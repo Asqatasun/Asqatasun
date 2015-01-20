@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa30 Test.13.02.01 NMI 03</title>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa30 Test.13.02.01 NMI 03</h1>
+
+            <div class="test-detail">
+                On each Web page, for each new window opening launched via a link (target="_blank" attribute) or a javascript command, is the user warned?
+            </div>
+
+            <div class="testcase">
+                <a href="my-link1.html" target="_self">My link1</a>
+                <a href="my-link2.html" target="_top">My link2</a>
+                <a href="my-link3.html" target="_parent">My link3</a>
+            </div>
+
+            <div class="test-explanation">
+                NMI : The page has no link with a target attribute different from "_self", "_top" or "_parent", 
+                but a new window may be opened via a javascript command.
+            </div>
+        </div>
+    </body>
+</html>

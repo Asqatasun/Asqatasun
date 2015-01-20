@@ -2,18 +2,9 @@
 
 # Tanaguru
 
-## Problem & solution
+Tanaguru is an opensource (AGPL license) website assessment tool dedicated to
 
-Making your website better is hard. Better for users, better for developers,
-better for the client. [W3C standards](http://www.w3.org/TR/) can bring a lot of
- help, but they are a kind of tedious to understand and implement.
-
-[Tanaguru](http://www.tanaguru.com/) helps you in making your web site 
-accessible. It tests your pages, whole site,  or application and gives you 
-precise and detailed insights on the identified issues.
-
-You can [install Tanaguru by yourself](link to install doc) or use 
-[Tanaguru in SaaS](https://my.tanaguru.com/)
+* accessibility (a11y) audits
 
 ## Features
 
@@ -91,4 +82,4 @@ All these projects are opensource and also under the umbrella of [Tanaguru Githu
 
 Have Fun
 
-[Tanaguru Team](tanaguru-team.md)
+Tanaguru team

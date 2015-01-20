@@ -24,7 +24,7 @@ package org.opens.tgol.validator;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.opens.tgol.command.CreateContractCommand;
 import org.opens.tgol.entity.user.User;

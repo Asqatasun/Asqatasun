@@ -127,7 +127,7 @@
                     </c:if>
                     <c:if test="${tg:lang(pageContext) != 'en' && tg:lang(pageContext) != 'fr'}">
                         <c:choose>
-                            <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'RGAA')}">
+                            <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'Rgaa')}">
                                 <c:set var="ruleLang" value=" lang=fr "/>
                             </c:when>
                             <c:otherwise>
@@ -214,7 +214,7 @@
                                                     <c:otherwise>
                                                 <div class="audit-result-manual-empty span3"></div>
                                                     </c:otherwise>
-                                                </c:choose>
+                                                </c:choose>	    
                                             </div>
                                         </div>
                                         <c:if test="${isManualAudit}">

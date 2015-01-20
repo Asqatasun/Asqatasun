@@ -23,7 +23,7 @@ package org.opens.tgol.command.factory;
 
 import java.io.Serializable;
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.command.CreateContractCommand;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.functionality.Functionality;

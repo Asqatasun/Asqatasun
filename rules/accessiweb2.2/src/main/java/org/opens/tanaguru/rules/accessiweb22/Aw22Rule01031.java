@@ -96,8 +96,8 @@ public class Aw22Rule01031 extends AbstractMarkerPageRuleImplementation {
     
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
-        Iterator<Element> iter = elementHandler.get().iterator();
+        super.select(sspHandler, null); // the elementHandler instance is unused
+        Iterator<Element> iter = getSelectionWithoutMarkerHandler().get().iterator();
         // The elements with a longdesc attribute are seen as informative. 
         // They are added to the selection with marker
         while (iter.hasNext()) {

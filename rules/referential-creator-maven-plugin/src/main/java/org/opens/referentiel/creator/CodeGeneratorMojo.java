@@ -38,7 +38,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -328,6 +328,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
      *
      * @param ve
      * @param records
+     * @throws java.io.IOException
      */
     public void generate(VelocityEngine ve, Iterable<CSVRecord> records) throws IOException, ResourceNotFoundException, ParseErrorException, Exception {
         // Getting the Template

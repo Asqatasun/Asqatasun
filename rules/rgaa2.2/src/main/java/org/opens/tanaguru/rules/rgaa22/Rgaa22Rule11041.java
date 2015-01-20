@@ -50,17 +50,14 @@ public class Rgaa22Rule11041 extends AbstractMarkerPageRuleImplementation {
      * Tables not identified as presentation table that does not contain
      * data table markup
      */
-    private ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
+    private final ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     /** 
      * Tables identified as presentation table that does not contain
      * data table markup
      */
-    private ElementHandler presentationTableWithoutDataTableMarkup = 
+    private final ElementHandler presentationTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
-    
-    /** The local element counter */
-    private int tableCounter = 0;
     
     /**
      * Default constructor
@@ -101,18 +98,16 @@ public class Rgaa22Rule11041 extends AbstractMarkerPageRuleImplementation {
 
     @Override
     protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
+        super.select(sspHandler, null); // the elementHandler instance is unused
         
-        if (elementHandler.isEmpty() && getSelectionWithMarkerHandler().isEmpty()) {
+        if (getSelectionWithoutMarkerHandler().isEmpty() && 
+                getSelectionWithMarkerHandler().isEmpty()) {
             return;
         }
         
-        tableCounter = elementHandler.get().size() + 
-                       getSelectionWithMarkerHandler().get().size();
-        
         // extract not identified tables with data table markup
         extractTableWithDataTableMarkup(
-                    elementHandler, 
+                    getSelectionWithoutMarkerHandler(), 
                     notIdentifiedTableWithoutDataTableMarkup);
         
         // extract presentation tables with data table markup
@@ -184,7 +179,10 @@ public class Rgaa22Rule11041 extends AbstractMarkerPageRuleImplementation {
     
     @Override
     public int getSelectionSize() {
-        return tableCounter;
+        return  getSelectionWithMarkerHandler().get().size() + 
+                    getSelectionWithoutMarkerHandler().get().size() + 
+                    notIdentifiedTableWithoutDataTableMarkup.get().size() + 
+                    presentationTableWithoutDataTableMarkup.get().size();
     }
 
 }

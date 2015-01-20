@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.apache.velocity.Template;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.velocity.VelocityContext;
 import static java.nio.charset.StandardCharsets.*;
 import java.util.LinkedList;
@@ -40,8 +40,8 @@ import java.util.LinkedList;
  */
 public class FileGenerator {
 
-    private VelocityParametersContext vpc;
-    private boolean isCriterionPresent;
+    private final VelocityParametersContext vpc;
+    private final boolean isCriterionPresent;
 
     public FileGenerator(String referentiel,
             String referentielLabel,

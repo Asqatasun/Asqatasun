@@ -26,7 +26,7 @@
                 <ref bean="exclusionRegexpContractFormFieldBuilder"/>
             </list>
         </property>
-        <!--        <property name="exclusionContractSortKey" value="label-exclusion-choice"/>
+<!--        <property name="exclusionContractSortKey" value="label-exclusion-choice"/>
         <property name="inclusionContractSortKey" value="label-inclusion-choice"/>
         <property name="sortByKey" value="sort-by-choice"/>
         <property name="sortOrderKey" value="order-choice"/>
@@ -102,6 +102,7 @@
         <property name="authorizedRefForCriterionViewList">
             <list>
                 <value>Aw22</value>
+                <value>Rgaa30</value>
             </list>
         </property>
         <property name="actionHandler" ref="resultActionHandler"/>
@@ -109,6 +110,7 @@
             <list>
                 <ref bean="aw22ThemeSelectFormFieldBuilder"/>
                 <ref bean="rgaa22ThemeSelectFormFieldBuilder"/>
+                <ref bean="rgaa30ThemeSelectFormFieldBuilder"/>
                 <ref bean="testResultCheckboxFormFieldBuilder"/>
             </list>
         </property>
@@ -173,6 +175,7 @@
     </bean>
     
     <bean id="auditSetUpController" class="org.opens.tgol.controller.AuditSetUpController">
+        <property name="defaultReferential" value="Rgaa30"/>            
         <property name="referentialAndLevelFormFieldBuilderList">
             <ref bean="levelSelectFormFieldBuilder"/>
         </property>

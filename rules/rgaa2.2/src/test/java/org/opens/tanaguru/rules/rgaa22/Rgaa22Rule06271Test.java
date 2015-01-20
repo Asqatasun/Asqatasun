@@ -21,7 +21,7 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
@@ -37,6 +37,7 @@ public class Rgaa22Rule06271Test extends Rgaa22RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa22Rule06271Test (String testName){
         super(testName);

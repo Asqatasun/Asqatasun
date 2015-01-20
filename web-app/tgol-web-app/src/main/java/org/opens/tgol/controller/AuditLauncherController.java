@@ -22,7 +22,7 @@
 package org.opens.tgol.controller;
 
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -57,18 +57,6 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
 
     private static final Logger LOGGER = Logger.getLogger(AuditLauncherController.class);
 
-    private static final String PROXY_HOST_PARAM_KEY = "PROXY_HOST";
-    private static final String PROXY_PORT_PARAM_KEY = "PROXY_PORT";
-    private static final String DEPTH_PARAM_KEY = "DEPTH";
-    private static final String MAX_DOCUMENT_PARAM_KEY = "MAX_DOCUMENTS";
-    private static final String MAX_DURATION_PARAM_KEY = "MAX_DURATION";
-    private static final String EXCLUSION_URL_LIST_PARAM_KEY = "EXCLUSION_REGEXP";
-    private static final String DEPTH_PAGE_PARAM_VALUE = "0";
-    private static final String PROXY_HOST_CONF_KEY = "proxyHost";
-    private static final String PROXY_PORT_CONF_KEY = "proxyPort";
-    private static final String PROXY_EXCLUSION_URL_CONF_KEY = "proxyExclusionUrl";
-    private static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY = "emailSentToUserExclusionList";
-    
     private String groupePagesName = "";
     /**
      * The TanaguruOrchestrator instance needed to launch the audit process
@@ -124,7 +112,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
      */
     public String getHttpProxyHost() {
         if (httpProxyHost == null) {
-            httpProxyHost = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(PROXY_HOST_CONF_KEY);
+            httpProxyHost = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.PROXY_HOST_CONF_KEY);
         }
         return httpProxyHost;
     }
@@ -138,7 +126,8 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
      */
     public String getHttpProxyPort() {
         if (httpProxyPort == null) {
-            httpProxyPort = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(PROXY_PORT_CONF_KEY);
+            httpProxyPort = exposablePropertyPlaceholderConfigurer.
+                    getResolvedProps().get(TgolKeyStore.PROXY_PORT_CONF_KEY);
         }
         return httpProxyPort;
     }
@@ -155,7 +144,8 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
      */
     public List<String> getProxyExclusionUrlList() {
         if (proxyExclusionUrlList == null) {
-            String rawList = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(PROXY_EXCLUSION_URL_CONF_KEY);
+            String rawList = exposablePropertyPlaceholderConfigurer.
+                    getResolvedProps().get(TgolKeyStore.PROXY_EXCLUSION_URL_CONF_KEY);
             proxyExclusionUrlList=Arrays.asList(rawList.split(";"));
         }
         return proxyExclusionUrlList;
@@ -173,7 +163,8 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
      */
     public List<String> getEmailSentToUserExclusionList() {
         if (emailSentToUserExclusionList == null) {
-            String rawList = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY);
+            String rawList = exposablePropertyPlaceholderConfigurer.
+                    getResolvedProps().get(TgolKeyStore.EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY);
             emailSentToUserExclusionList = Arrays.asList(rawList.split(";"));
         }
         return emailSentToUserExclusionList;
@@ -471,8 +462,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
         paramSet = setProxyParameters(paramSet, url);
-        paramSet = setUserParameters(paramSet, auditSetUpCommand.getLevel().split(";")[0]);
-        return paramSet;
+        return (auditSetUpCommand.getLevel() != null )? setUserParameters(paramSet, auditSetUpCommand.getLevel().split(";")[0]) : paramSet;
     }
 
     /**
@@ -512,11 +502,13 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
         }
         Set<Parameter> proxyParamSet = new HashSet();
         ParameterElement proxyHostParameterElement =
-                parameterElementDataService.getParameterElement(PROXY_HOST_PARAM_KEY);
+                parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_HOST_PARAM_KEY);
         ParameterElement proxyPortParameterElement =
-                parameterElementDataService.getParameterElement(PROXY_PORT_PARAM_KEY);
-        Parameter proxyHostParameter = getParameterDataService().getParameter(proxyHostParameterElement, getHttpProxyHost());
-        Parameter proxyPortParameter = getParameterDataService().getParameter(proxyPortParameterElement, getHttpProxyPort());
+                parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_PORT_PARAM_KEY);
+        Parameter proxyHostParameter = getParameterDataService()
+                .getParameter(proxyHostParameterElement, getHttpProxyHost());
+        Parameter proxyPortParameter = getParameterDataService()
+                .getParameter(proxyPortParameterElement, getHttpProxyPort());
         proxyParamSet.add(proxyHostParameter);
         proxyParamSet.add(proxyPortParameter);
         LOGGER.debug("paramSet.size() " + paramSet.size());
@@ -524,10 +516,10 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
         if (LOGGER.isDebugEnabled()) {
             for (Parameter param : paramSet) {
                 switch (param.getParameterElement().getParameterElementCode()) {
-                    case PROXY_HOST_PARAM_KEY:
+                    case TgolKeyStore.PROXY_HOST_PARAM_KEY:
                         LOGGER.debug(param.getValue());
                         break;
-                    case PROXY_PORT_PARAM_KEY:
+                    case TgolKeyStore.PROXY_PORT_PARAM_KEY:
                         LOGGER.debug(param.getValue());
                         break;
                 }
@@ -541,10 +533,10 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
         if (LOGGER.isDebugEnabled()) {
             for (Parameter param : paramSet) {
                 switch (param.getParameterElement().getParameterElementCode()) {
-                    case PROXY_HOST_PARAM_KEY:
+                    case TgolKeyStore.PROXY_HOST_PARAM_KEY:
                         LOGGER.debug(param.getValue());
                         break;
-                    case PROXY_PORT_PARAM_KEY:
+                    case TgolKeyStore.PROXY_PORT_PARAM_KEY:
                         LOGGER.debug(param.getValue());
                         break;
                 }
@@ -563,10 +555,23 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
     private Set<Parameter> getAuditPageParameterSet(int nbOfPages) {
         if (auditPageParamSet == null) {
             Set<Parameter> paramSet = new HashSet();
-            ParameterElement depthParameterElement = parameterElementDataService.getParameterElement(DEPTH_PARAM_KEY);
-            ParameterElement maxDocParameterElement = parameterElementDataService.getParameterElement(MAX_DOCUMENT_PARAM_KEY);
-            Parameter depthParameter = getParameterDataService().getParameter(depthParameterElement, DEPTH_PAGE_PARAM_VALUE);
-            Parameter maxDocParameter = getParameterDataService().getParameter(maxDocParameterElement, String.valueOf(nbOfPages));
+            
+            ParameterElement depthParameterElement = 
+                    parameterElementDataService
+                            .getParameterElement(TgolKeyStore.DEPTH_PARAM_KEY);
+            
+            ParameterElement maxDocParameterElement = 
+                    parameterElementDataService
+                            .getParameterElement(TgolKeyStore.MAX_DOCUMENT_PARAM_KEY);
+            
+            Parameter depthParameter = 
+                    getParameterDataService()
+                            .getParameter(depthParameterElement, TgolKeyStore.DEPTH_PAGE_PARAM_VALUE);
+            
+            Parameter maxDocParameter = 
+                    getParameterDataService()
+                            .getParameter(maxDocParameterElement, String.valueOf(nbOfPages));
+            
             paramSet.add(depthParameter);
             paramSet.add(maxDocParameter);
             auditPageParamSet = getParameterDataService().updateParameterSet(getDefaultParamSet(), paramSet);
@@ -585,10 +590,10 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
         Set<Parameter> scenarioParamSet = getDefaultParamSet();
         Set<Parameter> parameterToRemove = new HashSet();
         for (Parameter param : scenarioParamSet) {
-            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), DEPTH_PARAM_KEY)
-                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DOCUMENT_PARAM_KEY)
-                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), MAX_DURATION_PARAM_KEY)
-                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), EXCLUSION_URL_LIST_PARAM_KEY)) {
+            if (StringUtils.equals(param.getParameterElement().getParameterElementCode(), TgolKeyStore.DEPTH_PARAM_KEY)
+                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), TgolKeyStore.MAX_DOCUMENT_PARAM_KEY)
+                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), TgolKeyStore.MAX_DURATION_PARAM_KEY)
+                    || StringUtils.equals(param.getParameterElement().getParameterElementCode(), TgolKeyStore.EXCLUSION_URL_LIST_PARAM_KEY)) {
                 parameterToRemove.add(param);
             }
         }

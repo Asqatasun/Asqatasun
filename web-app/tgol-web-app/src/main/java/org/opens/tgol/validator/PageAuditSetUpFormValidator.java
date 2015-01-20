@@ -23,7 +23,7 @@ package org.opens.tgol.validator;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.command.AuditSetUpCommand;
 import org.opens.tgol.entity.service.contract.ContractDataService;
 import org.opens.tgol.util.TgolKeyStore;
@@ -42,6 +42,8 @@ public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
             "required.notOnSameDomainUrl";
     private static final String NOT_ON_CONTRACT_MSG_BUNDLE_KEY =
             "required.notOnContractUrl";
+    private static final String FILE_NOT_ALLOWED_HERE_MSG_BUNDLE_KEY =
+            "required.fileAuditNotAllowed";
     private static final String ID_INPUT_PREFIX = "urlList";
     
     @Autowired
@@ -69,12 +71,15 @@ public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
         
         boolean onContractUrl = false;
         
-        String contractUrl =  getContractDataService().getUrlFromContractOption(getContractDataService().read(
-                pageAuditSetUpCommand.getContractId()));
+        String contractUrl =  getContractDataService()
+                                  .getUrlFromContractOption(
+                                          getContractDataService()
+                                                .read(pageAuditSetUpCommand.getContractId()));
         
         boolean emptyUrl = true;
         String domainOfFirstUrlEncountered = "";
-        Set<Integer> urlWithProblemIndexSet = new HashSet<Integer>();
+        Set<Integer> urlWithProblemIndexSet = new HashSet();
+        Set<Integer> urlWithFilePrefixSet = new HashSet();
         
         // We parse all the URL filled-in by the user and extract the ones that
         // don't match with the domain of the first encountered URL.
@@ -86,22 +91,26 @@ public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
                 
                 // first we sanitize the url and extract the domain
                 url = url.trim();
-                url = extractDomainFromUrl(url);
+                
+                if (hasUrlFilePrefix(url)) {
+                    urlWithFilePrefixSet.add(index);
+                } else {
+                    url = extractDomainFromUrl(url);
 
-                // we store the url if it's the first one.
-                if (domainOfFirstUrlEncountered.isEmpty()) {
-                    domainOfFirstUrlEncountered = url;
-                    
-                // if the domain of this url is different from the one of the 
-                // first encountered domain, we store its index.
-                } else if (!url.equalsIgnoreCase(domainOfFirstUrlEncountered)){
-                    urlWithProblemIndexSet.add(index);
-                }
-                if (!onContractUrl &&
-                        (StringUtils.containsIgnoreCase(contractUrl, url) || contractUrl.isEmpty())) {
-                    onContractUrl = true;
-                }
+                    // we store the url if it's the first one.
+                    if (domainOfFirstUrlEncountered.isEmpty()) {
+                        domainOfFirstUrlEncountered = url;
 
+                    // if the domain of this url is different from the one of the 
+                    // first encountered domain, we store its index.
+                    } else if (!url.equalsIgnoreCase(domainOfFirstUrlEncountered)){
+                        urlWithProblemIndexSet.add(index);
+                    }
+                    if (!onContractUrl &&
+                            (StringUtils.containsIgnoreCase(contractUrl, url) || contractUrl.isEmpty())) {
+                        onContractUrl = true;
+                    }
+                }
             }
             index++;
         }
@@ -110,6 +119,15 @@ public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
             LOGGER.debug("emptyUrl");
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);
+        } else if (!urlWithFilePrefixSet.isEmpty()) { // if some URLs are not on the right domain
+            LOGGER.debug("fileAuditNotAllowed");
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+                    FILE_NOT_ALLOWED_HERE_MSG_BUNDLE_KEY);
+            for (Integer urlIndex : urlWithFilePrefixSet) {
+                errors.rejectValue(
+                        ID_INPUT_PREFIX+"["+urlIndex+"]",
+                        FILE_NOT_ALLOWED_HERE_MSG_BUNDLE_KEY);
+            }
         } else if(!onContractUrl) { // if the URL is not allowed (not on the contract for authenticated users)
             LOGGER.debug("notOnContract");
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
@@ -126,7 +144,7 @@ public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
                         arg,
                         "{0}");
             }
-        }
+        } 
     }
 
     /**
@@ -146,6 +164,14 @@ public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
         } else {
             return url.substring(fromIndex);
         }
+    }
+    
+    /**
+     * @param url 
+     * @return whether the current Url starts with a file prefix
+     */
+    public boolean hasUrlFilePrefix(String url) {
+        return StringUtils.startsWith(url, TgolKeyStore.FILE_PREFIX);
     }
 
     @Override

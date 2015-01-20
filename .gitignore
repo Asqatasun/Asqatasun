@@ -22,10 +22,15 @@
 engine/reference/target/
 /rules/accessiweb2.2/target/
 /rules/rgaa2.2/target/
+/rules/rgaa3.0/target/
 /rules/accessiweb2.2/src/main/resources/hsql-db.properties
 /rules/accessiweb2.2/src/main/resources/hsql-db.tmp/
 /rules/accessiweb2.2/src/main/resources/hsql-db.script
 /rules/accessiweb2.2/src/main/resources/hsql-db.log
+/rules/rgaa3.0/src/main/resources/hsql-db.properties
+/rules/rgaa3.0/src/main/resources/hsql-db.tmp/
+/rules/rgaa3.0/main/resources/hsql-db.script
+/rules/rgaa3.0/src/main/resources/hsql-db.log
 /rules/rules-commons/target/
 /rules/accessiweb2.1-testcases/target/
 /rules/accessiweb2.1-i18n/target/

@@ -237,6 +237,7 @@ create_tables() {
 	cd "$PKG_DIR/install/rules/sql"
 	cat 10-rules-resources-insert.sql                \
             accessiweb2.2-insert.sql               \
+            rgaa3.0-insert.sql                \
             rgaa2.2-insert.sql |              \
 		mysql --user=${mysql_tg_user}            \
 		      --password=${mysql_tg_passwd}      \

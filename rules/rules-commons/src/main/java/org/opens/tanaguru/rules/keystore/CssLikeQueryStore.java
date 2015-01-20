@@ -102,6 +102,22 @@ public final class CssLikeQueryStore {
                    +"input[type=file] , "
                    +"input[type=text] , "
                    +"input[type=radio]"; 
+    public static final String INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY=
+                    "form textarea , "
+                   +"form select , "
+                   +"form input[type=password] , "
+                   +"form input[type=checkbox] , "
+                   +"form input[type=file] , "
+                   +"form input[type=text] , "
+                   +"form input[type=radio]"; 
+    public static final String INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY=
+                    "form textarea[aria-labelledby] , "
+                   +"form select[aria-labelledby] , "
+                   +"form input[type=password][aria-labelledby] , "
+                   +"form input[type=checkbox][aria-labelledby] , "
+                   +"form input[type=file][aria-labelledby] , "
+                   +"form input[type=text][aria-labelledby] , "
+                   +"form input[type=radio][aria-labelledby]"; 
     public static final String FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY = 
                     "textarea[id] , "
                     + "select[id] , "
@@ -212,6 +228,14 @@ public final class CssLikeQueryStore {
     // Structuration of information css-like queries
     public static final String HEADINGS_CSS_LIKE_QUERY = 
                     "h1, h2, h3, h4, h5, h6";
+
+    // Structuration of information css-like queries
+    public static final String ARIA_HEADINGS_CSS_LIKE_QUERY = 
+                    "[role=heading][aria-level]";
+
+    // Structuration of information css-like queries
+    public static final String ARIA_LEVEL1_HEADINGS_CSS_LIKE_QUERY = 
+                    "[role=heading][aria-level=1]";
     
     // Elements with attributes (minus element exceptions)
     public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = 

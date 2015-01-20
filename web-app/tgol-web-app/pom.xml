@@ -118,6 +118,10 @@
             <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-rgaa2.2</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-rgaa3.0</artifactId>
+        </dependency>
         
         <!-- spring dependencies -->
         <dependency>
@@ -185,10 +189,6 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-validator</groupId>

@@ -51,7 +51,7 @@ public class AuditSetUpCommand implements Serializable {
     /**
      * The map that handles the audit parameters (except the level parameter)
      */
-    private Map<String, String> auditParameterMap = new HashMap<String, String>();
+    private final Map<String, String> auditParameterMap = new HashMap();
     public Map<String, String> getAuditParameter() {
         return auditParameterMap;
     }
@@ -116,7 +116,7 @@ public class AuditSetUpCommand implements Serializable {
     /**
      * List of urls to test (only needed when scope = ScopeEnum.PAGES)
      */
-    private List<String> urlList = new LinkedList<String>();
+    private final List<String> urlList = new LinkedList();
     public List<String> getUrlList() {
         return urlList;
     }
@@ -126,7 +126,7 @@ public class AuditSetUpCommand implements Serializable {
     }
     
     /**
-     * Map of uploaded files (only needed when scope = ScopeEnum.UPLOAD)
+     * @return Map of uploaded files (only needed when scope = ScopeEnum.UPLOAD)
      */
     public Map<String, String> getFileMap() {
         return UploadAuditSetUpCommandHelper.convertFilesToMap(fileInputList);

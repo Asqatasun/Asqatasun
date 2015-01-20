@@ -117,6 +117,7 @@ public class SignUpControllerTest extends TestCase {
 
     /**
      * Test of submitForm method, of class SignUpController.
+     * @throws java.lang.Exception
      */
     public void testSubmitForm() throws Exception {
         System.out.println("submitForm");
@@ -244,11 +245,11 @@ public class SignUpControllerTest extends TestCase {
  
    private void setUpMockExposablePropertyPlaceholderConfigurer() {
        mockExposablePropertyPlaceholderConfigurer = createMock(ExposablePropertyPlaceholderConfigurer.class);
-       Map<String, String> props = new HashMap<String, String>();
-       props.put(SignUpController.EMAIL_FROM_KEY, "from@user.com");
-       props.put(SignUpController.EMAIL_TO_KEY, "to@user.com");
-       props.put(SignUpController.EMAIL_SUBJECT_KEY, "subject");
-       props.put(SignUpController.EMAIL_CONTENT_KEY, "content");
+       Map<String, String> props = new HashMap();
+       props.put(TgolKeyStore.EMAIL_FROM_KEY, "from@user.com");
+       props.put(TgolKeyStore.EMAIL_TO_KEY, "to@user.com");
+       props.put(TgolKeyStore.EMAIL_SUBJECT_KEY, "subject");
+       props.put(TgolKeyStore.EMAIL_CONTENT_KEY, "content");
        
        expect(mockExposablePropertyPlaceholderConfigurer.getResolvedProps()).andReturn(props).times(4);
        replay(mockExposablePropertyPlaceholderConfigurer);
@@ -258,7 +259,7 @@ public class SignUpControllerTest extends TestCase {
    
    private void setUpMockEmailSender() {
        mockEmailSender = createMock(EmailSender.class);
-       Set<String> toUserList = new HashSet<String>();
+       Set<String> toUserList = new HashSet();
        toUserList.add("to@user.com");
        mockEmailSender.sendEmail(
                "from@user.com", 

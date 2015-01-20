@@ -9,6 +9,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
+    <!-- Accessiweb 2.2 --> 
     <bean id="aw22AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
@@ -149,6 +150,7 @@
         </property>
     </bean>
 
+    <!-- Rgaa 2.2 -->   
     <bean id="rgaa22AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
@@ -274,6 +276,135 @@
                         <ref local="rgaa22StructureThemeSelectElementBuilder"/>
                         <ref local="rgaa22TableThemeSelectElementBuilder"/>
                         <ref local="rgaa22TextThemeSelectElementBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- Rgaa 3.0 --> 
+    <bean id="rgaa30AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="all-theme"/>
+        <property name="i18nKey" value="result.all-theme"/>
+        <property name="errorI18nKey" value="all-theme-error"/>
+        <property name="default" value="true"/>
+        <property name="enabled" value="true"/>
+    </bean>
+
+        <bean id="rgaa30-1ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-1"/>
+        <property name="i18nKey" value="Rgaa30-1"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-2ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-2"/>
+        <property name="i18nKey" value="Rgaa30-2"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-3ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-3"/>
+        <property name="i18nKey" value="Rgaa30-3"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-4ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-4"/>
+        <property name="i18nKey" value="Rgaa30-4"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-5ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-5"/>
+        <property name="i18nKey" value="Rgaa30-5"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-6ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-6"/>
+        <property name="i18nKey" value="Rgaa30-6"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-7ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-7"/>
+        <property name="i18nKey" value="Rgaa30-7"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-8ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-8"/>
+        <property name="i18nKey" value="Rgaa30-8"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-9ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-9"/>
+        <property name="i18nKey" value="Rgaa30-9"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-10ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-10"/>
+        <property name="i18nKey" value="Rgaa30-10"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-11ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-11"/>
+        <property name="i18nKey" value="Rgaa30-11"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-12ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-12"/>
+        <property name="i18nKey" value="Rgaa30-12"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="rgaa30-13ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Rgaa30-13"/>
+        <property name="i18nKey" value="Rgaa30-13"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        
+    <bean id="rgaa30ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+        <property name="i18nKey" value="result.theme"/>
+        <property name="errorI18nKey" value="result.theme-error"/>
+        <property name="value" value="Rgaa30"/>
+        <property name="selectElementBuilderMap">
+            <map>
+                <entry key="theme">
+                    <list>
+                        <ref local="rgaa30AllThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-1ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-2ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-3ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-4ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-5ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-6ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-7ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-8ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-9ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-10ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-11ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-12ThemeSelectElementBuilder"/>
+                        <ref local="rgaa30-13ThemeSelectElementBuilder"/>
                     </list>
                 </entry>
             </map>

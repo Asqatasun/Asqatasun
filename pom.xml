@@ -236,33 +236,15 @@
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.2-i18n</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.2-testcases</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
                 <artifactId>tanaguru-rgaa2.2</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rgaa2.2-i18n</artifactId>
+                <artifactId>tanaguru-rgaa3.0</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rgaa2.2-testcases</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>test</scope>
             </dependency>
 
             <!-- tanaguru-engine dependencies -->
@@ -1146,6 +1128,10 @@
                         <artifactId>commons-beanutils</artifactId>
                     </exclusion>
                     <exclusion>
+                        <groupId>commons-lang</groupId>
+                        <artifactId>commons-lang</artifactId>
+                    </exclusion>
+                    <exclusion>
                         <groupId>com.lowagie</groupId>
                         <artifactId>itext</artifactId>
                     </exclusion>
@@ -1393,6 +1379,18 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity</artifactId>
                 <version>1.6.4</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-lang</groupId>
+                        <artifactId>commons-lang</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>1.1</version>
             </dependency>
 
             <!-- velocity (needed by maven kbcsv-plugin -->

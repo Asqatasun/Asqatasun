@@ -23,7 +23,7 @@ package org.opens.tgol.validator;
 
 import java.util.Map;
 import java.util.regex.Pattern;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.command.ChangeTestWeightCommand;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

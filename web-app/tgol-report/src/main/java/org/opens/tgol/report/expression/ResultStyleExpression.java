@@ -25,8 +25,8 @@ import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionStyleExpression;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -35,12 +35,12 @@ import org.apache.commons.lang.StringUtils;
 public class ResultStyleExpression extends ConditionStyleExpression {
 
     private static final long serialVersionUID = -4839459906641930176L;
-    private String result;
+    private final String result;
 
     public ResultStyleExpression(String result, String bundleName, Locale locale) {
         if (bundleName != null) {
             ResourceBundle resourceBundle = ResourceBundle.getBundle(bundleName, locale);
-            this.result = StringEscapeUtils.unescapeHtml(resourceBundle.getString(result));
+            this.result = StringEscapeUtils.unescapeHtml4(resourceBundle.getString(result));
         } else {
             this.result = result;
         }

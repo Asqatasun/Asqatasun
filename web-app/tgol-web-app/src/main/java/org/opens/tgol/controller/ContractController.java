@@ -55,7 +55,7 @@ public class ContractController extends AbstractController {
         this.localeResolver = localeResolver;
     }
 
-    private List<String> authorizedFunctionalityForTrend = new ArrayList<String>();
+    private List<String> authorizedFunctionalityForTrend = new ArrayList();
     public List<String> getAuthorizedFunctionalityForTrend() {
         return authorizedFunctionalityForTrend;
     }
