@@ -227,4 +227,25 @@
         <property name="formFieldBuilder" ref="considerCookiesFormFieldBuilder"/>
     </bean>
 
+    <bean id="screenWidthFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+        <property name="maxValue" value="2048"/>
+        <property name="minValue" value="1"/>
+        <property name="i18nKey" value="screen-width"/>
+        <property name="errorI18nKey" value="screen-width-error"/>
+    </bean>
+    <bean id="screenWidthParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+        <property name="parameterCode" value="SCREEN_WIDTH"/>
+        <property name="formFieldBuilder" ref="screenWidthFormFieldBuilder"/>
+    </bean>
+    <bean id="screenHeightFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+        <property name="maxValue" value="2048"/>
+        <property name="minValue" value="1"/>
+        <property name="i18nKey" value="screen-height"/>
+        <property name="errorI18nKey" value="screen-height-error"/>
+    </bean>
+    <bean id="screenHeightParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+        <property name="parameterCode" value="SCREEN_HEIGHT"/>
+        <property name="formFieldBuilder" ref="screenHeightFormFieldBuilder"/>
+    </bean>
+    
 </beans>

@@ -85,6 +85,12 @@
                 <entry key="ALTERNATIVE_CONTRAST_MECHANISM">
                     <value>contrast-alternative</value>
                 </entry>
+                <entry key="SCREEN_WIDTH">
+                    <value>screen-width</value>
+                </entry>
+                <entry key="SCREEN_HEIGHT">
+                    <value>screen-height</value>
+                </entry>
             </map>
         </property>
         <property name="authorizedScopeForPageList">
@@ -211,6 +217,12 @@
                         <ref bean="informativeImageParamBuilder"/>
                     </list>
                 </entry>
+                <entry key="resolution-parameters">
+                    <list>
+                        <ref bean="screenWidthParamBuilder"/>
+                        <ref bean="screenHeightParamBuilder"/>
+                    </list>
+                </entry>
                 <entry key="contrast-parameters">
                     <list>
                         <ref bean="alternativeContrastMechanismPresentParamBuilder"/>
@@ -269,6 +281,12 @@
                         <ref bean="presentationTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
+                    </list>
+                </entry>
+                <entry key="resolution-parameters">
+                    <list>
+                        <ref bean="screenWidthParamBuilder"/>
+                        <ref bean="screenHeightParamBuilder"/>
                     </list>
                 </entry>
                 <entry key="contrast-parameters">
