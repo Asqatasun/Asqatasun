@@ -188,4 +188,13 @@ public abstract class AbstractAllLinkAggregateRuleImplementation
             ElementHandler formButtonHandler, 
             TestSolutionHandler testSolutionHandler);
     
+    @Override
+    public int getSelectionSize() {
+        return linkElementHandler.size() +
+                imageLinkElementHandler.size() +
+                compositeLinkElementHandler.size() +
+                areaLinkElementHandler.size() +
+                formButtonHandler.size();
+    }
+
 }
