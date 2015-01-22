@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -21,6 +21,7 @@ package org.opens.tanaguru.rules.rgaa30;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -51,7 +52,7 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
     private static final String PRESENTATION_ATTR_NOM = 
                 "DeprecatedRepresentationAttributes";
     
-    private final Map<String, ElementHandler> attrElementHandlerMap = new HashMap();
+    private final Map<String, ElementHandler> attrElementHandlerMap = new HashMap<>();
     /* the total number of elements */
     int totalNumberOfElements = 0;
     
@@ -63,7 +64,7 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         totalNumberOfElements = sspHandler.getTotalNumberOfElements();
         // retrieve element from the nomenclature
         Nomenclature deprecatedHtmlAttr = nomenclatureLoaderService.
@@ -71,7 +72,7 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
         for (String deprecatedAttr : deprecatedHtmlAttr.getValueList()) {
             SimpleElementSelector sec = 
                         new SimpleElementSelector(buildQuery(deprecatedAttr));
-            ElementHandler eh = new ElementHandlerImpl();
+            ElementHandler<Element> eh = new ElementHandlerImpl();
             sec.selectElements(sspHandler, eh);
             
             attrElementHandlerMap.put(deprecatedAttr, eh);
@@ -80,7 +81,7 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
         // elements with width attribute that are not img
         SimpleElementSelector secWidthAttrNotImg = 
                 new SimpleElementSelector(ELEMENT_WITH_WITDH_ATTR_NOT_IMG);
-        ElementHandler ehWithAttrNotImg = new ElementHandlerImpl();
+        ElementHandler<Element> ehWithAttrNotImg = new ElementHandlerImpl();
         secWidthAttrNotImg.selectElements(sspHandler, ehWithAttrNotImg);
             
         attrElementHandlerMap.put(WIDTH_ATTR, ehWithAttrNotImg);
@@ -88,14 +89,14 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
         // elements with width attribute that are not img
         SimpleElementSelector secHeightAttrNotImg = 
                 new SimpleElementSelector(ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG);
-        ElementHandler ehHeightAttrNotImg = new ElementHandlerImpl();
+        ElementHandler<Element> ehHeightAttrNotImg = new ElementHandlerImpl();
         secHeightAttrNotImg.selectElements(sspHandler, ehHeightAttrNotImg);
             
         attrElementHandlerMap.put(HEIGHT_ATTR, ehHeightAttrNotImg);
     }
 
     @Override
-    protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
+    protected void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
 
         // Attributes checks
         for (Map.Entry<String, ElementHandler> attrElementHandlerMapEntry : 

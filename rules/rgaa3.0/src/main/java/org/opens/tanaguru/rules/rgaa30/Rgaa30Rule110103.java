@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -59,7 +59,7 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
     private static final String FORM_TAG = "form";
     private SimpleElementSelector selector;
     private final ElementHandler<Element> inputElementHandler = new ElementHandlerImpl();
-    private final Map<Element, ElementHandler<Element>> inputFormMap = new HashMap();
+    private final Map<Element, ElementHandler<Element>> inputFormMap = new HashMap<>();
 
     /**
      * Default constructor
@@ -69,7 +69,7 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         selector = new SimpleElementSelector(INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY);
         selector.selectElements(
                 sspHandler,
@@ -85,7 +85,6 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler,
-            ElementHandler elementHandler,
             TestSolutionHandler testSolutionHandler) {
 
         /* If the page has no input form element, the test is not applicable */

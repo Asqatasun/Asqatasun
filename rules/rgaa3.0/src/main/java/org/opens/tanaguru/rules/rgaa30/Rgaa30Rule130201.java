@@ -20,11 +20,9 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
@@ -69,12 +67,11 @@ public class Rgaa30Rule130201 extends AbstractDetectionPageRuleImplementation {
     @Override
     protected void check(
                 SSPHandler sspHandler, 
-                ElementHandler<Element> selectionHandler, 
                 TestSolutionHandler testSolutionHandler) {
 
         ElementPresenceChecker epc = getElementPresenceChecker();
         epc.setTextElementBuilder(new LinkTextElementBuilder());
-        epc.check(sspHandler, selectionHandler, testSolutionHandler);
+        epc.check(sspHandler, getElements(), testSolutionHandler);
     }
 
 }

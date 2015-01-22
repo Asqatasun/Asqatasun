@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -71,8 +71,8 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
     private SimpleElementSelector selector;
     private final ElementHandler<Element> labelElementHandler = new ElementHandlerImpl();
     private final ElementHandler<Element> inputElementHandler = new ElementHandlerImpl();
-    private final Map<Element, ElementHandler<Element>> labelFormMap = new HashMap();
-    private final Map<Element, ElementHandler<Element>> inputFormMap = new HashMap();
+    private final Map<Element, ElementHandler<Element>> labelFormMap = new HashMap<>();
+    private final Map<Element, ElementHandler<Element>> inputFormMap = new HashMap<>();
 
     /**
      * Default constructor
@@ -82,7 +82,7 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         selector = new SimpleElementSelector(LABEL_ELEMENT);
         selector.selectElements(
                 sspHandler,
@@ -103,7 +103,6 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler,
-            ElementHandler elementHandler,
             TestSolutionHandler testSolutionHandler) {
 
         /* If the page has no input form element, the test is not applicable */
@@ -166,7 +165,7 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
             for (Element el : entry.getValue().get()) {
                 String id = el.id();
                 if (StringUtils.isNotBlank(id)) {
-                    ElementHandler linkedLabelToInputHandler = new ElementHandlerImpl();
+                    ElementHandler<Element> linkedLabelToInputHandler = new ElementHandlerImpl();
                     if (entry.getKey().select(LABEL_ELEMENT + " "
                             + CssLikeSelectorBuilder.buildSelectorFromElementsAndAttributeValue(INPUT_ELEMENT, ID_ATTR, id)).isEmpty()) {
                         linkedLabelToInputHandler
@@ -193,7 +192,7 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
             for (Element el : entry.getValue().get()) {
                 String id = el.attr(FOR_ATTR);
                 if (StringUtils.isNotBlank(id)) {
-                    ElementHandler linkedLabelToInputHandler = new ElementHandlerImpl();
+                    ElementHandler<Element> linkedLabelToInputHandler = new ElementHandlerImpl();
                     linkedLabelToInputHandler
                             .addAll(entry.getKey()
                                     .select(CssLikeSelectorBuilder

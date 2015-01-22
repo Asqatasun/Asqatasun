@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -25,7 +25,6 @@ import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.TABLE_WITH_CAPTION_CSS_LIKE_QUERY;
@@ -92,15 +91,15 @@ public class Rgaa30Rule050501 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
         // once tables selected, we extract the caption child element of each 
         // to make the control
         Elements captionOnTable = new Elements();
-        for (Element el : elementHandler.get()) {
+        for (Element el : getSelectionWithoutMarkerHandler().get()) {
             captionOnTable.add(el.select(CAPTION_ELEMENT).first());
         }
-        elementHandler.clean().addAll(captionOnTable);
+        getSelectionWithoutMarkerHandler().clean().addAll(captionOnTable);
         
         Elements captionOnDataTable = new Elements();
         for (Element el : getSelectionWithMarkerHandler().get()) {

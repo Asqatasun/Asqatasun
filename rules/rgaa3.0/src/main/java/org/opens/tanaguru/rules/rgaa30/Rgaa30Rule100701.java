@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -89,12 +89,11 @@ public class Rgaa30Rule100701 extends AbstractPageRuleFromPreProcessImplementati
     @Override
     protected void doSelect(
             Collection<DomElement> domElements, 
-            SSPHandler sspHandler, 
-            ElementHandler elementHandler) {
+            SSPHandler sspHandler) {
         for (DomElement domElement : domElements) {
             if (domElement.isFocusable()) {
                 Element el = DomElementExtractor.getElementFromDomElement(domElement, sspHandler);
-                treatFocusableElement(el, domElement, elementHandler);
+                treatFocusableElement(el, domElement, getElements());
             }
         }
     }   
@@ -102,13 +101,12 @@ public class Rgaa30Rule100701 extends AbstractPageRuleFromPreProcessImplementati
      @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
          if (nbOfFocusableElements == 0) {
              testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
              return;
          }
-         super.check(sspHandler, selectionHandler, testSolutionHandler);
+         super.check(sspHandler, testSolutionHandler);
          if (focusableElementExcluded) {
              testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
              sspHandler.getProcessRemarkService().addProcessRemark(
@@ -155,7 +153,7 @@ public class Rgaa30Rule100701 extends AbstractPageRuleFromPreProcessImplementati
     private void treatFocusableElement(
             Element element,
             DomElement domElement, 
-            ElementHandler elementHandler){
+            ElementHandler<Element> elementHandler){
         if (element == null) {
             return;
         }

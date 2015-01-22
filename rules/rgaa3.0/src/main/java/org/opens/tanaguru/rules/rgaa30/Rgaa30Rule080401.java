@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,53 +20,28 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
 
 /**
- * Implementation of the rule 8.4.1 of the referential Accessiweb 4.1.
+ * Implementation of the rule 8.4.1 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-8-4-1">the rule 8.4.1 design page.</a>
  * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-8-4-1"> 8.4.1 rule specification</a>
  *
  */
-public class Rgaa30Rule080401 extends AbstractPageRuleMarkupImplementation {
+public class Rgaa30Rule080401 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /**
+     /**
      * Default constructor
      */
     public Rgaa30Rule080401 () {
-        super();
-    }
-    
-    @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        ElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementHandler);
-   }
-
-    @Override
-    protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler<Element> selectionHandler, 
-            TestSolutionHandler testSolutionHandler) {
-
-        if (selectionHandler.isEmpty()) {
-            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
-            return;
-        }
-        LangChecker ec = new LangDeclarationValidityChecker(true, true);
-        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
-        ec.check(sspHandler, selectionHandler, testSolutionHandler);
+        super(
+                new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY),
+                new LangDeclarationValidityChecker(true, true)
+            );
     }
 
 }

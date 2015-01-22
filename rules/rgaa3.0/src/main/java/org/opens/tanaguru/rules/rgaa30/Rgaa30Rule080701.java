@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,11 +20,9 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChangeChecker;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
@@ -39,37 +37,23 @@ import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
  * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-8-7-1"> 8.7.1 rule specification</a>
  *
  */
-public class Rgaa30Rule080701 extends AbstractPageRuleMarkupImplementation {
+public class Rgaa30Rule080701 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    private LangChecker ec = new LangChangeChecker();
-    
+    private final LangChecker ec = new LangChangeChecker();
+
     /**
      * Default constructor
      */
-    public Rgaa30Rule080701 () {
+    public Rgaa30Rule080701() {
         super();
+        setElementSelector(new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY));
+        setElementChecker(ec);
     }
-    
-    @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        SimpleElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementHandler);
-   }
 
     @Override
-    protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler<Element> selectionHandler, 
-            TestSolutionHandler testSolutionHandler) {
-
-        if (selectionHandler.isEmpty()) {
-            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
-            return;
-        }
-        ec = new LangChangeChecker();
-        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
-        ec.check(sspHandler, selectionHandler, testSolutionHandler);
-        
+    public void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, testSolutionHandler);
+        // add extra remark at the end of the test, if the result is NMI
         if (testSolutionHandler.getTestSolution().equals(TestSolution.NEED_MORE_INFO)) {
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 

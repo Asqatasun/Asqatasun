@@ -45,7 +45,8 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.EMPTY_LINK_MS
  */
 public class Rgaa30Rule060501 extends AbstractPageRuleMarkupImplementation {
     
-    ElementHandler emptyLinksHandler = new ElementHandlerImpl();
+    ElementHandler<Element> emptyLinksHandler = new ElementHandlerImpl();
+    ElementHandler<Element> linksHandler = new ElementHandlerImpl();
     
     /**
      * Default constructor
@@ -55,11 +56,11 @@ public class Rgaa30Rule060501 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         ElementSelector elementsSelector = 
                 new SimpleElementSelector(NOT_ANCHOR_LINK_CSS_LIKE_QUERY);
-        elementsSelector.selectElements(sspHandler, elementHandler);
-        for (Element el : elementHandler.get()) {
+        elementsSelector.selectElements(sspHandler, linksHandler);
+        for (Element el : linksHandler.get()) {
             if (StringUtils.isBlank(el.text()) && 
                     el.getElementsByAttributeValueMatching(ALT_ATTR, "^(?=\\s*\\S).*$").isEmpty()) {
                 emptyLinksHandler.add(el);
@@ -70,10 +71,9 @@ public class Rgaa30Rule060501 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
 
-        if (selectionHandler.isEmpty()) {
+        if (linksHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
@@ -88,5 +88,10 @@ public class Rgaa30Rule060501 extends AbstractPageRuleMarkupImplementation {
                         null, 
                         HREF_ATTR);
         ec.check(sspHandler, emptyLinksHandler, testSolutionHandler);
+    }
+    
+    @Override
+    public int getSelectionSize() {
+        return linksHandler.size();
     }
 }

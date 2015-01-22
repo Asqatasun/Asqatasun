@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -60,7 +60,7 @@ public class Rgaa30Rule010201 extends AbstractMarkerPageRuleImplementation {
                 INFORMATIVE_IMAGE_MARKER);
         setElementSelector(new ImageElementSelector(IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY, true, false));
         setMarkerElementChecker(getMarkerElementChecker());
-        setElementChecker(getElementChecker());
+        setRegularElementChecker(getLocalRegularElementChecker());
     }
     
     /**
@@ -91,7 +91,7 @@ public class Rgaa30Rule010201 extends AbstractMarkerPageRuleImplementation {
      * 
      * @return the checker user for not marked elements
      */
-    private ElementChecker getElementChecker() {
+    private ElementChecker getLocalRegularElementChecker() {
         
         CompositeChecker compositeChecker = new CompositeChecker();
         
@@ -114,10 +114,14 @@ public class Rgaa30Rule010201 extends AbstractMarkerPageRuleImplementation {
         compositeChecker.setIsOrCombinaison(false);
         compositeChecker.addCheckMessageFromSolution(
                 TestSolution.PASSED,
-                Collections.singletonMap(TestSolution.NEED_MORE_INFO, DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
+                Collections.singletonMap(
+                        TestSolution.NEED_MORE_INFO, 
+                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
         compositeChecker.addCheckMessageFromSolution(
                 TestSolution.FAILED,
-                Collections.singletonMap(TestSolution.NEED_MORE_INFO, DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
+                Collections.singletonMap(
+                        TestSolution.NEED_MORE_INFO, 
+                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
         
         return compositeChecker;
     }

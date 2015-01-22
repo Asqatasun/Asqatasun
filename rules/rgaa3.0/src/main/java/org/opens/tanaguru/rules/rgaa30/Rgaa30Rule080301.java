@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -26,12 +27,8 @@ import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementatio
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.LANG_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.XML_LANG_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.*;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.HTML_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG;
 
@@ -44,49 +41,59 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUT
  */
 public class Rgaa30Rule080301 extends AbstractPageRuleMarkupImplementation {
 
-    /** the elements with a lang attribute */
-    private final ElementHandler elementWithLang = new ElementHandlerImpl();
-    /** the elements without lang attribute */
-    private final ElementHandler elementWithoutLang = new ElementHandlerImpl();
-    
+    /**
+     * the elements with a lang attribute
+     */
+    private final ElementHandler<Element> elementWithLang
+            = new ElementHandlerImpl();
+    /**
+     * the elements without lang attribute
+     */
+    private final ElementHandler<Element> elementWithoutLang
+            = new ElementHandlerImpl();
+    /**
+     * the html element with lang attribute
+     */
+    private final ElementHandler<Element> htmlWithLangHandler
+            = new ElementHandlerImpl();
+
     /**
      * Default constructor
      */
-    public Rgaa30Rule080301(){
+    public Rgaa30Rule080301() {
         super();
     }
-    
+
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        ElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementHandler);
-        if (!elementHandler.isEmpty()) {
+    protected void select(SSPHandler sspHandler) {
+        new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY)
+                .selectElements(sspHandler, htmlWithLangHandler);
+
+        if (!htmlWithLangHandler.isEmpty()) {
             return;
         }
-        selector = new SimpleElementSelector(ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementWithLang);
-        if (elementWithLang.isEmpty()) {
-            return;
-        }
-        selector = new SimpleElementSelector(ELEMENT_WITHOUT_LANG_ATTR_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementWithoutLang);
-        removeElementWithParentWithLangAttr(elementWithoutLang);
-   }
+
+        new SimpleElementSelector(ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY)
+                .selectElements(sspHandler, elementWithLang);
+        new SimpleElementSelector(ELEMENT_WITHOUT_LANG_ATTR_CSS_LIKE_QUERY)
+                .selectElements(sspHandler, elementWithoutLang);
+
+        removeElementWithParentWithLangAttr();
+    }
 
     @Override
     protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
+            SSPHandler sspHandler,
             TestSolutionHandler testSolutionHandler) {
 
-        if (!selectionHandler.isEmpty()) {
+        if (!htmlWithLangHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.PASSED);
             return;
         }
         if (elementWithLang.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.FAILED);
             sspHandler.getProcessRemarkService().addProcessRemark(
-                    TestSolution.FAILED, 
+                    TestSolution.FAILED,
                     LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG);
             return;
         }
@@ -95,43 +102,48 @@ public class Rgaa30Rule080301 extends AbstractPageRuleMarkupImplementation {
         } else {
             testSolutionHandler.addTestSolution(TestSolution.FAILED);
             sspHandler.getProcessRemarkService().addProcessRemark(
-                    TestSolution.FAILED, 
+                    TestSolution.FAILED,
                     LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG);
         }
     }
-    
+
     /**
-     * Remove elements from the current elementHandler when an element has 
-     * a parent with a lang attribute
-     * 
-     * @param elementHandler 
+     * Remove elements from the current elementHandler when an element has a
+     * parent with a lang attribute
+     *
+     * @param elementHandler
      */
-    private void removeElementWithParentWithLangAttr(ElementHandler<Element> elementHandler) {
-        ElementHandler elementWithParentWithLang = new ElementHandlerImpl();
-        for (Element el : elementHandler.get()) {
+    private void removeElementWithParentWithLangAttr() {
+        if (elementWithLang.isEmpty()) {
+            return;
+        }
+        ElementHandler<Element> elementWithParentWithLang = new ElementHandlerImpl();
+        for (Element el : elementWithoutLang.get()) {
             if (isElementHasParentWithLang(el)) {
                 elementWithParentWithLang.add(el);
             }
         }
-        elementHandler.removeAll(elementWithParentWithLang);
+        elementWithoutLang.removeAll(elementWithParentWithLang);
+        elementWithLang.addAll(elementWithParentWithLang.get());
     }
-    
+
     /**
      * Checks recursively whether an element has a parent with a lang attribute
-     * 
+     *
      * @param el
-     * @return whether the element passed as argument has a parent with a 
-     * lang attribute
+     * @return whether the element passed as argument has a parent with a lang
+     * attribute
      */
     private boolean isElementHasParentWithLang(Element el) {
-        for (Element pel : el.parents()) {
-            if (!pel.nodeName().equals(HTML_ELEMENT) && 
-                    (pel.hasAttr(LANG_ATTR) || 
-                        pel.hasAttr(XML_LANG_ATTR))){
-                return true;
-            }
+        return CollectionUtils.containsAny(el.parents(), elementWithLang.get());
+    }
+
+    @Override
+    public int getSelectionSize() {
+        if (!htmlWithLangHandler.isEmpty()) {
+            return htmlWithLangHandler.size();
         }
-        return false;
+        return elementWithLang.size() + elementWithoutLang.size();
     }
 
 }

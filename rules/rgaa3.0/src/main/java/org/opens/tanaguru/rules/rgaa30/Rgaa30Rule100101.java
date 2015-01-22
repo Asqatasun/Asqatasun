@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -23,7 +23,6 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.rules.elementselector.MultipleElementSelector;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
 
@@ -57,7 +56,7 @@ public class Rgaa30Rule100101 extends AbstractDetectionPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler selectionHandler) {
+    protected void select(SSPHandler sspHandler) {
         // retrieve element from the nomenclature
         Nomenclature deprecatedHtmlTags = nomenclatureLoaderService.
                 loadByCode(DEPREC_TAG_NOM);
@@ -67,7 +66,7 @@ public class Rgaa30Rule100101 extends AbstractDetectionPageRuleImplementation {
             mes.addCssQuery(deprecatedTag.toLowerCase());
         }
         totalNumberOfElements = sspHandler.getTotalNumberOfElements();
-        super.select(sspHandler, selectionHandler);
+        super.select(sspHandler);
     }
     
      @Override

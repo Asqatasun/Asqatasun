@@ -57,9 +57,9 @@ public class Rgaa30Rule090102 extends AbstractPageRuleWithSelectorAndCheckerImpl
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-        super.select(sspHandler, elementHandler);
-        Iterator<Element> elementsIterator = elementHandler.get().iterator();
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        Iterator<Element> elementsIterator = getElements().get().iterator();
         while (elementsIterator.hasNext()) {
             Element element = elementsIterator.next();
             if (element.hasAttr("aria-level")) {

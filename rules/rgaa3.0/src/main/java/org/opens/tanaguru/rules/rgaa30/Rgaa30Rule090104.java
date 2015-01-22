@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -28,7 +28,6 @@ import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
@@ -79,9 +78,9 @@ public class Rgaa30Rule090104 extends AbstractPageRuleWithSelectorAndCheckerImpl
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-        super.select(sspHandler, elementHandler);
-        Iterator<Element> elementsIterator = elementHandler.get().iterator();
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        Iterator<Element> elementsIterator = getElements().get().iterator();
         while (elementsIterator.hasNext()) {
             Element element = elementsIterator.next();
             if (element.hasAttr("aria-level")) {
@@ -95,9 +94,8 @@ public class Rgaa30Rule090104 extends AbstractPageRuleWithSelectorAndCheckerImpl
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
+        super.check(sspHandler, testSolutionHandler);
         ProcessRemarkService prs = sspHandler.getProcessRemarkService();
         if (CollectionUtils.isNotEmpty(prs.getRemarkList())) {
             for (ProcessRemark pr : prs.getRemarkList()) {

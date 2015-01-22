@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -61,7 +61,7 @@ public class Rgaa30Rule010202 extends AbstractMarkerPageRuleImplementation {
                 INFORMATIVE_IMAGE_MARKER);
         setElementSelector(new ImageElementSelector(new AreaElementSelector(true, true, false), true, false));
         setMarkerElementChecker(getMarkerElementChecker());
-        setElementChecker(getElementChecker());
+        setRegularElementChecker(getLocalRegularElementChecker());
     }
 
     /**
@@ -72,29 +72,30 @@ public class Rgaa30Rule010202 extends AbstractMarkerPageRuleImplementation {
         // checker for elements identified by marker
         return new CompositeChecker(
                 new TextEmptinessChecker(
-                new TextAttributeOfElementBuilder(ALT_ATTR),
-                // solution when attribute is empty
-                TestSolution.PASSED,
-                // solution when attribute is not empty
-                TestSolution.FAILED,
-                null, // no message created when a decorative with empty alt is found
-                DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
-                ALT_ATTR),
+                    new TextAttributeOfElementBuilder(ALT_ATTR),
+                    // solution when attribute is empty
+                    TestSolution.PASSED,
+                    // solution when attribute is not empty
+                    TestSolution.FAILED,
+                    null, // no message created when a decorative with empty alt is found
+                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                    ALT_ATTR),
                 new AttributePresenceChecker(
-                TITLE_ATTR,
-                TestSolution.FAILED,
-                TestSolution.PASSED,
-                CHECK_PRESENCE_ELEMENT_TITLE_MSG,
-                CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG,
-                TITLE_ATTR,
-                SRC_ATTR));
+                    TITLE_ATTR,
+                    TestSolution.FAILED,
+                    TestSolution.PASSED,
+                    CHECK_PRESENCE_ELEMENT_TITLE_MSG,
+                    CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG,
+                    TITLE_ATTR,
+                    SRC_ATTR)
+        );
     }
     
     /**
      * 
      * @return the checker user for not marked elements
      */
-    private ElementChecker getElementChecker() {
+    private ElementChecker getLocalRegularElementChecker() {
         
         CompositeChecker compositeChecker = new CompositeChecker();
         
@@ -118,10 +119,14 @@ public class Rgaa30Rule010202 extends AbstractMarkerPageRuleImplementation {
         
         compositeChecker.addCheckMessageFromSolution(
                 TestSolution.PASSED,
-                Collections.singletonMap(TestSolution.NEED_MORE_INFO, DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
+                Collections.singletonMap(
+                        TestSolution.NEED_MORE_INFO, 
+                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
         compositeChecker.addCheckMessageFromSolution(
                 TestSolution.FAILED,
-                Collections.singletonMap(TestSolution.NEED_MORE_INFO, DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
+                Collections.singletonMap(
+                        TestSolution.NEED_MORE_INFO, 
+                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
         
         return compositeChecker;
     }

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -50,13 +50,13 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
      * Tables not identified as presentation table that does not contain
      * data table markup
      */
-    private final ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
+    private final ElementHandler<Element> notIdentifiedTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     /** 
      * Tables identified as presentation table that does not contain
      * data table markup
      */
-    private final ElementHandler presentationTableWithoutDataTableMarkup = 
+    private final ElementHandler<Element> presentationTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     
     /** The local element counter */
@@ -100,19 +100,20 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
         
-        if (elementHandler.isEmpty() && getSelectionWithMarkerHandler().isEmpty()) {
+        if (getSelectionWithoutMarkerHandler().isEmpty() && 
+                getSelectionWithMarkerHandler().isEmpty()) {
             return;
         }
         
-        tableCounter = elementHandler.get().size() + 
+        tableCounter = getSelectionWithoutMarkerHandler().get().size() + 
                        getSelectionWithMarkerHandler().get().size();
         
         // extract not identified tables with data table markup
         extractTableWithDataTableMarkup(
-                    elementHandler, 
+                    getSelectionWithoutMarkerHandler(), 
                     notIdentifiedTableWithoutDataTableMarkup);
         
         // extract presentation tables with data table markup
@@ -124,9 +125,8 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
+        super.check(sspHandler, testSolutionHandler);
         ElementChecker ec;
         if (!notIdentifiedTableWithoutDataTableMarkup.isEmpty()) {
             ec = new ElementPresenceChecker(
@@ -169,7 +169,7 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
      */
     private void extractTableWithDataTableMarkup(
                 ElementHandler<Element> elementHandler, 
-                ElementHandler elementHandlerWithoutDataTableMarkup) {
+                ElementHandler<Element> elementHandlerWithoutDataTableMarkup) {
         
         Elements elementsWithMarkup = new Elements();
         

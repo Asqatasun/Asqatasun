@@ -58,8 +58,10 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
      * The name of the nomenclature that handles the image file extensions
      */
     private static final String IMAGE_FILE_EXTENSION_NOM = "ImageFileExtensions";
-    private ElementHandler<Element> elemWithMarkerWithTitle = new ElementHandlerImpl();
-    private ElementHandler<Element> elemWithoutMarkerWithTitle = new ElementHandlerImpl();
+    private final ElementHandler<Element> elemWithMarkerWithTitle = 
+            new ElementHandlerImpl();
+    private final ElementHandler<Element> elemWithoutMarkerWithTitle = 
+            new ElementHandlerImpl();
 
     /**
      * Constructor
@@ -70,7 +72,9 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
                 INFORMATIVE_IMAGE_MARKER,
                 // the decorative images are not part of the scope
                 DECORATIVE_IMAGE_MARKER);
-        setElementSelector(new ImageElementSelector(new AreaElementSelector(true, false, false), true, false));
+        setElementSelector(
+                new ImageElementSelector(
+                        new AreaElementSelector(true, false, false), true, false));
 
         // checker for elements identified by marker
         setMarkerElementChecker(
@@ -112,8 +116,8 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
         iterateOnElementHandler(getSelectionWithMarkerHandler(), elemWithMarkerWithTitle);
         iterateOnElementHandler(getSelectionWithoutMarkerHandler(), elemWithoutMarkerWithTitle);
     }
@@ -142,8 +146,8 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void check(SSPHandler sspHandler, ElementHandler<Element> selectionHandler, TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, selectionHandler, testSolutionHandler);
+    protected void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler,  testSolutionHandler);
         CompositeChecker compositeCheckerForMarkedElements = 
                 new CompositeChecker(
                     new TextNotIdenticalToAttributeChecker(
@@ -194,8 +198,14 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
                         ALT_ATTR,
                         HREF_ATTR));
                 
-        compositeCheckerForMarkedElements.check(sspHandler, elemWithMarkerWithTitle, testSolutionHandler);
-        compositeCheckerForNotMarkedElements.check(sspHandler, elemWithoutMarkerWithTitle, testSolutionHandler);
+        compositeCheckerForMarkedElements.check(
+                sspHandler, 
+                elemWithMarkerWithTitle, 
+                testSolutionHandler);
+        compositeCheckerForNotMarkedElements.check(
+                sspHandler, 
+                elemWithoutMarkerWithTitle, 
+                testSolutionHandler);
     }
 
     @Override
