@@ -49,7 +49,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * The testSolution of the elementary checks used to compute the final
      * result of the test
      */
-    Collection<TestSolution> testSolutions = new ArrayList<TestSolution>();
+    Collection<TestSolution> testSolutions = new ArrayList<>();
     
     /**
      * Default constructor
@@ -125,7 +125,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * 
      * @param testSolution
      * @param sspHandler
-     * * @param elementCounter
+     * @param elementCounter
      * @return a Definite result that handles the result of the test
      */
     protected ProcessResult prepareDefiniteResult(

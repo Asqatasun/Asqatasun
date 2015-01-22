@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2014  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -66,7 +66,7 @@ public class HttpRequestHandler {
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
-    private final List<String> proxyExclusionUrlList = new ArrayList();
+    private final List<String> proxyExclusionUrlList = new ArrayList<>();
     public List<String> getProxyExclusionUrlList() {
         return proxyExclusionUrlList;
     }
@@ -151,7 +151,6 @@ public class HttpRequestHandler {
             return HttpStatus.SC_NOT_FOUND;
         } catch (IOException ioe) {
             LOGGER.warn("IOException on " + encodedUrl);
-            ioe.fillInStackTrace();
             return HttpStatus.SC_NOT_FOUND;
         } finally {
             // When HttpClient instance is no longer needed,
