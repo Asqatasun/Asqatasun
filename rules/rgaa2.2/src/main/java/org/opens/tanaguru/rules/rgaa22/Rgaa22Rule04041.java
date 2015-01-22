@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -121,8 +121,8 @@ public class Rgaa22Rule04041 extends AbstractCompositePageRuleMarkupImplementati
         }
 
         @Override
-        protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-            super.select(sspHandler, null); // the elementHandler instance is unused
+        protected void select(SSPHandler sspHandler) {
+            super.select(sspHandler); 
             Iterator<Element> iter = getSelectionWithoutMarkerHandler().get().iterator();
             // The elements with a longdesc attribute are seen as informative. 
             // They are added to the selection with marker

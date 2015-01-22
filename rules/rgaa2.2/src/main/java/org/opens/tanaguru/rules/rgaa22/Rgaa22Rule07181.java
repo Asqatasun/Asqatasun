@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -25,7 +25,6 @@ import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.rules.domelement.DomElement;
 import org.opens.tanaguru.rules.domelement.extractor.DomElementExtractor;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
@@ -58,13 +57,12 @@ public class Rgaa22Rule07181 extends AbstractPageRuleFromPreProcessImplementatio
     @Override
     protected void doSelect(
             Collection<DomElement> domElements, 
-            SSPHandler sspHandler, 
-            ElementHandler elementHandler) {
+            SSPHandler sspHandler) {
         for (DomElement element : domElements) {
             if (element.isHidden() && element.isTextNode()) {
                 Element el = DomElementExtractor.getElementFromDomElement(element, sspHandler);
                 if (el != null) {
-                    elementHandler.add(el);
+                    getElements().add(el);
                 }
             }
         }

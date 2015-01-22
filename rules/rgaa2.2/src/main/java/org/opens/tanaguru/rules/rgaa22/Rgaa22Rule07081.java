@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -22,10 +22,11 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -47,30 +48,32 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule07081 extends AbstractPageRuleMarkupImplementation {
+public class Rgaa22Rule07081 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     private static final String PRESENTATION_TAG_NOM = "DeprecatedRepresentationTagsV2";
     private static final String PRESENTATION_ATTR_NOM = "DeprecatedRepresentationAttributesV2";
     
-    private Map<String, ElementHandler> attrElementHandlerMap = 
-            new HashMap<String, ElementHandler>();
+    private final Map<String, ElementHandler> attrElementHandlerMap = 
+            new HashMap<>();
     
     
-    private ElementHandler deprecatedElementHandler = new ElementHandlerImpl();
+    private final ElementHandler<Element> deprecatedElementHandler = 
+            new ElementHandlerImpl();
 
     /**
      * Default constructor
      */
     public Rgaa22Rule07081 () {
         super();
+        // Retrieve all elements of the page and store to main elementHandler
+        // for couting purpose.
+        setElementSelector(new SimpleElementSelector("*"));
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-        // Retrieve all elements of the page and store to main elementHandler
-        // for couting purpose.
-        SimpleElementSelector allElements = new SimpleElementSelector("*");
-        allElements.selectElements(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        
+        super.select(sspHandler);
 
         // retrieve element from the nomenclature
         Nomenclature deprecatedHtmlTags = nomenclatureLoaderService.
@@ -97,7 +100,7 @@ public class Rgaa22Rule07081 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void check(SSPHandler sspHandler, ElementHandler selectionHandler, TestSolutionHandler testSolutionHandler) {
+    protected void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
  
         // Tags check
         ElementChecker ec = new ElementPresenceChecker(

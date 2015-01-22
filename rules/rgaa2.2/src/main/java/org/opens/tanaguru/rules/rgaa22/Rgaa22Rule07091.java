@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+* Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,6 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa22;
 
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
@@ -48,9 +49,9 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NO_PATTERN_DE
 public class Rgaa22Rule07091 extends AbstractPageRuleMarkupImplementation {
 
     /* the links without target */
-    ElementHandler linkWithoutTarget = new ElementHandlerImpl();
+    ElementHandler<Element> linkWithoutTarget = new ElementHandlerImpl();
     /* the fieldset not within form*/
-    ElementHandler fieldsetNotWithinForm = new ElementHandlerImpl();
+    ElementHandler<Element> fieldsetNotWithinForm = new ElementHandlerImpl();
     /* the total number of elements */
     int totalNumberOfElements = 0;
             
@@ -62,7 +63,7 @@ public class Rgaa22Rule07091 extends AbstractPageRuleMarkupImplementation {
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         // Selection of all links without target
         ElementSelector linkWithoutTargetSelector = 
                 new SimpleElementSelector(LINK_WITHOUT_TARGET_CSS_LIKE_QUERY);
@@ -79,7 +80,6 @@ public class Rgaa22Rule07091 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
 
         if (linkWithoutTarget.isEmpty() && fieldsetNotWithinForm.isEmpty()) {

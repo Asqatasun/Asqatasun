@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -54,7 +54,10 @@ public class Rgaa22Rule06021 extends AbstractPageRuleMarkupImplementation {
     private static final String SELF_TARGET_VALUE = "_self";
     private static final String TOP_TARGET_VALUE = "_top";
 
-    private ElementHandler formWithTargetHandler = new ElementHandlerImpl();
+    private final ElementHandler<Element> formWithTargetHandler = 
+            new ElementHandlerImpl();
+    private final ElementHandler<Element> imageLinks = new ElementHandlerImpl();
+    
     private int linkSelected=0;
     
     /**
@@ -65,7 +68,7 @@ public class Rgaa22Rule06021 extends AbstractPageRuleMarkupImplementation {
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         ElementHandler<Element> tmpElHandler = new ElementHandlerImpl();
         
         /* the image link element selector */
@@ -73,7 +76,7 @@ public class Rgaa22Rule06021 extends AbstractPageRuleMarkupImplementation {
         linkElementSelector.selectElements(sspHandler, tmpElHandler);
         for (Element el : linkElementSelector.getDecidableElements().get()) {
             if (doesElementHaveRequestedTargetAttribute(el)) {
-                elementHandler.add(el);
+                imageLinks.add(el);
             }
         }
               
@@ -83,10 +86,10 @@ public class Rgaa22Rule06021 extends AbstractPageRuleMarkupImplementation {
         compositeLinkElementSelector.selectElements(sspHandler, tmpElHandler);
         for (Element el : compositeLinkElementSelector.getDecidableElements().get()) {
             if (doesElementHaveRequestedTargetAttribute(el)) {
-                elementHandler.add(el);
+                imageLinks.add(el);
             }
         }
-        linkSelected = elementHandler.get().size();
+        linkSelected = imageLinks.get().size();
         
         ElementSelector formElementSelector = new SimpleElementSelector(HtmlElementStore.FORM_ELEMENT);
         tmpElHandler.clean();
@@ -101,9 +104,8 @@ public class Rgaa22Rule06021 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        if (elementHandler.isEmpty() && formWithTargetHandler.isEmpty()) {
+        if (imageLinks.isEmpty() && formWithTargetHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
@@ -115,7 +117,7 @@ public class Rgaa22Rule06021 extends AbstractPageRuleMarkupImplementation {
                                         TEXT_ELEMENT2,
                                         TITLE_ATTR);
         epc.setTextElementBuilder(new LinkTextElementBuilder());
-        epc.check(sspHandler, elementHandler, testSolutionHandler);
+        epc.check(sspHandler, imageLinks, testSolutionHandler);
         
         epc = new ElementPresenceChecker(
                     TestSolution.NEED_MORE_INFO, 
@@ -135,12 +137,9 @@ public class Rgaa22Rule06021 extends AbstractPageRuleMarkupImplementation {
            return false;
        }
        String targetValue = element.attr(TARGET_ATTR);
-       if (StringUtils.equalsIgnoreCase(targetValue, TOP_TARGET_VALUE) || 
-               StringUtils.equalsIgnoreCase(targetValue, PARENT_TARGET_VALUE) || 
-               StringUtils.equalsIgnoreCase(targetValue, SELF_TARGET_VALUE)) {
-           return false;
-       }
-       return true;
+       return !(StringUtils.equalsIgnoreCase(targetValue, TOP_TARGET_VALUE) || 
+               StringUtils.equalsIgnoreCase(targetValue, PARENT_TARGET_VALUE) ||
+               StringUtils.equalsIgnoreCase(targetValue, SELF_TARGET_VALUE));
     }
     
     @Override
