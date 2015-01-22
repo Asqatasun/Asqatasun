@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -59,7 +59,7 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
      * For these elements, the extraction is not trusted, the default value
      * depends on the browser and may be confusable
      */
-    private static String[] FOCUSABLE_EXCLUDED_LIST = 
+    private final static String[] FOCUSABLE_EXCLUDED_LIST = 
             {HtmlElementStore.INPUT_ELEMENT, 
              HtmlElementStore.BUTTON_ELEMENT, 
              HtmlElementStore.TEXTAREA_ELEMENT, 
@@ -89,26 +89,24 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
     @Override
     protected void doSelect(
             Collection<DomElement> domElements, 
-            SSPHandler sspHandler, 
-            ElementHandler elementHandler) {
+            SSPHandler sspHandler) {
         for (DomElement domElement : domElements) {
             if (domElement.isFocusable()) {
                 Element el = DomElementExtractor.getElementFromDomElement(domElement, sspHandler);
-                treatFocusableElement(el, domElement, elementHandler);
+                treatFocusableElement(el, domElement, getElements());
             }
         }
     }   
 
      @Override
     protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
+            SSPHandler sspHandler,
             TestSolutionHandler testSolutionHandler) {
          if (nbOfFocusableElements == 0) {
              testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
              return;
          }
-         super.check(sspHandler, selectionHandler, testSolutionHandler);
+         super.check(sspHandler, testSolutionHandler);
          if (focusableElementExcluded) {
              testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
              sspHandler.getProcessRemarkService().addProcessRemark(
@@ -130,10 +128,7 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
         if (StringUtils.equalsIgnoreCase(element.getBgColor(),element.getOutlineColor())) {
             return false;
         }
-        if (element.getOutlineWidthValue() == 0) {
-            return false;
-        }
-        return true;
+        return element.getOutlineWidthValue() != 0;
     }
 
     @Override
@@ -158,7 +153,7 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
     private void treatFocusableElement(
             Element element,
             DomElement domElement, 
-            ElementHandler elementHandler){
+            ElementHandler<Element> elementHandler){
         if (element == null) {
             return;
         }

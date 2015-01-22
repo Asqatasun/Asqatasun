@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -58,7 +58,7 @@ public class Aw22Rule06034 extends AbstractLinkRuleImplementation {
     private static final String LINK_TEXT_BL_NOM_NAME = "LinkTextBlacklist";
     
     /* the checker of link title pertinence*/
-    private ElementChecker titlePertinenceElementChecker = 
+    private final ElementChecker titlePertinenceElementChecker = 
             new TextPertinenceChecker(
                 new TextAttributeOfElementBuilder(TITLE_ATTR),
                 // no emptiness check
@@ -75,7 +75,7 @@ public class Aw22Rule06034 extends AbstractLinkRuleImplementation {
                 TEXT_ELEMENT2,
                 TITLE_ATTR);
     /* local collection of process remarks*/
-    private Collection<ProcessRemark> remarks = new ArrayList<ProcessRemark>();
+    private final Collection<ProcessRemark> remarks = new ArrayList<>();
     /* local instance of ProcessRemarkService*/
     ProcessRemarkService  prs;
     
@@ -102,9 +102,8 @@ public class Aw22Rule06034 extends AbstractLinkRuleImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        if (elementHandler.isEmpty()) {
+        if (getLinkElementSelector().isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }

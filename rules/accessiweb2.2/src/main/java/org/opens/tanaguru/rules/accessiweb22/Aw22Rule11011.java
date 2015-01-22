@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
@@ -45,7 +46,12 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_FORM_
 public class Aw22Rule11011 extends AbstractPageRuleMarkupImplementation {
 
     /** the input form elements with inplicit label */
-    private ElementHandler inputFormWithoutLabelHandler = new ElementHandlerImpl();
+    private final ElementHandler<Element> inputFormWithoutLabelHandler = 
+            new ElementHandlerImpl();
+    
+    /** the input form elements  */
+    private final ElementHandler<Element> inputFormHandler = 
+            new ElementHandlerImpl();
         
     /**
      * Default constructor
@@ -55,19 +61,19 @@ public class Aw22Rule11011 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         // Selection of all the input form elements of the page
         ElementSelector elementSelector = new SimpleElementSelector(FORM_ELEMENT_CSS_LIKE_QUERY);
-        elementSelector.selectElements(sspHandler, elementHandler);
+        elementSelector.selectElements(sspHandler, inputFormHandler);
 
         // the selection of the input form elements without label is initialised
         // with all the elements of the page, some elements will be removed later
-        inputFormWithoutLabelHandler.addAll(elementHandler.get());
+        inputFormWithoutLabelHandler.addAll(inputFormHandler.get());
         
         // selection of the input form elements with explicit label
-        ElementHandler inputFormLabelHandler = new ElementHandlerImpl();
+        ElementHandler<Element> inputFormLabelHandler = new ElementHandlerImpl();
         ElementSelector explicitLabelSelector = 
-                new InputFormElementWithExplicitLabelSelector(elementHandler);
+                new InputFormElementWithExplicitLabelSelector(inputFormHandler);
         explicitLabelSelector.selectElements(sspHandler, inputFormLabelHandler);
 
         // remove all the input form elements with explicit label from 
@@ -76,7 +82,7 @@ public class Aw22Rule11011 extends AbstractPageRuleMarkupImplementation {
         
         // selection of the input form with inplicit label
         ElementSelector inplicitLabelSelector = 
-                new InputFormElementWithInplicitLabelSelector(elementHandler);
+                new InputFormElementWithInplicitLabelSelector(inputFormHandler);
         inplicitLabelSelector.selectElements(sspHandler, inputFormLabelHandler);
         
         // remove all the input form elements with inplicit label from 
@@ -87,11 +93,10 @@ public class Aw22Rule11011 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
 
         // If the page has no input form element, the test is not applicable
-        if (selectionHandler.isEmpty()) {
+        if (inputFormHandler.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
@@ -115,4 +120,9 @@ public class Aw22Rule11011 extends AbstractPageRuleMarkupImplementation {
                 testSolutionHandler);
     }
 
+    @Override
+    public int getSelectionSize() {
+        return inputFormHandler.size();
+    }
+    
 }

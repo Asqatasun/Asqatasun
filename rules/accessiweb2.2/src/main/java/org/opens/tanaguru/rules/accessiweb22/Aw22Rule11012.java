@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -19,10 +19,12 @@
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
@@ -45,6 +47,9 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  */
 public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
 
+    /* the links without target */
+    private final ElementHandler<Element> labels = new ElementHandlerImpl();
+    
     /**
      * Default constructor
      */
@@ -53,27 +58,26 @@ public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         ElementSelector explicitLabelSelector = 
                 new InputFormElementWithExplicitLabelSelector();
         explicitLabelSelector.selectElements(
                         sspHandler, 
-                        elementHandler);
+                        labels);
         ElementSelector inplicitLabelSelector = 
                 new InputFormElementWithInplicitLabelSelector();
         inplicitLabelSelector.selectElements(
                         sspHandler, 
-                        elementHandler);
+                        labels);
     }
 
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         
         // If the page has no input form element, the test is not applicable
-        if (elementHandler.isEmpty()) {
+        if (labels.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
@@ -86,7 +90,7 @@ public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
                         TestSolution.FAILED, 
                         null, 
                         ID_MISSING_MSG);
-        attributePresenceChecker.check(sspHandler, elementHandler, testSolutionHandler);
+        attributePresenceChecker.check(sspHandler, labels, testSolutionHandler);
 
         /* The attribute Emptiness Checker. Keep default value i.e failed 
          when attribute is empty
@@ -96,11 +100,16 @@ public class Aw22Rule11012 extends AbstractPageRuleMarkupImplementation {
                         new TextAttributeOfElementBuilder(ID_ATTR), 
                         ID_MISSING_MSG, 
                         null);
-        attributeEmptinessChecker.check(sspHandler, elementHandler, testSolutionHandler);
+        attributeEmptinessChecker.check(sspHandler, labels, testSolutionHandler);
         
         /* The id unicityChecker */
         ElementChecker idUnicityChecker = new IdUnicityChecker(ID_NOT_UNIQUE_MSG);
-        idUnicityChecker.check(sspHandler, elementHandler, testSolutionHandler);
+        idUnicityChecker.check(sspHandler, labels, testSolutionHandler);
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return labels.size();
     }
 
 }

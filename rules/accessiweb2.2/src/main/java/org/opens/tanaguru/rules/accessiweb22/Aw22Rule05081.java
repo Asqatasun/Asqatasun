@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -50,13 +50,13 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
      * Tables not identified as presentation table that does not contain
      * data table markup
      */
-    private final ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
+    private final ElementHandler<Element> notIdentifiedTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     /** 
      * Tables identified as presentation table that does not contain
      * data table markup
      */
-    private final  ElementHandler presentationTableWithoutDataTableMarkup = 
+    private final  ElementHandler<Element> presentationTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     
     /**
@@ -97,10 +97,11 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, null); // the elementHandler instance is unused
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler); 
         
-        if (getSelectionWithoutMarkerHandler().isEmpty() && getSelectionWithMarkerHandler().isEmpty()) {
+        if (getSelectionWithoutMarkerHandler().isEmpty() && 
+                getSelectionWithMarkerHandler().isEmpty()) {
             return;
         }
 
@@ -118,9 +119,8 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
+        super.check(sspHandler, testSolutionHandler);
         ElementChecker ec;
         if (!notIdentifiedTableWithoutDataTableMarkup.isEmpty()) {
             ec = new ElementPresenceChecker(
@@ -163,7 +163,7 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
      */
     private void extractTableWithDataTableMarkup(
                 ElementHandler<Element> elementHandler, 
-                ElementHandler elementHandlerWithoutDataTableMarkup) {
+                ElementHandler<Element> elementHandlerWithoutDataTableMarkup) {
         
         Elements elementsWithMarkup = new Elements();
         
@@ -179,10 +179,10 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     
     @Override
     public int getSelectionSize() {
-        return getSelectionWithMarkerHandler().get().size() + 
-                   getSelectionWithoutMarkerHandler().get().size() + 
-                   notIdentifiedTableWithoutDataTableMarkup.get().size() + 
-                   presentationTableWithoutDataTableMarkup.get().size();
+        return getSelectionWithMarkerHandler().size() + 
+                   getSelectionWithoutMarkerHandler().size() + 
+                   notIdentifiedTableWithoutDataTableMarkup.size() + 
+                   presentationTableWithoutDataTableMarkup.size();
     }
     
 }

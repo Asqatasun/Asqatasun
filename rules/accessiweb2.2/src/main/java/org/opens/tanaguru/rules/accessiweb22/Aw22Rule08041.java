@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -23,8 +23,9 @@ package org.opens.tanaguru.rules.accessiweb22;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
 import org.opens.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
@@ -39,34 +40,16 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-4-1"> 8.4.1 rule specification</a>
  *
  */
-public class Aw22Rule08041 extends AbstractPageRuleMarkupImplementation {
+public class Aw22Rule08041 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /**
+     /**
      * Default constructor
      */
     public Aw22Rule08041 () {
-        super();
+        super(
+                new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY),
+                new LangDeclarationValidityChecker(true, true)
+            );
     }
     
-    @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        ElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementHandler);
-   }
-
-    @Override
-    protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler<Element> selectionHandler, 
-            TestSolutionHandler testSolutionHandler) {
-
-        if (selectionHandler.isEmpty()) {
-            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
-            return;
-        }
-        LangChecker ec = new LangDeclarationValidityChecker(true, true);
-        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
-        ec.check(sspHandler, selectionHandler, testSolutionHandler);
-    }
-
 }

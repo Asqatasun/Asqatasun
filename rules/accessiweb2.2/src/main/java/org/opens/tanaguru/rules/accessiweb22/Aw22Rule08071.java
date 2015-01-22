@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,17 +17,19 @@
  *
  * Contact us by mail: open-s AT open-s DOT com
  */
-
 package org.opens.tanaguru.rules.accessiweb22;
 
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChangeChecker;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
+import org.opens.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
@@ -35,41 +37,32 @@ import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 /**
  * Implementation of the rule 8.7.1 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-8-7-1">the rule 8.7.1 design page.</a>
- * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-7-1"> 8.7.1 rule specification</a>
+ * For more details about the implementation, refer to
+ * <a href="http://www.tanaguru.org/en/content/aw22-rule-8-7-1">the rule 8.7.1
+ * design page.</a>
+ *
+ * @see
+ * <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-7-1">
+ * 8.7.1 rule specification</a>
  *
  */
-public class Aw22Rule08071 extends AbstractPageRuleMarkupImplementation {
+public class Aw22Rule08071 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    private LangChecker ec = new LangChangeChecker();
-    
+    private final LangChecker ec = new LangChangeChecker();
+
     /**
      * Default constructor
      */
-    public Aw22Rule08071 () {
+    public Aw22Rule08071() {
         super();
+        setElementSelector(new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY));
+        setElementChecker(ec);
     }
-    
-    @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        SimpleElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementHandler);
-   }
 
     @Override
-    protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler<Element> selectionHandler, 
-            TestSolutionHandler testSolutionHandler) {
-
-        if (selectionHandler.isEmpty()) {
-            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
-            return;
-        }
-        ec = new LangChangeChecker();
-        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
-        ec.check(sspHandler, selectionHandler, testSolutionHandler);
-        
+    public void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, testSolutionHandler);
+        // add extra remark at the end of the test, if the result is NMI
         if (testSolutionHandler.getTestSolution().equals(TestSolution.NEED_MORE_INFO)) {
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 

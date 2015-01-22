@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -61,7 +61,7 @@ public class Aw22Rule07051 extends AbstractDetectionPageRuleImplementation {
         super.setTest(test);
         // set the not detected message after instanciation to make it
         // rule-specific
-        setMessageCodeOnElementNotDetected(
+        getElementPresenceChecker().setMessageCodeOnElementNotDetected(
                 RuleCheckHelper.specifyMessageToRule(
                     NO_PATTERN_DETECTED_MSG, 
                     this.getTest().getCode()));
