@@ -116,8 +116,8 @@ public abstract class AbstractMarkerPageRuleImplementation
     public ElementChecker getRegularElementChecker() {
         return getElementChecker();
     }
-    private void setRegularElementChecker(ElementChecker regularElementChecker) {
-        this.setElementChecker(regularElementChecker); 
+    public void setRegularElementChecker(ElementChecker regularElementChecker) {
+        this.setElementChecker(regularElementChecker);
     }
     
 
@@ -190,7 +190,7 @@ public abstract class AbstractMarkerPageRuleImplementation
         this.markerCode = markerCode;
         this.inverseMarkerCodes = inverseMarkerCode;
         this.elementSelector = elementSelector;
-        setRegularElementChecker(regularElementChecker);
+        this.setElementChecker(regularElementChecker);
         this.markerElementChecker = markerElementChecker;
     }
 
