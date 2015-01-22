@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -72,7 +72,7 @@ public class ElementPresenceCheckerTest extends TestCase{
 
         Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
                      Charset.defaultCharset().displayName());
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
         initMockContext((Elements) elementHandler.get(), TestSolution.FAILED, "detected");
@@ -98,7 +98,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
                      Charset.defaultCharset().displayName());
 
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.A_ELEMENT));
         
         initMockContext(TestSolution.PASSED, "notDetected");
@@ -124,7 +124,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
                      Charset.defaultCharset().displayName());
 
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
         initMockContext(TestSolution.PASSED, "notDetected");
@@ -151,7 +151,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
                      Charset.defaultCharset().displayName());
 
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
         initMockContext((Elements)elementHandler.get(), TestSolution.FAILED, "detected");
@@ -178,7 +178,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
                      Charset.defaultCharset().displayName());
 
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
         
         initMockContext((Elements)elementHandler.get(), TestSolution.NEED_MORE_INFO, "detected");
@@ -211,7 +211,7 @@ public class ElementPresenceCheckerTest extends TestCase{
         Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
                      Charset.defaultCharset().displayName());
 
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         elementHandler.addAll(doc.select(HtmlElementStore.A_ELEMENT));
         
         initMockContext(TestSolution.NOT_APPLICABLE, null);

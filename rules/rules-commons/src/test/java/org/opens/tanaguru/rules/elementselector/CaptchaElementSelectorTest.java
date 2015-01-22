@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -61,16 +61,12 @@ public class CaptchaElementSelectorTest extends TestCase{
 
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
+     * @throws java.io.IOException
      */
-    public void testSelectElementsAttrElement() {
+    public void testSelectElementsAttrElement() throws IOException{
         LOGGER.debug("selectElementsAttrElement");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/captcha/captcha1.html"), 
+        Document doc = Jsoup.parse(new File("src/test/resources/captcha/captcha1.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
-
         initMockContext(doc);
                         
         ElementHandler<Element> elementHandler = new ElementHandlerImpl();
@@ -88,15 +84,12 @@ public class CaptchaElementSelectorTest extends TestCase{
     
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
+     * @throws java.io.IOException
      */
-    public void testSelectElementsTextSibling1() {
+    public void testSelectElementsTextSibling1() throws IOException{
         LOGGER.debug("selectElementsTextSibling1");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/captcha/captcha2.html"), 
+        Document doc = Jsoup.parse(new File("src/test/resources/captcha/captcha2.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
 
         initMockContext(doc);
                         
@@ -115,15 +108,12 @@ public class CaptchaElementSelectorTest extends TestCase{
     
     /**
      * Test of selectElements method, of class CaptchaElementSelector.
+     * @throws java.io.IOException
      */
-    public void testSelectElementsTextSibling2() {
+    public void testSelectElementsTextSibling2() throws IOException{
         LOGGER.debug("selectElementsTextSibling2");
-        Document doc = null;
-        try {
-             doc = Jsoup.parse(new File("src/test/resources/captcha/captcha3.html"), 
+        Document doc = Jsoup.parse(new File("src/test/resources/captcha/captcha3.html"), 
                      Charset.defaultCharset().displayName());
-        } catch (IOException ex) {
-        }
 
         initMockContext(doc);
                         
@@ -208,7 +198,7 @@ public class CaptchaElementSelectorTest extends TestCase{
 
         initMockContext(HtmlElementStore.IMG_ELEMENT, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(
                     new SimpleElementSelector(HtmlElementStore.IMG_ELEMENT));
@@ -233,7 +223,7 @@ public class CaptchaElementSelectorTest extends TestCase{
 
         initMockContext(null, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(
                     new SimpleElementSelector(HtmlElementStore.IMG_ELEMENT));
@@ -258,7 +248,7 @@ public class CaptchaElementSelectorTest extends TestCase{
 
         initMockContext(null, doc);
                         
-        ElementHandler elementHandler = new ElementHandlerImpl();
+        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         CaptchaElementSelector instance = 
                 new CaptchaElementSelector(elementHandler);
         instance.selectElements(sspHandler, elementHandler);
