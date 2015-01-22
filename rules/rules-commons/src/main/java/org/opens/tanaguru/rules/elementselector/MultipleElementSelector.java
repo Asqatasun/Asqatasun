@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -23,10 +23,11 @@
 package org.opens.tanaguru.rules.elementselector;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.springframework.util.CollectionUtils;
 
 /**
  * Element selector implementation that uses multiple css queries to retrieve
@@ -37,11 +38,8 @@ import org.springframework.util.CollectionUtils;
 public class MultipleElementSelector implements ElementSelector{
 
     /* The css queries used to retrieve Elements */
-    private Collection<String> cssQueryList;
+    private final Collection<String> cssQueryList = new ArrayList<>();
     public void addCssQuery(String cssQuery) {
-        if (cssQueryList == null) {
-            cssQueryList = new ArrayList<>();
-        }
         cssQueryList.add(cssQuery);
     }
 
@@ -56,11 +54,11 @@ public class MultipleElementSelector implements ElementSelector{
      * @param cssQueryList 
      */
     public MultipleElementSelector(String... cssQueryList) {
-        this.cssQueryList = CollectionUtils.arrayToList(cssQueryList);
+        this.cssQueryList.addAll(Arrays.asList(cssQueryList));
     }
     
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> selectionHandler) {
         for (String cssQuery : cssQueryList) {
             selectionHandler.addAll(sspHandler.
                     domCssLikeSelectNodeSet(cssQuery).getSelectedElements());

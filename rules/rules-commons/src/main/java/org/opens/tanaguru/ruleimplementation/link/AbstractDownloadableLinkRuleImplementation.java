@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -21,7 +21,6 @@
  */
 package org.opens.tanaguru.ruleimplementation.link;
 
-import java.util.Collection;
 import java.util.Iterator;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
@@ -53,7 +52,8 @@ public abstract class AbstractDownloadableLinkRuleImplementation
     private static final String SLASH_CHAR = "/";
 
     /* the links with a proper extension */
-    private final ElementHandler linkWithSimpleExtension = new ElementHandlerImpl();
+    private final ElementHandler<Element> linkWithSimpleExtension =
+            new ElementHandlerImpl();
 
     /**
      * Default constructor
@@ -64,14 +64,13 @@ public abstract class AbstractDownloadableLinkRuleImplementation
                 new SimpleElementSelector(LINK_WITH_HREF_CSS_LIKE_QUERY),
                 elementChecker
             );
+        
     }
     
     @Override
-    protected void select(
-            SSPHandler sspHandler, 
-            ElementHandler elementHandler) {
-        super.select(sspHandler, elementHandler);
-        Iterator<Element> iter = ((Collection<Element>)elementHandler.get()).iterator();
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        Iterator<Element> iter = getElements().get().iterator();
         Element el;
         while (iter.hasNext()){
             el = iter.next();
@@ -91,15 +90,17 @@ public abstract class AbstractDownloadableLinkRuleImplementation
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         
-        super.check(sspHandler, linkWithSimpleExtension, testSolutionHandler);
+        // invoke getElementChecker instead of super.check() to use local
+        // collection of elements
+        setServicesToChecker(getElementChecker());
+        getElementChecker().check(sspHandler, linkWithSimpleExtension, testSolutionHandler);
         
         TestSolution checkerSolution = testSolutionHandler.getTestSolution();
         
         if (checkerSolution.equals(TestSolution.NOT_APPLICABLE) && 
-                !elementHandler.isEmpty()) {
+                !getElements().isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 
@@ -113,7 +114,7 @@ public abstract class AbstractDownloadableLinkRuleImplementation
         if (checkerSolution.equals(TestSolution.PASSED) ) { 
             // if nothing have been found and some links have a no extension
             // the test result is NMI
-            if (elementHandler.get().size() > linkWithSimpleExtension.get().size() ) {
+            if (getElements().get().size() > linkWithSimpleExtension.get().size() ) {
                 testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
                 sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.NEED_MORE_INFO, 
@@ -125,7 +126,7 @@ public abstract class AbstractDownloadableLinkRuleImplementation
             }
             // we search whether the page contains form, if yes, the result 
             // is nmi, if not, the test is not applicable
-            ElementHandler formHandler = new ElementHandlerImpl();
+            ElementHandler<Element> formHandler = new ElementHandlerImpl();
             new SimpleElementSelector(FORM_ELEMENT).selectElements(sspHandler, formHandler);
             if (formHandler.isEmpty()) {
                 testSolutionHandler.cleanTestSolutions();

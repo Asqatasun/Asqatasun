@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -24,12 +24,11 @@ package org.opens.tanaguru.ruleimplementation.link;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
@@ -50,7 +49,7 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.BUTTON_FORM_CS
  * elements that lead to any action (as a link).
  */
 public abstract class AbstractAllLinkAggregateRuleImplementation 
-            extends AbstractPageRuleMarkupImplementation {
+            extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /* the link element selector */
     LinkElementSelector linkElementSelector;
@@ -100,7 +99,7 @@ public abstract class AbstractAllLinkAggregateRuleImplementation
         
         this.areaLinkElementSelector = areaLinkElementSelector;
         this.areaLinkElementHandler = new ElementHandlerImpl();
-
+        
         this.compositeLinkElementSelector = compositeLinkElementSelector;
         this.compositeLinkElementHandler = new ElementHandlerImpl();
         
@@ -112,7 +111,7 @@ public abstract class AbstractAllLinkAggregateRuleImplementation
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         linkElementSelector.selectElements(sspHandler, linkElementHandler);
         imageLinkElementSelector.selectElements(sspHandler, imageLinkElementHandler);
         areaLinkElementSelector.selectElements(sspHandler, areaLinkElementHandler);
@@ -123,14 +122,13 @@ public abstract class AbstractAllLinkAggregateRuleImplementation
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         
         if (selectionsEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
-
+        
         testElements(sspHandler, linkElementSelector, testSolutionHandler);
         testElements(sspHandler, imageLinkElementSelector, testSolutionHandler);
         testElements(sspHandler, areaLinkElementSelector, testSolutionHandler);
@@ -190,23 +188,4 @@ public abstract class AbstractAllLinkAggregateRuleImplementation
             ElementHandler formButtonHandler, 
             TestSolutionHandler testSolutionHandler);
     
-    /**
-     * Set service to elementChecker depending on their nature.
-     * @param elementChecker 
-     */
-    private void setServicesToChecker(ElementChecker ec) {
-        if (ec instanceof NomenclatureBasedElementChecker) {
-            ((NomenclatureBasedElementChecker)ec).
-                setNomenclatureLoaderService(nomenclatureLoaderService);
-        }
-    }
-    
-    @Override
-    public int getSelectionSize() {
-        return linkElementHandler.get().size() + 
-               imageLinkElementHandler.get().size() + 
-               areaLinkElementHandler.get().size() + 
-               compositeLinkElementHandler.get().size() + 
-               formButtonHandler.get().size();
-    }
 }

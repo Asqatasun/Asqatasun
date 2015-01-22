@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -41,123 +41,108 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
  */
 public class ElementPresenceChecker extends ElementCheckerImpl {
 
+    public static boolean DEFAULT_CHECK_UNICITY = false;
     /**
      * Determine whether the element has to be present and unique.
      */
-    private boolean checkUnicity = false;
+    private boolean checkUnicity = DEFAULT_CHECK_UNICITY;
+    public void setCheckUnicity(boolean checkUnicity) {
+        this.checkUnicity = checkUnicity;
+    }
+    
+    public static TestSolution DEFAULT_NOT_DETECTED_SOLUTION = TestSolution.PASSED;
+    public static TestSolution DEFAULT_DETECTED_SOLUTION = TestSolution.FAILED;
+    
     /**
      * Not detected solution. Default is PASSED.
      */
-    private TestSolution notDetectedSolution = TestSolution.PASSED;
+    private TestSolution notDetectedSolution = DEFAULT_NOT_DETECTED_SOLUTION;
+    public void setNotDetectedSolution(TestSolution notDetectedSolution) {
+        this.notDetectedSolution = notDetectedSolution;
+    }
+
     /**
      * Detected solution. Default is FAILED.
      */
-    private TestSolution detectedSolution = TestSolution.FAILED;
+    private TestSolution detectedSolution = DEFAULT_DETECTED_SOLUTION;
+    public void setDetectedSolution(TestSolution detectedSolution) {
+        this.detectedSolution = detectedSolution;
+    }
+        
     /**
      * The message code associated with a processRemark when the element is
      * detected on the page
      */
-    private final String messageCodeOnElementDetected;
+    private String messageCodeOnElementDetected;
+    public void setMessageCodeOnElementDetected(String messageCodeOnElementDetected) {
+        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
+    }
+    
     /**
      * The message code associated with a processRemark when the element is
      * not found on the page
      */
-    private final String messageCodeOnElementNotDetected;
+    private String messageCodeOnElementNotDetected;
+    public void setMessageCodeOnElementNotDetected(String messageCodeOnElementNotDetected) {
+        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
+    }
+    
     /**
      * The message code associated with a sourceCodeRemark when several elements
      * are detected and the checkUnicity state is set to true
      */
     private String messageCodeOnMultipleElements;
-
-    /**
-     * Constructor.
-     *
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     */
-    public ElementPresenceChecker(
-            String messageCodeOnElementDetected,
-            String messageCodeOnElementNotDetected) {
-        super();
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     * @param eeAttributeNameList
-     */
-    public ElementPresenceChecker(
-            String messageCodeOnElementDetected,
-            String messageCodeOnElementNotDetected,
-            String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     */
-    public ElementPresenceChecker(
-            TestSolution detectedSolution,
-            TestSolution notDetectedSolution,
-            String messageCodeOnElementDetected,
-            String messageCodeOnElementNotDetected) {
-        this.detectedSolution = detectedSolution;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.notDetectedSolution = notDetectedSolution;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     * @param eeAttributeNameList
-     */
-    public ElementPresenceChecker(
-            TestSolution detectedSolution,
-            TestSolution notDetectedSolution,
-            String messageCodeOnElementDetected,
-            String messageCodeOnElementNotDetected,
-            String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.detectedSolution = detectedSolution;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.notDetectedSolution = notDetectedSolution;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param checkUnicity
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     * @param messageCodeOnMultipleElements
-     */
-    public ElementPresenceChecker(
-            boolean checkUnicity,
-            String messageCodeOnElementDetected,
-            String messageCodeOnElementNotDetected,
-            String messageCodeOnMultipleElements) {
-        super();
-        this.checkUnicity = checkUnicity;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
+    public void setMessageCodeOnMultipleElements(String messageCodeOnMultipleElements) {
         this.messageCodeOnMultipleElements = messageCodeOnMultipleElements;
+    }
+
+    /**
+     * 
+     */
+    public ElementPresenceChecker(){}
+    
+    /**
+     * Constructor.
+     *
+     * @param messageCodeOnElementDetected
+     * @param messageCodeOnElementNotDetected
+     * @param eeAttributeNameList
+     */
+    public ElementPresenceChecker(
+            String messageCodeOnElementDetected,
+            String messageCodeOnElementNotDetected,
+            String... eeAttributeNameList) {
+        this(DEFAULT_CHECK_UNICITY,
+             DEFAULT_DETECTED_SOLUTION, 
+             DEFAULT_NOT_DETECTED_SOLUTION,
+             messageCodeOnElementDetected,
+             messageCodeOnElementNotDetected,
+             null,
+             eeAttributeNameList);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param detectedSolution
+     * @param notDetectedSolution
+     * @param messageCodeOnElementDetected
+     * @param messageCodeOnElementNotDetected
+     * @param eeAttributeNameList
+     */
+    public ElementPresenceChecker(
+            TestSolution detectedSolution,
+            TestSolution notDetectedSolution,
+            String messageCodeOnElementDetected,
+            String messageCodeOnElementNotDetected,
+            String... eeAttributeNameList) {
+        this(DEFAULT_CHECK_UNICITY,
+             detectedSolution, 
+             notDetectedSolution,
+             messageCodeOnElementDetected,
+             messageCodeOnElementNotDetected,
+             null,
+             eeAttributeNameList);
     }
 
     /**
@@ -175,37 +160,13 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
             String messageCodeOnElementNotDetected,
             String messageCodeOnMultipleElements,
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.checkUnicity = checkUnicity;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
-        this.messageCodeOnMultipleElements = messageCodeOnMultipleElements;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param checkUnicity
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     * @param messageCodeOnMultipleElements
-     */
-    public ElementPresenceChecker(
-            boolean checkUnicity,
-            TestSolution detectedSolution,
-            TestSolution notDetectedSolution,
-            String messageCodeOnElementDetected,
-            String messageCodeOnElementNotDetected,
-            String messageCodeOnMultipleElements) {
-        super();
-        this.checkUnicity = checkUnicity;
-        this.detectedSolution = detectedSolution;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.notDetectedSolution = notDetectedSolution;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
-        this.messageCodeOnMultipleElements = messageCodeOnMultipleElements;
+        this(checkUnicity, 
+             DEFAULT_DETECTED_SOLUTION, 
+             DEFAULT_NOT_DETECTED_SOLUTION,
+             messageCodeOnElementDetected,
+             messageCodeOnElementNotDetected,
+             messageCodeOnMultipleElements,
+             eeAttributeNameList);
     }
 
     /**
@@ -290,4 +251,5 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
     protected void createSourceCodeRemark(TestSolution testSolution, Element element, String message) {
         addSourceCodeRemark(testSolution, element, message);
     }
+
 }

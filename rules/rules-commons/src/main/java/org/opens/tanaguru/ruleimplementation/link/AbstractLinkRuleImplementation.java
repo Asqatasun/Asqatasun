@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -21,14 +21,11 @@
  */
 package org.opens.tanaguru.ruleimplementation.link;
 
-import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
 
 /**
@@ -38,12 +35,10 @@ import org.opens.tanaguru.rules.elementselector.LinkElementSelector;
  * 
  */
 public abstract class AbstractLinkRuleImplementation 
-            extends AbstractPageRuleMarkupImplementation {
+            extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /* the link element selector */
-    LinkElementSelector linkElementSelector;
     public LinkElementSelector getLinkElementSelector() {
-        return linkElementSelector;
+        return (LinkElementSelector)this.getElementSelector();
     }
 
     /* the checked used for decidable elements */
@@ -70,22 +65,19 @@ public abstract class AbstractLinkRuleImplementation
             ElementChecker decidableElementsChecker,
             ElementChecker notDecidableElementsChecker) {
         super();
-        this.linkElementSelector = linkElementSelector;
+        setElementSelector(linkElementSelector);
         this.decidableElementsChecker = decidableElementsChecker;
         this.notDecidableElementsChecker = notDecidableElementsChecker;
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        linkElementSelector.selectElements(sspHandler, elementHandler);
-    }
-    
-    @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        if (elementHandler.isEmpty()) {
+
+        LinkElementSelector linkElementSelector = getLinkElementSelector();
+        
+        if (linkElementSelector.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
@@ -105,15 +97,10 @@ public abstract class AbstractLinkRuleImplementation
         }
     }
 
-    /**
-     * Set service to elementChecker depending on their nature.
-     * @param elementChecker 
-     */
-    protected void setServicesToChecker(ElementChecker elementChecker) {
-        if (elementChecker instanceof NomenclatureBasedElementChecker) {
-            ((NomenclatureBasedElementChecker)elementChecker).
-                setNomenclatureLoaderService(nomenclatureLoaderService);
-        }
+    @Override
+    public int getSelectionSize() {
+        return getLinkElementSelector().getDecidableElements().get().size()+
+                getLinkElementSelector().getNotDecidableElements().get().size();
     }
     
 }

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -29,7 +29,6 @@ import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
 
@@ -56,8 +55,10 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
  *
  */
 public abstract class AbstractMarkerPageRuleImplementation
-        extends AbstractPageRuleMarkupImplementation {
+        extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
+    private ElementSelector elementSelector;
+    
     /**
      * The elements identified with the markers
      */
@@ -73,7 +74,6 @@ public abstract class AbstractMarkerPageRuleImplementation
      */
     private final ElementHandler<Element> selectionWithoutMarkerHandler
             = new ElementHandlerImpl();
-
     public ElementHandler<Element> getSelectionWithoutMarkerHandler() {
         return selectionWithoutMarkerHandler;
     }
@@ -87,7 +87,7 @@ public abstract class AbstractMarkerPageRuleImplementation
      * The marker code that identifies elements of same type but with another
      * nature.
      */
-    private final String inverseMarkerCode;
+    private final String[] inverseMarkerCodes;
 
     /**
      * The collection of marker that enable to identify the targeted elements
@@ -101,31 +101,25 @@ public abstract class AbstractMarkerPageRuleImplementation
     private Collection<String> inverseMarkerList;
 
     /**
-     * The elementSelector used by the rule
-     */
-    private ElementSelector elementSelector;
-
-    public void setElementSelector(ElementSelector elementSelector) {
-        this.elementSelector = elementSelector;
-    }
-
-    /**
-     * The elementChecker used by the rule
-     */
-    private ElementChecker elementChecker;
-
-    public void setElementChecker(ElementChecker elementChecker) {
-        this.elementChecker = elementChecker;
-    }
-
-    /**
      * The elementChecker used by the rule for marker elements
      */
     private ElementChecker markerElementChecker;
-
     public void setMarkerElementChecker(ElementChecker markerElementChecker) {
         this.markerElementChecker = markerElementChecker;
     }
+    
+    /**
+     * The elementChecker used by the rule for regular elements, i.e not 
+     * identified by marker
+     * @return 
+     */
+    public ElementChecker getRegularElementChecker() {
+        return getElementChecker();
+    }
+    private void setRegularElementChecker(ElementChecker regularElementChecker) {
+        this.setElementChecker(regularElementChecker); 
+    }
+    
 
     /**
      * Constructor
@@ -136,9 +130,21 @@ public abstract class AbstractMarkerPageRuleImplementation
     public AbstractMarkerPageRuleImplementation(
             @Nonnull String markerCode,
             @Nonnull String inverseMarkerCode) {
+        this(markerCode, new String[]{inverseMarkerCode});
+    }
+    
+    /**
+     * Constructor
+     *
+     * @param markerCode
+     * @param inverseMarkerCode
+     */
+    public AbstractMarkerPageRuleImplementation(
+            @Nonnull String markerCode,
+            @Nonnull String[] inverseMarkerCode) {
         super();
         this.markerCode = markerCode;
-        this.inverseMarkerCode = inverseMarkerCode;
+        this.inverseMarkerCodes = inverseMarkerCode;
     }
 
     /**
@@ -156,25 +162,48 @@ public abstract class AbstractMarkerPageRuleImplementation
             @Nonnull String inverseMarkerCode,
             @Nonnull ElementChecker markerElementChecker,
             @Nonnull ElementChecker elementChecker) {
+        this(
+                elementSelector,
+                markerCode,
+                new String[]{inverseMarkerCode}, 
+                markerElementChecker,
+                elementChecker
+            );
+    }
+    
+    /**
+     * Constructor
+     *
+     * @param elementSelector
+     * @param markerCode
+     * @param inverseMarkerCode
+     * @param markerElementChecker
+     * @param regularElementChecker
+     */
+    public AbstractMarkerPageRuleImplementation(
+            @Nonnull ElementSelector elementSelector,
+            @Nonnull String markerCode,
+            @Nonnull String[] inverseMarkerCode,
+            @Nonnull ElementChecker markerElementChecker,
+            @Nonnull ElementChecker regularElementChecker) {
         super();
         this.markerCode = markerCode;
-        this.inverseMarkerCode = inverseMarkerCode;
+        this.inverseMarkerCodes = inverseMarkerCode;
         this.elementSelector = elementSelector;
-        this.elementChecker = elementChecker;
+        setRegularElementChecker(regularElementChecker);
         this.markerElementChecker = markerElementChecker;
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         elementSelector.selectElements(sspHandler, selectionWithoutMarkerHandler);
         extractMarkerListFromAuditParameter(sspHandler);
         sortMarkerElements();
     }
-
+        
     @Override
     protected void check(
             SSPHandler sspHandler,
-            ElementHandler<Element> selectionHandler,
             TestSolutionHandler testSolutionHandler) {
          if (!selectionWithMarkerHandler.isEmpty()) {
             setServicesToChecker(markerElementChecker);
@@ -182,10 +211,10 @@ public abstract class AbstractMarkerPageRuleImplementation
                     sspHandler,
                     selectionWithMarkerHandler,
                     testSolutionHandler);
-        }
+    }
         if (!selectionWithoutMarkerHandler.isEmpty()) {
-            setServicesToChecker(elementChecker);
-            elementChecker.check(
+            setServicesToChecker(getRegularElementChecker());
+            getRegularElementChecker().check(
                     sspHandler,
                     selectionWithoutMarkerHandler,
                     testSolutionHandler);
@@ -208,18 +237,21 @@ public abstract class AbstractMarkerPageRuleImplementation
         boolean markerFound = false;
         boolean inverseMarkerFound = false;
         for (Parameter parameter : sspHandler.getSSP().getAudit().getParameterSet()) {
-            if (parameter.getParameterElement().getParameterElementCode().equalsIgnoreCase(markerCode)) {
+            String paramElCode = parameter.getParameterElement().getParameterElementCode();
+            if (StringUtils.equalsIgnoreCase(paramElCode, markerCode)) {
                 String markerTab = parameter.getValue();
                 if (StringUtils.isNotEmpty(markerTab)) {
-                    markerList = new ArrayList();
+                    markerList = new ArrayList<>();
                     inverseMarkerFound = initMarkerList(markerTab, markerList);
                 }
             }
-            if (parameter.getParameterElement().getParameterElementCode().equalsIgnoreCase(inverseMarkerCode)) {
-                String markerTab = parameter.getValue();
-                if (StringUtils.isNotEmpty(markerTab)) {
-                    inverseMarkerList = new ArrayList();
-                    inverseMarkerFound = initMarkerList(markerTab, inverseMarkerList);
+            for (String inverseMarkerCode : inverseMarkerCodes) {
+                if (StringUtils.equalsIgnoreCase(paramElCode, inverseMarkerCode)) {
+                    String markerTab = parameter.getValue();
+                    if (StringUtils.isNotEmpty(markerTab)) {
+                        inverseMarkerList = new ArrayList<>();
+                        inverseMarkerFound = initMarkerList(markerTab, inverseMarkerList);
+                    }
                 }
             }
             if (inverseMarkerFound && markerFound) {
@@ -283,23 +315,11 @@ public abstract class AbstractMarkerPageRuleImplementation
         if (CollectionUtils.isEmpty(markerList)) {
             return false;
         }
-        Collection<String> elAttr = new ArrayList();
+        Collection<String> elAttr = new ArrayList<>();
         elAttr.add(id);
         elAttr.addAll(classNames);
         elAttr.add(role);
         return CollectionUtils.containsAny(markerList, elAttr);
-    }
-
-    /**
-     * Set service to elementChecker depending on their nature.
-     *
-     * @param elementChecker
-     */
-    private void setServicesToChecker(ElementChecker elementChecker) {
-        if (elementChecker instanceof NomenclatureBasedElementChecker) {
-            ((NomenclatureBasedElementChecker) elementChecker).
-                    setNomenclatureLoaderService(nomenclatureLoaderService);
-        }
     }
 
     /**

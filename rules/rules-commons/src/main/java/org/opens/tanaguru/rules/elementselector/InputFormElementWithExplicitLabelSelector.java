@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -48,12 +48,12 @@ public class InputFormElementWithExplicitLabelSelector implements ElementSelecto
      * Constructor
      * @param formElementHandler 
      */
-    public InputFormElementWithExplicitLabelSelector(ElementHandler formElementHandler) {
+    public InputFormElementWithExplicitLabelSelector(ElementHandler<Element> formElementHandler) {
         this.formElementHandler = formElementHandler;
     }
 
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> selectionHandler) {
         for (Element el : getElements(sspHandler)) {
             if (StringUtils.isNotBlank(el.id()) && 
                     isLabelElementWithForAttributeExists(sspHandler, el.id())) {

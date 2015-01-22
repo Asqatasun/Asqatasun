@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -22,6 +22,7 @@
 package org.opens.tanaguru.ruleimplementation;
 
 import javax.annotation.Nonnull;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
 import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
@@ -40,16 +41,42 @@ import org.opens.tanaguru.rules.elementselector.ElementSelector;
 public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation 
         extends AbstractPageRuleMarkupImplementation {
 
+    /** The elementHandler used by the rule */
+    private ElementHandler<Element> elementHandler = new ElementHandlerImpl();
+    public ElementHandler<Element> getElements() {
+        return elementHandler;
+    }
+
+    public void setElementHandler(ElementHandler<Element> elementHandler) {
+        this.elementHandler = elementHandler;
+    }
+    
+    /** The elementSelector used by the rule */
+    private ElementSelector elementSelector;
+    public ElementSelector getElementSelector() {
+        return elementSelector;
+    }
+    
+    public void setElementSelector(ElementSelector elementSelector) {
+        this.elementSelector = elementSelector;
+    }
+    
     /** The elementChecker used by the rule */
-    private final ElementChecker elementChecker;
+    private ElementChecker elementChecker;
     public ElementChecker getElementChecker() {
         return elementChecker;
     }
     
-    /** The elementSelector used by the rule */
-    private final ElementSelector elementSelector;
-    public ElementSelector getElementSelector() {
-        return elementSelector;
+    public void setElementChecker(ElementChecker elementChecker) {
+        this.elementChecker = elementChecker;
+    }
+    
+    /**
+     * The constructor
+     * 
+     */
+    public AbstractPageRuleWithSelectorAndCheckerImplementation() {
+        super();
     }
     
     /**
@@ -64,39 +91,51 @@ public abstract class AbstractPageRuleWithSelectorAndCheckerImplementation
         super();
         this.elementChecker = elementChecker;
         this.elementSelector = elementSelector;
-    }   
-
+    }
+    
     /**
      * Perform the selection using the {@link ElementSelector}
      * 
      * @param sspHandler
-     * @param elementHandler 
      */
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
-        elementSelector.selectElements(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        if (elementSelector != null) {
+            elementSelector.selectElements(sspHandler, elementHandler);
+        }
     }
-
+    
     /**
      * Perform the check using the {@link ElementChecker}
      * 
      * @param sspHandler
-     * @param elementHandler 
      * @param testSolutionHandler
      */
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        if (elementChecker instanceof NomenclatureBasedElementChecker) {
-            ((NomenclatureBasedElementChecker)elementChecker).
-                setNomenclatureLoaderService(nomenclatureLoaderService);
-        }
+        setServicesToChecker(elementChecker);
         elementChecker.check(
             sspHandler, 
             elementHandler, 
             testSolutionHandler);
+    }
+    
+    /**
+     * Set service to elementChecker depending on their nature.
+     * @param elementChecker 
+     */
+    protected void setServicesToChecker(ElementChecker elementChecker) {
+        if (elementChecker instanceof NomenclatureBasedElementChecker) {
+            ((NomenclatureBasedElementChecker)elementChecker).
+                setNomenclatureLoaderService(nomenclatureLoaderService);
+        }
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return elementHandler.size();
     }
 
 }

@@ -325,7 +325,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     private void resetCollectedDataOnException (
             TestSolutionHandler testSolutionHandler, 
             Exception exception) {
-        LOGGER.warn(exception);
+        LOGGER.info(exception);
         testSolutionHandler.cleanTestSolutions();
         testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
         elementCounter = 0;
@@ -334,7 +334,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     private boolean isAlternativeContrastMechanismPresentFromParam(SSPHandler sspHandler) {
         for (Parameter parameter : sspHandler.getSSP().getAudit().getParameterSet()){
             if (parameter.getParameterElement().getParameterElementCode().equalsIgnoreCase(ALT_CONTRAST_MECHA_PARAM_KEY)) {
-                if(parameter.getValue().equals("true")) {
+                if(Boolean.valueOf(parameter.getValue())) {
                     return true;
                 }
                 break;

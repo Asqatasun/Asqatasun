@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -35,24 +35,24 @@ import org.jsoup.select.Elements;
 public class ElementHandlerImpl implements ElementHandler<Element> {
 
     /**
+     * The elements implied by the test
+     */
+    private final Elements elements = new Elements();
+    
+    /**
      * Default constructor
      */
     public ElementHandlerImpl(){}
     
     /**
      * Constructor that initialise locale collection with elements passed as 
-     * arguement
+     * argument
      * @param els
      */
     public ElementHandlerImpl(Element... els){
         elements.addAll(Arrays.asList(els));
     }
 
-    /**
-     * The elements implied by the test
-     */
-    private final Elements elements = new Elements();
-    
     /**
      * {@inheritDoc}
      * @param element
@@ -107,7 +107,7 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
      * @return the current ElementHandler emptied
      */
     @Override
-    public ElementHandler clean() {
+    public ElementHandler<Element> clean() {
         elements.clear();
         return this;
     }
@@ -128,6 +128,15 @@ public class ElementHandlerImpl implements ElementHandler<Element> {
     @Override
     public boolean isEmpty() {
         return elements.isEmpty();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return 
+     */
+    @Override
+    public int size() {
+        return get().size();
     }
 
 }

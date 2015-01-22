@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+  * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -22,7 +22,6 @@
 package org.opens.tanaguru.ruleimplementation;
 
 
-import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 
@@ -44,16 +43,19 @@ public abstract class AbstractNotTestedRuleImplementation
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, 
-                          ElementHandler<Element> elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         // DO NOTHING
     }
     
     @Override
-    protected void check(SSPHandler sspHandler, 
-                         ElementHandler<Element> elementHandler,
+    protected void check(SSPHandler sspHandler,
                          TestSolutionHandler testSolutionHandler) {
         testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return 0;
     }
 
 }

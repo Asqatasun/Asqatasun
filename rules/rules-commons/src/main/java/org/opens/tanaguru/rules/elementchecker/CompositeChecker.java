@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -68,8 +68,9 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
      * This map provides a way to override the final result of the successive 
      * checkers execution and associate eventually a message.
      */
-    private final Map<TestSolution, Map<TestSolution, String>> checkMessageFromSolutionMap = new HashMap();
-    public void addCheckMessageFromSolution(TestSolution solution, Map resultAndMessage) {
+    private final Map<TestSolution, Map<TestSolution, String>> checkMessageFromSolutionMap = 
+            new HashMap<>();
+    public void addCheckMessageFromSolution(TestSolution solution, Map<TestSolution, String> resultAndMessage) {
         checkMessageFromSolutionMap.put(solution, resultAndMessage);
     }
     
@@ -128,7 +129,7 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
              Elements elements, 
              TestSolutionHandler testSolutionHandler) {
          setServicesToCheckers();
-         ElementHandler elementHandler = new ElementHandlerImpl();
+         ElementHandler<Element> elementHandler = new ElementHandlerImpl();
          for (Element element : elements) {
              elementHandler.clean().add(element);
              testSolutionHandler.addTestSolution(callCheckers(sspHandler, elementHandler));

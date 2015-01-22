@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -229,7 +229,7 @@ public class AbstractUniqueElementSiteRuleImplementation
         
         TestSolution testSolution = TestSolution.PASSED;
         
-        if (CollectionUtils.size(wrsOnError) > 1) {
+        if (CollectionUtils.isNotEmpty(wrsOnError)) {
             
             for (WebResource wr : wrsOnError) {
                 
@@ -375,9 +375,8 @@ public class AbstractUniqueElementSiteRuleImplementation
                                 TestSolution.PASSED, 
                                 0, 
                                 null));
-                    return Collections.EMPTY_LIST;
+                    return Collections.<WebResource>emptyList();
                 } else {
-                    
                     // if all the pages with the rel canonical don't point to 
                     // a unique page defined by the href value, all is on error
                     pagesWithDuplicate.addAll(urlListWithRelCanonical.get(canonicalValue));
@@ -493,7 +492,7 @@ public class AbstractUniqueElementSiteRuleImplementation
             Collection<ProcessRemark> remarks) {
         ElementSelector relCanonicalSelector = 
                 new SimpleElementSelector(CssLikeQueryStore.REL_CANONICAL_CSS_LIKE_QUERY);
-        ElementHandler relCan = new ElementHandlerImpl();
+        ElementHandler<Element> relCan = new ElementHandlerImpl();
         relCanonicalSelector.selectElements(sspHandler, relCan);
         if (relCan.get().size() != 1) {
             return;

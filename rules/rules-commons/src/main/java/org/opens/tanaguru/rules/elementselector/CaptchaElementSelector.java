@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -47,7 +47,7 @@ public class CaptchaElementSelector implements ElementSelector {
     private ElementSelector elementSelector;
 
     /** the pre-selected image elements */
-    private ElementHandler imageHandler;
+    private ElementHandler<Element> imageHandler;
     
     /**
      * @param elementSelector 
@@ -59,12 +59,12 @@ public class CaptchaElementSelector implements ElementSelector {
     /**
      * @param imageHandler
      */
-    public CaptchaElementSelector(ElementHandler imageHandler) {
+    public CaptchaElementSelector(ElementHandler<Element> imageHandler) {
         this.imageHandler = imageHandler;
     }
     
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> selectionHandler) {
         if (!StringUtils.containsIgnoreCase(sspHandler.getSSP().getDOM(), CAPTCHA_KEY)) {
             return;
         }

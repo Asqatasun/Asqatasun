@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -22,9 +22,7 @@
 package org.opens.tanaguru.ruleimplementation;
 
 import javax.annotation.Nonnull;
-import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 
 /**
  * <p>
@@ -36,14 +34,8 @@ import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
  * </p>
  */
 public abstract class AbstractPageRuleWithCheckerImplementation 
-        extends AbstractPageRuleMarkupImplementation {
+        extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /** The elementChecker used by the rule */
-    private ElementChecker elementChecker;
-    public void setElementChecker(ElementChecker elementChecker) {
-        this.elementChecker = elementChecker;
-    }
-    
     /**
      * The default constructor
      * 
@@ -60,40 +52,7 @@ public abstract class AbstractPageRuleWithCheckerImplementation
     public AbstractPageRuleWithCheckerImplementation(
             @Nonnull ElementChecker elementChecker) {
         super();
-        this.elementChecker = elementChecker;
+        setElementChecker(elementChecker);
     }
     
-    /**
-     * No selection is performed here.
-     * 
-     * @param sspHandler
-     * @param selectionHandler 
-     */
-    @Override
-    protected void select(SSPHandler sspHandler, ElementHandler selectionHandler) {
-        // NO SELECTION REQUIRED HERE, ALL IS ABOUT CHECKING
-    }
-
-    /**
-     * Perform the check using the {@link ElementChecker}
-     * 
-     * @param sspHandler
-     * @param selectionHandler 
-     * @param testSolutionHandler
-     */
-    @Override
-    protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
-            TestSolutionHandler testSolutionHandler) {
-        if (elementChecker instanceof NomenclatureBasedElementChecker) {
-            ((NomenclatureBasedElementChecker)elementChecker).
-                    setNomenclatureLoaderService(nomenclatureLoaderService);
-        }
-        elementChecker.check(
-                sspHandler, 
-                selectionHandler, 
-                testSolutionHandler);
-    }
-
 }
