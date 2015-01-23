@@ -374,7 +374,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         testRunFactory.setScreenWidth(
                 Integer.valueOf(
                         parameterDataService.getParameter(
-                                webResource.getAudit(), ParameterElement.SCREEN_HEIGHT_KEY).getValue()));
+                                webResource.getAudit(), ParameterElement.SCREEN_WIDTH_KEY).getValue()));
 //      ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return testRunFactory;
     }
