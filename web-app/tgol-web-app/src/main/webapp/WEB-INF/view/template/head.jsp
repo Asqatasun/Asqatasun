@@ -6,7 +6,7 @@
     <meta charset="utf-8"/>
     <title>${pageTitle}</title>
     <meta name="description" content="${pageMetaDescription}"/>
-    <meta name="author" content="Open-S.com"/>
+    <meta name="author" content="Tanaguru.org"/>
     <!-- Le styles -->
 
 <c:if test="${addJqueryUI}">
