@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -22,6 +22,7 @@
 package org.opens.tgol.controller;
 
 import java.util.Collection;
+import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,6 +44,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
 /** 
  *
@@ -51,6 +53,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController extends AbstractUserAndContractsController{
 
+    private static final String FRENCH_GUEST_PREFIX="_fr";
     
     private AuthenticationManager authenticationManager;
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
@@ -73,6 +76,12 @@ public class LoginController extends AbstractUserAndContractsController{
     @Autowired
     public void setTgolUserDetails(TgolUserDetailsService tgolUserDetailsService) {
         this.tgolUserDetailsService = tgolUserDetailsService;
+    }
+    
+    private LocaleResolver localeResolver;
+    @Autowired
+    public final void setLocaleResolver(LocaleResolver localeResolver) {
+        this.localeResolver = localeResolver;
     }
     
     @RequestMapping(value = TgolKeyStore.LOGIN_URL, method=RequestMethod.GET)
@@ -102,7 +111,15 @@ public class LoginController extends AbstractUserAndContractsController{
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        if (StringUtils.isBlank(guestUser) || StringUtils.isBlank(guestPassword)) {
+        Locale locale = localeResolver.resolveLocale(request);
+        String lGuestUser;
+        boolean isFrench = locale.equals(Locale.FRANCE) || locale.equals(Locale.FRENCH);
+        if (isFrench) {
+            lGuestUser=this.guestUser+FRENCH_GUEST_PREFIX;
+        } else {
+            lGuestUser=this.guestUser;
+        }
+        if (StringUtils.isBlank(lGuestUser) || StringUtils.isBlank(guestPassword)) {
             return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
         }
         if (isAuthenticated()) {
@@ -110,14 +127,17 @@ public class LoginController extends AbstractUserAndContractsController{
         }
         if (guestUserDetails == null) {
             try {
-                guestUserDetails = tgolUserDetailsService.loadUserByUsername(guestUser);
+                guestUserDetails = tgolUserDetailsService.loadUserByUsername(lGuestUser);
             } catch (UsernameNotFoundException unfe) {
                 return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
             }
         }
 
-        doGuestAutoLogin(request);
+        doGuestAutoLogin(request, lGuestUser);
 
+        if (isFrench) {
+            return TgolKeyStore.HOME_VIEW_REDIRECT_NAME;
+        }
         Collection<Contract> contractSet = getContractDataService().getAllContractsByUser(getCurrentUser());
         if (contractSet == null || contractSet.isEmpty()) {
             return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
@@ -125,9 +145,9 @@ public class LoginController extends AbstractUserAndContractsController{
         String contractId = contractSet.iterator().next().getId().toString();
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contractId);
         return TgolKeyStore.AUDIT_PAGE_SET_UP_REDIRECT_NAME;
-    }
+   }
     
-    private void doGuestAutoLogin(HttpServletRequest request) {
+    private void doGuestAutoLogin(HttpServletRequest request, String guestUser) {
         try {
             // Must be called from request filtered by Spring Security, otherwise SecurityContextHolder is not updated
             UsernamePasswordAuthenticationToken token = 

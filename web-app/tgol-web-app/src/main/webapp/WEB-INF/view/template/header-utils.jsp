@@ -51,7 +51,7 @@
                 <c:when test="${configProperties['enable-account-settings'] == 'true'}">
                 <li ${accountSettingsActive}>
                     <c:choose>
-                    <c:when test="${currentUserName != 'guest'}">
+                    <c:when test="${! fn:startsWith(currentUserName, 'guest')}">
                     <div id="account-settings">
                         <a href="<c:url value="/account-settings.html"/>" 
                            title="<fmt:message key="account-settings.accountSettingsLinkTitle"><fmt:param>${currentUserName}</fmt:param></fmt:message>">
