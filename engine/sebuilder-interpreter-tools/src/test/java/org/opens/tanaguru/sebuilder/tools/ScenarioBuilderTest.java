@@ -68,7 +68,7 @@ public class ScenarioBuilderTest extends TestCase {
      */
     public void testBuildScenario_List() {
         System.out.println("buildScenario with several Url");
-        List<String> urlList = new LinkedList<String>();
+        List<String> urlList = new LinkedList<>();
         String url1 = "http://www.test1.org";
         String url2 = "http://www.test2.org";
         String url3 = "http://www.test3.org";

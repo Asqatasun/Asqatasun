@@ -104,7 +104,7 @@ public abstract class ScenarioBuilder {
      * 
      * @return 
      */
-    private static final String buildHeader() {
+    private static String buildHeader() {
         if (header == null) {
             StringBuilder strb = new StringBuilder();
             strb.append(LEFT_BRACE);
@@ -129,7 +129,7 @@ public abstract class ScenarioBuilder {
      * 
      * @return 
      */
-    private static final String buildFooter() {
+    private static String buildFooter() {
         if (footer == null) {
             StringBuilder strb = new StringBuilder();
             strb.append(RIGHT_SQUARE_BRACKET);
@@ -145,7 +145,7 @@ public abstract class ScenarioBuilder {
      * @param url
      * @return 
      */
-    private static final String buildGetStep(String url) {
+    private static String buildGetStep(String url) {
         StringBuilder strb = new StringBuilder();
         strb.append(LEFT_BRACE);
         strb.append(TYPE_KEY);

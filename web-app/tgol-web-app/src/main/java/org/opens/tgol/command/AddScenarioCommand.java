@@ -100,6 +100,9 @@ public class AddScenarioCommand implements Serializable {
                 if (scenarioFile != null && !scenarioFile.isEmpty() && scenarioFile.getInputStream() != null) {
                     String tmpCharset = CrawlUtils.extractCharset(scenarioFile.getInputStream());
                     scenarioContent = scenarioFile.getFileItem().getString(tmpCharset);
+                    // #57 issue quick fix.......
+                    scenarioContent = scenarioContent.replace("\"formatVersion\": 2", "\"formatVersion\":1")
+                                                     .replace("\"formatVersion\":2", "\"formatVersion\":1");
                 }
             } catch (IOException e) {}
         }
