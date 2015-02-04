@@ -52,11 +52,12 @@ What tests are covered:
 
 By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
 
-## Contact and mailing-list
+## Contact and discussions
 
-Join our brand new [Tanaguru discussion space](http://discuss.tanaguru.org) 
+* [Tanaguru discussion space](http://discuss.tanaguru.org) 
+* email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
+* [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
-Or you can contact the team by sending an email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
 
 ## Content of this (last) version
 
