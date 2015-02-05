@@ -1,5 +1,7 @@
 # Tanaguru
 
+Tanaguru is an opensource (AGPL license) website assessment tool. It is dedicated to accessibility (a11y) audits, and focuses on reliability and high level of automation.
+
 ## Problem & solution
 
 Making your website better is hard. Better for users, better for developers,
@@ -10,7 +12,7 @@ better for the client. [W3C standards](http://www.w3.org/TR/) can bring a lot of
 accessible. It tests your pages, whole site,  or application and gives you 
 precise and detailed insights on the identified issues.
 
-You can [install Tanaguru by yourself](link to install doc) or use 
+You can [install Tanaguru by yourself](http://www.tanaguru.org/en/content/ubuntu-prerequisites-tanaguru-3x) or use 
 [Tanaguru in SaaS](https://my.tanaguru.com/)
 
 ## Features
@@ -26,7 +28,7 @@ You can [install Tanaguru by yourself](link to install doc) or use
 
 ### Accessibility Analytics
 
- * Metrics to follow your accessibility growth
+ * Metrics and graphs to follow your accessibility growth
 
 ### Customization
 
@@ -34,14 +36,43 @@ You can [install Tanaguru by yourself](link to install doc) or use
 * Optimise++ with integration in Quality Assurance tools like Travis, Jenkins...
 * multi-lingual: English, Spanish, French, and [any other language you would add](https://crowdin.com/project/tanaguru) :)
 
+## Vision
+
+1. Automate as much as we can and even more :)
+2. Be 200% reliable (don't give erroneous result)
+3. have technological fun !
+
+## Download
+
+http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
+
+## Demo
+
+https://my.tanaguru.com/
+
+## Installation and documentation
+
+* Tanaguru User doc
+* Tanaguru Install doc
+* Tanaguru Maintenance doc
+* Tanaguru Developer doc
+
+[Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
+
+More precisely:
+
+* [Installation](http://www.tanaguru.org/en/content/tanaguru-3x)
+* [Configuration](http://www.tanaguru.org/en/content/configuration)
+* [How to build](http://www.tanaguru.org/en/content/how-build)
+
 ## Business: accessibility
 
-What tests are covered ? The ones users like more:
+What tests are covered ? The ones we like most:
 
-* color contrast with solutions offered
-* language change in the page
+* color contrast *with solutions offered*
+* *language change* in the page
 
-Other tests they enjoy:
+And the usual ones:
 
 * all usual tests like the "tag and attributes tests" (missing alt, table headers check, frame title...)
 * downloadable files / office files (spreadsheet, wordprocessor...)
@@ -50,11 +81,9 @@ Other tests they enjoy:
 
 By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
 
-## Installation & download
+## Support and discussions
 
-* [Download Tanaguru latest (.tar.gz, ~110Mb)](http://www.tanaguru.org/Download/tanaguru-latest.tar.gz)
-* [Installation](http://www.tanaguru.org/en/content/tanaguru-3x)
-* [Configuration](http://www.tanaguru.org/en/content/configuration)
+* [Tanaguru discussion space](http://discuss.tanaguru.org) 
 
 ## Contribute
 
@@ -62,22 +91,10 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 - [Source Code](https://github.com/Tanaguru/Tanaguru)
 - [How to build](http://www.tanaguru.org/en/content/how-build)
 
-## Support
+## Contact 
 
-We have a mailing lists dedicated to Tanaguru users and development
-discussion. To subscribe, send an empty message to :
-
-        tanaguru-users-fr@lists.adullact.net
-
-Or you can send an email to 
-
-        tanaguru AT tanaguru dot org 
-
-(only english, french and klingon is spoken :) ) 
-
-## License
-
-Tanaguru is licensed under the AGPL license.
+* email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
+* [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
 ## Other opensource tools
 
