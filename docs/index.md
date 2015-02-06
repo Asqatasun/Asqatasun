@@ -44,7 +44,7 @@ You can [install Tanaguru by yourself](http://www.tanaguru.org/en/content/ubuntu
 
 ## Download
 
-[Tanaguru latest release (~100Mb)](http://www.tanaguru.org/Download/tanaguru-latest.tar.gz)
+[Tanaguru latest release (.tar.gz, ~100Mb)](http://www.tanaguru.org/Download/tanaguru-latest.tar.gz)
 
 ## Demo
 
@@ -52,7 +52,8 @@ https://my.tanaguru.com/
 
 ## Installation and documentation
 
-* [Tanaguru User doc](user_doc.md)
+[Tanaguru User doc](user_doc.md)
+
 * Tanaguru Install doc
 * Tanaguru Maintenance doc
 * Tanaguru Developer doc
