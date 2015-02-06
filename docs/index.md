@@ -52,7 +52,7 @@ https://my.tanaguru.com/
 
 ## Installation and documentation
 
-* Tanaguru User doc
+* [Tanaguru User doc](user_doc.md)
 * Tanaguru Install doc
 * Tanaguru Maintenance doc
 * Tanaguru Developer doc
