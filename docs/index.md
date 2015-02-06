@@ -48,7 +48,7 @@ You can [install Tanaguru by yourself](http://www.tanaguru.org/en/content/ubuntu
 
 ## Demo
 
-https://my.tanaguru.com/
+Directly on [Tanaguru SaaS](https://my.tanaguru.com/)
 
 ## Installation and documentation
 
