@@ -1,18 +1,30 @@
 # Tanaguru User documentation
 
+## Foreword
+
+Tanaguru is an opensource accessibility validator. It is build with three strong objectives:
+
+* ease of use
+* reliability of its results
+* maximum automation and time-savings
+
+## Discover the User Interface
+
+Discover User Interface
+
 ## Type of result given by Tanaguru
 
 see more on our blog post "how accessibility automation is pushed furtherin Tanaguru"@@@
 
 ## Four kinds of audit
 
-### page audit
+### Page audit
 
 Typical usage:
 
 * test a given webpage (e.g. the home page, a given article, the contact page...)
 
-### full site audit
+### Full site audit
 
 Typical usage:
 
@@ -20,7 +32,7 @@ Typical usage:
 
 (Heritrix crawler embedded)
 
-### scenario audit 
+### Scenario audit 
 
 Typical usage:
 
@@ -29,7 +41,7 @@ Typical usage:
 * electronic procedures
 * web application
 
-### offline file audit
+### Offline file audit
 
 (That's the DOM that is tested, thus dealing with JS/AJAX/ARIA)
 
