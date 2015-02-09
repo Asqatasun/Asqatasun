@@ -59,7 +59,7 @@ public class ContractSortCommandHelperTest extends TestCase {
     public void testGetLastAuditMarkSortValue() {
         System.out.println("getLastAuditMarkSortValue");
 
-        List<ContractInfo> contractInfoSet = new ArrayList<ContractInfo>(); 
+        List<ContractInfo> contractInfoSet = new ArrayList<>(); 
         ContractSortCommand csc = new ContractSortCommand();
         
         ContractInfo c1 = new ContractInfoImpl();
@@ -96,14 +96,14 @@ public class ContractSortCommandHelperTest extends TestCase {
         ContractSortCommandHelper.setSortByKey("SORTBY");
         ContractSortCommandHelper.setLastAuditMarkSortValue("MARK");
         ContractSortCommandHelper.setSortOrderKey("SORTORDER");
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("SORTORDER", SortOrderEnum.ASCENDING.getCode());
         map.put("SORTBY", "MARK");
 
         csc.setSortOptionMap(map);
         ContractSortCommandHelper.sortContractInfoSetRegardingCommand(contractInfoSet, csc);
         
-        map = new HashMap<String, Object>();
+        map = new HashMap<>();
         map.put("SORTORDER", SortOrderEnum.DESCENDING.getCode());
         map.put("SORTBY", "MARK");
 
