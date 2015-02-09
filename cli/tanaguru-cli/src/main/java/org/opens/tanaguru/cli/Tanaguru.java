@@ -44,9 +44,6 @@ import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterElementDataService;
-import org.opens.tanaguru.entity.service.reference.TestDataService;
-import org.opens.tanaguru.entity.service.reference.ThemeDataService;
-import org.opens.tanaguru.entity.service.statistics.ThemeStatisticsDataService;
 import org.opens.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Site;
@@ -411,7 +408,9 @@ public class Tanaguru implements AuditServiceListener {
      * @return 
      */
     private String readFile(File file) throws IOException {
-        return FileUtils.readFileToString(file);
+      // #57 issue quick fix.......
+        return FileUtils.readFileToString(file).replace("\"formatVersion\": 2", "\"formatVersion\":1")
+                                               .replace("\"formatVersion\":2", "\"formatVersion\":1");
     }
 
     /**
