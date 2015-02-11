@@ -20,18 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.CODE_ATTR;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.APPLET_NOT_IN_LINK_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule 1.7.4 of the referential Rgaa 3.0.
@@ -40,49 +29,58 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_
  * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-7-4"> 1.7.4 rule specification</a>
  *
  */
-public class Rgaa30Rule010704 extends AbstractMarkerPageRuleImplementation {
+public class Rgaa30Rule010704 extends AbstractNotTestedRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa30Rule010704() {
-        super(
-                new ImageElementSelector(APPLET_NOT_IN_LINK_CSS_LIKE_QUERY),
+    public Rgaa30Rule010704 () {
+        super();
+    } 
 
-                // the informative images are part of the scope
-                INFORMATIVE_IMAGE_MARKER, 
-
-                // the decorative images are not part of the scope
-                DECORATIVE_IMAGE_MARKER, 
-                
-                // checker for elements identified by marker
-                new ElementPresenceChecker(
-                    // solution when at least one element is found
-                    TestSolution.NEED_MORE_INFO,
-                    // solution when no element is found
-                    TestSolution.NOT_APPLICABLE,
-                    // manual check message
-                    CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
-                    null, 
-                    // evidence elements
-                    ALT_ATTR, 
-                    TEXT_ELEMENT2,
-                    CODE_ATTR), 
-                
-                // checker for elements not identified by marker
-                new ElementPresenceChecker(
-                    // solution when at least one element is found
-                    TestSolution.NEED_MORE_INFO,
-                    // solution when no element is found
-                    TestSolution.NOT_APPLICABLE,
-                    // manual check message
-                    CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG,
-                    null, 
-                    // evidence elements
-                    ALT_ATTR, 
-                    TEXT_ELEMENT2,
-                    CODE_ATTR)
-            );
-    }
+//extends AbstractMarkerPageRuleImplementation {
+//
+//    /**
+//     * Default constructor
+//     */
+//    public Rgaa30Rule010704() {
+//        super(
+//                new ImageElementSelector(APPLET_NOT_IN_LINK_CSS_LIKE_QUERY),
+//
+//                // the informative images are part of the scope
+//                INFORMATIVE_IMAGE_MARKER, 
+//
+//                // the decorative images are not part of the scope
+//                DECORATIVE_IMAGE_MARKER, 
+//                
+//                // checker for elements identified by marker
+//                new ElementPresenceChecker(
+//                    // solution when at least one element is found
+//                    TestSolution.NEED_MORE_INFO,
+//                    // solution when no element is found
+//                    TestSolution.NOT_APPLICABLE,
+//                    // manual check message
+//                    CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
+//                    null, 
+//                    // evidence elements
+//                    ALT_ATTR, 
+//                    TEXT_ELEMENT2,
+//                    CODE_ATTR), 
+//                
+//                // checker for elements not identified by marker
+//                new ElementPresenceChecker(
+//                    // solution when at least one element is found
+//                    TestSolution.NEED_MORE_INFO,
+//                    // solution when no element is found
+//                    TestSolution.NOT_APPLICABLE,
+//                    // manual check message
+//                    CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG,
+//                    null, 
+//                    // evidence elements
+//                    ALT_ATTR, 
+//                    TEXT_ELEMENT2,
+//                    CODE_ATTR)
+//            );
+//    }
 
 }

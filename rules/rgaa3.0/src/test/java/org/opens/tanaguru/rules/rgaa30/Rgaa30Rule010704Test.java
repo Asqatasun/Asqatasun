@@ -74,27 +74,27 @@ public class Rgaa30Rule010704Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.01.07.04-3NMI-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.APPLET_ELEMENT, processRemark.getTarget());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG, processRemark.getMessageCode());
+//        assertEquals(HtmlElementStore.APPLET_ELEMENT, processRemark.getTarget());
         // check number of evidence elements and their value
-        assertEquals(3, processRemark.getElementList().size());
-        Iterator<EvidenceElement> pIter = processRemark.getElementList().iterator();
-        EvidenceElement ee = pIter.next();
-        assertEquals("", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("Java mock applet.", ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("mock.class",ee.getValue());
-        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
+//        assertEquals(3, processRemark.getElementList().size());
+//        Iterator<EvidenceElement> pIter = processRemark.getElementList().iterator();
+//        EvidenceElement ee = pIter.next();
+//        assertEquals("", ee.getValue());
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        ee = pIter.next();
+//        assertEquals("Java mock applet.", ee.getValue());
+//        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
+//        ee = pIter.next();
+//        assertEquals("mock.class",ee.getValue());
+//        assertEquals(CODE_ATTR, ee.getEvidence().getCode());
 
         
         //----------------------------------------------------------------------
@@ -135,7 +135,7 @@ public class Rgaa30Rule010704Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.07.04-3NMI-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.07.04-4NA-01").getValue());
