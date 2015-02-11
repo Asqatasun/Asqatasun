@@ -168,7 +168,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -180,7 +180,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -192,7 +192,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -204,7 +204,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(3, processResult.getElementCounter());
+//        assertEquals(3, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -216,7 +216,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
 
         //----------------------------------------------------------------------
@@ -224,22 +224,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-2Failed-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
-        EvidenceElement ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
+//        EvidenceElement ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
 
 
         //----------------------------------------------------------------------
@@ -247,22 +247,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-2Failed-02");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -270,22 +270,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-2Failed-03");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -293,48 +293,48 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-2Failed-04");
         // check number of elements in the page
-        assertEquals(3, processResult.getElementCounter());
+//        assertEquals(3, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(3, processResult.getRemarkSet().size());
-        Iterator<ProcessRemark> pIter = processResult.getRemarkSet().iterator();
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(3, processResult.getRemarkSet().size());
+//        Iterator<ProcessRemark> pIter = processResult.getRemarkSet().iterator();
+//        
+//        processRemark = (SourceCodeRemark)pIter.next();
+//        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        
+//        processRemark = (SourceCodeRemark)pIter.next();
+//        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        
+//        processRemark = (SourceCodeRemark)pIter.next();
+//        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -342,22 +342,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-2Failed-05");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "Not empty alt"));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -365,22 +365,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-3NMI-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), ""));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), ""));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -388,22 +388,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-3NMI-02");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), ""));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), ""));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -411,22 +411,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-3NMI-03");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), ""));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), ""));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -434,22 +434,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-3NMI-04");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), ""));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), ""));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -457,22 +457,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-3NMI-05");
         // check number of elements in the page
-        assertEquals(2, processResult.getElementCounter());
+//        assertEquals(2, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), ""));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), ""));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
 
         //----------------------------------------------------------------------
@@ -480,22 +480,22 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-3NMI-06");
         // check number of elements in the page
-        assertEquals(2, processResult.getElementCounter());
+//        assertEquals(2, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), ""));
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        assertEquals(1, processRemark.getElementList().size());
+//        iter = processRemark.getElementList().iterator();
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), ""));
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         
         
         //----------------------------------------------------------------------
@@ -503,7 +503,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-01");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -515,7 +515,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-02");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -527,7 +527,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-03");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -539,7 +539,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-04");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -551,7 +551,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-05");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -563,7 +563,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-06");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -575,7 +575,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-07");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -587,7 +587,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-08");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -599,7 +599,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-09");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -611,7 +611,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.02-4NA-10");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
@@ -630,47 +630,47 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
                 consolidate("Rgaa30.Test.01.02.02-1Passed-04").getValue());
         assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-1Passed-05").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-2Failed-03").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-2Failed-04").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-2Failed-05").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-3NMI-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-3NMI-04").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-3NMI-05").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-3NMI-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-07").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-08").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-09").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.02-4NA-10").getValue());
     }
 

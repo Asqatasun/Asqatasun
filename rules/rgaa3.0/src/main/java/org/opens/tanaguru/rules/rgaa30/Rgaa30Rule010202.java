@@ -19,22 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Collections;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
-import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
-import org.opens.tanaguru.rules.elementselector.AreaElementSelector;
-import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
-import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule 1.2.2 of the referential Rgaa 3.0.
@@ -48,86 +33,95 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * 1.2.2 rule specification</a>
  *
  */
-public class Rgaa30Rule010202 extends AbstractMarkerPageRuleImplementation {
+public class Rgaa30Rule010202  extends AbstractNotTestedRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa30Rule010202() {
-        super(
-                // the decorative images are part of the scope
-                DECORATIVE_IMAGE_MARKER,
-                // the informative images are not part of the scope
-                INFORMATIVE_IMAGE_MARKER);
-        setElementSelector(new ImageElementSelector(new AreaElementSelector(true, true, false), true, false));
-        setMarkerElementChecker(getMarkerElementChecker());
-        setRegularElementChecker(getLocalRegularElementChecker());
+    public Rgaa30Rule010202 () {
+        super();
     }
 
-    /**
-     *
-     * @return the checker user for marked elements
-     */
-    private ElementChecker getMarkerElementChecker() {
-        // checker for elements identified by marker
-        return new CompositeChecker(
-                new TextEmptinessChecker(
-                    new TextAttributeOfElementBuilder(ALT_ATTR),
-                    // solution when attribute is empty
-                    TestSolution.PASSED,
-                    // solution when attribute is not empty
-                    TestSolution.FAILED,
-                    null, // no message created when a decorative with empty alt is found
-                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
-                    ALT_ATTR),
-                new AttributePresenceChecker(
-                    TITLE_ATTR,
-                    TestSolution.FAILED,
-                    TestSolution.PASSED,
-                    CHECK_PRESENCE_ELEMENT_TITLE_MSG,
-                    CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG,
-                    TITLE_ATTR,
-                    SRC_ATTR)
-        );
-    }
-    
-    /**
-     * 
-     * @return the checker user for not marked elements
-     */
-    private ElementChecker getLocalRegularElementChecker() {
-        
-        CompositeChecker compositeChecker = new CompositeChecker();
-        
-        compositeChecker.addChecker(
-                new TextEmptinessChecker(
-                        new TextAttributeOfElementBuilder(ALT_ATTR),
-                        TestSolution.PASSED,
-                        TestSolution.FAILED,
-                        null,
-                        null));
-        
-        compositeChecker.addChecker(
-                new AttributePresenceChecker(
-                        TITLE_ATTR,
-                        TestSolution.FAILED,
-                        TestSolution.PASSED,
-                        null,
-                        null));
-        
-        compositeChecker.setIsOrCombinaison(false);
-        
-        compositeChecker.addCheckMessageFromSolution(
-                TestSolution.PASSED,
-                Collections.singletonMap(
-                        TestSolution.NEED_MORE_INFO, 
-                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
-        compositeChecker.addCheckMessageFromSolution(
-                TestSolution.FAILED,
-                Collections.singletonMap(
-                        TestSolution.NEED_MORE_INFO, 
-                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
-        
-        return compositeChecker;
-    }
+//extends AbstractMarkerPageRuleImplementation {
+//
+//    /**
+//     * Default constructor
+//     */
+//    public Rgaa30Rule010202() {
+//        super(
+//                // the decorative images are part of the scope
+//                DECORATIVE_IMAGE_MARKER,
+//                // the informative images are not part of the scope
+//                INFORMATIVE_IMAGE_MARKER);
+//        setElementSelector(new ImageElementSelector(new AreaElementSelector(true, true, false), true, false));
+//        setMarkerElementChecker(getMarkerElementChecker());
+//        setRegularElementChecker(getLocalRegularElementChecker());
+//    }
+//
+//    /**
+//     *
+//     * @return the checker user for marked elements
+//     */
+//    private ElementChecker getMarkerElementChecker() {
+//        // checker for elements identified by marker
+//        return new CompositeChecker(
+//                new TextEmptinessChecker(
+//                    new TextAttributeOfElementBuilder(ALT_ATTR),
+//                    // solution when attribute is empty
+//                    TestSolution.PASSED,
+//                    // solution when attribute is not empty
+//                    TestSolution.FAILED,
+//                    null, // no message created when a decorative with empty alt is found
+//                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+//                    ALT_ATTR),
+//                new AttributePresenceChecker(
+//                    TITLE_ATTR,
+//                    TestSolution.FAILED,
+//                    TestSolution.PASSED,
+//                    CHECK_PRESENCE_ELEMENT_TITLE_MSG,
+//                    CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG,
+//                    TITLE_ATTR,
+//                    SRC_ATTR)
+//        );
+//    }
+//    
+//    /**
+//     * 
+//     * @return the checker user for not marked elements
+//     */
+//    private ElementChecker getLocalRegularElementChecker() {
+//        
+//        CompositeChecker compositeChecker = new CompositeChecker();
+//        
+//        compositeChecker.addChecker(
+//                new TextEmptinessChecker(
+//                        new TextAttributeOfElementBuilder(ALT_ATTR),
+//                        TestSolution.PASSED,
+//                        TestSolution.FAILED,
+//                        null,
+//                        null));
+//        
+//        compositeChecker.addChecker(
+//                new AttributePresenceChecker(
+//                        TITLE_ATTR,
+//                        TestSolution.FAILED,
+//                        TestSolution.PASSED,
+//                        null,
+//                        null));
+//        
+//        compositeChecker.setIsOrCombinaison(false);
+//        
+//        compositeChecker.addCheckMessageFromSolution(
+//                TestSolution.PASSED,
+//                Collections.singletonMap(
+//                        TestSolution.NEED_MORE_INFO, 
+//                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
+//        compositeChecker.addCheckMessageFromSolution(
+//                TestSolution.FAILED,
+//                Collections.singletonMap(
+//                        TestSolution.NEED_MORE_INFO, 
+//                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
+//        
+//        return compositeChecker;
+//    }
 }
