@@ -57,8 +57,6 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
 public abstract class AbstractMarkerPageRuleImplementation
         extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    private ElementSelector elementSelector;
-    
     /**
      * The elements identified with the markers
      */
@@ -189,14 +187,14 @@ public abstract class AbstractMarkerPageRuleImplementation
         super();
         this.markerCode = markerCode;
         this.inverseMarkerCodes = inverseMarkerCode;
-        this.elementSelector = elementSelector;
+        setElementSelector(elementSelector);
         this.setElementChecker(regularElementChecker);
         this.markerElementChecker = markerElementChecker;
     }
 
     @Override
     protected void select(SSPHandler sspHandler) {
-        elementSelector.selectElements(sspHandler, selectionWithoutMarkerHandler);
+        getElementSelector().selectElements(sspHandler, selectionWithoutMarkerHandler);
         extractMarkerListFromAuditParameter(sspHandler);
         sortMarkerElements();
     }
