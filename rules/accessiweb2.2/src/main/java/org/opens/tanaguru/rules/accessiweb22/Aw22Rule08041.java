@@ -20,16 +20,8 @@
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
 import org.opens.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
 
