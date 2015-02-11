@@ -20,42 +20,44 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.opens.tanaguru.rules.elementselector.CaptchaElementSelector;
-import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
- * Implementation of the rule 1.4.4 of the referential Rgaa 3.0.
+ * Implementation of the rule 1.4.3 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-1-4-4">the rule 1.4.4 design page.</a>
- * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-4-4"> 1.4.4 rule specification</a>
+ * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-1-4-3">the rule 1.4.3 design page.</a>
+ * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-4-3"> 1.4.3 rule specification</a>
  *
  */
-public class Rgaa30Rule010403 extends AbstractDetectionPageRuleImplementation {
+public class Rgaa30Rule010403 extends AbstractNotTestedRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa30Rule010403 () {
-        super(
-                new CaptchaElementSelector(
-                    new SimpleElementSelector(FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY)),
-                // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
-                // solution when no element is found
-                TestSolution.NOT_APPLICABLE,
-                // manual check message
-                CHECK_CAPTCHA_ALTERNATIVE_MSG,
-                null,
-                // evidence elements
-                ALT_ATTR, 
-                SRC_ATTR
-            );
-    }
+        super();
+    } 
+
+//extends AbstractDetectionPageRuleImplementation {
+//
+//    /**
+//     * Default constructor
+//     */
+//    public Rgaa30Rule010403 () {
+//        super(
+//                new CaptchaElementSelector(
+//                    new SimpleElementSelector(FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY)),
+//                // solution when at least one element is found
+//                TestSolution.NEED_MORE_INFO,
+//                // solution when no element is found
+//                TestSolution.NOT_APPLICABLE,
+//                // manual check message
+//                CHECK_CAPTCHA_ALTERNATIVE_MSG,
+//                null,
+//                // evidence elements
+//                ALT_ATTR, 
+//                SRC_ATTR
+//            );
+//    }
 
 }
