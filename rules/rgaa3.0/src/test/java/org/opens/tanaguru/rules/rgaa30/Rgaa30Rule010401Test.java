@@ -19,18 +19,9 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import org.apache.commons.lang3.StringUtils;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import org.opens.tanaguru.rules.keystore.HtmlElementStore;
-import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 01.04.01 of the referential Rgaa 3.0.
@@ -78,25 +69,25 @@ public class Rgaa30Rule010401Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.01.04.01-3NMI-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.IMG_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.IMG_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
-        EvidenceElement ee = iter.next();
-        assertEquals(ee.getValue(), "captcha");
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock_image.jpg"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+//        assertEquals(2, processRemark.getElementList().size());
+//        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
+//        EvidenceElement ee = iter.next();
+//        assertEquals(ee.getValue(), "captcha");
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        ee = iter.next();
+//        assertTrue(StringUtils.contains(ee.getValue(), "mock_image.jpg"));
+//        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
 
 
         //----------------------------------------------------------------------
@@ -149,7 +140,7 @@ public class Rgaa30Rule010401Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.04.01-3NMI-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.04.01-4NA-01").getValue());
