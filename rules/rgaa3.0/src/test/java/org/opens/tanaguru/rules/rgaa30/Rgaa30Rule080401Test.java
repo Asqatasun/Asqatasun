@@ -305,7 +305,7 @@ public class Rgaa30Rule080401Test extends Rgaa30RuleImplementationTestCase {
         assertEquals("en",ee.getValue());
         assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
         ee = pIter.next();
-        assertTrue(ee.getValue().contains("Rgaa30 Test.08.04.01 NMI 01 Rgaa30 Test.08.04.01 NMI 01"));
+        assertTrue(ee.getValue().contains("Rgaa30 Test.08.04.01 NMI 01 (testcase warning one) Rgaa30 Test.08.04.01 NMI 01 (testcase warning one)"));
         assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
 
         
