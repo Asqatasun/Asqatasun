@@ -20,13 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.opens.tanaguru.rules.elementselector.AreaElementSelector;
-import org.opens.tanaguru.rules.elementselector.CaptchaElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule 1.4.2 of the referential Rgaa 3.0.
@@ -35,26 +29,35 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA
  * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-4-2"> 1.4.2 rule specification</a>
  *
  */
-public class Rgaa30Rule010402 extends AbstractDetectionPageRuleImplementation {
-    
+public class Rgaa30Rule010402 extends AbstractNotTestedRuleImplementation {
+
     /**
      * Default constructor
      */
     public Rgaa30Rule010402 () {
-        super(
-                new CaptchaElementSelector(
-                    new AreaElementSelector(true, false, true)),
-                // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
-                // solution when no element is found
-                TestSolution.NOT_APPLICABLE,
-                // manual check message
-                CHECK_CAPTCHA_ALTERNATIVE_MSG,
-                null,
-                // evidence elements
-                ALT_ATTR, 
-                HREF_ATTR
-            );
-    }
+        super();
+    }  
+
+//extends AbstractDetectionPageRuleImplementation {
+//    
+//    /**
+//     * Default constructor
+//     */
+//    public Rgaa30Rule010402 () {
+//        super(
+//                new CaptchaElementSelector(
+//                    new AreaElementSelector(true, false, true)),
+//                // solution when at least one element is found
+//                TestSolution.NEED_MORE_INFO,
+//                // solution when no element is found
+//                TestSolution.NOT_APPLICABLE,
+//                // manual check message
+//                CHECK_CAPTCHA_ALTERNATIVE_MSG,
+//                null,
+//                // evidence elements
+//                ALT_ATTR, 
+//                HREF_ATTR
+//            );
+//    }
 
 }

@@ -76,25 +76,25 @@ public class Rgaa30Rule010402Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.01.04.02-3NMI-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.AREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
-        EvidenceElement ee = iter.next();
-        assertEquals(ee.getValue(), "");
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals(ABSENT_ATTRIBUTE_VALUE, ee.getValue());
-        assertEquals(HREF_ATTR, ee.getEvidence().getCode());
+//        assertEquals(2, processRemark.getElementList().size());
+//        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
+//        EvidenceElement ee = iter.next();
+//        assertEquals(ee.getValue(), "");
+//        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
+//        ee = iter.next();
+//        assertEquals(ABSENT_ATTRIBUTE_VALUE, ee.getValue());
+//        assertEquals(HREF_ATTR, ee.getEvidence().getCode());
 
 
         //----------------------------------------------------------------------
@@ -147,7 +147,7 @@ public class Rgaa30Rule010402Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setConsolidate() {
-        assertEquals(TestSolution.NEED_MORE_INFO,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.04.02-3NMI-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.04.02-4NA-01").getValue());
