@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
@@ -144,9 +145,8 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
             this.jsScriptMap = new HashMap<>();
         }
         for (Map.Entry<String, String> entry : jsScriptMap.entrySet()) {
-        Resource resource = new ClassPathResource(entry.getValue());
             try {
-                this.jsScriptMap.put(entry.getKey(), FileUtils.readFileToString(resource.getFile()));
+                this.jsScriptMap.put(entry.getKey(), IOUtils.toString(getClass().getResourceAsStream(entry.getValue())));
             } catch (IOException ex) {
                 Logger.getLogger(this.getClass()).warn(ex);
             }
