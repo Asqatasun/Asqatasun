@@ -129,9 +129,9 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test result
         assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
-        assertNull(processResult.getRemarkSet());
+//        assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -143,7 +143,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -155,7 +155,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -167,7 +167,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -179,7 +179,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -191,7 +191,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -203,7 +203,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -215,7 +215,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -227,7 +227,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -239,7 +239,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -251,7 +251,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -263,7 +263,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -275,7 +275,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -287,7 +287,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -299,7 +299,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
@@ -311,7 +311,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         
 
         //----------------------------------------------------------------------
@@ -319,18 +319,18 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-2Failed-01");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+//        assertNull(processRemark.getElementList());
         
 
         //----------------------------------------------------------------------
@@ -338,18 +338,18 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-2Failed-02");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+//        assertNull(processRemark.getElementList());
         
 
         //----------------------------------------------------------------------
@@ -357,18 +357,18 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-2Failed-03");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+//        assertNull(processRemark.getElementList());
         
 
         //----------------------------------------------------------------------
@@ -376,18 +376,18 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-2Failed-04");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+//        assertNull(processRemark.getElementList());
         
 
         //----------------------------------------------------------------------
@@ -395,18 +395,18 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-2Failed-05");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+//        assertNull(processRemark.getElementList());
         
 
         //----------------------------------------------------------------------
@@ -414,18 +414,18 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-2Failed-06");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.TEXTAREA_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.TEXTAREA_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+//        assertNull(processRemark.getElementList());
         
 
         //----------------------------------------------------------------------
@@ -433,18 +433,18 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-2Failed-07");
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+//        assertEquals(1, processResult.getElementCounter());
         // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.SELECT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
+//        // check number of remarks and their value
+//        assertEquals(1, processResult.getRemarkSet().size());
+//        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
+//        assertEquals(RemarkMessageStore.INVALID_FORM_FIELD_MSG, processRemark.getMessageCode());
+//        assertEquals(TestSolution.FAILED, processRemark.getIssue());
+//        assertEquals(HtmlElementStore.SELECT_ELEMENT, processRemark.getTarget());
+//        assertNotNull(processRemark.getSnippet());
         // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+//        assertNull(processRemark.getElementList());
 
         
         //----------------------------------------------------------------------
@@ -452,7 +452,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.11.01.01-4NA-01");
         // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
+        assertEquals(TestSolution.NOT_TESTED, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
     }
@@ -491,21 +491,21 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
                 consolidate("Rgaa30.Test.11.01.01-1Passed-15").getValue());
         assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-1Passed-16").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-2Failed-03").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-2Failed-04").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-2Failed-05").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-2Failed-06").getValue());
-        assertEquals(TestSolution.FAILED,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-2Failed-07").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
+        assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.11.01.01-4NA-01").getValue());
     }
 

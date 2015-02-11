@@ -19,22 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
-import org.opens.tanaguru.rules.elementselector.InputFormElementWithExplicitLabelSelector;
-import org.opens.tanaguru.rules.elementselector.InputFormElementWithInplicitLabelSelector;
-import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_FORM_FIELD_MSG;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule 11.1.1 of the referential Rgaa 3.0.
@@ -43,87 +28,95 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_FORM_
  * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-11-1-1"> 11.1.1 rule specification</a>
  *
  */
-public class Rgaa30Rule110101 extends AbstractPageRuleMarkupImplementation {
+public class Rgaa30Rule110101  extends AbstractNotTestedRuleImplementation {
 
-    /** the input form elements with implicit label */
-    private final ElementHandler<Element> inputFormWithoutLabelHandler = 
-            new ElementHandlerImpl();
-        
-    /** the input form elements  */
-    private final ElementHandler<Element> inputFormHandler = 
-            new ElementHandlerImpl();
-    
     /**
      * Default constructor
      */
-    public Rgaa30Rule110101() {
+    public Rgaa30Rule110101 () {
         super();
     }
-
-    @Override
-    protected void select(SSPHandler sspHandler) {
-        
-        // Selection of all the input form elements of the page
-        ElementSelector elementSelector = new SimpleElementSelector(INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY);
-        elementSelector.selectElements(sspHandler, inputFormHandler);
-
-        // the selection of the input form elements without label is initialised
-        // with all the elements of the page, some elements will be removed later
-        inputFormWithoutLabelHandler.addAll(inputFormHandler.get());
-        
-        // selection of the input form elements with explicit label
-        ElementHandler<Element> inputFormLabelHandler = new ElementHandlerImpl();
-        ElementSelector explicitLabelSelector = 
-                new InputFormElementWithExplicitLabelSelector(inputFormHandler);
-        explicitLabelSelector.selectElements(sspHandler, inputFormLabelHandler);
-
-        // remove all the input form elements with explicit label from 
-        // the selection of the input form elements without label
-        inputFormWithoutLabelHandler.removeAll(inputFormLabelHandler.get());
-        
-        // selection of the input form with inplicit label
-        ElementSelector inplicitLabelSelector = 
-                new InputFormElementWithInplicitLabelSelector(inputFormHandler);
-        inplicitLabelSelector.selectElements(sspHandler, inputFormLabelHandler);
-        
-        // remove all the input form elements with inplicit label from 
-        // the selection of the input form elements without label
-        inputFormWithoutLabelHandler.removeAll(inputFormLabelHandler.get());
-    }
-
-    @Override
-    protected void check(
-            SSPHandler sspHandler, 
-            TestSolutionHandler testSolutionHandler) {
-
-        // If the page has no input form element, the test is not applicable
-        if (inputFormHandler.isEmpty()) {
-            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
-            return;
-        }
-        // If all the input form have a label, the test is passed
-        if (inputFormWithoutLabelHandler.isEmpty()) {
-            testSolutionHandler.addTestSolution(TestSolution.PASSED);
-            return;
-        }
-
-        ElementChecker titleAttrPresenceChecker = 
-                new AttributePresenceChecker(
-                    TITLE_ATTR, 
-                    TestSolution.PASSED, 
-                    TestSolution.FAILED, 
-                    null, 
-                    INVALID_FORM_FIELD_MSG);
-
-        titleAttrPresenceChecker.check(
-                sspHandler, 
-                inputFormWithoutLabelHandler, 
-                testSolutionHandler);
-    }
-
-    @Override
-    public int getSelectionSize() {
-        return inputFormHandler.size();
-    }
+//extends AbstractPageRuleMarkupImplementation {
+//
+//    /** the input form elements with implicit label */
+//    private final ElementHandler<Element> inputFormWithoutLabelHandler = 
+//            new ElementHandlerImpl();
+//        
+//    /** the input form elements  */
+//    private final ElementHandler<Element> inputFormHandler = 
+//            new ElementHandlerImpl();
+//    
+//    /**
+//     * Default constructor
+//     */
+//    public Rgaa30Rule110101() {
+//        super();
+//    }
+//
+//    @Override
+//    protected void select(SSPHandler sspHandler) {
+//        
+//        // Selection of all the input form elements of the page
+//        ElementSelector elementSelector = new SimpleElementSelector(INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY);
+//        elementSelector.selectElements(sspHandler, inputFormHandler);
+//
+//        // the selection of the input form elements without label is initialised
+//        // with all the elements of the page, some elements will be removed later
+//        inputFormWithoutLabelHandler.addAll(inputFormHandler.get());
+//        
+//        // selection of the input form elements with explicit label
+//        ElementHandler<Element> inputFormLabelHandler = new ElementHandlerImpl();
+//        ElementSelector explicitLabelSelector = 
+//                new InputFormElementWithExplicitLabelSelector(inputFormHandler);
+//        explicitLabelSelector.selectElements(sspHandler, inputFormLabelHandler);
+//
+//        // remove all the input form elements with explicit label from 
+//        // the selection of the input form elements without label
+//        inputFormWithoutLabelHandler.removeAll(inputFormLabelHandler.get());
+//        
+//        // selection of the input form with inplicit label
+//        ElementSelector inplicitLabelSelector = 
+//                new InputFormElementWithInplicitLabelSelector(inputFormHandler);
+//        inplicitLabelSelector.selectElements(sspHandler, inputFormLabelHandler);
+//        
+//        // remove all the input form elements with inplicit label from 
+//        // the selection of the input form elements without label
+//        inputFormWithoutLabelHandler.removeAll(inputFormLabelHandler.get());
+//    }
+//
+//    @Override
+//    protected void check(
+//            SSPHandler sspHandler, 
+//            TestSolutionHandler testSolutionHandler) {
+//
+//        // If the page has no input form element, the test is not applicable
+//        if (inputFormHandler.isEmpty()) {
+//            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+//            return;
+//        }
+//        // If all the input form have a label, the test is passed
+//        if (inputFormWithoutLabelHandler.isEmpty()) {
+//            testSolutionHandler.addTestSolution(TestSolution.PASSED);
+//            return;
+//        }
+//
+//        ElementChecker titleAttrPresenceChecker = 
+//                new AttributePresenceChecker(
+//                    TITLE_ATTR, 
+//                    TestSolution.PASSED, 
+//                    TestSolution.FAILED, 
+//                    null, 
+//                    INVALID_FORM_FIELD_MSG);
+//
+//        titleAttrPresenceChecker.check(
+//                sspHandler, 
+//                inputFormWithoutLabelHandler, 
+//                testSolutionHandler);
+//    }
+//
+//    @Override
+//    public int getSelectionSize() {
+//        return inputFormHandler.size();
+//    }
 
 }
