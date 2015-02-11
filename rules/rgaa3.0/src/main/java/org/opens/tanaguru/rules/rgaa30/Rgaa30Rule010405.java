@@ -29,10 +29,10 @@ import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.EMBED_TYPE_IMG
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
 
 /**
- * Implementation of the rule 1.4.6 of the referential Rgaa 3.0.
+ * Implementation of the rule 1.4.5 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-1-4-6">the rule 1.4.6 design page.</a>
- * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-4-6"> 1.4.6 rule specification</a>
+ * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-1-4-5">the rule 1.4.5 design page.</a>
+ * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-1-4-5"> 1.4.5 rule specification</a>
  *
  */
 public class Rgaa30Rule010405 extends AbstractDetectionPageRuleImplementation {
