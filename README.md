@@ -97,17 +97,17 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 
 Bugs:
 
-- [#86](https://github.com/Tanaguru/Tanaguru/issues/86) : AW22 8.8.1 Case sensitivity of lang definition
+- [#95](https://github.com/Tanaguru/Tanaguru/issues/95) : Provide mechanism to set the size of the firefox screen when loading the page
+- [#93](https://github.com/Tanaguru/Tanaguru/issues/93) : CLI install instructions broken
+
 
 Features :
 
-- Upgrade Java from 1.6 to 1.7
-- Upgrade Hibernate from 3.6.0.Final to 4.3.5.Final
-- Add new "referential-creator-maven-plugin" and "referential-creator" projects 
-- Create "rule demo project"
-- Refactor rule packaging to be handled by one project 
-- Harmonisation of Referential names
-- Improve rules test management 
+- Spanish language integration
+- A11y improvments in audit result page
+- Initialisation of Rgaa3 referential context
+- Initialisation of assisted audit
+- Addition of cli script options
 
 ## Other opensource tools
 
