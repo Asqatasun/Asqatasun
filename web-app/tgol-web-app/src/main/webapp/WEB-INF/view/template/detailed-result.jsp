@@ -79,7 +79,8 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <span class="passed-th-gray theme-result" title="${passedTitle}">${counterByThemeMap[entry.key].passedCount}</span>
+                                        <img src="<c:url value="/Images/ico-passed-m-gray.png"/>" title="${passedTitle}" alt="${passedTitle}"/>
+                                        <span class="theme-result" title="${passedTitle}">${counterByThemeMap[entry.key].passedCount}</span>
                                         <c:set scope="page" var="failedTitle">
                                             <fmt:message key="resultPage.tests">
                                                 <fmt:param value="${counterByThemeMap[entry.key].failedCount}"/>
@@ -88,7 +89,8 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <span class="failed-th-gray theme-result" title="${failedTitle}">${counterByThemeMap[entry.key].failedCount}</span>
+                                        <img src="<c:url value="/Images/ico-failed-m-gray.png"/>" title="${failedTitle}" alt="${failedTitle}"/>
+                                        <span class="theme-result" title="${failedTitle}">${counterByThemeMap[entry.key].failedCount}</span>
                                         <c:if test="${isManualAudit != 'true'}">
                                             <c:set scope="page" var="nmiTitle">
                                                 <fmt:message key="resultPage.tests">
@@ -99,7 +101,8 @@
                                                 <fmt:message key="${entry.key.code}"/>
                                                 <!-- test git commit -->
                                             </c:set>
-                                            <span class="nmi-th-gray theme-result" title="${nmiTitle}">${counterByThemeMap[entry.key].nmiCount}</span>
+                                        <img src="<c:url value="/Images/ico-nmi-m-gray.png"/>" title="${nmiTitle}" alt="${nmiTitle}"/>
+                                        <span class="theme-result" title="${nmiTitle}">${counterByThemeMap[entry.key].nmiCount}</span>
                                         </c:if>
                                         <c:set scope="page" var="naTitle">
                                             <fmt:message key="resultPage.tests">
@@ -109,7 +112,8 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <span class="na-th-gray theme-result" title="${naTitle}">${counterByThemeMap[entry.key].naCount}</span> 
+                                        <img src="<c:url value="/Images/ico-na-m-gray.png"/>" title="${naTitle}" alt="${naTitle}"/>
+                                        <span class="theme-result" title="${naTitle}">${counterByThemeMap[entry.key].naCount}</span> 
 
                                         <c:set scope="page" var="ntTitle">
                                             <fmt:message key="resultPage.tests">
@@ -119,7 +123,8 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <span class="nt-th-gray theme-result" title="${ntTitle}">${counterByThemeMap[entry.key].ntCount}</span>
+                                        <img src="<c:url value="/Images/ico-nt-m-gray.png"/>" title="${ntTitle}" alt="${ntTitle}"/>
+                                        <span class="theme-result" title="${ntTitle}">${counterByThemeMap[entry.key].ntCount}</span>
                                     </div>
                                 </div>
                             </div><!-- class="span16" -->

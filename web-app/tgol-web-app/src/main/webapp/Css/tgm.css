@@ -2288,12 +2288,17 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 .theme-result-repartition {
     text-align: right;
 }
+.theme-result-repartition > img {
+    margin-right: 6px;
+    vertical-align: text-top;
+}
 .theme-result {
     display: inline-block;
     min-width: 26.5px;
     text-align: left;
     font-size : 14px;
     font-family: OpenSansRegular;
+    margin-right: 3px;
 }
 .show-theme-details-link-icon {
     display: none;

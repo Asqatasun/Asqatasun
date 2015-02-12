@@ -82,7 +82,8 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <span class="passed-th-gray theme-result" title="${passedTitle}">
+                    <img src="<c:url value="/Images/ico-passed-m-gray.png"/>" title="${passedTitle}" alt="${passedTitle}"/>
+                    <span class="theme-result" title="${passedTitle}">
                         ${counterByThemeMap[entry.key].passedCount}
                     </span>
                     <c:set scope="page" var="failedTitle">
@@ -93,7 +94,8 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <span class="failed-th-gray theme-result" title="${failedTitle}">
+                    <img src="<c:url value="/Images/ico-failed-m-gray.png"/>" title="${failedTitle}" alt="${failedTitle}"/>
+                    <span class="theme-result" title="${failedTitle}">
                         ${counterByThemeMap[entry.key].failedCount}
                     </span>
                     <c:set scope="page" var="nmiTitle">
@@ -104,7 +106,8 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <span class="nmi-th-gray theme-result" title="${nmiTitle}">
+                    <img src="<c:url value="/Images/ico-nmi-m-gray.png"/>" title="${nmiTitle}" alt="${nmiTitle}"/>
+                    <span class="theme-result" title="${nmiTitle}">
                         ${counterByThemeMap[entry.key].nmiCount}
                     </span>
                     <c:set scope="page" var="naTitle">
@@ -115,7 +118,8 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <span class="na-th-gray theme-result" title="${naTitle}">
+                    <img src="<c:url value="/Images/ico-na-m-gray.png"/>" title="${naTitle}" alt="${naTitle}"/>
+                    <span class="theme-result" title="${naTitle}">
                         ${counterByThemeMap[entry.key].naCount}
                     </span>
                     <c:set scope="page" var="ntTitle">
@@ -126,7 +130,8 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <span class="nt-th-gray theme-result" title="${ntTitle}">
+                    <img src="<c:url value="/Images/ico-nt-m-gray.png"/>" title="${ntTitle}" alt="${ntTitle}"/>
+                    <span class="theme-result" title="${ntTitle}">
                         ${counterByThemeMap[entry.key].ntCount}
                     </span>
                 </div>
@@ -173,9 +178,13 @@
                     <div class="span1 criterion-details">
                         <a href="<c:url value="/home/contract/criterion-result.html?wr=${param.wr}&amp;crit=${criterionResult.criterion.id}"/>" 
                            class="criterion-result-compact" 
-                           title="Voir le détail des tests du critère ${criterionResult.criterion.label}">
+                           title="<fmt:message key="resultPage.displayCriterionInfosOn">
+                                    <fmt:param>${criterionResult.criterion.label}</fmt:param>
+                                  </fmt:message>">
                             <img src="<c:url value="/Images/criterion-detail.png"/>" 
-                                 alt="Voir le détail des tests du critère ${criterionResult.criterion.label}"/>
+                                 alt="<fmt:message key="resultPage.displayCriterionInfosOn">
+                                    <fmt:param>${criterionResult.criterion.label}</fmt:param>
+                                  </fmt:message>" />
                         </a>
                     </div><!-- class="span1 criterion-details" -->
                 </div><!-- class="row" -->
