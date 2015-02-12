@@ -47,6 +47,9 @@ export JAVA_HOME
 ##########################################################
 XMX_VALUE=256
 
+# store options in variable before shifting
+TANAGURU_OPTIONS=$@
+
 while [[ $# > 1 ]]
 do
     key="$1"
@@ -64,10 +67,9 @@ do
 done
 
 if [[ -n ${XMX_VALUE//[0-9]/} ]]; then
-    echo "Xmx value, containing letters, is restored to default, 256M"
+    echo "Xmx value is invalid because it contains letters"
 else if test $XMX_VALUE -lt 65
   then 
-    echo "Xmx value, is inferior to Xms, so it is restored to default, 256M"
     # restore default
     XMX_VALUE=256 
   fi 
@@ -79,7 +81,7 @@ fi
 # so the maximum heap size is set to 256M.
 # Set java.awt.headless=true if you work without X11 display
 ##################
-JAVA_OPTS="-Dlog4j.configuration=file:$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=file:$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx$XMX_VALUEM -classpath $CLASSPATH  "
+JAVA_OPTS="-Dlog4j.configuration=file:$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=file:$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx${XMX_VALUE}M -classpath $CLASSPATH  "
 JAVA_BIN="$JAVA_HOME/bin/java "
 
 
@@ -87,4 +89,4 @@ JAVA_BIN="$JAVA_HOME/bin/java "
 # LAUNCH_TANAGURU
 ##################
 
-$JAVA_BIN $JAVA_OPTS org.opens.tanaguru.cli.Tanaguru "$@"
+$JAVA_BIN $JAVA_OPTS org.opens.tanaguru.cli.Tanaguru ${TANAGURU_OPTIONS}
