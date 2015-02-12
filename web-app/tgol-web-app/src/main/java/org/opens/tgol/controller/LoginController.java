@@ -21,8 +21,12 @@
  */
 package org.opens.tgol.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -53,20 +57,13 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class LoginController extends AbstractUserAndContractsController{
 
-    private static final String FRENCH_GUEST_PREFIX="_fr";
-    
     private AuthenticationManager authenticationManager;
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
     UserDetails guestUserDetails;
-    
-    private String guestUser;
-    public void setGuestUser(String guestUser) {
-        this.guestUser = guestUser;
-    }
-    
+
     private String guestPassword;
     public void setGuestPassword(String guestPassword) {
         this.guestPassword = guestPassword;
@@ -84,6 +81,24 @@ public class LoginController extends AbstractUserAndContractsController{
         this.localeResolver = localeResolver;
     }
     
+    private final Map<String, String> guestListByLang = new LinkedHashMap<>();
+    public Map<String, String> getGuestListByLang() {
+        return guestListByLang;
+    }
+
+    public void setGuestListByLang(Map<String, String> guestListByLang) {
+        this.guestListByLang.putAll(guestListByLang);
+    }
+    
+    private final List<String> forbiddenLangForOnlineDemo = new ArrayList<>();
+    public List<String> getForbiddenLangForOnlineDemo() {
+        return forbiddenLangForOnlineDemo;
+    }
+
+    public void setForbiddenLangForOnlineDemo(List<String> forbiddenLangForOnlineDemo) {
+        this.forbiddenLangForOnlineDemo.addAll(forbiddenLangForOnlineDemo);
+    }
+    
     @RequestMapping(value = TgolKeyStore.LOGIN_URL, method=RequestMethod.GET)
     public String displayLoginPage (
             @RequestParam(value=TgolKeyStore.EMAIL_KEY, required=false) String email,
@@ -92,7 +107,7 @@ public class LoginController extends AbstractUserAndContractsController{
         if (isAuthenticated()) {
             if (StringUtils.isNotBlank(email)){
                 logoutCurrentUser(request);
-            } else if (getCurrentUser().getEmail1().equalsIgnoreCase(guestUser)) {
+            } else if (guestListByLang.containsValue(getCurrentUser().getEmail1())) {
                 logoutCurrentUser(request);
             } else {
                 return TgolKeyStore.HOME_VIEW_REDIRECT_NAME;
@@ -112,13 +127,15 @@ public class LoginController extends AbstractUserAndContractsController{
             HttpServletResponse response,
             Model model) {
         Locale locale = localeResolver.resolveLocale(request);
-        String lGuestUser;
-        boolean isFrench = locale.equals(Locale.FRANCE) || locale.equals(Locale.FRENCH);
-        if (isFrench) {
-            lGuestUser=this.guestUser+FRENCH_GUEST_PREFIX;
-        } else {
-            lGuestUser=this.guestUser;
+        String languageKey = locale.getLanguage().toLowerCase();
+        String lGuestUser=null;
+
+        if (guestListByLang.containsKey(languageKey)) {
+            lGuestUser = guestListByLang.get(languageKey);
+        } else if (guestListByLang.containsKey("default")) {
+            lGuestUser = guestListByLang.get("default");
         }
+
         if (StringUtils.isBlank(lGuestUser) || StringUtils.isBlank(guestPassword)) {
             return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
         }
@@ -135,7 +152,7 @@ public class LoginController extends AbstractUserAndContractsController{
 
         doGuestAutoLogin(request, lGuestUser);
 
-        if (isFrench) {
+        if (forbiddenLangForOnlineDemo.contains(languageKey)) {
             return TgolKeyStore.HOME_VIEW_REDIRECT_NAME;
         }
         Collection<Contract> contractSet = getContractDataService().getAllContractsByUser(getCurrentUser());
