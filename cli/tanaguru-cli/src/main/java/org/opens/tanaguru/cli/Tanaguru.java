@@ -84,6 +84,8 @@ public class Tanaguru implements AuditServiceListener {
     private static final String LEVEL_2 = "LEVEL_1";
     private static final String LEVEL_3 = "LEVEL_3";
     
+    private static final int DEFAULT_XMS_VALUE = 64;
+    
     private static String LEVEL = SILVER_LEVEL;
     
     private static final String LEVEL_PARAMETER_ELEMENT_CODE = "LEVEL";
@@ -172,6 +174,13 @@ public class Tanaguru implements AuditServiceListener {
                     return;
                 } else {
                     AUDIT_TYPE = auditType;
+                }
+            }
+            if (cl.hasOption("x")) {
+                String xmxValue = cl.getOptionValue("x");
+                if (!isValidXmxValue(xmxValue)) {
+                    printUsage();
+                    return;
                 }
             }
             if (AUDIT_TYPE.equalsIgnoreCase(PAGE_AUDIT)) {
@@ -472,6 +481,13 @@ public class Tanaguru implements AuditServiceListener {
                              .hasArg()
                              .isRequired(false)
                              .create("t"));
+        options.addOption(OptionBuilder.withLongOpt("xmx-value")
+                             .withDescription("Xmx value set to the process (without 'M' at the end):\n"
+                + "- default is 256 \n"
+                + "- must be superior to 64 (Xms value)")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("x"));
 
         return options;
     }
@@ -552,6 +568,28 @@ public class Tanaguru implements AuditServiceListener {
         }
         System.out.println("\nThe level \"" + level + "\" doesn't exist.\n");
         return false;
+    }
+    
+    /**
+     * 
+     * @param path
+     * @param argument
+     * @param testWritable
+     * @return whether the given level is valid
+     */
+    private static boolean isValidXmxValue(String xmxStr) {
+      System.out.println(xmxStr);
+        try {
+            int xmxValue = Integer.valueOf(xmxStr);
+            if (xmxValue <= DEFAULT_XMS_VALUE) {
+                System.out.println("\nThe value of the Xmx value \"" + xmxStr + "\" must be superior to "+DEFAULT_XMS_VALUE+".\n");
+                return false;
+            }
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nThe format of the Xmx value \"" + xmxStr + "\" is incorrect.\n");
+            return false;
+        }
+        return true;
     }
     
     /**

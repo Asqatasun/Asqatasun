@@ -42,13 +42,44 @@ for jdir in $JDK_DIRS; do
 done
 export JAVA_HOME
 
+##########################################################
+# default xmx value is 256 but can be overridden by option
+##########################################################
+XMX_VALUE=256
+
+while [[ $# > 1 ]]
+do
+    key="$1"
+
+    case $key in
+      -x|--xmx-value)
+          XMX_VALUE="$2"
+          shift
+      ;;
+      *)
+        # unknown option
+      ;;
+    esac
+    shift
+done
+
+if [[ -n ${XMX_VALUE//[0-9]/} ]]; then
+    echo "Xmx value, containing letters, is restored to default, 256M"
+else if test $XMX_VALUE -lt 65
+  then 
+    echo "Xmx value, is inferior to Xms, so it is restored to default, 256M"
+    # restore default
+    XMX_VALUE=256 
+  fi 
+fi 
+
 ##################
 # set JAVA_OPTS
-# It also looks like the default heap size of 64M is not enough for most cases
-# so the maximum heap size is set to 128M.
+# It also looks like the default heap size of 128M is not enough for most cases
+# so the maximum heap size is set to 256M.
 # Set java.awt.headless=true if you work without X11 display
 ##################
-JAVA_OPTS="-Dlog4j.configuration=file:$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=file:$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx128M -classpath $CLASSPATH  "
+JAVA_OPTS="-Dlog4j.configuration=file:$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=file:$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx$XMX_VALUEM -classpath $CLASSPATH  "
 JAVA_BIN="$JAVA_HOME/bin/java "
 
 
@@ -57,4 +88,3 @@ JAVA_BIN="$JAVA_HOME/bin/java "
 ##################
 
 $JAVA_BIN $JAVA_OPTS org.opens.tanaguru.cli.Tanaguru "$@"
-
