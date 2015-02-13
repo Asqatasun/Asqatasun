@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,15 +17,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.entity.service.contract;
 
 import java.util.Collection;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.dao.contract.ContractDAO;
+import org.opens.tgol.entity.functionality.Functionality;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.user.User;
 
@@ -63,6 +64,16 @@ public class ContractDataServiceImpl extends AbstractGenericDataService<Contract
             }
         }
         return "";
+    }
+
+    @Override
+    public boolean doesContractHaveFunctionality(Contract contract, String functionnalityKey) {
+        for (Functionality functionality : contract.getFunctionalitySet()) {
+            if (StringUtils.equalsIgnoreCase(functionality.getCode(), functionnalityKey)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

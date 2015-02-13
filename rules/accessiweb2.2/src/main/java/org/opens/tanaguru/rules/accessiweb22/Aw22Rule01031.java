@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
@@ -24,7 +24,6 @@ import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.*;
@@ -95,9 +94,9 @@ public class Aw22Rule01031 extends AbstractMarkerPageRuleImplementation {
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
-        Iterator<Element> iter = elementHandler.get().iterator();
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler); 
+        Iterator<Element> iter = getSelectionWithoutMarkerHandler().get().iterator();
         // The elements with a longdesc attribute are seen as informative. 
         // They are added to the selection with marker
         while (iter.hasNext()) {

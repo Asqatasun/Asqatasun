@@ -1,0 +1,11 @@
+site_name: Tanaguru
+pages:
+- ['index.md', 'Home']
+- ['user-doc.md', 'User Documentation']
+- ['install-doc.md', 'Installation']
+- ['developer-doc.md', 'Developer Documentation']
+- ['robots-txt.md', 'Robots.txt']
+- ['tanaguru-team.md', 'Tanaguru Team']
+
+theme: readthedocs
+repo_url: https://github.com/Tanaguru/Tanaguru

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,16 +15,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.accessiweb22;
 
-import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
@@ -69,12 +67,10 @@ public class Aw22Rule13021 extends AbstractDetectionPageRuleImplementation {
     @Override
     protected void check(
                 SSPHandler sspHandler, 
-                ElementHandler<Element> selectionHandler, 
                 TestSolutionHandler testSolutionHandler) {
-
         ElementPresenceChecker epc = getElementPresenceChecker();
         epc.setTextElementBuilder(new LinkTextElementBuilder());
-        epc.check(sspHandler, selectionHandler, testSolutionHandler);
+        epc.check(sspHandler, getElements(), testSolutionHandler);
     }
 
 }

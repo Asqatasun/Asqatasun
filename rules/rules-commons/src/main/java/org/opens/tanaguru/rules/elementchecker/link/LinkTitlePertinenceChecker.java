@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementchecker.link;
@@ -66,7 +66,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
      * @param isEqualContentAuthorized 
      */
     public LinkTitlePertinenceChecker(boolean isEqualContentAuthorized) {
-        super(null, HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
+        super(HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
         this.isEqualContentAuthorized = isEqualContentAuthorized;
         addCheckers();
     }
@@ -75,7 +75,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
      * Constructor.
      */
     public LinkTitlePertinenceChecker() {
-        super(null, HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
+        super(HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
         addCheckers();
     }
  
@@ -138,4 +138,5 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
         containChecker.setTextElementBuilder(linkTextElementBuilder);
         addChecker(containChecker);
     }
+    
 }

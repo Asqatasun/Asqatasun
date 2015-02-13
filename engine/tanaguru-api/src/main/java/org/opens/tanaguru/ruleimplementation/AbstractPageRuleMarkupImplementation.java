@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,13 +17,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.ruleimplementation;
 
-import java.util.Collection;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.opens.tanaguru.processor.SSPHandler;
 
 /**
@@ -42,14 +39,8 @@ import org.opens.tanaguru.processor.SSPHandler;
  * @author jkowalczyk
  */
 public abstract class AbstractPageRuleMarkupImplementation 
-            extends AbstractPageRuleDefaultImplementation  
-                implements ElementHandler<Element> {
+            extends AbstractPageRuleDefaultImplementation   {
 
-    /**
-     * The elements implied by the test
-     */
-    private Elements elements = new Elements();
-    
     /**
      * Default constructor
      */
@@ -59,8 +50,8 @@ public abstract class AbstractPageRuleMarkupImplementation
     
     @Override
     protected void selectAndCheck(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
-        select(sspHandler, this);
-        check(sspHandler, this, testSolutionHandler);
+        select(sspHandler);
+        check(sspHandler, testSolutionHandler);
     }
 
     /**
@@ -69,12 +60,8 @@ public abstract class AbstractPageRuleMarkupImplementation
      *
      * @param sspHandler
      *            the SSP handler to use.
-     * @param elementHandler
-     *            the selectionHandler that handles the selected elements of the DOM.
      */
-    abstract protected void select(
-                SSPHandler sspHandler, 
-                ElementHandler<Element> elementHandler);
+    abstract protected void select(SSPHandler sspHandler);
     
     /**
      * This method defines a check operation . The instance of 
@@ -87,64 +74,14 @@ public abstract class AbstractPageRuleMarkupImplementation
      *
      * @param sspHandler
      *            the SSP handler to use.
-     * @param elementHandler
-     *            the selectionHandler that handles the selected elements of the DOM.
      * @param testSolutionHandler
      *            the testSolutionHandler that handles the computed TestSolutions.
      */
     abstract protected void check(
-                SSPHandler sspHandler, 
-                ElementHandler<Element> elementHandler, 
+                SSPHandler sspHandler,
                 TestSolutionHandler testSolutionHandler);
-    
-    @Override
-    public int getSelectionSize() {
-        return elements.size();
-    }
-    
-    @Override
-    public void add(Element element) {
-        if (!elements.contains(element)) {
-            elements.add(element);
-        }
-    }
-    
-    @Override
-    public void remove(Element element) {
-        elements.remove(element);
-    }
-    
-    @Override
-    public void addAll(Collection<Element> elements) {
-        for (Element el : elements) {
-            add(el);
-        }
-    }
 
     @Override
-    public void removeAll(Collection<Element> elements) {
-        this.elements.removeAll(elements);
-    }
-    
-    @Override
-    public void removeAll(ElementHandler<Element> elementHandler) {
-        elements.removeAll(elementHandler.get());
-    }
-    
-    @Override
-    public ElementHandler clean() {
-        elements.clear();
-        return this;
-    }
-    
-    @Override
-    public Elements get() {
-        return elements;
-    }
-    
-    @Override
-    public boolean isEmpty() {
-        return elements.isEmpty();
-    }
+    abstract public int getSelectionSize();
 
 }

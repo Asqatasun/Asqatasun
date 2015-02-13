@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.ruleimplementation;
 
@@ -49,7 +49,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * The testSolution of the elementary checks used to compute the final
      * result of the test
      */
-    Collection<TestSolution> testSolutions = new ArrayList<TestSolution>();
+    Collection<TestSolution> testSolutions = new ArrayList<>();
     
     /**
      * Default constructor
@@ -125,7 +125,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * 
      * @param testSolution
      * @param sspHandler
-     * * @param elementCounter
+     * @param elementCounter
      * @return a Definite result that handles the result of the test
      */
     protected ProcessResult prepareDefiniteResult(

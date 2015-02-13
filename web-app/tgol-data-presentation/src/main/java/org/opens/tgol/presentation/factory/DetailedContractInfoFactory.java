@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.presentation.factory;
 
@@ -28,6 +28,7 @@ import org.opens.tgol.entity.contract.ScopeEnum;
 import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.presentation.data.DetailedContractInfo;
 import org.opens.tgol.presentation.data.DetailedContractInfoImpl;
+import org.opens.tgol.util.TgolKeyStore;
 
 /**
  *
@@ -35,8 +36,8 @@ import org.opens.tgol.presentation.data.DetailedContractInfoImpl;
  */
 public final class DetailedContractInfoFactory extends ContractInfoFactory {
 
-    private static int NB_MAX_DISPLAYED_ACT = 100;
-    
+    private static final int NB_MAX_DISPLAYED_ACT = 100;
+
     private String nbMaxActRestrictionCode;
     public String getNbMaxActRestrictionCode() {
         return nbMaxActRestrictionCode;
@@ -73,6 +74,10 @@ public final class DetailedContractInfoFactory extends ContractInfoFactory {
         detailedContractInfo = (DetailedContractInfoImpl) setLastActInfo(contract, detailedContractInfo);
         detailedContractInfo = setNLastActInfo(contract, detailedContractInfo);
         
+        detailedContractInfo.setIsManualAuditEnabled(
+                getContractDataService().doesContractHaveFunctionality(
+                        contract, 
+                        TgolKeyStore.MANUAL_AUDIT_FUNCTIONALITY_KEY));
         return detailedContractInfo;
     }
 

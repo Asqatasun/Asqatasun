@@ -23,6 +23,7 @@ declare dirty_webapp=false
 declare TG_CONF_DIR="etc/tanaguru/"
 declare TG_TMP_DIR="var/tmp/tanaguru"
 declare TG_LOG_DIR="var/log/tanaguru"
+declare TOMCAT_HOME_DIR="/usr/share"
 declare PKG_DIR=$(pwd)
 
 declare ARCH="i386"
@@ -236,6 +237,7 @@ create_tables() {
 	cd "$PKG_DIR/install/rules/sql"
 	cat 10-rules-resources-insert.sql                \
             accessiweb2.2-insert.sql               \
+            rgaa3.0-insert.sql                \
             rgaa2.2-insert.sql |              \
 		mysql --user=${mysql_tg_user}            \
 		      --password=${mysql_tg_passwd}      \
@@ -256,6 +258,26 @@ create_directories() {
 	install -dm 755 -o ${tomcat_user} -g root                          \
 		"${prefix}/${tomcat_webapps}/${tanaguru_webapp_dir}" \
 		|| fail "Unable to create Tanaguru webapp directory"
+}
+
+install_firefox_profile_files() {
+    install -dm 700 -o ${tomcat_user} -g root \
+		"${prefix}/$TG_TMP_DIR/.gconf"          \
+		"${prefix}/$TG_TMP_DIR/.java"          \
+		"${prefix}/$TG_TMP_DIR/.cache"          \
+		"${prefix}/$TG_TMP_DIR/.dbus"          \
+		"${prefix}/$TG_TMP_DIR/.mozilla"          \
+		"${prefix}/$TG_TMP_DIR/.gnome2"          \
+		"${prefix}/$TG_TMP_DIR/.gnome2_private"          \
+		|| fail "Unable to create Tanaguru directories"
+
+    ln -s "${prefix}$TG_TMP_DIR/.gconf" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gconf" 
+    ln -s "${prefix}$TG_TMP_DIR/.java" "${TOMCAT_HOME_DIR}/${tomcat_user}/.java" 
+    ln -s "${prefix}$TG_TMP_DIR/.cache" "${TOMCAT_HOME_DIR}/${tomcat_user}/.cache" 
+    ln -s "${prefix}$TG_TMP_DIR/.dbus" "${TOMCAT_HOME_DIR}/${tomcat_user}/.dbus" 
+    ln -s "${prefix}$TG_TMP_DIR/.mozilla" "${TOMCAT_HOME_DIR}/${tomcat_user}/.mozilla" 
+    ln -s "${prefix}$TG_TMP_DIR/.gnome2" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2" 
+    ln -s "${prefix}$TG_TMP_DIR/.gnome2_private" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2_private" 
 }
 
 install_configuration() {
@@ -364,6 +386,9 @@ main() {
 	# install webapp
 	install_webapp
 	echo "Tanaguru webapp creation: 	.	OK"
+	# install firefox profile files
+	install_firefox_profile_files
+	echo "Firefox Profile Files creation: 	.	OK"
 	# edit esapi configuration file
 	edit_esapi_configuration_file
 	echo "Tanaguru webapp configuration: 	.	OK"

@@ -146,56 +146,58 @@ function hidePanel(selection, panneaux) {
 }
 
 function toggleIconResult(selection, highlight) {
-    var grayClassSuffix = '-th-gray',
-            coloredClassSuffix = '-th';
+    var grayClassSuffix = '-m-gray.png',
+            coloredClassSuffix = '-m.png';
 
     if (highlight) {
-        changeSelectionClass(
-                selection.children('.passed' + grayClassSuffix),
-                'passed' + grayClassSuffix,
-                'passed' + coloredClassSuffix);
-        changeSelectionClass(
-                selection.children('.failed' + grayClassSuffix),
-                'failed' + grayClassSuffix,
-                'failed' + coloredClassSuffix);
-        changeSelectionClass(
-                selection.children('.nmi' + grayClassSuffix),
-                'nmi' + grayClassSuffix,
-                'nmi' + coloredClassSuffix);
-        changeSelectionClass(
-                selection.children('.na' + grayClassSuffix),
-                'na' + grayClassSuffix,
-                'na' + coloredClassSuffix);
-        changeSelectionClass(
-                selection.children('.nt' + grayClassSuffix),
-                'nt' + grayClassSuffix,
-                'nt' + coloredClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-passed' + grayClassSuffix+'"]'),
+                'ico-passed' + grayClassSuffix,
+                'ico-passed' + coloredClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-failed' + grayClassSuffix+'"]'),
+                'ico-failed' + grayClassSuffix,
+                'ico-failed' + coloredClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-nmi' + grayClassSuffix+'"]'),
+                'ico-nmi' + grayClassSuffix,
+                'ico-nmi' + coloredClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-na' + grayClassSuffix+'"]'),
+                'ico-na' + grayClassSuffix,
+                'ico-na' + coloredClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-nt' + grayClassSuffix+'"]'),
+                'ico-nt' + grayClassSuffix,
+                'ico-nt' + coloredClassSuffix);
     } else {
-        changeSelectionClass(
-                selection.children('.passed' + coloredClassSuffix),
-                'passed' + coloredClassSuffix,
-                'passed' + grayClassSuffix);
-        changeSelectionClass(
-                selection.children('.failed' + coloredClassSuffix),
-                'failed' + coloredClassSuffix,
-                'failed' + grayClassSuffix);
-        changeSelectionClass(
-                selection.children('.nmi' + coloredClassSuffix),
-                'nmi' + coloredClassSuffix,
-                'nmi' + grayClassSuffix);
-        changeSelectionClass(
-                selection.children('.na' + coloredClassSuffix),
-                'na' + coloredClassSuffix,
-                'na' + grayClassSuffix);
-        changeSelectionClass(
-                selection.children('.nt' + coloredClassSuffix),
-                'nt' + coloredClassSuffix,
-                'nt' + grayClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-passed' + coloredClassSuffix+'"]'),
+                'ico-passed' + coloredClassSuffix,
+                'ico-passed' + grayClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-failed' + coloredClassSuffix+'"]'),
+                'ico-failed' + coloredClassSuffix,
+                'ico-failed' + grayClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-nmi' + coloredClassSuffix+'"]'),
+                'ico-nmi' + coloredClassSuffix,
+                'ico-nmi' + grayClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-na' + coloredClassSuffix+'"]'),
+                'ico-na' + coloredClassSuffix,
+                'ico-na' + grayClassSuffix);
+        changeSelectionSrc(
+                selection.children('img[src$="ico-nt' + coloredClassSuffix+'"]'),
+                'ico-nt' + coloredClassSuffix,
+                'ico-nt' + grayClassSuffix);
     }
 }
 
-function changeSelectionClass(selection, fromClass, toClass) {
-    if (selection.text().length > 0 && selection.text() != "0") {
-        selection.removeClass(fromClass).addClass(toClass);
+function changeSelectionSrc(selection, fromSrc, toSrc) {
+    var attr = selection.attr('alt');
+    if (typeof attr !== typeof undefined && attr !== false && attr.length > 0 && !attr.startsWith("0")) {
+        var src = selection.attr('src').replace(fromSrc, toSrc)
+        selection.attr('src', src);
     }
 }

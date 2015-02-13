@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.accessiweb22;
@@ -25,7 +25,6 @@ import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
@@ -76,9 +75,8 @@ public class Aw22Rule09014 extends AbstractPageRuleWithSelectorAndCheckerImpleme
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
+        super.check(sspHandler, testSolutionHandler);
         ProcessRemarkService prs = sspHandler.getProcessRemarkService();
         if (CollectionUtils.isNotEmpty(prs.getRemarkList())) {
             for (ProcessRemark pr : prs.getRemarkList()) {

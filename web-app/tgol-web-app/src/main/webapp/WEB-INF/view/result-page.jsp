@@ -1,12 +1,11 @@
-<%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
+<%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
 <compress:html>
-<%@page contentType="text/html;charset=UTF-8"%>
-<%@page pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://tagutils" prefix="tg" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
 
 <!-- external js -->
@@ -59,6 +58,9 @@
 </c:set>
 <c:set var="displaySnapshotJsUrl" scope="page">
     <c:url value="/Js/snapshot/snapshot-min.js"/>
+</c:set>
+<c:set var="detailResultManualJsUrl">
+    <c:url value="/Js/result-page/detail-result-manual.js"/>  
 </c:set>
 
 <!-- external images -->
@@ -206,6 +208,7 @@
         <c:set var="hasResultDispatchTitle" scope="request" value="false"/>
         <c:set var="themeRepartitionWidth" scope="request" value="690"/>
         <c:set var="hasPieChartInGraphicalResult" scope="request" value="true"/>
+        <c:set var="hasBarChartInGraphicalResult" scope="request" value="true"/>
         <c:set var="addLinkToSourceCode" scope="request" value="true"/>
         <c:import url="template/synthesis.jsp" />
         <c:import url="template/sort-result-console.jsp" />
@@ -229,6 +232,9 @@
         <c:if test="${addRelaunchAction}">
         <script type="text/javascript" src="${jqueryUIUrl}"></script>
         <script type="text/javascript" src="${progressBarJsUrl}"></script>
+        </c:if>
+        <c:if test="${isManualAudit}">
+        <script type="text/javascript" src="${detailResultManualJsUrl}"></script>
         </c:if>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>

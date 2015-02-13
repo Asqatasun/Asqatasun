@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,15 +17,20 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.security.userdetails.TgolUserDetailsService;
@@ -43,6 +48,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
 /** 
  *
@@ -51,19 +57,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController extends AbstractUserAndContractsController{
 
-    
     private AuthenticationManager authenticationManager;
     public void setAuthenticationManager(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
     UserDetails guestUserDetails;
-    
-    private String guestUser;
-    public void setGuestUser(String guestUser) {
-        this.guestUser = guestUser;
-    }
-    
+
     private String guestPassword;
     public void setGuestPassword(String guestPassword) {
         this.guestPassword = guestPassword;
@@ -75,6 +75,30 @@ public class LoginController extends AbstractUserAndContractsController{
         this.tgolUserDetailsService = tgolUserDetailsService;
     }
     
+    private LocaleResolver localeResolver;
+    @Autowired
+    public final void setLocaleResolver(LocaleResolver localeResolver) {
+        this.localeResolver = localeResolver;
+    }
+    
+    private final Map<String, String> guestListByLang = new LinkedHashMap<>();
+    public Map<String, String> getGuestListByLang() {
+        return guestListByLang;
+    }
+
+    public void setGuestListByLang(Map<String, String> guestListByLang) {
+        this.guestListByLang.putAll(guestListByLang);
+    }
+    
+    private final List<String> forbiddenLangForOnlineDemo = new ArrayList<>();
+    public List<String> getForbiddenLangForOnlineDemo() {
+        return forbiddenLangForOnlineDemo;
+    }
+
+    public void setForbiddenLangForOnlineDemo(List<String> forbiddenLangForOnlineDemo) {
+        this.forbiddenLangForOnlineDemo.addAll(forbiddenLangForOnlineDemo);
+    }
+    
     @RequestMapping(value = TgolKeyStore.LOGIN_URL, method=RequestMethod.GET)
     public String displayLoginPage (
             @RequestParam(value=TgolKeyStore.EMAIL_KEY, required=false) String email,
@@ -83,7 +107,7 @@ public class LoginController extends AbstractUserAndContractsController{
         if (isAuthenticated()) {
             if (StringUtils.isNotBlank(email)){
                 logoutCurrentUser(request);
-            } else if (getCurrentUser().getEmail1().equalsIgnoreCase(guestUser)) {
+            } else if (guestListByLang.containsValue(getCurrentUser().getEmail1())) {
                 logoutCurrentUser(request);
             } else {
                 return TgolKeyStore.HOME_VIEW_REDIRECT_NAME;
@@ -102,7 +126,17 @@ public class LoginController extends AbstractUserAndContractsController{
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        if (StringUtils.isBlank(guestUser) || StringUtils.isBlank(guestPassword)) {
+        Locale locale = localeResolver.resolveLocale(request);
+        String languageKey = locale.getLanguage().toLowerCase();
+        String lGuestUser=null;
+
+        if (guestListByLang.containsKey(languageKey)) {
+            lGuestUser = guestListByLang.get(languageKey);
+        } else if (guestListByLang.containsKey("default")) {
+            lGuestUser = guestListByLang.get("default");
+        }
+
+        if (StringUtils.isBlank(lGuestUser) || StringUtils.isBlank(guestPassword)) {
             return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
         }
         if (isAuthenticated()) {
@@ -110,14 +144,17 @@ public class LoginController extends AbstractUserAndContractsController{
         }
         if (guestUserDetails == null) {
             try {
-                guestUserDetails = tgolUserDetailsService.loadUserByUsername(guestUser);
+                guestUserDetails = tgolUserDetailsService.loadUserByUsername(lGuestUser);
             } catch (UsernameNotFoundException unfe) {
                 return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
             }
         }
 
-        doGuestAutoLogin(request);
+        doGuestAutoLogin(request, lGuestUser);
 
+        if (forbiddenLangForOnlineDemo.contains(languageKey)) {
+            return TgolKeyStore.HOME_VIEW_REDIRECT_NAME;
+        }
         Collection<Contract> contractSet = getContractDataService().getAllContractsByUser(getCurrentUser());
         if (contractSet == null || contractSet.isEmpty()) {
             return TgolKeyStore.NO_DEMO_AVAILABLE_VIEW_NAME;
@@ -125,9 +162,9 @@ public class LoginController extends AbstractUserAndContractsController{
         String contractId = contractSet.iterator().next().getId().toString();
         model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, contractId);
         return TgolKeyStore.AUDIT_PAGE_SET_UP_REDIRECT_NAME;
-    }
+   }
     
-    private void doGuestAutoLogin(HttpServletRequest request) {
+    private void doGuestAutoLogin(HttpServletRequest request, String guestUser) {
         try {
             // Must be called from request filtered by Spring Security, otherwise SecurityContextHolder is not updated
             UsernamePasswordAuthenticationToken token = 

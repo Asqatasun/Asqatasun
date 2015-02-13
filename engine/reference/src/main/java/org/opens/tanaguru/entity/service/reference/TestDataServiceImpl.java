@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.service.reference;
 
@@ -34,31 +34,36 @@ import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
- *
+ * 
  * @author jkowalczyk
  */
 public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
         implements TestDataService {
 
     private static final Logger LOGGER = Logger.getLogger(TestDataServiceImpl.class);
-    private String levelParameterCode = "LEVEL";
 
+    private String levelParameterCode = "LEVEL";
     public void setLevelParameterCode(String levelParameterCode) {
         this.levelParameterCode = levelParameterCode;
     }
-    private LevelDataService levelDataService;
 
+    private LevelDataService levelDataService;
     public void setLevelDataService(LevelDataService levelDataService) {
         this.levelDataService = levelDataService;
     }
-    private ReferenceDataService referenceDataService;
 
+    private ReferenceDataService referenceDataService;
     public void setReferenceDataService(ReferenceDataService referenceDataService) {
         this.referenceDataService = referenceDataService;
     }
-
+    
     public TestDataServiceImpl() {
         super();
+    }
+
+    @Override
+    public Test read(String label) {
+        return ((TestDAO) entityDao).read(label);
     }
 
     @Override
@@ -82,9 +87,9 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
     }
 
     /**
-     * The parameter set contains a unique parameter that combines the
-     * referential and the level parameters. This method extracts these
-     * parameters to retrieve the appropriate tests.
+     * The parameter set contains a unique parameter that combines the referential
+     * and the level parameters.
+     * This method extracts these parameters to retrieve the appropriate tests.
      *
      * @param paramSet
      * @return
@@ -105,20 +110,21 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
         List<Test> testList = getAllByReferenceAndLevel(reference, level);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Retrieved " + testList.size() + " test for the referential "
-                    + reference.getLabel() + " and the level " + level.getLabel());
+                + reference.getLabel() + " and the level " + level.getLabel());
         }
         return testList;
     }
 
     /**
-     * 
+     *
      * @param audit
      * @param testLabel
-     * @return 
+     * @return
      */
     @Override
     public Test getTestFromAuditAndLabel(Audit audit, String testLabel) {
         return ((TestDAO) entityDao).retrieveTestFromAuditAndLabel(audit, testLabel);
-        
+
     }
+
 }

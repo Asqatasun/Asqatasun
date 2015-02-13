@@ -2,7 +2,7 @@ package org.opens.tgol.controller;
 
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -19,7 +19,7 @@ package org.opens.tgol.controller;
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 
@@ -59,7 +59,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     }
 
     /**
-     * @param contractId
+     * @param userId
      * @param request
      * @param response
      * @param model

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.entity.decorator.tanaguru.subject;
 
@@ -188,13 +188,15 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      * @param audit
      * @param testSolution
      * @param theme
+     * @param manualAudit
      * @return 
      */
     Long getResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme);
+            Theme theme,
+            boolean manualAudit);
 
     /**
      * 
@@ -218,9 +220,10 @@ public interface WebResourceDataServiceDecorator extends WebResourceDataService 
      *
      * @param webResource
      * @param isRawMark
+     * @param isManual
      * @return
      */
-    Float getMarkByWebResourceAndAudit(WebResource webResource, boolean isRawMark);
+    Float getMarkByWebResourceAndAudit(WebResource webResource, boolean isRawMark, boolean isManual);
     
     /**
      * 

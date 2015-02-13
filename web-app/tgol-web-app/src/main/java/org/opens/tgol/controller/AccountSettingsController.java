@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.controller;
 
@@ -53,7 +53,7 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class AccountSettingsController extends AbstractUserAndContractsController {
 
-    List<String> forbiddenUserList = new ArrayList<String>();
+    List<String> forbiddenUserList = new ArrayList();
     public void setForbiddenUserList(List<String> forbiddenUserList) {
         this.forbiddenUserList = forbiddenUserList;
     }
@@ -64,7 +64,7 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
         this.testDataService = testDataService;
     }
     
-    private Map<String, Reference> refMap = new HashMap<String, Reference>();
+    private final Map<String, Reference> refMap = new HashMap();
     @Autowired
     public void setReferenceDataService(ReferenceDataService referenceDataService) {
         for (Reference ref : referenceDataService.findAll()) {

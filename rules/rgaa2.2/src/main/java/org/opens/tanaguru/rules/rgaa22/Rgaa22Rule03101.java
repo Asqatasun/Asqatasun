@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.rgaa22;
@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
@@ -47,7 +47,7 @@ import org.opens.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
  * @see <a href="http://rgaa.net/Absence-d-element-de-formulaire.html"> 3.10 rule specification </a>
  *
  */
-public class Rgaa22Rule03101 extends AbstractPageRuleMarkupImplementation {
+public class Rgaa22Rule03101 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /** The element selector */
     private static final ElementSelector ELEMENT_SELECTOR = 
@@ -83,24 +83,23 @@ public class Rgaa22Rule03101 extends AbstractPageRuleMarkupImplementation {
      * The element handler that handles elements without id or with a 
      * not unique id
      */
-    private ElementHandler elementsWithoutUniqueId = new ElementHandlerImpl();
+    private final ElementHandler<Element> elementsWithoutUniqueId = 
+            new ElementHandlerImpl();
     
     /**
      * Default constructor
      */
     public Rgaa22Rule03101(){
         super();
+        setElementSelector(ELEMENT_SELECTOR);
     }
     
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        ELEMENT_SELECTOR.selectElements(sspHandler, elementHandler);
-        if (elementHandler.isEmpty()) {
-            return;
-        }
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
         // From the selected form elements, only keep the one without id
         // or with an id not unique on the page
-        for (Element el : elementHandler.get()) {
+        for (Element el : getElements().get()) {
             if (!el.hasAttr(ID_ATTR) || 
                 StringUtils.isEmpty(el.id().trim()) ||
                     CssLikeSelectorBuilder.getNumberOfElements(sspHandler, CssLikeSelectorBuilder.buildSelectorFromId(el.id())) >= 2) {
@@ -112,11 +111,10 @@ public class Rgaa22Rule03101 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
 
         // if the page have no form elements, the test is not applicable
-        if (elementHandler.isEmpty()) {
+        if (getElements().isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }

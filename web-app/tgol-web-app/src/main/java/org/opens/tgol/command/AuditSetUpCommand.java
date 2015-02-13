@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.command;
 
@@ -51,7 +51,7 @@ public class AuditSetUpCommand implements Serializable {
     /**
      * The map that handles the audit parameters (except the level parameter)
      */
-    private Map<String, String> auditParameterMap = new HashMap<String, String>();
+    private final Map<String, String> auditParameterMap = new HashMap();
     public Map<String, String> getAuditParameter() {
         return auditParameterMap;
     }
@@ -116,7 +116,7 @@ public class AuditSetUpCommand implements Serializable {
     /**
      * List of urls to test (only needed when scope = ScopeEnum.PAGES)
      */
-    private List<String> urlList = new LinkedList<String>();
+    private final List<String> urlList = new LinkedList();
     public List<String> getUrlList() {
         return urlList;
     }
@@ -126,7 +126,7 @@ public class AuditSetUpCommand implements Serializable {
     }
     
     /**
-     * Map of uploaded files (only needed when scope = ScopeEnum.UPLOAD)
+     * @return Map of uploaded files (only needed when scope = ScopeEnum.UPLOAD)
      */
     public Map<String, String> getFileMap() {
         return UploadAuditSetUpCommandHelper.convertFilesToMap(fileInputList);

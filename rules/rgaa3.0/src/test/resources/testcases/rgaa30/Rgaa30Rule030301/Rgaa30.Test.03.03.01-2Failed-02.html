@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa30 Test.03.03.01 Failed 02</title>
+        <style type="text/css">
+            .testcase {
+                color:#FFA500
+            }
+            body {
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+
+            <h1>Rgaa30 Test.03.03.01 Failed 02</h1>
+
+           <div class="test-detail">
+                On each Web page, <strong>until 150%</strong> of the default font size (or 1.5em), do text and image of text without bolding pass one of the conditions below (except in special cases)?
+                <ul>
+                    <li> The contrast ratio between text and its background is at least 4.5:1</li>
+                    <li> a mechanism allows the user to display text with a contrast ratio of at least 4.5:1</li>
+                </ul>
+            </div>
+
+            <div class="testcase">
+                <span>
+                    Some text with incorrect contrast
+                </span>
+            </div>
+
+            <div class="test-explanation">
+                Failed : The text is displayed with the default background (white) color 
+                and foreground set to red which is incorrect in terms of contrast
+                for a 4.5 ration.
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.sebuilder.tools;
@@ -104,7 +104,7 @@ public abstract class ScenarioBuilder {
      * 
      * @return 
      */
-    private static final String buildHeader() {
+    private static String buildHeader() {
         if (header == null) {
             StringBuilder strb = new StringBuilder();
             strb.append(LEFT_BRACE);
@@ -129,7 +129,7 @@ public abstract class ScenarioBuilder {
      * 
      * @return 
      */
-    private static final String buildFooter() {
+    private static String buildFooter() {
         if (footer == null) {
             StringBuilder strb = new StringBuilder();
             strb.append(RIGHT_SQUARE_BRACKET);
@@ -145,7 +145,7 @@ public abstract class ScenarioBuilder {
      * @param url
      * @return 
      */
-    private static final String buildGetStep(String url) {
+    private static String buildGetStep(String url) {
         StringBuilder strb = new StringBuilder();
         strb.append(LEFT_BRACE);
         strb.append(TYPE_KEY);

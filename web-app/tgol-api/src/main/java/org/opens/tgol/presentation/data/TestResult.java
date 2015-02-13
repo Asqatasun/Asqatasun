@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,15 +17,19 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.presentation.data;
 
 import java.util.List;
+
+import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
 
 /**
  * This class processes raw results and handles displayable remarks data
+ *
  * @author jkowalczyk
  */
 public interface TestResult {
@@ -38,12 +42,6 @@ public interface TestResult {
     String REPRESENTATION_ORDER_SUFFIX_KEY = "-representation-order";
     String CONTRAST_RATIO_SUFFIX_KEY = "-contrast-ratio";
 
-    String FAILED = "FAILED";
-    String PASSED = "PASSED";
-    String NEED_MORE_INFO = "NEED_MORE_INFO";
-    String NOT_APPLICABLE = "NOT_APPLICABLE";
-    String NOT_TESTED = "NOT_TESTED";
-
     String FAILED_LOWER = "failed";
     String PASSED_LOWER = "passed";
     String NEED_MORE_INFO_LOWER = "nmi";
@@ -54,17 +52,40 @@ public interface TestResult {
 
     String REPRESENTATION_BUNDLE_NAME = "representation";
 
-    String REPRESENTATION_FILE_PREFIX ="data-representation/data-representation-";
+    String REPRESENTATION_FILE_PREFIX = "data-representation/data-representation-";
     String REPRESENTATION_FILE_SUFFIX = ".jsp";
-    
+
     int MAX_REMARK_INFO = 10;
 
     /**
      *
-     * @return
-     *          the list of remark info for the given test
+     * @return the list of remark info for the given test
      */
     List<RemarkInfos> getRemarkInfosList();
+
+    /**
+     *
+     * @return the manual result
+     */
+    String getManualResult();
+    
+    /**
+     * 
+     * @param manualResult 
+     */
+    void setManualResult(String manualResult);
+
+    /**
+     *
+     * @return the manual audit entered comment
+     */
+    String getComment();
+    
+    /**
+     * 
+     * @param comment 
+     */
+    void setComment(String comment);
 
     /**
      *
@@ -73,15 +94,14 @@ public interface TestResult {
     void setTestEvidenceRepresentationOrder(String testEvidenceRepresentationOrder);
 
     /**
-     * 
+     *
      * @return
      */
     String[] getTestEvidenceRepresentationOrder();
 
     /**
      *
-     * @return
-     *          the test representation needed to display test results
+     * @return the test representation needed to display test results
      */
     String getTestRepresentation();
 
@@ -92,44 +112,41 @@ public interface TestResult {
     void setTestRepresentation(int testRepresentationType);
 
     /**
-     * In case of tests checking color contrast, we may need to call 
-     * an external service to find good colors with the contrast value 
-     * threashold. That value is set through the properties file.
-     * 
-     * @param contrastRatio 
+     * In case of tests checking color contrast, we may need to call an external
+     * service to find good colors with the contrast value threashold. That
+     * value is set through the properties file.
+     *
+     * @param colorTestContrastRatio
      */
     void setColorTestContrastRatio(String colorTestContrastRatio);
-    
+
     /**
-     * 
+     *
      * @return the contrast value threashold for the given test
      */
     String getColorTestContrastRatio();
-    
+
     /**
-     * 
-     * @return
-     *      the test representation type as integer
+     *
+     * @return the test representation type as integer
      */
     int getTestRepresentationType();
 
     /**
      *
-     * @return
-     *          The test 
+     * @return The test
      */
     Test getTest();
 
     /**
-     * 
+     *
      * @param test
      */
     void setTest(Test test);
 
     /**
      *
-     * @return
-     *          The test short label
+     * @return The test short label
      */
     String getTestShortLabel();
 
@@ -141,8 +158,7 @@ public interface TestResult {
 
     /**
      *
-     * @return
-     *      the test key 
+     * @return the test key
      */
     String getTestCode();
 
@@ -154,8 +170,7 @@ public interface TestResult {
 
     /**
      *
-     * @return
-     *      the tested url
+     * @return the tested url
      */
     String getTestUrl();
 
@@ -167,8 +182,7 @@ public interface TestResult {
 
     /**
      *
-     * @return
-     *          the number of encountered elements
+     * @return the number of encountered elements
      */
     int getElementCounter();
 
@@ -185,29 +199,27 @@ public interface TestResult {
     ResultCounter getResultCounter();
 
     /**
-     * 
+     *
      * @param resultCounter
      */
     void setResultCounter(ResultCounter resultCounter);
 
     /**
      *
-     * @return
-     * The lower-case-formatted result value. This data is usefull to apply the
-     * correct css on the displayed result String.
+     * @return The lower-case-formatted result value. This data is usefull to
+     * apply the correct css on the displayed result String.
      */
     String getResultCode();
 
     /**
-     * 
+     *
      * @param resultCode
      */
     void setResultCode(String resultCode);
 
     /**
      *
-     * @return
-     *          the displayable result data
+     * @return the displayable result data
      */
     String getResult();
 
@@ -218,9 +230,8 @@ public interface TestResult {
     void setResult(String result);
 
     /**
-     * 
-     * @return
-     *          the code of the level for the current test
+     *
+     * @return the code of the level for the current test
      */
     String getLevelCode();
 
@@ -232,9 +243,8 @@ public interface TestResult {
 
     /**
      *
-     * @return
-     *          the rule design url that explains the algorithm for the current
-     *          test
+     * @return the rule design url that explains the algorithm for the current
+     * test
      */
     String getRuleDesignUrl();
 
@@ -243,17 +253,37 @@ public interface TestResult {
      * @param ruleDesignUrl
      */
     void setRuleDesignUrl(String ruleDesignUrl);
-    
+
     /**
-     * 
+     *
      * @return whether the rendered result is truncated
      */
     boolean getIsTruncated();
-    
+
     /**
-     * 
+     *
      * @param isTruncated
      */
     void setTruncated(boolean isTruncated);
-    
+
+    /**
+     * 
+     * @param processResult
+     * @return the historic of process result manually overridden for a given
+     * processResult
+     */
+    List<ProcessResult> getHistory(ProcessResult processResult);
+
+    /**
+     * 
+     * @return the historic of process result manually overridden 
+     */
+    public List<DefiniteResult> getHistory();
+
+    /**
+     * 
+     * @param list 
+     */
+    public void setHistory(List<DefiniteResult> list);
+
 }

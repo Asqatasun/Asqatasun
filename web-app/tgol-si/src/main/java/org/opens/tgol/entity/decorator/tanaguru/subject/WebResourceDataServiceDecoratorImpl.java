@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.entity.decorator.tanaguru.subject;
 
@@ -192,9 +192,10 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme) {
+            Theme theme,
+            boolean manualAudit) {
         return statisticsDAO.findResultCountByResultTypeAndTheme(
-            webResource,audit,testSolution,theme);
+            webResource,audit,testSolution,theme, manualAudit);
     }
 
     @Override
@@ -204,8 +205,8 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
         List<PageResult> pageResultList = (List<PageResult>)
                 ((TgolWebResourceDAO)entityDao).retrieveChildUrlList(webResource);
         for (PageResult pageResult : pageResultList) {
-            pageResult.setWeightedMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), false).intValue()));
-            pageResult.setRawMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), true).intValue()));
+            pageResult.setWeightedMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), false , false).intValue()));
+            pageResult.setRawMark(String.valueOf(getMarkByWebResourceAndAudit(pageResult.getId(), true, false).intValue()));
         }
         return pageResultList;
     }
@@ -233,8 +234,9 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     @Override
     public Float getMarkByWebResourceAndAudit(
             WebResource webResource,
-            boolean isRawMark) {
-        return this.getMarkByWebResourceAndAudit(webResource.getId(), isRawMark);
+            boolean isRawMark,
+            boolean isManual) {
+        return this.getMarkByWebResourceAndAudit(webResource.getId(), isRawMark, isManual);
     }
 
     /**
@@ -245,11 +247,12 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
      */
     private Float getMarkByWebResourceAndAudit(
             Long idWebResource,
-            boolean isRawMark) {
+            boolean isRawMark,
+            boolean isManual) {
         if (isRawMark) {
-            return statisticsDAO.findRawMarkByWebResourceAndAudit(idWebResource);
+            return statisticsDAO.findRawMarkByWebResourceAndAudit(idWebResource, isManual);
         } else {
-            return statisticsDAO.findWeightedMarkByWebResourceAndAudit(idWebResource);
+            return statisticsDAO.findWeightedMarkByWebResourceAndAudit(idWebResource, isManual);
         }
     }
 

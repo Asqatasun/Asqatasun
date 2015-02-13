@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013 Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,14 +17,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.controller;
 
 import java.util.*;
 import javax.servlet.http.HttpServletResponse;
 import junit.framework.TestCase;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -564,6 +564,7 @@ public class PageListControllerTest extends TestCase {
      */
     private void setUpMockWebResourceDataServiceDecorator (Long idAudit) {
 
+    	boolean manualAudit = false;
         mockWebResourceDataServiceDecorator = createMock(WebResourceDataServiceDecorator.class);
         mockParameterDataService = createMock(ParameterDataService.class);
         
@@ -583,10 +584,10 @@ public class PageListControllerTest extends TestCase {
         expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f9xx, null, null)).
                 andReturn(Long.valueOf(4)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, false)).
+        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, false , false)).
                 andReturn(Float.valueOf(55)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, true)).
+        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, true , false)).
                 andReturn(Float.valueOf(75)).
                 anyTimes();
         expect(mockWebResourceDataServiceDecorator.getChildWebResourceCount(mockSite)).
@@ -607,19 +608,19 @@ public class PageListControllerTest extends TestCase {
         
         setUpThemeDataService();
         
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.PASSED, mockTheme)).
+        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.PASSED, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.FAILED, mockTheme)).
+        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.FAILED, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NEED_MORE_INFO, mockTheme)).
+        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NEED_MORE_INFO, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_APPLICABLE, mockTheme)).
+        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_APPLICABLE, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_TESTED, mockTheme)).
+		expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_TESTED, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
                 

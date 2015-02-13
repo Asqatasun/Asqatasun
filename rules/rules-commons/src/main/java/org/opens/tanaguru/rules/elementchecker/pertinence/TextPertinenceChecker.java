@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,11 +17,12 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementchecker.pertinence;
 
+import java.util.Collections;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -84,8 +85,12 @@ public class TextPertinenceChecker extends CompositeChecker {
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
-        super(manualCheckMessage, notPertinentSolution, eeAttributeNameList);
+        super(notPertinentSolution, eeAttributeNameList);
 
+        addCheckMessageFromSolution(
+                TestSolution.PASSED, 
+                Collections.singletonMap(TestSolution.NEED_MORE_INFO, manualCheckMessage));
+        
         this.checkEmptiness = checkEmptiness;
         this.textElementBuilderToCompareWith = textElementBuilderToCompareWith;
         this.blacklistNameToCompareWith = blacklistNameToCompareWith;
@@ -140,8 +145,12 @@ public class TextPertinenceChecker extends CompositeChecker {
             String notPertinentMessageCode,
             String manualCheckMessage,
             String... eeAttributeNameList) {
-        super(manualCheckMessage, TestSolution.FAILED, eeAttributeNameList);
+        super(TestSolution.FAILED, eeAttributeNameList);
 
+        addCheckMessageFromSolution(
+                TestSolution.PASSED, 
+                Collections.singletonMap(TestSolution.NEED_MORE_INFO, manualCheckMessage));
+        
         this.checkEmptiness = checkEmptiness;
         this.textElementBuilderToCompareWith = textElementBuilderToCompareWith;
         this.blacklistNameToCompareWith = blacklistNameToCompareWith;

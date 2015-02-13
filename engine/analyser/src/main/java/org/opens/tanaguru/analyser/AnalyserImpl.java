@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.analyser;
 
@@ -66,7 +66,7 @@ public class AnalyserImpl implements Analyser {
      * The auditStatisticsDataService instance needed to retrieve and save
      * auditStatistics instances
      */
-    private WebResourceStatisticsDataService webResourceStatisticsDataService;
+    private final WebResourceStatisticsDataService webResourceStatisticsDataService;
     public WebResourceStatisticsDataService getWebResourceStatisticsDataService() {
         return webResourceStatisticsDataService;
     }
@@ -74,32 +74,32 @@ public class AnalyserImpl implements Analyser {
     /**
      * The ThemeStatisticsDataService instance
      */
-    private ThemeStatisticsDataService themeStatisticsDataService;
+    private final ThemeStatisticsDataService themeStatisticsDataService;
     
     /**
      * The CriterionStatisticsDataService instance
      */
-    private CriterionStatisticsDataService criterionStatisticsDataService;
+    private final CriterionStatisticsDataService criterionStatisticsDataService;
     
     /**
      * THe testStatisticsDataService instance
      */
-    private TestStatisticsDataService testStatisticsDataService;
+    private final TestStatisticsDataService testStatisticsDataService;
     
     /**
      * The auditDataService instance
      */
-    private AuditDataService auditDataService;
+    private final AuditDataService auditDataService;
     
     /**
      * The ProcessResultDataService instance
      */
-    private ProcessResultDataService processResultDataService;
+    private final ProcessResultDataService processResultDataService;
     
     /**
      * The ProcessResultFactory instance
      */
-    private ProcessResultFactory processResultFactory;
+    private final ProcessResultFactory processResultFactory;
     
     
     private Map<Criterion, Integer> criterionMap;
@@ -132,8 +132,8 @@ public class AnalyserImpl implements Analyser {
      * the set of audit parameters that handles some overridden values for test
      * weight (needed to compute the raw mark)
      */
-    private Collection<Parameter> paramSet; 
-    private static BigDecimal ZERO = BigDecimal.valueOf(Double.valueOf(0.0));
+    private final Collection<Parameter> paramSet; 
+    private static final BigDecimal ZERO = BigDecimal.valueOf(Double.valueOf(0.0));
 
     public AnalyserImpl(
             AuditDataService auditDataService,
@@ -264,8 +264,8 @@ public class AnalyserImpl implements Analyser {
                     nbOfNt++;
                     break;
             }
-            addResultToCriterionCounterMap(prResult, pr.getTest().getCriterion(), wrStatistics);
-            addResultToThemeCounterMap(prResult, pr.getTest().getCriterion().getTheme(), wrStatistics);
+            addResultToCriterionCounterMap(prResult, pr.getTest().getCriterion());
+            addResultToThemeCounterMap(prResult, pr.getTest().getCriterion().getTheme());
         }
         // if no test have been processed for any reason, mostly cause the source
         // code couldn't have been adapted, all theses values are set to -1
@@ -302,14 +302,12 @@ public class AnalyserImpl implements Analyser {
      *
      * @param testSolution
      * @param criterion
-     * @param wrs
      */
     private void addResultToCriterionCounterMap(
             TestSolution testSolution,
-            Criterion criterion,
-            WebResourceStatistics wrs) {
+            Criterion criterion) {
         if (csMap == null) {
-            csMap = new HashMap<Criterion, CriterionStatistics>();
+            csMap = new HashMap();
         }
         if (csMap.containsKey(criterion)) {
             CriterionStatistics cs = csMap.get(criterion);
@@ -356,14 +354,12 @@ public class AnalyserImpl implements Analyser {
      *
      * @param testSolution
      * @param criterion
-     * @param wrs
      */
     private void addResultToThemeCounterMap(
             TestSolution testSolution,
-            Theme theme,
-            WebResourceStatistics wrs) {
+            Theme theme) {
         if (tsMap == null) {
-            tsMap = new HashMap<Theme, ThemeStatistics>();
+            tsMap = new HashMap();
         }
         if (tsMap.containsKey(theme)) {
             ThemeStatistics ts = tsMap.get(theme);
@@ -470,22 +466,26 @@ public class AnalyserImpl implements Analyser {
         BigDecimal weightedPassed = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.PASSED);
+                TestSolution.PASSED,
+                false);
 
         BigDecimal weightedFailed = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.FAILED);
+                TestSolution.FAILED,
+                false);
 
         BigDecimal weightedNa = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.NOT_APPLICABLE);
+                TestSolution.NOT_APPLICABLE,
+                false);
 
         BigDecimal weightedNmi = webResourceStatisticsDataService.getWeightedResultByResultType(
                 webResource.getId(),
                 paramSet,
-                TestSolution.NEED_MORE_INFO);
+                TestSolution.NEED_MORE_INFO,
+                false);
         wrStatistics.setWeightedFailed(weightedFailed);
         wrStatistics.setWeightedPassed(weightedPassed);
         wrStatistics.setWeightedNmi(weightedNmi);
@@ -557,7 +557,8 @@ public class AnalyserImpl implements Analyser {
         int nbOfFailedOccurences =
                 webResourceStatisticsDataService.getNumberOfOccurrencesByWebResourceAndResultType(
                 webResource.getId(),
-                TestSolution.FAILED).intValue();
+                TestSolution.FAILED,
+                false).intValue();
         wrStatistics.setNbOfFailedOccurences(nbOfFailedOccurences);
         return wrStatistics;
     }
@@ -676,8 +677,8 @@ public class AnalyserImpl implements Analyser {
      * @return
      */
     private void extractThemeAndCriterionSet() {
-        themeMap = new HashMap<Theme, Integer>();
-        criterionMap = new HashMap<Criterion, Integer>();
+        themeMap = new HashMap();
+        criterionMap = new HashMap();
         for (Test test : testSet) {
 
             //Collect criterions given the set of tests for the audit, and keep
@@ -688,7 +689,7 @@ public class AnalyserImpl implements Analyser {
                 Integer testCounter = criterionMap.get(criterion) + 1;
                 criterionMap.put(criterion, testCounter);
             } else {
-                criterionMap.put(criterion, Integer.valueOf(1));
+                criterionMap.put(criterion, 1);
             }
 
             //Collect themes given the set of tests for the audit, and keep
@@ -699,7 +700,7 @@ public class AnalyserImpl implements Analyser {
                 Integer testCounter = themeMap.get(theme) + 1;
                 themeMap.put(theme, testCounter);
             } else {
-                themeMap.put(theme, Integer.valueOf(1));
+                themeMap.put(theme, 1);
             }
 
         }
@@ -711,7 +712,7 @@ public class AnalyserImpl implements Analyser {
      * @return
      */
     private void extractTestSet(boolean extractThemeAndCriterion) {
-        testSet = new HashSet<Test>();
+        testSet = new HashSet();
         testSet.addAll(auditDataService.getAuditWithTest(this.audit.getId()).getTestList());
         if (extractThemeAndCriterion) {
             extractThemeAndCriterionSet();
@@ -759,12 +760,12 @@ public class AnalyserImpl implements Analyser {
             Collection<Test> testList,
             Collection<ProcessResult> netResultList) {
 
-        Collection<Test> testedTestList = new ArrayList<Test>();
+        Collection<Test> testedTestList = new ArrayList();
         for (ProcessResult pr : netResultList) {
             testedTestList.add(pr.getTest());
         }
 
-        Collection<ProcessResult> fullProcessResultList = new ArrayList<ProcessResult>();
+        Collection<ProcessResult> fullProcessResultList = new ArrayList();
         fullProcessResultList.addAll(netResultList);
 
         for (Test test : testList) {

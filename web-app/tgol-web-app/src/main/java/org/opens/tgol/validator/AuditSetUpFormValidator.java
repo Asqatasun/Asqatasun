@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.validator;
 
@@ -41,7 +41,7 @@ public class AuditSetUpFormValidator implements Validator {
     protected static final String MANDATORY_FIELD_MSG_BUNDLE_KEY =
             "required.mandatoryField";
 
-    private ContractDataService contractDataService;
+    private final ContractDataService contractDataService;
     public ContractDataService getContractDataService() {
         return contractDataService;
     }
@@ -51,8 +51,7 @@ public class AuditSetUpFormValidator implements Validator {
         this.contractDataService = contractDataService;
     }
 
-    private Map<String, AuditSetUpFormField> auditSetUpFormFieldMap =
-            new HashMap<String,AuditSetUpFormField>();
+    private final Map<String, AuditSetUpFormField> auditSetUpFormFieldMap = new HashMap();
     public void setAuditSetUpFormFieldMap(Map<String, List<AuditSetUpFormField>> auditSetUpFormFieldMapSortedByParamType) {
         for (Map.Entry<String, List<AuditSetUpFormField>> entry : auditSetUpFormFieldMapSortedByParamType.entrySet()) {
             for (AuditSetUpFormField asuff : entry.getValue()){

@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementselector;
@@ -72,11 +72,11 @@ public class LinkElementSelector implements ElementSelector {
                 };
 
     /** */
-    private static Collection<String> PARENT_CONTEXT_ELEMENTS = 
+    private static Collection PARENT_CONTEXT_ELEMENTS = 
             CollectionUtils.arrayToList(PARENT_CONTEXT_ELEMENTS_TAB);
     
     /** */
-    private static Collection<String> PREV_SIBLING_CONTEXT_ELEMENTS = 
+    private static Collection PREV_SIBLING_CONTEXT_ELEMENTS = 
             CollectionUtils.arrayToList(PREV_SIBLING_CONTEXT_ELEMENTS_TAB);
     
     /** */
@@ -140,14 +140,31 @@ public class LinkElementSelector implements ElementSelector {
     
     @Override
     public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+        // the elementHandler is ignored, the selection is handled by two 
+        // local collections 
         Elements elements = sspHandler.beginCssLikeSelection().
                                domCssLikeSelectNodeSet(getCssLikeQuery()).
                                getSelectedElements();
         characteriseElements(elements);
-        elementHandler.addAll(notDecidableElements.get());
-        elementHandler.addAll(decidableElements.get());
+        if (elementHandler != null) {
+            elementHandler.addAll(notDecidableElements.get());
+            elementHandler.addAll(decidableElements.get());
+        }
     }
 
+    /**
+     * Expose the selectElement without ElementHandler argument to delegate 
+     * the null value usage responsibility to the current class
+     * @param sspHandler 
+     */
+    public void selectElements(SSPHandler sspHandler) {
+        this.selectElements(sspHandler, null);
+    }
+
+    public boolean isEmpty() {
+        return notDecidableElements.isEmpty() && decidableElements.isEmpty();
+    }
+    
     /**
      * 
      * @param elements 

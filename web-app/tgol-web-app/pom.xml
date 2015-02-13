@@ -12,6 +12,10 @@
     <packaging>war</packaging>
     <name>tgol-web-app</name>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
         <!-- tgol dependencies-->
         <dependency>
             <groupId>${webappGroupId}</groupId>
@@ -49,6 +53,10 @@
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-engine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opens</groupId>
+            <artifactId>tanaguru-jms</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
@@ -104,6 +112,10 @@
             <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-rgaa2.2</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-rgaa3.0</artifactId>
+        </dependency>
         
         <!-- spring dependencies -->
         <dependency>
@@ -118,11 +130,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument</artifactId>
         </dependency>
-<!--        <dependency>
+        <!--       <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-instrument-tomcat</artifactId>
         </dependency>-->
-<!--        <dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
@@ -130,7 +142,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
         </dependency>-->
@@ -148,6 +160,16 @@
         <!-- hibernate dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <!--            <scope>runtime</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>5.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
             <scope>runtime</scope>
         </dependency>
@@ -161,10 +183,6 @@
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-validator</groupId>
@@ -231,7 +249,6 @@
             <plugin>
             <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.2</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -246,13 +263,12 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>yuicompressor-maven-plugin</artifactId>
-                <version>1.1</version>
                 <executions>
-                <execution>
-                    <goals>
-                        <goal>compress</goal>
-                    </goals>
-                </execution>
+                    <execution>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
                 </executions>        
                 <configuration>
                     <excludes>

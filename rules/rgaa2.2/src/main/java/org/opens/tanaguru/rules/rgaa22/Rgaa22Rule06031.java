@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.rgaa22;
@@ -52,6 +52,7 @@ public class Rgaa22Rule06031 extends AbstractPageRuleMarkupImplementation {
     private static final String SELF_TARGET_VALUE = "_self";
     private static final String TOP_TARGET_VALUE = "_top";
 
+    private final ElementHandler<Element> compositeLinks = new ElementHandlerImpl();
     /**
      * Default constructor
      */
@@ -60,17 +61,17 @@ public class Rgaa22Rule06031 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         /* the image link element selector */
-        LinkElementSelector imageLinkElementSelector = 
+        LinkElementSelector compositeLinkElementSelector = 
                 new CompositeLinkElementSelector(false, true);
                 
         ElementHandler<Element> elHandler = new ElementHandlerImpl();
         
-        imageLinkElementSelector.selectElements(sspHandler, elHandler);
-        for (Element el : imageLinkElementSelector.getDecidableElements().get()) {
+        compositeLinkElementSelector.selectElements(sspHandler, elHandler);
+        for (Element el : compositeLinkElementSelector.getDecidableElements().get()) {
             if (doesElementHaveRequestedTargetAttribute(el)) {
-                elementHandler.add(el);
+                compositeLinks.add(el);
             }
         }
               
@@ -79,7 +80,7 @@ public class Rgaa22Rule06031 extends AbstractPageRuleMarkupImplementation {
         areaLinkElementSelector.selectElements(sspHandler, elHandler);
         for (Element el : areaLinkElementSelector.getDecidableElements().get()) {
             if (doesElementHaveRequestedTargetAttribute(el)) {
-                elementHandler.add(el);
+                compositeLinks.add(el);
             }
         }
     }
@@ -87,9 +88,8 @@ public class Rgaa22Rule06031 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        if (elementHandler.isEmpty()) {
+        if (compositeLinks.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
@@ -101,7 +101,7 @@ public class Rgaa22Rule06031 extends AbstractPageRuleMarkupImplementation {
                                         TEXT_ELEMENT2,
                                         TITLE_ATTR);
         epc.setTextElementBuilder(new LinkTextElementBuilder());
-        epc.check(sspHandler, elementHandler, testSolutionHandler);
+        epc.check(sspHandler, compositeLinks, testSolutionHandler);
     }
 
     /**
@@ -120,6 +120,11 @@ public class Rgaa22Rule06031 extends AbstractPageRuleMarkupImplementation {
            return false;
        }
        return true;
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return compositeLinks.size();
     }
 
 }

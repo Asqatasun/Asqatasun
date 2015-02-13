@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.controller;
 
@@ -53,7 +53,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author jkowalczyk
  */
 @Controller
-public class AuditExportResultController extends AuditDataHandlerController {
+public class AuditExportResultController extends AbstractAuditDataHandlerController {
 
     private static final Logger LOGGER = Logger.getLogger(AuditExportResultController.class);
 
@@ -73,8 +73,11 @@ public class AuditExportResultController extends AuditDataHandlerController {
     /**
      * The export view is only available for page result
      * 
+     * @param webresourceId 
+     * @param format 
      * @param request
      * @param response
+     * @param model
      * @return
      */
     @RequestMapping(value=TgolKeyStore.EXPORT_AUDIT_RESULT_CONTRACT_URL, method=RequestMethod.GET)
@@ -150,11 +153,11 @@ public class AuditExportResultController extends AuditDataHandlerController {
                     webResource,
                     scope,
                     getLocaleResolver().resolveLocale(request));
-
+        
         AuditStatistics auditStatistics = getAuditStatistics(
                     webResource, 
                     model, 
-                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
+                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false);//TODO a revoir dans le cas manuel 
         model.addAttribute(TgolKeyStore.STATISTICS_KEY, auditStatistics);
 
         try {
@@ -165,11 +168,7 @@ public class AuditExportResultController extends AuditDataHandlerController {
                     testResultList,
                     locale,
                     exportFormat);
-        } catch (ColumnBuilderException ex) {
-            LOGGER.error(ex);
-        } catch (ClassNotFoundException ex) {
-            LOGGER.error(ex);
-        } catch (JRException ex) {
+        } catch (ColumnBuilderException | ClassNotFoundException | JRException ex) {
             LOGGER.error(ex);
         }
     }

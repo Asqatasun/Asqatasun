@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,16 +17,17 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementselector;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import org.jsoup.nodes.Element;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.springframework.util.CollectionUtils;
 
 /**
  * Element selector implementation that uses multiple {@link SimpleElementSelector}
@@ -37,11 +38,9 @@ import org.springframework.util.CollectionUtils;
 public class SimpleElementSelectorAggregator implements ElementSelector{
 
     /* The css queries used to retrieve Elements */
-    private Collection<SimpleElementSelector> simpleElementSelectorList;
+    private final Collection<SimpleElementSelector> simpleElementSelectorList = 
+            new ArrayList<>();
     public void addSimpleElementSelector(SimpleElementSelector simpleElementSelector) {
-        if (simpleElementSelectorList == null ) {
-            simpleElementSelectorList = new ArrayList<>();
-        }
         simpleElementSelectorList.add(simpleElementSelector);
     }
     
@@ -56,12 +55,11 @@ public class SimpleElementSelectorAggregator implements ElementSelector{
      * @param simpleElementSelectors 
      */
     public SimpleElementSelectorAggregator(SimpleElementSelector... simpleElementSelectors) {
-        this.simpleElementSelectorList = 
-                CollectionUtils.arrayToList(simpleElementSelectors);
+        this.simpleElementSelectorList.addAll(Arrays.asList(simpleElementSelectors));
     }
 
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> selectionHandler) {
         for (SimpleElementSelector ses : simpleElementSelectorList) {
             ses.selectElements(sspHandler, selectionHandler);
         }

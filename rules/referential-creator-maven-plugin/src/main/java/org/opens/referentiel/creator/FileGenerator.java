@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.referentiel.creator;
 
@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.apache.velocity.Template;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.velocity.VelocityContext;
 import static java.nio.charset.StandardCharsets.*;
 import java.util.LinkedList;
@@ -40,8 +40,8 @@ import java.util.LinkedList;
  */
 public class FileGenerator {
 
-    private VelocityParametersContext vpc;
-    private boolean isCriterionPresent;
+    private final VelocityParametersContext vpc;
+    private final boolean isCriterionPresent;
 
     public FileGenerator(String referentiel,
             String referentielLabel,

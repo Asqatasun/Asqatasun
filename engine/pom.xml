@@ -33,5 +33,6 @@
 <!--        <module>tanaguru-i18n</module>-->
         <module>scenarioloader</module>
         <module>sebuilder-interpreter-tools</module>
-  </modules>
+        <module>tanaguru-jms</module>
+    </modules>
 </project>

@@ -13,7 +13,7 @@
     </bean>
 
     <bean id="auditServiceThreadFactory" class="org.opens.tanaguru.service.AuditServiceThreadFactoryImpl"/>
-
+    
     <bean id="auditService" class="org.opens.tanaguru.service.AuditServiceImpl"/>
 
     <bean id="auditCommandFactory" class="org.opens.tanaguru.service.command.factory.AuditCommandFactoryImpl">

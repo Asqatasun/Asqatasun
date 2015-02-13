@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementselector;
@@ -89,7 +89,7 @@ public class ImageElementSelector extends SimpleElementSelector {
     }
 
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler elementHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         if (elementSelector != null) {
             elementSelector.selectElements(sspHandler, elementHandler);
         } else {
@@ -97,7 +97,7 @@ public class ImageElementSelector extends SimpleElementSelector {
         }
         // we search the captcha from the selection and remove them from 
         // the selection
-        ElementHandler captchaHandler = new ElementHandlerImpl();
+        ElementHandler<Element> captchaHandler = new ElementHandlerImpl();
         CaptchaElementSelector captchaElementSelector = 
                 new CaptchaElementSelector(elementHandler);
         captchaElementSelector.selectElements(sspHandler, captchaHandler);
@@ -114,7 +114,7 @@ public class ImageElementSelector extends SimpleElementSelector {
         if (!excludeCompositeLink && !excludeImageLink) {
             return;
         }
-        ElementHandler linkHandler = new ElementHandlerImpl();
+        ElementHandler<Element> linkHandler = new ElementHandlerImpl();
         for (Element el: elementHandler.get()) {
             Element link = el.parents().select(A_ELEMENT).first();
             if (excludeImageLink && isImageLink(link, el)){

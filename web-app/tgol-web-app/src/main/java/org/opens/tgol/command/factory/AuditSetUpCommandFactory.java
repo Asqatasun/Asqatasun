@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,12 +17,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.command.factory;
 
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
@@ -51,6 +51,7 @@ public final class AuditSetUpCommandFactory {
 
     /**
      *
+     * @return the Level Parameter Element
      */
     public ParameterElement getLevelParameterElement() {
         return parameterElementDataService.getParameterElement(TgolKeyStore.LEVEL_PARAM_KEY);
@@ -137,6 +138,7 @@ public final class AuditSetUpCommandFactory {
     /**
      *
      * @param contract
+     * @param levelFormFieldList
      * @param optionalFormFieldMap
      * @return
      */
@@ -156,6 +158,13 @@ public final class AuditSetUpCommandFactory {
         return pageAuditSetUpCommand;
     }
 
+    /**
+     * 
+     * @param contract
+     * @param url
+     * @param auditParamset
+     * @return an AuditSetUpCommand instance set for page audit
+     */
     public AuditSetUpCommand getPageAuditSetUpCommand(
             Contract contract,
             String url,
@@ -164,7 +173,7 @@ public final class AuditSetUpCommandFactory {
         pageAuditSetUpCommand.setScope(ScopeEnum.PAGE);
         pageAuditSetUpCommand.setContractId(contract.getId());
         pageAuditSetUpCommand.setRelaunch(true);
-        List<String> urlList = new ArrayList<String>();
+        List<String> urlList = new ArrayList();
         urlList.add(url);
         pageAuditSetUpCommand.setUrlList(urlList);
         for (Parameter param : auditParamset) {
@@ -227,6 +236,7 @@ public final class AuditSetUpCommandFactory {
     /**
      *
      * @param contract
+     * @param scenarioId
      * @param levelFormFieldList
      * @param optionalFormFieldMap
      * @return
@@ -340,7 +350,7 @@ public final class AuditSetUpCommandFactory {
          * @TODO : do it better
          */
         int nbOfPages = AuditSetUpCommand.DEFAULT_LIST_SIZE;
-        List<String> groupOfPagesUrl = new LinkedList<String>();
+        List<String> groupOfPagesUrl = new LinkedList();
         if (user == null) {
             return null;
         } else if (user.getEmail1().equalsIgnoreCase("guest") || isSiteAudit) {

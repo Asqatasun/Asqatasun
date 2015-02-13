@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.report.layout.column.builder;
 
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
 import org.opens.tgol.report.expression.builder.AbstractGenericConditionalStyleBuilder;
 import org.opens.tgol.report.expression.builder.AbstractGenericCustomExpressionBuilder;
@@ -168,7 +168,7 @@ public class ElementColumnBuilderImpl implements ElementColumnBuilder{
         if (columnTitleBundleName != null) {
             ResourceBundle bundle = ResourceBundle.getBundle(columnTitleBundleName, locale);
             if (columnTitleKey != null) {
-                columnBuilder.setTitle(StringEscapeUtils.unescapeHtml(bundle.getString(columnTitleKey)));
+                columnBuilder.setTitle(StringEscapeUtils.unescapeHtml4(bundle.getString(columnTitleKey)));
             }
         }
         if (conditionalStyleBuilderList != null &&
@@ -190,7 +190,7 @@ public class ElementColumnBuilderImpl implements ElementColumnBuilder{
      * @return
      */
     private List<ConditionalStyle> buildConditionStyleList(Locale locale) {
-        List<ConditionalStyle> cseList = new ArrayList<ConditionalStyle>();
+        List<ConditionalStyle> cseList = new ArrayList();
         for (AbstractGenericConditionalStyleBuilder<? extends ConditionalStyle> csb : conditionalStyleBuilderList) {
             cseList.add(csb.build(locale));
         }

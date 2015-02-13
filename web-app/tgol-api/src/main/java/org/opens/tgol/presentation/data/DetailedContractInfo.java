@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.presentation.data;
 
@@ -107,5 +107,18 @@ public interface DetailedContractInfo extends ContractInfo{
      * @param numberOfDisplayedAct
      */
     void setNumberOfDisplayedAct(int numberOfDisplayedAct);
+    
+    /**
+     * 
+     * @return whether the current contract handles the manual audit 
+     * functionality
+     */
+    boolean getIsManualAuditEnabled();
+    
+    /**
+     * 
+     * @param isManualAuditEnabled
+     */
+    void setIsManualAuditEnabled(boolean isManualAuditEnabled);
 
 }

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,15 +15,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.ruleimplementation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
 
@@ -38,64 +36,14 @@ import org.opens.tanaguru.rules.elementselector.ElementSelector;
  * one element has been detected. The solution of the detection and the no detection
  * can be overridden by constructor argument.
  */
-public class AbstractDetectionPageRuleImplementation
-            extends AbstractPageRuleMarkupImplementation {
+public abstract class AbstractDetectionPageRuleImplementation
+            extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /**
-     * Not detected solution. Default is PASSED.
-     */
-    private TestSolution notDetectedSolution = TestSolution.PASSED;
-
-    /**
-     * Detected solution. Default is FAILED.
-     */
-    private TestSolution detectedSolution = TestSolution.FAILED;
-
-    /**
-     * The message code associated with a processRemark when the element is
-     * detected on the page
-     */
-    private String messageCodeOnElementDetected;
-    
-    /**
-     * The message code associated with a processRemark when the element is
-     * not found on the page
-     */
-    private String messageCodeOnElementNotDetected;
-    public void setMessageCodeOnElementNotDetected(String messageCodeOnElementNotDetected) {
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
+    private ElementPresenceChecker epc;
+    public ElementPresenceChecker getElementPresenceChecker() {
+        return epc;
     }
 
-    /**
-     * the collection of attributes name used to collect evidenceElement
-     */
-    private String[] eeAttributeNameList;
-    
-    /**
-     * The elementSelector used by the rule
-     */
-    private ElementSelector elementSelector;
-    public ElementSelector getElementSelector() {
-        return elementSelector;
-    }
-    
-    /**
-     * Constructor
-     * 
-     * @param elementSelector
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     */
-    public AbstractDetectionPageRuleImplementation(
-            @Nonnull ElementSelector elementSelector, 
-            @Nullable String messageCodeOnElementDetected, 
-            @Nullable String messageCodeOnElementNotDetected) {
-        super();
-        this.elementSelector = elementSelector;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
-    }
-    
     /**
      * Constructor
      * 
@@ -109,32 +57,12 @@ public class AbstractDetectionPageRuleImplementation
             @Nullable String messageCodeOnElementDetected, 
             @Nullable String messageCodeOnElementNotDetected,
             String... eeAttributeNameList) {
-        this(elementSelector,
-             messageCodeOnElementDetected,
-             messageCodeOnElementNotDetected);
-        this.eeAttributeNameList = eeAttributeNameList;
-    }
-    
-    /**
-     * Constructor
-     * 
-     * @param elementSelector
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     */
-    public AbstractDetectionPageRuleImplementation(
-            @Nonnull ElementSelector elementSelector, 
-            @Nonnull TestSolution detectedSolution, 
-            @Nonnull TestSolution notDetectedSolution, 
-            @Nullable String messageCodeOnElementDetected, 
-            @Nullable String messageCodeOnElementNotDetected) {
         this(elementSelector, 
+             ElementPresenceChecker.DEFAULT_DETECTED_SOLUTION,
+             ElementPresenceChecker.DEFAULT_NOT_DETECTED_SOLUTION,
              messageCodeOnElementDetected, 
-             messageCodeOnElementNotDetected);
-        this.detectedSolution = detectedSolution;
-        this.notDetectedSolution = notDetectedSolution;
+             messageCodeOnElementNotDetected, 
+             eeAttributeNameList);
     }
     
     /**
@@ -154,47 +82,16 @@ public class AbstractDetectionPageRuleImplementation
             @Nullable String messageCodeOnElementDetected, 
             @Nullable String messageCodeOnElementNotDetected,
             String... eeAttributeNameList) {
-        this(elementSelector, 
-             detectedSolution, 
-             notDetectedSolution, 
-             messageCodeOnElementDetected, 
-             messageCodeOnElementNotDetected);
-        this.eeAttributeNameList = eeAttributeNameList;
-    }
-    
-    @Override
-    protected void select(SSPHandler sspHandler, 
-                          ElementHandler<Element> selectionHandler) {
-        elementSelector.selectElements(sspHandler, selectionHandler);
-    }
-
-    @Override
-    protected void check(SSPHandler sspHandler, 
-                         ElementHandler<Element> selectionHandler, 
-                         TestSolutionHandler testSolutionHandler) {
-        ElementPresenceChecker epc = getElementPresenceChecker();
-        epc.check(sspHandler, selectionHandler, testSolutionHandler);
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    protected ElementPresenceChecker getElementPresenceChecker() {
-        if (eeAttributeNameList != null && eeAttributeNameList.length > 0) {
-            return new ElementPresenceChecker(
+        super(elementSelector, 
+              new ElementPresenceChecker(
                             detectedSolution, 
                             notDetectedSolution, 
                             messageCodeOnElementDetected,
                             messageCodeOnElementNotDetected,
-                            eeAttributeNameList);
-        } else {
-            return new ElementPresenceChecker(
-                            detectedSolution, 
-                            notDetectedSolution, 
-                            messageCodeOnElementDetected,
-                            messageCodeOnElementNotDetected);
-        }
+                            eeAttributeNameList)
+        );
+
+        this.epc = (ElementPresenceChecker)getElementChecker();
     }
 
 }

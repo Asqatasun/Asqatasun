@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.service.reference;
 
@@ -36,7 +36,15 @@ import org.opens.tanaguru.sdk.entity.service.GenericDataService;
  * @author jkowalczyk
  */
 public interface TestDataService extends GenericDataService<Test, Long> {
-
+	
+	/**
+    *
+    * @param label
+    *            the label of the test to read
+    * @return the matching read test
+    */
+	Test read(String label);
+	
     /**
      *
      * @param reference
@@ -75,6 +83,11 @@ public interface TestDataService extends GenericDataService<Test, Long> {
      */
     List<Test> getTestListFromParamSet(Set<Parameter> paramSet);
 
-    
+    /**
+     * 
+     * @param audit
+     * @param testLabel
+     * @return the test
+     */
     Test getTestFromAuditAndLabel(Audit audit, String testLabel);
 }

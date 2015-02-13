@@ -15,37 +15,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.14.1</version>
                 <configuration>
                     <skipTests>false</skipTests>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
-<!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <instrumentation>
-                        <includes>
-                            <include>**/*.class</include>
-                        </includes>                 
-                    </instrumentation>
-                    <formats>
-                        <format>xml</format>
-                    </formats>
-                </configuration>                
-            </plugin>-->
         </plugins>
     </build>
     <modules>
         <module>rules-commons</module>
-<!--        <module>accessiweb2.1</module>
-        <module>accessiweb2.1-testcases</module>
-        <module>accessiweb2.1-i18n</module>
-        <module>accessiweb2.1-resources</module>-->
         <module>accessiweb2.2</module>
         <module>rgaa2.2</module>
+        <module>rgaa3.0</module>
+<!--        <module>rules-creation-demo</module>-->
         <module>rules-resources</module>
   </modules>
 

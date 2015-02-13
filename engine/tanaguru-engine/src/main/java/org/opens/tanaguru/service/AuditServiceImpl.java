@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.service;
 
@@ -37,7 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author jkowalczyk
  */
 public class AuditServiceImpl implements AuditService, AuditServiceListener {
-
+	
     private AuditServiceThreadFactory auditServiceThreadFactory;
     @Autowired
     public void setAuditServiceThreadFactory(AuditServiceThreadFactory auditServiceThreadFactory) {
@@ -201,6 +201,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
      * @return
      */
     private AuditServiceThread getInitialisedAuditServiceThread(Audit audit) {
+    	  
         return auditServiceThreadFactory.create(audit);
     }
 

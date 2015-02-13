@@ -1,4 +1,22 @@
 --------------------------
+Tanaguru 3.0.4, 2015-02-12
+--------------------------
+Bugs:
+
+- [#95](https://github.com/Tanaguru/Tanaguru/issues/95) : Provide mechanism to set the size of the firefox screen when loading the page
+- [#93](https://github.com/Tanaguru/Tanaguru/issues/93) : CLI install instructions broken 
+
+
+Features :
+
+- Spanish language integration
+- A11y improvments in audit result page
+- Initialisation of Rgaa3 referential context
+- Initialisation of assisted audit
+- Addition of cli script options 
+
+
+--------------------------
 Tanaguru 3.0.3, 2014-07-06
 --------------------------
 Bugs:

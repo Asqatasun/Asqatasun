@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,13 +17,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.service;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.apache.log4j.Logger;
+
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.service.command.AuditCommand;
 
@@ -31,29 +31,31 @@ import org.opens.tanaguru.service.command.AuditCommand;
  *
  * @author enzolalay
  */
+//@Service
+//@Lazy
 public class AuditServiceThreadImpl implements AuditServiceThread {
 
     private Audit audit;
     private AuditCommand auditCommand;
 
     private Set<AuditServiceThreadListener> listeners;
+
     public Set<AuditServiceThreadListener> getListeners() {
         return listeners;
     }
 
     /**
-     * 
-     * @param audit 
+     *
+     * @param audit
      */
-    public AuditServiceThreadImpl(
-            Audit audit) {
+    public AuditServiceThreadImpl(Audit audit) {
         super();
         this.audit = audit;
     }
-    
+
     /**
-     * 
-     * @param auditCommand 
+     *
+     * @param auditCommand
      */
     public AuditServiceThreadImpl(AuditCommand auditCommand) {
         super();
@@ -71,7 +73,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     @Override
     public void add(AuditServiceThreadListener listener) {
         if (listeners == null) {
-            listeners = new HashSet<AuditServiceThreadListener>();
+            listeners = new HashSet<>();
         }
         listeners.add(listener);
     }
@@ -86,14 +88,18 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
 
     @Override
     public void run() {
+
+        //FIXME :Taoufiq
         try {
             init();
+            sendMessage("[MSGOUT] AUDIT " + getAudit().getId() + " PENDIG ");
             loadContent();
             adaptContent();
             process();
             consolidate();
             analyse();
             fireAuditCompleted();
+            sendMessage("[MSGOUT] AUDIT " + getAudit().getId() + " FINISHED ");
         } catch (Exception e) {
             fireAuditException(e);
         }
@@ -102,6 +108,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     @Override
     public void init() {
         auditCommand.init();
+
     }
 
     @Override
@@ -123,10 +130,15 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     public void consolidate() {
         auditCommand.consolidate();
     }
-    
+
     @Override
     public void analyse() {
         auditCommand.analyse();
+    }
+
+    @Override
+    public boolean sendMessage(String urlPage) {
+        return auditCommand.sendMessageOut(urlPage);
     }
 
     private void fireAuditCompleted() {
@@ -136,6 +148,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         for (AuditServiceThreadListener listener : listeners) {
             listener.auditCompleted(this);
         }
+        //TODO :envoi JMS
     }
 
     private void fireAuditException(Exception e) {

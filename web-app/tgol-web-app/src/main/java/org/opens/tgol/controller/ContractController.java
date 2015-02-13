@@ -2,7 +2,7 @@ package org.opens.tgol.controller;
 
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -19,7 +19,7 @@ package org.opens.tgol.controller;
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 
@@ -55,7 +55,7 @@ public class ContractController extends AbstractController {
         this.localeResolver = localeResolver;
     }
 
-    private List<String> authorizedFunctionalityForTrend = new ArrayList<String>();
+    private List<String> authorizedFunctionalityForTrend = new ArrayList();
     public List<String> getAuthorizedFunctionalityForTrend() {
         return authorizedFunctionalityForTrend;
     }
@@ -105,18 +105,36 @@ public class ContractController extends AbstractController {
     private String displayContractPage(
             HttpServletRequest request,
             Model model,
-            Long contractId) {
-        model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
-        Contract contract = getContractDataService().read(contractId);
-        if (isContractExpired(contract)) {
-            throw new ForbiddenUserException(getCurrentUser());
+            Long contractId) {            
+                model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
+                Contract contract = getContractDataService().read(contractId);
+                if (isContractExpired(contract)) {
+                    throw new ForbiddenUserException(getCurrentUser());
+                }
+                // add the action list to the view
+//                model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
+                if (isContractHasFunctionalityAllowingTrend(contract)) {
+                    model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY, true);
+                }
+                if(isContractHasFunctionalityAllowingManualAudit(contract)){
+                	model.addAttribute(TgolKeyStore.CONTRACT_WITH_MANUAL_AUDIT_KEY, true);
+                }
+                return displayContractView(contract, model);
+}
+    
+    /**
+     * We iterate through the list of functionalities associated with the contract
+     * to determine whether a manual audit option has to be displayed. 
+     * @param contract
+     * @return 
+     */
+    private boolean isContractHasFunctionalityAllowingManualAudit(Contract contract) {
+        for (Functionality functionality : contract.getFunctionalitySet()) {
+            if (functionality.getId() == 5) {
+                return true;
+            }
         }
-        // add the action list to the view
-//        model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
-        if (isContractHasFunctionalityAllowingTrend(contract)) {
-            model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY, true);
-        }
-        return displayContractView(contract, model);
+        return false;
     }
 
     /**

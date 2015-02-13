@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,12 +17,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.form.parameterization.helper;
 
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.service.reference.ReferenceDataService;
 import org.opens.tgol.entity.option.OptionElement;
@@ -47,7 +47,7 @@ public final class AuditSetUpFormFieldHelper {
     }
      
     public static void setReferenceDataService(ReferenceDataService referenceDataService) {
-        DEFAULT_LEVEL_BY_REF_MAP = new HashMap<String, String> ();
+        DEFAULT_LEVEL_BY_REF_MAP = new HashMap();
         for (Reference reference : referenceDataService.findAll()) {
             DEFAULT_LEVEL_BY_REF_MAP.put(reference.getCode(), reference.getDefaultLevel().getCode());
         }
@@ -133,9 +133,8 @@ public final class AuditSetUpFormFieldHelper {
         if (optionElement != null) {
             String[] optionValues = optionElement.getValue().split(";");
             boolean isSelectFormFieldHasDefault = false;
-            for (int i = 0; i < optionValues.length; i++) {
-                List<SelectElement> sel =
-                        selectFormField.getSelectElementMap().get(optionValues[i]);
+            for (String optionValue : optionValues) {
+                List<SelectElement> sel = selectFormField.getSelectElementMap().get(optionValue);
                 for (SelectElement se : sel) {
                     se.setEnabled(enableElements);
                     // By option mechanism, we can set an SelectElement as default.

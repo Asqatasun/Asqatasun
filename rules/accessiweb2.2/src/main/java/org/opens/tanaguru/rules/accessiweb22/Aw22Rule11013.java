@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
@@ -47,7 +47,12 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.INVALID_LABEL
 public class Aw22Rule11013 extends AbstractPageRuleMarkupImplementation {
 
     /** The explicit label elements */
-    private ElementHandler<Element> explicitLabelElements = new ElementHandlerImpl();
+    private final ElementHandler<Element> explicitLabelElements = 
+            new ElementHandlerImpl();
+    
+    /** The label elements with inner control*/
+    private final ElementHandler<Element> innerControlLabelElements = 
+            new ElementHandlerImpl();
 
     /**
      * Default constructor
@@ -57,11 +62,11 @@ public class Aw22Rule11013 extends AbstractPageRuleMarkupImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         ElementSelector elementSelector = 
                 new SimpleElementSelector(
                     FORM_LABEL_WITH_INNER_FORM_ELEMENT_CSS_LIKE_QUERY);
-        elementSelector.selectElements(sspHandler, elementHandler);
+        elementSelector.selectElements(sspHandler, innerControlLabelElements);
 
         ElementSelector explicitLabelSelector = 
                 new InputFormElementWithExplicitLabelSelector();
@@ -73,23 +78,22 @@ public class Aw22Rule11013 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         
-        if (explicitLabelElements.isEmpty() && elementHandler.isEmpty()) {
+        if (explicitLabelElements.isEmpty() && innerControlLabelElements.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
         // if all the label are explicitely defined, the test is passed
-        if (elementHandler.isEmpty()){
+        if (innerControlLabelElements.isEmpty()){
             // add the explicit label element to main handler for counter
             // purpose
-            elementHandler.addAll(explicitLabelElements.get());
+            innerControlLabelElements.addAll(explicitLabelElements.get());
             testSolutionHandler.addTestSolution(TestSolution.PASSED);
             return;
         }
-        ElementHandler labelOnError = new ElementHandlerImpl();
-        for (Element el:elementHandler.get()) {
+        ElementHandler<Element> labelOnError = new ElementHandlerImpl();
+        for (Element el :innerControlLabelElements.get()) {
             if (!isForAttributeOfLabelEqualsToIdAttributeOfFormField(
                     el, 
                     el.attr(FOR_ATTR)))  {
@@ -121,6 +125,11 @@ public class Aw22Rule11013 extends AbstractPageRuleMarkupImplementation {
             }
         }
         return false;
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return innerControlLabelElements.size();
     }
 
 }

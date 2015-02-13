@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.rgaa22;
@@ -96,15 +96,16 @@ public class Rgaa22Rule11091 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        
         // once tables selected, we extract the caption child element of each 
         // to make the control
         Elements captionOnTable = new Elements();
-        for (Element el : elementHandler.get()) {
+        for (Element el : getSelectionWithoutMarkerHandler().get()) {
             captionOnTable.add(el.select(CAPTION_ELEMENT).first());
         }
-        elementHandler.clean().addAll(captionOnTable);
+        getSelectionWithoutMarkerHandler().clean().addAll(captionOnTable);
         
         Elements captionOnDataTable = new Elements();
         for (Element el : getSelectionWithMarkerHandler().get()) {

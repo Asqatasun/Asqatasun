@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.audit;
 
@@ -28,7 +28,7 @@ import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 @Entity
@@ -37,7 +37,7 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
         IndefiniteResult, Serializable {
 
     private static final long serialVersionUID = -9026725317465914229L;
-    
+
     @Column(name = "Indefinite_Value", length = 16777215)
     private String indefiniteValue;
 
@@ -59,8 +59,7 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
     }
 
     /**
-     * @param indefiniteValue
-     *            the indefiniteValue to set
+     * @param indefiniteValue the indefiniteValue to set
      */
     @Override
     public void setIndefiniteValue(String indefiniteValue) {
@@ -71,4 +70,15 @@ public class IndefiniteResultImpl extends ProcessResultImpl implements
     public void setValue(Object value) {
         setIndefiniteValue((String) value);
     }
+
+    @Override
+    public Object getManualValue() {
+        return null;
+    }
+
+    @Override
+    public void setManualValue(Object manualValue) {
+        // DO NOTHING
+    }
+
 }

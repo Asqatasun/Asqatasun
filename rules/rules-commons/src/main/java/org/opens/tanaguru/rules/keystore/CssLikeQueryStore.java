@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.keystore;
 
@@ -102,6 +102,22 @@ public final class CssLikeQueryStore {
                    +"input[type=file] , "
                    +"input[type=text] , "
                    +"input[type=radio]"; 
+    public static final String INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY=
+                    "form textarea , "
+                   +"form select , "
+                   +"form input[type=password] , "
+                   +"form input[type=checkbox] , "
+                   +"form input[type=file] , "
+                   +"form input[type=text] , "
+                   +"form input[type=radio]"; 
+    public static final String INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY=
+                    "form textarea[aria-labelledby] , "
+                   +"form select[aria-labelledby] , "
+                   +"form input[type=password][aria-labelledby] , "
+                   +"form input[type=checkbox][aria-labelledby] , "
+                   +"form input[type=file][aria-labelledby] , "
+                   +"form input[type=text][aria-labelledby] , "
+                   +"form input[type=radio][aria-labelledby]"; 
     public static final String FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY = 
                     "textarea[id] , "
                     + "select[id] , "
@@ -212,6 +228,14 @@ public final class CssLikeQueryStore {
     // Structuration of information css-like queries
     public static final String HEADINGS_CSS_LIKE_QUERY = 
                     "h1, h2, h3, h4, h5, h6";
+
+    // Structuration of information css-like queries
+    public static final String ARIA_HEADINGS_CSS_LIKE_QUERY = 
+                    "[role=heading][aria-level]";
+
+    // Structuration of information css-like queries
+    public static final String ARIA_LEVEL1_HEADINGS_CSS_LIKE_QUERY = 
+                    "[role=heading][aria-level=1]";
     
     // Elements with attributes (minus element exceptions)
     public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = 

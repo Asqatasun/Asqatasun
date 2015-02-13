@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.command;
 
@@ -100,6 +100,9 @@ public class AddScenarioCommand implements Serializable {
                 if (scenarioFile != null && !scenarioFile.isEmpty() && scenarioFile.getInputStream() != null) {
                     String tmpCharset = CrawlUtils.extractCharset(scenarioFile.getInputStream());
                     scenarioContent = scenarioFile.getFileItem().getString(tmpCharset);
+                    // #57 issue quick fix.......
+                    scenarioContent = scenarioContent.replace("\"formatVersion\": 2", "\"formatVersion\":1")
+                                                     .replace("\"formatVersion\":2", "\"formatVersion\":1");
                 }
             } catch (IOException e) {}
         }

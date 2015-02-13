@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.referentiel.creator;
 
@@ -38,7 +38,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -328,6 +328,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
      *
      * @param ve
      * @param records
+     * @throws java.io.IOException
      */
     public void generate(VelocityEngine ve, Iterable<CSVRecord> records) throws IOException, ResourceNotFoundException, ParseErrorException, Exception {
         // Getting the Template

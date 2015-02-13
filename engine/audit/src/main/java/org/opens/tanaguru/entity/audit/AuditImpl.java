@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.audit;
 
@@ -55,6 +55,8 @@ public class AuditImpl implements Audit, Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "Dt_Creation")
     private Date dateOfCreation;
+    @Column(name = "Manual_Audit_Dt_Creation")
+    private Date manualAuditDateOfCreation;
     @OneToMany(mappedBy = "grossResultAudit")
     private Set<ProcessResultImpl> grossResultSet;
     @Id
@@ -174,6 +176,11 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
+    public Date getManualAuditDateOfCreation() {
+        return manualAuditDateOfCreation;
+    }
+    
+    @Override
     @XmlElementWrapper
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.IndefiniteResultImpl.class),
@@ -233,6 +240,11 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     public void setDateOfCreation(Date dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
+    }
+    
+    @Override
+    public void setManualAuditDateOfCreation(Date manualAuditDateOfCreation) {
+        this.manualAuditDateOfCreation = manualAuditDateOfCreation;
     }
 
     @Override

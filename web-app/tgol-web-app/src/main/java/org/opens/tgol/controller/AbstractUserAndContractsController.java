@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tgol.controller;
@@ -59,15 +59,15 @@ import org.springframework.web.bind.annotation.InitBinder;
 @Controller
 public class AbstractUserAndContractsController extends AbstractController{
 
-    public static final String EMAIL_FROM_KEY="emailFrom";
-    public static final String EMAIL_TO_KEY="emailTo";
-    public static final String EMAIL_SUBJECT_KEY="emailSubject";
-    public static final String EMAIL_CONTENT_KEY="emailContent";
-    private static final String URL_KEY="#urlToTest";
-    private static final String EMAIL_KEY="#email";
-    private static final String FIRST_NAME_KEY="#firstName";
-    private static final String LAST_NAME_KEY="#lastName";
-    private static final String PHONE_NUMBER_KEY="#phoneNumber";
+//    public static final String EMAIL_FROM_KEY="emailFrom";
+//    public static final String EMAIL_TO_KEY="emailTo";
+//    public static final String EMAIL_SUBJECT_KEY="emailSubject";
+//    public static final String EMAIL_CONTENT_KEY="emailContent";
+//    private static final String URL_KEY="#urlToTest";
+//    private static final String EMAIL_KEY="#email";
+//    private static final String FIRST_NAME_KEY="#firstName";
+//    private static final String LAST_NAME_KEY="#lastName";
+//    private static final String PHONE_NUMBER_KEY="#phoneNumber";
 
     List<FormFieldBuilder> displayOptionFieldsBuilderList;
     public final void setDisplayOptionFieldsBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
@@ -144,6 +144,7 @@ public class AbstractUserAndContractsController extends AbstractController{
     /**
      * 
      * @param model
+     * @param user
      * @param successViewName
      * @return 
      */
@@ -165,6 +166,9 @@ public class AbstractUserAndContractsController extends AbstractController{
     /**
      * 
      * @param model
+     * @param user
+     * @param contract
+     * @param optionFormFieldMap
      * @param successViewName
      * @return 
      */
@@ -392,8 +396,11 @@ public class AbstractUserAndContractsController extends AbstractController{
      * 
      * @param model
      * @param createContractCommand
+     * @param userName
+     * @param userId
+     * @param optionFormFieldMap
      * @param errorViewName
-     * @return
+     * @return 
      */
     public String displayFormWithErrors(
             Model model,
@@ -421,31 +428,31 @@ public class AbstractUserAndContractsController extends AbstractController{
      */
     private void sendEmailInscription(User user) {
         String emailFrom =
-            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(EMAIL_FROM_KEY);
+            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_FROM_KEY);
         String[] emailTo =
-                exposablePropertyPlaceholderConfigurer.getResolvedProps().get(EMAIL_TO_KEY).split(",");
-        Set<String> emailToSet = new HashSet<String>();
+                exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_TO_KEY).split(",");
+        Set<String> emailToSet = new HashSet();
         emailToSet.addAll(Arrays.asList(emailTo));
         String emailSubject =
-            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(EMAIL_SUBJECT_KEY);
+            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_SUBJECT_KEY);
         String emailContent =
-            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(EMAIL_CONTENT_KEY);
-        emailContent = emailContent.replace(EMAIL_KEY, user.getEmail1());
-        emailContent = emailContent.replace(URL_KEY, user.getWebUrl1());
+            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_CONTENT_KEY);
+        emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_EMAIL_KEY, user.getEmail1());
+        emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_URL_KEY, user.getWebUrl1());
         if (user.getName() != null) {
-            emailContent = emailContent.replace(LAST_NAME_KEY, user.getName());
+            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_LAST_NAME_KEY, user.getName());
         } else {
-            emailContent = emailContent.replace(LAST_NAME_KEY, "");
+            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_LAST_NAME_KEY, "");
         }
         if (user.getFirstName() != null) {
-            emailContent = emailContent.replace(FIRST_NAME_KEY, user.getFirstName());
+            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_FIRST_NAME_KEY, user.getFirstName());
         } else {
-            emailContent = emailContent.replace(FIRST_NAME_KEY, "");
+            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_FIRST_NAME_KEY, "");
         }
         if (user.getPhoneNumber() != null) {
-            emailContent = emailContent.replace(PHONE_NUMBER_KEY, user.getPhoneNumber());
+            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_PHONE_NUMBER_KEY, user.getPhoneNumber());
         } else {
-            emailContent = emailContent.replace(PHONE_NUMBER_KEY, "");
+            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_PHONE_NUMBER_KEY, "");
         }
         emailSender.sendEmail(
                 emailFrom, 
@@ -457,18 +464,16 @@ public class AbstractUserAndContractsController extends AbstractController{
     }
 
     /**
-     * Check whether the current authentified user is admin
+     * @param user
+     * @return whether the current authenticated user is admin
      */
     protected boolean isUserAdmin(User user) {
-        if (user.getRole().getId().equals(
-                CreateUserCommandFactory.getInstance().getAdminRole().getId())) {
-            return true;
-        }
-        return false;
+        return user.getRole().getId().equals(
+                CreateUserCommandFactory.getInstance().getAdminRole().getId());
     }
 
     /**
-     * Check whether the current authentified user is admin
+     * @return whether the current authenticated user is admin
      */
     protected boolean isCurrentUserAdmin() {
         return isUserAdmin(getCurrentUser());

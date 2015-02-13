@@ -1,23 +1,23 @@
 /*
- * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
- *
- * This file is part of Tanaguru.
- *
- * Tanaguru is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Contact us by mail: open-s AT open-s DOT com
+ *  Tanaguru - Automated webpage assessment
+ *  Copyright (C) 2008-2015  Tanaguru.org
+ * 
+ *  This file is part of Tanaguru.
+ * 
+ *  Tanaguru is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Affero General Public License as
+ *  published by the Free Software Foundation, either version 3 of the
+ *  License, or (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Affero General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU Affero General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.scenarioloader;
 
@@ -46,8 +46,10 @@ import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
+import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
+import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
@@ -69,13 +71,13 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
 
     private static final Logger LOGGER = Logger.getLogger(ScenarioLoaderImpl.class);
     private static final String UFT8 = "UTF-8";
-    private List<Content> result = new ArrayList<Content>();
+    private final List<Content> result = new ArrayList<>();
     private int pageRank = 1;
 
     private static final int SCENARIO_IMPLICITELY_WAIT_TIMEOUT = 60;
 
     /** The script factory instance */
-    private ScriptFactory scriptFactory = new ScriptFactory();
+    private final ScriptFactory scriptFactory = new ScriptFactory();
     
     @Override
     public List<Content> getResult() {
@@ -105,11 +107,16 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     /**
      * 
      */
-    private ProfileFactory profileFactory;
+    private final ProfileFactory profileFactory;
     
     private WebResourceDataService webResourceDataService;
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
+    }
+    
+    private ParameterDataService parameterDataService;
+    public void setParameterDataService(ParameterDataService parameterDataService) {
+        this.parameterDataService = parameterDataService;
     }
     
     private ContentDataService contentDataService;
@@ -137,7 +144,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         this.dateFactory = dateFactory;
     }
     
-    List<SSPInfo> sspInfoList = new LinkedList<SSPInfo>();
+    List<SSPInfo> sspInfoList = new LinkedList<>();
     
     private Map<String, String> jsScriptMap;
     public Map<String, String> getJsScriptMap() {
@@ -170,7 +177,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     /**
      * The scenario
      */
-    private String scenario;
+    private final String scenario;
 
     ScenarioLoaderImpl(
             WebResource webResource, 
@@ -222,13 +229,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                 throw new ScenarioLoaderException(re);
             }    
             profileFactory.shutdownFirefoxProfile(firefoxProfile);
-        } catch (IOException ex) {
-            LOGGER.warn(ex.getMessage());
-            throw new ScenarioLoaderException(ex);
-        } catch (JSONException ex) {
-            LOGGER.warn(ex.getMessage());
-            throw new ScenarioLoaderException(ex);
-        } catch (SuiteException ex) {
+        } catch (IOException | JSONException | SuiteException ex) {
             LOGGER.warn(ex.getMessage());
             throw new ScenarioLoaderException(ex);
         }
@@ -365,6 +366,15 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             testRunFactory.setImplicitlyWaitDriverTimeout(implicitelyWaitDriverTimeout);
         }
         testRunFactory.setPageLoadDriverTimeout(pageLoadDriverTimeout);
+        
+        testRunFactory.setScreenHeight(
+                Integer.valueOf(
+                        parameterDataService.getParameter(
+                                webResource.getAudit(), ParameterElement.SCREEN_HEIGHT_KEY).getValue()));
+        testRunFactory.setScreenWidth(
+                Integer.valueOf(
+                        parameterDataService.getParameter(
+                                webResource.getAudit(), ParameterElement.SCREEN_WIDTH_KEY).getValue()));
 //      ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return testRunFactory;
     }

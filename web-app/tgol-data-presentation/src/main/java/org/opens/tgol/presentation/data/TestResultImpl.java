@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,12 +17,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.presentation.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
 
 /**
@@ -31,7 +33,7 @@ import org.opens.tanaguru.entity.reference.Test;
  */
 public class TestResultImpl implements TestResult{
 
-    private List<RemarkInfos> remarkInfosList = new ArrayList<RemarkInfos>();
+    private final List<RemarkInfos> remarkInfosList = new ArrayList<>();
 
     /**
      *
@@ -49,6 +51,27 @@ public class TestResultImpl implements TestResult{
         this.testEvidenceRepresentationOrder = testEvidenceRepresentationOrder.split(";");
     }
     
+    private final ManualResult manualResult = new ManualResult();
+    @Override
+    public String getManualResult() {
+        return manualResult.getResult();
+    }
+
+    @Override
+    public void setManualResult(String manualResult) {
+        this.manualResult.setResult(manualResult);
+    }
+
+    @Override
+    public String getComment() {
+        return manualResult.getComment();
+    }
+
+    @Override
+    public void setComment(String comment) {
+        this.manualResult.setComment(comment);
+    }
+
     @Override
     public String[] getTestEvidenceRepresentationOrder() {
         return testEvidenceRepresentationOrder;
@@ -208,7 +231,7 @@ public class TestResultImpl implements TestResult{
 
     @Override
     public void setResultCode(String resultCode) {
-        this.resultCode=resultCode;
+        this.resultCode = resultCode;
     }
 
     private String result;
@@ -285,7 +308,7 @@ public class TestResultImpl implements TestResult{
     public void setTruncated(boolean isTruncated) {
         this.isTruncated = isTruncated;
     }
-    
+
     private String colorTestContrastRatio;
     @Override
     public void setColorTestContrastRatio(String colorTestContrastRatio) {
@@ -296,11 +319,31 @@ public class TestResultImpl implements TestResult{
     public String getColorTestContrastRatio() {
         return colorTestContrastRatio;
     }
-    
+
     /**
      * Default constructor
      */
     public TestResultImpl() {
     }
-    
+
+    private List<DefiniteResult> history;
+
+    @Override
+    public List<DefiniteResult> getHistory() {
+        return history;
+    }
+
+    @Override
+    public void setHistory(List<DefiniteResult> history) {
+        this.history = history;
+    }
+
+    @Override
+    public List<ProcessResult> getHistory(ProcessResult processResult) {
+        //TODO :YNE: afficher l'historique pour chaque processResult
+        //TODO :YNE: essayer de déporter ce code sur un service et/ou module dédier à hibernate-envers
+//		AuditReader auditReader = AuditReaderFactory.get(ProcessResultImpl);
+        return null;
+    }
+
 }

@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.sebuilder.interpreter.factory;
@@ -56,6 +56,16 @@ public class TgTestRunFactory extends TestRunFactory {
         this.firefoxProfile = firefoxProfile;
     }
     
+    int screenWidth=-1;
+    public void setScreenWidth(int screenWidth) {
+        this.screenWidth = screenWidth;
+    }
+    
+    int screenHeight=-1;
+    public void setScreenHeight(int screenHeight) {
+        this.screenHeight = screenHeight;
+    }
+    
     /**
      * the map that handles js scripts executed when page is loaded
      */
@@ -73,14 +83,14 @@ public class TgTestRunFactory extends TestRunFactory {
     private Collection<NewPageListener> newPageListeners;
     public void addNewPageListener(NewPageListener newPageListener) {
         if (newPageListeners == null) {
-            newPageListeners = new ArrayList<NewPageListener>();
+            newPageListeners = new ArrayList<>();
         }
         this.newPageListeners.add(newPageListener);
     }
 
     public void addNewPageListeners(Collection<NewPageListener> newPageListeners) {
         if (this.newPageListeners == null) {
-            this.newPageListeners = new ArrayList<NewPageListener>();
+            this.newPageListeners = new ArrayList<>();
         }
         this.newPageListeners.addAll(newPageListeners);
     }
@@ -104,9 +114,7 @@ public class TgTestRunFactory extends TestRunFactory {
     
     @Override
     public TestRun createTestRun(Script script) {
-        if (webDriverFactory instanceof FirefoxDriverFactory) {
-            ((FirefoxDriverFactory)webDriverFactory).setFirefoxProfile(firefoxProfile);
-        }
+        initialiseWebDriverFactory();
         TgTestRun testRun = new TgTestRun(
                 script, 
                 webDriverFactory, 
@@ -120,9 +128,7 @@ public class TgTestRunFactory extends TestRunFactory {
     
     @Override
     public TestRun createTestRun(Script script, Log log, WebDriverFactory webDriverFactory, HashMap<String, String> webDriverConfig) {
-        if (webDriverFactory instanceof FirefoxDriverFactory) {
-            ((FirefoxDriverFactory)webDriverFactory).setFirefoxProfile(firefoxProfile);
-        }
+        initialiseWebDriverFactory();
         TgTestRun testRun = 
                 new TgTestRun(
                     script, 
@@ -136,4 +142,16 @@ public class TgTestRunFactory extends TestRunFactory {
         return testRun;
     }
 
+    /**
+     * initialise WebDriverFactory with profile and screen size values
+     */
+    private void initialiseWebDriverFactory() {
+        if (webDriverFactory instanceof FirefoxDriverFactory) {
+            ((FirefoxDriverFactory)webDriverFactory).setFirefoxProfile(firefoxProfile);
+            if (screenHeight != -1 && screenWidth!= -1) {
+                ((FirefoxDriverFactory)webDriverFactory).setScreenHeight(screenHeight);
+                ((FirefoxDriverFactory)webDriverFactory).setScreenWidht(screenWidth);
+            }
+        }
+    }
 }

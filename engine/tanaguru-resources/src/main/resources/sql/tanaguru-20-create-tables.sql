@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS `AUDIT` (
   `Id_Audit` bigint(20) NOT NULL AUTO_INCREMENT,
   `Comment` varchar(255) DEFAULT NULL,
   `Dt_Creation` datetime DEFAULT NULL,
-  `Status` varchar(255) DEFAULT NULL,
+  `Manual_Audit_Dt_Creation` datetime DEFAULT NULL,
+  `Status` varchar(255) DEFAULT NULL, 
   PRIMARY KEY (`Id_Audit`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -305,6 +306,8 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
   `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
   `Id_Web_Resource` bigint(20) NOT NULL,
   `Id_Test` bigint(20) DEFAULT NULL,
+  `Manual_Definite_Value` VARCHAR(255) NULL DEFAULT NULL,
+  `Manual_Audit_Comment` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`Id_Process_Result`),
   UNIQUE KEY `Id_Test` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Gross_Result`),
   UNIQUE KEY `Id_Test_2` (`Id_Test`,`Id_Web_Resource`,`Id_Audit_Net_Result`),
@@ -586,6 +589,7 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE_STATISTICS` (
   `Id_Audit` bigint(20) DEFAULT NULL,
   `Id_Web_Resource` bigint(20) DEFAULT NULL,
   `Http_Status_Code` int(11) DEFAULT -1,
+  `Manual_Audit` int(11) NULL DEFAULT 0, 
   PRIMARY KEY (`Id_Web_Resource_Statistics`),
   INDEX `fk_WEB_RESOURCE_STATISTICS_AUDIT` (`Id_Audit` ASC) ,
   CONSTRAINT `fk_WEB_RESOURCE_STATISTICS_AUDIT`
@@ -603,7 +607,6 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE_STATISTICS` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
-
 
 -- -----------------------------------------------------
 -- Table `tanaguru`.`THEME_STATISTICS`
@@ -703,3 +706,30 @@ CREATE TABLE IF NOT EXISTS `TEST_STATISTICS` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
+-- ---------------------------------------------------------------------------------------------------------
+-- Hibernate envers technical table to refer the hibernate changes versions
+-- ---------------------------------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `REVINFO` (
+  `REV` int(11) NOT NULL AUTO_INCREMENT,
+  `REVTSTMP` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`REV`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ---------------------------------------------------------------------------------------------------------
+-- Creating the hibernate audit table of process_result
+-- ---------------------------------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
+  `DTYPE` varchar(31) NOT NULL,
+  `Id_Process_Result` bigint(20) NOT NULL,
+  `REV` int(11) NOT NULL,
+  `REVTYPE` tinyint(4) DEFAULT NULL,
+  `Element_Counter` int(11) DEFAULT NULL,
+  `Id_Process_Result_Parent` bigint(20) DEFAULT NULL,
+  `Definite_Value` varchar(255) DEFAULT NULL,
+  `Manual_Audit_Comment` varchar(255) DEFAULT NULL,
+  `Manual_Definite_Value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Id_Process_Result`,`REV`),
+  KEY `FK5411075EDF74E053` (`REV`),
+  CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `REVINFO` (`REV`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

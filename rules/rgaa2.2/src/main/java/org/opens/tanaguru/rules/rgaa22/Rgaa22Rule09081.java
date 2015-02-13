@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,20 +15,19 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.rgaa22;
 
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandlerImpl;
 import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
 import org.opens.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
-import org.opens.tanaguru.rules.elementselector.ElementSelector;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.LANG_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.XML_LANG_ATTR;
@@ -44,60 +43,61 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUT
  * page.</a>
  *
  * @see <a href="http://rgaa.net/Presence-d-une-langue-de.html"> 9.8 rule
- * specification
+ * specification</a>
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule09081 extends AbstractPageRuleMarkupImplementation {
+public class Rgaa22Rule09081 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * the elements with a lang attribute
      */
-    private ElementHandler elementWithLang = new ElementHandlerImpl();
+    private final ElementHandler<Element> elementWithLang = 
+            new ElementHandlerImpl();
     /**
      * the elements without lang attribute
      */
-    private ElementHandler elementWithoutLang = new ElementHandlerImpl();
+    private final ElementHandler<Element> elementWithoutLang = 
+            new ElementHandlerImpl();
 
     /**
      * Default constructor
      */
     public Rgaa22Rule09081() {
         super();
+        setElementSelector(new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY));
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        ElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
         
-        selector = new SimpleElementSelector(ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementWithLang);
+        new SimpleElementSelector(ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY)
+                .selectElements(sspHandler, elementWithLang);
         if (elementWithLang.isEmpty()) {
             return;
         }
-        selector = new SimpleElementSelector(ELEMENT_WITHOUT_LANG_ATTR_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementWithoutLang);
+        new SimpleElementSelector(ELEMENT_WITHOUT_LANG_ATTR_CSS_LIKE_QUERY)
+                .selectElements(sspHandler, elementWithoutLang);
         removeElementWithParentWithLangAttr(elementWithoutLang);
     }
 
     @Override
     protected void check(
             SSPHandler sspHandler,
-            ElementHandler selectionHandler,
             TestSolutionHandler testSolutionHandler) {
 
-        if (!selectionHandler.isEmpty()) {
-            checkLangDeclarationValidity(sspHandler, selectionHandler, testSolutionHandler);
+        if (!getElements().isEmpty()) {
+            checkLangDeclarationValidity(sspHandler, getElements(), testSolutionHandler);
         }
-        if (selectionHandler.isEmpty() && elementWithLang.isEmpty()) {
+        if (getElements().isEmpty() && elementWithLang.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.FAILED);
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.FAILED,
                     LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG);
             return;
         }
-        if (selectionHandler.isEmpty() && !elementWithoutLang.isEmpty()) {
+        if (getElements().isEmpty() && !elementWithoutLang.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.FAILED);
             sspHandler.getProcessRemarkService().addProcessRemark(
                     TestSolution.FAILED,

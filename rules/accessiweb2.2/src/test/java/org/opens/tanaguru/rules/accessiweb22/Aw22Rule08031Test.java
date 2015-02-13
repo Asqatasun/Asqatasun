@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
@@ -96,7 +96,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-1Passed-02");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(7, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
@@ -108,7 +108,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-1Passed-03");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
@@ -120,7 +120,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-1Passed-04");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(6, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check number of remarks and their value
@@ -132,7 +132,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-2Failed-01");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(6, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -148,7 +148,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-2Failed-02");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(6, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -164,7 +164,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-2Failed-03");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(7, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -180,7 +180,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-2Failed-04");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -196,7 +196,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-2Failed-05");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -212,7 +212,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-2Failed-06");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -228,7 +228,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("AW22.Test.8.3.1-2Failed-07");
         // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
+        assertEquals(8, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value

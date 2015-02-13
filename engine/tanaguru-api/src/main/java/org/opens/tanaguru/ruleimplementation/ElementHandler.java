@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.ruleimplementation;
 
@@ -26,6 +26,7 @@ import java.util.Collection;
 /**
  * Common interface to deal with selected DOM elements
  * 
+ * @param <E>
  */
 public interface ElementHandler<E> {
     
@@ -68,7 +69,7 @@ public interface ElementHandler<E> {
      * Clean the collection of element
      * @return the current instance of ElementHandler
      */
-    ElementHandler clean();
+    ElementHandler<E> clean();
     
     /**
      * 
@@ -83,5 +84,12 @@ public interface ElementHandler<E> {
      * 
      */
     boolean isEmpty();
+    
+    /**
+     * 
+     * @return the size of the current collection
+     * 
+     */
+    int size();
     
 }

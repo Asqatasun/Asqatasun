@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,17 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.rgaa22;
 
-import org.jsoup.nodes.Element;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.processor.SSPHandler;
-import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
-import org.opens.tanaguru.ruleimplementation.TestSolutionHandler;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChangeChecker;
 import org.opens.tanaguru.rules.elementchecker.lang.LangChecker;
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
@@ -41,34 +36,10 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  *
  * @author jkowalczyk
  */
-public class Rgaa22Rule12021 extends AbstractPageRuleMarkupImplementation {
+public class Rgaa22Rule12021 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    private LangChecker ec = new LangChangeChecker();
-    
-    /**
-     * Default constructor
-     */
-    public Rgaa22Rule12021 () {
-        super();
-    }
-    
-    @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        SimpleElementSelector selector = new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY);
-        selector.selectElements(sspHandler, elementHandler);
-   }
-
-    @Override
-    protected void check(
-            SSPHandler sspHandler, 
-            ElementHandler<Element> selectionHandler, 
-            TestSolutionHandler testSolutionHandler) {
-
-        if (selectionHandler.isEmpty()) {
-            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
-            return;
-        }
-        ec = new LangChangeChecker(
+    private final LangChecker ec = 
+            new LangChangeChecker(
                     new TextAttributeOfElementBuilder(
                         ALT_ATTR, 
                         SUMMARY_ATTR, 
@@ -77,14 +48,19 @@ public class Rgaa22Rule12021 extends AbstractPageRuleMarkupImplementation {
                         VALUE_ATTR, 
                         NAME_ATTR, 
                         TITLE_ATTR));
-        ec.setNomenclatureLoaderService(nomenclatureLoaderService);
-        ec.check(sspHandler, selectionHandler, testSolutionHandler);
+    
+    /**
+     * Default constructor
+     */
+    public Rgaa22Rule12021 () {
+        super();
+        setElementSelector(new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY));
+        setElementChecker(ec);
     }
     
     @Override
     public int getSelectionSize() {
         return ec.getNbOfElementsTested();
     }
-
 
 }

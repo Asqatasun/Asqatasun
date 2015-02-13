@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.presentation.data;
 
@@ -31,9 +31,8 @@ import java.util.LinkedHashSet;
  */
 public class DetailedContractInfoImpl extends ContractInfoImpl implements DetailedContractInfo{
 
-
-    private Collection<ActInfo> lastActInfoSet = new LinkedHashSet<ActInfo>();
-    private Collection<ActInfo> siteActInfoSet = new LinkedHashSet<ActInfo>();
+    private final Collection<ActInfo> lastActInfoSet = new LinkedHashSet();
+    private final Collection<ActInfo> siteActInfoSet = new LinkedHashSet();
 
     private Date contractCreationDate = null;
     @Override
@@ -110,6 +109,17 @@ public class DetailedContractInfoImpl extends ContractInfoImpl implements Detail
     @Override
     public void setNumberOfDisplayedAct(int numberOfDisplayedAct) {
         this.numberOfDisplayedAct = numberOfDisplayedAct;
+    }
+
+    private boolean isManualAuditEnabled;
+    @Override
+    public boolean getIsManualAuditEnabled() {
+        return isManualAuditEnabled;
+    }
+
+    @Override
+    public void setIsManualAuditEnabled(boolean isManualAuditEnabled) {
+        this.isManualAuditEnabled = isManualAuditEnabled;
     }
 
 }

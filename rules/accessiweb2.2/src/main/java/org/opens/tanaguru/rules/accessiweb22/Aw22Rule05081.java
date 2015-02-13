@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.accessiweb22;
@@ -50,17 +50,14 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
      * Tables not identified as presentation table that does not contain
      * data table markup
      */
-    private ElementHandler notIdentifiedTableWithoutDataTableMarkup = 
+    private final ElementHandler<Element> notIdentifiedTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
     /** 
      * Tables identified as presentation table that does not contain
      * data table markup
      */
-    private ElementHandler presentationTableWithoutDataTableMarkup = 
+    private final  ElementHandler<Element> presentationTableWithoutDataTableMarkup = 
             new ElementHandlerImpl();
-    
-    /** The local element counter */
-    private int tableCounter = 0;
     
     /**
      * Default constructor
@@ -100,19 +97,17 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     }
 
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        super.select(sspHandler, elementHandler);
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler); 
         
-        if (elementHandler.isEmpty() && getSelectionWithMarkerHandler().isEmpty()) {
+        if (getSelectionWithoutMarkerHandler().isEmpty() && 
+                getSelectionWithMarkerHandler().isEmpty()) {
             return;
         }
-        
-        tableCounter = elementHandler.get().size() + 
-                       getSelectionWithMarkerHandler().get().size();
-        
+
         // extract not identified tables with data table markup
         extractTableWithDataTableMarkup(
-                    elementHandler, 
+                    getSelectionWithoutMarkerHandler(), 
                     notIdentifiedTableWithoutDataTableMarkup);
         
         // extract presentation tables with data table markup
@@ -124,9 +119,8 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler, elementHandler, testSolutionHandler);
+        super.check(sspHandler, testSolutionHandler);
         ElementChecker ec;
         if (!notIdentifiedTableWithoutDataTableMarkup.isEmpty()) {
             ec = new ElementPresenceChecker(
@@ -169,7 +163,7 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
      */
     private void extractTableWithDataTableMarkup(
                 ElementHandler<Element> elementHandler, 
-                ElementHandler elementHandlerWithoutDataTableMarkup) {
+                ElementHandler<Element> elementHandlerWithoutDataTableMarkup) {
         
         Elements elementsWithMarkup = new Elements();
         
@@ -185,7 +179,10 @@ public class Aw22Rule05081 extends AbstractMarkerPageRuleImplementation {
     
     @Override
     public int getSelectionSize() {
-        return tableCounter;
+        return getSelectionWithMarkerHandler().size() + 
+                   getSelectionWithoutMarkerHandler().size() + 
+                   notIdentifiedTableWithoutDataTableMarkup.size() + 
+                   presentationTableWithoutDataTableMarkup.size();
     }
     
 }

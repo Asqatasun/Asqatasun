@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.presentation.data;
 
@@ -34,7 +34,12 @@ public class ResultCounterImpl implements ResultCounter {
     public ResultCounterImpl (){}
 
     /**
-     * Constructor with parameters
+     * 
+     * @param passedCount
+     * @param failedCount
+     * @param nmiCount
+     * @param naCount
+     * @param ntCount 
      */
     public ResultCounterImpl (
             Integer passedCount, 

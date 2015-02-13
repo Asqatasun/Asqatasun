@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.entity.dao.statistics;
 
@@ -112,29 +112,33 @@ public interface StatisticsDAO extends GenericDAO<WebResourceStatistics, Long> {
      * @param audit
      * @param testSolution
      * @param theme
+     * @param manualAudit
      * @return 
      */
     Long findResultCountByResultTypeAndTheme(
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme);
+            Theme theme,
+            boolean manualAudit);
 
     /**
      * 
      * @param idWebResource
+     * @param isManual 
      * @return 
      */
     Float findWeightedMarkByWebResourceAndAudit(
-            Long idWebResource);
+            Long idWebResource, boolean isManual);
 
     /**
      * 
      * @param idWebResource
+     * @param isManual
      * @return 
      */
     Float findRawMarkByWebResourceAndAudit(
-            Long idWebResource);
+            Long idWebResource, boolean isManual);
 
     /**
      * 

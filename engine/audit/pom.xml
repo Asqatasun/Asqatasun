@@ -19,5 +19,9 @@
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-parameterization</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+        </dependency>
     </dependencies>
 </project>

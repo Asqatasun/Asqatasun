@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.dao.reference;
 
@@ -52,6 +52,19 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         return AuditImpl.class;
     }
 
+    @Override
+    public Test read(String label) {
+        StringBuilder queryStr = new StringBuilder();
+        queryStr.append("SELECT t FROM ");
+        queryStr.append(getEntityClass().getName());
+        queryStr.append(" t WHERE");
+        queryStr.append(" t.label = :label");
+        Query query = entityManager.createQuery(queryStr.toString());
+        query.setParameter("label", label);
+        query.setHint("org.hibernate.cacheable", "true");
+        return (Test)query.getSingleResult();
+    }
+    
     @Override
     @SuppressWarnings("unchecked")
     public List<Test> retrieveAll(Reference reference) {
@@ -117,7 +130,7 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
         query.setHint("org.hibernate.cacheable", "true");
         return query.getResultList();
     }
-
+    
     @Override
     public List<Test> retrieveAllByReferenceAndCriterion(
             Reference reference,

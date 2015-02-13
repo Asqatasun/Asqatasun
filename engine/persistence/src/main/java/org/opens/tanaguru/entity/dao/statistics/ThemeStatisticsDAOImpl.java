@@ -15,10 +15,12 @@ package org.opens.tanaguru.entity.dao.statistics;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.statistics.ThemeStatistics;
 import org.opens.tanaguru.entity.statistics.ThemeStatisticsImpl;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.entity.subject.WebResourceImpl;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
@@ -67,5 +69,33 @@ public class ThemeStatisticsDAOImpl extends AbstractJPADAO<ThemeStatistics, Long
             return null;
         }
     }
+
+    /**
+     * {@inheritDoc}
+     * */
+	@Override
+	public ThemeStatistics findThemeStatisticsByWebResource(Theme theme,
+			WebResourceStatistics wrStats) {
+
+		StringBuilder builder = new StringBuilder();
+
+		builder.append(" SELECT ts FROM ");
+		builder.append(getEntityClass().getName());
+		builder.append(" as ts");
+		builder.append(" WHERE ");
+		builder.append(" ts.webResourceStatistics= :wrStats").append(" and ");
+		builder.append(" ts.theme= :theme");
+
+		Query query = entityManager.createQuery(builder.toString());
+		query.setParameter("wrStats", wrStats);
+		query.setParameter("theme", theme);
+
+		try {
+			return (ThemeStatistics) query.getSingleResult();
+
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
 
 }

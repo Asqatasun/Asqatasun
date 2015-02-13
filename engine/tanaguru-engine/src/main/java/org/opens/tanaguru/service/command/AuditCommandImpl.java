@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.service.command;
@@ -42,6 +42,7 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
+import org.opens.tanaguru.messagin.TanaguruMsgOutService;
 import org.opens.tanaguru.service.*;
 import org.opens.tanaguru.util.MD5Encoder;
 
@@ -90,8 +91,8 @@ public abstract class AuditCommandImpl implements AuditCommand {
     @Override
     public Audit getAudit() {
         return audit;
-    }
     
+    }
     @Override
     public void setAudit(Audit audit) {
         this.audit = audit;
@@ -187,11 +188,19 @@ public abstract class AuditCommandImpl implements AuditCommand {
     }
     public void setAnalyserService(AnalyserService analyserService) {
         this.analyserService = analyserService;
-    }    
+    }   
+    
+    //The sender
+    private TanaguruMsgOutService tanaguruMsgOutService;
+    public TanaguruMsgOutService getTanaguruMsgOutService() {
+        return tanaguruMsgOutService;
+    }
+    public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
+        this.tanaguruMsgOutService = tanaguruMsgOutService;
+    }
 
     // The listeners
-    
-    private AdaptationListener adaptationListener;
+	private AdaptationListener adaptationListener;
     public AdaptationListener getAdaptationListener() {
         return adaptationListener;
     }
@@ -207,7 +216,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
     /**
      * The audit parameters
      */
-    private Set<Parameter> paramSet;
+    private final Set<Parameter> paramSet;
 
     /**
      * @param paramSet 
@@ -731,6 +740,14 @@ public abstract class AuditCommandImpl implements AuditCommand {
         if (cleanUpRelatedContent) {
             cleanUpTestData(audit);
         }
+    }
+    
+    @Override
+    public boolean sendMessageOut(String ulrPage){
+        if (tanaguruMsgOutService != null) {
+            return tanaguruMsgOutService.send(ulrPage);
+        }
+        return false;
     }
     
     /**

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.util;
 
@@ -90,9 +90,18 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_URL = "/audit-result";
     public static final String AUDIT_RESULT_CONTRACT_URL =
             CONTRACT_URL+AUDIT_RESULT_URL;
+    public static final String MANUAL_AUDIT_RESULT_URL = "/manual-audit-result";
+    public static final String MANUAL_AUDIT_RESULT_CONTRACT_URL =
+            CONTRACT_URL+MANUAL_AUDIT_RESULT_URL;
+    public static final String MANUAL_AUDIT_PAGE_RESULT_URL = "/manual-audit-page-result";
+    public static final String MANUAL_AUDIT_PAGE_RESULT_CONTRACT_URL =
+            CONTRACT_URL+MANUAL_AUDIT_PAGE_RESULT_URL;
     public static final String PAGE_RESULT_URL = "/page-result";
     public static final String PAGE_RESULT_CONTRACT_URL =
             CONTRACT_URL+PAGE_RESULT_URL;
+    public static final String UPDATE_MANUAL_RESULT_URL = "/update-manual-result";
+    public static final String UPDATE_MANUAL_RESULT_CONTRACT_URL =
+            CONTRACT_URL+UPDATE_MANUAL_RESULT_URL;
     public static final String SITE_RESULT_URL = "/site-result";
     public static final String SITE_RESULT_CONTRACT_URL =
             CONTRACT_URL+SITE_RESULT_URL;
@@ -170,6 +179,7 @@ public final class TgolKeyStore {
     public static final String SIGN_UP_CONFIRMATION_VIEW_NAME = "sign-up-confirmation";
     public static final String SIGN_UP_CONFIRMATION_VIEW_REDIRECT_NAME = "sign-up-confirmation-redirect";
     public static final String CONTRACT_VIEW_NAME = "contract";
+    public static final String CONTRACT_VIEW_NAME_REDIRECT = "contract-redirect";
     public static final String AUDIT_SITE_SET_UP_VIEW_NAME = "audit-site-set-up";
     public static final String AUDIT_PAGE_SET_UP_VIEW_NAME = "audit-page-set-up";
     public static final String AUDIT_UPLOAD_SET_UP_VIEW_NAME = "audit-upload-set-up";
@@ -184,6 +194,8 @@ public final class TgolKeyStore {
     public static final String RESULT_PAGE_VIEW_NAME = "result-page";
     public static final String RESULT_PAGE_VIEW_REDIRECT_NAME =
             "result-page-redirect";
+    public static final String MANUAL_AUDIT_RESULT_VIEW_REDIRECT_NAME =
+            "manual-audit-page-result-redirect";
     public static final String RESULT_PAGE_BY_CRITERION_VIEW_NAME = "result-page-by-criterion";
     public static final String RESULT_PAGE_BY_CRITERION_VIEW_REDIRECT_NAME =
             "result-page-by-criterion-redirect";
@@ -229,6 +241,7 @@ public final class TgolKeyStore {
     public static final String AUDIT_RESULT_SORT_COMMAND_KEY="auditResultSortCommand";
     public static final String CONTRACT_SORT_COMMAND_KEY="contractSortCommand";
     public static final String WEBRESOURCE_ID_KEY = "wr";
+    public static final String IS_MANUAL_AUDIT_KEY = "isManualAudit";
     public static final String AUDIT_ID_KEY = "audit";
     public static final String DISPLAY_SCOPE_KEY = "lvl";
     public static final String EXPORT_FORMAT_KEY = "format";
@@ -276,6 +289,7 @@ public final class TgolKeyStore {
     public static final String RESULT_ACTION_LIST_KEY = "resultActionList";
     public static final String HOME_ACTION_LIST_KEY = "homeActionList";
     public static final String DISPLAY_RESULT_TREND_KEY = "displayResultTrend";
+    public static final String CONTRACT_WITH_MANUAL_AUDIT_KEY = "displayManualAuditOption";
     public static final String CONTRACT_LIST_KEY = "contractList";
     public static final String USER_LIST_KEY = "userList";
     public static final String RETURN_PAGE_URL_KEY="returnPageUrl";
@@ -298,6 +312,7 @@ public final class TgolKeyStore {
     public static final String STATUS_KEY = "status";
     public static final String TEST_KEY = "test";
     public static final String COMPLETED_KEY = "COMPLETED";
+    public static final String ONGOING_KEY = "ONGOING";
     public static final String ERROR_LOADING_KEY = "ERROR_LOADING";
     public static final String ERROR_ADAPTING_KEY = "ERROR_ADAPTING";
     public static final String ERROR_UNKNOWN_KEY = "ERROR_UNKNOWN";
@@ -314,6 +329,7 @@ public final class TgolKeyStore {
     public static final String CREATE_CONTRACT_COMMAND_KEY = "createContractCommand";
     public static final String CREATE_USER_ATTACK_COMMAND_KEY = "createUserAttack";
     public static final String CHANGE_TEST_WEIGHT_COMMAND_KEY ="changeTestWeightCommand";
+    public static final String MANUAL_AUDIT_COMMAND_KEY ="manualAuditCommand";
     public static final String TEST_WEIGHT_SUCCESSFULLY_UPDATED_KEY="testWeightSuccessfullyUpdated";
     public static final String IS_CONTRACT_EXPIRED_KEY = "isContractExpired";
     public static final String PARAMETERS_MAP_KEY = "parametersMap";
@@ -346,6 +362,9 @@ public final class TgolKeyStore {
     public static final String CRITERION_DISPLAY_SCOPE_VALUE = "cr";
     public static final String TEST_DISPLAY_SCOPE_VALUE = "tst";
 
+    /* functionality keys */
+    public static final String MANUAL_AUDIT_FUNCTIONALITY_KEY = "MANUAL";
+    
     /* role keys */
     public static final String ROLE_GUEST_KEY = "ROLE_GUEST";
     public static final String ROLE_USER_KEY = "ROLE_USER";
@@ -357,10 +376,55 @@ public final class TgolKeyStore {
     /* HTTP PREFIX*/
     public static final String HTTP_PREFIX = "http://";
     public static final String HTTPS_PREFIX = "https://";
+    public static final String FILE_PREFIX = "file:";
     public static final char SLASH_CHAR = '/';
 
     public static final String ACT_QUOTA_EXCEEDED = "actQuotaExceeded";
     public static final String ACT_QUOTA_BY_IP_EXCEEDED = "actQuotaByIpExceeded";
     public static final String ACT_ALLOWED = "actAllowed";
     
+    /* audit param keys */
+    public static final String PROXY_HOST_PARAM_KEY = "PROXY_HOST";
+    public static final String PROXY_PORT_PARAM_KEY = "PROXY_PORT";
+    public static final String DEPTH_PARAM_KEY = "DEPTH";
+    public static final String MAX_DOCUMENT_PARAM_KEY = "MAX_DOCUMENTS";
+    public static final String MAX_DURATION_PARAM_KEY = "MAX_DURATION";
+    public static final String EXCLUSION_URL_LIST_PARAM_KEY = "EXCLUSION_REGEXP";
+    public static final String DEPTH_PAGE_PARAM_VALUE = "0";
+    public static final String PROXY_HOST_CONF_KEY = "proxyHost";
+    public static final String PROXY_PORT_CONF_KEY = "proxyPort";
+    public static final String PROXY_EXCLUSION_URL_CONF_KEY = "proxyExclusionUrl";
+    public static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY = "emailSentToUserExclusionList";
+    
+    /* url param keys */
+    public static final String CRITERION_RESULT_PAGE_KEY = "criterion-result";
+    public static final String REFERER_HEADER_KEY = "referer";
+    
+    /* email creator keys */
+    public static final String EMAIL_FROM_KEY="emailFrom";
+    public static final String EMAIL_TO_KEY="emailTo";
+    public static final String EMAIL_SUBJECT_KEY="emailSubject";
+    public static final String EMAIL_CONTENT_KEY="emailContent";
+    public static final String EMAIL_CONTENT_URL_KEY="#urlToTest";
+    public static final String EMAIL_CONTENT_EMAIL_KEY="#email";
+    public static final String EMAIL_CONTENT_FIRST_NAME_KEY="#firstName";
+    public static final String EMAIL_CONTENT_LAST_NAME_KEY="#lastName";
+    public static final String EMAIL_CONTENT_PHONE_NUMBER_KEY="#phoneNumber";
+    
+    /* scenario meta data keys */
+    public static final String CONTENT_TYPE="text/plain";
+    public static final String JSON_EXTENSION=".json";
+    public static final String CONTENT_DISPOSITION="Content-Disposition";
+    public static final String ATTACHMENT="attachment; filename=";
+    
+    /* forgotten password email creator keys */
+    public static final String FORGOTTEN_PASSWD_EMAIL_FROM_KEY = "forgotten-password.emailFrom";
+    public static final String FORGOTTEN_PASSWD_EMAIL_SUBJECT_KEY = "forgotten-password.emailSubject";
+    public static final String FORGOTTEN_PASSWD_EMAIL_CONTENT_KEY = "forgotten-password.emailContent";
+    public static final String FORGOTTEN_PASSWD_BUNDLE_NAME = "i18n/forgotten-password-page-I18N";
+    public static final String FORGOTTEN_PASSWD_CHANGE_PASSWORD_URL_KEY = "changePasswordUrl";
+
+    public static final String AUTHENTICATED_KEY = "authenticated";
+    
+    public static final String ROLE_ADMIN_NAME_KEY = "ROLE_ADMIN";
 }

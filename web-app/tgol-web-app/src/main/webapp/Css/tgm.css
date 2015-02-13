@@ -1949,6 +1949,9 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     padding-right: 10px;
     color : #FFF;
 }
+.result-page-action.manual-audit-save-btn{
+    width: 100%;
+}
 .theme-nav {
     display: none;
 }
@@ -2053,6 +2056,70 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 .rule-general-result-last select,
 .rule-general-result select{
     width: 140px;
+}
+.audit-result-container {
+    float:right;
+    /*width:280px;*/
+}
+.audit-result-container.span5 {
+    margin-left: 10px;
+}
+.audit-result-container .test-result {
+    text-align: right;
+}
+.audit-result-container .audit-result-manual,.audit-result-container .test-result,.audit-result-container .test-details{
+    float:right;
+    margin-left: 10px;
+}
+.audit-result-manual-empty{
+    margin-left:20px;;
+}
+.audit-result-manual div{
+    margin-bottom:0;
+}
+.audit-result-manual legend{
+    font-size:13px;
+    margin-left:0;
+    padding-left: 23px;
+    padding-top: 4px;
+}
+.audit-result-manual fieldset {
+    border: none;
+    margin-top: 0;
+    padding-right: 0;
+}
+.audit-result-manual label{
+    margin-right:5px;
+    padding-top:0;
+}
+.audit-result-manual fieldset div:nth-child(2) label{
+    color:green;
+}
+.audit-result-manual fieldset div:nth-child(3) label{
+    color:red;
+}
+.audit-result-manual div.input{
+    margin-left:0;
+}
+.audit-result-manual + div{
+    margin-left:35px!important;
+}
+.audit-result-manual-comment {
+    margin-top:0;
+    margin-bottom:5px;
+}
+.audit-result-manual-comment textarea{
+    resize: none;
+    width:80%;
+    margin-left: 10px;
+}
+.audit-result-manual-comment label{
+    font-size:10px;
+    font-weight:bold;
+    padding-top: 0;
+}
+#manual-audit-form-submit {
+    margin-top: 40px;
 }
 #audit-result-menu-actions ul {
     margin : 0;
@@ -2221,12 +2288,17 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 .theme-result-repartition {
     text-align: right;
 }
+.theme-result-repartition > img {
+    margin-right: 6px;
+    vertical-align: text-top;
+}
 .theme-result {
     display: inline-block;
     min-width: 26.5px;
     text-align: left;
     font-size : 14px;
     font-family: OpenSansRegular;
+    margin-right: 3px;
 }
 .show-theme-details-link-icon {
     display: none;
@@ -2346,6 +2418,14 @@ td.occurences {
 }
 .url-in-title{
     font-size : 20px;
+}
+
+.row > [class*="span"].audit-result-manual-comment-hidden {
+    display: none;
+}
+
+.row > [class*="span"].audit-result-manual-comment {
+    display: inline;
 }
 /*
  * page : detailed-result (criterion scope)

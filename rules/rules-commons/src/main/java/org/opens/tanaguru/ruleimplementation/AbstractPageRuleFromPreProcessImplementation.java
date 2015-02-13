@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.ruleimplementation;
 
@@ -29,7 +29,6 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.rules.domelement.DomElement;
 import org.opens.tanaguru.rules.domelement.extractor.DomElementExtractor;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
-import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
 
 /**
  * <p>
@@ -44,13 +43,7 @@ import org.opens.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
  * </p>
  */
 public abstract class AbstractPageRuleFromPreProcessImplementation 
-        extends AbstractPageRuleMarkupImplementation {
-
-    /** The elementChecker used by the rule */
-    private ElementChecker elementChecker;
-    public void setElementChecker(ElementChecker elementChecker) {
-        this.elementChecker = elementChecker;
-    }
+        extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /* the extracted domElements*/
     Collection<DomElement> domElements;
@@ -71,62 +64,49 @@ public abstract class AbstractPageRuleFromPreProcessImplementation
     public AbstractPageRuleFromPreProcessImplementation(
             @Nonnull ElementChecker elementChecker) {
         super();
-        this.elementChecker = elementChecker;
+        setElementChecker(elementChecker);
     }
     
     /**
      * No selection is performed here.
      * 
      * @param sspHandler
-     * @param elementHandler 
      */
     @Override
-    protected void select(SSPHandler sspHandler, ElementHandler elementHandler) {
+    protected void select(SSPHandler sspHandler) {
         try {
             domElements = DomElementExtractor.extractDomElements(sspHandler);
         } catch (NoResultException nre) {
             return;
         }
-        
-        doSelect(domElements, sspHandler, elementHandler);
+        doSelect(domElements, sspHandler);
     }
 
     /**
      * 
      * @param domElements
      * @param sspHandler
-     * @param elementHandler 
      */
     protected abstract void doSelect(
             Collection<DomElement>domElements, 
-            SSPHandler sspHandler, 
-            ElementHandler elementHandler);
+            SSPHandler sspHandler);
     
     /**
      * Perform the check using the {@link ElementChecker}
      * 
      * @param sspHandler
-     * @param selectionHandler 
      * @param testSolutionHandler
      */
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler selectionHandler, 
             TestSolutionHandler testSolutionHandler) {
         if (domElements == null) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
             return;
         }
         
-        if (elementChecker instanceof NomenclatureBasedElementChecker) {
-            ((NomenclatureBasedElementChecker)elementChecker).
-                    setNomenclatureLoaderService(nomenclatureLoaderService);
-        }
-        elementChecker.check(
-                sspHandler, 
-                selectionHandler, 
-                testSolutionHandler);
+        super.check(sspHandler, testSolutionHandler);
     }
 
 }

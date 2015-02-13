@@ -1,12 +1,11 @@
-<%@taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
+<%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
 <compress:html>
-<%@page contentType="text/html;charset=UTF-8"%>
-<%@page pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@taglib uri="http://tagutils" prefix="tg" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
 
 <!-- external js-->
@@ -118,13 +117,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <c:if test="${tg:lang(pageContext) != 'en' && tg:lang(pageContext) != 'fr'}">
+                            <c:choose>
+                                <c:when test="${fn:startsWith(statistics.parametersMap['referential'], 'Rgaa')}">
+                                    <c:set var="ruleLang" value=" lang=fr "/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:set var="ruleLang" value=" lang=en "/>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                         <c:forEach var="failedTestByPageInfo" items="${failedTestInfoByPageSet}" varStatus="pFailedTestInfoByPageSet">
                             <tr>
                                 <td headers="testTop5FailedTestByPage" class="tg-textual-column">
                                     <c:set var="abbrTitle">
                                         ${failedTestByPageInfo.testLabel} : <spring:message code="${failedTestByPageInfo.testCode}"/>
                                     </c:set>
-                                    <abbr title="${fn:escapeXml(abbrTitle)}"  style="border-bottom: 1px dotted;cursor: help;">
+                                    <abbr title="${fn:escapeXml(abbrTitle)}"  style="border-bottom: 1px dotted;cursor: help;" ${ruleLang}>
                                         ${failedTestByPageInfo.testLabel}
                                     </abbr>
                                 </td>

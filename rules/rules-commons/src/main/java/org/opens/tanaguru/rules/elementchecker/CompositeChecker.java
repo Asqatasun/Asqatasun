@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,13 +17,16 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementchecker;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
@@ -39,13 +42,13 @@ import org.opens.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
  * This checker aggregate checkers and call then recursively, element by element
  * 
  */
-public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
+public class CompositeChecker extends NomenclatureBasedElementChecker {
 
     /**
-     * The collection of checkers recursively called to check the pertinence. 
+     * The collection of checkers recursively called. 
      * This collection is of LinkedList type to maintain an order.
      */
-    private final Collection<ElementChecker> checkers;
+    private Collection<ElementChecker> checkers = new LinkedList<ElementChecker>();
     public Collection<ElementChecker> getCheckers() {
         return checkers;
     }
@@ -54,70 +57,70 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
     }
     
     /**
-     * the message code thrown to manually check the element when no checker
-     * has returned a failed result.
+     * boolean used to determine how to compute results from successive checkers
      */
-    private final String manualCheckMessage;
+    private boolean isOrCombinaison = true;
+    public void setIsOrCombinaison(boolean isOrCombinaison) {
+        this.isOrCombinaison = isOrCombinaison;
+    }
     
     /**
-     * Constructor. 
-     * Returns FAILED when the tested element is not pertinent.
-     * 
-     * @param manualCheckMessage
+     * This map provides a way to override the final result of the successive 
+     * checkers execution and associate eventually a message.
      */
-    public CompositeChecker(String manualCheckMessage) {
-        super();
-        this.checkers = new LinkedList<>();
-        this.manualCheckMessage = manualCheckMessage;
+    private final Map<TestSolution, Map<TestSolution, String>> checkMessageFromSolutionMap = 
+            new HashMap<>();
+    public void addCheckMessageFromSolution(TestSolution solution, Map<TestSolution, String> resultAndMessage) {
+        checkMessageFromSolutionMap.put(solution, resultAndMessage);
     }
     
     /**
      * Constructor. 
-     * Returns FAILED when the tested element is not pertinent.
+     * 
+     * @param elementCheckers
+     */
+    public CompositeChecker(ElementChecker... elementCheckers) {
+        super();
+        this.checkers.addAll(Arrays.asList(elementCheckers));
+    }
+    
+    /**
      * 
      * @param manualCheckMessage
+     */
+    public CompositeChecker() {
+        super();
+    }
+    
+    /**
+     * 
      * @param eeAttributeNameList 
      */
-    public CompositeChecker(
-            String manualCheckMessage,
-            String... eeAttributeNameList) {
+    public CompositeChecker(String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.checkers = new LinkedList<>();
-        this.manualCheckMessage = manualCheckMessage;
+    }
+    
+    /**
+     * 
+     * @param failureSolution
+     */
+    public CompositeChecker(TestSolution failureSolution) {
+        super();
+        setFailureSolution(failureSolution);
     }
     
     /**
      * Constructor.
      * Enables to override the failure solution.
-     * 
      * @param manualCheckMessage
-     * @param notPertinentSolution
-     */
-    public CompositeChecker(
-            String manualCheckMessage,
-            TestSolution notPertinentSolution) {
-        super();
-        this.checkers = new LinkedList<>();
-        setFailureSolution(notPertinentSolution);
-        this.manualCheckMessage = manualCheckMessage;
-    }
-    
-    /**
-     * Constructor.
-     * Enables to override the failure solution.
-     * @param manualCheckMessage
-     * @param notPertinentSolution
+     * @param failureSolution
      * @param eeAttributeNameList 
      */
     public CompositeChecker(
-            String manualCheckMessage,
-            TestSolution notPertinentSolution,
+            TestSolution failureSolution,
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.checkers = new LinkedList<>();
-        
-        setFailureSolution(notPertinentSolution);
-        this.manualCheckMessage = manualCheckMessage;
+        setFailureSolution(failureSolution);
     }
 
     @Override
@@ -126,10 +129,10 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
              Elements elements, 
              TestSolutionHandler testSolutionHandler) {
          setServicesToCheckers();
-         ElementHandler elementHandler = new ElementHandlerImpl();
+         ElementHandler<Element> elementHandler = new ElementHandlerImpl();
          for (Element element : elements) {
              elementHandler.clean().add(element);
-             testSolutionHandler.addTestSolution(checkPertinence(sspHandler, elementHandler));
+             testSolutionHandler.addTestSolution(callCheckers(sspHandler, elementHandler));
          }
     }
     
@@ -144,45 +147,58 @@ public abstract class CompositeChecker extends NomenclatureBasedElementChecker {
      * @param elementHandler
      * @return the solution of the pertinence check
      */
-    protected TestSolution checkPertinence(
+    protected TestSolution callCheckers(
             SSPHandler sspHandler,
             ElementHandler<Element> elementHandler) {
         
-        TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
+        TestSolutionHandler globalTestSolutionHandler = new TestSolutionHandlerImpl();
 
         for (ElementChecker ec : checkers) {
-            testSolutionHandler.cleanTestSolutions();
+            TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
             ec.check(sspHandler, elementHandler, testSolutionHandler);
 
             TestSolution checkerSolution = testSolutionHandler.getTestSolution();
-
+            
             Logger.getLogger(this.getClass()).debug("Checker "+ec.getClass() + 
                     " returned " + checkerSolution);
 
-            if (checkerSolution.equals(ec.getFailureSolution()) || 
-                    checkerSolution.equals(TestSolution.NOT_APPLICABLE))  {
+            if (isOrCombinaison && (checkerSolution.equals(ec.getFailureSolution()) || 
+                    checkerSolution.equals(TestSolution.NOT_APPLICABLE)))  {
                 return checkerSolution;
             }
+            globalTestSolutionHandler.addTestSolution(checkerSolution);
         }
 
-        createNMIProcessRemark(elementHandler);
-
-        return TestSolution.NEED_MORE_INFO;
+        return createSolutionFromCheckersResult(
+                globalTestSolutionHandler.getTestSolution(), 
+                elementHandler);
     }
-
+            
     /**
      * 
+     * @param testSolution 
      * @param elementHandler 
+     * @return the solution when the successive checkers doesn't produce a 
+     * failure or a not_applicable result. The final result may be overidden 
+     * if the solution is managed by the checkMessageFromSolutionMap.
      */
-    private void createNMIProcessRemark(ElementHandler<Element> elementHandler) {
-        if (StringUtils.isNotBlank(manualCheckMessage)) {
-            // if the test at this step is not failed, create a NMI ProcessRemark
-            // for a manual check
-            Element el = (Element)elementHandler.get().iterator().next();
-            addSourceCodeRemark(
-                    TestSolution.NEED_MORE_INFO,
-                    el,
-                    manualCheckMessage);
+    protected TestSolution createSolutionFromCheckersResult (
+            TestSolution testSolution, 
+            ElementHandler<Element> elementHandler) {
+        if (checkMessageFromSolutionMap.containsKey(testSolution)) {
+            // if the final solution belongs to the checkMessageFromSolutionMap,
+            // we create a message and override the final result
+            Map.Entry<TestSolution, String> entry = 
+                    checkMessageFromSolutionMap.get(testSolution).entrySet().iterator().next();
+            if (StringUtils.isNotBlank(entry.getValue())) {
+                addSourceCodeRemark(
+                    entry.getKey(),
+                    (Element)elementHandler.get().iterator().next(),
+                    entry.getValue());
+            }
+            return entry.getKey();
+        } else {
+            return testSolution;
         }
     }
     

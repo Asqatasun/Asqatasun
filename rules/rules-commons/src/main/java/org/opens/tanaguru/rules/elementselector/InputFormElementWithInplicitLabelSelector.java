@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementselector;
@@ -37,7 +37,7 @@ import static org.opens.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
 public class InputFormElementWithInplicitLabelSelector implements ElementSelector{
 
     /** the pre-selected input form elements */
-    private ElementHandler formElementHandler;
+    private ElementHandler<Element> formElementHandler;
     
     /**
      * Default constructor
@@ -48,12 +48,12 @@ public class InputFormElementWithInplicitLabelSelector implements ElementSelecto
      * Constructor
      * @param formElementHandler 
      */
-    public InputFormElementWithInplicitLabelSelector(ElementHandler formElementHandler) {
+    public InputFormElementWithInplicitLabelSelector(ElementHandler<Element> formElementHandler) {
         this.formElementHandler = formElementHandler;
     }
 
     @Override
-    public void selectElements(SSPHandler sspHandler, ElementHandler selectionHandler) {
+    public void selectElements(SSPHandler sspHandler, ElementHandler<Element> selectionHandler) {
         for (Element el : getElements(sspHandler)) {
             if (StringUtils.equalsIgnoreCase(el.parent().nodeName(), LABEL_ELEMENT)) {
                 selectionHandler.add(el);

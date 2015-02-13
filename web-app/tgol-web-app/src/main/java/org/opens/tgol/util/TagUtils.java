@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.util;
 
@@ -58,13 +58,16 @@ public final class TagUtils {
         if (pageContext.getResponse().getLocale().getLanguage().
                 equalsIgnoreCase(Locale.FRENCH.getLanguage())) {
             return Locale.FRENCH.getLanguage();
+        } else if (pageContext.getResponse().getLocale().getLanguage().
+                equalsIgnoreCase("es")) {
+            return "es";
         }
         return Locale.ENGLISH.getLanguage();
     }
     
     /**
      * 
-     * @param pageContext
+     * @param url
      * @return 
      */
     public static String getHostFromUrl(String url)  {

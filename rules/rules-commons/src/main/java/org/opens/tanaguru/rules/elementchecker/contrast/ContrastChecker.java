@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementchecker.contrast;
@@ -325,7 +325,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     private void resetCollectedDataOnException (
             TestSolutionHandler testSolutionHandler, 
             Exception exception) {
-        LOGGER.warn(exception);
+        LOGGER.info(exception);
         testSolutionHandler.cleanTestSolutions();
         testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
         elementCounter = 0;
@@ -334,7 +334,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     private boolean isAlternativeContrastMechanismPresentFromParam(SSPHandler sspHandler) {
         for (Parameter parameter : sspHandler.getSSP().getAudit().getParameterSet()){
             if (parameter.getParameterElement().getParameterElementCode().equalsIgnoreCase(ALT_CONTRAST_MECHA_PARAM_KEY)) {
-                if(parameter.getValue().equals("true")) {
+                if(Boolean.valueOf(parameter.getValue())) {
                     return true;
                 }
                 break;

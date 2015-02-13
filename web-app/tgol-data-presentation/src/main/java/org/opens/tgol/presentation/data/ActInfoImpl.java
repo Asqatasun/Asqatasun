@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,11 +17,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.presentation.data;
 
 import java.util.Date;
+
 import org.opens.tgol.util.TgolEscapeUrl;
 
 /**
@@ -29,8 +30,73 @@ import org.opens.tgol.util.TgolEscapeUrl;
  * @author jkowalczyk
  */
 public class ActInfoImpl implements ActInfo{
+	
+	private boolean isManual;
+	@Override
+    public boolean isManual() {
+		return isManual;
+	}
+    @Override
+	public void setManual(boolean isManual) {
+		this.isManual = isManual;
+	}
+    private Date dateManual = null;
+    
+    @Override
+    public Date getDateManual() {
+        if (dateManual != null) {
+            return new Date(dateManual.getTime());
+        } else {
+            return null;
+        }
+    }
 
-    private Date date = null;
+    @Override
+    public void setDateManual(Date dateManual) {
+        if (dateManual != null) {
+            this.dateManual = new Date(dateManual.getTime());
+        } else {
+            this.dateManual = null;
+        }
+    }
+    
+    private int weightedMarkManual = 0;
+    @Override
+    public int getWeightedMarkManual() {
+        return weightedMarkManual;
+    }
+
+    @Override
+    public void setWeightedMarkManual(int weightedMarkManual) {
+        this.weightedMarkManual = weightedMarkManual;
+    }
+
+    private int rawMarkManual = 0;
+    @Override
+    public int getRawMarkManual() {
+        return rawMarkManual;
+    }
+
+    @Override
+    public void setRawMarkManual(int rawMarkManual) {
+        this.rawMarkManual = rawMarkManual;
+    }
+    
+    private String statusManual;
+    @Override
+    public String getStatusManual() {
+        return statusManual;
+    }
+    
+    @Override
+    public void setStatusManual(String statusManual){
+        this.statusManual = statusManual;
+    }
+
+
+	private Date date = null;
+	
+	
     @Override
     public Date getDate() {
         if (date != null) {
@@ -125,5 +191,5 @@ public class ActInfoImpl implements ActInfo{
     public void setReferential(String referential) {
         this.referential = referential;
     }
-
+    
 }

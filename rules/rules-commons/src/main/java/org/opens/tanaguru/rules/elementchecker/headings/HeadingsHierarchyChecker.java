@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,12 +17,13 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
-
 package org.opens.tanaguru.rules.elementchecker.headings;
 
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -35,44 +36,45 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.HEADER_NOT_HI
 
 /**
  * This class checks whether the headings hierarchy is well-formed.
- * 
+ *
  */
 public class HeadingsHierarchyChecker extends ElementCheckerImpl {
 
     private static final int HEADER_INDEX_IN_TAG = 1;
+    private static final String ARIA_LEVEL_ATTR = "aria-level";
 
     /**
      * Constructor.
-     * 
+     *
      */
     public HeadingsHierarchyChecker() {
         super();
     }
-    
+
     @Override
     public void doCheck(
-            SSPHandler sspHandler, 
-            Elements elements, 
+            SSPHandler sspHandler,
+            Elements elements,
             TestSolutionHandler testSolutionHandler) {
         checkHeadingsHierarchy(elements, testSolutionHandler);
     }
 
     /**
      * This methods checks whether the headings hierarchy is well-structured
-     * 
+     *
      * @param elements
-     * @param testSolutionHandler 
+     * @param testSolutionHandler
      */
-    private void checkHeadingsHierarchy (
-            Elements elements, 
+    private void checkHeadingsHierarchy(
+            Elements elements,
             TestSolutionHandler testSolutionHandler) {
         if (elements.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
-        
+
         TestSolution checkResult = TestSolution.PASSED;
-        
+
         Iterator<Element> iter = elements.iterator();
 
         // we get the index of the first element for further test
@@ -80,6 +82,8 @@ public class HeadingsHierarchyChecker extends ElementCheckerImpl {
         int indexOfReference = getHeaderIndex(element);
         int currentIndex;
         int previousIndex = indexOfReference;
+        Element elementOfReference = element;
+        Element previousElement = element;
 
         while (iter.hasNext()) {
             element = iter.next();
@@ -91,30 +95,65 @@ public class HeadingsHierarchyChecker extends ElementCheckerImpl {
                             TestSolution.FAILED,
                             element,
                             HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG,
-                            getEvidenceElement(PREVIOUS_H_TAG_INDEX_EE, "h"+String.valueOf(previousIndex)));
+                            getEvidenceElement(PREVIOUS_H_TAG_INDEX_EE, getEvidenceElementMsg(previousIndex, previousElement)));
                 } else if (currentIndex < indexOfReference) {
                     checkResult = TestSolution.FAILED;
                     addSourceCodeRemark(
                             TestSolution.FAILED,
                             element,
                             HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG,
-                            getEvidenceElement(FIRST_H_TAG_INDEX_EE, "h"+String.valueOf(indexOfReference)));
+                            getEvidenceElement(FIRST_H_TAG_INDEX_EE, getEvidenceElementMsg(indexOfReference, elementOfReference)));
                 }
                 previousIndex = currentIndex;
+                previousElement = element;
             }
         }
         testSolutionHandler.addTestSolution(checkResult);
     }
 
     /**
-     * 
+     *
+     * @param previousIndex
+     * @param element
+     * @return the evidence element string.
+     */
+    private String getEvidenceElementMsg(int previousIndex, Element element) {
+        Pattern pattern = Pattern.compile("(?i)h[1-6]");
+        Matcher matcher = pattern.matcher(element.tagName());
+        if (matcher.matches()) {
+            return "h" + String.valueOf(previousIndex);
+        } else {
+            return element.tagName() + " role=\"heading\" aria-level=\""
+                    + String.valueOf(previousIndex) + "\"";
+        }
+    }
+
+    /**
+     *
+     * @param element
+     * @return
+     */
+    private int getHeaderIndex(Element element) {
+        Pattern pattern = Pattern.compile("(?i)h[1-6]");
+        Matcher matcher = pattern.matcher(element.tagName());
+        if (matcher.matches()) {
+            return getHeaderIndexFromHTag(element);
+        } else if (element.hasAttr(ARIA_LEVEL_ATTR)) {
+            return getHeaderIndexFromAriaAttribute(element);
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     *
      * @param header
      * @return the index of the given heading element
      */
-    private int getHeaderIndex(Element element) {
+    private int getHeaderIndexFromAriaAttribute(Element element) {
         try {
-            int index = Integer.parseInt(element.tagName().substring(HEADER_INDEX_IN_TAG));
-            if ( index>0 && index<=6) {
+            int index = Integer.valueOf(element.attr(ARIA_LEVEL_ATTR));
+            if (index > 0) {
                 return index;
             } else {
                 return -1;
@@ -124,4 +163,21 @@ public class HeadingsHierarchyChecker extends ElementCheckerImpl {
         }
     }
 
+    /**
+     *
+     * @param header
+     * @return the index of the given heading element
+     */
+    private int getHeaderIndexFromHTag(Element element) {
+        try {
+            int index = Integer.parseInt(element.tagName().substring(HEADER_INDEX_IN_TAG));
+            if (index > 0 && index <= 6) {
+                return index;
+            } else {
+                return -1;
+            }
+        } catch (NumberFormatException ex) {
+            return -1;
+        }
+    }
 }

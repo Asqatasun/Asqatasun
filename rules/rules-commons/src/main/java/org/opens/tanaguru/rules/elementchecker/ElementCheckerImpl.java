@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 
 package org.opens.tanaguru.rules.elementchecker;
@@ -118,19 +118,11 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     
     /**
      * 
-     * Constructor
+     * @param eeAttributeNameList 
      */
-    public ElementCheckerImpl() {}
-    
-    /**
-     * 
-     * @param successSolution
-     * @param failureSolution 
-     */
-    public ElementCheckerImpl(TestSolution successSolution, 
-                              TestSolution failureSolution) {
-        this.successSolution = successSolution;
-        this.failureSolution = failureSolution;
+    public ElementCheckerImpl(String... eeAttributeNameList) {
+       this.eeAttributeNames = 
+               Arrays.copyOf(eeAttributeNameList, eeAttributeNameList.length); 
     }
     
     /**
@@ -142,20 +134,12 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     public ElementCheckerImpl(TestSolution successSolution, 
                               TestSolution failureSolution,
                               String... eeAttributeNameList) {
-       this(successSolution,failureSolution);
-       this.eeAttributeNames = 
+        this.successSolution = successSolution;
+        this.failureSolution = failureSolution;
+        this.eeAttributeNames = 
                Arrays.copyOf(eeAttributeNameList, eeAttributeNameList.length); 
     }
     
-    /**
-     * 
-     * @param eeAttributeNameList 
-     */
-    public ElementCheckerImpl(String... eeAttributeNameList) {
-       this.eeAttributeNames = 
-               Arrays.copyOf(eeAttributeNameList, eeAttributeNameList.length); 
-    }
-
     @Override
     public void check (
             SSPHandler sspHandler, 

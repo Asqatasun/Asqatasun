@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.rgaa22;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
@@ -37,6 +37,7 @@ public class Rgaa22Rule06271Test extends Rgaa22RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa22Rule06271Test (String testName){
         super(testName);

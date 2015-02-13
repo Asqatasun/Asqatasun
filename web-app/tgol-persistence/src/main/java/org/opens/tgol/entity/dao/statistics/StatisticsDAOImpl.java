@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.entity.dao.statistics;
 
@@ -119,6 +119,8 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
     private static final String RETRIEVE_MARK_QUERY =
             " FROM WEB_RESOURCE_STATISTICS "
             + "WHERE Id_Web_Resource=:idWebResource";
+    private static final String IS_AUDIT_MANUAL =
+            " AND Manual_Audit=:isManual";
 
     private static final String WEB_RESOURCE_STAT_COUNT =
             " count(Id_Web_Resource_Statistics) ";
@@ -177,6 +179,7 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      * @param audit
      * @param testSolution
      * @param theme
+     * @param manualAudit
      * @return
      *      the number of elements for a given result type and theme
      */
@@ -185,12 +188,15 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
             WebResource webResource,
             Audit audit,
             TestSolution testSolution,
-            Theme theme) {
+            Theme theme,
+            boolean manualAudit) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(THEME_STATISTICS_TABLE_STR);
         queryString = selectNbField(queryString, testSolution);
         queryString.append(RETRIEVE_COUNT_BY_RESULT_TYPE_AND_THEME_QUERY);
+        queryString.append(" and wrs.manual_audit = ");
+        queryString.append(manualAudit ? "1" : "0");
         
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", webResource.getId());
@@ -529,13 +535,15 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *      the mark for given audit and webresource
      */
     @Override
-    public Float findWeightedMarkByWebResourceAndAudit(Long idWebResource) {
+    public Float findWeightedMarkByWebResourceAndAudit(Long idWebResource , boolean isManual) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(MARK_FIELD_STR);
         queryString.append(RETRIEVE_MARK_QUERY);
+        queryString.append(IS_AUDIT_MANUAL);
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
+        query.setParameter("isManual", isManual);
         try {
             Object result = query.getSingleResult();
             if (result instanceof Float) {
@@ -561,13 +569,16 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
      *      the mark for given audit and webresource
      */
     @Override
-    public Float findRawMarkByWebResourceAndAudit(Long idWebResource) {
+    public Float findRawMarkByWebResourceAndAudit(Long idWebResource, boolean isManual) {
         StringBuilder queryString = new StringBuilder();
         queryString.append(SELECT_STR);
         queryString.append(RAW_MARK_FIELD_STR);
         queryString.append(RETRIEVE_MARK_QUERY);
+        queryString.append(IS_AUDIT_MANUAL);
+        
         Query query = entityManager.createNativeQuery(queryString.toString());
         query.setParameter("idWebResource", idWebResource);
+        query.setParameter("isManual", isManual);
         try {
             Object result = query.getSingleResult();
             if (result instanceof Float) {

@@ -1,6 +1,6 @@
  /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.controller;
 
@@ -59,16 +59,6 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class ForgottenOrChangePasswordController extends AbstractController {
 
-    private static final String EMAIL_FROM_KEY = "forgotten-password.emailFrom";
-    private static final String EMAIL_SUBJECT_KEY = "forgotten-password.emailSubject";
-    private static final String EMAIL_CONTENT_KEY = "forgotten-password.emailContent";
-    private static final String BUNDLE_NAME = "i18n/forgotten-password-page-I18N";
-    private static final String CHANGE_PASSWORD_URL_KEY = "changePasswordUrl";
-    
-    private static final String AUTHENTICATED_KEY = "authenticated";
-    
-    private static final String ROLE_ADMIN_NAME_KEY = "ROLE_ADMIN";
-
     private ChangePasswordFormValidator changePasswordFormValidator;
     @Autowired
     public final void setChangePasswordFormValidator(ChangePasswordFormValidator changePasswordFormValidator) {
@@ -99,7 +89,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         this.localeResolver = localeResolver;
     }
 
-    List<String> forbiddenUserList = new ArrayList<String>();
+    List<String> forbiddenUserList = new ArrayList();
     public void setForbiddenUserList(List<String> forbiddenUserList) {
         this.forbiddenUserList = forbiddenUserList;
     }
@@ -155,7 +145,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
             HttpServletRequest request,
             Model model) {
         model.addAttribute(TgolKeyStore.CHANGE_PASSWORD_FROM_ADMIN_KEY, true);
-        return displayChangePasswordView(id, AUTHENTICATED_KEY, model, request);
+        return displayChangePasswordView(id, TgolKeyStore.AUTHENTICATED_KEY, model, request);
     }
     
     /**
@@ -184,10 +174,10 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         User user;
         // if the change password request comes from an authentied user or from
         // an admin
-        if (token.equalsIgnoreCase(AUTHENTICATED_KEY)) {
+        if (token.equalsIgnoreCase(TgolKeyStore.AUTHENTICATED_KEY)) {
             if (currentUser == null || 
                     (!currentUser.getId().equals(userId) &&
-                    !currentUser.getRole().getRoleName().equals(ROLE_ADMIN_NAME_KEY)) ||
+                    !currentUser.getRole().getRoleName().equals(TgolKeyStore.ROLE_ADMIN_NAME_KEY)) ||
                     forbiddenUserList.contains(currentUser.getEmail1())) {
                 return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
             } else {
@@ -233,7 +223,6 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     
     /**
      * This method displays the change password page from an authenticated user
-     * @param contractId
      * @param model
      * @return
      */
@@ -334,6 +323,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @param result
      * @param model
      * @param request
+     * @param isrequestFromAdmin
      * @return
      * @throws Exception
      */
@@ -371,6 +361,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     /**
      *
      * @param model
+     * @param request
      * @return
      */
     @RequestMapping(value = TgolKeyStore.FORGOTTEN_PASSWORD_CONFIRMATION_URL, method = RequestMethod.GET)
@@ -385,7 +376,6 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     /**
      * 
      * @param model
-     * @param contract
      * @param launchAuditFromContractCommand
      * @return
      */
@@ -424,12 +414,12 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @param user
      */
     private void sendResetEmail(User user, Locale locale) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
-        String emailFrom = resourceBundle.getString(EMAIL_FROM_KEY);
-        Set<String> emailToSet = new HashSet<String>();
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(TgolKeyStore.FORGOTTEN_PASSWD_BUNDLE_NAME, locale);
+        String emailFrom = resourceBundle.getString(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_FROM_KEY);
+        Set<String> emailToSet = new HashSet();
         emailToSet.add(user.getEmail1());
-        String emailSubject = resourceBundle.getString(EMAIL_SUBJECT_KEY);
-        String emailContentPattern = resourceBundle.getString(EMAIL_CONTENT_KEY);
+        String emailSubject = resourceBundle.getString(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_SUBJECT_KEY);
+        String emailContentPattern = resourceBundle.getString(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_CONTENT_KEY);
         String emailContent = MessageFormat.format(emailContentPattern,
                 user.getEmail1(),
                 computeReturnedUrl(user));
@@ -449,7 +439,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      */
     private String computeReturnedUrl(User user) {
         StringBuilder sb = new StringBuilder();
-        sb.append(exposablePropertyPlaceholderConfigurer.getResolvedProps().get(CHANGE_PASSWORD_URL_KEY));
+        sb.append(exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.FORGOTTEN_PASSWD_CHANGE_PASSWORD_URL_KEY));
         sb.append("?user=");
         sb.append(user.getId());
         sb.append("&token=");

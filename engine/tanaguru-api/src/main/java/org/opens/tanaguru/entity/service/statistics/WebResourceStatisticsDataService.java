@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,12 +17,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.service.statistics;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
+
+import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
@@ -51,22 +55,26 @@ public interface WebResourceStatisticsDataService
      * @param webresourceId
      * @param paramSet
      * @param testSolution
+     * @param isManualAudit
      * @return
      */
     BigDecimal getWeightedResultByResultType(
             Long webresourceId,
             Collection<Parameter> paramSet,
-            TestSolution testSolution);
+            TestSolution testSolution,
+            boolean isManualAudit);
 
     /**
      * 
      * @param webresourceId
      * @param testSolution
+     * @param isManualAudit
      * @return
      */
     Long getNumberOfOccurrencesByWebResourceAndResultType(
             Long webresourceId,
-            TestSolution testSolution);
+            TestSolution testSolution,
+            boolean isManualAudit);
 
     /**
      *
@@ -81,4 +89,11 @@ public interface WebResourceStatisticsDataService
      * @return
      */
     WebResourceStatistics getWebResourceStatisticsByWebResource(WebResource webResource);
+    
+    /**
+     * 
+     * @param audit
+     * @param webResource
+     */
+    WebResourceStatistics createWebResourceStatisticsForManualAudit(Audit audit, WebResource webResource, List<ProcessResult> netResultList);
 }

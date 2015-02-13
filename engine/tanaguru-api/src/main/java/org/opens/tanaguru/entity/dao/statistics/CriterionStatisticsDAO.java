@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,15 +17,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.dao.statistics;
 
 import java.util.Collection;
+
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.statistics.CriterionStatistics;
+import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 
@@ -82,5 +84,16 @@ public interface CriterionStatisticsDAO extends GenericDAO<CriterionStatistics, 
      * @return 
      */
     Long findCriterionStatisticsCountByWebResource(Long webResourceId);
+    
+    
+    
+    /**
+     * Getting the CriterionStatistics by web resources statistics
+     * @param webResourceStatistics The web resources statistics
+     * @return List of CriterionStatistics by web resources statistics
+     */
+    CriterionStatistics findCriterionStatisticsByWebResource(Criterion criterion ,WebResourceStatistics webResourceStatistics);
+
+
 
 }

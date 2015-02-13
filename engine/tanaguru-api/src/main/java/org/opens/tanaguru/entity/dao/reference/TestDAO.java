@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,12 +17,11 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.dao.reference;
 
 import java.util.List;
-import java.util.Map;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Level;
@@ -35,8 +34,16 @@ import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
  * @author jkowalczyk
  */
 public interface TestDAO extends GenericDAO<Test, Long> {
-
-    /**
+	
+	/**
+    *
+    * @param label
+    *            the label of the test to read
+    * @return the matching read test
+    */
+	Test read(String label);
+    
+	/**
      *
      * @param reference
      *            the reference of the tests to find

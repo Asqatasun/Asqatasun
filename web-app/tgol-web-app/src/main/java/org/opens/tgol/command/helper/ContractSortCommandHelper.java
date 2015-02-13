@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2012  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,12 +17,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.command.helper;
 
 import java.util.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.displaytag.properties.SortOrderEnum;
 import org.opens.tgol.command.ContractSortCommand;
 import org.opens.tgol.command.factory.ContractSortCommandFactory;
@@ -113,18 +113,18 @@ public final class ContractSortCommandHelper  {
         
         csc = prepareDataForSortConsole(user.getId(), csc, displayOptionFieldsBuilderList, model);
 
-        List<ContractInfo> contractInfoSet = new LinkedList<ContractInfo>();
+        List<ContractInfo> contractInfoSet = new LinkedList();
         List<String> inclusionSortOccurence;
         if (csc.getSortOptionMap().containsKey(inclusionContractSortKey))  {
             inclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).toString().split(";"));
         } else {
-            inclusionSortOccurence = new ArrayList<String>();
+            inclusionSortOccurence = new ArrayList();
         }
         List<String> exclusionSortOccurence;
         if (csc.getSortOptionMap().containsKey(exclusionContractSortKey))  {
             exclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(exclusionContractSortKey).toString().split(";"));
         } else {
-            exclusionSortOccurence = new ArrayList<String>();
+            exclusionSortOccurence = new ArrayList();
         }
         for (Contract contract : user.getContractSet()) {
             if (isContractLabelIncluded(inclusionSortOccurence, contract.getLabel()) &&
@@ -158,7 +158,7 @@ public final class ContractSortCommandHelper  {
                 csc, 
                 displayOptionFieldsBuilderList, 
                 model);
-        List<Contract> contractSet = new LinkedList<Contract>();
+        List<Contract> contractSet = new LinkedList();
         List<String> inclusionSortOccurence = 
                 Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).toString().split(";"));
         List<String> exclusionSortOccurence = 
@@ -253,8 +253,7 @@ public final class ContractSortCommandHelper  {
                 if (c1.getLastActInfo() != null 
                         && c.getLastActInfo() != null) {
                     return Integer.valueOf(c1.getLastActInfo().getRawMark())
-                        .compareTo(
-                            Integer.valueOf(c.getLastActInfo().getRawMark()));
+                        .compareTo(c.getLastActInfo().getRawMark());
                 } else if (c1.getLastActInfo() == null 
                         && c.getLastActInfo() == null) {
                     return c.getLabel().compareToIgnoreCase(c1.getLabel());
@@ -267,8 +266,7 @@ public final class ContractSortCommandHelper  {
                 if (c1.getLastActInfo() != null 
                         && c.getLastActInfo() != null) {
                     return Integer.valueOf(c.getLastActInfo().getRawMark())
-                        .compareTo(
-                            Integer.valueOf(c1.getLastActInfo().getRawMark()));
+                        .compareTo(c1.getLastActInfo().getRawMark());
                 } else if (c1.getLastActInfo() == null 
                         && c.getLastActInfo() == null) {
                     return c.getLabel().compareToIgnoreCase(c1.getLabel());

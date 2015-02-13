@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.sebuilder.interpreter;
 
@@ -60,14 +60,14 @@ public class TgTestRun extends TestRun {
     private Collection<NewPageListener> newPageListeners;
     public void addNewPageListener(NewPageListener newPageListener) {
         if (newPageListeners == null) {
-            newPageListeners = new ArrayList<NewPageListener>();
+            newPageListeners = new ArrayList<>();
         }
         this.newPageListeners.add(newPageListener);
     }
 
     public void addNewPageListeners(Collection<NewPageListener> newPageListeners) {
         if (this.newPageListeners == null) {
-            this.newPageListeners = new ArrayList<NewPageListener>();
+            this.newPageListeners = new ArrayList<>();
         }
         this.newPageListeners.addAll(newPageListeners);
     }
@@ -282,7 +282,7 @@ public class TgTestRun extends TestRun {
                 getLog().warn(wde.getMessage());
             }
             /*##############################################################*/
-            
+
             /* byte[] snapshot = createPageSnapshot();*/
             for (NewPageListener npl : newPageListeners) {
                 npl.fireNewPage(url, sourceCode, null, jsScriptResult);
@@ -299,7 +299,7 @@ public class TgTestRun extends TestRun {
      */
     private Map<String, String> executeJsScripts() {
         getLog().debug("Executing js");
-        Map<String, String> jsScriptResult = new HashMap<String, String>();
+        Map<String, String> jsScriptResult = new HashMap<>();
         for (Map.Entry<String, String> entry : jsScriptMap.entrySet()) {
             try {
              jsScriptResult.put(entry.getKey(), getDriver().executeScript(entry.getValue()).toString());

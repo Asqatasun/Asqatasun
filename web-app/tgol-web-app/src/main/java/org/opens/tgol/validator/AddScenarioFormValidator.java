@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.validator;
 
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
@@ -71,7 +71,7 @@ public class AddScenarioFormValidator implements Validator {
     private static final String INVALID_SCENARIO_MSG_BUNDLE_KEY = 
             "scenarioManagement.invalidScenario";
             
-    public List<String> authorizedMimeType = new ArrayList<String>();
+    public List<String> authorizedMimeType = new ArrayList();
     public List<String> getAuthorizedMimeType() {
         return authorizedMimeType;
     }
@@ -86,7 +86,7 @@ public class AddScenarioFormValidator implements Validator {
         this.maxFileSize = maxFileSize;
     }
     
-    private ContractDataService contractDataService;
+    private final ContractDataService contractDataService;
     public ContractDataService getContractDataService() {
         return contractDataService;
     }
@@ -117,6 +117,8 @@ public class AddScenarioFormValidator implements Validator {
      * 
      * @param addScenarioCommand
      * @param errors 
+     * @return  whether the scenario handled by the current AddScenarioCommand
+     * has a well-formed label
      */
     public boolean checkScenarioLabel(
             AddScenarioCommand addScenarioCommand, 
@@ -130,7 +132,7 @@ public class AddScenarioFormValidator implements Validator {
             return false;
         }
         Contract contract = contractDataService.read(addScenarioCommand.getContractId());
-        Set<String> scenarioLabelSet = new HashSet<String>();
+        Set<String> scenarioLabelSet = new HashSet();
         for (Scenario scenario :contract.getScenarioSet()) {
             scenarioLabelSet.add(scenario.getLabel());
         }
@@ -154,15 +156,7 @@ public class AddScenarioFormValidator implements Validator {
             Errors errors) {
         try {
             IO.read(addScenarioCommand.getScenarioContent());
-        } catch (JSONException je) {
-            errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
-            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
-                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
-        } catch (IOException ex) {
-            errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
-            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
-                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
-        } catch (SuiteException ex) {
+        } catch (JSONException | IOException | SuiteException je) {
             errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);
@@ -173,6 +167,8 @@ public class AddScenarioFormValidator implements Validator {
      * 
      * @param addScenarioCommand
      * @param errors 
+     * @return  whether the scenario handled by the current AddScenarioCommand
+     * has a correct type and size
      */
     public boolean checkScenarioFileTypeAndSize(
             AddScenarioCommand addScenarioCommand, 

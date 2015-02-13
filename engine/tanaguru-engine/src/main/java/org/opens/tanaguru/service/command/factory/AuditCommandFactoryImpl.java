@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2013  Open-S Company
+ *  Copyright (C) 2008-2015  Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,14 +17,14 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
-
 package org.opens.tanaguru.service.command.factory;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.parameterization.Parameter;
@@ -35,8 +35,23 @@ import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.service.*;
-import org.opens.tanaguru.service.command.*;
+import org.opens.tanaguru.messagin.TanaguruMsgOutService;
+import org.opens.tanaguru.service.AnalyserService;
+import org.opens.tanaguru.service.ConsolidatorService;
+import org.opens.tanaguru.service.ContentAdapterService;
+import org.opens.tanaguru.service.ContentLoaderService;
+import org.opens.tanaguru.service.CrawlerService;
+import org.opens.tanaguru.service.ProcessorService;
+import org.opens.tanaguru.service.ScenarioLoaderService;
+import org.opens.tanaguru.service.command.AuditCommand;
+import org.opens.tanaguru.service.command.AuditCommandImpl;
+import org.opens.tanaguru.service.command.GroupOfPagesAuditCommandImpl;
+import org.opens.tanaguru.service.command.GroupOfPagesCrawlerAuditCommandImpl;
+import org.opens.tanaguru.service.command.PageAuditCommandImpl;
+import org.opens.tanaguru.service.command.PageAuditCrawlerCommandImpl;
+import org.opens.tanaguru.service.command.ScenarioAuditCommandImpl;
+import org.opens.tanaguru.service.command.SiteAuditCommandImpl;
+import org.opens.tanaguru.service.command.UploadAuditCommandImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -50,73 +65,73 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
     }
-    
+
     private WebResourceDataService webResourceDataService;
     @Autowired
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
     }
-    
+
     private TestDataService testDataService;
     @Autowired
     public void setTestDataService(TestDataService testDataService) {
         this.testDataService = testDataService;
     }
-    
+
     private ParameterDataService parameterDataService;
     @Autowired
     public void setParameterDataService(ParameterDataService parameterDataService) {
         this.parameterDataService = parameterDataService;
     }
-    
+
     private ContentDataService contentDataService;
     @Autowired
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
-    
+
     private ProcessResultDataService processResultDataService;
     @Autowired
     public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
         this.processResultDataService = processResultDataService;
     }
-    
+
     private PreProcessResultDataService preProcessResultDataService;
     @Autowired
     public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
         this.preProcessResultDataService = preProcessResultDataService;
     }
-    
+
     private CrawlerService crawlerService;
     @Autowired
     public void setCrawlerService(CrawlerService crawlerService) {
         this.crawlerService = crawlerService;
     }
-    
+
     private ContentLoaderService contentLoaderService;
     @Autowired
     public void setContentLoaderService(ContentLoaderService contentLoaderService) {
         this.contentLoaderService = contentLoaderService;
     }
-    
+
     private ScenarioLoaderService scenarioLoaderService;
     @Autowired
     public void setScenarioLoaderService(ScenarioLoaderService scenarioLoaderService) {
         this.scenarioLoaderService = scenarioLoaderService;
     }
-    
+
     private ContentAdapterService contentAdapterService;
     @Autowired
     public void setContentAdapterService(ContentAdapterService contentAdapterService) {
         this.contentAdapterService = contentAdapterService;
     }
-    
+
     private ProcessorService processorService;
     @Autowired
     public void setProcessorService(ProcessorService processorService) {
         this.processorService = processorService;
     }
-    
+
     private ConsolidatorService consolidatorService;
     @Autowired
     public void setConsolidatorService(ConsolidatorService consolidatorService) {
@@ -128,30 +143,35 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     public void setAnalyserService(AnalyserService analyserService) {
         this.analyserService = analyserService;
     }
-    
+
     private AdaptationListener adaptationListener;
     @Autowired
     public void setAdaptationListener(AdaptationListener adaptationListener) {
         this.adaptationListener = adaptationListener;
     }
-    
+
+    private TanaguruMsgOutService tanaguruMsgOutService;
+    public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
+        this.tanaguruMsgOutService = tanaguruMsgOutService;
+    }
+
     private boolean auditPageWithCrawler = false;
     public void setAuditPageWithCrawler(boolean auditPageWithCrawler) {
         Logger.getLogger(this.getClass()).debug("AuditPageWithCrawler " + auditPageWithCrawler);
         this.auditPageWithCrawler = auditPageWithCrawler;
     }
-    
+
     private boolean cleanUpRelatedContent = true;
     public void setCleanUpRelatedContent(boolean cleanUpRelatedContent) {
         Logger.getLogger(this.getClass()).debug("CleanUpRelatedContent " + cleanUpRelatedContent);
         this.cleanUpRelatedContent = cleanUpRelatedContent;
     }
-    
+
     public static final int ANALYSE_TREATMENT_WINDOW = 10;
     public static final int PROCESSING_TREATMENT_WINDOW = 4;
     public static final int ADAPTATION_TREATMENT_WINDOW = 4;
     public static final int CONSOLIDATION_TREATMENT_WINDOW = 200;
-    
+
     private int adaptationTreatmentWindow = ADAPTATION_TREATMENT_WINDOW;
     public void setAdaptationTreatmentWindow(int adaptationTreatmentWindow) {
         this.adaptationTreatmentWindow = adaptationTreatmentWindow;
@@ -171,7 +191,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     public void setProcessingTreatmentWindow(int processingTreatmentWindow) {
         this.processingTreatmentWindow = processingTreatmentWindow;
     }
-    
+
     @Override
     public AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite) {
         if (isSite) {
@@ -206,24 +226,24 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
 
     @Override
     public AuditCommand create(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet) {
-        
+
         if (auditPageWithCrawler) {
             GroupOfPagesCrawlerAuditCommandImpl auditCommand = 
                 new GroupOfPagesCrawlerAuditCommandImpl(
-                    siteUrl, 
-                    pageUrlList, 
-                    paramSet,
-                    auditDataService);
+                            siteUrl,
+                            pageUrlList,
+                            paramSet,
+                            auditDataService);
             initCommandServices(auditCommand);
             auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
         } else {
             GroupOfPagesAuditCommandImpl auditCommand = 
                 new GroupOfPagesAuditCommandImpl(
-                    siteUrl, 
-                    pageUrlList, 
-                    paramSet,
-                    auditDataService);
+                            siteUrl,
+                            pageUrlList,
+                            paramSet,
+                            auditDataService);
             initCommandServices(auditCommand);
             auditCommand.setScenarioLoaderService(scenarioLoaderService);
             return auditCommand;
@@ -240,8 +260,8 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     }
 
     /**
-     * 
-     * @param auditCommand 
+     *
+     * @param auditCommand
      */
     private void initCommandServices(AuditCommandImpl auditCommand) {
         auditCommand.setAdaptationListener(adaptationListener);
@@ -261,5 +281,10 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         auditCommand.setProcessorService(processorService);
         auditCommand.setTestDataService(testDataService);
         auditCommand.setWebResourceDataService(webResourceDataService);
+
+        //service to send message on queu
+        if (tanaguruMsgOutService != null) {
+            auditCommand.setTanaguruMsgOutService(tanaguruMsgOutService);
+        }
     }
 }

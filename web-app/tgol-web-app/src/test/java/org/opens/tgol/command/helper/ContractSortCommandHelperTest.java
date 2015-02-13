@@ -1,6 +1,6 @@
 /*
  *  Tanaguru - Automated webpage assessment
- *  Copyright (C) 2008-2011  Open-S Company
+ *  Copyright (C) 2008-2015 Tanaguru.org
  * 
  *  This file is part of Tanaguru.
  * 
@@ -17,7 +17,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
- *  Contact us by mail: open-s AT open-s DOT com
+ *  Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tgol.command.helper;
 
@@ -59,7 +59,7 @@ public class ContractSortCommandHelperTest extends TestCase {
     public void testGetLastAuditMarkSortValue() {
         System.out.println("getLastAuditMarkSortValue");
 
-        List<ContractInfo> contractInfoSet = new ArrayList<ContractInfo>(); 
+        List<ContractInfo> contractInfoSet = new ArrayList<>(); 
         ContractSortCommand csc = new ContractSortCommand();
         
         ContractInfo c1 = new ContractInfoImpl();
@@ -96,14 +96,14 @@ public class ContractSortCommandHelperTest extends TestCase {
         ContractSortCommandHelper.setSortByKey("SORTBY");
         ContractSortCommandHelper.setLastAuditMarkSortValue("MARK");
         ContractSortCommandHelper.setSortOrderKey("SORTORDER");
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("SORTORDER", SortOrderEnum.ASCENDING.getCode());
         map.put("SORTBY", "MARK");
 
         csc.setSortOptionMap(map);
         ContractSortCommandHelper.sortContractInfoSetRegardingCommand(contractInfoSet, csc);
         
-        map = new HashMap<String, Object>();
+        map = new HashMap<>();
         map.put("SORTORDER", SortOrderEnum.DESCENDING.getCode());
         map.put("SORTBY", "MARK");
 

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2014  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.rgaa22;
 
@@ -47,7 +47,7 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * page.</a>
  *
  * @see <a href="http://rgaa.net/Pertinence-de-l-alternative,38.html"> 4.4 rule
- * specification
+ * specification</a>
  *
  */
 public class Rgaa22Rule04041 extends AbstractCompositePageRuleMarkupImplementation {
@@ -62,8 +62,7 @@ public class Rgaa22Rule04041 extends AbstractCompositePageRuleMarkupImplementati
      */
     public Rgaa22Rule04041() {
         super();
-        Collection<AbstractPageRuleMarkupImplementation> ruleCheckers =
-                new ArrayList<AbstractPageRuleMarkupImplementation>();
+        Collection<AbstractPageRuleMarkupImplementation> ruleCheckers = new ArrayList();
         ruleCheckers.add(new InformativeImageRuleMarkupImplementation());
         ruleCheckers.add(new InformativeAppletRuleMarkupImplementation());
         ruleCheckers.add(new InformativeObjectRuleMarkupImplementation());
@@ -122,9 +121,9 @@ public class Rgaa22Rule04041 extends AbstractCompositePageRuleMarkupImplementati
         }
 
         @Override
-        protected void select(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-            super.select(sspHandler, elementHandler);
-            Iterator<Element> iter = elementHandler.get().iterator();
+        protected void select(SSPHandler sspHandler) {
+            super.select(sspHandler); 
+            Iterator<Element> iter = getSelectionWithoutMarkerHandler().get().iterator();
             // The elements with a longdesc attribute are seen as informative. 
             // They are added to the selection with marker
             while (iter.hasNext()) {

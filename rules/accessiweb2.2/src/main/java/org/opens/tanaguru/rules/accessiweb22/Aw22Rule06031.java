@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.accessiweb22;
 
@@ -55,7 +55,7 @@ public class Aw22Rule06031 extends AbstractLinkRuleImplementation {
     private static final String LINK_TEXT_BL_NOM_NAME = "LinkTextBlacklist";
     
     /* the checker of link title pertinence*/
-    private ElementChecker titlePertinenceElementChecker = 
+    private final ElementChecker titlePertinenceElementChecker = 
             new TextPertinenceChecker(
                 new TextAttributeOfElementBuilder(TITLE_ATTR),
                 // no emptiness check
@@ -72,9 +72,9 @@ public class Aw22Rule06031 extends AbstractLinkRuleImplementation {
                 TEXT_ELEMENT2,
                 TITLE_ATTR);
     /* local collection of process remarks*/
-    private Collection<ProcessRemark> remarks = new ArrayList<ProcessRemark>();
+    private final Collection<ProcessRemark> remarks = new ArrayList<>();
     /* local instance of ProcessRemarkService*/
-    ProcessRemarkService  prs;
+    ProcessRemarkService prs;
     
     /**
      * Default constructor
@@ -99,9 +99,8 @@ public class Aw22Rule06031 extends AbstractLinkRuleImplementation {
     @Override
     protected void check(
             SSPHandler sspHandler, 
-            ElementHandler<Element> elementHandler, 
             TestSolutionHandler testSolutionHandler) {
-        if (elementHandler.isEmpty()) {
+        if (getLinkElementSelector().isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }

@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2011  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.entity.audit;
 
@@ -26,11 +26,20 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlTransient;
+
+
+
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+//import org.hibernate.envers.Audited;
+//import org.hibernate.envers.NotAudited;
+//import org.hibernate.envers.RelationTargetAuditMode;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.TestImpl;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -46,40 +55,58 @@ import org.opens.tanaguru.entity.subject.WebResourceImpl;
         "Id_Audit_Gross_Result"}),
     @UniqueConstraint(columnNames = {"Id_Test", "Id_Web_Resource",
         "Id_Audit_Net_Result"})})
+@Audited
 public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
     private static final long serialVersionUID = -6016677895001819904L;
     @OneToMany(mappedBy = "parentResult", cascade = CascadeType.ALL)
     private Set<ProcessResultImpl> childResultSet;
+   
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Gross_Result")
+    @NotAudited
     private AuditImpl grossResultAudit;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_Process_Result")
     private Long id;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Audit_Net_Result")
+    @NotAudited
     private AuditImpl netResultAudit;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Process_Result_Parent")
     private ProcessResultImpl parentResult;
+    
+    
     @OneToMany(mappedBy = "processResult", cascade = {CascadeType.PERSIST})
+    @NotAudited
     private Set<ProcessRemarkImpl> remarkSet;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Web_Resource", nullable = false)
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+    @NotAudited
     private WebResourceImpl subject;
+    
     @ManyToOne
     @JoinColumn(name = "Id_Test")
+    @NotAudited
     private TestImpl test;
+    
     @Column(name = "Element_Counter")
     private int elementCounter;
+    
 
-    public ProcessResultImpl() {
+	public ProcessResultImpl() {
         super();
     }
 
     @Override
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void addAllRemark(Collection<ProcessRemark> remarkSet) {
         if (remarkSet == null) {
             return;
@@ -100,6 +127,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void addRemark(ProcessRemark remark) {
         if (remarkSet == null) {
             this.remarkSet = new LinkedHashSet<>();
@@ -145,6 +173,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.ProcessRemarkImpl.class),
         @XmlElementRef(type = org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public Collection<ProcessRemark> getRemarkSet() {
         return (Collection)remarkSet;
     }
@@ -201,6 +230,7 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     }
 
     @Override
+//    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public void setRemarkSet(Collection<ProcessRemark> remarkSet) {
         if (this.remarkSet == null) {
             this.remarkSet = new LinkedHashSet<>();
@@ -225,5 +255,5 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     public void setElementCounter(int elementCounter){
        this.elementCounter = elementCounter;
     }
-
+    
 }

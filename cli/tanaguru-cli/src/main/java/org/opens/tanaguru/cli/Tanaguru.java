@@ -1,6 +1,6 @@
 /*
  * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2013  Open-S Company
+ * Copyright (C) 2008-2015  Tanaguru.org
  *
  * This file is part of Tanaguru.
  *
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: open-s AT open-s DOT com
+ * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.cli;
 
@@ -70,6 +70,7 @@ public class Tanaguru implements AuditServiceListener {
     
     private static final String AW22_REF = "Aw22";
     private static final String RGAA22_REF = "Rgaa22";
+    private static final String RGAA30_REF = "Rgaa30";
     private static String REF = AW22_REF;
     
     private static final String BRONZE_LEVEL = "Bz";
@@ -82,6 +83,8 @@ public class Tanaguru implements AuditServiceListener {
     private static final String LEVEL_1 = "LEVEL_1";
     private static final String LEVEL_2 = "LEVEL_1";
     private static final String LEVEL_3 = "LEVEL_3";
+    
+    private static final int DEFAULT_XMS_VALUE = 64;
     
     private static String LEVEL = SILVER_LEVEL;
     
@@ -118,6 +121,15 @@ public class Tanaguru implements AuditServiceListener {
                 String ffPath = cl.getOptionValue("f");
                 if (isValidPath(ffPath, "f", false)) {
                     System.setProperty("webdriver.firefox.bin", ffPath);
+                } else {
+                    printUsage();
+                    return;
+                }
+            }
+            if (cl.hasOption("d")) {
+                String display = cl.getOptionValue("d");
+                if (isValidDisplay(display, "d")) {
+                    System.setProperty("display", ":"+display);
                 } else {
                     printUsage();
                     return;
@@ -162,6 +174,13 @@ public class Tanaguru implements AuditServiceListener {
                     return;
                 } else {
                     AUDIT_TYPE = auditType;
+                }
+            }
+            if (cl.hasOption("x")) {
+                String xmxValue = cl.getOptionValue("x");
+                if (!isValidXmxValue(xmxValue)) {
+                    printUsage();
+                    return;
                 }
             }
             if (AUDIT_TYPE.equalsIgnoreCase(PAGE_AUDIT)) {
@@ -251,10 +270,19 @@ public class Tanaguru implements AuditServiceListener {
     public void auditCompleted(Audit audit) {
         audit = auditDataService.read(audit.getId());
         List<ProcessResult> processResultList = (List<ProcessResult>) processResultDataService.getNetResultFromAudit(audit);
+
         System.out.println("Audit terminated with success at " + audit.getDateOfCreation());
+        System.out.println("Audit Id : " + audit.getId());
         System.out.println("");
         System.out.println("RawMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getRawMark() + "%");
         System.out.println("WeightedMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getMark() + "%");
+        System.out.println("Nb Passed : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfPassed());
+        System.out.println("Nb Failed test : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfInvalidTest());
+        System.out.println("Nb Failed occurences : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfFailedOccurences());
+        System.out.println("Nb Pre-qualified : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfNmi());
+        System.out.println("Nb Not Applicable : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfNa());
+        System.out.println("Nb Not Tested : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfNotTested());
+
         if (audit.getSubject() instanceof Site) {
             int numberOfChildWebResource = webResourceDataService.getNumberOfChildWebResource(audit.getSubject()).intValue();
             for (int i = 0; i < numberOfChildWebResource; i++) {
@@ -279,6 +307,13 @@ public class Tanaguru implements AuditServiceListener {
         }
         System.out.println("RawMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getRawMark() + "%");
         System.out.println("WeightedMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getMark() + "%");
+        System.out.println("Nb Passed : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfPassed());
+        System.out.println("Nb Failed test : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfInvalidTest());
+        System.out.println("Nb Failed occurences : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfFailedOccurences());
+        System.out.println("Nb Pre-qualified : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNmi());
+        System.out.println("Nb Not Applicable : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNa());
+        System.out.println("Nb Not Tested : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNotTested());
+        
         Collections.sort(prList, new Comparator<ProcessResult>() {
             @Override
             public int compare(ProcessResult t, ProcessResult t1) {
@@ -343,7 +378,7 @@ public class Tanaguru implements AuditServiceListener {
      * @return 
      */
     private Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
-        if (ref.equalsIgnoreCase(RGAA22_REF)) {
+        if (ref.equalsIgnoreCase(RGAA22_REF) || ref.equalsIgnoreCase(RGAA30_REF)) {
             if (level.equalsIgnoreCase(BRONZE_LEVEL)) {
                 level=A_LEVEL;
             } else if (level.equalsIgnoreCase(SILVER_LEVEL)) {
@@ -383,7 +418,9 @@ public class Tanaguru implements AuditServiceListener {
      * @return 
      */
     private String readFile(File file) throws IOException {
-        return FileUtils.readFileToString(file);
+      // #57 issue quick fix.......
+        return FileUtils.readFileToString(file).replace("\"formatVersion\": 2", "\"formatVersion\":1")
+                                               .replace("\"formatVersion\":2", "\"formatVersion\":1");
     }
 
     /**
@@ -411,10 +448,17 @@ public class Tanaguru implements AuditServiceListener {
                              .isRequired(false)
                              .create("f"));
         
+        options.addOption(OptionBuilder.withLongOpt("display")
+                             .withDescription("Value of the display")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("d"));
+        
         options.addOption(OptionBuilder.withLongOpt("referential")
                              .withDescription("Referential : \n"
                 + "- \"Aw22\" for Accessiweb 2.2 (default)\n"
-                + "- \"Rgaa22\" for Rgaa 2.2\n")
+                + "- \"Rgaa22\" for Rgaa 2.2\n"
+                + "- \"Rgaa30\" for Rgaa 3.0\n")
                              .hasArg()
                              .isRequired(false)
                              .create("r"));
@@ -437,6 +481,13 @@ public class Tanaguru implements AuditServiceListener {
                              .hasArg()
                              .isRequired(false)
                              .create("t"));
+        options.addOption(OptionBuilder.withLongOpt("xmx-value")
+                             .withDescription("Xmx value set to the process (without 'M' at the end):\n"
+                + "- default is 256 \n"
+                + "- must be superior to 64 (Xms value)")
+                             .hasArg()
+                             .isRequired(false)
+                             .create("x"));
 
         return options;
     }
@@ -471,6 +522,22 @@ public class Tanaguru implements AuditServiceListener {
     
     /**
      * 
+     * @param display
+     * @param option
+     * @return whether the given display is valid 
+     */
+    private static boolean isValidDisplay(String display, String option) {
+        try {
+            Integer.valueOf(display);
+            return true;
+        } catch (NumberFormatException nme) {
+            System.out.println("\n"+display + " is invalid for " + option + " option.\n");
+            return false;
+        }
+    }
+    
+    /**
+     * 
      * @param path
      * @param argument
      * @param testWritable
@@ -478,7 +545,8 @@ public class Tanaguru implements AuditServiceListener {
      */
     private static boolean isValidReferential(String ref) {
         if (StringUtils.equals(ref, AW22_REF) ||
-                StringUtils.equals(ref, RGAA22_REF) ) {
+                StringUtils.equals(ref, RGAA22_REF) ||
+                    StringUtils.equals(ref, RGAA30_REF)) {
             return true;
         }
         System.out.println("\nThe referential \"" + ref + "\" doesn't exist.\n");
@@ -500,6 +568,28 @@ public class Tanaguru implements AuditServiceListener {
         }
         System.out.println("\nThe level \"" + level + "\" doesn't exist.\n");
         return false;
+    }
+    
+    /**
+     * 
+     * @param path
+     * @param argument
+     * @param testWritable
+     * @return whether the given level is valid
+     */
+    private static boolean isValidXmxValue(String xmxStr) {
+      System.out.println(xmxStr);
+        try {
+            int xmxValue = Integer.valueOf(xmxStr);
+            if (xmxValue <= DEFAULT_XMS_VALUE) {
+                System.out.println("\nThe value of the Xmx value \"" + xmxStr + "\" must be superior to "+DEFAULT_XMS_VALUE+".\n");
+                return false;
+            }
+        } catch (NumberFormatException nfe) {
+            System.out.println("\nThe format of the Xmx value \"" + xmxStr + "\" is incorrect.\n");
+            return false;
+        }
+        return true;
     }
     
     /**
