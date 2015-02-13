@@ -4,23 +4,21 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>engine</artifactId>
-        <version>3.0.3</version>
+        <version>3.0.4</version>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>tanaguru-statistics</artifactId>
     <name>statistics</name>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-audit</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
     </dependencies>
 </project>

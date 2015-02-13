@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>web-app</artifactId>
-        <version>3.0.3</version>
+        <version>3.0.4</version>
     </parent>
     <artifactId>tgol-report</artifactId>
     <name>tgol-report</name>

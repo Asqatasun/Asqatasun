@@ -6,11 +6,11 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>web-app</artifactId>
-        <version>3.0.3</version>
+        <version>3.0.4</version>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>security</artifactId>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
     <name>security</name>
     <dependencies>
     <!-- log4j dependencies -->
