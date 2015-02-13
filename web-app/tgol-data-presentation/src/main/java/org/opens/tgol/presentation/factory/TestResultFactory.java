@@ -320,7 +320,6 @@ public final class TestResultFactory {
                 } else {
                     processResult = prList.get(0);
                 }
-                Logger.getLogger(this.getClass()).error(entry.getValue().getResult());
                 processResult.setManualValue(
                         entry.getValue().getResult().equals(TestResult.FAILED_LOWER) ? TestSolution.FAILED :
                         (entry.getValue().getResult().equals(TestResult.PASSED_LOWER) ? TestSolution.PASSED :
