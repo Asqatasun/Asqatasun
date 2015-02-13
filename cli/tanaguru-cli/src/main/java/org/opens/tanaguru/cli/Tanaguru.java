@@ -81,7 +81,7 @@ public class Tanaguru implements AuditServiceListener {
     private static final String AAA_LEVEL = "AAA";
    
     private static final String LEVEL_1 = "LEVEL_1";
-    private static final String LEVEL_2 = "LEVEL_1";
+    private static final String LEVEL_2 = "LEVEL_2";
     private static final String LEVEL_3 = "LEVEL_3";
     
     private static final int DEFAULT_XMS_VALUE = 64;
