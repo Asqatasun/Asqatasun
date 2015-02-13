@@ -33,7 +33,7 @@
                 <a class="brand" 
                    href="<c:url value="/dispatch.html"/>" 
                    title="<fmt:message key="home.home"/>">
-                    <img src="${tgLogoUrl}" />
+                    <img src="${tgLogoUrl}" alt="<fmt:message key="home.home"/>"/>
                 </a>
                 </c:when>
                 <c:otherwise>
