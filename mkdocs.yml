@@ -11,6 +11,7 @@ pages:
 - ['usage-cli-doc.md', 'Command Line Interface (CLI)','Usage']
 - ['developer-doc.md', 'Developer Documentation']
 - ['robots-txt.md', 'Robots.txt']
+- ['Tanaguru-meter.md', 'Tanaguru meter']
 - ['tanaguru-team.md', 'Tanaguru Team']
 
 theme: readthedocs
