@@ -26,7 +26,9 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (41, 'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling'),
 (42, 'INCLUSION_REGEXP', 1, '', 'inclusion regex'),
 (43, 'SCREEN_WIDTH', 1, '', 'screen width'),
-(44, 'SCREEN_HEIGHT', 1, '', 'screen height');
+(44, 'SCREEN_HEIGHT', 1, '', 'screen height'),
+(45, 'PROXY_USER', 1, 'proxy user', 'proxy user'),
+(46, 'PROXY_PASSWORD', 1, 'proxy password', 'proxy password');
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (1, '50000', b'0'),
@@ -50,6 +52,8 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (41, 'false', b'0'),
 (42, '', b'1'),
 (43, '1920', b'1'),
-(44, '1080', b'1'); 
+(44, '1080', b'1'),
+(45, '', b'1'),
+(46, '', b'1'); 
 
 SET foreign_key_checks=1;
