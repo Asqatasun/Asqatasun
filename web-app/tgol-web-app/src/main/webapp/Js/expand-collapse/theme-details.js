@@ -116,7 +116,8 @@ $(document).ready(function() {
         });
     });
     
-    window.location.hash=window.location.hash;
+//    window.location.hash=window.location.hash; // unexpected line of code, must 
+// be there for something 
 });
 
 function showPanel(selection, panneaux) {
