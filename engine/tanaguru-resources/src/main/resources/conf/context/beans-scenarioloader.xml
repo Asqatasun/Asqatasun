@@ -93,5 +93,20 @@
             </list>
         </property>
     </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="profileFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setPathToPreSetProfile</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>${pathToPreSetFirefoxProfile}</value>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>
