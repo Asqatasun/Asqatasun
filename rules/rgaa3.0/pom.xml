@@ -33,7 +33,7 @@
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
-        /plugins>
+        </plugins>
         <finalName>rgaa3.0-${rulesVersion}</finalName>
     </build>
     <dependencies>
