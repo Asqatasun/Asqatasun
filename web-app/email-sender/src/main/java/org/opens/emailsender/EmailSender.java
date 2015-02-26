@@ -137,7 +137,7 @@ public class EmailSender {
                 // Setting content and charset (warning: both declarations of
                 // charset are needed)
                 msg.setHeader(CONTENT_TYPE_KEY, FULL_CHARSET_KEY);
-                LOGGER.error("emailContent  " + emailContent);
+                LOGGER.debug("emailContent  " + emailContent);
                 msg.setContent(emailContent, FULL_CHARSET_KEY);
                 try {
                     LOGGER.debug("emailContent from message object "
@@ -148,16 +148,19 @@ public class EmailSender {
                     LOGGER.error(ex.getMessage());
                 }
                 for (Address addr :  msg.getAllRecipients()) {
-                    LOGGER.error("addr " + addr);
+                    LOGGER.debug("addr " + addr);
                 }
                 t.sendMessage(msg, msg.getAllRecipients());
             } catch (AddressException ex) {
-                LOGGER.warn(ex.getMessage());
+                LOGGER.warn("AddressException " + ex.getMessage());
+                LOGGER.warn("AddressException " + ex.getStackTrace());
             }
         } catch (NoSuchProviderException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.warn("NoSuchProviderException " + e.getMessage());
+            LOGGER.warn("NoSuchProviderException " + e.getStackTrace());
         } catch (MessagingException e) {
-            LOGGER.warn(e.getMessage());
+            LOGGER.warn("MessagingException " + e.getMessage());
+            LOGGER.warn("MessagingException " + e.getStackTrace());
         }
     }
 }
