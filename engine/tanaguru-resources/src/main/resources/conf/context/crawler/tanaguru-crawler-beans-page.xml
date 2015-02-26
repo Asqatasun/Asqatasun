@@ -224,6 +224,8 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="soTimeoutMs" value="10000" />
         <property name="httpProxyHost" value="" />
         <property name="httpProxyPort" value="0" />
+        <property name="httpProxyUser" value="" />
+        <property name="httpProxyPassword" value="" />
         <property name="digestContent" value="false" />
         <property name="ignoreCookies" value="false" />
         <property name="shouldFetchBodyRule">

@@ -236,6 +236,8 @@ metadata.description=Basic crawl starting with useful defaults
   <!-- <property name="httpBindAddress" value="" /> -->
         <property name="httpProxyHost" value="" />
         <property name="httpProxyPort" value="" />
+        <property name="httpProxyUser" value="" />
+        <property name="httpProxyPassword" value="" />
         <property name="digestContent" value="false" />
         <property name="ignoreCookies" value="false" />
         <property name="shouldFetchBodyRule">

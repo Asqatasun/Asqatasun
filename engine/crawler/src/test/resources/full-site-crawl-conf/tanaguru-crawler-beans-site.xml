@@ -222,6 +222,8 @@
         <property name="digestContent" value="false" />
         <property name="httpProxyHost" value="" />
         <property name="httpProxyPort" value="0" />
+        <property name="httpProxyUser" value="" />
+        <property name="httpProxyPassword" value="" />
         <property name="ignoreCookies" value="false" />
         <property name="shouldFetchBodyRule">
             <bean class="org.archive.modules.deciderules.ContentTypeNotMatchesRegexDecideRule">
