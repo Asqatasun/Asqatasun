@@ -309,10 +309,9 @@
     </build>
     <profiles>
         <profile>
-            <id>web</id>
+            <id>tanaguru</id>
             <properties>
-                <sonar.branch>web</sonar.branch>
-                <sonar.language>web</sonar.language>
+                <sonar.language>accessibility</sonar.language>
             </properties>
         </profile>
         <profile>
