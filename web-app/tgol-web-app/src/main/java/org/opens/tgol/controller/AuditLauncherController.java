@@ -131,6 +131,36 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
         }
         return httpProxyPort;
     }
+    private String httpProxyUser;
+
+    /**
+     * Direct call to the property place holder configurer due to exposition
+     * context
+     *
+     * @return
+     */
+    public String getHttpProxyUser() {
+        if (httpProxyUser == null) {
+            httpProxyUser = exposablePropertyPlaceholderConfigurer.
+                    getResolvedProps().get(TgolKeyStore.PROXY_USER_CONF_KEY);
+        }
+        return httpProxyUser;
+    }
+    private String httpProxyPassword;
+
+    /**
+     * Direct call to the property place holder configurer due to exposition
+     * context
+     *
+     * @return
+     */
+    public String getHttpProxyPassword() {
+        if (httpProxyPassword == null) {
+            httpProxyPassword = exposablePropertyPlaceholderConfigurer.
+                    getResolvedProps().get(TgolKeyStore.PROXY_PASSWORD_CONF_KEY);
+        }
+        return httpProxyPassword;
+    }
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
@@ -511,6 +541,20 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
                 .getParameter(proxyPortParameterElement, getHttpProxyPort());
         proxyParamSet.add(proxyHostParameter);
         proxyParamSet.add(proxyPortParameter);
+        
+        if ((StringUtils.isNotEmpty(getHttpProxyUser()) && StringUtils.isNotEmpty(getHttpProxyPassword()))) {
+            ParameterElement proxyUserParameterElement =
+                parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_USER_PARAM_KEY);
+            ParameterElement proxyPasswordParameterElement =
+                    parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_PASSWORD_PARAM_KEY);
+            Parameter proxyUserParameter = getParameterDataService()
+                    .getParameter(proxyUserParameterElement, getHttpProxyUser());
+            Parameter proxyPasswordParameter = getParameterDataService()
+                    .getParameter(proxyPasswordParameterElement, getHttpProxyPassword());
+            proxyParamSet.add(proxyUserParameter);
+            proxyParamSet.add(proxyPasswordParameter);
+        }
+        
         LOGGER.debug("paramSet.size() " + paramSet.size());
         LOGGER.debug("proxyParamSet " + proxyParamSet.size());
         if (LOGGER.isDebugEnabled()) {
@@ -520,6 +564,12 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
                         LOGGER.debug(param.getValue());
                         break;
                     case TgolKeyStore.PROXY_PORT_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                    case TgolKeyStore.PROXY_PASSWORD_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                    case TgolKeyStore.PROXY_USER_PARAM_KEY:
                         LOGGER.debug(param.getValue());
                         break;
                 }
@@ -537,6 +587,12 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
                         LOGGER.debug(param.getValue());
                         break;
                     case TgolKeyStore.PROXY_PORT_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                    case TgolKeyStore.PROXY_USER_PARAM_KEY:
+                        LOGGER.debug(param.getValue());
+                        break;
+                    case TgolKeyStore.PROXY_PASSWORD_PARAM_KEY:
                         LOGGER.debug(param.getValue());
                         break;
                 }

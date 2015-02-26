@@ -386,6 +386,8 @@ public final class TgolKeyStore {
     /* audit param keys */
     public static final String PROXY_HOST_PARAM_KEY = "PROXY_HOST";
     public static final String PROXY_PORT_PARAM_KEY = "PROXY_PORT";
+    public static final String PROXY_USER_PARAM_KEY = "PROXY_USER";
+    public static final String PROXY_PASSWORD_PARAM_KEY = "PROXY_PASSWORD";
     public static final String DEPTH_PARAM_KEY = "DEPTH";
     public static final String MAX_DOCUMENT_PARAM_KEY = "MAX_DOCUMENTS";
     public static final String MAX_DURATION_PARAM_KEY = "MAX_DURATION";
@@ -393,6 +395,8 @@ public final class TgolKeyStore {
     public static final String DEPTH_PAGE_PARAM_VALUE = "0";
     public static final String PROXY_HOST_CONF_KEY = "proxyHost";
     public static final String PROXY_PORT_CONF_KEY = "proxyPort";
+    public static final String PROXY_USER_CONF_KEY = "proxyUser";
+    public static final String PROXY_PASSWORD_CONF_KEY = "proxyPassword";
     public static final String PROXY_EXCLUSION_URL_CONF_KEY = "proxyExclusionUrl";
     public static final String EMAIL_SENT_TO_USER_EXCLUSION_CONF_KEY = "emailSentToUserExclusionList";
     
