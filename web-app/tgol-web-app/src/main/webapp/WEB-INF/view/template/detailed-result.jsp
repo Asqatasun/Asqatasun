@@ -42,6 +42,25 @@
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
         </c:if>
+        <c:if test="${isManualAudit}">
+            <div class="row"> 
+                <div class="offset1 span4">
+                    <button id="apply-all-auto-passed" class="result-page-action">
+                        <fmt:message key="resultPage.applyAllAutoPassed"/>
+                    </button>
+                </div>
+                <div class="offset1 span4">²    
+                    <button id="apply-all-auto-failed" class="result-page-action">
+                        <fmt:message key="resultPage.applyAllAutoFailed"/>
+                    </button>
+                </div>    
+                <div class="offset1 span4">    
+                    <button id="apply-all-auto-na" class="result-page-action ">
+                        <fmt:message key="resultPage.applyAllAutoNa"/>
+                    </button>
+                </div>
+            </div>
+        </c:if>
         <c:set var="updateManualResultUrl">
             <c:url value="/home/contract/update-manual-result.html?wr=${param.wr}"/>
         </c:set>
@@ -202,18 +221,18 @@
                                                 <c:choose>
                                                     <c:when test="${isManualAudit}">
                                                 <div class="audit-result-manual span3">
-                                                            <fieldset>
-                                                                <legend><fmt:message key="resultPage.overridenResult"/><span class="offscreen">${testResult.testShortLabel}</span>
-                                                                </legend>
-                                                                <c:forEach items="${manualAuditCommand.statusList}" var="auditStatus">
-                                                                    <div class="clearfix ">
-                                                                        <div class="input">
-                                                                            <form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="modifiedManualResultMap['${testResult.testShortLabel}'].result" value="${auditStatus}"/>
-                                                                            <form:label path="" for="${auditStatus}${testResult.testShortLabel}"><fmt:message key="${auditStatus}"/></form:label>
-                                                                            </div>
-                                                                        </div>
-                                                                </c:forEach>
-                                                            </fieldset>
+                                                    <fieldset>
+                                                        <legend><fmt:message key="resultPage.overridenResult"/><span class="offscreen">${testResult.testShortLabel}</span>
+                                                        </legend>
+                                                        <c:forEach items="${manualAuditCommand.statusList}" var="auditStatus">
+                                                            <div class="clearfix ">
+                                                                <div class="input">
+                                                                    <form:radiobutton id="${auditStatus}${testResult.testShortLabel}" name="auditStatus${testResult.testShortLabel}" path="modifiedManualResultMap['${testResult.testShortLabel}'].result" value="${auditStatus}"/>
+                                                                    <form:label path="" for="${auditStatus}${testResult.testShortLabel}"><fmt:message key="${auditStatus}"/></form:label>
+                                                                    </div>
+                                                                </div>
+                                                        </c:forEach>
+                                                    </fieldset>
                                                 </div>   
                                                     </c:when>
                                                     <c:otherwise>

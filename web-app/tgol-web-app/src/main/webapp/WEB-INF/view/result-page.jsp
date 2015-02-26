@@ -60,7 +60,10 @@
     <c:url value="/Js/snapshot/snapshot-min.js"/>
 </c:set>
 <c:set var="detailResultManualJsUrl">
-    <c:url value="/Js/result-page/detail-result-manual.js"/>  
+    <c:url value="/Js/result-page/detail-result-manual-min.js"/>  
+</c:set>
+<c:set var="applyAutoResultsJsUrl">
+    <c:url value="/Js/result-page/apply-auto-results-min.js"/>  
 </c:set>
 
 <!-- external images -->
@@ -235,6 +238,7 @@
         </c:if>
         <c:if test="${isManualAudit}">
         <script type="text/javascript" src="${detailResultManualJsUrl}"></script>
+        <script type="text/javascript" src="${applyAutoResultsJsUrl}"></script>
         </c:if>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>
