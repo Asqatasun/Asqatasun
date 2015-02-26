@@ -49,7 +49,7 @@
                         <fmt:message key="resultPage.applyAllAutoPassed"/>
                     </button>
                 </div>
-                <div class="offset1 span4">²    
+                <div class="offset1 span4">
                     <button id="apply-all-auto-failed" class="result-page-action">
                         <fmt:message key="resultPage.applyAllAutoFailed"/>
                     </button>
