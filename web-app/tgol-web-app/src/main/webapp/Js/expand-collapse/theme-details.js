@@ -195,10 +195,16 @@ function toggleIconResult(selection, highlight) {
     }
 }
 
+if (typeof String.prototype.startsWith !== 'function') {
+  String.prototype.startsWith = function (str){
+    return this.slice(0, str.length) === str;
+  };
+}
+
 function changeSelectionSrc(selection, fromSrc, toSrc) {
     var attr = selection.attr('alt');
     if (typeof attr !== typeof undefined && attr !== false && attr.length > 0 && !attr.startsWith("0")) {
-        var src = selection.attr('src').replace(fromSrc, toSrc)
+        var src = selection.attr('src').replace(fromSrc, toSrc);
         selection.attr('src', src);
     }
 }
