@@ -29,7 +29,7 @@ with the www.bbc.com project (you have to use a dedicated project for sports.bbc
 
 ### Step 2b
 
-Eventually adjust the [#Page-audit-options](Options)
+Eventually adjust the [Options](#page-audit-options)
 
 ### Step 2c
 
