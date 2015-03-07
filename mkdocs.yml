@@ -1,7 +1,9 @@
 site_name: Tanaguru
 pages:
 - ['index.md',                      'Home']
-- ['user-doc.md',                   'User Documentation']
+- ['user-doc.md',                   'User Documentation', 'User Documentation']
+- ['userdoc-4-audits.md',           'User Documentation', '4 kinds of audit']
+- ['userdoc-assisted-audit.md',     'User Documentation', 'Assisted audit']
 - ['prerequisites-webapp-doc.md',   'Installation Web Application','Prerequisites']
 - ['install-webapp-doc.md',         'Installation Web Application','Installation']
 - ['configuration-webapp-doc.md',   'Installation Web Application','Configuration']
@@ -11,7 +13,6 @@ pages:
 - ['usage-cli-doc.md',              'Installation Command Line Interface (CLI)','Usage']
 - ['developer-doc.md',              'Developer Documentation']
 - ['robots-txt.md',                 'Robots.txt']
-- ['Tanaguru-meter.md',             'Tanaguru meter']
 - ['tanaguru-team.md',              'Tanaguru Team']
 
 theme: readthedocs
