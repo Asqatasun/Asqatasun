@@ -1,18 +1,18 @@
 site_name: Tanaguru
 pages:
-- ['index.md', 'Home']
-- ['user-doc.md', 'User Documentation']
-- ['prerequisites-webapp-doc.md', 'Web Application','Prerequisites']
-- ['install-webapp-doc.md', 'Web Application','Installation']
-- ['configuration-webapp-doc.md', 'Web Application','Configuration']
-- ['usage-webapp-doc.md', 'Web Application','Usage']
-- ['prerequisites-cli-doc.md', 'Command Line Interface (CLI)','Prerequisites']
-- ['install-cli-doc.md', 'Command Line Interface (CLI)','Installation']
-- ['usage-cli-doc.md', 'Command Line Interface (CLI)','Usage']
-- ['developer-doc.md', 'Developer Documentation']
-- ['robots-txt.md', 'Robots.txt']
-- ['Tanaguru-meter.md', 'Tanaguru meter']
-- ['tanaguru-team.md', 'Tanaguru Team']
+- ['index.md',                      'Home']
+- ['user-doc.md',                   'User Documentation']
+- ['prerequisites-webapp-doc.md',   'Installation Web Application','Prerequisites']
+- ['install-webapp-doc.md',         'Installation Web Application','Installation']
+- ['configuration-webapp-doc.md',   'Installation Web Application','Configuration']
+- ['usage-webapp-doc.md',           'Installation Web Application','Usage']
+- ['prerequisites-cli-doc.md',      'Installation Command Line Interface (CLI)','Prerequisites']
+- ['install-cli-doc.md',            'Installation Command Line Interface (CLI)','Installation']
+- ['usage-cli-doc.md',              'Installation Command Line Interface (CLI)','Usage']
+- ['developer-doc.md',              'Developer Documentation']
+- ['robots-txt.md',                 'Robots.txt']
+- ['Tanaguru-meter.md',             'Tanaguru meter']
+- ['tanaguru-team.md',              'Tanaguru Team']
 
 theme: readthedocs
 repo_url: https://github.com/Tanaguru/Tanaguru
