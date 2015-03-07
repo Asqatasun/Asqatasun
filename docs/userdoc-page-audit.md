@@ -29,7 +29,7 @@ with the www.bbc.com project (you have to use a dedicated project for sports.bbc
 
 ### Step 2b
 
-Eventually adjust the [Options](#page-audit-options)
+Eventually adjust the [Options](#page-audit-options).
 
 ### Step 2c
 
@@ -37,7 +37,7 @@ Click the *Launch the audit* button.
 
 ### Step 3
 
-Have the result
+Have the result.
 
 ![](Images/screenshot_20150307_TANAGURU_PAGE_audit_BBC_30_result.png)
 
