@@ -3,7 +3,9 @@ pages:
 - ['index.md',                      'Home']
 - ['user-doc.md',                   'User Documentation', 'User Documentation']
 - ['userdoc-4-audits.md',           'User Documentation', '4 kinds of audit']
+- ['userdoc-page-audit.md',         'User Documentation', 'Page audit']
 - ['userdoc-assisted-audit.md',     'User Documentation', 'Assisted audit']
+- ['userdoc-HTML-markers.md',       'User Documentation', 'HTML markers']
 - ['prerequisites-webapp-doc.md',   'Installation Web Application','Prerequisites']
 - ['install-webapp-doc.md',         'Installation Web Application','Installation']
 - ['configuration-webapp-doc.md',   'Installation Web Application','Configuration']
@@ -12,7 +14,6 @@ pages:
 - ['install-cli-doc.md',            'Installation Command Line Interface (CLI)','Installation']
 - ['usage-cli-doc.md',              'Installation Command Line Interface (CLI)','Usage']
 - ['developer-doc.md',              'Developer Documentation']
-- ['robots-txt.md',                 'Robots.txt']
 - ['tanaguru-team.md',              'Tanaguru Team']
 
 theme: readthedocs

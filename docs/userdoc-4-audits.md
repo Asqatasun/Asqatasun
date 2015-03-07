@@ -4,7 +4,7 @@ Tanaguru offers 4 kinds of audit. Choose the suitable kind depending on your nee
 
 ## Typical usages for Page audit
 
-* THE typical audit you run on a page to have insights about its level of accessibility
+* *the* typical audit you run on a page to have insights about its level of accessibility
 (be it a quick view, or an in-depth study with [Assisted Audit](userdoc-assisted-audit.md))
 
 ## Typical usages for Scenario audit
@@ -34,4 +34,4 @@ page and send it as offline file to Tanaguru
 ----------------------------------- | ------------- | --------------| ------------- | -------------
 DOM / Generated HTML support        | YES           | YES           |               |
 Treat also CSS                      | YES           | YES           |               |
-Comply with robots.txt restrictions |               |               | YES           | 
+Comply with [robots.txt](http://www.robotstxt.org) |               |               | YES           | 
