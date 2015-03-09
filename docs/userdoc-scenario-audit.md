@@ -102,6 +102,6 @@ by clicking on the number of pages link
 You may then explore the detail of each audited page.
 
 Scenarios are a powerful tool. Once created a scenario can be executed over and
-over providing also regression testing in addition of accessibility testing.
+over providing also **regression testing** in addition of accessibility testing.
 
 
