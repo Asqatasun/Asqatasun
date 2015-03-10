@@ -1,6 +1,4 @@
-# Tanaguru User documentation
-
-## Foreword
+# Tanaguru User documentation Foreword
 
 Tanaguru is an opensource accessibility validator. It is build with three strong objectives:
 
@@ -8,7 +6,5 @@ Tanaguru is an opensource accessibility validator. It is build with three strong
 * reliability of its results
 * maximum automation and time-savings
 
-## Topics
-
-* [4 kinds of audit](userdoc-4-audits.md)
+If you ever lack some information, feel free to ask on [Tanaguru Forum](http://discuss.tanaguru.org/).
 
