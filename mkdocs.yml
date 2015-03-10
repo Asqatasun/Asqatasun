@@ -3,6 +3,7 @@ pages:
 - ['index.md',                              'Home']
 - ['user-doc.md',                           'User Documentation', 'User Documentation']
 - ['userdoc-4-audits.md',                   'User Documentation', '4 kinds of audit']
+- ['userdoc-5-results.md',                  'User Documentation', '5 types of result']
 - ['userdoc-page-audit.md',                 'User Documentation', 'Page audit']
 - ['userdoc-scenario-audit.md',             'User Documentation', 'Scenario audit']
 - ['userdoc-scenario-audit-advanced.md',    'User Documentation', 'Scenario advanced usage']
