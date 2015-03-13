@@ -9,7 +9,7 @@ PLEASE ensure you meet all [prerequisites for Tanaguru 3.x on Ubuntu](#prerequis
 Retrieve the [lastest version of Tanaguru](http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz) and extract it on your file system. 
 
 ```sh
-wget http://www.tanaguru.org/Download/tanaguru-latest.tar.gz
+wget http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz
 tar xzf tanaguru-latest.tar.gz
 cd tanaguru*
 ```
