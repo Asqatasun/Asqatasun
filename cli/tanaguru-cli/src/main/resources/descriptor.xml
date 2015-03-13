@@ -140,7 +140,6 @@
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/conf</directory>
             <includes>
                 <include>ESAPI.properties</include>
-                <include>google-code.properties</include>
                 <include>tanaguru.conf</include>
             </includes>
             <fileMode>666</fileMode>
