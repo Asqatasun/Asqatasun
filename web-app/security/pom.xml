@@ -11,13 +11,6 @@
     <groupId>org.opens</groupId>
     <artifactId>security</artifactId>
     <name>security</name>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <log4jGroupId>log4j</log4jGroupId>
-        <log4jVersion>1.2.15</log4jVersion>
-
-    </properties>
     <dependencies>
     <!-- log4j dependencies -->
         <dependency>
