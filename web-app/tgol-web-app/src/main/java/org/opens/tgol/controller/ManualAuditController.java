@@ -23,6 +23,7 @@ package org.opens.tgol.controller;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.opens.tanaguru.entity.audit.Audit;
@@ -58,7 +59,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ManualAuditController extends AbstractAuditResultController {
 
     /** The String that represents the "Finish" state */
-    private static final String FINISH_ACTION_NAME = "Finish";
+    private static final String FINISH_ACTION_BUNDLE_NAME = "i18n/result-page-I18N";
+    private static final String FINISH_ACTION_NAME_KEY = "resultPage.closeManualAudit";
     
     @Autowired
     private WebResourceStatisticsDataService webResourceStatisticsDataService;
@@ -174,16 +176,23 @@ public class ManualAuditController extends AbstractAuditResultController {
             BindingResult result,
             Model model,
             HttpServletRequest request) {
-
+      
         return dispatchSubmitManualAuditValues(
                 webresourceId, 
                 manualAuditCommand, 
                 result, 
                 model,
                 request, 
-                StringUtils.equalsIgnoreCase(action, FINISH_ACTION_NAME));
+                StringUtils.equalsIgnoreCase(action, getFinishActionNameFromLocale(request)));
     }
-
+    
+    private String getFinishActionNameFromLocale(HttpServletRequest request) {
+        return ResourceBundle.getBundle(
+                  FINISH_ACTION_BUNDLE_NAME, 
+                  getLocaleResolver().resolveLocale(request))
+                      .getString(FINISH_ACTION_NAME_KEY);
+    }
+    
     /**
      * Override this method to change default false argument value
      * 

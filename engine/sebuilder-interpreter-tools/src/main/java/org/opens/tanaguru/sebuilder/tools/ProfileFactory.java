@@ -61,6 +61,12 @@ public final class ProfileFactory {
     public void setProxyHost(String proxyHost) {
         this.proxyHost = proxyHost;
     }
+
+    private String pathToPreSetProfile;
+    public void setPathToPreSetProfile(String pathToPreSetProfile) {
+        this.pathToPreSetProfile = pathToPreSetProfile;
+    }
+    
     
     private String proxyExclusionUrl;
     public void setProxyExclusionUrl(String proxyExclusionUrl) {
@@ -122,6 +128,24 @@ public final class ProfileFactory {
      *      a set-up Firefox profile
      */
     private FirefoxProfile getProfile(boolean loadImage) {
+        if (StringUtils.isNotBlank(pathToPreSetProfile)) {
+            File presetProfileDir = new File(pathToPreSetProfile);
+            if (presetProfileDir.exists() 
+                  && presetProfileDir.canRead() 
+                  && presetProfileDir.canExecute()
+                  && presetProfileDir.canWrite()) {
+                Logger.getLogger(this.getClass()).debug(
+                        "Start firefox profile with path " 
+                        + presetProfileDir.getAbsolutePath());
+                return new FirefoxProfile(presetProfileDir);
+            } else {
+                Logger.getLogger(this.getClass()).debug(
+                        "The profile with path " 
+                        + presetProfileDir.getAbsolutePath()
+                        + " doesn't exist or don't have permissions");
+            }
+        }
+        Logger.getLogger(this.getClass()).debug("Start firefox with fresh new profile");
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         setUpPreferences(firefoxProfile, loadImage);
 //        setUpExtensions(firefoxProfile);
@@ -173,6 +197,7 @@ public final class ProfileFactory {
         firefoxProfile.setPreference("browser.privatebrowsing.autostart", false);
         firefoxProfile.setPreference("browser.link.open_newwindow", 2);
         firefoxProfile.setPreference("Network.cookie.cookieBehavior", 1);
+        firefoxProfile.setPreference("signon.autologin.proxy", true);
 
 
         // to disable the update of search engines
@@ -226,7 +251,7 @@ public final class ProfileFactory {
         
         // Show preview of exported data by default.
         firefoxProfile.setPreference("extensions.firebug.netexport.showPreview", false);
-        
+          
         // Displaye confirmation before uploading collecetd data to the server yes/no.
         firefoxProfile.setPreference("extensions.firebug.netexport.sendToConfirmation", false);
         

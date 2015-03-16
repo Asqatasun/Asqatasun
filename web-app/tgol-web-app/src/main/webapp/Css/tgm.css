@@ -2164,6 +2164,25 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     color : #fff;
     margin-left: 10px;
 }
+#apply-all-auto-passed {
+    background: none repeat scroll 0 0 #9fd162;
+    border-color: black;
+    color: black;
+    margin-bottom : 20px;
+}
+
+#apply-all-auto-failed {
+    background: none repeat scroll 0 0 #ED4D60;
+    border-color: black;
+    color: black;
+    margin-bottom : 20px;
+}
+#apply-all-auto-na {
+    background: none repeat scroll 0 0 #B3B3B3;
+    border-color: black;
+    color: black;
+    margin-bottom : 20px;
+}
 .process-remarks {
     /*    font-family: OpenSansSemibold;*/
     font-size: 13px;

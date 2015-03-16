@@ -58,22 +58,19 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 * email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
 * [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
-
 ## Content of this (last) version
 
 Bugs:
 
-- [#95](https://github.com/Tanaguru/Tanaguru/issues/95) : Provide mechanism to set the size of the firefox screen when loading the page
-- [#93](https://github.com/Tanaguru/Tanaguru/issues/93) : CLI install instructions broken
+- [#107](https://github.com/Tanaguru/Tanaguru/issues/107) : Provide a way to set-up proxy credentials
+- [#105](https://github.com/Tanaguru/Tanaguru/issues/105) : Set "esapiPropertyValue" property of tokenManager bean to use the system property confDir value instead of hard-coded value
+- [#102](https://github.com/Tanaguru/Tanaguru/issues/102) : Assisted Audit : Complete action is ineffective
 
+Features : 
 
-Features :
-
-- Spanish language integration
-- A11y improvments in audit result page
-- Initialisation of Rgaa3 referential context
-- Initialisation of assisted audit
-- Addition of cli script options
+- UI improvments
+- Correction of bug on buttons that apply automatic result on assisted audit 
+- User guide documentation 
 
 ## Other opensource tools
 

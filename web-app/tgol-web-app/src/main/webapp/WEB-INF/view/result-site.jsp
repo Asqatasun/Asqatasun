@@ -18,7 +18,7 @@
     <c:url value="/External-Js/r2d3.v2.min.js"/>
 </c:set> 
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+    <c:url value="/External-Js/jquery.tablesort er.min.js"/>
 </c:set> 
 
 <!-- internal js -->
@@ -152,7 +152,7 @@
         <script type="text/javascript" src="${scoreJsUrl}"></script>
         <script type="text/javascript" src="${siteScopeScoreJsUrl}"></script>
         <!--<![endif]-->
-        <script type="text/javascript" src="${displaySnapshotJsUrl}"></script>
+	<script type="text/javascript" src="${displaySnapshotJsUrl}"></script>
     </body>
 </html>
 </compress:html>

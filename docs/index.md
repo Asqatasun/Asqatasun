@@ -52,7 +52,7 @@ Directly on [Tanaguru SaaS](https://my.tanaguru.com/)
 
 ## Installation and documentation
 
-* [Tanaguru User doc](user_doc.md)
+* [Tanaguru User doc](user-doc.md)
 * Tanaguru Install doc
 * Tanaguru Maintenance doc
 * Tanaguru Developer doc

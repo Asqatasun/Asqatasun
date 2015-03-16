@@ -69,6 +69,20 @@
         <property name="idBeanParent" value="fetchHttp"/>
         <property name="elementName" value="property"/>
     </bean>
+    
+    <bean id="proxyUserModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+        <property name="attributeName" value="name"/>
+        <property name="attributeValue" value="httpProxyUser"/>
+        <property name="idBeanParent" value="fetchHttp"/>
+        <property name="elementName" value="property"/>
+    </bean>
+    
+    <bean id="proxyPasswordModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+        <property name="attributeName" value="name"/>
+        <property name="attributeValue" value="httpProxyPassword"/>
+        <property name="idBeanParent" value="fetchHttp"/>
+        <property name="elementName" value="property"/>
+    </bean>
 
     <bean id="crawlConfigurationUtils" class="org.opens.tanaguru.crawler.util.CrawlConfigurationUtils" factory-method="getInstance">
         <property name="parameterModifierMap">
@@ -80,6 +94,8 @@
                 <entry key="INCLUSION_REGEXP" value-ref="inclusionRegexpModifier"/>
                 <entry key="PROXY_HOST" value-ref="proxyHostModifier"/>
                 <entry key="PROXY_PORT" value-ref="proxyPortModifier"/>
+                <entry key="PROXY_USER" value-ref="proxyUserModifier"/>
+                <entry key="PROXY_PASSWORD" value-ref="proxyPasswordModifier"/>
                 <entry key="CONSIDER_COOKIES" value-ref="ignoreCookiesModifier"/>
             </map>
         </property>

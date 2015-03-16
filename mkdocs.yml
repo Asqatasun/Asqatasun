@@ -1,11 +1,26 @@
 site_name: Tanaguru
 pages:
-- ['index.md', 'Home']
-- ['user-doc.md', 'User Documentation']
-- ['install-doc.md', 'Installation']
-- ['developer-doc.md', 'Developer Documentation']
-- ['robots-txt.md', 'Robots.txt']
-- ['tanaguru-team.md', 'Tanaguru Team']
+- ['index.md',                              'Home']
+- ['user-doc.md',                           'User Documentation', 'User Documentation']
+- ['userdoc-4-audits.md',                   'User Documentation', '4 kinds of audit']
+- ['userdoc-5-results.md',                  'User Documentation', '5 types of result']
+- ['userdoc-page-audit.md',                 'User Documentation', 'Page audit']
+- ['userdoc-scenario-audit.md',             'User Documentation', 'Scenario audit']
+- ['userdoc-scenario-audit-advanced.md',    'User Documentation', 'Scenario advanced usage']
+- ['userdoc-assisted-audit.md',             'User Documentation', 'Assisted audit']
+- ['userdoc-HTML-markers.md',               'User Documentation', 'HTML markers']
+- ['userdoc-accessibility-metrics.md',      'User Documentation', 'Accessibility metrics']
+#- ['admindoc.md',                           'Admin Documentation', 'Admin Documentation']
+#- ['admindoc.md',                           'Admin Documentation', 'Admin Documentation']
+- ['prerequisites-webapp-doc.md',           'Installation Web Application','Prerequisites']
+- ['install-webapp-doc.md',                 'Installation Web Application','Installation']
+- ['configuration-webapp-doc.md',           'Installation Web Application','Configuration']
+- ['usage-webapp-doc.md',                   'Installation Web Application','Usage']
+- ['prerequisites-cli-doc.md',              'Installation Command Line Interface (CLI)','Prerequisites']
+- ['install-cli-doc.md',                    'Installation Command Line Interface (CLI)','Installation']
+- ['usage-cli-doc.md',                      'Installation Command Line Interface (CLI)','Usage']
+- ['developer-doc.md',                      'Developer Documentation']
+- ['tanaguru-team.md',                      'Tanaguru Team']
 
 theme: readthedocs
 repo_url: https://github.com/Tanaguru/Tanaguru

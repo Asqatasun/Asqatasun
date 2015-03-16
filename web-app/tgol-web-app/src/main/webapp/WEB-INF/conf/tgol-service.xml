@@ -8,7 +8,6 @@
         <property name="locations">
             <list>
                 <value>#{systemProperties.confDir}/tanaguru.conf</value>
-                <value>#{systemProperties.confDir}/google-code.properties</value>
                 <value>#{systemProperties.confDir}/ESAPI.properties</value>
             </list>
 

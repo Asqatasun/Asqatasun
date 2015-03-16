@@ -10,14 +10,12 @@
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>security</artifactId>
-    <version>3.0.4</version>
     <name>security</name>
     <dependencies>
     <!-- log4j dependencies -->
         <dependency>
             <groupId>${log4jGroupId}</groupId>
             <artifactId>log4j</artifactId>
-            <version>${log4jVersion}</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>

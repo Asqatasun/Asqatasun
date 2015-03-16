@@ -283,6 +283,12 @@
     </build>
     <profiles>
         <profile>
+            <id>tanaguru</id>
+            <properties>
+                <sonar.language>accessibility</sonar.language>
+            </properties>
+        </profile>
+        <profile>
             <activation>
                 <!-- the "activation" command offer the ability to run this profile only if "property" is set
                 See http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->
