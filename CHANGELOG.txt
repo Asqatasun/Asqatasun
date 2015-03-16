@@ -1,4 +1,19 @@
 --------------------------
+Tanaguru 3.0.5, 2015-03-16
+--------------------------
+Bugs:
+
+- [#107](https://github.com/Tanaguru/Tanaguru/issues/107) : Provide a way to set-up proxy credentials
+- [#105](https://github.com/Tanaguru/Tanaguru/issues/105) : Set "esapiPropertyValue" property of tokenManager bean to use the system property confDir value instead of hard-coded value
+- [#102](https://github.com/Tanaguru/Tanaguru/issues/102) : Assisted Audit : Complete action is ineffective
+
+Features : 
+
+- UI improvments
+- Correction of bug on buttons that apply automatic result on assisted audit 
+- User guide documentation 
+
+--------------------------
 Tanaguru 3.0.4, 2015-02-12
 --------------------------
 Bugs:
