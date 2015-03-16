@@ -4,10 +4,10 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>rules</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
     </parent>
     <artifactId>referential-creator-maven-plugin</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>maven-plugin</packaging>
     <name>referential-creator-maven-plugin</name>
     <url>http://maven.apache.org</url>

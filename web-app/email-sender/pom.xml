@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>web-app</artifactId>
-        <version>3.0.4</version>
+        <version>3.0.5</version>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>email-sender</artifactId>
     <name>email-sender</name>
-    <version>3.0.4</version>
+    <version>3.0.5</version>
     <dependencies>
         <dependency>
             <groupId>javax.mail</groupId>

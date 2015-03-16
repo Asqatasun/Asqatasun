@@ -4,11 +4,11 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>rules</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
     </parent>
     <groupId>org.opens</groupId>
     <artifactId>referential-creator</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <packaging>jar</packaging>
 
     <name>referential-creator</name>
@@ -27,7 +27,7 @@
             <plugin>
                 <groupId>org.opens</groupId>
                 <artifactId>referential-creator-maven-plugin</artifactId>
-                <version>1.1.1</version>
+                <version>1.1.2</version>
                 <executions>
                     <execution>
                         <id>generate</id>

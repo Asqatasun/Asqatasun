@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.opens</groupId>
         <artifactId>testing-tools</artifactId>
-        <version>3.0.4</version>
+        <version>3.0.5</version>
     </parent>
     <artifactId>tanaguru-maven-testgenerator-plugin</artifactId>
     <packaging>maven-plugin</packaging>
