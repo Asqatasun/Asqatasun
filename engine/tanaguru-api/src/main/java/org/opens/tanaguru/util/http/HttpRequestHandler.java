@@ -112,20 +112,20 @@ public class HttpRequestHandler {
      * @return whether the given Url is accessible or not
      */
     public boolean isUrlAccessible (String url) {
-//        int statusFromHead = computeStatus(getHttpStatus(url));
-//        switch (statusFromHead) {
-//            case 1 : 
-//                return true;
-//            case 0 : 
-//                int statusFromGet = computeStatus(getHttpStatusFromGet(url));
-//                switch (statusFromGet) {
-//                    case 0 : 
-//                        return false;
-//                    case 1 : 
-//                        return true;
-//                }
-//        }
-        return true;
+        int statusFromHead = computeStatus(getHttpStatus(url));
+        switch (statusFromHead) {
+            case 1 : 
+                return true;
+            case 0 : 
+                int statusFromGet = computeStatus(getHttpStatusFromGet(url));
+                switch (statusFromGet) {
+                    case 0 : 
+                        return false;
+                    case 1 : 
+                        return true;
+                }
+        }
+        return false;
     }
     
     public int getHttpStatus (String url) {
