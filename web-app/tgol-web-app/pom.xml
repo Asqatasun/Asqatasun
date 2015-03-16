@@ -12,12 +12,6 @@
     <packaging>war</packaging>
     <name>tgol-web-app</name>
     <dependencies>
-        <!--        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.14</version>
-            <scope>compile</scope>
-        </dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
