@@ -1,27 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-	
-<head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<title>Rgaa30 Test.06.03.03 Failed 05</title>
-</head>
-<body>
-<div>
-
-	<p class="test-detail">
-            <span lang="fr">Chaque intitulé de lien de type zone cliquable (contenu de l'attribut alt d'une balise area) est-il explicite hors contexte (hors cas particulier) ? </span>
-	</p>
-
-        <area href="my-link.html" title="-->;*" alt="-->;*"/>
-
-        <h1>
-            <map id="map">
-                <area href="my-link.html" title="-->;*" alt="-->;*"/>
-            </map>
-        </h1>
-
-	<p class="test-explanation">Failed : The link text only contains non alphanumeric characters (whatever the context). We can deduce it is not pertinent</p>
-
-</div>
-</body>
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.6.3.3 Failed 05</title> 
+    </head> 
+    <body> 
+        <div> 
+            <div class="test-detail" lang="fr"> 
+              Chaque intitulé de lien image (contenu de l&apos;attribut 
+                <code>alt</code>, texte entre 
+                <code>&lt;canvas&gt;</code> et 
+                <code>&lt;/canvas&gt;</code> ou texte entre 
+                <code>&lt;object&gt;</code> et 
+                <code>&lt;/object&gt;</code>) est-il 
+                explicite hors contexte (hors cas particuliers) ? 
+            </div> 
+            <area href="my-link.html" title="--&gt;;*" alt="--&gt;;*"></area> 
+            <h1> <map id="map"> <area href="my-link.html" title="--&gt;;*" alt="--&gt;;*"></area> </map> </h1> 
+            <p class="test-explanation">Failed : The link text only contains non alphanumeric characters (whatever the context). We can deduce it is not pertinent</p> 
+        </div>   
+    </body>
 </html>

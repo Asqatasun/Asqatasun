@@ -1,30 +1,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.06.01.02 Failed 08</title>
-    </head>
-    <body>
-        <div>
-
-            <p class="test-detail">
-                <span lang="fr">Test 06.01.02 : Pour chaque lien image (contenu de l'attribut alt ou texte entre <object> et </object>) le contexte du lien permet-il d'en comprendre la fonction et la destination (hors cas particuliers) ?</span>
-            </p>
-
-            <a href="my-link.html" title="-->;*">
-                <object data="data.png">
-                    -->;*
-                </object>
-            </a>
-
-            <h1>Rgaa30 Test.06.01.02 Failed 08</h1>
-            <a href="my-link.html" >
-                <img src="image.jpg" alt="-->;*"/>
-            </a>
-
-            <p class="test-explanation">Failed : The link has no context and its text only contains non alphanumeric characters. We can deduce it is not pertinent</p>
-            <p class="test-explanation">A suspected not pertinent conimage link is also present in the page</p>
-        </div>
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.6.1.2 Failed 08</title> 
+    </head> 
+    <body> 
+        <div> 
+            <div class="test-detail" lang="fr"> 
+                Chaque lien image</a> (contenu de l&apos;attribut 
+                <code>alt</code>, texte entre 
+                <code>&lt;canvas&gt;</code> et 
+                <code>&lt;/canvas&gt;</code> ou texte entre 
+                <code>&lt;object&gt;</code> et 
+                <code>&lt;/object&gt;</code>) vérifie-t-il une de ces conditions (hors cas particuliers) ? 
+                <ul class="ssTests"> 
+                    <li>L&apos;intitulé de lien seul permet d&apos;en comprendre la fonction et la destination</li> 
+                    <li>Le contexte du lien permet d&apos;en comprendre la fonction et la destination</li> 
+                </ul> 
+            </div> 
+            <a href="my-link.html" title="--&gt;;*"> <object data="data.png"> --&gt;;* </object> </a> 
+            <h1>Rgaa30 Test.6.1.2 Failed 08</h1> 
+            <a href="my-link.html"> <img src="image.jpg" alt="--&gt;;*" /> </a> 
+            <p class="test-explanation">Failed : The link has no context and its text only contains non alphanumeric characters. We can deduce it is not pertinent</p> 
+            <p class="test-explanation">A suspected not pertinent conimage link is also present in the page</p> 
+        </div>   
     </body>
 </html>

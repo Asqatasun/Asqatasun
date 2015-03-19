@@ -1,54 +1,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.01.03.03 NMI 06</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.01.03.03 NMI 06</h1>
-
-            <div class="test-detail">
-                For each button that is associated with an image (input tag with the attribute type="image") that has an alt attribute, is the content of this attribute relevant (except in special cases)?
-            </div>
-
-            <div class="testcase">
-                <input type="image" class="class-informative-input" src="image/mock-image2" alt="Informative input alternative">
-                </input>
-                <input type="image" src="image/mock-image3" alt="mock-image3">
-                </input>
-                <a href="mock-link.html" title="combined link">
-                    combined link
-                    <input type="image" src="image/mock-image4" alt="not identified input alternative">
-                    </input>
-                </a>
-                <input type="image" src="image/mock-image5" alt="mock-image" title="captcha">
-                </input>
-                <a href="mock-link.html">
-                    <input type="image" src="image/mock-image6" alt="input within link">
-                    </input>
-                </a>
-                <input class="class-decorative-input" type="image" src="image/mock-image7" alt="">
-                </input>
-                <input type="text" src="image/mock-image8" alt="">
-                </input>
-            </div>
-
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1.3.3 NMI 06</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1.3.3 NMI 06</h1> 
+            <div class="test-detail" lang="fr"> Pour chaque bouton associé à une image (balise 
+                <code>input</code> avec l&apos;attribut 
+                <code>type=&quot;image&quot;</code>) ayant un attribut 
+                <code>alt</code>, le contenu de cet attribut est-il pertinent (hors 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit1-3" title="Cas particuliers pour le critère 1.3">cas particuliers</a>) ? 
+            </div> 
+            <div class="testcase"> 
+                <input type="image" class="class-informative-input" src="image/mock-image2" alt="Informative input alternative" />  
+                <input type="image" src="image/mock-image3" alt="mock-image3" />  
+                <a href="mock-link.html" title="combined link"> combined link <input type="image" src="image/mock-image4" alt="not identified input alternative" />  </a> 
+                <input type="image" src="image/mock-image5" alt="mock-image" title="captcha" />  
+                <a href="mock-link.html"> <input type="image" src="image/mock-image6" alt="input within link" />  </a> 
+                <input class="class-decorative-input" type="image" src="image/mock-image7" alt="" />  
+                <input type="text" src="image/mock-image8" alt="" />  
+            </div> 
             <div class="test-explanation">
-                NMI : The pertinence of the alt attribute of the first &lt;input&gt;
-                identified as informative by marker needs to be a humanly check. 
-                The second &lt;input&gt; is not identified by marker and the value of its 
-                alt attribute is contained in the src attribute. It is suspected failed.
-                The third &lt;input&gt; is a combined link, it is part of the scope 
-                and the pertinence of the its alt attribute needs to be 
-                humanly check.
-                The fourth &lt;input&gt; is seen as a captcha, it is out of scope.
-                The fifth &lt;input&gt; is within a link, it is out of scope.
-                The sixth &lt;input&gt; is identified as decorative by marker usage.
-                The seventh &lt;input&gt; is a text input
-            </div>
-        </div>
+                 NMI : The pertinence of the alt attribute of the first &lt;input&gt; identified as informative by marker needs to be a humanly check. The second &lt;input&gt; is not identified by marker and the value of its alt attribute is contained in the src attribute. It is suspected failed. The third &lt;input&gt; is a combined link, it is part of the scope and the pertinence of the its alt attribute needs to be humanly check. The fourth &lt;input&gt; is seen as a captcha, it is out of scope. The fifth &lt;input&gt; is within a link, it is out of scope. The sixth &lt;input&gt; is identified as decorative by marker usage. The seventh &lt;input&gt; is a text input 
+            </div> 
+        </div>   
     </body>
 </html>

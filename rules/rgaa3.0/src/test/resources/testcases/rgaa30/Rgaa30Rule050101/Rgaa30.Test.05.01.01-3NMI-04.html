@@ -1,49 +1,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.05.01.01 NMI 04</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.05.01.01 NMI 04</h1>
-
-            <div class="test-detail">
-                <span>Does each data table (table tag) have a summary attribute?</span>
-            </div>
-
-            <div class="testcase">
-                <table id="id-data-table" summary="id data table summary">
-                    <tr>
-                        <th>head</th>
-                        <td>data</td>
-                    </tr>
-                </table>
-
-                <table>
-                    <tr>
-                        <th>head</th>
-                        <td>data</td>
-                    </tr>
-                </table>
-
-                <table class="class-presentation-table">
-                    <tr>
-                        <th>head</th>
-                        <td>data</td>
-                    </tr>
-                </table>
-            </div>
-            
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.5.1.1 NMI 04</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.5.1.1 NMI 04</h1> 
+            <div class="test-detail" lang="fr"> Pour chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabDonneeC">tableau de données complexe</a> (balise 
+                <code>table</code>) un résumé est-il disponible dans la balise 
+                <code>caption</code> ? 
+            </div> 
+            <div class="testcase"> 
+                <table id="id-data-table" summary="id data table summary"> 
+                    <tbody>
+                        <tr> 
+                            <th>head</th> 
+                            <td>data</td> 
+                        </tr> 
+                    </tbody>
+                </table> 
+                <table> 
+                    <tbody>
+                        <tr> 
+                            <th>head</th> 
+                            <td>data</td> 
+                        </tr> 
+                    </tbody>
+                </table> 
+                <table class="class-presentation-table"> 
+                    <tbody>
+                        <tr> 
+                            <th>head</th> 
+                            <td>data</td> 
+                        </tr> 
+                    </tbody>
+                </table> 
+            </div> 
             <div class="test-explanation">
-                NMI : One table is identified by a marker (id attribute) and contains a summary attribute. This table is valid<br/>
-                Another table is not identified by a marker and doesn"t containsa summary attribute.
-                The second table without summary is identified as presentation table. It is out of scope
-            </div>
-
-        </div>
+                 NMI : One table is identified by a marker (id attribute) and contains a summary attribute. This table is valid
+                <br /> Another table is not identified by a marker and doesn&quot;t containsa summary attribute. The second table without summary is identified as presentation table. It is out of scope 
+            </div> 
+        </div>   
     </body>
-
 </html>

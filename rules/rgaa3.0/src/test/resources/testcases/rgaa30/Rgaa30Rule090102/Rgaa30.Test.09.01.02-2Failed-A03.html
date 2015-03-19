@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-        <title>Rgaa30 Test.09.01.02 Failed A03</title>
-    </head>
-    <body>
-        <div>
-
-            <div role="heading" aria-level="1">Rgaa30 Test.09.01.02 Failed A03</div>
-
-            <p class="test-detail">
-                <span lang="fr">
-                    Test 09.01.02 : Dans chaque page Web, la hiérarchie entre les titres (balises h) est-elle pertinente ?
-                </span>
-            </p>
-
-            <div class="testcase">
-                <h7>Title 7_1_1_1_1_1_1</h7>
-                <div role="heading" aria-level="3">Title 3_1_1 </div>
-                <div role="heading" aria-level="4">Title 4_1_1_1 </div>
-                <div role="heading" aria-level="5">Title 5_1_1_1_1 </div>
-                <div role="heading" aria-level="6">Title 6_1_1_1_1_1 </div>
-            </div>
-
-            <p class="test-explanation">
-                Failed : A role="heading" link to aria-level="3" tag is used after a &lt;h1&gt; tag, whereas,
-                the h7 tag is not on error because this tag does not exist in html language. So, it's not an heading tag.
-            </p>
-
-        </div>
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.9.1.2 Failed A03</title> 
+    </head> 
+    <body> 
+        <div> 
+            <div role="heading" aria-level="1">
+                Rgaa30 Test.9.1.2 Failed A03
+            </div> 
+            <div class="test-detail" lang="fr"> Dans chaque page Web, la hiérarchie entre les 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitre">titres</a> (balises 
+                <code>h</code> ou balise possédant un role ARIA 
+                <code>&quot;heading&quot;</code> associé à une propriété 
+                <code>aria-level</code>) est-elle pertinente ? 
+            </div> 
+            <div class="testcase"> 
+                <h7>
+                    Title 7_1_1_1_1_1_1
+                </h7> 
+                <div role="heading" aria-level="3">
+                    Title 3_1_1 
+                </div> 
+                <div role="heading" aria-level="4">
+                    Title 4_1_1_1 
+                </div> 
+                <div role="heading" aria-level="5">
+                    Title 5_1_1_1_1 
+                </div> 
+                <div role="heading" aria-level="6">
+                    Title 6_1_1_1_1_1 
+                </div> 
+            </div> 
+            <p class="test-explanation"> Failed : A role=&quot;heading&quot; link to aria-level=&quot;3&quot; tag is used after a &lt;h1&gt; tag, whereas, the h7 tag is not on error because this tag does not exist in html language. So, it&apos;s not an heading tag. </p> 
+        </div>   
     </body>
 </html>

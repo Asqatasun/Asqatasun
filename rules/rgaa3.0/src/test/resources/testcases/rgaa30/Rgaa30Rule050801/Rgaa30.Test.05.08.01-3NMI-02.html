@@ -1,27 +1,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.05.08.01 NMI 02</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.05.08.01 NMI 02</h1>
-
-            <div class="test-detail">
-                Does each layout table (table tag) pass the conditions below? <ul> <li> The layout table (table tag) does not have any caption, th, thead, tfoot tags</li> <li> The cells of the layout table (td tag) have no scope, headers, colgroup, axis attributes.</li> </ul>
-            </div>
-
-            <div class="testcase">
-                <table id="table-test">
-                    <caption>Caption Forbidden for presentation table</caption>
-                </table>
-            </div>
-            
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.5.8.1 NMI 02</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.5.8.1 NMI 02</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabMiseForme">tableau de mise en forme</a> (balise 
+                <code>table</code>) vérifie-t-il ces conditions ? 
+                <ul class="ssTests"> 
+                    <li> Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabMiseForme">tableau de mise en forme</a> (balise <code>table</code>) ne possède pas de balises <code>caption</code>, <code>th</code>, <code>thead</code>, <code>tfoot</code></li> 
+                    <li> Les cellules du <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabMiseForme">tableau de mise en forme</a> (balise <code>td</code>) ne possèdent pas d&apos;attributs <code>scope</code>, <code>headers</code>, <code>colgroup</code>, <code>axis</code>.</li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <table id="table-test"> 
+                    <caption>
+                        Caption Forbidden for presentation table
+                    </caption> 
+                </table> 
+            </div> 
             <div class="test-explanation">
-                NMI : A not identified table is found with data table markup.
-            </div>
-        </div>
+                 NMI : A not identified table is found with data table markup. 
+            </div> 
+        </div>   
     </body>
 </html>

@@ -1,33 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.01.06.04 NMI 03</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.01.06.04 NMI 03</h1>
-
-            <div class="test-detail">
-                Does each image form button (input tag with the attribute type="image", requiring a detailed description, pass one of the conditions below?<ul><li> An alt attribute containing the reference to a detailed description just next to the image is available</li><li> An adjacent link (via a url or an anchor) allowing to access to the content of the detailed description is available</li></ul>
-            </div>
-
-            <div class="testcase">
-                <input type="image">
-                </input>
-                <input id="id-informative-input" type="image">
-                </input>
-                <input class="class-decorative-input" type="image">
-                </input>
-            </div>
-
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1.6.4 NMI 03</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1.6.4 NMI 03</h1> 
+            <div class="test-detail" lang="fr"> Chaque bouton de formulaire de type image (balise 
+                <code>input</code> avec l&apos;attribut 
+                <code>type=&quot;image&quot;</code>), qui nécessite une 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description détaillée</a>, vérifie-t-il une de ces conditions ? 
+                <ul class="ssTests"> 
+                    <li>Il existe un attribut <code>alt</code> contenant la référence à une description détaillée adjacente à l&apos;image</li> 
+                    <li> Il existe un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienAdj">lien adjacent</a> (via une <code>url</code> ou une <code>ancre</code>) permettant d&apos;accéder au contenu de la <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description détaillée</a></li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <input type="image" />  
+                <input id="id-informative-input" type="image" />  
+                <input class="class-decorative-input" type="image" />  
+            </div> 
             <div class="test-explanation">
-                 NMI : 3 &lt;input&gt; images are found on the page. The second is identified
-                as informative by marker usage.
-                The last &lt;input&gt; image is identified as decorative by marker usage,
-                it is out of scope.
-            </div>
-        </div>
+                 NMI : 3 &lt;input&gt; images are found on the page. The second is identified as informative by marker usage. The last &lt;input&gt; image is identified as decorative by marker usage, it is out of scope. 
+            </div> 
+        </div>   
     </body>
 </html>

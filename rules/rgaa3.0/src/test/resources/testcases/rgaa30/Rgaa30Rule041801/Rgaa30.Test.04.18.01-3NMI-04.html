@@ -1,30 +1,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.04.18.01 NMI 04</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.04.18.01 NMI 04</h1>
-
-            <div class="test-detail">
-                Does each audio sequence that is played automatically via an object, applet, embed tag, a javascript code or bgsound property pass one of the conditions below? 
-                <ul> 
-                    <li> The audio sequence lasts less than or equal to 3 seconds</li> 
-                    <li> The audio sequence can be stopped by an action initiated by the user</li> 
-                    <li> The volume of the audio sequence can be controlled by the user independently from the system volume control.</li> 
-                </ul>
-            </div>
-
-            <div class="testcase">
-                <bgsound src="my-sound.mp3" loop="infinite"/>
-            </div>
-
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.4.18.1 NMI 04</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.4.18.1 NMI 04</h1> 
+            <div class="test-detail" lang="fr"> Chaque séquence sonore déclenchée automatiquement via une balise 
+                <code>object</code>, 
+                <code>video</code>, 
+                <code>audio</code>, 
+                <code>embed</code>, un 
+                <code>code JavaScript</code> ou une propriété 
+                <code>bgsound</code> vérifie-t-il une de ces conditions ? 
+                <ul class="ssTests"> 
+                    <li> La séquence sonore a une durée inférieure ou égale à 3 secondes</li> 
+                    <li> La séquence sonore peut être stoppée sur action de l&apos;utilisateur</li> 
+                    <li> Le volume de la séquence sonore peut être contrôlé par l&apos;utilisateur indépendamment du contrôle de volume du système.</li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <bgsound src="my-sound.mp3" loop="infinite" /> 
+            </div> 
             <div class="test-explanation">
-                NMI : a &lt;bgsound&gt; element is found on the page
-            </div>
-        </div>
+                 NMI : a &lt;bgsound&gt; element is found on the page 
+            </div> 
+        </div>   
     </body>
 </html>

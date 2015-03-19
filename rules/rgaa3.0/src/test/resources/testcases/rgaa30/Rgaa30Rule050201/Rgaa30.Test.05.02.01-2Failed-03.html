@@ -1,38 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.05.02.01 Failed 03</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.05.02.01 Failed 03</h1>
-
-            <div class="test-detail">
-                    For each data table (table tag) with a summary attribute, is the content of this attribute relevant?
-            </div>
-
-            <div class="testcase">
-                <table id="id-data-table" summary="       ">
-                </table>
-                <table id="id-presentation-table" summary="       ">
-                </table>
-                <table summary="Summary of table without marker">
-                </table>
-                <table summary="$$##''''">
-                </table>
-            </div>
-
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.5.2.1 Failed 03</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.5.2.1 Failed 03</h1> 
+            <div class="test-detail" lang="fr"> Pour chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabDonneeC">tableau de donnée complexes</a> (balise 
+                <code>table</code>) ayant un résumé, celui-ci est-il pertinent ? 
+            </div> 
+            <div class="testcase"> 
+                <table id="id-data-table" summary="       "> 
+                </table> 
+                <table id="id-presentation-table" summary="       "> 
+                </table> 
+                <table summary="Summary of table without marker"> 
+                </table> 
+                <table summary="$$##&apos;&apos;&apos;&apos;"> 
+                </table> 
+            </div> 
             <div class="test-explanation">
-                Failed : A table identified as data table by marker has an empty summary. 
-                The second table with an empty summary is identified as presentation table 
-                by marker. It is out of scope
-                The third is not identified as identified as data table. Its
-                summary needs to be checked.
-                The fourth table is not identified as data table and its 
-                summary is not pertinent.
-            </div>
-        </div>
+                 Failed : A table identified as data table by marker has an empty summary. The second table with an empty summary is identified as presentation table by marker. It is out of scope The third is not identified as identified as data table. Its summary needs to be checked. The fourth table is not identified as data table and its summary is not pertinent. 
+            </div> 
+        </div>   
     </body>
 </html>
