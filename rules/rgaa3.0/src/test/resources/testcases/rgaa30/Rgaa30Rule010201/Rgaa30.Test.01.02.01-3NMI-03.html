@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.01.02.01 NMI 03</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.01.02.01 NMI 03</h1>
-
-            <p class="test-detail" lang="fr">
-                Pour chaque image de décoration (balise img) ayant un attribut alt, le contenu de cet attribut est-il vide (alt="") ?
-            </p>
-
-            <div class="testcase">
-                <img src="mock-image.jpg" alt="Not empty alt"/>
-                <a>
-                    <img src="image-link.jpg" alt=""/>
-                </a>
-                <img src="image-with-longdesc.jpg" alt="" longdesc=""/>
-                <img src="image-without-alt.jpg" />
-                <img role="role-informative-image" src="mock-informative-image.jpg" alt=""/>
-            </div>
-
-            <p class="test-explanation">
-                NMI : One image is found on the page and is not identified by marker.
-                The other images are either an image link, either an image with
-                a longdesc attribute, either an image marked as informative or
-                an image without alt attribute. They are all out of scope.
-            </p>
-
-        </div>
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1.2.1 NMI 03</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1.2.1 NMI 03</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgDeco">image de décoration</a> sans 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLegendeImage">légende</a> (balise 
+                <code>img</code>) et ayant un attribut 
+                <code>alt</code> vérifie-t-elle ces conditions : 
+                <ul class="ssTests"> 
+                    <li>le contenu de l&apos;attribut alt est vide (<code>alt=&quot;&quot;</code>)</li> 
+                    <li>l&apos;image de décoration ne possède pas d&apos;attribut <code>title</code></li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <img src="mock-image.jpg" alt="Not empty alt" /> 
+                <a> <img src="image-link.jpg" alt="" /> </a> 
+                <img src="image-with-longdesc.jpg" alt="" longdesc="" /> 
+                <img src="image-without-alt.jpg" /> 
+                <img role="role-informative-image" src="mock-informative-image.jpg" alt="" /> 
+            </div> 
+            <p class="test-explanation"> NMI : One image is found on the page and is not identified by marker. The other images are either an image link, either an image with a longdesc attribute, either an image marked as informative or an image without alt attribute. They are all out of scope. </p> 
+        </div>   
     </body>
 </html>

@@ -1,48 +1,72 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.09.01.04 Failed 02</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.09.01.04 Failed 02</h1>
-
-            <div class="test-detail">
-                On each Web page, is each heading (h tag) relevant?
-            </div>
-
-            <div class="testcase">
-                <span role="heading" aria-level="1"> </span>
-                <div role="heading" aria-level="1"> !:;,&~$*/-*/-* </div>
-                <div role="heading" aria-level="1"> <img src="my-image.jpg" alt=""></img></div>
-                <span role="heading" aria-level="2"> </span>
-                <div role="heading" aria-level="2"> !:;,&~$*/-*/-* </div>
-                <div role="heading" aria-level="2"> <img src="my-image.jpg" alt=""></img></div>
-                <span role="heading" aria-level="3"> </span>
-                <div role="heading" aria-level="3"> !:;,&~$*/-*/-* </div>
-                <div role="heading" aria-level="3"> <img src="my-image.jpg" alt=""></img></div>
-                <span role="heading" aria-level="4"> </span>
-                <div role="heading" aria-level="4"> !:;,&~$*/-*/-* </div>
-                <div role="heading" aria-level="4"> <img src="my-image.jpg" alt=""></img></div>
-                <span role="heading" aria-level="5"> </span>
-                <div role="heading" aria-level="5"> !:;,&~$*/-*/-* </div>
-                <div role="heading" aria-level="5"> <img src="my-image.jpg" alt=""></img></div>
-                <span role="heading" aria-level="6"> </span>
-                <div role="heading" aria-level="6"> !:;,&~$*/-*/-* </div>
-                <div role="heading" aria-level="6"> <img src="my-image.jpg" alt=""></img></div>
-                <span role="heading" aria-level="7"> </span>
-                <div role="heading" aria-level="7"> !:;,&~$*/-*/-* </div>
-                <div role="heading" aria-level="7"> <img src="my-image.jpg" alt=""></img></div>
-            </div>
-
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.9.1.4 Failed 02</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.9.1.4 Failed 02</h1> 
+            <div class="test-detail" lang="fr"> Dans chaque page Web, chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitre">titre</a> (balise 
+                <code>h</code> ou balise possédant un role ARIA 
+                <code>&quot;heading&quot;</code> associé à une propriété 
+                <code>aria-level</code>) est-il pertinent ? 
+            </div> 
+            <div class="testcase"> 
+                <span role="heading" aria-level="1"> </span> 
+                <div role="heading" aria-level="1">
+                     !:;,&amp;~$*/-*/-* 
+                </div> 
+                <div role="heading" aria-level="1"> 
+                    <img src="my-image.jpg" alt="" />
+                </div> 
+                <span role="heading" aria-level="2"> </span> 
+                <div role="heading" aria-level="2">
+                     !:;,&amp;~$*/-*/-* 
+                </div> 
+                <div role="heading" aria-level="2"> 
+                    <img src="my-image.jpg" alt="" />
+                </div> 
+                <span role="heading" aria-level="3"> </span> 
+                <div role="heading" aria-level="3">
+                     !:;,&amp;~$*/-*/-* 
+                </div> 
+                <div role="heading" aria-level="3"> 
+                    <img src="my-image.jpg" alt="" />
+                </div> 
+                <span role="heading" aria-level="4"> </span> 
+                <div role="heading" aria-level="4">
+                     !:;,&amp;~$*/-*/-* 
+                </div> 
+                <div role="heading" aria-level="4"> 
+                    <img src="my-image.jpg" alt="" />
+                </div> 
+                <span role="heading" aria-level="5"> </span> 
+                <div role="heading" aria-level="5">
+                     !:;,&amp;~$*/-*/-* 
+                </div> 
+                <div role="heading" aria-level="5"> 
+                    <img src="my-image.jpg" alt="" />
+                </div> 
+                <span role="heading" aria-level="6"> </span> 
+                <div role="heading" aria-level="6">
+                     !:;,&amp;~$*/-*/-* 
+                </div> 
+                <div role="heading" aria-level="6"> 
+                    <img src="my-image.jpg" alt="" />
+                </div> 
+                <span role="heading" aria-level="7"> </span> 
+                <div role="heading" aria-level="7">
+                     !:;,&amp;~$*/-*/-* 
+                </div> 
+                <div role="heading" aria-level="7"> 
+                    <img src="my-image.jpg" alt="" />
+                </div> 
+            </div> 
             <div class="test-explanation">
-                Failed : All these headings are irrelevant. They are either empty
-                or only composed of non alphanumerical characters. 
-                The aria-level 7 is not ignored. Aria provides here a way to 
-                bypass the limit of 6 defined by semantic markup.
-            </div>
-        </div>
+                 Failed : All these headings are irrelevant. They are either empty or only composed of non alphanumerical characters. The aria-level 7 is not ignored. Aria provides here a way to bypass the limit of 6 defined by semantic markup. 
+            </div> 
+        </div>   
     </body>
 </html>

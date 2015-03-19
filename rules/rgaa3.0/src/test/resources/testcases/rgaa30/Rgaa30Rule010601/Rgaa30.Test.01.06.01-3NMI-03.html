@@ -1,35 +1,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.01.06.01 NMI 03</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.01.06.01 NMI 03</h1>
-
-            <div class="test-detail">
-                Does each image that conveys information (img tag) that needs a detailed description, pass one of the conditions below?
-                <ul>
-                    <li> A longdesc attribute providing the url of a page that contains the detailed descriptionis available</li>
-                    <li> An alt attribute that contains the reference to a detailed description just next to the image is available</li>
-                    <li> There is an adjacent link allowing to access to the content of the detailed description</li>
-                </ul>
-            </div>
-
-            <div class="testcase">
-                <img alt="" src="mock_image1.jpg"/>
-                <img id="id-informative-image" alt="" src="mock_image2.jpg"/>
-                <img class="class-decorative-image" alt="" src="mock_image3.jpg"/>
-            </div>
-
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1.6.1 NMI 03</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1.6.1 NMI 03</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgInfo">image porteuse d&apos;information</a> (balise 
+                <code>img</code>) qui nécessite une 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description détaillée</a>, vérifie-t-elle une de ces conditions ? 
+                <ul class="ssTests"> 
+                    <li>Il existe un attribut <code>longdesc</code> qui donne l&apos;adresse (<code>url</code>) d&apos;une page contenant la <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description détaillée</a></li> 
+                    <li>Il existe un attribut <code>alt</code> contenant la référence à une description détaillée adjacente à l&apos;image</li> 
+                    <li>Il existe un lien adjacent (via une <code>url</code> ou une <code>ancre</code>) permettant d&apos;accéder au contenu de la description détaillée</li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <img alt="" src="mock_image1.jpg" /> 
+                <img id="id-informative-image" alt="" src="mock_image2.jpg" /> 
+                <img class="class-decorative-image" alt="" src="mock_image3.jpg" /> 
+            </div> 
             <div class="test-explanation">
-                NMI : 3 &lt;img&gt; are found on the page. The second is identified
-                as informative by marker usage.
-                The last &lt;img&gt; is identified as decorative by marker usage,
-                it is out of scope.
-            </div>
-        </div>
+                 NMI : 3 &lt;img&gt; are found on the page. The second is identified as informative by marker usage. The last &lt;img&gt; is identified as decorative by marker usage, it is out of scope. 
+            </div> 
+        </div>   
     </body>
 </html>

@@ -1,39 +1,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.11.01.1 Passed 03</title>
-    </head>
-    <body>
-        <div>
-
-            <h1>Rgaa30 Test.11.01.1 Passed 03</h1>
-
-            <p class="test-detail">
-                <span>
-                    Does each form field (input tag of type text, password, checkbox, radio, file, or textarea and select tags), pass one of the conditions below?
-                    <ul>
-                        <li> The form field has a title attribute</li>
-                        <li> A label (label tag) is associated with the form field</li>
-                    </ul>
-                </span>
-            </p>
-
-            <div class="testcase">
-                <form action="http://action.html" method="post">
-                    <p>
-                        <label for="checkbox">checkbox : </label>
-                        <input type="checkbox" id="checkbox"/>
-                        <input type="submit" value="Send"/> <input type="reset"/>
-                    </p>
-                </form>
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.11.01.1 Passed 03</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.11.01.1 Passed 03</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChpSaisie">champ de formulaire</a> vérifie-t-il une de ces conditions ? 
+                <ul class="ssTests"> 
+                    <li> Le champ de formulaire possède un attribut <code>title</code></li> 
+                    <li> Une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mEtiquette">étiquette</a> (balise <code>label</code>) est associée au champ de formulaire</li> 
+                    <li>Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChpSaisie">champ de formulaire</a> possède une propriété <code>aria-label</code></li> 
+                    <li>Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChpSaisie">champ de formulaire</a> possède une propriété <code>aria-labelledby</code> référençant un passage de texte identifié</li> 
+                </ul> 
             </div>
-
-            <p class="test-explanation">
-                Passed: All the form field have either a title attribute or an associated label tag
-            </p>
-
-        </div>
+            <ul> 
+                <li> The form field has a title attribute</li> 
+                <li> A label (label tag) is associated with the form field</li> 
+            </ul>  
+            <p></p> 
+            <div class="testcase"> 
+                <form action="http://action.html" method="post"> 
+                    <p> <label for="checkbox">checkbox : </label> <input type="checkbox" id="checkbox" /> <input type="submit" value="Send" /> <input type="reset" /> </p> 
+                </form> 
+            </div> 
+            <p class="test-explanation"> Passed: All the form field have either a title attribute or an associated label tag </p> 
+        </div>   
     </body>
 </html>

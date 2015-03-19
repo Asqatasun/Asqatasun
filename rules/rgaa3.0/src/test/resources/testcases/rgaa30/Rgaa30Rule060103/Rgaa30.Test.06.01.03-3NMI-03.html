@@ -1,25 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-
-    <head>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa30 Test.06.01.03 NMI 03</title>
-    </head>
-    <body>
-        <div>
-
-            <p class="test-detail">
-                <span lang="fr">Test 06.01.03 : Pour chaque lien de type zone cliquable (contenu de l'attribut alt d'une balise area) le contexte du lien permet-il d'en comprendre la fonction et la destination (hors cas particuliers) ?</span>
-            </p>
-
-            <h1>
-                <map id="map">
-                    <area href="my-link.html" title="-->;*" alt="-->;*"/>
-                </map>
-            </h1>
-
-            <p class="test-explanation">NMI : The text link only contains non alphanumeric characters but the context may precise the link function and destination. A warning is thrown</p>
-
-        </div>
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.6.1.3 NMI 03</title> 
+    </head> 
+    <body> 
+        <div> 
+            <div class="test-detail" lang="fr"> 
+              Chaque lien doublant une zone cliquable d&apos;une image réactive coté serveur vérifie-t-il une de ces conditions (hors cas particuliers) ? 
+                <ul class="ssTests"> 
+                    <li>L&apos;intitulé de lien seul permet d&apos;en comprendre la fonction et la destination</li> 
+                    <li>Le contexte du lien permet d&apos;en comprendre la fonction et la destination</li> 
+                </ul> 
+            </div> 
+            <h1> <map id="map"> <area href="my-link.html" title="--&gt;;*" alt="--&gt;;*"></area> </map> </h1> 
+            <p class="test-explanation">NMI : The text link only contains non alphanumeric characters but the context may precise the link function and destination. A warning is thrown</p> 
+        </div>   
     </body>
 </html>

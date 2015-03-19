@@ -1,45 +1,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-	
-<head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <title>Rgaa30 Test.07.04.01 NMI 08</title>
-</head>
-<body>
-<div>
-
-	<h1>Rgaa30 Test.07.04.01 NMI 08</h1>
-
-	<p class="test-detail">
-            Does each script initiating a change of context pass one of the conditions below?
-            <ul>
-                <li> The user is warned by a text about the script action and the kind of change before it is activated</li>
-                <li> The change of context is initiated by an explicit button (input of type submit or button) </li>
-                <li> The change of context is initiated by an explicit link</li>
-            </ul>
-	</p>
-
-	<div class="testcase">
-            <form action="http://somesite.com/prog/component-select" method="post">
-                <p>
-                <button name="send" value="send">Send</button>
-                <select multiple="multiple" size="4" name="component-select">
-                    <option selected="selected" value="Component_1_a">Component_1</option>
-                    <option selected="selected" value="Component_1_b">Component_2</option>
-                    <option>Component_3</option>
-                    <option>Component_4</option>
-                    <option>Component_5</option>
-                    <option>Component_6</option>
-                    <option>Component_7</option>
-                </select>
-                </p>
-            </form>
-	</div>
-
-	<p class="test-explanation">
-            NMI : no script that changes the context is detected
-        </p>
-
-</div>
-</body>
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.7.4.1 NMI 08</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.7.4.1 NMI 08</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mScript">script</a> qui initie un 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChangContexte">changement de contexte</a> vérifie-t-il une de ces conditions ? 
+                <ul class="ssTests"> 
+                    <li> L&apos;utilisateur est averti par un texte de l&apos;action du <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mScript">script</a> et du type de changement avant son déclenchement</li> 
+                    <li> Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChangContexte">changement de contexte</a> est initié par un bouton (<code>input</code> de type <code>submit</code>, <code>button</code> ou <code>image</code> ou balise <code>button</code>) explicite</li> 
+                    <li> Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChangContexte">changement de contexte</a> est initié par un lien explicite</li> 
+                </ul> 
+            </div>
+            <ul> 
+                <li> The user is warned by a text about the script action and the kind of change before it is activated</li> 
+                <li> The change of context is initiated by an explicit button (input of type submit or button) </li> 
+                <li> The change of context is initiated by an explicit link</li> 
+            </ul> 
+            <p></p> 
+            <div class="testcase"> 
+                <form action="http://somesite.com/prog/component-select" method="post"> 
+                    <p> <button name="send" value="send">Send</button> <select multiple="multiple" size="4" name="component-select"> <option selected="selected" value="Component_1_a">Component_1</option> <option selected="selected" value="Component_1_b">Component_2</option> <option>Component_3</option> <option>Component_4</option> <option>Component_5</option> <option>Component_6</option> <option>Component_7</option> </select> </p> 
+                </form> 
+            </div> 
+            <p class="test-explanation"> NMI : no script that changes the context is detected </p> 
+        </div>   
+    </body>
 </html>
