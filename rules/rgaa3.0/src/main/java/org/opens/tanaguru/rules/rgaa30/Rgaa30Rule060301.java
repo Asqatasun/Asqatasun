@@ -45,8 +45,8 @@ import org.opens.tanaguru.service.ProcessRemarkService;
 /**
  * Implementation of the rule 6.3.1 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-6-3-1">the rule 6.3.1 design page.</a>
- * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-6-3-1"> 6.3.1 rule specification</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-6-3-1">the rule 6.3.1 design page.</a>
+ * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-3-1"> 6.3.1 rule specification</a>
  *
  */
 public class Rgaa30Rule060301 extends AbstractLinkRuleImplementation {
