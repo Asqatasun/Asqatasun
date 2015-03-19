@@ -26,8 +26,8 @@ import org.opens.tanaguru.rules.elementchecker.doctype.DoctypePositionChecker;
 /**
  * Implementation of the rule 8.1.3 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-8-1-3">the rule 8.1.3 design page.</a>
- * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-8-1-3"> 8.1.3 rule specification</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-8-1-3">the rule 8.1.3 design page.</a>
+ * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-8-1-3"> 8.1.3 rule specification</a>
  *
  */
 public class Rgaa30Rule080103 extends AbstractPageRuleWithCheckerImplementation {

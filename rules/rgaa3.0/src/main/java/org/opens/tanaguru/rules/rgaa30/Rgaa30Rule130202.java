@@ -30,8 +30,8 @@ import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS
 /**
  * Implementation of the rule 13.2.2 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="https://github.com/Tanaguru/Tanaguru-rules-RGAA-3-doc/wiki/Rule-13-2-2">the rule 13.2.2 design page.</a>
- * @see <a href="https://references.modernisation.gouv.fr/sites/default/files/RGAA3/referentiel_technique.htm#test-13-2-2"> 13.2.2 rule specification</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-13-2-2">the rule 13.2.2 design page.</a>
+ * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-13-2-2"> 13.2.2 rule specification</a>
  *
  * @author jkowalczyk
  */
