@@ -383,15 +383,11 @@ public class Rgaa30Rule060101Test extends Rgaa30RuleImplementationTestCase {
 
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-02");
         assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
+        assertEquals(1, processResult.getRemarkSet().size());
         assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
 
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-03");
         assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());

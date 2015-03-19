@@ -153,7 +153,7 @@ public class Rgaa30Rule080601Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(1, processRemark.getElementList().size());
         pIter = processRemark.getElementList().iterator();
         ee = pIter.next();
-        assertEquals("Rgaa30 Test.08.06.01 NMI 01",ee.getValue());
+        assertEquals("Rgaa30 Test.8.6.1 NMI 01",ee.getValue());
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
 
         
