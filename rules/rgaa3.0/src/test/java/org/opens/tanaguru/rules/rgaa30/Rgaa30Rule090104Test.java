@@ -94,7 +94,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(2,processRemark.getElementList().size());
         Iterator<EvidenceElement> eIter =  processRemark.getElementList().iterator();
         EvidenceElement ee = eIter.next();
-        assertEquals("Rgaa30 Test.09.01.04 Failed 01", ee.getValue());
+        assertEquals("Rgaa30 Test.9.1.4 Failed 01", ee.getValue());
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
         ee = eIter.next();
         assertEquals("headings", ee.getValue());
@@ -392,7 +392,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(2,processRemark.getElementList().size());
         eIter =  processRemark.getElementList().iterator();
         ee = eIter.next();
-        assertEquals("Rgaa30 Test.09.01.04 Failed 02", ee.getValue());
+        assertEquals("Rgaa30 Test.9.1.4 Failed 02", ee.getValue());
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
         ee = eIter.next();
         assertEquals("headings", ee.getValue());
@@ -735,7 +735,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(2,processRemark.getElementList().size());
         eIter =  processRemark.getElementList().iterator();
         ee = eIter.next();
-        assertEquals("Rgaa30 Test.09.01.04 NMI 01", ee.getValue());
+        assertEquals("Rgaa30 Test.9.1.4 NMI 01", ee.getValue());
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
         ee = eIter.next();
         assertEquals("headings", ee.getValue());
@@ -943,7 +943,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(2,processRemark.getElementList().size());
         eIter =  processRemark.getElementList().iterator();
         ee = eIter.next();
-        assertEquals("Rgaa30 Test.09.01.04 NMI 02", ee.getValue());
+        assertEquals("Rgaa30 Test.9.1.4 NMI 02", ee.getValue());
         assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
         ee = eIter.next();
         assertEquals("headings", ee.getValue());

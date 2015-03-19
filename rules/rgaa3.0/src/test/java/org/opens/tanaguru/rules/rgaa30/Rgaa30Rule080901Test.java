@@ -92,7 +92,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.08.09.01-2Failed-01");
         // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
+        assertEquals(16, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -110,7 +110,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-2Failed-02");
         // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
+        assertEquals(16, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -128,7 +128,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-2Failed-03");
         // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
+        assertEquals(16, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -146,7 +146,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-2Failed-04");
         // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
+        assertEquals(17, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.FAILED, processResult.getValue());
         // check number of remarks and their value
@@ -164,7 +164,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-3NMI-01");
         // check number of elements in the page
-        assertEquals(11, processResult.getElementCounter());
+        assertEquals(15, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
@@ -180,7 +180,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-3NMI-02");
         // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
+        assertEquals(16, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
@@ -196,7 +196,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-3NMI-03");
         // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
+        assertEquals(16, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
@@ -212,7 +212,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-3NMI-04");
         // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
+        assertEquals(16, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
@@ -228,7 +228,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-3NMI-05");
         // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
+        assertEquals(17, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
@@ -244,7 +244,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-3NMI-06");
         // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
+        assertEquals(17, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
@@ -260,7 +260,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.09.01-3NMI-07");
         // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
+        assertEquals(17, processResult.getElementCounter());
         // check test result
         assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
         // check number of remarks and their value
