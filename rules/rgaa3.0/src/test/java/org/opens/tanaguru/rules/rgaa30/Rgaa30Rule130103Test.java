@@ -23,7 +23,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule 13-1-3 of the referential Rgaa30Name.
+ * Unit test class for the implementation of the rule 13-1-3 of the referential Rgaa 3.0.
  *
  * @author
  */
