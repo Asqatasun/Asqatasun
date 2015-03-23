@@ -31,13 +31,13 @@ https://my.tanaguru.com/
 
 ## Installation and documentation
 
-[Tanaguru wiki](http://www.tanaguru.org) (registration is warmly welcomed, please email mfaure AT tanaguru. org)
+See [all Tanaguru Docs](http://tanaguru.readthedocs.org/)
 
-More precisely:
+Usefull links:
 
-* [Installation](http://www.tanaguru.org/en/content/tanaguru-3x)
-* [Configuration](http://www.tanaguru.org/en/content/configuration)
-* [How to build](http://www.tanaguru.org/en/content/how-build)
+* [Installation](http://tanaguru.readthedocs.org/en/develop/prerequisites-webapp-doc/)
+* [Configuration](http://tanaguru.readthedocs.org/en/develop/configuration-webapp-doc/)
+* [User Doc](http://tanaguru.readthedocs.org/en/develop/user-doc/)
 
 ## Business: accessibility
 
@@ -58,7 +58,7 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 * email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
 * [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
-## Content of this (last) version
+## Content of this last version (Tanaguru 3.0.5, 2015-03-16)
 
 Bugs:
 
@@ -71,6 +71,8 @@ Features :
 - UI improvments
 - Correction of bug on buttons that apply automatic result on assisted audit 
 - User guide documentation 
+
+See full [Changelog](CHANGELOG.txt)
 
 ## Other opensource tools
 
