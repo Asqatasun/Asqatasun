@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in checking whether each `<img>` tag is defined with an `"alt"` attribute.
 
 ## Business description
 
@@ -36,22 +36,35 @@ Chaque image (balise `img`) a-t-elle un attribut `alt` ?
 
 ### Selection
 
+**Set1**
+
+All the `<img>` tags
+
 ### Process
+
+**Test1**
+
+For each element of **Set1**, test the presence of an `"alt"` attribute.
+
+For each occurence of false-result of Test1, raise a MessageA
+
+#### MessageA : Missing summary attribute
+
+-    code : **AltMissing** 
+-    status: Failed
+-    parameter : `"src"` attribute, tag name
+-    present in source : yes
 
 ### Analysis
 
 #### Passed
 
+All the `<img>` tags of the page have an `"alt"` attribute (Test 1 returns true for all the elements of Set 1)
+
 #### Failed
+
+At least one `<img>` tag has no `"alt"` attribute (Test 1 returns failed for at least one element)
 
 #### Not Applicable
 
-#### Pre-qualified
-
-#### No Tested 
-
-
-
-
-
-
+The page has no `<img>` tag
