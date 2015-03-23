@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Entities;
 
 /**
  *
@@ -97,13 +98,15 @@ public class Rgaa3Extractor {
             }
         }
 
-        generateMysql();
+//        generateMysql();
         compareReferentials();
+//
+//        getRuleI18nKeys();
+//        checkClassesExist();
+//        updateTestcasesWithRuleTitle();
+//        generateMkdoc();
+//        createTestcaseFiles();
 
-        getRuleI18nKeys();
-        checkClassesExist();
-        updateTestcasesWithRuleTitle();
-        generateMkdoc();
     }
 
     private static void extractLevelFromCriterionAndWrite(Document doc) throws IOException {
@@ -482,6 +485,45 @@ public class Rgaa3Extractor {
             
         }
         FileUtils.writeStringToFile(file, strb.toString());
+    }
+    
+    private static void createTestcaseFiles() throws IOException {
+        File srcDir = new File(RGAA3_TESTCASE_PATH);
+        for (File file : srcDir.listFiles()) {
+            String fileName = file.getName().replace("Rgaa30Rule", "").replace(".java", "");
+            String theme = fileName.substring(0, 2);
+            String crit = fileName.substring(2, 4);
+            String test = fileName.substring(4, 6);
+            String testKey = Integer.valueOf(theme).toString()+"-"+Integer.valueOf(crit).toString()+"-"+Integer.valueOf(test).toString();
+            String wrongKey = theme+"."+crit+"."+test;
+            for (File testcase : file.listFiles()) {
+                if (testcase.isFile() && testcase.getName().contains("html")) {
+                    Document doc = Jsoup.parse(FileUtils.readFileToString(testcase));
+                    Element detail = doc.select(".test-detail").first();
+                    if (detail == null) {
+                        System.out.println(doc.outerHtml());
+                    } else {
+                        detail.tagName("div");
+                        detail.text("");
+                        for (Element el : detail.children()) {
+                            el.remove();
+                        }
+                        if (!detail.hasAttr("lang")) {
+                            detail.attr("lang", "fr");
+                        }
+                        detail.append("\n"+RGAA3.get(testKey).ruleRawHtml+"\n");
+                        doc.outputSettings().escapeMode(Entities.EscapeMode.xhtml);
+                        doc.outputSettings().outline(false);
+                        doc.outputSettings().indentAmount(4);
+                        String outputHtml = doc.outerHtml();
+                        if (outputHtml.contains(wrongKey)) {
+                            outputHtml = outputHtml.replaceAll(wrongKey, RGAA3.get(testKey).getRuleDot());
+                        }
+                        FileUtils.writeStringToFile(testcase, outputHtml);
+                    }
+                }
+            }
+        }
     }
     
 }
