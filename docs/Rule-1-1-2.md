@@ -1,8 +1,8 @@
 # Rule 1.1.2
+
 ## Summary
 
-This test consists in checking whether each area of an image map is
-defined with an "alt" attribute
+This test consists in checking whether each `<area>` of an image map is defined with an `"alt"` attribute
 
 ## Business description
 
@@ -36,40 +36,35 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Selection
 
-All the <area\> tags, defined in a <map\> tag associated with the
-"usemap"\
-attribute of an <img\> tag
+**Set1**
 
--   used nomenclature : none
-
--   reference : none
+All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute of an `<img>` tag
 
 ### Process
 
-Test the presence of an "alt" attribute in each element of the selection
-set.
+**Test1**
 
--   used nomenclature : none
+For each element of **Set1**, test the presence of an `"alt"` attribute.
 
--   reference : none
+For each occurrence of false-result of Test1, raise a MessageA
+
+#### MessageA : Missing Alt attribute
+
+-    code : **AltMissing** 
+-    status: Failed
+-    parameter : `"href"` attribute, tag name
+-    present in source : yes
 
 ### Analysis
 
-#### Not Applicable
+#### Passed
 
--   The page has no <img\> tag
--   no <img\> tag is defined with an "usemap" attribute
+All the `<area>` tags of the page, correctly associated with an image, have an `"alt"` attribute (**Test1** returns true for all the elements of **Set1**)
 
 #### Failed
 
-The <map\> associated with the "usemap" attribute of a <img\> tag has at
-least one <area\> tag without "alt" attribute
+At least one `<area>` tag, correctly associated with an image, has no `"alt"` attribute (**Test1** returns failed for at least one element)
 
-#### Passed
+#### Not Applicable
 
-All the <area\> tags, defined in a <map\> tag associated with the
-"usemap" attribute of an <img\> tag have an "alt" attribute
-
-## Notes
-
-No notes yet for that rule
+The page has no `<area>` tag, correctly associated with an image (**Set1** is empty)

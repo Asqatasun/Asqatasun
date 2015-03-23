@@ -46,9 +46,9 @@ All the `<img>` tags
 
 For each element of **Set1**, test the presence of an `"alt"` attribute.
 
-For each occurence of false-result of Test1, raise a MessageA
+For each occurrence of false-result of Test1, raise a MessageA
 
-#### MessageA : Missing summary attribute
+#### MessageA : Missing Alt attribute
 
 -    code : **AltMissing** 
 -    status: Failed
@@ -59,12 +59,12 @@ For each occurence of false-result of Test1, raise a MessageA
 
 #### Passed
 
-All the `<img>` tags of the page have an `"alt"` attribute (Test 1 returns true for all the elements of Set 1)
+All the `<img>` tags of the page have an `"alt"` attribute (**Test1** returns true for all the elements of **Set1**)
 
 #### Failed
 
-At least one `<img>` tag has no `"alt"` attribute (Test 1 returns failed for at least one element)
+At least one `<img>` tag has no `"alt"` attribute (**Test1** returns failed for at least one element)
 
 #### Not Applicable
 
-The page has no `<img>` tag
+The page has no `<img>` tag (**Set1** is empty)
