@@ -1,8 +1,9 @@
 # Rule 1.2.3
+
+
 ## Summary
 
-This test consists in checking whether each object image that doesn't
-handle any information is defined with an empty "alt" attribute.
+@@@ TO-DO
 
 ## Business description
 
@@ -30,30 +31,22 @@ Pour chaque image objet sans <a href="http://references.modernisation.gouv.fr/si
 
 ### Decision level
 
-**semidecidable**
+**Decidable**
 
 ## Algorithm
 
 ### Selection
 
-All the <object\> tags with a "type" attribute that starts with
-"image/..."
-
 ### Process
-
-The selection handles the process
 
 ### Analysis
 
-#### Not Applicable
+#### Passed
 
-Selection is empty (The page has no <object\> tag with a "type"
-attribute that starts with "image/...")
+#### Failed
+
+#### Not Applicable
 
 #### Pre-qualified
 
-The selection is not empty
-
-## Notes
-
-No notes yet for that rule
+#### No Tested 
