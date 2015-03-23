@@ -19,6 +19,8 @@ pages:
 - ['prerequisites-cli-doc.md',              'Installation Command Line Interface (CLI)','Prerequisites']
 - ['install-cli-doc.md',                    'Installation Command Line Interface (CLI)','Installation']
 - ['usage-cli-doc.md',                      'Installation Command Line Interface (CLI)','Usage']
+- ['install-windows-prerequesites.md',      'Installation Windows','Prerequisites']
+- ['install-windows.md',      'Installation Windows','Installation']
 - ['developer-doc.md',                      'Developer Documentation']
 - ['tanaguru-team.md',                      'Tanaguru Team']
 
