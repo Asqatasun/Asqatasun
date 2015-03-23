@@ -1,8 +1,8 @@
 # Rule 1.1.3
+
 ## Summary
 
-This test consists in checking whether each form button is defined with
-an "alt" attribute
+This test consists in checking whether each form button is defined with an `"alt"` attribute
 
 ## Business description
 
@@ -36,42 +36,35 @@ Chaque bouton de formulaire (balise `input` avec l'attribut `type="image"`) a-t-
 
 ### Selection
 
-Set1 : All the <input\> tags with a "type" attribute equals to "image"
+**Set1**
+
+All the `<input>` tags with a `"type"` attribute equals to "image"
 
 ### Process
 
-Test1 : Check whether each element of Set1 contains an "alt" attribute.
+**Test1**
 
--   Message :
+For each element of **Set1**, test the presence of an `"alt"` attribute.
 
-1.  Type : SourceCodeRemark
-2.  Code : AltAttributeMissing
-3.  Issue : Failed
-4.  Target : <form\>
-5.  Value : x
-6.  Case : For each element returning false in Test1
+For each occurrence of false-result of Test1, raise a MessageA
 
--   used nomenclature : none
+#### MessageA 
 
--   reference : none
+-    code : **AltMissing** 
+-    status: Failed
+-    parameter : `"src"` attribute, tag name
+-    present in source : yes
 
 ### Analysis
 
-#### Not Applicable
+#### Passed
 
-The page has no <input\> tag with a "type" attribute equals to "image"
-(Set1 is empty)
+All the `<input>` tags with a `"type"` attribute equals to "image" of the page have an `"alt"` attribute (**Test1** returns true for all the elements of **Set1**)
 
 #### Failed
 
-At least one form button has no "alt" attribute (Test1 returns false for
-at least one element)
+At least one `<input>` tag with a `"type"` attribute equals to "image" has no `"alt"` attribute (**Test1** returns failed for at least one element)
 
-#### Passed
+#### Not Applicable
 
-All the <input\> tags with a "type" attribute equals to "image" have an
-"alt" attribut
-
-## Notes
-
-No notes yet for that rule
+The page has no `<input>` tag with a `"type"` attribute equals to "image" tag (**Set1** is empty)
