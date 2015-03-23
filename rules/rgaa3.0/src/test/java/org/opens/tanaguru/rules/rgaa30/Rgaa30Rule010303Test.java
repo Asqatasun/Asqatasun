@@ -52,83 +52,83 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-2Failed-01",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-2Failed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-2Failed-01", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-01.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-01", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
 
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-2Failed-02",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-02",
                 getWebResourceFactory().createPage(
-                    getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-2Failed-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-2Failed-02", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
+                    getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-02.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-02", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-2Failed-03",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-2Failed-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-2Failed-03", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-03.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-03", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-2Failed-04",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-2Failed-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-2Failed-04", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-04.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-04", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-2Failed-05",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-2Failed-05.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-2Failed-05", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-2Failed-05", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-05.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-05", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-05", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-3NMI-01",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-3NMI-01.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-01.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-3NMI-02",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-3NMI-02.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-02.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-3NMI-03",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-3NMI-03.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-03.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-3NMI-04",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-3NMI-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-3NMI-04", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-04.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-3NMI-04", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
     
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-3NMI-05",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-3NMI-05.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-05.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-3NMI-06",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-06",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-3NMI-06.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-3NMI-06", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-3NMI-06", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-06.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-3NMI-06", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-3NMI-06", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-4NA-01",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-4NA-01.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-01.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-4NA-02",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-4NA-02.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-02.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-4NA-03",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-03",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-4NA-03.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-03.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-4NA-04",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-04",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-4NA-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.03.03-4NA-04", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-04.html"));
+        addParameterToParameterMap("Rgaa30.Test.1.3.3-4NA-04", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-4NA-05",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-05",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-4NA-05.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-05.html"));
         
-        getWebResourceMap().put("Rgaa30.Test.01.03.03-4NA-06",
+        getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-06",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.01.03.03-4NA-06.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-06.html"));
     }
 
     @Override
@@ -136,7 +136,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.01.03.03-2Failed-01");
+        ProcessResult processResult = processPageTest("Rgaa30.Test.1.3.3-2Failed-01");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -162,7 +162,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-2Failed-02");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-2Failed-02");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -188,7 +188,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-2Failed-03");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-2Failed-03");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -214,7 +214,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-2Failed-04");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-2Failed-04");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -240,7 +240,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-2Failed-05");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-2Failed-05");
         // check number of elements in the page
         assertEquals(4, processResult.getElementCounter());
         // check test result
@@ -313,7 +313,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-3NMI-01");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-01");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -339,7 +339,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-3NMI-02");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-02");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -365,7 +365,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-3NMI-03");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-03");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -391,7 +391,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-3NMI-04");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-04");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -417,7 +417,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-05---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-3NMI-05");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-05");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -443,7 +443,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-06---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-3NMI-06");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-06");
         // check number of elements in the page
         assertEquals(3, processResult.getElementCounter());
         // check test result
@@ -501,7 +501,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-4NA-01");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-01");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -513,7 +513,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-4NA-02");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-02");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -525,7 +525,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-4NA-03");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-03");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -537,7 +537,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-4NA-03");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-03");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -549,7 +549,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-04----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-4NA-04");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-04");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -561,7 +561,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-05----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-4NA-05");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-05");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -573,7 +573,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-06----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.03.03-4NA-06");
+        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-06");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -585,38 +585,38 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setConsolidate() {
         assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.01.03.03-2Failed-01").getValue());
+                consolidate("Rgaa30.Test.1.3.3-2Failed-01").getValue());
         assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.01.03.03-2Failed-02").getValue());
+                consolidate("Rgaa30.Test.1.3.3-2Failed-02").getValue());
         assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.01.03.03-2Failed-03").getValue());
+                consolidate("Rgaa30.Test.1.3.3-2Failed-03").getValue());
         assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.01.03.03-2Failed-04").getValue());
+                consolidate("Rgaa30.Test.1.3.3-2Failed-04").getValue());
         assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.01.03.03-2Failed-05").getValue());
+                consolidate("Rgaa30.Test.1.3.3-2Failed-05").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.03.03-3NMI-01").getValue());
+                consolidate("Rgaa30.Test.1.3.3-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.03.03-3NMI-02").getValue());
+                consolidate("Rgaa30.Test.1.3.3-3NMI-02").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.03.03-3NMI-03").getValue());
+                consolidate("Rgaa30.Test.1.3.3-3NMI-03").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.03.03-3NMI-04").getValue());
+                consolidate("Rgaa30.Test.1.3.3-3NMI-04").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.03.03-3NMI-05").getValue());
+                consolidate("Rgaa30.Test.1.3.3-3NMI-05").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.03.03-3NMI-06").getValue());
+                consolidate("Rgaa30.Test.1.3.3-3NMI-06").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.03.03-4NA-01").getValue());
+                consolidate("Rgaa30.Test.1.3.3-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.03.03-4NA-02").getValue());
+                consolidate("Rgaa30.Test.1.3.3-4NA-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.03.03-4NA-03").getValue());
+                consolidate("Rgaa30.Test.1.3.3-4NA-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.03.03-4NA-04").getValue());
+                consolidate("Rgaa30.Test.1.3.3-4NA-04").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.03.03-4NA-05").getValue());
+                consolidate("Rgaa30.Test.1.3.3-4NA-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.03.03-4NA-06").getValue());
+                consolidate("Rgaa30.Test.1.3.3-4NA-06").getValue());
     }
 }
