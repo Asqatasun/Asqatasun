@@ -22,6 +22,7 @@ package org.opens.tanaguru.rules.rgaa30;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.DATA_ATTR;
@@ -39,51 +40,58 @@ import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-2-4"> 1.2.4 rule specification</a>
  *
  */
-public class Rgaa30Rule010203 extends AbstractMarkerPageRuleImplementation {
+public class Rgaa30Rule010203 extends AbstractNotTestedRuleImplementation {
 
     /**
-     * Constructor
+     * Default constructor
      */
-    public Rgaa30Rule010203() {
-        super(
-                new ImageElementSelector(OBJECT_TYPE_IMG_CSS_LIKE_QUERY, true, false),
-                
-                // the decorative images are part of the scope
-                DECORATIVE_IMAGE_MARKER, 
-                
-                // the informative images are not part of the scope
-                INFORMATIVE_IMAGE_MARKER, 
-
-                // checker for elements identified by marker
-                new TextEmptinessChecker(
-                    // the text element builder
-                    new SimpleTextElementBuilder(),
-                    // solution when text is empty
-                    TestSolution.PASSED, 
-                    // solution when text is not empty
-                    TestSolution.FAILED, 
-                    // no message created when a decorative object with an empty text is found
-                    null, 
-                    // message created when a decorative object with a not empty text is found
-                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
-                    // evidence elements
-                    TEXT_ELEMENT2,
-                    DATA_ATTR),
-                
-                // checker for elements not identified by marker
-                new TextEmptinessChecker(
-                    // the text element builder
-                    new SimpleTextElementBuilder(),
-                    // solution when text is empty
-                    TestSolution.NEED_MORE_INFO, 
-                    // solution when text is notempty
-                    TestSolution.NEED_MORE_INFO, 
-                    CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, 
-                    CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
-                    // evidence elements
-                    TEXT_ELEMENT2,
-                    DATA_ATTR)
-            );
+    public Rgaa30Rule010203 () {
+        super();
     }
+    
+//    /**
+//     * Constructor
+//     */
+//    public Rgaa30Rule010203() {
+//        super(
+//                new ImageElementSelector(OBJECT_TYPE_IMG_CSS_LIKE_QUERY, true, false),
+//                
+//                // the decorative images are part of the scope
+//                DECORATIVE_IMAGE_MARKER, 
+//                
+//                // the informative images are not part of the scope
+//                INFORMATIVE_IMAGE_MARKER, 
+//
+//                // checker for elements identified by marker
+//                new TextEmptinessChecker(
+//                    // the text element builder
+//                    new SimpleTextElementBuilder(),
+//                    // solution when text is empty
+//                    TestSolution.PASSED, 
+//                    // solution when text is not empty
+//                    TestSolution.FAILED, 
+//                    // no message created when a decorative object with an empty text is found
+//                    null, 
+//                    // message created when a decorative object with a not empty text is found
+//                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
+//                    // evidence elements
+//                    TEXT_ELEMENT2,
+//                    DATA_ATTR),
+//                
+//                // checker for elements not identified by marker
+//                new TextEmptinessChecker(
+//                    // the text element builder
+//                    new SimpleTextElementBuilder(),
+//                    // solution when text is empty
+//                    TestSolution.NEED_MORE_INFO, 
+//                    // solution when text is notempty
+//                    TestSolution.NEED_MORE_INFO, 
+//                    CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, 
+//                    CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
+//                    // evidence elements
+//                    TEXT_ELEMENT2,
+//                    DATA_ATTR)
+//            );
+//    }
 
 }
