@@ -45,7 +45,9 @@ All the `<input>` tags with a `"type"` attribute equals to "image" and an `"alt"
 #### Test1
 
 For all elements of **Set1**, check whether the content of the "`alt`" attribute is not relevant (see Notes for details about relevancy test). 
+
 For each occurrence of true-result of **Test1**, raise a MessageA.
+
 For each occurrence of false-result of **Test1**, raise a MessageB
 
 ##### MessageA 
@@ -64,14 +66,17 @@ For each occurrence of false-result of **Test1**, raise a MessageB
 
 ### Analysis
 
-#### Not Applicable
+#### Failed
 
-Selection is empty (The page has no<input\> tags with a "alt" attribute
-and the type attribute equals to "image")
+At least one `<input>` tag with a `"type"` attribute equals to "image" has an irrelevant `"alt"` attribute (**Test1** returns true for at least one element)
 
 #### Pre-qualified
 
-The selection is not empty
+The alternatives of all the `<input>` tags with a `"type"` attribute equals to "image" need to be manually checked (**Test1** returns false for all the elements of **Set1**) 
+
+#### Not Applicable
+
+The page has no `<input>` tag with a `"type"` attribute equals to "image" tag and an `"alt"` attribute (**Set1** is empty)
 
 ## Notes
 
@@ -80,4 +85,4 @@ The content of the "`alt`" attribute is seen as not relevant if :
 - empty
 - only composed of non-alphanumerical characters
 - identical to the `"src"` attribute
-- 
+- it has an extension of image type (loaded by the nomenclature named *ImageFileExtensions* composed of : jpg, gif, jpeg, png, bmp)
