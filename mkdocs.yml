@@ -20,9 +20,9 @@ pages:
 - ['install-cli-doc.md',                    'Installation Command Line Interface (CLI)','Installation']
 - ['usage-cli-doc.md',                      'Installation Command Line Interface (CLI)','Usage']
 - ['install-windows-prerequesites.md',      'Installation Windows','Prerequisites']
-- ['install-windows.md',      'Installation Windows','Installation']
-- ['developer-doc.md',                      'Developer Documentation']
-- ['tanaguru-team.md',                      'Tanaguru Team']
+- ['install-windows.md',                    'Installation Windows','Installation']
+- ['developer-doc.md',                      'Misc', 'Developer Documentation']
+- ['tanaguru-team.md',                      'Misc', 'Tanaguru Team']
 
 theme: readthedocs
 repo_url: https://github.com/Tanaguru/Tanaguru
