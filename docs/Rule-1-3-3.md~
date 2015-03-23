@@ -36,26 +36,26 @@ Pour chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attr
 
 ### Selection
 
-#### Set1
+**Set1** 
 
 All the `<input>` tags with a `"type"` attribute equals to "image" and an `"alt"` attribute
 
 ### Process
 
-#### Test1
+**Test1** 
 
 For all elements of **Set1**, check whether the content of the "`alt`" attribute is not relevant (see Notes for details about relevancy test). 
 For each occurrence of true-result of **Test1**, raise a MessageA.
 For each occurrence of false-result of **Test1**, raise a MessageB
 
-##### MessageA 
+#### MessageA 
 
 -    code : **NotPertinentAlt** 
 -    status: Failed
 -    parameter : `"alt"` attribute, `"src"` attribute, tag name
 -    present in source : yes
 
-##### MessageB 
+#### MessageB 
 
 -    code : **CheckPertinenceOfAltAttributeOfInformativeImage** 
 -    status: Pre-Qualified

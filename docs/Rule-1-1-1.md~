@@ -48,7 +48,7 @@ For each element of **Set1**, test the presence of an `"alt"` attribute.
 
 For each occurrence of false-result of Test1, raise a MessageA
 
-##### MessageA : Missing Alt attribute
+#### MessageA : Missing Alt attribute
 
 -    code : **AltMissing** 
 -    status: Failed
