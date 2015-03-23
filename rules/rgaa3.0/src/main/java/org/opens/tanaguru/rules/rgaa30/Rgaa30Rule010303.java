@@ -20,15 +20,12 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
@@ -39,7 +36,7 @@ import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-3-3"> 1.3.3 rule specification</a>
  *
  */
-public class Rgaa30Rule010303 extends AbstractMarkerPageRuleImplementation {
+public class Rgaa30Rule010303 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /** The name of the nomenclature that handles the image file extensions */
     private static final String IMAGE_FILE_EXTENSION_NOM = "ImageFileExtensions";
@@ -50,12 +47,6 @@ public class Rgaa30Rule010303 extends AbstractMarkerPageRuleImplementation {
     public Rgaa30Rule010303() {
         super(
                 new ImageElementSelector(FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY, true, false),
-
-                // the informative images are part of the scope
-                INFORMATIVE_IMAGE_MARKER, 
-
-                // the decorative images are not part of the scope
-                DECORATIVE_IMAGE_MARKER, 
 
                 // checker for elements identified by marker
                 new AttributePertinenceChecker(
@@ -70,25 +61,6 @@ public class Rgaa30Rule010303 extends AbstractMarkerPageRuleImplementation {
                     NOT_PERTINENT_ALT_MSG,
                     // manual check message
                     CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
-                    // evidence elemeents
-                    ALT_ATTR, 
-                    SRC_ATTR),
-                
-                // checker for elements not identified by marker
-                new AttributePertinenceChecker(
-                    ALT_ATTR,
-                    // no emptiness check 
-                    false,
-                    // compare with src attribute
-                    new TextAttributeOfElementBuilder(SRC_ATTR),
-                    // compare attribute value with nomenclature
-                    IMAGE_FILE_EXTENSION_NOM,
-                    // override not pertinent result
-                    TestSolution.NEED_MORE_INFO,
-                    // not pertinent message
-                    CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
-                    // manual check message
-                    CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
                     // evidence elemeents
                     ALT_ATTR, 
                     SRC_ATTR)

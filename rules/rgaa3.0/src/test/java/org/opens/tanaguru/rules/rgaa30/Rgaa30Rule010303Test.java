@@ -31,7 +31,7 @@ import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 
 /**
- * Unit test class for the implementation of the rule 01.03.03 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.3.3 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -39,6 +39,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule010303Test (String testName){
         super(testName);
@@ -55,55 +56,22 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-01", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
 
         getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-02",
                 getWebResourceFactory().createPage(
                     getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-02", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
         
         getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-03",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-03", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
         
         getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-04",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-04", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
-        
-        getWebResourceMap().put("Rgaa30.Test.1.3.3-2Failed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-2Failed-05.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-05", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-2Failed-05", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
         
         getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-01.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-02.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-03.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-3NMI-04", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
-    
-        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-05.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.1.3.3-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-3NMI-06.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-3NMI-06", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "class-informative-input"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-3NMI-06", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
         
         getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-01",
                 getWebResourceFactory().createPage(
@@ -120,15 +88,10 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-04",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.1.3.3-4NA-04", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-input"));
         
         getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-05",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-05.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.1.3.3-4NA-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010303/Rgaa30.Test.1.3.3-4NA-06.html"));
     }
 
     @Override
@@ -178,7 +141,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(2, processRemark.getElementList().size());
         iter = processRemark.getElementList().iterator();
         ee = iter.next();
-        assertEquals("mock-image.png", ee.getValue());
+        assertEquals("my-image.png", ee.getValue());
         assertEquals(ALT_ATTR, ee.getEvidence().getCode());
         ee = iter.next();
         assertTrue(StringUtils.contains(ee.getValue(), "mock-image"));
@@ -238,79 +201,6 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         
         
         //----------------------------------------------------------------------
-        //------------------------------2Failed-05------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.3.3-2Failed-05");
-        // check number of elements in the page
-        assertEquals(4, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(4, processResult.getRemarkSet().size());
-        Iterator<ProcessRemark> pIter = processResult.getRemarkSet().iterator();
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.NOT_PERTINENT_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image1"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("Informative input alternative", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image2"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("mock-image3", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image3"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("not identified input alternative", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image4"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-
-        //----------------------------------------------------------------------
         //------------------------------3NMI-01------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-01");
@@ -321,84 +211,6 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         // check number of remarks and their value
         assertEquals(1, processResult.getRemarkSet().size());
         processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("mock-image", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-02------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("mock-image.png", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-03------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("#!/;'(|", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-04------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-04");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
         assertEquals(RemarkMessageStore.CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG, processRemark.getMessageCode());
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
@@ -414,90 +226,6 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(SRC_ATTR, ee.getEvidence().getCode());
         
 
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-05---------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-05");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("Not identified input alternative", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-06---------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.3.3-3NMI-06");
-        // check number of elements in the page
-        assertEquals(3, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(3, processResult.getRemarkSet().size());
-        pIter = processResult.getRemarkSet().iterator();
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("Informative input alternative", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image2"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("mock-image3", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image3"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(HtmlElementStore.INPUT_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("not identified input alternative", ee.getValue());
-        assertEquals(ALT_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-image4"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
-
-        
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
@@ -569,17 +297,6 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
         // check number of elements in the page
         assertEquals(0, processResult.getElementCounter());
         
-        
-        //----------------------------------------------------------------------
-        //------------------------------4NA-06----------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.3.3-4NA-06");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
     }
 
     @Override
@@ -592,20 +309,8 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
                 consolidate("Rgaa30.Test.1.3.3-2Failed-03").getValue());
         assertEquals(TestSolution.FAILED,
                 consolidate("Rgaa30.Test.1.3.3-2Failed-04").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.1.3.3-2Failed-05").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa30.Test.1.3.3-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.1.3.3-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.1.3.3-3NMI-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.1.3.3-3NMI-04").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.1.3.3-3NMI-05").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.1.3.3-3NMI-06").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.1.3.3-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
@@ -616,7 +321,6 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
                 consolidate("Rgaa30.Test.1.3.3-4NA-04").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.1.3.3-4NA-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.1.3.3-4NA-06").getValue());
     }
+    
 }
