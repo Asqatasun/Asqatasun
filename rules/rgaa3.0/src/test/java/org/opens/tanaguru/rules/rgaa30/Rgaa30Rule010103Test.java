@@ -51,24 +51,24 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.01.01.03-1Passed-01",
+        getWebResourceMap().put("Rgaa30.Test.1.1.3-1Passed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.01.01.03-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.01.03-1Passed-02",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.1.1.3-1Passed-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.1.1.3-1Passed-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.01.01.03-1Passed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.01.03-2Failed-01",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.1.1.3-1Passed-02.html"));
+        getWebResourceMap().put("Rgaa30.Test.1.1.3-2Failed-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.01.01.03-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.01.03-2Failed-02",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.1.1.3-2Failed-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.1.1.3-2Failed-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.01.01.03-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.01.03-4NA-01",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.1.1.3-2Failed-02.html"));
+        getWebResourceMap().put("Rgaa30.Test.1.1.3-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.01.01.03-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.01.03-4NA-02",
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.1.1.3-4NA-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.1.1.3-4NA-02",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.01.01.03-4NA-02.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010103/Rgaa30.Test.1.1.3-4NA-02.html"));
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.01.01.03-1Passed-01");
+        ProcessResult processResult = processPageTest("Rgaa30.Test.1.1.3-1Passed-01");
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check test has no remark
@@ -88,7 +88,7 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.01.03-1Passed-02");
+        processResult = processPageTest("Rgaa30.Test.1.1.3-1Passed-02");
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());
         // check test has no remark
@@ -100,7 +100,7 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.01.03-2Failed-01");
+        processResult = processPageTest("Rgaa30.Test.1.1.3-2Failed-01");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
         // check test result
@@ -122,7 +122,7 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.01.03-2Failed-02");
+        processResult = processPageTest("Rgaa30.Test.1.1.3-2Failed-02");
         // check number of elements in the page
         assertEquals(2, processResult.getElementCounter());
         // check test result
@@ -144,7 +144,7 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.01.03-4NA-01");
+        processResult = processPageTest("Rgaa30.Test.1.1.3-4NA-01");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -155,7 +155,7 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.01.03-4NA-02");
+        processResult = processPageTest("Rgaa30.Test.1.1.3-4NA-02");
         // check test result
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
@@ -167,16 +167,16 @@ public class Rgaa30Rule010103Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setConsolidate() {
         assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.01.01.03-1Passed-01").getValue());
+                consolidate("Rgaa30.Test.1.1.3-1Passed-01").getValue());
         assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.01.01.03-1Passed-02").getValue());
+                consolidate("Rgaa30.Test.1.1.3-1Passed-02").getValue());
         assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.01.01.03-2Failed-01").getValue());
+                consolidate("Rgaa30.Test.1.1.3-2Failed-01").getValue());
         assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.01.01.03-2Failed-02").getValue());
+                consolidate("Rgaa30.Test.1.1.3-2Failed-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.01.03-4NA-01").getValue());
+                consolidate("Rgaa30.Test.1.1.3-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.01.03-4NA-02").getValue());
+                consolidate("Rgaa30.Test.1.1.3-4NA-02").getValue());
     }
 }
