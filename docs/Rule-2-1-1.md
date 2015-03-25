@@ -52,7 +52,7 @@ For each occurrence of false-result of **Test1**, raise a MessageA
 
 -   code : TitleAttributeMissing
 -   status: Failed
--   parameter : `"src"` attribute, snippet
+-   parameter : `"src"` attribute, tag name, snippet
 -   present in source : yes
 
 ### Analysis

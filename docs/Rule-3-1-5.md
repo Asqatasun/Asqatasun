@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -30,7 +30,7 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -40,18 +40,9 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
+In all cases
 
 
 

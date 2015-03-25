@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -40,16 +40,9 @@ Pour chaque image <a href="http://references.modernisation.gouv.fr/sites/default
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
+In all cases
 
 
 

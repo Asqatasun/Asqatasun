@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -30,7 +30,7 @@ Pour chaque indication de couleur donn&eacute;e par un texte, l'<a href="http://
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -40,16 +40,9 @@ Pour chaque indication de couleur donn&eacute;e par un texte, l'<a href="http://
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
+In all cases
 
 
 

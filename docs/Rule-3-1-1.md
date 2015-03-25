@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -30,7 +30,7 @@ Pour chaque mot ou ensemble de mots dont la mise en couleur est porteuse d'<a hr
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -40,17 +40,9 @@ Pour chaque mot ou ensemble de mots dont la mise en couleur est porteuse d'<a hr
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
+In all cases
 
 
 
