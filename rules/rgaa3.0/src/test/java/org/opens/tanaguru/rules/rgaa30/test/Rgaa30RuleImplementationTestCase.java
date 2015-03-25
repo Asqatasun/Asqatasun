@@ -38,4 +38,10 @@ public abstract class Rgaa30RuleImplementationTestCase extends AbstractRuleImple
         super(testName, inputFileDataName, TESTCASE_FILE_PATH);
     }
 
+    
+    @Override
+    protected String getRefKey() {
+        return "rgaa30";
+    }
+
 }

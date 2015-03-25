@@ -28,8 +28,13 @@ import java.net.URL;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.log4j.Logger;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
@@ -41,8 +46,11 @@ import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
+import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.factory.audit.AuditFactory;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.factory.parameterization.ParameterElementFactory;
@@ -266,6 +274,31 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     protected abstract void setUpWebResourceMap();
 
     /**
+     * Add a webResource. Path is built from webResourceName.
+     * 
+     * @param webResourceName 
+     */
+    protected void addWebResource(String webResourceName) {
+        getWebResourceMap().put(webResourceName,
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + getRefKey()+"/"+getClassName()+"/"+webResourceName+".html"));
+    }
+    
+    /**
+     * 
+     * @return the name of the current referential
+     */
+    protected String getRefKey() {
+        return "";
+    }
+    
+    protected String getClassName() {
+        return ruleImplementationClassName.substring(
+                ruleImplementationClassName.lastIndexOf(".")+1, 
+                ruleImplementationClassName.length());
+    }
+    
+    /**
      * In this method, set the parameters associated with the each webresource.
      */
     protected void setUpParameterMap() {
@@ -350,8 +383,6 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     }
 
     protected abstract void setProcess();
-
-    protected abstract void setConsolidate();
 
     protected ProcessResult getGrossResult(String pageKey, String siteKey) {
         Site site = (Site) webResourceMap.get(siteKey);
@@ -539,4 +570,122 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         return StringUtils.replace(className, "Rule", "-");
     }
 
+    /**
+     * Check whether the result of a ProcessResult is Passed
+     * 
+     * @param processResult
+     * @param numberOfElements 
+     */
+    protected void checkResultIsPassed(ProcessResult processResult, int numberOfElements) {
+        checkResult(processResult, TestSolution.PASSED, numberOfElements, 0);
+    }
+    
+    /**
+     * Check whether the result of a ProcessResult is Not Applicable
+     * 
+     * @param processResult
+     */
+    protected void checkResultIsNotApplicable(ProcessResult processResult) {
+        checkResult(processResult, TestSolution.NOT_APPLICABLE, 0, 0);
+    }
+    
+    /**
+     * Check whether the result of a ProcessResult is Failed
+     * 
+     * @param processResult
+     * @param numberOfElements 
+     * @param numberOfRemarks
+     */
+    protected void checkResultIsFailed(
+            ProcessResult processResult,
+            int numberOfElements,
+            int numberOfRemarks) {
+        checkResult(processResult, TestSolution.FAILED, numberOfElements, numberOfRemarks);
+    }
+    
+    /**
+     * Generic test result check, regarding the result of the ProcessResult, 
+     * the number of remarks created, and the number of detected elements
+     * 
+     * @param processResult
+     * @param testSolution
+     * @param numberOfElements 
+     * @param numberOfRemarks
+     */
+    private void checkResult(
+            ProcessResult processResult, 
+            TestSolution testSolution, 
+            int numberOfElements,
+            int numberOfRemarks) {
+        // check test result
+        assertEquals(testSolution, processResult.getValue());
+        if (numberOfRemarks == 0) {
+            // check test has no remark
+            assertNull(processResult.getRemarkSet());
+        } else {
+            // check number of created remarks
+            assertEquals(numberOfRemarks, processResult.getRemarkSet().size());
+        }
+        // check number of elements in the page
+        assertEquals(numberOfElements, processResult.getElementCounter());
+    }
+
+    /**
+     * 
+     * @param processResult
+     * @param testSolution
+     * @param remarkMessageCode
+     * @param remarkTarget 
+     * @param position 
+     * @param evidencePairs
+     */
+    protected void checkRemarkIsPresent(
+            ProcessResult processResult, 
+            TestSolution testSolution, 
+            String remarkMessageCode,
+            String remarkTarget,
+            int position, 
+            Pair<String,String>... evidencePairs) {
+        SourceCodeRemark sourceCodeRemark = 
+                ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
+        assertEquals(remarkMessageCode, sourceCodeRemark.getMessageCode());
+        assertEquals(testSolution, sourceCodeRemark.getIssue());
+        assertEquals(remarkTarget, sourceCodeRemark.getTarget());
+        assertNotNull(sourceCodeRemark.getSnippet());
+        if (evidencePairs.length == 0 || sourceCodeRemark.getElementList().isEmpty()) {
+            return;
+        }
+        // check number of evidence elements and their value
+        assertEquals(evidencePairs.length, sourceCodeRemark.getElementList().size());
+        
+        Object[] evEls = sourceCodeRemark.getElementList().toArray();
+        for (int i=0 ; i<evEls.length ; i++) {
+            EvidenceElement ee = (EvidenceElement)evEls[i];
+            assertEquals(evidencePairs[i].getLeft(), ee.getEvidence().getCode());
+            assertTrue(StringUtils.contains(ee.getValue(), evidencePairs[i].getRight()));
+        }
+    }
+    
+    /**
+     * Default implementation of setConsolidate. May be overridden only in 
+     * special cases
+     */
+    protected void setConsolidate() {
+        for (String webResourceKey : webResourceMap.keySet()) {
+            if (StringUtils.containsIgnoreCase(webResourceKey, "Passed")) {
+                assertEquals(TestSolution.PASSED,
+                    consolidate(webResourceKey).getValue());
+            } else if (StringUtils.containsIgnoreCase(webResourceKey, "Failed")) {
+                assertEquals(TestSolution.FAILED,
+                    consolidate(webResourceKey).getValue());
+            } else if (StringUtils.containsIgnoreCase(webResourceKey, "NMI")) {
+                assertEquals(TestSolution.NEED_MORE_INFO,
+                    consolidate(webResourceKey).getValue());
+            } else if (StringUtils.containsIgnoreCase(webResourceKey, "NA")) {
+                assertEquals(TestSolution.NOT_APPLICABLE,
+                    consolidate(webResourceKey).getValue());
+            } 
+        }
+    }
+    
 }
