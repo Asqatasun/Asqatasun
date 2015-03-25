@@ -669,7 +669,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         assertEquals(remarkTarget, sourceCodeRemark.getTarget());
         Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getTarget());
         assertNotNull(sourceCodeRemark.getSnippet());
-        if (evidencePairs.length == 0 || sourceCodeRemark.getElementList().isEmpty()) {
+        if (evidencePairs.length == 0) {
+            assertNull(sourceCodeRemark.getElementList());
             return;
         }
         // check number of evidence elements and their value
