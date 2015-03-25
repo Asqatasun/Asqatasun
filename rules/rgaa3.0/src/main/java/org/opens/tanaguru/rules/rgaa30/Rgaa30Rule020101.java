@@ -25,7 +25,7 @@ import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecke
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.FRAME_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.IFRAME_ELEMENT;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING_MSG;
 
 /**
@@ -42,7 +42,7 @@ public class Rgaa30Rule020101 extends AbstractPageRuleWithSelectorAndCheckerImpl
      */
     public Rgaa30Rule020101 () {
         super(
-                new SimpleElementSelector(FRAME_ELEMENT), 
+                new SimpleElementSelector(IFRAME_ELEMENT), 
                 
                 new AttributePresenceChecker(
                     TITLE_ATTR, 
@@ -51,7 +51,7 @@ public class Rgaa30Rule020101 extends AbstractPageRuleWithSelectorAndCheckerImpl
                     // failed when attribute is not found
                     TestSolution.FAILED, 
                     // no message created when attribute is found
-                    null, 
+                    null,
                     // message associated with element when attribute is not found
                     TITLE_ATTR_MISSING_MSG, 
                     // evidence elements

@@ -21,14 +21,11 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.LinkedHashSet;
-import org.apache.commons.lang3.StringUtils;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
+import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
@@ -50,15 +47,9 @@ public class Rgaa30Rule020101Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.02.01.01-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule020101/Rgaa30.Test.02.01.01-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.02.01.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule020101/Rgaa30.Test.02.01.01-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.02.01.01-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule020101/Rgaa30.Test.02.01.01-4NA-01.html"));
+        addWebResource("Rgaa30.Test.2.1.1-1Passed-01");
+        addWebResource("Rgaa30.Test.2.1.1-2Failed-01");
+        addWebResource("Rgaa30.Test.2.1.1-4NA-01");
     }
 
     @Override
@@ -66,53 +57,27 @@ public class Rgaa30Rule020101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.02.01.01-1Passed-01");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        checkResultIsPassed(processPageTest("Rgaa30.Test.2.1.1-1Passed-01"), 1);
         
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.02.01.01-2Failed-01");
-        // check number of elements in the page
-        assertEquals(2, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.TITLE_ATTR_MISSING_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.FRAME_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        EvidenceElement ee = processRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock-frame1.html"));
-        assertEquals(SRC_ATTR, ee.getEvidence().getCode());
+        ProcessResult processResult = processPageTest("Rgaa30.Test.2.1.1-2Failed-01");
+        checkResultIsFailed(processResult, 2, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.TITLE_ATTR_MISSING_MSG,
+                HtmlElementStore.IFRAME_ELEMENT,
+                1,
+                new ImmutablePair(SRC_ATTR, "mock-iframe1.html"));
 
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.02.01.01-4NA-01");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.2.1.1-4NA-01"));
     }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.02.01.01-1Passed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.02.01.01-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.02.01.01-4NA-01").getValue());
-    }
 }
