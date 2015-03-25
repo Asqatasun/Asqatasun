@@ -122,7 +122,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public void setRuleImplementationClassName(String ruleImplementationClassName) {
         this.ruleImplementationClassName = ruleImplementationClassName;
     }
-    private final Map<String, WebResource> webResourceMap = new HashMap<>();
+    private final Map<String, WebResource> webResourceMap = new LinkedHashMap<>();
     public Map<String, WebResource> getWebResourceMap() {
         return webResourceMap;
     }
@@ -604,6 +604,20 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     }
     
     /**
+     * Check whether the result of a ProcessResult is Pre-Qualified
+     * 
+     * @param processResult
+     * @param numberOfElements 
+     * @param numberOfRemarks
+     */
+    protected void checkResultIsPreQualified(
+            ProcessResult processResult,
+            int numberOfElements,
+            int numberOfRemarks) {
+        checkResult(processResult, TestSolution.NEED_MORE_INFO, numberOfElements, numberOfRemarks);
+    }
+    
+    /**
      * Generic test result check, regarding the result of the ProcessResult, 
      * the number of remarks created, and the number of detected elements
      * 
@@ -648,9 +662,12 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             Pair<String,String>... evidencePairs) {
         SourceCodeRemark sourceCodeRemark = 
                 ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
+        Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getMessageCode());
         assertEquals(remarkMessageCode, sourceCodeRemark.getMessageCode());
         assertEquals(testSolution, sourceCodeRemark.getIssue());
+        Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getIssue());
         assertEquals(remarkTarget, sourceCodeRemark.getTarget());
+        Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getTarget());
         assertNotNull(sourceCodeRemark.getSnippet());
         if (evidencePairs.length == 0 || sourceCodeRemark.getElementList().isEmpty()) {
             return;
@@ -661,6 +678,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         Object[] evEls = sourceCodeRemark.getElementList().toArray();
         for (int i=0 ; i<evEls.length ; i++) {
             EvidenceElement ee = (EvidenceElement)evEls[i];
+            Logger.getLogger(this.getClass()).debug(ee.getEvidence().getCode());
+            Logger.getLogger(this.getClass()).debug(ee.getValue());
             assertEquals(evidencePairs[i].getLeft(), ee.getEvidence().getCode());
             assertTrue(StringUtils.contains(ee.getValue(), evidencePairs[i].getRight()));
         }
