@@ -2,7 +2,9 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in detecting images and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the detected elements containing text can be replaced by styled text.
 
 ## Business description
 
@@ -30,28 +32,35 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
+#### Set1
+
+All the `<img>` tags of the page (css selector : `img`)
+
 ### Process
+
+#### Test1
+
+For each element of **Set1**, raise a MessageA
+
+##### MessageA 
+
+-    code : **ManualCheckOnElements** 
+-    status: Pre-Qualified
+-    parameter : `"src"` attribute, tag name
+-    present in source : yes
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
 #### Not Applicable
+
+The page has no `<img>` tags (**Set1** is empty)
 
 #### Pre-qualified
 
-#### No Tested 
-
-
-
-
-
-
+The page has at least one `<img>` tag (**Set1** is not empty)

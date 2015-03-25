@@ -1,8 +1,10 @@
 # Rule 1.9.2
+
 ## Summary
 
-This test consists in checking whether each text area associated with an
-image map is replaced with styled text.
+This test consists in detecting map images and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the detected elements containing text can be replaced by styled text.
 
 ## Business description
 
@@ -30,28 +32,35 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-All the <area\> tags of the page
+#### Set1
+
+All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute of an `<img>` tag.
 
 ### Process
 
-The selection handles the process
+#### Test1
+
+For each element of **Set1**, raise a MessageA
+
+##### MessageA 
+
+-    code : **ManualCheckOnElements** 
+-    status: Pre-Qualified
+-    parameter : `"href"` attribute, tag name
+-    present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-The selection is empty (The page has no <area\> tag)
+The page has no `<area>` tag, correctly associated with an image (**Set1** is empty)
 
 #### Pre-qualified
 
-In all other cases
-
-## Notes
-
-No notes yet for that rule
+The page has at least one `<area>` tag, correctly associated with an image (**Set1** is not empty)

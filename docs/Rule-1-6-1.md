@@ -2,8 +2,9 @@
 
 ## Summary
 
-This test consists in checking whether an informative image has a detailed description if necessary
-This test consists in detecting informative image buttons associated with an image used as a CAPTCHA.
+This test consists in detecting informative image.
+
+Human check will be then needed to determine whether these detected elements have a detailed description if necessary.
 
 ## Business description
 

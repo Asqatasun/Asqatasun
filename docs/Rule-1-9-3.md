@@ -1,8 +1,10 @@
 # Rule 1.9.3
+
 ## Summary
 
-This test consists in checking whether each button "image of text" is
-replaced with styled text.
+This test consists in detecting "image of text" buttons and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the detected elements containing text can be replaced by styled text.
 
 ## Business description
 
@@ -26,33 +28,39 @@ Pour chaque balise `form`, chacun de ses boutons "image texte" (balise `input` a
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-All the <input\> tags with a "type" attribute equals to "image"
+#### Set1
+
+All the `<input>` tags with a `"type"` attribute equals to "image"
 
 ### Process
 
-The selection handles the process
+#### Test1
+
+For each element of **Set1**, raise a MessageA
+
+##### MessageA 
+
+-    code : **ManualCheckOnElements** 
+-    status: Pre-Qualified
+-    parameter : `"src"` attribute, tag name
+-    present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-The selection is empty (The page has no <input\> tag with a "type"
-attribute equals to "image")
+The page has no `<input>` tags with a `"type"` attribute equals to "image" (**Set1** is empty)
 
 #### Pre-qualified
 
-In all other cases
-
-## Notes
-
-No notes yet for that rule
+The page has at least one `<input>` tags with a `"type"` attribute equals to "image" (**Set1** is not empty)

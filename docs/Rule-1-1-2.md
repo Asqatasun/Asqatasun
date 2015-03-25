@@ -38,7 +38,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 #### Set1
 
-All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute of an `<img>` tag
+All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute of an `<img>` tag.
 
 ### Process
 
