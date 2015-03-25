@@ -1,8 +1,9 @@
 # Rule 1.6.1
+
 ## Summary
 
-This test consists in checking whether an informative image has a
-detailed description if necessary
+This test consists in checking whether an informative image has a detailed description if necessary
+This test consists in detecting informative image buttons associated with an image used as a CAPTCHA.
 
 ## Business description
 
@@ -22,7 +23,6 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
  * Il existe un attribut `alt` contenant la r&eacute;f&eacute;rence &agrave; une description d&eacute;taill&eacute;e adjacente &agrave; l'image 
  * Il existe un lien adjacent (via une `url` ou une `ancre`) permettant d'acc&eacute;der au contenu de la description d&eacute;taill&eacute;e 
 
-
 ### Level
 
 **A**
@@ -35,28 +35,66 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-All the <img\> of the page
+#### Set1
+
+All the `<img>` tags of the page not within a link (css selector : `img:not(a img)`)
+
+#### Set2
+
+All the elements of **Set1** identified as informative image by marker usage (see Notes for details about detection through marker)
+
+#### Set3
+
+All the elements of **Set1** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
 
 ### Process
 
-The selection handles the process
+#### Test1
+
+For each element of **Set2**, raise a MessageA
+
+##### MessageA 
+
+-    code : **CheckLongdescDefinitionOfInformativeImage** 
+-    status: Pre-Qualified
+-    parameter : `"longdesc"` attribute, `"alt"` attribute, `"src"` attribute, tag name
+-    present in source : yes
+
+#### Test2
+
+For each element of **Set3**, raise a MessageB
+
+##### MessageB 
+
+-    code : **CheckNatureOfImageAndLongdescDefinition** 
+-    status: Pre-Qualified
+-    parameter : `"longdesc"` attribute, `"alt"` attribute, `"src"` attribute, tag name
+-    present in source : yes
 
 ### Analysis
 
 #### Not Applicable:
 
-The selection is empty (the page has no <img\> tag)
+The page has no `<img>` tags or only image links or only images identified as decorative by marker  (**Set1** is empty, or **Set2** AND **Set3** are empty)
 
 #### Pre-qualified:
 
-The seletion is not empty
+The page has at least one `<img>` tag that is not an image link and not identified as decorative by marker (**Set2** or **Set3** is not empty)
 
 ## Notes
 
-No notes yet for that rule
+**Informative images** markers are set through the *INFORMATIVE_IMAGE_MARKER* parameter.
+
+**Decorative images** markers are set through the *DECORATIVE_IMAGE_MARKER* parameter.
+
+The value(s) passed as marker(s) will be checked against the following attributes:
+
+- `class`
+- `id`
+- `role`
