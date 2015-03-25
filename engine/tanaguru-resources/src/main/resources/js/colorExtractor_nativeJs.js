@@ -182,6 +182,7 @@ function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, el
         element.color = '\"'+color+'\"';
         element.fontSize =  getStyle(elem,'font-size');
         element.fontWeight = getStyle(elem,'font-weight');
+        element.textAlign = getStyle(elem,'text-align');
         element.isTextNode = isTextNode(elem);
         elem.focus(); // get the focus
         focus = document.activeElement;

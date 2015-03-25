@@ -106,6 +106,15 @@ public class DomElement {
     public void setFontSize(String fontSize) {
         this.fontSize = fontSize;
     }
+    
+    /* the value of the textAlign property*/
+    private String textAlignValue;
+    public String getTextAlignValue() {
+        return textAlignValue;
+    }
+    public void setTextAlignValue(String textAlignValue) {
+        this.textAlignValue = textAlignValue;
+    }
 
     public float getFontSizeInPt() {
         return Float.valueOf(fontSize.substring(0,fontSize.indexOf(PIXEL_KEY))) 
