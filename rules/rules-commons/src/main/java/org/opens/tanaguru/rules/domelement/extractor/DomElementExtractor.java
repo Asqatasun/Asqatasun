@@ -51,6 +51,7 @@ public final class DomElementExtractor {
     private static final String JSON_FG_COLOR_KEY = "color";
     private static final String JSON_BG_COLOR_KEY = "bgColor";
     private static final String JSON_IS_FOCUSABLE_KEY = "isFocusable";
+    private static final String JSON_TEXT_ALIGN_KEY = "textAlign";
     private static final String JSON_OUTLINE_COLOR_FOCUS_KEY = 
             "outlineColorFocus";
     private static final String JSON_OUTLINE_WIDTH_FOCUS_KEY = 
@@ -147,6 +148,7 @@ public final class DomElementExtractor {
         domElement.setTextNode(
                 Boolean.valueOf(element.get(JSON_IS_TEXT_NODE_KEY).toString()));
         domElement.setWeight(element.get(JSON_FONT_WEIGHT_KEY).toString());
+        domElement.setTextAlignValue(element.get(JSON_TEXT_ALIGN_KEY).toString());
         return domElement;
     }
 
