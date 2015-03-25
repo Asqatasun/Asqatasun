@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in detecting buttons associated with an image used as a CAPTCHA.
 
 ## Business description
 
@@ -21,7 +21,6 @@ Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut 
  * Il existe une autre forme de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> non graphique, au moins  
  * Il existe une autre solution d'acc&egrave;s &agrave; la fonctionnalit&eacute; s&eacute;curis&eacute;e par le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> 
 
-
 ### Level
 
 **A**
@@ -34,28 +33,46 @@ Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut 
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
+#### Set1
+
+All the `<input>` tags with a `"type"` attribute equals to "image" identified as a CAPTCHA (see Notes for details about CAPTCHA characterisation).
+
 ### Process
+
+#### Test1
+
+For each element of **Set1**, raise a MessageA
+
+##### MessageA 
+
+-    code : **CheckCaptchaAlternativeAccess** 
+-    status: Pre-Qualified
+-    parameter : tag name
+-    present in source : yes
 
 ### Analysis
 
-#### Passed
+#### Pre-qualified
 
-#### Failed
+At least one `<input>` tags with a `"type"` attribute equals to "image" identified as a CAPTCHA has been found on the page (**Set1** is not empty)
 
 #### Not Applicable
 
-#### Pre-qualified
+No `<input>` tag with a `"type"` attribute equals to "image" identified as a CAPTCHA has been found on the page (**Set1** is empty)
 
-#### No Tested 
+## Notes
 
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
 
-
-
-
-
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element
