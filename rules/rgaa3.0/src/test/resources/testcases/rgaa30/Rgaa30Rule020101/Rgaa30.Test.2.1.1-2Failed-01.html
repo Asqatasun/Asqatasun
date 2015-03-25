@@ -12,11 +12,16 @@
                 <code>iframe</code>) a-t-il un attribut 
                 <code>title</code> ? 
             </div> 
-            <div class="testcase"> 
-            </div> 
+            <div class="testcase">
+                <iframe src="mock-iframe1.html">
+                </iframe>
+                <iframe src="mock-iframe2.html" title="Mock Iframe 2">
+                </iframe>
+            </div>
+
             <div class="test-explanation">
-                 Failed. 
-            </div> 
+              Failed : One iframe tag has an no title attribute
+            </div>
         </div>  
     </body>
 </html>

@@ -25,9 +25,9 @@ import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChe
 import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.FRAME_WITH_TITLE_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_FRAME_PERTINENCE_MSG;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_MSG;
+import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_IFRAME_MSG;
 import org.opens.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
@@ -44,21 +44,21 @@ public class Rgaa30Rule020201 extends AbstractPageRuleWithSelectorAndCheckerImpl
      */
     public Rgaa30Rule020201() {
         super(
-                new SimpleElementSelector(FRAME_WITH_TITLE_CSS_LIKE_QUERY), 
+                new SimpleElementSelector(IFRAME_WITH_TITLE_CSS_LIKE_QUERY), 
                 
                 new AttributePertinenceChecker(
                     TITLE_ATTR, 
-                    // the selection keep elements with not empty title
+                    // tests the emptiness of the attribute
                     true, 
                     // compare title with src attribute
                     new TextAttributeOfElementBuilder(SRC_ATTR), 
                     // no comparison by extension
                     null, 
                     //  message associated with element when title is not pertinent
-                    NOT_PERTINENT_TITLE_OF_FRAME_MSG, 
+                    NOT_PERTINENT_TITLE_OF_IFRAME_MSG, 
                     // message associated with element when pertinence cannot be determined
-                    CHECK_TITLE_OF_FRAME_PERTINENCE_MSG, 
-                    //evidence elements 
+                    CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG, 
+                    //evidence elements
                     TITLE_ATTR)
             );
     }

@@ -48,7 +48,7 @@ public class Aw22Rule02022 extends AbstractPageRuleWithSelectorAndCheckerImpleme
                 
                 new AttributePertinenceChecker(
                     TITLE_ATTR, 
-                    // the selection keep elements with not empty title
+                    // tests the emptiness of the attribute
                     true, 
                     // compare title with src attribute
                     new TextAttributeOfElementBuilder(SRC_ATTR), 

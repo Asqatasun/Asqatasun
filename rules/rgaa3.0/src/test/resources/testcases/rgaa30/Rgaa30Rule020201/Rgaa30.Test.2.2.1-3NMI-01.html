@@ -12,11 +12,14 @@
                 <code>iframe</code>) ayant un attribut 
                 <code>title</code>, le contenu de cet attribut est-il pertinent ? 
             </div> 
-            <div class="testcase"> 
-            </div> 
+            <div class="testcase">
+                <iframe src="mock-iframe.html" title="title of iframe"></iframe>
+            </div>
+
             <div class="test-explanation">
-                 NMI. 
-            </div> 
+              NMI : The html element implied by the test  has been found at least once on the page.
+              The relevancy of the title needs to be checked by a human.
+            </div>
         </div>  
     </body>
 </html>

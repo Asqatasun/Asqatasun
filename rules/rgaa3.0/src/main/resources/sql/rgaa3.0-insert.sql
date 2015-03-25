@@ -651,7 +651,12 @@ Cd_Test='Rgaa30-1-1-2' OR
 Cd_Test='Rgaa30-1-1-3' OR 
 Cd_Test='Rgaa30-1-3-3' OR 
 Cd_Test='Rgaa30-1-5-2' OR
-Cd_Test='Rgaa30-1-6-1';
+Cd_Test='Rgaa30-1-6-1' OR
+Cd_Test='Rgaa30-1-9-1' OR
+Cd_Test='Rgaa30-1-9-2' OR
+Cd_Test='Rgaa30-1-9-3' OR
+Cd_Test='Rgaa30-2-1-1' OR
+Cd_Test='Rgaa30-2-2-1';
 
 -- UPDATE TEST SET `No_Process`=b'0' WHERE 
 -- -- AW22 identicals
