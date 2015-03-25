@@ -38,7 +38,7 @@ Chaque bouton de formulaire (balise `input` avec l'attribut `type="image"`) a-t-
 
 #### Set1
 
-All the `<input>` tags with a `"type"` attribute equals to "image"
+All the `<input>` tags with a `"type"` attribute equals to "image" (css selector : `input[type=image]`)
 
 ### Process
 
@@ -52,7 +52,7 @@ For each occurrence of false-result of Test1, raise a MessageA
 
 -    code : **AltMissing** 
 -    status: Failed
--    parameter : `"src"` attribute, tag name
+-    parameter : `"src"` attribute, tag name, snippet
 -    present in source : yes
 
 ### Analysis

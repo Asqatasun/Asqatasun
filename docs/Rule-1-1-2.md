@@ -50,7 +50,7 @@ For each element of **Set1**, test the presence of an `"alt"` attribute. For eac
 
 -    code : **AltMissing** 
 -    status: Failed
--    parameter : `"href"` attribute, tag name
+-    parameter : `"href"` attribute, tag name, snippet
 -    present in source : yes
 
 ### Analysis

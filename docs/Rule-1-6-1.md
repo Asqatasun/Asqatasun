@@ -64,7 +64,7 @@ For each element of **Set2**, raise a MessageA
 
 -    code : **CheckLongdescDefinitionOfInformativeImage** 
 -    status: Pre-Qualified
--    parameter : `"longdesc"` attribute, `"alt"` attribute, `"src"` attribute, tag name
+-    parameter : `"longdesc"` attribute, `"alt"` attribute, `"src"` attribute, tag name, snippet
 -    present in source : yes
 
 #### Test2
@@ -75,7 +75,7 @@ For each element of **Set3**, raise a MessageB
 
 -    code : **CheckNatureOfImageAndLongdescDefinition** 
 -    status: Pre-Qualified
--    parameter : `"longdesc"` attribute, `"alt"` attribute, `"src"` attribute, tag name
+-    parameter : `"longdesc"` attribute, `"alt"` attribute, `"src"` attribute, tag name, snippet
 -    present in source : yes
 
 ### Analysis

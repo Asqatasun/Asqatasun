@@ -38,7 +38,7 @@ Pour chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attr
 
 #### Set1
 
-All the `<input>` tags with a `"type"` attribute equals to "image" and an `"alt"` attribute
+All the `<input>` tags with a `"type"` attribute equals to "image" and an `"alt"` attribute (css selector : `input[type=image][alt]`)
 
 ### Process
 

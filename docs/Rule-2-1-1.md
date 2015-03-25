@@ -1,8 +1,8 @@
 # Rule 2.1.1
+
 ## Summary
 
-This test consists in checking the presence of the title attribute for
-all the frame elements of the page.
+This test consists in checking the presence of the `"title"` attribute for all the `<iframe>` elements of the page.
 
 ## Business description
 
@@ -26,51 +26,45 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 
-**decidable**
+**Decidable**
 
 ## Algorithm
 
 ### Selection
 
-**Set1**
+#### Set1
 
-All the <frame\> tags (frame)
+All the `<iframe>` tags of the page (css selector : `iframe`)
 
 ### Process
 
 **Test1 :**
 
-Test the presence of a "title" attribute for each element of Set1.
+For each element of **Set1**, test the presence of the `"title"` attribute.
 
-For each element returning false in Test1, raise a Message1.
+For each occurrence of false-result of **Test1**, raise a MessageA
 
-##### Message1: Title attribute is missing
+##### MessageA: Title attribute is missing
 
 -   code : TitleAttributeMissing
 -   status: Failed
--   parameter : src attribute, snippet
+-   parameter : `"src"` attribute, snippet
 -   present in source : yes
 
 ### Analysis
 
-#### Not Applicable
+#### Passed
 
-The page has no <frame\> tag (Set1 is empty)
+All the `<iframe>` tags have an `"title"` attribute (**Test1** returns true for all the elements of **Set1**)
 
 #### Failed
 
-At least one <frame\> tag has no "title" attribute (Test1 returns false
-for at least one element of Set1)
+At least one `<frame>` tag has no `"title"` attribute (**Test1** returns false for at least one element of **Set1**)
 
-#### Passed
+#### Not Applicable
 
-All the <frame\> tags have an "title" attribute (Test1 returns true for
-all the elements of Set1)
-
-## Notes
-
-No notes yet for that rule
+The page has no `<iframe>` tag (**Set1** is empty)

@@ -52,7 +52,7 @@ For each element of **Set1**, raise a MessageA
 
 -    code : **ManualCheckOnElements** 
 -    status: Pre-Qualified
--    parameter : `"src"` attribute, tag name
+-    parameter : `"src"` attribute, tag name, snippet
 -    present in source : yes
 
 ### Analysis

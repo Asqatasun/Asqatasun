@@ -1,8 +1,8 @@
 # Rule 2.2.1
+
 ## Summary
 
-This test consists in checking the relevancy of the title associated
-with each frame tag
+This test consists in checking the relevancy of the `"title"` attribute for each `<iframe>` tag.
 
 ## Business description
 
@@ -26,83 +26,63 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-**Set1 :**
+#### Set1
 
-All the <frame\> tags with a "title" attribute ( frame[title] )
+All the `<iframe>` tags of the page with a title `"attribute"` (css selector : `iframe[title]`)
 
 ### Process
 
-##### Test1
+#### Test1
 
-For each element of Set1, we check whether the "title" attribute is not
-empty
+For all elements of **Set1**, check whether the content of the "`title`" attribute is not relevant (see Notes for details about relevancy test). 
 
-For each element returning false in Test1, raise a Message1.
+For each occurrence of true-result of **Test1**, raise a MessageA.
 
-##### Test2
+For each occurrence of false-result of **Test1**, raise a MessageB
 
-For each element of Set1, we check whether the "title" attribute doesn't
-only contain non alphanumerical characters.
-
-For each element returning false in Test2, raise a Message1.
-
-##### Test3
-
-For each element of Set1, we check whether the "title" attribute is not
-striclty identical to the "src" attribute.
-
-For each element returning false in Test3, raise a Message1.
-
-**Test4**
-
-If Test1 AND Test2 AND Test3 return true (no pattern detected), raise a
-Message2**.**
-
-##### Message1: Not Pertinent title of frame
+##### MessageA
 
 -   code : NotPertinentTitleOfFrame
 -   status: Failed
--   parameter : title attribute, snippet
+-   parameter : `"title"` attribute, tag name, snippet
 -   present in source : yes
 
-##### Message2 : Check Pertinence of title of frame
+##### MessageB
 
 -   code : CheckTitleOfFramePertinence
--   status: NMI
--   parameter : title attribute, snippet
+-   status: Pre-Qualified
+-   parameter : `"title"` attribute, tag name, snippet
 -   present in source : yes
 
 ### Analysis
 
-**NA :**
+#### Failed
 
-The page has no <frame\> tag with a "title" attribute (Set1 is empty)
+At least one `<iframe>` has an irrelevant `"title"` attribute (**Test1** returns true for at least one element)
 
-**Failed :**
+#### Pre-qualified
 
-Test1 OR Test2 OR Test3 returns true for at least one element of Set1
+The content of the `"title"` attribute of all the `<iframe>` tags needs to be manually checked (**Test1** returns false for all the elements of **Set1**) 
 
-**NMI :**
+#### Not Applicable
 
-In all other cases
+The page has no `<iframe>` tag with a `"title"` attribute (**Set1** is empty)
 
 ## Notes
 
-***Definition of not-pertinent frame title :***
+The content of the "`title`" attribute is seen as not relevant if :
 
-A frame title is regarded as not-pertinent in the following cases :
-
--   the frame title is empty
--   the frame title is identical to the src attribute of the frame
--   the frame title only contains not alphanumerics characters
+- empty
+- only composed of non-alphanumerical characters
+- identical to the `"src"` attribute
 

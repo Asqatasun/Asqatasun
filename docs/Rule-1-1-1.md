@@ -38,21 +38,21 @@ Chaque image (balise `img`) a-t-elle un attribut `alt` ?
 
 #### Set1
 
-All the `<img>` tags
+All the `<img>` tags (css selector : `img`)
 
 ### Process
 
 #### Test1
 
-For each element of **Set1**, test the presence of an `"alt"` attribute.
+For each element of **Set1**, test the presence of the `"alt"` attribute.
 
-For each occurrence of false-result of Test1, raise a MessageA
+For each occurrence of false-result of **Test1**, raise a MessageA
 
 ##### MessageA : Missing Alt attribute
 
 -    code : **AltMissing** 
 -    status: Failed
--    parameter : `"src"` attribute, tag name
+-    parameter : `"src"` attribute, tag name, snippet
 -    present in source : yes
 
 ### Analysis
