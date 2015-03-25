@@ -277,11 +277,15 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
      * Add a webResource. Path is built from webResourceName.
      * 
      * @param webResourceName 
+     * @param parameters
      */
-    protected void addWebResource(String webResourceName) {
+    protected void addWebResource(String webResourceName, Parameter... parameters) {
         getWebResourceMap().put(webResourceName,
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + getRefKey()+"/"+getClassName()+"/"+webResourceName+".html"));
+        for (Parameter param : parameters) {
+            addParameterToParameterMap(webResourceName,param);
+        }
     }
     
     /**
