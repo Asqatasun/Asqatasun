@@ -49,6 +49,14 @@
             <artifactId>tanaguru-consolidator</artifactId>
         </dependency>
         <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${engineGroupId}</groupId>
+            <artifactId>tanaguru-resources</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${springGroupId}</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
