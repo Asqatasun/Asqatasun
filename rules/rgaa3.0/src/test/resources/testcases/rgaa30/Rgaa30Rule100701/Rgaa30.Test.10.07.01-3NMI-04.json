@@ -1,1 +1,140 @@
-[{bgColor="transparent", isHidden=false, isFocusable=false, fontWeight=400, color="rgb(0; 0; 0)", isTextNode=false, path="body", fontSize=16px}, {bgColor="transparent", isHidden=false, isFocusable=false, fontWeight=400, color="rgb(0; 0; 0)", isTextNode=false, path="body > div:eq(0)", fontSize=16px}, {bgColor="transparent", isHidden=false, isFocusable=false, fontWeight=700, color="rgb(0; 0; 0)", isTextNode=true, path="body > div:eq(0) > h1:eq(0)", fontSize=32px}, {bgColor="transparent", isHidden=false, isFocusable=false, fontWeight=400, color="rgb(0; 0; 0)", isTextNode=true, path="body > div:eq(0) > div:eq(1)", fontSize=16px}, {bgColor="transparent", isHidden=false, isFocusable=false, fontWeight=400, color="rgb(0; 0; 0)", isTextNode=false, path="body > div:eq(0) > div:eq(2)", fontSize=16px}, {bgColor="transparent", isHidden=false, isFocusable=true, fontWeight=400, outlineColorFocus="rgb(0; 0; 0)", color="rgb(0; 0; 0)", isTextNode=false, path="body > div:eq(0) > div:eq(2) > iframe:eq(0)", outlineWidthFocus=0px, fontSize=16px, outlineStyleFocus="none"}, {bgColor="transparent", isHidden=false, isFocusable=false, fontWeight=400, color="rgb(0; 0; 0)", isTextNode=true, path="body > div:eq(0) > p:eq(3)", fontSize=16px}]
+[
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": true,
+        "isHidden": false,
+        "isTextNode": false,
+        "outlineColorFocus": "rgb(0; 0; 0)",
+        "outlineStyleFocus": "none",
+        "outlineWidthFocus": "0px",
+        "path": "body",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": false,
+        "path": "body > div:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "32px",
+        "fontWeight": 700,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > h1:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(1)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(2)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(3)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(4)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": false,
+        "path": "body > div:eq(0) > div:eq(2)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": true,
+        "isHidden": false,
+        "isTextNode": false,
+        "outlineColorFocus": "rgb(0; 0; 0)",
+        "outlineStyleFocus": "none",
+        "outlineWidthFocus": "0px",
+        "path": "body > div:eq(0) > div:eq(2) > iframe:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "transparent",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > p:eq(3)",
+        "textAlign": "start"
+    }
+]
