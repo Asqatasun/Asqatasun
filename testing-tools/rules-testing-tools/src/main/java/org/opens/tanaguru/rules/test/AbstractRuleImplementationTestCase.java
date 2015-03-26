@@ -47,6 +47,7 @@ import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
@@ -365,6 +366,10 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         LOGGER.debug(this + "::process(\"" + webResourceKey + "\")");
         WebResource webResource = webResourceMap.get(webResourceKey);
         Collection<ProcessResult> grossResultList = PROCESSOR_SERVICE.process(contentMap.get(webResource), testList);
+        for (Content content : contentMap.get(webResource)) {
+            System.out.println(content.getURI());
+        }
+        
         grossResultMap.put(webResource, grossResultList);
         return grossResultList;
     }
@@ -653,6 +658,27 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
      * @param processResult
      * @param testSolution
      * @param remarkMessageCode
+     * @param position 
+     */
+    protected void checkRemarkIsPresent(
+            ProcessResult processResult, 
+            TestSolution testSolution, 
+            String remarkMessageCode,
+            int position) {
+        ProcessRemark processRemark = 
+                ((ProcessRemark)((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
+        Logger.getLogger(this.getClass()).debug(processRemark.getMessageCode());
+        assertEquals(remarkMessageCode, processRemark.getMessageCode());
+        Logger.getLogger(this.getClass()).debug(processRemark.getIssue());
+        assertEquals(testSolution, processRemark.getIssue());
+        assertNull(processRemark.getElementList());
+    }
+    
+    /**
+     * 
+     * @param processResult
+     * @param testSolution
+     * @param remarkMessageCode
      * @param remarkTarget 
      * @param position 
      * @param evidencePairs
@@ -670,9 +696,13 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         assertEquals(remarkMessageCode, sourceCodeRemark.getMessageCode());
         assertEquals(testSolution, sourceCodeRemark.getIssue());
         Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getIssue());
-        assertEquals(remarkTarget, sourceCodeRemark.getTarget());
-        Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
+        if (remarkTarget.equals("EMPTY_TARGET") ) {
+            assertEquals(-1, sourceCodeRemark.getLineNumber());
+        } else {
+            assertEquals(remarkTarget, sourceCodeRemark.getTarget());
+            Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getTarget());
+            assertNotNull(sourceCodeRemark.getSnippet());
+        }
         if (evidencePairs.length == 0) {
             assertNull(sourceCodeRemark.getElementList());
             return;
