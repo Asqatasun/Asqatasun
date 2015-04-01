@@ -139,7 +139,7 @@ public class Rgaa30Rule010203Test extends Rgaa30RuleImplementationTestCase {
         // check test has no remark
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
+        assertEquals(0, processResult.getElementCounter());
         
         
         //----------------------------------------------------------------------
