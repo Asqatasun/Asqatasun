@@ -23,6 +23,7 @@ package org.opens.tanaguru.rules.domelement.extractor;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import javax.persistence.NoResultException;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -43,22 +44,7 @@ public final class DomElementExtractor {
     private static final Logger LOGGER = Logger.getLogger(DomElementExtractor.class);
     private static final String COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY = 
             "colorExtractor";
-    private static final String JSON_IS_HIDDEN_KEY = "isHidden";
-    private static final String JSON_IS_TEXT_NODE_KEY = "isTextNode";
-    private static final String JSON_ELEMENT_PATH_KEY = "path";
-    private static final String JSON_FONT_SIZE_KEY = "fontSize";
-    private static final String JSON_FONT_WEIGHT_KEY = "fontWeight";
-    private static final String JSON_FG_COLOR_KEY = "color";
-    private static final String JSON_BG_COLOR_KEY = "bgColor";
-    private static final String JSON_IS_FOCUSABLE_KEY = "isFocusable";
-    private static final String JSON_TEXT_ALIGN_KEY = "textAlign";
-    private static final String JSON_OUTLINE_COLOR_FOCUS_KEY = 
-            "outlineColorFocus";
-    private static final String JSON_OUTLINE_WIDTH_FOCUS_KEY = 
-            "outlineWidthFocus";
-    private static final String JSON_OUTLINE_STYLE_FOCUS_KEY = 
-            "outlineStyleFocus";
-    
+
     /**
      * Private constructor for utility class
      */
@@ -128,27 +114,14 @@ public final class DomElementExtractor {
      * @throws JSONException 
      */
     private static DomElement getDomElementFromJson(JSONObject element) throws JSONException{
+        Iterator<String> keys = element.keys();
         DomElement domElement = new DomElement();
-        domElement.setBgColor(element.get(JSON_BG_COLOR_KEY).toString());
-        domElement.setFgColor(element.get(JSON_FG_COLOR_KEY).toString());
-        domElement.setFocusable(
-                Boolean.valueOf(element.get(JSON_IS_FOCUSABLE_KEY).toString()));
-        domElement.setFontSize(element.get(JSON_FONT_SIZE_KEY).toString());
-        domElement.setHidden(
-                Boolean.valueOf(element.get(JSON_IS_HIDDEN_KEY).toString()));
-        if (domElement.isFocusable()) {
-            domElement.setOutlineColor(
-                    element.get(JSON_OUTLINE_COLOR_FOCUS_KEY).toString());
-            domElement.setOutlineStyle(element.get(
-                    JSON_OUTLINE_STYLE_FOCUS_KEY).toString());
-            domElement.setOutlineWidth(
-                    element.get(JSON_OUTLINE_WIDTH_FOCUS_KEY).toString());
+        while(keys.hasNext()){
+            String key = keys.next();
+            try{
+                domElement.addProperty(key, element.get(key).toString());
+            }catch(Exception e){}
         }
-        domElement.setPath(element.get(JSON_ELEMENT_PATH_KEY).toString());
-        domElement.setTextNode(
-                Boolean.valueOf(element.get(JSON_IS_TEXT_NODE_KEY).toString()));
-        domElement.setWeight(element.get(JSON_FONT_WEIGHT_KEY).toString());
-        domElement.setTextAlignValue(element.get(JSON_TEXT_ALIGN_KEY).toString());
         return domElement;
     }
 

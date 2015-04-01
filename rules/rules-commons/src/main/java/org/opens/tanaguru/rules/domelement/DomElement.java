@@ -22,6 +22,8 @@
 
 package org.opens.tanaguru.rules.domelement;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -45,140 +47,157 @@ public class DomElement {
     /* */
     private static final String BACKGROUND_IMAGE_KEY="background-image:";
     
-    /* whether the current element is hidden*/
-    private boolean isHidden;
+    public static final String IS_HIDDEN_KEY = "isHidden";
+    public static final String IS_TEXT_NODE_KEY = "isTextNode";
+    public static final String ELEMENT_PATH_KEY = "path";
+    public static final String FONT_SIZE_KEY = "fontSize";
+    public static final String FONT_WEIGHT_KEY = "fontWeight";
+    public static final String FG_COLOR_KEY = "color";
+    public static final String BG_COLOR_KEY = "bgColor";
+    public static final String IS_FOCUSABLE_KEY = "isFocusable";
+    public static final String TEXT_ALIGN_KEY = "textAlign";
+    public static final String OUTLINE_COLOR_FOCUS_KEY = 
+            "outlineColorFocus";
+    public static final String OUTLINE_WIDTH_FOCUS_KEY = 
+            "outlineWidthFocus";
+    public static final String OUTLINE_STYLE_FOCUS_KEY = 
+            "outlineStyleFocus";
+    public static final String NOT_EXISTING_PROPERTY = "notExisting";
+    
+    /**
+     * All the values handled by the element identified by a key that 
+     * corresponds to the json object element key.
+     */
+    Map<String, String> extractedProperties=new HashMap<>(); 
+    
+    public void addProperty(String key, String value) {
+        extractedProperties.put(key, value);
+    }
+    
+    public String getProperty(String key) {
+        if (!extractedProperties.containsKey(key)) {
+            return NOT_EXISTING_PROPERTY;
+        }
+        return extractedProperties.get(key);
+    }
+    
+    /**
+     * 
+     * @return whether the current element is hidden 
+     */
     public boolean isHidden() {
-        return isHidden;
+        return Boolean.valueOf(getProperty(IS_HIDDEN_KEY));
     }
-    public void setHidden(boolean isHidden) {
-        this.isHidden = isHidden;
-    }
-    
-    /* whether the current element is a text node*/
-    private boolean isTextNode;
+
+    /**
+     * 
+     * @return whether the current element is a text node
+     */
     public boolean isTextNode() {
-        return isTextNode;
-    }
-    public void setTextNode(boolean isTextNode) {
-        this.isTextNode = isTextNode;
+        return Boolean.valueOf(getProperty(IS_TEXT_NODE_KEY));
     }
     
-    /* the current element path*/
-    private String path;
+    /**
+     * 
+     * @return the current element path
+     */
     public String getPath() {
-        return path;
+        return getProperty(ELEMENT_PATH_KEY);
     }
 
-    public void setPath(String path) {
-        this.path = path;
-    }
-    
-    /* whether the current element is bold*/
-    private boolean isBold;
+    /**
+     * 
+     * @return whether the current element is bold
+     */
     public boolean isBold() {
-        return isBold;
+        return isBoldFromWeightValue(getWeight());
     }
     
-    /* the current element weight raw value*/
-    private String weight;
+    /**
+     * 
+     * @return the current element weight raw value
+     */
     public String getWeight() {
-        return weight;
-    }
-    public void setWeight(String weight) {
-        this.weight = weight;
-        isBold = isBoldFromWeightValue(weight);
+        return getProperty(FONT_WEIGHT_KEY);
     }
 
-    /* whether the current element is focusable*/
-    private boolean isFocusable;
+    /**
+     * 
+     * @return whether the current element is focusable
+     */
     public boolean isFocusable() {
-        return isFocusable;
+        return Boolean.valueOf(getProperty(IS_FOCUSABLE_KEY));
     }
-    public void setFocusable(boolean isFocusable) {
-        this.isFocusable = isFocusable;
-    }
-    
-    /* the current element weight raw value*/
-    private String fontSize;
+
+    /**
+     * 
+     * @return the current element weight raw value
+     */
     public String getFontSize() {
-        return fontSize;
+        return getProperty(FONT_SIZE_KEY);
     }
-    public void setFontSize(String fontSize) {
-        this.fontSize = fontSize;
-    }
-    
-    /* the value of the textAlign property*/
-    private String textAlignValue;
+
+    /**
+     * 
+     * @return the value of the textAlign property
+     */
     public String getTextAlignValue() {
-        return textAlignValue;
-    }
-    public void setTextAlignValue(String textAlignValue) {
-        this.textAlignValue = textAlignValue;
+        return getProperty(TEXT_ALIGN_KEY);
     }
 
     public float getFontSizeInPt() {
-        return Float.valueOf(fontSize.substring(0,fontSize.indexOf(PIXEL_KEY))) 
+        return Float.valueOf(getFontSize().substring(0,getFontSize().indexOf(PIXEL_KEY))) 
                * PIXEL_TO_POINT_MULTIPLIER;
     }
 
-    /* the current element raw foreground color*/
-    private String fgColor;
+    /**
+     * 
+     * @return the current element raw foreground color
+     */
     public String getFgColor() {
-        return fgColor;
-    }
-
-    public void setFgColor(String fgColor) {
-        this.fgColor = fgColor;
+        return getProperty(FG_COLOR_KEY);
     }
     
-    /* the current element raw background color*/
-    private String bgColor;
+    /**
+     * 
+     * @return the current element raw background color
+     */
     public String getBgColor() {
-        return bgColor;
+        return getProperty(BG_COLOR_KEY);
     }
 
     public String getDisplayableBgColor() {
-        if (StringUtils.startsWith(bgColor, BACKGROUND_IMAGE_KEY)) {
-            return StringUtils.substring(bgColor, bgColor.indexOf(":")+1, bgColor.length());
+        if (StringUtils.startsWith(getBgColor(), BACKGROUND_IMAGE_KEY)) {
+            return StringUtils.substring(getBgColor(), getBgColor().indexOf(":")+1, getBgColor().length());
         }
-        return bgColor;
+        return getBgColor();
     }
     
-    public void setBgColor(String bgColor) {
-        this.bgColor = bgColor;
-    }
-    
-    /* the current element outline width (when focusable)*/
-    private String outlineWidth;
+    /**
+     * 
+     * @return the current element outline width (when focusable)
+     */
     public String getOutlineWidth() {
-        return outlineWidth;
+        return getProperty(OUTLINE_WIDTH_FOCUS_KEY);
     }
     public float getOutlineWidthValue() {
-        return Float.valueOf(outlineWidth.substring(0,outlineWidth.indexOf(PIXEL_KEY))); 
-    }
-
-    public void setOutlineWidth(String outlineWidth) {
-        this.outlineWidth = outlineWidth;
+        return Float.valueOf(getOutlineWidth().substring(0,getOutlineWidth().indexOf(PIXEL_KEY))); 
     }
     
-    /* the current element outline style (when focusable)*/
-    private String outlineStyle;
+    /**
+     * 
+     * @return the current element outline style (when focusable)
+     */
     public String getOutlineStyle() {
-        return outlineStyle;
-    }
-
-    public void setOutlineStyle(String outlineStyle) {
-        this.outlineStyle = outlineStyle;
+        return getProperty(OUTLINE_STYLE_FOCUS_KEY);
     }
     
-    /* the current element outline color (when focusable)*/
-    private String outlineColor;
+    /**
+     * 
+     * @return the current element outline color (when focusable)
+     */
     public String getOutlineColor() {
-        return outlineColor;
-    }
-
-    public void setOutlineColor(String outlineColor) {
-        this.outlineColor = outlineColor;
+        return getProperty(OUTLINE_COLOR_FOCUS_KEY);
     }
 
     /**
