@@ -19,14 +19,9 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.LinkedHashSet;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;

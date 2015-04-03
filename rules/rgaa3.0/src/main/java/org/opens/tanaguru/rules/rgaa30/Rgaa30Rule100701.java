@@ -161,7 +161,9 @@ public class Rgaa30Rule100701 extends AbstractPageRuleFromPreProcessImplementati
         if (getFocusableElementExcludedList().contains(element.tagName())) {
             focusableElementExcluded = true;
         } else if (!isOutlineVisible(domElement)) {
-            if (!StringUtils.equalsIgnoreCase(element.tagName(), BODY_ELEMENT)) {
+            if (StringUtils.equalsIgnoreCase(element.tagName(), BODY_ELEMENT)) {
+                nbOfFocusableElements--;
+            } else {
                 elementHandler.add(element);
             }
         }
