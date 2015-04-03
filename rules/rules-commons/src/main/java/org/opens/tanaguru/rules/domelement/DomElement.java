@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
+
 /**
  * POJO that handles all the extracted properties from the js script
  * while fetching the DOM.
@@ -46,6 +47,7 @@ public class DomElement {
     private static final int BOLD_FONT_WEIGHT = 700;
     /* */
     private static final String BACKGROUND_IMAGE_KEY="background-image:";
+    private static final String ALPHA_COLOR_KEY="rgba";
     
     public static final String IS_HIDDEN_KEY = "isHidden";
     public static final String IS_TEXT_NODE_KEY = "isTextNode";
@@ -163,7 +165,16 @@ public class DomElement {
      * @return the current element raw background color
      */
     public String getBgColor() {
-        return getProperty(BG_COLOR_KEY);
+        String bgColor = getProperty(BG_COLOR_KEY);
+        if (StringUtils.startsWith(bgColor, ALPHA_COLOR_KEY)) {
+            int alpha = getAlpha(bgColor);
+            if (alpha == 0) {
+                return "rgb(255; 255; 255)";
+            } else if (alpha ==1) {
+                return StringUtils.replace(bgColor, ", 0)", ")");
+            }
+        }
+        return bgColor;
     }
 
     public String getDisplayableBgColor() {
@@ -225,4 +236,14 @@ public class DomElement {
         return fontWeight >= BOLD_FONT_WEIGHT;
     }
 
+    private int getAlpha(String color) {
+        String lColor = StringUtils.remove(StringUtils.remove(StringUtils.remove(color, ALPHA_COLOR_KEY),"("),")");
+        String[] components = lColor.split(";");
+        if (components.length !=4) {
+            return -1;
+        } else {
+            return Integer.valueOf(components[3].trim());
+        }
+    }
+    
 }

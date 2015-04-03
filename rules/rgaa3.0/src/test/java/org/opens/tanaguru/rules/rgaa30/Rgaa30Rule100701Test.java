@@ -19,17 +19,14 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.LinkedHashSet;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import org.opens.tanaguru.rules.keystore.HtmlElementStore;
-import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
+import static org.opens.tanaguru.rules.keystore.HtmlElementStore.*;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
 
 /**
- * Unit test class for the implementation of the rule 10.07.01 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 10.7.1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -37,6 +34,7 @@ public class Rgaa30Rule100701Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule100701Test (String testName){
         super(testName);
@@ -50,88 +48,31 @@ public class Rgaa30Rule100701Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-                /*------------------------------------1Passed------------------------------------------*/
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-1Passed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-1Passed-02.html"));
-
-        /*------------------------------------2Failed------------------------------------------*/
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-2Failed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-2Failed-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-2Failed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-2Failed-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-2Failed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-2Failed-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-2Failed-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-2Failed-06.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-2Failed-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-2Failed-07.html"));
-
-        /*------------------------------------3NMI------------------------------------------*/
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-06.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-07.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-08",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-08.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-09",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-09.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-3NMI-10",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-3NMI-10.html"));
-
-        /*------------------------------------4NA------------------------------------------*/
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-4NA-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-4NA-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-4NA-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-4NA-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-4NA-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-4NA-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.10.07.01-4NA-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule100701/Rgaa30.Test.10.07.01-4NA-06.html"));
+        addWebResource("Rgaa30.Test.10.7.1-1Passed-01");
+        addWebResource("Rgaa30.Test.10.7.1-1Passed-02");
+        addWebResource("Rgaa30.Test.10.7.1-2Failed-01");
+        addWebResource("Rgaa30.Test.10.7.1-2Failed-02");
+        addWebResource("Rgaa30.Test.10.7.1-2Failed-03");
+        addWebResource("Rgaa30.Test.10.7.1-2Failed-04");
+        addWebResource("Rgaa30.Test.10.7.1-2Failed-05");
+        addWebResource("Rgaa30.Test.10.7.1-2Failed-06");
+        addWebResource("Rgaa30.Test.10.7.1-2Failed-07");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-01");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-02");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-03");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-04");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-05");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-06");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-07");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-08");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-09");
+        addWebResource("Rgaa30.Test.10.7.1-3NMI-10");
+        addWebResource("Rgaa30.Test.10.7.1-4NA-01");
+        addWebResource("Rgaa30.Test.10.7.1-4NA-02");
+        addWebResource("Rgaa30.Test.10.7.1-4NA-03");
+        addWebResource("Rgaa30.Test.10.7.1-4NA-04");
+        addWebResource("Rgaa30.Test.10.7.1-4NA-05");
+        addWebResource("Rgaa30.Test.10.7.1-4NA-06");
     }
 
     @Override
@@ -139,452 +80,317 @@ public class Rgaa30Rule100701Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.10.07.01-1Passed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.7.1-1Passed-01"),1);
 
 
         //----------------------------------------------------------------------
         //------------------------------1Passed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-1Passed-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.7.1-1Passed-02"),1);
 
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-2Failed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-
+        ProcessResult pr = processPageTest("Rgaa30.Test.10.7.1-2Failed-01");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-2Failed-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-2Failed-02");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
 
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-2Failed-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-2Failed-03");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
 
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-2Failed-04");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-2Failed-04");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                DIV_ELEMENT, 
+                1);
 
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-2Failed-05");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-2Failed-05");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
 
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-06------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-2Failed-06");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-2Failed-06");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
 
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-07------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-2Failed-07");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.SPAN_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-2Failed-07");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                SPAN_ELEMENT, 
+                1);
 
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        ProcessRemark pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-01");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
         
         
         //----------------------------------------------------------------------
         //---------------------------------3NMI-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-02");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-03");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-04");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-04");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-05------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-05");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-05");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-06------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-06");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-06");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-07------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-07");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-07");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-08------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-08");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-08");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-09------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-09");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-09");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
 	//----------------------------------------------------------------------
         //---------------------------------3NMI-10------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-3NMI-10");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        pr = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, pr.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, pr.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(pr.getElementList());
+        pr = processPageTest("Rgaa30.Test.10.7.1-3NMI-10");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-4NA-01");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.7.1-4NA-01"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-02------------------------------
+        //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-4NA-02");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.7.1-4NA-02"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-03------------------------------
+        //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-4NA-03");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.7.1-4NA-03"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-04------------------------------
+        //------------------------------4NA-04----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-4NA-04");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.7.1-4NA-04"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-05------------------------------
+        //------------------------------4NA-05----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-4NA-05");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.7.1-4NA-05"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-06------------------------------
+        //------------------------------4NA-06----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.07.01-4NA-06");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.7.1-4NA-06"));
     }
 
     @Override
     protected void setConsolidate() {
         assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.10.07.01-1Passed-01").getValue());
+                consolidate("Rgaa30.Test.10.7.1-1Passed-01").getValue());
         assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.10.07.01-1Passed-02").getValue());
+                consolidate("Rgaa30.Test.10.7.1-1Passed-02").getValue());
 
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-2Failed-01").getValue());
+                consolidate("Rgaa30.Test.10.7.1-2Failed-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-2Failed-02").getValue());
+                consolidate("Rgaa30.Test.10.7.1-2Failed-02").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-2Failed-03").getValue());
+                consolidate("Rgaa30.Test.10.7.1-2Failed-03").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-2Failed-04").getValue());
+                consolidate("Rgaa30.Test.10.7.1-2Failed-04").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-2Failed-05").getValue());
+                consolidate("Rgaa30.Test.10.7.1-2Failed-05").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-2Failed-06").getValue());
+                consolidate("Rgaa30.Test.10.7.1-2Failed-06").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-2Failed-07").getValue());
+                consolidate("Rgaa30.Test.10.7.1-2Failed-07").getValue());
 
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-01").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-01").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-02").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-02").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-03").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-03").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-04").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-04").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-05").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-05").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-06").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-06").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-07").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-07").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-08").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-08").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-09").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-09").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.10.07.01-3NMI-10").getValue());
+                consolidate("Rgaa30.Test.10.7.1-3NMI-10").getValue());
 
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.10.07.01-4NA-01").getValue());
+                consolidate("Rgaa30.Test.10.7.1-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.10.07.01-4NA-02").getValue());
+                consolidate("Rgaa30.Test.10.7.1-4NA-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.10.07.01-4NA-03").getValue());
+                consolidate("Rgaa30.Test.10.7.1-4NA-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.10.07.01-4NA-04").getValue());
+                consolidate("Rgaa30.Test.10.7.1-4NA-04").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.10.07.01-4NA-05").getValue());
+                consolidate("Rgaa30.Test.10.7.1-4NA-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.10.07.01-4NA-06").getValue());
-
+                consolidate("Rgaa30.Test.10.7.1-4NA-06").getValue());
 
     }
-
+    
 }

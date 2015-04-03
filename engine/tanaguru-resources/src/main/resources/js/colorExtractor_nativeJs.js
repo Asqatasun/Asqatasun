@@ -17,7 +17,7 @@ function isTextNode (elem) {
     if (isElementOfType(elem,'style')) {
         return false;
     }
-    if (isElementOfType(elem,'img') && elem.hasAttribute('alt') && (elem.getAttribute('type').trim().length > 0)) {
+    if (isElementOfType(elem,'img') && elem.hasAttribute('alt') && (elem.getAttribute('alt').trim().length > 0)) {
         return true;
     }
     for (var i=0 ; i<elem.childNodes.length ; i++) {
@@ -61,7 +61,7 @@ function formatColor(color) {
  */
 function getBackgroundColor(elem){
     var bgImg = getStyle(elem,'background-image');
-    if (bgImg != 'none') {
+    if (bgImg !== 'none') {
         while (bgImg.indexOf('"') > -1) {
             bgImg = bgImg.replace('"','\'');
         }
@@ -84,8 +84,8 @@ function getForegroundColor(elem){
  */
 function isHidden(elem) {
     var isElementHidden = 
-        (getStyle(elem, 'display') == 'none') || 
-        (getStyle(elem,'visibility') == 'hidden');
+        (getStyle(elem, 'display') === 'none') || 
+        (getStyle(elem,'visibility') === 'hidden');
     if (! isElementHidden  && ! isElementOfType(getElementName(elem),'html')) {
         return isHidden(elem.parentNode);
     }
@@ -165,18 +165,24 @@ function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, el
     if (isAllowedElement(elem)) {
         var path, element={}, bgColor, color, children, focus;
         bgColor = getBackgroundColor(elem);
-        if (bgColor == 'transparent' && parentBgColor != null) {
-            bgColor = parentBgColor;
+        if ( (bgColor === 'transparent' || bgColor === 'rgba(0; 0; 0; 0)' )) {
+          if (parentBgColor !== null) {
+              console.log(parentBgColor);
+              bgColor = parentBgColor;
+          } else if (isElementOfType(getElementName(elem),'body')) {
+              bgColor = 'rgb(255; 255; 255)';
+          } 
         }
+        console.log(bgColor);
         color = getForegroundColor(elem);
-        if (color == 'transparent' && parentFgColor != null) {
+        if ( (color === 'transparent' || color === 'rgba(0; 0; 0; 0)' ) && parentFgColor !== null) {
             color = parentFgColor;
         }
         
         path = buildPath(elem, parentPath, elemIndex);
         
-        element={}
-        element.path='\"'+path+'\"';;
+        element={};
+        element.path='\"'+path+'\"';
         element.bgColor = '\"'+bgColor+'\"';
         element.isHidden= isHidden(elem);
         element.color = '\"'+color+'\"';
@@ -208,12 +214,16 @@ function extractInfo (elem, parentFgColor, parentBgColor, result, parentPath, el
  * Get all the elements of the DOM from body, 
  * extracts the textual one and store bg-color, font-size, color and font-weight.
  */
-var result = [], element, rootElem, htmlElem;
+var result = [], element, rootElem, htmlElem, htmlBgColor;
 rootElem = document.body;
 /*var e = new Date().getTime();*/
 if (rootElem.length !== 0) {
     htmlElem = rootElem.parentNode;
-    extractInfo(rootElem, getForegroundColor(htmlElem), getBackgroundColor(htmlElem), result, "",0);
+    htmlBgColor= getBackgroundColor(htmlElem);
+    if ( (htmlBgColor === 'transparent' || htmlBgColor === 'rgba(0; 0; 0; 0)' )) {
+      htmlBgColor = 'rgb(255; 255; 255)';
+    }
+    extractInfo(rootElem, getForegroundColor(htmlElem), htmlBgColor, result, "",0);
 }
 /*var f = new Date().getTime();
 console.log("Execution : "+ (f-e)  + "ms");

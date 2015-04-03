@@ -68,7 +68,6 @@ public class Rgaa30Rule030301Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.3.3.1-3NMI-05");
         addWebResource("Rgaa30.Test.3.3.1-3NMI-06");
         addWebResource("Rgaa30.Test.3.3.1-3NMI-07");
-        addWebResource("Rgaa30.Test.3.3.1-3NMI-08");
         addWebResource("Rgaa30.Test.3.3.1-4NA-01");
     }
 
@@ -138,20 +137,13 @@ public class Rgaa30Rule030301Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.3.3.1-2Failed-03");
-        checkResultIsFailed(processResult, 7, 2);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.NOT_TREATED_BACKGROUND_COLOR_MSG,
-                EMPTY_TARGET,
-                1,
-                new ImmutablePair(ELEMENT_NAME_EE, "transparent"));
+        checkResultIsFailed(processResult, 7, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.BAD_CONTRAST_MSG,
                 HtmlElementStore.SPAN_ELEMENT,
-                2,
+                1,
                 new ImmutablePair(FG_COLOR_EE, "rgb(255; 255; 255)"),
                 new ImmutablePair(BG_COLOR_EE, "rgb(255; 165; 0)"),
                 new ImmutablePair(CONTRAST_EE, "1.97"));
@@ -160,20 +152,13 @@ public class Rgaa30Rule030301Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.3.3.1-2Failed-04");
-        checkResultIsFailed(processResult, 7, 2);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.NOT_TREATED_BACKGROUND_COLOR_MSG,
-                EMPTY_TARGET,
-                1,
-                new ImmutablePair(ELEMENT_NAME_EE, "transparent"));
+        checkResultIsFailed(processResult, 7, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.BAD_CONTRAST_MSG,
                 HtmlElementStore.SPAN_ELEMENT,
-                2,
+                1,
                 new ImmutablePair(FG_COLOR_EE, "rgb(223; 240; 216)"),
                 new ImmutablePair(BG_COLOR_EE, "rgb(98; 111; 83)"),
                 new ImmutablePair(CONTRAST_EE, "4.49"));
@@ -182,20 +167,13 @@ public class Rgaa30Rule030301Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.3.3.1-2Failed-05");
-        checkResultIsFailed(processResult, 7, 2);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.NOT_TREATED_BACKGROUND_COLOR_MSG,
-                EMPTY_TARGET,
-                1,
-                new ImmutablePair(ELEMENT_NAME_EE, "transparent"));
+        checkResultIsFailed(processResult, 7, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.BAD_CONTRAST_MSG,
                 HtmlElementStore.SPAN_ELEMENT,
-                2,
+                1,
                 new ImmutablePair(FG_COLOR_EE, "rgb(70; 136; 71)"),
                 new ImmutablePair(BG_COLOR_EE, "rgb(223; 240; 216)"),
                 new ImmutablePair(CONTRAST_EE, "3.61"));
@@ -284,19 +262,6 @@ public class Rgaa30Rule030301Test extends Rgaa30RuleImplementationTestCase {
                 new ImmutablePair(FG_COLOR_EE, "rgb(70; 136; 71)"),
                 new ImmutablePair(BG_COLOR_EE, "rgb(223; 240; 216)"),
                 new ImmutablePair(CONTRAST_EE, "3.61"));
-        
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-08---------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.3.3.1-3NMI-08");
-        checkResultIsPreQualified(processResult, 7, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.NOT_TREATED_BACKGROUND_COLOR_MSG,
-                EMPTY_TARGET,
-                1,
-                new ImmutablePair(ELEMENT_NAME_EE, "transparent"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
