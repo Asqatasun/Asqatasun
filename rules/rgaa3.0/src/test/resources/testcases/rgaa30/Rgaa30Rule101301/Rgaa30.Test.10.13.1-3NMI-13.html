@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.10.13.1 NMI 13</title> 
+        <style type="text/css">
+            .hidden-text {
+                visibility : hidden;
+            }
+        </style> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.10.13.1 NMI 13</h1> 
+            <div class="test-detail" lang="fr"> Dans chaque page Web, chaque 
+                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTexteCache">texte caché</a> vérifie-t-il une de ces conditions ? 
+                <ul class="ssTests"> 
+                    <li>Le texte n&apos;a pas vocation à être restitué par les technologies d&apos;assistance</li> 
+                    <li>Le texte est rendu visible sur action de l&apos;utilisateur sur l&apos;élément lui-même ou un élément précédant le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTexteCache">texte caché</a></li> 
+                    <li>Le texte caché fait partie d&apos;un composant d&apos;interface piloté par l&apos;API ARIA, prenant en charge l&apos;état affiché ou masqué du contenu.</li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <span class="hidden-text">Some hidden text</span> 
+            </div> 
+            <div class="test-explanation">
+                 NMI : Some text is hidden by locale style through a class selector 
+            </div> 
+        </div>   
+    </body>
+</html>

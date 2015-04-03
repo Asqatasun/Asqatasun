@@ -45,7 +45,7 @@ public class TanaguruJsTestCaseExtractor {
 
     static final String REF_NAME = "rgaa3.0";
     static final String REF_KEY = StringUtils.remove(REF_NAME, ".");
-    static final String RULE_KEY = "Rgaa30Rule030301/"; //Rgaa30Rule030301/
+    static final String RULE_KEY = "Rgaa30Rule101301/"; //Rgaa30Rule030301/
     static final String URL_LIST = "http://172.17.42.1/" + RULE_KEY;
     static final String HUB_URL = "http://172.17.0.23:4444/wd/hub";
     static final String JS_SCRIPT_NAME = "js/colorExtractor_nativeJs.js";
