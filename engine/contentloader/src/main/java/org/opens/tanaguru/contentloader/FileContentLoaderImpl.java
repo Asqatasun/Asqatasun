@@ -28,9 +28,8 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import java.util.Date;
 import java.util.List;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.opens.tanaguru.util.FileNaming;
 import org.opens.tanaguru.util.factory.DateFactory;
 
@@ -43,12 +42,12 @@ public class FileContentLoaderImpl implements ContentLoader {
     /**
      * THe content factory instance needed to create the SSP
      */
-    private ContentFactory contentFactory;
+    private final ContentFactory contentFactory;
     
     /**
      * The fileMap to work on
      */
-    private Map<String, String> fileMap;
+    private final Map<String, String> fileMap;
     
     /**
      * The list of created content
@@ -68,7 +67,7 @@ public class FileContentLoaderImpl implements ContentLoader {
     /**
      * The dateFactory instance
      */
-    private DateFactory dateFactory;
+    private final DateFactory dateFactory;
 
     /**
      * Constructor
@@ -103,7 +102,7 @@ public class FileContentLoaderImpl implements ContentLoader {
      * @return 
      */
     private List<Content> run(WebResource webResource) {
-        List<Content> localResult = new ArrayList<Content>();
+        List<Content> localResult = new ArrayList<>();
         if (webResource instanceof Page) {
             Content content = contentFactory.createSSP(
                     dateFactory.createDate(),

@@ -52,4 +52,32 @@
         </property>
     </bean>
 
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="httpRequestHandler"/>
+        </property>
+        <property name="targetMethod">
+            <value>setProxyUser</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>${proxyUser}</value>
+            </list>
+        </property>
+    </bean>
+    
+        <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="httpRequestHandler"/>
+        </property>
+        <property name="targetMethod">
+            <value>setProxyPassword</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>${proxyPassword}</value>
+            </list>
+        </property>
+    </bean>
+    
 </beans>
