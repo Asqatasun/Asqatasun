@@ -22,7 +22,7 @@
 package org.opens.tanaguru.entity.service.audit;
 
 import java.util.*;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
@@ -208,7 +208,7 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
             boolean getContentWithNullDom) {
 
         Date beginProcessDate = Calendar.getInstance().getTime();
-        List<Content> contentList = new ArrayList<Content>();
+        List<Content> contentList = new ArrayList<>();
         
         // First we retrieve a list of Ids
         Collection<Long> contentIdList = this.getSSPIdsFromWebResource(

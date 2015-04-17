@@ -25,23 +25,29 @@ package org.opens.tanaguru.util.http;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.apache.commons.httpclient.Header;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.HeadMethod;
-import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpHost;
-import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpHead;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -63,6 +69,16 @@ public class HttpRequestHandler {
         this.proxyHost = proxyHost;
     }
     
+    private String proxyUser;
+    public void setProxyUser(String proxyUser) {
+        this.proxyUser = proxyUser;
+    }
+    
+    private String proxyPassword;
+    public void setProxyPassword(String proxyPassword) {
+        this.proxyPassword = proxyPassword;
+    }
+    
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
@@ -72,7 +88,9 @@ public class HttpRequestHandler {
     }
 
     public void setProxyExclusionUrl(String proxyExclusionUrl) {
-        proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
+        if (StringUtils.isNotBlank(proxyExclusionUrl.trim())) {
+            proxyExclusionUrlList.addAll(Arrays.asList(proxyExclusionUrl.split(";")));
+        }
     }
 
     private int connectionTimeout = 3000;
@@ -112,37 +130,43 @@ public class HttpRequestHandler {
      * @return whether the given Url is accessible or not
      */
     public boolean isUrlAccessible (String url) {
-        int statusFromHead = computeStatus(getHttpStatus(url));
-        switch (statusFromHead) {
-            case 1 : 
-                return true;
-            case 0 : 
-                int statusFromGet = computeStatus(getHttpStatusFromGet(url));
-                switch (statusFromGet) {
-                    case 0 : 
-                        return false;
-                    case 1 : 
-                        return true;
-                }
+        try {
+            int statusFromHead = computeStatus(getHttpStatus(url));
+            switch (statusFromHead) {
+                case 1 :
+                    return true;
+                case 0 :
+                    int statusFromGet = computeStatus(getHttpStatusFromGet(url));
+                    switch (statusFromGet) {
+                        case 0 :
+                            return false;
+                        case 1 :
+                            return true;
+                    }
+            }
+            return false;
+        } catch (IOException ex) {
+            LOGGER.debug(ex.getMessage());
+            LOGGER.debug("IOException on " + url);
+            return false;
         }
-        return false;
     }
     
-    public int getHttpStatus (String url) {
+    public int getHttpStatus (String url) throws IOException {
         String encodedUrl = getEncodedUrl(url);
-        HttpClient httpClient = getHttpClient(encodedUrl);
-        HeadMethod head = new HeadMethod(encodedUrl);
+        CloseableHttpClient httpClient = getHttpClient(encodedUrl);
+        HttpHead head = new HttpHead(encodedUrl);
         try {
             LOGGER.debug("executing head request to retrieve page status on " + head.getURI());
-            int status = httpClient.executeMethod(head);
+            HttpResponse response = httpClient.execute(head);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("received " + status + " from head request");
-                for (Header h : head.getResponseHeaders()) {
-                    LOGGER.debug("header : " + h.toExternalForm());
+                LOGGER.debug("received " + response.getStatusLine().getStatusCode() + " from head request");
+                for (Header h : head.getAllHeaders()) {
+                    LOGGER.debug("header : " + h.getName() + " " + h.getValue());
                 }
             }
             
-            return status;
+            return response.getStatusLine().getStatusCode();
         } catch (UnknownHostException uhe) {
             LOGGER.warn("UnknownHostException on " + encodedUrl);
             return HttpStatus.SC_NOT_FOUND;
@@ -157,6 +181,7 @@ public class HttpRequestHandler {
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
             head.releaseConnection();
+            httpClient.close();
         }
     }
     
@@ -164,19 +189,16 @@ public class HttpRequestHandler {
         if (StringUtils.isEmpty(url)){
             return "";
         }
-        
         String encodedUrl = getEncodedUrl(url);
-        HttpClient httpClient = getHttpClient(encodedUrl);
-        GetMethod get = new GetMethod(encodedUrl);
+        CloseableHttpClient httpClient = getHttpClient(encodedUrl);
+        HttpGet get = new HttpGet(encodedUrl);
         try {
             LOGGER.debug("executing request to retrieve content on " + get.getURI());
-            int status = httpClient.executeMethod(get);
-            LOGGER.debug("received " + status + " from get request");
-            if (status == HttpStatus.SC_OK) {
+            HttpResponse response = httpClient.execute(get);
+            LOGGER.debug("received " + response.getStatusLine().getStatusCode() + " from get request");
+            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                 LOGGER.debug("status == HttpStatus.SC_OK " );
-                
-                byte[] responseBody = get.getResponseBody();
-                return new String(responseBody);
+                return EntityUtils.toString(response.getEntity(), Charset.defaultCharset());
             } else {
                 LOGGER.debug("status != HttpStatus.SC_OK " );
                 return "";
@@ -191,23 +213,24 @@ public class HttpRequestHandler {
             // immediate deallocation of all system resources
             get.releaseConnection();
             LOGGER.debug("finally");
+            httpClient.close();
         }
     }
     
-    public int getHttpStatusFromGet (String url) {
+    public int getHttpStatusFromGet (String url) throws IOException {
         String encodedUrl = getEncodedUrl(url);
-        HttpClient httpClient = getHttpClient(encodedUrl);
-        GetMethod get = new GetMethod(encodedUrl);
+        CloseableHttpClient httpClient = getHttpClient(encodedUrl);
+        HttpGet get = new HttpGet(encodedUrl);
         try {
             LOGGER.debug("executing get request to retrieve status on " + get.getURI());
-            int status = httpClient.executeMethod(get);
+            HttpResponse status = httpClient.execute(get);
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("received " + status + " from get request");
-                for (Header h : get.getResponseHeaders()) {
-                    LOGGER.debug("header : " + h.toExternalForm());
+                for (Header h : get.getAllHeaders()) {
+                    LOGGER.debug("header : " + h.getName() + " " +h.getValue());
                 }
             }
-            return status;
+            return status.getStatusLine().getStatusCode();
         } catch (UnknownHostException uhe) {
             LOGGER.warn("UnknownHostException on " + encodedUrl);
             return HttpStatus.SC_NOT_FOUND;
@@ -219,34 +242,60 @@ public class HttpRequestHandler {
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
             get.releaseConnection();
+            httpClient.close();
         }
     }
     
-    private HttpClient getHttpClient(String url) {
-        HttpClient httpclient = new HttpClient();
-        boolean isExcludedUrl=false;
-        for (String excludedUrl : proxyExclusionUrlList) {
-            if (url.contains(excludedUrl)) {
-                isExcludedUrl=true;
+    private CloseableHttpClient getHttpClient(String url) {
+        RequestConfig requestConfig = RequestConfig.custom()
+			.setSocketTimeout(socketTimeout)
+			.setConnectTimeout(connectionTimeout)
+			.build();
+        HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+        httpClientBuilder.setDefaultRequestConfig(requestConfig);
+        httpClientBuilder.setConnectionManager(new PoolingHttpClientConnectionManager());
+        httpClientBuilder.setUserAgent(TANAGURU_USER_AGENT);
+        if (isProxySet(url)) {
+            LOGGER.debug(("Set proxy with " + proxyHost + " and " + proxyPort));
+            httpClientBuilder.setProxy(new HttpHost(proxyHost, Integer.valueOf(proxyPort)));
+            if (isProxyCredentialSet()) {
+                CredentialsProvider credsProvider = new BasicCredentialsProvider();
+                credsProvider.setCredentials(
+                        new AuthScope(proxyHost, Integer.valueOf(proxyPort)),
+                        new UsernamePasswordCredentials(proxyUser, proxyPassword));
+                httpClientBuilder.setDefaultCredentialsProvider(credsProvider);
+                LOGGER.debug(("Set proxy credentials " + proxyHost + " and " + proxyPort + " and " + proxyUser + " and " + proxyPassword));
             }
         }
-        if (StringUtils.isNotEmpty(proxyPort) && StringUtils.isNotEmpty(proxyPort) && !isExcludedUrl) {
-            HttpHost proxy = new HttpHost(proxyHost, Integer.valueOf(proxyPort));
-            httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
-        }
-        setTimeouts(httpclient.getParams());
-        httpclient.getParams().setParameter(
-                CoreProtocolPNames.USER_AGENT, 
-                TANAGURU_USER_AGENT);
-        return httpclient;
+        return httpClientBuilder.build();
     }
     
-    private void setTimeouts(HttpClientParams params) {
-        params.setIntParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 
-            connectionTimeout);
-        params.setIntParameter(CoreConnectionPNames.SO_TIMEOUT, socketTimeout);
+    /**
+     * 
+     * @param url
+     * @return 
+     */
+    private boolean isProxySet(String url) {
+        LOGGER.debug(proxyExclusionUrlList.size());
+        for (String excludedUrl : proxyExclusionUrlList) {
+            if (url.contains(excludedUrl)) {
+                LOGGER.debug("Proxy Not Set due to exclusion with : " + excludedUrl);
+                return false;
+            }
+        }
+        return StringUtils.isNotEmpty(proxyHost) && StringUtils.isNotEmpty(proxyPort);
     }
-
+    
+    /**
+     * 
+     * @param url
+     * @return 
+     */
+    private boolean isProxyCredentialSet() {
+        LOGGER.debug("isProxyCredentialSet" + (StringUtils.isNotEmpty(proxyUser) && StringUtils.isNotEmpty(proxyPassword)));
+        return StringUtils.isNotEmpty(proxyUser) && StringUtils.isNotEmpty(proxyPassword);
+    }
+    
     private int computeStatus(int status) {
         switch (status) { 
             case HttpStatus.SC_FORBIDDEN:

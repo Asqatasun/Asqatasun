@@ -21,9 +21,8 @@
  */
 package org.opens.tanaguru.ruleimplementation.link;
 
+import java.net.URI;
 import java.util.Iterator;
-import org.apache.commons.httpclient.URI;
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -75,15 +74,15 @@ public abstract class AbstractDownloadableLinkRuleImplementation
         while (iter.hasNext()){
             el = iter.next();
             try {
-                URI uri = new URI(el.absUrl(HREF_ATTR), true);
+                URI uri = new URI(el.absUrl(HREF_ATTR));
                 if (isLinkWithProperExtension(uri)) {
-                    if (uri.hasFragment()) {
+                    if (StringUtils.isNotBlank(uri.getFragment())) {
                         iter.remove();
                     } else {
                         linkWithSimpleExtension.add(el);
                     }
                 }
-            } catch (URIException use){}
+            } catch (Exception ex){}
         }
     }
     
@@ -147,10 +146,9 @@ public abstract class AbstractDownloadableLinkRuleImplementation
      * 
      * @param uri
      * @return whether the current link has a proper extension (link.html)
-     * @throws URIException
      */
-    private boolean isLinkWithProperExtension(URI uri) throws URIException{
-        if (uri.hasQuery()) {
+    private boolean isLinkWithProperExtension(URI uri) {
+        if (StringUtils.isNotBlank(uri.getQuery())) {
             return false;
         }
         String path = uri.getPath();

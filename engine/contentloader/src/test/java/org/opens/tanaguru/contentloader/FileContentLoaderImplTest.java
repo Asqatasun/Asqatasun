@@ -23,7 +23,7 @@ package org.opens.tanaguru.contentloader;
 
 import java.util.*;
 import junit.framework.TestCase;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.easymock.EasyMock;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
@@ -89,7 +89,7 @@ public class FileContentLoaderImplTest extends TestCase {
                 mockPage, 
                 HttpStatus.SC_OK)).andReturn(mockSSP).once();
         
-        Map<String, String> fileMap = new HashMap<String, String>();
+        Map<String, String> fileMap = new HashMap<>();
         fileMap.put("http://my.testUrl.org", "My Page Content");
         
         EasyMock.replay(mockPage);
@@ -154,7 +154,7 @@ public class FileContentLoaderImplTest extends TestCase {
                     .andReturn(mockSSP)
                     .once();
         
-        Map<String, String> fileMap = new HashMap<String, String>();
+        Map<String, String> fileMap = new HashMap<>();
         fileMap.put("http://my.testUrl1.org", "My Page Content 1");
         fileMap.put("http://my.testUrl2.org", "My Page Content 2");
         

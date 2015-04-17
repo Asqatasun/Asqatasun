@@ -26,7 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import javax.persistence.PersistenceException;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
 import org.opens.tanaguru.entity.audit.*;
@@ -259,10 +259,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Date endRetrieveDate;
         Date endProcessDate;
         Date endPersistDate;
-        Long persistenceDuration = Long.valueOf(0);
+        Long persistenceDuration = (long) 0;
 
         boolean hasCorrectDOM = false;
-        Long i = Long.valueOf(0);
+        Long i = (long) 0;
         Long webResourceId = audit.getSubject().getId();
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
 
@@ -288,7 +288,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                                             true);
             endRetrieveDate = Calendar.getInstance().getTime();
             
-            Set<Content> contentSet = new HashSet<Content>();
+            Set<Content> contentSet = new HashSet<>();
             // Set the referential to the contentAdapterService due to different
             // behaviour in the implementation. Has to be removed when accessiweb 2.1
             // implementations will be based on jsoup.
@@ -369,9 +369,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                 !((SSP) content).getDOM().isEmpty()) {
                 try {
                     ((SSP) content).setSource(MD5Encoder.MD5(((SSP) content).getSource()));
-                } catch (NoSuchAlgorithmException ex) {
-                    LOGGER.warn(ex);
-                } catch (UnsupportedEncodingException ex) {
+                } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
                     LOGGER.warn(ex);
                 }
             }
@@ -407,13 +405,13 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Date beginProcessDate = null;
         Date endProcessDate = null;
         Date endPersistDate;
-        Long persistenceDuration = Long.valueOf(0);
+        Long persistenceDuration = (long) 0;
 
-        Long i = Long.valueOf(0);
+        Long i = (long) 0;
         Long webResourceId = audit.getSubject().getId();
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
 
-        Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
+        Set<ProcessResult> processResultSet = new HashSet<>();
         
         while (i.compareTo(nbOfContent) < 0) {
             if (LOGGER.isDebugEnabled()) {
@@ -525,7 +523,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             }
         } else if (audit.getSubject() instanceof Site) {
             if (contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK) > 20) {
-                List<Test> testList = new ArrayList<Test>();
+                List<Test> testList = new ArrayList<>();
                 for (Test test : audit.getTestList()) {
                     if (! test.getNoProcess()) { // only consolidate if the process has been launched on the test
                         testList.add(test);
@@ -575,7 +573,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @param testList 
      */
     private void consolidate(Collection<ProcessResult> prList, Collection<Test> testList) {
-        Set<ProcessResult> processResultSet = new HashSet<ProcessResult>();
+        Set<ProcessResult> processResultSet = new HashSet<>();
         if (LOGGER.isDebugEnabled()) {
             if (testList.size() == 1) {
                 LOGGER.debug(
@@ -603,7 +601,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
             audit.setStatus(AuditStatus.ERROR);
         }
         Iterator<ProcessResult> iter = processResultSet.iterator();
-        Set<ProcessResult> processResultSubset = new HashSet<ProcessResult>();
+        Set<ProcessResult> processResultSubset = new HashSet<>();
         int i = 0;
         while (iter.hasNext()) {
             ProcessResult pr = iter.next();
@@ -646,7 +644,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Date beginProcessDate = null;
         Date endProcessDate = null;
         Date endPersistDate;
-        Long persistenceDuration = Long.valueOf(0);
+        Long persistenceDuration = (long) 0;
 
         WebResource parentWebResource = audit.getSubject();
         if (parentWebResource instanceof Page) {
@@ -679,7 +677,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
 
             Long nbOfContent =
                     webResourceDataService.getNumberOfChildWebResource(parentWebResource);
-            Long i = Long.valueOf(0);
+            Long i = (long) 0;
             List<WebResource> webResourceList;
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug(
@@ -756,7 +754,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
      */
     private void cleanUpTestData(Audit audit) {
         LOGGER.info("Cleaning-up data for " + audit.getSubject().getURL());
-        Long i = Long.valueOf(0);
+        Long i = (long) 0;
         Long webResourceId = audit.getSubject().getId();
         Long nbOfContent = contentDataService.getNumberOfSSPFromWebResource(audit.getSubject(), HttpStatus.SC_OK);
         while (i.compareTo(nbOfContent) < 0) {

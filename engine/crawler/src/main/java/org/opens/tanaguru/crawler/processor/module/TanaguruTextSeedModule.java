@@ -30,7 +30,6 @@ import org.apache.commons.io.IOUtils;
 import org.archive.io.ReadSource;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.SchedulingConstants;
-import org.archive.modules.seeds.SeedModule;
 import org.archive.net.UURI;
 import org.archive.net.UURIFactory;
 import org.archive.spring.WriteTarget;
@@ -172,13 +171,12 @@ public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSo
      * flow from seeds).
      *
      * @param curi CandidateUri to add
-     * @return true if successful, false if add failed for any reason
      */
     @Override
     public synchronized void addSeed(final CrawlURI curi) {
         if(!(textSource instanceof WriteTarget)) {
             // TODO: do something else to log seed update
-            logger.warning("nowhere to log added seed: "+curi);
+            logger.log(Level.WARNING, "nowhere to log added seed: {0}", curi);
         } else {
             // TODO: determine if this modification to seeds file means
             // TextSeedModule should (again) be Checkpointable

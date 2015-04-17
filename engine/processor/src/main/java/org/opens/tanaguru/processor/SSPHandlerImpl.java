@@ -31,7 +31,6 @@ import java.net.URL;
 import java.util.*;
 import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
 import org.archive.net.UURIFactory;
 import org.jsoup.select.Elements;
@@ -65,7 +64,7 @@ public class SSPHandlerImpl implements SSPHandler {
     private URLIdentifier urlIdentifier;
     private Set<ImageContent> imageOnErrorSet;
     private ProcessRemarkService processRemarkService;
-    private PreProcessResultDataService preProcessResultDataService;
+    private final PreProcessResultDataService preProcessResultDataService;
 
     /**
      * 
@@ -318,7 +317,7 @@ public class SSPHandlerImpl implements SSPHandler {
 
     @Override
     public TestSolution domCheckNodeValueInNomenclature(String nomenclatureCode, String errorMessage) {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
 
         Nomenclature nomenclature = nomenclatureLoaderService.loadByCode(nomenclatureCode);
 
@@ -383,9 +382,9 @@ public class SSPHandlerImpl implements SSPHandler {
             }
         } else {
             try {
-                String str = UURIFactory.getInstance(urlIdentifier.resolve(url).toExternalForm()).toString();
+                String str = urlIdentifier.resolve(url).toExternalForm();
                 return imageMap.get(str);
-            } catch (URIException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
             }
             return null;
@@ -425,10 +424,10 @@ public class SSPHandlerImpl implements SSPHandler {
      */
     public void initializeImageMap() {
         if (imageMap == null) {
-            imageMap = new HashMap<String, BufferedImage>();
+            imageMap = new HashMap<>();
         }
         if (imageOnErrorSet == null) {
-            imageOnErrorSet = new HashSet<ImageContent>();
+            imageOnErrorSet = new HashSet<>();
         }
         imageMap.clear();
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {

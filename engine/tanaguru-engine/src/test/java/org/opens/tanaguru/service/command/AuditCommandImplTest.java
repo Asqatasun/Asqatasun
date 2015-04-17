@@ -26,7 +26,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.contentadapter.AdaptationListener;
@@ -278,7 +278,6 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
                 mockWr, 
                 HttpStatus.SC_OK)).andReturn(Long.valueOf(49)).once();
         
-        Collection<Long> longList = new ArrayList<Long>(25);
         expect(mockContentDataService.getSSPFromWebResource(
                 Long.valueOf(1), 
                 Long.valueOf(0), 
@@ -298,12 +297,10 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         try {
             mockSSP.setSource(MD5Encoder.MD5("Not Empty String"));
             expectLastCall().times(2);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(this.getClass()).error(ex);
-        } catch (UnsupportedEncodingException ex) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
             Logger.getLogger(this.getClass()).error(ex);
         }
-        List<Content> mockAdaptedContentList = new ArrayList<Content>();
+        List<Content> mockAdaptedContentList = new ArrayList<>();
         mockAdaptedContentList.add(mockSSP);
         
         expect(mockContentAdapterService.adaptContent(new ArrayList<Content>())).

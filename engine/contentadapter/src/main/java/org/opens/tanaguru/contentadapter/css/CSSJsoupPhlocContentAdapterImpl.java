@@ -23,6 +23,7 @@ package org.opens.tanaguru.contentadapter.css;
 
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.io.streamprovider.ByteArrayInputStreamProvider;
+import com.phloc.commons.url.URLUtils;
 import com.phloc.css.ECSSVersion;
 import com.phloc.css.decl.CSSImportRule;
 import com.phloc.css.decl.CSSMediaQuery;
@@ -33,6 +34,7 @@ import com.phloc.css.tools.MediaQueryTools;
 import com.thoughtworks.xstream.XStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
@@ -41,12 +43,9 @@ import java.util.*;
 import javax.annotation.Nullable;
 import javax.persistence.PersistenceException;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.archive.net.UURI;
-import org.archive.net.UURIFactory;
 import org.hibernate.exception.DataException;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.contentadapter.ContentParser;
@@ -75,11 +74,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
     private static final String HTTP_PREFIX = "http";
     
     private String currentLocalResourcePath;
-    private Set<StylesheetContent> relatedExternalCssSet =
-            new HashSet<StylesheetContent>();
-    private ExternalCSSRetriever externalCSSRetriever;
-    private Set<StylesheetContent> externalCssSet =
-            new HashSet<StylesheetContent>();
+    private final Set<StylesheetContent> relatedExternalCssSet = new HashSet<>();
+    private final ExternalCSSRetriever externalCSSRetriever;
+    private final Set<StylesheetContent> externalCssSet = new HashSet<>();
 
     private int inlineCssCounter;
     private int localeCssCounter;
@@ -100,7 +97,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
         this.localeCssElements = localeCssElements;
     }
     
-    private URLIdentifier urlIdentifier;
+    private final URLIdentifier urlIdentifier;
     
     /**
      * Constructor
@@ -108,6 +105,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * @param urlIdentifier
      * @param downloader
      * @param contentDataService
+     * @param externalCSSRetriever
      */
     public CSSJsoupPhlocContentAdapterImpl(
             ContentFactory contentFactory,
@@ -162,7 +160,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * Retrieve css content and adapt it for each locale resource 
      */
     private void adaptLocaleCSS() {
-        Set<Long> relatedCssIdSet = new HashSet<Long>();
+        Set<Long> relatedCssIdSet = new HashSet<>();
 
         for (Element el : localeCssElements) {
             Resource cssResource;
@@ -189,7 +187,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * Retrieve css content and adapt it for each inline resource
      */
     private void adaptInlineCSS() {
-        Set<Long> relatedCssIdSet = new HashSet<Long>();
+        Set<Long> relatedCssIdSet = new HashSet<>();
 
         for (Element el : inlineCssElements) {
             String attributeValue = el.attr("style");
@@ -216,7 +214,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             String resourcePath = el.attr("abs:href");
             getExternalResourceAndAdapt(resourcePath, mediaList);
         }
-        Set<Long> relatedCssIdSet = new HashSet<Long>();
+        Set<Long> relatedCssIdSet = new HashSet<>();
         // At the end of the document we link each external css that are
         // already fetched and that have been encountered in the SSP to the SSP.
         LOGGER.debug("Found " + relatedExternalCssSet.size() + 
@@ -237,9 +235,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                     cssContent = (StylesheetContent)getContentDataService().saveOrUpdate(cssContent);
                 }
                 relatedCssIdSet.add(cssContent.getId());
-            } catch (PersistenceException pe) {
-                adaptedContentOnError(cssContent, relatedCssIdSet);
-            } catch (DataException de) {
+            } catch (PersistenceException | DataException pe) {
                 adaptedContentOnError(cssContent, relatedCssIdSet);
             }
         }
@@ -253,7 +249,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      */
     private List<CSSMediaQuery> getListOfMediaFromAttributeValue(Element element) {
         String mediaAttribute = element.attr("media");
-        List<CSSMediaQuery> mediaTypeList = new ArrayList<CSSMediaQuery>();
+        List<CSSMediaQuery> mediaTypeList = new ArrayList<>();
         if (mediaAttribute == null || StringUtils.isBlank(mediaAttribute) ) {
             return mediaTypeList;
         } else {
@@ -494,9 +490,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                         }
                     }
                 } 
-            } catch (IllegalArgumentException iae) {
-                stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
-            } catch (TokenMgrError tme) {
+            } catch (IllegalArgumentException | TokenMgrError iae) {
                 stylesheetContent.setAdaptedContent(CSS_ON_ERROR);
             }
         }
@@ -522,12 +516,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * @return 
      */
     public String setBaseAsRootOfSite(String base) {
-        UURI uri;
         try {
-            uri = UURIFactory.getInstance(base);
-            return uri.getScheme()+"://"+uri.getHost().toString();
-        } catch (URIException ex) {
-            LOGGER.error(ex);
+            URI uri = URLUtils.getAsURI(base);
+            return uri.getScheme()+"://"+uri.getHost();
         } catch (NullPointerException ex) {
             LOGGER.error(ex);
         }

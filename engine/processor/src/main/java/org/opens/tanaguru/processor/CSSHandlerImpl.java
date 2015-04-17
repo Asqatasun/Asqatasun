@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.opens.tanaguru.contentadapter.css.CSSContentAdapter;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.service.ProcessRemarkService;
@@ -85,7 +85,7 @@ public class CSSHandlerImpl implements CSSHandler {
      */
     private void initializeCssOnErrorSet() {
         if (cssOnErrorSet == null) {
-            cssOnErrorSet = new ArrayList<StylesheetContent>();
+            cssOnErrorSet = new ArrayList<>();
         }
         cssOnErrorSet.clear();
     }
@@ -96,7 +96,7 @@ public class CSSHandlerImpl implements CSSHandler {
      */
     private void initializeStyleSet() {
         if (styleMap == null) {
-            styleMap = new HashMap<String, CascadingStyleSheet>();
+            styleMap = new HashMap<>();
         }
         styleMap.clear();
     }

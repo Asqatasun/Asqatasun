@@ -28,8 +28,8 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import junit.framework.TestCase;
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.pool.impl.GenericObjectPool.Config;
+import org.apache.http.HttpStatus;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.ContentFactory;
@@ -60,7 +60,7 @@ public class ScenarioLoaderImplTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        pageMap = new LinkedHashMap<String, String>();
+        pageMap = new LinkedHashMap<>();
         pageMap.put(ROOT_PAGE_URL, readFile("htmlFiles/root-page.html", true));
         pageMap.put(PAGE_1_URL, readFile("htmlFiles/page-1.html", true));
         pageMap.put(PAGE_ACCESS_FORBIDDEN_URL, readFile("htmlFiles/page-access-forbidden.html", true));
@@ -69,7 +69,7 @@ public class ScenarioLoaderImplTest extends TestCase {
         // need to initilise properly the ProfileFactory needed by sebuilder
         ProfileFactory.getInstance().setNetExportPath("/tmp/");
         
-        List<String> extensionList = new ArrayList<String>();
+//        List<String> extensionList = new ArrayList<>();
 //        extensionList.add("../tanaguru-resources/src/main/resources/firefox/extensions/firebug@software.joehewitt.com.xpi");
 //        extensionList.add("../tanaguru-resources/src/main/resources/firefox/extensions/firestarter@getfirebug.com.xpi");
 //        extensionList.add("../tanaguru-resources/src/main/resources/firefox/extensions/netexport@getfirebug.com.xpi");
@@ -496,10 +496,8 @@ public class ScenarioLoaderImplTest extends TestCase {
                 Logger.getLogger(ScenarioLoaderImplTest.class.getName()).log(Level.SEVERE, null, ex);
             }
             return file.toString();
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException | URISyntaxException ex) {
             Logger.getLogger(ScenarioLoaderImplTest.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-                Logger.getLogger(ScenarioLoaderImplTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "";
     }
