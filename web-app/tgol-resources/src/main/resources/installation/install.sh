@@ -226,9 +226,9 @@ create_tables() {
 
 	cd "$PKG_DIR/install/web-app/sql"
 	cat tgol-20-create-tables.sql tgol-30-insert.sql | \
-		sed -e "s/\$tgDatabase/$mysql_tg_db/" |    \
-		mysql --user="$mysql_tg_user"              \
-		      --password="$mysql_tg_passwd" ||     \
+		mysql --user="${mysql_tg_user}"              \
+		      --password="${mysql_tg_passwd}"        \
+                      ${mysql_tg_db} ||                    \
 		fail "Unable to create and fill the TGSI tables" \
                      "The mysql user ${mysql_tg_user}" \
                      "may already exists with a different" \

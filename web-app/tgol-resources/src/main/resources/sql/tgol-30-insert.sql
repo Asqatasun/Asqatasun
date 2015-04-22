@@ -1,5 +1,3 @@
-USE $tgDatabase;
-
 INSERT IGNORE INTO `TGSI_ROLE` (`Id_Role`, `Role_Name`) VALUES
 (1, 'ROLE_GUEST'),
 (2, 'ROLE_USER');
