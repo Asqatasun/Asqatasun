@@ -278,7 +278,7 @@ public class HttpRequestHandler {
     private boolean isProxySet(String url) {
         LOGGER.debug(proxyExclusionUrlList.size());
         for (String excludedUrl : proxyExclusionUrlList) {
-            if (url.contains(excludedUrl)) {
+            if (url.contains(excludedUrl) && StringUtils.isNotBlank(excludedUrl)) {
                 LOGGER.debug("Proxy Not Set due to exclusion with : " + excludedUrl);
                 return false;
             }
