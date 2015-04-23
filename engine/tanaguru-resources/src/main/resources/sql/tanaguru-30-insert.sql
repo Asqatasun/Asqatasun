@@ -18,17 +18,13 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (5, 'LEVEL', 2, 'Audit level (includes the referential code)', 'Audit level'),
 (6, 'DATA_TABLE_MARKER', 3, 'Data Table HTML marker (id or class)', 'Data table marker'),
 (7, 'PRESENTATION_TABLE_MARKER', 3, 'Presentation Table HTML marker (id or class)', 'Presentation table marker'),
-(8, 'PROXY_HOST', 1, 'proxy host', 'proxy host'),
-(9, 'PROXY_PORT', 1, 'proxy port', 'proxy port'),
 (38, 'DECORATIVE_IMAGE_MARKER', 3, 'Decorative image HTML marker (id or class)', 'Decorative image marker'),
 (39, 'INFORMATIVE_IMAGE_MARKER', 3, 'Informative image HTML marker (id or class)', 'Informative image marker'), 
 (40, 'ALTERNATIVE_CONTRAST_MECHANISM', 3, 'The page embeds a mechanism that displays text with a correct ratio', 'Alternative Contrast Mechanism'),
 (41, 'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling'),
 (42, 'INCLUSION_REGEXP', 1, '', 'inclusion regex'),
 (43, 'SCREEN_WIDTH', 1, '', 'screen width'),
-(44, 'SCREEN_HEIGHT', 1, '', 'screen height'),
-(45, 'PROXY_USER', 1, 'proxy user', 'proxy user'),
-(46, 'PROXY_PASSWORD', 1, 'proxy password', 'proxy password');
+(44, 'SCREEN_HEIGHT', 1, '', 'screen height');
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (1, '50000', b'0'),
@@ -41,8 +37,6 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (1, '20000', b'0'),
 (6, '', b'1'),
 (7, '', b'1'),
-(8, '', b'1'),
-(9, '', b'1'), 
 (4, '86400', b'1'), 
 (38, '', b'1'),
 (39, '', b'1'), 
@@ -52,8 +46,6 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (41, 'false', b'0'),
 (42, '', b'1'),
 (43, '1920', b'1'),
-(44, '1080', b'1'),
-(45, '', b'1'),
-(46, '', b'1'); 
+(44, '1080', b'1'); 
 
 SET foreign_key_checks=1;
