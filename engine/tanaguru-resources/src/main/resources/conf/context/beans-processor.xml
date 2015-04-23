@@ -8,75 +8,21 @@
 
     <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl"/>
 
-    <bean id="httpRequestHandler" class="org.opens.tanaguru.util.http.HttpRequestHandler" factory-method="getInstance"/>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="httpRequestHandler"/>
+    <bean id="httpRequestHandler" class="org.opens.tanaguru.util.http.HttpRequestHandler" factory-method="getInstance">
+        <property name="proxyHost">
+            <value>${proxyHost}</value>
         </property>
-        <property name="targetMethod">
-            <value>setProxyPort</value>
+        <property name="proxyPort">
+            <value>${proxyPort}</value>
         </property>
-        <property name="arguments">
-            <list>
-                <value>${proxyPort}</value>
-            </list>
+        <property name="proxyUser">
+            <value>${proxyUser}</value>
         </property>
-    </bean>
-    
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="httpRequestHandler"/>
+        <property name="proxyPassword">
+            <value>${proxyPassword}</value>
         </property>
-        <property name="targetMethod">
-            <value>setProxyHost</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${proxyHost}</value>
-            </list>
-        </property>
-    </bean>
-    
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="httpRequestHandler"/>
-        </property>
-        <property name="targetMethod">
-            <value>setProxyExclusionUrl</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${proxyExclusionUrl}</value>
-            </list>
-        </property>
-    </bean>
-
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="httpRequestHandler"/>
-        </property>
-        <property name="targetMethod">
-            <value>setProxyUser</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${proxyUser}</value>
-            </list>
-        </property>
-    </bean>
-    
-        <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="targetObject">
-            <ref local="httpRequestHandler"/>
-        </property>
-        <property name="targetMethod">
-            <value>setProxyPassword</value>
-        </property>
-        <property name="arguments">
-            <list>
-                <value>${proxyPassword}</value>
-            </list>
+        <property name="bypassCheck">
+            <value>${bypassUrlCheck}</value>
         </property>
     </bean>
     

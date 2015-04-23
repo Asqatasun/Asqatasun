@@ -79,6 +79,11 @@ public class HttpRequestHandler {
         this.proxyPassword = proxyPassword;
     }
     
+    private boolean bypassCheck = false;
+    public void setBypassCheck(String bypassCheck) {
+        this.bypassCheck = Boolean.valueOf(bypassCheck);
+    }
+    
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
@@ -130,6 +135,10 @@ public class HttpRequestHandler {
      * @return whether the given Url is accessible or not
      */
     public boolean isUrlAccessible (String url) {
+        if (bypassCheck) {
+            LOGGER.debug("check on Url is bypassed by configuration");
+            return true;
+        }
         try {
             int statusFromHead = computeStatus(getHttpStatus(url));
             switch (statusFromHead) {
@@ -275,14 +284,14 @@ public class HttpRequestHandler {
      * @param url
      * @return 
      */
-    private boolean isProxySet(String url) {
-        LOGGER.debug(proxyExclusionUrlList.size());
+    public boolean isProxySet(String url) {
         for (String excludedUrl : proxyExclusionUrlList) {
             if (url.contains(excludedUrl) && StringUtils.isNotBlank(excludedUrl)) {
                 LOGGER.debug("Proxy Not Set due to exclusion with : " + excludedUrl);
                 return false;
             }
         }
+        LOGGER.debug("isProxySet:  " + (StringUtils.isNotEmpty(proxyHost) && StringUtils.isNotEmpty(proxyPort)));
         return StringUtils.isNotEmpty(proxyHost) && StringUtils.isNotEmpty(proxyPort);
     }
     
