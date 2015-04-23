@@ -50,8 +50,8 @@ public abstract class HeritrixRegexpParameterValueModifier extends HeritrixParam
             Node node = getNodeFromXpath(document);
             Logger.getLogger(HeritrixParameterValueModifier.class.getName()).debug(node + " value " + value);
             String[] regexpTab = value.split(";");
-            for (int i = 0; i < regexpTab.length; i++) {
-                addRegexpAsParameter(regexpTab[i], node, document, url);
+            for (String regexpTab1 : regexpTab) {
+                addRegexpAsParameter(regexpTab1, node, document, url);
             }
         } catch (XPathExpressionException xee) {
             Logger.getLogger(HeritrixParameterValueModifier.class.getName()).warn(xee);
@@ -75,7 +75,7 @@ public abstract class HeritrixRegexpParameterValueModifier extends HeritrixParam
 
     private boolean compileRegexp(String regexp) {
         Pattern pattern = Pattern.compile(regexp);
-        return (pattern != null) ? true : false;
+        return (pattern != null);
     }
 
     /**

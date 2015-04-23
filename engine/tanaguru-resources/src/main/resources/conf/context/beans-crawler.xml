@@ -56,32 +56,36 @@
         <property name="elementName" value="prop"/>
     </bean>
 
-    <bean id="proxyHostModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+    <bean id="proxyHostModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraserFromProperty">
         <property name="attributeName" value="name"/>
         <property name="attributeValue" value="httpProxyHost"/>
         <property name="idBeanParent" value="fetchHttp"/>
         <property name="elementName" value="property"/>
+        <property name="propertyValue" value="${proxyHost}"/>
     </bean>
 
-    <bean id="proxyPortModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+    <bean id="proxyPortModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraserFromProperty">
         <property name="attributeName" value="name"/>
         <property name="attributeValue" value="httpProxyPort"/>
         <property name="idBeanParent" value="fetchHttp"/>
         <property name="elementName" value="property"/>
+        <property name="propertyValue" value="${proxyPort}"/>
     </bean>
     
-    <bean id="proxyUserModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+    <bean id="proxyUserModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraserFromProperty">
         <property name="attributeName" value="name"/>
         <property name="attributeValue" value="httpProxyUser"/>
         <property name="idBeanParent" value="fetchHttp"/>
         <property name="elementName" value="property"/>
+        <property name="propertyValue" value="${proxyUser}"/>
     </bean>
     
-    <bean id="proxyPasswordModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraser">
+    <bean id="proxyPasswordModifier" class="org.opens.tanaguru.crawler.util.HeritrixAttributeValueModifierAndEraserFromProperty">
         <property name="attributeName" value="name"/>
         <property name="attributeValue" value="httpProxyPassword"/>
         <property name="idBeanParent" value="fetchHttp"/>
         <property name="elementName" value="property"/>
+        <property name="propertyValue" value="${proxyPassword}"/>
     </bean>
 
     <bean id="crawlConfigurationUtils" class="org.opens.tanaguru.crawler.util.CrawlConfigurationUtils" factory-method="getInstance">
@@ -92,15 +96,19 @@
                 <entry key="MAX_DURATION" value-ref="maxDurationModifier"/>
                 <entry key="EXCLUSION_REGEXP" value-ref="exclusionRegexpModifier"/>
                 <entry key="INCLUSION_REGEXP" value-ref="inclusionRegexpModifier"/>
-                <entry key="PROXY_HOST" value-ref="proxyHostModifier"/>
-                <entry key="PROXY_PORT" value-ref="proxyPortModifier"/>
-                <entry key="PROXY_USER" value-ref="proxyUserModifier"/>
-                <entry key="PROXY_PASSWORD" value-ref="proxyPasswordModifier"/>
                 <entry key="CONSIDER_COOKIES" value-ref="ignoreCookiesModifier"/>
             </map>
         </property>
         <property name="urlModifier">
             <ref local="urlModifier"/>
+        </property>
+        <property name="proxyModifierList">
+            <list>
+                <ref local="proxyHostModifier"/>
+                <ref local="proxyPortModifier"/>
+                <ref local="proxyUserModifier"/>
+                <ref local="proxyPasswordModifier"/>
+            </list>
         </property>
     </bean>
 

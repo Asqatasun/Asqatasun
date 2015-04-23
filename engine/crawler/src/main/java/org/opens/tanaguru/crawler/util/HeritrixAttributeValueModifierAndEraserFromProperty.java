@@ -21,47 +21,26 @@
  */
 package org.opens.tanaguru.crawler.util;
 
-import javax.xml.xpath.XPathExpressionException;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 
 /**
  *
  * @author jkowalczyk
  */
-public class HeritrixAttributeValueModifierAndEraser extends DefaultHeritrixConfigurationModifier{
+public class HeritrixAttributeValueModifierAndEraserFromProperty extends HeritrixAttributeValueModifierAndEraser{
 
-    private static final Logger LOGGER = Logger.getLogger(HeritrixAttributeValueModifierAndEraser.class);
-    private static final String DEFAULT_ATTRIBUTE_NAME = "value";
-
-    public HeritrixAttributeValueModifierAndEraser(){
+    private String propertyValue;
+    public void setPropertyValue(String propertyValue) {
+        this.propertyValue = propertyValue;
+    }
+    
+    public HeritrixAttributeValueModifierAndEraserFromProperty(){
         super();
     }
 
     @Override
     public Document modifyDocument(Document document, String value) {
-        try {
-            Node parentNode = getNodeFromXpath(document);
-            NamedNodeMap attr = parentNode.getAttributes();
-            Node nodeAttr = attr.getNamedItem(DEFAULT_ATTRIBUTE_NAME);
-            if (StringUtils.isNotEmpty(value)) {
-                nodeAttr.setTextContent(value);
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Update " + getAttributeValue() +" attribute of bean "+getIdBeanParent()+ " with value "+ value);
-                }
-            } else {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Delete " + getAttributeValue() +" attribute of bean "+getIdBeanParent()+ " because of null or empty value ");
-                }
-                parentNode.getParentNode().removeChild(parentNode);
-            }
-        } catch (XPathExpressionException ex) {
-            Logger.getLogger(HeritrixParameterValueModifier.class.getName()).warn(ex);
-        }
-        return document;
+        return super.modifyDocument(document, propertyValue);
     }
 
 }

@@ -45,7 +45,6 @@ import org.archive.crawler.framework.CrawlController.State;
 import org.archive.crawler.framework.CrawlJob;
 import org.archive.crawler.reporting.AlertThreadGroup;
 import org.archive.modules.deciderules.DecideRuleSequence;
-import org.archive.net.UURIFactory;
 import org.archive.spring.PathSharingContext;
 import org.opens.tanaguru.crawler.ContentWriter;
 import org.opens.tanaguru.crawler.exception.CrawlerException;
@@ -78,7 +77,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
     private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
     private String outputDir = System.getProperty("user.dir")  + "/output";
-    private CrawlJob crawlJob;
+    private final CrawlJob crawlJob;
     private String crawlConfigFilePath = "/etc/tanaguru/context/crawler/";
     private ContentWriter contentWriter;
     private ExtractorCSSListener extractorCSSListener;
@@ -220,16 +219,13 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
         } catch (BeansException be) {
             LOGGER.warn(be.getMessage());
             ac.close();
-            ac = null;
         } catch (Exception e) {
             LOGGER.warn(e.getMessage());
             try {
                 ac.close();
             } catch (Exception e2) {
                 e2.printStackTrace(System.err);
-            } finally {
-                ac = null;
-            }
+            } finally {}
         }
         LOGGER.debug("Context started");
     }
@@ -267,13 +263,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
             StreamResult result =  new StreamResult(new File(resultFileName));
             transformer.transform(source, result);
 
-        } catch (IOException ex) {
-            LOGGER.error(ex);
-            throw new CrawlerException(ex);
-        } catch (ParserConfigurationException ex) {
-            LOGGER.error(ex);
-            throw new CrawlerException(ex);
-        }  catch (SAXException ex) {
+        } catch (IOException | ParserConfigurationException | SAXException ex) {
             LOGGER.error(ex);
             throw new CrawlerException(ex);
         } catch (TransformerConfigurationException ex) {
@@ -330,20 +320,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
             throws IOException{
 
         doc.getFirstChild();
-        String uriTmp;
-        StringBuilder urls = new StringBuilder();
-        CrawlConfigurationUtils ccu = CrawlConfigurationUtils.getInstance();
-        for (String url : urlList) {
-            // first convert the URI in unicode
-            uriTmp = UURIFactory.getInstance(url).getEscapedURI();
-            urls.append(uriTmp);
-            urls.append("\r");
-        }
-        doc = ccu.modifyValue(ccu.getUrlModifier(), doc, urls.toString(), "");
-        for (Parameter parameter : crawlParameterSet) {
-            doc = ccu.modifyHeritrixParameter(doc, parameter, urlList.iterator().next());
-        }
-        return doc;
+        return CrawlConfigurationUtils.getInstance().setUpDocument(doc, crawlParameterSet, urlList);
     }
 
     /**
@@ -404,16 +381,13 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
      */
     private boolean removeConfigFile(File file) {
         if (file.exists()) {
-            File[] files = file.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory()) {
-                    removeConfigFile(files[i]);
+            for (File file1 : file.listFiles()) {
+                if (file1.isDirectory()) {
+                    removeConfigFile(file1);
                 } else {
-                    boolean isDeleted = files[i].delete();
+                    boolean isDeleted = file1.delete();
                     if (!isDeleted) {
-                        LOGGER.error(
-                                "The file " + files[i].getPath()
-                                + " cannot be deleted");
+                        LOGGER.error("The file " + file1.getPath() + " cannot be deleted");
                     }
                 }
             }
@@ -426,7 +400,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
      * We have to close them "manually".
      */
     private void closeCrawlerLogFiles() {
-        List<FileHandler> loggerHandlerList = new ArrayList<FileHandler>();
+        List<FileHandler> loggerHandlerList = new ArrayList<>();
         for (Handler handler : crawlJob.getJobLogger().getHandlers()) {
             if (handler instanceof FileHandler) {
                 ((FileHandler) handler).close();

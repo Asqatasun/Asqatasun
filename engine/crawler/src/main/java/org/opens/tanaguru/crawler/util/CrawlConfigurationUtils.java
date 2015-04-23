@@ -21,9 +21,16 @@
  */
 package org.opens.tanaguru.crawler.util;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
+import org.archive.net.UURIFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
+import org.opens.tanaguru.util.http.HttpRequestHandler;
 import org.w3c.dom.Document;
 
 /**
@@ -32,8 +39,41 @@ import org.w3c.dom.Document;
  */
 public class CrawlConfigurationUtils {
 
-    Map<String, HeritrixConfigurationModifier> paramModifierMap;
+    Map<String, HeritrixConfigurationModifier> paramModifierMap = Collections.EMPTY_MAP;
+    /**
+     *
+     * @param paramModifierMap
+     */
+    public void setParameterModifierMap(Map<String, HeritrixConfigurationModifier> paramModifierMap) {
+        this.paramModifierMap = paramModifierMap;
+    }
+    
+    List<HeritrixConfigurationModifier> proxyModifierList = Collections.EMPTY_LIST;
+    /**
+     *
+     * @param proxyModifierList
+     */
+    public void setProxyModifierList(List<HeritrixConfigurationModifier> proxyModifierList) {
+        this.proxyModifierList = proxyModifierList;
+    }
+    
     HeritrixConfigurationModifier urlModifier;
+    /**
+     *
+     * @param urlModifier
+     */
+    public void setUrlModifier(HeritrixConfigurationModifier urlModifier) {
+        this.urlModifier = urlModifier;
+    }
+
+    /**
+     *
+     * @return the HeritrixConfigurationModifier used to specify the Url the
+     * audit is about.
+     */
+    public HeritrixConfigurationModifier getUrlModifier() {
+        return this.urlModifier;
+    }
 
     /**
      * The holder that handles the unique instance of CrawlConfigurationUtils
@@ -61,6 +101,38 @@ public class CrawlConfigurationUtils {
         return CrawlConfigurationUtilsHolder.INSTANCE;
     }
 
+    /**
+     * 
+     * @param document
+     * @param parameters
+     * @param urlList
+     * @return
+     * @throws URIException 
+     */
+    public Document setUpDocument(
+            Document document, 
+            Set<Parameter> parameters, 
+            Collection<String> urlList) throws URIException {
+        document = modifyValue(
+                getUrlModifier(), 
+                document, 
+                getUrlListAsUniqueString(urlList), 
+                "");
+        for (Parameter parameter : parameters) {
+            document = modifyHeritrixParameter(document, parameter, urlList.iterator().next());
+        }
+        if (HttpRequestHandler.getInstance().isProxySet(urlList.iterator().next())) {
+            for (HeritrixConfigurationModifier hcm : proxyModifierList) {
+                // to respect the hcm interface, the method is called with 3 parameters
+                // but the last 2 parameters are ignored (so set as empty strings). 
+                // The modifier is already set  with the proxy parameters set 
+                // by spring configuration on startup
+                document = hcm.modifyDocument(document, "", "");
+            }
+        }
+        return document;
+    }
+    
     /**
      *
      * @param document
@@ -93,27 +165,19 @@ public class CrawlConfigurationUtils {
     }
 
     /**
-     *
-     * @param paramModifierMap
+     * 
+     * @param urlList
+     * @return
+     * @throws URIException 
      */
-    public void setParameterModifierMap(Map<String, HeritrixConfigurationModifier> paramModifierMap) {
-        this.paramModifierMap = paramModifierMap;
+    private String getUrlListAsUniqueString(Collection<String> urlList) throws URIException {
+        StringBuilder urls = new StringBuilder();
+        for (String url : urlList) {
+            // first convert the URI in unicode
+            urls.append(UURIFactory.getInstance(url).getEscapedURI());
+            urls.append("\r");
+        }
+        return urls.toString();
     }
 
-    /**
-     *
-     * @param urlModifier
-     */
-    public void setUrlModifier(HeritrixConfigurationModifier urlModifier) {
-        this.urlModifier = urlModifier;
-    }
-
-    /**
-     *
-     * @return the HeritrixConfigurationModifier used to specify the Url the
-     * audit is about.
-     */
-    public HeritrixConfigurationModifier getUrlModifier() {
-        return this.urlModifier;
-    }
 }
