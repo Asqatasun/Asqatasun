@@ -41,16 +41,6 @@ public class TanaguruFetchHTTP extends FetchHTTP{
     public void setFrontier(TanaguruBdbFrontier frontier) {
         this.frontier = frontier;
     }
-    
-    @Override
-    public int getHttpProxyPort() {
-        return super.getHttpProxyPort();
-    }
-
-    @Override
-    public void setHttpProxyPort(int host) {
-        super.setHttpProxyPort(host);
-    }
 
     /**
      * 
