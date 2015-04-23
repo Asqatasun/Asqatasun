@@ -40,11 +40,6 @@ public class PageAuditCrawlerCommandImpl extends CrawlAuditCommandImpl {
     private static final Logger LOGGER = Logger.getLogger(PageAuditCrawlerCommandImpl.class);
     
     /**
-     * The url of the tested page
-     */
-    private String pageUrl;
-    
-    /**
      * 
      * @param pageUrl
      * @param paramSet
@@ -54,18 +49,21 @@ public class PageAuditCrawlerCommandImpl extends CrawlAuditCommandImpl {
                 String pageUrl,
                 Set<Parameter> paramSet,
                 AuditDataService auditDataService) {
-        
         super(paramSet, auditDataService);
-        
-        this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
+        setUrl(FileNaming.addProtocolToUrl(pageUrl));
     }
     
     @Override
     public void callCrawlerService() {
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Launching crawler for page " + pageUrl);
+            LOGGER.info("Launching crawler for page " + getUrl());
         }
-        getCrawlerService().crawlPage(getAudit(), pageUrl);
+        getCrawlerService().crawlPage(getAudit(), getUrl());
+    }
+
+    @Override
+    void createEmptyWebResource() {
+        createEmptyPageResource(getUrl());
     }
 
 }

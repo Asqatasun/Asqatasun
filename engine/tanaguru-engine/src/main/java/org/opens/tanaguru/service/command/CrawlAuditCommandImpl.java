@@ -29,6 +29,7 @@ import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.service.AuditServiceImpl;
 import org.opens.tanaguru.service.CrawlerService;
+import org.opens.tanaguru.util.http.HttpRequestHandler;
 
 /**
  *
@@ -52,6 +53,15 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
         this.crawlerService = crawlerService;
     }
     
+    private String url;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+    
     /**
      * 
      * @param paramSet
@@ -65,8 +75,14 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
     
     @Override
     public void init() {
-        super.init();
-        setStatusToAudit(AuditStatus.CRAWLING);
+        if (HttpRequestHandler.getInstance().isUrlAccessible(url)) {
+            super.init();
+            setStatusToAudit(AuditStatus.CRAWLING);
+        } else {
+            super.init();
+            createEmptyWebResource();
+            setStatusToAudit(AuditStatus.ERROR);
+        }
     }
     
     @Override
@@ -94,6 +110,12 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
     /**
      * Call the crawler service in an appropriate way regarding the audit type
      */
-    public abstract void callCrawlerService();
-
+    abstract void callCrawlerService();
+    
+    /**
+     * 
+     * @param url 
+     */
+    abstract void createEmptyWebResource();
+    
 }

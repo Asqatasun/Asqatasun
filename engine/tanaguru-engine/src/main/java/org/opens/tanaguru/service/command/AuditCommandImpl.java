@@ -790,4 +790,24 @@ public abstract class AuditCommandImpl implements AuditCommand {
         audit = auditDataService.saveOrUpdate(audit);
     }
  
+    /**
+     * Create a webResource of page type and associate it with the current audit
+     * @param url 
+     */
+    protected void createEmptyPageResource(String url) {
+        Page page = getWebResourceDataService().createPage(url);
+        getAudit().setSubject(page);
+        getWebResourceDataService().saveOrUpdate(page);
+    }
+    
+    /**
+     * Create a webResource of site type and associate it with the current audit
+     * @param url 
+     */
+    protected void createEmptySiteResource(String url) {
+        Site site = getWebResourceDataService().createSite(url);
+        getAudit().setSubject(site);
+        getWebResourceDataService().saveOrUpdate(site);
+    }
+
 }

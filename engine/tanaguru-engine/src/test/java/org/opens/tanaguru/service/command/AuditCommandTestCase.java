@@ -42,6 +42,7 @@ import org.opens.tanaguru.service.AnalyserService;
 import org.opens.tanaguru.service.ConsolidatorService;
 import org.opens.tanaguru.service.ContentAdapterService;
 import org.opens.tanaguru.service.ProcessorService;
+import org.opens.tanaguru.util.http.HttpRequestHandler;
 
 /**
  *
@@ -83,6 +84,7 @@ public abstract class AuditCommandTestCase extends TestCase{
         mockConsolidatorService = EasyMock.createMock(ConsolidatorService.class);
         mockAnalyserService = EasyMock.createMock(AnalyserService.class);
         mockAdaptationListener = EasyMock.createMock(AdaptationListener.class);
+        HttpRequestHandler.getInstance().setBypassCheck(Boolean.TRUE.toString());
     }
     
     /**
@@ -123,7 +125,6 @@ public abstract class AuditCommandTestCase extends TestCase{
     
     /**
      * 
-     * @param isMockInReplayMode 
      */
     protected void mockConstructorCalls() {
         mockAudit = EasyMock.createMock(Audit.class);

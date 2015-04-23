@@ -34,8 +34,8 @@ import org.opens.tanaguru.service.CrawlerService;
  */
 public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCase {
 
-    private String siteUrl = "My Group of Pages site Name";
-    private List<String> urlList = new ArrayList<String>();
+    private final String siteUrl = "My Group of Pages site Name";
+    private final List<String> urlList = new ArrayList<>();
     private CrawlerService mockCrawlerService;
 
     public GroupOfPagesCrawlerAuditCommandImplTest(String testName) {
