@@ -102,84 +102,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
     public final void setExposablePropertyPlaceholderConfigurer(ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer) {
         this.exposablePropertyPlaceholderConfigurer = exposablePropertyPlaceholderConfigurer;
     }
-    private String httpProxyHost;
 
-    /**
-     * Direct call to the property place holder configurer due to exposition
-     * context
-     *
-     * @return
-     */
-    public String getHttpProxyHost() {
-        if (httpProxyHost == null) {
-            httpProxyHost = exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.PROXY_HOST_CONF_KEY);
-        }
-        return httpProxyHost;
-    }
-    private String httpProxyPort;
-
-    /**
-     * Direct call to the property place holder configurer due to exposition
-     * context
-     *
-     * @return
-     */
-    public String getHttpProxyPort() {
-        if (httpProxyPort == null) {
-            httpProxyPort = exposablePropertyPlaceholderConfigurer.
-                    getResolvedProps().get(TgolKeyStore.PROXY_PORT_CONF_KEY);
-        }
-        return httpProxyPort;
-    }
-    private String httpProxyUser;
-
-    /**
-     * Direct call to the property place holder configurer due to exposition
-     * context
-     *
-     * @return
-     */
-    public String getHttpProxyUser() {
-        if (httpProxyUser == null) {
-            httpProxyUser = exposablePropertyPlaceholderConfigurer.
-                    getResolvedProps().get(TgolKeyStore.PROXY_USER_CONF_KEY);
-        }
-        return httpProxyUser;
-    }
-    private String httpProxyPassword;
-
-    /**
-     * Direct call to the property place holder configurer due to exposition
-     * context
-     *
-     * @return
-     */
-    public String getHttpProxyPassword() {
-        if (httpProxyPassword == null) {
-            httpProxyPassword = exposablePropertyPlaceholderConfigurer.
-                    getResolvedProps().get(TgolKeyStore.PROXY_PASSWORD_CONF_KEY);
-        }
-        return httpProxyPassword;
-    }
-    /**
-     * Multiple Url can be set through a unique String separated by ;
-     */
-    private List<String> proxyExclusionUrlList;
-
-    /**
-     * Direct call to the property place holder configurer due to exposition
-     * context
-     *
-     * @return
-     */
-    public List<String> getProxyExclusionUrlList() {
-        if (proxyExclusionUrlList == null) {
-            String rawList = exposablePropertyPlaceholderConfigurer.
-                    getResolvedProps().get(TgolKeyStore.PROXY_EXCLUSION_URL_CONF_KEY);
-            proxyExclusionUrlList=Arrays.asList(rawList.split(";"));
-        }
-        return proxyExclusionUrlList;
-    }
     /**
      *
      */
@@ -491,7 +414,6 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
             }
             paramSet = getParameterDataService().updateParameterSet(paramSet, userParamSet);
         }
-        paramSet = setProxyParameters(paramSet, url);
         return (auditSetUpCommand.getLevel() != null )? setUserParameters(paramSet, auditSetUpCommand.getLevel().split(";")[0]) : paramSet;
     }
 
@@ -504,100 +426,6 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
     private Set<Parameter> setLevelParameter(Set<Parameter> paramSet, String level) {
         Parameter levelParameter = getParameterDataService().getLevelParameter(level);
         paramSet = getParameterDataService().updateParameter(paramSet, levelParameter);
-        return paramSet;
-    }
-
-    /**
-     *
-     * @param paramSet
-     * @param url
-     */
-    private Set<Parameter> setProxyParameters(Set<Parameter> paramSet, String url) {
-        if ((StringUtils.isEmpty(getHttpProxyHost()) && StringUtils.isEmpty(getHttpProxyPort()))) {
-            return paramSet;
-        }
-        for (String urlExclusion : getProxyExclusionUrlList()) {
-            if (StringUtils.isNotEmpty(urlExclusion) && url.contains(urlExclusion)) {
-                return paramSet;
-            }
-        }
-        if (StringUtils.isEmpty(url)) {
-            return paramSet;
-        }
-        try {
-            Integer.valueOf(getHttpProxyPort());
-        } catch (NumberFormatException nfe) {
-            LOGGER.warn("Incorrect value of proxy Port : " + getHttpProxyPort() + ". Proxy parameters are ignored");
-            return paramSet;
-        }
-        Set<Parameter> proxyParamSet = new HashSet();
-        ParameterElement proxyHostParameterElement =
-                parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_HOST_PARAM_KEY);
-        ParameterElement proxyPortParameterElement =
-                parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_PORT_PARAM_KEY);
-        Parameter proxyHostParameter = getParameterDataService()
-                .getParameter(proxyHostParameterElement, getHttpProxyHost());
-        Parameter proxyPortParameter = getParameterDataService()
-                .getParameter(proxyPortParameterElement, getHttpProxyPort());
-        proxyParamSet.add(proxyHostParameter);
-        proxyParamSet.add(proxyPortParameter);
-        
-        if ((StringUtils.isNotEmpty(getHttpProxyUser()) && StringUtils.isNotEmpty(getHttpProxyPassword()))) {
-            ParameterElement proxyUserParameterElement =
-                parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_USER_PARAM_KEY);
-            ParameterElement proxyPasswordParameterElement =
-                    parameterElementDataService.getParameterElement(TgolKeyStore.PROXY_PASSWORD_PARAM_KEY);
-            Parameter proxyUserParameter = getParameterDataService()
-                    .getParameter(proxyUserParameterElement, getHttpProxyUser());
-            Parameter proxyPasswordParameter = getParameterDataService()
-                    .getParameter(proxyPasswordParameterElement, getHttpProxyPassword());
-            proxyParamSet.add(proxyUserParameter);
-            proxyParamSet.add(proxyPasswordParameter);
-        }
-        
-        LOGGER.debug("paramSet.size() " + paramSet.size());
-        LOGGER.debug("proxyParamSet " + proxyParamSet.size());
-        if (LOGGER.isDebugEnabled()) {
-            for (Parameter param : paramSet) {
-                switch (param.getParameterElement().getParameterElementCode()) {
-                    case TgolKeyStore.PROXY_HOST_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                    case TgolKeyStore.PROXY_PORT_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                    case TgolKeyStore.PROXY_PASSWORD_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                    case TgolKeyStore.PROXY_USER_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                }
-            }
-        }
-        paramSet = getParameterDataService().updateParameterSet(paramSet, proxyParamSet);
-        LOGGER.debug("after update paramSet.size() " + paramSet.size());
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Audit is set to use proxy with parameters " + getHttpProxyHost() + " : " + getHttpProxyPort());
-        }
-        if (LOGGER.isDebugEnabled()) {
-            for (Parameter param : paramSet) {
-                switch (param.getParameterElement().getParameterElementCode()) {
-                    case TgolKeyStore.PROXY_HOST_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                    case TgolKeyStore.PROXY_PORT_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                    case TgolKeyStore.PROXY_USER_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                    case TgolKeyStore.PROXY_PASSWORD_PARAM_KEY:
-                        LOGGER.debug(param.getValue());
-                        break;
-                }
-            }
-        }
         return paramSet;
     }
 
