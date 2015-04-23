@@ -26,7 +26,6 @@ import java.util.Set;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
-import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.sebuilder.tools.ScenarioBuilder;
 import org.opens.tanaguru.util.FileNaming;
 import org.opens.tanaguru.util.http.HttpRequestHandler;
@@ -37,7 +36,7 @@ import org.opens.tanaguru.util.http.HttpRequestHandler;
  */
 public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
 
-    private String pageUrl;
+    private final String pageUrl;
     
     /**
      * 
@@ -62,15 +61,9 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
             super.init();
         } else {
             super.init();
-            createEmptyWebResource(pageUrl);
+            createEmptyPageResource(pageUrl);
             setStatusToAudit(AuditStatus.ERROR);
         }
     }
-    
-    private void createEmptyWebResource(String url) {
-        Page page = getWebResourceDataService().createPage(pageUrl);
-        getAudit().setSubject(page);
-        getWebResourceDataService().saveOrUpdate(page);
-    }
-
+ 
 }

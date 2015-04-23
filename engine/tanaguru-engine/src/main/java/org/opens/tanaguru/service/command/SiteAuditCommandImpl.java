@@ -31,17 +31,12 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
  *
  * @author jkowalczyk
  */
-public class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
+public final class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
 
      /**
      * Logger
      */
     private static final Logger LOGGER = Logger.getLogger(SiteAuditCommandImpl.class);
-    
-    /**
-     * The url of the tested site
-     */
-    private String siteUrl;
     
     /**
      * 
@@ -54,16 +49,20 @@ public class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
             Set<Parameter> paramSet,
             AuditDataService auditDataService) {
         super(paramSet, auditDataService);
-        
-        this.siteUrl = siteUrl;
+        setUrl(siteUrl);
     }
     
     @Override
     public void callCrawlerService() {
         if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Launching crawler for page " + siteUrl);
+            LOGGER.info("Launching crawler for page " + getUrl());
         }
-        getCrawlerService().crawlSite(getAudit(), siteUrl);
+        getCrawlerService().crawlSite(getAudit(), getUrl());
+    }
+
+    @Override
+    void createEmptyWebResource() {
+        createEmptySiteResource(getUrl());
     }
 
 }

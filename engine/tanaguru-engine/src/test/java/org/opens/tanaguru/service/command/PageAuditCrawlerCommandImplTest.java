@@ -33,7 +33,7 @@ import org.opens.tanaguru.util.FileNaming;
  */
 public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
     
-    private String pageUrl = "My page";
+    private final String pageUrl = "My page";
     private CrawlerService mockCrawlerService;
     
     public PageAuditCrawlerCommandImplTest(String testName) {
@@ -65,11 +65,11 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
                 .once();
         
         setReplayMode();
-        
+
         PageAuditCrawlerCommandImpl pageAuditCommand = getInstance();
 
         pageAuditCommand.callCrawlerService();
-        
+
         setVerifyMode();
     }
     
@@ -78,7 +78,7 @@ public class PageAuditCrawlerCommandImplTest extends AuditCommandTestCase {
      * @return an instance of PageAuditCrawlerCommandImpl class
      */
     private PageAuditCrawlerCommandImpl getInstance() {
-         PageAuditCrawlerCommandImpl pageAuditCommand = new PageAuditCrawlerCommandImpl(
+        PageAuditCrawlerCommandImpl pageAuditCommand = new PageAuditCrawlerCommandImpl(
                 pageUrl, 
                 null,
                 mockAuditDataService);

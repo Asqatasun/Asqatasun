@@ -75,7 +75,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     @Override
     public void add(AuditServiceListener listener) {
         if (listeners == null) {
-            listeners = new HashSet<AuditServiceListener>();
+            listeners = new HashSet<>();
         }
         listeners.add(listener);
     }

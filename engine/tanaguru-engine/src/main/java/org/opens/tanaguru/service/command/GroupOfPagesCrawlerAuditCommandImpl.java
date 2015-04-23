@@ -36,14 +36,9 @@ import org.opens.tanaguru.util.FileNaming;
 public class GroupOfPagesCrawlerAuditCommandImpl extends CrawlAuditCommandImpl {
     
     /**
-     * The URL that identifies the list of pages to test
-     */
-    private String siteUrl;
-    
-    /**
      * The list of URLs to test
      */
-    private List<String> pageUrlList = new ArrayList<String>();
+    private final List<String> pageUrlList = new ArrayList<>();
     
     /**
      * 
@@ -60,7 +55,7 @@ public class GroupOfPagesCrawlerAuditCommandImpl extends CrawlAuditCommandImpl {
         
         super(paramSet, auditDataService);
 
-        this.siteUrl = siteUrl;
+        setUrl(siteUrl);
         for (String url : pageUrlList) {
             this.pageUrlList.add(FileNaming.addProtocolToUrl(url));
         }
@@ -68,7 +63,12 @@ public class GroupOfPagesCrawlerAuditCommandImpl extends CrawlAuditCommandImpl {
     
     @Override
     public void callCrawlerService() {
-        getCrawlerService().crawlGroupOfPages(getAudit(), siteUrl, pageUrlList);
+        getCrawlerService().crawlGroupOfPages(getAudit(), getUrl(), pageUrlList);
+    }
+
+    @Override
+    void createEmptyWebResource() {
+        createEmptySiteResource(getUrl());
     }
 
 }

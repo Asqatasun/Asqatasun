@@ -157,6 +157,9 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
             System.out.println("The abstract callCrawlerService is called");
             assertTrue(true);
         }
+
+        @Override
+        void createEmptyWebResource() {}
     }
 
 }
