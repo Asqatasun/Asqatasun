@@ -18,7 +18,7 @@
     <c:url value="/External-Js/r2d3.v2.min.js"/>
 </c:set> 
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/External-Js/jquery.tablesort er.min.js"/>
+    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
 </c:set> 
 
 <!-- internal js -->
