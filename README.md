@@ -50,12 +50,12 @@ What tests are covered:
 * switch of context
 * ...
 
-By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
+As of January 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
 
 ## Contact and discussions
 
 * [Tanaguru discussion space](http://discuss.tanaguru.org) 
-* email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
+* email to `tanaguru AT tanaguru dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
 ## Content of this last version (Tanaguru 3.0.5, 2015-03-16)
@@ -68,13 +68,13 @@ Bugs:
 
 Features : 
 
-- UI improvments
+- UI improvements
 - Correction of bug on buttons that apply automatic result on assisted audit 
 - User guide documentation 
 
 See full [Changelog](CHANGELOG.txt)
 
-## Other opensource tools
+## Other Open Source tools
 
 * [KBAccess](http://www.kbaccess.org/) : database of good and bad examples of web accessibility
 * [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
