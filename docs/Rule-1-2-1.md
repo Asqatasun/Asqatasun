@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in checking whether the alt attribute of each decorative image (`<img>` tag) is empty.
 
 ## Business description
 
@@ -40,19 +40,19 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Selection
 
-### Process
+#### Set1
+
+All the `<img>` tags of the page with an `"alt"` attribute and a `"src"` attribute but not within a `<a>` tag (in this case, the image would be considered as a link)
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
 #### Not Applicable
+
+The page has no `<img>` tag with a "alt" attribute (Set1 is empty)
 
 #### Pre-qualified
 
-#### No Tested 
+The selection is not empty
 
 
 
