@@ -44,7 +44,7 @@ All the `<img>` tags with a `"ismap"` attribute
 
 #### Not Applicable
 
-The page has no <img> tag with a `"ismap"` attribute (Set1 is empty)
+The page has no `<img>` tag with a `"ismap"` attribute (Set1 is empty)
 
 #### Pre-qualified
 
