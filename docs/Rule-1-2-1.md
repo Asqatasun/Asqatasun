@@ -34,7 +34,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
