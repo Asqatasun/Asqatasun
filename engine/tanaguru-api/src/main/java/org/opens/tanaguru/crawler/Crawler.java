@@ -68,12 +68,6 @@ public interface Crawler extends Parametrable {
 
     /**
      *
-     * @param contentFactory
-     */
-    void setContentFactory(ContentFactory contentFactory);
-
-    /**
-     *
      * @param contentDataService
      */
     void setContentDataService(ContentDataService contentDataService);

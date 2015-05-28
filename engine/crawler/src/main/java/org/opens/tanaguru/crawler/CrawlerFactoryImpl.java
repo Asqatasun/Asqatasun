@@ -22,7 +22,6 @@
 package org.opens.tanaguru.crawler;
 
 import java.util.Set;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -40,12 +39,6 @@ public class CrawlerFactoryImpl implements CrawlerFactory {
         this.contentDataService = contentDataService;
     }
 
-    private ContentFactory contentFactory;
-    @Autowired
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
-    }
-    
     private WebResourceDataService webResourceDataService;
     @Autowired
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
@@ -75,7 +68,6 @@ public class CrawlerFactoryImpl implements CrawlerFactory {
     public Crawler create(Set<Parameter> paramSet, boolean persistOnTheFly) {
         Crawler crawler = new CrawlerImpl();
         crawler.setWebResourceDataService(webResourceDataService);
-        crawler.setContentFactory(contentFactory);
         crawler.setContentDataService(contentDataService);
         crawler.setOutputDir(outputDir);
         crawler.setParameterSet(paramSet);
