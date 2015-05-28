@@ -138,6 +138,12 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
             NomenclatureLoaderService nomenclatureLoaderService) {
         this.nomenclatureLoaderService = nomenclatureLoaderService;
     }
+    
+    @Override
+    public void setProcessResultDataService(
+            ProcessResultDataService processResultDataService) {
+        this.processResultDataService = processResultDataService;
+    }
 
     @Override
     public void setTest(Test test) {
