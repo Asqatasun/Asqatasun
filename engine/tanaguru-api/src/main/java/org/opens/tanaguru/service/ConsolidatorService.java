@@ -25,11 +25,10 @@ import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.consolidator.ConsolidatorFactory;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.entity.service.audit.EvidenceElementDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 
 /**
  * 
@@ -61,21 +60,15 @@ public interface ConsolidatorService {// TODO Write javadoc
 
     /**
      *
-     * @param evidenceElementFactory
+     * @param evidenceElementDataService
      */
-    void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory);
+    void setEvidenceElementDataService(EvidenceElementDataService evidenceElementDataService);
 
     /**
      *
-     * @param processRemarkFactory
+     * @param processRemarkDataService
      */
-    void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory);
-
-    /**
-     *
-     * @param sourceCodeRemarkFactory
-     */
-    void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory);
+    void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService);
 
     /**
      * 
