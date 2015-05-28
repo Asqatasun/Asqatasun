@@ -44,8 +44,6 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
 import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
@@ -124,19 +122,9 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         this.contentDataService = contentDataService;
     }
     
-    private ContentFactory contentFactory;
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
-    }
-    
     private PreProcessResultDataService preProcessResultDataService;
     public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
         this.preProcessResultDataService = preProcessResultDataService;
-    }
-    
-    private PreProcessResultFactory preProcessResultFactory;
-    public void setPreProcessResultFactory(PreProcessResultFactory preProcessResultFactory) {
-        this.preProcessResultFactory = preProcessResultFactory;
     }
     
     private DateFactory dateFactory;
@@ -258,7 +246,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             Logger.getLogger(this.getClass()).warn(ex);
         }
         Page page = getWebResource(url);
-        SSP ssp = contentFactory.createSSP(
+        SSP ssp = contentDataService.getSSP(
                 dateFactory.createDate(),
                 url,
                 sourceCode,
@@ -282,7 +270,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
             audit = page.getParent().getAudit();
         }
         for (Map.Entry<String, String> entry : jsScriptMap.entrySet()) {
-            PreProcessResult ppr = preProcessResultFactory.create(
+            PreProcessResult ppr = preProcessResultDataService.getPreProcessResult(
                     entry.getKey(), 
                     entry.getValue(),
                     audit, 
