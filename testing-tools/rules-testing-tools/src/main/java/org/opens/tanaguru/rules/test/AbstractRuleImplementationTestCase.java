@@ -599,6 +599,15 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     }
     
     /**
+     * Check whether the result of a ProcessResult is Not Applicable
+     * 
+     * @param processResult
+     */
+    protected void checkResultIsNotTested(ProcessResult processResult) {
+        checkResult(processResult, TestSolution.NOT_TESTED, 0, 0);
+    }
+    
+    /**
      * Check whether the result of a ProcessResult is Failed
      * 
      * @param processResult

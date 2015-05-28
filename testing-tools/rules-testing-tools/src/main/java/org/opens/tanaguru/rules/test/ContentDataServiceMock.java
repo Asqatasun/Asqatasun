@@ -242,7 +242,7 @@ public class ContentDataServiceMock implements ContentDataService{
 
     @Override
     public SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Page page, int httpStatusCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new SSPImpl(dateOfLoading, uri, sourceCode, page, httpStatusCode);
     }
 
     @Override
@@ -262,7 +262,7 @@ public class ContentDataServiceMock implements ContentDataService{
 
     @Override
     public StylesheetContent getStylesheetContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode, int httpStatusCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new StylesheetContentImpl(dateOfLoading, uri, ssp, sourceCode, httpStatusCode);
     }
 
     @Override

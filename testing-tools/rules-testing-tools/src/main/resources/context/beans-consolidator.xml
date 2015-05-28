@@ -5,15 +5,6 @@
 
     <bean id="consolidatorFactory" class="org.opens.tanaguru.consolidator.ConsolidatorFactoryImpl"/>
     
-    <bean id="consolidatorService" class="org.opens.tanaguru.service.ConsolidatorServiceImpl">
-        <property name="ruleImplementationLoaderService" ref="ruleImplementationLoaderService"/>
-
-        <property name="processRemarkFactory" ref="processRemarkFactory"/>
-        <property name="sourceCodeRemarkFactory" ref="sourceCodeRemarkFactory"/>
-        <property name="evidenceDataService" ref="evidenceDataService"/>
-        <property name="evidenceElementFactory" ref="evidenceElementFactory"/>
-
-        <property name="consolidatorFactory" ref="consolidatorFactory"/>
-    </bean>
+    <bean id="consolidatorService" class="org.opens.tanaguru.service.ConsolidatorServiceImpl"/>
 
 </beans>

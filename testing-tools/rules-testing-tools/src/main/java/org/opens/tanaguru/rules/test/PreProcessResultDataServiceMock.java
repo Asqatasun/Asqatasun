@@ -136,5 +136,10 @@ public class PreProcessResultDataServiceMock implements PreProcessResultDataServ
     public Collection<PreProcessResult> getPreProcessResultFromAudit(Audit audit) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public PreProcessResult getPreProcessResult(String key, String value, Audit audit, WebResource webResource) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

@@ -25,6 +25,7 @@ package org.opens.tanaguru.rules.test;
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
@@ -109,6 +110,26 @@ public class ProcessRemarkDataServiceMock implements ProcessRemarkDataService{
     @Override
     public ProcessRemark update(ProcessRemark entity) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ProcessRemark getProcessRemark(TestSolution issue, String messageCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SourceCodeRemark getSourceCodeRemark() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SourceCodeRemark getSourceCodeRemark(TestSolution issue, String messageCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SourceCodeRemark getSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
