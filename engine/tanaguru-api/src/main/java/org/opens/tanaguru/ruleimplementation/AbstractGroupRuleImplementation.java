@@ -50,6 +50,7 @@ public abstract class AbstractGroupRuleImplementation extends AbstractRuleImplem
      *            the group of the gross result list ton consolidate.
      * @param groupedGrossResultSet
      *            the gross result list to consolidate concerning the group.
+     * @param processRemarkService
      * @return the net result of the group from the gross result list
      */
     protected DefiniteResult consolidateGroup(Site group,
@@ -79,14 +80,14 @@ public abstract class AbstractGroupRuleImplementation extends AbstractRuleImplem
     protected List<ProcessResult> consolidateImpl(
             Map<WebResource, List<ProcessResult>> grossResultMap, 
             ProcessRemarkService processRemarkService) {
-        List<ProcessResult> netResultList = new ArrayList<ProcessResult>();
+        List<ProcessResult> netResultList = new ArrayList<>();
 
         for (Map.Entry<WebResource, List<ProcessResult>> entry : grossResultMap.entrySet()) {
             WebResource key = entry.getKey();
             List<ProcessResult> grossResultList = entry.getValue();
 
             if (entry.getKey() instanceof Page) {
-                DefiniteResult netResult = definiteResultFactory.create(test,
+                DefiniteResult netResult = processResultDataService.getDefiniteResult(test,
                         key);
                 netResult.setDefiniteValue(TestSolution.NOT_APPLICABLE);
                 for (ProcessResult grossResult : grossResultList) {
