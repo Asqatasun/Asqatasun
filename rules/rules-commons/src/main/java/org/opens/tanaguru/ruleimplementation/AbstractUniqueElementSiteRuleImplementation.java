@@ -108,7 +108,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                     remarks);
         }
         IndefiniteResult result = 
-                    indefiniteResultFactory.create(
+                    processResultDataService.getIndefiniteResult(
                         test,
                         sspHandler.getPage(), 
                         text, 
@@ -158,7 +158,7 @@ public class AbstractUniqueElementSiteRuleImplementation
                     }
                 } else {
                     netResultList.add(
-                        definiteResultFactory.create(
+                        processResultDataService.getDefiniteResult(
                             test, 
                             grossResult.getSubject(),
                             TestSolution.NOT_APPLICABLE, 
@@ -201,7 +201,7 @@ public class AbstractUniqueElementSiteRuleImplementation
         }
 
         netResultList.add(
-                definiteResultFactory.create(
+                processResultDataService.getDefiniteResult(
                     test, 
                     group,
                     testSolution, 
@@ -303,7 +303,7 @@ public class AbstractUniqueElementSiteRuleImplementation
             Collection<ProcessRemark> processRemarkList) {
         
         DefiniteResult result = 
-                definiteResultFactory.create(
+                processResultDataService.getDefiniteResult(
                         test, 
                         wr,
                         testSolution, 
