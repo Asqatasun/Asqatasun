@@ -27,11 +27,10 @@ import java.util.List;
 import org.opens.tanaguru.consolidator.Consolidator;
 import org.opens.tanaguru.consolidator.ConsolidatorFactory;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.entity.service.audit.EvidenceElementDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.processing.ProcessRemarkServiceFactory;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 
@@ -42,9 +41,8 @@ import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 public class ConsolidatorServiceImpl implements ConsolidatorService {
 
     protected RuleImplementationLoaderService ruleImplementationLoaderService;
-    private ProcessRemarkFactory processRemarkFactory;
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    private EvidenceElementFactory evidenceElementFactory;
+    private ProcessRemarkDataService processRemarkDataService;
+    private EvidenceElementDataService evidenceElementDataService;
     private EvidenceDataService evidenceDataService;
     private ConsolidatorFactory consolidatorFactory;
 
@@ -55,7 +53,7 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
     @Override
     public Collection<ProcessResult> consolidate(Collection<ProcessResult> grossResultList,
             Collection<Test> testList) {
-        List<ProcessResult> resultList = new ArrayList<ProcessResult>();
+        List<ProcessResult> resultList = new ArrayList<>();
         for (Test test : testList) {
             // if the rule archive name is empty, the test is not launched
             if (!test.getNoProcess()) {
@@ -64,9 +62,8 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
                         grossResultList, 
                         ruleImplementation, 
                         ProcessRemarkServiceFactory.create(
-                            processRemarkFactory, 
-                            sourceCodeRemarkFactory, 
-                            evidenceElementFactory, 
+                            processRemarkDataService, 
+                            evidenceElementDataService, 
                             evidenceDataService));
                 consolidator.run();
                 resultList.addAll(consolidator.getResult());
@@ -86,18 +83,13 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
     }
 
     @Override
-    public void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory) {
-        this.evidenceElementFactory = evidenceElementFactory;
+    public void setEvidenceElementDataService(EvidenceElementDataService evidenceElementDataService) {
+        this.evidenceElementDataService = evidenceElementDataService;
     }
 
     @Override
-    public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    @Override
-    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+    public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
+        this.processRemarkDataService = processRemarkDataService;
     }
 
     @Override
