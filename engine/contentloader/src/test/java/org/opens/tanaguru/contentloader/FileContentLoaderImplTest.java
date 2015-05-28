@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 import org.apache.http.HttpStatus;
 import org.easymock.EasyMock;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.subject.*;
 import org.opens.tanaguru.util.factory.DateFactory;
 
@@ -73,7 +73,7 @@ public class FileContentLoaderImplTest extends TestCase {
         Page mockPage = EasyMock.createMock(Page.class);
         EasyMock.expect(mockPage.getURL()).andReturn("http://my.testUrl.org").times(2);
         
-        ContentFactory mockContentFactory = EasyMock.createMock(ContentFactory.class);
+        ContentDataService mockContentDataService = EasyMock.createMock(ContentDataService.class);
         SSP mockSSP = EasyMock.createMock(SSP.class);
         
         Date date = new Date();
@@ -82,7 +82,7 @@ public class FileContentLoaderImplTest extends TestCase {
                 .andReturn(date)
                 .once();
         
-        EasyMock.expect(mockContentFactory.createSSP(
+        EasyMock.expect(mockContentDataService.getSSP(
                 date, 
                 "http://my.testUrl.org", 
                 "My Page Content", 
@@ -94,11 +94,11 @@ public class FileContentLoaderImplTest extends TestCase {
         
         EasyMock.replay(mockPage);
         EasyMock.replay(mockSSP);
-        EasyMock.replay(mockContentFactory);
+        EasyMock.replay(mockContentDataService);
         EasyMock.replay(mockDateFactory);
         
         FileContentLoaderImpl instance = new FileContentLoaderImpl(
-                mockContentFactory, 
+                mockContentDataService, 
                 fileMap, 
                 mockDateFactory);
         instance.setWebResource(mockPage);
@@ -108,7 +108,7 @@ public class FileContentLoaderImplTest extends TestCase {
         
         EasyMock.verify(mockPage);
         EasyMock.verify(mockSSP);
-        EasyMock.verify(mockContentFactory);
+        EasyMock.verify(mockContentDataService);
         EasyMock.verify(mockDateFactory);
     }
     
@@ -127,7 +127,7 @@ public class FileContentLoaderImplTest extends TestCase {
         mockSite.addChild(mockPage1);
         mockSite.addChild(mockPage2);
         
-        ContentFactory mockContentFactory = EasyMock.createMock(ContentFactory.class);
+        ContentDataService mockContentDataService = EasyMock.createMock(ContentDataService.class);
         SSP mockSSP = EasyMock.createMock(SSP.class);
         
         Date date = new Date();
@@ -136,7 +136,7 @@ public class FileContentLoaderImplTest extends TestCase {
                 .andReturn(date)
                 .times(2);
         
-        EasyMock.expect(mockContentFactory.createSSP(
+        EasyMock.expect(mockContentDataService.getSSP(
                 date, 
                 "http://my.testUrl1.org", 
                 "My Page Content 1", 
@@ -145,7 +145,7 @@ public class FileContentLoaderImplTest extends TestCase {
                     .andReturn(mockSSP)
                     .once();
         
-        EasyMock.expect(mockContentFactory.createSSP(
+        EasyMock.expect(mockContentDataService.getSSP(
                 date, 
                 "http://my.testUrl2.org", 
                 "My Page Content 2", 
@@ -159,11 +159,11 @@ public class FileContentLoaderImplTest extends TestCase {
         fileMap.put("http://my.testUrl2.org", "My Page Content 2");
         
         EasyMock.replay(mockSSP);
-        EasyMock.replay(mockContentFactory);
+        EasyMock.replay(mockContentDataService);
         EasyMock.replay(mockDateFactory);
         
         FileContentLoaderImpl instance = new FileContentLoaderImpl(
-                mockContentFactory, 
+                mockContentDataService, 
                 fileMap, 
                 mockDateFactory);
         instance.setWebResource(mockSite);
@@ -172,7 +172,7 @@ public class FileContentLoaderImplTest extends TestCase {
         assertTrue(instance.getResult().contains(mockSSP));
         
         EasyMock.verify(mockSSP);
-        EasyMock.verify(mockContentFactory);
+        EasyMock.verify(mockContentDataService);
         EasyMock.verify(mockDateFactory);
     }
 

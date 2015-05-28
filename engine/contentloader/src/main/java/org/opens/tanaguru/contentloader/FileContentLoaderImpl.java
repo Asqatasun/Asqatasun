@@ -23,13 +23,13 @@ package org.opens.tanaguru.contentloader;
 
 import java.util.ArrayList;
 import java.util.Map;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
 import java.util.List;
 import org.apache.http.HttpStatus;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.util.FileNaming;
 import org.opens.tanaguru.util.factory.DateFactory;
 
@@ -42,7 +42,7 @@ public class FileContentLoaderImpl implements ContentLoader {
     /**
      * THe content factory instance needed to create the SSP
      */
-    private final ContentFactory contentFactory;
+    private final ContentDataService contentDataService;
     
     /**
      * The fileMap to work on
@@ -72,16 +72,16 @@ public class FileContentLoaderImpl implements ContentLoader {
     /**
      * Constructor
      * 
-     * @param contentFactory
+     * @param contentDataService
      * @param fileMap
      * @param contentDataService
      */
     FileContentLoaderImpl(
-            ContentFactory contentFactory,
+            ContentDataService contentDataService,
             Map<String, String> fileMap, 
             DateFactory dateFactory) {
         super();
-        this.contentFactory = contentFactory;
+        this.contentDataService = contentDataService;
         this.fileMap = fileMap;
         this.dateFactory = dateFactory;
     }
@@ -104,7 +104,7 @@ public class FileContentLoaderImpl implements ContentLoader {
     private List<Content> run(WebResource webResource) {
         List<Content> localResult = new ArrayList<>();
         if (webResource instanceof Page) {
-            Content content = contentFactory.createSSP(
+            Content content = contentDataService.getSSP(
                     dateFactory.createDate(),
                     webResource.getURL(),
                     fileMap.get(FileNaming.removeFilePrefix(webResource.getURL())),

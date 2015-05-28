@@ -23,7 +23,7 @@ package org.opens.tanaguru.contentloader;
 
 import java.util.Map;
 import junit.framework.TestCase;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.util.factory.DateFactory;
 
 /**
@@ -52,7 +52,7 @@ public class FileContentLoaderFactoryImplTest extends TestCase {
     public void testCreate() {
         System.out.println("create");
         
-        ContentFactory contentFactory = null;
+        ContentDataService contentDataService = null;
         Downloader downloader = null;
         Map<String, String> fileMap = null;
         DateFactory dateFactory = null;
@@ -60,7 +60,7 @@ public class FileContentLoaderFactoryImplTest extends TestCase {
         FileContentLoaderFactoryImpl instance = new FileContentLoaderFactoryImpl();
         
         ContentLoader contentLoader = instance.create(
-                contentFactory, 
+                contentDataService, 
                 downloader, 
                 dateFactory,
                 fileMap);

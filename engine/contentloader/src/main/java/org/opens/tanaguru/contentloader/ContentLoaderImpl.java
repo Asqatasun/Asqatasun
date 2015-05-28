@@ -24,7 +24,7 @@ package org.opens.tanaguru.contentloader;
 import java.util.ArrayList;
 import java.util.List;
 import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
@@ -37,9 +37,9 @@ import org.opens.tanaguru.util.factory.DateFactory;
 public class ContentLoaderImpl implements ContentLoader {
 
     private static final int HTTP_CODE_OK = 200;
-    private ContentFactory contentFactory;
-    private DateFactory dateFactory;
-    private Downloader downloader;
+    private final ContentDataService contentDataService;
+    private final DateFactory dateFactory;
+    private final Downloader downloader;
     private List<Content> result;
     private WebResource webResource;
     @Override
@@ -50,16 +50,16 @@ public class ContentLoaderImpl implements ContentLoader {
     /**
      * Constructor
      * 
-     * @param contentFactory
+     * @param contentDataService
      * @param downloader
      * @param dateFactory 
      */
     ContentLoaderImpl(
-            ContentFactory contentFactory, 
+            ContentDataService contentDataService, 
             Downloader downloader, 
             DateFactory dateFactory) {
         super();
-        this.contentFactory = contentFactory;
+        this.contentDataService = contentDataService;
         this.downloader = downloader;
         this.dateFactory = dateFactory;
     }
@@ -75,13 +75,13 @@ public class ContentLoaderImpl implements ContentLoader {
     }
 
     private List<Content> run(WebResource webResource) {// TODO Handle exceptions like 404, 403, 500, ...
-        List<Content> localResult = new ArrayList<Content>();
+        List<Content> localResult = new ArrayList<>();
 
         if (webResource instanceof Page) {
             downloader.setURL(webResource.getURL());
             downloader.run();
             String stringContent = downloader.getResult();
-            Content content = contentFactory.createSSP(
+            Content content = contentDataService.getSSP(
                     dateFactory.createDate(),
                     webResource.getURL(),
                     stringContent,
