@@ -24,11 +24,8 @@ package org.opens.tanaguru.scenarioloader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
@@ -36,8 +33,6 @@ import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 /**
  *
@@ -95,16 +90,6 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         this.contentDataService = contentDataService;
     }
     
-    private ContentFactory contentFactory;
-    public ContentFactory getContentFactory() {
-        return contentFactory;
-    }
-
-    @Autowired
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
-    }
-    
     private PreProcessResultDataService preProcessResultDataService;
     public PreProcessResultDataService getPreProcessResultDataService() {
         return preProcessResultDataService;
@@ -113,16 +98,6 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
     @Autowired
     public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
         this.preProcessResultDataService = preProcessResultDataService;
-    }
-    
-    private PreProcessResultFactory preProcessResultFactory;
-    public PreProcessResultFactory getPreProcessResultFactory() {
-        return preProcessResultFactory;
-    }
-
-    @Autowired
-    public void setPreProcessResultFactory(PreProcessResultFactory preProcessResultFactory) {
-        this.preProcessResultFactory = preProcessResultFactory;
     }
     
 //    private FirefoxDriverObjectPool firefoxDriverObjectPool;
@@ -174,10 +149,8 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
                 mainWebResource, 
                 scenario);
         scenarioLoader.setContentDataService(contentDataService);
-        scenarioLoader.setContentFactory(contentFactory);
         scenarioLoader.setDateFactory(dateFactory);
         scenarioLoader.setWebResourceDataService(webResourceDataService);
-        scenarioLoader.setPreProcessResultFactory(preProcessResultFactory);
         scenarioLoader.setPreProcessResultDataService(preProcessResultDataService);
         scenarioLoader.setJsScriptMap(jsScriptMap);
         scenarioLoader.setPageLoadDriverTimeout(pageLoadDriverTimeout);
