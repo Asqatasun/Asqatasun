@@ -32,8 +32,7 @@ import org.opens.tanaguru.entity.audit.JavascriptContent;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.RelatedContent;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 
 /**
  * 
@@ -43,10 +42,9 @@ public class JSHandlerImpl implements JSHandler {
 
     private boolean initialized = false;
     private Set<JSResource> javaScriptSet;
-    private ProcessRemarkFactory processRemarkFactory;
+    private ProcessRemarkDataService processRemarkDataService;
     private Collection<ProcessRemark> remarkList;
     private Collection<JSResource> selectedJSList;
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
     private SSP ssp;
 
     public JSHandlerImpl() {
@@ -61,22 +59,18 @@ public class JSHandlerImpl implements JSHandler {
     public JSHandler beginSelection() {
         initialize();
 
-        selectedJSList = new ArrayList<JSResource>();
-        remarkList = new ArrayList<ProcessRemark>();
+        selectedJSList = new ArrayList<>();
+        remarkList = new ArrayList<>();
         return this;
     }
 
-    public ProcessRemarkFactory getProcessRemarkFactory() {
-        return processRemarkFactory;
+    public ProcessRemarkDataService getProcessRemarkDataService() {
+        return processRemarkDataService;
     }
 
     @Override
     public Collection<ProcessRemark> getRemarkList() {
         return remarkList;
-    }
-
-    public SourceCodeRemarkFactory getSourceCodeRemarkFactory() {
-        return sourceCodeRemarkFactory;
     }
 
     @Override
@@ -94,7 +88,7 @@ public class JSHandlerImpl implements JSHandler {
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
             if (relatedContent instanceof JavascriptContent) {
                 if (javaScriptSet == null) {
-                    javaScriptSet = new HashSet<JSResource>();
+                    javaScriptSet = new HashSet<>();
                 }
                 javaScriptSet.addAll(
                         (Set<JSResource>) xstream.fromXML(
@@ -112,7 +106,7 @@ public class JSHandlerImpl implements JSHandler {
 
     @Override
     public JSHandler selectExternalJS() {
-        Collection<JSResource> externalJsList = new ArrayList<JSResource>();
+        Collection<JSResource> externalJsList = new ArrayList<>();
         for (JSResource jsResource : javaScriptSet) {
             RsrcLocator location = jsResource.getRsrcLocator();
             if (location.getRsrcLocatorType() == RsrcLocator.EXTERNAL) {
@@ -125,7 +119,7 @@ public class JSHandlerImpl implements JSHandler {
 
     @Override
     public JSHandler selectInlineJS() {
-        Collection<JSResource> inlineJsList = new ArrayList<JSResource>();
+        Collection<JSResource> inlineJsList = new ArrayList<>();
         for (JSResource jsResource : javaScriptSet) {
             RsrcLocator location = jsResource.getRsrcLocator();
             if (location.getRsrcLocatorType() == RsrcLocator.INLINE) {
@@ -138,7 +132,7 @@ public class JSHandlerImpl implements JSHandler {
 
     @Override
     public JSHandler selectLocalJS() {
-        Collection<JSResource> localJsList = new ArrayList<JSResource>();
+        Collection<JSResource> localJsList = new ArrayList<>();
         for (JSResource jsResource : javaScriptSet) {
             RsrcLocator location = jsResource.getRsrcLocator();
             if (location.getRsrcLocatorType() == RsrcLocator.LOCAL) {
@@ -150,20 +144,14 @@ public class JSHandlerImpl implements JSHandler {
     }
 
     @Override
-    public void setProcessRemarkFactory(
-            ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
+    public void setProcessRemarkDataService(
+            ProcessRemarkDataService processRemarkDataService) {
+        this.processRemarkDataService = processRemarkDataService;
     }
 
     @Override
     public void setRemarkList(Collection<ProcessRemark> remarkList) {
         this.remarkList = remarkList;
-    }
-
-    @Override
-    public void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
     }
 
     @Override

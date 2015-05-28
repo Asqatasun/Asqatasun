@@ -24,8 +24,7 @@ package org.opens.tanaguru.processor;
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 
 /**
  * 
@@ -77,11 +76,11 @@ public interface JSHandler {
 
     /**
      *
-     * @param processRemarkFactory
-     *            the ProcessRemarkFactory to set
+     * @param processRemarkDataService
+     *            the ProcessRemarkDataService to set
      */
-    void setProcessRemarkFactory(
-            ProcessRemarkFactory processRemarkFactory);
+    void setProcessRemarkDataService(
+            ProcessRemarkDataService processRemarkDataService);
 
     /**
      *
@@ -89,14 +88,6 @@ public interface JSHandler {
      *            the remarkList to set
      */
     void setRemarkList(Collection<ProcessRemark> remarkList);
-
-    /**
-     *
-     * @param sourceCodeRemarkFactory
-     *            the SourceCodeRemarkFactory to set
-     */
-    void setSourceCodeRemarkFactory(
-            SourceCodeRemarkFactory sourceCodeRemarkFactory);
 
     /**
      *

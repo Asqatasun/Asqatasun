@@ -32,13 +32,12 @@ import java.util.*;
 import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
-import org.archive.net.UURIFactory;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.entity.audit.*;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
 import org.opens.tanaguru.entity.reference.Nomenclature;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.ruleimplementation.RuleHelper;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
@@ -58,7 +57,7 @@ public class SSPHandlerImpl implements SSPHandler {
     private JSHandler jsHandler;
     private SSP ssp;
     private NomenclatureLoaderService nomenclatureLoaderService;
-    private ProcessRemarkFactory processRemarkFactory;
+    private ProcessRemarkDataService processRemarkDataService;
     private String selectionExpression;
     private Map<String, BufferedImage> imageMap;
     private URLIdentifier urlIdentifier;
@@ -335,7 +334,7 @@ public class SSPHandlerImpl implements SSPHandler {
             } else {
                 resultSet.add(TestSolution.FAILED);
 
-                ProcessRemark remark = processRemarkFactory.create();
+                ProcessRemark remark = processRemarkDataService.create();
                 remark.setIssue(TestSolution.FAILED);
                 remark.setMessageCode(errorMessage);
                 remark.setSelectionExpression(selectionExpression);
