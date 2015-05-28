@@ -22,6 +22,7 @@
 package org.opens.tgol.entity.dao.contract;
 
 import java.util.*;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import org.opens.tanaguru.entity.audit.AuditStatus;
@@ -189,4 +190,52 @@ public class ActDAOImpl extends AbstractJPADAO<Act, Long> implements ActDAO {
         return ((Long)query.getSingleResult()).intValue();
     }
 
+    @Override
+    public Act findLastActByContract(Long idContract, ScopeEnum scope) {
+        Query query = entityManager.createQuery("SELECT a FROM "
+                + ActImpl.class.getName() + " a"
+                + " WHERE a.contract.id = :idContract"
+                + " AND (a.status = :completedStatus OR a.status = :errorStatus)"
+                + " AND a.scope.code =:scope "
+                + " ORDER BY a.id DESC");
+        query.setParameter("idContract", idContract);
+        query.setParameter("completedStatus", ActStatus.COMPLETED);
+        query.setParameter("errorStatus", ActStatus.ERROR);
+        query.setParameter("scope", scope);
+        query.setMaxResults(1);
+        query.setHint(CACHEABLE_OPTION, "true");
+        try {
+            return (Act)query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Act findLastActByContractAndScenario(Long idContract, String scenarioName) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append("SELECT a FROM ");
+        queryString.append(ActImpl.class.getName());
+        queryString.append(" a");
+        queryString.append(" left join a.audit.subject w");
+        queryString.append(" WHERE a.contract.id = :idContract");
+        queryString.append(" AND (a.status = :completedStatus OR a.status = :errorStatus)");
+        queryString.append(" AND a.scope.code =:scope ");
+        queryString.append(" AND w.url=:scenarioName");
+        queryString.append(" ORDER BY a.id DESC");
+        
+        Query query = entityManager.createQuery(queryString.toString());
+        query.setParameter("idContract", idContract);
+        query.setParameter("completedStatus", ActStatus.COMPLETED);
+        query.setParameter("errorStatus", ActStatus.ERROR);
+        query.setParameter("scope", ScopeEnum.SCENARIO);
+        query.setParameter("scenarioName", scenarioName);
+        query.setMaxResults(1);
+        query.setHint(CACHEABLE_OPTION, "true");
+        try {
+            return (Act)query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
 }

@@ -28,9 +28,9 @@ import org.opens.tanaguru.entity.parameterization.ParameterElement;
 import org.opens.tanaguru.entity.parameterization.ParameterImpl;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 import org.opens.tgol.entity.contract.Act;
-import org.opens.tgol.entity.contract.ActImpl;
-import org.opens.tgol.entity.contract.ActStatus;
 import org.opens.tgol.entity.contract.ScopeEnum;
+import org.opens.tgol.entity.dao.contract.ActDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -39,8 +39,12 @@ import org.opens.tgol.entity.contract.ScopeEnum;
 public class TgolParameterDAOImpl extends AbstractJPADAO<Parameter, Long>
         implements TgolParameterDAO {
 
-    private static final String CACHEABLE_OPTION="org.hibernate.cacheable";
-
+    private ActDAO actDAO;
+    @Autowired
+    public void setActDAO(ActDAO actDAO) {
+        this.actDAO = actDAO;
+    }
+    
     @Override
     protected Class<? extends Parameter> getEntityClass() {
         return ParameterImpl.class;
@@ -51,77 +55,28 @@ public class TgolParameterDAOImpl extends AbstractJPADAO<Parameter, Long>
             Long contract,
             ParameterElement parameterElement,
             ScopeEnum scope) {
-        Act act = findLastActByContract(contract, scope);
+        Act act = actDAO.findLastActByContract(contract, scope);
         if (act == null) {
             return null;
         }
         return retrieveParameterValueFromParameterElementAndAct(parameterElement, act);
     }
     
-    private Act findLastActByContract(Long idContract, ScopeEnum scope) {
-        Query query = entityManager.createQuery("SELECT a FROM "
-                + ActImpl.class.getName() + " a"
-                + " WHERE a.contract.id = :idContract"
-                + " AND (a.status = :completedStatus OR a.status = :errorStatus)"
-                + " AND a.scope.code =:scope "
-                + " ORDER BY a.id DESC");
-        query.setParameter("idContract", idContract);
-        query.setParameter("completedStatus", ActStatus.COMPLETED);
-        query.setParameter("errorStatus", ActStatus.ERROR);
-        query.setParameter("scope", scope);
-        query.setMaxResults(1);
-        query.setHint(CACHEABLE_OPTION, "true");
-        try {
-            return (Act)query.getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
+    
     
     @Override
     public String findLastParameterValueFromContractAndScenario(
             Long contract,
             ParameterElement parameterElement,
             String scenarioName) {
-        Act act = findLastActByContractAndScenario(contract, scenarioName);
+        Act act = actDAO.findLastActByContractAndScenario(contract, scenarioName);
         if (act == null) {
             return null;
         }
         return retrieveParameterValueFromParameterElementAndAct(parameterElement, act);
     }
     
-    /**
-     * 
-     * @param idContract
-     * @param scenarioName
-     * @return 
-     */
-    private Act findLastActByContractAndScenario(Long idContract, String scenarioName) {
-        StringBuilder queryString = new StringBuilder();
-        queryString.append("SELECT a FROM ");
-        queryString.append(ActImpl.class.getName());
-        queryString.append(" a");
-        queryString.append(" left join a.audit.subject w");
-        queryString.append(" WHERE a.contract.id = :idContract");
-        queryString.append(" AND (a.status = :completedStatus OR a.status = :errorStatus)");
-        queryString.append(" AND a.scope.code =:scope ");
-        queryString.append(" AND w.url=:scenarioName");
-        queryString.append(" ORDER BY a.id DESC");
-        
-        Query query = entityManager.createQuery(queryString.toString());
-        query.setParameter("idContract", idContract);
-        query.setParameter("completedStatus", ActStatus.COMPLETED);
-        query.setParameter("errorStatus", ActStatus.ERROR);
-        query.setParameter("scope", ScopeEnum.SCENARIO);
-        query.setParameter("scenarioName", scenarioName);
-        query.setMaxResults(1);
-        query.setHint(CACHEABLE_OPTION, "true");
-        try {
-            return (Act)query.getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
+    
 
     /**
      * 
