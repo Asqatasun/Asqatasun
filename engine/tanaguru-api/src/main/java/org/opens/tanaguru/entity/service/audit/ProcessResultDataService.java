@@ -26,6 +26,8 @@ import java.util.List;
 
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.IndefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Scope;
@@ -89,6 +91,7 @@ public interface ProcessResultDataService extends
     /**
      *
      * @param audit
+     * @param test
      * @return
      */
     Collection<ProcessResult> getGrossResultFromAuditAndTest(Audit audit, Test test);
@@ -111,7 +114,6 @@ public interface ProcessResultDataService extends
     /**
      * 
      * @param audit
-     * @return
      */
     void cleanUpIndefiniteResultFromAudit(Audit audit);
     
@@ -123,11 +125,85 @@ public interface ProcessResultDataService extends
     Collection<ProcessResult> getIndefiniteResultFromAudit(Audit audit);
 
     
-	/**
-	 * Return the history changes for the given processResult
-	 * @param processResult 
-	 * @return The list of changes
-	 */
-	List<DefiniteResult> getHistoyChanges(ProcessResult processResult);
+    /**
+     * Return the history changes for the given processResult
+     * @param processResult 
+     * @return The list of changes
+     */
+    List<DefiniteResult> getHistoyChanges(ProcessResult processResult);
 
+    /**
+     * 
+     * @param test
+     * @param subject
+     * @return 
+     */
+    DefiniteResult getDefiniteResult(Test test, WebResource subject);
+
+    /**
+     * 
+     * @param test
+     * @param subject
+     * @param value
+     * @param remarkSet
+     * @return 
+     */
+    DefiniteResult getDefiniteResult(
+            Test test, 
+            WebResource subject,
+            TestSolution value, 
+            Collection<ProcessRemark> remarkSet);
+
+    /**
+     * 
+     * @param test
+     * @param subject
+     * @param value
+     * @param elementCounter
+     * @return 
+     */
+    DefiniteResult getDefiniteResult(
+            Test test, 
+            WebResource subject, 
+            TestSolution value, 
+            int elementCounter);
+    
+    /**
+     * 
+     * @param test
+     * @param subject
+     * @param value
+     * @param elementCounter
+     * @param remarkSet
+     * @return 
+     */
+    DefiniteResult getDefiniteResult(
+            Test test, 
+            WebResource subject, 
+            TestSolution value, 
+            int elementCounter, 
+            Collection<ProcessRemark> remarkSet);
+
+    /**
+     * 
+     * @param test
+     * @param subject
+     * @param value
+     * @return 
+     */
+    IndefiniteResult getIndefiniteResult(Test test, WebResource subject, String value);
+    
+    /**
+     * 
+     * @param test
+     * @param subject
+     * @param value
+     * @param remarkList
+     * @return 
+     */
+    IndefiniteResult getIndefiniteResult(
+            Test test, 
+            WebResource subject,
+            String value, 
+            Collection<ProcessRemark> remarkList);
 }
