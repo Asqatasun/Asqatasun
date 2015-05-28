@@ -27,6 +27,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.dao.audit.ContentDAO;
+import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
@@ -261,6 +263,91 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
             LOGGER.debug(debugMessage.toString());
         }
         return contentList;
+    }
+
+    @Override
+    public SSP getSSP(String uri) {
+        return ((ContentFactory) entityFactory).createSSP(uri);
+    }
+
+    @Override
+    public SSP getSSP(String uri, Page page) {
+        return ((ContentFactory) entityFactory).createSSP(uri, page);
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri) {
+        return ((ContentFactory) entityFactory).createSSP(dateOfLoading, uri);
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Page page) {
+        SSP ssp = ((ContentFactory) entityFactory).createSSP(dateOfLoading, uri, sourceCode, page);
+        saveOrUpdate(ssp);
+        return ssp;
+    }
+    
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, int httpStatusCode) {
+        return ((ContentFactory) entityFactory).createSSP(dateOfLoading, uri, httpStatusCode);
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Page page, int httpStatusCode) {
+        return ((ContentFactory) entityFactory).createSSP(dateOfLoading, uri, sourceCode, page, httpStatusCode);
+    }
+    
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Audit audit, Page page, int httpStatusCode) {
+        SSP ssp = ((ContentFactory) entityFactory).createSSP(dateOfLoading, uri, sourceCode, page, httpStatusCode);
+        ssp.setAudit(audit);
+        ssp = (SSP)saveOrUpdate(ssp);
+        return ssp;
+    }
+
+    @Override
+    public StylesheetContent getStylesheetContent(String uri, SSP ssp) {
+        return ((ContentFactory) entityFactory).createStylesheetContent(uri, ssp);
+    }
+
+    @Override
+    public StylesheetContent getStylesheetContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode) {
+        return ((ContentFactory) entityFactory).createStylesheetContent(dateOfLoading, uri, ssp, sourceCode);
+    }
+
+    @Override
+    public StylesheetContent getStylesheetContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode, int httpStatusCode) {
+        return ((ContentFactory) entityFactory).createStylesheetContent(dateOfLoading, uri, ssp, sourceCode, httpStatusCode);
+    }
+
+    @Override
+    public JavascriptContent getJavascriptContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode) {
+        return ((ContentFactory) entityFactory).createJavascriptContent(dateOfLoading, uri, ssp, sourceCode);
+    }
+
+    @Override
+    public JavascriptContent getJavascriptContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode, int httpStatusCode) {
+        return ((ContentFactory) entityFactory).createJavascriptContent(dateOfLoading, uri, ssp, sourceCode, httpStatusCode);
+    }
+
+    @Override
+    public ImageContent getImageContent(Date dateOfLoading, String uri, SSP ssp, byte[] binaryContent) {
+        return ((ContentFactory) entityFactory).createImageContent(dateOfLoading, uri, ssp, binaryContent);
+    }
+
+    @Override
+    public ImageContent getImageContent(String uri, SSP ssp) {
+        return ((ContentFactory) entityFactory).createImageContent(uri, ssp);
+    }
+
+    @Override
+    public ImageContent getImageContent(Date dateOfLoading, String uri, SSP ssp, byte[] binaryContent, int httpStatusCode) {
+        return ((ContentFactory) entityFactory).createImageContent(dateOfLoading, uri, ssp, binaryContent, httpStatusCode);
+    }
+
+    @Override
+    public RelatedContent getRelatedContent(String uri, SSP ssp) {
+        return ((ContentFactory) entityFactory).createRelatedContent(uri, ssp);
     }
     
 }
