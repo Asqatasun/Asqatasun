@@ -22,9 +22,11 @@
 package org.opens.tanaguru.entity.service.audit;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
@@ -228,5 +230,157 @@ public interface ContentDataService extends GenericDataService<Content, Long> {
      * @param content 
      */
     void deleteRelatedContentFromContent(Content content);
+    
+    /**
+     *
+     * @param uri
+     * @return
+     */
+    SSP getSSP(String uri);
+
+    /**
+     *
+     * @param uri
+     * @param page
+     * @return
+     */
+    SSP getSSP(String uri,Page page);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @return
+     */
+    SSP getSSP(Date dateOfLoading, String uri);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param sourceCode
+     * @param page
+     * @return
+     */
+    SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Page page);
+    
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param httpStatusCode
+     * @return
+     */
+    SSP getSSP(Date dateOfLoading, String uri, int httpStatusCode);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param sourceCode
+     * @param page
+     * @param httpStatusCode
+     * @return
+     */
+    SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Page page, int httpStatusCode);
+    
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param sourceCode
+     * @param audit
+     * @param page
+     * @param httpStatusCode
+     * @return
+     */
+    SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Audit audit, Page page, int httpStatusCode);
+
+    /**
+     *
+     * @param uri
+     * @param ssp
+     * @return
+     */
+    StylesheetContent getStylesheetContent(String uri, SSP ssp);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param ssp
+     * @param sourceCode
+     * @return
+     */
+    StylesheetContent getStylesheetContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param ssp
+     * @param sourceCode
+     * @param httpStatusCode
+     * @return
+     */
+    StylesheetContent getStylesheetContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode, int httpStatusCode);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param ssp
+     * @param sourceCode
+     * @return
+     */
+    JavascriptContent getJavascriptContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param ssp
+     * @param sourceCode
+     * @param httpStatusCode
+     * @return
+     */
+    JavascriptContent getJavascriptContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode, int httpStatusCode);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param ssp
+     * @param binaryContent
+     * @return
+     */
+    ImageContent getImageContent(Date dateOfLoading, String uri, SSP ssp, byte[] binaryContent);
+
+    /**
+     *
+     * @param uri
+     * @param ssp
+     * @return
+     */
+    ImageContent getImageContent(String uri, SSP ssp);
+
+    /**
+     *
+     * @param dateOfLoading
+     * @param uri
+     * @param ssp
+     * @param binaryContent
+     * @param httpStatusCode
+     * @return
+     */
+    ImageContent getImageContent(Date dateOfLoading, String uri, SSP ssp, byte[] binaryContent, int httpStatusCode);
+
+    /**
+     * 
+     * @param uri
+     * @param ssp
+     * @return
+     */
+    RelatedContent getRelatedContent(String uri, SSP ssp);
 
 }
