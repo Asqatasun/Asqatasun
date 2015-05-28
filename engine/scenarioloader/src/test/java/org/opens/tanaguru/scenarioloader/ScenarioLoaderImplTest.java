@@ -32,8 +32,6 @@ import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import org.apache.http.HttpStatus;
 import static org.easymock.EasyMock.*;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.subject.WebResourceFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
@@ -116,8 +114,6 @@ public class ScenarioLoaderImplTest extends TestCase {
         System.out.println("run");
         
         Date date = new Date();
-        ContentFactory mockContentFactory = createMock(ContentFactory.class);
-        WebResourceFactory mockWebResourceFactory = createMock(WebResourceFactory.class);
         DateFactory mockDateFactory = createMock(DateFactory.class);
         expect(mockDateFactory.createDate())
                 .andReturn(date)
@@ -214,7 +210,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
 
         SSP ssp1 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 ROOT_PAGE_URL, 
                 pageMap.get(ROOT_PAGE_URL), 
@@ -235,7 +231,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
 
         SSP ssp2 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 PAGE_ACCESS_FORBIDDEN_URL, 
                 pageMap.get(PAGE_ACCESS_FORBIDDEN_URL), 
@@ -256,7 +252,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
         
         SSP ssp3 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 ROOT_PAGE_URL, 
                 pageMap.get(ROOT_PAGE_URL), 
@@ -277,7 +273,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
 
         SSP ssp4 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 PAGE_1_URL, 
                 pageMap.get(PAGE_1_URL), 
@@ -298,7 +294,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
 
         SSP ssp5 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 PAGE_ACCESS_FORBIDDEN_URL, 
                 pageMap.get(PAGE_ACCESS_FORBIDDEN_URL), 
@@ -319,7 +315,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
 
         SSP ssp6 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 PAGE_1_URL, 
                 pageMap.get(PAGE_1_URL), 
@@ -340,7 +336,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
 
         SSP ssp7 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 PAGE_2_URL, 
                 pageMap.get(PAGE_2_URL), 
@@ -361,7 +357,7 @@ public class ScenarioLoaderImplTest extends TestCase {
                 .once();
 
         SSP ssp8 = createMock(SSP.class);
-        expect(mockContentFactory.createSSP(
+        expect(mockContentDataService.getSSP(
                 date, 
                 PAGE_ACCESS_FORBIDDEN_URL, 
                 pageMap.get(PAGE_ACCESS_FORBIDDEN_URL), 
@@ -421,10 +417,8 @@ public class ScenarioLoaderImplTest extends TestCase {
         replay(mockPage8);
         replay(mockSite);
         replay(mockWebResourceDataService);
-        replay(mockWebResourceFactory);
         replay(mockDateFactory);
         replay(mockContentDataService);
-        replay(mockContentFactory);
         replay(ssp1);
         replay(ssp2);
         replay(ssp3);
@@ -455,10 +449,8 @@ public class ScenarioLoaderImplTest extends TestCase {
         verify(mockPage8);
         verify(mockSite);
         verify(mockWebResourceDataService);
-        verify(mockWebResourceFactory);
         verify(mockDateFactory);
         verify(mockContentDataService);
-        verify(mockContentFactory);
         verify(ssp1);
         verify(ssp2);
         verify(ssp3);
