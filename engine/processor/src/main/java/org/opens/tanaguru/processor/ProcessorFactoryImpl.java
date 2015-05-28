@@ -22,11 +22,10 @@
 package org.opens.tanaguru.processor;
 
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.entity.service.audit.EvidenceElementDataService;
 import org.opens.tanaguru.entity.service.audit.PreProcessResultDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.processing.ProcessRemarkServiceFactory;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,34 +56,24 @@ public class ProcessorFactoryImpl implements ProcessorFactory {// TODO Write jav
         this.evidenceDataService = evidenceDataService;
     }
 
-    private EvidenceElementFactory evidenceElementFactory;
-    public EvidenceElementFactory getEvidenceElementFactory() {
-        return evidenceElementFactory;
+    private EvidenceElementDataService evidenceElementDataService;
+    public EvidenceElementDataService getEvidenceElementDataService() {
+        return evidenceElementDataService;
     }
 
     @Autowired
-    public void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory) {
-        this.evidenceElementFactory = evidenceElementFactory;
+    public void setEvidenceElementDataService(EvidenceElementDataService evidenceElementDataService) {
+        this.evidenceElementDataService = evidenceElementDataService;
     }
     
-    private ProcessRemarkFactory processRemarkFactory;
-    public ProcessRemarkFactory getProcessRemarkFactory() {
-        return processRemarkFactory;
+    private ProcessRemarkDataService processRemarkDataService;
+    public ProcessRemarkDataService getProcessRemarkDataService() {
+        return processRemarkDataService;
     }
     
     @Autowired
-    public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
-    }
-
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    public SourceCodeRemarkFactory getSourceCodeRemarkFactory() {
-        return sourceCodeRemarkFactory;
-    }
-
-    @Autowired
-    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+    public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
+        this.processRemarkDataService = processRemarkDataService;
     }
 
     private URLIdentifierFactory urlIdentifierFactory;
@@ -112,9 +101,8 @@ public class ProcessorFactoryImpl implements ProcessorFactory {// TODO Write jav
         return new ProcessorImpl(
                 SSPHandlerFactory.create(
                     ProcessRemarkServiceFactory.create(
-                        processRemarkFactory, 
-                        sourceCodeRemarkFactory,
-                        evidenceElementFactory,
+                        processRemarkDataService, 
+                        evidenceElementDataService,
                         evidenceDataService),
                     nomenclatureLoaderService, 
                     urlIdentifierFactory.create(), 
