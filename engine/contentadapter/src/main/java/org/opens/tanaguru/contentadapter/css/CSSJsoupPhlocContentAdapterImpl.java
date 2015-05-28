@@ -57,7 +57,6 @@ import org.opens.tanaguru.contentadapter.util.LocalRsrc;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
 import org.opens.tanaguru.entity.audit.StylesheetContent;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.util.http.HttpRequestHandler;
 
@@ -101,19 +100,17 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
     
     /**
      * Constructor
-     * @param contentFactory
      * @param urlIdentifier
      * @param downloader
      * @param contentDataService
      * @param externalCSSRetriever
      */
     public CSSJsoupPhlocContentAdapterImpl(
-            ContentFactory contentFactory,
             URLIdentifier urlIdentifier,
             Downloader downloader,
             ContentDataService contentDataService,
             ExternalCSSRetriever externalCSSRetriever) {
-        super(contentFactory, urlIdentifier, downloader, contentDataService);
+        super(urlIdentifier, downloader, contentDataService);
         this.externalCSSRetriever = externalCSSRetriever;
         this.urlIdentifier = urlIdentifier;
     }
@@ -366,7 +363,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             cssSourceCode = CSS_ON_ERROR;
         }
 
-        StylesheetContent cssContent = getContentFactory().createStylesheetContent(
+        StylesheetContent cssContent = getContentDataService().getStylesheetContent(
                 new Date(),
                 cssAbsolutePath,
                 getSSP(),
@@ -405,7 +402,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      */
     private StylesheetContent getStylesheetFromLocaleResource(String resource) {
         localeCssCounter++;
-        StylesheetContent cssContent = getContentFactory().createStylesheetContent(
+        StylesheetContent cssContent = getContentDataService().getStylesheetContent(
                 new Date(),
                 getSSP().getURI() + LOCALE_CSS_PREFIX + localeCssCounter,
                 getSSP(),
@@ -422,7 +419,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      */
     private StylesheetContent getStylesheetFromInlineResource(String resource) {
         inlineCssCounter++;
-        StylesheetContent cssContent = getContentFactory().createStylesheetContent(
+        StylesheetContent cssContent = getContentDataService().getStylesheetContent(
                 new Date(),
                 getSSP().getURI() + INLINE_CSS_PREFIX + inlineCssCounter,
                 getSSP(),
@@ -483,7 +480,9 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                                     + "is impossible");
                         }
                     }
+                    
                     stylesheetContent.setAdaptedContent(new XStream().toXML(aCSS));
+                    
                     if (aCSS.hasImportRules()) {
                         for (CSSImportRule cssImportRule : aCSS.getAllImportRules()) {
                             getImportedResources(cssImportRule, currentLocalResourcePath);

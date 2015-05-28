@@ -24,7 +24,6 @@ package org.opens.tanaguru.contentadapter.css;
 import org.opens.tanaguru.contentadapter.ContentAdapterFactory;
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
@@ -36,7 +35,6 @@ public interface CSSContentAdapterFactory extends ContentAdapterFactory {
 
     /**
      * 
-     * @param contentFactory
      * @param urlIdentifier
      * @param downloader
      * @param contentDataService
@@ -44,7 +42,6 @@ public interface CSSContentAdapterFactory extends ContentAdapterFactory {
      */
     @Override
     CSSContentAdapter create(
-            ContentFactory contentFactory,
             URLIdentifier urlIdentifier,
             Downloader downloader,
             ContentDataService contentDataService);

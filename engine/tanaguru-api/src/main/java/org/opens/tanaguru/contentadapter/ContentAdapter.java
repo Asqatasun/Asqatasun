@@ -61,12 +61,6 @@ public interface ContentAdapter {
 
     /**
      * 
-     * @param contentFactory
-     */
-    void setContentFactory(ContentFactory contentFactory);
-
-    /**
-     * 
      * @param ssp
      */
     void setSSP(SSP ssp);

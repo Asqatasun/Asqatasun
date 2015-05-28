@@ -29,7 +29,6 @@ import org.opens.tanaguru.contentadapter.ContentParser;
 import org.opens.tanaguru.contentadapter.Resource;
 import org.opens.tanaguru.contentadapter.util.*;
 import org.opens.tanaguru.contentloader.Downloader;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
@@ -63,15 +62,19 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
 
     /**
      * Default constructor.
+     * @param urlIdentifier
+     * @param downloader
+     * @param contentDataService
      */
-    public JSContentAdapterImpl(ContentFactory contentFactory, URLIdentifier urlIdentifier, Downloader downloader, ContentDataService contentDataService) {
-        super(contentFactory, urlIdentifier, downloader, contentDataService);
+    public JSContentAdapterImpl(URLIdentifier urlIdentifier, Downloader downloader, ContentDataService contentDataService) {
+        super(urlIdentifier, downloader, contentDataService);
     }
 
     /**
      * @param ch
      * @param start
      * @param end
+     * @throws org.xml.sax.SAXException
      * @see org.xml.sax.ContentHandler#characters(char[], int, int)
      */
     @Override
@@ -107,6 +110,10 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     }
 
     /**
+     * @param nameSpaceURI
+     * @param localName
+     * @param rawName
+     * @throws org.xml.sax.SAXException
      * @see org.xml.sax.ContentHandler#endElement(java.lang.String,
      *      java.lang.String, java.lang.String)
      */
@@ -129,6 +136,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
 
     /**
      * @param prefix
+     * @throws org.xml.sax.SAXException
      * @see org.xml.sax.ContentHandler#endPrefixMapping(java.lang.String)
      */
     @Override
@@ -145,6 +153,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @param ch
      * @param start
      * @param end
+     * @throws org.xml.sax.SAXException
      * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
      */
     @Override
@@ -157,6 +166,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @param target
      * @param data
      *            d'une
+     * @throws org.xml.sax.SAXException
      * @see org.xml.sax.ContentHandler#processingInstruction(java.lang.String,
      *      java.lang.String)
      */
@@ -179,6 +189,8 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     }
 
     /**
+     * @param arg0
+     * @throws org.xml.sax.SAXException
      * @see org.xml.sax.ContentHandler#skippedEntity(java.lang.String)
      */
     @Override
@@ -197,14 +209,15 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
         buffer = new StringBuffer();
         jsVector = new HashSet();
         locator = new LocatorImpl();
-        inlineResourceList = new ArrayList<Resource>();
-        jsSet = new HashSet<JSResource>();
+        inlineResourceList = new ArrayList<>();
+        jsSet = new HashSet<>();
     }
 
     /**
      * @param nameSpaceURI
      * @param localName
      * @param rawName
+     * @param attributs
      * @throws SAXException
      * @see org.xml.sax.ContentHandler#startElement(java.lang.String,
      *      java.lang.String, java.lang.String, org.xml.sax.Attributes)
@@ -265,6 +278,7 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
      * @param prefix
      *            .
      * @param URI
+     * @throws org.xml.sax.SAXException
      * @see org.xml.sax.ContentHandler#startPrefixMapping(java.lang.String,
      *      java.lang.String)
      */

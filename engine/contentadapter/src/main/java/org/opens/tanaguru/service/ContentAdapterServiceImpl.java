@@ -2,13 +2,11 @@ package org.opens.tanaguru.service;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.opens.tanaguru.contentadapter.*;
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.contentloader.DownloaderFactory;
 import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
@@ -17,7 +15,6 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
  */
 public class ContentAdapterServiceImpl implements ContentAdapterService {
 
-    private ContentFactory contentFactory;
     private boolean writeCleanHtmlInFile;
     private String tempFolderRootPath;
     private ContentsAdapterFactory contentsAdapterFactory;
@@ -40,11 +37,10 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
     @Override
     public Collection<Content> adaptContent(Collection<Content> contentList) {
 
-        Set<ContentAdapter> contentAdapterSet = new HashSet<ContentAdapter>();
+        Set<ContentAdapter> contentAdapterSet = new HashSet<>();
         
         for (ContentAdapterFactory contentAdapterFactory : contentAdapterFactorySet) {
             contentAdapterSet.add(contentAdapterFactory.create(
-                    contentFactory, 
                     urlIdentifierFactory.create(), 
                     downloaderFactory.create(), 
                     contentDataService));
@@ -58,11 +54,6 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
                 htmlParserFactory.create(contentAdapterSet));
         adapter.run();
         return adapter.getResult();
-    }
-
-    @Override
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
     }
 
     @Override

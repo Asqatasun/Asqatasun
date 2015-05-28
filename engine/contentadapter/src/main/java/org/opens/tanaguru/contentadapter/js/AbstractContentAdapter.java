@@ -32,7 +32,6 @@ import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
@@ -61,7 +60,7 @@ public abstract class AbstractContentAdapter implements ContentAdapter {
     @Override
     public void setSSP(SSP ssp) {
         this.ssp = ssp;
-        contentList = new ArrayList<Content>();
+        contentList = new ArrayList<>();
         try {
             urlIdentifier.setUrl(new URL(ssp.getURI()));
         } catch (MalformedURLException ex) {
@@ -79,22 +78,12 @@ public abstract class AbstractContentAdapter implements ContentAdapter {
         this.urlIdentifier = urlIdentifier;
     }
     
-    private ContentFactory contentFactory;
-    public ContentFactory getContentFactory() {
-        return contentFactory;
-    }
-
-    @Override
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
-    }
-    
-    private ContentDataService contentDataService;
+    private final ContentDataService contentDataService;
     public ContentDataService getContentDataService() {
         return contentDataService;
     }
 
-    private List<Content> contentList = new ArrayList<Content>();
+    private List<Content> contentList = new ArrayList<>();
     @Override
     public List<Content> getContentList() {
         return contentList;
@@ -102,18 +91,15 @@ public abstract class AbstractContentAdapter implements ContentAdapter {
 
     /**
      * 
-     * @param contentFactory
      * @param urlIdentifier
      * @param downloader
      * @param contentDataService
      */
     public AbstractContentAdapter(
-            ContentFactory contentFactory,
             URLIdentifier urlIdentifier,
             Downloader downloader,
             ContentDataService contentDataService) {
         super();
-        this.contentFactory = contentFactory;
         this.urlIdentifier = urlIdentifier;
         this.downloader = downloader;
         this.contentDataService = contentDataService;
