@@ -23,6 +23,7 @@ package org.opens.tanaguru.entity.factory.audit;
 
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl;
+import org.opens.tanaguru.entity.audit.TestSolution;
 
 /**
  * 
@@ -39,4 +40,21 @@ public class SourceCodeRemarkFactoryImpl implements SourceCodeRemarkFactory {
         return new SourceCodeRemarkImpl();
     }
 
+    @Override
+    public SourceCodeRemark create(TestSolution issue, String messageCode) {
+        SourceCodeRemark sourceCodeRemark = create();
+        sourceCodeRemark.setIssue(issue);
+        sourceCodeRemark.setMessageCode(messageCode);
+
+        return sourceCodeRemark;
+    }
+    
+    @Override
+    public SourceCodeRemark create(String target, TestSolution issue, String messageCode, int lineNumber) {
+        SourceCodeRemark sourceCodeRemark = create();
+        sourceCodeRemark.setIssue(issue);
+        sourceCodeRemark.setMessageCode(messageCode);
+
+        return sourceCodeRemark;
+    }
 }

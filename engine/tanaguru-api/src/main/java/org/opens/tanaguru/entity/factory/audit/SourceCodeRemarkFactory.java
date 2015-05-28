@@ -22,6 +22,7 @@
 package org.opens.tanaguru.entity.factory.audit;
 
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
+import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 
 /**
@@ -29,4 +30,24 @@ import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
  * @author jkowalczyk
  */
 public interface SourceCodeRemarkFactory extends
-		GenericFactory<SourceCodeRemark> {}
+		GenericFactory<SourceCodeRemark> {
+
+    /**
+     * 
+     * @param issue
+     * @param messageCode
+     * @return 
+     */
+    SourceCodeRemark create(TestSolution issue, String messageCode);
+    
+    /**
+     * 
+     * @param target
+     * @param issue
+     * @param messageCode
+     * @param lineNumber
+     * @return 
+     */
+    SourceCodeRemark create(String target, TestSolution issue, String messageCode, int lineNumber);
+    
+}

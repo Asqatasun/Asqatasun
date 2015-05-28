@@ -24,9 +24,13 @@ package org.opens.tanaguru.entity.service.audit;
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.audit.ProcessRemarkDAO;
+import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
+import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -35,6 +39,12 @@ import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 public class ProcessRemarkDataServiceImpl extends AbstractGenericDataService<ProcessRemark, Long> implements
         ProcessRemarkDataService {
 
+    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    @Autowired
+    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
+        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+    }
+    
     @Override
     public Collection<ProcessRemark> findProcessRemarksFromProcessResult(
             ProcessResult processResult, 
@@ -58,6 +68,26 @@ public class ProcessRemarkDataServiceImpl extends AbstractGenericDataService<Pro
             TestSolution testSolution) {
         return ((ProcessRemarkDAO) entityDao).
                 countProcessRemarksFromProcessResultAndTestSolution(processResult, testSolution);
+    }
+
+    @Override
+    public ProcessRemark create(TestSolution issue, String messageCode) {
+        return ((ProcessRemarkFactory) entityFactory).create(issue, messageCode);
+    }
+    
+    @Override
+    public SourceCodeRemark createSourceCodeRemark(TestSolution issue, String messageCode) {
+        return sourceCodeRemarkFactory.create(issue, messageCode);
+    }
+
+    @Override
+    public SourceCodeRemark createSourceCodeRemark() {
+        return sourceCodeRemarkFactory.create();
+    }
+    
+    @Override
+    public SourceCodeRemark createSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber) {
+        return sourceCodeRemarkFactory.create(target, issue, messageCode, lineNumber);
     }
     
 }
