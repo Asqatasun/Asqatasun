@@ -46,17 +46,17 @@ public class AnalyserImplTest extends TestCase {
         WebResourceStatisticsDataService webResourceStatisticsDataService =
                 new WebResourceStatisticsDataServiceImpl();
         webResourceStatisticsDataService.setEntityFactory(webResourceStatisticsFactory);
-        AnalyserImpl analyser = new AnalyserImpl(null, null, null, webResourceStatisticsDataService, null, null, null, null, new ArrayList<Parameter>(),1);
+        AnalyserImpl analyser = new AnalyserImpl(null, null, null, webResourceStatisticsDataService, null, null, null, new ArrayList<Parameter>(),1);
 
         WebResourceStatistics wrStats = analyser.getWebResourceStatisticsDataService().create();
         wrStats.setNbOfPassed(89330);
         wrStats.setNbOfFailed(84541);
         wrStats.setNbOfNmi(97541);
-        assertEquals(Double.valueOf(45.828712).floatValue(), analyser.computeMark(wrStats).getMark().floatValue());
+        assertEquals(Double.valueOf(45.828712).floatValue(), analyser.computeMark(wrStats).getMark());
         wrStats.setNbOfPassed(0);
         wrStats.setNbOfFailed(0);
         wrStats.setNbOfNmi(0);
-        assertEquals(Double.valueOf(0).floatValue(), analyser.computeMark(wrStats).getMark().floatValue());
+        assertEquals(Double.valueOf(0).floatValue(), analyser.computeMark(wrStats).getMark());
     }
 
     public void testComputeRawMark() {
@@ -65,7 +65,7 @@ public class AnalyserImplTest extends TestCase {
         WebResourceStatisticsDataService webResourceStatisticsDataService =
                 new WebResourceStatisticsDataServiceImpl();
         webResourceStatisticsDataService.setEntityFactory(webResourceStatisticsFactory);
-        AnalyserImpl analyser = new AnalyserImpl(null, null,  null, webResourceStatisticsDataService, null, null, null, null, new ArrayList<Parameter>(),1);
+        AnalyserImpl analyser = new AnalyserImpl(null, null,  null, webResourceStatisticsDataService, null,  null, null, new ArrayList<Parameter>(),1);
 
         WebResourceStatistics wrStats = analyser.getWebResourceStatisticsDataService().create();
         wrStats.setNbOfPassed(0);
@@ -75,14 +75,14 @@ public class AnalyserImplTest extends TestCase {
         wrStats.setWeightedFailed(BigDecimal.valueOf(Double.valueOf("0.0")));
         wrStats.setWeightedNmi(BigDecimal.valueOf(Double.valueOf("21.1")));
         wrStats.setWeightedNa(BigDecimal.valueOf(Double.valueOf("114.2")));
-        assertEquals(Double.valueOf(0).floatValue(), analyser.computeRawMark(wrStats).getRawMark().floatValue());
+        assertEquals(Double.valueOf(0).floatValue(), analyser.computeRawMark(wrStats).getRawMark());
         
 //        wrStats.setWeightedPassed(BigDecimal.valueOf(Double.valueOf("44.0")));
 //        assertEquals(Double.valueOf(100).floatValue(), analyser.computeRawMark(wrStats).getRawMark().floatValue());
         
 //        wrStats.setWeightedPassed(BigDecimal.valueOf(Double.valueOf("0")));
         wrStats.setWeightedFailed(BigDecimal.valueOf(Double.valueOf("44.0")));
-        assertEquals(Double.valueOf(0).floatValue(), analyser.computeRawMark(wrStats).getRawMark().floatValue());
+        assertEquals(Double.valueOf(0).floatValue(), analyser.computeRawMark(wrStats).getRawMark());
         
         wrStats.setNbOfPassed(45);
         wrStats.setNbOfFailed(84541);
@@ -91,15 +91,15 @@ public class AnalyserImplTest extends TestCase {
         wrStats.setWeightedFailed(BigDecimal.valueOf(Double.valueOf("44.8")));
         wrStats.setWeightedNmi(BigDecimal.valueOf(Double.valueOf("21.1")));
         wrStats.setWeightedNa(BigDecimal.valueOf(Double.valueOf("114.2")));
-        assertEquals(Double.valueOf(50.11).floatValue(), analyser.computeRawMark(wrStats).getRawMark().floatValue());
+        assertEquals(Double.valueOf(50.11).floatValue(), analyser.computeRawMark(wrStats).getRawMark());
         // the nmi value is not taken into account
         wrStats.setWeightedNmi(BigDecimal.valueOf(Double.valueOf("1.1")));
         wrStats.setWeightedNa(BigDecimal.valueOf(Double.valueOf("134.4")));
-        assertEquals(Double.valueOf(50.11).floatValue(), analyser.computeRawMark(wrStats).getRawMark().floatValue());
+        assertEquals(Double.valueOf(50.11).floatValue(), analyser.computeRawMark(wrStats).getRawMark());
 
         wrStats.setWeightedPassed(BigDecimal.valueOf(Double.valueOf("50.4")));
         wrStats.setWeightedFailed(BigDecimal.valueOf(Double.valueOf("24.8")));
-        assertEquals(Double.valueOf(64.47).floatValue(), analyser.computeRawMark(wrStats).getRawMark().floatValue());
+        assertEquals(Double.valueOf(64.47).floatValue(), analyser.computeRawMark(wrStats).getRawMark());
     }
 
 }

@@ -27,7 +27,6 @@ import java.util.*;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.factory.audit.ProcessResultFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Test;
@@ -96,12 +95,6 @@ public class AnalyserImpl implements Analyser {
      */
     private final ProcessResultDataService processResultDataService;
     
-    /**
-     * The ProcessResultFactory instance
-     */
-    private final ProcessResultFactory processResultFactory;
-    
-    
     private Map<Criterion, Integer> criterionMap;
     private Map<Theme, Integer> themeMap;
     private Collection<Test> testSet;
@@ -142,7 +135,6 @@ public class AnalyserImpl implements Analyser {
             WebResourceStatisticsDataService webResourceStatisticsDataService,
             CriterionStatisticsDataService criterionStatisticsDataService,
             ProcessResultDataService processResultDataService,
-            ProcessResultFactory processResultFactory,
             WebResource webResource,
             Collection<Parameter> paramSet,
             int nbOfWr) {
@@ -152,7 +144,6 @@ public class AnalyserImpl implements Analyser {
         this.webResourceStatisticsDataService = webResourceStatisticsDataService;
         this.criterionStatisticsDataService = criterionStatisticsDataService;
         this.processResultDataService = processResultDataService;
-        this.processResultFactory = processResultFactory;
         this.setWebResource(webResource);
         this.paramSet = paramSet;
         this.nbOfWr = nbOfWr;
@@ -772,9 +763,10 @@ public class AnalyserImpl implements Analyser {
             // if the test has no ProcessResult and its theme is part of the user
             // selection, a NOT_TESTED result ProcessRemark is created
             if (!testedTestList.contains(test)) {
-                ProcessResult pr = processResultFactory.createDefiniteResult();
-                pr.setTest(test);
-                pr.setValue(TestSolution.NOT_TESTED);
+                ProcessResult pr = 
+                        processResultDataService.getDefiniteResult(
+                                test, 
+                                TestSolution.NOT_TESTED);
                 fullProcessResultList.add(pr);
             }
         }
