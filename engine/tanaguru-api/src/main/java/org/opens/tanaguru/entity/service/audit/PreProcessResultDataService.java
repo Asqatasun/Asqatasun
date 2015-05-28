@@ -69,7 +69,6 @@ public interface PreProcessResultDataService extends
      * This method clears all the entries for a given audit
      * 
      * @param audit
-     * @return
      */
     void cleanUpAllPreProcessResultByAudit(Audit audit); 
 
@@ -77,8 +76,16 @@ public interface PreProcessResultDataService extends
      * This method clears all the entries for a given webResource
      * 
      * @param webResource
-     * @return
      */
     void cleanUpAllPreProcessResultByWebResource(WebResource webResource); 
 
+    /**
+     * 
+     * @param key
+     * @param value
+     * @param audit
+     * @param webResource
+     * @return 
+     */
+    PreProcessResult getPreProcessResult(String key, String value, Audit audit, WebResource webResource);
 }
