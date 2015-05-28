@@ -35,10 +35,9 @@ import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.*;
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.entity.service.audit.EvidenceElementDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.service.ProcessRemarkService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -65,26 +64,23 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     private static final String CSS_FILENAME_EVIDENCE = "Css-Filename";
     private static final String START_COMMENT_OCCURENCE = "<!--";
     private static final String END_COMMENT_OCCURENCE = "-->";
-    private XPath xpath = XPathFactory.newInstance().newXPath();
+    private final XPath xpath = XPathFactory.newInstance().newXPath();
     private Document document;
     private org.jsoup.nodes.Document jsoupDocument;
 
     /**
      * 
-     * @param processRemarkFactory
-     * @param sourceCodeRemarkFactory
-     * @param evidenceElementFactory
+     * @param processRemarkDataService
+     * @param evidenceElementDataService
      * @param evidenceDataService
      */
     public ProcessRemarkServiceImpl(
-            ProcessRemarkFactory processRemarkFactory,
-            SourceCodeRemarkFactory sourceCodeRemarkFactory,
-            EvidenceElementFactory evidenceElementFactory,
+            ProcessRemarkDataService processRemarkDataService,
+            EvidenceElementDataService evidenceElementDataService,
             EvidenceDataService evidenceDataService) {
         super();
-        this.processRemarkFactory = processRemarkFactory;
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-        this.evidenceElementFactory = evidenceElementFactory;
+        this.processRemarkDataService = processRemarkDataService;
+        this.evidenceElementDataService = evidenceElementDataService;
         this.evidenceDataService = evidenceDataService;
     }
 
@@ -106,7 +102,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         return this.remarkSet;
     }
     
-    private List<String> evidenceElementList = new ArrayList<String>();
+    private List<String> evidenceElementList = new ArrayList<>();
     @Override
     public void addEvidenceElement(String element) {
         if (!evidenceElementList.contains(element)) {
@@ -118,33 +114,25 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public void setEvidenceElementList(Collection<String> element) {
         evidenceElementList.addAll(element);
     }
-    private ProcessRemarkFactory processRemarkFactory;
-
-    public ProcessRemarkFactory getProcessRemarkFactory() {
-        return processRemarkFactory;
+    
+    private ProcessRemarkDataService processRemarkDataService;
+    public ProcessRemarkDataService getProcessRemarkDataService() {
+        return processRemarkDataService;
     }
 
-    public void setProcessRemarkFactory(ProcessRemarkFactory processRemarkFactory) {
-        this.processRemarkFactory = processRemarkFactory;
+    public void setProcessRemarkFactory(ProcessRemarkDataService processRemarkDataService) {
+        this.processRemarkDataService = processRemarkDataService;
     }
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
-
-    public SourceCodeRemarkFactory getSourceCodeRemarkFactory() {
-        return sourceCodeRemarkFactory;
-    }
-
-    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-    private EvidenceElementFactory evidenceElementFactory;
+    
+    private EvidenceElementDataService evidenceElementDataService;
 
     @Override
-    public EvidenceElementFactory getEvidenceElementFactory() {
-        return evidenceElementFactory;
+    public EvidenceElementDataService getEvidenceElementDataService() {
+        return evidenceElementDataService;
     }
 
-    public void setEvidenceElementFactory(EvidenceElementFactory evidenceElementFactory) {
-        this.evidenceElementFactory = evidenceElementFactory;
+    public void setEvidenceElementFactory(EvidenceElementDataService evidenceElementDataService) {
+        this.evidenceElementDataService = evidenceElementDataService;
     }
     private EvidenceDataService evidenceDataService;
 
@@ -163,8 +151,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     /**
      * Local map of evidence to avoid multiple access to database
      */
-    private Map<String, Evidence> evidenceMap =
-            new HashMap<String, Evidence>();
+    private final Map<String, Evidence> evidenceMap = new HashMap<>();
 
     @Override
     public void initializeService(Document document, String adaptedContent) {
@@ -215,20 +202,20 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     @Override
     public void resetService() {
         LOGGER.debug("Service is reset");
-        remarkSet = new LinkedHashSet<ProcessRemark>();
-        evidenceElementList = new LinkedList<String>();
+        remarkSet = new LinkedHashSet<>();
+        evidenceElementList = new LinkedList<>();
     }
 
     @Override
     public ProcessRemark createProcessRemark(
             TestSolution processResult,
             String messageCode) {
-        return processRemarkFactory.create(processResult, messageCode);
+        return processRemarkDataService.create(processResult, messageCode);
     }
 
     @Override
     public void addProcessRemark(TestSolution processResult, String messageCode) {
-        remarkSet.add(processRemarkFactory.create(processResult, messageCode));
+        remarkSet.add(processRemarkDataService.create(processResult, messageCode));
     }
 
     @Override
@@ -256,9 +243,11 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             Element element,
             String messageCode, 
             Collection<EvidenceElement> evidenceElementList) {
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
+        SourceCodeRemark remark = 
+                processRemarkDataService.createSourceCodeRemark(
+                        processResult, 
+                        messageCode);
+        
         if (element != null) {
             remark.setLineNumber(searchElementLineNumber(element));
             remark.setTarget(element.nodeName());
@@ -282,11 +271,12 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String messageCode, 
             EvidenceElement... evidenceElementList) {
         
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
-        remark.setTarget(targetValue);
-        remark.setLineNumber(-1);
+        SourceCodeRemark remark = 
+                processRemarkDataService.createSourceCodeRemark(
+                        targetValue, 
+                        processResult, 
+                        messageCode, 
+                        -1);
 
         for (EvidenceElement ee : evidenceElementList) {
             remark.addElement(ee);
@@ -301,9 +291,11 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             Node node,
             String messageCode, 
             Collection<EvidenceElement> evidenceElementList) {
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
+        SourceCodeRemark remark = 
+                processRemarkDataService.createSourceCodeRemark(
+                        processResult, 
+                        messageCode);
+        
         if (node != null) {
             remark.setLineNumber(searchNodeLineNumber(node));
         } else {
@@ -322,30 +314,37 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String messageCode, 
             String attrName, 
             String fileName) {// XXX
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
+        SourceCodeRemark remark = 
+                processRemarkDataService.createSourceCodeRemark(
+                        processResult, 
+                        messageCode);
         // This a fake sourceCode Remark, the line number cannot be found
         // we use a sourceCodeRemark here to add evidence elements
         remark.setLineNumber(-1);
-        EvidenceElement evidenceElement = evidenceElementFactory.create();
-        evidenceElement.setProcessRemark(remark);
-        evidenceElement.setValue(attrName);
-        evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
+        
+        EvidenceElement evidenceElement = 
+                evidenceElementDataService.create(
+                        remark, 
+                        attrName, 
+                        getEvidence(DEFAULT_EVIDENCE));
+
         remark.addElement(evidenceElement);
         try {
             if (selectorValue != null) {
-                EvidenceElement cssSelectorEvidenceElement = evidenceElementFactory.create();
-                cssSelectorEvidenceElement.setProcessRemark(remark);
-                cssSelectorEvidenceElement.setValue(selectorValue);
-                cssSelectorEvidenceElement.setEvidence(getEvidence(CSS_SELECTOR_EVIDENCE));
+                EvidenceElement cssSelectorEvidenceElement = 
+                        evidenceElementDataService.create(
+                                remark, 
+                                selectorValue, 
+                                getEvidence(CSS_SELECTOR_EVIDENCE));
+
                 remark.addElement(cssSelectorEvidenceElement);
             }
             if (fileName != null) {
-                EvidenceElement fileNameEvidenceElement = evidenceElementFactory.create();
-                fileNameEvidenceElement.setProcessRemark(remark);
-                fileNameEvidenceElement.setValue(fileName);
-                fileNameEvidenceElement.setEvidence(getEvidence(CSS_FILENAME_EVIDENCE));
+                EvidenceElement fileNameEvidenceElement = 
+                        evidenceElementDataService.create(
+                                remark, 
+                                fileName, 
+                                getEvidence(CSS_FILENAME_EVIDENCE));
                 remark.addElement(fileNameEvidenceElement);
             }
         } catch (ClassCastException ex) {
@@ -526,7 +525,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
      * @param adaptedContent
      */
     private void initializeSourceCodeMap(String adaptedContent) {
-        sourceCodeWithLine = new LinkedHashMap<Integer, String>();
+        sourceCodeWithLine = new LinkedHashMap<>();
         int lineNumber = 1;
         StringReader sr = new StringReader(adaptedContent);
         BufferedReader br = new BufferedReader(sr);
@@ -549,7 +548,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
      * @param adaptedContent
      */
     private void initializeRawSourceCodeMap(String rawSource) {
-        rawSourceCodeWithLine = new LinkedHashMap<Integer, String>();
+        rawSourceCodeWithLine = new LinkedHashMap<>();
         int lineNumber = 1;
         StringReader sr = new StringReader(rawSource);
         BufferedReader br = new BufferedReader(sr);
@@ -569,10 +568,9 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     @Override
     public EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue) {
-        EvidenceElement evidenceElement = evidenceElementFactory.create();
-        evidenceElement.setValue(StringUtils.trim(evidenceValue));
-        evidenceElement.setEvidence(getEvidence(evidenceCode));
-        return evidenceElement;
+        return evidenceElementDataService.create(
+                StringUtils.trim(evidenceValue), 
+                getEvidence(evidenceCode));
     }
 
     @Override
@@ -581,22 +579,26 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             Node node,
             String messageCode,
             String elementName) {
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
+        SourceCodeRemark remark = 
+                processRemarkDataService.createSourceCodeRemark(
+                        processResult, 
+                        messageCode);
 
         remark.setLineNumber(searchNodeLineNumber(node));
 
-        EvidenceElement evidenceElement = evidenceElementFactory.create();
-        evidenceElement.setProcessRemark(remark);
-        evidenceElement.setValue(elementName);
-        evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
+        EvidenceElement evidenceElement = 
+                evidenceElementDataService.create(
+                        remark, 
+                        elementName, 
+                        getEvidence(DEFAULT_EVIDENCE));
+        
         for (String attr : evidenceElementList) {
             if (node.getAttributes().getNamedItem(attr) != null) {
-                EvidenceElement evidenceElementSup = evidenceElementFactory.create();
-                evidenceElementSup.setProcessRemark(remark);
-                evidenceElementSup.setValue(node.getAttributes().getNamedItem(attr).getNodeValue());
-                evidenceElementSup.setEvidence(getEvidence(attr));
+                EvidenceElement evidenceElementSup = 
+                    evidenceElementDataService.create(
+                            remark, 
+                            node.getAttributes().getNamedItem(attr).getNodeValue(), 
+                            getEvidence(attr));
                 remark.addElement(evidenceElementSup);
             }
         }
@@ -609,11 +611,14 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             TestSolution processResult,
             Element element,
             String messageCode) {
-        SourceCodeRemark remark = sourceCodeRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
-        remark.setLineNumber(searchElementLineNumber(element));
-        remark.setTarget(element.nodeName());
+        
+        SourceCodeRemark remark = 
+                processRemarkDataService.createSourceCodeRemark(
+                        element.nodeName(), 
+                        processResult, 
+                        messageCode, 
+                        searchElementLineNumber(element));
+        
         remark.setSnippet(getSnippetFromElement(element));
         for (String attr : evidenceElementList) {
             EvidenceElement evidenceElementSup;
@@ -665,9 +670,9 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             TestSolution processResult,
             String messageCode,
             Collection<EvidenceElement> evidenceElementList) {
-        ProcessRemark remark = processRemarkFactory.create();
-        remark.setIssue(processResult);
-        remark.setMessageCode(messageCode);
+        
+        ProcessRemark remark = processRemarkDataService.create(processResult,messageCode);
+        
         for (EvidenceElement element : evidenceElementList) {
             remark.addElement(element);
             element.setProcessRemark(remark);
@@ -679,7 +684,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public ProcessRemark createConsolidationRemark(
             TestSolution processResult,
             String messageCode) {
-        return processRemarkFactory.create(processResult, messageCode);
+        return processRemarkDataService.create(processResult, messageCode);
     }
 
     @Override
@@ -691,17 +696,19 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         ProcessRemark remark = createConsolidationRemark(processResult, messageCode);
 
         if (value != null) {
-            EvidenceElement evidenceElement = evidenceElementFactory.create();
-            evidenceElement.setProcessRemark(remark);
-            evidenceElement.setValue(value);
-            evidenceElement.setEvidence(getEvidence(DEFAULT_EVIDENCE));
+            EvidenceElement evidenceElement = 
+                evidenceElementDataService.create(
+                        remark, 
+                        value, 
+                        getEvidence(DEFAULT_EVIDENCE));
             remark.addElement(evidenceElement);
         }
         if (url != null) {
-            EvidenceElement evidenceElement = evidenceElementFactory.create();
-            evidenceElement.setProcessRemark(remark);
-            evidenceElement.setValue(url);
-            evidenceElement.setEvidence(getEvidence(URL_EVIDENCE));
+            EvidenceElement evidenceElement = 
+                evidenceElementDataService.create(
+                        remark, 
+                        url, 
+                        getEvidence(URL_EVIDENCE));
             remark.addElement(evidenceElement);
         }
         return remark;

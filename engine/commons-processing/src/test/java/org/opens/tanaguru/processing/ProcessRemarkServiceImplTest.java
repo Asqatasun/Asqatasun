@@ -51,7 +51,7 @@ public class ProcessRemarkServiceImplTest extends TestCase {
      * Test of setDocument method, of class ProcessRemarkServiceImpl.
      */
     public void testGetSnippetFromElement() {
-        ProcessRemarkServiceImpl instance = new ProcessRemarkServiceImpl(null, null, null, null);
+        ProcessRemarkServiceImpl instance = new ProcessRemarkServiceImpl(null, null, null);
         
         //--------------------------------------------------------------------//
         //-----------------------Test1----------------------------------------//
