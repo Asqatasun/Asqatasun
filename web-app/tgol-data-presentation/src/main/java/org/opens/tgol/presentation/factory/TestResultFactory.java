@@ -26,7 +26,6 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.*;
-import org.opens.tanaguru.entity.factory.audit.ProcessResultFactory;
 import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
@@ -75,11 +74,11 @@ public final class TestResultFactory {
         this.auditDataService = auditDataService;
     }
 
-    private ProcessResultDataService processDataService;
+    private ProcessResultDataService processResultDataService;
 
     @Autowired
     public void setProcessResultDataService(ProcessResultDataService processDataService) {
-        this.processDataService = processDataService;
+        this.processResultDataService = processDataService;
     }
 
     private TestDataService testDataService;
@@ -87,13 +86,6 @@ public final class TestResultFactory {
     @Autowired
     public void setTestDataService(TestDataService testDataService) {
         this.testDataService = testDataService;
-    }
-
-    private ProcessResultFactory processResultFactory;
-
-    @Autowired
-    public void setProcessResultFactory(ProcessResultFactory processResultFactory) {
-        this.processResultFactory = processResultFactory;
     }
 
     private String selectAllThemeKey;
@@ -196,7 +188,7 @@ public final class TestResultFactory {
     private List<DefiniteResult> constructHistoryChanges(
             ProcessResult processResult) {
 
-        List<DefiniteResult> histoyChanges = processDataService.getHistoyChanges(processResult);
+        List<DefiniteResult> histoyChanges = processResultDataService.getHistoyChanges(processResult);
         return histoyChanges;
 
     }
@@ -810,9 +802,11 @@ public final class TestResultFactory {
             if (!testedTestList.contains(test) && (StringUtils.equalsIgnoreCase(test.getCriterion().getTheme().getCode(), themeCode)
                     || themeCode == null
                     || StringUtils.equalsIgnoreCase(selectAllThemeKey, themeCode))) {
-                ProcessResult pr = processResultFactory.createDefiniteResult();
-                pr.setTest(test);
-                pr.setValue(TestSolution.NOT_TESTED);
+                ProcessResult pr = 
+                        processResultDataService.getDefiniteResult(
+                                test, 
+                                TestSolution.NOT_TESTED);
+
                 pr.setRemarkSet(new ArrayList<ProcessRemark>());
                 if (manualValues.containsKey(test.getLabel())) {
                     ((DefiniteResult) pr).setManualDefiniteValue(manualValues.get(test.getLabel()));
@@ -838,12 +832,14 @@ public final class TestResultFactory {
             Test test,
             WebResource wr) {
 
-        ProcessResult pr = processResultFactory.createDefiniteResult();
-        pr.setTest(test);
-        pr.setValue(TestSolution.NOT_TESTED);
-        pr.setRemarkSet(new ArrayList<ProcessRemark>());
-        pr.setSubject(wr);
-        pr.setElementCounter(1); //TODO set value to 1 or 0?
+        ProcessResult pr = 
+                processResultDataService.getDefiniteResult(
+                        test, 
+                        wr, 
+                        TestSolution.NOT_TESTED, 
+                        1,  //TODO set value to 1 or 0?
+                        new ArrayList<ProcessRemark>());
+        
         pr.setNetResultAudit(wr.getAudit());
         pr.setGrossResultAudit(wr.getAudit());
         return pr;
