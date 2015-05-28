@@ -7,8 +7,7 @@
 
     <bean id="ruleImplementationLoaderService" class="org.opens.tanaguru.service.RuleImplementationLoaderServiceImpl">
         <property name="ruleImplementationLoaderFactory" ref="ruleImplementationLoaderFactory"/>
-        <property name="definiteResultFactory" ref="definiteResultFactory"/>
-        <property name="indefiniteResultFactory" ref="indefiniteResultFactory"/>
+        <property name="processResultDataService" ref="processResultDataService"/>
         <property name="nomenclatureLoaderService" ref="nomenclatureLoaderService"/>
         <property name="processRemarkDataService" ref="processRemarkDataService"/>
     </bean>
