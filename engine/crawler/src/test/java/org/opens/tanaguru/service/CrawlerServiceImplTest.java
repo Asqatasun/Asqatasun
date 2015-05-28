@@ -28,10 +28,9 @@ import org.opens.tanaguru.crawler.CrawlerFactory;
 import org.opens.tanaguru.crawler.CrawlerFactoryImpl;
 import org.opens.tanaguru.crawler.util.*;
 import org.opens.tanaguru.entity.audit.Audit;
+import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
-import org.opens.tanaguru.entity.factory.audit.AuditFactory;
-import org.opens.tanaguru.entity.factory.audit.AuditFactoryImpl;
 import org.opens.tanaguru.entity.parameterization.*;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -63,7 +62,6 @@ public class CrawlerServiceImplTest extends TestCase {
             ResourceBundle.getBundle(SITES_URL_BUNDLE_NAME);
     private CrawlerService crawlerService;
     private CrawlerFactory crawlerFactory;
-    private AuditFactory auditFactory;
     private WebResourceDataService mockWebResourceDataService;
     private ContentDataService mockContentDataService;
     private AuditDataService mockAuditDataService;
@@ -92,8 +90,6 @@ public class CrawlerServiceImplTest extends TestCase {
         crawlerService.setAuditDataService(mockAuditDataService);
         crawlerService.setContentDataService(mockContentDataService);
 
-        auditFactory = new AuditFactoryImpl();
-
         initCrawlConfigUtils();
     }
 
@@ -120,7 +116,7 @@ public class CrawlerServiceImplTest extends TestCase {
             String inlusionRegexp,
             String maxDuration,
             String maxDocuments) {
-        Audit audit = auditFactory.create();
+        Audit audit = new AuditImpl();
         audit.setParameterSet(setCrawlParameters(depth, exlusionRegexp, inlusionRegexp, maxDuration, maxDocuments));
         WebResource site = crawlerService.crawlSite(audit, siteUrl);
         Collection<Long> contentListId = mockContentDataService.getSSPIdsFromWebResource(site.getId(), HttpStatus.SC_OK, 0, 10);
@@ -248,7 +244,7 @@ public class CrawlerServiceImplTest extends TestCase {
         System.out.println("crawl_page");
         crawlerFactory.setCrawlConfigFilePath(PAGE_CRAWL_CONF_FILE_PATH);
         String siteUrl = bundle.getString(FULL_SITE_CRAWL_URL_KEY);
-        Audit audit = auditFactory.create();
+        Audit audit = new AuditImpl();
         audit.setParameterSet(setCrawlParameters("3", "", "", "", ""));
         WebResource page = crawlerService.crawlPage(audit, siteUrl);
         Collection<Long> contentListId = mockContentDataService.getSSPIdsFromWebResource(page.getId(), HttpStatus.SC_OK, 0, 10);
