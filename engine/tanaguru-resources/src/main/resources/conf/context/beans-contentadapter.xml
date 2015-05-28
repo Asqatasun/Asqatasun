@@ -42,8 +42,6 @@
     </bean>
   
     <bean id="contentAdapterService" class="org.opens.tanaguru.service.ContentAdapterServiceImpl">
-        <property name="contentFactory" ref="contentFactory"/>
-
         <property name="writeCleanHtmlInFile" value="false"/>
         <property name="tempFolderRootPath" value="${tempFolderRootPath}"/>
         
