@@ -25,6 +25,7 @@ import java.util.Collection;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.PreProcessResult;
 import org.opens.tanaguru.entity.dao.audit.PreProcessResultDAO;
+import org.opens.tanaguru.entity.factory.audit.PreProcessResultFactory;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
@@ -60,4 +61,11 @@ public class PreProcessResultDataServiceImpl extends AbstractGenericDataService<
         return ((PreProcessResultDAO) entityDao).findPreProcessResultFromAudit(audit);
     }
 
+    @Override
+    public PreProcessResult getPreProcessResult(String key, String value, Audit audit, WebResource webResource) {
+        PreProcessResult preProcessResult = ((PreProcessResultFactory) entityFactory)
+                .create(key, value, audit, webResource);
+        return preProcessResult;
+    }
+    
 }
