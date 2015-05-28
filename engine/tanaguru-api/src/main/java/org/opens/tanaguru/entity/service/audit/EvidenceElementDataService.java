@@ -22,6 +22,7 @@
 package org.opens.tanaguru.entity.service.audit;
 
 import java.util.Collection;
+import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
@@ -41,5 +42,29 @@ public interface EvidenceElementDataService extends
      */
     Collection<EvidenceElement> findAllByProcessRemark(
             ProcessRemark processRemark);
+
+    /**
+     * 
+     * @param value
+     * @return
+     */
+    EvidenceElement create(String value);
+    
+    /**
+     * 
+     * @param value
+     * @param evidence
+     * @return 
+     */
+    EvidenceElement create(String value, Evidence evidence);
+    
+    /**
+     * 
+     * @param processRemark
+     * @param value
+     * @param evidence
+     * @return 
+     */
+    EvidenceElement create(ProcessRemark processRemark, String value, Evidence evidence);
 
 }

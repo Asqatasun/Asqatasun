@@ -21,8 +21,10 @@
  */
 package org.opens.tanaguru.entity.factory.audit;
 
+import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 
 /**
  * 
@@ -37,5 +39,22 @@ public interface EvidenceElementFactory extends
      * @return
      */
     EvidenceElement create(String value);
+    
+    /**
+     * 
+     * @param value
+     * @param evidence
+     * @return 
+     */
+    EvidenceElement create(String value, Evidence evidence);
+    
+    /**
+     * 
+     * @param processRemark
+     * @param value
+     * @param evidence
+     * @return 
+     */
+    EvidenceElement create(ProcessRemark processRemark, String value, Evidence evidence);
 
 }

@@ -22,9 +22,11 @@
 package org.opens.tanaguru.entity.service.audit;
 
 import java.util.Collection;
+import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.dao.audit.EvidenceElementDAO;
+import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 
 /**
@@ -43,6 +45,21 @@ public class EvidenceElementDataServiceImpl extends AbstractGenericDataService<E
             ProcessRemark processRemark) {
         return ((EvidenceElementDAO) entityDao).
                 retrieveAllByProcessRemark(processRemark);
+    }
+
+    @Override
+    public EvidenceElement create(String value) {
+        return ((EvidenceElementFactory) entityFactory).create(value);
+    }
+
+    @Override
+    public EvidenceElement create(ProcessRemark processRemark, String value, Evidence evidence) {
+        return ((EvidenceElementFactory) entityFactory).create(processRemark, value, evidence);
+    }
+    
+    @Override
+    public EvidenceElement create(String value, Evidence evidence) {
+        return ((EvidenceElementFactory) entityFactory).create(value, evidence);
     }
 
 }
