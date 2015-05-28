@@ -146,4 +146,12 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
         return indefiniteResultFactory.create(test, subject, value, remarkList);
     }
 
+    @Override
+    public DefiniteResult getDefiniteResult(Test test, TestSolution solution) {
+        DefiniteResult definiteResult = definiteResultFactory.create();
+        definiteResult.setTest(test);
+        definiteResult.setDefiniteValue(solution);
+        return definiteResult;
+    }
+
 }
