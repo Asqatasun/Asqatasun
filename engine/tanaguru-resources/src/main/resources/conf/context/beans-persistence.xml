@@ -40,10 +40,10 @@
           p:user="${jdbc.username}"
           p:password="${jdbc.password}"
           p:idleConnectionTestPeriod="3600"
-          p:initialPoolSize="50"
+          p:initialPoolSize="1"
           p:maxPoolSize="1000"
-          p:minPoolSize="10"
-          p:acquireIncrement="10"
+          p:minPoolSize="1"
+          p:acquireIncrement="1"
           p:debugUnreturnedConnectionStackTraces="true"
     />
     <!--
