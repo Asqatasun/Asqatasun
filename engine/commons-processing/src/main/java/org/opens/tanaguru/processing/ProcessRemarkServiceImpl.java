@@ -210,12 +210,12 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public ProcessRemark createProcessRemark(
             TestSolution processResult,
             String messageCode) {
-        return processRemarkDataService.create(processResult, messageCode);
+        return processRemarkDataService.getProcessRemark(processResult, messageCode);
     }
 
     @Override
     public void addProcessRemark(TestSolution processResult, String messageCode) {
-        remarkSet.add(processRemarkDataService.create(processResult, messageCode));
+        remarkSet.add(processRemarkDataService.getProcessRemark(processResult, messageCode));
     }
 
     @Override
@@ -244,7 +244,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String messageCode, 
             Collection<EvidenceElement> evidenceElementList) {
         SourceCodeRemark remark = 
-                processRemarkDataService.createSourceCodeRemark(
+                processRemarkDataService.getSourceCodeRemark(
                         processResult, 
                         messageCode);
         
@@ -272,7 +272,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             EvidenceElement... evidenceElementList) {
         
         SourceCodeRemark remark = 
-                processRemarkDataService.createSourceCodeRemark(
+                processRemarkDataService.getSourceCodeRemark(
                         targetValue, 
                         processResult, 
                         messageCode, 
@@ -292,7 +292,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String messageCode, 
             Collection<EvidenceElement> evidenceElementList) {
         SourceCodeRemark remark = 
-                processRemarkDataService.createSourceCodeRemark(
+                processRemarkDataService.getSourceCodeRemark(
                         processResult, 
                         messageCode);
         
@@ -315,7 +315,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String attrName, 
             String fileName) {// XXX
         SourceCodeRemark remark = 
-                processRemarkDataService.createSourceCodeRemark(
+                processRemarkDataService.getSourceCodeRemark(
                         processResult, 
                         messageCode);
         // This a fake sourceCode Remark, the line number cannot be found
@@ -323,7 +323,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         remark.setLineNumber(-1);
         
         EvidenceElement evidenceElement = 
-                evidenceElementDataService.create(
+                evidenceElementDataService.getEvidenceElement(
                         remark, 
                         attrName, 
                         getEvidence(DEFAULT_EVIDENCE));
@@ -332,7 +332,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         try {
             if (selectorValue != null) {
                 EvidenceElement cssSelectorEvidenceElement = 
-                        evidenceElementDataService.create(
+                        evidenceElementDataService.getEvidenceElement(
                                 remark, 
                                 selectorValue, 
                                 getEvidence(CSS_SELECTOR_EVIDENCE));
@@ -341,7 +341,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             }
             if (fileName != null) {
                 EvidenceElement fileNameEvidenceElement = 
-                        evidenceElementDataService.create(
+                        evidenceElementDataService.getEvidenceElement(
                                 remark, 
                                 fileName, 
                                 getEvidence(CSS_FILENAME_EVIDENCE));
@@ -568,7 +568,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     @Override
     public EvidenceElement getEvidenceElement(String evidenceCode, String evidenceValue) {
-        return evidenceElementDataService.create(
+        return evidenceElementDataService.getEvidenceElement(
                 StringUtils.trim(evidenceValue), 
                 getEvidence(evidenceCode));
     }
@@ -580,14 +580,14 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String messageCode,
             String elementName) {
         SourceCodeRemark remark = 
-                processRemarkDataService.createSourceCodeRemark(
+                processRemarkDataService.getSourceCodeRemark(
                         processResult, 
                         messageCode);
 
         remark.setLineNumber(searchNodeLineNumber(node));
 
         EvidenceElement evidenceElement = 
-                evidenceElementDataService.create(
+                evidenceElementDataService.getEvidenceElement(
                         remark, 
                         elementName, 
                         getEvidence(DEFAULT_EVIDENCE));
@@ -595,7 +595,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         for (String attr : evidenceElementList) {
             if (node.getAttributes().getNamedItem(attr) != null) {
                 EvidenceElement evidenceElementSup = 
-                    evidenceElementDataService.create(
+                    evidenceElementDataService.getEvidenceElement(
                             remark, 
                             node.getAttributes().getNamedItem(attr).getNodeValue(), 
                             getEvidence(attr));
@@ -613,7 +613,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String messageCode) {
         
         SourceCodeRemark remark = 
-                processRemarkDataService.createSourceCodeRemark(
+                processRemarkDataService.getSourceCodeRemark(
                         element.nodeName(), 
                         processResult, 
                         messageCode, 
@@ -671,7 +671,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
             String messageCode,
             Collection<EvidenceElement> evidenceElementList) {
         
-        ProcessRemark remark = processRemarkDataService.create(processResult,messageCode);
+        ProcessRemark remark = processRemarkDataService.getProcessRemark(processResult,messageCode);
         
         for (EvidenceElement element : evidenceElementList) {
             remark.addElement(element);
@@ -684,7 +684,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     public ProcessRemark createConsolidationRemark(
             TestSolution processResult,
             String messageCode) {
-        return processRemarkDataService.create(processResult, messageCode);
+        return processRemarkDataService.getProcessRemark(processResult, messageCode);
     }
 
     @Override
@@ -697,7 +697,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
         if (value != null) {
             EvidenceElement evidenceElement = 
-                evidenceElementDataService.create(
+                evidenceElementDataService.getEvidenceElement(
                         remark, 
                         value, 
                         getEvidence(DEFAULT_EVIDENCE));
@@ -705,7 +705,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
         }
         if (url != null) {
             EvidenceElement evidenceElement = 
-                evidenceElementDataService.create(
+                evidenceElementDataService.getEvidenceElement(
                         remark, 
                         url, 
                         getEvidence(URL_EVIDENCE));

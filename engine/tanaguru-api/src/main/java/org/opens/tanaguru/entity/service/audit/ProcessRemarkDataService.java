@@ -73,13 +73,13 @@ public interface ProcessRemarkDataService extends
      * @param messageCode
      * @return
      */
-    ProcessRemark create(TestSolution issue, String messageCode);
+    ProcessRemark getProcessRemark(TestSolution issue, String messageCode);
     
     /**
      * 
      * @return 
      */
-    SourceCodeRemark createSourceCodeRemark();
+    SourceCodeRemark getSourceCodeRemark();
     
     /**
      * 
@@ -87,7 +87,7 @@ public interface ProcessRemarkDataService extends
      * @param messageCode
      * @return 
      */
-    SourceCodeRemark createSourceCodeRemark(TestSolution issue, String messageCode);
+    SourceCodeRemark getSourceCodeRemark(TestSolution issue, String messageCode);
     
     /**
      * 
@@ -97,6 +97,6 @@ public interface ProcessRemarkDataService extends
      * @param lineNumber
      * @return 
      */
-    SourceCodeRemark createSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber);
+    SourceCodeRemark getSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber);
     
 }
