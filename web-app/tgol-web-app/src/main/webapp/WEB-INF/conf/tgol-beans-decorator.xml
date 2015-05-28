@@ -23,10 +23,4 @@
         <property name="entityDao" ref="tgolParameterDAO"/>
     </bean>
 
-    <bean name="tgolLevelDAO" class="org.opens.tgol.entity.dao.tanaguru.reference.TgolLevelDAOImpl"/>
-    <bean name="levelDataServiceDecorator" class="org.opens.tgol.entity.decorator.tanaguru.reference.LevelDataServiceDecoratorImpl">
-        <property name="entityFactory" ref="levelFactory"/>
-        <property name="entityDao" ref="tgolLevelDAO"/>
-    </bean>
-
 </beans>
