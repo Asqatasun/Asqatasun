@@ -24,6 +24,7 @@ package org.opens.tanaguru.service.mock;
 import java.util.*;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
@@ -34,8 +35,8 @@ import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
  */
 public class MockContentDataService implements ContentDataService {
 
-    Map<Long, Content> contentMap = new LinkedHashMap<Long, Content>();
-    private Long id = Long.valueOf(1);
+    Map<Long, Content> contentMap = new LinkedHashMap<>();
+    private Long id = 1l;
     
     @Override
     public JavascriptContent findJavascriptContent(Audit audit, String uri) {
@@ -64,7 +65,7 @@ public class MockContentDataService implements ContentDataService {
 
     @Override
     public Long getNumberOfOrphanContent(WebResource webResource) {
-        return Long.valueOf(0);
+        return 0l;
     }
 
     @Override
@@ -74,7 +75,7 @@ public class MockContentDataService implements ContentDataService {
 
     @Override
     public Long getNumberOfOrphanRelatedContent(WebResource webResource) {
-        return Long.valueOf(0);
+        return 0l;
     }
 
     @Override
@@ -84,12 +85,12 @@ public class MockContentDataService implements ContentDataService {
 
     @Override
     public Long getNumberOfSSPFromWebResource(WebResource webResource, int httpStatusCode) {
-        return Long.valueOf(0);
+        return 0l;
     }
 
     @Override
     public Long getNumberOfRelatedContentFromWebResource(WebResource webResource) {
-        return Long.valueOf(0);
+        return 0l;
     }
 
     @Override
@@ -104,7 +105,7 @@ public class MockContentDataService implements ContentDataService {
 
     @Override
     public Collection<Long> getSSPIdsFromWebResource(Long webResourceId, int httpStatusCode, int start, int chunkSize) {
-        Collection<Long> idList = new ArrayList<Long>();
+        Collection<Long> idList = new ArrayList<>();
         for (Content content : contentMap.values()) {
             if (content.getHttpStatusCode() == httpStatusCode) {
                 idList.add(content.getId());
@@ -130,7 +131,7 @@ public class MockContentDataService implements ContentDataService {
 
     @Override
     public Collection<RelatedContent> getRelatedContentFromAudit(Audit audit) {
-        return new HashSet<RelatedContent>(); 
+        return new HashSet<>(); 
     }
 
     @Override
@@ -214,6 +215,86 @@ public class MockContentDataService implements ContentDataService {
     @Override
     public Collection<Content> getSSPWithRelatedContentFromWebResource(Long webResourceId, Long startValue, int windowSize, boolean acceptContentWithNullDom) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public SSP getSSP(String uri) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SSP getSSP(String uri, Page page) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Page page) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, int httpStatusCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Page page, int httpStatusCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SSP getSSP(Date dateOfLoading, String uri, String sourceCode, Audit audit, Page page, int httpStatusCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StylesheetContent getStylesheetContent(String uri, SSP ssp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StylesheetContent getStylesheetContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StylesheetContent getStylesheetContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode, int httpStatusCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public JavascriptContent getJavascriptContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public JavascriptContent getJavascriptContent(Date dateOfLoading, String uri, SSP ssp, String sourceCode, int httpStatusCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ImageContent getImageContent(Date dateOfLoading, String uri, SSP ssp, byte[] binaryContent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ImageContent getImageContent(String uri, SSP ssp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ImageContent getImageContent(Date dateOfLoading, String uri, SSP ssp, byte[] binaryContent, int httpStatusCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public RelatedContent getRelatedContent(String uri, SSP ssp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
