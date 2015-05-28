@@ -26,14 +26,19 @@ import java.util.List;
 
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
+import org.opens.tanaguru.entity.audit.IndefiniteResult;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.audit.ProcessResultDAO;
+import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
+import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -42,6 +47,18 @@ import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
 public class ProcessResultDataServiceImpl extends AbstractGenericDataService<ProcessResult, Long> implements
         ProcessResultDataService {
 
+    private DefiniteResultFactory definiteResultFactory;
+    @Autowired
+    public void setDefiniteResultFactory(DefiniteResultFactory definiteResultFactory) {
+        this.definiteResultFactory = definiteResultFactory;
+    }
+    
+    private IndefiniteResultFactory indefiniteResultFactory;
+    @Autowired
+    public void setIndefiniteResultFactory(IndefiniteResultFactory indefiniteResultFactory) {
+        this.indefiniteResultFactory = indefiniteResultFactory;
+    }
+    
     @Override
     public int getResultByThemeCount(WebResource webresource, TestSolution testSolution, Theme theme) {
         return ((ProcessResultDAO) entityDao).
@@ -94,9 +111,39 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
         return ((ProcessResultDAO) entityDao).retrieveIndefiniteResultFromAudit(audit);
     }
 
-	@Override
-	public List<DefiniteResult> getHistoyChanges(ProcessResult processResult) {
-		return ((ProcessResultDAO) entityDao).getHistoryChanges(processResult);
-	}
+    @Override
+    public List<DefiniteResult> getHistoyChanges(ProcessResult processResult) {
+        return ((ProcessResultDAO) entityDao).getHistoryChanges(processResult);
+    }
+
+    @Override
+    public DefiniteResult getDefiniteResult(Test test, WebResource subject) {
+        return definiteResultFactory.create(test, subject);
+    }
+
+    @Override
+    public DefiniteResult getDefiniteResult(Test test, WebResource subject, TestSolution value, Collection<ProcessRemark> remarkSet) {
+        return definiteResultFactory.create(test, subject, value, remarkSet);
+    }
+
+    @Override
+    public DefiniteResult getDefiniteResult(Test test, WebResource subject, TestSolution value, int elementCounter) {
+        return definiteResultFactory.create(test, subject, value, elementCounter);
+    }
+
+    @Override
+    public DefiniteResult getDefiniteResult(Test test, WebResource subject, TestSolution value, int elementCounter, Collection<ProcessRemark> remarkSet) {
+        return definiteResultFactory.create(test, subject, value, elementCounter, remarkSet);
+    }
+
+    @Override
+    public IndefiniteResult getIndefiniteResult(Test test, WebResource subject, String value) {
+        return indefiniteResultFactory.create(test, subject, value);
+    }
+
+    @Override
+    public IndefiniteResult getIndefiniteResult(Test test, WebResource subject, String value, Collection<ProcessRemark> remarkList) {
+        return indefiniteResultFactory.create(test, subject, value, remarkList);
+    }
 
 }
