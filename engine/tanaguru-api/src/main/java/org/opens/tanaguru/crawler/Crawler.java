@@ -22,7 +22,6 @@
 package org.opens.tanaguru.crawler;
 
 import java.util.Collection;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
