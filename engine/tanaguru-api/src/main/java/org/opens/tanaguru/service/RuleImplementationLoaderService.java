@@ -22,10 +22,9 @@
 package org.opens.tanaguru.service;
 
 import org.opens.tanaguru.entity.reference.Test;
-import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import java.util.Set;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderFactory;
 
 /**
@@ -43,16 +42,9 @@ public interface RuleImplementationLoaderService {
 
     /**
      *
-     * @param definiteResultFactory
+     * @param processResultDataService
      */
-    void setDefiniteResultFactory(DefiniteResultFactory definiteResultFactory);
-
-    /**
-     *
-     * @param indefiniteResultFactory
-     */
-    void setIndefiniteResultFactory(
-            IndefiniteResultFactory indefiniteResultFactory);
+    void setProcessResultDataService(ProcessResultDataService processResultDataService);
 
     /**
      *
