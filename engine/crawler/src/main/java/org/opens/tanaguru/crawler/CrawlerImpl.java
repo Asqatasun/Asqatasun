@@ -37,7 +37,6 @@ import org.jsoup.select.Elements;
 import org.opens.tanaguru.crawler.framework.TanaguruCrawlJob;
 import org.opens.tanaguru.crawler.util.CrawlUtils;
 import org.opens.tanaguru.entity.audit.*;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
@@ -80,7 +79,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     private SSP lastFetchedSSP;
 
     private TanaguruCrawlJob crawlJob;
-    private Set<Long> relatedContentSetTemp = new HashSet<Long>();
+    private final Set<Long> relatedContentSetTemp = new HashSet<>();
     
     private Pattern cssFilePattern = null;
     public Pattern getCssFilePattern() {
@@ -116,12 +115,6 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     @Override
     public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
-    }
-
-    private ContentFactory contentFactory;
-    @Override
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
     }
 
     private String crawlConfigFilePath = null;
@@ -170,7 +163,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         this.persistOnTheFly = persistOnTheFly;
     }
     
-    private GzipHeader gzipHeader = new GzipHeader();
+    private final GzipHeader gzipHeader = new GzipHeader();
     public GzipHeader getGzipHeader() {
         return gzipHeader;
     }
@@ -191,7 +184,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     public void setSiteURL(String siteURL) {
         mainWebResource = webResourceDataService.createSite(siteURL);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
-        Collection<String> urlList = new ArrayList<String>();
+        Collection<String> urlList = new ArrayList<>();
         urlList.add(siteURL);
         this.crawlJob = new TanaguruCrawlJob(
                 urlList,
@@ -232,7 +225,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     public void setPageURL(String pageURL) {
         mainWebResource = webResourceDataService.createPage(pageURL);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
-        Collection<String> urlList = new ArrayList<String>();
+        Collection<String> urlList = new ArrayList<>();
         urlList.add(pageURL);
         this.crawlJob = new TanaguruCrawlJob(
                 urlList,
@@ -425,7 +418,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
             String charset,
             Page page,
             String sourceCode) {
-        SSP ssp = contentFactory.createSSP(uri);
+        SSP ssp = contentDataService.getSSP(uri);
         ssp.setPage(page);
         ssp.setCharset(charset);
         ssp.setSource(sourceCode);
@@ -455,7 +448,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param cssCode
      */
     private void saveStylesheetFromFetchedCss(CrawlURI curi, String cssCode) {
-        StylesheetContent newCssContent = contentFactory.createStylesheetContent(
+        StylesheetContent newCssContent = contentDataService.getStylesheetContent(
                 null,
                 curi.getURI(),
                 null,
@@ -480,7 +473,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @param rawImage 
      */
     private void saveRawImageFromFetchedImage(CrawlURI curi, byte[] rawImage) {
-        ImageContent newImgContent = contentFactory.createImageContent(
+        ImageContent newImgContent = contentDataService.getImageContent(
                     null,
                     curi.getURI(),
                     null,
@@ -664,7 +657,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      * @throws IOException 
      */
     private String extractCharset(CrawlURI curi, RecordingInputStream recis) throws IOException{
-        if (curi.getContentType().indexOf("=") != -1 ) {
+        if (curi.getContentType().contains("=") ) {
             return curi.getContentType().substring(curi.getContentType().indexOf("=")+1);
         } else {
             return CrawlUtils.extractCharset(recis.getMessageBodyReplayInputStream());

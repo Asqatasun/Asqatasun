@@ -32,8 +32,6 @@ import org.opens.tanaguru.entity.audit.Content;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.factory.audit.AuditFactory;
 import org.opens.tanaguru.entity.factory.audit.AuditFactoryImpl;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
-import org.opens.tanaguru.entity.factory.audit.ContentFactoryImpl;
 import org.opens.tanaguru.entity.parameterization.*;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
@@ -66,7 +64,6 @@ public class CrawlerServiceImplTest extends TestCase {
     private CrawlerService crawlerService;
     private CrawlerFactory crawlerFactory;
     private AuditFactory auditFactory;
-    private ContentFactory contentFactory;
     private WebResourceDataService mockWebResourceDataService;
     private ContentDataService mockContentDataService;
     private AuditDataService mockAuditDataService;
@@ -80,8 +77,6 @@ public class CrawlerServiceImplTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
 
-        contentFactory = new ContentFactoryImpl();
-
         mockWebResourceDataService = new MockWebResourceDataService();
         mockContentDataService = new MockContentDataService();
         mockAuditDataService = new MockAuditDataService();
@@ -90,7 +85,6 @@ public class CrawlerServiceImplTest extends TestCase {
         crawlerFactory.setOutputDir("/tmp");
         ((CrawlerFactoryImpl) crawlerFactory).setWebResourceDataService(mockWebResourceDataService);
         ((CrawlerFactoryImpl) crawlerFactory).setContentDataService(mockContentDataService);
-        ((CrawlerFactoryImpl) crawlerFactory).setContentFactory(contentFactory);
 
         crawlerService = new CrawlerServiceImpl();
         crawlerService.setCrawlerFactory(crawlerFactory);
