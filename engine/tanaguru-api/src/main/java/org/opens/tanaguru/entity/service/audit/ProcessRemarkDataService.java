@@ -24,6 +24,7 @@ package org.opens.tanaguru.entity.service.audit;
 import java.util.Collection;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.sdk.entity.service.GenericDataService;
 
@@ -47,6 +48,7 @@ public interface ProcessRemarkDataService extends
     /**
      * 
      * @param processResult
+     * @param testSolution
      * @param limit
      * @return a collection of ProcessRemark
      */
@@ -64,5 +66,37 @@ public interface ProcessRemarkDataService extends
     int findNumberOfProcessRemarksFromProcessResultAndTestSolution(
             ProcessResult processResult, 
             TestSolution testSolution);
+    
+    /**
+     *
+     * @param issue
+     * @param messageCode
+     * @return
+     */
+    ProcessRemark create(TestSolution issue, String messageCode);
+    
+    /**
+     * 
+     * @return 
+     */
+    SourceCodeRemark createSourceCodeRemark();
+    
+    /**
+     * 
+     * @param issue
+     * @param messageCode
+     * @return 
+     */
+    SourceCodeRemark createSourceCodeRemark(TestSolution issue, String messageCode);
+    
+    /**
+     * 
+     * @param target
+     * @param issue
+     * @param messageCode
+     * @param lineNumber
+     * @return 
+     */
+    SourceCodeRemark createSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber);
     
 }
