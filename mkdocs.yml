@@ -21,8 +21,15 @@ pages:
 - ['usage-cli-doc.md',                      'Installation Command Line Interface (CLI)','Usage']
 - ['install-windows-prerequesites.md',      'Installation Windows','Prerequisites']
 - ['install-windows.md',                    'Installation Windows','Installation']
-- ['developer-doc.md',                      'Misc', 'Developer Documentation']
-- ['tanaguru-team.md',                      'Misc', 'Tanaguru Team']
+- ['engine-overview.md',                    'Developer Documentation', 'Engine overview']
+- ['business-model.md',                     'Developer Documentation', 'Business model description']
+- ['crawler-component.md',                  'Developer Documentation', 'Crawler component description']
+- ['scenario-loader-component.md',          'Developer Documentation', 'Scenario Loader component description']
+- ['adapter-component.md',                  'Developer Documentation', 'Adapter component description']
+- ['processor-component.md',                'Developer Documentation', 'Processor component description']
+- ['consolidator-component.md',             'Developer Documentation', 'Consolidator component description']
+- ['analyser-component.md',                  'Developer Documentation', 'Analyser component description']
+- ['tanaguru-team.md',                      'Tanaguru Team']
 
 theme: readthedocs
 repo_url: https://github.com/Tanaguru/Tanaguru
