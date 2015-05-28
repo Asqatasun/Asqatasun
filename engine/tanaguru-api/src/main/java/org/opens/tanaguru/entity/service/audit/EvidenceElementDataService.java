@@ -48,7 +48,7 @@ public interface EvidenceElementDataService extends
      * @param value
      * @return
      */
-    EvidenceElement create(String value);
+    EvidenceElement getEvidenceElement(String value);
     
     /**
      * 
@@ -56,7 +56,7 @@ public interface EvidenceElementDataService extends
      * @param evidence
      * @return 
      */
-    EvidenceElement create(String value, Evidence evidence);
+    EvidenceElement getEvidenceElement(String value, Evidence evidence);
     
     /**
      * 
@@ -65,6 +65,6 @@ public interface EvidenceElementDataService extends
      * @param evidence
      * @return 
      */
-    EvidenceElement create(ProcessRemark processRemark, String value, Evidence evidence);
+    EvidenceElement getEvidenceElement(ProcessRemark processRemark, String value, Evidence evidence);
 
 }

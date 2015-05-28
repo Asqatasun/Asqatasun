@@ -48,17 +48,17 @@ public class EvidenceElementDataServiceImpl extends AbstractGenericDataService<E
     }
 
     @Override
-    public EvidenceElement create(String value) {
+    public EvidenceElement getEvidenceElement(String value) {
         return ((EvidenceElementFactory) entityFactory).create(value);
     }
 
     @Override
-    public EvidenceElement create(ProcessRemark processRemark, String value, Evidence evidence) {
+    public EvidenceElement getEvidenceElement(ProcessRemark processRemark, String value, Evidence evidence) {
         return ((EvidenceElementFactory) entityFactory).create(processRemark, value, evidence);
     }
     
     @Override
-    public EvidenceElement create(String value, Evidence evidence) {
+    public EvidenceElement getEvidenceElement(String value, Evidence evidence) {
         return ((EvidenceElementFactory) entityFactory).create(value, evidence);
     }
 

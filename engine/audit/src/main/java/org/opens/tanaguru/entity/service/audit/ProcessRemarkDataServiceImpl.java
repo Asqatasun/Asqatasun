@@ -71,22 +71,22 @@ public class ProcessRemarkDataServiceImpl extends AbstractGenericDataService<Pro
     }
 
     @Override
-    public ProcessRemark create(TestSolution issue, String messageCode) {
+    public ProcessRemark getProcessRemark(TestSolution issue, String messageCode) {
         return ((ProcessRemarkFactory) entityFactory).create(issue, messageCode);
     }
     
     @Override
-    public SourceCodeRemark createSourceCodeRemark(TestSolution issue, String messageCode) {
+    public SourceCodeRemark getSourceCodeRemark(TestSolution issue, String messageCode) {
         return sourceCodeRemarkFactory.create(issue, messageCode);
     }
 
     @Override
-    public SourceCodeRemark createSourceCodeRemark() {
+    public SourceCodeRemark getSourceCodeRemark() {
         return sourceCodeRemarkFactory.create();
     }
     
     @Override
-    public SourceCodeRemark createSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber) {
+    public SourceCodeRemark getSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber) {
         return sourceCodeRemarkFactory.create(target, issue, messageCode, lineNumber);
     }
     

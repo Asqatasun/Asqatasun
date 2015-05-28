@@ -31,7 +31,6 @@ import org.opens.tanaguru.contentadapter.HTMLParserFactory;
 import org.opens.tanaguru.contentadapter.util.URLIdentifierFactory;
 import org.opens.tanaguru.contentloader.DownloaderFactory;
 import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
@@ -47,12 +46,6 @@ public interface ContentAdapterService {// TODO Write javadoc
      * @return
      */
     Collection<Content> adaptContent(Collection<Content> contentList);
-
-    /**
-     *
-     * @param contentFactory the content factory to set
-     */
-    void setContentFactory(ContentFactory contentFactory);
 
     /**
      *
