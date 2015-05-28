@@ -133,7 +133,7 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
             SSPHandler sspHandler, 
             int elementCounter) {
 
-        DefiniteResult result = definiteResultFactory.create(
+        DefiniteResult result = processResultDataService.getDefiniteResult(
                 test,
                 sspHandler.getSSP().getPage(),
                 testSolution,

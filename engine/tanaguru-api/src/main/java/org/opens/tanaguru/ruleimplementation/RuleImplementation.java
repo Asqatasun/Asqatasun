@@ -26,10 +26,9 @@ import java.util.List;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 import java.util.Map;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
@@ -68,18 +67,10 @@ public interface RuleImplementation {
 
     /**
      *
-     * @param definiteResultFactory
-     *            the definite result factory to set
+     * @param processResultDataService
+     *            the ProcessResultDataService to set
      */
-    void setDefiniteResultFactory(DefiniteResultFactory definiteResultFactory);
-
-    /**
-     *
-     * @param indefiniteResultFactory
-     *            the indefinite result factory to set
-     */
-    void setIndefiniteResultFactory(
-            IndefiniteResultFactory indefiniteResultFactory);
+    void setProcessResultDataService(ProcessResultDataService processResultDataService);
 
     /**
      *

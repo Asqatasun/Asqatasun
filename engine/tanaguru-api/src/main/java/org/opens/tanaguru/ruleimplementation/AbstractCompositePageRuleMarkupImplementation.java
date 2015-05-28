@@ -71,8 +71,7 @@ public abstract class AbstractCompositePageRuleMarkupImplementation
     private void setServicesToRuleChecker(AbstractPageRuleMarkupImplementation checker) {
         checker.setTest(test);
         checker.setNomenclatureLoaderService(nomenclatureLoaderService);
-        checker.setDefiniteResultFactory(definiteResultFactory);
-        checker.setIndefiniteResultFactory(indefiniteResultFactory);
+        checker.setProcessResultDataService(processResultDataService);
     }
 
 }

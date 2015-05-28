@@ -26,12 +26,11 @@ import java.util.ArrayList;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
@@ -44,8 +43,7 @@ import org.opens.tanaguru.service.ProcessRemarkService;
  */
 public abstract class AbstractRuleImplementation implements RuleImplementation {
 
-    protected DefiniteResultFactory definiteResultFactory;
-    protected IndefiniteResultFactory indefiniteResultFactory;
+    protected ProcessResultDataService processResultDataService;
     protected NomenclatureLoaderService nomenclatureLoaderService;
     protected Test test;
 
@@ -71,9 +69,9 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
     public List<ProcessResult> consolidate(
             Map<WebResource, List<ProcessResult>> grossResultMap,
             ProcessRemarkService processRemarkService) {
-        Map<WebResource, List<ProcessResult>> fileteredGrossResultMap = new HashMap<WebResource, List<ProcessResult>>();
+        Map<WebResource, List<ProcessResult>> fileteredGrossResultMap = new HashMap<>();
         for (Map.Entry<WebResource, List<ProcessResult>> entry : grossResultMap.entrySet()) {
-            List<ProcessResult> processResultSet = new ArrayList<ProcessResult>();
+            List<ProcessResult> processResultSet = new ArrayList<>();
             for (ProcessResult processResult : entry.getValue()) {
                 if (processResult.getTest().getCode().equalsIgnoreCase(this.test.getCode())) {
                     processResultSet.add(processResult);
@@ -94,6 +92,7 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
      *
      * @param grossResultMap
      *            the gross result map filtered used for consolidation.
+     * @param processRemarkService
      * @return the net result list from the consolidation operation.
      */
     protected abstract List<ProcessResult> consolidateImpl(
@@ -133,18 +132,6 @@ public abstract class AbstractRuleImplementation implements RuleImplementation {
      * @return the result of the processing.
      */
     protected abstract ProcessResult processImpl(SSPHandler sspHandler);
-
-    @Override
-    public void setDefiniteResultFactory(
-            DefiniteResultFactory definiteResultFactory) {
-        this.definiteResultFactory = definiteResultFactory;
-    }
-
-    @Override
-    public void setIndefiniteResultFactory(
-            IndefiniteResultFactory indefiniteResultFactory) {
-        this.indefiniteResultFactory = indefiniteResultFactory;
-    }
 
     @Override
     public void setNomenclatureLoaderService(
