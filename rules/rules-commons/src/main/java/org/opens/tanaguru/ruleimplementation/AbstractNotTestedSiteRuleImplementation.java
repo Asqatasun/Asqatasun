@@ -53,7 +53,7 @@ public abstract class AbstractNotTestedSiteRuleImplementation
     @Override
     protected ProcessResult processImpl(SSPHandler sspHandler) {
         sspHandler.getProcessRemarkService().resetService();
-        return indefiniteResultFactory.create(
+        return processResultDataService.getIndefiniteResult(
                 test, 
                 sspHandler.getPage(), 
                 MOCK_INDEFINITE_RESULT);
@@ -64,7 +64,7 @@ public abstract class AbstractNotTestedSiteRuleImplementation
             Site group, 
             List<ProcessResult> groupedGrossResultList, 
             ProcessRemarkService processRemarkService) {
-        return definiteResultFactory.create(
+        return processResultDataService.getDefiniteResult(
                 test, 
                 group, 
                 TestSolution.NOT_TESTED, 
