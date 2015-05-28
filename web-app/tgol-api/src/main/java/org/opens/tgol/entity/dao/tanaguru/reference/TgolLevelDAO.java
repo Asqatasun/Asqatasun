@@ -38,6 +38,6 @@ public interface TgolLevelDAO extends GenericDAO<Level, Long> {
      * @param code
      * @return
      */
-    Level retrieveLevelByCode(String code);
+//    Level retrieveLevelByCode(String code);
 
 }

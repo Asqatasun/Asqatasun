@@ -98,4 +98,20 @@ public interface ActDAO extends GenericDAO<Act, Long> {
      * @return
      */
     int findNumberOfActByPeriodAndIp(Contract contract, Date limitDate, String ip);
+    
+    /**
+     * 
+     * @param idContract
+     * @param scope
+     * @return 
+     */
+    Act findLastActByContract(Long idContract, ScopeEnum scope);
+    
+    /**
+     * 
+     * @param idContract
+     * @param scenarioName
+     * @return 
+     */
+    Act findLastActByContractAndScenario(Long idContract, String scenarioName);
 }
