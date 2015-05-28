@@ -78,7 +78,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     }
 
     private Collection<Content> run(Collection<Content> contentList) {
-        Collection<Content> localResult = new ArrayList<Content>();
+        Collection<Content> localResult = new ArrayList<>();
         for (Content content : contentList) {
             // Unreachable resources (404 error) are saved in the list for reports
             // We only handle here the fetched content (HttpStatus=200)

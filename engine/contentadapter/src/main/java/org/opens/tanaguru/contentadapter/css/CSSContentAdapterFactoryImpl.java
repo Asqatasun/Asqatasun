@@ -23,7 +23,6 @@ package org.opens.tanaguru.contentadapter.css;
 
 import org.opens.tanaguru.contentadapter.util.URLIdentifier;
 import org.opens.tanaguru.contentloader.Downloader;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
 
 /**
@@ -36,12 +35,10 @@ public class CSSContentAdapterFactoryImpl implements CSSContentAdapterFactory {
 
     @Override
     public CSSContentAdapter create(
-            ContentFactory contentFactory,
             URLIdentifier urlIdentifier,
             Downloader downloader,
             ContentDataService contentDataService) {
         return new CSSJsoupPhlocContentAdapterImpl(
-                contentFactory,
                 urlIdentifier,
                 downloader,
                 contentDataService,
