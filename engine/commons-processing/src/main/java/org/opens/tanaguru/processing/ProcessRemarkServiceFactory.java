@@ -21,10 +21,9 @@
  */
 package org.opens.tanaguru.processing;
 
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
-import org.opens.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.opens.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.entity.service.audit.EvidenceElementDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
@@ -43,14 +42,12 @@ public class ProcessRemarkServiceFactory {
      *      an instance of ProcessRemarkImpl
      */
     public static ProcessRemarkService create(
-            ProcessRemarkFactory processRemarkFactory,
-            SourceCodeRemarkFactory sourceCodeRemarkFactory,
-            EvidenceElementFactory evidenceElementFactory,
+            ProcessRemarkDataService processRemarkDataService,
+            EvidenceElementDataService evidenceElementDataService,
             EvidenceDataService evidenceDataService) {
         return new ProcessRemarkServiceImpl(
-                processRemarkFactory,
-                sourceCodeRemarkFactory,
-                evidenceElementFactory,
+                processRemarkDataService,
+                evidenceElementDataService,
                 evidenceDataService);
     }
 

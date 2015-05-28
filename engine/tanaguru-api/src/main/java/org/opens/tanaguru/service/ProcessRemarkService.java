@@ -27,8 +27,8 @@ import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.entity.factory.audit.EvidenceElementFactory;
 import org.opens.tanaguru.entity.service.audit.EvidenceDataService;
+import org.opens.tanaguru.entity.service.audit.EvidenceElementDataService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -301,7 +301,7 @@ public interface ProcessRemarkService {
      *
      * @return
      */
-    EvidenceElementFactory getEvidenceElementFactory();
+    EvidenceElementDataService getEvidenceElementDataService();
 
     /**
      *
