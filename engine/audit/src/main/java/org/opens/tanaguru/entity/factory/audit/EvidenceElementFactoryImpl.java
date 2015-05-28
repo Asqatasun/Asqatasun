@@ -21,15 +21,16 @@
  */
 package org.opens.tanaguru.entity.factory.audit;
 
+import org.opens.tanaguru.entity.audit.Evidence;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
 import org.opens.tanaguru.entity.audit.EvidenceElementImpl;
+import org.opens.tanaguru.entity.audit.ProcessRemark;
 
 /**
  * 
  * @author jkowalczyk
  */
-public class EvidenceElementFactoryImpl implements
-        EvidenceElementFactory {
+public class EvidenceElementFactoryImpl implements EvidenceElementFactory {
 
     public EvidenceElementFactoryImpl() {
         super();
@@ -43,6 +44,27 @@ public class EvidenceElementFactoryImpl implements
     @Override
     public EvidenceElement create(String value) {
         return new EvidenceElementImpl(value);
+    }
+    
+    @Override
+    public EvidenceElement create(ProcessRemark processRemark, String value, Evidence evidence) {
+        EvidenceElement evidenceElement = create();
+        
+        evidenceElement.setProcessRemark(processRemark);
+        evidenceElement.setValue(value);
+        evidenceElement.setEvidence(evidence);
+        
+        return evidenceElement;
+    }
+    
+    @Override
+    public EvidenceElement create(String value, Evidence evidence) {
+        EvidenceElement evidenceElement = create();
+        
+        evidenceElement.setValue(value);
+        evidenceElement.setEvidence(evidence);
+        
+        return evidenceElement;
     }
 
 }
