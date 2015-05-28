@@ -27,7 +27,7 @@ import org.opens.tanaguru.contentloader.ContentLoader;
 import org.opens.tanaguru.contentloader.ContentLoaderFactory;
 import org.opens.tanaguru.contentloader.DownloaderFactory;
 import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +38,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ContentLoaderServiceImpl implements ContentLoaderService {
 
-    private ContentFactory contentFactory;
+    private ContentDataService contentDataService;
     @Override
     @Autowired
-    public void setContentFactory(ContentFactory contentFactory) {
-        this.contentFactory = contentFactory;
+    public void setContentDataService(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
     }
 
     private ContentLoaderFactory contentLoaderFactory;
@@ -73,7 +73,7 @@ public class ContentLoaderServiceImpl implements ContentLoaderService {
     @Override
     public List<Content> loadContent(WebResource webResource) {
         ContentLoader contentLoader = contentLoaderFactory.create(
-                contentFactory, 
+                contentDataService, 
                 downloaderFactory.create(), 
                 dateFactory,
                 null);
@@ -85,7 +85,7 @@ public class ContentLoaderServiceImpl implements ContentLoaderService {
     @Override
     public List<Content> loadContent(WebResource webResource, Map<String, String> fileMap) {
         ContentLoader contentLoader = contentLoaderFactory.create(
-                contentFactory, 
+                contentDataService, 
                 null, 
                 dateFactory,
                 fileMap);

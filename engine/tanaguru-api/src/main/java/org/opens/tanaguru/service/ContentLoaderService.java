@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.opens.tanaguru.contentloader.ContentLoaderFactory;
 import org.opens.tanaguru.contentloader.DownloaderFactory;
 import org.opens.tanaguru.entity.audit.Content;
-import org.opens.tanaguru.entity.factory.audit.ContentFactory;
+import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.util.factory.DateFactory;
 
@@ -55,9 +55,9 @@ public interface ContentLoaderService {// TODO Write javadoc
 
     /**
      *
-     * @param contentFactory
+     * @param contentDataService
      */
-    void setContentFactory(ContentFactory contentFactory);
+    void setContentDataService(ContentDataService contentDataService);
 
     /**
      *
