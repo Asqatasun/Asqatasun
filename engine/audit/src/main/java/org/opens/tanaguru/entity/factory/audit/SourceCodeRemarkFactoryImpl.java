@@ -51,10 +51,10 @@ public class SourceCodeRemarkFactoryImpl implements SourceCodeRemarkFactory {
     
     @Override
     public SourceCodeRemark create(String target, TestSolution issue, String messageCode, int lineNumber) {
-        SourceCodeRemark sourceCodeRemark = create();
-        sourceCodeRemark.setIssue(issue);
-        sourceCodeRemark.setMessageCode(messageCode);
-
+        SourceCodeRemark sourceCodeRemark = create(issue, messageCode);
+        sourceCodeRemark.setTarget(target);
+        sourceCodeRemark.setLineNumber(lineNumber);
+        
         return sourceCodeRemark;
     }
 }
