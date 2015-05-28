@@ -139,33 +139,41 @@ public interface ProcessResultDataService extends
      * @return 
      */
     DefiniteResult getDefiniteResult(Test test, WebResource subject);
+    
+    /**
+     * 
+     * @param test
+     * @param solution
+     * @return 
+     */
+    DefiniteResult getDefiniteResult(Test test, TestSolution solution);
 
     /**
      * 
      * @param test
      * @param subject
-     * @param value
+     * @param solution
      * @param remarkSet
      * @return 
      */
     DefiniteResult getDefiniteResult(
             Test test, 
             WebResource subject,
-            TestSolution value, 
+            TestSolution solution, 
             Collection<ProcessRemark> remarkSet);
 
     /**
      * 
      * @param test
      * @param subject
-     * @param value
+     * @param solution
      * @param elementCounter
      * @return 
      */
     DefiniteResult getDefiniteResult(
             Test test, 
             WebResource subject, 
-            TestSolution value, 
+            TestSolution solution, 
             int elementCounter);
     
     /**
