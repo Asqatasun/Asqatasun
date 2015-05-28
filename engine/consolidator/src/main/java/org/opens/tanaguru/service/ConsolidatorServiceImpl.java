@@ -33,6 +33,7 @@ import org.opens.tanaguru.entity.service.audit.EvidenceElementDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.processing.ProcessRemarkServiceFactory;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -73,26 +74,31 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
     }
 
     @Override
+    @Autowired
     public void setRuleImplementationLoaderService(RuleImplementationLoaderService ruleImplementationLoaderService) {
         this.ruleImplementationLoaderService = ruleImplementationLoaderService;
     }
 
     @Override
+    @Autowired
     public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
         this.evidenceDataService = evidenceDataService;
     }
 
     @Override
+    @Autowired
     public void setEvidenceElementDataService(EvidenceElementDataService evidenceElementDataService) {
         this.evidenceElementDataService = evidenceElementDataService;
     }
 
     @Override
+    @Autowired
     public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
         this.processRemarkDataService = processRemarkDataService;
     }
 
     @Override
+    @Autowired
     public void setConsolidatorFactory(ConsolidatorFactory consolidatorFactory) {
         this.consolidatorFactory = consolidatorFactory;
     }
