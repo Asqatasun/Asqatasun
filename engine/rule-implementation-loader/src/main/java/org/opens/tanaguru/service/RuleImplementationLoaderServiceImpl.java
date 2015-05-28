@@ -23,14 +23,14 @@ package org.opens.tanaguru.service;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
-import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.ruleimplementation.AbstractSiteRuleWithPageResultImplementation;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoader;
 import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 
@@ -38,10 +38,9 @@ import org.opens.tanaguru.ruleimplementationloader.RuleImplementationLoaderFacto
  */
 public class RuleImplementationLoaderServiceImpl implements RuleImplementationLoaderService {
 
-    private DefiniteResultFactory definiteResultFactory;
-    private IndefiniteResultFactory indefiniteResultFactory;
     private NomenclatureLoaderService nomenclatureLoaderService;
     private ProcessRemarkDataService processRemarkDataService;
+    private ProcessResultDataService processResultDataService;
     private String archiveRoot;
     private RuleImplementationLoaderFactory ruleImplementationLoaderFactory;
 
@@ -51,7 +50,7 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
 
     @Override
     public Set<RuleImplementation> loadRuleImplementationSet(Set<Test> testSet) {
-        Set<RuleImplementation> ruleImplementationSet = new HashSet<RuleImplementation>();
+        Set<RuleImplementation> ruleImplementationSet = new HashSet<>();
         for (Test test : testSet) {
             ruleImplementationSet.add(loadRuleImplementation(test));
         }
@@ -64,8 +63,7 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
         ruleImplementationLoader.run();
         RuleImplementation ruleImplementation = ruleImplementationLoader.getResult();
         ruleImplementation.setTest(test);
-        ruleImplementation.setDefiniteResultFactory(definiteResultFactory);
-        ruleImplementation.setIndefiniteResultFactory(indefiniteResultFactory);
+        ruleImplementation.setProcessResultDataService(processResultDataService);
         ruleImplementation.setNomenclatureLoaderService(nomenclatureLoaderService);
         
         // for specific purpose, we may need to access to ProcessRemark of
@@ -81,22 +79,12 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
     }
 
     @Override
-    public void setDefiniteResultFactory(
-            DefiniteResultFactory definiteResultFactory) {
-        this.definiteResultFactory = definiteResultFactory;
-    }
-
-    @Override
-    public void setIndefiniteResultFactory(
-            IndefiniteResultFactory indefiniteResultFactory) {
-        this.indefiniteResultFactory = indefiniteResultFactory;
-    }
-
-    @Override
+    @Autowired
     public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureService) {
         this.nomenclatureLoaderService = nomenclatureService;
     }
     
+    @Autowired
     public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
         this.processRemarkDataService = processRemarkDataService;
     }
@@ -107,8 +95,15 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
     }
 
     @Override
+    @Autowired
     public void setRuleImplementationLoaderFactory(RuleImplementationLoaderFactory ruleImplementationLoaderFactory) {
         this.ruleImplementationLoaderFactory = ruleImplementationLoaderFactory;
+    }
+
+    @Override
+    @Autowired
+    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
+        this.processResultDataService = processResultDataService;
     }
 
 }
