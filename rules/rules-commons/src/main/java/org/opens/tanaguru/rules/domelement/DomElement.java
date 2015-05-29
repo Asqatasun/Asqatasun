@@ -167,10 +167,10 @@ public class DomElement {
     public String getBgColor() {
         String bgColor = getProperty(BG_COLOR_KEY);
         if (StringUtils.startsWith(bgColor, ALPHA_COLOR_KEY)) {
-            int alpha = getAlpha(bgColor);
-            if (alpha == 0) {
+            float alpha = getAlpha(bgColor);
+            if (alpha == 0f) {
                 return "rgb(255; 255; 255)";
-            } else if (alpha ==1) {
+            } else if (alpha == 1f) {
                 return StringUtils.replace(bgColor, ", 0)", ")");
             }
         }
@@ -236,13 +236,13 @@ public class DomElement {
         return fontWeight >= BOLD_FONT_WEIGHT;
     }
 
-    private int getAlpha(String color) {
+    private float getAlpha(String color) {
         String lColor = StringUtils.remove(StringUtils.remove(StringUtils.remove(color, ALPHA_COLOR_KEY),"("),")");
         String[] components = lColor.split(";");
         if (components.length !=4) {
             return -1;
         } else {
-            return Integer.valueOf(components[3].trim());
+            return Float.valueOf(components[3].trim());
         }
     }
     
