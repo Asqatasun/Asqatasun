@@ -19,8 +19,9 @@
         <generator.referentiel>referentielname1.0</generator.referentiel>
         <generator.baseFolder>/home/$user/Tanaguru/rules/</generator.baseFolder>
         <generator.dataFile>/home/$user/referentiel.csv</generator.dataFile>
-        <!--<generator.delimiter>ø</generator.delimiter>-->
+        <generator.delimiter>ø</generator.delimiter>
         <generator.refdescriptor>http://www.example.com/refential-descriptor.html</generator.refdescriptor>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
         <plugins>
