@@ -30,6 +30,7 @@ import org.opens.tanaguru.entity.audit.IndefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
@@ -214,4 +215,52 @@ public interface ProcessResultDataService extends
             WebResource subject,
             String value, 
             Collection<ProcessRemark> remarkList);
+    
+    /**
+     * 
+     * @param webResource
+     * @param scope
+     * @return 
+     */
+    Collection<ProcessResult> getProcessResultListByWebResourceAndScope(WebResource webResource, Scope scope);
+    
+    /**
+     * 
+     * @param webResource
+     * @param criterion
+     * @return 
+     */
+    Collection<ProcessResult> getProcessResultListByWebResourceAndCriterion(WebResource webResource, Criterion criterion);
+    
+    /**
+     *
+     * @param webResource
+     * @param test
+     * @return
+     */
+    Collection<ProcessResult> getProcessResultListByWebResourceAndTest(
+            WebResource webResource,
+            Test test);
+    
+    /**
+     * 
+     * @param webResource
+     * @param scope
+     * @param theme
+     * @param testSolutionList
+     * @return 
+     */
+    Collection<ProcessResult> getProcessResultListByWebResourceAndScope(
+            WebResource webResource,
+            Scope scope,
+            String theme,
+            Collection<String> testSolutionList);
+    
+    /**
+     * 
+     * @param webResource
+     * @param scope
+     * @return 
+     */
+    boolean hasAuditSiteScopeResult(WebResource webResource, Scope scope);
 }

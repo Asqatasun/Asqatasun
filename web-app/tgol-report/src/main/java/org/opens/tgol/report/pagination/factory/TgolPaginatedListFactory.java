@@ -25,8 +25,8 @@ import java.util.Collection;
 import org.apache.log4j.Logger;
 import org.displaytag.pagination.PaginatedList;
 import org.displaytag.properties.SortOrderEnum;
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.report.pagination.TgolPaginatedListImpl;
+import org.opens.tgol.entity.service.statistics.StatisticsDataService;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,7 +44,7 @@ public final class TgolPaginatedListFactory {
     /*
      * Sort criterion values
      */
-    private String default2xxSortCriterion = "rawMark";
+    private final String default2xxSortCriterion = "rawMark";
     /**
      *
      * @return
@@ -53,7 +53,7 @@ public final class TgolPaginatedListFactory {
         return default2xxSortCriterion;
     }
     
-    private String default3xxSortCriterion = "httpStatusCode";
+    private final String default3xxSortCriterion = "httpStatusCode";
     /**
      * 
      * @return
@@ -62,7 +62,7 @@ public final class TgolPaginatedListFactory {
         return default3xxSortCriterion;
     }
 
-    private String urlSortCriterion = "url";
+    private final String urlSortCriterion = "url";
     /**
      *
      * @return
@@ -71,7 +71,7 @@ public final class TgolPaginatedListFactory {
         return urlSortCriterion;
     }
     
-    private String rankCriterion = "rank";
+    private final String rankCriterion = "rank";
     /**
      *
      * @return
@@ -83,7 +83,7 @@ public final class TgolPaginatedListFactory {
     /*
      * Defaults values for page size and page number
      */
-    private int defaultPageSize = 50;
+    private final int defaultPageSize = 50;
     /**
      *
      * @return
@@ -92,7 +92,7 @@ public final class TgolPaginatedListFactory {
         return defaultPageSize;
     }
 
-    private int defaultPageNumber = 1;
+    private final int defaultPageNumber = 1;
     /**
      *
      * @return
@@ -142,14 +142,14 @@ public final class TgolPaginatedListFactory {
      */
     private static TgolPaginatedListFactory tgolPaginatedListFactory = null;
 
-    private WebResourceDataServiceDecorator webResourceDataService;
+    private StatisticsDataService statisticsDataService;
     /**
      *
-     * @param webResourceDataService
+     * @param statisticsDataService
      */
     @Autowired
-    public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
+    public void setStatisticsDataService(StatisticsDataService statisticsDataService) {
+        this.statisticsDataService = statisticsDataService;
     }
 
 
@@ -177,6 +177,7 @@ public final class TgolPaginatedListFactory {
      * @param sortCriterion
      * @param pageNumber
      * @param containingValue
+     * @param invalidTestLabel
      * @param authorizedPageSize
      * @param authorizedSortCriterion
      * @param idAudit
@@ -196,7 +197,7 @@ public final class TgolPaginatedListFactory {
 
         // get the total number of pages for a given httpStatusCode family and
         // an url filter
-        int totalNumberOfElements = webResourceDataService.getWebResourceCountByAuditAndHttpStatusCode(
+        int totalNumberOfElements = statisticsDataService.getWebResourceCountByAuditAndHttpStatusCode(
                 idAudit,
                 httpStatusCode,
                 invalidTestLabel,
@@ -216,7 +217,7 @@ public final class TgolPaginatedListFactory {
         // sql request with the given parameters
         int startElement = (paginatedList.getPageNumber() - 1) * paginatedList.getObjectsPerPage();
         ((TgolPaginatedListImpl)paginatedList).addAllElements(
-                webResourceDataService.getWebResourceListByAuditAndHttpStatusCode(
+                statisticsDataService.getPageListByAuditAndHttpStatusCode(
                 idAudit,
                 httpStatusCode,
                 invalidTestLabel,
@@ -249,7 +250,7 @@ public final class TgolPaginatedListFactory {
         TgolPaginatedListImpl paginatedList;
         // depending on the httpStatusCodeFamily, the default sort Criterion is
         // different : Mark for the 2xx and HttpStatusCode for the others
-        if (httpStatusCode.equals(httpStatusCode.f2xx)) {
+        if (httpStatusCode.equals(HttpStatusCodeFamily.f2xx)) {
             paginatedList = new TgolPaginatedListImpl(default2xxSortCriterion);
         } else {
             paginatedList = new TgolPaginatedListImpl(default3xxSortCriterion);
@@ -285,7 +286,7 @@ public final class TgolPaginatedListFactory {
             if (pageSize != null &&
                     authorizedPageSize.contains(Integer.valueOf(pageSize))) {
                 if (Integer.valueOf(pageSize) == -1) {
-                    paginatedList.setObjectsPerPage(Integer.valueOf(totalNumberOfElements));
+                    paginatedList.setObjectsPerPage(totalNumberOfElements);
                 } else {
                     paginatedList.setObjectsPerPage(Integer.valueOf(pageSize));
                 }

@@ -33,6 +33,7 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.dao.audit.ProcessResultDAO;
 import org.opens.tanaguru.entity.factory.audit.DefiniteResultFactory;
 import org.opens.tanaguru.entity.factory.audit.IndefiniteResultFactory;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
@@ -154,4 +155,43 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
         return definiteResult;
     }
 
+    @Override
+    public Collection<ProcessResult> getProcessResultListByWebResourceAndScope(WebResource webResource, Scope scope) {
+        return ((ProcessResultDAO) entityDao).
+                retrieveProcessResultListByWebResourceAndScope(webResource, scope);
+    }
+    
+    @Override
+    public Collection<ProcessResult> getProcessResultListByWebResourceAndCriterion(WebResource webResource, Criterion criterion) {
+        return ((ProcessResultDAO) entityDao).
+                retrieveProcessResultListByWebResourceAndCriterion(webResource, criterion);
+    }
+
+    @Override
+    public Collection<ProcessResult> getProcessResultListByWebResourceAndScope(
+            WebResource webResource,
+            Scope scope,
+            String theme,
+            Collection<String> testSolutionList) {
+        return ((ProcessResultDAO) entityDao).
+                retrieveProcessResultListByWebResourceAndScope(
+                    webResource,
+                    scope,
+                    theme,
+                    testSolutionList);
+    }
+
+    @Override
+    public Collection<ProcessResult> getProcessResultListByWebResourceAndTest(WebResource webResource, Test test) {
+        return ((ProcessResultDAO) entityDao).
+                retrieveProcessResultListByWebResourceAndTest(
+                    webResource,
+                    test);
+    }
+
+    @Override
+    public boolean hasAuditSiteScopeResult(WebResource webResource, Scope scope) {
+        return ((ProcessResultDAO) entityDao).hasAuditSiteScopeResult(webResource, scope);
+    }
+    
 }

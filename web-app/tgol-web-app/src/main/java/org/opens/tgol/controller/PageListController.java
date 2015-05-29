@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.controller;
 
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -216,7 +217,7 @@ public class PageListController extends AbstractAuditDataHandlerController {
     private int getWebResourceCount(
             Long idAudit,
             HttpStatusCodeFamily hpcf) {
-        return getWebResourceDataService().getWebResourceCountByAuditAndHttpStatusCode(
+        return getStatisticsDataService().getWebResourceCountByAuditAndHttpStatusCode(
                 idAudit,
                 hpcf,
                 null,

@@ -28,7 +28,10 @@
         <property name="entityDao" ref="contentDAO"/>
     </bean>
 
-    <bean id="processResultDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessResultDAOImpl"/>
+    <bean id="processResultDAO" class="org.opens.tanaguru.entity.dao.audit.ProcessResultDAOImpl">
+        <property name="selectAllTestResultKey" value="all-result"/>
+        <property name="selectAllThemeKey" value="all-theme"/>
+    </bean>
     <bean id="processResultDataService" class="org.opens.tanaguru.entity.service.audit.ProcessResultDataServiceImpl">
         <property name="entityFactory" ref="processResultFactory"/>
         <property name="entityDao" ref="processResultDAO"/>

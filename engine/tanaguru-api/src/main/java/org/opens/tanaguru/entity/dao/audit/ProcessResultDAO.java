@@ -28,6 +28,7 @@ import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.DefiniteResult;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
@@ -126,6 +127,58 @@ public interface ProcessResultDAO extends GenericDAO<ProcessResult, Long> {
     Collection<ProcessResult> retrieveIndefiniteResultFromAudit(Audit audit);
     
     
+    /**
+     * 
+     * @param processResultImpl
+     * @return 
+     */
     List<DefiniteResult> getHistoryChanges (ProcessResult processResultImpl);
 
+    /**
+     * 
+     * @param webResource
+     * @param scope
+     * @return 
+     */
+    Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(WebResource webResource, Scope scope);
+    
+    /**
+     * 
+     * @param webResource
+     * @param criterion
+     * @return 
+     */
+    Collection<ProcessResult> retrieveProcessResultListByWebResourceAndCriterion(WebResource webResource, Criterion criterion);
+    
+    /**
+     * 
+     * @param webResource
+     * @param scope
+     * @param theme
+     * @param testSolutionList
+     * @return 
+     */
+    Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(
+            WebResource webResource,
+            Scope scope,
+            String theme,
+            Collection<String> testSolutionList);
+    
+    /**
+     * 
+     * @param webResource
+     * @param test
+     * @return 
+     */
+    Collection<ProcessResult> retrieveProcessResultListByWebResourceAndTest(
+            WebResource webResource, 
+            Test test);
+    
+    /**
+     * 
+     * @param webResource
+     * @param scope
+     * @return 
+     */
+    boolean hasAuditSiteScopeResult(WebResource webResource, Scope scope);
 }

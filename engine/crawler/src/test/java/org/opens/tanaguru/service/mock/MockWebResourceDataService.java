@@ -38,9 +38,9 @@ import org.opens.tanaguru.sdk.entity.factory.GenericFactory;
  */
 public class MockWebResourceDataService implements WebResourceDataService{
 
-    private Map<Long, WebResource> wrMap = new LinkedHashMap<Long, WebResource>();
+    private final Map<Long, WebResource> wrMap = new LinkedHashMap<>();
 
-    private Long id = Long.valueOf(1);
+    private Long id = 1l;
     
     @Override
     public Page createPage(String pageUrl) {
@@ -137,6 +137,21 @@ public class MockWebResourceDataService implements WebResourceDataService{
 
     @Override
     public WebResource update(WebResource entity) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public WebResource ligthRead(Long webResourceId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public WebResource deepRead(Long webResourceId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Long getChildWebResourceCount(WebResource parentWebResource) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

@@ -34,15 +34,16 @@ import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Reference;
 import org.opens.tanaguru.entity.reference.Theme;
 import org.opens.tanaguru.entity.service.audit.AuditDataService;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ThemeDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.contract.Scope;
 import org.opens.tgol.entity.contract.ScopeEnum;
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.entity.service.user.UserDataService;
 import org.opens.tgol.entity.user.User;
@@ -51,6 +52,8 @@ import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenScopeException;
 import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
 import org.opens.tgol.security.userdetails.TgolUserDetails;
+import org.opens.tgol.entity.service.statistics.StatisticsDataService;
+import org.opens.tgol.report.pagination.factory.TgolPaginatedListFactory;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -75,7 +78,9 @@ public class PageListControllerTest extends TestCase {
     private Authentication mockAuthentication;
     private Contract mockContract;
     private User mockUser;
-    private WebResourceDataServiceDecorator mockWebResourceDataServiceDecorator;
+    private WebResourceDataService mockWebResourceDataService;
+    private StatisticsDataService mockStatisticsDataService;
+    private ProcessResultDataService mockProcessResultDataService;
     private AuditDataService mockAuditDataService;
     private Site mockSite;
     private Page mockPage;
@@ -121,8 +126,14 @@ public class PageListControllerTest extends TestCase {
         if (mockPage != null) {
             verify(mockPage);
         }
-        if (mockWebResourceDataServiceDecorator != null) {
-            verify(mockWebResourceDataServiceDecorator);
+        if (mockWebResourceDataService != null) {
+            verify(mockWebResourceDataService);
+        }
+        if (mockProcessResultDataService != null) {
+            verify(mockProcessResultDataService);
+        }
+        if (mockStatisticsDataService != null) {
+            verify(mockStatisticsDataService);
         }
         if (mockActDataService != null) {
             verify(mockActDataService);
@@ -376,9 +387,10 @@ public class PageListControllerTest extends TestCase {
      */
     private void setUpAuditStatisticsFactory() {
         AuditStatisticsFactory.getInstance().setActDataService(mockActDataService);
-        AuditStatisticsFactory.getInstance().setWebResourceDataService(mockWebResourceDataServiceDecorator);
+        AuditStatisticsFactory.getInstance().setWebResourceDataService(mockWebResourceDataService);
         AuditStatisticsFactory.getInstance().setParameterDataService(mockParameterDataService);
         AuditStatisticsFactory.getInstance().setThemeDataService(mockThemeDataService);
+        AuditStatisticsFactory.getInstance().setStatisticsDataService(mockStatisticsDataService);
     }
     
     /**
@@ -519,7 +531,7 @@ public class PageListControllerTest extends TestCase {
                 expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
                 expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
-                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                setUpMockWebResourceDataService(Long.valueOf(getIdValue));
                 replay(mockSite);
                 break;
             case SITE_AUDIT_2XX_PAGE_LIST_ID:
@@ -528,7 +540,7 @@ public class PageListControllerTest extends TestCase {
                 expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
                 expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
-                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                setUpMockWebResourceDataService(Long.valueOf(getIdValue));
                 replay(mockSite);
                 break;
             case SITE_AUDIT_3XX_PAGE_LIST_ID:
@@ -537,7 +549,7 @@ public class PageListControllerTest extends TestCase {
                 expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
                 expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
-                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                setUpMockWebResourceDataService(Long.valueOf(getIdValue));
                 replay(mockSite);
                 break;
             case SITE_AUDIT_4XX_PAGE_LIST_ID:
@@ -546,7 +558,7 @@ public class PageListControllerTest extends TestCase {
                 expect(mockAudit.getSubject()).andReturn(mockSite).anyTimes();
                 expect(mockAudit.getId()).andReturn(Long.valueOf(getIdValue)).anyTimes();
                 // set mock data Service cause the data are all collected
-                setUpMockWebResourceDataServiceDecorator(Long.valueOf(getIdValue));
+                setUpMockWebResourceDataService(Long.valueOf(getIdValue));
                 replay(mockSite);
                 break;
             case UNKNOWN_AUDIT_ID : 
@@ -562,65 +574,66 @@ public class PageListControllerTest extends TestCase {
     /**
      * 
      */
-    private void setUpMockWebResourceDataServiceDecorator (Long idAudit) {
+    private void setUpMockWebResourceDataService (Long idAudit) {
 
     	boolean manualAudit = false;
-        mockWebResourceDataServiceDecorator = createMock(WebResourceDataServiceDecorator.class);
+        mockWebResourceDataService = createMock(WebResourceDataService.class);
+        mockStatisticsDataService = createMock(StatisticsDataService.class);
         mockParameterDataService = createMock(ParameterDataService.class);
         
         expect(mockSite.getAudit()).andReturn(mockAudit).anyTimes();
         expect(mockSite.getURL()).andReturn("http://www.test.org").anyTimes();
         expect(mockAudit.getDateOfCreation()).andReturn(Calendar.getInstance().getTime()).anyTimes();
         
-        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f2xx, null, null)).
+        expect(mockStatisticsDataService.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f2xx, null, null)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f3xx, null, null)).
+        expect(mockStatisticsDataService.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f3xx, null, null)).
                 andReturn(Long.valueOf(2)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f4xx, null, null)).
+        expect(mockStatisticsDataService.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f4xx, null, null)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f9xx, null, null)).
+        expect(mockStatisticsDataService.getWebResourceCountByAuditAndHttpStatusCode(idAudit, HttpStatusCodeFamily.f9xx, null, null)).
                 andReturn(Long.valueOf(4)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, false , false)).
+        expect(mockStatisticsDataService.getMarkByWebResourceAndAudit(mockSite, false , false)).
                 andReturn(Float.valueOf(55)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getMarkByWebResourceAndAudit(mockSite, true , false)).
+        expect(mockStatisticsDataService.getMarkByWebResourceAndAudit(mockSite, true , false)).
                 andReturn(Float.valueOf(75)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getChildWebResourceCount(mockSite)).
+        expect(mockWebResourceDataService.getChildWebResourceCount(mockSite)).
                 andReturn(Long.valueOf(10)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultType(mockSite, mockAudit, TestSolution.PASSED)).
+        expect(mockStatisticsDataService.getResultCountByResultType(mockSite, mockAudit, TestSolution.PASSED)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultType(mockSite, mockAudit, TestSolution.FAILED)).
+        expect(mockStatisticsDataService.getResultCountByResultType(mockSite, mockAudit, TestSolution.FAILED)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultType(mockSite, mockAudit, TestSolution.NEED_MORE_INFO)).
+        expect(mockStatisticsDataService.getResultCountByResultType(mockSite, mockAudit, TestSolution.NEED_MORE_INFO)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultType(mockSite, mockAudit, TestSolution.NOT_APPLICABLE)).
+        expect(mockStatisticsDataService.getResultCountByResultType(mockSite, mockAudit, TestSolution.NOT_APPLICABLE)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
         
         setUpThemeDataService();
         
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.PASSED, mockTheme, manualAudit)).
+        expect(mockStatisticsDataService.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.PASSED, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.FAILED, mockTheme, manualAudit)).
+        expect(mockStatisticsDataService.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.FAILED, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NEED_MORE_INFO, mockTheme, manualAudit)).
+        expect(mockStatisticsDataService.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NEED_MORE_INFO, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(3)).
                 anyTimes();
-        expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_APPLICABLE, mockTheme, manualAudit)).
+        expect(mockStatisticsDataService.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_APPLICABLE, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
-		expect(mockWebResourceDataServiceDecorator.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_TESTED, mockTheme, manualAudit)).
+		expect(mockStatisticsDataService.getResultCountByResultTypeAndTheme(mockSite, mockAudit, TestSolution.NOT_TESTED, mockTheme, manualAudit)).
                 andReturn(Long.valueOf(1)).
                 anyTimes();
                 
@@ -634,12 +647,14 @@ public class PageListControllerTest extends TestCase {
         expect(mockParameterDataService.getParameterSetFromAudit(mockAudit)).andReturn(paramSet).anyTimes();
         expect(mockParameterDataService.getReferentialKeyFromAudit(mockAudit)).andReturn("AW21").anyTimes();
         
-        replay(mockWebResourceDataServiceDecorator);
+        replay(mockWebResourceDataService);
+        replay(mockStatisticsDataService);
         replay(mockParameterDataService);
 //        replay(mockParameter);
         replay(mockParameterElement);
         
-        instance.setWebResourceDataService(mockWebResourceDataServiceDecorator);
+        instance.setWebResourceDataService(mockWebResourceDataService);
+        instance.setStatisticsDataService(mockStatisticsDataService);
     }
     
     /**
