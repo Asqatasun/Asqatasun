@@ -38,4 +38,8 @@ public abstract class ${referentiel}RuleImplementationTestCase extends AbstractR
         super(testName, inputFileDataName, TESTCASE_FILE_PATH);
     }
 
+    @Override
+    protected String getRefKey() {
+        return "${referentiel.toLowerCase()}";
+    }
 }

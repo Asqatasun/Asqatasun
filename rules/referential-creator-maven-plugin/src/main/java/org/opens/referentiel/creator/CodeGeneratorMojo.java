@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -127,7 +128,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
      */
     File dataFile;
     /**
-     * @parameter default-value=';'
+     * @parameter default-value='ø'
      */
     char delimiter;
     /**
@@ -215,7 +216,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
         // we parse the csv file to extract the first line and get the headers 
         LineIterator lineIterator;
         try {
-            lineIterator = FileUtils.lineIterator(dataFile);
+            lineIterator = FileUtils.lineIterator(dataFile, Charset.defaultCharset().name());
         } catch (IOException ex) {
             Logger.getLogger(CodeGeneratorMojo.class.getName()).log(Level.SEVERE, null, ex);
             lineIterator = null;
@@ -251,9 +252,9 @@ public class CodeGeneratorMojo extends AbstractMojo {
     }
 
     private void extractAvailableLangsFromCsvHeader(String[] csvHeaders) throws I18NLanguageNotFoundException {
-        LinkedHashSet<String> themeList = new LinkedHashSet();
-        LinkedHashSet<String> critereList = new LinkedHashSet();
-        LinkedHashSet<String> testList = new LinkedHashSet();
+        LinkedHashSet<String> themeList = new LinkedHashSet<>();
+        LinkedHashSet<String> critereList = new LinkedHashSet<>();
+        LinkedHashSet<String> testList = new LinkedHashSet<>();
         for (String header : csvHeaders) {
             if (header.startsWith(THEME_LABEL_COLUMN_NAME)) {
                 themeList.add(header.split("_")[1]);
@@ -293,7 +294,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
         String theme = record.get(THEME_LABEL_COLUMN_NAME + lang);
         String critere;
         String critereCode;
-        String test = record.get(TEST_LABEL_COLUMN_NAME + langSet.first());
+        String test = record.get(TEST_LABEL_COLUMN_NAME + lang);
         String testCode = record.get(TEST_CODE_COLUMN_NAME);
         if (isCriterionPresent) {
             critere = record.get(CRITERION_LABEL_COLUMN_NAME + lang);
