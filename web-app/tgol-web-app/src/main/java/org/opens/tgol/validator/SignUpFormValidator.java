@@ -41,7 +41,7 @@ public class SignUpFormValidator implements Validator {
     private static final String SITE_URL_KEY = "siteUrl";
     private static final String EMAIL_KEY = "email";
     private static final String PASSWORD_KEY = "password";
-//    private static final String PHONE_NUMBER_KEY = "phoneNumber";
+
     private static final String MANDATORY_FIELD_MSG_BUNDLE_KEY =
             "sign-up.mandatoryField";
     private static final String EXISTING_ACCOUNT_WITH_EMAIL_KEY =
@@ -65,15 +65,6 @@ public class SignUpFormValidator implements Validator {
     private static final String EMAIL_CHECKER_REGEXP =
             "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
     private final Pattern emailCheckerPattern = Pattern.compile(EMAIL_CHECKER_REGEXP);
-
-    // from http://www.cafewebmaster.com/regex-regular-expression-password-check-java
-    private static final String PASSWORD_CHECKER_REGEXP =
-            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,})";
-    private final Pattern passwordCheckerPattern = Pattern.compile(PASSWORD_CHECKER_REGEXP);
-
-    private static final String PHONE_CHECKER_REGEXP =
-            "^[0-9]{4,}";
-    private final Pattern phoneCheckerPattern = Pattern.compile(PHONE_CHECKER_REGEXP);
 
     private UserDataService userDataService;
     public UserDataService getContractDataService() {

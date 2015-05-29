@@ -20,18 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
-import org.opens.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
-import org.opens.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.opens.tanaguru.rules.keystore.AttributeStore.DATA_ATTR;
-import static org.opens.tanaguru.rules.keystore.CssLikeQueryStore.OBJECT_TYPE_IMG_CSS_LIKE_QUERY;
-import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.*;
-import org.opens.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
  * Implementation of the rule 1.2.4 of the referential Rgaa 3.0.

@@ -22,7 +22,6 @@
 package org.opens.tgol.action.voter;
 
 import org.opens.tgol.action.Action;
-import org.opens.tgol.action.ActionImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

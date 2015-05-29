@@ -24,7 +24,6 @@ package org.opens.tgol.entity.dao.contract;
 import java.util.Collection;
 import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
 import org.opens.tgol.entity.contract.Contract;
-import org.opens.tgol.entity.option.OptionElement;
 import org.opens.tgol.entity.user.User;
 
 /**

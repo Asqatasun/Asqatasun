@@ -367,7 +367,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         WebResource webResource = webResourceMap.get(webResourceKey);
         Collection<ProcessResult> grossResultList = PROCESSOR_SERVICE.process(contentMap.get(webResource), testList);
         for (Content content : contentMap.get(webResource)) {
-            System.out.println(content.getURI());
+            LOGGER.debug(content.getURI());
         }
         
         grossResultMap.put(webResource, grossResultList);

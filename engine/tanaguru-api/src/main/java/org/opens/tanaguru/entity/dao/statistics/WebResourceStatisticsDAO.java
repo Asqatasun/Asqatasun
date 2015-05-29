@@ -23,8 +23,6 @@ package org.opens.tanaguru.entity.dao.statistics;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.List;
-
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.statistics.WebResourceStatistics;

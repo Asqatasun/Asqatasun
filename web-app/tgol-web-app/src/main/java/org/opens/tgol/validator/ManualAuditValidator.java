@@ -46,11 +46,9 @@ public class ManualAuditValidator implements org.springframework.validation.Vali
         }
         String[] arg = {msg.toString()};
 
-        if (i == 0) {
-            // noting to do
-        } else if (i > 0 && i < 11) {
+        if (i > 0 && i < 11) {
             errors.rejectValue(GENERAL_ERROR_MSG_KEY, RESULT_ABSENCE_VALUES, arg, "{0}");
-        } else {
+        } else if (i != 0) {
             errors.rejectValue(GENERAL_ERROR_MSG_KEY, RESULT_ABSENCE_VALUES_OVER_TEN, arg, "{0}");
         }
 

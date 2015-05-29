@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
@@ -55,8 +54,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class AuditSynthesisController extends AbstractAuditDataHandlerController {
-
-    private static final Logger LOGGER = Logger.getLogger(AuditSynthesisController.class);
 
     private int nbOfDisplayedFailedTest = 5;
     public void setNbOfDisplayedFailedTest(int nbOfDisplayedFailedTest) {

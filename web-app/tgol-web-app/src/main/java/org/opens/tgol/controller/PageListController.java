@@ -25,7 +25,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tgol.entity.contract.Contract;
@@ -49,8 +48,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class PageListController extends AbstractAuditDataHandlerController {
-
-    private static final Logger LOGGER = Logger.getLogger(PageListController.class);
 
     public PageListController() {
         super();

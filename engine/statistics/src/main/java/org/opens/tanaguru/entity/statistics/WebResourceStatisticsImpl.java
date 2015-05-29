@@ -23,13 +23,10 @@ package org.opens.tanaguru.entity.statistics;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditImpl;
 import org.opens.tanaguru.entity.subject.WebResource;

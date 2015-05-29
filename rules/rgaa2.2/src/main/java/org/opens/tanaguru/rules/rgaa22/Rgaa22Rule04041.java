@@ -28,7 +28,6 @@ import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractCompositePageRuleMarkupImplementation;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.opens.tanaguru.ruleimplementation.ElementHandler;
 import org.opens.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.opens.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
 import org.opens.tanaguru.rules.elementselector.ImageElementSelector;

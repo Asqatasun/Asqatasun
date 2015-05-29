@@ -55,17 +55,12 @@ public class CreateContractFormValidator implements Validator {
             = "edit-contract.emptyEndDate";
     private static final String EMPTY_USER_LIST_KEY
             = "edit-contract.emptyUserList";
-    private static final String EMPTY_REF_KEY
-            = "edit-contract.emptyRefChoice";
     private static final String END_DATE_ANTERIOR_TO_BEGIN_KEY
             = "edit-contract.endDateAnteriorToBeginDate";
     private static final String INVALID_URL_KEY
             = "sign-up.invalidUrl";
     private static final String COMBINATION_NOT_ALLOWED
             = "edit-contract.typeAuditCombinationIsNotAllowed";
-//    private static final String URL_CHECKER_REGEXP =
-//            "(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-//    private final Pattern urlCheckerPattern = Pattern.compile(URL_CHECKER_REGEXP);
 
     private final Map<String, ContractOptionFormField> contractOptionFormFieldMap = new HashMap<>();
 

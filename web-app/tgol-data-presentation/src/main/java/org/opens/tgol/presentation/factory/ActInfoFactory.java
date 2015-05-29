@@ -27,7 +27,6 @@ import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
@@ -48,13 +47,7 @@ public final class ActInfoFactory {
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
     }
-
-    private WebResourceDataService webResourceDataService;
-    @Autowired
-    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
-
+    
     private StatisticsDataService statisticsDataService;
     @Autowired
     public void setStatisticsDataService(StatisticsDataService statisticsDataService) {

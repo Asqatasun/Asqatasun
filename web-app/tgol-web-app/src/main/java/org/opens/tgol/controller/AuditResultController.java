@@ -25,7 +25,6 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.SSP;
 import org.opens.tanaguru.entity.reference.Criterion;
@@ -61,8 +60,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuditResultController extends AbstractAuditResultController {
 
-    private static final Logger LOGGER = Logger.getLogger(AuditResultController.class);
-    
     private CriterionDataService criterionDataService;
     public CriterionDataService getCriterionDataService() {
         return criterionDataService;

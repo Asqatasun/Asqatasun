@@ -21,7 +21,6 @@
  */
 package org.opens.tanaguru.ruleimplementationloader;
 
-import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.opens.tanaguru.ruleimplementation.RuleImplementation;
 

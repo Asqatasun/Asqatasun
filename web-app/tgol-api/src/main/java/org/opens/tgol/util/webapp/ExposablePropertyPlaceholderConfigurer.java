@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
-import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
@@ -40,7 +39,6 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 public class ExposablePropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
 
     private Map<String, String> resolvedProps;
-    private static final Logger LOGGER = Logger.getLogger(ConfigPropertiesExposerListener.class);
 
     public ExposablePropertyPlaceholderConfigurer(){
         super();
