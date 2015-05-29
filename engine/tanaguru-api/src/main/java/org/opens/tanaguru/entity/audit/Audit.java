@@ -25,7 +25,6 @@ import java.util.Date;
 
 import org.opens.tanaguru.sdk.entity.Entity;
 import java.util.Collection;
-import java.util.List;
 import org.opens.tanaguru.entity.parameterization.Parameter;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.subject.WebResource;

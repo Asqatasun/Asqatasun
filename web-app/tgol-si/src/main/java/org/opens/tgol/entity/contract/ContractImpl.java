@@ -27,8 +27,6 @@ import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.opens.tgol.entity.functionality.Functionality;
 import org.opens.tgol.entity.functionality.FunctionalityImpl;
 import org.opens.tgol.entity.option.OptionElement;

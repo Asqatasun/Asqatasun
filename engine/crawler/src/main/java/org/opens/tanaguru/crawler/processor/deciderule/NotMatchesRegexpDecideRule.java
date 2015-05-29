@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.archive.modules.CrawlURI;
-import org.archive.modules.deciderules.MatchesRegexDecideRule;
 import org.archive.modules.deciderules.NotMatchesListRegexDecideRule;
 
 /**

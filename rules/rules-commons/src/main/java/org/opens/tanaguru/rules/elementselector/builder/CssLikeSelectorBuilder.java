@@ -37,7 +37,6 @@ public final class CssLikeSelectorBuilder {
     private static final char ID_SELECTOR_PREFIX = '#';
     private static final char CLASS_SELECTOR_PREFIX = '.';
     private static final char OPEN_BRACKET = '[';
-    private static final char OPEN_PARENTHESE = '(';
     private static final char CLOSE_BRACKET = ']';
     private static final char CLOSE_PARENTHESE = ')';
     private static final char SPACE = ' ';
