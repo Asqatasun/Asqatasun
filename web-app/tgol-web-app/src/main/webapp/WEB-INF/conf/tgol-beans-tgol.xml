@@ -72,5 +72,6 @@
     </bean>
 
     <bean id="statisticsDAO" class="org.opens.tgol.entity.dao.statistics.StatisticsDAOImpl"/>
+    <bean id="statisticsDataService" class="org.opens.tgol.entity.service.statistics.StatisticsDataServiceImpl"/>
 
 </beans>

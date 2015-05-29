@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.controller;
 
+import java.io.IOException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import org.apache.log4j.Logger;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Theme;
+import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.subject.Page;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tgol.entity.contract.Contract;
@@ -39,6 +41,7 @@ import org.opens.tgol.presentation.factory.AuditStatisticsFactory;
 import org.opens.tgol.presentation.factory.ResultCounterFactory;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,6 +83,12 @@ public class AuditSynthesisController extends AbstractAuditDataHandlerController
         }
         String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
         return (authorizedScopeForSynthesis.contains(scope));
+    }
+    
+    private ProcessResultDataService processResultDataService;
+    @Autowired
+    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
+        this.processResultDataService = processResultDataService;
     }
     
     public AuditSynthesisController() {
@@ -162,9 +171,9 @@ public class AuditSynthesisController extends AbstractAuditDataHandlerController
                 Site site = (Site) audit.getSubject();
                 addAuditStatisticsToModel(site, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);//TODO cas manual
                 model.addAttribute(TgolKeyStore.FAILED_TEST_INFO_BY_OCCURRENCE_SET_KEY,
-                        getWebResourceDataService().getFailedTestByOccurrence(site, audit, -1));
+                        getStatisticsDataService().getFailedTestByOccurrence(site, audit, -1));
                 model.addAttribute(TgolKeyStore.HAS_SITE_SCOPE_TEST_KEY,
-                        getWebResourceDataService().hasAuditSiteScopeTest(site, getSiteScope()));
+                        processResultDataService.hasAuditSiteScopeResult(site, getSiteScope()));
                 model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(site.getAudit()));
                 return TgolKeyStore.FAILED_TEST_LIST_VIEW_NAME;
 
@@ -195,7 +204,7 @@ public class AuditSynthesisController extends AbstractAuditDataHandlerController
                 new LinkedHashMap<>();
         @SuppressWarnings("unchecked")
         Collection<FailedThemeInfo> tfiCollection =
-                (Collection<FailedThemeInfo>) getWebResourceDataService().
+                (Collection<FailedThemeInfo>) getStatisticsDataService().
                 getResultCountByResultTypeAndTheme(site, audit, TestSolution.FAILED, nbOfDisplayedFailedTest);
 
         for (FailedThemeInfo tfi : tfiCollection) {
@@ -205,20 +214,20 @@ public class AuditSynthesisController extends AbstractAuditDataHandlerController
         }
         model.addAttribute(
                 TgolKeyStore.AUDITED_PAGES_COUNT_KEY,
-                getWebResourceDataService().getWebResourceCountByAuditAndHttpStatusCode(
+                getStatisticsDataService().getWebResourceCountByAuditAndHttpStatusCode(
                 audit.getId(),
                 HttpStatusCodeFamily.f2xx,
                 null,
                 null).intValue());
         model.addAttribute(TgolKeyStore.TOP5_SORTED_THEME_MAP, top5SortedThemeMap);
         model.addAttribute(TgolKeyStore.FAILED_PAGE_INFO_BY_TEST_SET_KEY,
-                getWebResourceDataService().getFailedWebResourceSortedByTest(site, audit, nbOfDisplayedFailedPages));
+                getStatisticsDataService().getFailedWebResourceSortedByTest(site, audit, nbOfDisplayedFailedPages));
         model.addAttribute(TgolKeyStore.FAILED_PAGE_INFO_BY_OCCURRENCE_SET_KEY,
-                getWebResourceDataService().getFailedWebResourceSortedByOccurrence(site, audit, nbOfDisplayedFailedPages));
+                getStatisticsDataService().getFailedWebResourceSortedByOccurrence(site, audit, nbOfDisplayedFailedPages));
         model.addAttribute(TgolKeyStore.FAILED_TEST_INFO_BY_OCCURRENCE_SET_KEY,
-                getWebResourceDataService().getFailedTestByOccurrence(site, audit, nbOfDisplayedFailedTest));
+                getStatisticsDataService().getFailedTestByOccurrence(site, audit, nbOfDisplayedFailedTest));
         model.addAttribute(TgolKeyStore.HAS_SITE_SCOPE_TEST_KEY,
-                getWebResourceDataService().hasAuditSiteScopeTest(site, getSiteScope()));
+                processResultDataService.hasAuditSiteScopeResult(site, getSiteScope()));
         model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(site.getAudit()));
         return TgolKeyStore.SYNTHESIS_SITE_VIEW_NAME;
     }

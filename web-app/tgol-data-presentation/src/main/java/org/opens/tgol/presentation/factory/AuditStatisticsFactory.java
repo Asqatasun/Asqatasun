@@ -32,14 +32,15 @@ import org.opens.tanaguru.entity.service.audit.AuditDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ThemeDataService;
 import org.opens.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.statistics.CriterionStatistics;
 import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.entity.service.contract.ActDataService;
 import org.opens.tgol.presentation.data.AuditStatistics;
 import org.opens.tgol.presentation.data.AuditStatisticsImpl;
 import org.opens.tgol.presentation.data.ResultCounter;
+import org.opens.tgol.entity.service.statistics.StatisticsDataService;
 import org.opens.tgol.util.HttpStatusCodeFamily;
 import org.opens.tgol.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,10 +57,10 @@ public class AuditStatisticsFactory {
         this.actDataService = actDataService;
     }
     
-    private WebResourceDataServiceDecorator webResourceDataService;
+    private WebResourceDataService webResourceDataService;
     @Autowired
-    public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
-        this.webResourceDataService = webResourceDataServiceDecorator;
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
     }
     
     private AuditDataService auditDataService;
@@ -78,6 +79,12 @@ public class AuditStatisticsFactory {
     @Autowired
     public void setCriterionStatisticsDataService(CriterionStatisticsDataService criterionStatisticsDataService) {
         this.criterionStatisticsDataService = criterionStatisticsDataService;
+    }
+    
+    private StatisticsDataService statisticsDataService;
+    @Autowired
+    public void setStatisticsDataService(StatisticsDataService statisticsDataService) {
+        this.statisticsDataService = statisticsDataService;
     }
 
     private Map<String, Collection<Theme>> fullThemeMapByRef = null;
@@ -152,7 +159,7 @@ public class AuditStatisticsFactory {
         if (webResource instanceof Site) {
             auditStats.setPageCounter(webResourceDataService.getChildWebResourceCount(webResource).intValue());
             audit = webResource.getAudit();
-            auditStats.setAuditedPageCounter(webResourceDataService.getWebResourceCountByAuditAndHttpStatusCode(
+            auditStats.setAuditedPageCounter(statisticsDataService.getWebResourceCountByAuditAndHttpStatusCode(
                     audit.getId(),
                     HttpStatusCodeFamily.f2xx,
                     null,
@@ -245,7 +252,7 @@ public class AuditStatisticsFactory {
             WebResource webresource,
             boolean isRawMark,
             boolean isManual) {
-        Float mark = webResourceDataService.getMarkByWebResourceAndAudit(webresource, isRawMark, isManual);
+        Float mark = statisticsDataService.getMarkByWebResourceAndAudit(webresource, isRawMark, isManual);
         if (mark == -1) {
             return "0";
         }
@@ -325,15 +332,15 @@ public class AuditStatisticsFactory {
             boolean manualAudit) {
         ResultCounter resultCounter
                 = ResultCounterFactory.getInstance().getResultCounter();
-        resultCounter.setPassedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+        resultCounter.setPassedCount(statisticsDataService.getResultCountByResultTypeAndTheme(
                 webResource, audit, TestSolution.PASSED, theme, manualAudit).intValue());
-        resultCounter.setFailedCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+        resultCounter.setFailedCount(statisticsDataService.getResultCountByResultTypeAndTheme(
                 webResource, audit, TestSolution.FAILED, theme, manualAudit).intValue());
-        resultCounter.setNmiCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+        resultCounter.setNmiCount(statisticsDataService.getResultCountByResultTypeAndTheme(
                 webResource, audit, TestSolution.NEED_MORE_INFO, theme, manualAudit).intValue());
-        resultCounter.setNaCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+        resultCounter.setNaCount(statisticsDataService.getResultCountByResultTypeAndTheme(
                 webResource, audit, TestSolution.NOT_APPLICABLE, theme, manualAudit).intValue());
-        resultCounter.setNtCount(webResourceDataService.getResultCountByResultTypeAndTheme(
+        resultCounter.setNtCount(statisticsDataService.getResultCountByResultTypeAndTheme(
                 webResource, audit, TestSolution.NOT_TESTED, theme, manualAudit).intValue());
         return resultCounter;
     }

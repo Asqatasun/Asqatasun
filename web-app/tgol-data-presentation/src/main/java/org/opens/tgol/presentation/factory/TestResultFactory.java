@@ -35,7 +35,6 @@ import org.opens.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.opens.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.presentation.data.ManualResult;
 import org.opens.tgol.presentation.data.RemarkInfos;
 import org.opens.tgol.presentation.data.TestResult;
@@ -53,43 +52,31 @@ public final class TestResultFactory {
     private final ResourceBundle representationBundle =
             ResourceBundle.getBundle(TestResult.REPRESENTATION_BUNDLE_NAME);
 
-    private WebResourceDataServiceDecorator webResourceDataService;
-
-    @Autowired
-    public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
-        this.webResourceDataService = webResourceDataServiceDecorator;
-    }
-
     private ProcessRemarkDataService processRemarkDataService;
-
     @Autowired
     public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
         this.processRemarkDataService = processRemarkDataService;
     }
 
     private AuditDataService auditDataService;
-
     @Autowired
     public void setAuditDataService(AuditDataService auditDataService) {
         this.auditDataService = auditDataService;
     }
 
     private ProcessResultDataService processResultDataService;
-
     @Autowired
     public void setProcessResultDataService(ProcessResultDataService processDataService) {
         this.processResultDataService = processDataService;
     }
 
     private TestDataService testDataService;
-
     @Autowired
     public void setTestDataService(TestDataService testDataService) {
         this.testDataService = testDataService;
     }
-
+    
     private String selectAllThemeKey;
-
     public String getSelectAllThemeKey() {
         return selectAllThemeKey;
     }
@@ -207,14 +194,14 @@ public final class TestResultFactory {
             String theme,
             Collection<String> testSolutionList) {
 
-        List<ProcessResult> effectiveNetResultList = (List<ProcessResult>) webResourceDataService.
+        List<ProcessResult> effectiveNetResultList = (List<ProcessResult>) processResultDataService.
                 getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolutionList);
         // The not tested tests are not persisted but deduced from the testResultList
         // If the not_tested solution is requested to be displayed, we add fake
         // processResult to the current list.
 
         if (testSolutionList.contains(NOT_TESTED_STR)) {
-            List<ProcessResult> netResultList = (List<ProcessResult>) webResourceDataService.
+            List<ProcessResult> netResultList = (List<ProcessResult>) processResultDataService.
                     getProcessResultListByWebResourceAndScope(webresource, scope);
             effectiveNetResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
         }
@@ -269,7 +256,7 @@ public final class TestResultFactory {
             Locale locale) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList();
-        List<ProcessResult> netResultList = (List<ProcessResult>) webResourceDataService.
+        List<ProcessResult> netResultList = (List<ProcessResult>) processResultDataService.
                 getProcessResultListByWebResourceAndScope(webresource, scope);
 
         netResultList.addAll(
@@ -300,7 +287,7 @@ public final class TestResultFactory {
         for (Map.Entry<String, ManualResult> entry : overriddenResultMap.entrySet()) {
             if (StringUtils.isNotBlank(entry.getValue().getResult())) {
                 Test test = testDataService.getTestFromAuditAndLabel(audit, entry.getKey());
-                List<ProcessResult> prList = ((List<ProcessResult>) webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, test));
+                List<ProcessResult> prList = ((List<ProcessResult>) processResultDataService.getProcessResultListByWebResourceAndTest(webResource, test));
                 /**
                  * If returned process result list doesn't contains elements
                  * that means the test is NOT_TESTED and has to be created to
@@ -339,7 +326,7 @@ public final class TestResultFactory {
         for (Map.Entry<String, ManualResult> entry : overriddenResultMap.entrySet()) {
 
             Test test = testDataService.getTestFromAuditAndLabel(audit, entry.getKey());
-            List<ProcessResult> prList = ((List<ProcessResult>) webResourceDataService.getProcessResultListByWebResourceAndTest(webResource, test));
+            List<ProcessResult> prList = ((List<ProcessResult>) processResultDataService.getProcessResultListByWebResourceAndTest(webResource, test));
             /**
              * If returned process result list doesn't contains elements that
              * means the test is NOT_TESTED and has to be created to persist the
@@ -382,11 +369,11 @@ public final class TestResultFactory {
             Collection<String> testSolutionList) {
         // Map that associates a list of results with a theme
         Map<String, TestResult> testResultMap = new HashMap();
-        List<ProcessResult> effectiveNetResultList = (List<ProcessResult>) webResourceDataService.
+        List<ProcessResult> effectiveNetResultList = (List<ProcessResult>) processResultDataService.
                 getProcessResultListByWebResourceAndScope(webresource, scope, theme, testSolutionList);
 
         if (testSolutionList.contains(NOT_TESTED_STR)) {
-            List<ProcessResult> netResultList = (List<ProcessResult>) webResourceDataService.
+            List<ProcessResult> netResultList = (List<ProcessResult>) processResultDataService.
                     getProcessResultListByWebResourceAndScope(webresource, scope);
             effectiveNetResultList.addAll(addNotTestedProcessResult(getTestListFromWebResource(webresource), theme, netResultList));
         }
@@ -411,7 +398,7 @@ public final class TestResultFactory {
             Criterion crit) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList();
-        List<ProcessResult> netResultList = (List<ProcessResult>) webResourceDataService.
+        List<ProcessResult> netResultList = (List<ProcessResult>) processResultDataService.
                 getProcessResultListByWebResourceAndCriterion(
                         webresource,
                         crit);
@@ -449,7 +436,7 @@ public final class TestResultFactory {
             Test test) {
         // Map that associates a list of results with a theme
         List<TestResult> testResultList = new LinkedList();
-        List<ProcessResult> netResultList = (List<ProcessResult>) webResourceDataService.
+        List<ProcessResult> netResultList = (List<ProcessResult>) processResultDataService.
                 getProcessResultListByWebResourceAndTest(
                         webresource,
                         test);

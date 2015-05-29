@@ -40,6 +40,9 @@ import org.opens.tanaguru.entity.subject.PageImpl;
 public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         implements WebResourceDAO {
 
+    private static final String CACHEABLE_OPTION = "org.hibernate.cacheable";
+    private static final String TRUE = "true";
+    
     public WebResourceDAOImpl() {
         super();
     }
@@ -162,5 +165,59 @@ public class WebResourceDAOImpl extends AbstractJPADAO<WebResource, Long>
         query.setParameter("webResource", webResource);;
         return (Long) query.getSingleResult();
     }
+
+    @Override
+    public WebResource ligthRead(Long webResourceId) {
+        try {
+            Query query = entityManager.createQuery("SELECT wr FROM "
+                    + getEntityClass().getName() + " wr"
+                    + " WHERE wr.id = :id");
+            query.setParameter("id", webResourceId);
+            query.setHint(CACHEABLE_OPTION, TRUE);
+            return (WebResource) query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+    @Override
+    public Long findParentWebResourceId(Long webresourceId) {
+        if (webresourceId == null) {
+            return null;
+        }
+        try {
+            Query query = entityManager.createQuery("SELECT r FROM "
+                    + getEntityClass().getName() + " r"
+                    + " WHERE r.id = :id");
+            query.setParameter("id", webresourceId);
+            if (query.getSingleResult() != null
+                    && ((WebResource) query.getSingleResult()).getParent() != null) {
+                return ((WebResource) query.getSingleResult()).getParent().getId();
+            } else {
+                return null;
+            }
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Long findChildWebResourceCount(WebResource parentWebResource) {
+        if (parentWebResource == null) {
+            return null;
+        }
+        Query query = entityManager.createQuery(
+                "SELECT count (r.id) FROM "
+                + getEntityClass().getName() + " r"
+                + " WHERE r.parent.id = :id");
+        query.setParameter("id", parentWebResource.getId());
+        query.setHint(CACHEABLE_OPTION, TRUE);
+        try {
+            return (Long)query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 
 }

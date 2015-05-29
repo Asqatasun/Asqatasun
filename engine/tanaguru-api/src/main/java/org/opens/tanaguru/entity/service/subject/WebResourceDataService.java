@@ -82,4 +82,24 @@ public interface WebResourceDataService extends
      */
     Long getNumberOfChildWebResource(WebResource webResource);
 
+    /**
+     * 
+     * @param webResourceId
+     * @return 
+     */
+    WebResource ligthRead(Long webResourceId);
+    
+    /**
+     * 
+     * @param webResourceId
+     * @return 
+     */
+    WebResource deepRead(Long webResourceId);
+    
+    /**
+     * 
+     * @param parentWebResource
+     * @return 
+     */
+    Long getChildWebResourceCount(WebResource parentWebResource);
 }

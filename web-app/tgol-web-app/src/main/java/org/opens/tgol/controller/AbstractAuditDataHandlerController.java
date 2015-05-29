@@ -35,12 +35,13 @@ import org.opens.tanaguru.entity.service.audit.ContentDataService;
 import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.opens.tanaguru.entity.service.reference.ScopeDataService;
 import org.opens.tanaguru.entity.service.reference.TestDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.contract.Contract;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
 import org.opens.tgol.entity.service.contract.ActDataService;
+import org.opens.tgol.entity.service.statistics.StatisticsDataService;
 import org.opens.tgol.entity.user.User;
 import org.opens.tgol.exception.ForbiddenPageException;
 import org.opens.tgol.exception.ForbiddenUserException;
@@ -125,14 +126,24 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
         pageScope = scopeDataService.read(Long.valueOf(pageScopeId));
     }
 
-    private WebResourceDataServiceDecorator webResourceDataService;
-    public WebResourceDataServiceDecorator getWebResourceDataService() {
+    private WebResourceDataService webResourceDataService;
+    public WebResourceDataService getWebResourceDataService() {
         return webResourceDataService;
     }
 
     @Autowired
-    public final void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataService) {
+    public final void setWebResourceDataService(WebResourceDataService webResourceDataService) {
         this.webResourceDataService = webResourceDataService;
+    }
+    
+    private StatisticsDataService statisticsDataService;
+    public StatisticsDataService getStatisticsDataService() {
+        return statisticsDataService;
+    }
+
+    @Autowired
+    public final void setStatisticsDataService(StatisticsDataService statisticsDataService) {
+        this.statisticsDataService = statisticsDataService;
     }
 
     /**

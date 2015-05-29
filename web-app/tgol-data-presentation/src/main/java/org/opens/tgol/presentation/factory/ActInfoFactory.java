@@ -27,10 +27,11 @@ import java.util.Set;
 import org.opens.tanaguru.entity.audit.Audit;
 import org.opens.tanaguru.entity.audit.AuditStatus;
 import org.opens.tanaguru.entity.service.audit.ContentDataService;
+import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
 import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tgol.entity.contract.Act;
 import org.opens.tgol.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.opens.tgol.entity.decorator.tanaguru.subject.WebResourceDataServiceDecorator;
+import org.opens.tgol.entity.service.statistics.StatisticsDataService;
 import org.opens.tgol.presentation.data.ActInfo;
 import org.opens.tgol.presentation.data.ActInfoImpl;
 import org.opens.tgol.util.TgolKeyStore;
@@ -48,10 +49,16 @@ public final class ActInfoFactory {
         this.contentDataService = contentDataService;
     }
 
-    private WebResourceDataServiceDecorator webResourceDataService;
+    private WebResourceDataService webResourceDataService;
     @Autowired
-    public void setWebResourceDataService(WebResourceDataServiceDecorator webResourceDataServiceDecorator) {
-        this.webResourceDataService = webResourceDataServiceDecorator;
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+
+    private StatisticsDataService statisticsDataService;
+    @Autowired
+    public void setStatisticsDataService(StatisticsDataService statisticsDataService) {
+        this.statisticsDataService = statisticsDataService;
     }
     
     private ParameterDataServiceDecorator parameterDataService;
@@ -102,8 +109,8 @@ public final class ActInfoFactory {
                     || audit.getStatus().equals(
                             AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
                     || audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)) {
-                actInfo.setWeightedMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, false, false).intValue());
-                actInfo.setRawMark(webResourceDataService.getMarkByWebResourceAndAudit(wr, true, false).intValue());
+                actInfo.setWeightedMark(statisticsDataService.getMarkByWebResourceAndAudit(wr, false, false).intValue());
+                actInfo.setRawMark(statisticsDataService.getMarkByWebResourceAndAudit(wr, true, false).intValue());
                 if (actInfo.getRawMark() == -1) {
                     actInfo.setRawMark(0);
                 }
@@ -124,10 +131,10 @@ public final class ActInfoFactory {
             if (actInfo.isManual()) {
 
                 actInfo.setDateManual(audit.getManualAuditDateOfCreation());
-                actInfo.setWeightedMarkManual(webResourceDataService
+                actInfo.setWeightedMarkManual(statisticsDataService
                         .getMarkByWebResourceAndAudit(wr, false, true)
                         .intValue());
-                actInfo.setRawMarkManual(webResourceDataService
+                actInfo.setRawMarkManual(statisticsDataService
                         .getMarkByWebResourceAndAudit(wr, true, true)
                         .intValue());
 

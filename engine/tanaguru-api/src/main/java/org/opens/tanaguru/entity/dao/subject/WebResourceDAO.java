@@ -74,4 +74,25 @@ public interface WebResourceDAO extends GenericDAO<WebResource, Long> {
      */
     Long findNumberOfChildWebResource(WebResource webResource);
 
+    /**
+     * 
+     * @param webResourceId
+     * @return 
+     */
+    WebResource ligthRead(Long webResourceId);
+
+    /**
+     * 
+     * @param webresourceId
+     * @return 
+     */
+    Long findParentWebResourceId(Long webresourceId);
+    
+    /**
+     * 
+     * @param webresourceId
+     * @return 
+     */
+    Long findChildWebResourceCount(WebResource webresourceId);
+    
 }

@@ -80,4 +80,19 @@ public class WebResourceDataServiceImpl extends AbstractGenericDataService<WebRe
         return ((WebResourceDAO) entityDao).findNumberOfChildWebResource(webResource);
     }
 
+    @Override
+    public WebResource ligthRead(Long webResourceId) {
+        return ((WebResourceDAO) entityDao).ligthRead(webResourceId);
+    }
+    
+    @Override
+    public WebResource deepRead(Long webResourceId) {
+        return ((WebResourceDAO) entityDao).read(webResourceId);
+    }
+
+    @Override
+    public Long getChildWebResourceCount(WebResource parentWebResource) {
+        return ((WebResourceDAO) entityDao).findChildWebResourceCount(parentWebResource);
+    }
+
 }

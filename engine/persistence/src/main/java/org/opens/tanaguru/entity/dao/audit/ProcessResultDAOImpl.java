@@ -26,12 +26,14 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.NoResultException;
 
 import javax.persistence.Query;
 
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.opens.tanaguru.entity.audit.*;
+import org.opens.tanaguru.entity.reference.Criterion;
 import org.opens.tanaguru.entity.reference.Scope;
 import org.opens.tanaguru.entity.reference.Test;
 import org.opens.tanaguru.entity.reference.Theme;
@@ -39,16 +41,47 @@ import org.opens.tanaguru.entity.subject.WebResource;
 import org.opens.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
 public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
         implements ProcessResultDAO {
 
+    private static final String CACHEABLE_OPTION = "org.hibernate.cacheable";
+    private static final String TRUE = "true";
+    
+    private Long pageAndSiteScopeId = 3l;
+    public Long getPageAndSiteScopeId() {
+        return pageAndSiteScopeId;
+    }
+
+    public void setPageAndSiteScopeId(String pageAndSiteScopeId) {
+        this.pageAndSiteScopeId = Long.valueOf(pageAndSiteScopeId);
+    }
+
+    private String selectAllThemeKey;
+    public String getSelectAllThemeKey() {
+        return selectAllThemeKey;
+    }
+
+    public void setSelectAllThemeKey(String selectAllThemeKey) {
+        this.selectAllThemeKey = selectAllThemeKey;
+    }
+
+    private String selectAllTestResultKey;
+    public String getSelectAllTestResultKey() {
+        return selectAllTestResultKey;
+    }
+
+    public void setSelectAllTestResultKey(String selectAllTestResultKey) {
+        this.selectAllTestResultKey = selectAllTestResultKey;
+    }
+    
     public ProcessResultDAOImpl() {
         super();
     }
 
+    @Override
     protected Class<ProcessResultImpl> getEntityClass() {
         return ProcessResultImpl.class;
     }
@@ -56,7 +89,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
     private Class<DefiniteResultImpl> getDefitiniteResultClass() {
         return DefiniteResultImpl.class;
     }
-    
+
     private Class<IndefiniteResultImpl> getIndefitiniteResultClass() {
         return IndefiniteResultImpl.class;
     }
@@ -78,20 +111,20 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
         if (theme != null) {
             query.setParameter("theme", theme);
         }
-        return Long.valueOf((Long)query.getSingleResult()).intValue();
+        return ((Long) query.getSingleResult()).intValue();
     }
 
     @Override
     public Collection<ProcessResult> getResultByScopeList(WebResource webresource, Scope scope) {
         Query query = entityManager.createQuery("SELECT pr FROM "
                 + getDefitiniteResultClass().getName() + " pr "
-                + " WHERE "+
-                "pr.subject = :webresource AND " +
-                "pr.test.scope = :scope");
+                + " WHERE "
+                + "pr.subject = :webresource AND "
+                + "pr.test.scope = :scope");
         query.setParameter("webresource", webresource);
         query.setParameter("scope", scope);
         Set setItems = new LinkedHashSet(query.getResultList());
-        return  setItems;
+        return setItems;
     }
 
     @Override
@@ -101,7 +134,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
                 + " WHERE "
                 + " pr.grossResultAudit = :audit");
         query.setParameter("audit", audit);
-        return  (Long)query.getSingleResult();
+        return (Long) query.getSingleResult();
     }
 
     @Override
@@ -111,7 +144,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
                 + " WHERE "
                 + " pr.netResultAudit = :audit");
         query.setParameter("audit", audit);
-        return  (Long)query.getSingleResult();
+        return (Long) query.getSingleResult();
     }
 
     @Override
@@ -170,11 +203,11 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
                 + " WHERE "
                 + " pr.grossResultAudit = :audit");
         query.setParameter("audit", audit);
-        for (ProcessResult pr : (Collection<ProcessResult>)query.getResultList()) {
+        for (ProcessResult pr : (Collection<ProcessResult>) query.getResultList()) {
             delete(pr.getId());
         }
     }
-    
+
     @Override
     public Collection<ProcessResult> retrieveIndefiniteResultFromAudit(Audit audit) {
         Query query = entityManager.createQuery("SELECT pr FROM "
@@ -185,27 +218,165 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
         return query.getResultList();
     }
 
-	@Override
-	public List<DefiniteResult> getHistoryChanges(ProcessResult processResultImpl) {
-		
-		List<DefiniteResult> history = new ArrayList<DefiniteResult>();
-		AuditReader auditReader = AuditReaderFactory.get(this.entityManager);
-		Long id = processResultImpl.getId();
-		if (id == null) {
-			return new ArrayList<DefiniteResult>();
-		}
-		List<Number> revisions = auditReader.getRevisions(processResultImpl.getClass(), id);
-		DefiniteResult find = null;
-		for (int i=0; i<revisions.size(); i++) {
-			Number revision = revisions.get(i);
-			find = auditReader.find(DefiniteResultImpl.class, id, revision);
-			history.add(find);
-		}
-		
-		
-		
-		return history;
-		
-	}
+    @Override
+    public List<DefiniteResult> getHistoryChanges(ProcessResult processResultImpl) {
+
+        List<DefiniteResult> history = new ArrayList<>();
+        AuditReader auditReader = AuditReaderFactory.get(this.entityManager);
+        Long id = processResultImpl.getId();
+        if (id == null) {
+            return new ArrayList<>();
+        }
+        List<Number> revisions = auditReader.getRevisions(processResultImpl.getClass(), id);
+        DefiniteResult find = null;
+        for (int i = 0; i < revisions.size(); i++) {
+            Number revision = revisions.get(i);
+            find = auditReader.find(DefiniteResultImpl.class, id, revision);
+            history.add(find);
+        }
+
+        return history;
+
+    }
+
+    @Override
+    public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(
+            WebResource webResource, 
+            Scope scope) {
+        Query query = entityManager.createQuery(
+                "SELECT distinct(pr) FROM "
+                + getEntityClass().getName() + " pr"
+                + " LEFT JOIN FETCH pr.remarkSet pk"
+                + " LEFT JOIN FETCH pk.elementSet el"
+                + " JOIN pr.subject r"
+                + " JOIN pr.test t"
+                + " JOIN t.scope s"
+                + " WHERE (r=:webResource)"
+                + " AND (s = :scope or s.id = :pageAndSiteScope)");
+        query.setParameter("webResource", webResource);
+        query.setParameter("scope", scope);
+        query.setParameter("pageAndSiteScope", pageAndSiteScopeId);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndCriterion(
+            WebResource webResource, 
+            Criterion criterion) {
+        Query query = entityManager.createQuery(
+                "SELECT distinct(pr) FROM "
+                + getEntityClass().getName() + " pr"
+                + " LEFT JOIN FETCH pr.remarkSet pk"
+                + " LEFT JOIN FETCH pk.elementSet el"
+                + " JOIN pr.subject r"        
+                + " JOIN pr.test t"
+                + " JOIN t.criterion c"
+                + " WHERE r=:webResource"
+                + " AND c=:criterion");
+        query.setParameter("webResource", webResource);
+        query.setParameter("criterion", criterion);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndScope(
+            WebResource webResource, 
+            Scope scope, 
+            String theme, 
+            Collection<String> testSolutions) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT pr FROM ");
+        sb.append(getEntityClass().getName());
+        sb.append(" pr");
+        sb.append(" JOIN pr.subject w");
+        sb.append(" JOIN pr.test t");
+        sb.append(" JOIN pr.test.criterion.theme th");
+        sb.append(" JOIN t.scope s");
+        sb.append(" WHERE w=:webResource");
+        sb.append(" AND (s = :scope or s.id = :pageAndSiteScope) ");
+        if (theme != null && 
+                !theme.isEmpty() &&
+                    !theme.equals(selectAllThemeKey)) {
+            sb.append("AND (th.code = :theme)");
+        }
+        if (!testSolutions.isEmpty()) {
+            sb.append(" AND (pr.definiteValue IN (:testSolution)) ");
+        }
+
+        Query query = entityManager.createQuery(sb.toString());
+        query.setParameter("webResource", webResource);
+        query.setParameter("scope", scope);
+        query.setParameter("pageAndSiteScope", pageAndSiteScopeId);
+        if (theme != null &&
+                !theme.isEmpty() &&
+                    !theme.equals(selectAllThemeKey)) {
+            query.setParameter("theme", theme);
+        }
+        if (!testSolutions.isEmpty()) {
+            Collection<TestSolution> solutions = new ArrayList<>();
+            for (String solution : testSolutions) {
+                solutions.add(TestSolution.valueOf(solution));
+            }
+            query.setParameter("testSolution", solutions);
+        }
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Collection<ProcessResult> retrieveProcessResultListByWebResourceAndTest(WebResource webResource, Test test) {
+        Query query = entityManager.createQuery(
+                "SELECT distinct(pr) FROM "
+                + getEntityClass().getName() + " pr"
+                + " LEFT JOIN FETCH pr.remarkSet pk"
+                + " LEFT JOIN FETCH pk.elementSet el"
+                + " JOIN pr.subject r"
+                + " JOIN pr.test t"
+                + " WHERE r=:webResource"
+                + " AND t=:test");
+        query.setParameter("webResource", webResource);
+        query.setParameter("test", test);
+        try {
+            return query.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean hasAuditSiteScopeResult(WebResource webResource, Scope scope) {
+        Query query = entityManager.createQuery(
+                "SELECT count(pr.id) FROM "
+                + getEntityClass().getName() + " pr"
+                + " JOIN pr.subject r"
+                + " JOIN pr.test t"
+                + " JOIN t.scope s"
+                + " WHERE (r.id=:id)"
+                + " AND (s = :scope or s.id = :pageAndSiteScope)");
+        query.setParameter("id", webResource.getId());
+        query.setParameter("pageAndSiteScope", pageAndSiteScopeId);
+        query.setParameter("scope", scope);
+        query.setHint(CACHEABLE_OPTION, TRUE);
+        try {
+            if ((Long)query.getSingleResult()>0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (NoResultException e) {
+            return false;
+        }
+    }
 
 }
