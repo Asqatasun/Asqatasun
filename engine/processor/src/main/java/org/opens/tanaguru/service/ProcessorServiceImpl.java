@@ -64,7 +64,7 @@ public class ProcessorServiceImpl implements ProcessorService {
 
     @Override
     public Collection<ProcessResult> process(Collection<Content> contentList, Collection<Test> testList) {
-        Collection<ProcessResult> processResultList = new ArrayList<ProcessResult>();
+        Collection<ProcessResult> processResultList = new ArrayList<>();
 
         Processor processor = processorFactory.create();
 
