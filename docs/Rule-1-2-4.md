@@ -23,7 +23,6 @@ Chaque image vectorielle de d&eacute;coration (balise `<svg>`) non porteuse d'in
  * Les balises `<title>` et `<desc>` sont absentes ou vides 
  * La balise `<svg>` ou l'un de ses enfants est d&eacute;pourvue d'attribut `title` 
 
-
 ### Level
 
 **A**
@@ -51,6 +50,19 @@ All the `<svg>` tags of the page
 All the `<svg>` tags of the page with a `"role"` attribute with value `"img"`
 
 ### Process
+
+#### Test1
+
+For each element of Set1, test the presence of the `"role"` attribute with value `"img"`.
+
+For each occurrence of false-result of Test1, raise a MessageA
+
+##### MessageA : Missing Alt attribute
+
+code : RoleImgMissing
+status: Failed
+parameter : tag name
+present in source : yes
 
 ### Analysis
 
