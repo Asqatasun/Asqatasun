@@ -29,6 +29,7 @@ public final class MarkerStore {
 
     public static final String DATA_TABLE_MARKER = "DATA_TABLE_MARKER";
     public static final String PRESENTATION_TABLE_MARKER = "PRESENTATION_TABLE_MARKER";
+    public static final String COMPLEX_TABLE_MARKER = "COMPLEX_TABLE_MARKER";
     public static final String DECORATIVE_IMAGE_MARKER = "DECORATIVE_IMAGE_MARKER";
     public static final String INFORMATIVE_IMAGE_MARKER = "INFORMATIVE_IMAGE_MARKER";
 

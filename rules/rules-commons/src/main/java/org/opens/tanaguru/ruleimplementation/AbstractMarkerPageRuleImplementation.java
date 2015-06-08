@@ -77,12 +77,12 @@ public abstract class AbstractMarkerPageRuleImplementation
     }
 
     /**
-     * The marker code that identifies the targeted elements
+     * The marker codes that identifies the targeted elements
      */
-    private final String markerCode;
+    private final String[] markerCodes;
 
     /**
-     * The marker code that identifies elements of same type but with another
+     * The marker codes that identifies elements of same type but with another
      * nature.
      */
     private final String[] inverseMarkerCodes;
@@ -128,7 +128,7 @@ public abstract class AbstractMarkerPageRuleImplementation
     public AbstractMarkerPageRuleImplementation(
             @Nonnull String markerCode,
             @Nonnull String inverseMarkerCode) {
-        this(markerCode, new String[]{inverseMarkerCode});
+        this(new String[]{markerCode}, new String[]{inverseMarkerCode});
     }
     
     /**
@@ -138,10 +138,10 @@ public abstract class AbstractMarkerPageRuleImplementation
      * @param inverseMarkerCode
      */
     public AbstractMarkerPageRuleImplementation(
-            @Nonnull String markerCode,
+            @Nonnull String[] markerCode,
             @Nonnull String[] inverseMarkerCode) {
         super();
-        this.markerCode = markerCode;
+        this.markerCodes = markerCode;
         this.inverseMarkerCodes = inverseMarkerCode;
     }
 
@@ -162,7 +162,7 @@ public abstract class AbstractMarkerPageRuleImplementation
             @Nonnull ElementChecker elementChecker) {
         this(
                 elementSelector,
-                markerCode,
+                new String[]{markerCode},
                 new String[]{inverseMarkerCode}, 
                 markerElementChecker,
                 elementChecker
@@ -180,12 +180,12 @@ public abstract class AbstractMarkerPageRuleImplementation
      */
     public AbstractMarkerPageRuleImplementation(
             @Nonnull ElementSelector elementSelector,
-            @Nonnull String markerCode,
+            @Nonnull String[] markerCode,
             @Nonnull String[] inverseMarkerCode,
             @Nonnull ElementChecker markerElementChecker,
             @Nonnull ElementChecker regularElementChecker) {
         super();
-        this.markerCode = markerCode;
+        this.markerCodes = markerCode;
         this.inverseMarkerCodes = inverseMarkerCode;
         setElementSelector(elementSelector);
         this.setElementChecker(regularElementChecker);
@@ -236,11 +236,13 @@ public abstract class AbstractMarkerPageRuleImplementation
         boolean inverseMarkerFound = false;
         for (Parameter parameter : sspHandler.getSSP().getAudit().getParameterSet()) {
             String paramElCode = parameter.getParameterElement().getParameterElementCode();
-            if (StringUtils.equalsIgnoreCase(paramElCode, markerCode)) {
-                String markerTab = parameter.getValue();
-                if (StringUtils.isNotEmpty(markerTab)) {
-                    markerList = new ArrayList<>();
-                    inverseMarkerFound = initMarkerList(markerTab, markerList);
+            for (String markerCode : markerCodes) {
+                if (StringUtils.equalsIgnoreCase(paramElCode, markerCode)) {
+                    String markerTab = parameter.getValue();
+                    if (StringUtils.isNotEmpty(markerTab)) {
+                        markerList = new ArrayList<>();
+                        inverseMarkerFound = initMarkerList(markerTab, markerList);
+                    }
                 }
             }
             for (String inverseMarkerCode : inverseMarkerCodes) {
