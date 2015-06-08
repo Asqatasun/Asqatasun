@@ -1,8 +1,8 @@
 # Rule 5.5.1
+
 ## Summary
 
-This test consists in checking the relevancy of the caption of data
-tables.
+This test consists in checking the relevancy of the caption of data tables.
 
 ## Business description
 
@@ -36,70 +36,42 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files
 
 ### Selection
 
-**Set1 (table tags identified as data table from html markers) : \
-**
+#### Set1 (table tags identified as data table from html markers)
 
-All the <table\> tags with an "id" attribute or a "class" attribute or a
+All the `<table>` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
-the "DATA\_TABLE\_MARKER" parameter AND with a <caption\> child tag.
+the "DATA_TABLE_MARKER" parameter AND with a `<caption>` child tag.
 
-**Set2 (table tags not identified as data table from html markers) :\
-**
+#### Set2 (table tags not identified as data table from html markers)
 
-All the <table\> tags that don't have an "id" attribute or a "class"
+All the `<table>` tags that don't have an "id" attribute or a "class"
 attribute or a "role" attribute that matches one the values set by the
-use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
-"DATA\_TABLE\_MARKER" parameter AND with a <caption\> child tag. That
-means select all the table tags of the page when these parameters are
+use through the "PRESENTATION_TABLE_MARKER" parameter or the
+"DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with a `<caption>` child tag. That
+means select all the `<table>` tags of the page when these parameters are
 empty.
 
-**Set3 :**
+#### Set3
 
-The <caption\> child tag of each element of Set1.
+The `<caption>` child tag of each element of **Set1**.
 
-**Set4 :**
+#### Set4
 
-The <caption\> child tag of each element of Set2.
+The `<caption>` child tag of each element of **Set2**.
 
 ### Process
 
-**Test1 :**
+#### Test1
 
-For each element of Set3 (caption of data tables identified by a html
-marker), test whether the text is not empty.
+For all elements of **Set3** (caption of data tables identified by a html marker), check whether the content of the `<caption>` tag is not relevant (see Notes for details about relevancy test). 
 
-For each occurence of false-result of Test1, raise a MessageA
+For each occurence of false-result of **Test1**, raise a MessageA. Raise a MessageB instead.
 
-**Test2 :**
+#### Test2
 
-For each element of Set3 (caption of data tables identified by a html
-marker), test whether the text doesn't only contain non alphanumerical
-characters.
+For all elements of **Set4** (tables not identified by a html marker), check whether the content of the `<caption>` tag is not relevant (see Notes for details about relevancy test). 
 
-For each occurence of false-result of Test2, raise a MessageA
-
-**Test3 :**
-
-If Test1 AND Test2 return true (no pattern detected), raise a
-MessageB.****
-
-**Test4 :**
-
-For each element of Set4, test whether the text is not empty.
-
-For each occurence of false-result of Test4, raise a MessageC
-
-**Test5 :**
-
-For each element of Set4, test whether the text doesn't only contain non
-alphanumerical characters.
-
-For each occurence of false-result of Test5, raise a MessageC
-
-**Test6 :**
-
-If Test4 AND Test5 return true (no pattern detected), raise a
-MessageD.****
+For each occurence of false-result of **Test2**, raise a MessageC. Raise a MessageD instead.
 
 ##### MessageA : Not Pertinent caption of data table
 
@@ -111,42 +83,41 @@ MessageD.****
 ##### MessageB : Check the pertinence of caption of data table
 
 -   code : CheckCaptionPertinenceForDataTable
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : tag text, snippet
 -   present in source : yes
 
 ##### MessageC : Check the nature of table with not pertinent caption child tag
 
 -   code : CheckNatureOfTableForNotPertinentCaption
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : tag text, snippet
 -   present in source : yes
 
 ##### MessageD : Check the nature of table and the pertinenceof the caption child tag
 
 -   code : CheckNatureOfTableAndCaptionPertinence
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : title attribute, snippet
 -   present in source : yes
 
 ### Analysis
 
-**Failed :**
+#### Failed
 
-Test1 OR Test2 return false for at least one element (at least one table
-identified as data table has a not pertinent caption)**\
-**
+At least one table identified as data table has a not pertinent caption (**Test1** return false for at least one element)
 
-**NA : \
-**
+#### Not Applicable
 
-Set1 AND Set2 are empty (the page has no <table\> tag or only table
-identified as presentation table)
+The page has no `<table>` tag or only table identified as presentation table (**Set1** AND **Set2** are empty)
 
-**NMI :**
+#### Pre-Qualified
 
 In all other cases
 
 ## Notes
 
+The content of the `<caption>` tag is seen as not relevant if :
 
+- empty
+- only composed of non-alphanumerical characters

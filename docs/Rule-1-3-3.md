@@ -44,7 +44,7 @@ All the `<input>` tags with a `"type"` attribute equals to "image" and an `"alt"
 
 #### Test1
 
-For all elements of **Set1**, check whether the content of the "`alt`" attribute is not relevant (see Notes for details about relevancy test). 
+For all elements of **Set1**, check whether the content of the `"alt"` attribute is not relevant (see Notes for details about relevancy test). 
 
 For each occurrence of true-result of **Test1**, raise a MessageA.
 
@@ -80,7 +80,7 @@ The page has no `<input>` tag with a `"type"` attribute equals to "image" tag an
 
 ## Notes
 
-The content of the "`alt`" attribute is seen as not relevant if :
+The content of the `"alt"` attribute is seen as not relevant if :
 
 - empty
 - only composed of non-alphanumerical characters
