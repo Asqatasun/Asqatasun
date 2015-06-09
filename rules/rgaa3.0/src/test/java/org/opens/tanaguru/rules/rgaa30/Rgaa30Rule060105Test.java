@@ -20,6 +20,7 @@
 package org.opens.tanaguru.rules.rgaa30;
 
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
@@ -31,6 +32,7 @@ public class Rgaa30Rule060105Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule060105Test (String testName){
         super(testName);
@@ -44,42 +46,61 @@ public class Rgaa30Rule060105Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        getWebResourceMap().put("Rgaa30.Test.6-1-5-1Passed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "rgaa30/Rgaa30Rule060105/Rgaa30.Test.6.1.5-1Passed-01.html"));
-//        getWebResourceMap().put("Rgaa30.Test.6-1-5-2Failed-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "rgaa30/Rgaa30Rule060105/Rgaa30.Test.6.1.5-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.6-1-5-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060105/Rgaa30.Test.6.1.5-3NMI-01.html"));
-//        getWebResourceMap().put("Rgaa30.Test.6-1-5-4NA-01",
-//              getWebResourceFactory().createPage(
-//              getTestcasesFilePath() + "rgaa30/Rgaa30Rule060105/Rgaa30.Test.6.1.5-4NA-01.html"));
+//        addWebResource("Rgaa30.Test.6.1.5-1Passed-01");
+//        addWebResource("Rgaa30.Test.6.1.5-2Failed-01");
+        addWebResource("Rgaa30.Test.6.1.5-3NMI-01");
+//        addWebResource("Rgaa30.Test.6.1.5-4NA-01");
     }
 
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("Rgaa30.Test.6-1-5-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("Rgaa30.Test.6-1-5-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("Rgaa30.Test.6-1-5-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("Rgaa30.Test.6-1-5-4NA-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+//        checkResultIsPassed(processPageTest("Rgaa30.Test.6.1.5-1Passed-01"), 1);
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+//        ProcessResult processResult = processPageTest("Rgaa30.Test.6.1.5-2Failed-01");
+//        checkResultIsFailed(processResult, 1, 1);
+//        checkRemarkIsPresent(
+//                processResult,
+//                TestSolution.FAILED,
+//                "#MessageHere",
+//                "#CurrentElementHere",
+//                1,
+//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01---------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Rgaa30.Test.6.1.5-3NMI-01");
+        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
+//        checkResultIsPreQualified(processResult, 2, 1);
+//        checkRemarkIsPresent(
+//                processResult,
+//                TestSolution.NEED_MORE_INFO,
+//                "#MessageHere",
+//                "#CurrentElementHere",
+//                1,
+//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01------------------------------
+        //----------------------------------------------------------------------
+//        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.6.1.5-4NA-01"));
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("Rgaa30.Test.6-1-5-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Rgaa30.Test.6-1-5-2Failed-01").getValue());
+
+        // The consolidate method can be removed when real implementation is done.
+        // The assertions are automatically tested regarding the file names by 
+        // the abstract parent class
         assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa30.Test.6-1-5-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("Rgaa30.Test.6-1-5-4NA-01").getValue());
+                consolidate("Rgaa30.Test.6.1.5-3NMI-01").getValue());
     }
 
 }
