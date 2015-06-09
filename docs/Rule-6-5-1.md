@@ -35,10 +35,10 @@ Dans chaque page Web, chaque lien (balise `a` avec un attribut `href`), &agrave;
 
 ### Selection
 
-Set1 : All the <a\> tags of the page that are not an anchor (
+**Set1** : All the `<a>` tags of the page that are not an anchor (
 a:not([name]):not([id]) )
 
-Set2 : All the tags from Set1 that have an empty text (including
+**Set2** : All the tags from **Set1** that have an empty text (including
 children text) and that have not children with a not empty "alt"
 attribute
 
@@ -50,26 +50,26 @@ The selection handles the process.
 
 #### Not Applicable
 
-Set1 is empty (The page has no <a\> tag)
+**Set1** is empty (The page has no `<a>` tag)
 
 #### Passed
 
-Set2 is empty (The page only contains not empty links)
+**Set2** is empty (The page only contains not empty links)
 
 #### Failed
 
-Set2 is not empty. For each element of Set2, raise a Message1
+**Set2** is not empty. For each element of **Set2**, raise a Message1
 
 ##### Message 1 : Empty link
 
 -   code : EmptyLink
 -   status: Failed
--   case : For each element of Set2
+-   case : For each element of **Set2**
 -   parameter : href attribute, snippet
 -   present in source : yes
 
 ## Notes
 
-A <a\> tag is seen as an anchor if and only if it has either a "name" or
+A `<a>` tag is seen as an anchor if and only if it has either a "name" or
 an "id" attribute (assuming [the definition of an anchor in AccessiWeb
 2.2](http://accessiweb.org/index.php/glossary-76.html#mAncreNom))

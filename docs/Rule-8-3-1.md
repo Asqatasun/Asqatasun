@@ -42,7 +42,7 @@ Pour chaque page Web, l'indication de <a href="http://references.modernisation.g
 
 ##### Set 1 :
 
-The <html\> tag with a "lang" or "xml:lang" attribute.
+The `<html>` tag with a "lang" or "xml:lang" attribute.
 
 ##### Set 2 :
 
@@ -62,18 +62,18 @@ The selection handles the process.
 
 #### Passed
 
--   The <html\> tag has a "lang" or a "xml:lang" attribute (Set1 is not
+-   The `<html>` tag has a "lang" or a "xml:lang" attribute (**Set1** is not
     empty)
 -   The language is provided for each textual element by the tag or by
-    one of its parents (Set1 is empty AND Set2 is not empty AND Set3 is
+    one of its parents (**Set1** is empty AND **Set2** is not empty AND **Set3** is
     empty)
 
 #### Failed
 
--   The page has no language specification (Set2 is empty). In this
+-   The page has no language specification (**Set2** is empty). In this
     case, raise a Message 1
--   Some textual tags are missing the language attribute (Set1 is empty
-    AND Set2 is not empty AND Set3 is not empty). In this case, raise a
+-   Some textual tags are missing the language attribute (**Set1** is empty
+    AND **Set2** is not empty AND **Set3** is not empty). In this case, raise a
     Message 2
 
 ##### Message 1: Lang Attribute Missing On Whole Page

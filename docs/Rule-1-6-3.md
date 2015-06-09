@@ -40,7 +40,7 @@ Chaque image embarqu&eacute;e porteuse d'information (balise `embed`), qui n&eac
 
 ### Selection
 
-All the <embed\> tags
+All the `<embed>` tags
 
 ### Process
 
@@ -50,7 +50,7 @@ The selection handles the process
 
 #### Not Applicable
 
-Selection is empty (The page has no <embed\> tag)
+Selection is empty (The page has no `<embed>` tag)
 
 #### Pre-qualified
 

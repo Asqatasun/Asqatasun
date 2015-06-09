@@ -50,36 +50,36 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ##### Set1
 
-All the <select\> tags with an "onchange" attribute (select[onchange])
+All the `<select>` tags with an "onchange" attribute (select[onchange])
 
 ##### Set2
 
-All the <form\> tags with a <select\> child but without child of type
-<button\>, <input type='submit'\>, <input type='button'\> or <input
-type='reset'\>
+All the `<form>` tags with a `<select>` child but without child of type
+`<button>`, `<input type='submit'>`, `<input type='button'>` or `<input
+type='reset'>
 (form:has(select):not(:has(button)):not(:has(input[type=submit])):not(:has(input[type=button])):not(:has(input[type=reset])))
 
 ### Process
 
 ##### Test1
 
-For each occurence of Set1 and Set2, raise a MessageA
+For each occurence of **Set1** and **Set2**, raise a MessageA
 
 Test2
 
-If Set1 AND Set2 are empty, raise a MessageB
+If **Set1** AND **Set2** are empty, raise a MessageB
 
 ##### MessageA : Context changed by script detected
 
 -   code :ContextChangedScriptDetected
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : snippet
 -   present in source : yes
 
 ##### MessageB : No Pattern detected
 
--   code : NoPatternDetected\_AW22-07051
--   status: NMI
+-   code : NoPatternDetected_AW22-07051
+-   status: Pre-Qualified
 -   present in source : no
 
 ### Analysis

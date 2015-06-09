@@ -35,7 +35,7 @@ Dans chaque page Web, chaque changement de langue (attribut `lang` et/ou `xml:la
 
 ### Selection
 
-All the tags different from <html\> that have a "lang" or a "xml:lang"
+All the tags different from `<html>` that have a "lang" or a "xml:lang"
 attribute
 
 ### Process
@@ -47,7 +47,7 @@ For each occurence of the selection raise a MessageA
 ###### MessageA : Check Manually the elements
 
 -   code :ManualCheckOnElements
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : tag name
 -   present in source : yes
 

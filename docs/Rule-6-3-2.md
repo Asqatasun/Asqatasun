@@ -37,23 +37,23 @@ Chaque intitul&eacute; de <a href="http://references.modernisation.gouv.fr/sites
 
 ### Selection
 
-**Set1 :**
+#### Set1 :
 
-All the <a\> tags with a "href" attribute, with children (
-a[href]:has(\*) )
+All the `<a>` tags with a "href" attribute, with children (
+a[href]:has(*) )
 
-**Set2 :**
+#### Set2 :
 
-All the elements of Set1 without own text and with only one child of
-type img or object (img , object[type\^=image],
-object[data\^=data:image], object[data$=png], object[data$=jpeg],
+All the elements of **Set1** without own text and with only one child of
+type img or object (img , object[type^=image],
+object[data^=data:image], object[data$=png], object[data$=jpeg],
 object[data$=jpg],object[data$=bmp], object[data$=gif]) (assuming [the
 definition of an image link in AccessiWeb
 2.2](http://accessiweb.org/index.php/glossary-76.html#mLienImage))
 
-**Set3 :**
+#### Set3 :
 
-All the elements of Set2 with a child tag with a not empty "alt"
+All the elements of **Set2** with a child tag with a not empty "alt"
 attribute (assuming [the definition of a link context in AccessiWeb
 2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
 
@@ -61,7 +61,7 @@ attribute (assuming [the definition of a link context in AccessiWeb
 
 ##### Test1
 
-For each element of Set2, we check whether the link content (content of
+For each element of **Set2**, we check whether the link content (content of
 the "alt" attribute of the child tag) doesn't belong to the text link
 blacklist.
 
@@ -70,7 +70,7 @@ MessageB instead
 
 ##### Test2
 
-For each element of Set2, we check whether the link content (content of
+For each element of **Set2**, we check whether the link content (content of
 the "alt" attribute of the child tag) doesn't only contain non
 alphanumeric characters
 
@@ -93,19 +93,18 @@ MessageB instead
 
 ### Analysis
 
-**NA :**
+#### Not Applicable
 
-Set1 is empty (the page has no image links)
+**Set1** is empty (the page has no image links)
 
 **Failed :**
 
 Test1 OR Test2 returns false for at least one element (At least one
-element of the Set2 has a child tag with an "alt" attribute content
+element of the **Set2** has a child tag with an "alt" attribute content
 which is blacklisted or that only contains non alphanumerical
 characters)
 
-**NMI :\
-**
+#### Pre-Qualified
 
 In all other cases
 

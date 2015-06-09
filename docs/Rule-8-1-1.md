@@ -35,7 +35,7 @@ Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/sites/
 
 ### Selection
 
-The <!doctype\> tag on the page
+The `<!doctype>` tag on the page
 
 ### Process
 

@@ -36,18 +36,18 @@ Pour chaque page web, chaque <a href="http://references.modernisation.gouv.fr/si
 
 ### Selection
 
-Set1 : All the clickable area (see [the definition of a clickable
+**Set1** : All the clickable area (see [the definition of a clickable
 area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZoneCliquable))
 with a "href" attribute, without "title" attribute, without context
 (assuming [the definition of a link context in AccessiWeb
 2.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mContexteLien))
 and with an identical link text.
 
-Set2 : All the clickable area with a "href" attribute, a not empty
+**Set2** : All the clickable area with a "href" attribute, a not empty
 "title" attribute, without context and with an identical link text
 (combination of the link text and the "title" attribute text)
 
-Set3 : All the clickable area with a "href" attribute, with a context
+**Set3** : All the clickable area with a "href" attribute, with a context
 and with an identical link text (combination of the link text and the
 "title" attribute text if it exists)
 
@@ -57,13 +57,13 @@ and with an identical link text (combination of the link text and the
 
 ### Process
 
-Test1 : We check whether all the elements of Set1 have an identical
+Test1 : We check whether all the elements of **Set1** have an identical
 "href" attribute
 
-Test2 : We check whether all the elements of Set2 have an identical
+Test2 : We check whether all the elements of **Set2** have an identical
 "href" attribute
 
-Test3 : We check whether all the elements of Set3 have an identical
+Test3 : We check whether all the elements of **Set3** have an identical
 "href" attribute
 
 -   used nomenclature : none
@@ -72,15 +72,15 @@ Test3 : We check whether all the elements of Set3 have an identical
 
 ### Analysis
 
--   NA : Set1, Set2 and Set3 are empty
+-   NA : **Set1**, **Set2** and **Set3** are empty
 -   Failed :
 
-1.  At least one element of the Set1 has a "href" attribute different
+1.  At least one element of the **Set1** has a "href" attribute different
     from the others (Test1 returns false for at least one element)
-2.  At least one element of the Set2 has a "href" attribute different
+2.  At least one element of the **Set2** has a "href" attribute different
     from the others (Test2 returns false for at least one element)
 
--   NMI : In all other cases
+-   Pre-Qualified : In all other cases
 
 -   Message 1:
 
@@ -93,7 +93,7 @@ Test3 : We check whether all the elements of Set3 have an identical
 -   Message 2:
 
 1.  code : SuspectedIdenticalLinkWithDifferentTarget
-2.  status: NMI
+2.  status: Pre-Qualified
 3.  case : For each element returning true in Test3
 4.  parameter : tag name
 5.  present in source : yes

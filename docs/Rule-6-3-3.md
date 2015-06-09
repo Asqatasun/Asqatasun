@@ -37,20 +37,20 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Selection
 
-**Set1 :**
+#### Set1 :
 
-All the <area\> tags with a "href" attribute and a "alt attribute (
+All the `<area>` tags with a "href" attribute and a "alt attribute (
 area[href][alt] )
 
-**Set2 :**
+#### Set2 :
 
-All the elements of Set1 with a not empty "alt" attribute
+All the elements of **Set1** with a not empty "alt" attribute
 
 ### Process
 
 ##### Test1
 
-For each element of Set2, we check whether the link content doesn't
+For each element of **Set2**, we check whether the link content doesn't
 belong to the text link blacklist.
 
 For each element returning false in Test1, raise a MessageA, raise a
@@ -58,7 +58,7 @@ MessageB instead
 
 ##### Test2
 
-For each element of Set2, we check whether the link content doesn't only
+For each element of **Set2**, we check whether the link content doesn't only
 contain non alphanumeric characters
 
 For each element returning false in Test2, raise a MessageA, raise a
@@ -80,18 +80,17 @@ MessageB instead
 
 ### Analysis
 
-**NA :**
+#### Not Applicable
 
-Set1 is empty (the page has no clickable area)
+**Set1** is empty (the page has no clickable area)
 
 **Failed :**
 
 Test1 OR Test2 returns false for at least one element (At least one
-element of the Set2 has an "alt" attribute" content which is blacklisted
+element of the **Set2** has an "alt" attribute" content which is blacklisted
 or that only contains non alphanumerical characters)
 
-**NMI :\
-**
+#### Pre-Qualified
 
 In all other cases
 

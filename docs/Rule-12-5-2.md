@@ -43,7 +43,7 @@ None
 
 ### Analysis
 
-returns **NMI** in all cases
+returns **Pre-Qualified** in all cases
 
 ## Notes
 

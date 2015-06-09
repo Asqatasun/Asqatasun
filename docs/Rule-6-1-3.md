@@ -42,30 +42,30 @@ Chaque lien doublant une <a href="http://references.modernisation.gouv.fr/sites/
 
 ##### Set1 :
 
-All the <area\> tags with a "href" attribute and a "alt attribute (
+All the `<area>` tags with a "href" attribute and a "alt attribute (
 area[href][alt] )
 
 ##### Set2 :
 
-All the elements of Set1 with a not empty text and without context
+All the elements of **Set1** with a not empty text and without context
 (assuming [the definition of a link context in AccessiWeb
 2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
 
 ##### Set3 :
 
-All the elements of Set2 with a not empty text, with a context (assuming
+All the elements of **Set2** with a not empty text, with a context (assuming
 [the definition of a link context in AccessiWeb
 2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
 
 in other words :
 
-size(Set1) = size(Set2) + size(Set3)
+size(**Set1**) = size(**Set2**) + size(**Set3**)
 
 ### Process
 
 ##### Test1
 
-For each element of Set2, we check whether the link content doesn't
+For each element of **Set2**, we check whether the link content doesn't
 belong to the text link blacklist.
 
 For each element returning false in Test1, raise a Message1, raise a
@@ -73,7 +73,7 @@ Message2 instead
 
 ##### Test2
 
-For each element of Set3, we check whether the link content doesn't
+For each element of **Set3**, we check whether the link content doesn't
 belong to the text link blacklist.
 
 For each element returning false in Test2, raise a Message3, raise a
@@ -81,7 +81,7 @@ Message4 instead
 
 ##### Test3
 
-For each element of Set2, we check whether the link content doesn't only
+For each element of **Set2**, we check whether the link content doesn't only
 contain non alphanumeric characters
 
 For each element returning false in Test3, raise a Message1, raise a
@@ -89,7 +89,7 @@ Message2 instead
 
 ##### Test4
 
-For each element of Set3, we check whether the link content doesn't only
+For each element of **Set3**, we check whether the link content doesn't only
 contain non alphanumeric characters
 
 For each element returning false in Test4, raise a Message3, raise a
@@ -127,12 +127,12 @@ Message4 instead
 
 #### Not Applicable
 
-Set1 is empty
+**Set1** is empty
 
 #### Failed
 
 Test1 returns false for at least one element (At least one element of
-the Set2 has a text content which is blacklisted)
+the **Set2** has a text content which is blacklisted)
 
 #### Pre-qualified
 

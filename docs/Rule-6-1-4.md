@@ -42,38 +42,38 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ##### Set1 :
 
-All the <a\> tags with a "href" attribute, with children (
-a[href]:has(\*) )
+All the `<a>` tags with a "href" attribute, with children (
+a[href]:has(*) )
 
 ##### Set2 :
 
-All the elements of Set1 with own text or with more than 1 child or with
+All the elements of **Set1** with own text or with more than 1 child or with
 only one child not of type img or object (where "img ,
-object[type\^=image], object[data\^=data:image], object[data$=png],
+object[type^=image], object[data^=data:image], object[data$=png],
 object[data$=jpeg], object[data$=jpg],object[data$=bmp],
 object[data$=gif]" returns empty)
 
 ##### Set3 :
 
-All the elements of Set2 with a not empty text and without context
+All the elements of **Set2** with a not empty text and without context
 (assuming [the definition of a link context in AccessiWeb
 2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
 
 ##### Set4 :
 
-All the elements of Set2 with a not empty text, with a context (assuming
+All the elements of **Set2** with a not empty text, with a context (assuming
 [the definition of a link context in AccessiWeb
 2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
 
 in other words :
 
-size(Set2) = size(Set3) + size(Set4)
+size(**Set2**) = size(**Set3**) + size(**Set4**)
 
 ### Process
 
 ##### Test1
 
-For each element of Set3, we check whether the link content doesn't
+For each element of **Set3**, we check whether the link content doesn't
 belong to the text link blacklist.
 
 For each element returning false in Test1, raise a Message1, raise a
@@ -81,7 +81,7 @@ Message2 instead
 
 ##### Test2
 
-For each element of Set4, we check whether the link content doesn't
+For each element of **Set4**, we check whether the link content doesn't
 belong to the text link blacklist.
 
 For each element returning false in Test2, raise a Message3, raise a
@@ -89,7 +89,7 @@ Message4 instead
 
 ##### Test3
 
-For each element of Set3, we check whether the link content doesn't only
+For each element of **Set3**, we check whether the link content doesn't only
 contain non alphanumeric characters
 
 For each element returning false in Test3, raise a Message1, raise a
@@ -97,7 +97,7 @@ Message2 instead
 
 ##### Test4
 
-For each element of Set4, we check whether the link content doesn't only
+For each element of **Set4**, we check whether the link content doesn't only
 contain non alphanumeric characters
 
 For each element returning false in Test4, raise a Message3, raise a
@@ -135,12 +135,12 @@ Message4 instead
 
 #### Not Applicable
 
-Set2 is empty
+**Set2** is empty
 
 #### Failed
 
 Test1 returns false for at least one element (At least one element of
-the Set3 has a text content which is blacklisted)
+the **Set3** has a text content which is blacklisted)
 
 #### Pre-qualified
 
@@ -153,8 +153,8 @@ considered as combined links.
 
 examples :
 
--   <a href="/target.html"\> <span\> my link</span\></a\>
--   <a href="/target.html"\> my <span\>my link</span\></a\>
--   <a href="/target.html"\> <p\>my link</p\></a\>
--   <a href="/target.html"\> my <p\> link</p\></a\>
+-   `<a href="/target.html">` `<span>` my link`</span>``</a>`
+-   `<a href="/target.html">` my `<span>`my link`</span>``</a>`
+-   `<a href="/target.html">` `<p>`my link`</p>``</a>`
+-   `<a href="/target.html">` my `<p>` link`</p>``</a>`
 

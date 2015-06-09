@@ -43,11 +43,11 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ##### Set1
 
-All the <img\> tags of the page
+All the `<img>` tags of the page
 
 ##### Set2
 
-All the <input\> tags with the "type" attribute equals to "image"
+All the `<input>` tags with the "type" attribute equals to "image"
 
 ### Process
 
@@ -57,12 +57,12 @@ The selection handles the process
 
 #### Not Applicable
 
-Set1 AND Set2 are empty (The page has no <img\> tag and no <input\> tag
+**Set1** AND **Set2** are empty (The page has no `<img>` tag and no `<input>` tag
 with a type" attribute equals to "image")
 
 #### Pre-qualified
 
-Set1 OR Set2 is not empty
+**Set1** OR **Set2** is not empty
 
 ## Notes
 

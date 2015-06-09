@@ -40,26 +40,26 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ### Selection
 
-**Set1 (table tags identified as presentation table from html markers)**
+#### Set1 (table tags identified as presentation table from html markers)
 
-All the <table\> tags with an "id" attribute or a "class" attribute or a
+All the `<table>` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
-the "PRESENTATION\_TABLE\_MARKER" parameter
+the "PRESENTATION_TABLE_MARKER" parameter
 
-**Set2 (table tags not identified as data table or presentation table
+#### Set2 (table tags not identified as data table or presentation table
 from html markers)**
 
-All the <table\> tags that don't have an "id" attribute or a "class"
+All the `<table>` tags that don't have an "id" attribute or a "class"
 attribute or a "role" attribute that matches one the values set by the
-user through the "PRESENTATION\_TABLE\_MARKER" parameter or the
-"DATA\_TABLE\_MARKER" parameter. That means select all the table tags of
+user through the "PRESENTATION_TABLE_MARKER" parameter or the
+"DATA_TABLE_MARKER" parameter. That means select all the table tags of
 the page when the parameters are empty.
 
 ### Process
 
-**Test1 :**
+#### Test1 :
 
-For each element of Set1, test the absence of one the following tags as
+For each element of **Set1**, test the absence of one the following tags as
 children tag :
 
 -   caption
@@ -73,9 +73,9 @@ children tag :
 
 For each occurence of false-result of Test1, raise a MessageA
 
-**Test2 :**
+#### Test2 :
 
-For each element of Set2, test the absence of one the following tags as
+For each element of **Set2**, test the absence of one the following tags as
 children tag :
 
 -   caption
@@ -101,43 +101,39 @@ For each occurence of true-result of Test2, raise a MessageC
 ###### MessageB : Check the table is a data table
 
 -   code :CheckTableIsDataTable
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : Snippet
 -   present in source : yes
 
 ###### MessageC : Check the table is a presentation table
 
 -   code :CheckTableIsPresentationTable
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : Snippet
 -   present in source : yes
 
 ### Analysis
 
-**Passed : \
-**
+**Passed : 
 
-Test1 returns true for all elements and Set2 is empty (all the tables of
+Test1 returns true for all elements and **Set2** is empty (all the tables of
 the page are identified by marker and none of the presentation ones
 contain forbidden child element)
 
-**Failed : \
-**
+**Failed : 
 
 Test1 returns false for at least one element (at least one table
 identified as presentation table by marker contains forbidden child
-element) **\
-**
+element) **
 
-**NA : \
-**
+#### Not Applicable 
 
-Set1 and Set2 are empty (the page has no table tags or only data table
+**Set1** and **Set2** are empty (the page has no table tags or only data table
 identified by marker)
 
 #### Pre-qualified :
 
-Set1 is empty or Test1 returns true for all elements AND Set2 is not
+**Set1** is empty or Test1 returns true for all elements AND **Set2** is not
 empty (the page contains not identified tables that need to be manually
 checked and no table identified as presentation contain forbidden child
 element)

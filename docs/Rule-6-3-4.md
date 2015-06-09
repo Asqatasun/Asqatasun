@@ -39,26 +39,26 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 ##### Set1 :
 
-All the <a\> tags with a "href" attribute, with children (
-a[href]:has(\*) )
+All the `<a>` tags with a "href" attribute, with children (
+a[href]:has(*) )
 
 ##### Set2 :
 
-All the elements of Set1 with own text or with more than 1 child or with
+All the elements of **Set1** with own text or with more than 1 child or with
 only one child not of type img or object (where "img ,
-object[type\^=image], object[data\^=data:image], object[data$=png],
+object[type^=image], object[data^=data:image], object[data$=png],
 object[data$=jpeg], object[data$=jpg],object[data$=bmp],
 object[data$=gif]" returns empty)
 
 ##### Set3 :
 
-All the elements of Set2 with a not empty text.
+All the elements of **Set2** with a not empty text.
 
 ### Process
 
 ##### Test1
 
-For each element of Set3, we check whether the link content doesn't
+For each element of **Set3**, we check whether the link content doesn't
 belong to the text link blacklist.
 
 For each element returning false in Test1, raise a MessageA, raise a
@@ -66,7 +66,7 @@ MessageB instead
 
 ##### Test2
 
-For each element of Set3, we check whether the link content doesn't only
+For each element of **Set3**, we check whether the link content doesn't only
 contain non alphanumeric characters
 
 For each element returning false in Test2, raise a MessageA, raise a
@@ -90,23 +90,22 @@ MessageB instead
 
 ##### **NA :**
 
-Set1 is empty (the page has no combined links)
+**Set1** is empty (the page has no combined links)
 
 ##### **Failed :**
 
 Test1 OR Test2 returns false for at least one element (At least one
-element of the Set2 has a text content which is blacklisted or that only
+element of the **Set2** has a text content which is blacklisted or that only
 contains non alphanumerical characters)
 
-##### **NMI :\
-**
+##### **Pre-Qualified :
 
 In all other cases
 
 ## Notes
 
 We assume here that the links are only composed of a text. (<a
-href="http://www.tanaguru.org/target.html"\> my link</a\>)
+href="http://www.tanaguru.org/target.html">` my link`</a>`)
 
 All the links that have children different from img or object, are
 considered as combined links

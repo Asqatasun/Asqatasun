@@ -40,7 +40,7 @@ Chaque image objet porteuse d'information (balise `object` avec l'attribut `type
 
 ### Selection
 
-All the <object\> tags with a "type" attribute that starts with
+All the `<object>` tags with a "type" attribute that starts with
 "image/..."
 
 ### Process
@@ -51,7 +51,7 @@ The selection handles the process
 
 #### Not Applicable
 
-Selection is empty (The page has no <object\> tag with a "type"
+Selection is empty (The page has no `<object>` tag with a "type"
 attribute that starts with "image/...")
 
 #### Pre-qualified

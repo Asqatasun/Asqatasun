@@ -3,7 +3,7 @@
 
 We check whether the language specified for each textual element of the
 page is correct (regarding the code list given in the following page
-[http://www.loc.gov/standards/iso639-2/php/code\_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php))
+[http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php))
 and relevant.
 
 ## Business description
@@ -46,7 +46,7 @@ Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/
 
 ##### Set 1 :
 
-The <html\> tag with a "lang" or "xml:lang" attribute.
+The `<html>` tag with a "lang" or "xml:lang" attribute.
 
 ##### Set 2 :
 
@@ -79,7 +79,7 @@ For each extracted lang attribute, we check its validity regarding the
 
 -   Used nomenclature : "ValidLanguageCode", "XhtmlDoctypeDeclarations"
 -   Reference : All the valid language codes recommanded in
-    [http://www.loc.gov/standards/iso639-2/php/code\_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php%20 "http://www.loc.gov/standards/iso639-2/php/code_list.php ")\
+    [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php%20 "http://www.loc.gov/standards/iso639-2/php/code_list.php ")
     and all the xhtml doctypes declarations recommanded in
     [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html "http://www.w3.org/TR/html4/index/elements.html")
 
@@ -103,7 +103,7 @@ For each extracted lang attribute, we check its validity regarding the
 
 -   Used nomenclature : "ValidLanguageCode", "XhtmlDoctypeDeclarations"
 -   Reference : All the valid language codes recommanded in
-    [http://www.loc.gov/standards/iso639-2/php/code\_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php "http://www.loc.gov/standards/iso639-2/php/code_list.php ")\
+    [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php "http://www.loc.gov/standards/iso639-2/php/code_list.php ")
      and all the xhtml doctypes declarations recommanded in
     [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html "http://www.w3.org/TR/html4/index/elements.html")
 
@@ -122,9 +122,9 @@ overidden by a lang attribute (Set 3).
 IF the detected language corresponds to the specified language AND the
 detection is seen as unreliable (regarding the google AJAX API detection
 described in the page
-[http://code.google.com/intl/fr/apis/language/translate/v1/using\_rest\_langdetect.html\#json\_response](http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response "http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response")
+[http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response](http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response "http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response")
 
-THEN raise Message A and return NMI
+THEN raise Message A and return Pre-Qualified
 
 ELSE IF the detected language doesn't corresponds to the specified
 language AND the detection is seen as reliable
@@ -134,7 +134,7 @@ THEN raise Message B and return FAILED
 ELSE IF the detected language doesn't corresponds to the specified
 language AND the detection is seen as unreliable
 
-THEN raise Message C and return NMI
+THEN raise Message C and return Pre-Qualified
 
 ELSE return PASSED
 
@@ -146,9 +146,9 @@ overidden by a lang attribute (Set 4).
 IF the detected language corresponds to the specified language AND the
 detection is seen as unreliable (regarding the google AJAX API detection
 described in the page
-[http://code.google.com/intl/fr/apis/language/translate/v1/using\_rest\_langdetect.html\#json\_response](http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response "http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response")
+[http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response](http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response "http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response")
 
-THEN raise Message A and return NMI
+THEN raise Message A and return Pre-Qualified
 
 ELSE IF the detected language doesn't corresponds to the specified
 language AND the detection is seen as reliable
@@ -158,7 +158,7 @@ THEN raise Message B and return FAILED
 ELSE IF the detected language doesn't corresponds to the specified
 language AND the detection is seen as unreliable
 
-THEN raise Message C and return NMI
+THEN raise Message C and return Pre-Qualified
 
 ELSE return PASSED
 
@@ -166,7 +166,7 @@ ELSE return PASSED
 
 -   code : SuspectedRelevantLanguageDeclaration
 
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : the extracted language, the detected language, and an
     extraction of the text (limited to 200 charachters) from which the
     detection has been applied
@@ -186,7 +186,7 @@ ELSE return PASSED
 
 -   code : SuspectedUnrelevantLanguageDeclaration
 
--   status: NMI
+-   status: Pre-Qualified
 -   parameter : the extracted language, the detected language, and an
     extraction of the text (limited to 200 charachters) from which the
     detection has been applied
@@ -197,7 +197,7 @@ ELSE return PASSED
 #### Not Applicable
 
 Selections are empty (The page has language declarations, that means
-that Set1 and Set2 are empty)
+that **Set1** and **Set2** are empty)
 
 #### Failed
 
@@ -209,7 +209,7 @@ Test1 AND Test2 return true AND Test3 AND Test4 return PASSED
 
 #### Pre-qualified
 
-Test3 OR test4 returns NMI
+Test3 OR test4 returns Pre-Qualified
 
 ## Notes
 
