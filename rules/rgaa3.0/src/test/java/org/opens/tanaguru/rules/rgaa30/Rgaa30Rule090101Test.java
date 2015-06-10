@@ -2,9 +2,7 @@
  * Tanaguru - Automated webpage assessment
  * Copyright (C) 2008-2015  Tanaguru.org
  *
- * This file is part of Tanaguru.
- *
- * Tanaguru is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -28,41 +26,34 @@ import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
+ * Unit test class for the implementation of the rule 9-1-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
 public class Rgaa30Rule090101Test extends Rgaa30RuleImplementationTestCase {
-    
-    public Rgaa30Rule090101Test(String testName) {
+
+    /**
+     * Default constructor
+     * @param testName
+     */
+    public Rgaa30Rule090101Test (String testName){
         super(testName);
     }
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule090101");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule090101");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.09.01.01-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090101/Rgaa30.Test.09.01.01-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.01-1Passed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090101/Rgaa30.Test.09.01.01-1Passed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.01-1Passed-A01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090101/Rgaa30.Test.09.01.01-1Passed-A01.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090101/Rgaa30.Test.09.01.01-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.01-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090101/Rgaa30.Test.09.01.01-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.01-2Failed-A01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090101/Rgaa30.Test.09.01.01-2Failed-A01.html"));
+        addWebResource("Rgaa30.Test.09.01.01-1Passed-01");
+        addWebResource("Rgaa30.Test.09.01.01-1Passed-02");
+        addWebResource("Rgaa30.Test.09.01.01-1Passed-A01");
+        addWebResource("Rgaa30.Test.09.01.01-2Failed-01");
+        addWebResource("Rgaa30.Test.09.01.01-2Failed-02");
+        addWebResource("Rgaa30.Test.09.01.01-2Failed-A01");
+
     }
 
     @Override
@@ -146,23 +137,7 @@ public class Rgaa30Rule090101Test extends Rgaa30RuleImplementationTestCase {
         assertTrue(processResult.getRemarkSet().iterator().next() instanceof ProcessRemark);
         assertEquals(RemarkMessageStore.H1_TAG_MISSING_MSG, 
                 processResult.getRemarkSet().iterator().next().getMessageCode());
-    }
 
-    
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.09.01.01-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.09.01.01-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.09.01.01-1Passed-A01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.09.01.01-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.09.01.01-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.09.01.01-2Failed-A01").getValue());
     }
 
 }

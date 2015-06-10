@@ -2,9 +2,7 @@
  * Tanaguru - Automated webpage assessment
  * Copyright (C) 2008-2015  Tanaguru.org
  *
- * This file is part of Tanaguru.
- *
- * Tanaguru is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -29,29 +27,30 @@ import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
+ * Unit test class for the implementation of the rule 8-1-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
 public class Rgaa30Rule080101Test extends Rgaa30RuleImplementationTestCase {
 
-    public Rgaa30Rule080101Test(String testName) {
+    /**
+     * Default constructor
+     * @param testName
+     */
+    public Rgaa30Rule080101Test (String testName){
         super(testName);
     }
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080101");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080101");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.08.01.01-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080101/Rgaa30.Test.08.01.01-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.01.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080101/Rgaa30.Test.08.01.01-2Failed-01.html"));
+        addWebResource("Rgaa30.Test.08.01.01-1Passed-01");
+        addWebResource("Rgaa30.Test.08.01.01-2Failed-01");
+
     }
 
     @Override
@@ -84,14 +83,7 @@ public class Rgaa30Rule080101Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(RemarkMessageStore.DOCTYPE_MISSING_MSG, processRemark.getMessageCode());
         // check number of evidence elements and their value
         assertNull(processRemark.getElementList());
-    }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.08.01.01-1Passed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.01.01-2Failed-01").getValue());
     }
 
 }

@@ -31,7 +31,7 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 08.08.02 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 8-8-2 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -39,6 +39,7 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule080802Test (String testName){
         super(testName);
@@ -46,36 +47,20 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080802");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080802");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-3NMI-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-4NA-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.08.02-4NA-03",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080802/Rgaa30.Test.08.08.02-4NA-03.html"));
+        addWebResource("Rgaa30.Test.08.08.02-1Passed-01");
+        addWebResource("Rgaa30.Test.08.08.02-2Failed-01");
+        addWebResource("Rgaa30.Test.08.08.02-3NMI-01");
+        addWebResource("Rgaa30.Test.08.08.02-3NMI-02");
+        addWebResource("Rgaa30.Test.08.08.02-3NMI-03");
+        addWebResource("Rgaa30.Test.08.08.02-4NA-01");
+        addWebResource("Rgaa30.Test.08.08.02-4NA-02");
+        addWebResource("Rgaa30.Test.08.08.02-4NA-03");
+
     }
 
     @Override
@@ -236,26 +221,7 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
-    }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.08.08.02-1Passed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.08.02-2Failed-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.08.02-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.08.02-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.08.02-3NMI-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.08.08.02-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.08.08.02-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.08.08.02-4NA-03").getValue());
     }
 
 }

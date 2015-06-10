@@ -29,7 +29,7 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 01.06.03 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1-6-3 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -37,6 +37,7 @@ public class Rgaa30Rule010603Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule010603Test (String testName){
         super(testName);
@@ -44,37 +45,23 @@ public class Rgaa30Rule010603Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule010603");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule010603");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.01.06.03-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010603/Rgaa30.Test.01.06.03-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.06.03-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010603/Rgaa30.Test.01.06.03-3NMI-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.06.03-3NMI-02", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-embed"));
-        getWebResourceMap().put("Rgaa30.Test.01.06.03-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010603/Rgaa30.Test.01.06.03-3NMI-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.06.03-3NMI-03", createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-embed"));
-        addParameterToParameterMap("Rgaa30.Test.01.06.03-3NMI-03", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-embed"));
-        getWebResourceMap().put("Rgaa30.Test.01.06.03-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule010603/Rgaa30.Test.01.06.03-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.06.03-4NA-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule010603/Rgaa30.Test.01.06.03-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.06.03-4NA-03",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule010603/Rgaa30.Test.01.06.03-4NA-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.06.03-4NA-04",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule010603/Rgaa30.Test.01.06.03-4NA-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.06.03-4NA-04", createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-embed"));
+        addWebResource("Rgaa30.Test.01.06.03-3NMI-01");
+        addWebResource("Rgaa30.Test.01.06.03-3NMI-02",
+                    createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-embed"));
+        addWebResource("Rgaa30.Test.01.06.03-3NMI-03",
+                    createParameter("Rules", "INFORMATIVE_IMAGE_MARKER", "id-informative-embed"),
+                    createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-embed"));
+        addWebResource("Rgaa30.Test.01.06.03-4NA-01");
+        addWebResource("Rgaa30.Test.01.06.03-4NA-02");
+        addWebResource("Rgaa30.Test.01.06.03-4NA-03");
+        addWebResource("Rgaa30.Test.01.06.03-4NA-04",
+                    createParameter("Rules", "DECORATIVE_IMAGE_MARKER", "class-decorative-embed"));
+
     }
 
     @Override
@@ -216,24 +203,7 @@ public class Rgaa30Rule010603Test extends Rgaa30RuleImplementationTestCase {
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
         assertEquals(0, processResult.getElementCounter());
-    }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.06.03-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.06.03-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.01.06.03-3NMI-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.06.03-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.06.03-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.06.03-4NA-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.01.06.03-4NA-04").getValue());
     }
 
 }

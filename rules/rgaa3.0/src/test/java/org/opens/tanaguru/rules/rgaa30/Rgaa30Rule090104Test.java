@@ -32,7 +32,7 @@ import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 import org.opens.tanaguru.service.ProcessRemarkService;
 
 /**
- * Unit test class for the implementation of the rule 09.01.04 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 9-1-4 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -48,27 +48,17 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule090104");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule090104");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.09.01.04-2Failed-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.04-2Failed-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.04-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.04-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.09.01.04-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule090104/Rgaa30.Test.09.01.04-4NA-01.html"));
+        addWebResource("Rgaa30.Test.09.01.04-2Failed-01");
+        addWebResource("Rgaa30.Test.09.01.04-2Failed-02");
+        addWebResource("Rgaa30.Test.09.01.04-3NMI-01");
+        addWebResource("Rgaa30.Test.09.01.04-3NMI-02");
+        addWebResource("Rgaa30.Test.09.01.04-4NA-01");
+
     }
 
     @Override
@@ -1168,20 +1158,7 @@ public class Rgaa30Rule090104Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
         // check test has no remark
         assertNull(processResult.getRemarkSet());
-    }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.09.01.04-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.09.01.04-2Failed-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.09.01.04-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.09.01.04-3NMI-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.09.01.04-4NA-01").getValue());
     }
 
 }

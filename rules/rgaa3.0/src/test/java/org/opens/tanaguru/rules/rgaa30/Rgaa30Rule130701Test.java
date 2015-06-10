@@ -19,9 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
@@ -29,7 +27,7 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 13.07.01 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 13-7-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -37,6 +35,7 @@ public class Rgaa30Rule130701Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule130701Test (String testName){
         super(testName);
@@ -44,39 +43,20 @@ public class Rgaa30Rule130701Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule130701");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule130701");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-3NMI-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-3NMI-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-3NMI-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-3NMI-06.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-4NA-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.07.01-4NA-03",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130701/Rgaa30.Test.13.07.01-4NA-03.html"));
+        addWebResource("Rgaa30.Test.13.07.01-3NMI-01");
+        addWebResource("Rgaa30.Test.13.07.01-3NMI-02");
+        addWebResource("Rgaa30.Test.13.07.01-3NMI-03");
+        addWebResource("Rgaa30.Test.13.07.01-3NMI-04");
+        addWebResource("Rgaa30.Test.13.07.01-3NMI-05");
+        addWebResource("Rgaa30.Test.13.07.01-3NMI-06");
+        addWebResource("Rgaa30.Test.13.07.01-4NA-01");
+        addWebResource("Rgaa30.Test.13.07.01-4NA-02");
+        addWebResource("Rgaa30.Test.13.07.01-4NA-03");
     }
 
     @Override
@@ -85,651 +65,514 @@ public class Rgaa30Rule130701Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.13.07.01-3NMI-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark sourceCodeRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        EvidenceElement ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odt"));
 
-
+        
         //----------------------------------------------------------------------
         //------------------------------3NMI-02---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.07.01-3NMI-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        ProcessRemark processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1);
         
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-03---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.07.01-3NMI-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1);
         
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-04---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.07.01-3NMI-04");
-        // check number of elements in the page
-        assertEquals(2, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 2, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1);
         
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-05---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.07.01-3NMI-05");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1);
         
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-06---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.07.01-3NMI-06");
-        // check number of elements in the page
-        assertEquals(48, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(48, processResult.getRemarkSet().size());
-        Iterator<ProcessRemark> sIter = processResult.getRemarkSet().iterator();
-        
-        //----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ods"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkResultIsPreQualified(processResult, 48, 48);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ods"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fods"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                2, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fods"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                3, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odt"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fodt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                4, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fodt"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odp"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                5, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odp"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fodp"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                6, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fodp"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odg"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                7, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odg"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fodg"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                8, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fodg"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.pdf"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                9, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.pdf"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.doc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                10, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.doc"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.docx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                11, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.docx"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.docm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                12, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.docm"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.dot"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                13, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.dot"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.dotm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                14, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.dotm"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xls"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                15, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xls"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlsx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                16, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlsx"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlsm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                17, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlsm"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                18, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlt"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xltx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                19, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xltx"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xltm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                20, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xltm"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                21, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlc"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlr"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                22, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlr"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlam"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                23, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlam"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.csv"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                24, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.csv"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ppt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                25, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ppt"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.pptx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                26, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.pptx"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.pps"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                27, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.pps"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.vsd"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                28, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.vsd"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.vst"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                29, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.vst"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.vss"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                30, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.vss"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                31, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxc"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxd"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                32, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxd"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxi"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                33, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxi"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                34, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxm"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxw"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                35, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxw"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sda"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                36, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sda"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+       checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                37, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdc"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdd"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                38, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdd"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdf"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                39, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdf"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdp"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                40, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdp"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sds"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                41, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sds"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdw"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                42, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdw"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.oth"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                43, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.oth"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.otg"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                44, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.otg"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ots"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                45, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ots"));
         
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ott"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                46, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ott"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.cwk"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                47, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.cwk"));
 
 	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, sourceCodeRemark.getElementList().size());
-        ee = sourceCodeRemark.getElementList().iterator().next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.cws"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG,
+                HtmlElementStore.A_ELEMENT,
+                48, 
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.cws"));
         
         
         //----------------------------------------------------------------------
         //------------------------------4NA--01---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.13.07.01-4NA-01");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.13.07.01-4NA-01"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
+        // specific case of Not applicable with element counter superior to 0
         processResult = processPageTest("Rgaa30.Test.13.07.01-4NA-02");
         // check number of elements in the page
         assertEquals(1, processResult.getElementCounter());
@@ -738,39 +581,10 @@ public class Rgaa30Rule130701Test extends Rgaa30RuleImplementationTestCase {
         // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
         
-        
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.13.07.01-4NA-03");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-    }
-
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.07.01-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.07.01-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.07.01-3NMI-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.07.01-3NMI-04").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.07.01-3NMI-05").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.07.01-3NMI-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.07.01-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.07.01-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.07.01-4NA-03").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.13.07.01-4NA-03"));
     }
 
     /**
@@ -784,4 +598,5 @@ public class Rgaa30Rule130701Test extends Rgaa30RuleImplementationTestCase {
         strb.append(getName());
         return strb.toString();
     }
+    
 }

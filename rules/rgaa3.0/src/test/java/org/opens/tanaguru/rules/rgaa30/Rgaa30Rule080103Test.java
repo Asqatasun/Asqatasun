@@ -27,7 +27,7 @@ import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 08.01.03 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 8-1-3 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -35,6 +35,7 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule080103Test (String testName){
         super(testName);
@@ -42,24 +43,16 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080103");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080103");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.08.01.03-1Passed-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080103/Rgaa30.Test.08.01.03-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.01.03-2Failed-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080103/Rgaa30.Test.08.01.03-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.01.03-2Failed-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080103/Rgaa30.Test.08.01.03-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.01.03-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080103/Rgaa30.Test.08.01.03-4NA-01.html"));
+        addWebResource("Rgaa30.Test.08.01.03-1Passed-01");
+        addWebResource("Rgaa30.Test.08.01.03-2Failed-01");
+        addWebResource("Rgaa30.Test.08.01.03-2Failed-02");
+        addWebResource("Rgaa30.Test.08.01.03-4NA-01");
+
     }
 
     @Override
@@ -123,18 +116,7 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
         // check number of elements in the page (no counter management here, 
         // we test the presence of one tag in the page)
         assertEquals(0, processResult.getElementCounter());
-    }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.08.01.03-1Passed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.01.03-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.01.03-2Failed-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.08.01.03-4NA-01").getValue());
     }
 
 }

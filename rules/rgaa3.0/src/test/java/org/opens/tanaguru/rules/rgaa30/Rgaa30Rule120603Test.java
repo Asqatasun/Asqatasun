@@ -27,7 +27,7 @@ import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule 12.06.03 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 12-6-3 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -35,6 +35,7 @@ public class Rgaa30Rule120603Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule120603Test (String testName){
         super(testName);
@@ -42,8 +43,7 @@ public class Rgaa30Rule120603Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule120603");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule120603");
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Rgaa30Rule120603Test extends Rgaa30RuleImplementationTestCase {
         getWebResourceMap().put("Rgaa30.Test.12.06.03-4NA-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule120603/Rgaa30.Test.12.06.03-3NMI-01.html"));
-        
+
         Site site = getWebResourceFactory().createSite("file:Site-NotTested");
         getWebResourceMap().put("Rgaa30.Test.12.06.03-5NT-01", site);
 

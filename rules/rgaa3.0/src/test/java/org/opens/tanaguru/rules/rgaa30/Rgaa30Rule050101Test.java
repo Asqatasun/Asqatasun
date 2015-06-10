@@ -2,9 +2,7 @@
  * Tanaguru - Automated webpage assessment
  * Copyright (C) 2008-2015  Tanaguru.org
  *
- * This file is part of Tanaguru.
- *
- * Tanaguru is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -26,94 +24,56 @@ import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
+ * Unit test class for the implementation of the rule 5-1-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
 public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
 
-    public Rgaa30Rule050101Test(String testName) {
+    /**
+     * Default constructor
+     * @param testName
+     */
+    public Rgaa30Rule050101Test (String testName){
         super(testName);
     }
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule050101");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule050101");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-1Passed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-1Passed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-1Passed-01",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-1Passed-02",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-1Passed-03",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-1Passed-04",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-2Failed-01",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-2Failed-02",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-2Failed-03",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-2Failed-04",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-2Failed-05",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-3NMI-01");
+        addWebResource("Rgaa30.Test.05.01.01-3NMI-02");
+        addWebResource("Rgaa30.Test.05.01.01-3NMI-03",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa30.Test.05.01.01-3NMI-04",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"),
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
+        addWebResource("Rgaa30.Test.05.01.01-4NA-01");
+        addWebResource("Rgaa30.Test.05.01.01-4NA-02",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
 
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-1Passed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-1Passed-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-1Passed-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-1Passed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-1Passed-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-1Passed-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-1Passed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-1Passed-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-1Passed-04", createParameter("Rules", "DATA_TABLE_MARKER", "data-table"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-2Failed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-2Failed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-2Failed-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-2Failed-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-2Failed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-2Failed-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-2Failed-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-2Failed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-2Failed-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-2Failed-04", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-2Failed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-2Failed-05.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-2Failed-05", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-3NMI-01.html"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-3NMI-02.html"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-3NMI-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-3NMI-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-3NMI-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-3NMI-04", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-3NMI-04", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
-
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.05.01.01-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050101/Rgaa30.Test.05.01.01-4NA-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.01.01-4NA-02", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
     }
 
     @Override
@@ -391,6 +351,7 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
 //        assertNull(processResult.getRemarkSet());
         // check number of elements in the page
 //        assertEquals(0, processResult.getElementCounter());
+
     }
 
     @Override

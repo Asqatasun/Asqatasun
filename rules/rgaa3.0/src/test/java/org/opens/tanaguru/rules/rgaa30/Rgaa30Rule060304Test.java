@@ -26,7 +26,7 @@ import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 06.03.04 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 6-3-4 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -34,6 +34,7 @@ public class Rgaa30Rule060304Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule060304Test (String testName){
         super(testName);
@@ -41,84 +42,35 @@ public class Rgaa30Rule060304Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule060304");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule060304");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-06.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-07.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-08",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-08.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-09",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-09.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-10",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-10.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-11",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-11.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-2Failed-12",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-2Failed-12.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-3NMI-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-3NMI-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-3NMI-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-3NMI-06.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-3NMI-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-3NMI-07.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-4NA-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-4NA-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-4NA-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-4NA-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.03.04-4NA-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060304/Rgaa30.Test.06.03.04-4NA-05.html"));
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-01");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-02");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-03");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-04");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-05");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-06");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-07");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-08");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-09");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-10");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-11");
+        addWebResource("Rgaa30.Test.06.03.04-2Failed-12");
+        addWebResource("Rgaa30.Test.06.03.04-3NMI-01");
+        addWebResource("Rgaa30.Test.06.03.04-3NMI-02");
+        addWebResource("Rgaa30.Test.06.03.04-3NMI-03");
+        addWebResource("Rgaa30.Test.06.03.04-3NMI-04");
+        addWebResource("Rgaa30.Test.06.03.04-3NMI-05");
+        addWebResource("Rgaa30.Test.06.03.04-3NMI-06");
+        addWebResource("Rgaa30.Test.06.03.04-3NMI-07");
+        addWebResource("Rgaa30.Test.06.03.04-4NA-01");
+        addWebResource("Rgaa30.Test.06.03.04-4NA-02");
+        addWebResource("Rgaa30.Test.06.03.04-4NA-03");
+        addWebResource("Rgaa30.Test.06.03.04-4NA-04");
+        addWebResource("Rgaa30.Test.06.03.04-4NA-05");
         
         // 06.03.01 testcases
         getWebResourceMap().put("Rgaa30.Test.06.03.01-2Failed-01",

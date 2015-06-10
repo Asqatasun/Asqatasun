@@ -699,36 +699,74 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             String remarkTarget,
             int position, 
             Pair<String,String>... evidencePairs) {
-        SourceCodeRemark sourceCodeRemark = 
-                ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
-        Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getMessageCode());
-        assertEquals(remarkMessageCode, sourceCodeRemark.getMessageCode());
-        assertEquals(testSolution, sourceCodeRemark.getIssue());
-        Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getIssue());
-        if (remarkTarget.equals("EMPTY_TARGET") ) {
-            assertEquals(-1, sourceCodeRemark.getLineNumber());
-        } else {
-            assertEquals(remarkTarget, sourceCodeRemark.getTarget());
-            Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getTarget());
-            assertNotNull(sourceCodeRemark.getSnippet());
-        }
-        if (evidencePairs.length == 0) {
-            assertNull(sourceCodeRemark.getElementList());
-            return;
-        }
-        // check number of evidence elements and their value
-        assertEquals(evidencePairs.length, sourceCodeRemark.getElementList().size());
-        
-        Object[] evEls = sourceCodeRemark.getElementList().toArray();
-        for (int i=0 ; i<evEls.length ; i++) {
-            EvidenceElement ee = (EvidenceElement)evEls[i];
-            Logger.getLogger(this.getClass()).debug(ee.getEvidence().getCode());
-            Logger.getLogger(this.getClass()).debug(ee.getValue());
-            assertEquals(evidencePairs[i].getLeft(), ee.getEvidence().getCode());
-            assertTrue(StringUtils.contains(ee.getValue(), evidencePairs[i].getRight()));
-        }
+        checkRemarkIsPresent(
+                processResult, 
+                testSolution, 
+                remarkMessageCode, 
+                remarkTarget, 
+                position, 
+                false, 
+                evidencePairs);
     }
     
+    /**
+     * 
+     * @param processResult
+     * @param testSolution
+     * @param remarkMessageCode
+     * @param remarkTarget
+     * @param position
+     * @param emptySnippet
+     * @param evidencePairs 
+     */
+    protected void checkRemarkIsPresent(
+            ProcessResult processResult, 
+            TestSolution testSolution, 
+            String remarkMessageCode,
+            String remarkTarget,
+            int position, 
+            boolean emptySnippet,
+            Pair<String,String>... evidencePairs) {
+        if (((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1] instanceof SourceCodeRemark ) {
+            SourceCodeRemark sourceCodeRemark = 
+                    ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
+            Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getMessageCode());
+            assertEquals(remarkMessageCode, sourceCodeRemark.getMessageCode());
+            assertEquals(testSolution, sourceCodeRemark.getIssue());
+            Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getIssue());
+            if (remarkTarget.equals("EMPTY_TARGET") ) {
+                assertEquals(-1, sourceCodeRemark.getLineNumber());
+            } else {
+                assertEquals(remarkTarget, sourceCodeRemark.getTarget());
+                Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getTarget());
+                if (!emptySnippet) {
+                    assertNotNull("Snippet is empty but shouldn't !!! ",sourceCodeRemark.getSnippet());
+                }
+            }
+            if (evidencePairs.length == 0) {
+                assertNull("Evidence Element list is not empty but should be !!! ",sourceCodeRemark.getElementList());
+                return;
+            }
+            // check number of evidence elements and their value
+            assertEquals(evidencePairs.length, sourceCodeRemark.getElementList().size());
+
+            Object[] evEls = sourceCodeRemark.getElementList().toArray();
+            for (int i=0 ; i<evEls.length ; i++) {
+                EvidenceElement ee = (EvidenceElement)evEls[i];
+                Logger.getLogger(this.getClass()).debug(ee.getEvidence().getCode());
+                Logger.getLogger(this.getClass()).debug(ee.getValue());
+                assertEquals(evidencePairs[i].getLeft(), ee.getEvidence().getCode());
+                assertTrue("Wrong evidence element : expected["+evidencePairs[i].getRight()+"] actual["+ee.getValue()+"]",StringUtils.contains(ee.getValue(), evidencePairs[i].getRight()));
+            }
+        } else {
+            ProcessRemark processRemark = 
+                    (ProcessRemark)(((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
+            Logger.getLogger(this.getClass()).debug(processRemark.getMessageCode());
+            assertEquals(remarkMessageCode, processRemark.getMessageCode());
+            assertEquals(testSolution, processRemark.getIssue());
+            assertNull(processRemark.getElementList());
+        }
+    }
     /**
      * Default implementation of setConsolidate. May be overridden only in 
      * special cases

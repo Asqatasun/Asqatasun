@@ -19,19 +19,14 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.LinkedHashSet;
-import org.opens.tanaguru.rules.rgaa30.Rgaa30Rule130102;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import org.opens.tanaguru.rules.keystore.AttributeStore;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 13.01.02 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 13-1-2 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -39,6 +34,7 @@ public class Rgaa30Rule130102Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule130102Test (String testName){
         super(testName);
@@ -46,24 +42,16 @@ public class Rgaa30Rule130102Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule130102");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule130102");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.13.01.02-1Passed-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130102/Rgaa30.Test.13.01.02-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.01.02-2Failed-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130102/Rgaa30.Test.13.01.02-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.01.02-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130102/Rgaa30.Test.13.01.02-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.01.02-4NA-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130102/Rgaa30.Test.13.01.02-4NA-02.html"));
+        addWebResource("Rgaa30.Test.13.01.02-1Passed-01");
+        addWebResource("Rgaa30.Test.13.01.02-2Failed-01");
+        addWebResource("Rgaa30.Test.13.01.02-4NA-01");
+        addWebResource("Rgaa30.Test.13.01.02-4NA-02");
+
     }
 
     @Override
@@ -71,68 +59,30 @@ public class Rgaa30Rule130102Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult =
-                processPageTest("Rgaa30.Test.13.01.02-1Passed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsPassed(processPageTest("Rgaa30.Test.13.01.02-1Passed-01"), 1);
         
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.13.01.02-2Failed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NOT_IMMEDIATE_REDIRECT_VIA_META_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.META_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-
+        ProcessResult processResult = processPageTest("Rgaa30.Test.13.01.02-2Failed-01");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_IMMEDIATE_REDIRECT_VIA_META_MSG,
+                HtmlElementStore.META_ELEMENT,
+                1);
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.13.01.02-4NA-01");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.13.01.02-4NA-01"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.13.01.02-4NA-02");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-    }
-
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.13.01.02-1Passed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.13.01.02-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.01.02-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.01.02-4NA-02").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.13.01.02-4NA-02"));
     }
 
 }
