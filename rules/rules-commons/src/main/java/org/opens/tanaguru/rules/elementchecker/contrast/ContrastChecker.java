@@ -23,6 +23,7 @@
 package org.opens.tanaguru.rules.elementchecker.contrast;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 import javax.annotation.Nonnull;
 import javax.persistence.NoResultException;
@@ -191,10 +192,12 @@ public class ContrastChecker extends ElementCheckerImpl {
                     if (contrast < contrastRatio) {
                         LOGGER.debug(" cssPath " + domElement.getPath() + " "+
                                     + contrast);
+                        DecimalFormatSymbols decimalSymbol = new DecimalFormatSymbols(Locale.getDefault());
+                        decimalSymbol.setDecimalSeparator('.');
                         TestSolution elementSolution = createRemarkOnBadContrastElement (
                                 sspHandler, 
                                 domElement,
-                                new DecimalFormat("#.00").format(contrast));
+                                new DecimalFormat("#.00", decimalSymbol).format(contrast));
                         testSolutionHandler.addTestSolution(elementSolution);
                     } else {
                         LOGGER.debug(" good luminosity " + 

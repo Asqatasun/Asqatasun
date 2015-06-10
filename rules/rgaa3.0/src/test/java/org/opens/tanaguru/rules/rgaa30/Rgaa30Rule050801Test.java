@@ -176,44 +176,44 @@ public class Rgaa30Rule050801Test extends Rgaa30RuleImplementationTestCase {
         checkResultIsFailed(processResult, 16, 15);
         checkRemarkIsPresent(
                 processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_PRESENTATION_TABLE_MSG,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 1);
         checkRemarkIsPresent(
                 processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 2);
         checkRemarkIsPresent(
                 processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 3);
         checkRemarkIsPresent(
                 processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 4);
         checkRemarkIsPresent(
                 processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 5);
         checkRemarkIsPresent(
                 processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 6);
         checkRemarkIsPresent(
                 processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 7);
         checkRemarkIsPresent(
@@ -261,7 +261,7 @@ public class Rgaa30Rule050801Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TABLE_IS_DATA_TABLE_MSG,
+                RemarkMessageStore.CHECK_TABLE_IS_PRESENTATION_TABLE_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 15);
         
