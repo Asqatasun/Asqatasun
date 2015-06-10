@@ -116,10 +116,10 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_SUMMARY_PERTINENCE_FOR_DATA_TABLE_MSG,
+                RemarkMessageStore.CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_SUMMARY_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 3,
-                new ImmutablePair(SUMMARY_ATTR, "Summary of data table"));        
+                new ImmutablePair(SUMMARY_ATTR, "$$##''''"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-01--------------------------------

@@ -19,11 +19,9 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 6-2-2 of the referential Rgaa 3.0.
@@ -180,117 +178,181 @@ public class Rgaa30Rule060202Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-
-
-
-
-
-
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-01---------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-01");
+        checkResultIsFailed(processResult,1, 1);
         
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-02");
+        checkResultIsFailed(processResult,1, 1);
         
-        
-
-        
-        ProcessResult processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-02");
-        checkResultIsFailed(processResult, -1, -1);
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-03---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-03");
-        checkResultIsFailed(processResult, -1, -1);
+        checkResultIsFailed(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-01---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-04");
-        checkResultIsFailed(processResult, -1, -1);
+        checkResultIsFailed(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-01------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-01");
-        checkResultIsPreQualified(processResult, -1,  -1);
+        checkResultIsPreQualified(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-02------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-02");
-        checkResultIsPreQualified(processResult, -1,  -1);
+        checkResultIsPreQualified(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-03------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-03");
-        checkResultIsPreQualified(processResult, -1,  -1);
+        checkResultIsPreQualified(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-04------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-04");
-        checkResultIsPreQualified(processResult, -1,  -1);
+        checkResultIsPreQualified(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-05------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-05");
-        checkResultIsPreQualified(processResult, -1,  -1);
+        checkResultIsPreQualified(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-06------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-06");
-        checkResultIsPreQualified(processResult, -1,  -1);
+        checkResultIsPreQualified(processResult,1, 1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-01-------------------------------------
+        //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-01"));
-        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-02"));
-        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-03"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-02-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-02"),1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-03-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-03"),1);
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-04-------------------------------------
+        //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-04"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-05-------------------------------------
+        //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-05"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-06-------------------------------------
+        //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-06"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-07-------------------------------------
+        //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-07"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-08-------------------------------------
+        //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-08"));
-        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-09"));        
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-09-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-09"));     
+        
+        // other tests about links, scope of other is disjunted from the scope
+        // of the current test : All these scopes are not applicable
+        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-01");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-02");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-03");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-04");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-3NMI-01");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-3NMI-02");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-02");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-03");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-04");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-01");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-02");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-03");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-01");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-02");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-03");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-04");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-05");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-06");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-07");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-08");
-        checkResultIsFailed(processResult, -1, -1);                
+        checkResultIsNotApplicable(processResult);                
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-09");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-10");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-01");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-02");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-03");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-04");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-05");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-06");
-        checkResultIsPreQualified(processResult, -1,  -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-01");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-02");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-03");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-04");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-05");
-        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processResult);        
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-4NA-01"));
-        
-                
-        
-        
-
-
     }
 
     @Override

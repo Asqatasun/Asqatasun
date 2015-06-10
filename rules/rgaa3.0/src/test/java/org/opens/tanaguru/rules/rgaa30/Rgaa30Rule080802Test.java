@@ -80,7 +80,7 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
                 1,
                 new ImmutablePair(EvidenceStore.LANGUAGE_EE, "fr"),
                 new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "en"),
-                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE, "Some text is written here in english"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-01------------------------------
@@ -95,7 +95,7 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
                 1,
                 new ImmutablePair(EvidenceStore.LANGUAGE_EE, "fr"),
                 new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"),
-                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE, "Texte en francais"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-02------------------------------
@@ -110,7 +110,7 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
                 1,
                 new ImmutablePair(EvidenceStore.LANGUAGE_EE, "fr"),
                 new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"),
-                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE, "Texte en francais"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-03---------------------------------
@@ -125,7 +125,7 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
                 1,
                 new ImmutablePair(EvidenceStore.LANGUAGE_EE, "en"),
                 new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"),
-                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE, "Texte en francais"));        
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
@@ -140,7 +140,7 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.08.02-4NA-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.08.02-4NA-03"), 1);
     }
 
 }

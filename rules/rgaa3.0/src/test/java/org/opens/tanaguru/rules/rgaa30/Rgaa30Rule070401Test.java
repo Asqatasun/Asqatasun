@@ -64,12 +64,19 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-
+        ProcessResult processResult = processPageTest("Rgaa30.Test.07.04.01-3NMI-01");
+        checkResultIsPreQualified(processResult, 0,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+                HtmlElementStore.SELECT_ELEMENT,
+                1); 
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-02---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.07.04.01-3NMI-02");
+        processResult = processPageTest("Rgaa30.Test.07.04.01-3NMI-02");
         checkResultIsPreQualified(processResult, 1,  1);
         checkRemarkIsPresent(
                 processResult,
@@ -77,7 +84,6 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
                 RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG,
                 HtmlElementStore.SELECT_ELEMENT,
                 1);        
-
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-03---------------------------------
@@ -90,7 +96,6 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
                 RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG,
                 HtmlElementStore.FORM_ELEMENT,
                 1);        
-
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-04---------------------------------
@@ -113,7 +118,7 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG,
+                getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
                 HtmlElementStore.FORM_ELEMENT,
                 1);        
         
@@ -125,7 +130,7 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG,
+                getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
                 HtmlElementStore.FORM_ELEMENT,
                 1);
         
@@ -137,7 +142,7 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG,
+                getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
                 HtmlElementStore.FORM_ELEMENT,
                 1);
         
@@ -149,7 +154,7 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG,
+                getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
                 HtmlElementStore.FORM_ELEMENT,
                 1);
         
@@ -170,10 +175,6 @@ public class Rgaa30Rule070401Test extends Rgaa30RuleImplementationTestCase {
                 RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG,
                 HtmlElementStore.SELECT_ELEMENT,
                 2);        
-        
-
-    
-
     }
 
     /**

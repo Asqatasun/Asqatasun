@@ -161,16 +161,16 @@ public class Rgaa30Rule010302Test extends Rgaa30RuleImplementationTestCase {
                 RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
                 HtmlElementStore.AREA_ELEMENT,
                 3,
-                new ImmutablePair(ALT_ATTR, "mock-area.html"),
-                new ImmutablePair(HREF_ATTR, "mock-area.html"));
+                new ImmutablePair(ALT_ATTR, "mock-area3.html"),
+                new ImmutablePair(HREF_ATTR, "mock-area3.html"));
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
                 RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
                 HtmlElementStore.AREA_ELEMENT,
                 4,
-                new ImmutablePair(ALT_ATTR, "Not identified area alternative"),
-                new ImmutablePair(HREF_ATTR, "mock-area.html"));        
+                new ImmutablePair(ALT_ATTR, "not identified area alternative"),
+                new ImmutablePair(HREF_ATTR, "mock-area4.html"));        
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01------------------------------
@@ -266,11 +266,11 @@ public class Rgaa30Rule010302Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
                 HtmlElementStore.AREA_ELEMENT,
                 3,
-                new ImmutablePair(ALT_ATTR, "mock-area3.html"),
-                new ImmutablePair(HREF_ATTR, "mock-area3.html"));        
+                new ImmutablePair(ALT_ATTR, "not identified area alternative"),
+                new ImmutablePair(HREF_ATTR, "mock-area4.html"));        
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
