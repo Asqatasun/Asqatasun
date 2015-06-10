@@ -19,9 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.DATA_ATTR;
@@ -72,164 +70,81 @@ public class Rgaa30Rule010602Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------3NMI-01------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.01.06.02-3NMI-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DETAILED_DESC_AVAILABILITY_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.OBJECT_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        Iterator<EvidenceElement> iter = processRemark.getElementList().iterator();
-        EvidenceElement ee = iter.next();
-        assertEquals("Some text can be added here.",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock_image.gif"));
-        assertEquals(DATA_ATTR, ee.getEvidence().getCode());
-        
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DETAILED_DESC_AVAILABILITY_MSG,
+                HtmlElementStore.OBJECT_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Some text can be added here."),
+                new ImmutablePair(DATA_ATTR, "mock_image.gif"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-02---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.06.02-3NMI-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_DETAILED_DESC_DEFINITION_OF_INFORMATIVE_IMG_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.OBJECT_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("Some text can be added here.",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock_image.gif"));
-        assertEquals(DATA_ATTR, ee.getEvidence().getCode());
-        
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_DETAILED_DESC_DEFINITION_OF_INFORMATIVE_IMG_MSG,
+                HtmlElementStore.OBJECT_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Some text can be added here."),
+                new ImmutablePair(DATA_ATTR, "mock_image.gif"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-03---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.06.02-3NMI-03");
-        // check number of elements in the page
-        assertEquals(2, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(2, processResult.getRemarkSet().size());
-        Iterator<ProcessRemark> pIter = processResult.getRemarkSet().iterator();
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_DETAILED_DESC_DEFINITION_OF_INFORMATIVE_IMG_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.OBJECT_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("Some other text.",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock_image2.gif"));
-        assertEquals(DATA_ATTR, ee.getEvidence().getCode());
-        
-        processRemark = (SourceCodeRemark)pIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DETAILED_DESC_AVAILABILITY_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.OBJECT_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, processRemark.getElementList().size());
-        iter = processRemark.getElementList().iterator();
-        ee = iter.next();
-        assertEquals("Some text.",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "mock_image1.gif"));
-        assertEquals(DATA_ATTR, ee.getEvidence().getCode());
- 
+        checkResultIsPreQualified(processResult, 2,  2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_DETAILED_DESC_DEFINITION_OF_INFORMATIVE_IMG_MSG,
+                HtmlElementStore.OBJECT_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Some other text."),
+                new ImmutablePair(DATA_ATTR, "mock_image2.gif"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DETAILED_DESC_AVAILABILITY_MSG,
+                HtmlElementStore.OBJECT_ELEMENT,
+                2,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Some text."),
+                new ImmutablePair(DATA_ATTR, "mock_image1.gif"));        
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.06.02-4NA-01");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
- 
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.06.02-4NA-01")); 
 
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.06.02-4NA-02");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
- 
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.06.02-4NA-02")); 
 
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.06.02-4NA-03");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.06.02-4NA-03"));        
 
         //----------------------------------------------------------------------
         //------------------------------4NA-04---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.06.02-4NA-04");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.06.02-4NA-04"));        
 
         //----------------------------------------------------------------------
         //------------------------------4NA-05---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.06.02-4NA-05");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.06.02-4NA-05"));        
 
         //----------------------------------------------------------------------
         //------------------------------4NA-06---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.01.06.02-4NA-06");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.06.02-4NA-06"));
     }
 
 }

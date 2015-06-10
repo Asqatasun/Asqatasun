@@ -19,12 +19,8 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import static junit.framework.Assert.*;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
@@ -66,99 +62,58 @@ public class Rgaa30Rule080601Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.08.06.01-2Failed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        Iterator<EvidenceElement> pIter = processRemark.getElementList().iterator();
-        EvidenceElement ee = pIter.next();
-        assertEquals("Page title",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_TITLE_MSG,
+                HtmlElementStore.TITLE_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Page title"));
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.06.01-2Failed-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        pIter = processRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_TITLE_MSG,
+                HtmlElementStore.TITLE_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, ""));
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.06.01-2Failed-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.NOT_PERTINENT_TITLE_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        pIter = processRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("Bienvenue dans Adobe GoLive 6",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_TITLE_MSG,
+                HtmlElementStore.TITLE_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Bienvenue dans Adobe GoLive 6"));
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-01------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.06.01-3NMI-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.TITLE_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1, processRemark.getElementList().size());
-        pIter = processRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("Rgaa30 Test.8.6.1 NMI 01",ee.getValue());
-        assertEquals(HtmlElementStore.TEXT_ELEMENT2, ee.getEvidence().getCode());
-
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG,
+                HtmlElementStore.TITLE_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Rgaa30 Test.8.6.1 NMI 01"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.06.01-4NA-01");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.06.01-4NA-01"));
     }
 
 }

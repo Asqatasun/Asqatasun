@@ -19,9 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.LinkedHashSet;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
@@ -66,184 +64,115 @@ public class Rgaa30Rule100101Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.10.01.01-1Passed-01");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.01.01-1Passed-01"),12);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-01");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("basefont", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        ProcessResult processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-01");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "basefont",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-02");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("center", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "center",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-03");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("blink", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "blink",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-04");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("font", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "font",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-05");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("tt", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "tt",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-06------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-06");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("marquee", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "marquee",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-07------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-07");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("s", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "s",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-08------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-08");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("strike", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "strike",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-09------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.01-2Failed-09");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG, processRemark.getMessageCode());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals("u", processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "u",
+                1);
 
     }
 
