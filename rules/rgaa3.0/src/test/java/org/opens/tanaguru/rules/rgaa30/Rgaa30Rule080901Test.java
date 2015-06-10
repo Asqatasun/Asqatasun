@@ -29,7 +29,7 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 08.09.01 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 8-9-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -37,6 +37,7 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule080901Test (String testName){
         super(testName);
@@ -44,45 +45,23 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080901");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule080901");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-2Failed-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-2Failed-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-2Failed-03",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-2Failed-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-2Failed-04",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-2Failed-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-3NMI-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-3NMI-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-3NMI-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-3NMI-06.html"));
-        getWebResourceMap().put("Rgaa30.Test.08.09.01-3NMI-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule080901/Rgaa30.Test.08.09.01-3NMI-07.html"));
+        addWebResource("Rgaa30.Test.08.09.01-2Failed-01");
+        addWebResource("Rgaa30.Test.08.09.01-2Failed-02");
+        addWebResource("Rgaa30.Test.08.09.01-2Failed-03");
+        addWebResource("Rgaa30.Test.08.09.01-2Failed-04");
+        addWebResource("Rgaa30.Test.08.09.01-3NMI-01");
+        addWebResource("Rgaa30.Test.08.09.01-3NMI-02");
+        addWebResource("Rgaa30.Test.08.09.01-3NMI-03");
+        addWebResource("Rgaa30.Test.08.09.01-3NMI-04");
+        addWebResource("Rgaa30.Test.08.09.01-3NMI-05");
+        addWebResource("Rgaa30.Test.08.09.01-3NMI-06");
+        addWebResource("Rgaa30.Test.08.09.01-3NMI-07");
+
     }
 
     @Override
@@ -269,34 +248,6 @@ public class Rgaa30Rule080901Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
         assertEquals(getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG), processRemark.getMessageCode());
         assertNull(processRemark.getElementList());
-        
-
-    }
-
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.09.01-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.09.01-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.09.01-2Failed-03").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.08.09.01-2Failed-04").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.09.01-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.09.01-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.09.01-3NMI-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.09.01-3NMI-04").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.09.01-3NMI-05").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.09.01-3NMI-06").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.08.09.01-3NMI-07").getValue());
     }
 
     /**

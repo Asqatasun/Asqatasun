@@ -2,9 +2,7 @@
  * Tanaguru - Automated webpage assessment
  * Copyright (C) 2008-2015  Tanaguru.org
  *
- * This file is part of Tanaguru.
- *
- * Tanaguru is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -28,54 +26,38 @@ import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
+ * Unit test class for the implementation of the rule 6-2-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
 public class Rgaa30Rule060201Test extends Rgaa30RuleImplementationTestCase {
 
-    public Rgaa30Rule060201Test(String testName) {
+    /**
+     * Default constructor
+     * @param testName
+     */
+    public Rgaa30Rule060201Test (String testName){
         super(testName);
     }
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule060201");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule060201");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-2Failed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-2Failed-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-2Failed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-2Failed-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-4NA-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-4NA-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.06.02.01-4NA-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060201/Rgaa30.Test.06.02.01-4NA-04.html"));
-        
+        addWebResource("Rgaa30.Test.06.02.01-2Failed-01");
+        addWebResource("Rgaa30.Test.06.02.01-2Failed-02");
+        addWebResource("Rgaa30.Test.06.02.01-2Failed-03");
+        addWebResource("Rgaa30.Test.06.02.01-2Failed-04");
+        addWebResource("Rgaa30.Test.06.02.01-3NMI-01");
+        addWebResource("Rgaa30.Test.06.02.01-3NMI-02");
+        addWebResource("Rgaa30.Test.06.02.01-4NA-01");
+        addWebResource("Rgaa30.Test.06.02.01-4NA-02");
+        addWebResource("Rgaa30.Test.06.02.01-4NA-03");
+        addWebResource("Rgaa30.Test.06.02.01-4NA-04");
+
         //06.02.02 testcases
         getWebResourceMap().put("Rgaa30.Test.06.02.02-2Failed-01",
                 getWebResourceFactory().createPage(
@@ -513,4 +495,5 @@ public class Rgaa30Rule060201Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.06.05.01-4NA-01").getValue());
     }
+    
 }

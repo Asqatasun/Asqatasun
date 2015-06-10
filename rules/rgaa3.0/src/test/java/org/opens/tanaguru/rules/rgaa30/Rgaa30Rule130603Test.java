@@ -19,9 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
@@ -29,7 +27,7 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 13.06.03 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 13-6-3 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -37,6 +35,7 @@ public class Rgaa30Rule130603Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule130603Test (String testName){
         super(testName);
@@ -44,39 +43,21 @@ public class Rgaa30Rule130603Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule130603");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule130603");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-3NMI-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-3NMI-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-3NMI-05.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-3NMI-06.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-4NA-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.13.06.03-4NA-03",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule130603/Rgaa30.Test.13.06.03-4NA-03.html"));
+        addWebResource("Rgaa30.Test.13.06.03-3NMI-01");
+        addWebResource("Rgaa30.Test.13.06.03-3NMI-02");
+        addWebResource("Rgaa30.Test.13.06.03-3NMI-03");
+        addWebResource("Rgaa30.Test.13.06.03-3NMI-04");
+        addWebResource("Rgaa30.Test.13.06.03-3NMI-05");
+        addWebResource("Rgaa30.Test.13.06.03-3NMI-06");
+        addWebResource("Rgaa30.Test.13.06.03-4NA-01");
+        addWebResource("Rgaa30.Test.13.06.03-4NA-02");
+        addWebResource("Rgaa30.Test.13.06.03-4NA-03");
+
     }
 
     @Override
@@ -85,2783 +66,1854 @@ public class Rgaa30Rule130603Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.13.06.03-3NMI-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark sourceCodeRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, 
-                     sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        Iterator<EvidenceElement> iter = sourceCodeRemark.getElementList().iterator();
-        EvidenceElement ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odt"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
 
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-02---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.06.03-3NMI-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        ProcessRemark processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1);
         
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-03---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.06.03-3NMI-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1);
         
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-04---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.06.03-3NMI-04");
-        // check number of elements in the page
-        assertEquals(2, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 2, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1);
         
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-05---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.06.03-3NMI-05");
-        // check number of elements in the page
-        assertEquals(177, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(177, processResult.getRemarkSet().size());
-        Iterator<ProcessRemark> sIter = processResult.getRemarkSet().iterator();
+        checkResultIsPreQualified(processResult, 177, 177);
         
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ods"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fods"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fodt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odp"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fodp"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.odg"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.fodg"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.pdf"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.doc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.docx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.docm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.dot"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.dotm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xls"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlsx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlsm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xltx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xltm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlr"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.xlam"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.csv"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ppt"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.pptx"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.pps"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.vsd"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.vst"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.vss"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxd"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxi"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sxw"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sda"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdc"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdd"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdf"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdp"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sds"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.sdw"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.oth"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.otg"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ots"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.ott"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.cwk"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.cws"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.tar"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.tgz"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.bz"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.bz2"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.zip"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.gzip"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.gz"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.Z"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.7z"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.rar"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r00"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.rpm"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.deb"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.msi"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.exe"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.bat"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.pif"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.class"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.torrent"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.dmg"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.apk"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.bin"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.bak"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.dat"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.jar"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.mdk"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.dsk"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.vmdk"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r00"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r01"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r02"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r03"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r04"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r05"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r06"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r07"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r08"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r09"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r10"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r11"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r12"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r13"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r14"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r15"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r16"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r17"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r18"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r19"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r20"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r21"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r22"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r23"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r24"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r25"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r26"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r27"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r28"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r29"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r30"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r31"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r32"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r33"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r34"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r35"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r36"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r37"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r38"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r39"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r40"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r41"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r42"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r43"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r44"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r45"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r46"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r47"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r48"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r49"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r50"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r51"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r52"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r53"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r54"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r55"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r56"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r57"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r58"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r59"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r60"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r61"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r62"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r63"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r64"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r65"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r66"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r67"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r68"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r69"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r70"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r71"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r72"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r73"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r74"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r75"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r76"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r77"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r78"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r79"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r80"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r81"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r82"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r83"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r84"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r85"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r86"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r87"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r88"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r89"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r90"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r91"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r92"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r93"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r94"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r95"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r96"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r97"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r98"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.r99"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
-
-	//----------------------------------------------------------------------
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, sourceCodeRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(2, sourceCodeRemark.getElementList().size());
-        iter = sourceCodeRemark.getElementList().iterator();
-        ee = iter.next();
-        assertTrue(StringUtils.contains(ee.getValue(), "my-link.taz"));
-        assertEquals(AttributeStore.HREF_ATTR, ee.getEvidence().getCode());
-        ee = iter.next();
-        assertEquals("attribute-absent",ee.getValue());
-        assertEquals(AttributeStore.TITLE_ATTR, ee.getEvidence().getCode());
+       //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ods"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
         
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                2,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fods"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                3,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odt"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                4,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fodt"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                5,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odp"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                6,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fodp"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                7,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.odg"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                8,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.fodg"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                9,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.pdf"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                10,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.doc"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                11,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.docx"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                12,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.docm"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                13,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.dot"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                14,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.dotm"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                15,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xls"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                16,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlsx"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                17,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlsm"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                18,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlt"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                19,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xltx"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                20,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xltm"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                21,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlc"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                22,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlr"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                23,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.xlam"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                24,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.csv"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                25,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ppt"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                26,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.pptx"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                27,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.pps"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                28,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.vsd"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                29,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.vst"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                30,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.vss"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                31,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxc"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                32,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxd"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                33,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxi"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                34,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxm"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                35,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sxw"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                36,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sda"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                37,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdc"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                38,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdd"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                39,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdf"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                40,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdp"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                41,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sds"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                42,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.sdw"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                43,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.oth"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                44,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.otg"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                45,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ots"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                46,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.ott"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                47,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.cwk"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                48,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.cws"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                49,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.tar"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                50,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.tgz"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                51,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.bz"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                52,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.bz2"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                53,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.zip"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                54,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.gzip"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                55,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.gz"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                56,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.Z"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                57,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.7z"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                58,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.rar"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                59,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r00"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                60,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.rpm"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                61,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.deb"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                62,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.msi"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                63,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.exe"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                64,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.bat"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                65,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.pif"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                66,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.class"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                67,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.torrent"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                68,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.dmg"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                69,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.apk"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                70,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.bin"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                71,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.bak"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                72,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.dat"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                73,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.jar"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                74,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.mdk"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                75,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.dsk"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                76,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.vmdk"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                77,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r00"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                78,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r01"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                79,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r02"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                80,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r03"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                81,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r04"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                82,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r05"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                83,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r06"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                84,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r07"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                85,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r08"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                86,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r09"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                87,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r10"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                88,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r11"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                89,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r12"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                90,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r13"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                91,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r14"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                92,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r15"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                93,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r16"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                94,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r17"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                95,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r18"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                96,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r19"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                97,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r20"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                98,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r21"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                99,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r22"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                100,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r23"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                101,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r24"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                102,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r25"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                103,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r26"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                104,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r27"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                105,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r28"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                106,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r29"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                107,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r30"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                108,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r31"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                109,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r32"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                110,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r33"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                111,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r34"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                112,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r35"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                113,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r36"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                114,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r37"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                115,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r38"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                116,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r39"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                117,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r40"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                118,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r41"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                119,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r42"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                120,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r43"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                121,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r44"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                122,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r45"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                123,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r46"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                124,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r47"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                125,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r48"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                126,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r49"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                127,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r50"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                128,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r51"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                129,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r52"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                130,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r53"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                131,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r54"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                132,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r55"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                133,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r56"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                134,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r57"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                135,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r58"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                136,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r59"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                137,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r60"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                138,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r61"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                139,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r62"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                140,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r63"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                141,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r64"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                142,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r65"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                143,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r66"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                144,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r67"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                145,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r68"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                146,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r69"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                147,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r70"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                148,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r71"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                149,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r72"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                150,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r73"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                151,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r74"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                152,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r75"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                153,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r76"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                154,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r77"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                155,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r78"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                156,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r79"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                157,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r80"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                158,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r81"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                159,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r82"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                160,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r83"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                161,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r84"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                162,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r85"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                163,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r86"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                164,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r87"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                165,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r88"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                166,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r89"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                167,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r90"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                168,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r91"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                169,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r92"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                170,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r93"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                171,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r94"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                172,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r95"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                173,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r96"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                174,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r97"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                175,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r98"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                176,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.r99"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG,
+                HtmlElementStore.A_ELEMENT,
+                177,
+                new ImmutablePair(AttributeStore.HREF_ATTR, "my-link.taz"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent")); 
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-06---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.13.06.03-3NMI-06");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG), 
-                     processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                getMessageKey(RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG),
+                HtmlElementStore.A_ELEMENT,
+                1); 
         
         
         //----------------------------------------------------------------------
         //------------------------------4NA--01---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.13.06.03-4NA-01");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.13.06.03-4NA-01"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
+        // specific case of Not applicable with element counter superior to 0
         processResult = processPageTest("Rgaa30.Test.13.06.03-4NA-02");
         // check number of elements in the page
         assertEquals(26, processResult.getElementCounter());
@@ -2870,39 +1922,10 @@ public class Rgaa30Rule130603Test extends Rgaa30RuleImplementationTestCase {
         // check number of remarks and their value
         assertNull(processResult.getRemarkSet());
         
-        
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.13.06.03-4NA-03");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-    }
-
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.06.03-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.06.03-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.06.03-3NMI-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.06.03-3NMI-04").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.06.03-3NMI-05").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.13.06.03-3NMI-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.06.03-4NA-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.06.03-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.13.06.03-4NA-03").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.13.06.03-4NA-03"));
     }
 
     /**

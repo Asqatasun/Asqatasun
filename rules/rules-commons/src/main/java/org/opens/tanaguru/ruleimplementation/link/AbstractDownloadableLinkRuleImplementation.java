@@ -159,5 +159,5 @@ public abstract class AbstractDownloadableLinkRuleImplementation
         int lastSlash = StringUtils.lastIndexOf(path, SLASH_CHAR);
         return StringUtils.substring(path, lastSlash).contains(POINT_CHAR);
     }
-    
+ 
 }

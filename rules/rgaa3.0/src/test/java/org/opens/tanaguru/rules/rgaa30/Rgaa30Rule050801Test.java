@@ -28,7 +28,7 @@ import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 05.08.01 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 5-8-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
@@ -36,6 +36,7 @@ public class Rgaa30Rule050801Test extends Rgaa30RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public Rgaa30Rule050801Test (String testName){
         super(testName);
@@ -43,96 +44,40 @@ public class Rgaa30Rule050801Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule050801");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule050801");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-1Passed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-1Passed-01", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-01", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-02", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-03", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-04", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-05.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-05", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-06.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-06", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-07.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-07", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-2Failed-08",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-2Failed-08.html"));
-        addParameterToParameterMap("Rgaa30.Test.05.08.01-2Failed-08", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-01.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-02.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-03.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-04.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-05.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-06.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-07.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-08",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-08.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-3NMI-09",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-3NMI-09.html"));
-        
-        getWebResourceMap().put("Rgaa30.Test.05.08.01-4NA-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "rgaa30/Rgaa30Rule050801/Rgaa30.Test.05.08.01-4NA-01.html"));
+        addWebResource("Rgaa30.Test.05.08.01-1Passed-01",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-01",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-02",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-03",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-04",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-05",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-06",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-07",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-2Failed-08",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-01");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-02");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-03");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-04");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-05");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-06");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-07");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-08");
+        addWebResource("Rgaa30.Test.05.08.01-3NMI-09");
+        addWebResource("Rgaa30.Test.05.08.01-4NA-01");
+
     }
 
     @Override
@@ -468,48 +413,7 @@ public class Rgaa30Rule050801Test extends Rgaa30RuleImplementationTestCase {
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
         assertEquals(0, processResult.getElementCounter());
-    }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.05.08.01-1Passed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-03").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-04").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-05").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-06").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-07").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.05.08.01-2Failed-08").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-01").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-02").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-03").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-04").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-05").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-06").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-07").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-08").getValue());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                consolidate("Rgaa30.Test.05.08.01-3NMI-09").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.05.08.01-4NA-01").getValue());
     }
 
 }

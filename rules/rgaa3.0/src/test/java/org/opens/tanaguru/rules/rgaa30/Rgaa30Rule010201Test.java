@@ -2,9 +2,7 @@
  * Tanaguru - Automated webpage assessment
  * Copyright (C) 2008-2015  Tanaguru.org
  *
- * This file is part of Tanaguru.
- *
- * Tanaguru is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -34,105 +32,65 @@ import static org.opens.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MA
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
+ * Unit test class for the implementation of the rule 1-2-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
 public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
 
-    public Rgaa30Rule010201Test(String testName) {
+    /**
+     * Default constructor
+     * @param testName
+     */
+    public Rgaa30Rule010201Test (String testName){
         super(testName);
     }
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule010201");
+        setRuleImplementationClassName("org.opens.tanaguru.rules.rgaa30.Rgaa30Rule010201");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-1Passed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-1Passed-01", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-1Passed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-1Passed-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-1Passed-02", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-1Passed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-1Passed-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-1Passed-03", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "role-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-1Passed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-1Passed-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-1Passed-04", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image; class-decorative-image; role-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-1Passed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-1Passed-05.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-1Passed-05", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-1Passed-05", createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "class-informative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-1Passed-01",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-1Passed-02",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-1Passed-03",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "role-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-1Passed-04",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image;class-decorative-image;role-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-1Passed-05",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"),
+                    createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "class-informative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-2Failed-01",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-2Failed-02",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-2Failed-03",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "role-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-2Failed-04",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image;class-decorative-image;role-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-2Failed-05",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"),
+                    createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "role-informative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-3NMI-01");
+        addWebResource("Rgaa30.Test.01.02.01-3NMI-02");
+        addWebResource("Rgaa30.Test.01.02.01-3NMI-03",
+                    createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "role-informative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-3NMI-04",
+                    createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "role-informative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-3NMI-05",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-3NMI-06",
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
+        addWebResource("Rgaa30.Test.01.02.01-4NA-01");
+        addWebResource("Rgaa30.Test.01.02.01-4NA-02");
+        addWebResource("Rgaa30.Test.01.02.01-4NA-03");
+        addWebResource("Rgaa30.Test.01.02.01-4NA-04");
+        addWebResource("Rgaa30.Test.01.02.01-4NA-05");
 
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-2Failed-01.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-2Failed-01", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-2Failed-02.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-2Failed-02", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-2Failed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-2Failed-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-2Failed-03", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "role-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-2Failed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-2Failed-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-2Failed-04", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image; class-decorative-image; role-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-2Failed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-2Failed-05.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-2Failed-05", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-2Failed-05", createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "role-informative-image"));
-        
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-3NMI-03.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-3NMI-03", createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "role-informative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-3NMI-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-3NMI-04.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-3NMI-04", createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "role-informative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-3NMI-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-3NMI-05.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-3NMI-05", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-3NMI-06.html"));
-        addParameterToParameterMap("Rgaa30.Test.01.02.01-3NMI-06", createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
-        
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-4NA-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-4NA-01.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-4NA-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-4NA-02.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-4NA-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-4NA-03.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-4NA-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-4NA-04.html"));
-        getWebResourceMap().put("Rgaa30.Test.01.02.01-4NA-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule010201/Rgaa30.Test.01.02.01-4NA-05.html"));
     }
 
     @Override
@@ -570,6 +528,7 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
         assertNull(processResult.getRemarkSet());
         // check number of elements in the page
         assertEquals(0, processResult.getElementCounter());
+
     }
 
     @Override
@@ -617,4 +576,5 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.01.02.01-4NA-05").getValue());
     }
+
 }
