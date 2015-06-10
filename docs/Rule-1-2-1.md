@@ -65,24 +65,24 @@ For each element of Set2 (`<img>` tags not identified as decorative image), chec
 
 ##### MessageA : Decorative image with not empty alternative
 
-code : NotEmptyAlt
-status: Failed
-parameter : alt attribute, src attribute, Snippet
-present in source : yes
+-    code : NotEmptyAlt
+-    status: Failed
+-    parameter : alt attribute, src attribute, Snippet
+-    present in source : yes
 
 ##### MessageB : Check if the image is informative
 
-code : CheckIfTheImageIsInformative
-status: Pre-qualified
-parameter : alt attribute, src attribute, Snippet
-present in source : yes
+-    code : CheckIfTheImageIsInformative
+-    status: Pre-qualified
+-    parameter : alt attribute, src attribute, Snippet
+-    present in source : yes
 
 ##### MessageC : Check the nature of the image with a empty alternative
 
-code : CheckNatureOfImageWithEmptyAlt
-status: Pre-qualified
-parameter : alt attribute, src attribute, Snippet
-present in source : yes
+-    code : CheckNatureOfImageWithEmptyAlt
+-    status: Pre-qualified
+-    parameter : alt attribute, src attribute, Snippet
+-    present in source : yes
 
 ### Analysis
 
