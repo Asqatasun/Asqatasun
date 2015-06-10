@@ -19,11 +19,8 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.EvidenceStore;
@@ -68,160 +65,82 @@ public class Rgaa30Rule080802Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //---------------------------1Passed-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.08.08.02-1Passed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.08.02-1Passed-01"),1);        
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-01---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.08.02-2Failed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(3, processRemark.getElementList().size());
-        Iterator<EvidenceElement> pIter = processRemark.getElementList().iterator();
-        EvidenceElement ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Some text is written here in english"));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        ProcessResult processResult = processPageTest("Rgaa30.Test.08.08.02-2Failed-01");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.IRRELEVANT_LANG_DECL_MSG,
+                HtmlElementStore.DIV_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.LANGUAGE_EE, "fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "en"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-01------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.08.02-3NMI-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.SUSPECTED_RELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(3, processRemark.getElementList().size());
-        pIter = processRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Texte en francais"));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.SUSPECTED_RELEVANT_LANG_DECL_MSG,
+                HtmlElementStore.DIV_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.LANGUAGE_EE, "fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.08.02-3NMI-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.SUSPECTED_RELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(3, processRemark.getElementList().size());
-        pIter = processRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Texte en francais"));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.SUSPECTED_RELEVANT_LANG_DECL_MSG,
+                HtmlElementStore.DIV_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.LANGUAGE_EE, "fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-03---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.08.02-3NMI-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.DIV_ELEMENT, processRemark.getTarget());
-        assertNotNull(processRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(3, processRemark.getElementList().size());
-        pIter = processRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Texte en francais"));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.SUSPECTED_IRRELEVANT_LANG_DECL_MSG,
+                HtmlElementStore.DIV_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.LANGUAGE_EE, "en"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE, "fr"));        
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.08.02-4NA-01");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.08.02-4NA-01"));        
         
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.08.02-4NA-02");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.08.02-4NA-02"));        
         
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.08.02-4NA-03");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.08.02-4NA-03"));
     }
 
 }

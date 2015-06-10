@@ -180,232 +180,117 @@ public class Rgaa30Rule060202Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult =
-                processPageTest("Rgaa30.Test.06.02.02-2Failed-01");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        
-        processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-02");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
 
+
+
+
+
+
+        
+        
+        
+
+        
+        ProcessResult processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-02");
+        checkResultIsFailed(processResult, -1, -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-03");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(RemarkMessageStore.EMPTY_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, -1, -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-2Failed-04");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(RemarkMessageStore.EMPTY_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, -1, -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-01");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsPreQualified(processResult, -1,  -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-02");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsPreQualified(processResult, -1,  -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-03");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsPreQualified(processResult, -1,  -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-04");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsPreQualified(processResult, -1,  -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-05");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(RemarkMessageStore.SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsPreQualified(processResult, -1,  -1);
         processResult = processPageTest("Rgaa30.Test.06.02.02-3NMI-06");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(RemarkMessageStore.SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-05");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-06");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-07");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-08");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.02.02-4NA-09");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
-        // 06.02.01 testcases : All is Not Applicable
+        checkResultIsPreQualified(processResult, -1,  -1);
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-04"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-05"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-06"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-07"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-08"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.02-4NA-09"));        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-3NMI-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.01-3NMI-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
-        // 06.02.03 testcases : All is Not Applicable
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
-        // 06.02.04 testcases : All is Not Applicable
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-05");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-06");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-07");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-08");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-                
+        checkResultIsFailed(processResult, -1, -1);                
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-09");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-10");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-05");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-06");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
-        // 06.05.01 testcases : All is Not Applicable
+        checkResultIsPreQualified(processResult, -1,  -1);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsFailed(processResult, -1, -1);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-05");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        checkResultIsFailed(processResult, -1, -1);        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-4NA-01"));
         
-        processResult = processPageTest("Rgaa30.Test.06.05.01-4NA-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+                
+        
+        
+
+
     }
 
     @Override
