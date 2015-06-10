@@ -40,6 +40,24 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 All the `<img>` tags with a `"ismap"` attribute 
 
+### Process
+
+#### Tests
+
+##### Test1
+
+For each element of Set1, produce a MessageA
+
+#### Messages
+
+##### MessageA : Check a link is associated with the server-sided image map
+
+-    code : Check a link is associated with the server-sided image map
+-    status: Pre-qualified (NMI or warning)
+-    case : For each element of Set1
+-    parameter : tag name
+-    present in source : yes
+
 ### Analysis
 
 #### Not Applicable
