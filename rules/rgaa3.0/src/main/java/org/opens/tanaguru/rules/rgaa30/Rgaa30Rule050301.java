@@ -29,6 +29,7 @@ import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.PRESENTATION_VALUE;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
 import static org.opens.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINEARISED_CONTENT_MSG;
@@ -55,11 +56,13 @@ public class Rgaa30Rule050301 extends AbstractMarkerPageRuleImplementation {
     public Rgaa30Rule050301() {
         super(
                 new SimpleElementSelector(TABLE_ELEMENT),
-                // the presentation tables are part of the scope
-                PRESENTATION_TABLE_MARKER,
-                // the data tables are not part of the scope
-                DATA_TABLE_MARKER,
-                // checker for elements identified by marker
+                
+                // the presentation tables are not part of the scope
+                new String[]{PRESENTATION_TABLE_MARKER},
+                
+                // the data and complex tables are part of the scope
+                new String[]{DATA_TABLE_MARKER,COMPLEX_TABLE_MARKER},
+                
                 new CompositeChecker(
                         new ElementPresenceChecker(
                                 // nmi when element is found
