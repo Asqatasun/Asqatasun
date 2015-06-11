@@ -19,9 +19,11 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.AttributeStore;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.RemarkMessageStore;
 
@@ -234,389 +236,444 @@ public class Rgaa30Rule060104Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult =
-                processPageTest("Rgaa30.Test.06.01.04-2Failed-01");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-01---------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-01");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1, 
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "cliquez ici"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-02---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-02");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-03---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-03");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-->;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "-->;*"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-04---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-04");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-->;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-05---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-05");
-        assertEquals(3, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[2]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[2]).getIssue());
-
+        checkResultIsFailed(processResult, 3, 3);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "cliquez ici"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                2,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "cliquez ici"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                3,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-06---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-06");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
-
+        checkResultIsFailed(processResult, 2, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                2,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-07---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-07");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
-
+        checkResultIsFailed(processResult, 2, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-- > ;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "-- > ;*"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                2,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-- > ;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "-- > ;*"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-08---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-08");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
-
+        checkResultIsFailed(processResult, 2, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-->;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "-->;*"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                2,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-->;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-09---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-09");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "cliquez ici"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-10---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-10");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-11---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-11");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "--> ;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "--> ;*"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-12---------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-2Failed-12");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.FAILED,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.UNEXPLICIT_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-- >;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
         
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-01------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-3NMI-01");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
-
+        checkResultIsPreQualified(processResult, 2,  2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                2,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-02------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-3NMI-02");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getIssue());
-
+        checkResultIsPreQualified(processResult, 2, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "cliquez ici"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "cliquez ici"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-03------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-3NMI-03");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "-- > ;*"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "-- > ;*"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-04------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-3NMI-04");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_WITH_CONTEXT_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_LINK_WITH_CONTEXT_PERTINENCE_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "This is a combined link"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "attribute-absent"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-05------------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.04-3NMI-05");
-        assertEquals(TestSolution.NEED_MORE_INFO,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals(RemarkMessageStore.CHECK_LINK_WITH_CONTEXT_PERTINENCE_MSG,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals(TestSolution.NEED_MORE_INFO,
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getIssue());
-
-        processResult = processPageTest("Rgaa30.Test.06.01.04-4NA-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.01.04-4NA-02");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.01.04-4NA-03");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.01.04-4NA-04");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        processResult = processPageTest("Rgaa30.Test.06.01.04-4NA-05");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_LINK_WITH_CONTEXT_PERTINENCE_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "This is a combined link"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, "This is a combined link and more"));
         
-        // 06.01.01 testcases : All is Not Applicable
+        //----------------------------------------------------------------------
+        //---------------------------4NA-01-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.01.04-4NA-01"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-02-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.01.04-4NA-02"));        
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-03-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.01.04-4NA-03"));        
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-04-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.01.04-4NA-04"));    
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-05-------------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.01.04-4NA-05"));
+        
+        // other tests about links, scope of other is disjunted from the scope
+        // of the current test : All these scopes are not applicable
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.1.1----------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-05");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-06");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-07");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-2Failed-08");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-02");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-03");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-05");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-06");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.01-3NMI-07");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processResult);
         
-        // 06.01.02 testcases : All is Not Applicable
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.1.2----------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-05");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-06");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-07");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-08");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-09");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-10");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-11");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-2Failed-12");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-3NMI-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-3NMI-02");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-3NMI-03");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-3NMI-05");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.02-3NMI-06");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
         
-        // 06.01.03 testcases : All is Not Applicable
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.1.3----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processResult);
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-05");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-06");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-07");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-2Failed-08");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-3NMI-01");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-3NMI-02");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-3NMI-03");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-3NMI-05");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-3NMI-06");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.01.03-3NMI-07");
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
         
-        // 06.05.01 testcases : All is Not Applicable
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.5.1----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-02");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-03");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-04");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-05");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
-        processResult = processPageTest("Rgaa30.Test.06.05.01-4NA-01");
-        assertEquals(TestSolution.NOT_APPLICABLE,processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processResult);        
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-4NA-01"));
     }
 
     @Override

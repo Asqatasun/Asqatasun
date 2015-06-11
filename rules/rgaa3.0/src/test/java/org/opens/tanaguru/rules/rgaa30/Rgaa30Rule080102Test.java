@@ -19,8 +19,6 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.LinkedHashSet;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
@@ -66,7 +64,6 @@ public class Rgaa30Rule080102Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.08.01.02-2Failed-01");
         addWebResource("Rgaa30.Test.08.01.02-2Failed-02");
         addWebResource("Rgaa30.Test.08.01.02-4NA-01");
-
     }
 
     @Override
@@ -74,244 +71,106 @@ public class Rgaa30Rule080102Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-01");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-01"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-02");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-02"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-03");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-03"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-04");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-04"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-05------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-05");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-05"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-06------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-06");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-06"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-07------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-07");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-07"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-08------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-08");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-08"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-09------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-09");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-09"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-10------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-10");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-10"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-11------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-11");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-11"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-12------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-12");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-12"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-13------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-13");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-13"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-14------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-14");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-14"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-15------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-1Passed-15");
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.02-1Passed-15"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-2Failed-01");
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        ProcessRemark processRemark = ((ProcessRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_DOCTYPE_MSG, processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        ProcessResult processResult = processPageTest("Rgaa30.Test.08.01.02-2Failed-01");
+        checkResultIsFailed(processResult, 0, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.INVALID_DOCTYPE_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.01.02-2Failed-02");
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((ProcessRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.INVALID_DOCTYPE_MSG, processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 0, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.INVALID_DOCTYPE_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.02-4NA-01");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.01.02-4NA-01"));
     }
 
 }

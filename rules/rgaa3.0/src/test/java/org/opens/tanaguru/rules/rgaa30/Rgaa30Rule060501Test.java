@@ -19,7 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.LinkedHashSet;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.AttributeStore;
@@ -66,180 +66,98 @@ public class Rgaa30Rule060501Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult =
-                processPageTest("Rgaa30.Test.06.05.01-1Passed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsPassed(processPageTest("Rgaa30.Test.06.05.01-1Passed-01"),1);  
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.06.05.01-1Passed-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.06.05.01-1Passed-02"),1);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.06.05.01-1Passed-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsPassed(processPageTest("Rgaa30.Test.06.05.01-1Passed-03"),1);
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.06.05.01-1Passed-04");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.06.05.01-1Passed-04"),1);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-05------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.06.05.01-1Passed-05");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsPassed(processPageTest("Rgaa30.Test.06.05.01-1Passed-05"),1);
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        SourceCodeRemark processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.EMPTY_LINK_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
-        assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
-                iterator().next().getEvidence().getCode());
-
+        ProcessResult processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-01");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.EMPTY_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR,"my-link.html"));
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.EMPTY_LINK_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
-        assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
-                iterator().next().getEvidence().getCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.EMPTY_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR,"my-link.html"));
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-03");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.EMPTY_LINK_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
-        assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
-                iterator().next().getEvidence().getCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.EMPTY_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR,"my-link.html"));
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-04");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.EMPTY_LINK_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
-        assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
-                iterator().next().getEvidence().getCode());
-
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.EMPTY_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR,"my-link.html"));
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-05");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.EMPTY_LINK_MSG, processRemark.getMessageCode());
-        assertEquals(HtmlElementStore.A_ELEMENT, processRemark.getTarget());
-        // check number of evidence elements and their value
-        assertEquals(1,processRemark.getElementList().size());
-        assertTrue(processRemark.getElementList().iterator().next().getValue().contains("my-link.html"));
-        assertEquals(AttributeStore.HREF_ATTR, processRemark.getElementList().
-                iterator().next().getEvidence().getCode());
-        
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.EMPTY_LINK_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(AttributeStore.HREF_ATTR,"my-link.html"));
         
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.06.05.01-4NA-01");
-        // check number of elements in the page
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-4NA-01"));
     }
 
     @Override

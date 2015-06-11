@@ -19,7 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.*;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.EvidenceStore;
@@ -76,393 +76,206 @@ public class Rgaa30Rule080701Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //---------------------------1Passed-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.08.07.01-1Passed-01");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.07.01-1Passed-01"),6);        
         
         //----------------------------------------------------------------------
         //---------------------------1Passed-02---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-1Passed-02");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.07.01-1Passed-02"),6);
         
         //----------------------------------------------------------------------
         //---------------------------1Passed-03---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-1Passed-03");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.07.01-1Passed-03"),6);
         
         //----------------------------------------------------------------------
         //---------------------------1Passed-04---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-1Passed-04");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.07.01-1Passed-04"),6);
         
         //----------------------------------------------------------------------
         //---------------------------1Passed-05---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-1Passed-05");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.07.01-1Passed-05"),6);
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-01---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-01");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        Iterator<ProcessRemark> sIter = processResult.getRemarkSet().iterator();
-        SourceCodeRemark sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(3, sourceCodeRemark.getElementList().size());
-        Iterator<EvidenceElement> pIter = sourceCodeRemark.getElementList().iterator();
-        EvidenceElement ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("L'accessibilité du web est la problématique de l'accès aux"));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
+        ProcessResult processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-01");
+        checkResultIsFailed(processResult, 6, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG,
+                HtmlElementStore.P_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE,"fr"),
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE,"L'accessibilité du web est la problématique de l'accès aux"));
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-02---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-02");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(4, sourceCodeRemark.getElementList().size());
-        pIter = sourceCodeRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
- 
+        checkResultIsFailed(processResult, 6, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG,
+                HtmlElementStore.P_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.DEFAULT_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.CURRENT_LANGUAGE_EE,"fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE,"Web accessibility refers to the inclusive practice of making"));
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-03---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-03");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.SPAN_ELEMENT, sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(4, sourceCodeRemark.getElementList().size());
-        pIter = sourceCodeRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("fr",ee.getValue());
-        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making"));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsFailed(processResult, 6, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG,
+                HtmlElementStore.SPAN_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.DEFAULT_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.CURRENT_LANGUAGE_EE,"fr"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE,"Web accessibility refers to the inclusive practice of making"));
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-04---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-04");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(4, sourceCodeRemark.getElementList().size());
-        pIter = sourceCodeRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("dummy",ee.getValue());
-        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsFailed(processResult, 6, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG,
+                HtmlElementStore.P_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.DEFAULT_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.CURRENT_LANGUAGE_EE,"dummy"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE,"Web accessibility refers to the inclusive practice of making"));
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-05---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-05");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(4, sourceCodeRemark.getElementList().size());
-        pIter = sourceCodeRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("dummy",ee.getValue());
-        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsFailed(processResult, 6, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG,
+                HtmlElementStore.P_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.DEFAULT_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.CURRENT_LANGUAGE_EE,"dummy"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE,"Web accessibility refers to the inclusive practice of making"));
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-06---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-06");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.P_ELEMENT, sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(4, sourceCodeRemark.getElementList().size());
-        pIter = sourceCodeRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("dummy",ee.getValue());
-        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsFailed(processResult, 6, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG,
+                HtmlElementStore.P_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.DEFAULT_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.CURRENT_LANGUAGE_EE,"dummy"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE,"Web accessibility refers to the inclusive practice of making"));
         
         //----------------------------------------------------------------------
         //---------------------------2Failed-07---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-2Failed-07");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        sourceCodeRemark = (SourceCodeRemark)sIter.next();
-        assertEquals(TestSolution.FAILED, sourceCodeRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG, sourceCodeRemark.getMessageCode());
-        assertEquals(HtmlElementStore.SPAN_ELEMENT, sourceCodeRemark.getTarget());
-        assertNotNull(sourceCodeRemark.getSnippet());
-        // check number of evidence elements and their value
-        assertEquals(4, sourceCodeRemark.getElementList().size());
-        pIter = sourceCodeRemark.getElementList().iterator();
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DEFAULT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("dummy",ee.getValue());
-        assertEquals(EvidenceStore.CURRENT_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertEquals("en",ee.getValue());
-        assertEquals(EvidenceStore.DETECTED_LANGUAGE_EE, ee.getEvidence().getCode());
-        ee = pIter.next();
-        assertTrue(ee.getValue().contains("Web accessibility refers to the inclusive practice of making "));
-        assertEquals(EvidenceStore.EXTRACTED_TEXT_EE, ee.getEvidence().getCode());
-        
+        checkResultIsFailed(processResult, 6, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG,
+                HtmlElementStore.SPAN_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.DEFAULT_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.CURRENT_LANGUAGE_EE,"dummy"),
+                new ImmutablePair(EvidenceStore.DETECTED_LANGUAGE_EE,"en"),
+                new ImmutablePair(EvidenceStore.EXTRACTED_TEXT_EE,"Web accessibility refers to the inclusive practice of making"));
         
         //----------------------------------------------------------------------
         //---------------------------3NMI-01------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-3NMI-01");
-        // check number of elements in the page
-        assertEquals(6, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        ProcessRemark processRemark = sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
-        
+        checkResultIsPreQualified(processResult, 6,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_SHORT_TEST_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //---------------------------3NMI-02------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-3NMI-02");
-        // check number of elements in the page
-        assertEquals(5, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        processRemark = sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
-        
+        checkResultIsPreQualified(processResult, 5,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_SHORT_TEST_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //---------------------------3NMI-03------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-3NMI-03");
-        // check number of elements in the page
-        assertEquals(5, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        processRemark = sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
-        
+        checkResultIsPreQualified(processResult, 5,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_SHORT_TEST_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //---------------------------3NMI-04------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.07.01-3NMI-04");
-        // check number of elements in the page
-        assertEquals(5, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NEED_MORE_INFO, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        sIter = processResult.getRemarkSet().iterator();
-        processRemark = sIter.next();
-        assertEquals(TestSolution.NEED_MORE_INFO, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.CHECK_SHORT_TEST_MSG, processRemark.getMessageCode());
-        
+        checkResultIsPreQualified(processResult, 5,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_SHORT_TEST_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //---------------------------4NA-01-------------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-4NA-01");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.07.01-4NA-01"));
         
         //----------------------------------------------------------------------
         //---------------------------4NA-02-------------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-4NA-02");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.07.01-4NA-02"));
         
         //----------------------------------------------------------------------
         //---------------------------4NA-03-------------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-4NA-03");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.07.01-4NA-03"),7);
         
         //----------------------------------------------------------------------
         //---------------------------4NA-04-------------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.07.01-4NA-04");
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check test has no remark
-        assertNull(processResult.getRemarkSet());
-
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.08.07.01-4NA-04"),7);
     }
 
 }
