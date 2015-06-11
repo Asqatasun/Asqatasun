@@ -20,6 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
@@ -51,13 +52,9 @@ public class Rgaa30Rule130201 extends AbstractDetectionPageRuleImplementation {
         super(
                 new SimpleElementSelector(LINK_WITH_TARGET_ATTR_CSS_LIKE_QUERY),
                 // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
+                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG),
                 // solution when no element is found
-                TestSolution.NEED_MORE_INFO,
-                // message when element is found
-                CHECK_USER_IS_WARNED_WHEN_NEW_WINDOW_OPEN_MSG,
-                // message when element is not found
-                CHECK_JS_PROMPT_A_NEW_WINDOW_MSG,
+                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_JS_PROMPT_A_NEW_WINDOW_MSG),
                 // evidence elements
                 TEXT_ELEMENT2,
                 TITLE_ATTR
