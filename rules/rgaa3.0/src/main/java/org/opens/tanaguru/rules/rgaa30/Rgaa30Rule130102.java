@@ -21,6 +21,7 @@
 package org.opens.tanaguru.rules.rgaa30;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -55,10 +56,8 @@ public class Rgaa30Rule130102 extends AbstractPageRuleWithSelectorAndCheckerImpl
         super(
                 new SimpleElementSelector(META_WITH_REFRESH_CSS_LIKE_QUERY),
                 new ElementPresenceChecker(
-                        TestSolution.FAILED,
-                        TestSolution.PASSED,
-                        NOT_IMMEDIATE_REDIRECT_VIA_META_MSG, 
-                        null)
+                        new ImmutablePair(TestSolution.FAILED, NOT_IMMEDIATE_REDIRECT_VIA_META_MSG),
+                        new ImmutablePair(TestSolution.PASSED,""))
         );
     }
 

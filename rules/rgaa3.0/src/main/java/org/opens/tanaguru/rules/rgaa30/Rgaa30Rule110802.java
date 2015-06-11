@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
@@ -45,14 +46,11 @@ public class Rgaa30Rule110802 extends AbstractPageRuleWithSelectorAndCheckerImpl
                 new AttributePresenceChecker(
                     // the attribute to search
                     LABEL_ATTR, 
-                    // passed when attribute is found
-                    TestSolution.PASSED, 
+                    // passed when attribute is found, empty message
+                    new ImmutablePair(TestSolution.PASSED, ""),
                     // failed when attribute is not found
-                    TestSolution.FAILED, 
-                    // no message created when attribute is found
-                    null,
-                    // message associated with element when attribute is not found
-                    OPTGROUP_WITHOUT_LABEL_MSG)
+                    new ImmutablePair(TestSolution.FAILED, OPTGROUP_WITHOUT_LABEL_MSG)
+                    )
             );
     }
 

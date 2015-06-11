@@ -20,6 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -95,20 +96,18 @@ public class Rgaa30Rule080901 extends AbstractPageRuleMarkupImplementation {
         }
         
         ElementChecker linkWithoutTargetChecker = new ElementPresenceChecker(
-                        TestSolution.FAILED,
-                        TestSolution.PASSED,
-                        LINK_WITHOUT_TARGET_MSG, 
-                        null);
+                        new ImmutablePair(TestSolution.FAILED,LINK_WITHOUT_TARGET_MSG),
+                        new ImmutablePair(TestSolution.PASSED,""));
+        
         linkWithoutTargetChecker.check(
                     sspHandler, 
                     linkWithoutTarget, 
                     testSolutionHandler);
         
         ElementChecker fieldsetNotWithinFormChecker = new ElementPresenceChecker(
-                        TestSolution.FAILED,
-                        TestSolution.PASSED,
-                        FIELDSET_NOT_WITHIN_FORM_MSG, 
-                        null);
+                        new ImmutablePair(TestSolution.FAILED,FIELDSET_NOT_WITHIN_FORM_MSG),
+                        new ImmutablePair(TestSolution.PASSED,""));
+        
         fieldsetNotWithinFormChecker.check(
                     sspHandler, 
                     fieldsetNotWithinForm, 

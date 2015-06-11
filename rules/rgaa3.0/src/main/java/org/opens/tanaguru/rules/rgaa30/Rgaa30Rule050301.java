@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
@@ -62,39 +63,33 @@ public class Rgaa30Rule050301 extends AbstractMarkerPageRuleImplementation {
                 new CompositeChecker(
                         new ElementPresenceChecker(
                                 // nmi when element is found
-                                TestSolution.NEED_MORE_INFO,
+                                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_LINEARISED_CONTENT_MSG),
                                 // na when element is not found
-                                TestSolution.NOT_APPLICABLE,
-                                // message associated with each found element
-                                CHECK_LINEARISED_CONTENT_MSG,
-                                null),
+                                new ImmutablePair(TestSolution.NOT_APPLICABLE,"")
+                        ),
                         new AttributeWithValuePresenceChecker(
                                 ROLE_ATTR,
                                 PRESENTATION_VALUE,
-                                TestSolution.NEED_MORE_INFO,
-                                TestSolution.FAILED,
-                                // null beacause the CHECK_LINEARISED_CONTENT_MSG
+                                // empty msg because the CHECK_LINEARISED_CONTENT_MSG
                                 // is already use above in this case.
-                                null,
-                                PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG)
+                                new ImmutablePair(TestSolution.NEED_MORE_INFO,""),
+                                new ImmutablePair(TestSolution.FAILED,PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG)
+                        )
                 ),
                 // checker for elements not identified by marker
                 new CompositeChecker(
                         new ElementPresenceChecker(
                                 // nmi when element is found
-                                TestSolution.NEED_MORE_INFO,
+                                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG),
                                 // na when element is not found
-                                TestSolution.NOT_APPLICABLE,
-                                CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG,
-                                // message associated with each found element
-                                null),
+                                new ImmutablePair(TestSolution.NOT_APPLICABLE,"")
+                        ),
                         new AttributeWithValuePresenceChecker(
                                 ROLE_ATTR,
                                 PRESENTATION_VALUE,
-                                TestSolution.NEED_MORE_INFO,
-                                TestSolution.NEED_MORE_INFO,
-                                CHECK_LINEARISED_CONTENT_MSG,
-                                null)
+                                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_LINEARISED_CONTENT_MSG),
+                                new ImmutablePair(TestSolution.NEED_MORE_INFO,"")
+                        )
                 )
         );
     }

@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
@@ -26,6 +27,7 @@ import org.opens.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import static org.opens.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.opens.tanaguru.rules.keystore.HtmlElementStore.IFRAME_ELEMENT;
+import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.ALT_MISSING_MSG;
 import static org.opens.tanaguru.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING_MSG;
 
 /**
@@ -46,14 +48,10 @@ public class Rgaa30Rule020101 extends AbstractPageRuleWithSelectorAndCheckerImpl
                 
                 new AttributePresenceChecker(
                     TITLE_ATTR, 
-                    // passed when attribute is found
-                    TestSolution.PASSED, 
-                    // failed when attribute is not found
-                    TestSolution.FAILED, 
-                    // no message created when attribute is found
-                    null,
-                    // message associated with element when attribute is not found
-                    TITLE_ATTR_MISSING_MSG, 
+                    // passed when attribute is found, empty message
+                    new ImmutablePair(TestSolution.PASSED, ""),
+                    // failed when attribute is not found, titleAttrMissing Message
+                    new ImmutablePair(TestSolution.FAILED, TITLE_ATTR_MISSING_MSG),
                     // evidence elements
                     SRC_ATTR)
             );

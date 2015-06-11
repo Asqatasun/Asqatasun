@@ -20,6 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -78,24 +79,18 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
                 // checker for elements identified by marker
                 new ElementPresenceChecker(
                     // failed when element is found
-                    TestSolution.FAILED, 
+                    new ImmutablePair(TestSolution.FAILED, PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG),
                     // passed when element is not found
-                    TestSolution.NOT_APPLICABLE, 
-                    // message associated when element is found
-                    PRESENTATION_TABLE_WITH_FORBIDDEN_MARKUP_MSG,
-                    // no message created when child element is not found
-                    null),
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+                ),
                 
                 // checker for elements not identified by marker
                 new ElementPresenceChecker(
                     // nmi when element is found
-                    TestSolution.NEED_MORE_INFO, 
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_TABLE_IS_DATA_TABLE_MSG),
                     // nmi when element is not found
-                    TestSolution.NOT_APPLICABLE, 
-                    // message associated when element is found
-                    CHECK_TABLE_IS_DATA_TABLE_MSG, 
-                    // no message created when child element is not found
-                    null)
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+                )
             );
     }
 
@@ -131,13 +126,10 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
         if (!notIdentifiedTableWithoutDataTableMarkup.isEmpty()) {
             ec = new ElementPresenceChecker(
                         // nmi when element is found
-                        TestSolution.NEED_MORE_INFO, 
+                        new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_TABLE_IS_PRESENTATION_TABLE_MSG),
                         // na when element is not found
-                        TestSolution.NOT_APPLICABLE, 
-                        // message associated when element is found
-                        CHECK_TABLE_IS_PRESENTATION_TABLE_MSG, 
-                        // no message created when child element is not found
-                        null);
+                        new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+            );
             ec.check(
                     sspHandler, 
                     notIdentifiedTableWithoutDataTableMarkup, 
@@ -146,14 +138,10 @@ public class Rgaa30Rule050801 extends AbstractMarkerPageRuleImplementation {
         if (!presentationTableWithoutDataTableMarkup.isEmpty()) {
             ec = new ElementPresenceChecker(
                         // passed when element is foundexit
-                    
-                        TestSolution.PASSED, 
+                        new ImmutablePair(TestSolution.PASSED, ""),
                         // na when element is not found
-                        TestSolution.NOT_APPLICABLE, 
-                        // message associated when element is found
-                        null, 
-                        // no message created when child element is not found
-                        null);
+                        new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+            );
             ec.check(
                     sspHandler, 
                     presentationTableWithoutDataTableMarkup, 

@@ -22,6 +22,7 @@ package org.opens.tanaguru.rules.rgaa30;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -116,10 +117,9 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
             ElementChecker attributePresenceChecker
                     = new AttributePresenceChecker(
                             ID_ATTR,
-                            TestSolution.PASSED,
-                            TestSolution.FAILED,
-                            null,
-                            ID_MISSING_MSG);
+                            new ImmutablePair(TestSolution.PASSED,""),
+                            new ImmutablePair(TestSolution.FAILED,ID_MISSING_MSG));
+            
             attributePresenceChecker.check(sspHandler, entry.getValue(), testSolutionHandler);
 
             /* The attribute Emptiness Checker. Keep default value i.e failed 
@@ -142,10 +142,9 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
             ElementChecker attributePresenceChecker
                     = new AttributePresenceChecker(
                             FOR_ATTR,
-                            TestSolution.PASSED,
-                            TestSolution.FAILED,
-                            null,
-                            FOR_MISSING_MSG);
+                            new ImmutablePair(TestSolution.PASSED, ""),
+                            new ImmutablePair(TestSolution.FAILED, FOR_MISSING_MSG));
+            
             attributePresenceChecker.check(sspHandler, entry.getValue(), testSolutionHandler);
 
             /* The attribute Emptiness Checker. Keep default value i.e failed 
@@ -178,11 +177,10 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
                     }
                 }
             }
-            ElementChecker elementPresenceChecker
-                    = new ElementPresenceChecker(TestSolution.FAILED,
-                            TestSolution.PASSED,
-                            INVALID_INPUT_MSG,
-                            null);
+            ElementChecker elementPresenceChecker = new ElementPresenceChecker(
+                            new ImmutablePair(TestSolution.FAILED,INVALID_INPUT_MSG),
+                            new ImmutablePair(TestSolution.PASSED,""));
+            
             elementPresenceChecker.check(sspHandler, inputOnError, testSolutionHandler);
         }
 
@@ -202,11 +200,10 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
                     }
                 }
             }
-            ElementChecker elementPresenceChecker
-                    = new ElementPresenceChecker(TestSolution.FAILED,
-                            TestSolution.PASSED,
-                            INVALID_LABEL_MSG,
-                            null);
+            ElementChecker elementPresenceChecker = new ElementPresenceChecker(
+                            new ImmutablePair(TestSolution.FAILED,INVALID_LABEL_MSG),
+                            new ImmutablePair(TestSolution.PASSED,""));
+            
             elementPresenceChecker.check(sspHandler, labelOnError, testSolutionHandler);
         }
     }

@@ -20,6 +20,7 @@
 package org.opens.tanaguru.rules.rgaa30;
 
 import java.util.Iterator;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -153,10 +154,9 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
                     new TextNotIdenticalToAttributeChecker(
                         new TextAttributeOfElementBuilder(ALT_ATTR),
                         new TextAttributeOfElementBuilder(TITLE_ATTR),
-                        TestSolution.FAILED,
-                        TestSolution.PASSED,
-                        "",
-                        ""),
+                        new ImmutablePair(TestSolution.FAILED,""),
+                        new ImmutablePair(TestSolution.PASSED,"")
+                    ),
                     new AttributePertinenceChecker(
                         ALT_ATTR,
                         // check emptiness
@@ -178,10 +178,9 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
                     new TextNotIdenticalToAttributeChecker(
                         new TextAttributeOfElementBuilder(ALT_ATTR),
                         new TextAttributeOfElementBuilder(TITLE_ATTR),
-                        TestSolution.NEED_MORE_INFO,
-                        TestSolution.NEED_MORE_INFO,
-                        "",
-                        ""),
+                        new ImmutablePair(TestSolution.NEED_MORE_INFO,""),
+                        new ImmutablePair(TestSolution.NEED_MORE_INFO,"")
+                    ),
                     new AttributePertinenceChecker(
                         ALT_ATTR,
                         // check emptiness

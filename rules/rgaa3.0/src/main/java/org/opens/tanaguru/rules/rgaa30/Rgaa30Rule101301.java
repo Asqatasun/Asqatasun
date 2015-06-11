@@ -21,6 +21,7 @@
 package org.opens.tanaguru.rules.rgaa30;
 
 import java.util.Collection;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -42,14 +43,14 @@ public class Rgaa30Rule101301 extends AbstractPageRuleFromPreProcessImplementati
      * Default constructor
      */
     public Rgaa30Rule101301 () {
-        super(new ElementPresenceChecker(
+        super(
+                new ElementPresenceChecker(
                     // if some elements are found
-                    TestSolution.NEED_MORE_INFO, 
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, HIDDEN_TEXT_DETECTED_MSG),
                     // if no found element
-                    TestSolution.NOT_APPLICABLE, 
-                    // message for each detected element
-                    HIDDEN_TEXT_DETECTED_MSG,
-                    null));
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+                )
+            );
     }
 
     @Override

@@ -20,6 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
@@ -55,20 +56,18 @@ public class Rgaa30Rule050701 extends AbstractMarkerPageRuleImplementation {
                 // checker for elements identified by marker
                 new ElementPresenceChecker(
                     // nmi when element is found
-                    TestSolution.NEED_MORE_INFO, 
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_DEFINITION_OF_HEADERS_FOR_DATA_TABLE_MSG),
                     // na when element is not found
-                    TestSolution.NOT_APPLICABLE, 
-                    CHECK_DEFINITION_OF_HEADERS_FOR_DATA_TABLE_MSG,
-                    null), 
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+                ), 
                 
                 // checker for elements not identified by marker
                 new ElementPresenceChecker(
                     // nmi when element is found
-                    TestSolution.NEED_MORE_INFO, 
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_NATURE_OF_TABLE_AND_HEADERS_DEFINITION_MSG),
                     // na when element is not found
-                    TestSolution.NOT_APPLICABLE, 
-                    CHECK_NATURE_OF_TABLE_AND_HEADERS_DEFINITION_MSG,
-                    null)
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+                )
             );
     }
 

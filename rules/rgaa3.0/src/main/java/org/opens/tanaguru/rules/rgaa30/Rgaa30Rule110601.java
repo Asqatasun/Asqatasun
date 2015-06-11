@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ChildElementPresenceChecker;
@@ -47,13 +48,10 @@ public class Rgaa30Rule110601 extends AbstractPageRuleWithSelectorAndCheckerImpl
                     LEGEND_ELEMENT, 
                     1,
                     // passed when a child element is found
-                    TestSolution.PASSED,    
+                    new ImmutablePair(TestSolution.PASSED,""),    
                     // failed when no child element is found
-                    TestSolution.FAILED, 
-                    // no message when child element is found
-                    null, 
-                    // message associated with each element without child element
-                    FIELDSET_WITHOUT_LEGEND_MSG)
+                    new ImmutablePair(TestSolution.FAILED, FIELDSET_WITHOUT_LEGEND_MSG)
+                )
         );
     }
     

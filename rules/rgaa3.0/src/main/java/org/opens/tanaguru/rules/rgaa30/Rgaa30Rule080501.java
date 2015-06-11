@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
@@ -46,15 +47,12 @@ public class Rgaa30Rule080501 extends AbstractPageRuleWithSelectorAndCheckerImpl
                     // check unicity
                     true,
                     // result when element detected
-                    TestSolution.PASSED,
+                    new ImmutablePair(TestSolution.PASSED,""),
                     // result when element not detected
-                    TestSolution.FAILED,
-                    // no message when detected
-                    null,
-                    // message when element not detected
-                    TITLE_TAG_MISSING_MSG, 
+                    new ImmutablePair(TestSolution.FAILED,TITLE_TAG_MISSING_MSG),
                     // no message when multiple elements
-                    null)
+                    null
+                )
             );
     }
     
