@@ -25,6 +25,8 @@ package org.opens.tanaguru.rules.elementchecker.element;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -55,73 +57,44 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
     private int minimumNumberOfChildRequired = 1;
     
     /**
-     * Not detected solution. Default is PASSED.
-     */
-    private TestSolution notDetectedSolution = TestSolution.PASSED;
-
-    /**
-     * Detected solution. Default is FAILED.
-     */
-    private TestSolution detectedSolution = TestSolution.FAILED;
-
-    /**
-     * The message code associated with a processRemark when the element is
-     * detected on the page
-     */
-    private final String messageCodeOnElementDetected;
-    
-    /**
-     * The message code associated with a processRemark when the element is
-     * not found on the page
-     */
-    private final String messageCodeOnElementNotDetected;
-    
-    /**
      * Constructor.
      * 
      * @param childElementName
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
+     * @param detectedSolutionPair
+     * @param notDetectedSolutionPair
+     * @param eeAttributeNameList
      */
     public ChildElementPresenceChecker(
             String childElementName,
-            TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected) {
-        super();
+            Pair<TestSolution, String> detectedSolutionPair,
+            Pair<TestSolution, String> notDetectedSolutionPair, 
+            String... eeAttributeNameList) {
+        super(detectedSolutionPair, notDetectedSolutionPair, eeAttributeNameList);
         this.childElementNames.add(childElementName);
-        this.detectedSolution = detectedSolution;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.notDetectedSolution = notDetectedSolution;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
     }
     
     /**
-     * Constructor.
+     * @Deprecated 
+     * Use constructor with Pair instead
      * 
      * @param childElementName
      * @param detectedSolution
      * @param notDetectedSolution
      * @param messageCodeOnElementDetected
      * @param messageCodeOnElementNotDetected
-     * @param eeAttributeNameList 
+     * @param eeAttributeNameList
      */
     public ChildElementPresenceChecker(
             String childElementName,
             TestSolution detectedSolution,
             TestSolution notDetectedSolution, 
             String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
+            String messageCodeOnElementNotDetected,
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.childElementNames.add(childElementName);
-        this.detectedSolution = detectedSolution;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.notDetectedSolution = notDetectedSolution;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
+        this(childElementName,
+             new ImmutablePair(detectedSolution,messageCodeOnElementDetected),
+             new ImmutablePair(notDetectedSolution,messageCodeOnElementNotDetected),
+             eeAttributeNameList);
     }
     
     /**
@@ -129,29 +102,23 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
      * 
      * @param childElementName
      * @param minimumNumberOfChildRequired
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
+     * @param detectedSolutionPair
+     * @param notDetectedSolutionPair
+     * @param eeAttributeNameList 
      */
     public ChildElementPresenceChecker(
             String childElementName,
             int minimumNumberOfChildRequired,
-            TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected) {
-        super();
-        this.childElementNames.add(childElementName);
+            Pair<TestSolution,String> detectedSolutionPair,
+            Pair<TestSolution,String> notDetectedSolutionPair, 
+            String... eeAttributeNameList) {
+        this(childElementName, detectedSolutionPair, notDetectedSolutionPair, eeAttributeNameList);
         this.minimumNumberOfChildRequired = minimumNumberOfChildRequired;
-        this.detectedSolution = detectedSolution;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.notDetectedSolution = notDetectedSolution;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
     }
     
     /**
-     * Constructor.
+     * @Deprecated 
+     * Use constructor with Pair instead
      * 
      * @param childElementName
      * @param minimumNumberOfChildRequired
@@ -169,13 +136,11 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
             String messageCodeOnElementDetected, 
             String messageCodeOnElementNotDetected, 
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.childElementNames.add(childElementName);
-        this.minimumNumberOfChildRequired = minimumNumberOfChildRequired;
-        this.detectedSolution = detectedSolution;
-        this.messageCodeOnElementDetected = messageCodeOnElementDetected;
-        this.notDetectedSolution = notDetectedSolution;
-        this.messageCodeOnElementNotDetected = messageCodeOnElementNotDetected;
+        this(childElementName,
+             minimumNumberOfChildRequired,
+             new ImmutablePair(detectedSolution,messageCodeOnElementDetected),
+             new ImmutablePair(notDetectedSolution,messageCodeOnElementNotDetected),
+             eeAttributeNameList);
     }
     
     @Override
@@ -211,26 +176,26 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
 
             if (el.getElementsByTag(elementToTest).size()>=minimumNumberOfChildRequired) {
 
-                testSolution = setTestSolution(testSolution, detectedSolution);
+                testSolution = setTestSolution(testSolution, getSuccessSolution());
                 
-                if (StringUtils.isNotBlank(messageCodeOnElementDetected)) {
+                if (StringUtils.isNotBlank(getSuccessMsgCode())) {
                     
                     addSourceCodeRemark(
-                            detectedSolution,
+                            getSuccessSolution(),
                             el, 
-                            messageCodeOnElementDetected);
+                            getSuccessMsgCode());
                 }
                 
             } else {
                 
-                testSolution = setTestSolution(testSolution, notDetectedSolution);
+                testSolution = setTestSolution(testSolution, getFailureSolution());
                 
-                if (StringUtils.isNotBlank(messageCodeOnElementNotDetected)) {
+                if (StringUtils.isNotBlank(getFailureMsgCode())) {
                     
                     addSourceCodeRemark(
-                            notDetectedSolution,
+                            getFailureSolution(),
                             el, 
-                            messageCodeOnElementNotDetected);
+                            getFailureMsgCode());
                 }
 
             }

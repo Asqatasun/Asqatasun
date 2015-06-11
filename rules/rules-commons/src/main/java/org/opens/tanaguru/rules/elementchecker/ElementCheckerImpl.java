@@ -27,6 +27,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.EvidenceElement;
@@ -72,28 +74,56 @@ public abstract class ElementCheckerImpl implements ElementChecker {
         this.textElementBuilder = textElementBuilder;
     }
     
-    /* Success solution when checker returns success. Default is PASSED*/
-    private TestSolution successSolution = TestSolution.PASSED;
+    /* Success solution pair when checker returns success. Default solution is PASSED */
+    private final MutablePair<TestSolution,String> successSolutionPair = new MutablePair(TestSolution.PASSED, "");
+    @Override
+    public Pair<TestSolution,String> getSuccessSolutionPair(){
+        return successSolutionPair;
+    }
+    
+    @Override
+    public String getSuccessMsgCode(){
+        return successSolutionPair.getValue();
+    }
+    
     @Override
     public TestSolution getSuccessSolution(){
-        return successSolution;
+        return successSolutionPair.getKey();
+    }
+
+    public void setSuccessMsgCode(String successMsgCode){
+        this.successSolutionPair.setValue(successMsgCode);
     }
     
-    public void setSuccessSolution(TestSolution successSolution){
-        this.successSolution = successSolution;
+    public void setSuccessSolution(TestSolution testSolution){
+        this.successSolutionPair.left = testSolution;
     }
     
-    /* Success solution when checker returns failure. Default is FAILED*/
-    private TestSolution failureSolution = TestSolution.FAILED;
+    /* Success solution pair when checker returns success. Default solution is PASSED */
+    private final MutablePair<TestSolution,String> failureSolutionPair = new MutablePair(TestSolution.FAILED, "");
+    @Override
+    public Pair<TestSolution,String> getFailureSolutionPair(){
+        return failureSolutionPair;
+    }
+    
+    @Override
+    public String getFailureMsgCode(){
+        return failureSolutionPair.getValue();
+    }
+    
     @Override
     public TestSolution getFailureSolution(){
-        return failureSolution;
+        return failureSolutionPair.getKey();
     }
     
     public void setFailureSolution(TestSolution failureSolution){
-        this.failureSolution = failureSolution;
+        this.failureSolutionPair.left = failureSolution;
     }
 
+    public void setFailureMsgCode(String failureMsgCode){
+        this.failureSolutionPair.setValue(failureMsgCode);
+    }
+    
     /**
      * the collection of attributes name used to collect evidenceElement
      */
@@ -127,15 +157,19 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     
     /**
      * 
-     * @param successSolution 
-     * @param failureSolution 
+     * @param successSolutionPair
+     * @param failureSolutionPair 
      * @param eeAttributeNameList 
      */
-    public ElementCheckerImpl(TestSolution successSolution, 
-                              TestSolution failureSolution,
+    public ElementCheckerImpl(Pair<TestSolution, String> successSolutionPair, 
+                              Pair<TestSolution, String> failureSolutionPair,
                               String... eeAttributeNameList) {
-        this.successSolution = successSolution;
-        this.failureSolution = failureSolution;
+        this.successSolutionPair.left = successSolutionPair.getKey();
+        this.successSolutionPair.right = successSolutionPair.getValue();
+
+        this.failureSolutionPair.left = failureSolutionPair.getKey();
+        this.failureSolutionPair.right = failureSolutionPair.getValue();
+        
         this.eeAttributeNames = 
                Arrays.copyOf(eeAttributeNameList, eeAttributeNameList.length); 
     }

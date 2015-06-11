@@ -21,6 +21,8 @@ package org.opens.tanaguru.ruleimplementation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.opens.tanaguru.rules.elementselector.ElementSelector;
@@ -39,34 +41,58 @@ import org.opens.tanaguru.rules.elementselector.ElementSelector;
 public abstract class AbstractDetectionPageRuleImplementation
             extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    private ElementPresenceChecker epc;
+    private final ElementPresenceChecker epc;
     public ElementPresenceChecker getElementPresenceChecker() {
         return epc;
     }
 
+//    /**
+//     * Constructor
+//     * 
+//     * @param elementSelector
+//     * @param messageCodeOnElementDetected
+//     * @param messageCodeOnElementNotDetected
+//     * @param eeAttributeNameList 
+//     */
+//    public AbstractDetectionPageRuleImplementation(
+//            @Nonnull ElementSelector elementSelector, 
+//            @Nullable String messageCodeOnElementDetected, 
+//            @Nullable String messageCodeOnElementNotDetected,
+//            String... eeAttributeNameList) {
+//        this(elementSelector, 
+//             ElementPresenceChecker.DEFAULT_DETECTED_SOLUTION,
+//             ElementPresenceChecker.DEFAULT_NOT_DETECTED_SOLUTION,
+//             messageCodeOnElementDetected, 
+//             messageCodeOnElementNotDetected, 
+//             eeAttributeNameList);
+//    }
+    
     /**
      * Constructor
      * 
      * @param elementSelector
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
+     * @param detectedSolutionPair
+     * @param notDetectedSolutionPair
      * @param eeAttributeNameList 
      */
     public AbstractDetectionPageRuleImplementation(
             @Nonnull ElementSelector elementSelector, 
-            @Nullable String messageCodeOnElementDetected, 
-            @Nullable String messageCodeOnElementNotDetected,
+            @Nonnull Pair<TestSolution, String> detectedSolutionPair, 
+            @Nonnull Pair<TestSolution, String> notDetectedSolutionPair, 
             String... eeAttributeNameList) {
-        this(elementSelector, 
-             ElementPresenceChecker.DEFAULT_DETECTED_SOLUTION,
-             ElementPresenceChecker.DEFAULT_NOT_DETECTED_SOLUTION,
-             messageCodeOnElementDetected, 
-             messageCodeOnElementNotDetected, 
-             eeAttributeNameList);
+        super(elementSelector, 
+              new ElementPresenceChecker(
+                            detectedSolutionPair, 
+                            notDetectedSolutionPair, 
+                            eeAttributeNameList)
+        );
+
+        this.epc = (ElementPresenceChecker)getElementChecker();
     }
     
     /**
-     * Constructor
+     * @Deprecated 
+     * Use constructor with Pair instead
      * 
      * @param elementSelector
      * @param detectedSolution
@@ -84,10 +110,8 @@ public abstract class AbstractDetectionPageRuleImplementation
             String... eeAttributeNameList) {
         super(elementSelector, 
               new ElementPresenceChecker(
-                            detectedSolution, 
-                            notDetectedSolution, 
-                            messageCodeOnElementDetected,
-                            messageCodeOnElementNotDetected,
+                            new ImmutablePair(detectedSolution, messageCodeOnElementDetected),
+                            new ImmutablePair(notDetectedSolution, messageCodeOnElementNotDetected),
                             eeAttributeNameList)
         );
 

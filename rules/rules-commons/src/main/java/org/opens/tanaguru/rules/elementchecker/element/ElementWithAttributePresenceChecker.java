@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.element;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 
@@ -43,87 +44,23 @@ public class ElementWithAttributePresenceChecker extends ElementPresenceChecker 
     /**
      * Constructor.
      * 
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     * @param attributeName
-     */
-    public ElementWithAttributePresenceChecker(
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
-            String attributeName) {
-        super(messageCodeOnElementDetected, messageCodeOnElementNotDetected);
-        this.attributeName = attributeName;
-    }
-    
-    /**
-     * Constructor.
-     * 
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     * @param attributeName
-     * @param eeAttributeNameList 
-     */
-    public ElementWithAttributePresenceChecker(
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
-            String attributeName,
-            String... eeAttributeNameList) {
-        super(
-                messageCodeOnElementDetected, 
-                messageCodeOnElementNotDetected, 
-                eeAttributeNameList);
-        this.attributeName = attributeName;
-    }
-    
-    /**
-     * Constructor.
-     * 
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
-     * @param attributeName
-     */
-    public ElementWithAttributePresenceChecker(
-            TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
-            String attributeName) {
-        super(
-                detectedSolution, 
-                notDetectedSolution, 
-                messageCodeOnElementDetected, 
-                messageCodeOnElementNotDetected);
-        this.attributeName = attributeName;
-    }
-    
-    /**
-     * Constructor.
-     * 
-     * @param detectedSolution
-     * @param notDetectedSolution
-     * @param messageCodeOnElementDetected
-     * @param messageCodeOnElementNotDetected
+     * @param detectedSolutionPair
+     * @param notDetectedSolutionPair
      * @param attributeName 
      * @param eeAttributeNameList 
      */
     public ElementWithAttributePresenceChecker(
-            TestSolution detectedSolution,
-            TestSolution notDetectedSolution, 
-            String messageCodeOnElementDetected, 
-            String messageCodeOnElementNotDetected, 
+            Pair<TestSolution,String> detectedSolutionPair,
+            Pair<TestSolution,String> notDetectedSolutionPair, 
             String attributeName,
             String... eeAttributeNameList) {
         super(
-                detectedSolution, 
-                notDetectedSolution, 
-                messageCodeOnElementDetected, 
-                messageCodeOnElementNotDetected, 
+                detectedSolutionPair, 
+                notDetectedSolutionPair, 
                 eeAttributeNameList);
         this.attributeName = attributeName;
     }
-
+    
     @Override
     protected void createSourceCodeRemark(TestSolution testSolution, Element element, String message) {
         addSourceCodeRemarkOnAttribute(testSolution, element, message, attributeName);

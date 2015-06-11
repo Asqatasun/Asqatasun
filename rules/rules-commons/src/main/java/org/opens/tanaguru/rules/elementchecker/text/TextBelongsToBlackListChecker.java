@@ -84,22 +84,6 @@ public class TextBelongsToBlackListChecker
      * @param testableTextBuilder
      * @param blackListNomName
      * @param textBelongsToBlackListMessageCode
-     */
-    public TextBelongsToBlackListChecker(
-            TextElementBuilder testableTextBuilder,
-            String blackListNomName,
-            String textBelongsToBlackListMessageCode) {
-        super();
-        this.testableTextBuilder = testableTextBuilder;
-        this.blackListNomName = blackListNomName;
-        this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
-    }
-    
-    /**
-     * Constructor
-     * @param testableTextBuilder
-     * @param blackListNomName
-     * @param textBelongsToBlackListMessageCode
      * @param eeAttributeNameList 
      */
     public TextBelongsToBlackListChecker(
@@ -111,24 +95,6 @@ public class TextBelongsToBlackListChecker
         this.testableTextBuilder = testableTextBuilder;
         this.blackListNomName = blackListNomName;
         this.textBelongsToBlackListMessageCode = textBelongsToBlackListMessageCode;
-    }
-    
-    /**
-     * Constructor
-     * @param testableTextBuilder
-     * @param blackListNomName
-     * @param detectedSolution
-     * @param textBelongsToBlackListMessageCode
-     */
-    public TextBelongsToBlackListChecker(
-            TextElementBuilder testableTextBuilder,
-            String blackListNomName,
-            TestSolution detectedSolution,
-            String textBelongsToBlackListMessageCode) {
-        this(testableTextBuilder, 
-             blackListNomName,
-             textBelongsToBlackListMessageCode);
-        setFailureSolution(detectedSolution);
     }
     
     /**

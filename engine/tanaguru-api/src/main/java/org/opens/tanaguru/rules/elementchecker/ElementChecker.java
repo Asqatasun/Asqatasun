@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
 import org.opens.tanaguru.ruleimplementation.ElementHandler;
@@ -42,11 +43,23 @@ public interface ElementChecker {
      */
     TextElementBuilder getTextElementBuilder();
     
+    /* success solution pair : aggregation of solution and message*/
+    Pair<TestSolution,String> getSuccessSolutionPair();
+    
     /* success solution */
     TestSolution getSuccessSolution();
     
+    /* success message code */
+    String getSuccessMsgCode();
+    
+    /* failure solution pair : aggregation of solution and message*/
+    Pair<TestSolution,String> getFailureSolutionPair();
+    
     /* failure solution */
     TestSolution getFailureSolution();
+    
+    /* failure message code */
+    String getFailureMsgCode();
     
     /**
      * Perform the check operation. The instance of {@link ElementHandler} 

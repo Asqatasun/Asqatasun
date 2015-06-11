@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.elementchecker.element;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -39,88 +40,19 @@ import org.opens.tanaguru.rules.elementchecker.ElementCheckerImpl;
 public class ElementUnicityChecker extends ElementCheckerImpl {
 
     /**
-     * The message code associated with a processRemark when the element is
-     * detected on the page
-     */
-    private final String messageCodeOnElementUnique;
-    /**
-     * The message code associated with a processRemark when the element is not
-     * found on the page
-     */
-    private final String messageCodeOnElementNotUnique;
-
-    /**
-     * Constructor.
-     *
-     * @param messageCodeOnElementUnique
-     * @param messageCodeOnElementNotUnique
-     */
-    public ElementUnicityChecker(
-            String messageCodeOnElementUnique,
-            String messageCodeOnElementNotUnique) {
-        super();
-        this.messageCodeOnElementUnique = messageCodeOnElementUnique;
-        this.messageCodeOnElementNotUnique = messageCodeOnElementNotUnique;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param messageCodeOnElementUnique
-     * @param messageCodeOnElementNotUnique
-     * @param eeAttributeNameList
-     */
-    public ElementUnicityChecker(
-            String messageCodeOnElementUnique,
-            String messageCodeOnElementNotUnique,
-            String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.messageCodeOnElementUnique = messageCodeOnElementUnique;
-        this.messageCodeOnElementNotUnique = messageCodeOnElementNotUnique;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param messageCodeOnElementUnique
-     * @param solutionOnElementUnique
-     * @param messageCodeOnElementNotUnique
-     * @param solutionOnElementNotUnique
-     */
-    public ElementUnicityChecker(
-            String messageCodeOnElementUnique,
-            TestSolution solutionOnElementUnique,
-            String messageCodeOnElementNotUnique,
-            TestSolution solutionOnElementNotUnique) {
-        super();
-        this.messageCodeOnElementUnique = messageCodeOnElementUnique;
-        setSuccessSolution(solutionOnElementUnique);
-        this.messageCodeOnElementNotUnique = messageCodeOnElementNotUnique;
-        setFailureSolution(solutionOnElementNotUnique);
-    }
-
-    /**
      * Constructor
      *
-     * @param messageCodeOnElementUnique
-     * @param solutionOnElementUnique
-     * @param messageCodeOnElementNotUnique
-     * @param solutionOnElementNotUnique
+     * @param solutionOnElementUniquePair
+     * @param solutionOnElementNotUniquePair
      * @param eeAttributeNameList
      */
     public ElementUnicityChecker(
-            String messageCodeOnElementUnique,
-            TestSolution solutionOnElementUnique,
-            String messageCodeOnElementNotUnique,
-            TestSolution solutionOnElementNotUnique,
+            Pair<TestSolution,String> solutionOnElementUniquePair,
+            Pair<TestSolution,String> solutionOnElementNotUniquePair,
             String... eeAttributeNameList) {
-        super(eeAttributeNameList);
-        this.messageCodeOnElementUnique = messageCodeOnElementUnique;
-        setSuccessSolution(solutionOnElementUnique);
-        this.messageCodeOnElementNotUnique = messageCodeOnElementNotUnique;
-        setFailureSolution(solutionOnElementNotUnique);
+        super(solutionOnElementUniquePair, solutionOnElementNotUniquePair, eeAttributeNameList);
     }
-
+    
     @Override
     public void doCheck(
             SSPHandler sspHandler,
@@ -145,22 +77,22 @@ public class ElementUnicityChecker extends ElementCheckerImpl {
 
         TestSolution checkResult = getSuccessSolution();
         if (elements.size() == 1) {
-            if (StringUtils.isNotBlank(messageCodeOnElementUnique)) {
+            if (StringUtils.isNotBlank(getSuccessMsgCode())) {
                 for (Element el : elements) {
                     addSourceCodeRemark(
                             getSuccessSolution(),
                             el,
-                            messageCodeOnElementUnique);
+                            getSuccessMsgCode());
                 }
             }
         } else {
             checkResult = getFailureSolution();
-            if (StringUtils.isNotBlank(messageCodeOnElementNotUnique)) {
+            if (StringUtils.isNotBlank(getFailureMsgCode())) {
                 for (Element el : elements) {
                     addSourceCodeRemark(
                             getFailureSolution(),
                             el,
-                            messageCodeOnElementNotUnique);
+                            getFailureMsgCode());
                 }
             }
         }
