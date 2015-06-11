@@ -2,7 +2,9 @@
 
 ## Summary
 
-This test consists in checking whether each colum header of a data table is defined with a `<th>` tag
+This test consists in checking whether each colum header of a data table is defined with a `<th>` tag.
+
+To do so, we detect the tables on the page, and let the user make the control manually.
 
 ## Business description
 
@@ -40,7 +42,7 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files
 
 All the `<table>` tags with an `"id"` attribute or a `"class"` attribute or a
 `"role"` attribute that matches one of the values set by the user through
-the "DATA_TABLE_MARKER" parameter.
+the "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter.
 
 #### Set2 (table tags not identified as data table from html markers)
 
@@ -85,4 +87,6 @@ In all others cases
 
 ## Notes
 
-We only detect the elements of the scope of the test to determine whether the test is applicable
+We only detect the elements of the scope of the test to determine whether the test is applicable.
+
+Complex tables are seen as a subset of data tables. That's tables identified as complex tables are added to the set of identified data tables.

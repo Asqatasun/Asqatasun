@@ -1,9 +1,12 @@
 # Rule 5.7.1
+
 ## Summary
 
 This test consists in checking whether each header of a data table
 applied to the whole row or to the whole column have a unique id
 attribute or a scope attribute.
+
+To do so, we detect the tables on the page, and let the user make the control manually.
 
 ## Business description
 
@@ -41,14 +44,14 @@ Chaque en-t&ecirc;te (balise `th`) s'appliquant &agrave; la totalit&eacute; de l
 
 All the `<table>` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
-the "DATA_TABLE_MARKER" parameter AND with `<th>` child tags.
+the "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with `<th>` child tags.
 
 #### Set2 (table tags not identified as data table from html markers)
 
 All the `<table>` tags that don't have an "id" attribute or a "class"
 attribute or a "role" attribute that matches one the values set by the
 use through the "PRESENTATION_TABLE_MARKER" parameter or the
-"DATA_TABLE_MARKER" parameter AND with `<th>` child tags. That means
+"DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with `<th>` child tags. That means
 select all the table tags of the page when these parameters are empty.
 
 ### Process
@@ -79,8 +82,8 @@ For each occurence of **Set2**, raise a MessageB
 
 #### Not Applicable
 
-**Set1** AND **Set2** are empty (The page has no `<table>` tag with `<th>` child
-tags or only tables identified as presentation table)
+The page has no `<table>` tag with `<th>` child
+tags or only tables identified as presentation table (**Set1** AND **Set2** are empty)
 
 #### Pre-qualified
 
@@ -89,4 +92,6 @@ In all other cases
 ## Notes
 
 We only detect the elements of the scope of the test to determine
-whether the test is applicable
+whether the test is applicable.
+
+Complex tables are seen as a subset of data tables. That's tables identified as complex tables are added to the set of identified data tables.

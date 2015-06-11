@@ -43,7 +43,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA
 
 All the `<table>` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
-the "DATA_TABLE_MARKER" parameter.
+the "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter.
 
 #### Set2 (table tags not identified as data table from html markers)**
 
@@ -109,4 +109,8 @@ All the tables of page are identified as data tables and they all have a `<capti
 #### Pre-qualified:
 
 on all other cases
+
+## Notes 
+
+Complex tables are seen as a subset of data tables. That's tables identified as complex tables are added to the set of identified data tables.
 

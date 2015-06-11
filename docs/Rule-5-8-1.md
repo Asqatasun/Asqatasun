@@ -71,7 +71,7 @@ children tag :
 -   td[headers]
 -   td[axis]
 
-For each occurence of false-result of Test1, raise a MessageA
+For each occurence of false-result of **Test1**, raise a MessageA
 
 #### Test2 :
 
@@ -87,9 +87,9 @@ children tag :
 -   td[headers]
 -   td[axis]
 
-For each occurence of false-result of Test2, raise a MessageB
+For each occurence of false-result of **Test2**, raise a MessageB
 
-For each occurence of true-result of Test2, raise a MessageC
+For each occurence of true-result of **Test2**, raise a MessageC
 
 ###### MessageA : Presentation table with forbidden markup
 
@@ -114,30 +114,29 @@ For each occurence of true-result of Test2, raise a MessageC
 
 ### Analysis
 
-**Passed : 
+#### Passed
 
-Test1 returns true for all elements and **Set2** is empty (all the tables of
-the page are identified by marker and none of the presentation ones
-contain forbidden child element)
+All the tables of the page are identified by marker and none of the presentation ones
+contain forbidden child element (**Test1** returns true for all elements and **Set2** is empty)
 
-**Failed : 
+#### Failed
 
-Test1 returns false for at least one element (at least one table
+At least one table
 identified as presentation table by marker contains forbidden child
-element) **
+element (**Test1** returns false for at least one element)
 
 #### Not Applicable 
 
-**Set1** and **Set2** are empty (the page has no table tags or only data table
-identified by marker)
+The page has no table tags or only data table
+identified by marker (**Set1** and **Set2** are empty)
 
 #### Pre-qualified :
 
-**Set1** is empty or Test1 returns true for all elements AND **Set2** is not
-empty (the page contains not identified tables that need to be manually
+The page contains not identified tables that need to be manually
 checked and no table identified as presentation contain forbidden child
-element)
+element (**Set1** is empty or **Test1** returns true for all elements AND **Set2** is not
+empty)
 
 ## Notes
 
-No notes yet for that rule
+Complex tables are seen as a subset of data tables. That's tables identified as complex tables are added to the set of identified data tables and so excluded from the test.
