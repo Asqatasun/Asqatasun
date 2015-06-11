@@ -19,11 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
 import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.audit.SourceCodeRemark;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.opens.tanaguru.rules.keystore.HtmlElementStore;
