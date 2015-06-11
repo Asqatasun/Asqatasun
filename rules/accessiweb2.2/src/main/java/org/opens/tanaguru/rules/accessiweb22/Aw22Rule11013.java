@@ -20,6 +20,7 @@
 package org.opens.tanaguru.rules.accessiweb22;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -101,7 +102,9 @@ public class Aw22Rule11013 extends AbstractPageRuleMarkupImplementation {
             }
         }
         // use this checker to create sourceCodeRemark when needed
-        ElementChecker checker = new ElementPresenceChecker(INVALID_LABEL_MSG, null);
+        ElementChecker checker = new ElementPresenceChecker(
+                new ImmutablePair(TestSolution.FAILED, INVALID_LABEL_MSG), 
+                new ImmutablePair(TestSolution.PASSED, ""));
         checker.check(sspHandler, labelOnError, testSolutionHandler);
     }
     
