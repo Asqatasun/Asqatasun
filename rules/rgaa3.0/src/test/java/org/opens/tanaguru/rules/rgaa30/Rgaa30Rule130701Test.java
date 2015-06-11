@@ -572,14 +572,7 @@ public class Rgaa30Rule130701Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        // specific case of Not applicable with element counter superior to 0
-        processResult = processPageTest("Rgaa30.Test.13.07.01-4NA-02");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.NOT_APPLICABLE, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.13.07.01-4NA-02"), 1);
         
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
