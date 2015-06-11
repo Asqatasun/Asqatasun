@@ -19,9 +19,11 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.ProcessRemark;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.ProcessResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
+import org.opens.tanaguru.rules.keystore.EvidenceStore;
+import org.opens.tanaguru.rules.keystore.HtmlElementStore;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
@@ -65,91 +67,169 @@ public class Rgaa30Rule100102Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
-        ProcessResult processResult = processPageTest("Rgaa30.Test.10.01.02-1Passed-01");
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-01------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.01.02-1Passed-01"),12);
+       
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.01.02-1Passed-02"),13);
         
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-03------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.01.02-1Passed-03"),13);
         
-        processResult = processPageTest("Rgaa30.Test.10.01.02-1Passed-02");
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-04------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.01.02-1Passed-04"),18);
         
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-01");
+        checkResultIsFailed(processResult, 12, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.H1_ELEMENT,
+                1, 
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "align"));
         
-        processResult = processPageTest("Rgaa30.Test.10.01.02-1Passed-03");
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-        
-        
-        processResult = processPageTest("Rgaa30.Test.10.01.02-1Passed-04");
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        assertNull(processResult.getRemarkSet());
-
-        
-        processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-01");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-02");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-
+        checkResultIsFailed(processResult, 12, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "background"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.DIV_ELEMENT,
+                2,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "background"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-03");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "bgcolor"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-04");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 12, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.IMG_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "border"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-05");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                "font",
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "color"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-06");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "link"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-07");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore. BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "alink"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-08------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-08");
-        assertEquals(TestSolution.FAILED,processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "vlink"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-09------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-09");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(1, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "text"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-10------------------------------
+        //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.01.02-2Failed-10");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        assertEquals(2, processResult.getRemarkSet().size());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[0]).getMessageCode());
-        assertEquals("PresentationAttrFound",
-                ((ProcessRemark)processResult.getRemarkSet().toArray()[1]).getMessageCode());
-
-
+        checkResultIsFailed(processResult, 14, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                "hr",
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "height"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                "hr",
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "height"));
     }
 
 }

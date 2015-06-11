@@ -64,162 +64,106 @@ public class Rgaa30Rule080301Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.08.03.01-1Passed-01");
-        // check number of elements in the page
-        assertEquals(1, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.03.01-1Passed-01"),1);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.03.01-1Passed-02");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.03.01-1Passed-02"),13);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.03.01-1Passed-03");
-        // check number of elements in the page
-        assertEquals(14, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.03.01-1Passed-03"),14);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.03.01-1Passed-04");
-        // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.PASSED, processResult.getValue());
-        // check number of remarks and their value
-        assertNull(processResult.getRemarkSet());
-        
+        checkResultIsPassed(processPageTest("Rgaa30.Test.08.03.01-1Passed-04"),12);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-01");
-        // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        ProcessRemark processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG, processRemark.getMessageCode());
-        assertNull(processRemark.getElementList());
-        
+        ProcessResult processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-01");
+        checkResultIsFailed(processResult, 12, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-02");
-        // check number of elements in the page
-        assertEquals(12, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG, processRemark.getMessageCode());
-        assertNull(processRemark.getElementList());
-
+        checkResultIsFailed(processResult, 12, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG,
+                "",
+                1);
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-03");
-        // check number of elements in the page
-        assertEquals(13, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG, processRemark.getMessageCode());
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-04");
-        // check number of elements in the page
-        assertEquals(14, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG, processRemark.getMessageCode());
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 14, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-05");
-        // check number of elements in the page
-        assertEquals(14, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG, processRemark.getMessageCode());
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 14, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-06------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-06");
-        // check number of elements in the page
-        assertEquals(14, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG, processRemark.getMessageCode());
-        assertNull(processRemark.getElementList());
-        
+        checkResultIsFailed(processResult, 14, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG,
+                "",
+                1);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-07------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.08.03.01-2Failed-07");
-        // check number of elements in the page
-        assertEquals(14, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = processResult.getRemarkSet().iterator().next();
-        assertEquals(TestSolution.FAILED, processRemark.getIssue());
-        assertEquals(RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG, processRemark.getMessageCode());
-        assertNull(processRemark.getElementList());
-
+        checkResultIsFailed(processResult, 14, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG,
+                "",
+                1);
     }
 
 }
