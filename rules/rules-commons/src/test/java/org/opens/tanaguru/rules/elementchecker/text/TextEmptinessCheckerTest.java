@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.elementchecker.text;
 
 import junit.framework.TestCase;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
@@ -206,10 +207,8 @@ public class TextEmptinessCheckerTest extends TestCase {
         
         TextEmptinessChecker instance = new TextEmptinessChecker(
                     mockTextElementBuilder, 
-                    TestSolution.NEED_MORE_INFO, 
-                    TestSolution.PASSED, 
-                    TEXT_EMPTY_MSG, 
-                    TEXT_NOT_EMPTY_MSG);
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, TEXT_EMPTY_MSG),
+                    new ImmutablePair(TestSolution.PASSED, TEXT_NOT_EMPTY_MSG));
         instance.setProcessRemarkService(mockProcessRemarkService);
         
         replay(mockTextElementBuilder, 
@@ -246,10 +245,9 @@ public class TextEmptinessCheckerTest extends TestCase {
         
         TextEmptinessChecker instance = new TextEmptinessChecker(
                     mockTextElementBuilder, 
-                    TestSolution.PASSED, 
-                    TestSolution.FAILED, 
-                    TEXT_EMPTY_MSG, 
-                    TEXT_NOT_EMPTY_MSG);
+                    new ImmutablePair(TestSolution.PASSED, TEXT_EMPTY_MSG),
+                    new ImmutablePair(TestSolution.FAILED, TEXT_NOT_EMPTY_MSG)
+        );
         instance.setProcessRemarkService(mockProcessRemarkService);
         
         replay(mockTextElementBuilder, 

@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import junit.framework.TestCase;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
@@ -63,111 +64,6 @@ public class ElementPresenceCheckerTest extends TestCase{
     public void tearDown() {
     }
 
-    /**
-     * Test of doCheck method, of class ElementPresenceChecker.
-     * @throws java.io.IOException
-     */
-    public void testCheckDefaultDetectedResult() throws IOException{
-        LOGGER.debug("elementPresenceChecker-check-default-detected-result");
-
-        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
-                     Charset.defaultCharset().displayName());
-        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
-        elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
-        
-        initMockContext((Elements) elementHandler.get(), TestSolution.FAILED, "detected");
-
-        TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
-        
-        ElementPresenceChecker instance = 
-                new ElementPresenceChecker("detected", "notDetected");
-        
-        instance.check(mockSspHandler, elementHandler, testSolutionHandler);
-
-        assertEquals(TestSolution.FAILED,testSolutionHandler.getTestSolution());
-        
-        verifyMockContext();
-    }
-    
-    /**
-     * Test of doCheck method, of class ElementPresenceChecker.
-     * @throws java.io.IOException
-     */
-    public void testCheckDefaultNotDetectedResult() throws IOException{
-        LOGGER.debug("elementPresenceChecker-check-default-not-detected-result");
-        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
-                     Charset.defaultCharset().displayName());
-
-        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
-        elementHandler.addAll(doc.select(HtmlElementStore.A_ELEMENT));
-        
-        initMockContext(TestSolution.PASSED, "notDetected");
-
-        TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
-        
-        ElementPresenceChecker instance = 
-                new ElementPresenceChecker("detected", "notDetected");
-        
-        instance.check(mockSspHandler, elementHandler, testSolutionHandler);
-
-        assertEquals(TestSolution.PASSED,testSolutionHandler.getTestSolution());
-        
-        verifyMockContext();
-    }
-    
-    /**
-     * Test of doCheck method, of class ElementPresenceChecker.
-     * @throws java.io.IOException
-     */
-    public void testCheckDefaultDetectedUnicityResult() throws IOException{
-        LOGGER.debug("elementPresenceChecker-check-default-detected-unicity-result");
-        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-1.html"), 
-                     Charset.defaultCharset().displayName());
-
-        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
-        elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
-        
-        initMockContext(TestSolution.PASSED, "notDetected");
-
-        TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
-        
-        ElementPresenceChecker instance = 
-                new ElementPresenceChecker(true,"detected", "notDetected", null);
-        
-        instance.check(mockSspHandler, elementHandler, testSolutionHandler);
-
-        assertEquals(TestSolution.PASSED,testSolutionHandler.getTestSolution());
-        
-        verifyMockContext();
-    }
-    
-    /**
-     * Test of doCheck method, of class ElementPresenceChecker.
-     * @throws java.io.IOException
-     */
-    public void testCheckDefaultDetectedUnicityFailedResult() throws IOException{
-        LOGGER.debug("elementPresenceChecker-check-default-detection-unicity-failed-result");
-        
-        Document doc = Jsoup.parse(new File("src/test/resources/presenceChecker/presence-checker-unique-1.html"), 
-                     Charset.defaultCharset().displayName());
-
-        ElementHandler<Element> elementHandler = new ElementHandlerImpl();
-        elementHandler.addAll(doc.select(HtmlElementStore.DIV_ELEMENT));
-        
-        initMockContext((Elements)elementHandler.get(), TestSolution.FAILED, "detected");
-
-        TestSolutionHandler testSolutionHandler = new TestSolutionHandlerImpl();
-        
-        ElementPresenceChecker instance = 
-                new ElementPresenceChecker(true,"detected", "notDetected", null);
-        
-        instance.check(mockSspHandler, elementHandler, testSolutionHandler);
-
-        assertEquals(TestSolution.FAILED,testSolutionHandler.getTestSolution());
-        
-        verifyMockContext();
-    }
-    
     /**
      * Test of doCheck method, of class ElementPresenceChecker.
      * @throws java.io.IOException
@@ -220,10 +116,9 @@ public class ElementPresenceCheckerTest extends TestCase{
         
         ElementPresenceChecker instance = 
                 new ElementPresenceChecker(
-                    TestSolution.NEED_MORE_INFO,
-                    TestSolution.NOT_APPLICABLE,
-                    "detected", 
-                    null);
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,"detected"),
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,"")
+                );
         
         instance.check(mockSspHandler, elementHandler, testSolutionHandler);
 

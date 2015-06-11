@@ -25,6 +25,7 @@ package org.opens.tanaguru.rules.elementchecker.pertinence;
 import java.util.Collections;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
 import org.opens.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
@@ -203,10 +204,8 @@ public class TextPertinenceChecker extends CompositeChecker {
         if (checkEmptiness) {
             addChecker(new TextEmptinessChecker(
                             getTextElementBuilder(),
-                            getFailureSolution(), 
-                            TestSolution.PASSED, 
-                            notPertinentMessageCode, 
-                            null, 
+                            new ImmutablePair(getFailureSolution(), notPertinentMessageCode),
+                            new ImmutablePair(TestSolution.PASSED,""), 
                             getEeAttributeNames()));
         }
     }
@@ -251,10 +250,8 @@ public class TextPertinenceChecker extends CompositeChecker {
             addChecker(new TextNotIdenticalToAttributeChecker(
                             getTextElementBuilder(),
                             textElementBuilderToCompareWith, 
-                            getFailureSolution(),
-                            TestSolution.PASSED,
-                            notPertinentMessageCode, 
-                            null,
+                            new ImmutablePair(getFailureSolution(),notPertinentMessageCode),
+                            new ImmutablePair(TestSolution.PASSED,""),
                             getEeAttributeNames()));
         }
     }

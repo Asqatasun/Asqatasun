@@ -22,6 +22,7 @@
 package org.opens.tanaguru.rules.elementchecker.text;
 
 import junit.framework.TestCase;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
@@ -78,63 +79,6 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
     /**
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
      */
-    public void testDoCheckWithEmptyElements() {
-        LOGGER.debug("doCheckWithEmptyElements");
-        
-        /* Prepare test context */
-        TextNotIdenticalToAttributeChecker instance = 
-                new TextNotIdenticalToAttributeChecker(
-                    mockTextElementBuilder, 
-                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
-                    DETECTION_MSG, 
-                    null);
-
-        replay(mockTextElementBuilder, mockSSPHandler, mockTestSolutionHandler);
-        
-        /* test */
-        instance.doCheck(mockSSPHandler, elements, mockTestSolutionHandler);
-        
-        /* verification */
-        verify(mockTextElementBuilder, mockSSPHandler, mockTestSolutionHandler);
-    }
-
-    /**
-     * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
-     */
-    public void testDoCheckWithNullTextToCheck() {
-        LOGGER.debug("doCheckWithNullTextToCheck");
-        
-        /* Prepare test context */
-        
-        elements.add(element);
-
-        mockTestSolutionHandler.addTestSolution(TestSolution.FAILED);
-        expectLastCall().once();
-        
-        expect(mockTextElementBuilder.buildTextFromElement(element)).andReturn(null);
-        
-        TextNotIdenticalToAttributeChecker instance = 
-                new TextNotIdenticalToAttributeChecker(
-                    mockTextElementBuilder, 
-                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
-                    null, 
-                    DETECTION_MSG);
-        replay(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler);
-        
-        /* test */
-        instance.doCheck(mockSSPHandler, elements, mockTestSolutionHandler);
-        
-        /* verification */
-        verify(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler);
-    }
-    
-    /**
-     * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
-     */
     public void testDoCheckWithNullTextToCheckAndDetectionResultOverridenByConstructor() {
         LOGGER.debug("doCheckWithNullTextToCheckAndDetectionResultOverridenByConstructor");
         
@@ -151,10 +95,9 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
                     new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
-                    TestSolution.NOT_APPLICABLE,
-                    TestSolution.PASSED,
-                    DETECTION_MSG,
-                    null);
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,DETECTION_MSG),
+                    new ImmutablePair(TestSolution.PASSED,"")
+                );
         replay(mockTextElementBuilder,
                mockSSPHandler, 
                mockTestSolutionHandler);
@@ -168,127 +111,6 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
                mockTestSolutionHandler);
     }
     
-    /**
-     * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
-     */
-    public void testDoCheckWithDefaultDetectionResult() {
-        LOGGER.debug("doCheckWithDefaultDetectionResult");
-        
-        /* Prepare test context */
-        elements.add(element);
-
-        expect(mockTextElementBuilder.buildTextFromElement(element)).andReturn("test");
-        
-        mockTestSolutionHandler.addTestSolution(TestSolution.FAILED);
-        expectLastCall().once();
-        
-        mockProcessRemarkService.addSourceCodeRemarkOnElement(
-                    TestSolution.FAILED,
-                    element,
-                    DETECTION_MSG);
-        expectLastCall().once();
-
-        TextNotIdenticalToAttributeChecker instance = 
-                new TextNotIdenticalToAttributeChecker(
-                    mockTextElementBuilder, 
-                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
-                    DETECTION_MSG, 
-                    null);
-        instance.setProcessRemarkService(mockProcessRemarkService);
-        
-        replay(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler, 
-               mockProcessRemarkService);
-        
-        /* test */
-        instance.doCheck(mockSSPHandler, elements, mockTestSolutionHandler);
-        
-        /* verification */
-        verify(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler,
-               mockProcessRemarkService);
-    }
-    
-    /**
-     * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
-     */
-    public void testDoCheckWithDefaultNotDetectionResult() {
-        LOGGER.debug("doCheckWithDefaultNotDetectionResult");
-        
-        /* Prepare test context */
-        elements.add(element);
-        
-        expect(mockTextElementBuilder.buildTextFromElement(element)).andReturn("testNotIdentical");
-        
-        mockTestSolutionHandler.addTestSolution(TestSolution.PASSED);
-        expectLastCall().once();
-
-        TextNotIdenticalToAttributeChecker instance = 
-                new TextNotIdenticalToAttributeChecker(
-                    mockTextElementBuilder, 
-                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
-                    DETECTION_MSG,  
-                    null);
-        
-        replay(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler);
-        
-        /* test */
-        instance.doCheck(mockSSPHandler, elements, mockTestSolutionHandler);
-        
-        /* verification */
-        verify(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler);
-    }
-    
-    /**
-     * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
-     */
-    public void testDoCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor() {
-        LOGGER.debug("doCheckWithDefaultDetectionResultAndDetectionResultOverridenByConstructor");
-        
-        /* Prepare test context */
-        elements.add(element);
-
-        expect(mockTextElementBuilder.buildTextFromElement(element)).andReturn("test");
-        
-        mockTestSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
-        expectLastCall().once();
-        
-        mockProcessRemarkService.addSourceCodeRemarkOnElement(
-                    TestSolution.NEED_MORE_INFO,
-                    element,
-                    DETECTION_MSG);
-        expectLastCall().once();
-
-        TextNotIdenticalToAttributeChecker instance = 
-                new TextNotIdenticalToAttributeChecker(
-                    mockTextElementBuilder, 
-                    new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
-                    TestSolution.NEED_MORE_INFO,
-                    TestSolution.PASSED,
-                    DETECTION_MSG, 
-                    null);
-        instance.setProcessRemarkService(mockProcessRemarkService);
-        
-        replay(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler, 
-               mockProcessRemarkService);
-        
-        /* test */
-        instance.doCheck(mockSSPHandler, elements, mockTestSolutionHandler);
-        
-        /* verification */
-        verify(mockTextElementBuilder,
-               mockSSPHandler, 
-               mockTestSolutionHandler,
-               mockProcessRemarkService);
-    }
     
     /**
      * Test of doCheck method, of class TextNotIdenticalToAttributeChecker.
@@ -308,10 +130,9 @@ public class TextNotIdenticalToAttributeCheckerTest extends TestCase {
                 new TextNotIdenticalToAttributeChecker(
                     mockTextElementBuilder, 
                     new TextAttributeOfElementBuilder(AttributeStore.ALT_ATTR), 
-                    TestSolution.NEED_MORE_INFO,
-                    TestSolution.PASSED,
-                    DETECTION_MSG,
-                    null);
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,DETECTION_MSG),
+                    new ImmutablePair(TestSolution.PASSED,"")
+                );
 
         replay(mockTextElementBuilder,
                mockSSPHandler, 

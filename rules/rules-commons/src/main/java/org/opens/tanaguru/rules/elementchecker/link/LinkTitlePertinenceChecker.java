@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker.link;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.rules.elementchecker.CompositeChecker;
 import org.opens.tanaguru.rules.elementchecker.ElementChecker;
@@ -118,10 +119,8 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
         ElementChecker strictChecker = new TextNotIdenticalToAttributeChecker(
                         getTextElementBuilder(),
                         titleAttrElementBuilder,
-                        strictCheckerSolution,
-                        TestSolution.PASSED,
-                        strictCheckerMsg, 
-                        null,
+                        new ImmutablePair(strictCheckerSolution,strictCheckerMsg),
+                        new ImmutablePair(TestSolution.PASSED,""),
                         getEeAttributeNames());
         ((TextNotIdenticalToAttributeChecker)strictChecker).setStrictEquality(true);
         strictChecker.setTextElementBuilder(linkTextElementBuilder);
@@ -130,10 +129,8 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
         ElementChecker containChecker = new TextNotIdenticalToAttributeChecker(
                         getTextElementBuilder(),
                         titleAttrElementBuilder,
-                        TestSolution.NEED_MORE_INFO,
-                        TestSolution.NEED_MORE_INFO,
-                        RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG, 
-                        RemarkMessageStore.SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG, 
+                        new ImmutablePair(TestSolution.NEED_MORE_INFO,RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG),
+                        new ImmutablePair(TestSolution.NEED_MORE_INFO,RemarkMessageStore.SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG),
                         getEeAttributeNames());
         containChecker.setTextElementBuilder(linkTextElementBuilder);
         addChecker(containChecker);

@@ -40,12 +40,6 @@ import static org.opens.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
 public class IdUnicityChecker extends ElementCheckerImpl {
 
     /**
-     * The message code associated with a processRemark when an id is not unique
-     * on the page
-     */
-    private final String messageCodeOnIdNotUnique;
-    
-    /**
      * Default constructor 
      * 
      * @param messageCodeOnIdNotUnique
@@ -53,7 +47,7 @@ public class IdUnicityChecker extends ElementCheckerImpl {
     public IdUnicityChecker(
             String messageCodeOnIdNotUnique) {
         super();
-        this.messageCodeOnIdNotUnique = messageCodeOnIdNotUnique;
+        this.setFailureMsgCode(messageCodeOnIdNotUnique);
     }
     
     /**
@@ -66,7 +60,7 @@ public class IdUnicityChecker extends ElementCheckerImpl {
             String messageCodeOnIdNotUnique, 
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
-        this.messageCodeOnIdNotUnique = messageCodeOnIdNotUnique;
+        this.setFailureMsgCode(messageCodeOnIdNotUnique);
     }
     
     @Override
@@ -104,18 +98,16 @@ public class IdUnicityChecker extends ElementCheckerImpl {
             if (el.hasAttr(ID_ATTR) && StringUtils.isNotBlank(el.id()) && 
                 getIdPresenceCounter(sspHandler, el.id()) > 1) {
                 testSolution = getFailureSolution();
-                if (StringUtils.isNotBlank(messageCodeOnIdNotUnique)) {
-                    
+                if (StringUtils.isNotBlank(getFailureMsgCode())) {
                     addSourceCodeRemark(
-                        getFailureSolution(), 
-                        el, 
-                        messageCodeOnIdNotUnique);
+                            getFailureSolution(), 
+                            el, 
+                            getFailureMsgCode());
                 }
             }
         }
         
         testSolutionHandler.addTestSolution(testSolution);
-        
     }
 
     /**

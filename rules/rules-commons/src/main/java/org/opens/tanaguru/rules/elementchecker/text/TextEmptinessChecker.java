@@ -23,6 +23,8 @@
 package org.opens.tanaguru.rules.elementchecker.text;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -36,38 +38,8 @@ import org.opens.tanaguru.rules.textbuilder.TextElementBuilder;
  */
 public class TextEmptinessChecker extends ElementCheckerImpl {
 
-    /*
-     * The message code associated with a processRemark when the attribute is
-     * empty on an element
-     */
-    private String messageCodeOnTextEmpty;
-    
-    /* 
-     * The message code associated with a processRemark when the attribute is
-     * empty on an element
-     */
-    private String messageCodeOnTextNotEmpty;
-    
     /* The text element builder. By default, it is a simple Text builder */
-    private TextElementBuilder testableTextBuilder;
-    
-    /**
-     * Constructor. 
-     * Returns FAILED when the text is empty and PASSED when it is not.
-     * 
-     * @param testableTextBuilder
-     * @param messageCodeOnTextEmpty
-     * @param messageCodeOnTextNotEmpty
-     */
-    public TextEmptinessChecker(
-            TextElementBuilder testableTextBuilder,
-            String messageCodeOnTextEmpty, 
-            String messageCodeOnTextNotEmpty) {
-        super();
-        this.testableTextBuilder = testableTextBuilder;
-        this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
-        this.messageCodeOnTextNotEmpty = messageCodeOnTextNotEmpty;
-    }
+    private final TextElementBuilder testableTextBuilder;
     
     /**
      * Constructor.
@@ -85,30 +57,28 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
             String... eeAttributeNameList) {
         super(eeAttributeNameList);
         this.testableTextBuilder = testableTextBuilder;
-        this.messageCodeOnTextEmpty = messageCodeOnTextEmpty;
-        this.messageCodeOnTextNotEmpty = messageCodeOnTextNotEmpty;
+        this.setSuccessMsgCode(messageCodeOnTextNotEmpty);
+        this.setFailureMsgCode(messageCodeOnTextEmpty);
     }
     
     /**
      * Constructor.
      * 
      * @param testableTextBuilder
-     * @param textEmptySolution
-     * @param textNotEmptySolution
-     * @param messageCodeOnTextEmpty
-     * @param messageCodeOnTextNotEmpty
+     * @param textEmptySolutionPair
+     * @param textNotEmptySolutionPair
+     * @param eeAttributeNameList
      */
     public TextEmptinessChecker(
             TextElementBuilder testableTextBuilder,
-            TestSolution textEmptySolution,
-            TestSolution textNotEmptySolution,
-            String messageCodeOnTextEmpty, 
-            String messageCodeOnTextNotEmpty) {
-        this(testableTextBuilder, 
-             messageCodeOnTextEmpty, 
-             messageCodeOnTextNotEmpty);
-        setSuccessSolution(textNotEmptySolution);
-        setFailureSolution(textEmptySolution);
+            Pair<TestSolution,String> textEmptySolutionPair,
+            Pair<TestSolution,String> textNotEmptySolutionPair,
+            String... eeAttributeNameList) {
+        super(
+                textNotEmptySolutionPair, 
+                textEmptySolutionPair, 
+                eeAttributeNameList);
+        this.testableTextBuilder = testableTextBuilder;
     }
     
     /**
@@ -119,7 +89,7 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
      * @param textNotEmptySolution
      * @param messageCodeOnTextEmpty
      * @param messageCodeOnTextNotEmpty
-     * @param eeAttributeNameList 
+     * @param eeAttributeNameList
      */
     public TextEmptinessChecker(
             TextElementBuilder testableTextBuilder,
@@ -129,11 +99,9 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
             String messageCodeOnTextNotEmpty, 
             String... eeAttributeNameList) {
         this(testableTextBuilder, 
-             messageCodeOnTextEmpty, 
-             messageCodeOnTextNotEmpty, 
-             eeAttributeNameList);
-        setSuccessSolution(textNotEmptySolution);
-        setFailureSolution(textEmptySolution);
+             new ImmutablePair(textNotEmptySolution, messageCodeOnTextNotEmpty), 
+             new ImmutablePair(textEmptySolution, messageCodeOnTextEmpty), 
+                eeAttributeNameList);
     }
     
     @Override
@@ -172,20 +140,20 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
             } else if (isElementEmpty(textElement)) {
                 testSolution = setTestSolution(testSolution, 
                                                getFailureSolution());
-                if (StringUtils.isNotBlank(messageCodeOnTextEmpty)) {
+                if (StringUtils.isNotBlank(getFailureMsgCode())) {
                     addSourceCodeRemark(
                             getFailureSolution(), 
                             el, 
-                            messageCodeOnTextEmpty);
+                            getFailureMsgCode());
                 }
             } else {
                 testSolution = setTestSolution(testSolution, 
                                                getSuccessSolution());
-                if (StringUtils.isNotBlank(messageCodeOnTextNotEmpty)) {
+                if (StringUtils.isNotBlank(getSuccessMsgCode())) {
                     addSourceCodeRemark(
                             getSuccessSolution(), 
                             el, 
-                            messageCodeOnTextNotEmpty);
+                            getSuccessMsgCode());
                 }
             }
         }

@@ -22,6 +22,7 @@
 
 package org.opens.tanaguru.rules.elementchecker;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.service.NomenclatureLoaderService;
 
@@ -55,16 +56,6 @@ public abstract class NomenclatureBasedElementChecker extends ElementCheckerImpl
     
     /**
      * Constructor
-     * @param successSolution
-     * @param failureSolution 
-     */
-    public NomenclatureBasedElementChecker(TestSolution successSolution, 
-            TestSolution failureSolution) {
-        super(successSolution, failureSolution);
-    }
-    
-    /**
-     * Constructor
      * @param eeAttributeNameList 
      */
     public NomenclatureBasedElementChecker(
@@ -74,13 +65,15 @@ public abstract class NomenclatureBasedElementChecker extends ElementCheckerImpl
 
     /**
      * Constructor
-     * @param successSolution
-     * @param failureSolution
+     * @param successSolutionPair
+     * @param failureSolutionPair
      * @param eeAttributeNameList 
      */
-    public NomenclatureBasedElementChecker(TestSolution successSolution, 
-            TestSolution failureSolution, String... eeAttributeNameList) {
-        super(successSolution, failureSolution,eeAttributeNameList);
+    public NomenclatureBasedElementChecker(
+             Pair<TestSolution, String> successSolutionPair, 
+            Pair<TestSolution, String> failureSolutionPair,
+            String... eeAttributeNameList) {
+        super(successSolutionPair, failureSolutionPair, eeAttributeNameList);
     }
     
 }

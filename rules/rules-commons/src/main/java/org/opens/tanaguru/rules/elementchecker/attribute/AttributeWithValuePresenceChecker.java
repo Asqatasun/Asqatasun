@@ -22,6 +22,8 @@
 package org.opens.tanaguru.rules.elementchecker.attribute;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.opens.tanaguru.entity.audit.TestSolution;
@@ -46,18 +48,6 @@ public class AttributeWithValuePresenceChecker extends ElementCheckerImpl {
     private final String attributeValue;
 
     /**
-     * The message code associated with a processRemark when the attribute is
-     * detected on an element
-     */
-    private final String messageCodeOnAttrDetected;
-
-    /**
-     * The message code associated with a processRemark when the attribute is
-     * not detected on an element
-     */
-    private final String messageCodeOnAttrNotDetected;
-
-    /**
      * This flag determines whether each source code remark have to be related
      * with the element or the attribute itself. Default is false
      */
@@ -65,6 +55,26 @@ public class AttributeWithValuePresenceChecker extends ElementCheckerImpl {
 
     /**
      *
+     * @param attributeName
+     * @param attributeValue
+     * @param detectedSolutionPair
+     * @param notDetectedSolutionPair
+     * @param eeAttributeNameList
+     */
+    public AttributeWithValuePresenceChecker(
+            String attributeName,
+            String attributeValue,
+            Pair<TestSolution,String> detectedSolutionPair,
+            Pair<TestSolution,String> notDetectedSolutionPair,
+            String... eeAttributeNameList) {
+        super(detectedSolutionPair, notDetectedSolutionPair, eeAttributeNameList);
+        this.attributeName = attributeName;
+        this.attributeValue = attributeValue;
+    }
+    
+    /**
+     * @Deprecated 
+     * Use constructor with Pair instead
      * @param attributeName
      * @param attributeValue
      * @param detectedSolution
@@ -81,14 +91,36 @@ public class AttributeWithValuePresenceChecker extends ElementCheckerImpl {
             String messageCodeOnAttrDetected,
             String messageCodeOnAttrNotDetected,
             String... eeAttributeNameList) {
-        super(detectedSolution, notDetectedSolution, eeAttributeNameList);
-        this.attributeName = attributeName;
-        this.attributeValue = attributeValue;
-
-        this.messageCodeOnAttrDetected = messageCodeOnAttrDetected;
-        this.messageCodeOnAttrNotDetected = messageCodeOnAttrNotDetected;
+        this(
+                attributeName,
+                attributeValue,
+                new ImmutablePair(detectedSolution,messageCodeOnAttrDetected), 
+                new ImmutablePair(notDetectedSolution,messageCodeOnAttrNotDetected),
+                eeAttributeNameList);
     }
 
+        /**
+     *
+     * @param attributeName
+     * @param attributeValue
+     * @param detectedSolutionPair
+     * @param notDetectedSolutionPair
+     * @param createSourceCodeRemarkOnAttribute
+     * @param eeAttributeNameList
+     */
+    public AttributeWithValuePresenceChecker(
+            String attributeName,
+            String attributeValue,
+            Pair<TestSolution,String> detectedSolutionPair,
+            Pair<TestSolution,String> notDetectedSolutionPair,
+            boolean createSourceCodeRemarkOnAttribute,
+            String... eeAttributeNameList) {
+        super(detectedSolutionPair, notDetectedSolutionPair, eeAttributeNameList);
+        this.attributeName = attributeName;
+        this.attributeValue = attributeValue;
+        this.createSourceCodeRemarkOnAttribute = createSourceCodeRemarkOnAttribute;
+    }
+    
     /**
      *
      * @param attributeName
@@ -109,16 +141,15 @@ public class AttributeWithValuePresenceChecker extends ElementCheckerImpl {
             String messageCodeOnAttrNotDetected,
             boolean createSourceCodeRemarkOnAttribute,
             String... eeAttributeNameList) {
-        super(detectedSolution, notDetectedSolution, eeAttributeNameList);
-        this.attributeName = attributeName;
-        this.attributeValue = attributeValue;
-
-        this.messageCodeOnAttrDetected = messageCodeOnAttrDetected;
-        this.messageCodeOnAttrNotDetected = messageCodeOnAttrNotDetected;
-
-        this.createSourceCodeRemarkOnAttribute = createSourceCodeRemarkOnAttribute;
+        this(
+                attributeName,
+                attributeValue,
+                new ImmutablePair(detectedSolution,messageCodeOnAttrDetected), 
+                new ImmutablePair(notDetectedSolution,messageCodeOnAttrNotDetected),
+                createSourceCodeRemarkOnAttribute,
+                eeAttributeNameList);
     }
-
+    
     @Override
     public void doCheck(
             SSPHandler sspHandler,
@@ -153,14 +184,13 @@ public class AttributeWithValuePresenceChecker extends ElementCheckerImpl {
 
                 testSolution = setTestSolution(testSolution, getFailureSolution());
 
-                if (StringUtils.isNotBlank(messageCodeOnAttrNotDetected)) {
-                    createSourceCodeRemark(getFailureSolution(), el, messageCodeOnAttrNotDetected);
-
+                if (StringUtils.isNotBlank(getFailureMsgCode())) {
+                    createSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
                 }
-            } else if (StringUtils.isNotBlank(messageCodeOnAttrDetected)) {
+            } else if (StringUtils.isNotBlank(getSuccessMsgCode())) {
                 testSolution = setTestSolution(testSolution, getSuccessSolution());
 
-                createSourceCodeRemark(getSuccessSolution(), el, messageCodeOnAttrDetected);
+                createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
             }
         }
 
