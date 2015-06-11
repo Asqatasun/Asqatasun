@@ -22,6 +22,7 @@ package org.opens.tanaguru.rules.rgaa22;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
@@ -115,10 +116,8 @@ public class Rgaa22Rule07081 extends AbstractPageRuleWithSelectorAndCheckerImple
         for (Map.Entry<String, ElementHandler> attrElementHandlerMapEntry : attrElementHandlerMap.entrySet()) {
             
             ElementChecker attrEc = new ElementWithAttributePresenceChecker(
-                TestSolution.FAILED, 
-                TestSolution.PASSED,
-                PRESENTATION_ATTR_DETECTED_MSG, 
-                null,
+                new ImmutablePair(TestSolution.FAILED, PRESENTATION_ATTR_DETECTED_MSG),
+                new ImmutablePair(TestSolution.PASSED,""),
                 attrElementHandlerMapEntry.getKey()
             );
             
