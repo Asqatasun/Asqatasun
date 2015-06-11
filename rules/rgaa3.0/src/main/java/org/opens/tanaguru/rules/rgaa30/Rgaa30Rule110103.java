@@ -22,6 +22,7 @@ package org.opens.tanaguru.rules.rgaa30;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -120,18 +121,16 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
 
             /* Check if the form element has a label associated */
             ElementChecker elementPresenceChecker
-                    = new ElementPresenceChecker(TestSolution.FAILED,
-                            TestSolution.PASSED,
-                            FORM_ELEMENT_WITHOUT_LABEL_MSG,
-                            null);
+                    = new ElementPresenceChecker(
+                            new ImmutablePair(TestSolution.FAILED,FORM_ELEMENT_WITHOUT_LABEL_MSG),
+                            new ImmutablePair(TestSolution.PASSED,""));
             elementPresenceChecker.check(sspHandler, inputWithoutLabel, testSolutionHandler);
 
             /* Check if the id attr of the label associated to the form element is unique */
             elementPresenceChecker
-                    = new ElementPresenceChecker(TestSolution.FAILED,
-                            TestSolution.PASSED,
-                            FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG,
-                            null);
+                    = new ElementPresenceChecker(
+                            new ImmutablePair(TestSolution.FAILED,FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG),
+                            new ImmutablePair(TestSolution.PASSED,""));
             elementPresenceChecker.check(sspHandler, notUniqueLabel, testSolutionHandler);
         }
     }

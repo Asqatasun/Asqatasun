@@ -19,6 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.opens.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
@@ -46,14 +47,10 @@ public class Rgaa30Rule010101 extends AbstractPageRuleWithSelectorAndCheckerImpl
                 new SimpleElementSelector(IMG_ELEMENT), 
                 new AttributePresenceChecker(
                         ALT_ATTR, 
-                        // passed when attribute is found
-                        TestSolution.PASSED, 
-                        // failed when attribute is not found
-                        TestSolution.FAILED, 
-                        // no message created when attribute is found
-                        null,
-                        // message associated with element when attribute is not found
-                        ALT_MISSING_MSG, 
+                        // passed when attribute is found, empty message
+                        new ImmutablePair(TestSolution.PASSED, ""),
+                        // failed when attribute is not found, altMissing message
+                        new ImmutablePair(TestSolution.FAILED, ALT_MISSING_MSG),
                         // evidence elements
                         SRC_ATTR)
             );

@@ -20,6 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
@@ -57,12 +58,9 @@ public class Rgaa30Rule010604 extends AbstractMarkerPageRuleImplementation {
                 // checker for elements identified by marker
                 new ElementPresenceChecker(
                     // solution when at least one element is found
-                    TestSolution.NEED_MORE_INFO,
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_DETAILED_DESC_DEFINITION_OF_INFORMATIVE_IMG_MSG),
                     // solution when no element is found
-                    TestSolution.NOT_APPLICABLE,
-                    // manual check message
-                    CHECK_DETAILED_DESC_DEFINITION_OF_INFORMATIVE_IMG_MSG,
-                    null, 
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,""), 
                     // evidence elements
                     ALT_ATTR,
                     SRC_ATTR),
@@ -70,12 +68,9 @@ public class Rgaa30Rule010604 extends AbstractMarkerPageRuleImplementation {
                 // checker for elements not identified by marker
                 new ElementPresenceChecker(
                     // solution when at least one element is found
-                    TestSolution.NEED_MORE_INFO,
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_NATURE_OF_IMAGE_AND_DETAILED_DESC_AVAILABILITY_MSG),
                     // solution when no element is found
-                    TestSolution.NOT_APPLICABLE,
-                    // manual check message
-                    CHECK_NATURE_OF_IMAGE_AND_DETAILED_DESC_AVAILABILITY_MSG,
-                    null, 
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,""), 
                     // evidence elements
                     ALT_ATTR,
                     SRC_ATTR)

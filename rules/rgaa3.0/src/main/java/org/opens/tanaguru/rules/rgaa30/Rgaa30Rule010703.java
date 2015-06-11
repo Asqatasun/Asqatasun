@@ -20,6 +20,7 @@
 
 package org.opens.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
@@ -56,24 +57,18 @@ public class Rgaa30Rule010703 extends AbstractMarkerPageRuleImplementation {
                 // checker for elements identified by marker
                 new ElementPresenceChecker(
                     // solution when at least one element is found
-                    TestSolution.NEED_MORE_INFO,
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG),
                     // solution when no element is found
-                    TestSolution.NOT_APPLICABLE,
-                    // manual check message
-                    CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
-                    null, 
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,""), 
                     // evidence elements
                     SRC_ATTR), 
                 
                 // checker for elements not identified by marker
                 new ElementPresenceChecker(
                     // solution when at least one element is found
-                    TestSolution.NEED_MORE_INFO,
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG),
                     // solution when no element is found
-                    TestSolution.NOT_APPLICABLE,
-                    // manual check message
-                    CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG,
-                    null, 
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,""), 
                     // evidence elements
                     SRC_ATTR)
             );

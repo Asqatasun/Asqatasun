@@ -18,6 +18,7 @@
  * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.opens.tanaguru.rules.rgaa30;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.opens.tanaguru.rules.elementchecker.element.ChildElementPresenceChecker;
@@ -55,13 +56,10 @@ public class Rgaa30Rule050401 extends AbstractMarkerPageRuleImplementation {
                     HtmlElementStore.CAPTION_ELEMENT, 
                     1,
                     // passed when child element is found
-                    TestSolution.PASSED, 
+                    new ImmutablePair(TestSolution.PASSED, ""),
                     // failed when child element is not found
-                    TestSolution.FAILED, 
-                    // no message created when child element is found
-                    null, 
-                    // message associated with element when child element is not found
-                    CAPTION_MISSING_MSG),
+                    new ImmutablePair(TestSolution.FAILED, CAPTION_MISSING_MSG)
+                ),
                 
                 // checker for elements not identified by marker
                 new ChildElementPresenceChecker(
@@ -69,13 +67,10 @@ public class Rgaa30Rule050401 extends AbstractMarkerPageRuleImplementation {
                     // the child element is supposed to appear at least once
                     1,
                     // nmi when attribute is found
-                    TestSolution.NEED_MORE_INFO, 
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_NATURE_OF_TABLE_WITH_CAPTION_MSG),
                     // nmi when attribute is not found
-                    TestSolution.NEED_MORE_INFO, 
-                    // message associated with element when child element is found
-                    CHECK_NATURE_OF_TABLE_WITH_CAPTION_MSG, 
-                    // message associated with element when child element is not found
-                    CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG)
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG)
+                    )
             );
     }
 

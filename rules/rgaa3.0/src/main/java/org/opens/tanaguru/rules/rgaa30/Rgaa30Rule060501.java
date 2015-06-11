@@ -20,6 +20,7 @@
 package org.opens.tanaguru.rules.rgaa30;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.processor.SSPHandler;
@@ -82,10 +83,8 @@ public class Rgaa30Rule060501 extends AbstractPageRuleMarkupImplementation {
             return;
         }
         ElementChecker ec= new ElementPresenceChecker(
-                        TestSolution.FAILED,
-                        TestSolution.PASSED,
-                        EMPTY_LINK_MSG, 
-                        null, 
+                        new ImmutablePair(TestSolution.FAILED,EMPTY_LINK_MSG),
+                        new ImmutablePair(TestSolution.PASSED,""),
                         HREF_ATTR);
         ec.check(sspHandler, emptyLinksHandler, testSolutionHandler);
     }
