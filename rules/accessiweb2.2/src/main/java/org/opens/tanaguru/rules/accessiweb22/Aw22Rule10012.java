@@ -21,6 +21,7 @@ package org.opens.tanaguru.rules.accessiweb22;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.reference.Nomenclature;
@@ -105,10 +106,8 @@ public class Aw22Rule10012 extends AbstractPageRuleMarkupImplementation {
                 attrElementHandlerMap.entrySet()) {
             
             ElementChecker attrEc = new ElementWithAttributePresenceChecker(
-                TestSolution.FAILED, 
-                TestSolution.PASSED,
-                PRESENTATION_ATTR_DETECTED_MSG, 
-                null,
+                new ImmutablePair(TestSolution.FAILED, PRESENTATION_ATTR_DETECTED_MSG),
+                new ImmutablePair(TestSolution.PASSED,""),
                 attrElementHandlerMapEntry.getKey()
             );
             
