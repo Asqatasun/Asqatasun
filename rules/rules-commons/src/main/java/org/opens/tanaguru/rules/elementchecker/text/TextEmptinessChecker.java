@@ -99,8 +99,8 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
             String messageCodeOnTextNotEmpty, 
             String... eeAttributeNameList) {
         this(testableTextBuilder, 
-             new ImmutablePair(textNotEmptySolution, messageCodeOnTextNotEmpty), 
              new ImmutablePair(textEmptySolution, messageCodeOnTextEmpty), 
+             new ImmutablePair(textNotEmptySolution, messageCodeOnTextNotEmpty), 
                 eeAttributeNameList);
     }
     
