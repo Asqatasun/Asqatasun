@@ -44,6 +44,7 @@ Chaque image vectorielle de d&eacute;coration (balise `<svg>`) non porteuse d'in
 #### Set1
 
 All the `<svg>` tags of the page (css selector : `svg`) and with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"DECORATIVE_SVG_MARKER"` parameter.
+That means select all the `<svg>` tags not within an `<a>` tag when these parameters are empty.
 
 #### Set2
 
