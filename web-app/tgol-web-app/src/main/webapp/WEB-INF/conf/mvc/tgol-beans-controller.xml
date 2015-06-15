@@ -71,6 +71,9 @@
                 <entry key="DATA_TABLE_MARKER">
                     <value>data-table</value>
                 </entry>
+                <entry key="COMPLEX_TABLE_MARKER">
+                    <value>complex-table</value>
+                </entry>
                 <entry key="PRESENTATION_TABLE_MARKER">
                     <value>presentation-table</value>
                 </entry>
@@ -147,6 +150,9 @@
                 <entry key="DATA_TABLE_MARKER">
                     <value>data-table</value>
                 </entry>
+                 <entry key="COMPLEX_TABLE_MARKER">
+                    <value>complex-table</value>
+                </entry>
                 <entry key="PRESENTATION_TABLE_MARKER">
                     <value>presentation-table</value>
                 </entry>
@@ -197,6 +203,7 @@
                     <list>
                         <ref bean="dataTableParamBuilder"/>
                         <ref bean="presentationTableParamBuilder"/>
+                        <ref bean="complexTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
                     </list>
@@ -214,6 +221,7 @@
                     <list>
                         <ref bean="dataTableParamBuilder"/>
                         <ref bean="presentationTableParamBuilder"/>
+                        <ref bean="complexTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
                     </list>
@@ -237,6 +245,7 @@
                     <list>
                         <ref bean="dataTableParamBuilder"/>
                         <ref bean="presentationTableParamBuilder"/>
+                        <ref bean="complexTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
                     </list>
@@ -279,6 +288,7 @@
                 <entry key="marker-parameters">
                     <list>
                         <ref bean="dataTableParamBuilder"/>
+                        <ref bean="complexTableParamBuilder"/>
                         <ref bean="presentationTableParamBuilder"/>
                         <ref bean="decorativeImageParamBuilder"/>
                         <ref bean="informativeImageParamBuilder"/>
