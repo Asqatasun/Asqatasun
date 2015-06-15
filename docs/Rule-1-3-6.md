@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in checking for each informative vector image (`<svg>` tag) are implemented correctly and checking each informative vector image have a `"desc"` tags or a `aria-label` attribute with relevante alternative.
 
 ## Business description
 
@@ -113,21 +113,21 @@ For each occurrence of Set3 that return false-result of Test3, Test5 and Test7, 
 
 For each occurrence of Set4 that return false-result of Test4, Test6 and Test8, raise a MessageC
 
-##### MessageA : Informative svg without role img attribute 
+##### MessageA : Informative `svg` without role `img` attribute 
 
 -    code : InformativeSvgWithoutRoleImgAttribute
 -    status: Failed
 -    parameter : tag name, Snippet
 -    present in source : yes
 
-##### MessageB : Suspected informative svg without role img attribute 
+##### MessageB : Suspected informative `svg` without role `img` attribute 
 
 -    code : SuspectedInformativeSvgWithoutRoleImgAttribute
 -    status: NMI
 -    parameter : tag name, Snippet
 -    present in source : yes
 
-##### MessageC : Suspected informative svg without alternative 
+##### MessageC : Suspected informative `svg` without alternative 
 
 -    code : SuspectedInformativeSvgWithoutAlternative
 -    status: NMI
@@ -152,14 +152,14 @@ For each occurrence of Set3 that return a true-result of Test3, Test5 or Test7, 
 
 For each occurrence of Set4 that return a true-result of Test4, Test6 or Test8, raise a MessageE
 
-##### MessageD : Checked alternative of informative svg 
+##### MessageD : Checked alternative of informative `svg` 
 
 -    code : CheckedAlternativeOfInformativeSvg
 -    status: NMI
 -    parameter : tag name, Snippet
 -    present in source : yes
 
-##### MessageE : Checked alternative of suspected informative svg 
+##### MessageE : Checked alternative of suspected informative `svg` 
 
 -    code : CheckedAlternativeOfSuspectedInformativeSvg
 -    status: NMI
