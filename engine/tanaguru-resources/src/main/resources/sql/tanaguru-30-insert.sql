@@ -25,6 +25,8 @@ INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_El
 (42, 'INCLUSION_REGEXP', 1, '', 'inclusion regex'),
 (43, 'SCREEN_WIDTH', 1, '', 'screen width'),
 (44, 'SCREEN_HEIGHT', 1, '', 'screen height');
+(37, 'COMPLEX_TABLE_MARKER', 3, 'Complex table marker', 'Correspond to the attribute \"id\", \"class\" or \"role\" of the presentation tables');
+
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (1, '50000', b'0'),
@@ -47,5 +49,7 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (42, '', b'1'),
 (43, '1920', b'1'),
 (44, '1080', b'1'); 
+(37, '', b'1'),
+
 
 SET foreign_key_checks=1;
