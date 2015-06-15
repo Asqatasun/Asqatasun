@@ -38,11 +38,9 @@ Pour chaque image bitmap de d&eacute;coration (balise `canvas`), le contenu entr
 
 #### Set1
 All the `<canvas>` tags of the page (css selector : `canvas`) and with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"DECORATIVE_CANVAS_MARKER"` parameter.
-That means select all the `<canvas>` tags not within an `<a>` tag when these parameters are empty.
 
 #### Set2
 All the `<canvas>` tags of the page (css selector : `canvas`) that don't have an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"DECORATIVE_CANVAS_MARKER"` parameter or the `"INFORMATIVE_CANVAS_MARKER"` parameter. 
-That means select all the `<canvas>` tags not within an `<a>` tag when these parameters are empty.
 
 ### Process
 
