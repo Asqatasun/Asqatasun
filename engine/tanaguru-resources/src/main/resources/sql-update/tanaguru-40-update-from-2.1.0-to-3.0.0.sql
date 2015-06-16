@@ -184,16 +184,19 @@ CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
-INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
-(38, 'DECORATIVE_IMAGE_MARKER', 3, 'Decorative image HTML marker (id or class)', 'Decorative image marker'),
-(39, 'INFORMATIVE_IMAGE_MARKER', 3, 'Informative image HTML marker (id or class)', 'Informative image marker');
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Cd_Parameter_Element`, `Long_Label`, `Short_Label`) VALUES
+('DECORATIVE_IMAGE_MARKER', 'Decorative image HTML marker (id or class)', 'Decorative image marker'),
+('INFORMATIVE_IMAGE_MARKER', 'Informative image HTML marker (id or class)', 'Informative image marker');
+
+UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Family` FROM `PARAMETER_FAMILY` WHERE `Cd_Parameter_Family` LIKE 'RULES') WHERE `Cd_Parameter_Element` LIKE 'DECORATIVE_IMAGE_MARKER';
+UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Family` FROM `PARAMETER_FAMILY` WHERE `Cd_Parameter_Family` LIKE 'RULES') WHERE `Cd_Parameter_Element` LIKE 'INFORMATIVE_IMAGE_MARKER';
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
-(5, 'AW22;Ar', b'1'),
-(5, 'AW22;Bz', b'0'),
-(5, 'AW22;Or', b'0'),
-(38, '', b'1'),
-(39, '', b'1');
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'LEVEL'), 'AW22;Ar', b'1'),
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'LEVEL'), 'AW22;Bz', b'0'),
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'LEVEL'), 'AW22;Or', b'0'),
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'DECORATIVE_IMAGE_MARKER'), '', b'1'),
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'INFORMATIVE_IMAGE_MARKER'), '', b'1');
 
 UPDATE `PARAMETER` SET `Is_Default` = b'0' WHERE `Parameter_Value`='AW21;Ar';
 
@@ -212,14 +215,17 @@ ALTER IGNORE TABLE CONTENT MODIFY `Adapted_Content` longtext DEFAULT NULL;
 ALTER IGNORE TABLE CONTENT MODIFY `Source` longtext DEFAULT NULL;
 ALTER TABLE WEB_RESOURCE DROP `Mark`;
 
-INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
-(40, 'ALTERNATIVE_CONTRAST_MECHANISM', 3, 'The page embeds a mechanism that displays text with a correct ratio', 'Alternative Contrast Mechanism'),
-(41, 'CONSIDER_COOKIES',1,'consider cookies','consider cookies while crawling');
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Cd_Parameter_Element`, `Long_Label`, `Short_Label`) VALUES
+('ALTERNATIVE_CONTRAST_MECHANISM', 'The page embeds a mechanism that displays text with a correct ratio', 'Alternative Contrast Mechanism'),
+('CONSIDER_COOKIES','consider cookies','consider cookies while crawling');
+
+UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Family` FROM `PARAMETER_FAMILY` WHERE `Cd_Parameter_Family` LIKE 'CRAWL') WHERE `Cd_Parameter_Element` LIKE 'CONSIDER_COOKIES';
+UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Family` FROM `PARAMETER_FAMILY` WHERE `Cd_Parameter_Family` LIKE 'RULES') WHERE `Cd_Parameter_Element` LIKE 'ALTERNATIVE_CONTRAST_MECHANISM';
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
-(40, 'true', b'0'), 
-(40, 'false', b'1'),
-(41, 'true', b'1'),
-(41, 'false', b'0');
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'ALTERNATIVE_CONTRAST_MECHANISM'), 'true', b'0'), 
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'ALTERNATIVE_CONTRAST_MECHANISM'), 'false', b'1'),
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'CONSIDER_COOKIES'), 'true', b'1'),
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'CONSIDER_COOKIES'), 'false', b'0');
 
 SET foreign_key_checks=1;
