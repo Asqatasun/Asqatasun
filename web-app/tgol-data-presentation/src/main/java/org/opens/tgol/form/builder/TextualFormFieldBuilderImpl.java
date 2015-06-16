@@ -21,6 +21,7 @@
  */
 package org.opens.tgol.form.builder;
 
+import org.apache.commons.lang3.StringUtils;
 import org.opens.tgol.form.TextualFormField;
 import org.opens.tgol.form.TextualFormFieldImpl;
 
@@ -41,7 +42,7 @@ public class TextualFormFieldBuilderImpl extends FormFieldBuilderImpl
         formField.setErrorI18nKey(getErrorI18nKey());
         formField.setI18nKey(getI18nKey());
         formField.setValue(getValue());
-        if (validationRegexp != null && !validationRegexp.isEmpty()) {
+        if (StringUtils.isNotBlank(validationRegexp)) {
             formField.setValidationRegexp(validationRegexp);
         }
         return formField;

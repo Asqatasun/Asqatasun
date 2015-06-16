@@ -59,7 +59,7 @@ public class CheckboxFormFieldBuilderImpl extends FormFieldBuilderImpl
 
     @Override
     public List<CheckboxElement> getCheckboxElementList() {
-        List<CheckboxElement> checkboxElementList = new ArrayList<CheckboxElement>();
+        List<CheckboxElement> checkboxElementList = new ArrayList<>();
         for (CheckboxElementBuilder ceb : checkboxElementBuilderList) {
             checkboxElementList.add((CheckboxElement)ceb.build());
         }

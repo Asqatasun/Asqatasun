@@ -67,9 +67,9 @@ public class SelectFormFieldBuilderImpl extends FormFieldBuilderImpl
     
     @Override
     public Map<String, List<SelectElement>> getSelectElementMap() {
-        Map<String, List<SelectElement>> selectElementMap = new TreeMap<String, List<SelectElement>>();
+        Map<String, List<SelectElement>> selectElementMap = new TreeMap<>();
         for (Map.Entry<String, List<SelectElementBuilder>> entry : selectElementBuilderMap.entrySet()) {
-            List<SelectElement> selectElementList = new LinkedList<SelectElement>();
+            List<SelectElement> selectElementList = new LinkedList<>();
             for (SelectElementBuilder seb : entry.getValue()) {
                 selectElementList.add((SelectElement)seb.build());
             }
