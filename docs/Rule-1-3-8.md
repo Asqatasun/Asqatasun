@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in checking for each informative bitmap image (`canvas` tag) with an alternative are compatible with assistive Technology.
 
 ## Business description
 
@@ -36,22 +36,42 @@ Pour chaque image bitmap porteuse d'information (balise `canvas`) et poss&eacute
 
 ### Selection
 
+#### Set1
+
+All the `<canvas>` tags of the page (css selector : `canvas`) and with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"INFORMATIVE_CANVAS_MARKER"` parameter and a text between `<canvas>` tags
+
+#### Set2
+
+All the `<canvas>` tags of the page (css selector : `canvas`) that don't have an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"INFORMATIVE_CANVAS_MARKER"` parameter or the `"DECORATIVE_CANVAS_MARKER"` parameter and a text between `<canvas>` tags 
+
 ### Process
+
+#### Messages
+
+For each occurrence of Set1, raise a MessageA
+
+For each occurrence of Set2, raise a MessageB
+
+##### MessageA : Checked assistive technologie for informative `canvas` 
+
+-    code : CheckedAssistiveTechnologieForInformativeCanvas
+-    status: NMI
+-    parameter : tag name, Snippet
+-    present in source : yes
+
+##### MessageB : Checked assistive technologie for suspected informative `canvas` 
+
+-    code : CheckedAssistiveTechnologieForSuspectedInformativeCanvas
+-    status: NMI
+-    parameter : tag name, Snippet
+-    present in source : yes
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
 #### Not Applicable
+
+The page has no `<canvas>` tag (Set1 and Set2 are empty)
 
 #### Pre-qualified
 
-#### No Tested 
-
-
-
-
-
-
+In all other cases
