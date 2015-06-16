@@ -93,19 +93,19 @@ For each element of Set4, check the presence of the `aria-label` attribute and t
 
 ##### Test5 
 
-For each occurrence of true-result of Test3, check the presence of a `title` attribute and that its content is same as the content of the `aria-label` attribute
+For each element of Set3, check the presence of a `desc` tag children of the `svg` tag and that its content is same as the content of the `aria-label` attribute
 
 ##### Test6 
 
-For each occurrence of true-result of Test4, check the presence of a `title` attribute and that its content is same as the content of the `aria-label` attribute
+For each element of Set4, check the presence of a `desc` tag children of the `svg` tag and that its content is same as the content of the `aria-label` attribute
 
 ##### Test7 
 
-For each element of Set3, check the presence of a `desc` tag children of the `svg` tag and that its content is same as the content of the `aria-label` attribute
+For each occurrence of Set3 that return true-result of Test3 or Test5, check the presence of a `title` attribute and that its content is same as the content of the `aria-label` attribute or the `desc` tag
 
 ##### Test8 
 
-For each element of Set4, check the presence of a `desc` tag children of the `svg` tag and that its content is same as the content of the `aria-label` attribute
+For each occurrence of Set4 that return true-result of Test4 or Test6, check the presence of a `title` attribute and that its content is same as the content of the `aria-label` attribute or the `desc` tag
 
 #### Messages
 
