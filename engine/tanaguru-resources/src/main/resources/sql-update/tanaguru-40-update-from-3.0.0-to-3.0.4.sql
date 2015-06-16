@@ -58,11 +58,13 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
-(42, 'INCLUSION_REGEXP', 1, 'Regulard expression to crawl on a specific folder', 'inclusion regex');
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Cd_Parameter_Element`, `Long_Label`, `Short_Label`) VALUES
+('INCLUSION_REGEXP', 'Regular expression to crawl on a specific folder', 'inclusion regex');
 
-INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
-(42, '', b'1');
+UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Family` FROM `PARAMETER_FAMILY` WHERE `Cd_Parameter_Family` LIKE 'CRAWL') WHERE `Cd_Parameter_Element` LIKE 'INCLUSION_REGEXP';
+
+INSERT IGNORE INTO `PARAMETER` (`Parameter_Value`, `Is_Default`) VALUES
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'INCLUSION_REGEXP'), '', b'1');
 
 ALTER IGNORE TABLE REFERENCE ADD `Id_Default_Level` bigint(20) DEFAULT 2 AFTER `Url`;
 
@@ -91,12 +93,15 @@ UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AAA', ';LEVEL_
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';AA', ';LEVEL_2');
 UPDATE PARAMETER SET Parameter_Value = REPLACE(Parameter_Value, ';A', ';LEVEL_1');
 
-INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Id_Parameter_Element`, `Cd_Parameter_Element`, `Id_Parameter_Family`, `Long_Label`, `Short_Label`) VALUES
-(43, 'SCREEN_WIDTH', 1, '', 'screen width'),
-(44, 'SCREEN_HEIGHT', 1, '', 'screen height');
+INSERT IGNORE INTO `PARAMETER_ELEMENT` (`Cd_Parameter_Element`, `Long_Label`, `Short_Label`) VALUES
+('SCREEN_WIDTH', '', 'screen width'),
+('SCREEN_HEIGHT', '', 'screen height');
+
+UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Family` FROM `PARAMETER_FAMILY` WHERE `Cd_Parameter_Family` LIKE 'GENERAL') WHERE `Cd_Parameter_Element` LIKE 'SCREEN_WIDTH';
+UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Family` FROM `PARAMETER_FAMILY` WHERE `Cd_Parameter_Family` LIKE 'GENERAL') WHERE `Cd_Parameter_Element` LIKE 'SCREEN_HEIGHT';
 
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
-(43, '1680', b'1'),
-(44, '1050', b'1'); 
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'SCREEN_WIDTH'), '1920', b'1'),
+((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'SCREEN_HEIGHT'), '1080', b'1');
 
 SET foreign_key_checks=1;
