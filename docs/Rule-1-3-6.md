@@ -59,14 +59,6 @@ All the elements of set1 with a `"role"` attribute with value `"img"`
 
 All the elements of set2 with a `"role"` attribute with value `"img"` 
 
-#### Set5
-
-All the `<desc>` tags who are the children of the Set3 elements 
-
-#### Set6
-
-All the `<desc>` tags who are the children of the Set4 elements 
-
 ### Process
 
 #### Tests
