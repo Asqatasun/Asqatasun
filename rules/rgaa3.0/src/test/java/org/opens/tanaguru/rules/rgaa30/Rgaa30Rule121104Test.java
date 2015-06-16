@@ -19,8 +19,13 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import org.opens.tanaguru.entity.audit.IndefiniteResult;
 import org.opens.tanaguru.entity.audit.TestSolution;
 import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.opens.tanaguru.entity.subject.Page;
+import org.opens.tanaguru.entity.subject.Site;
 import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
@@ -44,63 +49,43 @@ public class Rgaa30Rule121104Test extends Rgaa30RuleImplementationTestCase {
                 "org.opens.tanaguru.rules.rgaa30.Rgaa30Rule121104");
     }
 
-    @Override
+   @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa30.Test.12.11.4-1Passed-01");
-//        addWebResource("Rgaa30.Test.12.11.4-2Failed-01");
-        addWebResource("Rgaa30.Test.12.11.4-3NMI-01");
-//        addWebResource("Rgaa30.Test.12.11.4-4NA-01");
+        getWebResourceMap().put("Rgaa30.Test.12.11.4-4NA-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule120601/Rgaa30.Test.12.11.4-3NMI-01.html"));
+
+        Site site = getWebResourceFactory().createSite("file:Site-NotTested");
+        getWebResourceMap().put("Rgaa30.Test.12.11.4-5NT-01", site);
+
+        Page page = getWebResourceFactory().createPage(getTestcasesFilePath() +
+                "rgaa30/Rgaa30Rule120601/Rgaa30.Test.12.11.4-3NMI-01.html");
+        site.addChild(page);
+        getWebResourceMap().put("Rgaa30.Test.12.11.4-5NT-01-page1",page);
+
+        page = getWebResourceFactory().createPage(getTestcasesFilePath() +
+                "rgaa30/Rgaa30Rule120601/Rgaa30.Test.12.11.4-3NMI-01.html");
+        site.addChild(page);
+        getWebResourceMap().put("Rgaa30.Test.12.11.4-5NT-01-page1",page);
     }
 
     @Override
     protected void setProcess() {
-        //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa30.Test.12.11.4-1Passed-01"), 1);
+        ProcessResult pr = processPageTest("Rgaa30.Test.12.11.4-4NA-01");
+        assertTrue(pr instanceof IndefiniteResult);
+        assertEquals(getWebResourceMap().get("Rgaa30.Test.12.11.4-4NA-01"),pr.getSubject());
+        assertEquals("mock-result", pr.getValue());
+        
+        process("Rgaa30.Test.12.11.4-5NT-01");
 
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa30.Test.12.11.4-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
-        //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.12.11.4-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-
-        //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.12.11.4-4NA-01"));
     }
 
     @Override
     protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa30.Test.12.11.4-4NA-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa30.Test.12.11.4-3NMI-01").getValue());
+                consolidate("Rgaa30.Test.12.11.4-5NT-01").getValue());
     }
 
 }

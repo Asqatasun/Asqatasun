@@ -19,7 +19,7 @@
  */
 package org.opens.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.opens.tanaguru.ruleimplementation.AbstractNotTestedSiteRuleImplementation;
 
 /**
  * Implementation of the rule 12.11.4 of the referential Rgaa 3.0.
@@ -28,7 +28,7 @@ import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-12-11-4"> 12.11.4 rule specification</a>
  */
 
-public class Rgaa30Rule121104 extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule121104 extends AbstractNotTestedSiteRuleImplementation {
 
     /**
      * Default constructor
