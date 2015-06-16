@@ -52,7 +52,7 @@ public class TextualFormFieldImpl extends FormFieldImpl implements TextualFormFi
 
     @Override
     public boolean checkParameters(String value) {
-        return (checkerPattern == null || checkerPattern.matcher(value).matches())?true:false;
+        return (checkerPattern == null || checkerPattern.matcher(value).matches());
     }
 
 }

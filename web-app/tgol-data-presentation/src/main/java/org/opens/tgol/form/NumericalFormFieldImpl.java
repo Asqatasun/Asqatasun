@@ -52,7 +52,7 @@ public class NumericalFormFieldImpl extends FormFieldImpl implements NumericalFo
     @Override
     public boolean checkParameters(String value) {
         int intValue = Integer.valueOf(value);
-        return (maxValue==0 || (intValue>=minValue && intValue<=maxValue)) ? true:false;
+        return (maxValue==0 || (intValue>=minValue && intValue<=maxValue));
     }
 
 }
