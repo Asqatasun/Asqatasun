@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in checking for each informative vector image (<svg> tag) with an alternative are compatible with assistive Technology.
 
 ## Business description
 
@@ -36,22 +36,42 @@ Pour chaque image vectorielle porteuse d'information (balise `svg`) et poss&eacu
 
 ### Selection
 
+#### Set1
+
+All the `<svg>` tags of the page (css selector : `svg`), with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"INFORMATIVE_SVG_MARKER"` parameter, with a `"role"` attribute with value `"img"` and with a `aria-label` attribute not null or a `desc` tag children not null
+
+#### Set2
+
+All the `<svg>` tags of the page (css selector : `svg`) that don't have an `id` attribute or a `class` attribute that matches one the values set by the use through the `"INFORMATIVE_SVG_MARKER"` parameter or the `"DECORATIVE_SVG_MARKER"` parameter, with a `"role"` attribute with value `"img"` and with a `aria-label` attribute not null or a `desc` tag children not null
+
 ### Process
+
+#### Messages
+
+For each occurrence of Set1, raise a MessageA
+
+For each occurrence of Set2, raise a MessageB
+
+##### MessageA : Checked assistive technologie for informative `svg` 
+
+-    code : CheckedAssistiveTechnologieForInformativeSvg
+-    status: NMI
+-    parameter : tag name, Snippet
+-    present in source : yes
+
+##### MessageB : Checked assistive technologie for suspected informative `svg` 
+
+-    code : CheckedAssistiveTechnologieForSuspectedInformativeSvg
+-    status: NMI
+-    parameter : tag name, Snippet
+-    present in source : yes
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
 #### Not Applicable
+
+The page has no `<svg>` tag (Set1 and Set2 are empty)
 
 #### Pre-qualified
 
-#### No Tested 
-
-
-
-
-
-
+In all other cases
