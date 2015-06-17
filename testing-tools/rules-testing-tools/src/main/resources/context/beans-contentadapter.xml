@@ -3,19 +3,19 @@
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="contentsAdapterFactory" class="org.opens.tanaguru.contentadapter.ContentsAdapterFactoryImpl"/>
-    <bean id="htmlCleanerFactory" class="org.opens.tanaguru.rules.test.HTMLCleanerFactoryImpl"/>
-    <bean id="htmlParserFactory" class="org.opens.tanaguru.contentadapter.html.HTMLParserFactoryImpl"/>
-    <bean id="urlIdentifierFactory" class="org.opens.tanaguru.contentadapter.util.URLIdentifierFactoryImpl"/>
-    <bean id="externalCSSRetriever" class="org.opens.tanaguru.rules.test.ExternalCSSRetrieverMock"/>
+    <bean id="contentsAdapterFactory" class="org.tanaguru.contentadapter.ContentsAdapterFactoryImpl"/>
+    <bean id="htmlCleanerFactory" class="org.tanaguru.rules.test.HTMLCleanerFactoryImpl"/>
+    <bean id="htmlParserFactory" class="org.tanaguru.contentadapter.html.HTMLParserFactoryImpl"/>
+    <bean id="urlIdentifierFactory" class="org.tanaguru.contentadapter.util.URLIdentifierFactoryImpl"/>
+    <bean id="externalCSSRetriever" class="org.tanaguru.rules.test.ExternalCSSRetrieverMock"/>
 
-    <bean id="cssContentAdapterFactory" class="org.opens.tanaguru.contentadapter.css.CSSContentAdapterFactoryImpl">
+    <bean id="cssContentAdapterFactory" class="org.tanaguru.contentadapter.css.CSSContentAdapterFactoryImpl">
         <property name="externalCSSRetriever">
             <ref local="externalCSSRetriever"/>
         </property>
     </bean>
 
-    <bean id="contentAdapterService" class="org.opens.tanaguru.service.ContentAdapterServiceImpl">
+    <bean id="contentAdapterService" class="org.tanaguru.service.ContentAdapterServiceImpl">
         <property name="writeCleanHtmlInFile" value="false"/>
         <property name="tempFolderRootPath" value="/tmp"/>
         

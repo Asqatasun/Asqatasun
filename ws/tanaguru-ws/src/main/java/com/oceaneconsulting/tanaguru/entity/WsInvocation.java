@@ -1,5 +1,5 @@
 package com.oceaneconsulting.tanaguru.entity;
-import org.opens.tanaguru.sdk.entity.Entity;
+import org.tanaguru.sdk.entity.Entity;
 
 import com.oceaneconsulting.tanaguru.entity.impl.WsUserImpl;
 

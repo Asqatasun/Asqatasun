@@ -4,7 +4,7 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="scenarioLoaderFactory" class="org.opens.tanaguru.scenarioloader.ScenarioLoaderFactoryImpl">
+    <bean id="scenarioLoaderFactory" class="org.tanaguru.scenarioloader.ScenarioLoaderFactoryImpl">
         <property name="jsScriptMap">
             <map>
                 <entry key="colorExtractor" value="/js/colorExtractor_nativeJs.js"/>
@@ -18,11 +18,11 @@
         </property>
     </bean>
 
-    <bean id="scenarioLoaderService" class="org.opens.tanaguru.service.ScenarioLoaderServiceImpl"/>
+    <bean id="scenarioLoaderService" class="org.tanaguru.service.ScenarioLoaderServiceImpl"/>
 
-    <bean id="profileFactory" class="org.opens.tanaguru.sebuilder.tools.ProfileFactory" factory-method="getInstance"/>
+    <bean id="profileFactory" class="org.tanaguru.sebuilder.tools.ProfileFactory" factory-method="getInstance"/>
 
-<!--    <bean id="firefoxDriverPoolabelObjectFactory" class="org.opens.tanaguru.sebuilder.tools.FirefoxDriverPoolableObjectFactory">
+<!--    <bean id="firefoxDriverPoolabelObjectFactory" class="org.tanaguru.sebuilder.tools.FirefoxDriverPoolableObjectFactory">
         <property name="implicitelyWaitDriverTimeout">
             <value>30</value>
         </property>
@@ -31,7 +31,7 @@
         </property>
     </bean>
 
-    <bean id="firefoxDriverObjectPool" class="org.opens.tanaguru.sebuilder.tools.FirefoxDriverObjectPool">
+    <bean id="firefoxDriverObjectPool" class="org.tanaguru.sebuilder.tools.FirefoxDriverObjectPool">
         <property name="maxActive">
             <value>10</value>
         </property>

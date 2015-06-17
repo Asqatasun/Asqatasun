@@ -242,7 +242,7 @@
                     </div>
                 </c:if>
                 <div class="span16 tg-table-container">
-                    <display:table id="page-list-${param.status}" name="pageList" sort="external" defaultsort="2" pagesize="${pageList.objectsPerPage}" partialList="true" size="${pageList.fullListSize}" requestURI="" class="tg-table" decorator="org.opens.tgol.report.pagination.PageListWrapper">
+                    <display:table id="page-list-${param.status}" name="pageList" sort="external" defaultsort="2" pagesize="${pageList.objectsPerPage}" partialList="true" size="${pageList.fullListSize}" requestURI="" class="tg-table" decorator="org.tanaguru.report.pagination.PageListWrapper">
                         <c:choose>
                             <c:when test="${pageList.objectsPerPage >= 25}">
                                 <display:setProperty name="paging.banner.placement" value="both" />

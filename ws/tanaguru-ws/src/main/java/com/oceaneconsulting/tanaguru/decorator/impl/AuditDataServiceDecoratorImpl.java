@@ -1,24 +1,24 @@
 package com.oceaneconsulting.tanaguru.decorator.impl;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.oceaneconsulting.tanaguru.decorator.AuditDataServiceDecorator;
 import java.util.Collection;
 import java.util.Date;
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
-import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
+import org.tanaguru.entity.audit.Audit;
+import org.tanaguru.entity.audit.AuditStatus;
+import org.tanaguru.entity.audit.EvidenceElement;
+import org.tanaguru.entity.audit.ProcessRemark;
+import org.tanaguru.entity.audit.ProcessResult;
+import org.tanaguru.entity.parameterization.Parameter;
+import org.tanaguru.entity.service.audit.AuditDataService;
 import org.springframework.stereotype.Service;
 
 /**
  * This class wrap
- * {@link org.opens.tanaguru.entity.service.subject.WebResourceDataService}
+ * {@link org.tanaguru.entity.service.subject.WebResourceDataService}
  * class. It enlarge default webresource data service by adding specific
  * statistics.
  *

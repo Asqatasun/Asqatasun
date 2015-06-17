@@ -3,8 +3,8 @@ package com.oceaneconsulting.tanaguru.dao;
 
 import java.util.List;
 
-import org.opens.tanaguru.entity.statistics.WebResourceStatistics;
-import org.opens.tanaguru.sdk.entity.dao.GenericDAO;
+import org.tanaguru.entity.statistics.WebResourceStatistics;
+import org.tanaguru.sdk.entity.dao.GenericDAO;
 
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;

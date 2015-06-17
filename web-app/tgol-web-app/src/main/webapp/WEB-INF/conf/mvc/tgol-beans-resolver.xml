@@ -17,11 +17,11 @@
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <prop key="org.opens.tgol.exception.ForbiddenUserException">access-denied</prop>
-                <prop key="org.opens.tgol.exception.ForbiddenPageException">access-denied</prop>
-                <prop key="org.opens.tgol.exception.ForbiddenAuditException">access-denied</prop>
-                <prop key="org.opens.tgol.exception.LostInSpaceException">oups</prop>
-                <prop key="org.opens.tgol.exception.KrashAuditException">oups</prop>
+                <prop key="org.tanaguru.exception.ForbiddenUserException">access-denied</prop>
+                <prop key="org.tanaguru.exception.ForbiddenPageException">access-denied</prop>
+                <prop key="org.tanaguru.exception.ForbiddenAuditException">access-denied</prop>
+                <prop key="org.tanaguru.exception.LostInSpaceException">oups</prop>
+                <prop key="org.tanaguru.exception.KrashAuditException">oups</prop>
                 <prop key="org.springframework.web.bind.MissingServletRequestParameterException">access-denied</prop>
                 <prop key="org.springframework.web.method.annotation.support.MethodArgumentNotValidException">access-denied</prop>
             </props>
@@ -49,7 +49,7 @@
         extends the DefaultHandlerExceptionResolver. So we need to instanciate manually
         the two other ones
     -->
-    <bean class="org.opens.tgol.exception.TgolHandlerExceptionResolver"/>
+    <bean class="org.tanaguru.exception.TgolHandlerExceptionResolver"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver"/>
     <bean class="org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver"/>
 

@@ -1,7 +1,7 @@
 package com.oceaneconsulting.tanaguru.decorator;
 
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.service.audit.AuditDataService;
+import org.tanaguru.entity.audit.Audit;
+import org.tanaguru.entity.service.audit.AuditDataService;
 
 /**
  * This interface decorates the AuditDataService interface to expose the 

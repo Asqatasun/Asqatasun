@@ -1,6 +1,6 @@
 package com.oceaneconsulting.tanaguru.service.impl;
 
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -9,28 +9,28 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <!-- KEY RETRIEVERS -->
-    <bean id="themeKeyRetriever" class="org.opens.tgol.report.expression.retriever.ThemeKeyRetrieverImpl">
+    <bean id="themeKeyRetriever" class="org.tanaguru.report.expression.retriever.ThemeKeyRetrieverImpl">
         <property name="fieldName" value="test"/>
     </bean>
 
-    <bean id="criterionKeyRetriever" class="org.opens.tgol.report.expression.retriever.CriterionKeyRetrieverImpl">
+    <bean id="criterionKeyRetriever" class="org.tanaguru.report.expression.retriever.CriterionKeyRetrieverImpl">
         <property name="fieldName" value="test"/>
     </bean>
 
-    <bean id="testKeyRetriever" class="org.opens.tgol.report.expression.retriever.TestKeyRetrieverImpl">
+    <bean id="testKeyRetriever" class="org.tanaguru.report.expression.retriever.TestKeyRetrieverImpl">
         <property name="fieldName" value="test"/>
     </bean>
 
-    <bean id="levelKeyRetriever" class="org.opens.tgol.report.expression.retriever.DefaultKeyRetrieverImpl">
+    <bean id="levelKeyRetriever" class="org.tanaguru.report.expression.retriever.DefaultKeyRetrieverImpl">
         <property name="fieldName" value="levelCode"/>
     </bean>
 
-    <bean id="resultKeyRetriever" class="org.opens.tgol.report.expression.retriever.DefaultKeyRetrieverImpl">
+    <bean id="resultKeyRetriever" class="org.tanaguru.report.expression.retriever.DefaultKeyRetrieverImpl">
         <property name="fieldName" value="resultCode"/>
     </bean>
 
     <!-- I18N EXPRESSIONS -->
-    <bean id="themeExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
+    <bean id="themeExpressionBuilder" class="org.tanaguru.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
                 <value>i18n/theme-rgaa22-I18N</value>
@@ -42,12 +42,12 @@
         <property name="keyRetriever" ref="themeKeyRetriever"/>
     </bean>
 
-    <bean id="criterionExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
+    <bean id="criterionExpressionBuilder" class="org.tanaguru.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="escapeHtml" value="false"/>
         <property name="keyRetriever" ref="criterionKeyRetriever"/>
     </bean>
     
-    <bean id="testExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
+    <bean id="testExpressionBuilder" class="org.tanaguru.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
                 <value>i18n/rule-rgaa22-I18N</value>
@@ -59,7 +59,7 @@
         <property name="keyRetriever" ref="testKeyRetriever"/>
     </bean>
 
-    <bean id="levelExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
+    <bean id="levelExpressionBuilder" class="org.tanaguru.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
                 <value>i18n/referential-aw22-I18N</value>
@@ -71,7 +71,7 @@
         <property name="keyRetriever" ref="levelKeyRetriever"/>
     </bean>
 
-    <bean id="resultExpressionBuilder" class="org.opens.tgol.report.expression.builder.I18nExpressionBuilderImpl">
+    <bean id="resultExpressionBuilder" class="org.tanaguru.report.expression.builder.I18nExpressionBuilderImpl">
         <property name="bundleNameList">
             <list>
                 <value>i18n/rule-result-I18N</value>
@@ -81,88 +81,88 @@
         <property name="keyRetriever" ref="resultKeyRetriever"/>
     </bean>
 
-    <bean id="resultDetailsExpressionBuilder" class="org.opens.tgol.report.expression.builder.ProcessRemarkCsvExtractorExpressionBuilderImpl"/>
+    <bean id="resultDetailsExpressionBuilder" class="org.tanaguru.report.expression.builder.ProcessRemarkCsvExtractorExpressionBuilderImpl"/>
 
-<!--    <bean id="passedCustomExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultCounterExpressionBuilderImpl">
+<!--    <bean id="passedCustomExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultCounterExpressionBuilderImpl">
         <property name="resultType" value="0"/>  ResultCounterExpression.PASSED_INDEX=0
     </bean>
 
-    <bean id="failedCustomExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultCounterExpressionBuilderImpl">
+    <bean id="failedCustomExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultCounterExpressionBuilderImpl">
         <property name="resultType" value="1"/>  ResultCounterExpression.FAILED_INDEX=1
     </bean>
 
-    <bean id="suspectedPassedCustomExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultCounterExpressionBuilderImpl">
+    <bean id="suspectedPassedCustomExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultCounterExpressionBuilderImpl">
         <property name="resultType" value="2"/>  ResultCounterExpression.SUS_PASSED_INDEX=2
     </bean>
 
-    <bean id="suspectedFailedCustomExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultCounterExpressionBuilderImpl">
+    <bean id="suspectedFailedCustomExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultCounterExpressionBuilderImpl">
         <property name="resultType" value="3"/>  ResultCounterExpression.SUS_FAILED_INDEX=3
     </bean>
 
-    <bean id="nmiCustomExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultCounterExpressionBuilderImpl">
+    <bean id="nmiCustomExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultCounterExpressionBuilderImpl">
         <property name="resultType" value="4"/>  ResultCounterExpression.NMI_INDEX=4
     </bean>
     
-    <bean id="naCustomExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultCounterExpressionBuilderImpl">
+    <bean id="naCustomExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultCounterExpressionBuilderImpl">
         <property name="resultType" value="5"/>  ResultCounterExpression.NA_INDEX=5
     </bean>-->
 
     <!-- STYLE EXPRESSIONS -->
-    <bean id="failedStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
+    <bean id="failedStyleExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultStyleExpressionBuilderImpl">
         <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="failed"/>
     </bean>
 
-    <bean id="failedStyleBuilder" class="org.opens.tgol.report.expression.builder.ConditionalStyleBuilderImpl">
+    <bean id="failedStyleBuilder" class="org.tanaguru.report.expression.builder.ConditionalStyleBuilderImpl">
         <property name="conditionalStyleExpressionBuilder" ref="failedStyleExpressionBuilder"/>
         <property name="style" ref="failedStyle"/>
     </bean>
 
-    <bean id="passedStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
+    <bean id="passedStyleExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultStyleExpressionBuilderImpl">
         <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="passed"/>
     </bean>
 
-    <bean id="passedStyleBuilder" class="org.opens.tgol.report.expression.builder.ConditionalStyleBuilderImpl">
+    <bean id="passedStyleBuilder" class="org.tanaguru.report.expression.builder.ConditionalStyleBuilderImpl">
         <property name="conditionalStyleExpressionBuilder" ref="passedStyleExpressionBuilder"/>
         <property name="style" ref="passedStyle"/>
     </bean>
 
-    <bean id="nmiStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
+    <bean id="nmiStyleExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultStyleExpressionBuilderImpl">
         <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="nmi"/>
     </bean>
 
-    <bean id="nmiStyleBuilder" class="org.opens.tgol.report.expression.builder.ConditionalStyleBuilderImpl">
+    <bean id="nmiStyleBuilder" class="org.tanaguru.report.expression.builder.ConditionalStyleBuilderImpl">
         <property name="conditionalStyleExpressionBuilder" ref="nmiStyleExpressionBuilder"/>
         <property name="style" ref="nmiStyle"/>
     </bean>
 
-    <bean id="naStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
+    <bean id="naStyleExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultStyleExpressionBuilderImpl">
         <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="na"/>
     </bean>
 
-    <bean id="naStyleBuilder" class="org.opens.tgol.report.expression.builder.ConditionalStyleBuilderImpl">
+    <bean id="naStyleBuilder" class="org.tanaguru.report.expression.builder.ConditionalStyleBuilderImpl">
         <property name="conditionalStyleExpressionBuilder" ref="naStyleExpressionBuilder"/>
         <property name="style" ref="naStyle"/>
     </bean>
     
-    <bean id="ntStyleExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
+    <bean id="ntStyleExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultStyleExpressionBuilderImpl">
         <property name="bundleName" value="i18n/rule-result-I18N"/>
         <property name="result" value="nt"/>
     </bean>
 
-    <bean id="ntStyleBuilder" class="org.opens.tgol.report.expression.builder.ConditionalStyleBuilderImpl">
+    <bean id="ntStyleBuilder" class="org.tanaguru.report.expression.builder.ConditionalStyleBuilderImpl">
         <property name="conditionalStyleExpressionBuilder" ref="ntStyleExpressionBuilder"/>
         <property name="style" ref="ntStyle"/>
     </bean>
 
-<!--    <bean id="zeroValueExpressionBuilder" class="org.opens.tgol.report.expression.builder.ResultStyleExpressionBuilderImpl">
+<!--    <bean id="zeroValueExpressionBuilder" class="org.tanaguru.report.expression.builder.ResultStyleExpressionBuilderImpl">
         <property name="result" value="0"/>
     </bean>
 
-    <bean id="zeroValueStyleBuilder" class="org.opens.tgol.report.expression.builder.ConditionalStyleBuilderImpl">
+    <bean id="zeroValueStyleBuilder" class="org.tanaguru.report.expression.builder.ConditionalStyleBuilderImpl">
         <property name="conditionalStyleExpressionBuilder" ref="zeroValueExpressionBuilder"/>
         <property name="style" ref="zeroStyle"/>
     </bean>-->

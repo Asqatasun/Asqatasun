@@ -25,11 +25,11 @@ import javax.ws.rs.core.SecurityContext;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.audit.AuditStatus;
-import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.opens.tanaguru.service.AuditService;
+import org.tanaguru.entity.audit.Audit;
+import org.tanaguru.entity.audit.AuditStatus;
+import org.tanaguru.entity.parameterization.Parameter;
+import org.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.tanaguru.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

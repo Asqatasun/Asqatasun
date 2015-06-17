@@ -6,12 +6,12 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="eaLoggerComponent" class="org.opens.tanaguru.logging.EALoggerImpl"/>
+    <bean id="eaLoggerComponent" class="org.tanaguru.logging.EALoggerImpl"/>
 
     <aop:config>
         <aop:aspect ref="eaLoggerComponent">
-<!--            <aop:pointcut id="servicePointcut" expression="execution(* org.opens.tanaguru.service.ContentAdapterServiceImpl.*(..)) || execution(* org.opens.tanaguru.contentadapter.*.*(..)) || execution(* org.opens.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter.*(..))" />-->
-            <aop:pointcut id="servicePointcut" expression="execution(* org.opens.tanaguru.service.*.*(..)) || execution(* org.opens.tanaguru.contentadapter.*.*(..))" />
+<!--            <aop:pointcut id="servicePointcut" expression="execution(* org.tanaguru.service.ContentAdapterServiceImpl.*(..)) || execution(* org.tanaguru.contentadapter.*.*(..)) || execution(* org.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter.*(..))" />-->
+            <aop:pointcut id="servicePointcut" expression="execution(* org.tanaguru.service.*.*(..)) || execution(* org.tanaguru.contentadapter.*.*(..))" />
             <aop:before method="logMethodEntry" pointcut-ref="servicePointcut"/>
             <aop:after-returning method="logMethodExit" returning="result" pointcut-ref="servicePointcut"/>
             <aop:after-throwing method="logException" throwing="exception" pointcut-ref="servicePointcut"/>

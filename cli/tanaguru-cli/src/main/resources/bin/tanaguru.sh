@@ -89,4 +89,4 @@ JAVA_BIN="$JAVA_HOME/bin/java "
 # LAUNCH_TANAGURU
 ##################
 
-$JAVA_BIN $JAVA_OPTS org.opens.tanaguru.cli.Tanaguru ${TANAGURU_OPTIONS}
+$JAVA_BIN $JAVA_OPTS org.tanaguru.cli.Tanaguru ${TANAGURU_OPTIONS}

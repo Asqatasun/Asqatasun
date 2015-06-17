@@ -19,7 +19,7 @@
  */
 package $package.$referentiel.toLowerCase();
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule $ruleCode of the referential $referentielName.

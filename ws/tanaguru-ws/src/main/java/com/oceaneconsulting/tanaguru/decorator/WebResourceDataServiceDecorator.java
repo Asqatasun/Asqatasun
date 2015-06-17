@@ -2,11 +2,11 @@ package com.oceaneconsulting.tanaguru.decorator;
 
 import java.util.List;
 
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
+import org.tanaguru.entity.service.subject.WebResourceDataService;
 
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
-import org.opens.tanaguru.entity.subject.WebResource;
+import org.tanaguru.entity.subject.WebResource;
 
 /**
  * This interface define added statistic methods to the wrapped statistics

@@ -4,20 +4,20 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="parameterDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterDAOImpl"/>
-    <bean id="parameterDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterDataServiceImpl">
+    <bean id="parameterDAO" class="org.tanaguru.entity.dao.parameterization.ParameterDAOImpl"/>
+    <bean id="parameterDataService" class="org.tanaguru.entity.service.parameterization.ParameterDataServiceImpl">
         <property name="entityDao" ref="parameterDAO"/>
         <property name="entityFactory" ref="parameterFactory"/>
     </bean>
 
-    <bean id="parameterElementDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterElementDAOImpl"/>
-    <bean id="parameterElementDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterElementDataServiceImpl">
+    <bean id="parameterElementDAO" class="org.tanaguru.entity.dao.parameterization.ParameterElementDAOImpl"/>
+    <bean id="parameterElementDataService" class="org.tanaguru.entity.service.parameterization.ParameterElementDataServiceImpl">
         <property name="entityDao" ref="parameterElementDAO"/>
         <property name="entityFactory" ref="parameterElementFactory"/>
     </bean>
 
-    <bean id="parameterFamilyDAO" class="org.opens.tanaguru.entity.dao.parameterization.ParameterFamilyDAOImpl"/>
-    <bean id="parameterFamilyDataService" class="org.opens.tanaguru.entity.service.parameterization.ParameterFamilyDataServiceImpl">
+    <bean id="parameterFamilyDAO" class="org.tanaguru.entity.dao.parameterization.ParameterFamilyDAOImpl"/>
+    <bean id="parameterFamilyDataService" class="org.tanaguru.entity.service.parameterization.ParameterFamilyDataServiceImpl">
         <property name="entityDao" ref="parameterFamilyDAO"/>
         <property name="entityFactory" ref="parameterFamilyFactory"/>
     </bean>

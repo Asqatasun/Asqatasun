@@ -4,10 +4,10 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="contentLoaderFactory" class="org.opens.tanaguru.contentloader.FileContentLoaderFactoryImpl"/>
+    <bean id="contentLoaderFactory" class="org.tanaguru.contentloader.FileContentLoaderFactoryImpl"/>
     
-    <bean id="dateFactory" class="org.opens.tanaguru.contentloader.DateFactoryImpl"/>
+    <bean id="dateFactory" class="org.tanaguru.contentloader.DateFactoryImpl"/>
 
-    <bean id="contentLoaderService" class="org.opens.tanaguru.service.ContentLoaderServiceImpl"/>
+    <bean id="contentLoaderService" class="org.tanaguru.service.ContentLoaderServiceImpl"/>
 
 </beans>

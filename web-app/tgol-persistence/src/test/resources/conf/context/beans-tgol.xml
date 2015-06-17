@@ -5,29 +5,29 @@
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="contractDAO" class="org.opens.tgol.entity.dao.contract.ContractDAOImpl"/>
-    <bean id="contractFactory" class="org.opens.tgol.entity.factory.contract.ContractFactoryImpl"/>
-    <bean id="actDAO" class="org.opens.tgol.entity.dao.contract.ActDAOImpl"/>
-    <bean id="actFactory" class="org.opens.tgol.entity.factory.contract.ActFactoryImpl"/>
-    <bean id="scopeDAO" class="org.opens.tgol.entity.dao.contract.ScopeDAOImpl"/>
-    <bean id="scopeFactory" class="org.opens.tgol.entity.factory.contract.ScopeFactoryImpl"/>
+    <bean id="contractDAO" class="org.tanaguru.entity.dao.contract.ContractDAOImpl"/>
+    <bean id="contractFactory" class="org.tanaguru.entity.factory.contract.ContractFactoryImpl"/>
+    <bean id="actDAO" class="org.tanaguru.entity.dao.contract.ActDAOImpl"/>
+    <bean id="actFactory" class="org.tanaguru.entity.factory.contract.ActFactoryImpl"/>
+    <bean id="scopeDAO" class="org.tanaguru.entity.dao.contract.ScopeDAOImpl"/>
+    <bean id="scopeFactory" class="org.tanaguru.entity.factory.contract.ScopeFactoryImpl"/>
 
-    <bean id="functionalityDAO" class="org.opens.tgol.entity.dao.functionality.FunctionalityDAOImpl"/>
-    <bean id="functionalityFactory" class="org.opens.tgol.entity.factory.functionality.FunctionalityFactoryImpl"/>
+    <bean id="functionalityDAO" class="org.tanaguru.entity.dao.functionality.FunctionalityDAOImpl"/>
+    <bean id="functionalityFactory" class="org.tanaguru.entity.factory.functionality.FunctionalityFactoryImpl"/>
     
-    <bean id="scenarioDAO" class="org.opens.tgol.entity.dao.scenario.ScenarioDAOImpl"/>
-    <bean id="scenarioFactory" class="org.opens.tgol.entity.factory.scenario.ScenarioFactoryImpl"/>
+    <bean id="scenarioDAO" class="org.tanaguru.entity.dao.scenario.ScenarioDAOImpl"/>
+    <bean id="scenarioFactory" class="org.tanaguru.entity.factory.scenario.ScenarioFactoryImpl"/>
     
-    <bean id="referentialDAO" class="org.opens.tgol.entity.dao.referential.ReferentialDAOImpl"/>
-    <bean id="referentialFactory" class="org.opens.tgol.entity.factory.referential.ReferentialFactoryImpl"/>
+    <bean id="referentialDAO" class="org.tanaguru.entity.dao.referential.ReferentialDAOImpl"/>
+    <bean id="referentialFactory" class="org.tanaguru.entity.factory.referential.ReferentialFactoryImpl"/>
 
-    <bean id="userDAO" class="org.opens.tgol.entity.dao.user.UserDAOImpl"/>
-    <bean id="userFactory" class="org.opens.tgol.entity.factory.user.UserFactoryImpl"/>
-    <bean id="roleDAO" class="org.opens.tgol.entity.dao.user.RoleDAOImpl"/>
-    <bean id="roleFactory" class="org.opens.tgol.entity.factory.user.RoleFactoryImpl"/>
+    <bean id="userDAO" class="org.tanaguru.entity.dao.user.UserDAOImpl"/>
+    <bean id="userFactory" class="org.tanaguru.entity.factory.user.UserFactoryImpl"/>
+    <bean id="roleDAO" class="org.tanaguru.entity.dao.user.RoleDAOImpl"/>
+    <bean id="roleFactory" class="org.tanaguru.entity.factory.user.RoleFactoryImpl"/>
 
-    <bean id="webResourceFactory" class="org.opens.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
-    <bean id="webResourceDAO" class="org.opens.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>
+    <bean id="webResourceFactory" class="org.tanaguru.entity.factory.subject.WebResourceFactoryImpl"/>
+    <bean id="webResourceDAO" class="org.tanaguru.entity.dao.subject.WebResourceDAOImpl"/>
 
-    <bean id="optionElementDAO" class="org.opens.tgol.entity.dao.option.OptionElementDAOImpl"/>
+    <bean id="optionElementDAO" class="org.tanaguru.entity.dao.option.OptionElementDAOImpl"/>
 </beans>

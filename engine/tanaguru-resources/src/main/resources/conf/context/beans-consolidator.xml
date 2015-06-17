@@ -4,8 +4,8 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean id="consolidatorFactory" class="org.opens.tanaguru.consolidator.ConsolidatorFactoryImpl"/>
+    <bean id="consolidatorFactory" class="org.tanaguru.consolidator.ConsolidatorFactoryImpl"/>
 
-    <bean id="consolidatorService" class="org.opens.tanaguru.service.ConsolidatorServiceImpl"/>
+    <bean id="consolidatorService" class="org.tanaguru.service.ConsolidatorServiceImpl"/>
 
 </beans>
