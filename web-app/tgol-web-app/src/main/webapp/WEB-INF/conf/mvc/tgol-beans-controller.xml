@@ -7,15 +7,15 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="org.opens.tgol.controller"/>
+    <context:component-scan base-package="org.tanaguru.controller"/>
 
-    <bean id="loginController" class="org.opens.tgol.controller.LoginController">
+    <bean id="loginController" class="org.tanaguru.controller.LoginController">
         <property name="authenticationManager">
             <ref bean="authenticationManager"/>
         </property>
     </bean>
 
-    <bean id="homeController" class="org.opens.tgol.controller.HomeController">
+    <bean id="homeController" class="org.tanaguru.controller.HomeController">
         <property name="displayOptionFieldsBuilderList">
             <list>
                 <ref bean="displayContractElementSelectFormFieldBuilder"/>
@@ -32,7 +32,7 @@
         <property name="lastAuditDateSortValue" value="date"/>-->
     </bean>
 
-    <bean id="contractController" class="org.opens.tgol.controller.ContractController">
+    <bean id="contractController" class="org.tanaguru.controller.ContractController">
         <property name="authorizedFunctionalityForTrend">
             <list>
                 <value>DOMAIN</value>
@@ -42,7 +42,7 @@
         <!--        <property name="actionHandler" ref="contractActionHandler"/>-->
     </bean>
 
-    <bean id="pageListController" class="org.opens.tgol.controller.PageListController">
+    <bean id="pageListController" class="org.tanaguru.controller.PageListController">
         <property name="authorizedPageSizeList">
             <list>
                 <value>10</value>
@@ -119,12 +119,12 @@
         <property name="testResultSortKey" value="test-result"/>
     </bean>
     
-    <bean id="auditResultController" class="org.opens.tgol.controller.AuditResultController" parent="abstractAuditResultController"/>
+    <bean id="auditResultController" class="org.tanaguru.controller.AuditResultController" parent="abstractAuditResultController"/>
         
-    <bean id="manualAuditController" class="org.opens.tgol.controller.ManualAuditController" 
+    <bean id="manualAuditController" class="org.tanaguru.controller.ManualAuditController" 
             parent="abstractAuditResultController"/>
     
-    <bean id="auditSynthesisController" class="org.opens.tgol.controller.AuditSynthesisController">
+    <bean id="auditSynthesisController" class="org.tanaguru.controller.AuditSynthesisController">
         <property name="nbOfDisplayedFailedTest" value="5"/>
         <property name="nbOfDisplayedFailedPages" value="10"/>
         <property name="parametersToDisplay">
@@ -178,7 +178,7 @@
         </property>
     </bean>
     
-    <bean id="auditSetUpController" class="org.opens.tgol.controller.AuditSetUpController">
+    <bean id="auditSetUpController" class="org.tanaguru.controller.AuditSetUpController">
         <property name="defaultReferential" value="Rgaa30"/>            
         <property name="referentialAndLevelFormFieldBuilderList">
             <ref bean="levelSelectFormFieldBuilder"/>
@@ -279,7 +279,7 @@
         </property>
     </bean>
     
-    <bean id="auditScenarioController" class="org.opens.tgol.controller.AuditScenarioController">
+    <bean id="auditScenarioController" class="org.tanaguru.controller.AuditScenarioController">
         <property name="referentialAndLevelFormFieldBuilderList">
             <ref bean="levelSelectFormFieldBuilder"/>
         </property>
@@ -319,7 +319,7 @@
         </property>
     </bean>
     
-    <bean id="auditExportResultController" class="org.opens.tgol.controller.AuditExportResultController">
+    <bean id="auditExportResultController" class="org.tanaguru.controller.AuditExportResultController">
         <property name="parametersToDisplay">
             <map>
                 <entry key="LEVEL">
@@ -329,7 +329,7 @@
         </property>
     </bean>
 
-    <bean id="auditLauncherController" class="org.opens.tgol.controller.AuditLauncherController">
+    <bean id="auditLauncherController" class="org.tanaguru.controller.AuditLauncherController">
         <property name="userOptionDependingOnReferential">
             <list>
                 <value>TEST_WEIGHT_MANAGEMENT</value>
@@ -340,13 +340,13 @@
         </property>
     </bean>
     
-    <bean id="signUpController" class="org.opens.tgol.controller.SignUpController">
+    <bean id="signUpController" class="org.tanaguru.controller.SignUpController">
         <property name="createUserFormValidator">
             <ref bean="createUserFormValidator"/>
         </property>
     </bean>
     
-    <bean id="accountSettingsController" class="org.opens.tgol.controller.AccountSettingsController">
+    <bean id="accountSettingsController" class="org.tanaguru.controller.AccountSettingsController">
         <property name="createUserFormValidator">
             <ref bean="createUserFormValidator"/>
         </property>
@@ -360,7 +360,7 @@
         </property>
     </bean>
     
-    <bean id="userManagementController" class="org.opens.tgol.controller.UserManagementController">
+    <bean id="userManagementController" class="org.tanaguru.controller.UserManagementController">
         <property name="createUserFormValidator">
             <ref bean="createUserFormValidator"/>
         </property>
@@ -391,7 +391,7 @@
         </property>
     </bean>
     
-    <bean id="contractManagementController" class="org.opens.tgol.controller.ContractManagementController">
+    <bean id="contractManagementController" class="org.tanaguru.controller.ContractManagementController">
         <property name="createContractFormValidator">
             <ref bean="createContractFormValidator"/>
         </property>
@@ -426,7 +426,7 @@
         </property>
     </bean>
 
-    <bean id="forgottenOrChangePasswordController" class="org.opens.tgol.controller.ForgottenOrChangePasswordController">
+    <bean id="forgottenOrChangePasswordController" class="org.tanaguru.controller.ForgottenOrChangePasswordController">
         <property name="forbiddenUserList">
             <list>
                 <value>guest</value>

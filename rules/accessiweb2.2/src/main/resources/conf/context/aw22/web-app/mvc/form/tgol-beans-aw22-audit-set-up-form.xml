@@ -10,7 +10,7 @@
 
 
     <!-- Aw22 select elements -->
-    <bean id="aw22BronzeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22BronzeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22;LEVEL_1"/>
         <property name="i18nKey" value="Aw22-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="aw22SilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22SilverSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22;LEVEL_2"/>
         <property name="i18nKey" value="Aw22-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <bean id="aw22GoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22GoldSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22;LEVEL_3"/>
         <property name="i18nKey" value="Aw22-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>

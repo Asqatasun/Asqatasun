@@ -21,7 +21,7 @@
     <import resource="classpath:context/beans-ruleimplementationloader.xml"/>
     <import resource="classpath:context/beans-nomenclatureloader.xml"/>
 
-    <bean id="testDAO" class="org.opens.tanaguru.entity.dao.reference.TestDAOImpl"/>
+    <bean id="testDAO" class="org.tanaguru.entity.dao.reference.TestDAOImpl"/>
 
 </beans>
 

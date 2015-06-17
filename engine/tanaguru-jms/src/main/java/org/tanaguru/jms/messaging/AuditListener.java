@@ -7,10 +7,10 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.log4j.Logger;
-import org.opens.tanaguru.entity.audit.Audit;
-import org.opens.tanaguru.entity.parameterization.Parameter;
-import org.opens.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.opens.tanaguru.service.AuditService;
+import org.tanaguru.entity.audit.Audit;
+import org.tanaguru.entity.parameterization.Parameter;
+import org.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.tanaguru.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.stereotype.Component;

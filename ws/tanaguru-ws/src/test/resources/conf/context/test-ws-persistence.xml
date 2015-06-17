@@ -8,57 +8,57 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <non-jta-data-source>jdbc/tanaguruDS</non-jta-data-source>
         <!-- TGSI classes -->
-<!--         <class>org.opens.tgol.entity.user.UserImpl</class>
-        <class>org.opens.tgol.entity.user.RoleImpl</class>
-        <class>org.opens.tgol.entity.contract.ContractImpl</class>
-        <class>org.opens.tgol.entity.contract.ActImpl</class>
-        <class>org.opens.tgol.entity.contract.TgsiScopeImpl</class>
-        <class>org.opens.tgol.entity.functionality.FunctionalityImpl</class>
-        <class>org.opens.tgol.entity.option.OptionImpl</class>
-        <class>org.opens.tgol.entity.option.OptionElementImpl</class>
-        <class>org.opens.tgol.entity.option.OptionFamilyImpl</class>
-        <class>org.opens.tgol.entity.referential.ReferentialImpl</class>
-        <class>org.opens.tgol.entity.scenario.ScenarioImpl</class> -->
+<!--         <class>org.tanaguru.entity.user.UserImpl</class>
+        <class>org.tanaguru.entity.user.RoleImpl</class>
+        <class>org.tanaguru.entity.contract.ContractImpl</class>
+        <class>org.tanaguru.entity.contract.ActImpl</class>
+        <class>org.tanaguru.entity.contract.TgsiScopeImpl</class>
+        <class>org.tanaguru.entity.functionality.FunctionalityImpl</class>
+        <class>org.tanaguru.entity.option.OptionImpl</class>
+        <class>org.tanaguru.entity.option.OptionElementImpl</class>
+        <class>org.tanaguru.entity.option.OptionFamilyImpl</class>
+        <class>org.tanaguru.entity.referential.ReferentialImpl</class>
+        <class>org.tanaguru.entity.scenario.ScenarioImpl</class> -->
         <!-- tanaguru classes -->
-<!--         <class>org.opens.tanaguru.entity.reference.CriterionImpl</class>
-        <class>org.opens.tanaguru.entity.reference.DecisionLevelImpl</class>
-        <class>org.opens.tanaguru.entity.reference.LevelImpl</class>
-        <class>org.opens.tanaguru.entity.reference.NomenclatureCssUnitImpl</class>
-        <class>org.opens.tanaguru.entity.reference.NomenclatureElementImpl</class>
-        <class>org.opens.tanaguru.entity.reference.NomenclatureImpl</class>
-        <class>org.opens.tanaguru.entity.reference.ReferenceImpl</class>
-        <class>org.opens.tanaguru.entity.reference.ScopeImpl</class>
-        <class>org.opens.tanaguru.entity.reference.StandardMessageImpl</class>
-        <class>org.opens.tanaguru.entity.reference.TestImpl</class>
-        <class>org.opens.tanaguru.entity.reference.ThemeImpl</class>
-        <class>org.opens.tanaguru.entity.audit.AuditImpl</class>
-        <class>org.opens.tanaguru.entity.audit.ContentImpl</class>
-        <class>org.opens.tanaguru.entity.audit.DefiniteResultImpl</class>
-        <class>org.opens.tanaguru.entity.audit.ImageContentImpl</class>
-        <class>org.opens.tanaguru.entity.audit.IndefiniteResultImpl</class>
-        <class>org.opens.tanaguru.entity.audit.JavascriptContentImpl</class>
-        <class>org.opens.tanaguru.entity.audit.ProcessRemarkImpl</class>
-        <class>org.opens.tanaguru.entity.audit.ProcessResultImpl</class>
-        <class>org.opens.tanaguru.entity.audit.PreProcessResultImpl</class>
-        <class>org.opens.tanaguru.entity.audit.SSPImpl</class>
-        <class>org.opens.tanaguru.entity.audit.SourceCodeRemarkImpl</class>
-        <class>org.opens.tanaguru.entity.audit.StylesheetContentImpl</class>
-        <class>org.opens.tanaguru.entity.audit.RelatedTextContentImpl</class>
-        <class>org.opens.tanaguru.entity.audit.RelatedBinaryContentImpl</class>
-        <class>org.opens.tanaguru.entity.audit.EvidenceElementImpl</class>
-        <class>org.opens.tanaguru.entity.audit.EvidenceImpl</class>
-        <class>org.opens.tanaguru.entity.subject.PageImpl</class>
-        <class>org.opens.tanaguru.entity.subject.SiteImpl</class>
-        <class>org.opens.tanaguru.entity.subject.WebResourceImpl</class>
-		<class>org.opens.tanaguru.entity.subject.SnapshotImpl</class>
-        <class>org.opens.tanaguru.entity.parameterization.ParameterImpl</class>
-        <class>org.opens.tanaguru.entity.parameterization.ParameterElementImpl</class>
-        <class>org.opens.tanaguru.entity.parameterization.ParameterFamilyImpl</class> -->
+<!--         <class>org.tanaguru.entity.reference.CriterionImpl</class>
+        <class>org.tanaguru.entity.reference.DecisionLevelImpl</class>
+        <class>org.tanaguru.entity.reference.LevelImpl</class>
+        <class>org.tanaguru.entity.reference.NomenclatureCssUnitImpl</class>
+        <class>org.tanaguru.entity.reference.NomenclatureElementImpl</class>
+        <class>org.tanaguru.entity.reference.NomenclatureImpl</class>
+        <class>org.tanaguru.entity.reference.ReferenceImpl</class>
+        <class>org.tanaguru.entity.reference.ScopeImpl</class>
+        <class>org.tanaguru.entity.reference.StandardMessageImpl</class>
+        <class>org.tanaguru.entity.reference.TestImpl</class>
+        <class>org.tanaguru.entity.reference.ThemeImpl</class>
+        <class>org.tanaguru.entity.audit.AuditImpl</class>
+        <class>org.tanaguru.entity.audit.ContentImpl</class>
+        <class>org.tanaguru.entity.audit.DefiniteResultImpl</class>
+        <class>org.tanaguru.entity.audit.ImageContentImpl</class>
+        <class>org.tanaguru.entity.audit.IndefiniteResultImpl</class>
+        <class>org.tanaguru.entity.audit.JavascriptContentImpl</class>
+        <class>org.tanaguru.entity.audit.ProcessRemarkImpl</class>
+        <class>org.tanaguru.entity.audit.ProcessResultImpl</class>
+        <class>org.tanaguru.entity.audit.PreProcessResultImpl</class>
+        <class>org.tanaguru.entity.audit.SSPImpl</class>
+        <class>org.tanaguru.entity.audit.SourceCodeRemarkImpl</class>
+        <class>org.tanaguru.entity.audit.StylesheetContentImpl</class>
+        <class>org.tanaguru.entity.audit.RelatedTextContentImpl</class>
+        <class>org.tanaguru.entity.audit.RelatedBinaryContentImpl</class>
+        <class>org.tanaguru.entity.audit.EvidenceElementImpl</class>
+        <class>org.tanaguru.entity.audit.EvidenceImpl</class>
+        <class>org.tanaguru.entity.subject.PageImpl</class>
+        <class>org.tanaguru.entity.subject.SiteImpl</class>
+        <class>org.tanaguru.entity.subject.WebResourceImpl</class>
+		<class>org.tanaguru.entity.subject.SnapshotImpl</class>
+        <class>org.tanaguru.entity.parameterization.ParameterImpl</class>
+        <class>org.tanaguru.entity.parameterization.ParameterElementImpl</class>
+        <class>org.tanaguru.entity.parameterization.ParameterFamilyImpl</class> -->
         <!-- tg-analyser classes -->
-<!-- 		<class>org.opens.tanaguru.entity.statistics.CriterionStatisticsImpl</class>
-		<class>org.opens.tanaguru.entity.statistics.WebResourceStatisticsImpl</class>
-        <class>org.opens.tanaguru.entity.statistics.TestStatisticsImpl</class>
-        <class>org.opens.tanaguru.entity.statistics.ThemeStatisticsImpl</class> -->
+<!-- 		<class>org.tanaguru.entity.statistics.CriterionStatisticsImpl</class>
+		<class>org.tanaguru.entity.statistics.WebResourceStatisticsImpl</class>
+        <class>org.tanaguru.entity.statistics.TestStatisticsImpl</class>
+        <class>org.tanaguru.entity.statistics.ThemeStatisticsImpl</class> -->
         <!-- Entity du WS -->
         <class>com.oceaneconsulting.tanaguru.entity.impl.WsInvocationImpl</class>
         <class>com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl</class>

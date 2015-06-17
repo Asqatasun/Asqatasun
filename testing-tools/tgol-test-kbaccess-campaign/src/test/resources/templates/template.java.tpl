@@ -1,12 +1,12 @@
-#set($class.package = 'org.opens.tanaguru.webapp.test')
+#set($class.package = 'org.tanaguru.webapp.test')
 #set($testPrefix = 'Test')
 #set($name = $model.name.replace('-', '_'))
 #set($test = $model.test.replace('.', '_'))
 #set($class.name = "t$name$testPrefix")
 
 package $class.package;
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.webapp.test.data.KrashtestResult;
+import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.webapp.test.data.KrashtestResult;
 
 public class $class.name extends AbstractTanaguruOnlineTest {
 

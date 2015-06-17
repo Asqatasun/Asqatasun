@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.opens</groupId>
+    <groupId>org.tanaguru</groupId>
     <artifactId>tanaguru</artifactId>
     <packaging>pom</packaging>
     <version>3.0.5</version>
@@ -15,41 +15,41 @@
         <module>rules</module>
         <module>web-app</module>
         <module>cli</module>
-        <!--<module>ws</module>-->
+        <module>ws</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
-        <engineGroupId>org.opens</engineGroupId>
+
+        <engineGroupId>org.tanaguru</engineGroupId>
         <engineVersion>3.0.5</engineVersion>
         
-        <webappGroupId>org.opens</webappGroupId>
+        <webappGroupId>org.tanaguru</webappGroupId>
         <webappVersion>3.0.5</webappVersion>
         
-        <testingToolsGroupId>org.opens</testingToolsGroupId>
+        <testingToolsGroupId>org.tanaguru</testingToolsGroupId>
         <testingToolsVersion>3.0.5</testingToolsVersion>
         
-        <tanaguruCliGroupId>org.opens</tanaguruCliGroupId>
+        <tanaguruCliGroupId>org.tanaguru</tanaguruCliGroupId>
         <tanaguruCliVersion>3.0.5</tanaguruCliVersion>
         
-        <rulesGroupId>org.opens</rulesGroupId>
+        <rulesGroupId>org.tanaguru</rulesGroupId>
         <rulesVersion>1.1.2</rulesVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
-        
+
         <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
         <heritrixVersion>3.1.1</heritrixVersion>
-        
+
         <hibernateGroupId>org.hibernate</hibernateGroupId>
         <hibernateVersion>4.3.5.Final</hibernateVersion>
         
         <junitGroupId>junit</junitGroupId>
         <junitVersion>3.8.2</junitVersion>
-        
+
         <log4jGroupId>log4j</log4jGroupId>
         <log4jVersion>1.2.15</log4jVersion>
-        
+
         <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
         
         <jersey.version>2.13</jersey.version>
@@ -241,10 +241,10 @@
                         <groupId>poi</groupId>
                         <artifactId>poi-scratchpad</artifactId>
                     </exclusion>
-                </exclusions>                    
+                </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.opens</groupId>
+                <groupId>org.tanaguru</groupId>
                 <artifactId>tanaguru-audit</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
@@ -358,8 +358,8 @@
                 <artifactId>tanaguru-logging</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
-            
-            <!-- tanaguru testing-tools --> 
+
+            <!-- tanaguru testing-tools -->
             <dependency>
                 <groupId>${testingToolsGroupId}</groupId>
                 <artifactId>tanaguru-rules-testing-tools</artifactId>
@@ -372,8 +372,8 @@
                 <version>${testingToolsVersion}</version>
                 <scope>test</scope>
             </dependency>
-        
-            <!-- tanaguru web-app --> 
+
+            <!-- tanaguru web-app -->
             <dependency>
                 <groupId>${webappGroupId}</groupId>
                 <artifactId>tgol-api</artifactId>
@@ -458,7 +458,7 @@
                 <version>${webappVersion}</version>
                 <scope>runtime</scope>
             </dependency>
-        
+
             <!-- mysql connector dependencies -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -983,7 +983,7 @@
                 <version>1.3</version>
             </dependency>
 
-            <!-- xerces dependencies-->
+            <!-- xerces dependencies -->
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>

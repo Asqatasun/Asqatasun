@@ -1,6 +1,6 @@
 package com.oceaneconsulting.tanaguru.service;
 
-import org.opens.tanaguru.sdk.entity.service.GenericDataService;
+import org.tanaguru.sdk.entity.service.GenericDataService;
 
 import com.oceaneconsulting.tanaguru.entity.WsRole;
 import com.oceaneconsulting.tanaguru.entity.WsUser;

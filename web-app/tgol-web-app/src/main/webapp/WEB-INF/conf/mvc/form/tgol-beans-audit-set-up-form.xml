@@ -10,7 +10,7 @@
 
 
     <!-- Accessiweb 2.2 select elements -->
-    <bean id="aw22BronzeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22BronzeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22;LEVEL_1"/>
         <property name="i18nKey" value="Aw22-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="aw22SilverSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22SilverSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22;LEVEL_2"/>
         <property name="i18nKey" value="Aw22-LEVEL_2"/>
         <property name="errorI18nKey" value="LEVEL_2-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="aw22GoldSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22GoldSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22;LEVEL_3"/>
         <property name="i18nKey" value="Aw22-LEVEL_3"/>
         <property name="errorI18nKey" value="LEVEL_3-error"/>
@@ -41,7 +41,7 @@
     </bean>
     
     <!-- RGAA 2.2 select elements -->
-    <bean id="rgaa22ASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22ASelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22;LEVEL_1"/>
         <property name="i18nKey" value="Rgaa22-LEVEL_1"/>
         <property name="errorI18nKey" value="A-error"/>
@@ -51,7 +51,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
     
-    <bean id="rgaa22AASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22AASelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22;LEVEL_2"/>
         <property name="i18nKey" value="Rgaa22-LEVEL_2"/>
         <property name="errorI18nKey" value="LEVEL_2-error"/>
@@ -61,7 +61,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
     
-    <bean id="rgaa22AAASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22AAASelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22;LEVEL_3"/>
         <property name="i18nKey" value="Rgaa22-LEVEL_3"/>
         <property name="errorI18nKey" value="LEVEL_3-error"/>
@@ -72,7 +72,7 @@
     </bean>
     
     <!-- RGAA 3.0 select elements -->
-    <bean id="rgaa30ASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa30ASelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30;LEVEL_1"/>
         <property name="i18nKey" value="Rgaa30-LEVEL_1"/>
         <property name="errorI18nKey" value="A-error"/>
@@ -82,7 +82,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
     
-    <bean id="rgaa30AASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa30AASelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30;LEVEL_2"/>
         <property name="i18nKey" value="Rgaa30-LEVEL_2"/>
         <property name="errorI18nKey" value="LEVEL_2-error"/>
@@ -92,7 +92,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
     
-    <bean id="rgaa30AAASelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa30AAASelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30;LEVEL_3"/>
         <property name="i18nKey" value="Rgaa30-LEVEL_3"/>
         <property name="errorI18nKey" value="LEVEL_3-error"/>
@@ -102,7 +102,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="levelSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="levelSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="level"/>
         <property name="errorI18nKey" value="level-error"/>
         <property name="selectElementBuilderMap">
@@ -132,115 +132,115 @@
         </property>
     </bean>
 
-    <bean id="depthFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+    <bean id="depthFormFieldBuilder" class="org.tanaguru.form.builder.NumericalFormFieldBuilderImpl">
         <property name="maxValue" value="20"/>
         <property name="minValue" value="0"/>
         <property name="i18nKey" value="depth"/>
         <property name="errorI18nKey" value="depth-error"/>
     </bean>
-    <bean id="depthParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="depthParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="DEPTH"/>
         <property name="formFieldBuilder" ref="depthFormFieldBuilder"/>
     </bean>
 
-    <bean id="maxDurationFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+    <bean id="maxDurationFormFieldBuilder" class="org.tanaguru.form.builder.NumericalFormFieldBuilderImpl">
         <property name="maxValue" value="86400"/>
         <property name="minValue" value="1"/>
         <property name="i18nKey" value="max-duration"/>
         <property name="errorI18nKey" value="max-duration-error"/>
     </bean>
-    <bean id="maxDurationParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="maxDurationParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="MAX_DURATION"/>
         <property name="formFieldBuilder" ref="maxDurationFormFieldBuilder"/>
     </bean>
 
-    <bean id="maxDocumentsFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+    <bean id="maxDocumentsFormFieldBuilder" class="org.tanaguru.form.builder.NumericalFormFieldBuilderImpl">
         <property name="maxValue" value="10000"/>
         <property name="minValue" value="1"/>
         <property name="i18nKey" value="max-documents"/>
         <property name="errorI18nKey" value="max-documents-error"/>
     </bean>
-    <bean id="maxDocumentsParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="maxDocumentsParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="MAX_DOCUMENTS"/>
         <property name="formFieldBuilder" ref="maxDocumentsFormFieldBuilder"/>
     </bean>
 
-    <bean id="exclusionRegexpFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="exclusionRegexpFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="exclusion-regexp"/>
         <property name="errorI18nKey" value="exclusion-regexp-error"/>
     </bean>
-    <bean id="exclusionRegexpParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="exclusionRegexpParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="EXCLUSION_REGEXP"/>
         <property name="formFieldBuilder" ref="exclusionRegexpFormFieldBuilder"/>
     </bean>
 
-    <bean id="inclusionRegexpFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="inclusionRegexpFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="inclusion-regexp"/>
         <property name="errorI18nKey" value="inclusion-regexp-error"/>
     </bean>
-    <bean id="inclusionRegexpParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="inclusionRegexpParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="INCLUSION_REGEXP"/>
         <property name="formFieldBuilder" ref="inclusionRegexpFormFieldBuilder"/>
     </bean>
 
-    <bean id="presentationTableFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="presentationTableFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="presentation-table"/>
         <property name="errorI18nKey" value="presentation-table-error"/>
     </bean>
 
-    <bean id="presentationTableParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="presentationTableParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="PRESENTATION_TABLE_MARKER"/>
         <property name="formFieldBuilder" ref="presentationTableFormFieldBuilder"/>
     </bean>
 
-    <bean id="dataTableFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="dataTableFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="data-table"/>
         <property name="errorI18nKey" value="data-table-error"/>
     </bean>
     
-    <bean id="dataTableParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="dataTableParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="DATA_TABLE_MARKER"/>
         <property name="formFieldBuilder" ref="dataTableFormFieldBuilder"/>
     </bean>
     
-     <bean id="complexTableFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
+     <bean id="complexTableFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="complex-table"/>
         <property name="errorI18nKey" value="complex-table-error"/>
     </bean>
     
-    <bean id="complexTableParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="complexTableParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="COMPLEX_TABLE_MARKER"/>
         <property name="formFieldBuilder" ref="complexTableFormFieldBuilder"/>
     </bean>
     
-    <bean id="decorativeImageFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="decorativeImageFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="decorative-image"/>
         <property name="errorI18nKey" value="decorative-image-error"/>
     </bean>
     
-    <bean id="decorativeImageParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="decorativeImageParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="DECORATIVE_IMAGE_MARKER"/>
         <property name="formFieldBuilder" ref="decorativeImageFormFieldBuilder"/>
     </bean>
     
-    <bean id="informativeImageFormFieldBuilder" class="org.opens.tgol.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="informativeImageFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="informative-image"/>
         <property name="errorI18nKey" value="informative-image-error"/>
     </bean>
     
-    <bean id="informativeImageParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="informativeImageParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="INFORMATIVE_IMAGE_MARKER"/>
         <property name="formFieldBuilder" ref="informativeImageFormFieldBuilder"/>
     </bean>
     
-    <bean id="alternativeContrastMechanismPresent" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+    <bean id="alternativeContrastMechanismPresent" class="org.tanaguru.form.builder.CheckboxElementBuilderImpl">
         <!--        <property name="i18nKey" value="alternative-contrast"/>
         <property name="errorI18nKey" value="alternativeContrast-error"/>-->
         <property name="enabled" value="true"/>
         <property name="value" value="true"/>
     </bean>
 
-    <bean id="alternativeContrastMechanismPresentFormFieldBuilder" class="org.opens.tgol.form.builder.CheckboxFormFieldBuilderImpl">
+    <bean id="alternativeContrastMechanismPresentFormFieldBuilder" class="org.tanaguru.form.builder.CheckboxFormFieldBuilderImpl">
         <property name="i18nKey" value="contrast-alternative"/>
         <property name="errorI18nKey" value="contrast-alternative-error"/>
         <property name="checkboxElementBuilderList">
@@ -250,17 +250,17 @@
         </property>
     </bean>
     
-    <bean id="alternativeContrastMechanismPresentParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="alternativeContrastMechanismPresentParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="ALTERNATIVE_CONTRAST_MECHANISM"/>
         <property name="formFieldBuilder" ref="alternativeContrastMechanismPresentFormFieldBuilder"/>
     </bean>
     
-    <bean id="considerCookiesBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+    <bean id="considerCookiesBuilder" class="org.tanaguru.form.builder.CheckboxElementBuilderImpl">
         <property name="enabled" value="true"/>
         <property name="value" value="true"/>
     </bean>
 
-    <bean id="considerCookiesFormFieldBuilder" class="org.opens.tgol.form.builder.CheckboxFormFieldBuilderImpl">
+    <bean id="considerCookiesFormFieldBuilder" class="org.tanaguru.form.builder.CheckboxFormFieldBuilderImpl">
         <property name="i18nKey" value="consider-cookies"/>
         <property name="errorI18nKey" value="consider-cookies-error"/>
         <property name="checkboxElementBuilderList">
@@ -270,28 +270,28 @@
         </property>
     </bean>
     
-    <bean id="considerCookiesParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="considerCookiesParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="CONSIDER_COOKIES"/>
         <property name="formFieldBuilder" ref="considerCookiesFormFieldBuilder"/>
     </bean>
 
-    <bean id="screenWidthFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+    <bean id="screenWidthFormFieldBuilder" class="org.tanaguru.form.builder.NumericalFormFieldBuilderImpl">
         <property name="maxValue" value="2048"/>
         <property name="minValue" value="1"/>
         <property name="i18nKey" value="screen-width"/>
         <property name="errorI18nKey" value="screen-width-error"/>
     </bean>
-    <bean id="screenWidthParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="screenWidthParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="SCREEN_WIDTH"/>
         <property name="formFieldBuilder" ref="screenWidthFormFieldBuilder"/>
     </bean>
-    <bean id="screenHeightFormFieldBuilder" class="org.opens.tgol.form.builder.NumericalFormFieldBuilderImpl">
+    <bean id="screenHeightFormFieldBuilder" class="org.tanaguru.form.builder.NumericalFormFieldBuilderImpl">
         <property name="maxValue" value="2048"/>
         <property name="minValue" value="1"/>
         <property name="i18nKey" value="screen-height"/>
         <property name="errorI18nKey" value="screen-height-error"/>
     </bean>
-    <bean id="screenHeightParamBuilder" class="org.opens.tgol.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
+    <bean id="screenHeightParamBuilder" class="org.tanaguru.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl">
         <property name="parameterCode" value="SCREEN_HEIGHT"/>
         <property name="formFieldBuilder" ref="screenHeightFormFieldBuilder"/>
     </bean>

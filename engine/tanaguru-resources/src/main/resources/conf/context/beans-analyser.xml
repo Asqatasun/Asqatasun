@@ -4,9 +4,9 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="analyserFactory" class="org.opens.tanaguru.analyser.AnalyserFactoryImpl"/>
+    <bean id="analyserFactory" class="org.tanaguru.analyser.AnalyserFactoryImpl"/>
 
-    <bean id="analyserService" class="org.opens.tanaguru.service.AnalyserServiceImpl">
+    <bean id="analyserService" class="org.tanaguru.service.AnalyserServiceImpl">
         <property name="analyserFactory" ref="analyserFactory"/>
     </bean>
 

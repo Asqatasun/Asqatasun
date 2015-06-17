@@ -10,7 +10,7 @@
 
 
     <!-- Accessiweb 2.2 --> 
-    <bean id="aw22AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22AllThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
         <property name="errorI18nKey" value="result.all-theme-error"/>
@@ -18,7 +18,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22ImageThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22ImageThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-1"/>
         <property name="i18nKey" value="Aw22-1"/>
         <property name="errorI18nKey" value="Aw22-1-error"/>
@@ -26,7 +26,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22FrameThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22FrameThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-2"/>
         <property name="i18nKey" value="Aw22-2"/>
         <property name="errorI18nKey" value="Aw22-2-error"/>
@@ -34,7 +34,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22ColorThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22ColorThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-3"/>
         <property name="i18nKey" value="Aw22-3"/>
         <property name="errorI18nKey" value="Aw22-3-error"/>
@@ -42,7 +42,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="aw22MultimediaThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22MultimediaThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-4"/>
         <property name="i18nKey" value="Aw22-4"/>
         <property name="errorI18nKey" value="Aw22-4-error"/>
@@ -50,7 +50,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="aw22TableThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22TableThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-5"/>
         <property name="i18nKey" value="Aw22-5"/>
         <property name="errorI18nKey" value="Aw22-5-error"/>
@@ -58,7 +58,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22LinkThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22LinkThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-6"/>
         <property name="i18nKey" value="Aw22-6"/>
         <property name="errorI18nKey" value="Aw22-6-error"/>
@@ -66,7 +66,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22ScriptThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22ScriptThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-7"/>
         <property name="i18nKey" value="Aw22-7"/>
         <property name="errorI18nKey" value="Aw22-7-error"/>
@@ -74,7 +74,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22MandatoryElementsThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22MandatoryElementsThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-8"/>
         <property name="i18nKey" value="Aw22-8"/>
         <property name="errorI18nKey" value="Aw22-8-error"/>
@@ -82,7 +82,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="aw22InfoStructureThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22InfoStructureThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-9"/>
         <property name="i18nKey" value="Aw22-9"/>
         <property name="errorI18nKey" value="Aw22-9-error"/>
@@ -90,7 +90,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22InfoPresentationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22InfoPresentationThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-10"/>
         <property name="i18nKey" value="Aw22-10"/>
         <property name="errorI18nKey" value="Aw22-10-error"/>
@@ -98,7 +98,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22FormThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22FormThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-11"/>
         <property name="i18nKey" value="Aw22-11"/>
         <property name="errorI18nKey" value="Aw22-11-error"/>
@@ -106,7 +106,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22NavigationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22NavigationThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-12"/>
         <property name="i18nKey" value="Aw22-12"/>
         <property name="errorI18nKey" value="Aw22-12-error"/>
@@ -114,7 +114,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22ConsultationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="aw22ConsultationThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Aw22-13"/>
         <property name="i18nKey" value="Aw22-13"/>
         <property name="errorI18nKey" value="Aw22-13-error"/>
@@ -122,7 +122,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="aw22ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="aw22ThemeSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-contract-error"/>
         <property name="value" value="Aw22"/>
@@ -151,7 +151,7 @@
     </bean>
 
     <!-- Rgaa 2.2 -->   
-    <bean id="rgaa22AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22AllThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
         <property name="errorI18nKey" value="all-theme-error"/>
@@ -159,7 +159,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22FrameThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22FrameThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-1"/>
         <property name="i18nKey" value="Rgaa22-1"/>
         <property name="errorI18nKey" value="Rgaa22-1-error"/>
@@ -167,7 +167,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22ColorThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22ColorThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-2"/>
         <property name="i18nKey" value="Rgaa22-2"/>
         <property name="errorI18nKey" value="Rgaa22-2-error"/>
@@ -175,7 +175,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22FormThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22FormThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-3"/>
         <property name="i18nKey" value="Rgaa22-3"/>
         <property name="errorI18nKey" value="Rgaa22-3-error"/>
@@ -183,7 +183,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22ImageThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22ImageThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-4"/>
         <property name="i18nKey" value="Rgaa22-4"/>
         <property name="errorI18nKey" value="Rgaa22-4-error"/>
@@ -191,7 +191,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22MultimediaThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22MultimediaThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-5"/>
         <property name="i18nKey" value="Rgaa22-5"/>
         <property name="errorI18nKey" value="Rgaa22-5-error"/>
@@ -199,7 +199,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22NavigationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22NavigationThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-6"/>
         <property name="i18nKey" value="Rgaa22-6"/>
         <property name="errorI18nKey" value="Rgaa22-6-error"/>
@@ -207,7 +207,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22PresentationThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22PresentationThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-7"/>
         <property name="i18nKey" value="Rgaa22-7"/>
         <property name="errorI18nKey" value="Rgaa22-7-error"/>
@@ -215,7 +215,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22ScriptThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22ScriptThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-8"/>
         <property name="i18nKey" value="Rgaa22-8"/>
         <property name="errorI18nKey" value="Rgaa22-8-error"/>
@@ -223,7 +223,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="rgaa22StandardThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22StandardThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-9"/>
         <property name="i18nKey" value="Rgaa22-9"/>
         <property name="errorI18nKey" value="Rgaa22-9-error"/>
@@ -231,7 +231,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="rgaa22StructureThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22StructureThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-10"/>
         <property name="i18nKey" value="Rgaa22-10"/>
         <property name="errorI18nKey" value="Rgaa22-10-error"/>
@@ -239,7 +239,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="rgaa22TableThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22TableThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-11"/>
         <property name="i18nKey" value="Rgaa22-11"/>
         <property name="errorI18nKey" value="Rgaa22-11-error"/>
@@ -247,7 +247,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="rgaa22TextThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22TextThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-12"/>
         <property name="i18nKey" value="Rgaa22-12"/>
         <property name="errorI18nKey" value="Rgaa22-12-error"/>
@@ -255,7 +255,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="rgaa22ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="rgaa22ThemeSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
         <property name="value" value="Rgaa22"/>
@@ -283,7 +283,7 @@
     </bean>
 
     <!-- Rgaa 3.0 --> 
-    <bean id="rgaa30AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa30AllThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
         <property name="errorI18nKey" value="all-theme-error"/>
@@ -291,91 +291,91 @@
         <property name="enabled" value="true"/>
     </bean>
 
-        <bean id="rgaa30-1ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-1ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-1"/>
         <property name="i18nKey" value="Rgaa30-1"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-2ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-2ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-2"/>
         <property name="i18nKey" value="Rgaa30-2"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-3ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-3ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-3"/>
         <property name="i18nKey" value="Rgaa30-3"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-4ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-4ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-4"/>
         <property name="i18nKey" value="Rgaa30-4"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-5ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-5ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-5"/>
         <property name="i18nKey" value="Rgaa30-5"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-6ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-6ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-6"/>
         <property name="i18nKey" value="Rgaa30-6"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-7ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-7ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-7"/>
         <property name="i18nKey" value="Rgaa30-7"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-8ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-8ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-8"/>
         <property name="i18nKey" value="Rgaa30-8"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-9ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-9ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-9"/>
         <property name="i18nKey" value="Rgaa30-9"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-10ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-10ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-10"/>
         <property name="i18nKey" value="Rgaa30-10"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-11ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-11ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-11"/>
         <property name="i18nKey" value="Rgaa30-11"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-12ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-12ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-12"/>
         <property name="i18nKey" value="Rgaa30-12"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa30-13ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa30-13ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30-13"/>
         <property name="i18nKey" value="Rgaa30-13"/>
         <property name="errorI18nKey" value=""/>
@@ -383,7 +383,7 @@
         <property name="enabled" value="true"/>
     </bean>
         
-    <bean id="rgaa30ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="rgaa30ThemeSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
         <property name="value" value="Rgaa30"/>
@@ -411,7 +411,7 @@
         </property>
     </bean>
 
-    <bean id="passedCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+    <bean id="passedCheckboxElementBuilder" class="org.tanaguru.form.builder.CheckboxElementBuilderImpl">
         <property name="value" value="PASSED"/>
         <property name="i18nKey" value="passed"/>
         <property name="errorI18nKey" value="passed-error"/>
@@ -419,7 +419,7 @@
         <property name="selected" value="true"/>
     </bean>
 
-    <bean id="failedCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+    <bean id="failedCheckboxElementBuilder" class="org.tanaguru.form.builder.CheckboxElementBuilderImpl">
         <property name="value" value="FAILED"/>
         <property name="i18nKey" value="failed"/>
         <property name="errorI18nKey" value="failed-error"/>
@@ -427,7 +427,7 @@
         <property name="selected" value="true"/>
     </bean>
 
-    <bean id="nmiCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+    <bean id="nmiCheckboxElementBuilder" class="org.tanaguru.form.builder.CheckboxElementBuilderImpl">
         <property name="value" value="NEED_MORE_INFO"/>
         <property name="i18nKey" value="nmi"/>
         <property name="errorI18nKey" value="nmi-error"/>
@@ -435,7 +435,7 @@
         <property name="selected" value="true"/>
     </bean>
 
-    <bean id="naCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+    <bean id="naCheckboxElementBuilder" class="org.tanaguru.form.builder.CheckboxElementBuilderImpl">
         <property name="value" value="NOT_APPLICABLE"/>
         <property name="i18nKey" value="na"/>
         <property name="errorI18nKey" value="na-error"/>
@@ -443,7 +443,7 @@
         <property name="selected" value="true"/>
     </bean>
     
-    <bean id="ntCheckboxElementBuilder" class="org.opens.tgol.form.builder.CheckboxElementBuilderImpl">
+    <bean id="ntCheckboxElementBuilder" class="org.tanaguru.form.builder.CheckboxElementBuilderImpl">
         <property name="value" value="NOT_TESTED"/>
         <property name="i18nKey" value="nt"/>
         <property name="errorI18nKey" value="nt-error"/>
@@ -451,7 +451,7 @@
         <property name="selected" value="false"/>
     </bean>
 
-    <bean id="testResultCheckboxFormFieldBuilder" class="org.opens.tgol.form.builder.CheckboxFormFieldBuilderImpl">
+    <bean id="testResultCheckboxFormFieldBuilder" class="org.tanaguru.form.builder.CheckboxFormFieldBuilderImpl">
         <property name="i18nKey" value="result.test-result"/>
         <property name="errorI18nKey" value="result.test-result-error"/>
         <property name="code" value="test-result"/>

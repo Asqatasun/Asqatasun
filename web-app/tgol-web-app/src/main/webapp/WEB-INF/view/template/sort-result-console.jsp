@@ -38,7 +38,7 @@
             <c:set var="i18nKey" scope="page" value="${formField.i18nKey}"/>
             <div class="clearfix ${auditParameterErrorClass}">
                 <c:choose>
-                    <c:when test="${tg:instanceOf(formField, 'org.opens.tgol.form.CheckboxFormField')}">
+                    <c:when test="${tg:instanceOf(formField, 'org.tanaguru.form.CheckboxFormField')}">
                 <div id="${i18nKey}" class="set-up-value input">
                     <ul class="inputs-list">
                         <c:forEach items="${formField.checkboxElementList}" var="element" varStatus="pResult">
@@ -51,7 +51,7 @@
                         </c:forEach>
                     </ul>
                     </c:when>
-                    <c:when test="${tg:instanceOf(formField, 'org.opens.tgol.form.SelectFormField')}">
+                    <c:when test="${tg:instanceOf(formField, 'org.tanaguru.form.SelectFormField')}">
                 <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>                                    
                 <div class="set-up-value input">
                     <c:forEach items="${formField.selectElementMap}" var="group">

@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.opens</groupId>
+        <groupId>org.tanaguru</groupId>
         <artifactId>web-app</artifactId>
         <version>3.0.5</version>
     </parent>
@@ -55,7 +55,7 @@
             <artifactId>tanaguru-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.opens</groupId>
+            <groupId>org.tanaguru</groupId>
             <artifactId>tanaguru-jms</artifactId>
         </dependency>
         <dependency>

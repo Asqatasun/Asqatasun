@@ -4,11 +4,11 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="processorFactory" class="org.opens.tanaguru.processor.ProcessorFactoryImpl"/>
+    <bean id="processorFactory" class="org.tanaguru.processor.ProcessorFactoryImpl"/>
 
-    <bean id="processorService" class="org.opens.tanaguru.service.ProcessorServiceImpl"/>
+    <bean id="processorService" class="org.tanaguru.service.ProcessorServiceImpl"/>
 
-    <bean id="httpRequestHandler" class="org.opens.tanaguru.util.http.HttpRequestHandler" factory-method="getInstance">
+    <bean id="httpRequestHandler" class="org.tanaguru.util.http.HttpRequestHandler" factory-method="getInstance">
         <property name="proxyHost">
             <value>${proxyHost}</value>
         </property>

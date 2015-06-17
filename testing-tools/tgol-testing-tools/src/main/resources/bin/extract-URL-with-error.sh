@@ -24,7 +24,7 @@ UrlList=$3
 # ---------
 # First: extract URL keys
 # Second: extract URL from its key
-for i in $( /bin/grep --text "${ErrorText}" -B 1 "${BuildLog}" | grep "Running org.opens.tanaguru.webapp.test" | perl -pi -e 's!Running org.opens.tanaguru.webapp.test.(.*)Test!$1!g' | perl -pi -e 's!\_!\-!g' );
+for i in $( /bin/grep --text "${ErrorText}" -B 1 "${BuildLog}" | grep "Running org.tanaguru.webapp.test" | perl -pi -e 's!Running org.tanaguru.webapp.test.(.*)Test!$1!g' | perl -pi -e 's!\_!\-!g' );
 do
     grep "${i};" ${UrlList} | perl -pi -e 's!.*?;(.*)!$1!' ;
 done

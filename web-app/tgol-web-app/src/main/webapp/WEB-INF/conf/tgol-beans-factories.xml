@@ -7,21 +7,21 @@
 
     <!-- si factories -->
 
-    <bean id="contractFactory" class="org.opens.tgol.entity.factory.contract.ContractFactoryImpl"/>
-    <bean id="actFactory" class="org.opens.tgol.entity.factory.contract.ActFactoryImpl"/>
-    <bean id="tgsiScopeFactory" class="org.opens.tgol.entity.factory.contract.ScopeFactoryImpl"/>
+    <bean id="contractFactory" class="org.tanaguru.entity.factory.contract.ContractFactoryImpl"/>
+    <bean id="actFactory" class="org.tanaguru.entity.factory.contract.ActFactoryImpl"/>
+    <bean id="tgsiScopeFactory" class="org.tanaguru.entity.factory.contract.ScopeFactoryImpl"/>
     
-    <bean id="userFactory" class="org.opens.tgol.entity.factory.user.UserFactoryImpl"/>
-    <bean id="roleFactory" class="org.opens.tgol.entity.factory.user.RoleFactoryImpl"/>
+    <bean id="userFactory" class="org.tanaguru.entity.factory.user.UserFactoryImpl"/>
+    <bean id="roleFactory" class="org.tanaguru.entity.factory.user.RoleFactoryImpl"/>
 
-    <bean id="tgsiFunctionalityFactory" class="org.opens.tgol.entity.factory.functionality.FunctionalityFactoryImpl"/>
+    <bean id="tgsiFunctionalityFactory" class="org.tanaguru.entity.factory.functionality.FunctionalityFactoryImpl"/>
     
-    <bean id="optionFamilyFactory" class="org.opens.tgol.entity.factory.option.OptionFamilyFactoryImpl"/>
-    <bean id="optionElementFactory" class="org.opens.tgol.entity.factory.option.OptionElementFactoryImpl"/>
-    <bean id="optionFactory" class="org.opens.tgol.entity.factory.option.OptionFactoryImpl"/>
+    <bean id="optionFamilyFactory" class="org.tanaguru.entity.factory.option.OptionFamilyFactoryImpl"/>
+    <bean id="optionElementFactory" class="org.tanaguru.entity.factory.option.OptionElementFactoryImpl"/>
+    <bean id="optionFactory" class="org.tanaguru.entity.factory.option.OptionFactoryImpl"/>
     
-    <bean id="referentialFactory" class="org.opens.tgol.entity.factory.referential.ReferentialFactoryImpl"/>
+    <bean id="referentialFactory" class="org.tanaguru.entity.factory.referential.ReferentialFactoryImpl"/>
 
-    <bean id="scenarioFactory" class="org.opens.tgol.entity.factory.scenario.ScenarioFactoryImpl"/>
+    <bean id="scenarioFactory" class="org.tanaguru.entity.factory.scenario.ScenarioFactoryImpl"/>
 
 </beans>

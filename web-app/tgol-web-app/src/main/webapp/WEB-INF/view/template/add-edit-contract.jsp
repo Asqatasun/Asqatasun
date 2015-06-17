@@ -233,7 +233,7 @@
                         <br/>
                         <span class="help-block">
                         <c:choose>
-                            <c:when test="${tg:instanceOf(option.formField, 'org.opens.tgol.form.NumericalFormField')}">
+                            <c:when test="${tg:instanceOf(option.formField, 'org.tanaguru.form.NumericalFormField')}">
                                 <fmt:message key="${i18nKey}-rule">
                                     <fmt:param>${option.formField.maxValue}</fmt:param>
                                 </fmt:message>

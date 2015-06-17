@@ -10,15 +10,15 @@
 
     <!-- data presentation factories -->
     
-    <bean id="createContractCommandFactory" class="org.opens.tgol.command.factory.CreateContractCommandFactory" factory-method="getInstance"/>
+    <bean id="createContractCommandFactory" class="org.tanaguru.command.factory.CreateContractCommandFactory" factory-method="getInstance"/>
     
-    <bean id="createUserCommandFactory" class="org.opens.tgol.command.factory.CreateUserCommandFactory" factory-method="getInstance"/>
+    <bean id="createUserCommandFactory" class="org.tanaguru.command.factory.CreateUserCommandFactory" factory-method="getInstance"/>
     
-    <bean id="auditSetUpCommandFactory" class="org.opens.tgol.command.factory.AuditSetUpCommandFactory" factory-method="getInstance"/>
+    <bean id="auditSetUpCommandFactory" class="org.tanaguru.command.factory.AuditSetUpCommandFactory" factory-method="getInstance"/>
     
-    <bean id="auditResultSortCommandFactory" class="org.opens.tgol.command.factory.AuditResultSortCommandFactory" factory-method="getInstance"/>
+    <bean id="auditResultSortCommandFactory" class="org.tanaguru.command.factory.AuditResultSortCommandFactory" factory-method="getInstance"/>
     
-    <bean id="changeTestWeightCommandFactory" class="org.opens.tgol.command.factory.ChangeTestWeightCommandFactory" factory-method="getInstance"/>
+    <bean id="changeTestWeightCommandFactory" class="org.tanaguru.command.factory.ChangeTestWeightCommandFactory" factory-method="getInstance"/>
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">

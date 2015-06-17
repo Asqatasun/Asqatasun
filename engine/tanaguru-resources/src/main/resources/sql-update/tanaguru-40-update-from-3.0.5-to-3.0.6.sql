@@ -11,4 +11,6 @@ UPDATE `PARAMETER_ELEMENT` SET `Id_Parameter_Family` = (SELECT `Id_Parameter_Fam
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 ((SELECT `Id_Parameter_Element` FROM `PARAMETER_ELEMENT` WHERE `Cd_Parameter_Element` LIKE 'COMPLEX_TABLE_MARKER'), '', b'1');
 
+UPDATE TEST SET Rule_Class_Name = REPLACE(Rule_Class_Name, 'org.opens.tanaguru.', 'org.tanaguru.');
+
 SET foreign_key_checks=1;

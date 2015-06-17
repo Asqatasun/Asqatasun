@@ -2,25 +2,25 @@ package com.oceaneconsulting.tanaguru.decorator.impl;
 
 import java.util.List;
 
-import org.opens.tanaguru.entity.service.subject.WebResourceDataService;
-import org.opens.tanaguru.entity.subject.Page;
-import org.opens.tanaguru.entity.subject.Site;
-import org.opens.tanaguru.entity.subject.WebResource;
-import org.opens.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.tanaguru.entity.service.subject.WebResourceDataService;
+import org.tanaguru.entity.subject.Page;
+import org.tanaguru.entity.subject.Site;
+import org.tanaguru.entity.subject.WebResource;
+import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.oceaneconsulting.tanaguru.dao.StatisticsDAO;
 import com.oceaneconsulting.tanaguru.decorator.WebResourceDataServiceDecorator;
 import com.oceaneconsulting.tanaguru.ws.types.AuditResult;
 import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
-import org.opens.tanaguru.entity.audit.EvidenceElement;
-import org.opens.tanaguru.entity.audit.ProcessRemark;
-import org.opens.tanaguru.entity.audit.ProcessResult;
+import org.tanaguru.entity.audit.EvidenceElement;
+import org.tanaguru.entity.audit.ProcessRemark;
+import org.tanaguru.entity.audit.ProcessResult;
 import org.springframework.stereotype.Service;
 
 /**
  * This class wrap
- * {@link org.opens.tanaguru.entity.service.subject.WebResourceDataService}
+ * {@link org.tanaguru.entity.service.subject.WebResourceDataService}
  * class. It enlarge default webresource data service by adding specific
  * statistics.
  *
@@ -88,6 +88,21 @@ public class WebResourceDataServiceDecoratorImpl extends AbstractGenericDataServ
     public List<WebResource> getWebResourceFromItsParent(WebResource arg0,
             int arg1, int arg2) {
         return webResourceDataService.getWebResourceFromItsParent(arg0, arg1, arg2);
+    }
+
+    @Override
+    public WebResource ligthRead(Long webResourceId) {
+        return webResourceDataService.ligthRead(webResourceId);
+    }
+
+    @Override
+    public WebResource deepRead(Long webResourceId) {
+        return webResourceDataService.deepRead(webResourceId);
+    }
+
+    @Override
+    public Long getChildWebResourceCount(WebResource parentWebResource) {
+        return webResourceDataService.getChildWebResourceCount(parentWebResource);
     }
 
 }

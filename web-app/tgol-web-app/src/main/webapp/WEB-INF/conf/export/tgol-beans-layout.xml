@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-    <bean id="layoutFactory" class="org.opens.tgol.report.layout.LayoutFactory" factory-method="getInstance">
+    <bean id="layoutFactory" class="org.tanaguru.report.layout.LayoutFactory" factory-method="getInstance">
         <property name="layoutBuilder" ref="layoutBuilder"/>
      </bean>
 
@@ -22,7 +22,7 @@
         </property>
     </bean>
 
-    <bean id="layoutBuilder" class="org.opens.tgol.report.layout.builder.LayoutBuilderImpl">
+    <bean id="layoutBuilder" class="org.tanaguru.report.layout.builder.LayoutBuilderImpl">
         <property name="ignorePagination" value="true"/>
         <property name="printColumnNames" value="true"/>
         <property name="useFullPageWidth" value="true"/>
@@ -31,10 +31,10 @@
         <property name="fieldMap">
             <map>
                 <entry key="resultCounter">
-                    <value>org.opens.tgol.presentation.data.ResultCounter</value>
+                    <value>org.tanaguru.presentation.data.ResultCounter</value>
                 </entry>
                 <entry key="test">
-                    <value>org.opens.tanaguru.entity.reference.Test</value>
+                    <value>org.tanaguru.entity.reference.Test</value>
                 </entry>
                 <entry key="levelCode">
                     <value>java.lang.String</value>
@@ -77,11 +77,11 @@
         </property>
     </bean>
 
-    <bean id="titleBuilder" class="org.opens.tgol.report.layout.builder.TitleBuilderImpl">
+    <bean id="titleBuilder" class="org.tanaguru.report.layout.builder.TitleBuilderImpl">
         <property name="bundleName" value="i18n/export-report-I18N"/>
     </bean>
 
-    <bean id="subtitleBuilder" class="org.opens.tgol.report.layout.builder.SubtitleBuilderImpl">
+    <bean id="subtitleBuilder" class="org.tanaguru.report.layout.builder.SubtitleBuilderImpl">
         <property name="bundleName" value="i18n/export-report-I18N"/>
         <property name="refAndLevelValueBundleList">
             <list>

@@ -17,10 +17,10 @@
  *
  * Contact us by mail: tanaguru AT tanaguru DOT org
  */
-package org.opens.tanaguru.rules.rgaa30;
+package org.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.entity.audit.TestSolution;
-import org.opens.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule $ruleDash of the referential Rgaa30.
@@ -39,7 +39,7 @@ public class $ruleFileNameTest extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.opens.tanaguru.rules.rgaa30.$ruleFileName");
+                "org.tanaguru.rules.rgaa30.$ruleFileName");
     }
 
     @Override

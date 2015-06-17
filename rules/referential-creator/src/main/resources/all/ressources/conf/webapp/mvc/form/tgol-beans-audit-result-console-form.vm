@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <bean id="${referentiel.toLowerCase()}AllThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="${referentiel.toLowerCase()}AllThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
         <property name="errorI18nKey" value="all-theme-error"/>
@@ -18,7 +18,7 @@
     </bean>
 
     #foreach ( $theme in $themes )
-    <bean id="${referentiel.toLowerCase()}-${theme}ThemeSelectElementBuilder" class="org.opens.tgol.form.builder.SelectElementBuilderImpl">
+    <bean id="${referentiel.toLowerCase()}-${theme}ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
         <property name="value" value="${referentiel}-${theme}"/>
         <property name="i18nKey" value="${referentiel}-${theme}"/>
         <property name="errorI18nKey" value=""/>
@@ -27,7 +27,7 @@
     </bean>
     #end
     
-    <bean id="${referentiel.toLowerCase()}ThemeSelectFormFieldBuilder" class="org.opens.tgol.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="${referentiel.toLowerCase()}ThemeSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
         <property name="value" value="${referentiel}"/>

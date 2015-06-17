@@ -17,9 +17,9 @@
  *
  * Contact us by mail: tanaguru AT tanaguru DOT org
  */
-package org.opens.tanaguru.rules.rgaa30;
+package org.tanaguru.rules.rgaa30;
 
-import org.opens.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule $ruleDot of the referential Rgaa 3.0.

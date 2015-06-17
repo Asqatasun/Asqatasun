@@ -69,7 +69,7 @@
     ConfigString allows simple, inline specification of a moderate
     number of seeds; see below comment for example of using an
     arbitrarily-large external file. -->
-    <bean id="seeds" class="org.opens.tanaguru.crawler.processor.module.TanaguruTextSeedModule">
+    <bean id="seeds" class="org.tanaguru.crawler.processor.module.TanaguruTextSeedModule">
         <property name="textSource">
             <bean class="org.archive.spring.ConfigString">
                 <property name="value">
@@ -100,7 +100,7 @@
                 </bean>-->
                 
                 <!--<bean id="inclusionListRegexDecideRule" class="org.archive.modules.deciderules.NotMatchesListRegexDecideRule">-->
-                <bean id="inclusionListRegexDecideRule" class="org.opens.tanaguru.crawler.processor.deciderule.NotMatchesRegexpDecideRule">
+                <bean id="inclusionListRegexDecideRule" class="org.tanaguru.crawler.processor.deciderule.NotMatchesRegexpDecideRule">
                     <property name="decision" value="REJECT"/>
                     <property name="listLogicalOr" value="true" />
                     <property name="regexList">
@@ -210,7 +210,7 @@
         <property name="digestContent" value="false" />
     </bean>
 
-    <bean id="fetchHttp" class="org.opens.tanaguru.crawler.framework.TanaguruFetchHTTP">
+    <bean id="fetchHttp" class="org.tanaguru.crawler.framework.TanaguruFetchHTTP">
         <!-- <property name="maxLengthBytes" value="0" /> -->
         <property name="timeoutSeconds" value="10" />
         <!-- <property name="maxFetchKBSec" value="0" /> -->
@@ -279,7 +279,7 @@
         </property>
     </bean>
 
-    <bean id="tanaguruWriter" class="org.opens.tanaguru.crawler.processor.TanaguruWriterProcessor">
+    <bean id="tanaguruWriter" class="org.tanaguru.crawler.processor.TanaguruWriterProcessor">
         <property name="htmlRegexp">
             <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
         </property>
@@ -336,7 +336,7 @@
     </bean>
  
     <!-- FRONTIER: Record of all URIs discovered and queued-for-collection -->
-    <bean id="frontier" class="org.opens.tanaguru.crawler.frontier.TanaguruBdbFrontier">
+    <bean id="frontier" class="org.tanaguru.crawler.frontier.TanaguruBdbFrontier">
         <!-- <property name="holdQueues" value="true" /> -->
         <!-- <property name="queueTotalBudget" value="-1" /> -->
         <!-- <property name="balanceReplenishAmount" value="3000" /> -->
