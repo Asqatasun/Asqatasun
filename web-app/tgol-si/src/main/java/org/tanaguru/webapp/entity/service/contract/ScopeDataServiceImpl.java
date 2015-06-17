@@ -22,7 +22,7 @@
 package org.tanaguru.webapp.entity.service.contract;
 
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.contract.Scope;
+import org.tanaguru.webapp.entity.contract.Scope;
 
 /**
  *

@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.tanaguru.presentation.data.AuditStatistics;
-import org.tanaguru.report.layout.column.builder.ElementColumnBuilder;
+import org.tanaguru.webapp.presentation.data.AuditStatistics;
+import org.tanaguru.webapp.report.layout.column.builder.ElementColumnBuilder;
 
 /**
  *

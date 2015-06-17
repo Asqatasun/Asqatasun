@@ -27,11 +27,11 @@ import java.util.List;
 import java.util.Map;
 import junit.framework.TestCase;
 import org.displaytag.properties.SortOrderEnum;
-import org.tanaguru.command.ContractSortCommand;
-import org.tanaguru.presentation.data.ActInfo;
-import org.tanaguru.presentation.data.ActInfoImpl;
-import org.tanaguru.presentation.data.ContractInfo;
-import org.tanaguru.presentation.data.ContractInfoImpl;
+import org.tanaguru.webapp.command.ContractSortCommand;
+import org.tanaguru.webapp.presentation.data.ActInfo;
+import org.tanaguru.webapp.presentation.data.ActInfoImpl;
+import org.tanaguru.webapp.presentation.data.ContractInfo;
+import org.tanaguru.webapp.presentation.data.ContractInfoImpl;
 
 /**
  *

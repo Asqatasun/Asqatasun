@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.action.builder;
 
-import org.tanaguru.action.Action;
-import org.tanaguru.action.ActionImpl;
+import org.tanaguru.webapp.action.Action;
+import org.tanaguru.webapp.action.ActionImpl;
 
 /**
  * The ActionBuilder interface contains the same methods as the Action interface

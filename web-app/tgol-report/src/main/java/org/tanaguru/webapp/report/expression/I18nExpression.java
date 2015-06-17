@@ -24,7 +24,7 @@ package org.tanaguru.webapp.report.expression;
 import ar.com.fdvs.dj.domain.CustomExpression;
 import java.util.*;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.tanaguru.report.expression.retriever.KeyRetriever;
+import org.tanaguru.webapp.report.expression.retriever.KeyRetriever;
 
 /**
  *

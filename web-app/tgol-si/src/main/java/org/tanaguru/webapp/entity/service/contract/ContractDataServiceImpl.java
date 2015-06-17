@@ -24,11 +24,11 @@ package org.tanaguru.webapp.entity.service.contract;
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.dao.contract.ContractDAO;
-import org.tanaguru.entity.functionality.Functionality;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.dao.contract.ContractDAO;
+import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

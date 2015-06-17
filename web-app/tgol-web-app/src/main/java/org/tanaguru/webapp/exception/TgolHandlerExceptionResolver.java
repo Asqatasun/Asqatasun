@@ -21,7 +21,7 @@
  */
 package org.tanaguru.webapp.exception;
 
-import org.tanaguru.util.TgolKeyStore;
+import org.tanaguru.webapp.util.TgolKeyStore;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;

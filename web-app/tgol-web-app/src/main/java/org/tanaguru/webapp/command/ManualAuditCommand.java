@@ -29,9 +29,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.presentation.data.ManualResult;
-import org.tanaguru.presentation.data.TestResult;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.presentation.data.ManualResult;
+import org.tanaguru.webapp.presentation.data.TestResult;
 
 /**
  * 

@@ -24,17 +24,17 @@ package org.tanaguru.webapp.entity.dao.contract;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.entity.dao.user.UserDAO;
-import org.tanaguru.entity.factory.contract.ContractFactory;
-import org.tanaguru.entity.functionality.Functionality;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.referential.Referential;
-import org.tanaguru.entity.scenario.Scenario;
-import org.tanaguru.entity.service.contract.ContractDataService;
-import org.tanaguru.entity.service.contract.ContractDataServiceImpl;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.dao.test.AbstractDaoTestCase;
+import org.tanaguru.webapp.entity.dao.user.UserDAO;
+import org.tanaguru.webapp.entity.factory.contract.ContractFactory;
+import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.referential.Referential;
+import org.tanaguru.webapp.entity.scenario.Scenario;
+import org.tanaguru.webapp.entity.service.contract.ContractDataService;
+import org.tanaguru.webapp.entity.service.contract.ContractDataServiceImpl;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

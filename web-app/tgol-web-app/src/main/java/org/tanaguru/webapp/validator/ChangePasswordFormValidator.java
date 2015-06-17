@@ -26,9 +26,9 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.tanaguru.util.MD5Encoder;
-import org.tanaguru.command.ChangePasswordCommand;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.util.TgolPasswordChecker;
+import org.tanaguru.webapp.command.ChangePasswordCommand;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.util.TgolPasswordChecker;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

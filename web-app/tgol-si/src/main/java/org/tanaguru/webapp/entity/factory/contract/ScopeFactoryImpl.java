@@ -21,9 +21,9 @@
  */
 package org.tanaguru.webapp.entity.factory.contract;
 
-import org.tanaguru.entity.contract.Scope;
-import org.tanaguru.entity.contract.ScopeEnum;
-import org.tanaguru.entity.contract.TgsiScopeImpl;
+import org.tanaguru.webapp.entity.contract.Scope;
+import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.tanaguru.webapp.entity.contract.TgsiScopeImpl;
 
 /**
  *

@@ -35,10 +35,10 @@ import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.tanaguru.entity.service.reference.TestDataService;
 import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.presentation.data.ManualResult;
-import org.tanaguru.presentation.data.RemarkInfos;
-import org.tanaguru.presentation.data.TestResult;
-import org.tanaguru.presentation.data.TestResultImpl;
+import org.tanaguru.webapp.presentation.data.ManualResult;
+import org.tanaguru.webapp.presentation.data.RemarkInfos;
+import org.tanaguru.webapp.presentation.data.TestResult;
+import org.tanaguru.webapp.presentation.data.TestResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

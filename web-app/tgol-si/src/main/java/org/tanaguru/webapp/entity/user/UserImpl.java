@@ -30,10 +30,10 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.contract.ContractImpl;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.option.OptionElementImpl;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.contract.ContractImpl;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.option.OptionElementImpl;
 
 /**
  *
@@ -235,7 +235,7 @@ public class UserImpl implements User, Serializable {
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.entity.contract.ContractImpl.class)
+    @XmlElementRef(type = org.tanaguru.webapp.entity.contract.ContractImpl.class)
     public Collection<Contract> getContractSet() {
         return (Collection)contractSet;
     }
@@ -262,7 +262,7 @@ public class UserImpl implements User, Serializable {
 
     @Override
     public void addAllOptionElement(Collection<OptionElement> optionElementSet) {
-        this.optionElementSet = new HashSet<OptionElementImpl>();
+        this.optionElementSet = new HashSet<>();
         for (OptionElement optionElement : optionElementSet) {
             if (optionElement instanceof OptionElementImpl) {
                 this.optionElementSet.add((OptionElementImpl)optionElement);

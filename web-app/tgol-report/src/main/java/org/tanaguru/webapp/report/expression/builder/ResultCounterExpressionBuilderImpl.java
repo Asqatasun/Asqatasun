@@ -22,7 +22,7 @@
 package org.tanaguru.webapp.report.expression.builder;
 
 import java.util.Locale;
-import org.tanaguru.report.expression.ResultCounterExpression;
+import org.tanaguru.webapp.report.expression.ResultCounterExpression;
 
 /**
  *

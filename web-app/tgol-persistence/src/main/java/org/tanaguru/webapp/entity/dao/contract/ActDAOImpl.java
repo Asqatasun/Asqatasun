@@ -27,7 +27,7 @@ import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import org.tanaguru.entity.audit.AuditStatus;
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.contract.*;
+import org.tanaguru.webapp.entity.contract.*;
 
 /**
  *

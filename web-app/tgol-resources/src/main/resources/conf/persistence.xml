@@ -4,17 +4,17 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <non-jta-data-source>jdbc/tanaguruDS</non-jta-data-source>
         <!-- TGSI classes-->
-        <class>org.tanaguru.entity.user.UserImpl</class>
-        <class>org.tanaguru.entity.user.RoleImpl</class>
-        <class>org.tanaguru.entity.contract.ContractImpl</class>
-        <class>org.tanaguru.entity.contract.ActImpl</class>
-        <class>org.tanaguru.entity.contract.TgsiScopeImpl</class>
-        <class>org.tanaguru.entity.functionality.FunctionalityImpl</class>
-        <class>org.tanaguru.entity.option.OptionImpl</class>
-        <class>org.tanaguru.entity.option.OptionElementImpl</class>
-        <class>org.tanaguru.entity.option.OptionFamilyImpl</class>
-        <class>org.tanaguru.entity.referential.ReferentialImpl</class>
-        <class>org.tanaguru.entity.scenario.ScenarioImpl</class>
+        <class>org.tanaguru.webapp.entity.user.UserImpl</class>
+        <class>org.tanaguru.webapp.entity.user.RoleImpl</class>
+        <class>org.tanaguru.webapp.entity.contract.ContractImpl</class>
+        <class>org.tanaguru.webapp.entity.contract.ActImpl</class>
+        <class>org.tanaguru.webapp.entity.contract.TgsiScopeImpl</class>
+        <class>org.tanaguru.webapp.entity.functionality.FunctionalityImpl</class>
+        <class>org.tanaguru.webapp.entity.option.OptionImpl</class>
+        <class>org.tanaguru.webapp.entity.option.OptionElementImpl</class>
+        <class>org.tanaguru.webapp.entity.option.OptionFamilyImpl</class>
+        <class>org.tanaguru.webapp.entity.referential.ReferentialImpl</class>
+        <class>org.tanaguru.webapp.entity.scenario.ScenarioImpl</class>
         <!-- tanaguru classes-->
         <class>org.tanaguru.entity.reference.CriterionImpl</class>
         <class>org.tanaguru.entity.reference.DecisionLevelImpl</class>

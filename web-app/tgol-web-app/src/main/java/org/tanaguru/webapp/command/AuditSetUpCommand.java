@@ -26,8 +26,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import org.tanaguru.command.helper.UploadAuditSetUpCommandHelper;
-import org.tanaguru.entity.contract.ScopeEnum;
+import org.tanaguru.webapp.command.helper.UploadAuditSetUpCommandHelper;
+import org.tanaguru.webapp.entity.contract.ScopeEnum;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**

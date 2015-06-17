@@ -24,16 +24,16 @@ package org.tanaguru.webapp.command.factory;
 import java.io.Serializable;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.command.CreateContractCommand;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.functionality.Functionality;
-import org.tanaguru.entity.option.Option;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.referential.Referential;
-import org.tanaguru.entity.service.functionality.FunctionalityDataService;
-import org.tanaguru.entity.service.option.OptionDataService;
-import org.tanaguru.entity.service.option.OptionElementDataService;
-import org.tanaguru.entity.service.referential.ReferentialDataService;
+import org.tanaguru.webapp.command.CreateContractCommand;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.tanaguru.webapp.entity.option.Option;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.referential.Referential;
+import org.tanaguru.webapp.entity.service.functionality.FunctionalityDataService;
+import org.tanaguru.webapp.entity.service.option.OptionDataService;
+import org.tanaguru.webapp.entity.service.option.OptionElementDataService;
+import org.tanaguru.webapp.entity.service.referential.ReferentialDataService;
 
 /**
  *

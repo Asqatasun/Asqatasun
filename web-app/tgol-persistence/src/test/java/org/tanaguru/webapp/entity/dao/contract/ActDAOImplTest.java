@@ -21,11 +21,11 @@
  */
 package org.tanaguru.webapp.entity.dao.contract;
 
-import org.tanaguru.entity.contract.Act;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.entity.factory.contract.ActFactory;
-import org.tanaguru.entity.factory.contract.ContractFactory;
+import org.tanaguru.webapp.entity.contract.Act;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.dao.test.AbstractDaoTestCase;
+import org.tanaguru.webapp.entity.factory.contract.ActFactory;
+import org.tanaguru.webapp.entity.factory.contract.ContractFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,13 +35,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.tanaguru.entity.dao.subject.WebResourceDAO;
-import org.tanaguru.entity.dao.subject.WebResourceDAOImpl;
 import org.tanaguru.entity.factory.subject.WebResourceFactory;
-import org.tanaguru.entity.factory.subject.WebResourceFactoryImpl;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.factory.contract.ActFactoryImpl;
-import org.tanaguru.entity.factory.contract.ContractFactoryImpl;
 
 /**
  *
@@ -54,13 +48,13 @@ public class ActDAOImplTest extends AbstractDaoTestCase {
      */
     private static final String INPUT_DATA_SET_FILENAME = "src/test/resources/dataSets/flatXmlDataSet.xml";
 
-    private ActDAO actDAO;
-    private ActFactory actFactory;
-    private ContractFactory contractFactory;
-    private ContractDAO contractDAO;
-    private ScopeDAO scopeDAO;
-    private WebResourceFactory wrFactory;
-    private WebResourceDAO wrDAO;
+    private final ActDAO actDAO;
+    private final ActFactory actFactory;
+    private final ContractFactory contractFactory;
+    private final ContractDAO contractDAO;
+    private final ScopeDAO scopeDAO;
+    private final WebResourceFactory wrFactory;
+    private final WebResourceDAO wrDAO;
 
     public ActDAOImplTest(String testName) {
         super(testName);

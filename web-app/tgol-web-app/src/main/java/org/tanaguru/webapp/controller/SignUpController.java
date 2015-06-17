@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.controller;
 
-import org.tanaguru.command.CreateUserCommand;
-import org.tanaguru.util.TgolKeyStore;
+import org.tanaguru.webapp.command.CreateUserCommand;
+import org.tanaguru.webapp.util.TgolKeyStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

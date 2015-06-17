@@ -21,7 +21,7 @@
  */
 package org.tanaguru.webapp.report.layout.builder;
 
-import org.tanaguru.presentation.data.AuditStatistics;
+import org.tanaguru.webapp.presentation.data.AuditStatistics;
 import java.text.DateFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;

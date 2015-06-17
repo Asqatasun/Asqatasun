@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.command.factory;
 
-import org.tanaguru.command.AddScenarioCommand;
-import org.tanaguru.entity.contract.Contract;
+import org.tanaguru.webapp.command.AddScenarioCommand;
+import org.tanaguru.webapp.entity.contract.Contract;
 
 
 /**

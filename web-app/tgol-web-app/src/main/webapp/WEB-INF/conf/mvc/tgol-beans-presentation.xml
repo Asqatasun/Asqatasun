@@ -10,19 +10,19 @@
 
     <!-- data presentation factories -->
     
-    <bean id="actInfoFactory" class="org.tanaguru.presentation.factory.ActInfoFactory" factory-method="getInstance"/>
-    <bean id="auditStatisticsFactory" class="org.tanaguru.presentation.factory.AuditStatisticsFactory" factory-method="getInstance"/>
-    <bean id="contractInfoFactory" class="org.tanaguru.presentation.factory.ContractInfoFactory" factory-method="getInstance"/>
-    <bean id="detailedContractInfoFactory" class="org.tanaguru.presentation.factory.DetailedContractInfoFactory" factory-method="getInstance"/>
-    <bean id="failedPageInfoFactory" class="org.tanaguru.presentation.factory.FailedPageInfoFactory" factory-method="getInstance"/>
-    <bean id="failedTestInfoFactory" class="org.tanaguru.presentation.factory.FailedTestInfoFactory" factory-method="getInstance"/>
-    <bean id="failedThemeInfoFactory" class="org.tanaguru.presentation.factory.FailedThemeInfoFactory" factory-method="getInstance"/>
-    <bean id="pageResultFactory" class="org.tanaguru.presentation.factory.PageResultFactory" factory-method="getInstance"/>
-    <bean id="remarksInfosFactory" class="org.tanaguru.presentation.factory.RemarkInfosFactory" factory-method="getInstance"/>
-    <bean id="resultCounterFactory" class="org.tanaguru.presentation.factory.ResultCounterFactory" factory-method="getInstance"/>
-    <bean id="testResultFactory" class="org.tanaguru.presentation.factory.TestResultFactory" factory-method="getInstance"/>
-    <bean id="criterionResultFactory" class="org.tanaguru.presentation.factory.CriterionResultFactory" factory-method="getInstance"/>
-    <bean id="tgolPaginatedListFactory" class="org.tanaguru.report.pagination.factory.TgolPaginatedListFactory" factory-method="getInstance"/>
+    <bean id="actInfoFactory" class="org.tanaguru.webapp.presentation.factory.ActInfoFactory" factory-method="getInstance"/>
+    <bean id="auditStatisticsFactory" class="org.tanaguru.webapp.presentation.factory.AuditStatisticsFactory" factory-method="getInstance"/>
+    <bean id="contractInfoFactory" class="org.tanaguru.webapp.presentation.factory.ContractInfoFactory" factory-method="getInstance"/>
+    <bean id="detailedContractInfoFactory" class="org.tanaguru.webapp.presentation.factory.DetailedContractInfoFactory" factory-method="getInstance"/>
+    <bean id="failedPageInfoFactory" class="org.tanaguru.webapp.presentation.factory.FailedPageInfoFactory" factory-method="getInstance"/>
+    <bean id="failedTestInfoFactory" class="org.tanaguru.webapp.presentation.factory.FailedTestInfoFactory" factory-method="getInstance"/>
+    <bean id="failedThemeInfoFactory" class="org.tanaguru.webapp.presentation.factory.FailedThemeInfoFactory" factory-method="getInstance"/>
+    <bean id="pageResultFactory" class="org.tanaguru.webapp.presentation.factory.PageResultFactory" factory-method="getInstance"/>
+    <bean id="remarksInfosFactory" class="org.tanaguru.webapp.presentation.factory.RemarkInfosFactory" factory-method="getInstance"/>
+    <bean id="resultCounterFactory" class="org.tanaguru.webapp.presentation.factory.ResultCounterFactory" factory-method="getInstance"/>
+    <bean id="testResultFactory" class="org.tanaguru.webapp.presentation.factory.TestResultFactory" factory-method="getInstance"/>
+    <bean id="criterionResultFactory" class="org.tanaguru.webapp.presentation.factory.CriterionResultFactory" factory-method="getInstance"/>
+    <bean id="tgolPaginatedListFactory" class="org.tanaguru.webapp.report.pagination.factory.TgolPaginatedListFactory" factory-method="getInstance"/>
 
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">
@@ -48,7 +48,7 @@
         <property name="arguments" value="all-theme"/>
     </bean>
     
-    <bean id="auditSetUpFormFieldHelper" class="org.tanaguru.form.parameterization.helper.AuditSetUpFormFieldHelper"/>
+    <bean id="auditSetUpFormFieldHelper" class="org.tanaguru.webapp.form.parameterization.helper.AuditSetUpFormFieldHelper"/>
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">
             <ref local="auditSetUpFormFieldHelper"/>

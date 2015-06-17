@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.entity.factory.option;
 
-import org.tanaguru.entity.option.OptionFamily;
-import org.tanaguru.entity.option.OptionFamilyImpl;
+import org.tanaguru.webapp.entity.option.OptionFamily;
+import org.tanaguru.webapp.entity.option.OptionFamilyImpl;
 
 /**
  *

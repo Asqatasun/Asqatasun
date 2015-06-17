@@ -34,10 +34,10 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
-import org.tanaguru.presentation.data.AuditStatistics;
-import org.tanaguru.report.format.ExportFormat;
-import org.tanaguru.report.layout.LayoutFactory;
-import org.tanaguru.report.service.exception.NotSupportedExportFormatException;
+import org.tanaguru.webapp.presentation.data.AuditStatistics;
+import org.tanaguru.webapp.report.format.ExportFormat;
+import org.tanaguru.webapp.report.layout.LayoutFactory;
+import org.tanaguru.webapp.report.service.exception.NotSupportedExportFormatException;
 
 /**
  * Service for processing DynamicJasper reports
@@ -83,6 +83,16 @@ public final class ExportService {
 
     /**
      * Processes the download for Excel format
+     * @param response
+     * @param resourceId
+     * @param auditStatistics
+     * @param dataSource
+     * @param locale
+     * @param format
+     * @throws ColumnBuilderException
+     * @throws ClassNotFoundException
+     * @throws JRException
+     * @throws NotSupportedExportFormatException 
      */
     @SuppressWarnings("unchecked")
     public void export (
@@ -125,9 +135,7 @@ public final class ExportService {
             response.setContentLength(baos.size());
             // Write to reponse stream
             writeReportToResponseStream(response, baos);
-        } catch (InstantiationException ex) {
-            LOGGER.warn(ex);
-        } catch (IllegalAccessException ex) {
+        } catch (InstantiationException | IllegalAccessException ex) {
             LOGGER.warn(ex);
         }
 

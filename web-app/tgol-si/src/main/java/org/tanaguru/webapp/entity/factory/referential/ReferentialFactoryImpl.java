@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.entity.factory.referential;
 
-import org.tanaguru.entity.referential.Referential;
-import org.tanaguru.entity.referential.ReferentialImpl;
+import org.tanaguru.webapp.entity.referential.Referential;
+import org.tanaguru.webapp.entity.referential.ReferentialImpl;
 
 /**
  *

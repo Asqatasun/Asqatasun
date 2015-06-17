@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.action.Action;
-import org.tanaguru.action.builder.ActionBuilder;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.functionality.Functionality;
+import org.tanaguru.webapp.action.Action;
+import org.tanaguru.webapp.action.builder.ActionBuilder;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.functionality.Functionality;
 
 /**
  *
@@ -45,7 +45,7 @@ public class ContractActionHandlerImpl implements ActionHandler {
 
     @SuppressWarnings("unchecked")
     public List<Action> getActionList() {
-        List<Action> actionList = new ArrayList<Action>();
+        List<Action> actionList = new ArrayList<>();
         for (ActionBuilder actionBuilder : actionBuilderList) {
             actionList.add(actionBuilder.build());
         }

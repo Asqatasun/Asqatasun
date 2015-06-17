@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.service.user;
 
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.dao.user.UserDAO;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.entity.dao.user.UserDAO;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

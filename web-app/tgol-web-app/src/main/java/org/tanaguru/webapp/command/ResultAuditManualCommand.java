@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.presentation.data.TestResult;
+import org.tanaguru.webapp.presentation.data.TestResult;
 
 /**
  * 

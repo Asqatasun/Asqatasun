@@ -22,10 +22,10 @@
 package org.tanaguru.webapp.command.factory;
 
 import java.io.Serializable;
-import org.tanaguru.command.CreateUserCommand;
-import org.tanaguru.entity.service.user.RoleDataService;
-import org.tanaguru.entity.user.Role;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.command.CreateUserCommand;
+import org.tanaguru.webapp.entity.service.user.RoleDataService;
+import org.tanaguru.webapp.entity.user.Role;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

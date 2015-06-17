@@ -25,8 +25,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.option.Option;
-import org.tanaguru.entity.option.OptionImpl;
+import org.tanaguru.webapp.entity.option.Option;
+import org.tanaguru.webapp.entity.option.OptionImpl;
 
 /**
  *

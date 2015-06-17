@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.presentation.factory;
 
-import org.tanaguru.presentation.data.FailedPageInfo;
-import org.tanaguru.presentation.data.FailedPageInfoImpl;
+import org.tanaguru.webapp.presentation.data.FailedPageInfo;
+import org.tanaguru.webapp.presentation.data.FailedPageInfoImpl;
 
 
 /**

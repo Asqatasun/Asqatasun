@@ -33,8 +33,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.report.expression.builder.AbstractGenericConditionalStyleBuilder;
-import org.tanaguru.report.expression.builder.AbstractGenericCustomExpressionBuilder;
+import org.tanaguru.webapp.report.expression.builder.AbstractGenericConditionalStyleBuilder;
+import org.tanaguru.webapp.report.expression.builder.AbstractGenericCustomExpressionBuilder;
 
 /**
  *

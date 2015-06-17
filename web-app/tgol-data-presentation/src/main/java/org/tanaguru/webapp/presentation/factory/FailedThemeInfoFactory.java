@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.presentation.factory;
 
-import org.tanaguru.presentation.data.FailedThemeInfo;
-import org.tanaguru.presentation.data.FailedThemeInfoImpl;
+import org.tanaguru.webapp.presentation.data.FailedThemeInfo;
+import org.tanaguru.webapp.presentation.data.FailedThemeInfoImpl;
 
 /**
  * 

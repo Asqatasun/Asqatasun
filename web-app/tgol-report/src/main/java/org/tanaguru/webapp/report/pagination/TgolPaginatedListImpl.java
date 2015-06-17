@@ -21,7 +21,7 @@
  */
 package org.tanaguru.webapp.report.pagination;
 
-import org.tanaguru.presentation.data.PageResult;
+import org.tanaguru.webapp.presentation.data.PageResult;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

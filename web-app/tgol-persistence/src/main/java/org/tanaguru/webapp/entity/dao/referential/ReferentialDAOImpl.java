@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.dao.referential;
 
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.referential.Referential;
-import org.tanaguru.entity.referential.ReferentialImpl;
+import org.tanaguru.webapp.entity.referential.Referential;
+import org.tanaguru.webapp.entity.referential.ReferentialImpl;
 
 /**
  * @author jkowalczyk

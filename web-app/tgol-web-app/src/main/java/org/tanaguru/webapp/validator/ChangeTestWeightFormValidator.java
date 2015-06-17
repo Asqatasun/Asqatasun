@@ -24,7 +24,7 @@ package org.tanaguru.webapp.validator;
 import java.util.Map;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.command.ChangeTestWeightCommand;
+import org.tanaguru.webapp.command.ChangeTestWeightCommand;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

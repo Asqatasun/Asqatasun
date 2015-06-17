@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.entity.dao.user;
 
-import org.tanaguru.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.entity.dao.test.AbstractDaoTestCase;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

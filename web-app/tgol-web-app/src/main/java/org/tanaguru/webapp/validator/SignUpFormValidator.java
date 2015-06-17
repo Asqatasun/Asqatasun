@@ -23,10 +23,10 @@ package org.tanaguru.webapp.validator;
 
 import java.util.regex.Pattern;
 import org.apache.commons.validator.routines.UrlValidator;
-import org.tanaguru.command.CreateUserCommand;
-import org.tanaguru.command.UserSignUpCommand;
-import org.tanaguru.entity.service.user.UserDataService;
-import org.tanaguru.util.TgolPasswordChecker;
+import org.tanaguru.webapp.command.CreateUserCommand;
+import org.tanaguru.webapp.command.UserSignUpCommand;
+import org.tanaguru.webapp.entity.service.user.UserDataService;
+import org.tanaguru.webapp.util.TgolPasswordChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

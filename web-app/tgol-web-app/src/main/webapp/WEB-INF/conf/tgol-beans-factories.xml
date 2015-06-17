@@ -7,21 +7,21 @@
 
     <!-- si factories -->
 
-    <bean id="contractFactory" class="org.tanaguru.entity.factory.contract.ContractFactoryImpl"/>
-    <bean id="actFactory" class="org.tanaguru.entity.factory.contract.ActFactoryImpl"/>
-    <bean id="tgsiScopeFactory" class="org.tanaguru.entity.factory.contract.ScopeFactoryImpl"/>
+    <bean id="contractFactory" class="org.tanaguru.webapp.entity.factory.contract.ContractFactoryImpl"/>
+    <bean id="actFactory" class="org.tanaguru.webapp.entity.factory.contract.ActFactoryImpl"/>
+    <bean id="tgsiScopeFactory" class="org.tanaguru.webapp.entity.factory.contract.ScopeFactoryImpl"/>
     
-    <bean id="userFactory" class="org.tanaguru.entity.factory.user.UserFactoryImpl"/>
-    <bean id="roleFactory" class="org.tanaguru.entity.factory.user.RoleFactoryImpl"/>
+    <bean id="userFactory" class="org.tanaguru.webapp.entity.factory.user.UserFactoryImpl"/>
+    <bean id="roleFactory" class="org.tanaguru.webapp.entity.factory.user.RoleFactoryImpl"/>
 
-    <bean id="tgsiFunctionalityFactory" class="org.tanaguru.entity.factory.functionality.FunctionalityFactoryImpl"/>
+    <bean id="tgsiFunctionalityFactory" class="org.tanaguru.webapp.entity.factory.functionality.FunctionalityFactoryImpl"/>
     
-    <bean id="optionFamilyFactory" class="org.tanaguru.entity.factory.option.OptionFamilyFactoryImpl"/>
-    <bean id="optionElementFactory" class="org.tanaguru.entity.factory.option.OptionElementFactoryImpl"/>
-    <bean id="optionFactory" class="org.tanaguru.entity.factory.option.OptionFactoryImpl"/>
+    <bean id="optionFamilyFactory" class="org.tanaguru.webapp.entity.factory.option.OptionFamilyFactoryImpl"/>
+    <bean id="optionElementFactory" class="org.tanaguru.webapp.entity.factory.option.OptionElementFactoryImpl"/>
+    <bean id="optionFactory" class="org.tanaguru.webapp.entity.factory.option.OptionFactoryImpl"/>
     
-    <bean id="referentialFactory" class="org.tanaguru.entity.factory.referential.ReferentialFactoryImpl"/>
+    <bean id="referentialFactory" class="org.tanaguru.webapp.entity.factory.referential.ReferentialFactoryImpl"/>
 
-    <bean id="scenarioFactory" class="org.tanaguru.entity.factory.scenario.ScenarioFactoryImpl"/>
+    <bean id="scenarioFactory" class="org.tanaguru.webapp.entity.factory.scenario.ScenarioFactoryImpl"/>
 
 </beans>

@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.dao.contract;
 
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.contract.Scope;
-import org.tanaguru.entity.contract.TgsiScopeImpl;
+import org.tanaguru.webapp.entity.contract.Scope;
+import org.tanaguru.webapp.entity.contract.TgsiScopeImpl;
 
 /**
  *
