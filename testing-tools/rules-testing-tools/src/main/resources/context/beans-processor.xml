@@ -24,13 +24,15 @@
         <property name="entityDao" ref="processResultDAO"/>
     </bean>
     
-    <bean id="processRemarkDAO" class="org.tanaguru.entity.dao.audit.ProcessRemarkDAOImpl"/>
-    <bean id="processRemarkFactory" class="org.tanaguru.entity.factory.audit.ProcessRemarkFactoryImpl"/>
-    <bean id="processRemarkDataService" class="org.tanaguru.entity.service.audit.ProcessRemarkDataServiceImpl">
-        <property name="entityFactory" ref="processRemarkFactory"/>
-        <property name="entityDao" ref="processRemarkDAO"/>
-    </bean>
+<!--    <bean id="processRemarkDAO" class="org.tanaguru.entity.dao.audit.ProcessRemarkDAOImpl"/>-->
+<!--        <property name="entityFactory" ref="processRemarkFactory"/>
+        <property name="entityDao" ref="processRemarkDAO"/>-->
+    <!--</bean>-->
     
+    <bean id="processRemarkFactory" class="org.tanaguru.entity.factory.audit.ProcessRemarkFactoryImpl"/>
+    <bean id="processRemarkDataService" class="org.tanaguru.rules.test.ProcessRemarkDataServiceMock">
+        <property name="entityFactory" ref="processRemarkFactory"/>
+    </bean>
     <bean id="contentDataService" class="org.tanaguru.rules.test.ContentDataServiceMock"/>
     <bean id="preProcessResultDataService" class="org.tanaguru.rules.test.PreProcessResultDataServiceMock"/>
 

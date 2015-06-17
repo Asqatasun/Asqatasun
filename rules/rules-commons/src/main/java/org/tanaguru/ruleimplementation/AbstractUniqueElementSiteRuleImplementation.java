@@ -277,8 +277,7 @@ public class AbstractUniqueElementSiteRuleImplementation
             int elementCounter,
             Collection<ProcessRemark> processRemarkList) {
         
-        Collection<DefiniteResult> definiteResults = 
-                            new ArrayList<>();
+        Collection<DefiniteResult> definiteResults = new ArrayList<>();
         
         for (WebResource wr : webResourceList) {
             definiteResults.add(

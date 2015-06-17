@@ -23,10 +23,12 @@
 package org.tanaguru.rules.test;
 
 import java.util.Collection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tanaguru.entity.audit.ProcessRemark;
 import org.tanaguru.entity.audit.ProcessResult;
 import org.tanaguru.entity.audit.SourceCodeRemark;
 import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
 import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
 import org.tanaguru.sdk.entity.dao.GenericDAO;
 import org.tanaguru.sdk.entity.factory.GenericFactory;
@@ -37,6 +39,14 @@ import org.tanaguru.sdk.entity.factory.GenericFactory;
  */
 public class ProcessRemarkDataServiceMock implements ProcessRemarkDataService{
 
+    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    @Autowired
+    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
+        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+    }
+    
+    private GenericFactory<ProcessRemark> processRemarkFactory;
+    
     @Override
     public Collection<ProcessRemark> findProcessRemarksFromProcessResult(ProcessResult processResult, int limit) {
         return processResult.getRemarkSet();
@@ -104,7 +114,7 @@ public class ProcessRemarkDataServiceMock implements ProcessRemarkDataService{
 
     @Override
     public void setEntityFactory(GenericFactory<ProcessRemark> factory) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.processRemarkFactory = factory;
     }
 
     @Override
@@ -114,22 +124,25 @@ public class ProcessRemarkDataServiceMock implements ProcessRemarkDataService{
 
     @Override
     public ProcessRemark getProcessRemark(TestSolution issue, String messageCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ProcessRemark pr = processRemarkFactory.create();
+        pr.setIssue(issue);
+        pr.setMessageCode(messageCode);
+        return pr;
     }
 
     @Override
     public SourceCodeRemark getSourceCodeRemark() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return sourceCodeRemarkFactory.create();
     }
 
     @Override
     public SourceCodeRemark getSourceCodeRemark(TestSolution issue, String messageCode) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return sourceCodeRemarkFactory.create(issue, messageCode);
     }
 
     @Override
     public SourceCodeRemark getSourceCodeRemark(String target, TestSolution issue, String messageCode, int lineNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return sourceCodeRemarkFactory.create(target, issue, messageCode, lineNumber);
     }
 
 }
