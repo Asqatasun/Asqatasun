@@ -10,7 +10,7 @@
 
 
     <!-- Rgaa30 select elements -->
-    <bean id="rgaa30BronzeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa30BronzeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30;LEVEL_1"/>
         <property name="i18nKey" value="Rgaa30-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="rgaa30SilverSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa30SilverSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30;LEVEL_2"/>
         <property name="i18nKey" value="Rgaa30-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <bean id="rgaa30GoldSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa30GoldSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa30;LEVEL_3"/>
         <property name="i18nKey" value="Rgaa30-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>

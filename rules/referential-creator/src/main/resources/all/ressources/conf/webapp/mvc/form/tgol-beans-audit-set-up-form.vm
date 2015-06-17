@@ -10,7 +10,7 @@
 
 
     <!-- ${referentiel} select elements -->
-    <bean id="${referentiel.toLowerCase()}BronzeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="${referentiel.toLowerCase()}BronzeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="${referentiel};LEVEL_1"/>
         <property name="i18nKey" value="${referentiel}-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="${referentiel.toLowerCase()}SilverSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="${referentiel.toLowerCase()}SilverSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="${referentiel};LEVEL_2"/>
         <property name="i18nKey" value="${referentiel}-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <bean id="${referentiel.toLowerCase()}GoldSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="${referentiel.toLowerCase()}GoldSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="${referentiel};LEVEL_3"/>
         <property name="i18nKey" value="${referentiel}-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>
