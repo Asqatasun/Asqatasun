@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.presentation.factory;
 
-import org.tanaguru.presentation.data.RemarkInfos;
-import org.tanaguru.presentation.data.RemarkInfosImpl;
+import org.tanaguru.webapp.presentation.data.RemarkInfos;
+import org.tanaguru.webapp.presentation.data.RemarkInfosImpl;
 
 /**
  * 

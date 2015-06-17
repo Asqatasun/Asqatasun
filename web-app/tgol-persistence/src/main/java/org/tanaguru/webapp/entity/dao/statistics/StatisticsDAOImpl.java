@@ -32,15 +32,15 @@ import org.tanaguru.entity.reference.Theme;
 import org.tanaguru.entity.statistics.*;
 import org.tanaguru.entity.subject.WebResource;
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.presentation.data.FailedPageInfo;
-import org.tanaguru.presentation.data.FailedTestInfo;
-import org.tanaguru.presentation.data.FailedThemeInfo;
-import org.tanaguru.presentation.data.PageResult;
-import org.tanaguru.presentation.factory.FailedPageInfoFactory;
-import org.tanaguru.presentation.factory.FailedTestInfoFactory;
-import org.tanaguru.presentation.factory.FailedThemeInfoFactory;
-import org.tanaguru.presentation.factory.PageResultFactory;
-import org.tanaguru.util.HttpStatusCodeFamily;
+import org.tanaguru.webapp.presentation.data.FailedPageInfo;
+import org.tanaguru.webapp.presentation.data.FailedTestInfo;
+import org.tanaguru.webapp.presentation.data.FailedThemeInfo;
+import org.tanaguru.webapp.presentation.data.PageResult;
+import org.tanaguru.webapp.presentation.factory.FailedPageInfoFactory;
+import org.tanaguru.webapp.presentation.factory.FailedTestInfoFactory;
+import org.tanaguru.webapp.presentation.factory.FailedThemeInfoFactory;
+import org.tanaguru.webapp.presentation.factory.PageResultFactory;
+import org.tanaguru.webapp.util.HttpStatusCodeFamily;
 
 /**
  *

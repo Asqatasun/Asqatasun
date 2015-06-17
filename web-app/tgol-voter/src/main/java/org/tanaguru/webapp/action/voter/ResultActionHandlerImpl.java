@@ -21,11 +21,11 @@
  */
 package org.tanaguru.webapp.action.voter;
 
-import org.tanaguru.action.Action;
+import org.tanaguru.webapp.action.Action;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.tanaguru.action.builder.ActionBuilder;
+import org.tanaguru.webapp.action.builder.ActionBuilder;
 
 /**
  *
@@ -52,7 +52,7 @@ public class ResultActionHandlerImpl implements ActionHandler {
 
     @SuppressWarnings("unchecked")
     public List<Action> getActionList() {
-        List<Action> actionList = new ArrayList<Action>();
+        List<Action> actionList = new ArrayList<>();
         for (ActionBuilder actionBuilder : actionBuilderList) {
             actionList.add(actionBuilder.build());
         }

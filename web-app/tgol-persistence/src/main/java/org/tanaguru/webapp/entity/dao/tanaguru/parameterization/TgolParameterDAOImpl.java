@@ -27,9 +27,9 @@ import org.tanaguru.entity.parameterization.Parameter;
 import org.tanaguru.entity.parameterization.ParameterElement;
 import org.tanaguru.entity.parameterization.ParameterImpl;
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.contract.Act;
-import org.tanaguru.entity.contract.ScopeEnum;
-import org.tanaguru.entity.dao.contract.ActDAO;
+import org.tanaguru.webapp.entity.contract.Act;
+import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.tanaguru.webapp.entity.dao.contract.ActDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -103,7 +103,7 @@ public class TgolParameterDAOImpl extends AbstractJPADAO<Parameter, Long>
         query.setParameter("idParameterElement", parameterElement.getId());
         query.setParameter("idAct", act.getId());
         try {
-            return ((String)query.getSingleResult()).toString();
+            return (query.getSingleResult()).toString();
         } catch (NoResultException e) {
             return null;
         }

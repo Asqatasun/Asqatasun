@@ -24,7 +24,7 @@ package org.tanaguru.webapp.report.expression;
 import ar.com.fdvs.dj.domain.CustomExpression;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.tanaguru.presentation.data.ResultCounter;
+import org.tanaguru.webapp.presentation.data.ResultCounter;
 
 /**
  *

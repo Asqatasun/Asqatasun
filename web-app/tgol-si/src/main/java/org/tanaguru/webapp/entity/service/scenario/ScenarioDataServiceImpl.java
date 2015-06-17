@@ -22,7 +22,7 @@
 package org.tanaguru.webapp.entity.service.scenario;
 
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.scenario.Scenario;
+import org.tanaguru.webapp.entity.scenario.Scenario;
 
 /**
  *

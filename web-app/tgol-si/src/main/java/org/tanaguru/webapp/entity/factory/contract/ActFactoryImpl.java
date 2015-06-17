@@ -22,9 +22,9 @@
 package org.tanaguru.webapp.entity.factory.contract;
 
 import java.util.Date;
-import org.tanaguru.entity.contract.Act;
-import org.tanaguru.entity.contract.ActImpl;
-import org.tanaguru.entity.contract.Contract;
+import org.tanaguru.webapp.entity.contract.Act;
+import org.tanaguru.webapp.entity.contract.ActImpl;
+import org.tanaguru.webapp.entity.contract.Contract;
 
 /**
  *

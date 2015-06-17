@@ -21,7 +21,7 @@
  */
 package org.tanaguru.webapp.action.voter;
 
-import org.tanaguru.action.Action;
+import org.tanaguru.webapp.action.Action;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

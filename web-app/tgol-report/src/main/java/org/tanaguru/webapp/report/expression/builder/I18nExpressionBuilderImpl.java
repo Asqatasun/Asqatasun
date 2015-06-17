@@ -24,8 +24,8 @@ package org.tanaguru.webapp.report.expression.builder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import org.tanaguru.report.expression.I18nExpression;
-import org.tanaguru.report.expression.retriever.KeyRetriever;
+import org.tanaguru.webapp.report.expression.I18nExpression;
+import org.tanaguru.webapp.report.expression.retriever.KeyRetriever;
 
 /**
  *
@@ -33,7 +33,7 @@ import org.tanaguru.report.expression.retriever.KeyRetriever;
  */
 public class I18nExpressionBuilderImpl implements AbstractGenericCustomExpressionBuilder<I18nExpression>{
 
-    private List<String> bundleNameList = new ArrayList<String>();
+    private final List<String> bundleNameList = new ArrayList<>();
     public List<String> getBundleNameList() {
         return bundleNameList;
     }

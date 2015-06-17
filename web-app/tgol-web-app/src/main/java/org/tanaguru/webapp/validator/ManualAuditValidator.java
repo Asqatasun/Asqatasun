@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.tanaguru.entity.audit.DefiniteResultImpl;
 import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.command.ManualAuditCommand;
+import org.tanaguru.webapp.command.ManualAuditCommand;
 import org.springframework.validation.Errors;
 
 public class ManualAuditValidator implements org.springframework.validation.Validator {

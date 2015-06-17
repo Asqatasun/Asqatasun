@@ -26,9 +26,9 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.UrlValidator;
-import org.tanaguru.command.CreateContractCommand;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.form.parameterization.ContractOptionFormField;
+import org.tanaguru.webapp.command.CreateContractCommand;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.form.parameterization.ContractOptionFormField;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

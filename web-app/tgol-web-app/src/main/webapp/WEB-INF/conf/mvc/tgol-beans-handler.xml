@@ -5,17 +5,17 @@
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="actByIpLimitationVoter" class="org.tanaguru.voter.restriction.ActByIpLimitationVoterImpl"/>
-    <bean id="actLimitationVoter" class="org.tanaguru.voter.restriction.ActLimitationVoterImpl"/>
+    <bean id="actByIpLimitationVoter" class="org.tanaguru.webapp.voter.restriction.ActByIpLimitationVoterImpl"/>
+    <bean id="actLimitationVoter" class="org.tanaguru.webapp.voter.restriction.ActLimitationVoterImpl"/>
 
-    <bean id="domainActLimitationVoter" class="org.tanaguru.voter.restriction.ActByScopeLimitationVoterImpl">
+    <bean id="domainActLimitationVoter" class="org.tanaguru.webapp.voter.restriction.ActByScopeLimitationVoterImpl">
         <property name="scopes">
             <list>
                 <value>DOMAIN</value>
             </list>
         </property>
     </bean>    
-    <bean id="pagesActLimitationVoter" class="org.tanaguru.voter.restriction.ActByScopeLimitationVoterImpl">
+    <bean id="pagesActLimitationVoter" class="org.tanaguru.webapp.voter.restriction.ActByScopeLimitationVoterImpl">
         <property name="scopes">
             <list>
                 <value>PAGE</value>
@@ -23,7 +23,7 @@
             </list>
         </property>
     </bean>
-    <bean id="uploadActLimitationVoter" class="org.tanaguru.voter.restriction.ActByScopeLimitationVoterImpl">
+    <bean id="uploadActLimitationVoter" class="org.tanaguru.webapp.voter.restriction.ActByScopeLimitationVoterImpl">
         <property name="scopes">
             <list>
                 <value>FILE</value>
@@ -31,7 +31,7 @@
             </list>
         </property>
     </bean>
-    <bean id="scenarioActLimitationVoter" class="org.tanaguru.voter.restriction.ActByScopeLimitationVoterImpl">
+    <bean id="scenarioActLimitationVoter" class="org.tanaguru.webapp.voter.restriction.ActByScopeLimitationVoterImpl">
         <property name="scopes">
             <list>
                 <value>SCENARIO</value>
@@ -39,7 +39,7 @@
         </property>
     </bean>
 
-    <bean id="restrictionHandler" class="org.tanaguru.voter.restriction.RestrictionHandlerImpl">
+    <bean id="restrictionHandler" class="org.tanaguru.webapp.voter.restriction.RestrictionHandlerImpl">
         <property name="restrictionVoterMap">
             <map>
                 <entry key="ACT_LIMITATION">
@@ -64,7 +64,7 @@
         </property>
     </bean>
 
-    <bean id="auditPageActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="auditPageActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="PAGES"/>
         <property name="actionI81NCode" value="contract.launchPages"/>
         <property name="actionUrl" value="/home/contract/audit-page-set-up.html"/>
@@ -74,7 +74,7 @@
         <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>-->
     </bean>
 
-    <bean id="auditSiteActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="auditSiteActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="DOMAIN"/>
         <property name="actionI81NCode" value="contract.launchFullSite"/>
         <property name="actionUrl" value="/home/contract/audit-site-set-up.html"/>
@@ -84,7 +84,7 @@
         <property name="enabledActionImageUrl" value="/Images/Audit-full-site.png"/>-->
     </bean>
 
-    <bean id="auditUploadActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="auditUploadActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="UPLOAD"/>
         <property name="actionI81NCode" value="contract.launchUpload"/>
         <property name="actionUrl" value="/home/contract/audit-upload-set-up.html"/>
@@ -94,7 +94,7 @@
         <property name="enabledActionImageUrl" value="/Images/Audit-10-pages.png"/>-->
     </bean>
     
-    <bean id="auditScenarioActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="auditScenarioActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="SCENARIO"/>
         <property name="actionI81NCode" value="contract.launchScenario"/>
         <property name="actionUrl" value="/home/contract/scenario-management.html"/>
@@ -104,7 +104,7 @@
         <property name="enabledActionImageUrl" value="/Images/Audit_Scenario.png"/>
     </bean>
 
-    <bean id="contractActionHandler" class="org.tanaguru.action.voter.ContractActionHandlerImpl">
+    <bean id="contractActionHandler" class="org.tanaguru.webapp.action.voter.ContractActionHandlerImpl">
         <property name="actionBuilderList">
             <list>
                 <ref bean="auditPageActionBuilder"/>
@@ -115,7 +115,7 @@
         </property>
     </bean>
 
-    <bean id="exportOdsActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="exportOdsActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_ODS"/>
         <property name="actionI81NCode" value="resultPage.odsExport"/>
         <property name="actionAltI81NCode" value="resultPage.odsExportAlt"/>
@@ -124,7 +124,7 @@
         <property name="enabledActionImageUrl" value="/Images/ods_export.png"/>
     </bean>
 
-    <bean id="exportXlsActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="exportXlsActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_XLS"/>
         <property name="actionI81NCode" value="resultPage.xlsExport"/>
         <property name="actionAltI81NCode" value="resultPage.xlsExportAlt"/>
@@ -133,7 +133,7 @@
         <property name="enabledActionImageUrl" value="/Images/xls_export.png"/>
     </bean>
 
-    <bean id="exportCsvActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="exportCsvActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_CSV"/>
         <property name="actionI81NCode" value="resultPage.csvExport"/>
         <property name="actionAltI81NCode" value="resultPage.csvExportAlt"/>
@@ -142,7 +142,7 @@
         <property name="enabledActionImageUrl" value="/Images/csv_export.png"/>
     </bean>
 
-    <bean id="exportPdfActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+    <bean id="exportPdfActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="EXPORT_PDF"/>
         <property name="actionI81NCode" value="resultPage.pdfExport"/>
         <property name="actionAltI81NCode" value="resultPage.pdfExportAlt"/>
@@ -151,7 +151,7 @@
         <property name="enabledActionImageUrl" value="/Images/pdf_export.png"/>
     </bean>
 
-    <bean id="exportVoter" class="org.tanaguru.action.voter.ActionVoterImpl">
+    <bean id="exportVoter" class="org.tanaguru.webapp.action.voter.ActionVoterImpl">
         <property name="actionEnableMap">
             <map>
                 <entry key="EXPORT_ODS" value="true"/>
@@ -163,7 +163,7 @@
         <property name="code" value="EXPORT"/>
     </bean>
 
-    <bean id="resultActionHandler" class="org.tanaguru.action.voter.ResultActionHandlerImpl">
+    <bean id="resultActionHandler" class="org.tanaguru.webapp.action.voter.ResultActionHandlerImpl">
         <property name="actionBuilderList">
             <list>
                 <ref bean="exportOdsActionBuilder"/>
@@ -179,7 +179,7 @@
         </property>
     </bean>
 
-<!--    <bean id="massAuditActionBuilder" class="org.tanaguru.action.builder.ActionBuilderImpl">
+<!--    <bean id="massAuditActionBuilder" class="org.tanaguru.webapp.action.builder.ActionBuilderImpl">
         <property name="actionCode" value="MASS_AUDIT"/>
         <property name="actionI81NCode" value="resultPage.pdfExport"/>
         <property name="actionAltI81NCode" value="resultPage.pdfExportAlt"/>
@@ -188,7 +188,7 @@
         <property name="enabledActionImageUrl" value="/Images/pdf_export.png"/>
     </bean>
 
-    <bean id="homeActionHandler" class="org.tanaguru.action.voter.HomeActionHandlerImpl">
+    <bean id="homeActionHandler" class="org.tanaguru.webapp.action.voter.HomeActionHandlerImpl">
         <property name="actionBuilderList">
             <list>
                 <ref bean="massAuditActionBuilder"/>

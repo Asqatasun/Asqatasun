@@ -25,8 +25,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.contract.ContractImpl;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.contract.ContractImpl;
 
 /**
  *

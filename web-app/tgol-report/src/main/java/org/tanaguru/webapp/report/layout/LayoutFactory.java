@@ -24,8 +24,8 @@ package org.tanaguru.webapp.report.layout;
 import ar.com.fdvs.dj.domain.DynamicReport;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import java.util.Locale;
-import org.tanaguru.presentation.data.AuditStatistics;
-import org.tanaguru.report.layout.builder.LayoutBuilder;
+import org.tanaguru.webapp.presentation.data.AuditStatistics;
+import org.tanaguru.webapp.report.layout.builder.LayoutBuilder;
 
 /**
  *

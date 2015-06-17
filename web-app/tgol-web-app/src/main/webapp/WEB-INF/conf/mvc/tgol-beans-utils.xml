@@ -15,7 +15,7 @@
         <property name="tokenDurationValidity" value="3600"/>
     </bean>
    
-    <bean id="contractSortCommandHelper" class="org.tanaguru.command.helper.ContractSortCommandHelper"/>
+    <bean id="contractSortCommandHelper" class="org.tanaguru.webapp.command.helper.ContractSortCommandHelper"/>
     
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">
@@ -89,7 +89,7 @@
         </property>
     </bean>
     
-    <bean id="secondaryLevelMenuDisplayer" class="org.tanaguru.presentation.menu.SecondaryLevelMenuDisplayer">
+    <bean id="secondaryLevelMenuDisplayer" class="org.tanaguru.webapp.presentation.menu.SecondaryLevelMenuDisplayer">
         <property name="contractDataService">
             <ref bean="contractDataService"/>
         </property>

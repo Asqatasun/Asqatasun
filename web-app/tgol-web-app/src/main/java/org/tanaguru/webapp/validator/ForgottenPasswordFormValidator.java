@@ -22,9 +22,9 @@
 package org.tanaguru.webapp.validator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.command.ForgottenPasswordCommand;
-import org.tanaguru.entity.service.user.UserDataService;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.command.ForgottenPasswordCommand;
+import org.tanaguru.webapp.entity.service.user.UserDataService;
+import org.tanaguru.webapp.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

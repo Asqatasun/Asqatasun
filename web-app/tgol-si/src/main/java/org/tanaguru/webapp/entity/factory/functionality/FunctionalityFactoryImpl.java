@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.entity.factory.functionality;
 
-import org.tanaguru.entity.functionality.Functionality;
-import org.tanaguru.entity.functionality.FunctionalityImpl;
+import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.tanaguru.webapp.entity.functionality.FunctionalityImpl;
 
 /**
  *

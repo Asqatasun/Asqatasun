@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <bean id="markContractSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="markContractSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="mark"/>
         <property name="i18nKey" value="last-audit-score-option"/>
         <property name="errorI18nKey" value="last-audit-score-option-error"/>
@@ -17,7 +17,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="alphabeticalContractSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="alphabeticalContractSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="label"/>
         <property name="i18nKey" value="label-option"/>
         <property name="errorI18nKey" value="label-option-error"/>
@@ -25,7 +25,7 @@
         <property name="enabled" value="true"/>
     </bean>
     
-    <bean id="dateContractSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="dateContractSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="date"/>
         <property name="i18nKey" value="last-audit-date-option"/>
         <property name="errorI18nKey" value="last-audit-date-option-error"/>
@@ -33,7 +33,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="displayContractElementSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="displayContractElementSelectFormFieldBuilder" class="org.tanaguru.webapp.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="sort-by-choice"/>
         <property name="errorI18nKey" value="sort-by-choice-error"/>
         <property name="selectElementBuilderMap">
@@ -49,7 +49,7 @@
         </property>
     </bean>
 
-    <bean id="ascendingContractSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="ascendingContractSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="1"/>
         <property name="i18nKey" value="ascending-option"/>
         <property name="errorI18nKey" value="ascending-option-error"/>
@@ -57,7 +57,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="descendingContractSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="descendingContractSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="2"/>
         <property name="i18nKey" value="descending-option"/>
         <property name="errorI18nKey" value="descending-option-error"/>
@@ -65,7 +65,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="displayContractOrderSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="displayContractOrderSelectFormFieldBuilder" class="org.tanaguru.webapp.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="order-choice"/>
         <property name="errorI18nKey" value="order-choice-error"/>
         <property name="selectElementBuilderMap">
@@ -80,13 +80,13 @@
         </property>
     </bean>
 
-    <bean id="inclusionRegexpContractFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="inclusionRegexpContractFormFieldBuilder" class="org.tanaguru.webapp.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="label-inclusion-choice"/>
         <property name="errorI18nKey" value="label-inclusion-choice-error"/>
         <property name="value" value=""/>
     </bean>
 
-    <bean id="exclusionRegexpContractFormFieldBuilder" class="org.tanaguru.form.builder.TextualFormFieldBuilderImpl">
+    <bean id="exclusionRegexpContractFormFieldBuilder" class="org.tanaguru.webapp.form.builder.TextualFormFieldBuilderImpl">
         <property name="i18nKey" value="label-exclusion-choice"/>
         <property name="errorI18nKey" value="label-exclusion-choice-error"/>
         <property name="value" value=""/>

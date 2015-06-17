@@ -21,11 +21,11 @@
  */
 package org.tanaguru.webapp.voter.restriction;
 
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.contract.ScopeEnum;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.service.contract.ActDataService;
-import org.tanaguru.util.TgolKeyStore;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.service.contract.ActDataService;
+import org.tanaguru.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

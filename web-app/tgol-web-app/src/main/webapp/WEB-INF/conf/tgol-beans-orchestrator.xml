@@ -12,7 +12,7 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="tanaguruOrchestrator" class="org.tanaguru.orchestrator.TanaguruOrchestratorImpl">
+    <bean id="tanaguruOrchestrator" class="org.tanaguru.webapp.orchestrator.TanaguruOrchestratorImpl">
         <property name="webappUrl" value="${web-app-url}"/>
         <property name="pageResultUrlSuffix" value="home/contract/audit-result.html?audit="/>
         <property name="contractUrlSuffix" value="home/contract.html?cr="/>

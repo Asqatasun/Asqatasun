@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.dao.user;
 
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.entity.user.UserImpl;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.entity.user.UserImpl;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 

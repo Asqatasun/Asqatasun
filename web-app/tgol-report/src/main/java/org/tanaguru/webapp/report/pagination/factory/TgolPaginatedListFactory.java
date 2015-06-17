@@ -25,9 +25,9 @@ import java.util.Collection;
 import org.apache.log4j.Logger;
 import org.displaytag.pagination.PaginatedList;
 import org.displaytag.properties.SortOrderEnum;
-import org.tanaguru.report.pagination.TgolPaginatedListImpl;
-import org.tanaguru.entity.service.statistics.StatisticsDataService;
-import org.tanaguru.util.HttpStatusCodeFamily;
+import org.tanaguru.webapp.report.pagination.TgolPaginatedListImpl;
+import org.tanaguru.webapp.entity.service.statistics.StatisticsDataService;
+import org.tanaguru.webapp.util.HttpStatusCodeFamily;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

@@ -23,9 +23,9 @@ package org.tanaguru.webapp.validator;
 
 import java.util.*;
 import org.apache.log4j.Logger;
-import org.tanaguru.command.AuditSetUpCommand;
-import org.tanaguru.entity.service.contract.ContractDataService;
-import org.tanaguru.form.parameterization.AuditSetUpFormField;
+import org.tanaguru.webapp.command.AuditSetUpCommand;
+import org.tanaguru.webapp.entity.service.contract.ContractDataService;
+import org.tanaguru.webapp.form.parameterization.AuditSetUpFormField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

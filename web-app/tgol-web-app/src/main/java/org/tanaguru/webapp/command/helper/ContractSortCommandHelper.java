@@ -24,16 +24,16 @@ package org.tanaguru.webapp.command.helper;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.displaytag.properties.SortOrderEnum;
-import org.tanaguru.command.ContractSortCommand;
-import org.tanaguru.command.factory.ContractSortCommandFactory;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.form.FormField;
-import org.tanaguru.form.builder.FormFieldBuilder;
-import org.tanaguru.form.parameterization.helper.FormFieldHelper;
-import org.tanaguru.presentation.data.ContractInfo;
-import org.tanaguru.presentation.factory.ContractInfoFactory;
-import org.tanaguru.util.TgolKeyStore;
+import org.tanaguru.webapp.command.ContractSortCommand;
+import org.tanaguru.webapp.command.factory.ContractSortCommandFactory;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.form.FormField;
+import org.tanaguru.webapp.form.builder.FormFieldBuilder;
+import org.tanaguru.webapp.form.parameterization.helper.FormFieldHelper;
+import org.tanaguru.webapp.presentation.data.ContractInfo;
+import org.tanaguru.webapp.presentation.factory.ContractInfoFactory;
+import org.tanaguru.webapp.util.TgolKeyStore;
 import org.springframework.ui.Model;
 
 /**

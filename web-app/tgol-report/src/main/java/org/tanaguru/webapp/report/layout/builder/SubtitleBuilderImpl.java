@@ -23,7 +23,7 @@ package org.tanaguru.webapp.report.layout.builder;
 
 import java.util.*;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.tanaguru.presentation.data.AuditStatistics;
+import org.tanaguru.webapp.presentation.data.AuditStatistics;
 
 /**
  *

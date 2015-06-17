@@ -21,9 +21,9 @@
  */
 package org.tanaguru.webapp.entity.factory.user;
 
-import org.tanaguru.entity.user.Role;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.entity.user.UserImpl;
+import org.tanaguru.webapp.entity.user.Role;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.entity.user.UserImpl;
 
 /**
  *

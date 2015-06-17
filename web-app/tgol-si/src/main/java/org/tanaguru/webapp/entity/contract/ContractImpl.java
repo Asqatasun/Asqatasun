@@ -27,16 +27,16 @@ import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.tanaguru.entity.functionality.Functionality;
-import org.tanaguru.entity.functionality.FunctionalityImpl;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.option.OptionElementImpl;
-import org.tanaguru.entity.referential.Referential;
-import org.tanaguru.entity.referential.ReferentialImpl;
-import org.tanaguru.entity.scenario.Scenario;
-import org.tanaguru.entity.scenario.ScenarioImpl;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.entity.user.UserImpl;
+import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.tanaguru.webapp.entity.functionality.FunctionalityImpl;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.option.OptionElementImpl;
+import org.tanaguru.webapp.entity.referential.Referential;
+import org.tanaguru.webapp.entity.referential.ReferentialImpl;
+import org.tanaguru.webapp.entity.scenario.Scenario;
+import org.tanaguru.webapp.entity.scenario.ScenarioImpl;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.entity.user.UserImpl;
 
 /**
  *
@@ -77,16 +77,16 @@ public class ContractImpl implements Contract, Serializable {
     private UserImpl user;
 
     @OneToMany(mappedBy = "contract")
-    private Set<ActImpl> actSet = new LinkedHashSet<ActImpl>();
+    private Set<ActImpl> actSet = new LinkedHashSet<>();
     
     @OneToMany(mappedBy = "contract")
-    private Set<ScenarioImpl> scenarioSet = new LinkedHashSet<ScenarioImpl>();
+    private Set<ScenarioImpl> scenarioSet = new LinkedHashSet<>();
     
     @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(name = "TGSI_CONTRACT_FUNCTIONALITY", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
         @JoinColumn(name = "FUNCTIONALITY_Id_Functionality"))
-    private Set<FunctionalityImpl> functionalitySet = new HashSet<FunctionalityImpl>();
+    private Set<FunctionalityImpl> functionalitySet = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(name = "TGSI_CONTRACT_OPTION_ELEMENT", joinColumns =
@@ -225,7 +225,7 @@ public class ContractImpl implements Contract, Serializable {
 
     @Override
     public void addAllOptionElement(Collection<OptionElement> optionElementSet) {
-        this.optionElementSet = new HashSet<OptionElementImpl>();
+        this.optionElementSet = new HashSet<>();
         for (OptionElement optionElement : optionElementSet) {
             if (optionElement instanceof OptionElementImpl) {
                 this.optionElementSet.add((OptionElementImpl)optionElement);
@@ -245,7 +245,7 @@ public class ContractImpl implements Contract, Serializable {
 
     @Override
     public void addAllFunctionality(Collection<Functionality> functionalitySet) {
-        this.functionalitySet = new HashSet<FunctionalityImpl>();
+        this.functionalitySet = new HashSet<>();
         for (Functionality funct : functionalitySet) {
             if (funct instanceof FunctionalityImpl) {
                 this.functionalitySet.add((FunctionalityImpl)funct);
@@ -255,7 +255,7 @@ public class ContractImpl implements Contract, Serializable {
     
     @Override
     public Set<Referential> getReferentialSet() {
-        Set<Referential> lReferentialSet = new HashSet<Referential>();
+        Set<Referential> lReferentialSet = new HashSet<>();
         lReferentialSet.addAll(this.referentialSet);
         return lReferentialSet;
     }
@@ -267,7 +267,7 @@ public class ContractImpl implements Contract, Serializable {
 
     @Override
     public void addAllReferential(Collection<Referential> referentialSet) {
-        this.referentialSet = new HashSet<ReferentialImpl>();
+        this.referentialSet = new HashSet<>();
         for (Referential ref : referentialSet) {
             if (ref instanceof ReferentialImpl) {
                 this.referentialSet.add((ReferentialImpl)ref);

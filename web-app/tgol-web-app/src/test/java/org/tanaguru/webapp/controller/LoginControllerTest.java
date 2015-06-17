@@ -35,7 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.util.TgolKeyStore;
+import org.tanaguru.webapp.util.TgolKeyStore;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;

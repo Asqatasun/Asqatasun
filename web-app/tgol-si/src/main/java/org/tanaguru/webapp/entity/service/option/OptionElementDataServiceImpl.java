@@ -23,10 +23,10 @@ package org.tanaguru.webapp.entity.service.option;
 
 import java.util.Collection;
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.dao.option.OptionElementDAO;
-import org.tanaguru.entity.option.Option;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.entity.dao.option.OptionElementDAO;
+import org.tanaguru.webapp.entity.option.Option;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

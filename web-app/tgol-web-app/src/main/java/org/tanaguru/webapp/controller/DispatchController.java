@@ -21,7 +21,7 @@
  */
 package org.tanaguru.webapp.controller;
 
-import org.tanaguru.util.TgolKeyStore;
+import org.tanaguru.webapp.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

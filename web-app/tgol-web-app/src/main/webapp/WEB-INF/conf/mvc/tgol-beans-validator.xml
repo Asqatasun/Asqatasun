@@ -8,13 +8,13 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-<!--    <bean id="signUpFormValidator" class="org.tanaguru.validator.SignUpFormValidator" />-->
-    <bean id="createUserFormValidator" class="org.tanaguru.validator.CreateUserFormValidator" />
-    <bean id="createContractFormValidator" class="org.tanaguru.validator.CreateContractFormValidator" />
-    <bean id="auditSiteSetUpFormValidator" class="org.tanaguru.validator.AuditSetUpFormValidator" />
-    <bean id="auditPageSetUpFormValidator" class="org.tanaguru.validator.PageAuditSetUpFormValidator" />
-    <bean id="manualAuditValidator" class="org.tanaguru.validator.ManualAuditValidator" />
-    <bean id="auditUploadSetUpFormValidator" class="org.tanaguru.validator.UploadAuditSetUpFormValidator" >
+<!--    <bean id="signUpFormValidator" class="org.tanaguru.webapp.validator.SignUpFormValidator" />-->
+    <bean id="createUserFormValidator" class="org.tanaguru.webapp.validator.CreateUserFormValidator" />
+    <bean id="createContractFormValidator" class="org.tanaguru.webapp.validator.CreateContractFormValidator" />
+    <bean id="auditSiteSetUpFormValidator" class="org.tanaguru.webapp.validator.AuditSetUpFormValidator" />
+    <bean id="auditPageSetUpFormValidator" class="org.tanaguru.webapp.validator.PageAuditSetUpFormValidator" />
+    <bean id="manualAuditValidator" class="org.tanaguru.webapp.validator.ManualAuditValidator" />
+    <bean id="auditUploadSetUpFormValidator" class="org.tanaguru.webapp.validator.UploadAuditSetUpFormValidator" >
         <property name="maxFileSize" value="2097152"/>
         <property name="authorizedMimeType">
             <list>
@@ -23,7 +23,7 @@
             </list>
         </property>
     </bean>
-    <bean id="addScenarioFormValidator" class="org.tanaguru.validator.AddScenarioFormValidator" >
+    <bean id="addScenarioFormValidator" class="org.tanaguru.webapp.validator.AddScenarioFormValidator" >
         <property name="maxFileSize" value="2097152"/>
         <property name="authorizedMimeType">
             <list>
@@ -31,7 +31,7 @@
             </list>
         </property>
     </bean>
-<!--    <bean id="uploadScenarioFormValidator" class="org.tanaguru.validator.UploadScenarioSetUpFormValidator" >
+<!--    <bean id="uploadScenarioFormValidator" class="org.tanaguru.webapp.validator.UploadScenarioSetUpFormValidator" >
         <property name="maxFileSize" value="2097152"/>
         <property name="authorizedMimeType">
             <list>
@@ -40,8 +40,8 @@
             </list>
         </property>
     </bean>-->
-    <bean id="forgottenPasswordFormValidator" class="org.tanaguru.validator.ForgottenPasswordFormValidator"/>
-    <bean id="changePasswordFormValidator" class="org.tanaguru.validator.ChangePasswordFormValidator"/>
-    <bean id="changeTestWeightFormValidator" class="org.tanaguru.validator.ChangeTestWeightFormValidator"/>
+    <bean id="forgottenPasswordFormValidator" class="org.tanaguru.webapp.validator.ForgottenPasswordFormValidator"/>
+    <bean id="changePasswordFormValidator" class="org.tanaguru.webapp.validator.ChangePasswordFormValidator"/>
+    <bean id="changeTestWeightFormValidator" class="org.tanaguru.webapp.validator.ChangeTestWeightFormValidator"/>
 
 </beans>

@@ -26,13 +26,13 @@ import java.text.NumberFormat;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.tanaguru.entity.reference.Test;
-import org.tanaguru.command.ChangeTestWeightCommand;
-import org.tanaguru.entity.option.Option;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.service.option.OptionDataService;
-import org.tanaguru.entity.service.option.OptionElementDataService;
-import org.tanaguru.entity.service.user.UserDataService;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.command.ChangeTestWeightCommand;
+import org.tanaguru.webapp.entity.option.Option;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.service.option.OptionDataService;
+import org.tanaguru.webapp.entity.service.option.OptionElementDataService;
+import org.tanaguru.webapp.entity.service.user.UserDataService;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

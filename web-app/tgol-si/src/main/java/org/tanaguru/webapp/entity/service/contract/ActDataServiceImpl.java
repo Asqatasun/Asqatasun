@@ -25,10 +25,10 @@ import java.util.Collection;
 import java.util.Date;
 import org.tanaguru.entity.audit.Audit;
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.contract.Act;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.contract.ScopeEnum;
-import org.tanaguru.entity.dao.contract.ActDAO;
+import org.tanaguru.webapp.entity.contract.Act;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.tanaguru.webapp.entity.dao.contract.ActDAO;
 
 /**
  *

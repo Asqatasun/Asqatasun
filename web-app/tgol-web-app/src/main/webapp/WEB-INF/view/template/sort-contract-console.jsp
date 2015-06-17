@@ -19,7 +19,7 @@
                 <label id="set-up-${i18nKey}" for="${i18nKey}"><fmt:message key="${i18nKey}"/></label>
                 <div class="set-up-value input">
                 <c:choose>
-                    <c:when test="${tg:instanceOf(formField, 'org.tanaguru.form.SelectFormField')}">
+                    <c:when test="${tg:instanceOf(formField, 'org.tanaguru.webapp.form.SelectFormField')}">
                         <c:forEach items="${formField.selectElementMap}" var="group">
                         <form:select id="${i18nKey}" path="sortOptionMap[${group.key}]">
                             <c:forEach items="${group.value}" var="level">

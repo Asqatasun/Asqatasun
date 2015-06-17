@@ -22,7 +22,7 @@
 package org.tanaguru.webapp.entity.service.functionality;
 
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.functionality.Functionality;
+import org.tanaguru.webapp.entity.functionality.Functionality;
 
 /**
  *

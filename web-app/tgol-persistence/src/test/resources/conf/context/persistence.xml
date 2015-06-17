@@ -8,17 +8,17 @@
     <persistence-unit name="tanaguruPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <non-jta-data-source>jdbc/tanaguruDS</non-jta-data-source>
-        <class>org.tanaguru.entity.user.UserImpl</class>
-        <class>org.tanaguru.entity.user.RoleImpl</class>
-        <class>org.tanaguru.entity.option.OptionImpl</class>
-        <class>org.tanaguru.entity.option.OptionElementImpl</class>
-        <class>org.tanaguru.entity.option.OptionFamilyImpl</class>
-        <class>org.tanaguru.entity.contract.ContractImpl</class>
-        <class>org.tanaguru.entity.contract.ActImpl</class>
-        <class>org.tanaguru.entity.contract.TgsiScopeImpl</class>
-        <class>org.tanaguru.entity.referential.ReferentialImpl</class>
-        <class>org.tanaguru.entity.scenario.ScenarioImpl</class>
-        <class>org.tanaguru.entity.functionality.FunctionalityImpl</class>
+        <class>org.tanaguru.webapp.entity.user.UserImpl</class>
+        <class>org.tanaguru.webapp.entity.user.RoleImpl</class>
+        <class>org.tanaguru.webapp.entity.option.OptionImpl</class>
+        <class>org.tanaguru.webapp.entity.option.OptionElementImpl</class>
+        <class>org.tanaguru.webapp.entity.option.OptionFamilyImpl</class>
+        <class>org.tanaguru.webapp.entity.contract.ContractImpl</class>
+        <class>org.tanaguru.webapp.entity.contract.ActImpl</class>
+        <class>org.tanaguru.webapp.entity.contract.TgsiScopeImpl</class>
+        <class>org.tanaguru.webapp.entity.referential.ReferentialImpl</class>
+        <class>org.tanaguru.webapp.entity.scenario.ScenarioImpl</class>
+        <class>org.tanaguru.webapp.entity.functionality.FunctionalityImpl</class>
         <class>org.tanaguru.entity.subject.WebResourceImpl</class>
         <class>org.tanaguru.entity.subject.SiteImpl</class>
         <class>org.tanaguru.entity.subject.PageImpl</class>
@@ -44,7 +44,7 @@
         <class>org.tanaguru.entity.parameterization.ParameterImpl</class>
         <class>org.tanaguru.entity.parameterization.ParameterElementImpl</class>
         <class>org.tanaguru.entity.parameterization.ParameterFamilyImpl</class>
-        <class>org.tanaguru.presentation.data.FailedPageInfo</class>
+        <class>org.tanaguru.webapp.presentation.data.FailedPageInfo</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="dialect" value="org.hibernate.dialect.HSQLDialect"/>

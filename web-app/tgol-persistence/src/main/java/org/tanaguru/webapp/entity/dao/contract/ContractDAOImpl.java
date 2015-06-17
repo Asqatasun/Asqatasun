@@ -25,9 +25,9 @@ import java.util.Collection;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.contract.Contract;
-import org.tanaguru.entity.contract.ContractImpl;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.entity.contract.Contract;
+import org.tanaguru.webapp.entity.contract.ContractImpl;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

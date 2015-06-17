@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import org.tanaguru.command.AuditResultSortCommand;
-import org.tanaguru.form.*;
-import org.tanaguru.form.builder.FormFieldBuilder;
-import org.tanaguru.form.parameterization.helper.FormFieldHelper;
+import org.tanaguru.webapp.command.AuditResultSortCommand;
+import org.tanaguru.webapp.form.*;
+import org.tanaguru.webapp.form.builder.FormFieldBuilder;
+import org.tanaguru.webapp.form.parameterization.helper.FormFieldHelper;
 
 /**
  *

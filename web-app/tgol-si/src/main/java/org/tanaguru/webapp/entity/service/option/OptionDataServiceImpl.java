@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.service.option;
 
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.dao.option.OptionDAO;
-import org.tanaguru.entity.option.Option;
+import org.tanaguru.webapp.entity.dao.option.OptionDAO;
+import org.tanaguru.webapp.entity.option.Option;
 
 /**
  *

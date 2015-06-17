@@ -27,7 +27,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.displaytag.decorator.TableDecorator;
-import org.tanaguru.presentation.data.PageResult;
+import org.tanaguru.webapp.presentation.data.PageResult;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.support.RequestContextUtils;
 

@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.entity.factory.scenario;
 
-import org.tanaguru.entity.scenario.Scenario;
-import org.tanaguru.entity.scenario.ScenarioImpl;
+import org.tanaguru.webapp.entity.scenario.Scenario;
+import org.tanaguru.webapp.entity.scenario.ScenarioImpl;
 
 /**
  *

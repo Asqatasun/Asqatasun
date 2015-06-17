@@ -22,7 +22,7 @@
 package org.tanaguru.webapp.entity.service.referential;
 
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.referential.Referential;
+import org.tanaguru.webapp.entity.referential.Referential;
 
 /**
  *

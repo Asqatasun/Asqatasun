@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.dao.option;
 
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.option.OptionFamily;
-import org.tanaguru.entity.option.OptionFamilyImpl;
+import org.tanaguru.webapp.entity.option.OptionFamily;
+import org.tanaguru.webapp.entity.option.OptionFamilyImpl;
 
 /**
  *

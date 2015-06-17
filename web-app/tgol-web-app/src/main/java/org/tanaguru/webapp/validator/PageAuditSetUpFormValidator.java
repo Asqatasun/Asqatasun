@@ -24,9 +24,9 @@ package org.tanaguru.webapp.validator;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.command.AuditSetUpCommand;
-import org.tanaguru.entity.service.contract.ContractDataService;
-import org.tanaguru.util.TgolKeyStore;
+import org.tanaguru.webapp.command.AuditSetUpCommand;
+import org.tanaguru.webapp.entity.service.contract.ContractDataService;
+import org.tanaguru.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 

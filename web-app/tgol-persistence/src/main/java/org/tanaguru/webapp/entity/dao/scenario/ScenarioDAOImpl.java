@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.dao.scenario;
 
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.scenario.Scenario;
-import org.tanaguru.entity.scenario.ScenarioImpl;
+import org.tanaguru.webapp.entity.scenario.Scenario;
+import org.tanaguru.webapp.entity.scenario.ScenarioImpl;
 
 /**
  * @author jkowalczyk

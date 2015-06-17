@@ -27,12 +27,12 @@ import org.tanaguru.entity.audit.Audit;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.entity.reference.Theme;
 import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.dao.statistics.StatisticsDAO;
-import org.tanaguru.presentation.data.FailedPageInfo;
-import org.tanaguru.presentation.data.FailedTestInfo;
-import org.tanaguru.presentation.data.FailedThemeInfo;
-import org.tanaguru.presentation.data.PageResult;
-import org.tanaguru.util.HttpStatusCodeFamily;
+import org.tanaguru.webapp.entity.dao.statistics.StatisticsDAO;
+import org.tanaguru.webapp.presentation.data.FailedPageInfo;
+import org.tanaguru.webapp.presentation.data.FailedTestInfo;
+import org.tanaguru.webapp.presentation.data.FailedThemeInfo;
+import org.tanaguru.webapp.presentation.data.PageResult;
+import org.tanaguru.webapp.util.HttpStatusCodeFamily;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

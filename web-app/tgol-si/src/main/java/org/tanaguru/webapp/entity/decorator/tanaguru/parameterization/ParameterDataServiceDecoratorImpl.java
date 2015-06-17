@@ -31,9 +31,9 @@ import org.tanaguru.entity.parameterization.ParameterFamily;
 import org.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.tanaguru.entity.service.parameterization.ParameterElementDataService;
 import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.entity.contract.ScopeEnum;
-import org.tanaguru.entity.dao.tanaguru.parameterization.TgolParameterDAO;
-import org.tanaguru.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.tanaguru.webapp.entity.dao.tanaguru.parameterization.TgolParameterDAO;
+import org.tanaguru.webapp.entity.option.OptionElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -43,8 +43,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataService<Parameter, Long>
         implements ParameterDataServiceDecorator{
 
-    private ParameterDataService decoratedParameterDataService; // the ParameterDataService instance being decorated
-    private ParameterElementDataService parameterElementDataService; 
+    private final ParameterDataService decoratedParameterDataService; // the ParameterDataService instance being decorated
+    private final ParameterElementDataService parameterElementDataService; 
 
     @Autowired
     public ParameterDataServiceDecoratorImpl (
@@ -121,7 +121,7 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
     
     @Override
     public Collection<Parameter> getParameterSetFromOptionElementSet(Collection<OptionElement> optionElementSet) {
-        Set<Parameter> paramSet = new HashSet<Parameter>();
+        Set<Parameter> paramSet = new HashSet<>();
         for (OptionElement optionElement : optionElementSet) {
             ParameterElement pe = parameterElementDataService.getParameterElement(optionElement.getOption().getCode());
             if (pe != null) {

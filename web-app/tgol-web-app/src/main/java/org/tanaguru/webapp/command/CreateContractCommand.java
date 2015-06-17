@@ -25,7 +25,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
-import org.tanaguru.entity.user.User;
+import org.tanaguru.webapp.entity.user.User;
 
 /**
  *

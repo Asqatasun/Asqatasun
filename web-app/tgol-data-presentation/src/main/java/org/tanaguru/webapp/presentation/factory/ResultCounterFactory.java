@@ -21,8 +21,8 @@
  */
 package org.tanaguru.webapp.presentation.factory;
 
-import org.tanaguru.presentation.data.ResultCounter;
-import org.tanaguru.presentation.data.ResultCounterImpl;
+import org.tanaguru.webapp.presentation.data.ResultCounter;
+import org.tanaguru.webapp.presentation.data.ResultCounterImpl;
 
 /**
  * 

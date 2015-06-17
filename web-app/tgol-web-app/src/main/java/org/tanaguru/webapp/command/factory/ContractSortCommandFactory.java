@@ -23,11 +23,11 @@ package org.tanaguru.webapp.command.factory;
 
 import java.util.List;
 import java.util.Map;
-import org.tanaguru.command.ContractSortCommand;
-import org.tanaguru.form.FormField;
-import org.tanaguru.form.SelectElement;
-import org.tanaguru.form.SelectFormField;
-import org.tanaguru.form.TextualFormField;
+import org.tanaguru.webapp.command.ContractSortCommand;
+import org.tanaguru.webapp.form.FormField;
+import org.tanaguru.webapp.form.SelectElement;
+import org.tanaguru.webapp.form.SelectFormField;
+import org.tanaguru.webapp.form.TextualFormField;
 
 
 /**

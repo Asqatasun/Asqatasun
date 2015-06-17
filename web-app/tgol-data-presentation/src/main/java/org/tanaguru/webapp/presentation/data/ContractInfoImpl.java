@@ -23,8 +23,8 @@ package org.tanaguru.webapp.presentation.data;
 
 import java.util.Collection;
 import java.util.Date;
-import org.tanaguru.action.Action;
-import org.tanaguru.util.TgolEscapeUrl;
+import org.tanaguru.webapp.action.Action;
+import org.tanaguru.webapp.util.TgolEscapeUrl;
 
 /**
  *

@@ -23,8 +23,8 @@ package org.tanaguru.webapp.presentation.factory;
 
 import org.tanaguru.entity.reference.Scope;
 import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.presentation.data.PageResult;
-import org.tanaguru.presentation.data.PageResultImpl;
+import org.tanaguru.webapp.presentation.data.PageResult;
+import org.tanaguru.webapp.presentation.data.PageResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -72,6 +72,7 @@ public class PageResultFactory {
     /**
      * 
      * @param url
+     * @param rank
      * @param weightedMark
      * @param rawMark
      * @param webResourceId

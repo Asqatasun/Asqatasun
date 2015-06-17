@@ -26,11 +26,11 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.option.Option;
-import org.tanaguru.entity.option.OptionElement;
-import org.tanaguru.entity.option.OptionElementImpl;
-import org.tanaguru.entity.user.User;
-import org.tanaguru.entity.user.UserImpl;
+import org.tanaguru.webapp.entity.option.Option;
+import org.tanaguru.webapp.entity.option.OptionElement;
+import org.tanaguru.webapp.entity.option.OptionElementImpl;
+import org.tanaguru.webapp.entity.user.User;
+import org.tanaguru.webapp.entity.user.UserImpl;
 
 /**
  *
@@ -68,9 +68,7 @@ public class OptionElementDAOImpl extends AbstractJPADAO<OptionElement, Long>
         query.setParameter("option", option);
         try {
             return (OptionElement) query.getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        } catch (NonUniqueResultException nure) {
+        } catch (NoResultException | NonUniqueResultException nre) {
             return null;
         }
     }
@@ -86,9 +84,7 @@ public class OptionElementDAOImpl extends AbstractJPADAO<OptionElement, Long>
         query.setParameter("optionFamilyCode", optionFamilyCode);
         try {
             return (Collection<OptionElement>) query.getResultList();
-        } catch (NoResultException nre) {
-            return null;
-        } catch (NonUniqueResultException nure) {
+        } catch (NoResultException | NonUniqueResultException nre) {
             return null;
         }
     }
@@ -101,9 +97,7 @@ public class OptionElementDAOImpl extends AbstractJPADAO<OptionElement, Long>
         query.setParameter("user", user);
         try {
             return (Collection<OptionElement>) query.getResultList();
-        } catch (NoResultException nre) {
-            return null;
-        } catch (NonUniqueResultException nure) {
+        } catch (NoResultException | NonUniqueResultException nre) {
             return null;
         }
     }

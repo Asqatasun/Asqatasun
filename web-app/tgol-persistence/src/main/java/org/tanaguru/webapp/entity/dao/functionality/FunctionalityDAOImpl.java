@@ -22,8 +22,8 @@
 package org.tanaguru.webapp.entity.dao.functionality;
 
 import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.entity.functionality.Functionality;
-import org.tanaguru.entity.functionality.FunctionalityImpl;
+import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.tanaguru.webapp.entity.functionality.FunctionalityImpl;
 
 /**
  *
