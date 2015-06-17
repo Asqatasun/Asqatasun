@@ -53,6 +53,7 @@ public abstract class AbstractSiteRuleWithPageResultImplementation extends Abstr
      *
      * @param group
      * @param groupedGrossResultList
+     * @param processRemarkService
      * @return
      */
     protected abstract List<DefiniteResult> consolidateSiteImpl(Site group,

@@ -30,8 +30,8 @@ import org.tanaguru.entity.audit.DefiniteResult;
 import org.tanaguru.entity.audit.ProcessRemark;
 import org.tanaguru.entity.audit.SSP;
 import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.factory.audit.DefiniteResultFactory;
 import org.tanaguru.entity.reference.Test;
+import org.tanaguru.entity.service.audit.ProcessResultDataService;
 import org.tanaguru.entity.subject.WebResource;
 import org.tanaguru.processor.SSPHandler;
 import org.tanaguru.service.ProcessRemarkService;
@@ -49,7 +49,7 @@ public abstract class AbstractUrlRuleImplementationTestCase extends TestCase {
     protected SSP mockSsp;
     protected ProcessRemark mockProcessRemark;
     protected WebResource mockWebResource;
-    protected DefiniteResultFactory mockDefiniteResultFactory;
+    protected ProcessResultDataService mockProcessResultDataService;
     protected Test mockTest;
     protected DefiniteResult mockDefiniteResult;
 
@@ -65,7 +65,7 @@ public abstract class AbstractUrlRuleImplementationTestCase extends TestCase {
                 mockProcessRemarkService,
                 mockWebResource,
                 mockDefiniteResult,
-                mockDefiniteResultFactory,
+                mockProcessResultDataService,
                 mockTest);
     }
 
@@ -83,7 +83,7 @@ public abstract class AbstractUrlRuleImplementationTestCase extends TestCase {
         mockSsp = createMock(SSP.class);
         mockProcessRemark = createMock(ProcessRemark.class);
         mockWebResource = createMock(WebResource.class);
-        mockDefiniteResultFactory = createMock(DefiniteResultFactory.class);
+        mockProcessResultDataService = createMock(ProcessResultDataService.class);
         mockTest = createMock(Test.class);
         mockDefiniteResult = createMock(DefiniteResult.class);
 
@@ -98,7 +98,8 @@ public abstract class AbstractUrlRuleImplementationTestCase extends TestCase {
         if (solution.equals(TestSolution.PASSED) || solution.equals(TestSolution.NOT_APPLICABLE)) {
             expect(mockProcessRemarkService.getRemarkList())
                     .andReturn(Collections.EMPTY_LIST);
-            expect(mockDefiniteResultFactory.create(mockTest,
+            expect(mockProcessResultDataService.getDefiniteResult(
+                    mockTest,
                     mockWebResource,
                     solution,
                     Collections.EMPTY_LIST)).andReturn(mockDefiniteResult);
@@ -107,11 +108,12 @@ public abstract class AbstractUrlRuleImplementationTestCase extends TestCase {
                     remarkMessage);
             expectLastCall().once();
             Collection<ProcessRemark> processRemarks =
-                    new HashSet<ProcessRemark>();
+                    new HashSet<>();
             processRemarks.add(mockProcessRemark);
             expect(mockProcessRemarkService.getRemarkList())
                     .andReturn(processRemarks).anyTimes();
-            expect(mockDefiniteResultFactory.create(mockTest,
+            expect(mockProcessResultDataService.getDefiniteResult(
+                    mockTest,
                     mockWebResource,
                     solution,
                     processRemarks)).andReturn(mockDefiniteResult);
@@ -123,7 +125,7 @@ public abstract class AbstractUrlRuleImplementationTestCase extends TestCase {
                 mockProcessRemarkService,
                 mockWebResource,
                 mockDefiniteResult,
-                mockDefiniteResultFactory,
+                mockProcessResultDataService,
                 mockTest);
     }
 }

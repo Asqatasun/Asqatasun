@@ -27,7 +27,7 @@
         <module>accessiweb2.2</module>
         <module>rgaa2.2</module>
         <module>rgaa3.0</module>
-<!--        <module>rules-creation-demo</module>-->
+        <module>rules-creation-demo</module>
         <module>rules-resources</module>
   </modules>
 

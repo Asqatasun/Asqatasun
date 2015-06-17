@@ -15,8 +15,11 @@
 
         <class>org.tanaguru.entity.audit.ContentImpl</class>
         <class>org.tanaguru.entity.audit.ProcessResultImpl</class>
+        <class>org.tanaguru.entity.audit.DefiniteResultImpl</class>
+        <class>org.tanaguru.entity.audit.IndefiniteResultImpl</class>
         <class>org.tanaguru.entity.subject.WebResourceImpl</class>
         <class>org.tanaguru.entity.subject.SiteImpl</class>
+        <class>org.tanaguru.entity.subject.PageImpl</class>
         <class>org.tanaguru.entity.audit.ProcessRemarkImpl</class>
         <class>org.tanaguru.entity.audit.EvidenceImpl</class>
         <class>org.tanaguru.entity.audit.EvidenceElementImpl</class>
