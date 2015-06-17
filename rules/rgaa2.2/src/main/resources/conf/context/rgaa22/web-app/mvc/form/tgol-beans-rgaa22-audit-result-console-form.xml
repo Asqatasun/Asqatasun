@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <bean id="rgaa22-AllThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa22-AllThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
         <property name="errorI18nKey" value="all-theme-error"/>
@@ -17,91 +17,91 @@
         <property name="enabled" value="true"/>
     </bean>
 
-        <bean id="rgaa22-1ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-1ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-1"/>
         <property name="i18nKey" value="Rgaa22-1"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-2ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-2ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-2"/>
         <property name="i18nKey" value="Rgaa22-2"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-3ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-3ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-3"/>
         <property name="i18nKey" value="Rgaa22-3"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-4ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-4ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-4"/>
         <property name="i18nKey" value="Rgaa22-4"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-5ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-5ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-5"/>
         <property name="i18nKey" value="Rgaa22-5"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-6ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-6ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-6"/>
         <property name="i18nKey" value="Rgaa22-6"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-7ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-7ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-7"/>
         <property name="i18nKey" value="Rgaa22-7"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-8ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-8ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-8"/>
         <property name="i18nKey" value="Rgaa22-8"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-9ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-9ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-9"/>
         <property name="i18nKey" value="Rgaa22-9"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-10ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-10ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-10"/>
         <property name="i18nKey" value="Rgaa22-10"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-11ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-11ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-11"/>
         <property name="i18nKey" value="Rgaa22-11"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-12ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-12ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-12"/>
         <property name="i18nKey" value="Rgaa22-12"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rgaa22-13ThemeSelectElementBuilder" class="org.tanaguru.form.builder.SelectElementBuilderImpl">
+        <bean id="rgaa22-13ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rgaa22-13"/>
         <property name="i18nKey" value="Rgaa22-13"/>
         <property name="errorI18nKey" value=""/>
@@ -109,7 +109,7 @@
         <property name="enabled" value="true"/>
     </bean>
         
-    <bean id="rgaa22ThemeSelectFormFieldBuilder" class="org.tanaguru.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="rgaa22ThemeSelectFormFieldBuilder" class="org.tanaguru.webapp.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
         <property name="value" value="RGAA30"/>
