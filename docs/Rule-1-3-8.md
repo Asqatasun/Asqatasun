@@ -30,7 +30,7 @@ Pour chaque image bitmap porteuse d'information (balise `canvas`) et poss&eacute
 
 ### Decision level
 
-**Decidable**
+**Semidecidable**
 
 ## Algorithm
 
