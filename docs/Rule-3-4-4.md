@@ -10,11 +10,11 @@ a font size superior to 14px.
 
 ### Criterion
 
-[3.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-3-4)
+[3.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-3-4)
 
 ### Test
 
-[3.4.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-3-4-4)
+[3.4.4](http://references.modernisation.gouv.fr/referentiel-technique-0#test-3-4-4)
 
 ### Description
 

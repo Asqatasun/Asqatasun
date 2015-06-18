@@ -8,11 +8,11 @@ This test consists in checking the relevancy of the caption of data tables.
 
 ### Criterion
 
-[5.5](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-5-5)
+[5.5](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-5-5)
 
 ### Test
 
-[5.5.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-5-5-1)
+[5.5.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-5-1)
 
 ### Description
 

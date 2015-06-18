@@ -8,11 +8,11 @@ This test consists in checking the relevancy of the `"title"` attribute for each
 
 ### Criterion
 
-[2.2](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-2-2)
+[2.2](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-2-2)
 
 ### Test
 
-[2.2.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-2-2-1)
+[2.2.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-2-2-1)
 
 ### Description
 

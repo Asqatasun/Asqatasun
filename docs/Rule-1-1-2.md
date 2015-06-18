@@ -8,11 +8,11 @@ This test consists in checking whether each `<area>` of an image map is defined 
 
 ### Criterion
 
-[1.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-1)
+[1.1](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-1)
 
 ### Test
 
-[1.1.2](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-1-2)
+[1.1.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-1-2)
 
 ### Description
 

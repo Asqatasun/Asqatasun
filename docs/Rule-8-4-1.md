@@ -10,11 +10,11 @@ and relevant.
 
 ### Criterion
 
-[8.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-8-4)
+[8.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-8-4)
 
 ### Test
 
-[8.4.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-8-4-1)
+[8.4.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-4-1)
 
 ### Description
 

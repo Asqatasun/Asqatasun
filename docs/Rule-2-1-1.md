@@ -8,11 +8,11 @@ This test consists in checking the presence of the `"title"` attribute for all t
 
 ### Criterion
 
-[2.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-2-1)
+[2.1](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-2-1)
 
 ### Test
 
-[2.1.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-2-1-1)
+[2.1.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-2-1-1)
 
 ### Description
 

@@ -11,11 +11,11 @@ To do so, we detect the tables on the page, and let the user make the control ma
 
 ### Criterion
 
-[5.6](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-5-6)
+[5.6](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-5-6)
 
 ### Test
 
-[5.6.2](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-5-6-2)
+[5.6.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-6-2)
 
 ### Description
 

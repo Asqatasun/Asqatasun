@@ -9,11 +9,11 @@ and its background is at least 7:1 for the normal weighted, under 18px sized, te
 
 ### Criterion
 
-[3.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-3-4)
+[3.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-3-4)
 
 ### Test
 
-[3.4.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-3-4-1)
+[3.4.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-3-4-1)
 
 ### Description
 

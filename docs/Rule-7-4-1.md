@@ -15,11 +15,11 @@ action and the kind of change before it is activated.
 
 ### Criterion
 
-[7.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-7-4)
+[7.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-7-4)
 
 ### Test
 
-[7.4.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-7-4-1)
+[7.4.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-7-4-1)
 
 ### Description
 

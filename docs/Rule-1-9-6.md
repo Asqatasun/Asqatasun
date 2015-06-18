@@ -8,11 +8,11 @@
 
 ### Criterion
 
-[1.9](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-9)
+[1.9](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-9)
 
 ###Test
 
-[1.9.6](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-9-6)
+[1.9.6](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-9-6)
 
 ### Description
 

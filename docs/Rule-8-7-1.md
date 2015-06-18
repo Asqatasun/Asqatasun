@@ -7,11 +7,11 @@ No-check rule
 
 ### Criterion
 
-[8.7](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-8-7)
+[8.7](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-8-7)
 
 ### Test
 
-[8.7.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-8-7-1)
+[8.7.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-7-1)
 
 ### Description
 

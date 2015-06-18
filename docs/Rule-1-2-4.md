@@ -8,11 +8,11 @@ This test consists in checking whether the ARIA attribute of each decorative vec
 
 ### Criterion
 
-[1.2](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-2)
+[1.2](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-2)
 
 ###Test
 
-[1.2.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-2-4)
+[1.2.4](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-4)
 
 ### Description
 

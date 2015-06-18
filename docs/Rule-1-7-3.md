@@ -8,11 +8,11 @@ informative embedded image is relevant.
 
 ### Criterion
 
-[1.7](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-7)
+[1.7](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-7)
 
 ### Test
 
-[1.7.3](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-7-3)
+[1.7.3](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-7-3)
 
 ### Description
 

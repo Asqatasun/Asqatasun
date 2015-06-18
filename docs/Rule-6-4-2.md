@@ -8,11 +8,11 @@ the same purpose and target
 
 ### Criterion
 
-[6.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-6-4)
+[6.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-6-4)
 
 ### Test
 
-[6.4.2](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-4-2)
+[6.4.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-4-2)
 
 ### Description
 

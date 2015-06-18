@@ -8,11 +8,11 @@ This test consists in checking whether the `alt` attribute of each decorative im
 
 ### Criterion
 
-[1.2](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-2)
+[1.2](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-2)
 
 ### Test
 
-[1.2.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-2-1)
+[1.2.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-1)
 
 ### Description
 

@@ -8,11 +8,11 @@ This test consists in checking for each informative vector image (`<svg>` tag) a
 
 ### Criterion
 
-[1.3](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-3)
+[1.3](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-3)
 
 ###Test
 
-[1.3.6](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-3-6)
+[1.3.6](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-3-6)
 
 ### Description
 

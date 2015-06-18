@@ -8,11 +8,11 @@ This test consists in searching patterns indicating that forbidden tags
 
 ### Criterion
 
-[8.9](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-8-9)
+[8.9](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-8-9)
 
 ### Test
 
-[8.9.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-8-9-1)
+[8.9.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-9-1)
 
 ### Description
 

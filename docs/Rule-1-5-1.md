@@ -7,11 +7,11 @@ Empty rule
 
 ### Criterion
 
-[1.5](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-5)
+[1.5](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-5)
 
 ### Test
 
-[1.5.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-5-1)
+[1.5.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-5-1)
 
 ### Description
 

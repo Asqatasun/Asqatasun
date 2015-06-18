@@ -7,11 +7,11 @@ This test checks whether the page contains empty links.
 
 ### Criterion
 
-[6.5](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-6-5)
+[6.5](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-6-5)
 
 ### Test
 
-[6.5.1](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-5-1)
+[6.5.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-5-1)
 
 ### Description
 

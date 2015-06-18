@@ -8,11 +8,11 @@ associated with an object image used as a CAPTCHA.
 
 ### Criterion
 
-[1.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#crit-1-4)
+[1.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-4)
 
 ### Test
 
-[1.4.4](http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-4-4)
+[1.4.4](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-4-4)
 
 ### Description
 
