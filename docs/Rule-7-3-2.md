@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -34,7 +34,7 @@ Chaque &eacute;l&eacute;ment poss&eacute;dant un gestionnaire d'&eacute;v&eacute
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -44,18 +44,7 @@ Chaque &eacute;l&eacute;ment poss&eacute;dant un gestionnaire d'&eacute;v&eacute
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
+In all cases
 

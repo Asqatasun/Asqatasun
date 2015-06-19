@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -21,7 +21,6 @@ Chaque &eacute;l&eacute;ment poss&eacute;dant un gestionnaire d'&eacute;v&eacute
  *  L'&eacute;l&eacute;ment est <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mAAClavierSouris">accessible par le clavier et la souris</a> 
  *  Un &eacute;l&eacute;ment <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mAAClavierSouris">accessible par le clavier et la souris</a> permettant de r&eacute;aliser la m&ecirc;me action est pr&eacute;sent dans la page 
 
-
 ### Level
 
 **A**
@@ -34,7 +33,7 @@ Chaque &eacute;l&eacute;ment poss&eacute;dant un gestionnaire d'&eacute;v&eacute
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -44,18 +43,6 @@ Chaque &eacute;l&eacute;ment poss&eacute;dant un gestionnaire d'&eacute;v&eacute
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases

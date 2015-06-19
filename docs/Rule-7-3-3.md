@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -30,7 +30,7 @@ Un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -40,18 +40,7 @@ Un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
+In all cases
 
