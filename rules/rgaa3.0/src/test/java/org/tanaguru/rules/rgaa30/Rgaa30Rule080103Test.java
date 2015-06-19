@@ -69,7 +69,6 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.BAD_DOCTYPE_LOCATION_MSG,
-                "",
                 1);        
         
         
@@ -82,7 +81,6 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.BAD_DOCTYPE_LOCATION_MSG,
-                "",
                 1);        
         
         //----------------------------------------------------------------------
