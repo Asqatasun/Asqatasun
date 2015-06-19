@@ -1,4 +1,5 @@
 # Rule 6.5.1
+
 ## Summary
 
 This test checks whether the page contains empty links.
@@ -15,7 +16,7 @@ This test checks whether the page contains empty links.
 
 ### Description
 
-Dans chaque page Web, chaque lien (balise `a` avec un attribut `href`), &agrave; l'exception des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAncreNom">ancres</a>, a-t-il un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">intitul&eacute;</a> entre `<a>` et `</a>` ?
+Dans chaque page Web, chaque lien (balise `a` avec un attribut `href`), &agrave; l'exception des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#content-ancre">ancres</a>, a-t-il un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#intitul-de-lien">intitul&eacute;</a> entre `<a>` et `</a>` ?
 
 ### Level
 
@@ -35,41 +36,43 @@ Dans chaque page Web, chaque lien (balise `a` avec un attribut `href`), &agrave;
 
 ### Selection
 
-**Set1** : All the `<a>` tags of the page that are not an anchor (
+#### Set1** 
+
+All the `<a>` tags of the page that are not an anchor (
 a:not([name]):not([id]) )
 
-**Set2** : All the tags from **Set1** that have an empty text (including
-children text) and that have not children with a not empty "alt"
+#### Set2
+
+All the tags from **Set1** that have an empty text (including
+children text) and that have not children with a not empty `"alt"`
 attribute
 
 ### Process
 
-The selection handles the process.
+For each element of **Set2**, raise a MessageA
+
+##### MessageA : Empty link
+
+-   code : EmptyLink
+-   status: Failed
+-   parameter : `"href"` attribute, snippet
+-   present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-**Set1** is empty (The page has no `<a>` tag)
+The page has no `<a>` tag (**Set1** is empty)
 
 #### Passed
 
-**Set2** is empty (The page only contains not empty links)
+The page only doesn't contain empty links (**Set2** is empty)
 
 #### Failed
 
-**Set2** is not empty. For each element of **Set2**, raise a Message1
-
-##### Message 1 : Empty link
-
--   code : EmptyLink
--   status: Failed
--   case : For each element of **Set2**
--   parameter : href attribute, snippet
--   present in source : yes
+The page only contains empty links (**Set2** is not empty)
 
 ## Notes
 
 A `<a>` tag is seen as an anchor if and only if it has either a "name" or
-an "id" attribute (assuming [the definition of an anchor in AccessiWeb
-2.2](http://accessiweb.org/index.php/glossary-76.html#mAncreNom))
+an "id" attribute (assuming [the definition of an anchor in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#content-ancre))
