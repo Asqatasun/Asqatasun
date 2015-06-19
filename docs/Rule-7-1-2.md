@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -30,7 +30,7 @@ Chaque fonctionnalit&eacute; d'insertion de contenu contr&ocirc;l&eacute;e par u
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -40,18 +40,6 @@ Chaque fonctionnalit&eacute; d'insertion de contenu contr&ocirc;l&eacute;e par u
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases

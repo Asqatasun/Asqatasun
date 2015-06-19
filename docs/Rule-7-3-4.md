@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -35,7 +35,7 @@ Chaque composant d'interface impl&eacute;ment&eacute; via un r&ocirc;le d&eacute
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -45,18 +45,6 @@ Chaque composant d'interface impl&eacute;ment&eacute; via un r&ocirc;le d&eacute
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases

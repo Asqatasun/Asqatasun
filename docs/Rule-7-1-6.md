@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -34,7 +34,7 @@ Chaque composant d'interface qui utilise un role ARIA `application` respecte-t-i
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -44,18 +44,6 @@ Chaque composant d'interface qui utilise un role ARIA `application` respecte-t-i
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases

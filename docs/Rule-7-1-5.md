@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -34,7 +34,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -44,18 +44,6 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases

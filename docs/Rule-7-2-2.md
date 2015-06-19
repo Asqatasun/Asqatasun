@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -34,7 +34,7 @@ Chaque &eacute;l&eacute;ment non textuel mis &agrave; jour par un <a href="http:
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 
@@ -44,18 +44,6 @@ Chaque &eacute;l&eacute;ment non textuel mis &agrave; jour par un <a href="http:
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases
