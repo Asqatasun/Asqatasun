@@ -22,10 +22,9 @@ package org.tanaguru.rules.rgaa30;
 
 import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
 import org.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
 import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_MSG;
 
@@ -38,10 +37,6 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE
  */
 public class Rgaa30Rule080601 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /* The selector */
-    private static final ElementSelector ELEMENT_SELECTOR = 
-            new SimpleElementSelector(TITLE_ELEMENT);
-    
     /* Title blacklisted nomenclature */
     private static final String TITLE_BLACKLIST_NOM = "UnexplicitPageTitle";
     
@@ -50,7 +45,7 @@ public class Rgaa30Rule080601 extends AbstractPageRuleWithSelectorAndCheckerImpl
      */
     public Rgaa30Rule080601 () {
         super(
-                ELEMENT_SELECTOR,
+                new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY),
                 new TextPertinenceChecker(
                     // check emptiness
                     true, 
