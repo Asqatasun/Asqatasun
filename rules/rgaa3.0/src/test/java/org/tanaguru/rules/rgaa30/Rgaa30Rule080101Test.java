@@ -67,7 +67,6 @@ public class Rgaa30Rule080101Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.DOCTYPE_MISSING_MSG,
-                "",
                 1);
     }
 
