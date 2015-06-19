@@ -52,6 +52,7 @@ public class Rgaa30Rule100402Test extends Rgaa30RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.10.04.02-4NA-01");
         addWebResource("Rgaa30.Test.10.04.02-4NA-02");
+        addWebResource("Rgaa30.Test.10.04.02-4NA-03");
         addWebResource("Rgaa30.Test.10.04.02-1Passed-01");
         addWebResource("Rgaa30.Test.10.04.02-1Passed-02");
         addWebResource("Rgaa30.Test.10.04.02-1Passed-03");
@@ -66,7 +67,6 @@ public class Rgaa30Rule100402Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.10.04.02-2Failed-01_2");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-01_3");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-01_4");
-        addWebResource("Rgaa30.Test.10.04.02-2Failed-01_5");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-02_1");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-02_2");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-02_3");
@@ -76,12 +76,8 @@ public class Rgaa30Rule100402Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.10.04.02-2Failed-03_2");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-03_3");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-03_4");
-        addWebResource("Rgaa30.Test.10.04.02-2Failed-03_5");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-04_1");
-        addWebResource("Rgaa30.Test.10.04.02-2Failed-04_2");
-        addWebResource("Rgaa30.Test.10.04.02-2Failed-04_3");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-04_4");
-        addWebResource("Rgaa30.Test.10.04.02-2Failed-04_5");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-05_1");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-05_2");
         addWebResource("Rgaa30.Test.10.04.02-2Failed-05_3");
@@ -225,22 +221,6 @@ public class Rgaa30Rule100402Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------2Failed-01_4----------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.04.02-2Failed-01_4");
-        checkResultIsFailed(processResult, 1, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.BAD_UNIT_TYPE_MSG,
-                "pt",
-                1,
-                true,
-                new ImmutablePair(EvidenceStore.CSS_SELECTOR_EE, "h1"),
-                new ImmutablePair(EvidenceStore.CSS_FILENAME_EE, "locale"));
-
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01_5----------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.04.02-2Failed-01_5");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -398,57 +378,9 @@ public class Rgaa30Rule100402Test extends Rgaa30RuleImplementationTestCase {
 
 
         //----------------------------------------------------------------------
-        //------------------------------2Failed-03_5----------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.04.02-2Failed-03_5");
-        checkResultIsFailed(processResult, 1, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.BAD_UNIT_TYPE_MSG,
-                "mm",
-                1,
-                true,
-                new ImmutablePair(EvidenceStore.CSS_SELECTOR_EE, "h1"),
-                new ImmutablePair(EvidenceStore.CSS_FILENAME_EE, "locale"));
-
-
-        //----------------------------------------------------------------------
         //------------------------------2Failed-04_1----------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.10.04.02-2Failed-04_1");
-        checkResultIsFailed(processResult, 1, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.BAD_UNIT_TYPE_MSG,
-                "cm",
-                1,
-                true,
-                new ImmutablePair(EvidenceStore.CSS_SELECTOR_EE, "h1"),
-                new ImmutablePair(EvidenceStore.CSS_FILENAME_EE, "locale"));
-
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-04_2----------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.04.02-2Failed-04_2");
-        checkResultIsFailed(processResult, 1, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.BAD_UNIT_TYPE_MSG,
-                "cm",
-                1,
-                true,
-                new ImmutablePair(EvidenceStore.CSS_SELECTOR_EE, "h1"),
-                new ImmutablePair(EvidenceStore.CSS_FILENAME_EE, "locale"));
-
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-04_3----------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.04.02-2Failed-04_3");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -476,21 +408,6 @@ public class Rgaa30Rule100402Test extends Rgaa30RuleImplementationTestCase {
                 new ImmutablePair(EvidenceStore.CSS_SELECTOR_EE, "h1"),
                 new ImmutablePair(EvidenceStore.CSS_FILENAME_EE, "locale"));
 
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-04_5----------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.10.04.02-2Failed-04_5");
-        checkResultIsFailed(processResult, 1, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.BAD_UNIT_TYPE_MSG,
-                "cm",
-                1,
-                true,
-                new ImmutablePair(EvidenceStore.CSS_SELECTOR_EE, "h1"),
-                new ImmutablePair(EvidenceStore.CSS_FILENAME_EE, "locale"));
 
 
         //----------------------------------------------------------------------
@@ -662,6 +579,12 @@ public class Rgaa30Rule100402Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------4NA-2-----------------------------------
         //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.04.02-4NA-02"));
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-3-----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.10.04.02-4NA-03"));
     }
 
 }

@@ -41,7 +41,7 @@ public class Rgaa30Rule100402 extends AbstractPageRuleCssImplementation {
      * 
      */
     public Rgaa30Rule100402() {
-        super(new ForbiddenUnitChecker(FONT_SIZE_CSS_PROPERTY));
+        super(new ForbiddenUnitChecker(FONT_SIZE_CSS_PROPERTY), "MediaListNotAcceptingRelativeUnits");
     }
 
 }
