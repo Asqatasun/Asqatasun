@@ -152,7 +152,6 @@ public class Rgaa30Rule080102Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.INVALID_DOCTYPE_MSG,
-                "",
                 1);        
         
         //----------------------------------------------------------------------
@@ -164,7 +163,6 @@ public class Rgaa30Rule080102Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.INVALID_DOCTYPE_MSG,
-                "",
                 1);        
         
         //----------------------------------------------------------------------
