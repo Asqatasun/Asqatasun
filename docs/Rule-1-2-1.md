@@ -16,7 +16,7 @@ This test consists in checking whether the `alt` attribute of each decorative im
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgDeco">image de d&eacute;coration</a> sans <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLegendeImage">l&eacute;gende</a> (balise `img`) et ayant un attribut `alt` v&eacute;rifie-t-elle ces conditions : 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgDeco">image de d&eacute;coration</a> sans <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLegendeImage">l&eacute;gende</a> (balise `img`) et ayant un attribut `alt` v&eacute;rifie-t-elle ces conditions : 
  
  * le contenu de l'attribut alt est vide (`alt=""`) 
  * l'image de d&eacute;coration ne poss&egrave;de pas d'attribut `title` 

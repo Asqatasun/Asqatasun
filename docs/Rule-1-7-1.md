@@ -16,11 +16,11 @@ informative image is relevant.
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgInfo">image porteuse d'information</a> (balise `img` ou `input` avec l'attribut `type="image"`) ayant une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description d&eacute;taill&eacute;e</a> v&eacute;rifie-t-elle une de ces conditions ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgInfo">image porteuse d'information</a> (balise `img` ou `input` avec l'attribut `type="image"`) ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> v&eacute;rifie-t-elle une de ces conditions ? 
  
- *  La <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description d&eacute;taill&eacute;e</a> via l'adresse r&eacute;f&eacute;renc&eacute;e dans l'attribut `longdesc` est pertinente 
- *  La <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description d&eacute;taill&eacute;e</a> dans la page et signal&eacute;e dans l'attribut `alt` est pertinente 
- *  La <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description d&eacute;taill&eacute;e</a> via un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienAdj">lien adjacent</a> est pertinente 
+ *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> via l'adresse r&eacute;f&eacute;renc&eacute;e dans l'attribut `longdesc` est pertinente 
+ *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> dans la page et signal&eacute;e dans l'attribut `alt` est pertinente 
+ *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> via un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienAdj">lien adjacent</a> est pertinente 
 
 
 ### Level

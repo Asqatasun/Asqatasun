@@ -16,7 +16,7 @@ No-check rule
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mMediaTemp">m&eacute;dia temporel</a> v&eacute;hiculant une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mInfoCouleur">information</a>, l'<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mInfoCouleur">information</a> ne doit pas &ecirc;tre donn&eacute;e uniquement par la couleur. Cette r&egrave;gle est-elle impl&eacute;ment&eacute;e de fa&ccedil;on <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mPertinence">pertinente</a> ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> v&eacute;hiculant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mInfoCouleur">information</a>, l'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mInfoCouleur">information</a> ne doit pas &ecirc;tre donn&eacute;e uniquement par la couleur. Cette r&egrave;gle est-elle impl&eacute;ment&eacute;e de fa&ccedil;on <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mPertinence">pertinente</a> ?
 
 ### Level
 

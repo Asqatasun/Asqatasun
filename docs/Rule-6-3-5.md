@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque intitul&eacute; de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienVectoriel">lien vectoriel</a> (contenu de l'alternative de l'image vectorielle, balise `svg`) est-il <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienHorsContexte">explicite hors contexte</a> (<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.3">hors cas particuliers</a>) ?
+Chaque intitul&eacute; de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienVectoriel">lien vectoriel</a> (contenu de l'alternative de l'image vectorielle, balise `svg`) est-il <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienHorsContexte">explicite hors contexte</a> (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.3">hors cas particuliers</a>) ?
 
 ### Level
 

@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mScript">script</a> qui provoque une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mAlerte">alerte</a> non sollicit&eacute;e est-il contr&ocirc;lable par l'utilisateur (hors <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit7-6" title="Cas particuliers pour le crit&egrave;re 7.6">cas particuliers</a>) ?
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> qui provoque une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAlerte">alerte</a> non sollicit&eacute;e est-il contr&ocirc;lable par l'utilisateur (hors <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit7-6" title="Cas particuliers pour le crit&egrave;re 7.6">cas particuliers</a>) ?
 
 ### Level
 

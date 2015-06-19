@@ -16,7 +16,7 @@ No-check rule
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; pr&eacute;-enregistr&eacute; ayant des <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mSsTitreSynchro">sous-titres synchronis&eacute;s</a>, ces sous-titres sont-ils pertinents ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; pr&eacute;-enregistr&eacute; ayant des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a>, ces sous-titres sont-ils pertinents ?
 
 ### Level
 

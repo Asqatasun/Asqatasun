@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque page Web a-t-elle un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitrePage">titre de page</a> (balise `title`) ?
+Chaque page Web a-t-elle un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitrePage">titre de page</a> (balise `title`) ?
 
 ### Level
 

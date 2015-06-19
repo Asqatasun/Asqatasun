@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgInfo">image porteuse d'information</a> (balise `img`) ayant un attribut `alt` v&eacute;rifie-t-elle ces conditions (hors <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgInfo">image porteuse d'information</a> (balise `img`) ayant un attribut `alt` v&eacute;rifie-t-elle ces conditions (hors <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ? 
  
  * Le contenu de l'attribut `alt` est pertinent 
  * S'il est pr&eacute;sent, le contenu de l'attribut `title` est identique au contenu de l'attribut `alt` 

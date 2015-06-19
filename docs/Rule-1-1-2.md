@@ -16,7 +16,7 @@ This test consists in checking whether each `<area>` of an image map is defined 
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mZone">zone</a> (balise `area`) d'une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mImgReactive">image r&eacute;active</a> a-t-elle un attribut `alt` ?
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZone">zone</a> (balise `area`) d'une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mImgReactive">image r&eacute;active</a> a-t-elle un attribut `alt` ?
 
 ### Level
 

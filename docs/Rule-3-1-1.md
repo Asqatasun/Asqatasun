@@ -16,7 +16,7 @@ No-check rule
 
 ### Description
 
-Pour chaque mot ou ensemble de mots dont la mise en couleur est porteuse d'<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mInfoCouleur">information</a>, l'<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mInfoCouleur">information</a> ne doit pas &ecirc;tre donn&eacute;e uniquement par la couleur. Cette r&egrave;gle est-elle respect&eacute;e ?
+Pour chaque mot ou ensemble de mots dont la mise en couleur est porteuse d'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mInfoCouleur">information</a>, l'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mInfoCouleur">information</a> ne doit pas &ecirc;tre donn&eacute;e uniquement par la couleur. Cette r&egrave;gle est-elle respect&eacute;e ?
 
 ### Level
 

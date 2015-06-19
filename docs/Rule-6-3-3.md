@@ -17,7 +17,7 @@ context.
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mIntituleLien">intitul&eacute; de lien</a> de type <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mZoneCliquable">zone cliquable</a> (contenu de l'attribut `alt` d'une balise `area`) est-il <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienHorsContexte">explicite hors contexte</a> (<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.4">hors cas particuliers</a>) ?
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">intitul&eacute; de lien</a> de type <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneCliquable">zone cliquable</a> (contenu de l'attribut `alt` d'une balise `area`) est-il <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienHorsContexte">explicite hors contexte</a> (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.4">hors cas particuliers</a>) ?
 
 ### Level
 

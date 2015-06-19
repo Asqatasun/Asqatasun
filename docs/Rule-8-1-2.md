@@ -17,7 +17,7 @@ declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 
 ### Description
 
-Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDTD">type de document</a> (balise `doctype`) est-il valide ?
+Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDTD">type de document</a> (balise `doctype`) est-il valide ?
 
 ### Level
 

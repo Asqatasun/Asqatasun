@@ -16,7 +16,7 @@
 
 ### Description
 
-Dans chaque page Web, la hi&eacute;rarchie entre les <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitre">titres</a> (balises `h` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level`) est-elle pertinente ?
+Dans chaque page Web, la hi&eacute;rarchie entre les <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitre">titres</a> (balises `h` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level`) est-elle pertinente ?
 
 ### Level
 

@@ -16,7 +16,7 @@ No-check rule
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mMediaTemp">m&eacute;dia temporel</a> pr&eacute;-enregistr&eacute; seulement audio a-t-il, si n&eacute;cessaire, une interpr&eacute;tation en langue des signes adapt&eacute;e &agrave; la langue du m&eacute;dia (<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit4-" title="Cas particuliers pour le crit&egrave;re 4.9">hors cas particuliers</a>) ?
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> pr&eacute;-enregistr&eacute; seulement audio a-t-il, si n&eacute;cessaire, une interpr&eacute;tation en langue des signes adapt&eacute;e &agrave; la langue du m&eacute;dia (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit4-" title="Cas particuliers pour le crit&egrave;re 4.9">hors cas particuliers</a>) ?
 
 ### Level
 

@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque image bitmap (balise `canvas`) ayant une description d&eacute;taill&eacute;e entre `<canvas>` et `</canvas>`, cette description d&eacute;taill&eacute;e est-elle <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
+Pour chaque image bitmap (balise `canvas`) ayant une description d&eacute;taill&eacute;e entre `<canvas>` et `</canvas>`, cette description d&eacute;taill&eacute;e est-elle <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
 
 ### Level
 

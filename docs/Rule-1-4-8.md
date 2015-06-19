@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque image bitmap (balise `canvas`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> ou comme image-test et ayant une alternative textuelle, l'alternative textuelle permet-elle d'identifier la nature et la fonction de l'image ?
+Pour chaque image bitmap (balise `canvas`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme image-test et ayant une alternative textuelle, l'alternative textuelle permet-elle d'identifier la nature et la fonction de l'image ?
 
 ### Level
 

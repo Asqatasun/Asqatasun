@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque page web, chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienIdentique">lien identique</a> de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mIntituleLien">type texte</a> a-t-il les m&ecirc;mes fonction et destination ?
+Pour chaque page web, chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienIdentique">lien identique</a> de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">type texte</a> a-t-il les m&ecirc;mes fonction et destination ?
 
 ### Level
 

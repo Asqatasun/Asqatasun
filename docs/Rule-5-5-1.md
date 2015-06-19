@@ -16,7 +16,7 @@ This test consists in checking the relevancy of the caption of data tables.
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`) ayant une balise `caption`, le contenu de cette balise donne-t-il le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitreTab">titre</a> du tableau ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`) ayant une balise `caption`, le contenu de cette balise donne-t-il le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitreTab">titre</a> du tableau ?
 
 ### Level
 

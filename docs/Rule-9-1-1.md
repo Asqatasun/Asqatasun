@@ -16,7 +16,7 @@
 
 ### Description
 
-Dans chaque page Web, y a-t-il un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitre">titre</a> de niveau 1 (balise `h1` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level="1"`) ?
+Dans chaque page Web, y a-t-il un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitre">titre</a> de niveau 1 (balise `h1` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level="1"`) ?
 
 ### Level
 

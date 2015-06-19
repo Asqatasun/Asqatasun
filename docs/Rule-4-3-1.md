@@ -16,10 +16,10 @@ No-check rule
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; pr&eacute;-enregistr&eacute; v&eacute;rifie-t-il, si n&eacute;cessaire, l'une de ces conditions (<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit4-" title="Cas particuliers pour le crit&egrave;re 4.3">hors cas particuliers</a>) ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; pr&eacute;-enregistr&eacute; v&eacute;rifie-t-il, si n&eacute;cessaire, l'une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit4-" title="Cas particuliers pour le crit&egrave;re 4.3">hors cas particuliers</a>) ? 
  
- * Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; poss&egrave;de des <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> 
- * Il existe une version alternative poss&eacute;dant des <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> accessible via un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienAdj">lien adjacent</a> (une url ou une ancre) 
+ * Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; poss&egrave;de des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> 
+ * Il existe une version alternative poss&eacute;dant des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> accessible via un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienAdj">lien adjacent</a> (une url ou une ancre) 
 
 
 ### Level

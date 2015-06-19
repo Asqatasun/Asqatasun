@@ -16,7 +16,7 @@
 
 ### Description
 
-Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mArboDoc">l'arborescence du document</a> est-elle coh&eacute;rente ?
+Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mArboDoc">l'arborescence du document</a> est-elle coh&eacute;rente ?
 
 ### Level
 

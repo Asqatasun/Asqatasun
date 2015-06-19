@@ -16,11 +16,11 @@ No-check rule
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; en direct v&eacute;rifie-t-il une de ces conditions ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; en direct v&eacute;rifie-t-il une de ces conditions ? 
  
- *  Les <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> sont pertinents 
- *  Les <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> de la version alternative sont pertinents 
- *  La <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTranscriptTextuel">transcription textuelle</a> est pertinente 
+ *  Les <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> sont pertinents 
+ *  Les <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> de la version alternative sont pertinents 
+ *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTranscriptTextuel">transcription textuelle</a> est pertinente 
 
 
 ### Level

@@ -16,10 +16,10 @@ elements used for data tables.
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabMiseForme">tableau de mise en forme</a> (balise `table`) v&eacute;rifie-t-il ces conditions ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> (balise `table`) v&eacute;rifie-t-il ces conditions ? 
  
- *  Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabMiseForme">tableau de mise en forme</a> (balise `table`) ne poss&egrave;de pas de balises `caption`, `th`, `thead`, `tfoot` 
- *  Les cellules du <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabMiseForme">tableau de mise en forme</a> (balise `td`) ne poss&egrave;dent pas d'attributs `scope`, `headers`, `colgroup`, `axis`. 
+ *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> (balise `table`) ne poss&egrave;de pas de balises `caption`, `th`, `thead`, `tfoot` 
+ *  Les cellules du <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> (balise `td`) ne poss&egrave;dent pas d'attributs `scope`, `headers`, `colgroup`, `axis`. 
 
 
 ### Level

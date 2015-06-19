@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque fonctionnalit&eacute; d'insertion de contenu contr&ocirc;l&eacute;e par un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mScript">script</a> utilise-t-elle des <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDomSpec">propri&eacute;t&eacute;s et m&eacute;thodes conformes &agrave; la sp&eacute;cification DOM (Document Object Model)</a> ?
+Chaque fonctionnalit&eacute; d'insertion de contenu contr&ocirc;l&eacute;e par un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> utilise-t-elle des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDomSpec">propri&eacute;t&eacute;s et m&eacute;thodes conformes &agrave; la sp&eacute;cification DOM (Document Object Model)</a> ?
 
 ### Level
 

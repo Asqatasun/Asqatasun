@@ -16,7 +16,7 @@ This test consists in checking the presence of the `"title"` attribute for all t
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mCadreEnLigne">cadre en ligne</a> (balise `iframe`) a-t-il un attribut `title` ?
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCadreEnLigne">cadre en ligne</a> (balise `iframe`) a-t-il un attribut `title` ?
 
 ### Level
 

@@ -16,10 +16,10 @@ area is enough explicit to understand the purpose and the target
 
 ### Description
 
-Chaque lien doublant une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mZoneCliquable">zone cliquable</a> d'une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mImgReactive">image r&eacute;active cot&eacute; serveur</a> v&eacute;rifie-t-il une de ces conditions (<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.1">hors cas particuliers</a>) ? 
+Chaque lien doublant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneCliquable">zone cliquable</a> d'une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mImgReactive">image r&eacute;active cot&eacute; serveur</a> v&eacute;rifie-t-il une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.1">hors cas particuliers</a>) ? 
  
- * L'<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mIntituleLien">intitul&eacute; de lien</a> seul permet d'en comprendre la fonction et la destination 
- * Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mContexteLien">contexte du lien</a> permet d'en comprendre la fonction et la destination 
+ * L'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">intitul&eacute; de lien</a> seul permet d'en comprendre la fonction et la destination 
+ * Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mContexteLien">contexte du lien</a> permet d'en comprendre la fonction et la destination 
 
 
 ### Level

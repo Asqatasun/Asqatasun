@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque image embarqu&eacute;e (balise `embed` avec l'attribut `type="image/..."`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgTest">image-test</a>, et ayant une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mAltTexteImg">alternative textuelle</a>, l'<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mAltTexteImg">alternative textuelle</a> permet-elle d'identifier la nature et la fonction de l'image ?
+Pour chaque image embarqu&eacute;e (balise `embed` avec l'attribut `type="image/..."`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a>, et ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a>, l'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a> permet-elle d'identifier la nature et la fonction de l'image ?
 
 ### Level
 

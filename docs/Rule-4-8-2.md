@@ -16,7 +16,7 @@ No-check rule
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; ayant une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mAudioDesc">audio-description</a> synchronis&eacute;e, celle-ci est-elle pertinente ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAudioDesc">audio-description</a> synchronis&eacute;e, celle-ci est-elle pertinente ?
 
 ### Level
 

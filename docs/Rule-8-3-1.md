@@ -16,7 +16,7 @@ page
 
 ### Description
 
-Pour chaque page Web, l'indication de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLangueDefaut"> langue par d&eacute;faut</a> v&eacute;rifie-t-elle une de ces conditions ? 
+Pour chaque page Web, l'indication de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLangueDefaut"> langue par d&eacute;faut</a> v&eacute;rifie-t-elle une de ces conditions ? 
  
  *  L'indication de la langue de la page (attribut `lang` et/ou `xml:lang`) est donn&eacute;e pour l'&eacute;l&eacute;ment `html` 
  *  L'indication de la langue de la page (attribut `lang` et/ou `xml:lang`) est donn&eacute;e sur chaque &eacute;l&eacute;ment de texte ou sur l'un des &eacute;l&eacute;ments parents 

@@ -18,9 +18,9 @@ Human check will be then needed to determine whether these detected elements hav
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgInfo">image porteuse d'information</a> (balise `img`) qui n&eacute;cessite une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description d&eacute;taill&eacute;e</a>, v&eacute;rifie-t-elle une de ces conditions ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgInfo">image porteuse d'information</a> (balise `img`) qui n&eacute;cessite une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a>, v&eacute;rifie-t-elle une de ces conditions ? 
  
- * Il existe un attribut `longdesc` qui donne l'adresse (`url`) d'une page contenant la <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description d&eacute;taill&eacute;e</a> 
+ * Il existe un attribut `longdesc` qui donne l'adresse (`url`) d'une page contenant la <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> 
  * Il existe un attribut `alt` contenant la r&eacute;f&eacute;rence &agrave; une description d&eacute;taill&eacute;e adjacente &agrave; l'image 
  * Il existe un lien adjacent (via une `url` ou une `ancre`) permettant d'acc&eacute;der au contenu de la description d&eacute;taill&eacute;e 
 

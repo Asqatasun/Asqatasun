@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque d&eacute;claration de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDTD">type de document</a>, le code source de la page ne doit pas utiliser d'&eacute;l&eacute;ments obsol&egrave;tes. Cette r&egrave;gle est-elle respect&eacute;e <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit8-2">hors cas particuliers</a> ?
+Pour chaque d&eacute;claration de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDTD">type de document</a>, le code source de la page ne doit pas utiliser d'&eacute;l&eacute;ments obsol&egrave;tes. Cette r&egrave;gle est-elle respect&eacute;e <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit8-2">hors cas particuliers</a> ?
 
 ### Level
 

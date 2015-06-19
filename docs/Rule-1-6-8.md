@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque image bitmap (balise `canvas`) qui impl&eacute;mente une r&eacute;f&eacute;rence &agrave; une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDescDetaillee">description d&eacute;taill&eacute;e</a> adjacente, cette r&eacute;f&eacute;rence est-elle <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
+Pour chaque image bitmap (balise `canvas`) qui impl&eacute;mente une r&eacute;f&eacute;rence &agrave; une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> adjacente, cette r&eacute;f&eacute;rence est-elle <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
 
 ### Level
 

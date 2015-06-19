@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabMiseForme">tableau de mise en forme</a> v&eacute;rifie-t-il ces conditions ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> v&eacute;rifie-t-il ces conditions ? 
  
  * le contenu lin&eacute;aris&eacute; reste compr&eacute;hensible 
  * la balise `table` poss&egrave;de un attribut `role="presentation"` 

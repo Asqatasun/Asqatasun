@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque page Web poss&eacute;dant une d&eacute;claration de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDTD">type de document</a>, celle-ci est-elle situ&eacute;e avant la balise `html` dans le code source ?
+Pour chaque page Web poss&eacute;dant une d&eacute;claration de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDTD">type de document</a>, celle-ci est-elle situ&eacute;e avant la balise `html` dans le code source ?
 
 ### Level
 

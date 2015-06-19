@@ -18,8 +18,8 @@
 
 Chaque composant d'interface qui utilise un role ARIA `application` respecte-t-il une de ces conditions ? 
  
- * Le composant d'interface est <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mRestitutionCorrecte"></a><a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mRestitutionCorrecte">correctement restitu&eacute;</a> par les technologies d'assistance 
- * Une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mAltScript">alternative</a> accessible permet d'acc&eacute;der aux m&ecirc;mes fonctionnalit&eacute;s. 
+ * Le composant d'interface est <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte"></a><a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte">correctement restitu&eacute;</a> par les technologies d'assistance 
+ * Une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> accessible permet d'acc&eacute;der aux m&ecirc;mes fonctionnalit&eacute;s. 
 
 
 ### Level

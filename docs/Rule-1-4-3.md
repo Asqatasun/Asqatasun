@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mimgTest">image-test</a>, ayant un attribut `alt` v&eacute;rifie-t-il ces conditions ? 
+Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a>, ayant un attribut `alt` v&eacute;rifie-t-il ces conditions ? 
  
  * le contenu de l'attribut `alt` permet d'identifier la nature et la fonction du bouton 
  * s'il est pr&eacute;sent, le contenu de l'attribut `title` est identique au contenu de l'attribut `alt` 

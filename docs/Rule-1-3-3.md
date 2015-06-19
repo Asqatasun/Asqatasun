@@ -16,7 +16,7 @@ This test consists in checking whether each button associated with an image that
 
 ### Description
 
-Pour chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) ayant un attribut `alt`, le contenu de cet attribut est-il pertinent (hors <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ?
+Pour chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) ayant un attribut `alt`, le contenu de cet attribut est-il pertinent (hors <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ?
 
 ### Level
 

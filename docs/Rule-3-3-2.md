@@ -18,7 +18,7 @@ textual elements
 
 ### Description
 
-Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTailleCaract%C3%A8re"><strong>jusqu'&agrave; 120%</strong> de la taille de police par d&eacute;faut</a> (ou 1.2em), le texte et le texte en image en gras v&eacute;rifient-ils une de ces conditions (<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit3-" title="Cas particuliers pour le crit&egrave;re 3.3">hors cas particuliers</a>) ? 
+Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTailleCaract%C3%A8re"><strong>jusqu'&agrave; 120%</strong> de la taille de police par d&eacute;faut</a> (ou 1.2em), le texte et le texte en image en gras v&eacute;rifient-ils une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit3-" title="Cas particuliers pour le crit&egrave;re 3.3">hors cas particuliers</a>) ? 
  
  *  le rapport de contraste entre le texte et son arri&egrave;re-plan est de 4,5:1, au moins 
  * un m&eacute;canisme permet &agrave; l'utilisateur d'afficher le texte avec un rapport de contraste de 4,5:1, au moins 

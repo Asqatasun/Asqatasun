@@ -16,7 +16,7 @@ This test consists in checking for each informative vector image (<svg> tag) wit
 
 ### Description
 
-Pour chaque image vectorielle porteuse d'information (balise `svg`) et poss&eacute;dant une alternative, cette alternative est-elle <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
+Pour chaque image vectorielle porteuse d'information (balise `svg`) et poss&eacute;dant une alternative, cette alternative est-elle <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
 
 ### Level
 

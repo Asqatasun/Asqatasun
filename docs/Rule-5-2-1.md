@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabDonneeC">tableau de donn&eacute;e complexes</a> (balise `table`) ayant un r&eacute;sum&eacute;, celui-ci est-il pertinent ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonneeC">tableau de donn&eacute;e complexes</a> (balise `table`) ayant un r&eacute;sum&eacute;, celui-ci est-il pertinent ?
 
 ### Level
 

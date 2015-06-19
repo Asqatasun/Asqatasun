@@ -16,7 +16,7 @@ This test consists in searching patterns indicating that forbidden tags
 
 ### Description
 
-Dans chaque page Web les balises (&agrave; l'exception de `div`, `span` et `table`) ne doivent pas &ecirc;tre utilis&eacute;es <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mUniquPres">uniquement &agrave; des fins de pr&eacute;sentation</a>. Cette r&egrave;gle est-elle respect&eacute;e ?
+Dans chaque page Web les balises (&agrave; l'exception de `div`, `span` et `table`) ne doivent pas &ecirc;tre utilis&eacute;es <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mUniquPres">uniquement &agrave; des fins de pr&eacute;sentation</a>. Cette r&egrave;gle est-elle respect&eacute;e ?
 
 ### Level
 

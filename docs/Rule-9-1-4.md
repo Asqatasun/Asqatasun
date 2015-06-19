@@ -16,7 +16,7 @@
 
 ### Description
 
-Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitre">titre</a> (balise `h` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level`) est-il pertinent ?
+Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitre">titre</a> (balise `h` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level`) est-il pertinent ?
 
 ### Level
 

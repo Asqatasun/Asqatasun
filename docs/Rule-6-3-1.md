@@ -16,7 +16,7 @@ explicit to understand the purpose and the target out of its context.
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienTexte">lien texte</a> v&eacute;rifie-t-il une de ces conditions (<a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/cas_particulier.htm#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.3">hors cas particuliers</a>) ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienTexte">lien texte</a> v&eacute;rifie-t-il une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.3">hors cas particuliers</a>) ? 
  
  * L'intitul&eacute; du lien est explicite hors contexte 
  * Un m&eacute;canisme permet &agrave; l'utilisateur d'obtenir un intitul&eacute; de lien explicite hors contexte 

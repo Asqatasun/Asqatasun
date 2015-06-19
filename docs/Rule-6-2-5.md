@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienVectoriel">lien vectoriel</a> ayant un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitreLien">titre de lien</a> (attribut `title`), le contenu de cet attribut est-il pertinent ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienVectoriel">lien vectoriel</a> ayant un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitreLien">titre de lien</a> (attribut `title`), le contenu de cet attribut est-il pertinent ?
 
 ### Level
 

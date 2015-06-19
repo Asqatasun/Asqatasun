@@ -19,7 +19,7 @@ To do so, we detect the tables on the page, and let the user make the control ma
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`), chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mEnteteTab">en-t&ecirc;te de lignes</a> a-t-il une balise `th` ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`), chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mEnteteTab">en-t&ecirc;te de lignes</a> a-t-il une balise `th` ?
 
 ### Level
 

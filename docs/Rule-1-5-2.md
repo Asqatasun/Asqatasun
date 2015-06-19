@@ -16,10 +16,10 @@ This test consists in detecting buttons associated with an image used as a CAPTC
 
 ### Description
 
-Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> v&eacute;rifie-t-il une de ces conditions ? 
+Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> v&eacute;rifie-t-il une de ces conditions ? 
  
- * Il existe une autre forme de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> non graphique, au moins  
- * Il existe une autre solution d'acc&egrave;s &agrave; la fonctionnalit&eacute; s&eacute;curis&eacute;e par le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mcaptcha">CAPTCHA</a> 
+ * Il existe une autre forme de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> non graphique, au moins  
+ * Il existe une autre solution d'acc&egrave;s &agrave; la fonctionnalit&eacute; s&eacute;curis&eacute;e par le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> 
 
 ### Level
 

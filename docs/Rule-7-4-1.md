@@ -23,11 +23,11 @@ action and the kind of change before it is activated.
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mScript">script</a> qui initie un <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChangContexte">changement de contexte</a> v&eacute;rifie-t-il une de ces conditions ? 
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> qui initie un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mChangContexte">changement de contexte</a> v&eacute;rifie-t-il une de ces conditions ? 
  
- *  L'utilisateur est averti par un texte de l'action du <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mScript">script</a> et du type de changement avant son d&eacute;clenchement 
- *  Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChangContexte">changement de contexte</a> est initi&eacute; par un bouton (`input` de type `submit`, `button` ou `image` ou balise `button`) explicite 
- *  Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mChangContexte">changement de contexte</a> est initi&eacute; par un lien explicite 
+ *  L'utilisateur est averti par un texte de l'action du <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> et du type de changement avant son d&eacute;clenchement 
+ *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mChangContexte">changement de contexte</a> est initi&eacute; par un bouton (`input` de type `submit`, `button` ou `image` ou balise `button`) explicite 
+ *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mChangContexte">changement de contexte</a> est initi&eacute; par un lien explicite 
 
 
 ### Level

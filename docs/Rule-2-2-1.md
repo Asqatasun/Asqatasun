@@ -16,7 +16,7 @@ This test consists in checking the relevancy of the `"title"` attribute for each
 
 ### Description
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mCadreEnLigne">cadre en ligne</a> (balise `iframe`) ayant un attribut `title`, le contenu de cet attribut est-il pertinent ?
+Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCadreEnLigne">cadre en ligne</a> (balise `iframe`) ayant un attribut `title`, le contenu de cet attribut est-il pertinent ?
 
 ### Level
 

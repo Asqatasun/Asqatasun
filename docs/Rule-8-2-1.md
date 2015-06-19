@@ -16,7 +16,7 @@
 
 ### Description
 
-Pour chaque d&eacute;claration de <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mDTD">type de document</a>, le code source de la page v&eacute;rifie-t-il ces conditions ? 
+Pour chaque d&eacute;claration de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDTD">type de document</a>, le code source de la page v&eacute;rifie-t-il ces conditions ? 
  
  *  Les balises respectent les r&egrave;gles d'&eacute;criture 
  *  L'imbrication des balises est conforme 

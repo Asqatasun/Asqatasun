@@ -19,7 +19,7 @@ the result is semi-decidable.
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`) a-t-il une balise `caption` ?
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`) a-t-il une balise `caption` ?
 
 ### Level
 

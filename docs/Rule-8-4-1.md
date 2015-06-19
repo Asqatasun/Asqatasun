@@ -18,10 +18,10 @@ and relevant.
 
 ### Description
 
-Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLangueDefaut"> langue par d&eacute;faut</a>, le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mCodeLangue">code de langue</a> v&eacute;rifie-t-il ces conditions ? 
+Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLangueDefaut"> langue par d&eacute;faut</a>, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> v&eacute;rifie-t-il ces conditions ? 
  
- *  Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mCodeLangue">code de langue</a> est valide 
- *  Le <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mCodeLangue">code de langue</a> est pertinent 
+ *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> est valide 
+ *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> est pertinent 
 
 
 ### Level

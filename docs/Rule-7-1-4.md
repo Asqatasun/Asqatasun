@@ -16,7 +16,7 @@
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mModifRole">modification du r&ocirc;le natif</a> d'un &eacute;l&eacute;ment HTML respecte-t-elle les r&egrave;gles et pr&eacute;conisations indiqu&eacute;es dans la sp&eacute;cification HTML5 et les notes techniques associ&eacute;es ?
+Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mModifRole">modification du r&ocirc;le natif</a> d'un &eacute;l&eacute;ment HTML respecte-t-elle les r&egrave;gles et pr&eacute;conisations indiqu&eacute;es dans la sp&eacute;cification HTML5 et les notes techniques associ&eacute;es ?
 
 ### Level
 
