@@ -1,4 +1,5 @@
 # Rule 8.1.1
+
 ## Summary
 
 This tests checks whether a document type is available on the page.
@@ -15,7 +16,7 @@ This tests checks whether a document type is available on the page.
 
 ### Description
 
-Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDTD">type de document</a> (balise `doctype`) est-il pr&eacute;sent ?
+Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#type-de-document">type de document</a> (balise `doctype`) est-il pr&eacute;sent ?
 
 ### Level
 
@@ -35,6 +36,8 @@ Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/refere
 
 ### Selection
 
+#### Set1
+
 The `<!doctype>` tag on the page
 
 ### Process
@@ -45,12 +48,8 @@ The selection handles the process
 
 #### Failed
 
-The page has no doctype (the selection is empty)
+The page has no doctype (**Set1** is empty)
 
 #### Passed
 
-A doctype is available on the page (the selection is not empty)
-
-## Notes
-
-No notes yet for that rule
+A doctype is available on the page (**Set1** is empty)

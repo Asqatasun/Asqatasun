@@ -17,7 +17,7 @@ declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 
 ### Description
 
-Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDTD">type de document</a> (balise `doctype`) est-il valide ?
+Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#type-de-document">type de document</a> (balise `doctype`) est-il valide ?
 
 ### Level
 
@@ -37,9 +37,13 @@ Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/refere
 
 ### Selection
 
+#### Set1
+
 The `<!doctype>` tag of the page
 
 ### Process
+
+#### Test1
 
 We check the validity of the doctype of the page regarding the
 "RecommendedDoctypeDeclarations" and
@@ -61,7 +65,7 @@ We check the validity of the doctype of the page regarding the
 
 #### Not Applicable
 
-Selection is empty (The page has no doctype)
+The page has no doctype (**Set1**)
 
 #### Failed
 
