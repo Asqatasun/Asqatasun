@@ -160,30 +160,4 @@ public class Rgaa30Rule060501Test extends Rgaa30RuleImplementationTestCase {
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-4NA-01"));
     }
 
-    @Override
-    protected void setConsolidate() {
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.06.05.01-1Passed-01").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.06.05.01-1Passed-02").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.06.05.01-1Passed-03").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.06.05.01-1Passed-04").getValue());
-        assertEquals(TestSolution.PASSED,
-                consolidate("Rgaa30.Test.06.05.01-1Passed-05").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.06.05.01-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.06.05.01-2Failed-02").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.06.05.01-2Failed-03").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.06.05.01-2Failed-04").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("Rgaa30.Test.06.05.01-2Failed-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.05.01-4NA-01").getValue());
-    }
-    
 }
