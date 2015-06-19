@@ -37,6 +37,7 @@ public final class HtmlElementStore {
     public static final String BLINK_ELEMENT = "blink";
     public static final String BODY_ELEMENT = HTML.Tag.BODY.toString();
     public static final String BUTTON_ELEMENT = "button";
+    public static final String CANVAS_ELEMENT = "canvas";
     public static final String CAPTION_ELEMENT = HTML.Tag.CAPTION.toString();
     public static final String CODE_ELEMENT = HTML.Tag.CODE.toString();
     public static final String COMMENT_ELEMENT = HTML.Tag.COMMENT.toString();
