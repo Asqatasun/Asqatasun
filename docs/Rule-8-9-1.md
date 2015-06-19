@@ -1,4 +1,5 @@
 # Rule 8.9.1
+
 ## Summary
 
 This test consists in searching patterns indicating that forbidden tags
@@ -36,17 +37,21 @@ Dans chaque page Web les balises (&agrave; l'exception de `div`, `span` et `tabl
 
 ### Selection
 
-Selection1 : all the `<a>` tags without "href", "name" or "id" attribute
+#### Set1
+
+All the `<a>` tags without "href", "name" or "id" attribute
 (a:not([href]):not([name]):not([id]))
 
-Selection2 : all the fieldset not within a form (fieldset:not(form
+#### Set2
+
+All the fieldset not within a form (fieldset:not(form
 fieldset):not(*[role=search] fieldset):not(*[role=form] fieldset))
 
 ### Process
 
-#### Test1 :
+#### Test1
 
-We check whether Selection1 AND Selection2 are empty. If true, raise a
+We check whether **Set1** AND **Set2** are empty. If true, raise a
 MessageA
 
 ###### MessageA : No suspect pattern detected
@@ -55,7 +60,7 @@ MessageA
 -   status: Pre-Qualified
 -   present in source : no
 
-For each occurence of the Selection1 raise a MessageB
+For each occurence of the **Set1** raise a MessageB
 
 ###### MessageB : Link without target
 
@@ -64,7 +69,7 @@ For each occurence of the Selection1 raise a MessageB
 -   parameter : snippet
 -   present in source : yes
 
-For each occurence of the Selection2 raise a MessageC
+For each occurence of the **Set2** raise a MessageC
 
 ###### MessageC : Fieldset not within a form
 
@@ -79,12 +84,11 @@ Test1 :
 
 #### Failed :
 
-Test1 returns false (The page contains a link without target or a
-fieldset not within a form)
+The page contains a link without target or a fieldset not within a form (**Test1** returns false)
 
 #### Pre-qualified :
 
-Test1 returns true
+**Test1** returns true
 
 ## Notes
 

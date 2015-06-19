@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in detecting the presence of the `<title>` tag
 
 ## Business description
 
@@ -36,22 +36,22 @@ Chaque page Web a-t-elle un <a href="http://references.modernisation.gouv.fr/ref
 
 ### Selection
 
+#### Set1
+
+The `<title>` tag of the page within the `<head>` tag (head title)
+
 ### Process
+
+#### Test1
+
+Test whether **Set1** is not empty. If false, raise a MessageA
 
 ### Analysis
 
 #### Passed
 
+The `<title>` tag is present on the page (**Test1** returns true)
+
 #### Failed
 
-#### Not Applicable
-
-#### Pre-qualified
-
-#### No Tested 
-
-
-
-
-
-
+The `<title>` tag is not present on the page (**Test1** returns false)

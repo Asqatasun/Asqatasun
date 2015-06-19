@@ -1,8 +1,8 @@
 # Rule 8.3.1
+
 ## Summary
 
-We check whether a language is specified for each textual element of the
-page
+We check whether a language is specified for each textual element of the page
 
 ## Business description
 
@@ -40,29 +40,49 @@ Pour chaque page Web, l'indication de <a href="http://references.modernisation.g
 
 ### Selection
 
-##### Set 1 :
+##### Set1
 
-The `<html>` tag with a "lang" or "xml:lang" attribute.
+The `<html>` tag with a `"lang"` or `"xml:lang"` attribute.
 
-##### Set 2 :
+##### Set2
 
-The tags with a "lang" or "xml:lang" attribute.
+The tags with a `"lang"` or `"xml:lang"` attribute.
 
-##### Set 3 :
+##### Set3
 
-The textual tags without "lang" or "xml:lang" attribute considering that
+The textual tags without `"lang"` or `"xml:lang"` attribute considering that
 these attributes can be set to the current tag or to one of its
-ascendants. (see Notes for the definition of the textual tags)
+ascendants.
 
 ### Process
 
-The selection handles the process.
+#### Test1
+
+Test whether **Set2** is empty. If yes, raise a MessageA
+
+#### Test2
+
+Test whether **Set1** is empty and **Set2** and **Set3** are not. If yes, raise a MessageB
+
+##### MessageA : Lang Attribute Missing On Whole Page
+
+-   code : LangAttributeMissingOnWholePage
+-   status: Failed
+-   parameter : none
+-   present in source : no
+
+##### MessageB : Lang Attribute Missing On Html
+
+-   code : LangAttributeMissingOnHtml
+-   status: Failed
+-   parameter : none
+-   present in source : no
 
 ### Analysis
 
 #### Passed
 
--   The `<html>` tag has a "lang" or a "xml:lang" attribute (**Set1** is not
+-   The `<html>` tag has a `"lang"` or a `"xml:lang"` attribute (**Set1** is not
     empty)
 -   The language is provided for each textual element by the tag or by
     one of its parents (**Set1** is empty AND **Set2** is not empty AND **Set3** is
@@ -70,28 +90,7 @@ The selection handles the process.
 
 #### Failed
 
--   The page has no language specification (**Set2** is empty). In this
-    case, raise a Message 1
+-   The page has no language specification (**Set2** is empty).
 -   Some textual tags are missing the language attribute (**Set1** is empty
-    AND **Set2** is not empty AND **Set3** is not empty). In this case, raise a
-    Message 2
+    AND **Set2** is not empty AND **Set3** is not empty)
 
-##### Message 1: Lang Attribute Missing On Whole Page
-
--   code : LangAttributeMissingOnWholePage
--   status: Failed
--   parameter : none
--   present in source : no
-
-##### 
-
-Message 2: Lang Attribute Missing On Html
-
--   code : LangAttributeMissingOnHtml
--   status: Failed
--   parameter : none
--   present in source : no
-
-## Notes
-
-No notes yet for that rule

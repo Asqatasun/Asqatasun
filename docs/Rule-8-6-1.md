@@ -1,8 +1,8 @@
 # Rule 8.6.1
+
 ## Summary
 
-This test consists in checking the relevancy of the title tag in the
-page.
+This test consists in checking the relevancy of the title tag in the page.
 
 ## Business description
 
@@ -34,28 +34,41 @@ Pour chaque page Web ayant un <a href="http://references.modernisation.gouv.fr/r
 
 ## Algorithm
 
-### Selection
+### Set1
 
-The content of the `<title>` tag
-
--   used nomenclature : none
-
--   reference : none
+The content of the `<title>` tag within the `<head>` (head title)
 
 ### Process
 
-We compare the content of the `<title>` tag with blacklist elements.
+#### Test1
 
--   used nomenclature : UnexplicitPageTitle
+We check whether the title is found amoung the blacklisted titles loaded by the nomenclature "UnexplicitPageTitle". If yes, raise a MessageA, raise a MessageB instead.
 
--   reference : none
+###### MessageA : Irrelevant title
+
+-   code : NotPertinentTitle
+-   status: Failed
+-   parameter : the textual content, snippet
+-   present in source : yes
+
+###### MessageB : Check title pertinence
+
+-   code : CheckTitlePertinence
+-   status: Pre-Qualified
+-   parameter : the textual content, snippet
+-   present in source : yes
 
 ### Analysis
 
--   NA : The page has no `<title>` tag
--   Failed : The title of the page has been found in the blacklist
--   Pre-Qualified : The title of the page has not been found in the blacklist
+####  Not Applicable
 
-## Notes
+The page has no `<title>` tag (**Set1** is empty)
 
-No notes yet for that rule
+#### Failed
+
+The title of the page has been found in the blacklist (**Test1** returns true)
+
+#### Pre-Qualified
+
+The title of the page has not been found in the blacklist (**Test1** returns false)
+

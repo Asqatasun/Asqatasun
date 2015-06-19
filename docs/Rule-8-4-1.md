@@ -1,4 +1,5 @@
 # Rule 8.4.1
+
 ## Summary
 
 We check whether the language specified for each textual element of the
@@ -23,7 +24,6 @@ Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/
  *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> est valide 
  *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> est pertinent 
 
-
 ### Level
 
 **A**
@@ -42,24 +42,22 @@ Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/
 
 ### Selection
 
-### Selection
-
-##### Set 1 :
+##### Set1
 
 The `<html>` tag with a "lang" or "xml:lang" attribute.
 
-##### Set 2 :
+##### Set2
 
 The textual tags (tags with a "title" attribute, an "alt" attribute or
 some content) without "lang" or "xml:lang" attribute. These attributes
 can be set to the current tag or to one of its ascendants.
 
-##### Set 3 :
+##### Set3
 
 All the textual elements of the page which are not overidden by a lang
 attribute.
 
-##### Set 3 :
+##### Set4
 
 All the textual elements of the page which are overidden by a lang
 attribute.
@@ -69,7 +67,7 @@ attribute.
 ##### Test 1:
 
 We extract the language code from the "lang" or the "xml:lang"
-attributes from elements of Set 2. If these attributes are both set and
+attributes from elements of **Set2**. If these attributes are both set and
 different, we keep the "xml:lang" attribute if the doctype of the page
 is found within the "XhtmlDoctypeDeclarations" whitelist, and we keep
 the "lang" attribute instead.
@@ -93,7 +91,7 @@ For each extracted lang attribute, we check its validity regarding the
 ##### Test 2:
 
 We extract the language code from the "lang" or the "xml:lang"
-attributes from elements of Set 2. If these attributes are both set and
+attributes from elements of **Set2**. If these attributes are both set and
 different, we keep the "xml:lang" attribute if the doctype of the page
 is found within the "XhtmlDoctypeDeclarations" whitelist, and we keep
 the "lang" attribute instead
@@ -114,15 +112,13 @@ For each extracted lang attribute, we check its validity regarding the
 -   parameter : none
 -   present in source : yes
 
-##### Test 3:
+##### Test3
 
 We detect the language of the textual elements of the page which are not
-overidden by a lang attribute (Set 3).
+overidden by a lang attribute (**Set3**).
 
 IF the detected language corresponds to the specified language AND the
-detection is seen as unreliable (regarding the google AJAX API detection
-described in the page
-[http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response](http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response "http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response")
+detection is seen as unreliable
 
 THEN raise Message A and return Pre-Qualified
 
@@ -134,38 +130,35 @@ THEN raise Message B and return FAILED
 ELSE IF the detected language doesn't corresponds to the specified
 language AND the detection is seen as unreliable
 
-THEN raise Message C and return Pre-Qualified
+THEN raise Message Cand return Pre-Qualified
 
 ELSE return PASSED
 
-##### Test 4:
+##### Test4
 
 We detect the language of the textual elements of the page which are
-overidden by a lang attribute (Set 4).
+overidden by a lang attribute (**Set4**).
 
 IF the detected language corresponds to the specified language AND the
-detection is seen as unreliable (regarding the google AJAX API detection
-described in the page
-[http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response](http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response "http://code.google.com/intl/fr/apis/language/translate/v1/using_rest_langdetect.html#json_response")
+detection is seen as unreliable
 
-THEN raise Message A and return Pre-Qualified
+THEN raise MessageA and return Pre-Qualified
 
 ELSE IF the detected language doesn't corresponds to the specified
 language AND the detection is seen as reliable
 
-THEN raise Message B and return FAILED
+THEN raise MessageB and return FAILED
 
 ELSE IF the detected language doesn't corresponds to the specified
 language AND the detection is seen as unreliable
 
-THEN raise Message C and return Pre-Qualified
+THEN raise MessageC and return Pre-Qualified
 
 ELSE return PASSED
 
 ###### MessageA : Suspected Relevant Language Declaration
 
 -   code : SuspectedRelevantLanguageDeclaration
-
 -   status: Pre-Qualified
 -   parameter : the extracted language, the detected language, and an
     extraction of the text (limited to 200 charachters) from which the
@@ -175,7 +168,6 @@ ELSE return PASSED
 ###### MessageB : Unrelevant Language Declaration
 
 -   code : UnrelevantLanguageDeclaration
-
 -   status: Failed
 -   parameter : the extracted language, the detected language, and an
     extraction of the text (limited to 200 charachters) from which the
@@ -185,7 +177,6 @@ ELSE return PASSED
 ###### MessageC : Suspected Unrelevant Language Declaration
 
 -   code : SuspectedUnrelevantLanguageDeclaration
-
 -   status: Pre-Qualified
 -   parameter : the extracted language, the detected language, and an
     extraction of the text (limited to 200 charachters) from which the
@@ -196,8 +187,7 @@ ELSE return PASSED
 
 #### Not Applicable
 
-Selections are empty (The page has language declarations, that means
-that **Set1** and **Set2** are empty)
+The page has no language declarations (**Set1** and **Set2** are empty)
 
 #### Failed
 
@@ -210,7 +200,3 @@ Test1 AND Test2 return true AND Test3 AND Test4 return PASSED
 #### Pre-qualified
 
 Test3 OR test4 returns Pre-Qualified
-
-## Notes
-
-No notes yet for that rule
