@@ -19,7 +19,6 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
 import org.tanaguru.ruleimplementation.AbstractPageRuleWithDoctypeHtml5CheckerImplementation;
 
 /**
