@@ -43,6 +43,10 @@ public final class RemarkMessageStore {
     public static final String BAD_DOCTYPE_LOCATION_MSG = "BadDoctypeLocation";
     public static final String INVALID_DOCTYPE_MSG = 
             "InvalidDoctypeDeclaration";
+    public static final String DOCTYPE_ABSENT_CHECK_HTML5 = 
+            "DoctypeAbsentCheckHtml5AndCheckManually";
+    public static final String HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY = 
+            "Html5DoctypeDetectedCheckManually";
     
     // images
     public static final String ALT_MISSING_MSG = "AltMissing";
