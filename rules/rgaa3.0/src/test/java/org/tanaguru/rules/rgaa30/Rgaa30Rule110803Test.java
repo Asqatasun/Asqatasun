@@ -19,11 +19,10 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
-import org.tanaguru.entity.audit.ProcessRemark;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.SourceCodeRemark;
 import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.rules.keystore.AttributeStore;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.tanaguru.rules.keystore.HtmlElementStore;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
@@ -50,6 +49,9 @@ public class Rgaa30Rule110803Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
+        addWebResource("Rgaa30.Test.11.08.03-2Failed-01");
+        addWebResource("Rgaa30.Test.11.08.03-2Failed-02");
+        addWebResource("Rgaa30.Test.11.08.03-2Failed-03");
         addWebResource("Rgaa30.Test.11.08.03-3NMI-01");
         addWebResource("Rgaa30.Test.11.08.03-4NA-01");
         addWebResource("Rgaa30.Test.11.08.03-4NA-02");
@@ -60,23 +62,71 @@ public class Rgaa30Rule110803Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Rgaa30.Test.11.08.03-2Failed-01");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_OPTGROUP_LABEL_MSG,
+                HtmlElementStore.OPTGROUP_ELEMENT,
+                1, 
+                new ImmutablePair(AttributeStore.LABEL_ATTR,""));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.11.08.03-2Failed-02");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_OPTGROUP_LABEL_MSG,
+                HtmlElementStore.OPTGROUP_ELEMENT,
+                1, 
+                new ImmutablePair(AttributeStore.LABEL_ATTR,"/--*:;!:;*"));
+        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.11.08.03-2Failed-03");
+        checkResultIsFailed(processResult, 2, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_OPTGROUP_LABEL_MSG,
+                HtmlElementStore.OPTGROUP_ELEMENT,
+                1, 
+                new ImmutablePair(AttributeStore.LABEL_ATTR,""));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_OPTGROUP_LABEL_PERTINENCE_MSG,
+                HtmlElementStore.OPTGROUP_ELEMENT,
+                2, 
+                new ImmutablePair(AttributeStore.LABEL_ATTR,"OptGroup2"));
+        
+        //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.11.08.03-3NMI-01");
+        processResult = processPageTest("Rgaa30.Test.11.08.03-3NMI-01");
         checkResultIsPreQualified(processResult, 2, 2);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+                RemarkMessageStore.CHECK_OPTGROUP_LABEL_PERTINENCE_MSG,
                 HtmlElementStore.OPTGROUP_ELEMENT,
-                1);
+                1,
+                new ImmutablePair(AttributeStore.LABEL_ATTR,"OptGroup1"));
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+                RemarkMessageStore.CHECK_OPTGROUP_LABEL_PERTINENCE_MSG,
                 HtmlElementStore.OPTGROUP_ELEMENT,
-                2);
-               
+                2,
+                new ImmutablePair(AttributeStore.LABEL_ATTR,"OptGroup2"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------

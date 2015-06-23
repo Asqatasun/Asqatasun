@@ -444,66 +444,67 @@ INSERT IGNORE INTO `TEST` (`Cd_Test`, `Description`, `Label`, `Rank`, `Weight`, 
 ('Rgaa30-11-14-3', '', '11.14.3', 272, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule111403', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-11-14-3', b'1'),
 ('Rgaa30-11-14-4', '', '11.14.4', 273, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule111404', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-11-14-4', b'1'),
 ('Rgaa30-11-14-5', '', '11.14.5', 274, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule111405', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-11-14-5', b'1'),
-('Rgaa30-11-15-1', '', '11.15.1', 275, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule111501', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-11-15-1', b'1'),
-('Rgaa30-12-1-1', '', '12.1.1', 276, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120101', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-1-1', b'1'),
-('Rgaa30-12-2-1', '', '12.2.1', 277, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120201', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-2-1', b'1'),
-('Rgaa30-12-2-2', '', '12.2.2', 278, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120202', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-2-2', b'1'),
-('Rgaa30-12-3-1', '', '12.3.1', 279, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120301', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-3-1', b'1'),
-('Rgaa30-12-3-2', '', '12.3.2', 280, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120302', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-3-2', b'1'),
-('Rgaa30-12-4-1', '', '12.4.1', 281, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120401', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-4-1', b'1'),
-('Rgaa30-12-4-2', '', '12.4.2', 282, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120402', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-4-2', b'1'),
-('Rgaa30-12-4-3', '', '12.4.3', 283, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120403', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-4-3', b'1'),
-('Rgaa30-12-5-1', '', '12.5.1', 284, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120501', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-5-1', b'1'),
-('Rgaa30-12-5-2', '', '12.5.2', 285, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120502', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-5-2', b'1'),
-('Rgaa30-12-5-3', '', '12.5.3', 286, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120503', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-5-3', b'1'),
-('Rgaa30-12-6-1', '', '12.6.1', 287, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120601', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-6-1', b'1'),
-('Rgaa30-12-6-2', '', '12.6.2', 288, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120602', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-6-2', b'1'),
-('Rgaa30-12-6-3', '', '12.6.3', 289, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120603', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-6-3', b'1'),
-('Rgaa30-12-7-1', '', '12.7.1', 290, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120701', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-7-1', b'1'),
-('Rgaa30-12-8-1', '', '12.8.1', 291, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120801', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-8-1', b'1'),
-('Rgaa30-12-9-1', '', '12.9.1', 292, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120901', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-9-1', b'1'),
-('Rgaa30-12-10-1', '', '12.10.1', 293, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121001', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-1', b'1'),
-('Rgaa30-12-10-2', '', '12.10.2', 294, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121002', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-2', b'1'),
-('Rgaa30-12-10-3', '', '12.10.3', 295, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121003', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-3', b'1'),
-('Rgaa30-12-10-4', '', '12.10.4', 296, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121004', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-4', b'1'),
-('Rgaa30-12-11-1', '', '12.11.1', 297, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121101', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-1', b'1'),
-('Rgaa30-12-11-2', '', '12.11.2', 298, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121102', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-2', b'1'),
-('Rgaa30-12-11-3', '', '12.11.3', 299, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121103', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-3', b'1'),
-('Rgaa30-12-11-4', '', '12.11.4', 300, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121104', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-4', b'1'),
-('Rgaa30-12-12-1', '', '12.12.1', 301, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121201', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-12-1', b'1'),
-('Rgaa30-12-13-1', '', '12.13.1', 302, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121301', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-13-1', b'1'),
-('Rgaa30-12-13-2', '', '12.13.2', 303, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121302', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-13-2', b'1'),
-('Rgaa30-12-14-1', '', '12.14.1', 304, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121401', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-14-1', b'1'),
-('Rgaa30-13-1-1', '', '13.1.1', 305, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130101', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-1', b'1'),
-('Rgaa30-13-1-2', '', '13.1.2', 306, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130102', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-2', b'1'),
-('Rgaa30-13-1-3', '', '13.1.3', 307, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130103', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-3', b'1'),
-('Rgaa30-13-1-4', '', '13.1.4', 308, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130104', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-4', b'1'),
-('Rgaa30-13-1-5', '', '13.1.5', 309, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130105', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-5', b'1'),
-('Rgaa30-13-2-1', '', '13.2.1', 310, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130201', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-2-1', b'1'),
-('Rgaa30-13-2-2', '', '13.2.2', 311, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130202', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-2-2', b'1'),
-('Rgaa30-13-2-3', '', '13.2.3', 312, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130203', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-2-3', b'1'),
-('Rgaa30-13-3-1', '', '13.3.1', 313, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130301', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-3-1', b'1'),
-('Rgaa30-13-4-1', '', '13.4.1', 314, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130401', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-4-1', b'1'),
-('Rgaa30-13-5-1', '', '13.5.1', 315, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130501', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-5-1', b'1'),
-('Rgaa30-13-6-1', '', '13.6.1', 316, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130601', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-6-1', b'1'),
-('Rgaa30-13-6-2', '', '13.6.2', 317, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130602', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-6-2', b'1'),
-('Rgaa30-13-6-3', '', '13.6.3', 318, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130603', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-6-3', b'1'),
-('Rgaa30-13-7-1', '', '13.7.1', 319, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130701', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-7-1', b'1'),
-('Rgaa30-13-8-1', '', '13.8.1', 320, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130801', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-8-1', b'1'),
-('Rgaa30-13-9-1', '', '13.9.1', 321, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130901', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-9-1', b'1'),
+('Rgaa30-11-14-6', '', '11.14.6', 275, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule111406', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-11-14-6', b'1'),
+('Rgaa30-11-15-1', '', '11.15.1', 276, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule111501', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-11-15-1', b'1'),
+('Rgaa30-12-1-1', '', '12.1.1', 277, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120101', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-1-1', b'1'),
+('Rgaa30-12-2-1', '', '12.2.1', 278, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120201', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-2-1', b'1'),
+('Rgaa30-12-2-2', '', '12.2.2', 279, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120202', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-2-2', b'1'),
+('Rgaa30-12-3-1', '', '12.3.1', 280, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120301', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-3-1', b'1'),
+('Rgaa30-12-3-2', '', '12.3.2', 281, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120302', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-3-2', b'1'),
+('Rgaa30-12-4-1', '', '12.4.1', 282, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120401', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-4-1', b'1'),
+('Rgaa30-12-4-2', '', '12.4.2', 283, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120402', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-4-2', b'1'),
+('Rgaa30-12-4-3', '', '12.4.3', 284, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120403', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-4-3', b'1'),
+('Rgaa30-12-5-1', '', '12.5.1', 285, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120501', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-5-1', b'1'),
+('Rgaa30-12-5-2', '', '12.5.2', 286, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120502', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-5-2', b'1'),
+('Rgaa30-12-5-3', '', '12.5.3', 287, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120503', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-5-3', b'1'),
+('Rgaa30-12-6-1', '', '12.6.1', 288, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120601', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-6-1', b'1'),
+('Rgaa30-12-6-2', '', '12.6.2', 289, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120602', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-6-2', b'1'),
+('Rgaa30-12-6-3', '', '12.6.3', 290, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120603', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-6-3', b'1'),
+('Rgaa30-12-7-1', '', '12.7.1', 291, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120701', NULL, 2, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-7-1', b'1'),
+('Rgaa30-12-8-1', '', '12.8.1', 292, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120801', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-8-1', b'1'),
+('Rgaa30-12-9-1', '', '12.9.1', 293, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule120901', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-9-1', b'1'),
+('Rgaa30-12-10-1', '', '12.10.1', 294, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121001', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-1', b'1'),
+('Rgaa30-12-10-2', '', '12.10.2', 295, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121002', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-2', b'1'),
+('Rgaa30-12-10-3', '', '12.10.3', 296, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121003', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-3', b'1'),
+('Rgaa30-12-10-4', '', '12.10.4', 297, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121004', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-10-4', b'1'),
+('Rgaa30-12-11-1', '', '12.11.1', 298, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121101', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-1', b'1'),
+('Rgaa30-12-11-2', '', '12.11.2', 299, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121102', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-2', b'1'),
+('Rgaa30-12-11-3', '', '12.11.3', 300, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121103', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-3', b'1'),
+('Rgaa30-12-11-4', '', '12.11.4', 301, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121104', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-11-4', b'1'),
+('Rgaa30-12-12-1', '', '12.12.1', 302, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121201', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-12-1', b'1'),
+('Rgaa30-12-13-1', '', '12.13.1', 303, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121301', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-13-1', b'1'),
+('Rgaa30-12-13-2', '', '12.13.2', 304, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121302', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-13-2', b'1'),
+('Rgaa30-12-14-1', '', '12.14.1', 305, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule121401', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-12-14-1', b'1'),
+('Rgaa30-13-1-1', '', '13.1.1', 306, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130101', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-1', b'1'),
+('Rgaa30-13-1-2', '', '13.1.2', 307, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130102', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-2', b'1'),
+('Rgaa30-13-1-3', '', '13.1.3', 308, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130103', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-3', b'1'),
+('Rgaa30-13-1-4', '', '13.1.4', 309, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130104', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-4', b'1'),
+('Rgaa30-13-1-5', '', '13.1.5', 310, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130105', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-1-5', b'1'),
+('Rgaa30-13-2-1', '', '13.2.1', 311, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130201', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-2-1', b'1'),
+('Rgaa30-13-2-2', '', '13.2.2', 312, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130202', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-2-2', b'1'),
+('Rgaa30-13-2-3', '', '13.2.3', 313, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130203', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-2-3', b'1'),
+('Rgaa30-13-3-1', '', '13.3.1', 314, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130301', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-3-1', b'1'),
+('Rgaa30-13-4-1', '', '13.4.1', 315, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130401', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-4-1', b'1'),
+('Rgaa30-13-5-1', '', '13.5.1', 316, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130501', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-5-1', b'1'),
+('Rgaa30-13-6-1', '', '13.6.1', 317, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130601', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-6-1', b'1'),
+('Rgaa30-13-6-2', '', '13.6.2', 318, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130602', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-6-2', b'1'),
+('Rgaa30-13-6-3', '', '13.6.3', 319, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130603', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-6-3', b'1'),
+('Rgaa30-13-7-1', '', '13.7.1', 320, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130701', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-7-1', b'1'),
+('Rgaa30-13-8-1', '', '13.8.1', 321, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130801', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-8-1', b'1'),
+('Rgaa30-13-9-1', '', '13.9.1', 322, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule130901', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-9-1', b'1'),
 ('Rgaa30-13-10-1', '', '13.10.1', 322, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131001', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-10-1', b'1'),
-('Rgaa30-13-11-1', '', '13.11.1', 323, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131101', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-11-1', b'1'),
-('Rgaa30-13-12-1', '', '13.12.1', 324, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131201', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-12-1', b'1'),
-('Rgaa30-13-13-1', '', '13.13.1', 325, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131301', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-13-1', b'1'),
-('Rgaa30-13-14-1', '', '13.14.1', 326, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131401', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-14-1', b'1'),
-('Rgaa30-13-15-1', '', '13.15.1', 327, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131501', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-15-1', b'1'),
-('Rgaa30-13-15-2', '', '13.15.2', 328, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131502', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-15-2', b'1'),
-('Rgaa30-13-15-3', '', '13.15.3', 329, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131503', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-15-3', b'1'),
-('Rgaa30-13-16-1', '', '13.16.1', 330, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131601', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-16-1', b'1'),
-('Rgaa30-13-16-2', '', '13.16.2', 331, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131602', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-16-2', b'1'),
-('Rgaa30-13-16-3', '', '13.16.3', 332, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131603', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-16-3', b'1'),
-('Rgaa30-13-17-1', '', '13.17.1', 333, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131701', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-17-1', b'1'),
-('Rgaa30-13-17-2', '', '13.17.2', 334, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131702', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-17-2', b'1');
+('Rgaa30-13-11-1', '', '13.11.1', 324, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131101', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-11-1', b'1'),
+('Rgaa30-13-12-1', '', '13.12.1', 325, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131201', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-12-1', b'1'),
+('Rgaa30-13-13-1', '', '13.13.1', 326, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131301', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-13-1', b'1'),
+('Rgaa30-13-14-1', '', '13.14.1', 327, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131401', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-14-1', b'1'),
+('Rgaa30-13-15-1', '', '13.15.1', 328, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131501', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-15-1', b'1'),
+('Rgaa30-13-15-2', '', '13.15.2', 329, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131502', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-15-2', b'1'),
+('Rgaa30-13-15-3', '', '13.15.3', 330, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131503', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-15-3', b'1'),
+('Rgaa30-13-16-1', '', '13.16.1', 331, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131601', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-16-1', b'1'),
+('Rgaa30-13-16-2', '', '13.16.2', 332, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131602', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-16-2', b'1'),
+('Rgaa30-13-16-3', '', '13.16.3', 333, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131603', NULL, 3, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-16-3', b'1'),
+('Rgaa30-13-17-1', '', '13.17.1', 334, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131701', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-17-1', b'1'),
+('Rgaa30-13-17-2', '', '13.17.2', 335, '1.0', 'rgaa30', 'org.tanaguru.rules.rgaa30.Rgaa30Rule131702', NULL, 1, 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-13-17-2', b'1');
 
 UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE `Cd_Criterion` LIKE 'Rgaa30-1-1') WHERE `Cd_Test` LIKE 'Rgaa30-1-1-%';
 UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE `Cd_Criterion` LIKE 'Rgaa30-1-2') WHERE `Cd_Test` LIKE 'Rgaa30-1-2-%';
@@ -668,7 +669,6 @@ Cd_Test='Rgaa30-3-4-4' OR
 Cd_Test='Rgaa30-4-22-1' OR 
 Cd_Test='Rgaa30-4-22-2' OR
 Cd_Test='Rgaa30-5-4-1' OR
-Cd_Test='Rgaa30-5-5-1' OR
 Cd_Test='Rgaa30-5-6-1' OR
 Cd_Test='Rgaa30-5-6-2' OR
 Cd_Test='Rgaa30-5-7-3' OR
@@ -702,6 +702,29 @@ Cd_Test='Rgaa30-10-7-1' OR
 Cd_Test='Rgaa30-10-8-3' OR 
 Cd_Test='Rgaa30-10-8-4' OR 
 Cd_Test='Rgaa30-10-13-1' OR
+Cd_Test='Rgaa30-11-3-1' OR 
+Cd_Test='Rgaa30-11-3-2' OR 
+Cd_Test='Rgaa30-11-4-1' OR 
+Cd_Test='Rgaa30-11-5-1' OR 
+Cd_Test='Rgaa30-11-6-1' OR 
+Cd_Test='Rgaa30-11-7-1' OR 
+Cd_Test='Rgaa30-11-8-1' OR 
+Cd_Test='Rgaa30-11-8-2' OR 
+Cd_Test='Rgaa30-11-8-3' OR 
+Cd_Test='Rgaa30-11-9-1' OR 
+Cd_Test='Rgaa30-11-9-2' OR 
+Cd_Test='Rgaa30-11-10-1' OR 
+Cd_Test='Rgaa30-11-10-4' OR 
+Cd_Test='Rgaa30-11-10-7' OR 
+Cd_Test='Rgaa30-11-11-1' OR 
+Cd_Test='Rgaa30-11-11-2' OR 
+Cd_Test='Rgaa30-11-12-1' OR 
+Cd_Test='Rgaa30-11-12-2' OR 
+Cd_Test='Rgaa30-11-13-1' OR 
+Cd_Test='Rgaa30-11-13-2' OR 
+Cd_Test='Rgaa30-11-14-1' OR 
+Cd_Test='Rgaa30-11-14-4' OR 
+Cd_Test='Rgaa30-11-15-1' OR 
 Cd_Test='Rgaa30-12-1-1' OR 
 Cd_Test='Rgaa30-12-2-1' OR 
 Cd_Test='Rgaa30-12-2-2' OR 

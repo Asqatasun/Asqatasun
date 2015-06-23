@@ -48,6 +48,8 @@ public class Rgaa30Rule110701Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
+        addWebResource("Rgaa30.Test.11.07.01-2Failed-01");
+        addWebResource("Rgaa30.Test.11.07.01-2Failed-02");
         addWebResource("Rgaa30.Test.11.07.01-3NMI-01");
         addWebResource("Rgaa30.Test.11.07.01-4NA-01");
         addWebResource("Rgaa30.Test.11.07.01-4NA-02");
@@ -58,9 +60,35 @@ public class Rgaa30Rule110701Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
+        //------------------------------2Failed-01------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Rgaa30.Test.11.07.01-2Failed-01");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_LEGEND_MSG,
+                HtmlElementStore.LEGEND_ELEMENT,
+                1, 
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,""));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.11.07.01-2Failed-02");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.NOT_PERTINENT_LEGEND_MSG,
+                HtmlElementStore.LEGEND_ELEMENT,
+                1, 
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"%!:/;.,~"));
+        
+        //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.11.07.01-3NMI-01");
+        processResult = processPageTest("Rgaa30.Test.11.07.01-3NMI-01");
         checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,

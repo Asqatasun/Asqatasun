@@ -50,8 +50,8 @@ public class Rgaa30Rule110802 extends AbstractPageRuleWithSelectorAndCheckerImpl
                     new ImmutablePair(TestSolution.PASSED, ""),
                     // failed when attribute is not found
                     new ImmutablePair(TestSolution.FAILED, OPTGROUP_WITHOUT_LABEL_MSG)
-                    )
+                )
             );
-    }
+    }   
 
 }
