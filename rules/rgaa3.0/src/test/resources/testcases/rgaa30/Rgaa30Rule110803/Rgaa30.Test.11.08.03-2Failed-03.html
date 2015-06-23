@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.11.8.3 NMI 01</title> 
+        <title>Rgaa30 Test.11.8.3 Failed 03</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.11.8.3 NMI 01</h1> 
+            <h1>Rgaa30 Test.11.8.3 Failed 03</h1> 
             <div class="test-detail" lang="fr"> Pour chaque regroupement d&apos;items de liste (balise 
                 <code>optgroup</code>) ayant un attribut 
                 <code>label</code>, le contenu de l&apos;attribut 
@@ -14,7 +14,7 @@
             </div> 
             <div class="testcase"> 
                 <select> 
-                  <optgroup label="OptGroup1">
+                  <optgroup label="">
                     <option value="Value1">Value1</option>
                     <option value="Value2">Value2</option>
                   </optgroup> 
@@ -25,8 +25,8 @@
                 </select> 
             </div> 
             <div class="test-explanation">
-                NMI : The page contains at least one optgroup element, 
-                the pertinence of the label attribute has to be determined manually
+                Failed : The page contains at least one optgroup element, with an empty label attribute.
+                The pertinence of the other optgroup label has to be determined manually
             </div> 
         </div>   
     </body>

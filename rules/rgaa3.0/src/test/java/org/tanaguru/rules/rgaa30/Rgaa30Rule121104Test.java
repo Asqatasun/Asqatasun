@@ -53,18 +53,18 @@ public class Rgaa30Rule121104Test extends Rgaa30RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         getWebResourceMap().put("Rgaa30.Test.12.11.4-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa30/Rgaa30Rule120601/Rgaa30.Test.12.11.4-3NMI-01.html"));
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule121104/Rgaa30.Test.12.11.4-3NMI-01.html"));
 
         Site site = getWebResourceFactory().createSite("file:Site-NotTested");
         getWebResourceMap().put("Rgaa30.Test.12.11.4-5NT-01", site);
 
         Page page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "rgaa30/Rgaa30Rule120601/Rgaa30.Test.12.11.4-3NMI-01.html");
+                "rgaa30/Rgaa30Rule121104/Rgaa30.Test.12.11.4-3NMI-01.html");
         site.addChild(page);
         getWebResourceMap().put("Rgaa30.Test.12.11.4-5NT-01-page1",page);
 
         page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "rgaa30/Rgaa30Rule120601/Rgaa30.Test.12.11.4-3NMI-01.html");
+                "rgaa30/Rgaa30Rule121104/Rgaa30.Test.12.11.4-3NMI-01.html");
         site.addChild(page);
         getWebResourceMap().put("Rgaa30.Test.12.11.4-5NT-01-page1",page);
     }

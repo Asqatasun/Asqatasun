@@ -2,20 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.11-7-1 NA 01</title> 
+        <title>Rgaa30 Test.11.7.1 Failed 02</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.11-7-1 NA 01</h1> 
+            <h1>Rgaa30 Test.11.7.1 Failed 02</h1> 
             <div class="test-detail" lang="fr"> Dans chaque formulaire, chaque légende (balise 
                 <code>legend</code>) associée à un groupement de champs de formulaire (balise 
                 <code>fieldset</code>) est-elle pertinente ? 
             </div> 
             <div class="testcase"> 
+                <form> 
+                    <fieldset> 
+                        <legend> %!:/;.,~ </legend>
+                        Field1: 
+                        <input type="text" size="30" />
+                        <br /> Field2: 
+                        <input type="text" size="30" />
+                        <br /> Field3: 
+                        <input type="text" size="10" /> 
+                    </fieldset> 
+                </form> 
             </div> 
             <div class="test-explanation">
-                 NA. 
+                Failed : The page contains at a legend with an empty content
             </div> 
-        </div>  
+        </div>   
     </body>
 </html>

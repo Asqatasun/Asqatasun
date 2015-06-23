@@ -20,11 +20,13 @@
 
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.OPTGROUP_WITHIN_SELECT_WITH_LABEL_ATTR_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import static org.tanaguru.rules.keystore.AttributeStore.LABEL_ATTR;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_OPTGROUP_LABEL_PERTINENCE_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_OPTGROUP_LABEL_MSG;
 
 /**
  * Implementation of the rule 11.8.3 of the referential Rgaa 3.0.
@@ -33,7 +35,7 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELE
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-11-8-3"> 11.8.3 rule specification</a>
  *
  */
-public class Rgaa30Rule110803 extends AbstractDetectionPageRuleImplementation {
+public class Rgaa30Rule110803 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
     
     /**
      * Default constructor
@@ -41,13 +43,20 @@ public class Rgaa30Rule110803 extends AbstractDetectionPageRuleImplementation {
     public Rgaa30Rule110803 () {
         super(
                 new SimpleElementSelector(OPTGROUP_WITHIN_SELECT_WITH_LABEL_ATTR_CSS_LIKE_QUERY),
-                // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
-                // solution when no element is found
-                TestSolution.NOT_APPLICABLE,
-                // manual check message
-                MANUAL_CHECK_ON_ELEMENTS_MSG,
-                null
+                new AttributePertinenceChecker(
+                    LABEL_ATTR,
+                    // check emptiness
+                    true, 
+                    // no comparison with other attributes
+                    null, 
+                    // no comparison with blacklist
+                    null, 
+                    //  message associated with element when not pertinent
+                    NOT_PERTINENT_OPTGROUP_LABEL_MSG, 
+                    //message associated with element when pertinence cannot be determined
+                    CHECK_OPTGROUP_LABEL_PERTINENCE_MSG,
+                    // evidence elements
+                    LABEL_ATTR)
             );
     }
 
