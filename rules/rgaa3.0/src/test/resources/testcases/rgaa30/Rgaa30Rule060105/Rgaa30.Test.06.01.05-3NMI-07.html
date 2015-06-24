@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.6.1.5 NMI 05</title> 
+        <title>Rgaa30 Test.6.1.5 NMI 07</title> 
     </head> 
     <body> 
         <div> 
@@ -13,8 +13,13 @@
                     <li>Le contexte du lien permet d&apos;en comprendre la fonction et la destination</li> 
                 </ul> 
             </div> 
-            <a href="my-link.html" title="This is a link and more"> <svg>This is a link</svg> </a> 
-            <p class="test-explanation">NMI : The pertinence of the image link context is unpredictable</p> 
+            <a href="my-link.html" aria-label="Aria label is part of the context">
+              <svg>Cliquez ici</svg>
+            </a> 
+            <p class="test-explanation">
+              NMI : The content of the svg link belongs to the blacklist.
+              But a aria-label attribute is present and considered as a context
+            </p> 
         </div>   
     </body>
 </html>

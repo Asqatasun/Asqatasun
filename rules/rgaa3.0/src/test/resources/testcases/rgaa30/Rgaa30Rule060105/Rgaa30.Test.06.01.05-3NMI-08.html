@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.6.1.5 NMI 05</title> 
+        <title>Rgaa30 Test.6.1.5 NMI 07</title> 
     </head> 
     <body> 
         <div> 
@@ -13,8 +13,12 @@
                     <li>Le contexte du lien permet d&apos;en comprendre la fonction et la destination</li> 
                 </ul> 
             </div> 
-            <a href="my-link.html" title="This is a link and more"> <svg>This is a link</svg> </a> 
-            <p class="test-explanation">NMI : The pertinence of the image link context is unpredictable</p> 
+            <a href="my-link.html" aria-labelledby="link-label"> <svg>A svg link</svg> </a> 
+            <p id="link-label">This is a link and more</p>
+            <p class="test-explanation">
+              NMI : The pertinence of the image link context is unpredictable
+              and the presence of the aria-labelledby attribute add a context to the link
+            </p> 
         </div>   
     </body>
 </html>
