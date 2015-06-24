@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -38,7 +38,7 @@ Dans chaque page Web, la structure du document v&eacute;rifie-t-elle ces conditi
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -48,18 +48,6 @@ Dans chaque page Web, la structure du document v&eacute;rifie-t-elle ces conditi
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases

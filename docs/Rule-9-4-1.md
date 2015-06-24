@@ -2,7 +2,7 @@
 
 ## Summary
 
-@@@ TO-DO
+No-check rule
 
 ## Business description
 
@@ -37,7 +37,7 @@ Dans chaque page Web, la premi&egrave;re occurrence de chaque abr&eacute;viation
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -47,18 +47,6 @@ Dans chaque page Web, la premi&egrave;re occurrence de chaque abr&eacute;viation
 
 ### Analysis
 
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
 #### No Tested 
 
-
-
-
-
-
+In all cases
