@@ -2,23 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.6-1-3 Passed 01</title> 
+        <title>Rgaa30 Test.6.1.5 NMI 01</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.6-1-3 Passed 01</h1> 
+            <h1>Rgaa30 Test.6.1.5 NMI 01</h1> 
             <div class="test-detail" lang="fr"> 
-              Chaque lien doublant une zone cliquable d&apos;une image réactive coté serveur vérifie-t-il une de ces conditions (hors cas particuliers) ? 
+                Chaque lien vectoriel vérifie-t-il une de ces conditions (hors cas particuliers) ? 
                 <ul class="ssTests"> 
                     <li>L&apos;intitulé de lien seul permet d&apos;en comprendre la fonction et la destination</li> 
                     <li>Le contexte du lien permet d&apos;en comprendre la fonction et la destination</li> 
                 </ul> 
             </div> 
-            <div class="testcase"> 
-            </div> 
-            <div class="test-explanation">
-                 Passed. 
-            </div> 
-        </div>  
+            <a href="my-link.html"> <svg>cliquez ici"</svg> </a> 
+
+            <p class="test-explanation">NMI : The image link belongs to the image link blacklist but the context may precise the link function and destination. A warning is thrown</p> 
+        </div>   
     </body>
 </html>

@@ -2,23 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.6-1-1 NA 01</title> 
+        <title>Rgaa30 Test.6.1.5 Failed 04</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.6-1-1 NA 01</h1> 
             <div class="test-detail" lang="fr"> 
-              Chaque lien texte vérifie-t-il une de ces conditions (hors cas particuliers) ? 
+                Chaque lien vectoriel vérifie-t-il une de ces conditions (hors cas particuliers) ? 
                 <ul class="ssTests"> 
                     <li>L&apos;intitulé de lien seul permet d&apos;en comprendre la fonction et la destination</li> 
                     <li>Le contexte du lien permet d&apos;en comprendre la fonction et la destination</li> 
                 </ul> 
             </div> 
-            <div class="testcase"> 
-            </div> 
-            <div class="test-explanation">
-                 NA. 
-            </div> 
-        </div>  
+            <a href="my-link.html"> 
+              <svg>--&gt;;*</svg>
+            </a> 
+            <p class="test-explanation">Failed : The link has no context and its text only contains non alphanumeric characters. We can deduce it is not pertinent</p> 
+        </div>   
     </body>
 </html>
