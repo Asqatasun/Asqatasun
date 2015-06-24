@@ -62,9 +62,10 @@ public class Rgaa30Rule060105Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.06.01.05-3NMI-04");
         addWebResource("Rgaa30.Test.06.01.05-3NMI-05");
         addWebResource("Rgaa30.Test.06.01.05-3NMI-06");
+        addWebResource("Rgaa30.Test.06.01.05-3NMI-07");
+        addWebResource("Rgaa30.Test.06.01.05-3NMI-08");
         addWebResource("Rgaa30.Test.06.01.05-4NA-01");
         addWebResource("Rgaa30.Test.06.01.05-4NA-02");
-        addWebResource("Rgaa30.Test.06.01.05-4NA-03");
         
         // 06.01.01 testcases
         getWebResourceMap().put("Rgaa30.Test.06.01.01-2Failed-01",
@@ -433,7 +434,7 @@ public class Rgaa30Rule060105Test extends Rgaa30RuleImplementationTestCase {
                 new ImmutablePair(AttributeStore.TITLE_ATTR, "This is a link and more"));
         
         //----------------------------------------------------------------------
-        //---------------------------3NMI-05------------------------------------
+        //---------------------------3NMI-06------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.06.01.05-3NMI-06");
         checkResultIsPreQualified(processResult, 1,  1);
@@ -441,6 +442,34 @@ public class Rgaa30Rule060105Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.NEED_MORE_INFO,
                 RemarkMessageStore.CHECK_LINK_WITHOUT_CONTEXT_PERTINENCE_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "A svg link"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, AttributeStore.ABSENT_ATTRIBUTE_VALUE));
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-07------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.06.01.05-3NMI-07");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.UNEXPLICIT_LINK_WITH_CONTEXT_MSG,
+                HtmlElementStore.A_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Cliquez ici"),
+                new ImmutablePair(AttributeStore.TITLE_ATTR, AttributeStore.ABSENT_ATTRIBUTE_VALUE));
+        
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-08------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.06.01.05-3NMI-08");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_LINK_WITH_CONTEXT_PERTINENCE_MSG,
                 HtmlElementStore.A_ELEMENT,
                 1,
                 new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "A svg link"),
@@ -456,10 +485,6 @@ public class Rgaa30Rule060105Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------4NA-02------------------------------
         //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.01.05-4NA-02"));
-        //----------------------------------------------------------------------
-        //------------------------------4NA-03------------------------------
-        //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.01.05-4NA-03"));
         
         
         // other tests about links, scope of other is disjunted from the scope
@@ -645,12 +670,14 @@ public class Rgaa30Rule060105Test extends Rgaa30RuleImplementationTestCase {
                 consolidate("Rgaa30.Test.06.01.05-3NMI-05").getValue());
         assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa30.Test.06.01.05-3NMI-06").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa30.Test.06.01.05-3NMI-07").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa30.Test.06.01.05-3NMI-08").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.06.01.05-4NA-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.06.01.05-4NA-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.01.05-4NA-03").getValue());
 
         // 06.01.01 testcases : All is Not Applicable
         assertEquals(TestSolution.NOT_APPLICABLE,
