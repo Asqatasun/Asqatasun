@@ -245,7 +245,7 @@ public class IdenticalLinkWithDifferentTargetChecker extends ElementCheckerImpl 
             if (title == null) {
                 return text.toLowerCase();
             } else {
-                return text.toLowerCase()+title.toLowerCase();
+                return text.toLowerCase()+ " "+title.toLowerCase();
             }
         }
         public Link(Element element){

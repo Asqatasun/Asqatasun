@@ -69,7 +69,7 @@ public class Rgaa30Rule060402Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.06.04.02-4NA-05");
         addWebResource("Rgaa30.Test.06.04.02-4NA-06");
 
-         // 06.04.01 testcases
+        // 06.04.01 testcases
         getWebResourceMap().put("Rgaa30.Test.06.04.01-1Passed-01",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule060401/Rgaa30.Test.06.04.01-1Passed-01.html"));
