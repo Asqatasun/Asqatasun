@@ -52,6 +52,7 @@ public class Rgaa30Rule100102Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.10.01.02-1Passed-02");
         addWebResource("Rgaa30.Test.10.01.02-1Passed-03");
         addWebResource("Rgaa30.Test.10.01.02-1Passed-04");
+        addWebResource("Rgaa30.Test.10.01.02-1Passed-05");
         addWebResource("Rgaa30.Test.10.01.02-2Failed-01");
         addWebResource("Rgaa30.Test.10.01.02-2Failed-02");
         addWebResource("Rgaa30.Test.10.01.02-2Failed-03");
@@ -86,6 +87,11 @@ public class Rgaa30Rule100102Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------1Passed-04------------------------------
         //----------------------------------------------------------------------
         checkResultIsPassed(processPageTest("Rgaa30.Test.10.01.02-1Passed-04"),18);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-05------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.10.01.02-1Passed-05"),15);
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
