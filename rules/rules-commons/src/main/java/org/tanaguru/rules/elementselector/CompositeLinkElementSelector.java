@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITH_CHILDREN_CSS_LIKE_QUERY;
+import org.tanaguru.rules.keystore.HtmlElementStore;
 
 /**
  * Element selector implementation that select composite links. 
@@ -77,7 +78,7 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
         if (searchImageLink) {
             return isImageLink(linkElement);
         }
-        return !isImageLink(linkElement);
+        return !isImageLink(linkElement) && !isSvgLink(linkElement);
     }
 
     /**
@@ -94,4 +95,17 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
         return !linkElement.children().select(IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY).isEmpty();
     }
 
+    /**
+     * 
+     * @param linkElement
+     * @return whether the current link element is a svg link
+     */
+    protected boolean isSvgLink(Element linkElement) {
+        if (linkElement.children().isEmpty() 
+                || linkElement.children().size() > 1
+                || StringUtils.isNotBlank(linkElement.ownText()) ) {
+            return false;
+        }
+        return !linkElement.children().select(HtmlElementStore.SVG_ELEMENT).isEmpty();
+    }
 }

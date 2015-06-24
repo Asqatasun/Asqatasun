@@ -196,7 +196,7 @@ public final class CssLikeQueryStore {
     public static final String IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY = 
                     "img[alt] , object[type^=image], object[data^=data:image],"
                   + "object[data$=png], object[data$=jpeg], object[data$=jpg],"
-                  + "object[data$=bmp], object[data$=gif]" ;
+                  + "object[data$=bmp], object[data$=gif], canvas" ;
     public static final String CLICKABLE_AREA_CSS_LIKE_QUERY = "area[href][alt]";
     public static final String LINK_WITHOUT_TARGET_CSS_LIKE_QUERY = 
                     "a:not([href]):not([name]):not([id])";

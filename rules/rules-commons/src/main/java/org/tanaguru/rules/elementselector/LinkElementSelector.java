@@ -30,6 +30,8 @@ import org.tanaguru.processor.SSPHandler;
 import org.tanaguru.ruleimplementation.ElementHandler;
 import org.tanaguru.ruleimplementation.ElementHandlerImpl;
 import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
+import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
 import org.tanaguru.rules.keystore.CssLikeQueryStore;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.TEXT_LINK_CSS_LIKE_QUERY;
 import org.tanaguru.rules.keystore.HtmlElementStore;
@@ -225,7 +227,15 @@ public class LinkElementSelector implements ElementSelector {
         // does the current link have a title attribute? 
         if (considerTitleAsContext && 
                 linkElement.hasAttr(TITLE_ATTR) && 
-                !StringUtils.equals(linkElement.attr(TITLE_ATTR), linkText)) {
+                !StringUtils.equalsIgnoreCase(linkElement.attr(TITLE_ATTR), linkText)) {
+            return true;
+        }
+        if (linkElement.hasAttr(ARIA_LABEL_ATTR) && 
+                !StringUtils.isNotBlank(linkElement.attr(ARIA_LABEL_ATTR))) {
+            return true;
+        }
+        if (linkElement.hasAttr(ARIA_LABELLEDBY_ATTR) && 
+                !StringUtils.isNotBlank(linkElement.attr(ARIA_LABELLEDBY_ATTR))) {
             return true;
         }
         // does the parent of the current link have some text?
