@@ -18,7 +18,18 @@
  * Contact us by mail: tanaguru AT tanaguru DOT org
  */
 package org.tanaguru.rules.rgaa30;
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
+import static org.tanaguru.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.SUMMARY_MISSING_MSG;
 
 /**
  * Implementation of the rule 5.1.1 of the referential Rgaa 3.0.
@@ -27,53 +38,45 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-5-1-1"> 5.1.1 rule specification</a>
  *
  */
-public class Rgaa30Rule050101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule050101 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa30Rule050101 () {
-        super();
+    public Rgaa30Rule050101() {
+        super(
+                new SimpleElementSelector(TABLE_ELEMENT), 
+
+                // the data tables are part of the scope
+                new String[]{COMPLEX_TABLE_MARKER},
+
+                // the presentation tables are not part of the scope
+                new String[]{DATA_TABLE_MARKER,PRESENTATION_TABLE_MARKER},
+
+                // checker for elements identified by marker
+                new AttributePresenceChecker(
+                    SUMMARY_ATTR, 
+                    // passed when attribute is found
+                    TestSolution.PASSED, 
+                    // failed when attribute is not found
+                    TestSolution.FAILED, 
+                    // no message created when attribute is found
+                    null, 
+                    // message associated with element when attribute is not found
+                    SUMMARY_MISSING_MSG),
+
+                // checker for elements not identified by marker
+                new AttributePresenceChecker(
+                    SUMMARY_ATTR, 
+                    // nmi when attribute is found
+                    TestSolution.NEED_MORE_INFO, 
+                    // nmi when attribute is not found
+                    TestSolution.NEED_MORE_INFO, 
+                    // message associated with element when attribute is found
+                    CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG, 
+                    // message associated with element when attribute is not found
+                    CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG)
+            );
     }
-//public class Rgaa30Rule050101 extends AbstractMarkerPageRuleImplementation {
-//
-//    /**
-//     * Default constructor
-//     */
-//    public Rgaa30Rule050101() {
-//        super(
-//                new SimpleElementSelector(TABLE_ELEMENT), 
-//
-//                // the data tables are part of the scope
-//                DATA_TABLE_MARKER,
-//
-//                // the presentation tables are not part of the scope
-//                PRESENTATION_TABLE_MARKER,
-//
-//                // checker for elements identified by marker
-//                new AttributePresenceChecker(
-//                    SUMMARY_ATTR, 
-//                    // passed when attribute is found
-//                    TestSolution.PASSED, 
-//                    // failed when attribute is not found
-//                    TestSolution.FAILED, 
-//                    // no message created when attribute is found
-//                    null, 
-//                    // message associated with element when attribute is not found
-//                    SUMMARY_MISSING_MSG),
-//
-//                // checker for elements not identified by marker
-//                new AttributePresenceChecker(
-//                    SUMMARY_ATTR, 
-//                    // nmi when attribute is found
-//                    TestSolution.NEED_MORE_INFO, 
-//                    // nmi when attribute is not found
-//                    TestSolution.NEED_MORE_INFO, 
-//                    // message associated with element when attribute is found
-//                    CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG, 
-//                    // message associated with element when attribute is not found
-//                    CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG)
-//            );
-//    }
 
 }

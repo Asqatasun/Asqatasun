@@ -23,6 +23,7 @@ import org.tanaguru.entity.audit.ProcessResult;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.MarkerStore.*;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
@@ -52,13 +53,13 @@ public class Rgaa30Rule050701Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.05.07.01-3NMI-03");
         addWebResource("Rgaa30.Test.05.07.01-3NMI-04");
         addWebResource("Rgaa30.Test.05.07.01-3NMI-05",
-                    createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
+                    createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"));
         addWebResource("Rgaa30.Test.05.07.01-3NMI-06",
-                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
         addWebResource("Rgaa30.Test.05.07.01-4NA-01");
         addWebResource("Rgaa30.Test.05.07.01-4NA-02");
         addWebResource("Rgaa30.Test.05.07.01-4NA-03",
-                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "id-presentation-table"));
 
     }
 

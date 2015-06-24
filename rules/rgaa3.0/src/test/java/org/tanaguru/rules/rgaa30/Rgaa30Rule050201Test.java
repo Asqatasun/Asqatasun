@@ -23,6 +23,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.*;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import static org.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
+import static org.tanaguru.rules.keystore.MarkerStore.*;
 import org.tanaguru.rules.keystore.HtmlElementStore;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 
@@ -49,20 +50,20 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.05.02.01-2Failed-01",
-                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
         addWebResource("Rgaa30.Test.05.02.01-2Failed-02",
-                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
         addWebResource("Rgaa30.Test.05.02.01-2Failed-03",
-                    createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"),
-                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-data-table"),
+                    createParameter("Rules", DATA_TABLE_MARKER, "id-presentation-table"));
         addWebResource("Rgaa30.Test.05.02.01-3NMI-01");
         addWebResource("Rgaa30.Test.05.02.01-3NMI-02",
-                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"),
-                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"),
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "id-presentation-table"));
         addWebResource("Rgaa30.Test.05.02.01-4NA-01");
         addWebResource("Rgaa30.Test.05.02.01-4NA-02");
         addWebResource("Rgaa30.Test.05.02.01-4NA-03",
-                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "class-presentation-table"));
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "class-presentation-table"));
 
     }
 
