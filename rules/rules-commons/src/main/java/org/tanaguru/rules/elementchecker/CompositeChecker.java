@@ -48,7 +48,7 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
      * The collection of checkers recursively called. 
      * This collection is of LinkedList type to maintain an order.
      */
-    private Collection<ElementChecker> checkers = new LinkedList<ElementChecker>();
+    private Collection<ElementChecker> checkers = new LinkedList<>();
     public Collection<ElementChecker> getCheckers() {
         return checkers;
     }
@@ -86,7 +86,6 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
     
     /**
      * 
-     * @param manualCheckMessage
      */
     public CompositeChecker() {
         super();
@@ -112,7 +111,6 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
     /**
      * Constructor.
      * Enables to override the failure solution.
-     * @param manualCheckMessage
      * @param failureSolution
      * @param eeAttributeNameList 
      */
