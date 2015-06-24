@@ -48,7 +48,9 @@
                                             <c:set var="lineValueTitle">
                                                 <fmt:message key="${evidenceElement2.key}"/> ${evidenceElement2.value}
                                             </c:set>
-                                            <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}#line${evidenceElement2.value}"/>" title="${lineValueTitle} <fmt:message key="evidenceElement.newWindow"/>">
+                                            <a href="<c:url value="/home/contract/source-code-page.html?wr=${param.wr}#line${evidenceElement2.value}"/>" 
+                                               target="_blank" 
+                                               title="${lineValueTitle} <fmt:message key="evidenceElement.newWindow"/>">
                                                 ${lineValueTitle}
                                             </a>
                                         </td>
