@@ -44,7 +44,13 @@ The `<title>` tag of the page within the `<head>` tag (head title)
 
 #### Test1
 
-Test whether **Set1** is not empty. If false, raise a MessageA
+Test whether **Set1** is not empty. If false, raise a MessageA.
+
+###### MessageA : Title tag missing
+
+-   code : TitleTagMissing
+-   status: Pre-Qualified
+-   present in source : no
 
 ### Analysis
 

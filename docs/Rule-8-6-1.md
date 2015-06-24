@@ -42,7 +42,9 @@ The content of the `<title>` tag within the `<head>` (head title)
 
 #### Test1
 
-We check whether the title is found amoung the blacklisted titles loaded by the nomenclature "UnexplicitPageTitle". If yes, raise a MessageA, raise a MessageB instead.
+We check whether the title is found amoung the blacklisted titles loaded by the nomenclature "UnexplicitPageTitle". 
+
+For each element returning false in Test1, raise a MessageA. Raise a MessageB instead.
 
 ###### MessageA : Irrelevant title
 
