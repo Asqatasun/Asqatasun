@@ -241,7 +241,13 @@ public final class CssLikeQueryStore {
     public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG = 
                     ":not(img):not(svg)[width]:not(svg [width])";
     public static final String ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG =
-                    ":not(img):not(svg)[height]:not(svg [width])";
+                    ":not(img):not(svg)[height]:not(svg [height])";
+    
+    // Elements with attributes (minus element exceptions)
+    public static final String ELEMENT_WITH_WITDH_ATTR_NOT_IMG_V2 = 
+                    ":not(img):not(svg):not(object):not(embed):not(canvas)[width]:not(svg [width])";
+    public static final String ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG_V2 =
+                    ":not(img):not(svg):not(object):not(embed):not(canvas)[height]:not(svg [height])";
     
     public static final String IMG_CSS_LIKE_QUERY=
                     IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY

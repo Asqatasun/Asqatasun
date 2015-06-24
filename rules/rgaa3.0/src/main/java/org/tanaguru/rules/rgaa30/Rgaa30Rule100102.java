@@ -36,6 +36,8 @@ import org.tanaguru.rules.elementselector.SimpleElementSelector;
 import org.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.tanaguru.rules.keystore.AttributeStore.HEIGHT_ATTR;
 import static org.tanaguru.rules.keystore.AttributeStore.WIDTH_ATTR;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG_V2;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_WITDH_ATTR_NOT_IMG_V2;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_WITDH_ATTR_NOT_IMG;
 import org.tanaguru.rules.keystore.HtmlElementStore;
@@ -81,7 +83,7 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
         
         // elements with width attribute that are not img
         SimpleElementSelector secWidthAttrNotImg = 
-                new SimpleElementSelector(ELEMENT_WITH_WITDH_ATTR_NOT_IMG);
+                new SimpleElementSelector(ELEMENT_WITH_WITDH_ATTR_NOT_IMG_V2);
         ElementHandler<Element> ehWithAttrNotImg = new ElementHandlerImpl();
         secWidthAttrNotImg.selectElements(sspHandler, ehWithAttrNotImg);
             
@@ -89,7 +91,7 @@ public class Rgaa30Rule100102 extends AbstractPageRuleMarkupImplementation {
         
         // elements with width attribute that are not img
         SimpleElementSelector secHeightAttrNotImg = 
-                new SimpleElementSelector(ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG);
+                new SimpleElementSelector(ELEMENT_WITH_HEIGHT_ATTR_NOT_IMG_V2);
         ElementHandler<Element> ehHeightAttrNotImg = new ElementHandlerImpl();
         secHeightAttrNotImg.selectElements(sspHandler, ehHeightAttrNotImg);
             
