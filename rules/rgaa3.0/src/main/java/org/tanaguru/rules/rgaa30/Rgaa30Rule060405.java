@@ -41,5 +41,5 @@ public class Rgaa30Rule060405 extends AbstractLinkRuleImplementation {
               new IdenticalLinkWithDifferentTargetChecker(false),
               new IdenticalLinkWithDifferentTargetChecker(true));
     }
-
+    
 }
