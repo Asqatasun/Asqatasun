@@ -2,20 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.6-2-5 Failed 01</title> 
+        <title>Rgaa30 Test.6-2-5 Failed 04</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.6-2-5 Failed 01</h1> 
-            <div class="test-detail" lang="fr"> Pour chaque 
-                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienVectoriel">lien vectoriel</a> ayant un 
-                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mTitreLien">titre de lien</a> (attribut 
+            <h1>Rgaa30 Test.6-2-5 Failed 04</h1> 
+            <div class="test-detail" lang="fr"> 
+                Pour chaque lien vectoriel ayant un titre de lien (attribut 
                 <code>title</code>), le contenu de cet attribut est-il pertinent ? 
             </div> 
             <div class="testcase"> 
+                <a href="my-link.html" title="This is a link"> <svg>This is a link</svg> </a> 
             </div> 
             <div class="test-explanation">
-                 Failed. 
+                 Failed : the title attribute of the svg link is identical to the link title.
+                 We can deduce it is not pertinent
             </div> 
         </div>  
     </body>
