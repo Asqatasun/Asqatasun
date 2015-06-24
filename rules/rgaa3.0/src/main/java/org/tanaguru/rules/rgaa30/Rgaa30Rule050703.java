@@ -36,7 +36,7 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TAB
  * Implementation of the rule 5.7.3 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-5-7-3">the rule 5.7.3 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-5-7-3"> 5.7.3 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-7-3"> 5.7.3 rule specification</a>
  *
  */
 public class Rgaa30Rule050703 extends AbstractMarkerPageRuleImplementation {

@@ -37,7 +37,7 @@ import static org.tanaguru.rules.keystore.CssLikeQueryStore.ARIA_HEADINGS_CSS_LI
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-9-1-2">
+ * href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-9-1-2">
  * 9.1.2 rule specification</a>
  *
  */

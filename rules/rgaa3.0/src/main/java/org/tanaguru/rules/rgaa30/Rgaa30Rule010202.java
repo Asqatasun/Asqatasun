@@ -29,7 +29,7 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-2-2">
+ * href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-2">
  * 1.2.2 rule specification</a>
  *
  */

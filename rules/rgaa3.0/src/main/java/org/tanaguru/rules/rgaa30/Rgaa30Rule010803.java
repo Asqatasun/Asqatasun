@@ -31,7 +31,7 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELE
  * Implementation of the rule 1.8.3 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-8-3">the rule 1.8.3 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-8-3"> 1.8.3 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-8-3"> 1.8.3 rule specification</a>
  *
  */
 public class Rgaa30Rule010803  extends AbstractDetectionPageRuleImplementation {

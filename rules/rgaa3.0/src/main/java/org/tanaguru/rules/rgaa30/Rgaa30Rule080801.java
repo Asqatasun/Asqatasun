@@ -29,7 +29,7 @@ import static org.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_LANG_AT
  * Implementation of the rule 8.8.1 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-8-8-1">the rule 8.8.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-8-8-1"> 8.8.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-8-1"> 8.8.1 rule specification</a>
  *
  */
 public class Rgaa30Rule080801  extends AbstractPageRuleWithSelectorAndCheckerImplementation {

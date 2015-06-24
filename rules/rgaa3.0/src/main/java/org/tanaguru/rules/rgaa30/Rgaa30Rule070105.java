@@ -25,7 +25,7 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * Implementation of the rule 7.1.5 of the referential Rgaa 3.0.
  *
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-7-1-5">the rule 7.1.5 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-7-1-5"> 7.1.5 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-7-1-5"> 7.1.5 rule specification</a>
  */
 
 public class Rgaa30Rule070105 extends AbstractNotTestedRuleImplementation {

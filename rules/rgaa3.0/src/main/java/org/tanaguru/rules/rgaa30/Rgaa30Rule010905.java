@@ -31,7 +31,7 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
  * Implementation of the rule 1.9.6 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-9-6">the rule 1.9.6 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-1-9-6"> 1.9.6 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-9-6"> 1.9.6 rule specification</a>
  *
  */
 public class Rgaa30Rule010905 extends AbstractDetectionPageRuleImplementation {
