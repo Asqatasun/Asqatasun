@@ -19,7 +19,9 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.tanaguru.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
+import org.tanaguru.rules.elementselector.SvgLinkElementSelector;
 
 /**
  * Implementation of the rule 6.4.5 of the referential Rgaa 3.0.
@@ -28,13 +30,16 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-4-5"> 6.4.5 rule specification</a>
  */
 
-public class Rgaa30Rule060405 extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule060405 extends AbstractLinkRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa30Rule060405 () {
-        super();
+        // context is taken into consideration 
+        super(new SvgLinkElementSelector(false, true), 
+              new IdenticalLinkWithDifferentTargetChecker(false),
+              new IdenticalLinkWithDifferentTargetChecker(true));
     }
 
 }

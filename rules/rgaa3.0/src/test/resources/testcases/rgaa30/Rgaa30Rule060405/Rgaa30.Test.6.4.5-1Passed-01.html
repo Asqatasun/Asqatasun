@@ -6,16 +6,18 @@
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.6-4-5 Passed 01</h1> 
-            <div class="test-detail" lang="fr"> Pour chaque page web, chaque 
-                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mLienIdentique">lien identique</a> de type 
-                <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/glossaire.htm#mIntituleLien">vectoriel</a> a-t-il les mêmes fonction et destination ? 
+            <div class="test-detail" lang="fr"> 
+                Pour chaque page web, chaque lien identique de type 
+                vectoriel a-t-il les mêmes fonction et destination ? 
             </div> 
             <div class="testcase"> 
-            </div> 
+                <a href="my-link.html" title="This is a link"> <svg>CLIQUEZ ICI</svg> </a> 
+                <a href="my-link.html" title="This is a link"> <svg>cliquez ici </svg> </a> 
+            </div>
             <div class="test-explanation">
-                 Passed. 
-            </div> 
+                Passed : The page contains only two identical image links without context and with the same target.
+                These two links have no context.
+            </div>
         </div>  
     </body>
 </html>
