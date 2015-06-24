@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.6-3-5 Failed 01</title> 
+        <title>Rgaa30 Test.6-3-5 Failed 02</title> 
     </head> 
     <body> 
         <div> 
@@ -11,13 +11,19 @@
                 <code>svg</code>) est-il explicite hors contexte (hors cas particuliers) ? 
             </div> 
 
-            <a href="my-link.html" title="cliquez ici">
+            <a href="my-link.html">
                 <svg>
-                    Cliquez ici
+                    !:,!:;<<***+////
+                </svg> 
+            </a> 
+            <a href="my-link.html">
+                <svg>
+                    Another svg link
                 </svg> 
             </a> 
             <p class="test-explanation">
-                Failed : the svg link title belongs to blacklist, the context is ignored here
+                Failed : the svg link title only contains non alphanumerical characters, no matter if a context exists
+                Another link is present on the page and produce a NMI remark
             </p> 
         </div>  
     </body>

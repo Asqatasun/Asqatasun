@@ -19,7 +19,14 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.tanaguru.rules.elementchecker.link.LinkPertinenceChecker;
+import org.tanaguru.rules.elementselector.SvgLinkElementSelector;
+import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_MSG;
 
 /**
  * Implementation of the rule 6.3.5 of the referential Rgaa 3.0.
@@ -28,13 +35,26 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-3-5"> 6.3.5 rule specification</a>
  */
 
-public class Rgaa30Rule060305 extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule060305 extends AbstractLinkRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa30Rule060305 () {
-        super();
+        // context is not taken into consideration 
+        super(new SvgLinkElementSelector(false), 
+              new LinkPertinenceChecker(
+                    // not pertinent solution 
+                    TestSolution.FAILED,
+                    // not pertinent message
+                    UNEXPLICIT_LINK_MSG,
+                    // manual check message
+                    CHECK_LINK_PERTINENCE_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2,
+                    TITLE_ATTR
+              ),
+              null);
     }
 
 }
