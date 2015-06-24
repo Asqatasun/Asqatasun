@@ -154,6 +154,26 @@ public class Rgaa30Rule060202Test extends Rgaa30RuleImplementationTestCase {
         getWebResourceMap().put("Rgaa30.Test.06.02.04-3NMI-06",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa30/Rgaa30Rule060204/Rgaa30.Test.06.02.04-3NMI-06.html"));
+
+        //06.02.05 testcases
+        getWebResourceMap().put("Rgaa30.Test.6.2.5-2Failed-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060205/Rgaa30.Test.6.2.5-2Failed-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.6.2.5-2Failed-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060205/Rgaa30.Test.6.2.5-2Failed-02.html"));
+        getWebResourceMap().put("Rgaa30.Test.6.2.5-2Failed-03",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060205/Rgaa30.Test.6.2.5-2Failed-03.html"));
+        getWebResourceMap().put("Rgaa30.Test.6.2.5-2Failed-04",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060205/Rgaa30.Test.6.2.5-2Failed-04.html"));
+        getWebResourceMap().put("Rgaa30.Test.6.2.5-3NMI-01",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060205/Rgaa30.Test.6.2.5-3NMI-01.html"));
+        getWebResourceMap().put("Rgaa30.Test.6.2.5-3NMI-02",
+                getWebResourceFactory().createPage(
+                getTestcasesFilePath() + "rgaa30/Rgaa30Rule060205/Rgaa30.Test.6.2.5-3NMI-02.html"));
         
         //06.05.01 testcases -> empty links
         getWebResourceMap().put("Rgaa30.Test.06.05.01-2Failed-01",
@@ -286,72 +306,64 @@ public class Rgaa30Rule060202Test extends Rgaa30RuleImplementationTestCase {
         // other tests about links, scope of other is disjunted from the scope
         // of the current test : All these scopes are not applicable
         
-        processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-01");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-02");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-03");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.01-2Failed-04");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.01-3NMI-01");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.01-3NMI-02");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-02");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-03");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.03-2Failed-04");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-01");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-02");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.03-3NMI-03");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-01");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-02");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-03");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-04");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-05");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-06");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-07");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-08");
-        checkResultIsNotApplicable(processResult);                
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-09");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-2Failed-10");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-01");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-02");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-03");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-04");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-05");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.02.04-3NMI-06");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-01");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-02");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-03");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-04");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa30.Test.06.05.01-2Failed-05");
-        checkResultIsNotApplicable(processResult);        
+         //----------------------------------------------------------------------
+        //---------------------------4NA-6.2.1----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.01-2Failed-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.01-2Failed-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.01-2Failed-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.01-2Failed-04"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.01-3NMI-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.01-3NMI-02"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.2.3----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.03-2Failed-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.03-2Failed-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.03-2Failed-04"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.03-3NMI-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.03-3NMI-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.03-3NMI-03"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.2.4----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-04"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-05"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-06"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-07"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-08"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-09"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-2Failed-10"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-3NMI-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-3NMI-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-3NMI-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-3NMI-04"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-3NMI-05"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.02.04-3NMI-06"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.2.4----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.6.2.5-2Failed-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.6.2.5-2Failed-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.6.2.5-2Failed-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.6.2.5-2Failed-04"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.6.2.5-3NMI-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.6.2.5-3NMI-02"));
+        
+        //----------------------------------------------------------------------
+        //---------------------------4NA-6.5.1----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-2Failed-01"), 0);
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-2Failed-02"), 0);
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-2Failed-03"), 0);
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-2Failed-04"), 0);
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-2Failed-05"), 0);
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.06.05.01-4NA-01"));
     }
 
@@ -456,7 +468,21 @@ public class Rgaa30Rule060202Test extends Rgaa30RuleImplementationTestCase {
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa30.Test.06.02.04-3NMI-05").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa30.Test.06.02.04-3NMI-06").getValue());        
+                consolidate("Rgaa30.Test.06.02.04-3NMI-06").getValue());
+        
+        // 06.02.05 testcases : All is Not Applicable
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa30.Test.6.2.5-2Failed-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa30.Test.6.2.5-2Failed-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa30.Test.6.2.5-2Failed-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa30.Test.6.2.5-2Failed-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa30.Test.6.2.5-3NMI-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa30.Test.6.2.5-3NMI-02").getValue());
         
         // 06.05.01 testcases : All is Not Applicable
         assertEquals(TestSolution.NOT_APPLICABLE,

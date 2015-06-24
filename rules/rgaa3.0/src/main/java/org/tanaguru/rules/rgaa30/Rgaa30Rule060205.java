@@ -19,7 +19,9 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.tanaguru.rules.elementchecker.link.LinkTitlePertinenceChecker;
+import org.tanaguru.rules.elementselector.SvgLinkElementSelector;
 
 /**
  * Implementation of the rule 6.2.5 of the referential Rgaa 3.0.
@@ -28,13 +30,14 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-2-5"> 6.2.5 rule specification</a>
  */
 
-public class Rgaa30Rule060205 extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule060205 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa30Rule060205 () {
-        super();
+        super(new SvgLinkElementSelector(false), 
+              new LinkTitlePertinenceChecker());
     }
 
 }
