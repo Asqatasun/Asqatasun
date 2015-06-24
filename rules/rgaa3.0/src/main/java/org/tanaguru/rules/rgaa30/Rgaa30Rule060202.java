@@ -27,7 +27,7 @@ import org.tanaguru.rules.elementselector.CompositeLinkElementSelector;
  * Implementation of the rule 6.2.2 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-6-2-2">the rule 6.2.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-2-2"> 6.2.2 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-2-2"> 6.2.2 rule specification</a>
  *
  */
 public class Rgaa30Rule060202 extends AbstractPageRuleWithSelectorAndCheckerImplementation {

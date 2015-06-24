@@ -44,7 +44,7 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TABLE_
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-5-3-1">
+ * href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-3-1">
  * 5.3.1 rule specification</a>
  *
  */

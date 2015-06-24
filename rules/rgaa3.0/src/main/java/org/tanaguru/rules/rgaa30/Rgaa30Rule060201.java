@@ -30,7 +30,7 @@ import org.tanaguru.rules.elementselector.LinkElementSelector;
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-6-2-1">
+ * href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-2-1">
  * 6.2.1 rule specification</a>
  *
  */

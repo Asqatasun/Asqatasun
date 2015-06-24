@@ -25,7 +25,7 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * Implementation of the rule 13.17.2 of the referential Rgaa 3.0.
  *
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-13-17-2">the rule 13.17.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-13-17-2"> 13.17.2 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-13-17-2"> 13.17.2 rule specification</a>
  */
 
 public class Rgaa30Rule131702 extends AbstractNotTestedRuleImplementation {

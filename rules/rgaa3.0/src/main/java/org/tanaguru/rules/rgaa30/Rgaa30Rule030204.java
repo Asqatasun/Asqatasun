@@ -25,7 +25,7 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * Implementation of the rule 3.2.4 of the referential Rgaa 3.0.
  *
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-3-2-4">the rule 3.2.4 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-3-2-4"> 3.2.4 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-3-2-4"> 3.2.4 rule specification</a>
  */
 
 public class Rgaa30Rule030204 extends AbstractNotTestedRuleImplementation {

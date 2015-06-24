@@ -62,7 +62,7 @@ import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-11-1-2">
+ * href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-11-1-2">
  * 11.1.2 rule specification</a>
  *
  */

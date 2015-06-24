@@ -29,7 +29,7 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELE
  * Implementation of the rule 11.10.4 of the referential Rgaa 3.0.
  *
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-11-10-4">the rule 11.10.4 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-11-10-4"> 11.10.4 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-11-10-4"> 11.10.4 rule specification</a>
  */
 
 public class Rgaa30Rule111004 extends AbstractDetectionPageRuleImplementation {

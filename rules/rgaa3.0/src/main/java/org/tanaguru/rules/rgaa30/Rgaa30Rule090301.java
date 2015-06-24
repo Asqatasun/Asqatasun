@@ -25,7 +25,7 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * Implementation of the rule 9.3.1 of the referential Rgaa 3.0.
  *
  * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-9-3-1">the rule 9.3.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-9-3-1"> 9.3.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-9-3-1"> 9.3.1 rule specification</a>
  */
 
 public class Rgaa30Rule090301 extends AbstractNotTestedRuleImplementation {
