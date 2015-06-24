@@ -231,11 +231,11 @@ public class LinkElementSelector implements ElementSelector {
             return true;
         }
         if (linkElement.hasAttr(ARIA_LABEL_ATTR) && 
-                !StringUtils.isNotBlank(linkElement.attr(ARIA_LABEL_ATTR))) {
+                StringUtils.isNotBlank(linkElement.attr(ARIA_LABEL_ATTR))) {
             return true;
         }
         if (linkElement.hasAttr(ARIA_LABELLEDBY_ATTR) && 
-                !StringUtils.isNotBlank(linkElement.attr(ARIA_LABELLEDBY_ATTR))) {
+                StringUtils.isNotBlank(linkElement.attr(ARIA_LABELLEDBY_ATTR))) {
             return true;
         }
         // does the parent of the current link have some text?
