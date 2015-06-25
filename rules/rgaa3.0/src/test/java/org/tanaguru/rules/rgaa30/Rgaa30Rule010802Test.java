@@ -26,6 +26,8 @@ import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
 import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
 import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
@@ -50,10 +52,12 @@ public class Rgaa30Rule010802Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa30.Test.01.08.02-3NMI-01");
+        addWebResource("Rgaa30.Test.01.08.02-3NMI-01",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
         addWebResource("Rgaa30.Test.01.08.02-4NA-01");
         addWebResource("Rgaa30.Test.01.08.02-4NA-02");
-        addWebResource("Rgaa30.Test.01.08.02-4NA-03");
+        addWebResource("Rgaa30.Test.01.08.02-4NA-03",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
 
     }
 
@@ -63,13 +67,20 @@ public class Rgaa30Rule010802Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------3NMI-01------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.01.08.02-3NMI-01");
-        checkResultIsPreQualified(processResult, 1,  1);
+        checkResultIsPreQualified(processResult, 2,  2);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+                RemarkMessageStore.CHECK_TEXT_STYLED_PRESENCE_OF_INFORMATIVE_IMG_MSG,
                 HtmlElementStore.AREA_ELEMENT,
                 1,
+                new ImmutablePair(HREF_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG,
+                HtmlElementStore.AREA_ELEMENT,
+                2,
                 new ImmutablePair(HREF_ATTR, ABSENT_ATTRIBUTE_VALUE));
 
         //----------------------------------------------------------------------

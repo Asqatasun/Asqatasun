@@ -19,7 +19,17 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.tanaguru.entity.audit.TestSolution.NOT_APPLICABLE;
+import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.tanaguru.rules.elementselector.ImageElementSelector;
+import static org.tanaguru.rules.keystore.HtmlElementStore.CANVAS_ELEMENT;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TEXT_STYLED_PRESENCE_OF_INFORMATIVE_IMG_MSG;
 
 /**
  * Implementation of the rule 1.8.6 of the referential Rgaa 3.0.
@@ -28,13 +38,25 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-8-6"> 1.8.6 rule specification</a>
  */
 
-public class Rgaa30Rule010806 extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule010806 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa30Rule010806 () {
-        super();
+        super(
+                new ImageElementSelector(CANVAS_ELEMENT),
+                INFORMATIVE_IMAGE_MARKER,
+                DECORATIVE_IMAGE_MARKER,
+                new ElementPresenceChecker(
+                        new ImmutablePair(NEED_MORE_INFO, CHECK_TEXT_STYLED_PRESENCE_OF_INFORMATIVE_IMG_MSG),
+                        new ImmutablePair(NOT_APPLICABLE, "")
+                ),
+                new ElementPresenceChecker(
+                        new ImmutablePair(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG),
+                        new ImmutablePair(NOT_APPLICABLE, "")
+                )
+            );
     }
 
 }

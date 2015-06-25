@@ -20,12 +20,17 @@
 
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.tanaguru.entity.audit.TestSolution.NOT_APPLICABLE;
+import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.tanaguru.rules.elementselector.AreaElementSelector;
-import org.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TEXT_STYLED_PRESENCE_OF_INFORMATIVE_IMG_MSG;
 
 /**
  * Implementation of the rule 1.8.2 of the referential Rgaa 3.0.
@@ -34,23 +39,28 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELE
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-8-2"> 1.8.2 rule specification</a>
  *
  */
-public class Rgaa30Rule010802 extends AbstractDetectionPageRuleImplementation {
+public class Rgaa30Rule010802 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa30Rule010802 () {
         super(
-                new ImageElementSelector(new AreaElementSelector()),
-                // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
-                // solution when no element is found
-                TestSolution.NOT_APPLICABLE,
-                // manual check message
-                MANUAL_CHECK_ON_ELEMENTS_MSG,
-                null,
-                // evidence elements
-                HREF_ATTR
+                new AreaElementSelector(),
+                INFORMATIVE_IMAGE_MARKER,
+                DECORATIVE_IMAGE_MARKER,
+                new ElementPresenceChecker(
+                        new ImmutablePair(NEED_MORE_INFO, CHECK_TEXT_STYLED_PRESENCE_OF_INFORMATIVE_IMG_MSG),
+                        new ImmutablePair(NOT_APPLICABLE, ""),
+                        // evidence elements
+                        HREF_ATTR
+                ),
+                new ElementPresenceChecker(
+                        new ImmutablePair(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG),
+                        new ImmutablePair(NOT_APPLICABLE, ""),
+                        // evidence elements
+                        HREF_ATTR
+                )
             );
     }
 
