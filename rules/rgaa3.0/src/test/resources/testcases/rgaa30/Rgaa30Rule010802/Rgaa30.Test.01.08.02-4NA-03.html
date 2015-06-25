@@ -22,10 +22,15 @@
             </div> 
             <div class="testcase"> 
                 <img alt="" src="mock-image.jpg" usemap="#mock-map" /> 
-                <map id="mock-map"> <area alt="captcha"></area> </map> 
-            </div> 
+                <map id="mock-map"> 
+                  <area alt="captcha"></area> 
+                  <area class="decorative-image" alt=""></area> 
+                </map> 
+                </div> 
             <div class="test-explanation">
-                 NA : All the &lt;area&gt; of the page are seen as captcha. They are out of scope 
+                 NA : 
+                 the first area of the page is a captcha. 
+                 the second is a decorative image. They're both out of scope
             </div> 
         </div>   
     </body>
