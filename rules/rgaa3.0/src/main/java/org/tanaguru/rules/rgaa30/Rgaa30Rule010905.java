@@ -20,6 +20,7 @@
 
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.tanaguru.rules.elementselector.ImageElementSelector;
@@ -28,10 +29,10 @@ import static org.tanaguru.rules.keystore.CssLikeQueryStore.*;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
 
 /**
- * Implementation of the rule 1.9.6 of the referential Rgaa 3.0.
+ * Implementation of the rule 1.9.5 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-9-6">the rule 1.9.6 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-9-6"> 1.9.6 rule specification</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-9-5">the rule 1.9.5 design page.</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-9-5"> 1.9.5 rule specification</a>
  *
  */
 public class Rgaa30Rule010905 extends AbstractDetectionPageRuleImplementation {
@@ -42,10 +43,8 @@ public class Rgaa30Rule010905 extends AbstractDetectionPageRuleImplementation {
     public Rgaa30Rule010905 () {
         super(
                 new ImageElementSelector(EMBED_TYPE_IMG_CSS_LIKE_QUERY),
-                TestSolution.NEED_MORE_INFO,
-                TestSolution.NOT_APPLICABLE,
-                MANUAL_CHECK_ON_ELEMENTS_MSG,
-                null,
+                new ImmutablePair(TestSolution.NEED_MORE_INFO,MANUAL_CHECK_ON_ELEMENTS_MSG),
+                new ImmutablePair(TestSolution.NOT_APPLICABLE,""),
                 // evidence elements
                 SRC_ATTR
             );

@@ -20,6 +20,7 @@
 
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.tanaguru.rules.elementselector.ImageElementSelector;
@@ -43,13 +44,9 @@ public class Rgaa30Rule010904 extends AbstractDetectionPageRuleImplementation {
         super(
                 new ImageElementSelector(OBJECT_TYPE_IMG_CSS_LIKE_QUERY),
                 // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
+                new ImmutablePair(TestSolution.NEED_MORE_INFO,MANUAL_CHECK_ON_ELEMENTS_MSG),
                 // solution when no element is found
-                TestSolution.NOT_APPLICABLE,
-                // manual check message
-                MANUAL_CHECK_ON_ELEMENTS_MSG,
-                null,
-                // evidence elements
+                new ImmutablePair(TestSolution.NOT_APPLICABLE,""),
                 DATA_ATTR
             );
     }
