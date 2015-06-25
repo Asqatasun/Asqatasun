@@ -22,7 +22,6 @@ package org.tanaguru.rules.rgaa30;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.ProcessResult;
 import org.tanaguru.entity.audit.TestSolution;
-import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.tanaguru.rules.keystore.HtmlElementStore;
 import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;

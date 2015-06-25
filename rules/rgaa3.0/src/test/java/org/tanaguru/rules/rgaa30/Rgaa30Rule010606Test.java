@@ -19,8 +19,14 @@
  */
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.entity.audit.ProcessResult;
+import org.tanaguru.rules.keystore.AttributeStore;
+import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import org.tanaguru.rules.keystore.RemarkMessageStore;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
@@ -46,61 +52,140 @@ public class Rgaa30Rule010606Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa30.Test.1.6.6-1Passed-01");
-//        addWebResource("Rgaa30.Test.1.6.6-2Failed-01");
-        addWebResource("Rgaa30.Test.1.6.6-3NMI-01");
-//        addWebResource("Rgaa30.Test.1.6.6-4NA-01");
+        addWebResource("Rgaa30.Test.1.6.6-3NMI-01",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
+        addWebResource("Rgaa30.Test.1.6.6-3NMI-02");
+        addWebResource("Rgaa30.Test.1.6.6-3NMI-03",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
+        addWebResource("Rgaa30.Test.1.6.6-3NMI-04");
+        addWebResource("Rgaa30.Test.1.6.6-3NMI-05",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
+        addWebResource("Rgaa30.Test.1.6.6-3NMI-06");
+        addWebResource("Rgaa30.Test.1.6.6-4NA-01");
+        addWebResource("Rgaa30.Test.1.6.6-4NA-02");
+        addWebResource("Rgaa30.Test.1.6.6-4NA-03");
+        addWebResource("Rgaa30.Test.1.6.6-4NA-04",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
+        addWebResource("Rgaa30.Test.1.6.6-4NA-05");
+        addWebResource("Rgaa30.Test.1.6.6-4NA-06");
+
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa30.Test.1.6.6-1Passed-01"), 1);
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa30.Test.1.6.6-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
+        //-------------------------------3NMI-01--------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.1.6.6-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "mock svg"),
+                new ImmutablePair(AttributeStore.ARIA_LABEL_ATTR, AttributeStore.ABSENT_ATTRIBUTE_VALUE));
+        
+        //----------------------------------------------------------------------
+        //-------------------------------3NMI-01--------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.6.6-3NMI-02");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "mock svg"),
+                new ImmutablePair(AttributeStore.ARIA_LABEL_ATTR, AttributeStore.ABSENT_ATTRIBUTE_VALUE));
+       
+        //----------------------------------------------------------------------
+        //-------------------------------3NMI-03--------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.6.6-3NMI-03");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, ""),
+                new ImmutablePair(AttributeStore.ARIA_LABEL_ATTR, "mock svg"));
+        
+        //----------------------------------------------------------------------
+        //-------------------------------3NMI-04--------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.6.6-3NMI-04");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, ""),
+                new ImmutablePair(AttributeStore.ARIA_LABEL_ATTR, "mock svg"));
+       
+        //----------------------------------------------------------------------
+        //-------------------------------3NMI-05--------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.6.6-3NMI-05");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "mock svg"),
+                new ImmutablePair(AttributeStore.ARIA_LABEL_ATTR, "svg label"));
+        
+        //----------------------------------------------------------------------
+        //-------------------------------3NMI-06--------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.6.6-3NMI-06");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "mock svg"),
+                new ImmutablePair(AttributeStore.ARIA_LABEL_ATTR, "svg label"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.6.6-4NA-01"));        
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.6.6-4NA-01"));
-    }
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.6.6-4NA-02"));        
 
-    @Override
-    protected void setConsolidate() {
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.6.6-4NA-03"));
 
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa30.Test.1.6.6-3NMI-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------4NA-04----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.6.6-4NA-04"));
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-05----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.6.6-4NA-05"));
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-06----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.6.6-4NA-06"));
     }
 
 }
