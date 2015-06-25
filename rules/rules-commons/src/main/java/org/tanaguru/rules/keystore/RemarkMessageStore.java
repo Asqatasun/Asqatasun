@@ -87,8 +87,12 @@ public final class RemarkMessageStore {
             "CheckNatureOfImageAndDescriptionPresence";
     public static final String CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG = 
             "CheckDescriptionPertinenceOfInformativeImage";
+    public static final String CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG = 
+            "CheckAtRestitutionOfDescriptionOfInformativeImage";
     public static final String CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG = 
             "CheckNatureOfImageAndDescriptionPertinence";
+    public static final String CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG = 
+            "CheckNatureOfImageAndAtRestitutionOfDescription";
     public static final String ALTERNATIVE_TOO_LONG_MSG = "AlternativeTooLong";
     public static final String CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG = 
             "CheckNatureOfImageAndStyledTextPresence";

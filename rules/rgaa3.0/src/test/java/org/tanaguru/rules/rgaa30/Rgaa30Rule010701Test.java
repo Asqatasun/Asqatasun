@@ -24,6 +24,8 @@ import org.tanaguru.entity.audit.*;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import static org.tanaguru.rules.keystore.AttributeStore.*;
 import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
@@ -49,12 +51,15 @@ public class Rgaa30Rule010701Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.01.07.01-3NMI-01");
-        addWebResource("Rgaa30.Test.01.07.01-3NMI-02");
+        addWebResource("Rgaa30.Test.01.07.01-3NMI-02",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
         addWebResource("Rgaa30.Test.01.07.01-3NMI-03");
         addWebResource("Rgaa30.Test.01.07.01-4NA-01");
         addWebResource("Rgaa30.Test.01.07.01-4NA-02");
         addWebResource("Rgaa30.Test.01.07.01-4NA-03");
         addWebResource("Rgaa30.Test.01.07.01-4NA-04");
+        addWebResource("Rgaa30.Test.01.07.01-4NA-05",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
 
     }
 
@@ -78,11 +83,11 @@ public class Rgaa30Rule010701Test extends Rgaa30RuleImplementationTestCase {
         //-------------------------------3NMI-02--------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.07.01-3NMI-02");
-        checkResultIsPreQualified(processResult, 2,  2);
+        checkResultIsPreQualified(processResult, 4,  4);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG,
+                RemarkMessageStore.CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
                 HtmlElementStore.INPUT_ELEMENT,
                 1,
                 new ImmutablePair(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
@@ -90,11 +95,28 @@ public class Rgaa30Rule010701Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG,
+                RemarkMessageStore.CHECK_DESC_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
                 HtmlElementStore.IMG_ELEMENT,
                 2,
                 new ImmutablePair(ALT_ATTR, ""),
+                new ImmutablePair(SRC_ATTR, "mock_image2.jpg")); 
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG,
+                HtmlElementStore.INPUT_ELEMENT,
+                3,
+                new ImmutablePair(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG,
+                HtmlElementStore.IMG_ELEMENT,
+                4,
+                new ImmutablePair(ALT_ATTR, ""),
                 new ImmutablePair(SRC_ATTR, "mock_image1.jpg"));        
+       
         
         //----------------------------------------------------------------------
         //-------------------------------3NMI-03--------------------------------
@@ -129,6 +151,11 @@ public class Rgaa30Rule010701Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------4NA-04---------------------------------
         //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.07.01-4NA-04"));
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-05---------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.01.07.01-4NA-05"));
     }
 
 }
