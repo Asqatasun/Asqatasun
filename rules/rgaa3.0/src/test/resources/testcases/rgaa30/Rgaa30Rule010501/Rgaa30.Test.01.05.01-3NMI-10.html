@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.1-5-1 Failed 01</title> 
+        <title>Rgaa30 Test.1.5.1 NMI 09</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.1-5-1 Failed 01</h1> 
+            <h1>Rgaa30 Test.1.5.1 NMI 09</h1> 
             <div class="test-detail" lang="fr"> Chaque image (balises 
                 <code>img</code>, 
                 <code>area</code>, 
@@ -20,11 +20,13 @@
                     <li>Il existe une autre solution d&apos;accès à la fonctionnalité sécurisée par le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a></li> 
                 </ul> 
             </div> 
-            <div class="testcase"> 
+            <div class="testcase captcha"> 
+                <p>This is a captcha</p> 
+                <canvas></canvas> 
             </div> 
             <div class="test-explanation">
-                 Failed. 
+                 NMI : An &lt;canvas&gt;, is seen as captcha. It is detected. 
             </div> 
-        </div>  
+        </div>   
     </body>
 </html>
