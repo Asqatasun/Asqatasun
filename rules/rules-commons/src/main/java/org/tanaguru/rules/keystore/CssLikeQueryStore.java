@@ -70,6 +70,8 @@ public final class CssLikeQueryStore {
                     "svg:not(a svg)"; 
     public static final String SVG_NOT_IN_LINK_WITH_DESC_CHILD_CSS_LIKE_QUERY=
                     "svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$))"; 
+    public static final String SVG_NOT_IN_LINK_WITH_ARIA_LABEL_CSS_LIKE_QUERY=
+                    "svg[aria-label]:not([aria-label~=^\\s*$]:not(a svg)"; 
     public static final String CANVAS_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "canvas:not(a canvas)"; 
     public static final String CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY=
