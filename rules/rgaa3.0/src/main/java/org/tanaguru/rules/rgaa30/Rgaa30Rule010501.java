@@ -45,7 +45,8 @@ public class Rgaa30Rule010501 extends AbstractDetectionPageRuleImplementation {
                         new MultipleElementSelector(
                                 IMG_NOT_IN_LINK_CSS_LIKE_QUERY,
                                 AREA_NOT_IN_LINK_CSS_LIKE_QUERY,
-                                APPLET_NOT_IN_LINK_CSS_LIKE_QUERY,
+                                SVG_NOT_IN_LINK_CSS_LIKE_QUERY,
+                                CANVAS_NOT_IN_LINK_CSS_LIKE_QUERY,
                                 OBJECT_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY,
                                 EMBED_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY
                         )

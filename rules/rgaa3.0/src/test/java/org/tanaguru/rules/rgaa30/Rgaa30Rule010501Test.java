@@ -56,6 +56,7 @@ public class Rgaa30Rule010501Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.01.05.01-3NMI-07");
         addWebResource("Rgaa30.Test.01.05.01-3NMI-08");
         addWebResource("Rgaa30.Test.01.05.01-3NMI-09");
+        addWebResource("Rgaa30.Test.01.05.01-3NMI-10");
         addWebResource("Rgaa30.Test.01.05.01-4NA-01");
         addWebResource("Rgaa30.Test.01.05.01-4NA-02");
         addWebResource("Rgaa30.Test.01.05.01-4NA-03");
@@ -127,7 +128,7 @@ public class Rgaa30Rule010501Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.NEED_MORE_INFO,
                 RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG,
-                HtmlElementStore.APPLET_ELEMENT,
+                HtmlElementStore.SVG_ELEMENT,
                 1);        
         
         //----------------------------------------------------------------------
@@ -139,7 +140,7 @@ public class Rgaa30Rule010501Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.NEED_MORE_INFO,
                 RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG,
-                HtmlElementStore.APPLET_ELEMENT,
+                HtmlElementStore.SVG_ELEMENT,
                 1);        
         
         //----------------------------------------------------------------------
@@ -176,6 +177,18 @@ public class Rgaa30Rule010501Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO,
                 RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG,
                 HtmlElementStore.EMBED_ELEMENT,
+                1);
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-10---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.01.05.01-3NMI-10");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
                 1);
 
         //----------------------------------------------------------------------
