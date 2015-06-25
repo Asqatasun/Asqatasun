@@ -2,25 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.1-7-3 NMI 01</title> 
+        <title>Rgaa30 Test.1.7.2 NA 06</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.1-7-3 NMI 01</h1> 
-            <div class="test-detail" lang="fr"> Chaque image embarquée (balise 
-                <code>embed</code> avec l&apos;attribut 
+            <h1>Rgaa30 Test.1.7.2 NA 06</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgObj">image objet</a> (balise 
+                <code>object</code> avec l&apos;attribut 
                 <code>type=&quot;image/...&quot;</code>) ayant une 
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description détaillée</a> vérifie-t-elle une de ces conditions ? 
                 <ul class="ssTests"> 
-                    <li> La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description détaillée</a> adjacente à l&apos;image embarquée est pertinente</li> 
+                    <li> La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description détaillée</a> adjacente à l&apos;image objet est pertinente</li> 
                     <li> La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description détaillée</a> via un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienAdj">lien adjacent</a> est pertinente</li> 
                 </ul> 
             </div> 
             <div class="testcase"> 
+                <object data="mock_image.gif" type="image/gif" class="decorative-image">  </object> 
             </div> 
             <div class="test-explanation">
-                 NMI. 
+                 NA : The &lt;object&gt; element found on the page is a decorative. It is out of scope. 
             </div> 
-        </div>  
+        </div>   
     </body>
 </html>
