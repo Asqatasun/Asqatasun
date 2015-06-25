@@ -2,7 +2,9 @@
 
 ## Summary
 
-@@@ TO-DO
+This test consists in detecting `<canvas>` tags and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the detected elements containing text can be replaced by styled text.
 
 ## Business description
 
@@ -30,28 +32,44 @@ Chaque image texte bitmap (balise `canvas`) doit si possible &ecirc;tre remplac&
 
 ### Decision level
 
-**Decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
-### Selection
+#### Set1
+
+All the `<canvas>` tags of the page not identified as captcha (see Notes about captcha detection) (css selector : `canvas`)
 
 ### Process
 
+#### Test1
+
+For each element of **Set1**, raise a MessageA
+
+##### MessageA 
+
+-    code : **ManualCheckOnElements** 
+-    status: Pre-Qualified
+-    parameter : tag name, snippet
+-    present in source : yes
+
 ### Analysis
-
-#### Passed
-
-#### Failed
 
 #### Not Applicable
 
+The page has no `<canvas>` tags (**Set1** is empty)
+
 #### Pre-qualified
 
-#### No Tested 
+The page has at least one `<canvas>` tag (**Set1** is not empty)
 
+## Notes
 
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
 
-
-
-
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

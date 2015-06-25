@@ -40,7 +40,7 @@ Pour chaque balise `form`, chacun de ses boutons "image texte" (balise `input` a
 
 #### Set1
 
-All the `<input>` tags with a `"type"` attribute equals to "image"
+All the `<input>` tags with a `"type"` attribute equals to "image"  not identified as captcha (see Notes about captcha detection) 
 
 ### Process
 
@@ -64,3 +64,14 @@ The page has no `<input>` tags with a `"type"` attribute equals to "image" (**Se
 #### Pre-qualified
 
 The page has at least one `<input>` tags with a `"type"` attribute equals to "image" (**Set1** is not empty)
+
+## Notes
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

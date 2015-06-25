@@ -40,7 +40,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 #### Set1
 
-All the `<img>` tags of the page (css selector : `img`)
+All the `<img>` tags of the page not identified as captcha (see Notes about captcha detection)  (css selector : `img`)
 
 ### Process
 
@@ -64,3 +64,14 @@ The page has no `<img>` tags (**Set1** is empty)
 #### Pre-qualified
 
 The page has at least one `<img>` tag (**Set1** is not empty)
+
+## Notes
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

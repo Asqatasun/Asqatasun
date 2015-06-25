@@ -1,8 +1,10 @@
 # Rule 1.9.4
+
 ## Summary
 
-This test consists in checking whether each text image object is
-replaced with styled text.
+This test consists in detecting "text image" objects and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the detected elements containing text can be replaced by styled text.
 
 ## Business description
 
@@ -30,30 +32,44 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-All the `<object>` tags with a "type" attribute that starts with
-"image/..."
+#### Set1
+
+All the `<object>` tags with a `"type"` attribute that starts with "image/..." not identified as captcha (see Notes about captcha detection)  (object[type^=image])
 
 ### Process
 
-The selection handles the process
+For each element of **Set1**, raise a MessageA
+
+##### MessageA 
+
+-    code : **ManualCheckOnElements** 
+-    status: Pre-Qualified
+-    parameter : `"data"` attribute, tag name, snippet
+-    present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-Selection is empty (The page has no `<object>` tag with a "type"
-attribute that starts with "image/...")
+The page has no `<object>` tag with a "type" attribute that starts with "image/..." (**Set1** is empty)
 
 #### Pre-qualified
 
-The selection is not empty
+The page has at least one `<object>` tag with a "type" attribute that starts with "image/..." (**Set1** is not empty)
 
 ## Notes
 
-No notes yet for that rule
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

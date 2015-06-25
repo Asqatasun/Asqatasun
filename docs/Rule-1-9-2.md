@@ -40,7 +40,7 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-techniq
 
 #### Set1
 
-All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute of an `<img>` tag.
+All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute of an `<img>` tag and not identified as captcha (see Notes about captcha detection) 
 
 ### Process
 
@@ -64,3 +64,14 @@ The page has no `<area>` tag, correctly associated with an image (**Set1** is em
 #### Pre-qualified
 
 The page has at least one `<area>` tag, correctly associated with an image (**Set1** is not empty)
+
+## Notes
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element
