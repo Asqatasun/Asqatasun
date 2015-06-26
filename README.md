@@ -58,19 +58,16 @@ As of January 2014, this represents [~170 accessibility tests](http://www.tanagu
 * email to `tanaguru AT tanaguru dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
-## Content of this last version (Tanaguru 3.0.5, 2015-03-16)
+## Content of this last version (Tanaguru 3.0.6, 2015-06-26)
 
-Bugs:
+Features :
 
-- [#107](https://github.com/Tanaguru/Tanaguru/issues/107) : Provide a way to set-up proxy credentials
-- [#105](https://github.com/Tanaguru/Tanaguru/issues/105) : Set "esapiPropertyValue" property of tokenManager bean to use the system property confDir value instead of hard-coded value
-- [#102](https://github.com/Tanaguru/Tanaguru/issues/102) : Assisted Audit : Complete action is ineffective
-
-Features : 
-
-- UI improvements
-- Correction of bug on buttons that apply automatic result on assisted audit 
-- User guide documentation 
+- Most of the implementation of Rgaa3 rules (about 150 rules)
+- Refactoring (clean-up) of Data Service layer usage
+- Package naming modification : now all packages starts with "org.tanaguru"
+- Rules commons improvments : use of Pair to define a combinaison of Result/Message
+- Rule TU improvments : provide new methods to test rule result and remarks
+- Add the "COMPLEX_TABLE_MARKER"
 
 See full [Changelog](CHANGELOG.txt)
 
