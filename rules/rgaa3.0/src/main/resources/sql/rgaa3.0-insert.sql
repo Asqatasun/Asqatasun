@@ -650,6 +650,7 @@ UPDATE TEST SET `No_Process`=b'0' WHERE
 Cd_Test='Rgaa30-1-1-1' OR 
 Cd_Test='Rgaa30-1-1-2' OR 
 Cd_Test='Rgaa30-1-1-3' OR 
+Cd_Test='Rgaa30-1-1-4' OR 
 Cd_Test='Rgaa30-1-3-3' OR 
 Cd_Test='Rgaa30-1-5-1' OR
 Cd_Test='Rgaa30-1-5-2' OR
