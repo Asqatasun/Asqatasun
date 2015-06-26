@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.1.2.1 Passed 05</title> 
+        <title>Rgaa30 Test.1.2.1 Failed 06</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.1.2.1 Passed 05</h1> 
+            <h1>Rgaa30 Test.1.2.1 Failed 06</h1> 
             <div class="test-detail" lang="fr"> Chaque 
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgDeco">image de décoration</a> sans 
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLegendeImage">légende</a> (balise 
@@ -18,13 +18,9 @@
                 </ul> 
             </div> 
             <div class="testcase"> 
-                <img id="id-decorative-image" src="mock-decorative-image.jpg" alt="" /> 
-                <a> <img src="image-link.jpg" alt="" /> </a> 
-                <img src="image-with-longdesc.jpg" alt="" longdesc="" /> 
-                <img src="image-without-alt.jpg" /> 
-                <img class="class-informative-image" src="mock-informative-image.jpg" alt="" title=""/> 
+                <img id="id-decorative-image" src="mock-decorative-image.jpg" alt="" title="not empty title" /> 
             </div> 
-            <p class="test-explanation"> Passed: One image is marked as decorative and its alt attribute is empty. The other images are either an image link, either an image with a longdesc attribute, either an image marked as informative or an image without alt attribute. They are all out of scope. </p> 
+            <p class="test-explanation"> Failed: All the images of the page are marked as decorative and their alt attribute is empty but an image has a title attribute set. </p> 
         </div>   
     </body>
 </html>

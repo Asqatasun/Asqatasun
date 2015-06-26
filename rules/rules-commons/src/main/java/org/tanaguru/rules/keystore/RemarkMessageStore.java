@@ -52,18 +52,14 @@ public final class RemarkMessageStore {
     public static final String ALT_MISSING_MSG = "AltMissing";
     public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
             "DecorativeElementWithNotEmptyAltAttribute";
-    public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_OR_TITLE_MSG =
-            "DecorativeElementWithNotEmptyAltAttributeOrTitlePresence";
+    public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG =
+            "DecorativeElementWithNotEmptyTitleAttribute";
     public static final String CHECK_ALTERNATIVE_OF_DECORATIVE_ELEMENT_MSG =
             "CheckAlternativeOfDecorativeElement";
     public static final String CHECK_NATURE_AND_ALTERNATIVE_OF_ELEMENT_MSG =
             "CheckNatureAndAlternativeOfElement";
-    public static final String CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
-            "CheckNatureOfElementWithNotEmptyAltAttribute";
     public static final String CHECK_PRESENCE_ELEMENT_TITLE_MSG =
             "CheckNatureOfElementWithNotEmptyTitleAttribute";
-    public static final String CHECK_ELEMENT_WITH_EMPTY_ALT_MSG =
-            "CheckNatureOfElementWithEmptyAltAttribute";
     public static final String CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG =
             "CheckNatureOfElementWithEmptyTitleAttribute";
     public static final String NOT_PERTINENT_ALT_MSG = "NotPertinentAlt";
@@ -71,6 +67,10 @@ public final class RemarkMessageStore {
             "CheckPertinenceOfAltAttributeOfInformativeImage";
     public static final String CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG = 
             "CheckNatureOfImageWithNotPertinentAlt";
+    public static final String CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG = 
+            "CheckNatureOfElementWithEmptyAltAttribute";
+    public static final String CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG = 
+            "CheckNatureOfElementWithNotEmptyAltAttribute";
     public static final String CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG = 
             "CheckNatureOfImageAndAltPertinence";
     public static final String CHECK_CAPTCHA_ALTERNATIVE_MSG =

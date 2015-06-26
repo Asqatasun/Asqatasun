@@ -19,7 +19,24 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import java.util.Collections;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import static org.tanaguru.entity.audit.TestSolution.*;
+import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.tanaguru.rules.elementchecker.CompositeChecker;
+import org.tanaguru.rules.elementchecker.ElementChecker;
+import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
+import org.tanaguru.rules.elementselector.ImageElementSelector;
+import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import org.tanaguru.rules.keystore.RemarkMessageStore;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG;
+import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.2.1 of the referential Rgaa 3.0.
@@ -33,88 +50,75 @@ import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
  * 1.2.1 rule specification</a>
  *
  */
-public class Rgaa30Rule010201  extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule010201  extends AbstractMarkerPageRuleImplementation {
 
-    /**
-     * Default constructor
-     */
-    public Rgaa30Rule010201 () {
-        super();
+    public Rgaa30Rule010201() {
+        super(
+                // the decorative images are part of the scope
+                DECORATIVE_IMAGE_MARKER,
+                // the informative images are not part of the scope
+                INFORMATIVE_IMAGE_MARKER);
+                setElementSelector(new ImageElementSelector(IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY, true, false));
+                setMarkerElementChecker(getMarkerElementChecker());
+                setRegularElementChecker(getLocalRegularElementChecker());
     }
-
-//extends AbstractMarkerPageRuleImplementation {
-//
-//    public Rgaa30Rule010201() {
-//        super(
-//                // the decorative images are part of the scope
-//                DECORATIVE_IMAGE_MARKER,
-//                // the informative images are not part of the scope
-//                INFORMATIVE_IMAGE_MARKER);
-//        setElementSelector(new ImageElementSelector(IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY, true, false));
-//        setMarkerElementChecker(getMarkerElementChecker());
-//        setRegularElementChecker(getLocalRegularElementChecker());
-//    }
-//    
-//    /**
-//     * 
-//     * @return the checker user for marked elements
-//     */
-//    private ElementChecker getMarkerElementChecker() {
-//        return new CompositeChecker(
-//                    new TextEmptinessChecker(
-//                        new TextAttributeOfElementBuilder(ALT_ATTR),
-//                        TestSolution.PASSED,
-//                        TestSolution.FAILED,
-//                        null,
-//                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
-//                        ALT_ATTR,
-//                        SRC_ATTR),
-//                    new AttributePresenceChecker(
-//                        TITLE_ATTR,
-//                        TestSolution.FAILED,
-//                        TestSolution.PASSED,
-//                        CHECK_PRESENCE_ELEMENT_TITLE_MSG,
-//                        CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG,
-//                        TITLE_ATTR,
-//                        SRC_ATTR));
-//    }
-//    
-//    /**
-//     * 
-//     * @return the checker user for not marked elements
-//     */
-//    private ElementChecker getLocalRegularElementChecker() {
-//        
-//        CompositeChecker compositeChecker = new CompositeChecker();
-//        
-//        compositeChecker.addChecker(
-//                new TextEmptinessChecker(
-//                        new TextAttributeOfElementBuilder(ALT_ATTR),
-//                        TestSolution.PASSED,
-//                        TestSolution.FAILED,
-//                        null,
-//                        null));
-//        
-//        compositeChecker.addChecker(
-//                new AttributePresenceChecker(
-//                        TITLE_ATTR,
-//                        TestSolution.FAILED,
-//                        TestSolution.PASSED,
-//                        null,
-//                        null));
-//        
-//        compositeChecker.setIsOrCombinaison(false);
-//        compositeChecker.addCheckMessageFromSolution(
-//                TestSolution.PASSED,
-//                Collections.singletonMap(
-//                        TestSolution.NEED_MORE_INFO, 
-//                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
-//        compositeChecker.addCheckMessageFromSolution(
-//                TestSolution.FAILED,
-//                Collections.singletonMap(
-//                        TestSolution.NEED_MORE_INFO, 
-//                        DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG));
-//        
-//        return compositeChecker;
-//    }
+    
+    /**
+     * 
+     * @return the checker user for marked elements
+     */
+    private ElementChecker getMarkerElementChecker() {
+        CompositeChecker ec = new CompositeChecker(
+                    new TextEmptinessChecker(
+                        new TextAttributeOfElementBuilder(ALT_ATTR),
+                        new ImmutablePair(PASSED,""),
+                        new ImmutablePair(FAILED,DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG),
+                        ALT_ATTR,
+                        TITLE_ATTR,
+                        SRC_ATTR),
+                    new TextEmptinessChecker(
+                        new TextAttributeOfElementBuilder(TITLE_ATTR),
+                        new ImmutablePair(PASSED,""),
+                        new ImmutablePair(FAILED,DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG),
+                        ALT_ATTR,
+                        TITLE_ATTR,
+                        SRC_ATTR));
+        ec.setIsOrCombinaison(false);
+        return ec;
+    }
+    
+    /**
+     * 
+     * @return the checker user for not marked elements
+     */
+    private ElementChecker getLocalRegularElementChecker() {
+        
+        CompositeChecker compositeChecker = new CompositeChecker();
+        
+        compositeChecker.addChecker(
+                new TextEmptinessChecker(
+                        new TextAttributeOfElementBuilder(ALT_ATTR),
+                        new ImmutablePair(PASSED,""),
+                        new ImmutablePair(FAILED,"")));
+        
+        compositeChecker.addChecker(
+                new TextEmptinessChecker(
+                        new TextAttributeOfElementBuilder(TITLE_ATTR),
+                        new ImmutablePair(PASSED,""),
+                        new ImmutablePair(FAILED,"")));
+        
+        compositeChecker.setIsOrCombinaison(false);
+        compositeChecker.addCheckMessageFromSolution(
+                PASSED,
+                Collections.singletonMap(
+                        NEED_MORE_INFO, 
+                        RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG));
+        compositeChecker.addCheckMessageFromSolution(
+                FAILED,
+                Collections.singletonMap(
+                        NEED_MORE_INFO, 
+                        RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG));
+        
+        return compositeChecker;
+    }
 }

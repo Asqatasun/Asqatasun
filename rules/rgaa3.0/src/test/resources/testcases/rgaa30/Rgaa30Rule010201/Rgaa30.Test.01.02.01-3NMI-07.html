@@ -18,10 +18,20 @@
                 </ul> 
             </div> 
             <div class="testcase"> 
-                <img src="mock-image.jpg" alt="description image" title="description image" /> 
-                <img id="id-decorative-image" src="mock-decorative-image.jpg" alt="" /> 
+                <img src="mock-image1.jpg" alt="description image" title="description image" /> 
+                <img src="mock-image2.jpg" alt="description image" title="" /> 
+                <img src="mock-image3.jpg" alt="" title="description image" /> 
+                <img src="mock-image4.jpg" alt="" title="" /> 
+                <img id="id-decorative-image" src="mock-decorative-image5.jpg" alt="" /> 
             </div> 
-            <p class="test-explanation"> NMI : One image is found on the page and is not identified by marker. The other image is marked as decorative and has an empty alt attribute. </p> 
+            <p class="test-explanation"> 
+              NMI : Three images are found on the page and is not identified by marker. 
+              The first has a not empty title and alt -> Suspected informative
+              The second has an empty title and not empty alt -> Suspected informative
+              The third has a not empty title and an empty alt -> Suspected informative
+              The fourth has an empty title and alt -> Suspected decorative
+              The last image is marked as decorative and has an empty alt attribute. 
+            </p> 
         </div>   
     </body>
 </html>
