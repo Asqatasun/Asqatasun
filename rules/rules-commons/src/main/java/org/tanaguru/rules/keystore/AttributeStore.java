@@ -55,6 +55,7 @@ public final class AttributeStore {
     public static final String TITLE_ATTR = HTML.Attribute.TITLE.toString();
     public static final String ARIA_LABEL_ATTR = "aria-label";
     public static final String ARIA_LABELLEDBY_ATTR = "aria-labelledby";
+    public static final String ARIA_DESCRIBEDBY_ATTR = "aria-describedby";
     public static final String USEMAP_ATTR = HTML.Attribute.USEMAP.toString();
     public static final String VALUE_ATTR = HTML.Attribute.VALUE.toString();
     public static final String WIDTH_ATTR = HTML.Attribute.WIDTH.toString();

@@ -166,18 +166,18 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
         
         for (Element el : elements) {
             if (!el.hasAttr(attributeName)) {
-                
+
                 testSolution = setTestSolution(testSolution, getFailureSolution());
-                
+
                 if (StringUtils.isNotBlank(getFailureMsgCode())) {
                     createSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
-                    
+
                 }
-                
+
             } else if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-                
+
                 testSolution = setTestSolution(testSolution, getSuccessSolution());
-                
+
                 createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
 
             }
