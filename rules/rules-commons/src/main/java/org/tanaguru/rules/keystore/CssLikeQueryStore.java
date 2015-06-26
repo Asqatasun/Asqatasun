@@ -66,8 +66,7 @@ public final class CssLikeQueryStore {
                     "map:has(area)[name]:not([name~=^\\s*$])";
     public static final String NOT_EMPTY_ALT_ATTR_NOT_IN_LINK_CSS_LIKE_QUERY = 
                     "[alt]:not([alt~=^\\s*$]):not(a [alt])";
-    public static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY="svg:not(a svg)"; 
-    
+
     //aria
     public static final String ARIA_ATTRIBUTES_CSS_LIKE_QUERY="[^aria]"; 
     public static final String ARIA_DESCRIBEDBY_CSS_LIKE_QUERY="[aria-describedby]"; 
@@ -79,7 +78,7 @@ public final class CssLikeQueryStore {
             "title:not(:matchesOwn(^\\s*$))";
     public static final String NOT_EMPTY_ARIA_DESC_CSS_LIKE_QUERY =
             "desc:not(:matchesOwn(^\\s*$))";
-    ublic static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY=
+    public static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "svg:not(a svg)"; 
     public static final String SVG_NOT_IN_LINK_WITH_DESC_CHILD_CSS_LIKE_QUERY=
                     "svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$))"; 
