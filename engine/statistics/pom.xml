@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.tanaguru</groupId>
         <artifactId>engine</artifactId>
-        <version>3.0.5</version>
+        <version>3.0.6</version>
     </parent>
     <groupId>org.tanaguru</groupId>
     <artifactId>tanaguru-statistics</artifactId>
     <name>statistics</name>
-    <version>3.0.5</version>
+    <version>3.0.6</version>
     <url>http://www.tanaguru.org</url>
     <dependencies>
         <dependency>

@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.tanaguru</groupId>
         <artifactId>testing-tools</artifactId>
-        <version>3.0.5</version>
+        <version>3.0.6</version>
     </parent>
     <artifactId>tgol-test-krash-online-site</artifactId>
     <packaging>jar</packaging>
