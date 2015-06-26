@@ -104,6 +104,7 @@ crowdin.yaml
 
 # saved files
 *~
-
+# Merge temp file
+*.orig
 # Mkdocs
 /docs/Site

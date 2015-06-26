@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1.2.4 NMI 11</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1.2.4 NMI 11</h1> 
+            <div class="test-detail" lang="fr"> Chaque image vectorielle de décoration (balise <code>&lt;svg&gt;</code>) non porteuse d&apos;information et possédant une alternative vérifie-t-elle ces conditions ? 
+                <ul class="ssTests"> 
+                    <li>La balise <code>&lt;svg&gt;</code> possède un role="img"</li> 
+                    <li>La balise <code>&lt;svg&gt;</code> ou l&apos;un de ses enfants est dépourvue de role, propriété ou état ARIA visant à labelliser l&apos;image vectorielle (aria-label, aria-describedby, aria-labelledby par exemple).</li> 
+                    <li>Les balises <code>&lt;title&gt;</code> et <code>&lt;desc&gt;</code> sont absentes ou vides</li> 
+                    <li>La balise <code>&lt;svg&gt;</code> ou l&apos;un de ses enfants est dépourvue d&apos;attribut title</li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" role="img">  
+
+                    <desc>Une description</desc>
+                    <title>Une description</title>
+                    <rect x="5" y="5" rx="10" width="210" height="40" fill="none" stroke="grey" stroke-width="2" /> 
+
+                </svg>
+            </div> 
+            <div class="testcase"> 
+                <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg">  
+
+                    <rect x="5" y="5" rx="10" width="210" height="40" fill="none" stroke="grey" stroke-width="2" /> 
+
+                </svg>
+            </div> 
+            <p class="test-explanation"> NMI : One svg is found on the page and is not identified by marker. </p> 
+        </div>   
+    </body>
+</html>

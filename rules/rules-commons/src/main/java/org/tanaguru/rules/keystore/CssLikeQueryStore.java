@@ -66,7 +66,20 @@ public final class CssLikeQueryStore {
                     "map:has(area)[name]:not([name~=^\\s*$])";
     public static final String NOT_EMPTY_ALT_ATTR_NOT_IN_LINK_CSS_LIKE_QUERY = 
                     "[alt]:not([alt~=^\\s*$]):not(a [alt])";
-    public static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY=
+    public static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY="svg:not(a svg)"; 
+    
+    //aria
+    public static final String ARIA_ATTRIBUTES_CSS_LIKE_QUERY="[^aria]"; 
+    public static final String ARIA_DESCRIBEDBY_CSS_LIKE_QUERY="[aria-describedby]"; 
+    public static final String ARIA_LABEL_CSS_LIKE_QUERY="[aria-label]"; 
+    public static final String ARIA_LABELLEDBY_CSS_LIKE_QUERY="[aria-labelledby]"; 
+    
+    //svg children
+    public static final String NOT_EMPTY_ARIA_TITLE_CSS_LIKE_QUERY = 
+            "title:not(:matchesOwn(^\\s*$))";
+    public static final String NOT_EMPTY_ARIA_DESC_CSS_LIKE_QUERY =
+            "desc:not(:matchesOwn(^\\s*$))";
+    ublic static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "svg:not(a svg)"; 
     public static final String SVG_NOT_IN_LINK_WITH_DESC_CHILD_CSS_LIKE_QUERY=
                     "svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$))"; 
@@ -75,8 +88,8 @@ public final class CssLikeQueryStore {
     public static final String CANVAS_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "canvas:not(a canvas)"; 
     public static final String CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY=
-                    "canvas:not(a canvas):not(:matchesOwn(^\\s*$))"; 
-
+                    "canvas:not(a canvas):not(:matchesOwn(^\\s*$))";
+ 
     // Table theme css-like queries
     public static final String TABLE_WITH_SUMMARY_CSS_LIKE_QUERY="table[summary]"; 
     public static final String TABLE_WITH_CAPTION_CSS_LIKE_QUERY="table:has(caption)"; 

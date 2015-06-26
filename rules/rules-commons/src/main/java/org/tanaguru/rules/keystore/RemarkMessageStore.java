@@ -94,6 +94,25 @@ public final class RemarkMessageStore {
     public static final String CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG = 
             "CheckNatureOfImageAndAtRestitutionOfDescription";
     public static final String ALTERNATIVE_TOO_LONG_MSG = "AlternativeTooLong";
+    public static final String ALT_SVG_DETECTED_MSG = "AltSvgDetect";
+    public static final String DECORATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE=
+            "DecorativeSvgWithoutRoleImgAttribute";
+    public static final String DECORATIVE_SVG_OR_CHILDREN_WITH_ARWIA_ATTRIBUTE=
+            "DecorativeSvgOrChildrenWithAriaAttribute";
+    public static final String DECORATIVE_SVG_WITH_NOT_EMPTY_TITLE_OR_DESC_TAGS=
+            "DecorativeSvgWithNotEmptyTitleOrDescTags";
+    public static final String DECORATIVE_SVG_OR_CHILD_WITH_TITLE_ATTRIBUTE=
+            "DecorativeSvgWithTitleAttribute";
+    public static final String SUSPECTED_INFORMATIVE_SVG_ROLE_IMAGE_MISSING_ON_SVG=
+            "SuspectedInformativeSvgRoleImageMissingOnSvg";
+    public static final String SUSPECTED_INFORMATIVE_SVG_WITH_ARIA_ATTRIBUTE_DETECTED_ON_ELEMENT_OR_CHILD=
+            "SuspectedInformativeSvgWithAriaAttributeDetectedOnElementOrChild";
+    public static final String SUSPECTED_INFORMATIVE_SVG_WITH_DESC_OR_TITLE_CHILD_TAG=
+            "SuspectedInformativeSvgWithDescOrTitleChildTag";
+    public static final String SUSPECTED_INFORMATIVE_SVG_WITH_TITLE_ATTRIBUTE_ON_ELEMENT_OR_CHILD=
+            "SuspectedInformativeSvgWithTitleAttributeOnElementOrChild";
+    public static final String SUSPECTED_WELL_FORMATED_DECORATIVE_SVG=
+            "SuspectedWellFormedDecorativeSvg";
     public static final String CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG = 
             "CheckNatureOfImageAndStyledTextPresence";
     public static final String CHECK_TEXT_STYLED_PRESENCE_OF_INFORMATIVE_IMG_MSG = 
