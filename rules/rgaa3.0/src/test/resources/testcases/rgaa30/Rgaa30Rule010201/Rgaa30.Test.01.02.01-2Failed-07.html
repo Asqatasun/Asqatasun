@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.1.2.1 Failed A01</title> 
+        <title>Rgaa30 Test.1.2.1 Failed 07</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.1.2.1 Failed A01</h1> 
+            <h1>Rgaa30 Test.1.2.1 Failed 07</h1> 
             <div class="test-detail" lang="fr"> Chaque 
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgDeco">image de décoration</a> sans 
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLegendeImage">légende</a> (balise 
@@ -18,9 +18,10 @@
                 </ul> 
             </div> 
             <div class="testcase"> 
-                <img id="id-decorative-image" src="mock-decorative-image.jpg" alt="" title="not empty title" /> 
+                <img id="id-decorative-image" src="mock-decorative-image.jpg" alt="not empty alt" title="not empty title" /> 
             </div> 
-            <p class="test-explanation"> Failed: All the images of the page are marked as decorative and their alt attribute is empty but an image has a title attribute set. </p> 
+            <p class="test-explanation"> 
+              Failed: All the images of the page are marked as decorative and their alt attribute is not empty and the title attribute is not empty. </p> 
         </div>   
     </body>
 </html>
