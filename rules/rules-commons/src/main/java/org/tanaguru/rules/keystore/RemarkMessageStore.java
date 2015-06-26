@@ -361,6 +361,10 @@ public final class RemarkMessageStore {
     public static final String URL_PARAMETERS_DETECTED = "UrlParametersDetected";
     public static final String URL_PATH_UNDERSCORE_DETECTED = "UrlPathUnderscoreDetected";
     
+    public static final String CHECK_LINK_ASSO_WITH_SERVER_SIDED_IMG_MAP = 
+            "CheckALinkIsAssociatedWithAServerSidedImageMap";
+    
+    
     /**
      * Private constructor. This class handles keys and must not be instantiated
      */
