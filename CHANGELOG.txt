@@ -1,4 +1,17 @@
 --------------------------
+Tanaguru 3.0.6, 2015-06-26
+--------------------------
+
+Features :
+
+- Most of the implementation of Rgaa3 rules (about 150 rules)
+- Refactoring (clean-up) of Data Service layer usage
+- Package naming modification : now all packages starts with "org.tanaguru"
+- Rules commons improvments : use of Pair to define a combinaison of Result/Message
+- Rule TU improvments : provide new methods to test rule result and remarks
+- Add the "COMPLEX_TABLE_MARKER" 
+
+--------------------------
 Tanaguru 3.0.5, 2015-03-16
 --------------------------
 Bugs:
