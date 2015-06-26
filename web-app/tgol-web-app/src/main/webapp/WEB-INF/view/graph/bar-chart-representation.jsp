@@ -40,7 +40,6 @@
             </td>
         </c:forEach>
         </tr>
-        <c:if test="${isManualAudit}">
         <tr>
             <th id="serie3" 
                 title="<fmt:message key="nmi"/>">
@@ -52,7 +51,6 @@
             </td>
         </c:forEach>
         </tr>
-        </c:if>
         <tr>
             <th id="serie4" 
                 title="<fmt:message key="na"/>">
