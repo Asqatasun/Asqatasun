@@ -174,11 +174,12 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
 
                 }
 
-            } else if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-
+            } else {
                 testSolution = setTestSolution(testSolution, getSuccessSolution());
 
-                createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
+                if (StringUtils.isNotBlank(getSuccessMsgCode())) {
+                    createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
+                }
 
             }
         }
