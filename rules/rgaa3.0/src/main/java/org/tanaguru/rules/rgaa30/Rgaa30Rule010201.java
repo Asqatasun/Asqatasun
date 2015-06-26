@@ -25,6 +25,7 @@ import static org.tanaguru.entity.audit.TestSolution.*;
 import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.tanaguru.rules.elementchecker.CompositeChecker;
 import org.tanaguru.rules.elementchecker.ElementChecker;
+import org.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
 import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
 import org.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
@@ -35,7 +36,7 @@ import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG;
 import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
@@ -76,10 +77,10 @@ public class Rgaa30Rule010201  extends AbstractMarkerPageRuleImplementation {
                         ALT_ATTR,
                         TITLE_ATTR,
                         SRC_ATTR),
-                    new TextEmptinessChecker(
-                        new TextAttributeOfElementBuilder(TITLE_ATTR),
+                    new AttributePresenceChecker(
+                        TITLE_ATTR,
+                        new ImmutablePair(FAILED,DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG),
                         new ImmutablePair(PASSED,""),
-                        new ImmutablePair(FAILED,DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG),
                         ALT_ATTR,
                         TITLE_ATTR,
                         SRC_ATTR));
@@ -93,19 +94,15 @@ public class Rgaa30Rule010201  extends AbstractMarkerPageRuleImplementation {
      */
     private ElementChecker getLocalRegularElementChecker() {
         
-        CompositeChecker compositeChecker = new CompositeChecker();
-        
-        compositeChecker.addChecker(
-                new TextEmptinessChecker(
+        CompositeChecker compositeChecker = new CompositeChecker(
+                    new TextEmptinessChecker(
                         new TextAttributeOfElementBuilder(ALT_ATTR),
                         new ImmutablePair(PASSED,""),
-                        new ImmutablePair(FAILED,"")));
-        
-        compositeChecker.addChecker(
-                new TextEmptinessChecker(
-                        new TextAttributeOfElementBuilder(TITLE_ATTR),
-                        new ImmutablePair(PASSED,""),
-                        new ImmutablePair(FAILED,"")));
+                        new ImmutablePair(FAILED,"")),
+                    new AttributePresenceChecker(
+                        TITLE_ATTR,
+                        new ImmutablePair(FAILED,""),
+                        new ImmutablePair(PASSED,"")));
         
         compositeChecker.setIsOrCombinaison(false);
         compositeChecker.addCheckMessageFromSolution(

@@ -32,7 +32,7 @@ import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG;
 
 /**
  * Unit test class for the implementation of the rule 1-2-1 of the referential Rgaa 3.0.
@@ -237,7 +237,7 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG,
+                DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG,
                 IMG_ELEMENT, 
                 1, 
                 new ImmutablePair(ALT_ATTR, ""),
@@ -262,7 +262,7 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TITLE_ATTR_MSG,
+                DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG,
                 IMG_ELEMENT, 
                 2, 
                 new ImmutablePair(ALT_ATTR, "not empty alt"),
@@ -351,7 +351,7 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------3NMI-07---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.01.02.01-3NMI-07");
-        checkResultIsPreQualified(processResult,5,4);
+        checkResultIsPreQualified(processResult,6,5);
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
@@ -373,9 +373,15 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
-                CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG,
+                CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
                 4);
+        checkRemarkIsPresent(
+                processResult, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG,
+                IMG_ELEMENT, 
+                5);
         
         
         //----------------------------------------------------------------------

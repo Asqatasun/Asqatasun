@@ -48,7 +48,7 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
      * The collection of checkers recursively called. 
      * This collection is of LinkedList type to maintain an order.
      */
-    private Collection<ElementChecker> checkers = new LinkedList<>();
+    private final Collection<ElementChecker> checkers = new LinkedList<>();
     public Collection<ElementChecker> getCheckers() {
         return checkers;
     }
@@ -159,7 +159,7 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
             
             Logger.getLogger(this.getClass()).debug("Checker "+ec.getClass() + 
                     " returned " + checkerSolution);
-
+            
             if (isOrCombinaison && (checkerSolution.equals(ec.getFailureSolution()) || 
                     checkerSolution.equals(TestSolution.NOT_APPLICABLE)))  {
                 return checkerSolution;
