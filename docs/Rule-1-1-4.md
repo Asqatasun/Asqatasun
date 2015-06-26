@@ -38,7 +38,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 #### Set1
 
-All the `<img>` tags with a `"ismap"` attribute 
+All the `<img>` tags with ab `"ismap"` attribute and all the `<input>` tags with a `"type"` attribute equals to "image" and an `"ismap"` attribute (css selector : `img[ismap],input[type=image][ismap]`)
 
 ### Process
 
@@ -52,25 +52,25 @@ For each element of Set1, produce a MessageA
 
 ##### MessageA : Check a link is associated with the server-sided image map
 
--    code : Check a link is associated with the server-sided image map
+-    code : CheckALinkIsAssociatedWithTheServerSidedImageMap
 -    status: Pre-qualified (NMI or warning)
 -    case : For each element of Set1
--    parameter : tag name
+-    parameter : `"alt"` attribute, `"src"` attribute, tag name
 -    present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-The page has no `<img>` tag with a `"ismap"` attribute (Set1 is empty)
+The page has no `<img>` tag with a `"ismap"` attribute (**Set1** is empty)
 
 #### Pre-qualified
 
-The selection is not empty
+**Set1** is not empty
 
 ## Notes
 
-We only detect the elements of the set1 to determine whether the test is applicable
+We only detect the elements of the **Set1** to determine whether the test is applicable
 
 
 
