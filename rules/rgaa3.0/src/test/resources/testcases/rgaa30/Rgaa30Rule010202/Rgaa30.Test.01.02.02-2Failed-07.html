@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.1-2-2 Failed 01</title> 
+        <title>Rgaa30 Test.1.2.2 Failed 07</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.1-2-2 Failed 01</h1> 
+            <h1>Rgaa30 Test.1.2.2 Failed 07</h1> 
             <div class="test-detail" lang="fr"> Chaque 
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneNonCliquable">zone non cliquable</a> (balise 
                 <code>area</code> sans attribut 
@@ -18,10 +18,14 @@
                 </ul> 
             </div> 
             <div class="testcase"> 
+                <img alt="" src="mock-image.jpg" usemap="#mock-map" /> 
+                <map id="mock-map" name="mock-map"> 
+                    <area class="class-decorative-area" alt="" title=""></area>
+                </map> 
             </div> 
             <div class="test-explanation">
-                 Failed. 
+                 Failed: All the &lt;area&gt; of the page are marked as decorative, their alt attribute is empty but an empty title attribute is present
             </div> 
-        </div>  
+        </div>   
     </body>
 </html>

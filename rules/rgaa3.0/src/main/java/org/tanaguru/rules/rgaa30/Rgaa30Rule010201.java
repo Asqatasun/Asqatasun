@@ -31,7 +31,7 @@ import org.tanaguru.rules.elementselector.ImageElementSelector;
 import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
 import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
 import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.IMG_WITH_ALT_NOT_IN_LINK_WITHOUT_LONGDESC_CSS_LIKE_QUERY;
 import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
@@ -59,7 +59,7 @@ public class Rgaa30Rule010201  extends AbstractMarkerPageRuleImplementation {
                 DECORATIVE_IMAGE_MARKER,
                 // the informative images are not part of the scope
                 INFORMATIVE_IMAGE_MARKER);
-                setElementSelector(new ImageElementSelector(IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY, true, false));
+                setElementSelector(new ImageElementSelector(IMG_WITH_ALT_NOT_IN_LINK_WITHOUT_LONGDESC_CSS_LIKE_QUERY, true, false));
                 setMarkerElementChecker(getMarkerElementChecker());
                 setRegularElementChecker(getLocalRegularElementChecker());
     }
