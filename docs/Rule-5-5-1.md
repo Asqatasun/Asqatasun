@@ -38,18 +38,12 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-techniq
 
 #### Set1 (table tags identified as data table from html markers)
 
-All the `<table>` tags with an "id" attribute or a "class" attribute or a
-"role" attribute that matches one of the values set by the user through
-the "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with a `<caption>` child tag.
+All the `<table>` tags with an "id" attribute or a "class" attribute or a "role" attribute that matches one of the values set by the user through the "DATA_TABLE_MARKER" parameter AND with a `<caption>` child tag.
 
 #### Set2 (table tags not identified as data table from html markers)
 
-All the `<table>` tags that don't have an "id" attribute or a "class"
-attribute or a "role" attribute that matches one the values set by the
-use through the "PRESENTATION_TABLE_MARKER" parameter or the
-"DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with a `<caption>` child tag. That
-means select all the `<table>` tags of the page when these parameters are
-empty.
+All the `<table>` tags that don't have an "id" attribute or a "class" attribute or a "role" attribute that matches one the values set by the use through the "PRESENTATION_TABLE_MARKER" parameter or the
+"DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with a `<caption>` child tag. That means select all the `<table>` tags of the page when these parameters are empty.
 
 #### Set3
 
@@ -121,5 +115,3 @@ The content of the `<caption>` tag is seen as not relevant if :
 
 - empty
 - only composed of non-alphanumerical characters
-
-Complex tables are seen as a subset of data tables. That's tables identified as complex tables are added to the set of identified data tables.

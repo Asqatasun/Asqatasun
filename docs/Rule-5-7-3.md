@@ -43,7 +43,7 @@ Chaque en-t&ecirc;te (balise `th`) ne s'appliquant pas &agrave; la totalit&eacut
 
 ### Selection
 
-#### Set1 (table tags identified as data table from html markers)
+#### Set1 (table tags identified as data or complex table from html markers)
 
 All the `<table>` tags with an "id" attribute or a "class" attribute or a
 "role" attribute that matches one of the values set by the user through
@@ -53,7 +53,7 @@ the "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND wi
 
 All the `<table>` tags that don't have an "id" attribute or a "class"
 attribute or a "role" attribute that matches one the values set by the
-use through the "PRESENTATION_TABLE_MARKER" parameter or the
+user through the "PRESENTATION_TABLE_MARKER" parameter or the
 "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with `<th>` child tags. That means
 select all the table tags of the page when these parameters are empty.
 

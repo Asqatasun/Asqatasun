@@ -65,13 +65,13 @@ size(**Set2**) = size(**Set3**) + size(**Set4**)
 
 For each element of **Set3**, we check whether the link content is not pertinent (see Notes about relevancy detection)
 
-For each element returning true in **Test1**, raise a MessageA, raise a MessageB instead
+For each element returning true in **Test1**, raise a MessageA, raise a MessageB instead.
 
 ##### Test2
 
 For each element of **Set4**, we check whether the link content is not pertinent (see Notes about relevancy detection)
 
-For each element returning true in **Test2**, raise a MessageC, raise a MessageD instead
+For each element returning true in **Test2**, raise a MessageC, raise a MessageD instead.
 
 ##### MessageA : Unexplicit Link
 
