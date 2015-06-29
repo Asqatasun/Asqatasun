@@ -47,7 +47,7 @@ Chaque image vectorielle (balise `svg`) qui n&eacute;cessite une <a href="http:/
 #### Set1
 
 All the `<svg>` tags of the page not within a link and not identified as captcha (see Notes about captcha detection)  (css selector : svg:not(a svg))
-css selector : 
+
 #### Set2
 
 All the elements of **Set1** identified as informative image by marker usage (see Notes for details about detection through marker)
