@@ -90,7 +90,7 @@ The page has at least one `<img>` tag that is not an image link and not identifi
 
 ## Notes
 
-**Informative images** markers are set through the *INFORMATIVE_IMAGE_MARKER* parameter.
+**Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
 
 **Decorative images** markers are set through the *DECORATIVE_IMAGE_MARKER* parameter.
 
