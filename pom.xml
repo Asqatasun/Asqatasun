@@ -285,7 +285,7 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.tanaguru</groupId>
+                <groupId>${engineGroupId}</groupId>
                 <artifactId>tanaguru-audit</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
