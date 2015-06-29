@@ -49,33 +49,34 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.05.01.01-1Passed-01",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-1Passed-02",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-1Passed-03",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table;id-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table;id-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-1Passed-04",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-2Failed-01",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-2Failed-02",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-2Failed-03",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table;id-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table;id-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-2Failed-04",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-2Failed-05",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-3NMI-01");
         addWebResource("Rgaa30.Test.05.01.01-3NMI-02");
         addWebResource("Rgaa30.Test.05.01.01-3NMI-03",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"));
         addWebResource("Rgaa30.Test.05.01.01-3NMI-04",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-data-table"),
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-complex-table"),
                     createParameter("Rules", PRESENTATION_TABLE_MARKER, "class-presentation-table"));
         addWebResource("Rgaa30.Test.05.01.01-4NA-01");
         addWebResource("Rgaa30.Test.05.01.01-4NA-02",
-                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "id-presentation-table"));
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "id-presentation-table"),
+                    createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"));
 
     }
 
@@ -112,7 +113,7 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                RemarkMessageStore.SUMMARY_MISSING_MSG, 
+                RemarkMessageStore.CAPTION_MISSING_ON_COMPLEX_TABLE_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
         
@@ -125,7 +126,7 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                RemarkMessageStore.SUMMARY_MISSING_MSG, 
+                RemarkMessageStore.CAPTION_MISSING_ON_COMPLEX_TABLE_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
         
@@ -138,13 +139,13 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                RemarkMessageStore.SUMMARY_MISSING_MSG, 
+                RemarkMessageStore.CAPTION_MISSING_ON_COMPLEX_TABLE_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                RemarkMessageStore.SUMMARY_MISSING_MSG, 
+                RemarkMessageStore.CAPTION_MISSING_ON_COMPLEX_TABLE_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 2);
         
@@ -157,13 +158,13 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                RemarkMessageStore.SUMMARY_MISSING_MSG, 
+                RemarkMessageStore.CAPTION_MISSING_ON_COMPLEX_TABLE_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG, 
+                RemarkMessageStore.CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 2);
         
@@ -176,13 +177,13 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.FAILED, 
-                RemarkMessageStore.SUMMARY_MISSING_MSG, 
+                RemarkMessageStore.CAPTION_MISSING_ON_COMPLEX_TABLE_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG, 
+                RemarkMessageStore.CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 2);
         
@@ -195,7 +196,7 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG, 
+                RemarkMessageStore.CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
 
@@ -208,7 +209,7 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG, 
+                RemarkMessageStore.CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
         
@@ -221,7 +222,7 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG, 
+                RemarkMessageStore.CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
 
@@ -234,7 +235,7 @@ public class Rgaa30Rule050101Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG, 
+                RemarkMessageStore.CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG, 
                 HtmlElementStore.TABLE_ELEMENT, 
                 1);
         

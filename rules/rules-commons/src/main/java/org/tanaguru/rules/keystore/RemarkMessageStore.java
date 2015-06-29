@@ -173,28 +173,41 @@ public final class RemarkMessageStore {
     public static final String CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG = 
             "CheckNatureOfTableWithoutSummaryAttribute";
     public static final String CAPTION_MISSING_MSG = "CaptionMissing";
+    public static final String CAPTION_MISSING_ON_COMPLEX_TABLE_MSG = "CaptionMissingOnComplexTable";
     public static final String CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG = 
             "CheckNatureOfTableWithoutCaptionChildElement";
+    public static final String CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG = 
+            "CheckTableWithoutCaptionChildElementIsNotComplex";
     public static final String CHECK_NATURE_OF_TABLE_WITH_CAPTION_MSG = 
             "CheckNatureOfTableWithCaptionChildElement";
+    public static final String CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG = 
+            "CheckTableWithCaptionChildElementIsComplex";
     public static final String NOT_EMPTY_SUMMARY_MSG =
             "NotEmptySummaryForPresentationTable";
     public static final String NOT_PERTINENT_SUMMARY_MSG =
             "NotPertinentSummaryForDataTable";
     public static final String NOT_PERTINENT_CAPTION_MSG =
             "NotPertinentCaptionForDataTable";
+    public static final String NOT_PERTINENT_CAPTION_FOR_COMPLEX_TABLE_MSG =
+            "NotPertinentCaptionForComplexTable";
     public static final String CHECK_SUMMARY_PERTINENCE_FOR_DATA_TABLE_MSG =
             "CheckSummaryPertinenceForDataTable";
     public static final String CHECK_CAPTION_PERTINENCE_FOR_DATA_TABLE_MSG =
             "CheckCaptionPertinenceForDataTable";
+    public static final String CHECK_CAPTION_PERTINENCE_FOR_COMPLEX_TABLE_MSG =
+            "CheckCaptionPertinenceForComplexTable";
     public static final String CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_SUMMARY_MSG =
             "CheckNatureOfTableForNotPertinentSummary";
     public static final String CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_CAPTION_MSG =
             "CheckNatureOfTableForNotPertinentCaption";
+    public static final String CHECK_TABLE_IS_COMPLEX_FOR_NOT_PERTINENT_CAPTION_MSG =
+            "CheckTableIsComplexForNotPertinentCaption";
     public static final String CHECK_NATURE_OF_TABLE_AND_SUMMARY_PERTINENCE_MSG =
             "CheckNatureOfTableAndSummaryPertinence";
     public static final String CHECK_NATURE_OF_TABLE_AND_CAPTION_PERTINENCE_MSG =
             "CheckNatureOfTableAndCaptionPertinence";
+    public static final String CHECK_TABLE_IS_COMPLEX_AND_CAPTION_PERTINENCE_MSG =
+            "CheckTableIsComplexAndCaptionPertinence";
     public static final String CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG =
             "CheckNatureOfTableAndLinearisedContent";
     public static final String CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG =
@@ -211,6 +224,10 @@ public final class RemarkMessageStore {
             "PresentationTableWithForbiddenMarkup";
     public static final String PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG =
             "PresentationTableWithoutAriaMarkup";
+    public static final String CHECK_TABLE_IS_PRESENTATION_WITH_ROLE_ARIA_MSG =
+            "CheckTableIsPresentationWithRoleAria";
+    public static final String CHECK_TABLE_IS_NOT_PRESENTATION_WITHOUT_ROLE_ARIA_MSG =
+            "CheckTableIsNotPresentationWithoutRoleAria";
     public static final String CHECK_TABLE_IS_DATA_TABLE_MSG =
             "CheckTableIsDataTable";
     public static final String CHECK_TABLE_IS_PRESENTATION_TABLE_MSG =

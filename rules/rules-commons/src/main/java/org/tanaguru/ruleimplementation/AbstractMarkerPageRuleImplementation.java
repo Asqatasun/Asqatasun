@@ -21,6 +21,7 @@ package org.tanaguru.ruleimplementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import javax.annotation.Nonnull;
 import org.apache.commons.collections.CollectionUtils;
@@ -90,13 +91,13 @@ public abstract class AbstractMarkerPageRuleImplementation
     /**
      * The collection of marker that enable to identify the targeted elements
      */
-    private Collection<String> markerList;
+    private final Collection<String> markerList = new HashSet<>();
 
     /**
      * The collection of marker that enable to identify elements of the same
      * type but with another nature.
      */
-    private Collection<String> inverseMarkerList;
+    private final Collection<String> inverseMarkerList = new HashSet<>();
 
     /**
      * The elementChecker used by the rule for marker elements
@@ -232,16 +233,14 @@ public abstract class AbstractMarkerPageRuleImplementation
      * @param sspHandler
      */
     protected void extractMarkerListFromAuditParameter(SSPHandler sspHandler) {
-        boolean markerFound = false;
-        boolean inverseMarkerFound = false;
+
         for (Parameter parameter : sspHandler.getSSP().getAudit().getParameterSet()) {
             String paramElCode = parameter.getParameterElement().getParameterElementCode();
             for (String markerCode : markerCodes) {
                 if (StringUtils.equalsIgnoreCase(paramElCode, markerCode)) {
                     String markerTab = parameter.getValue();
                     if (StringUtils.isNotEmpty(markerTab)) {
-                        markerList = new ArrayList<>();
-                        inverseMarkerFound = initMarkerList(markerTab, markerList);
+                        addMarkersToList(markerTab, markerList);
                     }
                 }
             }
@@ -249,13 +248,9 @@ public abstract class AbstractMarkerPageRuleImplementation
                 if (StringUtils.equalsIgnoreCase(paramElCode, inverseMarkerCode)) {
                     String markerTab = parameter.getValue();
                     if (StringUtils.isNotEmpty(markerTab)) {
-                        inverseMarkerList = new ArrayList<>();
-                        inverseMarkerFound = initMarkerList(markerTab, inverseMarkerList);
+                        addMarkersToList(markerTab, inverseMarkerList);
                     }
                 }
-            }
-            if (inverseMarkerFound && markerFound) {
-                break;
             }
         }
     }
@@ -328,14 +323,12 @@ public abstract class AbstractMarkerPageRuleImplementation
      * by the user
      *
      * @param parameterValue
-     * @param markerList
-     * @return whether the marker list is correctly initialised
+     * @param markers
      */
-    private boolean initMarkerList(String parameters, Collection<String> markerList) {
+    private void addMarkersToList(String parameters, Collection<String> markers) {
         for (String markerValue : parameters.split(";")) {
-            markerList.add(markerValue.trim());
+            markers.add(markerValue.trim());
         }
-        return true;
     }
 
 }

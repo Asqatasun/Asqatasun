@@ -12,13 +12,16 @@
                 <code>table</code>) ayant un résumé, celui-ci est-il pertinent ? 
             </div> 
             <div class="testcase"> 
-                <table class="class-data-table" summary="Summary of data table"> 
+                <table class="class-complex-table"> 
+                  <caption>Caption of complex table</caption>
                 </table> 
                 <table id="id-presentation-table" summary=""> 
                 </table> 
             </div> 
             <div class="test-explanation">
-                 NMI : A data table identified by marker is present on the page. The pertinence of its summary attribute cannot be determined. The other table is identified as a presentation table, it is out of scope. 
+                 NMI : A complex table identified by marker is present on the page. 
+                 The pertinence of its caption attribute cannot be determined. <br/>
+                 The other table is identified as a presentation table, it is out of scope. 
             </div> 
         </div>   
     </body>

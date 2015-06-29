@@ -12,17 +12,28 @@
                 <code>table</code>) ayant un résumé, celui-ci est-il pertinent ? 
             </div> 
             <div class="testcase"> 
-                <table id="id-data-table" summary="       "> 
+                <table id="id-complex-table"> 
+                  <caption>       </caption>
                 </table> 
-                <table id="id-presentation-table" summary="       "> 
+                <table id="id-presentation-table"> 
+                  <caption>       </caption>
                 </table> 
-                <table summary="Summary of table without marker"> 
+                <table id="id-data-table"> 
+                  <caption>       </caption>
                 </table> 
-                <table summary="$$##&apos;&apos;&apos;&apos;"> 
+                <table> 
+                  <caption>Caption of table without marker</caption>
+                </table> 
+                <table> 
+                  <caption>$$##&apos;&apos;&apos;&apos;</caption>
                 </table> 
             </div> 
             <div class="test-explanation">
-                 Failed : A table identified as data table by marker has an empty summary. The second table with an empty summary is identified as presentation table by marker. It is out of scope The third is not identified as identified as data table. Its summary needs to be checked. The fourth table is not identified as data table and its summary is not pertinent. 
+                 Failed : A table identified as complex table by marker has an empty caption. <br/>
+                 The second table with an empty caption is identified as presentation table by marker. It is out of scope.<br/>
+                 The third table with an empty caption is identified as data table by marker. It is out of scope.<br/>
+                 The fourth is not identified as complex table. Its caption needs to be checked. <br/>
+                 The fifth table is not identified as complex table and its caption is not pertinent. 
             </div> 
         </div>   
     </body>

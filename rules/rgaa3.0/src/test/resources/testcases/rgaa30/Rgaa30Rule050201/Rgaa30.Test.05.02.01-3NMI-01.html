@@ -12,11 +12,12 @@
                 <code>table</code>) ayant un résumé, celui-ci est-il pertinent ? 
             </div> 
             <div class="testcase"> 
-                <table summary="Summary of not identified table"> 
+                <table> 
+                  <caption>Caption of not identified table</caption>
                 </table> 
             </div> 
             <div class="test-explanation">
-                 NMI : A table with summary attribute is found. The pertinence of the summary attribute cannot be deduced 
+                 NMI : A table with a caption child tag is found. The pertinence of the caption has to be checked manually
             </div> 
         </div>   
     </body>

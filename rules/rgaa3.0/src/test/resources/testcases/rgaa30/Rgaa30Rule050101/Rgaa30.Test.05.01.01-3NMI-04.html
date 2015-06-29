@@ -13,7 +13,8 @@
                 <code>caption</code> ? 
             </div> 
             <div class="testcase"> 
-                <table id="id-data-table" summary="id data table summary"> 
+                <table id="id-complex-table"> 
+                    <caption>id complex table caption</caption>
                     <tbody>
                         <tr> 
                             <th>head</th> 
@@ -39,8 +40,9 @@
                 </table> 
             </div> 
             <div class="test-explanation">
-                 NMI : One table is identified by a marker (id attribute) and contains a summary attribute. This table is valid
-                <br /> Another table is not identified by a marker and doesn&quot;t containsa summary attribute. The second table without summary is identified as presentation table. It is out of scope 
+                 NMI : One table is identified by a marker (id attribute) and contains a caption child tag. This table is valid
+                <br /> Another table is not identified by a marker and doesn&quot;t contains a caption child tag. 
+                The second table without caption is identified as presentation table. It is out of scope 
             </div> 
         </div>   
     </body>

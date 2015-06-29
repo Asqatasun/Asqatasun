@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.5.3.1 NA 02</title> 
+        <title>Rgaa30 Test.5.3.1 NMI 02</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.5.3.1 NA 02</h1> 
+            <h1>Rgaa30 Test.5.3.1 NMI 02</h1> 
             <div class="test-detail" lang="fr"> Chaque 
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> vérifie-t-il ces conditions ? 
                 <ul class="ssTests"> 
@@ -15,13 +15,12 @@
                 </ul> 
             </div> 
             <div class="testcase"> 
-                <table id="id-data-table" summary=""> 
-                </table> 
-                <table id="id-complex-table" summary=""> 
+                <table id="test-table" role="presentation"> 
                 </table> 
             </div> 
             <div class="test-explanation">
-                 NA : The page contains &lt;table&gt; tags marked as data or complex tables 
+                 NMI : A table not identified as presentation table by marker contains a role presentation attribute.
+                 The linearized understanding has to be checked manually.
             </div> 
         </div>   
     </body>

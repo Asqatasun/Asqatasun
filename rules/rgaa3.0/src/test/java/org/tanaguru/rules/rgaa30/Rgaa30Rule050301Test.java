@@ -19,8 +19,11 @@
  */
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.ProcessResult;
 import org.tanaguru.entity.audit.TestSolution;
+import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
+import static org.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
 import org.tanaguru.rules.keystore.HtmlElementStore;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 import static org.tanaguru.rules.keystore.MarkerStore.*;
@@ -48,21 +51,29 @@ public class Rgaa30Rule050301Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa30.Test.05.03.01-2Failed-A01",
+        addWebResource("Rgaa30.Test.05.03.01-2Failed-01",
                     createParameter("Rules", PRESENTATION_TABLE_MARKER, "class-presentation-table"));
-        addWebResource("Rgaa30.Test.05.03.01-3NMI-A01");
+        addWebResource("Rgaa30.Test.05.03.01-2Failed-02",
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "class-presentation-table"));
+        addWebResource("Rgaa30.Test.05.03.01-3NMI-01",
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "presentation-table"));
+        addWebResource("Rgaa30.Test.05.03.01-3NMI-02",
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "presentation-table"));
+        addWebResource("Rgaa30.Test.05.03.01-3NMI-03");
+        addWebResource("Rgaa30.Test.05.03.01-3NMI-04");
         addWebResource("Rgaa30.Test.05.03.01-4NA-01");
         addWebResource("Rgaa30.Test.05.03.01-4NA-02",
-                    createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"));
+                    createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"),
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-complex-table"));
 
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------2Failed-A01-----------------------------
+        //------------------------------2Failed-01-----------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.05.03.01-2Failed-A01");
+        ProcessResult processResult = processPageTest("Rgaa30.Test.05.03.01-2Failed-01");
         checkResultIsFailed(processResult, 1, 2);
         checkRemarkIsPresent(
                 processResult,
@@ -75,19 +86,96 @@ public class Rgaa30Rule050301Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.FAILED,
                 RemarkMessageStore.PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
-                2);
+                2,
+                new ImmutablePair(ROLE_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-01-----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.05.03.01-2Failed-02");
+        checkResultIsFailed(processResult, 1, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_LINEARISED_CONTENT_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                2,
+                new ImmutablePair(ROLE_ATTR, "heading"));
+                
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-01--------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.05.03.01-3NMI-01");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_LINEARISED_CONTENT_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                1);
                 
         //----------------------------------------------------------------------
         //------------------------------3NMI-02--------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.05.03.01-3NMI-A01");
-        checkResultIsPreQualified(processResult, 1,  1);
+        processResult = processPageTest("Rgaa30.Test.05.03.01-3NMI-02");
+        checkResultIsPreQualified(processResult, 1, 2);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
                 RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG,
                 HtmlElementStore.TABLE_ELEMENT,
                 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_TABLE_IS_PRESENTATION_WITH_ROLE_ARIA_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                2,
+                new ImmutablePair(ROLE_ATTR, "presentation"));
+                
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.05.03.01-3NMI-03");
+        checkResultIsPreQualified(processResult, 1, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_TABLE_IS_NOT_PRESENTATION_WITHOUT_ROLE_ARIA_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                2,
+                new ImmutablePair(ROLE_ATTR, ABSENT_ATTRIBUTE_VALUE));
+                
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-04---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.05.03.01-3NMI-04");
+        checkResultIsPreQualified(processResult, 1, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_TABLE_IS_NOT_PRESENTATION_WITHOUT_ROLE_ARIA_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                2,
+                new ImmutablePair(ROLE_ATTR, "heading"));
                 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
