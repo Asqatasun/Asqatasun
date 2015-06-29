@@ -1,8 +1,8 @@
 # Rule 6.1.2
+
 ## Summary
 
-This test consists in checking whether the context of each image link is
-enough explicit to understand the purpose and the target
+This test consists in checking whether the context of each image link is enough explicit to understand the purpose and the target.
 
 ## Business description
 
@@ -21,7 +21,6 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
  * L'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">intitul&eacute; de lien</a> seul permet d'en comprendre la fonction et la destination 
  * Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mContexteLien">contexte du lien</a> permet d'en comprendre la fonction et la destination 
 
-
 ### Level
 
 **A**
@@ -34,37 +33,32 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-##### **Set1 :**
+##### Set1
 
-All the `<a>` tags with a "href" attribute, with children (
-a[href]:has(*) )
+All the `<a>` tags with a `"href"` attribute, with children (a[href]:has(*) )
 
-##### **Set2 :**
+##### Set2
 
 All the elements of **Set1** without own text and with only one child of
-type img or object (img , object[type^=image],
+type `<img>`, `<object>`, or `<canvas>` (img , object[type^=image],
 object[data^=data:image], object[data$=png], object[data$=jpeg],
-object[data$=jpg],object[data$=bmp], object[data$=gif]) (assuming [the
-definition of an image link in AccessiWeb
-2.2](http://accessiweb.org/index.php/glossary-76.html#mLienImage))
+object[data$=jpg],object[data$=bmp], object[data$=gif], canvas)
 
-##### **Set3 :**
+##### Set3
 
 All the elements of **Set2** with a not empty text and without context
-(assuming [the definition of a link context in AccessiWeb
-2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
+(assuming [the definition of a link context in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#contexte-du-lien))
 
-##### **Set4 :**
+##### Set4
 
 All the elements of **Set2** with a not empty text, with a context (assuming
-[the definition of a link context in AccessiWeb
-2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
+[the definition of a link context in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#contexte-du-lien))
 
 in other words :
 
@@ -72,76 +66,55 @@ size(**Set2**) = size(**Set3**) + size(**Set4**)
 
 ### Process
 
-##### **Test1**
+##### Test1
 
-For each element of **Set3**, we check whether the link content doesn't
-belong to the text link blacklist.
+For each element of **Set3**, we check whether the link content is not pertinent (see Notes about relevancy detection)
 
-For each element returning false in Test1, raise a Message 1, raise a
-Message 2 instead
+For each element returning true in **Test1**, raise a MessageA, raise a MessageB instead
 
 ##### Test2
 
-For each element of **Set4**, we check whether the link content doesn't
-belong to the text link blacklist.
+For each element of **Set4**, we check whether the link content is not pertinent (see Notes about relevancy detection)
 
-For each element returning false in Test2, raise a Message 3, raise a
-Message 4 instead
+For each element returning true in **Test2**, raise a MessageC, raise a MessageD instead
 
-##### Test3
-
-For each element of **Set3**, we check whether the link content doesn't only
-contain non alphanumeric characters
-
-For each element returning false in Test3, raise a Message 1, raise a
-Message 2 instead
-
-##### Test4
-
-For each element of **Set4**, we check whether the link content doesn't only
-contain non alphanumeric characters
-
-For each element returning false in Test4, raise a Message 3, raise a
-Message 4 instead
-
-##### Message 1: Unexplicit Link
+##### MessageA : Unexplicit Link
 
 -   code : UnexplicitLink
 -   status: Failed
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Message 2: Check link without context pertinence
+##### MessageB : Check link without context pertinence
 
 -   code : CheckLinkWithoutContextPertinence
 -   status: Need More Info
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Message 3: Unexplicit Link With context
+##### MessageC : Unexplicit Link With context
 
 -   code : UnexplicitLinkWithContext
 -   status: Need More Info
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Message 4: Check link with context pertinence
+##### MessageD : Check link with context pertinence
 
 -   code : CheckLinkWithContextPertinence
 -   status: Need More Info
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-**Set2** is empty
+The page has no image link (**Set2** is empty)
 
 #### Failed
 
-Test1 returns false for at least one element (At least one element of
-the **Set3** has a text content which is blacklisted)
+At least one image link without context has a text content which is blacklisted or only composed of non-alphanumerical characters (**Test1** returns false for at least one element)
 
 #### Pre-qualified
 
@@ -149,5 +122,11 @@ In all other cases
 
 ## Notes
 
-We assume here that the image links with only one child of type img or
-object
+We assume here that the image links have only one child of type `<img>`, `<object>` or `<canvas>`
+
+**Definition of not-pertinent link title :**
+
+A link title is seen as not-pertinent in the following cases :
+
+-   the link title is blacklisted (regarding the LinkTextBlacklist nomenclature)
+-   the link only contains not alphanumerics characters

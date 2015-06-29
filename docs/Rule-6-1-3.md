@@ -1,8 +1,8 @@
 # Rule 6.1.3
+
 ## Summary
 
-This test consists in checking whether the context of each clickable
-area is enough explicit to understand the purpose and the target
+This test consists in checking whether the text of each clickable area is enough explicit to understand the purpose and the target.
 
 ## Business description
 
@@ -34,30 +34,25 @@ Chaque lien doublant une <a href="http://references.modernisation.gouv.fr/refere
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-##### Set1 :
+##### Set1
 
-All the `<area>` tags with a "href" attribute and a "alt attribute (
-area[href][alt] )
+All the `<area>` tags with a `"href"` attribute and a `"alt"` attribute (area[href][alt] )
 
-##### Set2 :
+##### Set2
 
-All the elements of **Set1** with a not empty text and without context
-(assuming [the definition of a link context in AccessiWeb
-2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
+All the elements of **Set1** with a not empty text and without context (assuming [the definition of a link context in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#contexte-du-lien))
 
-##### Set3 :
+##### Set3
 
-All the elements of **Set2** with a not empty text, with a context (assuming
-[the definition of a link context in AccessiWeb
-2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
+All the elements of **Set2** with a not empty text, with a context (assuming [the definition of a link context in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#contexte-du-lien))
 
-in other words :
+In other words :
 
 size(**Set1**) = size(**Set2**) + size(**Set3**)
 
@@ -65,74 +60,53 @@ size(**Set1**) = size(**Set2**) + size(**Set3**)
 
 ##### Test1
 
-For each element of **Set2**, we check whether the link content doesn't
-belong to the text link blacklist.
+For each element of **Set2**, we check whether the link content is not pertinent (see Notes about relevancy detection)
 
-For each element returning false in Test1, raise a Message1, raise a
-Message2 instead
+For each element returning true in **Test1**, raise a MessageA, raise a MessageB instead
 
 ##### Test2
 
-For each element of **Set3**, we check whether the link content doesn't
-belong to the text link blacklist.
+For each element of **Set3**, we check whether the link content is not pertinent (see Notes about relevancy detection)
 
-For each element returning false in Test2, raise a Message3, raise a
-Message4 instead
+For each element returning true in **Test2**, raise a MessageC, raise a MessageD instead
 
-##### Test3
-
-For each element of **Set2**, we check whether the link content doesn't only
-contain non alphanumeric characters
-
-For each element returning false in Test3, raise a Message1, raise a
-Message2 instead
-
-##### Test4
-
-For each element of **Set3**, we check whether the link content doesn't only
-contain non alphanumeric characters
-
-For each element returning false in Test4, raise a Message3, raise a
-Message4 instead
-
-##### Message1 : Unexplicit Link
+##### MessageA : Unexplicit Link
 
 -   code : UnexplicitLink
 -   status: Failed
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Message2 : Check link without context pertinence
+##### MessageB : Check link without context pertinence
 
 -   code : CheckLinkWithoutContextPertinence
 -   status: Need More Info
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Message3 : Unexplicit Link With context
+##### MessageC : Unexplicit Link With context
 
 -   code : UnexplicitLinkWithContext
 -   status: Need More Info
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Message4 : Check link with context pertinence
+##### MessageD : Check link with context pertinence
 
 -   code : CheckLinkWithContextPertinence
 -   status: Need More Info
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-**Set1** is empty
+The page has no clickable area (**Set1** is empty)
 
 #### Failed
 
-Test1 returns false for at least one element (At least one element of
-the **Set2** has a text content which is blacklisted)
+At least one clickable area without context has a text content which is blacklisted or only composed of non-alphanumerical characters (**Test1** returns false for at least one element)
 
 #### Pre-qualified
 
@@ -140,4 +114,9 @@ In all other cases
 
 ## Notes
 
-No notes yet for that rule
+**Definition of not-pertinent link title :**
+
+A link title is seen as not-pertinent in the following cases :
+
+-   the link title is blacklisted (regarding the LinkTextBlacklist nomenclature)
+-   the link only contains not alphanumerics characters

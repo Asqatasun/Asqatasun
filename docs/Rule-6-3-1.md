@@ -1,8 +1,8 @@
 # Rule 6.3.1
+
 ## Summary
 
-This test consists in checking whether the text of a text link is enough
-explicit to understand the purpose and the target out of its context.
+This test consists in checking whether the text of each textual link is enough explicit to understand the purpose and the target out of its context.
 
 ## Business description
 
@@ -35,18 +35,17 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-##### **Set1 :**
+##### Set1
 
-All the `<a>` tags with a "href" attribute, without children (
-a[href]:not(:has(*)) )
+All the `<a>` tags with a `"href"` attribute, without children (a[href]:not(:has(*)) )
 
-##### **Set2 :**
+##### Set2
 
 All the elements of **Set1** with a not empty text.
 
@@ -54,54 +53,44 @@ All the elements of **Set1** with a not empty text.
 
 ##### Test1
 
-For each element of **Set2**, we check whether the link content doesn't
-belong to the text link blacklist.
+For each element of **Set3**, we check whether the link content doesn't belong to the text link blacklist.
 
-For each element returning false in Test1, raise a MessageA, raise a
-MessageB instead
+For each element returning false in **Test1**, raise a MessageA, raise a MessageB instead.
 
 ##### Test2
 
-For each element of **Set2**, we check whether the link content doesn't only
-contain non alphanumeric characters
+For each element of **Set3**, we check whether the link content doesn't only contain non alphanumeric characters.
 
-For each element returning false in Test2, raise a MessageA, raise a
-MessageB instead
+For each element returning false in **Test2**, raise a MessageA, raise a MessageB instead.
 
 ##### MessageA : Unexplicit Link
 
 -   code : UnexplicitLink
 -   status: Failed
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
 ##### MessageB : Check link without context pertinence
 
 -   code : CheckLinkWithoutContextPertinence
 -   status: Need More Info
--   parameter : link text, title attribute, snippet
+-   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
 ### Analysis
 
-##### **NA :**
+##### Not applicable
 
-**Set1** is empty (the page has no simple links)
+The page has no textual link (**Set1** is empty)
 
-##### **Failed :**
+##### Failed
 
-Test1 OR Test2 returns false for at least one element (At least one
-element of the **Set2** has a text content which is blacklisted or that only
-contains non alphanumerical characters)
+At least one textual link has a text content that is blacklisted or that only contains non alphanumerical characters (**Test1** OR **Test2** returns false for at least one element)
 
-##### **Pre-Qualified :
+##### Pre-Qualified
 
 In all other cases
 
 ## Notes
 
-We assume here that the links are only composed of a text. (<a
-href="http://www.tanaguru.org/target.html">` my link`</a>`)
-
-All the links that have children different from img or object, are
-considered as combined links
+We assume here that the links are only composed of a text. (<a href="http://www.tanaguru.org/target.html">` my link`</a>`)

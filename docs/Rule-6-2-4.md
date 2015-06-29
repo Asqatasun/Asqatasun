@@ -30,7 +30,7 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-techniq
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -43,10 +43,10 @@ All the `<a>` tags with a `"href"` attribute, with children (a[href]:has(*) )
 #### Set2
 
 All the elements of **Set1** with own text or with more than 1 child
-or with only one child not of type img or object (where "img ,
+or with only one child not of type `<img>`, `<canvas>`, `<svg>` or `<object>` (where "img ,
 object[type^=image], object[data^=data:image], object[data$=png],
 object[data$=jpeg], object[data$=jpg],object[data$=bmp],
-object[data$=gif]" returns empty)
+object[data$=gif], canvas, svg" returns empty)
 
 #### Set3
 
@@ -119,31 +119,26 @@ For each element returning false in **Test5**, raise a MessageD
 -   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Used nomenclature
-
--   LinkTextBlacklist
-
 ### Analysis
 
 #### Not Applicable
 
--   The **Set3** is empty
+The page has no combined link with a `"title"` attribute (**Set3** is empty)
 
 #### Failed
 
--   At least one element of the **Set3** has an empty `"title"` attribute text content which is blacklisted (**Test1** returns false for at least one element)
--   At least one element of the **Set3** has `"title"` attribute only composed of non alphanumerical characters (**Test2** returns false for at least one element)
--   At least one element of the **Set3** has a `"title"` attribute which is blacklisted (**Test3** returns false for at least one element)
--   At least one element of the **Set3** has a `"title"` attribute identical to the link text (**Test4** returns false for at least one element)
+-   At least one combined link has an empty `"title"` attribute text content which is blacklisted (**Test1** returns false for at least one element)
+-   At least one combined link has `"title"` attribute only composed of non alphanumerical characters (**Test2** returns false for at least one element)
+-   At least one combined link has a `"title"` attribute which is blacklisted (**Test3** returns false for at least one element)
+-   At least one combined link has a `"title"` attribute identical to the link text (**Test4** returns false for at least one element)
 
 #### Pre-qualified
 
--   In all other cases
+In all other cases
 
 ## Notes
 
-All the links that have children different from img or object, are
-considered as combined links.
+All the links that have children different from `<img>`, `<canvas>`, `<svg>` or `<object>`, are considered as combined links.
 
 examples :
 
@@ -152,9 +147,11 @@ examples :
 -   `<a href="/target.html">` `<p>`my link`</p>``</a>`
 -   `<a href="/target.html">` my `<p>` link`</p>``</a>`
 
-A link title is regarded as not-pertinent in the following cases :
+2. **Definition of not-pertinent link title attribute :**
 
--   the link title is empty
--   the link title is identical to the link text
--   the link only contains not alphanumerics characters
+A link `"title"` attribute is regarded as not-pertinent in the following cases :
 
+-   the link `"title"` attribute is empty
+-   the link `"title"` attribute is identical to the link text
+-   the link `"title"` attribute is blacklisted (regarding the **LinkTextBlacklist** nomenclature)
+-   the link `"title"` attribute only contains not alphanumerics characters

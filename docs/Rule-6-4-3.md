@@ -1,8 +1,8 @@
 # Rule 6.4.3
+
 ## Summary
 
-This test consists in checking whether each indentical clickable area
-have the same purpose and target
+This test consists in checking whether each indentical clickable area have the same purpose and target
 
 ## Business description
 
@@ -30,74 +30,73 @@ Pour chaque page web, chaque <a href="http://references.modernisation.gouv.fr/re
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-**Set1** : All the clickable area (see [the definition of a clickable
-area](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mZoneCliquable))
-with a "href" attribute, without "title" attribute, without context
-(assuming [the definition of a link context in AccessiWeb
-2.1](http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mContexteLien))
-and with an identical link text.
+##### Set1
 
-**Set2** : All the clickable area with a "href" attribute, a not empty
-"title" attribute, without context and with an identical link text
-(combination of the link text and the "title" attribute text)
+All the `<area>` tags with a `"href"` attribute and a `"alt"` attribute (area[href][alt] )
 
-**Set3** : All the clickable area with a "href" attribute, with a context
-and with an identical link text (combination of the link text and the
-"title" attribute text if it exists)
+#### Set2
 
--   used nomenclature : none
+All the elements of **Set1** without `"title"` attribute and without context (assuming [the definition of a link context in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#contexte-du-lien)) and with an identical link text.
 
--   reference : none
+#### Set3
+
+All the elements of **Set1** with a not empty `"title"` attribute, without context and with an identical link text (combinaison of the link text and the `"title"` attribute text)
+
+#### Set4
+
+All the elements of **Set1** with a `"href"` attribute, with a context and with an identical link text (combinaison of the link text and the `"title"` attribute text if it exists)
 
 ### Process
 
-Test1 : We check whether all the elements of **Set1** have an identical
-"href" attribute
+#### Test1
 
-Test2 : We check whether all the elements of **Set2** have an identical
-"href" attribute
+We check whether all the elements of **Set2** have an identical `"href"` attribute.
 
-Test3 : We check whether all the elements of **Set3** have an identical
-"href" attribute
+For each element returning false in **Test1**, raise a MessageA.
 
--   used nomenclature : none
+#### Test2
 
--   reference : none
+We check whether all the elements of **Set3** have an identical `"href"` attribute.
+
+For each element returning false in **Test2**, raise a MessageA.
+
+#### Test3
+
+We check whether all the elements of **Set4** have an identical `"href"` attribute.
+
+For each element returning false in **Test3**, raise a MessageB.
+
+##### MessageA
+
+-  code : IdenticalLinkWithDifferentTarget
+-  status: Failed
+-  parameter : text, `"href"` attribute, `"title"`, computed link text, tag name, snippet
+-  present in source : yes
+
+##### MessageB
+
+-  code : SuspectedIdenticalLinkWithDifferentTarget
+-  status: Pre-Qualified
+-  parameter : text, `"href"` attribute, `"title"`, computed link text, tag name, snippet
+-  present in source : yes
 
 ### Analysis
 
--   NA : **Set1**, **Set2** and **Set3** are empty
--   Failed :
+#### Not Applicable 
 
-1.  At least one element of the **Set1** has a "href" attribute different
-    from the others (Test1 returns false for at least one element)
-2.  At least one element of the **Set2** has a "href" attribute different
-    from the others (Test2 returns false for at least one element)
+The page has no group of clickable areas with an identical link text (**Set2**, **Set3** and **Set4** are empty)
 
--   Pre-Qualified : In all other cases
+#### Failed
 
--   Message 1:
+1.  At least one element of the **Set2** has a `"href"` attribute different from the others (**Test1** returns false for at least one element)
+2.  At least one element of the **Set3** has a `"href"` attribute different from the others (**Test2** returns false for at least one element)
 
-1.  code : IdenticalLinkWithDifferentTarget
-2.  status: Failed
-3.  case : For each element returning false in Test1 and Test2
-4.  parameter : tag name
-5.  present in source : yes
+#### Pre-Qualified
 
--   Message 2:
-
-1.  code : SuspectedIdenticalLinkWithDifferentTarget
-2.  status: Pre-Qualified
-3.  case : For each element returning true in Test3
-4.  parameter : tag name
-5.  present in source : yes
-
-## Notes
-
-No notes yet for that rule
+In all other cases

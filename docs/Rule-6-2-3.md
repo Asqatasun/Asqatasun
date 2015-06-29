@@ -31,7 +31,7 @@ pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-techniq
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -112,38 +112,35 @@ For each element returning false in **Test5**, raise a MessageD
 -   parameter : link text, `"title"` attribute, snippet
 -   present in source : yes
 
-##### Used nomenclature
-
--   LinkTextBlacklist
-
 ### Analysis
 
 #### Not Applicable
 
--   The **Set2** is empty
+The page has no clickable area (**Set2** is empty)
 
 #### Failed
 
--   At least one element of the **Set2** has an empty `"title"` attribute text content which is blacklisted (**Test1** returns false for at least one element)
--   At least one element of the **Set2** has `"title"` attribute only composed of non alphanumerical characters (**Test2** returns false for at least one element)
--   At least one element of the **Set2** has a `"title"` attribute which is blacklisted (**Test3** returns false for at least one element)
+-   At least one clickable area has an empty title attribute (**Test1** returns false for at least one element)
+-   At least one clickable area has title attribute only composed of non alphanumerical characters (**Test2** returns false for at least one element)
+-   At least one clickable area a title attribute which is blacklisted (**Test3** returns false for at least one element)
 
 #### Pre-qualified
 
--   In all other cases
+In all other cases
 
 ## Notes
 
 1.  We assume here that the textual alternative of the area corresponds
     to the link text.
 
-2.  A link title is regarded as not-pertinent in the following cases :
+2. **Definition of not-pertinent link title attribute :**
 
--   the link title is empty
--   the link only contains not alphanumerics characters
+A link title attribute is regarded as not-pertinent in the following cases :
 
-1.  Due to the "Note 1" of the [definition of a link
-    title](http://references.modernisation.gouv.fr/referentiel-technique-0#title-titre-de-lien),
-    a `"title"` attribute identical to the text link is seen as suspected
-    passed.
+-   the `"title"` attribute is empty
+-   the `"title"` attribute is blacklisted (regarding the **LinkTextBlacklist** nomenclature)
+-   the `"title"` attribute only contains not alphanumerics characters
+
+3.  Due to the "Note 1" of the [definition of a link title](http://references.modernisation.gouv.fr/referentiel-technique-0#title-titre-de-lien),
+    a `"title"` attribute identical to the text link is seen as suspected passed.
 
