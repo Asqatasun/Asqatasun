@@ -30,7 +30,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ### Decision level
 
-**decidable**
+**Decidable**
 
 ## Algorithm
 
@@ -44,7 +44,7 @@ All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute c
 
 #### Test1
 
-For each element of **Set1**, test the presence of an `"alt"` attribute. For each occurrence of false-result of Test1, raise a MessageA
+For each element of **Set1**, test the presence of an `"alt"` attribute. For each occurrence of false-result of **Test1**, raise a MessageA
 
 ##### MessageA : Missing Alt attribute
 

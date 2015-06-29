@@ -38,7 +38,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 #### Set1
 
-All the `<img>` tags with ab `"ismap"` attribute and all the `<input>` tags with a `"type"` attribute equals to "image" and an `"ismap"` attribute (css selector : `img[ismap],input[type=image][ismap]`)
+All the `<img>` tags with an `"ismap"` attribute and all the `<input>` tags with a `"type"` attribute equals to "image" and an `"ismap"` attribute (css selector : `img[ismap],input[type=image][ismap]`)
 
 ### Process
 
@@ -71,7 +71,3 @@ The page has no `<img>` tag with a `"ismap"` attribute (**Set1** is empty)
 ## Notes
 
 We only detect the elements of the **Set1** to determine whether the test is applicable
-
-
-
-

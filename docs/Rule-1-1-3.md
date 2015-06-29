@@ -30,7 +30,7 @@ Chaque bouton de formulaire (balise `input` avec l'attribut `type="image"`) a-t-
 
 ### Decision level
 
-**decidable**
+**Decidable**
 
 ## Algorithm
 
@@ -46,7 +46,7 @@ All the `<input>` tags with a `"type"` attribute equals to "image" (css selector
 
 For each element of **Set1**, test the presence of an `"alt"` attribute.
 
-For each occurrence of false-result of Test1, raise a MessageA
+For each occurrence of false-result of **Test1**, raise a MessageA
 
 ##### MessageA 
 
