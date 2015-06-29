@@ -45,7 +45,7 @@ Chaque image bitmap (balise `canvas`) ayant une description d&eacute;taill&eacut
 
 #### Set1
 
-All the `<canvas>` tags of the page not within a link and not identified as captcha (see Notes about captcha detection)  (canvas:not(a canvas))
+All the `<canvas>` tags of the page not within a link and not identified as captcha (see Notes about captcha detection)  (css selector : canvas:not(a canvas))
 
 #### Set2
 

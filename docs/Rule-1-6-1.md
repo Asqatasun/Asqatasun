@@ -2,9 +2,9 @@
 
 ## Summary
 
-This test consists in detecting informative image.
+This test consists in detecting informative images and thus defining the applicability of the test.
 
-Human check will be then needed to determine whether these detected elements have a detailed description if necessary.
+Human check will be then needed to determine whether the detected elements provide a detailed description if needed.
 
 ## Business description
 
@@ -42,9 +42,9 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ### Selection
 
-#### Set1
+##### Set1
 
-All the `<img>` tags of the page not within a link (css selector : `img:not(a img)`)
+All the `<img>` tags of the page not within a link and not identified as captcha (see Notes about captcha detection) (css selector : `img:not(a img)`)
 
 #### Set2
 
@@ -58,20 +58,20 @@ All the elements of **Set1** identified neither as informative image, nor as dec
 
 #### Test1
 
-For each element of **Set2**, raise a MessageA
+For each element of **Set2**, raise a MessageA.
 
-##### MessageA 
+#### Test2
+
+For each element of **Set3**, raise a MessageB.
+
+##### MessageA : Check detailed description definition of informative images
 
 -    code : **CheckLongdescDefinitionOfInformativeImage** 
 -    status: Pre-Qualified
 -    parameter : `"longdesc"` attribute, `"alt"` attribute, `"src"` attribute, tag name, snippet
 -    present in source : yes
 
-#### Test2
-
-For each element of **Set3**, raise a MessageB
-
-##### MessageB 
+##### MessageB : Check nature of image and detailed description definition
 
 -    code : **CheckNatureOfImageAndLongdescDefinition** 
 -    status: Pre-Qualified
@@ -80,22 +80,35 @@ For each element of **Set3**, raise a MessageB
 
 ### Analysis
 
-#### Not Applicable:
+#### Not Applicable 
 
-The page has no `<img>` tags or only image links or only images identified as decorative by marker  (**Set1** is empty, or **Set2** AND **Set3** are empty)
+The page has no image (**Set1** is empty)
 
-#### Pre-qualified:
+#### Pre-Qualified
 
-The page has at least one `<img>` tag that is not an image link and not identified as decorative by marker (**Set2** or **Set3** is not empty)
+In all other cases
 
 ## Notes
 
+### Markers 
+
 **Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
 
-**Decorative images** markers are set through the *DECORATIVE_IMAGE_MARKER* parameter.
+**Decorative images** markers are set through the **DECORATIVE_IMAGE_MARKER** parameter.
 
 The value(s) passed as marker(s) will be checked against the following attributes:
 
 - `class`
 - `id`
 - `role`
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

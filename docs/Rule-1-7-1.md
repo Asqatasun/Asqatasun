@@ -49,7 +49,7 @@ All the `<img>` tags of the page not within a link and not identified as captcha
 
 ##### Set2
 
-All the `<input>` tags with the "type" attribute equals to "image" and not identified as captcha (see Notes about captcha detection) (css selector : `img:not(a img)`)
+All the `<input>` tags with the "type" attribute equals to "image" and not identified as captcha (see Notes about captcha detection) (css selector : `input[type=image]`)
 
 #### Set3
 

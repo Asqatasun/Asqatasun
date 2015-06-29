@@ -23,7 +23,6 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
  *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> adjacente &agrave; l'image objet est pertinente 
  *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> via un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienAdj">lien adjacent</a> est pertinente 
 
-
 ### Level
 
 **A**
@@ -44,7 +43,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 #### Set1
 
-All the `<object>` tags with a `"type"` attribute that starts with "image/..." not identified as captcha (see Notes about captcha detection)  (object[type^=image])
+All the `<object>` tags with a `"type"` attribute that starts with "image/...", not within a link and not identified as captcha (see Notes about captcha detection)  (css selector : object[type^=image]:not(a object))
 
 #### Set2
 
