@@ -40,7 +40,7 @@ Pour chaque image vectorielle (balise `svg`) ayant une description d&eacute;tail
 
 #### Set1
 
-All the `<svg>` tags of the page not within a link, not identified as captcha and with a not `<desc>` child tag (see Notes about captcha detection) (svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$)))
+All the `<svg>` tags of the page not within a link, not identified as captcha and with a not empty `<desc>` child tag (see Notes about captcha detection) (svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$)))
 
 #### Set2
 
