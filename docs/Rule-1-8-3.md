@@ -32,7 +32,7 @@ Pour chaque balise `form`, chacun de ses boutons "image texte" (balise `input` a
 
 ### Decision level
 
-**semidecidable**
+**Semi-decidable**
 
 ## Algorithm
 

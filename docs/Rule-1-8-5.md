@@ -32,7 +32,7 @@ Chaque image texte embarqu&eacute;e (balise `embed` avec l'attribut `type="image
 
 ### Decision level
 
-**semidecidable**
+**Semi-decidable**
 
 ## Algorithm
 

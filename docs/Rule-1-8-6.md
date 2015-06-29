@@ -32,7 +32,7 @@ Chaque image texte bitmap (balise `canvas`) porteuse d'information, en l'absence
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 

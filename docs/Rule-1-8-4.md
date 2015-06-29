@@ -32,7 +32,7 @@ Chaque image texte objet (balise `object` avec l'attribut `type="image/..."`) po
 
 ### Decision level
 
-**Decidable**
+**Semi-decidable**
 
 ## Algorithm
 

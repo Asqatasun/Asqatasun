@@ -32,7 +32,7 @@ Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-techniq
 
 ### Decision level
 
-**semidecidable**
+**Semi-decidable**
 
 ## Algorithm
 
