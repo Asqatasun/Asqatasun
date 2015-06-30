@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
@@ -13,12 +13,13 @@
                 <code>&lt;/canvas&gt;</code> doit être dépourvu de contenus textuels, cette règle est-elle respectée ? 
             </div> 
             <div class="testcase"> 
-                <canvas>
-                    Textual content of canvas
+                <canvas width="500" height="500">
+                </canvas>
+                <canvas width="500" height="500">
                 </canvas>
             </div> 
             <div class="test-explanation">
-                 NMI : the canvas is not identified by marker and has a not empty textual content
+                 NMI : One canvas is found on the page and is not identified by marker. 
             </div> 
         </div>  
     </body>

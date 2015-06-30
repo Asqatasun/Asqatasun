@@ -55,9 +55,23 @@ public class Rgaa30Rule010205Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.1.2.5-1Passed-01",
-                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-1Passed-02",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-1Passed-03",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "role-decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-1Passed-04",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image;class-decorative-image;role-decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-1Passed-05",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image;class-decorative-image"));
         addWebResource("Rgaa30.Test.1.2.5-2Failed-01",
-                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-2Failed-02",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-2Failed-03",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "role-decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-2Failed-04",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-image;class-decorative-image;role-decorative-image"));
         addWebResource("Rgaa30.Test.1.2.5-3NMI-01");
         addWebResource("Rgaa30.Test.1.2.5-3NMI-02");
         addWebResource("Rgaa30.Test.1.2.5-4NA-01");
@@ -71,6 +85,26 @@ public class Rgaa30Rule010205Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
         checkResultIsPassed(processPageTest("Rgaa30.Test.1.2.5-1Passed-01"), 1);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.1.2.5-1Passed-02"), 1);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-03------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.1.2.5-1Passed-03"), 1);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-04------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.1.2.5-1Passed-04"), 3);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-05------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa30.Test.1.2.5-1Passed-05"), 2);
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
@@ -83,13 +117,72 @@ public class Rgaa30Rule010205Test extends Rgaa30RuleImplementationTestCase {
                 DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
                 HtmlElementStore.CANVAS_ELEMENT,
                 1,
-                new ImmutablePair(TEXT_ELEMENT2, "Textual content of decorative canvas"));
+                new ImmutablePair(TEXT_ELEMENT2, "Un text"));
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.2.5-2Failed-02");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Un text"));
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.2.5-2Failed-03");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Un text"));
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.2.5-2Failed-04");
+        checkResultIsFailed(processResult, 3, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Un text"));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa30.Test.1.2.5-3NMI-01");
-        checkResultIsPreQualified(processResult, 1, 1);
+        checkResultIsPreQualified(processResult, 2, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Un text"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                CHECK_ELEMENT_WITH_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                2,
+                new ImmutablePair(TEXT_ELEMENT2, ""));
+
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.2.5-3NMI-02");
+        checkResultIsPreQualified(processResult, 2, 2);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
@@ -97,19 +190,13 @@ public class Rgaa30Rule010205Test extends Rgaa30RuleImplementationTestCase {
                 HtmlElementStore.CANVAS_ELEMENT,
                 1,
                 new ImmutablePair(TEXT_ELEMENT2, ""));
-
-        //----------------------------------------------------------------------
-        //------------------------------3NMI-02---------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.1.2.5-3NMI-02");
-        checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                CHECK_ELEMENT_WITH_EMPTY_ALT_MSG,
                 HtmlElementStore.CANVAS_ELEMENT,
-                1,
-                new ImmutablePair(TEXT_ELEMENT2, "Textual content of canvas"));
+                2,
+                new ImmutablePair(TEXT_ELEMENT2, ""));
 
 
         //----------------------------------------------------------------------
