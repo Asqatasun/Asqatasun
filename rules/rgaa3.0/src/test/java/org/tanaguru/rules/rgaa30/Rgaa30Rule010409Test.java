@@ -19,9 +19,11 @@
  */
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.entity.audit.ProcessResult;
 import static org.tanaguru.rules.keystore.HtmlElementStore.CANVAS_ELEMENT;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
@@ -66,7 +68,8 @@ public class Rgaa30Rule010409Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO,
                 CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG,
                 CANVAS_ELEMENT,
-                1);
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Un texte"));
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------

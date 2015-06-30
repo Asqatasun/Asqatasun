@@ -25,6 +25,7 @@ import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.tanaguru.rules.elementselector.CaptchaElementSelector;
 import org.tanaguru.rules.elementselector.SimpleElementSelector;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
 
 /**
@@ -46,7 +47,9 @@ public class Rgaa30Rule010408 extends AbstractDetectionPageRuleImplementation {
                 // solution when at least one element is found
                 new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_CAPTCHA_ALTERNATIVE_MSG),
                 // solution when no element is found
-                new ImmutablePair(TestSolution.NOT_APPLICABLE,"")
+                new ImmutablePair(TestSolution.NOT_APPLICABLE,""),
+                // evidence element
+                TEXT_ELEMENT2
             );
     }
 
