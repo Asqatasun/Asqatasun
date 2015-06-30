@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1.3.1 Failed 10</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1.3.1 Failed 10</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgInfo">image porteuse d&apos;information</a> (balise 
+                <code>img</code>) ayant un attribut 
+                <code>alt</code> vérifie-t-elle ces conditions (hors 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-3" title="Cas particuliers pour le critère 1.3">cas particuliers</a>) ? 
+                <ul class="ssTests"> 
+                    <li>Le contenu de l&apos;attribut <code>alt</code> est pertinent</li> 
+                    <li>S&apos;il est présent, le contenu de l&apos;attribut <code>title</code> est identique au contenu de l&apos;attribut <code>alt</code></li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <img id="id-informative-image" src="mock-image.jpg" alt="Alternative" title="Title"/> 
+            </div> 
+            <div class="test-explanation">
+                 Failed : At least one image has a title attribute not identical to the alt attribute. This image is identified as informative by marker but the alt attribute is empty 
+            </div> 
+        </div>   
+    </body>
+</html>

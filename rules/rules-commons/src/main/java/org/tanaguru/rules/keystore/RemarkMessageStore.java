@@ -67,6 +67,7 @@ public final class RemarkMessageStore {
     public static final String CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG =
             "CheckNatureOfElementWithEmptyTitleAttribute";
     public static final String NOT_PERTINENT_ALT_MSG = "NotPertinentAlt";
+    public static final String TITLE_NOT_IDENTICAL_TO_ALT_MSG = "TitleNotIdenticalToAlt";
     public static final String CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG =
             "CheckPertinenceOfAltAttributeOfInformativeImage";
     public static final String CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG = 
