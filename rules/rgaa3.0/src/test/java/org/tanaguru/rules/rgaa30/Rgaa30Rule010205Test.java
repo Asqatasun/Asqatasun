@@ -19,8 +19,16 @@
  */
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.entity.audit.ProcessResult;
+import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
@@ -46,10 +54,15 @@ public class Rgaa30Rule010205Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa30.Test.1.2.5-1Passed-01");
-//        addWebResource("Rgaa30.Test.1.2.5-2Failed-01");
+        addWebResource("Rgaa30.Test.1.2.5-1Passed-01",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
+        addWebResource("Rgaa30.Test.1.2.5-2Failed-01",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
         addWebResource("Rgaa30.Test.1.2.5-3NMI-01");
-//        addWebResource("Rgaa30.Test.1.2.5-4NA-01");
+        addWebResource("Rgaa30.Test.1.2.5-3NMI-02");
+        addWebResource("Rgaa30.Test.1.2.5-4NA-01");
+        addWebResource("Rgaa30.Test.1.2.5-4NA-02",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
     }
 
     @Override
@@ -57,50 +70,57 @@ public class Rgaa30Rule010205Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa30.Test.1.2.5-1Passed-01"), 1);
+        checkResultIsPassed(processPageTest("Rgaa30.Test.1.2.5-1Passed-01"), 1);
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa30.Test.1.2.5-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        ProcessResult processResult = processPageTest("Rgaa30.Test.1.2.5-2Failed-01");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Textual content of decorative canvas"));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.1.2.5-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        processResult = processPageTest("Rgaa30.Test.1.2.5-3NMI-01");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                CHECK_ELEMENT_WITH_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, ""));
+
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.2.5-3NMI-02");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG,
+                HtmlElementStore.CANVAS_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Textual content of canvas"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.2.5-4NA-01"));
-    }
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.2.5-4NA-01"));
 
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa30.Test.1.2.5-3NMI-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.2.5-4NA-02"));
     }
 
 }

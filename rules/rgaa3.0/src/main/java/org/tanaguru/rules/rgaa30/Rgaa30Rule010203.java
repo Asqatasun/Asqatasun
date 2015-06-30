@@ -20,6 +20,7 @@
 
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
 import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
@@ -35,10 +36,10 @@ import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_
 import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
- * Implementation of the rule 1.2.4 of the referential Rgaa 3.0.
+ * Implementation of the rule 1.2.3 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-2-4">the rule 1.2.4 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-4"> 1.2.4 rule specification</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-2-3">the rule 1.2.3 design page.</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-3"> 1.2.3 rule specification</a>
  *
  */
 public class Rgaa30Rule010203 extends AbstractMarkerPageRuleImplementation {
@@ -61,13 +62,9 @@ public class Rgaa30Rule010203 extends AbstractMarkerPageRuleImplementation {
                     // the text element builder
                     new SimpleTextElementBuilder(),
                     // solution when text is empty
-                    TestSolution.PASSED, 
+                    new ImmutablePair(TestSolution.PASSED, ""), 
                     // solution when text is not empty
-                    TestSolution.FAILED, 
-                    // no message created when a decorative object with an empty text is found
-                    null, 
-                    // message created when a decorative object with a not empty text is found
-                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
+                    new ImmutablePair(TestSolution.FAILED, DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG),
                     // evidence elements
                     TEXT_ELEMENT2,
                     DATA_ATTR),
@@ -77,11 +74,9 @@ public class Rgaa30Rule010203 extends AbstractMarkerPageRuleImplementation {
                     // the text element builder
                     new SimpleTextElementBuilder(),
                     // solution when text is empty
-                    TestSolution.NEED_MORE_INFO, 
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_ELEMENT_WITH_EMPTY_ALT_MSG),
                     // solution when text is notempty
-                    TestSolution.NEED_MORE_INFO, 
-                    CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, 
-                    CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG),
                     // evidence elements
                     TEXT_ELEMENT2,
                     DATA_ATTR)
