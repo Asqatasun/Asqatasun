@@ -22,7 +22,6 @@
 
 package org.tanaguru.rules.elementchecker.text;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.tanaguru.entity.audit.TestSolution;
@@ -145,12 +144,8 @@ public class TextLengthChecker extends ElementCheckerImpl {
             return TestSolution.NOT_APPLICABLE;
         }
         if (elementText.length() > lengthLimit) {
-            if (StringUtils.isNotBlank(textTooLongMessageCode)) {
-                addSourceCodeRemark(
-                    getFailureSolution(), 
-                    element, 
-                    textTooLongMessageCode);
-            }
+            
+            addSourceCodeRemark(getFailureSolution(), element, textTooLongMessageCode);
             return getFailureSolution();
         }
         return getSuccessSolution();

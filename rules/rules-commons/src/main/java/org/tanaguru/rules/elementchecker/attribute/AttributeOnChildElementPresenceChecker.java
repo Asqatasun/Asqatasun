@@ -95,26 +95,12 @@ public class AttributeOnChildElementPresenceChecker extends ElementCheckerImpl {
             if (!el.getElementsByAttribute(attributeName).isEmpty()) {
 
                 testSolution = setTestSolution(testSolution, getSuccessSolution());
-                
-                if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-                    
-                    addSourceCodeRemark(
-                            getSuccessSolution(),
-                            el, 
-                            getSuccessMsgCode());
-                }
+                addSourceCodeRemark(getSuccessSolution(),el, getSuccessMsgCode());
                 
             } else {
                 
                 testSolution = setTestSolution(testSolution, getFailureSolution());
-                
-                if (StringUtils.isNotBlank(getFailureMsgCode())) {
-                    
-                    addSourceCodeRemark(
-                            getFailureSolution(),
-                            el, 
-                            getFailureMsgCode());
-                }
+                addSourceCodeRemark(getFailureSolution(),el, getFailureMsgCode());
 
             }
         }

@@ -27,7 +27,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -188,12 +187,10 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
             // we create a message and override the final result
             Map.Entry<TestSolution, String> entry = 
                     checkMessageFromSolutionMap.get(testSolution).entrySet().iterator().next();
-            if (StringUtils.isNotBlank(entry.getValue())) {
-                addSourceCodeRemark(
+            addSourceCodeRemark(
                     entry.getKey(),
                     (Element)elementHandler.get().iterator().next(),
                     entry.getValue());
-            }
             return entry.getKey();
         } else {
             return testSolution;

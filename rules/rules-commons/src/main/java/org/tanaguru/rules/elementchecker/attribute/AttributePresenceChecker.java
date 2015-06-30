@@ -22,7 +22,6 @@
 
 package org.tanaguru.rules.elementchecker.attribute;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
@@ -168,18 +167,11 @@ public class AttributePresenceChecker extends ElementCheckerImpl {
             if (!el.hasAttr(attributeName)) {
 
                 testSolution = setTestSolution(testSolution, getFailureSolution());
-
-                if (StringUtils.isNotBlank(getFailureMsgCode())) {
-                    createSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
-
-                }
+                createSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
 
             } else {
                 testSolution = setTestSolution(testSolution, getSuccessSolution());
-
-                if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-                    createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
-                }
+                createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
 
             }
         }

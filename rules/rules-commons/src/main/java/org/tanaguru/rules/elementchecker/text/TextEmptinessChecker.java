@@ -138,23 +138,11 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
                 testSolution = setTestSolution(testSolution, 
                                                TestSolution.NOT_APPLICABLE);
             } else if (isElementEmpty(textElement)) {
-                testSolution = setTestSolution(testSolution, 
-                                               getFailureSolution());
-                if (StringUtils.isNotBlank(getFailureMsgCode())) {
-                    addSourceCodeRemark(
-                            getFailureSolution(), 
-                            el, 
-                            getFailureMsgCode());
-                }
+                testSolution = setTestSolution(testSolution, getFailureSolution());
+                addSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
             } else {
-                testSolution = setTestSolution(testSolution, 
-                                               getSuccessSolution());
-                if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-                    addSourceCodeRemark(
-                            getSuccessSolution(), 
-                            el, 
-                            getSuccessMsgCode());
-                }
+                testSolution = setTestSolution(testSolution, getSuccessSolution());
+                addSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
             }
         }
         testSolutionHandler.addTestSolution(testSolution);

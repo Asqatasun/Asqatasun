@@ -98,12 +98,7 @@ public class IdUnicityChecker extends ElementCheckerImpl {
             if (el.hasAttr(ID_ATTR) && StringUtils.isNotBlank(el.id()) && 
                 getIdPresenceCounter(sspHandler, el.id()) > 1) {
                 testSolution = getFailureSolution();
-                if (StringUtils.isNotBlank(getFailureMsgCode())) {
-                    addSourceCodeRemark(
-                            getFailureSolution(), 
-                            el, 
-                            getFailureMsgCode());
-                }
+                addSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
             }
         }
         

@@ -24,7 +24,6 @@ package org.tanaguru.rules.elementchecker.element;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
@@ -175,28 +174,14 @@ public class ChildElementPresenceChecker extends ElementCheckerImpl {
         for (Element el : elements) {
 
             if (el.getElementsByTag(elementToTest).size()>=minimumNumberOfChildRequired) {
-
-                testSolution = setTestSolution(testSolution, getSuccessSolution());
                 
-                if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-                    
-                    addSourceCodeRemark(
-                            getSuccessSolution(),
-                            el, 
-                            getSuccessMsgCode());
-                }
+                testSolution = setTestSolution(testSolution, getSuccessSolution());
+                addSourceCodeRemark(getSuccessSolution(),el, getSuccessMsgCode());
                 
             } else {
                 
                 testSolution = setTestSolution(testSolution, getFailureSolution());
-                
-                if (StringUtils.isNotBlank(getFailureMsgCode())) {
-                    
-                    addSourceCodeRemark(
-                            getFailureSolution(),
-                            el, 
-                            getFailureMsgCode());
-                }
+                addSourceCodeRemark(getFailureSolution(),el, getFailureMsgCode());
 
             }
         }

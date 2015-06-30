@@ -115,7 +115,8 @@ public abstract class AbstractMarkerPageRuleImplementation
     public ElementChecker getRegularElementChecker() {
         return getElementChecker();
     }
-    public void setRegularElementChecker(ElementChecker regularElementChecker) {
+    
+    public final void setRegularElementChecker(ElementChecker regularElementChecker) {
         this.setElementChecker(regularElementChecker);
     }
     
@@ -204,13 +205,13 @@ public abstract class AbstractMarkerPageRuleImplementation
     protected void check(
             SSPHandler sspHandler,
             TestSolutionHandler testSolutionHandler) {
-         if (!selectionWithMarkerHandler.isEmpty()) {
+        if (!selectionWithMarkerHandler.isEmpty()) {
             setServicesToChecker(markerElementChecker);
             markerElementChecker.check(
                     sspHandler,
                     selectionWithMarkerHandler,
                     testSolutionHandler);
-    }
+        }
         if (!selectionWithoutMarkerHandler.isEmpty()) {
             setServicesToChecker(getRegularElementChecker());
             getRegularElementChecker().check(

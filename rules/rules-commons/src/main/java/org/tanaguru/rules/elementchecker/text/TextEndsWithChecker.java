@@ -198,23 +198,13 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
         }
         for (String extension : extensions) {
             if (StringUtils.endsWithIgnoreCase(elementText, extension)) {
-                
-                if (StringUtils.isNotBlank(textEndsWithMessageCode)) {
-                    addSourceCodeRemark(
-                        getFailureSolution(),
-                        element,
-                        textEndsWithMessageCode);
-                }
+                addSourceCodeRemark(getFailureSolution(),element,textEndsWithMessageCode);
                 return getFailureSolution();
             }
         }
         if (!getSuccessSolution().equals(TestSolution.PASSED) && 
-            !getSuccessSolution().equals(TestSolution.NOT_APPLICABLE) && 
-            StringUtils.isNotBlank(textNotEndsWithMessageCode)) {
-                    addSourceCodeRemark(
-                        getSuccessSolution(),
-                        element,
-                        textNotEndsWithMessageCode);
+            !getSuccessSolution().equals(TestSolution.NOT_APPLICABLE)) {
+            addSourceCodeRemark(getSuccessSolution(),element,textNotEndsWithMessageCode);
         }
         return getSuccessSolution();
     }

@@ -183,10 +183,8 @@ public class AttributeWithValuePresenceChecker extends ElementCheckerImpl {
                     || (el.hasAttr(attributeName) && !el.attr(attributeName).equals(attributeValue))) {
 
                 testSolution = setTestSolution(testSolution, getFailureSolution());
-
-                if (StringUtils.isNotBlank(getFailureMsgCode())) {
-                    createSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
-                }
+                createSourceCodeRemark(getFailureSolution(), el, getFailureMsgCode());
+                
             } else if (StringUtils.isNotBlank(getSuccessMsgCode())) {
                 testSolution = setTestSolution(testSolution, getSuccessSolution());
 

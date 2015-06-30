@@ -21,7 +21,6 @@
  */
 package org.tanaguru.rules.elementchecker.element;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -77,23 +76,13 @@ public class ElementUnicityChecker extends ElementCheckerImpl {
 
         TestSolution checkResult = getSuccessSolution();
         if (elements.size() == 1) {
-            if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-                for (Element el : elements) {
-                    addSourceCodeRemark(
-                            getSuccessSolution(),
-                            el,
-                            getSuccessMsgCode());
-                }
+            for (Element el : elements) {
+                addSourceCodeRemark(getSuccessSolution(),el,getSuccessMsgCode());
             }
         } else {
             checkResult = getFailureSolution();
-            if (StringUtils.isNotBlank(getFailureMsgCode())) {
-                for (Element el : elements) {
-                    addSourceCodeRemark(
-                            getFailureSolution(),
-                            el,
-                            getFailureMsgCode());
-                }
+            for (Element el : elements) {
+                addSourceCodeRemark(getFailureSolution(),el,getFailureMsgCode());
             }
         }
         testSolutionHandler.addTestSolution(checkResult);

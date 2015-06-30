@@ -114,20 +114,11 @@ public class TextNotIdenticalToAttributeChecker extends ElementCheckerImpl {
              ((!strictEquality && 
                 StringUtils.contains(otherAttributeContent, elementText)))   ) {
             
-            addSourceCodeRemark(
-                getFailureSolution(),
-                element,
-                getFailureMsgCode());
-
+            addSourceCodeRemark(getFailureSolution(),element,getFailureMsgCode());
             return getFailureSolution();
             
         } else {
-            if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-                addSourceCodeRemark(
-                    getSuccessSolution(),
-                    element,
-                    getSuccessMsgCode());
-            }
+            addSourceCodeRemark(getSuccessSolution(),element,getSuccessMsgCode());
             return getSuccessSolution();
         }
     }
