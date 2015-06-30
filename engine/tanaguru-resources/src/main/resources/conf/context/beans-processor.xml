@@ -21,6 +21,9 @@
         <property name="proxyPassword">
             <value>${proxyPassword}</value>
         </property>
+        <property name="proxyExclusionUrl">
+            <value>${proxyExclusionUrl}</value>
+        </property>
         <property name="bypassCheck">
             <value>${bypassUrlCheck}</value>
         </property>
