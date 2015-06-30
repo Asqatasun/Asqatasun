@@ -35,7 +35,7 @@ Chaque image vectorielle de d&eacute;coration (balise `<svg>`) non porteuse d'in
 
 ### Decision level
 
-**Semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
@@ -43,29 +43,47 @@ Chaque image vectorielle de d&eacute;coration (balise `<svg>`) non porteuse d'in
 
 #### Set1
 
-All the `<svg>` tags of the page (css selector : `svg`) and with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"DECORATIVE_SVG_MARKER"` parameter.
-That means select all the `<svg>` tags not within an `<a>` tag when these parameters are empty.
+All the `<svg>` tags of the page, not within a link not identified as captcha (see Notes about captcha detection) (css selector : `svg:not(a svg)`) 
 
 #### Set2
 
-All the `<svg>` tags of the page (css selector : `svg`) that don't have an `id` attribute or a `class` attribute that matches one the values set by the use through the `"DECORATIVE_SVG_MARKER"` parameter or the `"INFORMATIVE_SVG_MARKER"` parameter. 
-That means select all the `<svg>` tags not within an `<a>` tag when these parameters are empty.
+All the elements of **Set1** identified as decorative image by marker usage (see Notes for details about detection through marker)
 
 #### Set3
 
-All the elements of set1 with a `"role"` attribute with value `"img"` 
+All the elements of **Set1** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
 
 #### Set4
 
-All the elements of set2 with a `"role"` attribute with value `"img"` 
+All the elements of **Set1** without a `"role"` attribute equals to  `"img"`.
 
 #### Set5
 
-All the `<title>` or  `<desc>` tags who are the children of the Set3 elements 
+All the elements of **Set1** with a not empty `<title>` or `<desc>` tag as child tag.
 
 #### Set6
 
-All the `<title>` or  `<desc>` tags who are the children of the Set4 elements 
+All the elements of **Set1** with a `"aria-label"`, `"aria-labelledby"` or  `"aria-describedby"` attribute on the element or one of its children.
+
+#### Set7
+
+All the elements of **Set1** with a `"title"` attribute.
+
+#### Set8
+
+All the elements of **Set2** with a not empty `<title>` or `<desc>` tag as child tag.
+
+#### Set9
+
+All the elements of **Set2** with a `"aria-label"`, `"aria-labelledby"` or  `"aria-describedby"` attribute on the element or one of its children.
+
+#### Set10
+
+All the elements of **Set2** with a `"title"` attribute.
+
+#### Set11
+
+All the elements of **Set2** without `"title"`, `"aria-label"`, `"aria-labelledby"`, `"aria-describedby"` attributes, without a not empty `<title>` or `<desc>` tag as child tag and with a `"role"` attribute equals to  `"img"`.
 
 ### Process
 
@@ -73,51 +91,35 @@ All the `<title>` or  `<desc>` tags who are the children of the Set4 elements
 
 ##### Test1
 
-For each element of Set1, Check the presence of the `"role"` attribute with value `"img"`.
-
-For each occurrence of false-result of Test1, raise a MessageA
+For each element of **Set4**, raise a MessageA.
 
 ##### Test2
 
-For each element of Set2, Check the presence of the `"role"` attribute with value `"img"`.
-
-For each occurrence of false-result of Test2, raise a MessageB
+For each element of **Set5**, raise a MessageB.
 
 ##### Test3 
 
-For each element of Set3 and children of Set3 elements don't have `aria-label`, `aria-describedby` or `aria-labelledby` attribute
-
-For each occurrence of false-result of Test3, raise a MessageC
+For each element of **Set6**, raise a MessageC.
 
 ##### Test4 
 
-For each element of Set4 and children of Set4 elements don't have `aria-label`, `aria-describedby` or `aria-labelledby` attribute
-
-For each occurrence of false-result of Test4, raise a MessageD
+For each element of **Set7**, raise a MessageD.
 
 ##### Test5 
 
-For each element of Set5 don't have `<title>` or `<desc>` tags or they are empty
-
-For each occurrence of false-result of Test5, raise a MessageE
+For each element of **Set8**, raise a MessageE.
 
 ##### Test6 
 
-For each element of Set6 don't have `<title>` or `<desc>` tags or they are empty
-
-For each occurrence of false-result of Test6, raise a MessageF
+For each element of **Set9**, raise a MessageF.
 
 ##### Test7 
 
-For each element of Set3 and children of Set3 elements don't have `title` attribute
-
-For each occurrence of false-result of Test7, raise a MessageG
+For each element of **Set10**, raise a MessageG.
 
 ##### Test8 
 
-Test if elements of Set4 and children of Set4 elements don't have `title` attribute
-
-For each occurrence of false-result of Test8, raise a MessageH
+For each element of **Set11**, raise a MessageH.
 
 #### Messages
 
@@ -128,10 +130,10 @@ For each occurrence of false-result of Test8, raise a MessageH
 -    parameter : tag name, Snippet
 -    present in source : yes
 
-##### MessageB : Suspected decorative svg without role img attribute 
+##### MessageB : Decorative svg with a not empty `<title>` or `<desc>` child tag
 
--    code : SuspectedDecorativeSvgWithoutRoleImgAttribute
--    status: NMI
+-    code : DecorativeSvgWithNotEmptyTitleOrDescTags
+-    status: Failed
 -    parameter : tag name, Snippet
 -    present in source : yes
 
@@ -142,38 +144,38 @@ For each occurrence of false-result of Test8, raise a MessageH
 -    parameter : tag name, Snippet
 -    present in source : yes
 
-##### MessageD : Suspected decorative svg or children with Aria attribute
-
--    code : SuspectedDecorativeSvgOrChildrenWithAriaAttribute
--    status: NMI
--    parameter : tag name, Snippet
--    present in source : yes
-
-##### MessageE : Decorative svg without empty `<title>` or  `<desc>` tags
-
--    code : DecorativeSvgWithNotEmptyTitleOrDescTags
--    status: Failed
--    parameter : tag name
--    present in source : yes
-
-##### MessageF : Suspected decorative svg without empty `<title>` or  `<desc>` tags
-
--    code : SuspectedDecorativeSvgWithNotEmptyTitleOrDescTags
--    status: NMI
--    parameter : tag name, Snippet
--    present in source : yes
-
-##### MessageG : Decorative svg or children with `title` attribute
+##### MessageD : Decorative svg or children with `title` attribute
 
 -    code : DecorativeSvgWithTitleAttribute
 -    status: Failed
 -    parameter : tag name, Snippet
 -    present in source : yes
 
-##### MessageH : Suspected decorative svg or children with `title` attribute
+##### MessageE : Suspected informative svg with a not empty `<title>` or  `<desc>` child tag
 
--    code : SuspectedDecorativeSvgWithTitleAttribute
--    status: NMI
+-    code : SuspectedInformativeSvgWithDescOrTitleChildTag
+-    status: Pre-Qualified
+-    parameter : tag name
+-    present in source : yes
+
+##### MessageF : Suspected informative svg with aria attribute on element or child
+
+-    code : SuspectedInformativeSvgWithAriaAttributeDetectedOnElementOrChild
+-    status: Pre-Qualified
+-    parameter : tag name, Snippet
+-    present in source : yes
+
+##### MessageG : Suspected informative svg with title attribute on element or child
+
+-    code : SuspectedInformativeSvgWithTitleAttributeOnElementOrChild
+-    status: Pre-Qualified
+-    parameter : tag name, Snippet
+-    present in source : yes
+
+##### MessageH : Suspected decorative svg without alternative
+
+-    code : SuspectedWellFormedDecorativeSvg
+-    status: Pre-Qualified
 -    parameter : tag name, Snippet
 -    present in source : yes
 
@@ -181,16 +183,43 @@ For each occurrence of false-result of Test8, raise a MessageH
 
 #### Not Applicable
 
-The page has no `<svg>` tag (Set1 and Set2 are empty)
+The page has no `<svg>` tag (**Set1** is are empty)
 
 #### Failed
 
-Test1, Test3, Test5, Test7 returns false for at least one element (one svg identified as decorative and don't have role img or have `aria-label`, `aria-describedby`, `aria-labelledby` or `title` attribute or have `<title>` or  `<desc>` tags not empty)
+At least one `<svg>` identified as decorative don't have a role img or have a `aria-label`, `aria-describedby`, `aria-labelledby` or `title` attribute or have a not empty `<title>` or `<desc>` as child tag (**Set4** OR **Set5** OR **Set6** OR **Set7** is not empty)
 
 #### Passed
 
-Test1, Test3, Test5, Test7 returns true for all elements (all svg identified as decorative and have role img and without `aria-label`, `aria-describedby`, `aria-labelledby` or `title` attribute and without `<title>` or  `<desc>` tags or they are empty)
+All the `<svg>` identified as decorative, have role img, no `aria-label`, `aria-describedby`, `aria-labelledby` or `title` attributes, no `<title>` or `<desc>` as child tag (**Set4** AND **Set5** AND **Set6** AND **Set7** are empty)
 
 #### Pre-qualified
 
 In all other cases
+
+## Notes
+
+The `<svg>` not identified by marker, without `"role"` attribute equals to "img" are not treated in this test. The test 1.3.5 asks to check that is attribute is present for informative `<svg>`. We can deduce this attribute has to be present for all `<svg>` in any way. To avoid to invalidate a same element twice, we decided to invalid this pattern in the test 1.3.5
+ 
+### Markers 
+
+**Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
+
+**Decorative images** markers are set through the **DECORATIVE_IMAGE_MARKER** parameter.
+
+The value(s) passed as marker(s) will be checked against the following attributes:
+
+- `class`
+- `id`
+- `role`
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

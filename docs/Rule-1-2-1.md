@@ -41,7 +41,7 @@ Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#
 
 ##### Set1
 
-All the `<img>` tags of the page not within a link and not identified as captcha (see Notes about captcha detection) (css selector : `img:not(a img)`)
+All the `<img>` tags of the page not within a link, without `<longdesc>` attribute and not identified as captcha (see Notes about captcha detection) (css selector : `img:not(a img):not([longdesc])`)
 
 #### Set2
 
@@ -101,21 +101,21 @@ For each element returning true in **Test4**, raise a MessageD.
 
 -    code : CheckNatureOfElementWithNotEmptyAltAttribute
 -    status: Pre-qualified
--    parameter : `"alt"` attribute, `"title"` attribute, `"src"` attribute, Snippet
+-    parameter : Snippet
 -    present in source : yes
 
 ##### MessageD : Check the nature of the image with a empty alternative
 
 -    code : CheckNatureOfElementWithEmptyAltAttribute
 -    status: Pre-qualified
--    parameter : `"alt"` attribute, `"title"` attribute, `"src"` attribute, Snippet
+-    parameter : Snippet
 -    present in source : yes
 
 ### Analysis
 
 #### Not Applicable
 
-The page has no `<img>` tag with an `"alt"` attribute (**Set1** and **Set2** are empty)
+The page has no `<img>` tag with an `"alt"` attribute (**Set1** is empty)
 
 #### Failed
 
@@ -123,7 +123,7 @@ At least one `<img>` identified as decorative has a not empty alternative (**Tes
 
 #### Passed
 
-All `<img>` of the page are identified and all `img` identified as decorative have a empty alternative (**Set3** is empty and **Test1** AND **Test2** returns true for all element)
+All the `<img>` of the page are identified as decorative and have an empty alternative (**Set3** is empty and **Test1** AND **Test2** returns true for all element)
 
 #### Pre-qualified
 

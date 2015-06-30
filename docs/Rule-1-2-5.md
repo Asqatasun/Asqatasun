@@ -2,7 +2,7 @@
 
 ## Summary
 
-This test consists in checking whether neither text between `canvas` tags of each decorative bitmap image (`<canvas>` tag) are implemented correctly.
+This test consists in checking whether the textual alternative of each decorative canvas image is empty.
 
 ## Business description
 
@@ -30,17 +30,23 @@ Pour chaque image bitmap de d&eacute;coration (balise `canvas`), le contenu entr
 
 ### Decision level
 
-**Semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
 #### Set1
-All the `<canvas>` tags of the page (css selector : `canvas`) and with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"DECORATIVE_CANVAS_MARKER"` parameter.
+
+All the `<canvas>` tags of the page not within a link and not identified as captcha (see Notes about captcha detection) (css selector : `canvas:not(a canvas)`)
 
 #### Set2
-All the `<canvas>` tags of the page (css selector : `canvas`) that don't have an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"DECORATIVE_CANVAS_MARKER"` parameter or the `"INFORMATIVE_CANVAS_MARKER"` parameter. 
+
+All the elements of **Set1** identified as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set3
+
+All the elements of **Set1** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
 
 ### Process
 
@@ -48,52 +54,80 @@ All the `<canvas>` tags of the page (css selector : `canvas`) that don't have an
 
 ##### Test1
 
-For each element of Set1, Check the presence of text between `<canvas>` tags.
+For each element of **Set1**, Check the presence of text between `<canvas>` tags.
 
-For each occurrence of true-result of Test1, raise a MessageA
+For each occurrence of true-result of **Test1**, raise a MessageA
 
 ##### Test2
 
-For each element of Set2, Check the presence of text between `<canvas>` tags.
+For each element of **Set2**, Check the presence of text between `<canvas>` tags.
 
-For each occurrence of true-result of Test2, raise a MessageB
+For each occurrence of true-result of **Test2**, raise a MessageB
+
+For each occurrence of false-result of **Test2**, raise a MessageC
 
 #### Messages
 
-##### MessageA : Decorative canvas with text between `<canvas>` tags
+##### MessageA : Decorative image with not empty alternative
 
--    code : DecorativeCanvasWithTextBetweenCanvasTags
+-    code : DecorativeElementWithNotEmptyAltAttribute
 -    status: Failed
--    parameter : tag name, Snippet
+-    parameter : text, Snippet
 -    present in source : yes
 
-##### MessageB : Suspected decorative canvas with text between `<canvas>` tags
+##### MessageB : Check the nature of the image with a not empty alternative
 
--    code : SuspectedDecorativeCanvasWithTextBetweenCanvasTags
--    status: NMI
--    parameter : tag name, Snippet
+-    code : CheckNatureOfElementWithNotEmptyAltAttribute
+-    status: Pre-qualified
+-    parameter : text, Snippet
+-    present in source : yes
+
+##### MessageD : Check the nature of the image with a empty alternative
+
+-    code : CheckNatureOfElementWithEmptyAltAttribute
+-    status: Pre-qualified
+-    parameter : text, Snippet
 -    present in source : yes
 
 ### Analysis
 
 #### Passed
 
-Test1 returns false for all elements (all `canvas` identified as decorative and don't have text between `<canvas>` tags)
+All the `canvas` tags are identified as decorative and don't have text between `<canvas>` tags (**Test1** returns false for all elements)
 
 #### Failed
 
-Test1 returns true at least one element (one `canvas` identified as decorative and have text between `<canvas>` tags)
+At least one `canvas` identified as decorative have text between `<canvas>` tags (**Test1** returns true at least one element)
 
 #### Not Applicable
 
-The page has no `<canvas>` tag (Set1 and Set2 are empty)
+The page has no `<canvas>` tag (**Set1** is empty)
 
 #### Pre-qualified
 
 In all other cases
 
+## Notes
 
+### Markers 
 
+**Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
 
+**Decorative images** markers are set through the **DECORATIVE_IMAGE_MARKER** parameter.
 
+The value(s) passed as marker(s) will be checked against the following attributes:
 
+- `class`
+- `id`
+- `role`
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element
