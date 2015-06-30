@@ -19,8 +19,15 @@
  */
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.entity.audit.ProcessResult;
+import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
+import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
+import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
@@ -46,61 +53,79 @@ public class Rgaa30Rule010407Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa30.Test.1.4.7-1Passed-01");
-//        addWebResource("Rgaa30.Test.1.4.7-2Failed-01");
         addWebResource("Rgaa30.Test.1.4.7-3NMI-01");
-//        addWebResource("Rgaa30.Test.1.4.7-4NA-01");
+        addWebResource("Rgaa30.Test.1.4.7-3NMI-02");
+        addWebResource("Rgaa30.Test.1.4.7-3NMI-03");
+        addWebResource("Rgaa30.Test.1.4.7-4NA-01");
+        addWebResource("Rgaa30.Test.1.4.7-4NA-02");
+        addWebResource("Rgaa30.Test.1.4.7-4NA-03");
+        addWebResource("Rgaa30.Test.1.4.7-4NA-04");
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa30.Test.1.4.7-1Passed-01"), 1);
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa30.Test.1.4.7-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-        //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.1.4.7-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.4.7-3NMI-02");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(ARIA_LABEL_ATTR, "Alternative of captcha"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.4.7-3NMI-03");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG,
+                HtmlElementStore.SVG_ELEMENT,
+                1,
+                new ImmutablePair(TITLE_ATTR, "title of captcha"),
+                new ImmutablePair(ARIA_LABEL_ATTR, "Alternative of captcha"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.4.7-4NA-01"));
-    }
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.4.7-4NA-01"));
 
-    @Override
-    protected void setConsolidate() {
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.4.7-4NA-02"));
 
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa30.Test.1.4.7-3NMI-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.4.7-4NA-03"));
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-04----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.4.7-4NA-04"));
     }
 
 }

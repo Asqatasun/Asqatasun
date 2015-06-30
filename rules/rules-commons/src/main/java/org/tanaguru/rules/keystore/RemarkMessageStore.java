@@ -93,6 +93,8 @@ public final class RemarkMessageStore {
             "CheckDescriptionPertinenceOfInformativeImage";
     public static final String CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG = 
             "CheckAtRestitutionOfDescriptionOfInformativeImage";
+    public static final String CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG = 
+            "CheckAtRestitutionOfAlternativeOfCaptcha";
     public static final String CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG = 
             "CheckNatureOfImageAndDescriptionPertinence";
     public static final String CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG = 
