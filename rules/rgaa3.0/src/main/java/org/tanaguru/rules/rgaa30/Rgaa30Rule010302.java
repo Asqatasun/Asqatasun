@@ -19,26 +19,25 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import java.util.Iterator;
+import java.util.Collections;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
+import static org.tanaguru.entity.audit.TestSolution.FAILED;
+import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.tanaguru.entity.audit.TestSolution.PASSED;
 import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
 import org.tanaguru.rules.elementchecker.CompositeChecker;
+import org.tanaguru.rules.elementchecker.ElementChecker;
 import org.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.tanaguru.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
 import org.tanaguru.rules.elementselector.AreaElementSelector;
 import org.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
 import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
 import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
 import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import org.tanaguru.rules.keystore.RemarkMessageStore;
 import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
@@ -59,10 +58,6 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
      * The name of the nomenclature that handles the image file extensions
      */
     private static final String IMAGE_FILE_EXTENSION_NOM = "ImageFileExtensions";
-    private final ElementHandler<Element> elemWithMarkerWithTitle = 
-            new ElementHandlerImpl();
-    private final ElementHandler<Element> elemWithoutMarkerWithTitle = 
-            new ElementHandlerImpl();
 
     /**
      * Constructor
@@ -78,85 +73,19 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
                         new AreaElementSelector(true, false, false), true, false));
 
         // checker for elements identified by marker
-        setMarkerElementChecker(
-                new AttributePertinenceChecker(
-                    ALT_ATTR,
-                    // check emptiness
-                    true,
-                    // compare with src attribute
-                    new TextAttributeOfElementBuilder(HREF_ATTR),
-                    // compare attribute value with nomenclature
-                    IMAGE_FILE_EXTENSION_NOM,
-                    // not pertinent message
-                    NOT_PERTINENT_ALT_MSG,
-                    // manual check message
-                    CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
-                    // evidence elements
-                    ALT_ATTR,
-                    HREF_ATTR));
+        setMarkerElementChecker(getMarkerElementChecker());
         
         // checker for elements not identified by marker
-        setElementChecker(
-                new AttributePertinenceChecker(
-                    ALT_ATTR,
-                    // no emptiness check
-                    false,
-                    // compare with src attribute
-                    new TextAttributeOfElementBuilder(HREF_ATTR),
-                    // compare attribute value with nomenclature
-                    IMAGE_FILE_EXTENSION_NOM,
-                    // override not pertinent result
-                    TestSolution.NEED_MORE_INFO,
-                    // not pertinent message
-                    CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
-                    // manual check message
-                    CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
-                    // evidence elements
-                    ALT_ATTR,
-                    HREF_ATTR));
-    }
-
-    @Override
-    protected void select(SSPHandler sspHandler) {
-        super.select(sspHandler);
-        iterateOnElementHandler(getSelectionWithMarkerHandler(), elemWithMarkerWithTitle);
-        iterateOnElementHandler(getSelectionWithoutMarkerHandler(), elemWithoutMarkerWithTitle);
+        setElementChecker(getLocalRegularElementChecker());
     }
 
     /**
-     * We parse the elements of the original element handler to extract the ones
-     * with the title attribute, add them to a new ElementHandler and remove
-     * them from the original ElementHandler (if none element has a title
-     * attribute, the new element handler will be empty).
-     *
-     * @param elementHandler
-     * @param elementWithTitleHandler
+     * 
+     * @return the checker user for marked elements
      */
-    private void iterateOnElementHandler(
-            ElementHandler<Element> elementHandler,
-            ElementHandler<Element> elementWithTitleHandler) {
-        Iterator<Element> iterator = elementHandler.get().iterator();
-        Element el;
-        while (iterator.hasNext()) {
-            el = iterator.next();
-            if (el.hasAttr(TITLE_ATTR)) {
-                elementWithTitleHandler.add(el);
-                iterator.remove();
-            }
-        }
-    }
-
-    @Override
-    protected void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
-        super.check(sspHandler,  testSolutionHandler);
-        CompositeChecker compositeCheckerForMarkedElements = 
-                new CompositeChecker(
-                    new TextNotIdenticalToAttributeChecker(
-                        new TextAttributeOfElementBuilder(ALT_ATTR),
-                        new TextAttributeOfElementBuilder(TITLE_ATTR),
-                        new ImmutablePair(TestSolution.FAILED,""),
-                        new ImmutablePair(TestSolution.PASSED,"")
-                    ),
+    private ElementChecker getMarkerElementChecker() {
+        CompositeChecker ec = new CompositeChecker(
+                    // checker for elements identified by marker
                     new AttributePertinenceChecker(
                         ALT_ATTR,
                         // check emptiness
@@ -170,18 +99,32 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
                         // manual check message
                         CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
                         // evidence elements
-                        ALT_ATTR,
+                        ALT_ATTR, 
+                        TITLE_ATTR, 
+                        HREF_ATTR),
+                    new TextNotIdenticalToAttributeChecker(
+                        new TextAttributeOfElementBuilder(TITLE_ATTR),
+                        new TextAttributeOfElementBuilder(ALT_ATTR),
+                        new ImmutablePair(PASSED,""),
+                        new ImmutablePair(FAILED,TITLE_NOT_IDENTICAL_TO_ALT_MSG),
+                        // evidence elements
+                        ALT_ATTR, 
+                        TITLE_ATTR, 
                         HREF_ATTR));
+        ec.setIsOrCombinaison(false);
+        return ec;
+    }
+    
+    /**
+     * 
+     * @return the checker user for not marked elements
+     */
+    private ElementChecker getLocalRegularElementChecker() {
         
-        CompositeChecker compositeCheckerForNotMarkedElements =
-                new CompositeChecker(
-                    new TextNotIdenticalToAttributeChecker(
-                        new TextAttributeOfElementBuilder(ALT_ATTR),
-                        new TextAttributeOfElementBuilder(TITLE_ATTR),
-                        new ImmutablePair(TestSolution.NEED_MORE_INFO,""),
-                        new ImmutablePair(TestSolution.NEED_MORE_INFO,"")
-                    ),
-                    new AttributePertinenceChecker(
+        CompositeChecker compositeChecker = new CompositeChecker(ALT_ATTR, TITLE_ATTR, HREF_ATTR);
+        
+        compositeChecker.addChecker(
+                new AttributePertinenceChecker(
                         ALT_ATTR,
                         // check emptiness
                         true,
@@ -189,29 +132,32 @@ public class Rgaa30Rule010302 extends AbstractMarkerPageRuleImplementation {
                         new TextAttributeOfElementBuilder(HREF_ATTR),
                         // compare attribute value with nomenclature
                         IMAGE_FILE_EXTENSION_NOM,
+                        // solution when not pertinent
+                        FAILED,
                         // not pertinent message
-                        NOT_PERTINENT_ALT_MSG,
+                        "",
                         // manual check message
-                        CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG,
-                        // evidence elements
-                        ALT_ATTR,
-                        HREF_ATTR));
-                
-        compositeCheckerForMarkedElements.check(
-                sspHandler, 
-                elemWithMarkerWithTitle, 
-                testSolutionHandler);
-        compositeCheckerForNotMarkedElements.check(
-                sspHandler, 
-                elemWithoutMarkerWithTitle, 
-                testSolutionHandler);
-    }
-
-    @Override
-    public int getSelectionSize() {
-        return super.getSelectionSize()
-                + elemWithMarkerWithTitle.get().size()
-                + elemWithoutMarkerWithTitle.get().size();
+                        ""));
+        compositeChecker.addChecker(
+                new TextNotIdenticalToAttributeChecker(
+                        new TextAttributeOfElementBuilder(ALT_ATTR),
+                        new TextAttributeOfElementBuilder(TITLE_ATTR),
+                        new ImmutablePair(FAILED,""),
+                        new ImmutablePair(PASSED,"")));
+        
+        compositeChecker.setIsOrCombinaison(false);
+        compositeChecker.addCheckMessageFromSolution(
+                NEED_MORE_INFO,
+                Collections.singletonMap(
+                        NEED_MORE_INFO, 
+                        RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG));
+        compositeChecker.addCheckMessageFromSolution(
+                FAILED,
+                Collections.singletonMap(
+                        NEED_MORE_INFO, 
+                        RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG));
+        
+        return compositeChecker;
     }
     
 }
