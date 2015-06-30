@@ -34,7 +34,7 @@ public final class RemarkMessageStore {
             "NoPatternDetected";
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
-    public static final String ARIA_LABELLEDBY_MISSING_MSG = "AriaLabelledbyMissing";
+    public static final String ARIA_LABELLEDBY_EMPTY_MSG = "AriaLabelledbyEmpty";
     public static final String FOR_MISSING_MSG = "ForMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.11.01.3 Failed 05</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.11.01.3 Failed 05</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mChpSaisie">champ de formulaire</a> associé à une 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mEtiquette">étiquette</a> via la propriété ARIA 
+                <code>aria-labelledby</code>, vérifie-t-il ces conditions ? 
+                <ul class="ssTests"> 
+                    <li> l&apos;<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mEtiquette">étiquette</a> possède un attribut <code>id</code></li> 
+                    <li> La valeur de l&apos;attribut <code>id</code> est unique</li> 
+                    <li>La valeur de la propriété ARIA <code>aria-labelledby</code> est égale à la valeur de l&apos;attribut <code>id</code> de l&apos;<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mEtiquette">étiquette</a></li> 
+                </ul> 
+            </div>
+            <ul class="ssTests"> 
+                <li> l&apos;<a href="index.php/glossaire-du-referentiel-accessiweb-html5aria.html#mEtiquette">étiquette</a> possède un attribut id</li> 
+                <li> La valeur de l&apos;attribut id est unique</li> 
+                <li>La valeur de la propriété ARIA aria-labelledby est égale à la valeur de l&apos;attribut id de l&apos;<a href="index.php/glossaire-du-referentiel-accessiweb-html5aria.html#mEtiquette">étiquette</a></li> 
+            </ul>  
+            <p></p> 
+            <div class="testcase"> 
+                <form action="http://action.html" method="post"> 
+                    <p> 
+                        <span id="mylabel"> Text:</span> 
+                        <input type="text" aria-labelledby="" />
+                        <input type="submit" value="Send" />
+                        <input type="reset" />
+                    </p> 
+                </form> 
+            </div> 
+            <p class="test-explanation">
+                Failed : The input type text has  an empty "aria-labelledby". 
+            </p> 
+        </div>   
+    </body>
+</html>

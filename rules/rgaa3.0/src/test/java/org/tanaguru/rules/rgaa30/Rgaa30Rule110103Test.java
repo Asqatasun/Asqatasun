@@ -58,6 +58,7 @@ public class Rgaa30Rule110103Test extends Rgaa30RuleImplementationTestCase {
         addWebResource("Rgaa30.Test.11.01.03-2Failed-A02");
         addWebResource("Rgaa30.Test.11.01.03-2Failed-A03");
         addWebResource("Rgaa30.Test.11.01.03-2Failed-A04");
+        addWebResource("Rgaa30.Test.11.01.03-2Failed-5");
         addWebResource("Rgaa30.Test.11.01.03-4NA-A01");
 
     }
@@ -156,6 +157,18 @@ public class Rgaa30Rule110103Test extends Rgaa30RuleImplementationTestCase {
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.FORM_ELEMENT_WITHOUT_LABEL_MSG,
+                HtmlElementStore.INPUT_ELEMENT,
+                1);
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-A5-----------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.11.01.03-2Failed-5");
+        checkResultIsFailed(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.ARIA_LABELLEDBY_EMPTY_MSG,
                 HtmlElementStore.INPUT_ELEMENT,
                 1);
 
