@@ -85,4 +85,4 @@ The content of the `"alt"` attribute is seen as not relevant if :
 - empty
 - only composed of non-alphanumerical characters
 - identical to the `"src"` attribute
-- it has an extension of image type (loaded by the nomenclature named *ImageFileExtensions* composed of : jpg, gif, jpeg, png, bmp)
+- it has an extension of image type (loaded by the nomenclature named **ImageFileExtensions** composed of : jpg, gif, jpeg, png, bmp)

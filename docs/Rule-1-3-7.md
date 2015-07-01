@@ -2,7 +2,9 @@
 
 ## Summary
 
-This test consists in checking for each informative vector image (<svg> tag) with an alternative are compatible with assistive Technology.
+This test consists in detecting informative svg images with a `<desc>` child tag or a `"aria-label"` attribute and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the alternative is well rendered by assistive technologies.
 
 ## Business description
 
@@ -38,40 +40,83 @@ Pour chaque image vectorielle porteuse d'information (balise `svg`) et poss&eacu
 
 #### Set1
 
-All the `<svg>` tags of the page (css selector : `svg`), with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"INFORMATIVE_SVG_MARKER"` parameter, with a `"role"` attribute with value `"img"` and with a `aria-label` attribute not null or a `desc` tag children not null
+All the `<svg>` tags of the page not within a link, not identified as captcha and with a not empty `<desc>` child tag (see Notes about captcha detection) (svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$)))
 
 #### Set2
 
-All the `<svg>` tags of the page (css selector : `svg`) that don't have an `id` attribute or a `class` attribute that matches one the values set by the use through the `"INFORMATIVE_SVG_MARKER"` parameter or the `"DECORATIVE_SVG_MARKER"` parameter, with a `"role"` attribute with value `"img"` and with a `aria-label` attribute not null or a `desc` tag children not null
+All the `<svg>` tags of the page not within a link, not identified as captcha and with a not empty `"aria-label"` attribute (see Notes about captcha detection) (svg[aria-label]:not([aria-label~=^\\s*$]:not(a svg))
+
+#### Set3
+
+All the elements of **Set1** identified as informative image by marker usage (see Notes for details about detection through marker)
+
+#### Set4
+
+All the elements of **Set2** identified as informative image by marker usage (see Notes for details about detection through marker)
+
+#### Set5
+
+All the elements of **Set1** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set6
+
+All the elements of **Set2** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
 
 ### Process
 
-#### Messages
+#### Test1
 
-For each occurrence of Set1, raise a MessageA
+For each element of **Set2** and **Set3**, raise a MessageA.
 
-For each occurrence of Set2, raise a MessageB
+#### Test2
 
-##### MessageA : Checked assistive technologie for informative `svg` 
+For each element of **Set4** and **Set5**, raise a MessageB.
 
--    code : CheckedAssistiveTechnologieForInformativeSvg
--    status: NMI
--    parameter : tag name, Snippet
+##### MessageA : Check the restitution by assistive technologies of the alternative of informative images
+
+-    code : **CheckAtRestitutionOfAlternativeOfInformativeImage** 
+-    status: Pre-Qualified
+-    parameter : `"role"` attribute, `"aria-label"` attribute, `"title"` attribute, tag name, snippet
 -    present in source : yes
 
-##### MessageB : Checked assistive technologie for suspected informative `svg` 
+##### MessageB : Check nature of image and the restitution by assistive technologies of their alternative
 
--    code : CheckedAssistiveTechnologieForSuspectedInformativeSvg
--    status: NMI
--    parameter : tag name, Snippet
+-    code : **CheckNatureOfImageAndAtRestitutionOfAlternative** 
+-    status: Pre-Qualified
+-    parameter : `"role"` attribute, `"aria-label"` attribute, `"title"` attribute, tag name, snippet
 -    present in source : yes
 
 ### Analysis
 
-#### Not Applicable
+#### Not Applicable 
 
-The page has no `<svg>` tag (Set1 and Set2 are empty)
+The page has no svg image with a not empty `<desc>` child tag or a not empty `"aria-label"` attribute(**Set1** and **Set2** are empty)
 
-#### Pre-qualified
+#### Pre-Qualified
 
 In all other cases
+
+## Notes
+
+### Markers 
+
+**Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
+
+**Decorative images** markers are set through the **DECORATIVE_IMAGE_MARKER** parameter.
+
+The value(s) passed as marker(s) will be checked against the following attributes:
+
+- `class`
+- `id`
+- `role`
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

@@ -79,7 +79,7 @@ For each element of **Set4** and **Set5**, raise a MessageB.
 -    parameter : text, `"aria-label"` attribute, tag name, snippet
 -    present in source : yes
 
-##### MessageB : Check nature of image and the restitution by assistive technologies of the description of informative images
+##### MessageB : Check nature of image and the restitution by assistive technologies of their description
 
 -    code : **CheckNatureOfImageAndAtRestitutionOfDescription** 
 -    status: Pre-Qualified
@@ -120,5 +120,3 @@ An element is identified as a CAPTCHA when the "captcha" occurrence is found :
 - or within the text of one parent of the element
 - or on one attribute of a sibling of the element
 - or within the text of a sibling of the element
-
-

@@ -2,7 +2,9 @@
 
 ## Summary
 
-This test consists in checking for each informative bitmap image (`canvas` tag) with an alternative are compatible with assistive Technology.
+This test consists in detecting informative canvas images with an alternative text and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the alternative is well rendered by assistive technologies.
 
 ## Business description
 
@@ -35,43 +37,73 @@ Pour chaque image bitmap porteuse d'information (balise `canvas`) et poss&eacute
 ## Algorithm
 
 ### Selection
-
 #### Set1
 
-All the `<canvas>` tags of the page (css selector : `canvas`) and with an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"INFORMATIVE_CANVAS_MARKER"` parameter and a text between `<canvas>` tags
+All the `<canvas>` tags of the page not within a link, not identified as captcha and with a not empty text (see Notes about captcha detection) (canvas:not(a canvas):not(:matchesOwn(^\\s*$)))
 
 #### Set2
 
-All the `<canvas>` tags of the page (css selector : `canvas`) that don't have an `id` attribute or a `class` attribute that matches one of the values set by the user through the `"INFORMATIVE_CANVAS_MARKER"` parameter or the `"DECORATIVE_CANVAS_MARKER"` parameter and a text between `<canvas>` tags 
+All the elements of **Set1** identified as informative image by marker usage (see Notes for details about detection through marker)
+
+#### Set3
+
+All the elements of **Set1** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
 
 ### Process
 
-#### Messages
+#### Test1
 
-For each occurrence of Set1, raise a MessageA
+For each element of **Set2**, raise a MessageA.
 
-For each occurrence of Set2, raise a MessageB
+#### Test2
 
-##### MessageA : Checked assistive technologie for informative `canvas` 
+For each element of **Set3**, raise a MessageB.
 
--    code : CheckedAssistiveTechnologieForInformativeCanvas
--    status: NMI
--    parameter : tag name, Snippet
+##### MessageA : Check the restitution by assistive technologies of the alternative of informative images
+
+-    code : **CheckAtRestitutionOfAlternativeOfInformativeImage** 
+-    status: Pre-Qualified
+-    parameter : text, tag name, snippet
 -    present in source : yes
 
-##### MessageB : Checked assistive technologie for suspected informative `canvas` 
+##### MessageB : Check nature of image and the restitution by assistive technologies of their alternative
 
--    code : CheckedAssistiveTechnologieForSuspectedInformativeCanvas
--    status: NMI
--    parameter : tag name, Snippet
+-    code : **CheckNatureOfImageAndAtRestitutionOfAlternative** 
+-    status: Pre-Qualified
+-    parameter : text, tag name, snippet
 -    present in source : yes
 
 ### Analysis
 
-#### Not Applicable
+#### Not Applicable 
 
-The page has no `<canvas>` tag (Set1 and Set2 are empty)
+The page has no canvas image with a not empty text (**Set1** is empty)
 
-#### Pre-qualified
+#### Pre-Qualified
 
 In all other cases
+
+## Notes
+
+### Markers 
+
+**Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
+
+**Decorative images** markers are set through the **DECORATIVE_IMAGE_MARKER** parameter.
+
+The value(s) passed as marker(s) will be checked against the following attributes:
+
+- `class`
+- `id`
+- `role`
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element

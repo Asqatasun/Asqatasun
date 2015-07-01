@@ -67,7 +67,7 @@ For each element of **Set3**, raise a MessageB.
 -    parameter : text, tag name, snippet
 -    present in source : yes
 
-##### MessageB : Check nature of image and the restitution by assistive technologies of the description of informative images
+##### MessageB : Check nature of image and the restitution by assistive technologies of their description
 
 -    code : **CheckNatureOfImageAndAtRestitutionOfDescription** 
 -    status: Pre-Qualified
@@ -83,18 +83,6 @@ The page has no canvas image with a not empty text (**Set1** is empty)
 #### Pre-Qualified
 
 In all other cases
-
-### Analysis
-
-#### Passed
-
-#### Failed
-
-#### Not Applicable
-
-#### Pre-qualified
-
-#### No Tested 
 
 ## Notes
 
