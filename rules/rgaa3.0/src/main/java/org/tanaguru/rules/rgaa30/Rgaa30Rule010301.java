@@ -61,9 +61,9 @@ public class Rgaa30Rule010301 extends AbstractMarkerPageRuleImplementation {
     public Rgaa30Rule010301() {
         
         super(
-            // the informative images are not part of the scope
+            // the informative images are part of the scope
             INFORMATIVE_IMAGE_MARKER,
-            // the decorative images are part of the scope
+            // the decorative images are not part of the scope
             DECORATIVE_IMAGE_MARKER);
         setElementSelector(new ImageElementSelector(IMG_WITH_ALT_CSS_LIKE_QUERY, true, false));
         setMarkerElementChecker(getMarkerElementChecker());

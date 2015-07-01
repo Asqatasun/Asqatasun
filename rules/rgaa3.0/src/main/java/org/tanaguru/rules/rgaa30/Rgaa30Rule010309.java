@@ -19,22 +19,72 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.tanaguru.rules.elementchecker.ElementChecker;
+import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
+import org.tanaguru.rules.elementselector.SimpleElementSelector;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG;
 
 /**
  * Implementation of the rule 1.3.9 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-3-9">the rule 1.3.9 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-3-9"> 1.3.9 rule specification</a>
+ * For more details about the implementation, refer to
+ * <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-3-9">the
+ * rule 1.3.9 design page.</a>
+ *
+ * @see
+ * <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-3-9">
+ * 1.3.9 rule specification</a>
  */
-
-public class Rgaa30Rule010309 extends AbstractNotTestedRuleImplementation {
+public class Rgaa30Rule010309 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa30Rule010309 () {
-        super();
+    public Rgaa30Rule010309() {
+        super(
+                // the informative images are part of the scope
+                INFORMATIVE_IMAGE_MARKER,
+                // the decorative images are not part of the scope
+                DECORATIVE_IMAGE_MARKER);
+
+        setElementSelector(new SimpleElementSelector(CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY));
+        setMarkerElementChecker(getMarkerElementChecker());
+        setRegularElementChecker(getLocalRegularElementChecker());
     }
 
+    /**
+     *
+     * @return the checker user for marked elements
+     */
+    private ElementChecker getMarkerElementChecker() {
+        ElementChecker ec = new ElementPresenceChecker(
+                new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG),
+                new ImmutablePair(TestSolution.NOT_APPLICABLE, ""),
+                // evidence element
+                TEXT_ELEMENT2
+        );
+        return ec;
+    }
+    
+    /**
+     *
+     * @return the checker user for marked elements
+     */
+    private ElementChecker getLocalRegularElementChecker() {
+        ElementChecker ec = new ElementPresenceChecker(
+                new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG),
+                new ImmutablePair(TestSolution.NOT_APPLICABLE, ""),
+                // evidence element
+                TEXT_ELEMENT2
+        );
+        return ec;
+    }
 }

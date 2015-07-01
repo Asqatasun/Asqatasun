@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1.3.6 Failed 06</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1.3.6 Failed 06</h1> 
+            <div class="test-detail" lang="fr"> 'Chaque image vectorielle porteuse d''information (balise svg) et poss&eacute;dant une alternative v&eacute;rifie-t-elle une de ces conditions (hors <a href="http://www.accessiweb.org/index.php/glossaire-du-referentiel-accessiweb-html5aria.html#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ? 
+                <ul class="ssTests">  
+                    <li>La balise svg poss&egrave;de un attribut aria-label dont le contenu est pertinent et identique &agrave; l''attribut title s''il est pr&eacute;sent</li>  
+                    <li>La balise svg poss&egrave;de un &eacute;l&eacute;ment desc dont le contenu est pertinent et identique &agrave; l''attribut title de la balise svg s''il est pr&eacute;sent</li>  
+                    <li>Un lien adjacent permet d''acc&eacute;der &agrave; une alternative dont le contenu est pertinent et identique &agrave; l''attribut title de la balise svg s''il est pr&eacute;sent</li> 
+                </ul>'
+            </div> 
+            <div class="testcase"> 
+                <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" role="img">  
+
+                    <rect x="5" y="5" rx="10" width="210" height="40" fill="none" stroke="grey" stroke-width="2" /> 
+
+                </svg>
+            </div> 
+            <div class="testcase"> 
+                <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg">  
+
+                    <rect x="5" y="5" rx="10" width="210" height="40" fill="none" stroke="grey" stroke-width="2" /> 
+
+                </svg>
+            </div> 
+            <p class="test-explanation"> 
+                Failed : One svg is found on the page and is not identified by marker but don't have a role image 
+            </p> 
+        </div>   
+    </body>
+</html>

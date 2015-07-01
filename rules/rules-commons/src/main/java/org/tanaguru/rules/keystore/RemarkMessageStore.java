@@ -58,6 +58,10 @@ public final class RemarkMessageStore {
             "CheckAlternativeOfDecorativeElement";
     public static final String CHECK_NATURE_AND_ALTERNATIVE_OF_ELEMENT_MSG =
             "CheckNatureAndAlternativeOfElement";
+    public static final String CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG =
+            "CheckNatureOfImageAndPresenceOfAlternativeMechanism";
+    public static final String CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG =
+            "CheckPresenceOfAlternativeMechanismForInformativeImage";
     public static final String CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
             "CheckNatureOfElementWithNotEmptyAltAttribute";
     public static final String CHECK_PRESENCE_ELEMENT_TITLE_MSG =
@@ -96,6 +100,10 @@ public final class RemarkMessageStore {
             "CheckAtRestitutionOfDescriptionOfInformativeImage";
     public static final String CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG = 
             "CheckAtRestitutionOfAlternativeOfCaptcha";
+    public static final String CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_INFORMATIVE_IMAGE_MSG = 
+            "CheckAtRestitutionOfAlternativeOfInformativeImage";
+    public static final String CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_ALTERNATIVE_MSG = 
+            "CheckNatureOfImageAndAtRestitutionOfAlternative";
     public static final String CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG = 
             "CheckNatureOfImageAndDescriptionPertinence";
     public static final String CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG = 
@@ -110,8 +118,16 @@ public final class RemarkMessageStore {
             "DecorativeSvgWithNotEmptyTitleOrDescTags";
     public static final String DECORATIVE_SVG_OR_CHILD_WITH_TITLE_ATTRIBUTE=
             "DecorativeSvgWithTitleAttribute";
-    public static final String SUSPECTED_INFORMATIVE_SVG_ROLE_IMAGE_MISSING_ON_SVG=
-            "SuspectedInformativeSvgRoleImageMissingOnSvg";
+    public static final String SVG_WITHOUT_ROLE_IMAGE_MSG=
+            "SvgWithoutRoleImage";
+    public static final String INFORMATIVE_SVG_WITH_NOT_PERTINENT_ALT_MSG=
+            "InformativeSvgWithNotPertinentAlternative";
+    public static final String CHECK_NATURE_OF_SVG_WITH_NOT_PERTINENT_ALT_MSG=
+            "CheckNatureOfSvgWithNotPertinentAlternative";
+    public static final String CHECK_ALT_PERTINENCE_OF_INFORMATIVE_SVG_MSG=
+            "CheckPertinenceOfAlternativeOfInformativeSvg";
+    public static final String CHECK_NATURE_OF_SVG_AND_ALT_PERTINENCE_MSG=
+            "CheckNatureOfSvgAndAlternativePertinence";
     public static final String SUSPECTED_INFORMATIVE_SVG_WITH_ARIA_ATTRIBUTE_DETECTED_ON_ELEMENT_OR_CHILD=
             "SuspectedInformativeSvgWithAriaAttributeDetectedOnElementOrChild";
     public static final String SUSPECTED_INFORMATIVE_SVG_WITH_DESC_OR_TITLE_CHILD_TAG=
