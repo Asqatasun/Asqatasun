@@ -265,7 +265,7 @@ public class CrawlerServiceImpl implements CrawlerService {
             return;
         }
         Long i = (long) maxNumberOfCrawlPage +1 ;
-        Long fromValue = (long) maxNumberOfCrawlPage +1 ;
+        Long fromValue = (long) maxNumberOfCrawlPage ;
         LOGGER.info("Deleting "+ (nbOfContent - maxNumberOfCrawlPage)+" content excedent regarding user limit");
         while (i.compareTo(nbOfContent) < 0) {
             Collection<Long> contentIdList
