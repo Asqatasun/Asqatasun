@@ -58,8 +58,7 @@ public class TanaguruFetchHTTP extends FetchHTTP{
         // the counter is incremented when the curi is seen as success
         if (curi.getURI().endsWith("robots.txt")) {
             frontier.decrementSucceededFetchCounter();
-            Logger.getLogger(this.getClass()).debug("Robots is excluded from fetch and the counter is decremented");
-            return true;
+            Logger.getLogger(this.getClass()).debug("Robots.txt encountered leads to to counter begin decremented");
         } else if  (checkMidfetchAbort && curi.isSuccess()) {
             frontier.decrementSucceededFetchCounter();
             Logger.getLogger(this.getClass()).debug("succeeded Fetch Counter decremented due to MidfetchAbort");
