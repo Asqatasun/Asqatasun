@@ -26,6 +26,7 @@ import org.tanaguru.rules.elementchecker.CompositeChecker;
 import org.tanaguru.rules.elementchecker.attribute.AttributeWithValuePresenceChecker;
 import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
 import org.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.tanaguru.rules.keystore.AttributeStore;
 import static org.tanaguru.rules.keystore.AttributeStore.PRESENTATION_VALUE;
 import static org.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
 import static org.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
@@ -34,6 +35,8 @@ import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
 import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINEARISED_CONTENT_MSG;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TABLE_IS_NOT_PRESENTATION_WITHOUT_ROLE_ARIA_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TABLE_IS_PRESENTATION_WITH_ROLE_ARIA_MSG;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG;
 
 /**
@@ -76,7 +79,8 @@ public class Rgaa30Rule050301 extends AbstractMarkerPageRuleImplementation {
                                 // empty msg because the CHECK_LINEARISED_CONTENT_MSG
                                 // is already use above in this case.
                                 new ImmutablePair(TestSolution.NEED_MORE_INFO,""),
-                                new ImmutablePair(TestSolution.FAILED,PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG)
+                                new ImmutablePair(TestSolution.FAILED,PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG),
+                                AttributeStore.ROLE_ATTR
                         )
                 ),
                 // checker for elements not identified by marker
@@ -90,8 +94,9 @@ public class Rgaa30Rule050301 extends AbstractMarkerPageRuleImplementation {
                         new AttributeWithValuePresenceChecker(
                                 ROLE_ATTR,
                                 PRESENTATION_VALUE,
-                                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_LINEARISED_CONTENT_MSG),
-                                new ImmutablePair(TestSolution.NEED_MORE_INFO,"")
+                                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_TABLE_IS_PRESENTATION_WITH_ROLE_ARIA_MSG),
+                                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_TABLE_IS_NOT_PRESENTATION_WITHOUT_ROLE_ARIA_MSG),
+                                AttributeStore.ROLE_ATTR
                         )
                 )
         );

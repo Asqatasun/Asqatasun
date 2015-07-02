@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1-2-5 Failed 02</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1-2-5 Failed 02</h1> 
+            <div class="test-detail" lang="fr"> Pour chaque image bitmap de décoration (balise 
+                <code>canvas</code>), le contenu entre 
+                <code>&lt;canvas&gt;</code> et 
+                <code>&lt;/canvas&gt;</code> doit être dépourvu de contenus textuels, cette règle est-elle respectée ? 
+            </div> 
+            <div class="testcase"> 
+                <canvas class="class-decorative-image" width="500" height="500">
+                    Un text
+                </canvas>
+            </div> 
+            <div class="test-explanation">
+                 Failed : least one canvas of the page are marked as decorative and have text between <code>&lt;canvas&gt;</code> tags. 
+            </div> 
+        </div>  
+    </body>
+</html>

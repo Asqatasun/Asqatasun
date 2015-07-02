@@ -168,7 +168,15 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         return gzipHeader;
     }
 
-    private boolean treatRelCanonical = true;
+    /**
+     * List of referential with no exclusion for rel canonical page
+     */
+    private final List<String> keepRelCanonicalRefList = new ArrayList<>();
+    public void setKeepRelCanonicalRefList(List<String> keepRelCanonicalRefList) {
+        this.keepRelCanonicalRefList.addAll(keepRelCanonicalRefList);
+    }
+    
+    private boolean excludeRelCanonical = true;
     
     int pageRankCounter = 1; // a counter to determine the rank a page is fetched
 
@@ -250,6 +258,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
 
     @Override
     public void run() {
+        updateExcludeRelCanonicalRegardingRef();
         pageRankCounter = 1;
         this.crawlJob.setContentWriter(this);
         this.crawlJob.launchCrawlJob();
@@ -567,6 +576,25 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     }
 
     /**
+     * This method update the relcanonical boolean regarding the referential.
+     * For a11y refs, the boolean has to be set to false.
+     */
+    private void updateExcludeRelCanonicalRegardingRef() {
+        for (Parameter param : paramSet) {
+            if (param.getParameterElement().getParameterElementCode().equals("LEVEL")) {
+                String level = param.getValue().split(";")[0];
+                if (keepRelCanonicalRefList.contains(level)) {
+                    LOGGER.info("Rel canonical pages are kept for ref " + level);
+                    excludeRelCanonical = false;
+                } else {
+                    LOGGER.info("Rel canonical pages are excluded for ref " + level);
+                }
+                break;
+            }
+        }
+    }
+    
+    /**
      * Waiting for a better implementation, we parse here the html content
      * to detect the presence of the rel=canonical property.
      * @param content
@@ -575,7 +603,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
      */
     public final boolean isRelCanonicalPage(Content content) {
         // @TODO make this implementation cleaner
-        if (! treatRelCanonical) {
+        if (! excludeRelCanonical) {
             return false;
         }
         if (! (content instanceof SSP)) {

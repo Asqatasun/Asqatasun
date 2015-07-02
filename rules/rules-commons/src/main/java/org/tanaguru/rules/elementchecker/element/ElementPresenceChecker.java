@@ -185,13 +185,10 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
             
             checkResult = getSuccessSolution();
 
-            if (StringUtils.isNotBlank(getSuccessMsgCode())) {
-
-                for (Element el : elements) {
-                    createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
-                }
-
+            for (Element el : elements) {
+                createSourceCodeRemark(getSuccessSolution(), el, getSuccessMsgCode());
             }
+
         } else if (checkUnicity && elements.size() > 1 && 
                 StringUtils.isNotBlank(messageCodeOnMultipleElements)) {
             for (Element el : elements) {

@@ -20,6 +20,7 @@
 
 package org.tanaguru.rules.rgaa30;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.tanaguru.rules.elementselector.CaptchaElementSelector;
@@ -45,12 +46,9 @@ public class Rgaa30Rule010405 extends AbstractDetectionPageRuleImplementation {
                 new CaptchaElementSelector(
                     new SimpleElementSelector(EMBED_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY)),
                 // solution when at least one element is found
-                TestSolution.NEED_MORE_INFO,
+                new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_CAPTCHA_ALTERNATIVE_MSG),
                 // solution when no element is found
-                TestSolution.NOT_APPLICABLE,
-                // manual check message
-                CHECK_CAPTCHA_ALTERNATIVE_MSG,
-                null,
+                new ImmutablePair(TestSolution.NOT_APPLICABLE,""),
                 // evidence elements
                 SRC_ATTR
             );

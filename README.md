@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=master)](https://travis-ci.org/Tanaguru/Tanaguru) 
+[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=develop)](https://travis-ci.org/Tanaguru/Tanaguru) 
 
 # Tanaguru
 
@@ -58,16 +58,11 @@ As of January 2014, this represents [~170 accessibility tests](http://www.tanagu
 * email to `tanaguru AT tanaguru dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
-## Content of this last version (Tanaguru 3.0.6, 2015-06-26)
+## Content of this last version (Tanaguru 3.1.0, 2015-07-02)
 
 Features :
 
-- Most of the implementation of Rgaa3 rules (about 150 rules)
-- Refactoring (clean-up) of Data Service layer usage
-- Package naming modification : now all packages starts with "org.tanaguru"
-- Rules commons improvments : use of Pair to define a combinaison of Result/Message
-- Rule TU improvments : provide new methods to test rule result and remarks
-- Add the "COMPLEX_TABLE_MARKER"
+- Implementation of Rgaa3 rules (173 rules)
 
 See full [Changelog](CHANGELOG.txt)
 

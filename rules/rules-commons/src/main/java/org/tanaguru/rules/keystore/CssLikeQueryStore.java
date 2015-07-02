@@ -31,6 +31,8 @@ public final class CssLikeQueryStore {
     public static final String IMG_WITH_ALT_CSS_LIKE_QUERY="img[alt]"; 
     public static final String IMG_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "img[alt]:not(a img)"; 
+    public static final String IMG_WITH_ALT_NOT_IN_LINK_WITHOUT_LONGDESC_CSS_LIKE_QUERY=
+                    "img[alt]:not(a img):not([longdesc])"; 
     public static final String IMG_NOT_IN_LINK_CSS_LIKE_QUERY="img:not(a img)"; 
     public static final String IMG_WITH_ISMAP_ATTR_CSS_LIKE_QUERY=
                     "img[ismap] , "
@@ -84,6 +86,10 @@ public final class CssLikeQueryStore {
                     "svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$))"; 
     public static final String SVG_NOT_IN_LINK_WITH_ARIA_LABEL_CSS_LIKE_QUERY=
                     "svg[aria-label]:not([aria-label~=^\\s*$]:not(a svg)"; 
+    public static final String SVG_NOT_IN_LINK_WITH_DESC_CHILD_AND_ROLE_IMG_CSS_LIKE_QUERY=
+                    "svg[role=img]:not(a svg):has(desc:not(:matchesOwn(^\\s*$))"; 
+    public static final String SVG_NOT_IN_LINK_WITH_ARIA_LABEL_AND_ROLE_IMG_CSS_LIKE_QUERY=
+                    "svg[role=img][aria-label]:not([aria-label~=^\\s*$]:not(a svg)"; 
     public static final String CANVAS_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "canvas:not(a canvas)"; 
     public static final String CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY=
@@ -119,42 +125,97 @@ public final class CssLikeQueryStore {
     public static final String FORM_ELEMENT_CSS_LIKE_QUERY=
                     "textarea , "
                    +"select , "
+                   +"datalist , "
+                   +"keygen , "
                    +"input[type=password] , "
                    +"input[type=checkbox] , "
                    +"input[type=file] , "
                    +"input[type=text] , "
+                   +"input[type=search] , "
+                   +"input[type=tel] , "
+                   +"input[type=email] , "
+                   +"input[type=number] , "
+                   +"input[type=url] , "
+                   +"input[type=date] , "
+                   +"input[type=range] , "
+                   +"input[type=color] , "
+                   +"input[type=time] , "
                    +"input[type=radio]"; 
     public static final String INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY=
-                    "form textarea , "
-                   +"form select , "
-                   +"form input[type=password] , "
-                   +"form input[type=checkbox] , "
-                   +"form input[type=file] , "
-                   +"form input[type=text] , "
-                   +"form input[type=radio]"; 
+                    "form textarea:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form select:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form datalist:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form keygen:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=password]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=checkbox]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=file]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=text]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=search]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=tel]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=email]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=number]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=url]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=date]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=range]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=color]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=time]:not([title]):not([aria-label]):not([aria-labelledby]) , "
+                   +"form input[type=radio]:not([title]):not([aria-label]):not([aria-labelledby])"; 
     public static final String INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY=
                     "form textarea[aria-labelledby] , "
                    +"form select[aria-labelledby] , "
+                   +"form datalist[aria-labelledby] , "
+                   +"form keygen[aria-labelledby] , "
                    +"form input[type=password][aria-labelledby] , "
                    +"form input[type=checkbox][aria-labelledby] , "
                    +"form input[type=file][aria-labelledby] , "
                    +"form input[type=text][aria-labelledby] , "
+                   +"form input[type=search][aria-labelledby] , "
+                   +"form input[type=tel][aria-labelledby] , "
+                   +"form input[type=email][aria-labelledby] , "
+                   +"form input[type=number][aria-labelledby] , "
+                   +"form input[type=url][aria-labelledby] , "
+                   +"form input[type=date][aria-labelledby] , "
+                   +"form input[type=range][aria-labelledby] , "
+                   +"form input[type=color][aria-labelledby] , "
+                   +"form input[type=time][aria-labelledby] , "
                    +"form input[type=radio][aria-labelledby]"; 
     public static final String FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY = 
                     "textarea[id] , "
                     + "select[id] , "
+                    + "datalist[id] , "
+                    + "keygen[id] , "
                     + "input[type=password][id] , "
                     + "input[type=checkbox][id] , "
                     + "input[type=file][id] , "
                     + "input[type=text][id] , "
+                    + "input[type=search][id] , "
+                    + "input[type=tel][id] , "
+                    + "input[type=email][id] , "
+                    + "input[type=number][id] , "
+                    + "input[type=url][id] , "
+                    + "input[type=date][id] , "
+                    + "input[type=range][id] , "
+                    + "input[type=color][id] , "
+                    + "input[type=time][id] , "
                     + "input[type=radio][id]";
     public static final String FORM_ELEMENT_WITH_TITLE_CSS_LIKE_QUERY = 
                     "textarea[title] , "
                     + "select[title] , "
+                    + "datalist[title] , "
+                    + "keygen[title] , "
                     + "input[type=password][title] , "
                     + "input[type=checkbox][title] , "
                     + "input[type=file][title] , "
                     + "input[type=text][title] , "
+                    + "input[type=search][title] , "
+                    + "input[type=tel][title] , "
+                    + "input[type=email][title] , "
+                    + "input[type=number][title] , "
+                    + "input[type=url][title] , "
+                    + "input[type=date][title] , "
+                    + "input[type=range][title] , "
+                    + "input[type=color][title] , "
+                    + "input[type=time][title] , "
                     + "input[type=radio][title]";
     public static final String FORM_TEXT_INPUT_CSS_LIKE_QUERY = 
                     "form:has(textarea) , "
@@ -168,8 +229,19 @@ public final class CssLikeQueryStore {
                     + "form label:has(input[type=checkbox]) , "
                     + "form label:has(input[type=radio]) , "
                     + "form label:has(input[type=file]) , "
+                    + "form label:has(input[type=search]) , "
+                    + "form label:has(input[type=tel]) , "
+                    + "form label:has(input[type=email]) , "
+                    + "form label:has(input[type=number]) , "
+                    + "form label:has(input[type=url]) , "
+                    + "form label:has(input[type=date]) , "
+                    + "form label:has(input[type=range]) , "
+                    + "form label:has(input[type=color]) , "
+                    + "form label:has(input[type=time]) , "
                     + "form label:has(textarea) , "
-                    + "form label:has(select)";
+                    + "form label:has(select) , "
+                    + "form label:has(datalist) , "
+                    + "form label:has(keygen)";
     public static final String LEGEND_WITHIN_FIELDSET_CSS_LIKE_QUERY = 
                     "fieldset legend";
     public static final String SELECT_WITHOUT_OPTGROUP_CSS_LIKE_QUERY = 

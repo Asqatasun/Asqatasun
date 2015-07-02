@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1-4-6 NMI 02</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1-4-6 NMI 02</h1> 
+            <div class="test-detail" lang="fr"> Chaque image vectorielle (balise 
+                <code>svg</code>) utilisée comme 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a> et ayant une 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a> via la propriété 
+                <code>aria-label</code> ou la balise 
+                <code>desc</code> vérifie-t-elle ces conditions ? 
+                <ul class="ssTests"> 
+                    <li>l&apos;alternative textuelle implémentée via la propriété <code>aria-label</code> permet d&apos;identifier la nature et la fonction de l&apos;image et est identique à l&apos;attribut <code>title</code> s&apos;il est présent</li> 
+                    <li>l&apos;alternative textuelle implémentée via la balise <code>desc</code> permet d&apos;identifier la nature et la fonction de l&apos;image et est identique à l&apos;attribut <code>title</code> de la balise <code>svg</code> s&apos;il est présent</li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <svg class="captcha" viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-label="Alternative of captcha">  
+                    <rect x="5" y="5" rx="10" width="210" height="40" fill="none" stroke="grey" stroke-width="2" /> 
+                </svg>
+            </div> 
+            <div class="test-explanation">
+                 NMI : The html element implied by the test has been found at least once on the page 
+            </div> 
+        </div>  
+    </body>
+</html>

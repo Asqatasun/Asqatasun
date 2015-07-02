@@ -22,9 +22,9 @@ package org.tanaguru.rules.rgaa30;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.*;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import static org.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
 import static org.tanaguru.rules.keystore.MarkerStore.*;
 import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
@@ -50,20 +50,22 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.05.02.01-2Failed-01",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"));
         addWebResource("Rgaa30.Test.05.02.01-2Failed-02",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"));
         addWebResource("Rgaa30.Test.05.02.01-2Failed-03",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-data-table"),
-                    createParameter("Rules", DATA_TABLE_MARKER, "id-presentation-table"));
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "id-complex-table"),
+                    createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"),
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "id-presentation-table"));
         addWebResource("Rgaa30.Test.05.02.01-3NMI-01");
         addWebResource("Rgaa30.Test.05.02.01-3NMI-02",
-                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-data-table"),
+                    createParameter("Rules", COMPLEX_TABLE_MARKER, "class-complex-table"),
                     createParameter("Rules", PRESENTATION_TABLE_MARKER, "id-presentation-table"));
         addWebResource("Rgaa30.Test.05.02.01-4NA-01");
         addWebResource("Rgaa30.Test.05.02.01-4NA-02");
         addWebResource("Rgaa30.Test.05.02.01-4NA-03",
-                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "class-presentation-table"));
+                    createParameter("Rules", PRESENTATION_TABLE_MARKER, "class-presentation-table"),
+                    createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
 
     }
 
@@ -77,10 +79,10 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
-                RemarkMessageStore.NOT_PERTINENT_SUMMARY_MSG,
-                HtmlElementStore.TABLE_ELEMENT,
+                RemarkMessageStore.NOT_PERTINENT_CAPTION_FOR_COMPLEX_TABLE_MSG,
+                HtmlElementStore.CAPTION_ELEMENT,
                 1,
-                new ImmutablePair(SUMMARY_ATTR, ""));        
+                new ImmutablePair(TEXT_ELEMENT2, ""));
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
@@ -90,10 +92,10 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
-                RemarkMessageStore.NOT_PERTINENT_SUMMARY_MSG,
-                HtmlElementStore.TABLE_ELEMENT,
+                RemarkMessageStore.NOT_PERTINENT_CAPTION_FOR_COMPLEX_TABLE_MSG,
+                HtmlElementStore.CAPTION_ELEMENT,
                 1,
-                new ImmutablePair(SUMMARY_ATTR, "#^;:/"));        
+                new ImmutablePair(TEXT_ELEMENT2, "#^;:/"));        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
@@ -103,24 +105,24 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
-                RemarkMessageStore.NOT_PERTINENT_SUMMARY_MSG,
-                HtmlElementStore.TABLE_ELEMENT,
+                RemarkMessageStore.NOT_PERTINENT_CAPTION_FOR_COMPLEX_TABLE_MSG,
+                HtmlElementStore.CAPTION_ELEMENT,
                 1,
-                new ImmutablePair(SUMMARY_ATTR, ""));
+                new ImmutablePair(TEXT_ELEMENT2, ""));
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_SUMMARY_PERTINENCE_MSG,
-                HtmlElementStore.TABLE_ELEMENT,
+                RemarkMessageStore.CHECK_TABLE_IS_COMPLEX_AND_CAPTION_PERTINENCE_MSG,
+                HtmlElementStore.CAPTION_ELEMENT,
                 2,
-                new ImmutablePair(SUMMARY_ATTR, "Summary of table without marker"));
+                new ImmutablePair(TEXT_ELEMENT2, "Caption of table without marker"));
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_SUMMARY_MSG,
-                HtmlElementStore.TABLE_ELEMENT,
+                RemarkMessageStore.CHECK_TABLE_IS_COMPLEX_FOR_NOT_PERTINENT_CAPTION_MSG,
+                HtmlElementStore.CAPTION_ELEMENT,
                 3,
-                new ImmutablePair(SUMMARY_ATTR, "$$##''''"));        
+                new ImmutablePair(TEXT_ELEMENT2, "$$##''''"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-01--------------------------------
@@ -130,10 +132,10 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_SUMMARY_PERTINENCE_MSG,
-                HtmlElementStore.TABLE_ELEMENT,
+                RemarkMessageStore.CHECK_TABLE_IS_COMPLEX_AND_CAPTION_PERTINENCE_MSG,
+                HtmlElementStore.CAPTION_ELEMENT,
                 1,
-                new ImmutablePair(SUMMARY_ATTR, "Summary of not identified table"));        
+                new ImmutablePair(TEXT_ELEMENT2, "Caption of not identified table"));        
         
         //----------------------------------------------------------------------
         //------------------------------3NMI-02--------------------------------
@@ -143,10 +145,10 @@ public class Rgaa30Rule050201Test extends Rgaa30RuleImplementationTestCase {
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_SUMMARY_PERTINENCE_FOR_DATA_TABLE_MSG,
-                HtmlElementStore.TABLE_ELEMENT,
+                RemarkMessageStore.CHECK_CAPTION_PERTINENCE_FOR_COMPLEX_TABLE_MSG,
+                HtmlElementStore.CAPTION_ELEMENT,
                 1,
-                new ImmutablePair(SUMMARY_ATTR, "Summary of data table"));
+                new ImmutablePair(TEXT_ELEMENT2, "Caption of complex table"));
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------

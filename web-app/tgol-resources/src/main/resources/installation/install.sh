@@ -28,7 +28,7 @@ declare PKG_DIR=$(pwd)
 
 declare ARCH="i386"
 
-declare TG_VERSION="3.0.6"
+declare TG_VERSION="3.2.0-SNAPSHOT"
 declare TG_ARCHIVE="tanaguru-$TG_VERSION.$ARCH"
 declare TG_WAR_VERSION=$TG_VERSION
 declare TG_WAR="tgol-web-app-$TG_WAR_VERSION.war"
@@ -226,9 +226,9 @@ create_tables() {
 
 	cd "$PKG_DIR/install/web-app/sql"
 	cat tgol-20-create-tables.sql tgol-30-insert.sql | \
-		mysql --user="${mysql_tg_user}"              \
-		      --password="${mysql_tg_passwd}"        \
-                      ${mysql_tg_db} ||                    \
+		sed -e "s/\$tgDatabase/$mysql_tg_db/" |    \
+		mysql --user="$mysql_tg_user"              \
+		      --password="$mysql_tg_passwd" ||     \
 		fail "Unable to create and fill the TGSI tables" \
                      "The mysql user ${mysql_tg_user}" \
                      "may already exists with a different" \

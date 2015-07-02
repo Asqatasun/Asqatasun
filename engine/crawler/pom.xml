@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.tanaguru</groupId>
         <artifactId>engine</artifactId>
-        <version>3.0.6</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
     <artifactId>tanaguru-crawler</artifactId>
     <name>crawler</name>
@@ -16,7 +16,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <skipTests>false</skipTests>
 <!--                    <systemProperties>
                         <property>
                         <name>java.util.logging.config.file</name>
@@ -54,12 +54,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
-        <dependency>
+	<dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

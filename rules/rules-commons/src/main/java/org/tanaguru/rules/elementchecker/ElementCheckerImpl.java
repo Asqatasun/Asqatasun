@@ -205,6 +205,9 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             TestSolution testSolution, 
             Element element, 
             String messageCode) {
+        if (StringUtils.isBlank(messageCode)) {
+            return;
+        }
         Collection<EvidenceElement> eeCol = 
                 getEvidenceElementCollection(
                     element, 

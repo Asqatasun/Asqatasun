@@ -38,7 +38,8 @@ import org.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
 import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
 import static org.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.ARIA_LABELLEDBY_MISSING_MSG;
+import static org.tanaguru.rules.keystore.HtmlElementStore.FORM_ELEMENT;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.ARIA_LABELLEDBY_EMPTY_MSG;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITHOUT_LABEL_MSG;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG;
 import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
@@ -57,7 +58,6 @@ import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  */
 public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
 
-    private static final String FORM_TAG = "form";
     private SimpleElementSelector selector;
     private final ElementHandler<Element> inputElementHandler = new ElementHandlerImpl();
     private final Map<Element, ElementHandler<Element>> inputFormMap = new HashMap<>();
@@ -101,21 +101,23 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
             ElementChecker attributeEmptinessChecker
                     = new TextEmptinessChecker(
                             new TextAttributeOfElementBuilder(ARIA_LABELLEDBY_ATTR),
-                            ARIA_LABELLEDBY_MISSING_MSG,
+                            ARIA_LABELLEDBY_EMPTY_MSG,
                             null);
             attributeEmptinessChecker.check(sspHandler, entry.getValue(), testSolutionHandler);
 
             ElementHandler<Element> inputWithoutLabel = new ElementHandlerImpl();
             ElementHandler<Element> notUniqueLabel = new ElementHandlerImpl();
             for (Element el : entry.getValue().get()) {
-                ElementHandler<Element> labelHandler = new ElementHandlerImpl();
-                labelHandler.addAll(entry.getKey().select(CssLikeSelectorBuilder
-                        .buildSelectorFromAttributeTypeAndValue(ID_ATTR, el.attr(ARIA_LABELLEDBY_ATTR))));
-                if (labelHandler.get().isEmpty()) {
-                    inputWithoutLabel.add(el);
-                } else if (labelHandler.get().size() > 1) {
-                    notUniqueLabel.add(el);
-                    notUniqueLabel.addAll(labelHandler.get());
+                if (StringUtils.isNotEmpty(el.attr(ARIA_LABELLEDBY_ATTR))) {
+                    ElementHandler<Element> labelHandler = new ElementHandlerImpl();
+                    labelHandler.addAll(entry.getKey().select(CssLikeSelectorBuilder
+                            .buildSelectorFromAttributeTypeAndValue(ID_ATTR, el.attr(ARIA_LABELLEDBY_ATTR))));
+                    if (labelHandler.get().isEmpty()) {
+                        inputWithoutLabel.add(el);
+                    } else if (labelHandler.get().size() > 1) {
+                        notUniqueLabel.add(el);
+                        notUniqueLabel.addAll(labelHandler.get());
+                    }
                 }
             }
 
@@ -142,7 +144,7 @@ public class Rgaa30Rule110103 extends AbstractPageRuleMarkupImplementation {
         for (Element el : inputElementHandler.get()) {
             Element tmpElement = el.parent();
             while (StringUtils.isNotBlank(tmpElement.tagName())) {
-                if (tmpElement.tagName().equals(FORM_TAG)) {
+                if (tmpElement.tagName().equals(FORM_ELEMENT)) {
                     if (inputFormMap.containsKey(tmpElement)) {
                         inputFormMap.get(tmpElement).add(el);
                     } else {

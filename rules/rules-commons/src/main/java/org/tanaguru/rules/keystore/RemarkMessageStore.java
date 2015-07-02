@@ -34,7 +34,7 @@ public final class RemarkMessageStore {
             "NoPatternDetected";
     public static final String TITLE_ATTR_MISSING_MSG = "TitleAttributeMissing";
     public static final String ID_MISSING_MSG = "IdMissing";
-    public static final String ARIA_LABELLEDBY_MISSING_MSG = "AriaLabelledbyMissing";
+    public static final String ARIA_LABELLEDBY_EMPTY_MSG = "AriaLabelledbyEmpty";
     public static final String FOR_MISSING_MSG = "ForMissing";
     public static final String ID_NOT_UNIQUE_MSG = "IdNotUnique";
 
@@ -58,6 +58,10 @@ public final class RemarkMessageStore {
             "CheckAlternativeOfDecorativeElement";
     public static final String CHECK_NATURE_AND_ALTERNATIVE_OF_ELEMENT_MSG =
             "CheckNatureAndAlternativeOfElement";
+    public static final String CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG =
+            "CheckNatureOfImageAndPresenceOfAlternativeMechanism";
+    public static final String CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG =
+            "CheckPresenceOfAlternativeMechanismForInformativeImage";
     public static final String CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
             "CheckNatureOfElementWithNotEmptyAltAttribute";
     public static final String CHECK_PRESENCE_ELEMENT_TITLE_MSG =
@@ -67,6 +71,7 @@ public final class RemarkMessageStore {
     public static final String CHECK_NOT_PRESENCE_ELEMENT_TITLE_MSG =
             "CheckNatureOfElementWithEmptyTitleAttribute";
     public static final String NOT_PERTINENT_ALT_MSG = "NotPertinentAlt";
+    public static final String TITLE_NOT_IDENTICAL_TO_ALT_MSG = "TitleNotIdenticalToAlt";
     public static final String CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG =
             "CheckPertinenceOfAltAttributeOfInformativeImage";
     public static final String CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG = 
@@ -93,6 +98,12 @@ public final class RemarkMessageStore {
             "CheckDescriptionPertinenceOfInformativeImage";
     public static final String CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG = 
             "CheckAtRestitutionOfDescriptionOfInformativeImage";
+    public static final String CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_CAPTCHA_MSG = 
+            "CheckAtRestitutionOfAlternativeOfCaptcha";
+    public static final String CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_INFORMATIVE_IMAGE_MSG = 
+            "CheckAtRestitutionOfAlternativeOfInformativeImage";
+    public static final String CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_ALTERNATIVE_MSG = 
+            "CheckNatureOfImageAndAtRestitutionOfAlternative";
     public static final String CHECK_NATURE_OF_IMAGE_AND_DESC_PERTINENCE_MSG = 
             "CheckNatureOfImageAndDescriptionPertinence";
     public static final String CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG = 
@@ -107,8 +118,16 @@ public final class RemarkMessageStore {
             "DecorativeSvgWithNotEmptyTitleOrDescTags";
     public static final String DECORATIVE_SVG_OR_CHILD_WITH_TITLE_ATTRIBUTE=
             "DecorativeSvgWithTitleAttribute";
-    public static final String SUSPECTED_INFORMATIVE_SVG_ROLE_IMAGE_MISSING_ON_SVG=
-            "SuspectedInformativeSvgRoleImageMissingOnSvg";
+    public static final String SVG_WITHOUT_ROLE_IMAGE_MSG=
+            "SvgWithoutRoleImage";
+    public static final String INFORMATIVE_SVG_WITH_NOT_PERTINENT_ALT_MSG=
+            "InformativeSvgWithNotPertinentAlternative";
+    public static final String CHECK_NATURE_OF_SVG_WITH_NOT_PERTINENT_ALT_MSG=
+            "CheckNatureOfSvgWithNotPertinentAlternative";
+    public static final String CHECK_ALT_PERTINENCE_OF_INFORMATIVE_SVG_MSG=
+            "CheckPertinenceOfAlternativeOfInformativeSvg";
+    public static final String CHECK_NATURE_OF_SVG_AND_ALT_PERTINENCE_MSG=
+            "CheckNatureOfSvgAndAlternativePertinence";
     public static final String SUSPECTED_INFORMATIVE_SVG_WITH_ARIA_ATTRIBUTE_DETECTED_ON_ELEMENT_OR_CHILD=
             "SuspectedInformativeSvgWithAriaAttributeDetectedOnElementOrChild";
     public static final String SUSPECTED_INFORMATIVE_SVG_WITH_DESC_OR_TITLE_CHILD_TAG=
@@ -173,28 +192,41 @@ public final class RemarkMessageStore {
     public static final String CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG = 
             "CheckNatureOfTableWithoutSummaryAttribute";
     public static final String CAPTION_MISSING_MSG = "CaptionMissing";
+    public static final String CAPTION_MISSING_ON_COMPLEX_TABLE_MSG = "CaptionMissingOnComplexTable";
     public static final String CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG = 
             "CheckNatureOfTableWithoutCaptionChildElement";
+    public static final String CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG = 
+            "CheckTableWithoutCaptionChildElementIsNotComplex";
     public static final String CHECK_NATURE_OF_TABLE_WITH_CAPTION_MSG = 
             "CheckNatureOfTableWithCaptionChildElement";
+    public static final String CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG = 
+            "CheckTableWithCaptionChildElementIsComplex";
     public static final String NOT_EMPTY_SUMMARY_MSG =
             "NotEmptySummaryForPresentationTable";
     public static final String NOT_PERTINENT_SUMMARY_MSG =
             "NotPertinentSummaryForDataTable";
     public static final String NOT_PERTINENT_CAPTION_MSG =
             "NotPertinentCaptionForDataTable";
+    public static final String NOT_PERTINENT_CAPTION_FOR_COMPLEX_TABLE_MSG =
+            "NotPertinentCaptionForComplexTable";
     public static final String CHECK_SUMMARY_PERTINENCE_FOR_DATA_TABLE_MSG =
             "CheckSummaryPertinenceForDataTable";
     public static final String CHECK_CAPTION_PERTINENCE_FOR_DATA_TABLE_MSG =
             "CheckCaptionPertinenceForDataTable";
+    public static final String CHECK_CAPTION_PERTINENCE_FOR_COMPLEX_TABLE_MSG =
+            "CheckCaptionPertinenceForComplexTable";
     public static final String CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_SUMMARY_MSG =
             "CheckNatureOfTableForNotPertinentSummary";
     public static final String CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_CAPTION_MSG =
             "CheckNatureOfTableForNotPertinentCaption";
+    public static final String CHECK_TABLE_IS_COMPLEX_FOR_NOT_PERTINENT_CAPTION_MSG =
+            "CheckTableIsComplexForNotPertinentCaption";
     public static final String CHECK_NATURE_OF_TABLE_AND_SUMMARY_PERTINENCE_MSG =
             "CheckNatureOfTableAndSummaryPertinence";
     public static final String CHECK_NATURE_OF_TABLE_AND_CAPTION_PERTINENCE_MSG =
             "CheckNatureOfTableAndCaptionPertinence";
+    public static final String CHECK_TABLE_IS_COMPLEX_AND_CAPTION_PERTINENCE_MSG =
+            "CheckTableIsComplexAndCaptionPertinence";
     public static final String CHECK_NATURE_OF_TABLE_AND_LINEARISED_CONTENT_MSG =
             "CheckNatureOfTableAndLinearisedContent";
     public static final String CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG =
@@ -211,6 +243,10 @@ public final class RemarkMessageStore {
             "PresentationTableWithForbiddenMarkup";
     public static final String PRESENTATION_TABLE_WITHOUT_ARIA_MARKUP_MSG =
             "PresentationTableWithoutAriaMarkup";
+    public static final String CHECK_TABLE_IS_PRESENTATION_WITH_ROLE_ARIA_MSG =
+            "CheckTableIsPresentationWithRoleAria";
+    public static final String CHECK_TABLE_IS_NOT_PRESENTATION_WITHOUT_ROLE_ARIA_MSG =
+            "CheckTableIsNotPresentationWithoutRoleAria";
     public static final String CHECK_TABLE_IS_DATA_TABLE_MSG =
             "CheckTableIsDataTable";
     public static final String CHECK_TABLE_IS_PRESENTATION_TABLE_MSG =

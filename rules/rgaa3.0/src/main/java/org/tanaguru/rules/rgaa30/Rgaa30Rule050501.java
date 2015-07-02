@@ -51,11 +51,11 @@ public class Rgaa30Rule050501 extends AbstractMarkerPageRuleImplementation {
         super(
                 new SimpleElementSelector(TABLE_WITH_CAPTION_CSS_LIKE_QUERY),
 
-                // the data and complex tables are part of the scope
-                new String[]{DATA_TABLE_MARKER, COMPLEX_TABLE_MARKER},
+                // the data tables are part of the scope
+                new String[]{DATA_TABLE_MARKER},
 
-                // the presentation tables are not part of the scope
-                new String[]{PRESENTATION_TABLE_MARKER},
+                // the presentation and complex tables are not part of the scope
+                new String[]{PRESENTATION_TABLE_MARKER, COMPLEX_TABLE_MARKER},
 
                 // checker for elements identified by marker
                 new TextPertinenceChecker(

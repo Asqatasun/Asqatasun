@@ -45,6 +45,7 @@ import static org.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
 import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY;
 import static org.tanaguru.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.HtmlElementStore.FORM_ELEMENT;
 import static org.tanaguru.rules.keystore.HtmlElementStore.INPUT_ELEMENT;
 import static org.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
 import static org.tanaguru.rules.keystore.RemarkMessageStore.FOR_MISSING_MSG;
@@ -68,7 +69,6 @@ import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
  */
 public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
 
-    private static final String FORM_TAG = "form";
     private SimpleElementSelector selector;
     private final ElementHandler<Element> labelElementHandler = new ElementHandlerImpl();
     private final ElementHandler<Element> inputElementHandler = new ElementHandlerImpl();
@@ -218,7 +218,7 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
                     && !el.hasAttr(ARIA_LABELLEDBY_ATTR)) {
                 Element tmpElement = el.parent();
                 while (StringUtils.isNotBlank(tmpElement.tagName())) {
-                    if (tmpElement.tagName().equals(FORM_TAG)) {
+                    if (tmpElement.tagName().equals(FORM_ELEMENT)) {
                         if (inputFormMap.containsKey(tmpElement)) {
                             inputFormMap.get(tmpElement).add(el);
                         } else {
@@ -241,8 +241,9 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
     private void putLabelElementHandlerIntoTheMap() {
         for (Element el : labelElementHandler.get()) {
             Element tmpElement = el.parent();
-            while (StringUtils.isNotBlank(tmpElement.tagName())) {
-                if (tmpElement.tagName().equals(FORM_TAG)) {
+            
+            while (tmpElement!=null && StringUtils.isNotBlank(tmpElement.tagName())) {
+                if (tmpElement.tagName().equals(FORM_ELEMENT)) {
                     if (labelFormMap.containsKey(tmpElement)) {
                         Elements els = el.select(FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY);
                         if (!els.isEmpty()) {

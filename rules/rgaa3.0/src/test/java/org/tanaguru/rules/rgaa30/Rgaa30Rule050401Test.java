@@ -25,6 +25,9 @@ import org.tanaguru.entity.audit.ProcessResult;
 import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.tanaguru.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
 import org.tanaguru.rules.keystore.RemarkMessageStore;
 
 /**
@@ -45,22 +48,24 @@ public class Rgaa30Rule050401Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa30.Test.5.4.1-1Passed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-1Passed-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-1Passed-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-1Passed-04", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-2Failed-01", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-2Failed-02", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-2Failed-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table;id-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-2Failed-04", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-2Failed-05", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-2Failed-06", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-1Passed-01", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-1Passed-02", createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-1Passed-03", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table;id-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-1Passed-04", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-2Failed-01", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-2Failed-02", createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-2Failed-03", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table;id-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-2Failed-04", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-2Failed-05", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-2Failed-06", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
         addWebResource("Rgaa30.Test.5.4.1-3NMI-01");
         addWebResource("Rgaa30.Test.5.4.1-3NMI-02");
-        addWebResource("Rgaa30.Test.5.4.1-3NMI-03", createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
-        addWebResource("Rgaa30.Test.5.4.1-3NMI-04", createParameter("Rules", "DATA_TABLE_MARKER", "id-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-3NMI-03", createParameter("Rules", DATA_TABLE_MARKER, "class-data-table"));
+        addWebResource("Rgaa30.Test.5.4.1-3NMI-04", createParameter("Rules", DATA_TABLE_MARKER, "id-data-table"));
         addWebResource("Rgaa30.Test.5.4.1-4NA-01");
-        addWebResource("Rgaa30.Test.5.4.1-4NA-02", createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+        addWebResource("Rgaa30.Test.5.4.1-4NA-02", 
+                createParameter("Rules", PRESENTATION_TABLE_MARKER, "id-presentation-table"),
+                createParameter("Rules", COMPLEX_TABLE_MARKER, "id-complex-table"));
     }
 
     @Override

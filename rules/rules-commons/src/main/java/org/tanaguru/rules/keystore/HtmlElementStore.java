@@ -41,6 +41,7 @@ public final class HtmlElementStore {
     public static final String CAPTION_ELEMENT = HTML.Tag.CAPTION.toString();
     public static final String CODE_ELEMENT = HTML.Tag.CODE.toString();
     public static final String COMMENT_ELEMENT = HTML.Tag.COMMENT.toString();
+    public static final String DESC_ELEMENT = "desc";
     public static final String DIV_ELEMENT = HTML.Tag.DIV.toString();
     public static final String DL_ELEMENT = "dl";
     public static final String EMBED_ELEMENT = "embed";

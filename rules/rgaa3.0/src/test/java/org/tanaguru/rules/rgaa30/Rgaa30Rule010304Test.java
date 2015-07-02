@@ -19,8 +19,16 @@
  */
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.entity.audit.TestSolution;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.ProcessResult;
+import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.tanaguru.rules.keystore.AttributeStore.DATA_ATTR;
+import static org.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
@@ -46,61 +54,91 @@ public class Rgaa30Rule010304Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa30.Test.1.3.4-1Passed-01");
-//        addWebResource("Rgaa30.Test.1.3.4-2Failed-01");
-        addWebResource("Rgaa30.Test.1.3.4-3NMI-01");
-//        addWebResource("Rgaa30.Test.1.3.4-4NA-01");
+        addWebResource("Rgaa30.Test.1.3.4-3NMI-01",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "id-informative-object"));
+        addWebResource("Rgaa30.Test.1.3.4-3NMI-02",
+                createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "class-informative-object"));
+        addWebResource("Rgaa30.Test.1.3.4-3NMI-03");
+        addWebResource("Rgaa30.Test.1.3.4-3NMI-04");
+        addWebResource("Rgaa30.Test.1.3.4-4NA-01");
+        addWebResource("Rgaa30.Test.1.3.4-4NA-02");
+        addWebResource("Rgaa30.Test.1.3.4-4NA-03",
+                createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-object"));
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa30.Test.1.3.4-1Passed-01"), 1);
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa30.Test.1.3.4-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-        //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa30.Test.1.3.4-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                NEED_MORE_INFO,
+                CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG,
+                OBJECT_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, ""),
+                new ImmutablePair(DATA_ATTR, "mock_image.gif"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-02---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.3.4-3NMI-02");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                NEED_MORE_INFO,
+                CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG,
+                OBJECT_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Not empty text"),
+                new ImmutablePair(DATA_ATTR, "mock_image.gif"));
+ 
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.3.4-3NMI-03");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                NEED_MORE_INFO,
+                CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG,
+                OBJECT_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, ""),
+                new ImmutablePair(DATA_ATTR, "mock_image.gif"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-04---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa30.Test.1.3.4-3NMI-04");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+                processResult,
+                NEED_MORE_INFO,
+                CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG,
+                OBJECT_ELEMENT,
+                1,
+                new ImmutablePair(TEXT_ELEMENT2, "Not empty text"),
+                new ImmutablePair(DATA_ATTR, "mock_image.gif"));
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.3.4-4NA-01"));
-    }
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.3.4-4NA-01"));
 
-    @Override
-    protected void setConsolidate() {
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.3.4-4NA-02"));
 
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa30.Test.1.3.4-3NMI-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.3.4-4NA-03"));
     }
 
 }

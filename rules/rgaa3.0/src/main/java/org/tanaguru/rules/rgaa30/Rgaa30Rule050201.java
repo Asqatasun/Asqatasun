@@ -20,12 +20,16 @@
 
 package org.tanaguru.rules.rgaa30;
 
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.processor.SSPHandler;
 import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
+import org.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
 import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.TABLE_WITH_SUMMARY_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.TABLE_WITH_CAPTION_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.HtmlElementStore.CAPTION_ELEMENT;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.tanaguru.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
 import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
 import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
@@ -45,46 +49,64 @@ public class Rgaa30Rule050201 extends AbstractMarkerPageRuleImplementation {
      */
     public Rgaa30Rule050201() {
         super(
-                new SimpleElementSelector(TABLE_WITH_SUMMARY_CSS_LIKE_QUERY),
-            
-                // the data and complex tables are part of the scope
+                new SimpleElementSelector(TABLE_WITH_CAPTION_CSS_LIKE_QUERY),
+
+                // the data tables are part of the scope
                 new String[]{COMPLEX_TABLE_MARKER},
 
-                // the presentation tables are not part of the scope
-                new String[]{DATA_TABLE_MARKER, PRESENTATION_TABLE_MARKER},
-                
+                // the presentation and complex tables are not part of the scope
+                new String[]{PRESENTATION_TABLE_MARKER, DATA_TABLE_MARKER},
+
                 // checker for elements identified by marker
-                new AttributePertinenceChecker(
-                    //the attribute to check 
-                    SUMMARY_ATTR,
+                new TextPertinenceChecker(
                     // check emptiness
-                    true,
+                    true, 
+                    // no comparison with other attribute
                     null,
+                    // no comparison with blacklist
                     null,
                     // not pertinent message
-                    NOT_PERTINENT_SUMMARY_MSG,
+                    NOT_PERTINENT_CAPTION_FOR_COMPLEX_TABLE_MSG, 
                     // manual check message
-                    CHECK_SUMMARY_PERTINENCE_FOR_DATA_TABLE_MSG,
-                    // evidence elements
-                    SUMMARY_ATTR),
+                    CHECK_CAPTION_PERTINENCE_FOR_COMPLEX_TABLE_MSG, 
+                    // evidence element
+                    TEXT_ELEMENT2),
                 
                 // checker for elements not identified by marker
-                new AttributePertinenceChecker(
-                    //the attribute to check 
-                    SUMMARY_ATTR,
-                    // no emptiness check 
-                    false,
+                new TextPertinenceChecker(
+                   // check emptiness
+                    true, 
+                    // no comparison with other attribute
                     null,
+                    // no comparison with blacklist
                     null,
-                    // override not pertinent solution
+                    // override not pertinent result
                     TestSolution.NEED_MORE_INFO, 
                     // not pertinent message
-                    CHECK_NATURE_OF_TABLE_FOR_NOT_PERTINENT_SUMMARY_MSG,
+                    CHECK_TABLE_IS_COMPLEX_FOR_NOT_PERTINENT_CAPTION_MSG, 
                     // manual check message
-                    CHECK_NATURE_OF_TABLE_AND_SUMMARY_PERTINENCE_MSG,
-                    // evidence elements
-                    SUMMARY_ATTR)
+                    CHECK_TABLE_IS_COMPLEX_AND_CAPTION_PERTINENCE_MSG,
+                    // evidence element
+                    TEXT_ELEMENT2)
             );
+    }
+
+    @Override
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        // once tables selected, we extract the caption child element of each 
+        // to make the control
+        Elements captionOnTable = new Elements();
+        for (Element el : getSelectionWithoutMarkerHandler().get()) {
+            captionOnTable.add(el.select(CAPTION_ELEMENT).first());
+        }
+        getSelectionWithoutMarkerHandler().clean().addAll(captionOnTable);
+        
+        Elements captionOnDataTable = new Elements();
+        for (Element el : getSelectionWithMarkerHandler().get()) {
+            captionOnDataTable.add(el.select(CAPTION_ELEMENT).first());
+        }
+        getSelectionWithMarkerHandler().clean().addAll(captionOnDataTable);
     }
 
 }

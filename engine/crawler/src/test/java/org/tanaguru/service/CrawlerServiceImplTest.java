@@ -34,10 +34,12 @@ import org.tanaguru.entity.audit.SSP;
 import org.tanaguru.entity.parameterization.*;
 import org.tanaguru.entity.service.audit.AuditDataService;
 import org.tanaguru.entity.service.audit.ContentDataService;
+import org.tanaguru.entity.service.parameterization.ParameterDataService;
 import org.tanaguru.entity.service.subject.WebResourceDataService;
 import org.tanaguru.entity.subject.WebResource;
 import org.tanaguru.service.mock.MockAuditDataService;
 import org.tanaguru.service.mock.MockContentDataService;
+import org.tanaguru.service.mock.MockParameterDataService;
 import org.tanaguru.service.mock.MockWebResourceDataService;
 
 /**
@@ -65,6 +67,7 @@ public class CrawlerServiceImplTest extends TestCase {
     private WebResourceDataService mockWebResourceDataService;
     private ContentDataService mockContentDataService;
     private AuditDataService mockAuditDataService;
+    private ParameterDataService mockParameterDataService;
     CrawlConfigurationUtils ccu = CrawlConfigurationUtils.getInstance();
 
     public CrawlerServiceImplTest(String testName) {
@@ -78,7 +81,8 @@ public class CrawlerServiceImplTest extends TestCase {
         mockWebResourceDataService = new MockWebResourceDataService();
         mockContentDataService = new MockContentDataService();
         mockAuditDataService = new MockAuditDataService();
-
+        mockParameterDataService = new MockParameterDataService();
+        
         crawlerFactory = new CrawlerFactoryImpl();
         crawlerFactory.setOutputDir("/tmp");
         ((CrawlerFactoryImpl) crawlerFactory).setWebResourceDataService(mockWebResourceDataService);
@@ -89,6 +93,7 @@ public class CrawlerServiceImplTest extends TestCase {
         crawlerService.setWebResourceDataService(mockWebResourceDataService);
         crawlerService.setAuditDataService(mockAuditDataService);
         crawlerService.setContentDataService(mockContentDataService);
+        ((CrawlerServiceImpl)crawlerService).setParameterDataService(mockParameterDataService);
 
         initCrawlConfigUtils();
     }

@@ -20,67 +20,67 @@
 
 package org.tanaguru.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.tanaguru.entity.audit.TestSolution;
+import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
+import org.tanaguru.rules.elementselector.ImageElementSelector;
+import static org.tanaguru.rules.keystore.AttributeStore.DATA_ATTR;
+import static org.tanaguru.rules.keystore.CssLikeQueryStore.OBJECT_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY;
+import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_ELEMENT_WITH_EMPTY_ALT_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
+import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
+import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
- * Implementation of the rule 1.2.4 of the referential Rgaa 3.0.
+ * Implementation of the rule 1.2.3 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-2-4">the rule 1.2.4 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-4"> 1.2.4 rule specification</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-2-3">the rule 1.2.3 design page.</a>
+ * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-3"> 1.2.3 rule specification</a>
  *
  */
-public class Rgaa30Rule010203 extends AbstractNotTestedRuleImplementation {
-
-    /**
-     * Default constructor
-     */
-    public Rgaa30Rule010203 () {
-        super();
-    }
+public class Rgaa30Rule010203 extends AbstractMarkerPageRuleImplementation {
     
-//    /**
-//     * Constructor
-//     */
-//    public Rgaa30Rule010203() {
-//        super(
-//                new ImageElementSelector(OBJECT_TYPE_IMG_CSS_LIKE_QUERY, true, false),
-//                
-//                // the decorative images are part of the scope
-//                DECORATIVE_IMAGE_MARKER, 
-//                
-//                // the informative images are not part of the scope
-//                INFORMATIVE_IMAGE_MARKER, 
-//
-//                // checker for elements identified by marker
-//                new TextEmptinessChecker(
-//                    // the text element builder
-//                    new SimpleTextElementBuilder(),
-//                    // solution when text is empty
-//                    TestSolution.PASSED, 
-//                    // solution when text is not empty
-//                    TestSolution.FAILED, 
-//                    // no message created when a decorative object with an empty text is found
-//                    null, 
-//                    // message created when a decorative object with a not empty text is found
-//                    DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
-//                    // evidence elements
-//                    TEXT_ELEMENT2,
-//                    DATA_ATTR),
-//                
-//                // checker for elements not identified by marker
-//                new TextEmptinessChecker(
-//                    // the text element builder
-//                    new SimpleTextElementBuilder(),
-//                    // solution when text is empty
-//                    TestSolution.NEED_MORE_INFO, 
-//                    // solution when text is notempty
-//                    TestSolution.NEED_MORE_INFO, 
-//                    CHECK_ELEMENT_WITH_EMPTY_ALT_MSG, 
-//                    CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG, 
-//                    // evidence elements
-//                    TEXT_ELEMENT2,
-//                    DATA_ATTR)
-//            );
-//    }
+    /**
+     * Constructor
+     */
+    public Rgaa30Rule010203() {
+        super(
+                new ImageElementSelector(OBJECT_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY, true, false),
+                
+                // the decorative images are part of the scope
+                DECORATIVE_IMAGE_MARKER, 
+                
+                // the informative images are not part of the scope
+                INFORMATIVE_IMAGE_MARKER, 
+
+                // checker for elements identified by marker
+                new TextEmptinessChecker(
+                    // the text element builder
+                    new SimpleTextElementBuilder(),
+                    // solution when text is empty
+                    new ImmutablePair(TestSolution.PASSED, ""), 
+                    // solution when text is not empty
+                    new ImmutablePair(TestSolution.FAILED, DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG),
+                    // evidence elements
+                    TEXT_ELEMENT2,
+                    DATA_ATTR),
+                
+                // checker for elements not identified by marker
+                new TextEmptinessChecker(
+                    // the text element builder
+                    new SimpleTextElementBuilder(),
+                    // solution when text is empty
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_ELEMENT_WITH_EMPTY_ALT_MSG),
+                    // solution when text is notempty
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_ELEMENT_WITH_NOT_EMPTY_ALT_MSG),
+                    // evidence elements
+                    TEXT_ELEMENT2,
+                    DATA_ATTR)
+            );
+    }
 
 }

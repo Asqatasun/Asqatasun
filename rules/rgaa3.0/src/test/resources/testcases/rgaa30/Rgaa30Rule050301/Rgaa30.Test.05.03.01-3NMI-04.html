@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.5.3.1 NMI 04</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.5.3.1 NMI 04</h1> 
+            <div class="test-detail" lang="fr"> Chaque 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> vérifie-t-il ces conditions ? 
+                <ul class="ssTests"> 
+                    <li>le contenu linéarisé reste compréhensible</li> 
+                    <li>la balise <code>table</code> possède un attribut <code>role=&quot;presentation&quot;</code></li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <table id="test-table" role="heading"> 
+                </table> 
+            </div> 
+            <div class="test-explanation">
+                 NMI : A table not identified as presentation table by marker contains a role attribute equals to "heading".
+                 The linearized understanding has to be checked manually.
+            </div> 
+        </div>   
+    </body>
+</html>

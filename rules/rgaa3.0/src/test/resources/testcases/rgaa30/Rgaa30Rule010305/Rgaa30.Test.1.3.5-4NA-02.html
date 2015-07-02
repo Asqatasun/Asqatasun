@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head> 
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+        <title>Rgaa30 Test.1-3-5 NA 02</title> 
+    </head> 
+    <body> 
+        <div> 
+            <h1>Rgaa30 Test.1-3-5 NA 02</h1> 
+            <div class="test-detail" lang="fr"> Chaque image embarquée (balise 
+                <code>embed</code> avec l&apos;attribut 
+                <code>type=&quot;image/...&quot;</code>) porteuse d&apos;information vérifie-t-elle une de ces conditions (hors 
+                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-3" title="Cas particuliers pour le critère 1.3">cas particuliers</a>) ? 
+                <ul class="ssTests"> 
+                    <li>L&apos;image embarquée est immédiatement suivie d&apos;un lien adjacent permettant d&apos;afficher une page ou un passage de texte contenant une alternative pertinente.</li> 
+                    <li>Un mécanisme permet à l&apos;utilisateur de remplacer l&apos;image embarquée par un texte alternatif pertinent</li> 
+                    <li>Un mécanisme permet à l&apos;utilisateur de remplacer l&apos;image embarquée par une image possédant une alternative pertinente.</li> 
+                </ul> 
+            </div> 
+            <div class="testcase"> 
+                <a href="page.html">
+                    <embed  src="mock-embed.png" type="image/png" /> 
+                </a>
+            </div> 
+            <div class="test-explanation">
+                 NA : An embed is present on the page but within a link
+            </div> 
+        </div>  
+    </body>
+</html>

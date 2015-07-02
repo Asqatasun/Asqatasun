@@ -179,7 +179,6 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
             return;
         }
         
-        
         ElementChecker ec = new ElementPresenceChecker(
                 new ImmutablePair(FAILED, DECORATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE), 
                 new ImmutablePair(PASSED,""));
@@ -192,6 +191,7 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
         ec = new ElementPresenceChecker(
                 new ImmutablePair(FAILED, DECORATIVE_SVG_OR_CHILDREN_WITH_ARWIA_ATTRIBUTE), 
                 new ImmutablePair(PASSED,""));
+        
         if (!ariaAttrOnDecorativeSvgOrChild.isEmpty()) {
             ec.check(sspHandler, ariaAttrOnDecorativeSvgOrChild, testSolutionHandler);
         }
@@ -199,6 +199,7 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
         ec = new ElementPresenceChecker(
                 new ImmutablePair(FAILED, DECORATIVE_SVG_WITH_NOT_EMPTY_TITLE_OR_DESC_TAGS), 
                 new ImmutablePair(PASSED,""));
+        
         if (!decorativeSvgElementsWithDescOrTitleChild.isEmpty()) {
             ec.check(sspHandler, decorativeSvgElementsWithDescOrTitleChild, testSolutionHandler);
         }
@@ -206,6 +207,7 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
         ec = new ElementPresenceChecker(
                 new ImmutablePair(FAILED, DECORATIVE_SVG_OR_CHILD_WITH_TITLE_ATTRIBUTE), 
                 new ImmutablePair(PASSED,""));
+        
         if (!titleAttrOnDecorativeSvgOrChild.isEmpty()) {
           //  ec.check(sspHandler, titleAttrOnSvgOrChild, testSolutionHandler);
             ec.check(sspHandler, titleAttrOnDecorativeSvgOrChild, testSolutionHandler);
@@ -229,6 +231,7 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
         ec = new ElementPresenceChecker(
                 new ImmutablePair(NEED_MORE_INFO, SUSPECTED_INFORMATIVE_SVG_WITH_ARIA_ATTRIBUTE_DETECTED_ON_ELEMENT_OR_CHILD), 
                 new ImmutablePair(PASSED,""));
+        
         if (!ariaAttrOnSvgOrChild.isEmpty()) {
             ec.check(sspHandler, ariaAttrOnSvgOrChild, testSolutionHandler);
         }
@@ -236,6 +239,7 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
         ec = new ElementPresenceChecker(
                 new ImmutablePair(NEED_MORE_INFO, SUSPECTED_INFORMATIVE_SVG_WITH_DESC_OR_TITLE_CHILD_TAG), 
                 new ImmutablePair(PASSED,""));
+        
         if (!svgElementsWithDescOrTitleChild.isEmpty()) {
             ec.check(sspHandler, svgElementsWithDescOrTitleChild, testSolutionHandler);
         }
@@ -243,6 +247,7 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
         ec = new ElementPresenceChecker(
                 new ImmutablePair(NEED_MORE_INFO, SUSPECTED_INFORMATIVE_SVG_WITH_TITLE_ATTRIBUTE_ON_ELEMENT_OR_CHILD), 
                 new ImmutablePair(PASSED,""));
+        
         if (!titleAttrOnSvgOrChild.isEmpty()) {
             ec.check(sspHandler, titleAttrOnSvgOrChild, testSolutionHandler);
         }
@@ -250,6 +255,7 @@ public class Rgaa30Rule010204 extends AbstractMarkerPageRuleImplementation {
         ec = new ElementPresenceChecker(
                 new ImmutablePair(NEED_MORE_INFO, SUSPECTED_WELL_FORMATED_DECORATIVE_SVG), 
                 new ImmutablePair(PASSED,""));
+        
         if (!suspectedDecorativeSvgElements.isEmpty()) {
             ec.check(sspHandler, suspectedDecorativeSvgElements, testSolutionHandler);
         }
