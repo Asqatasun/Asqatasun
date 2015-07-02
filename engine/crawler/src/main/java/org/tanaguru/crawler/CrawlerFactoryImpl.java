@@ -21,6 +21,8 @@
  */
 package org.tanaguru.crawler;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import org.tanaguru.entity.parameterization.Parameter;
 import org.tanaguru.entity.service.audit.ContentDataService;
@@ -64,15 +66,24 @@ public class CrawlerFactoryImpl implements CrawlerFactory {
         this.outputDir = outputDir;
     }
     
+    /**
+     * List of referential with no exclusion for rel canonical page
+     */
+    private final List<String> keepRelCanonicalRefList = new ArrayList<>();
+    public void setKeepRelCanonicalRefList(List<String> keepRelCanonicalRefList) {
+        this.keepRelCanonicalRefList.addAll(keepRelCanonicalRefList);
+    }
+    
     @Override
     public Crawler create(Set<Parameter> paramSet, boolean persistOnTheFly) {
-        Crawler crawler = new CrawlerImpl();
+        CrawlerImpl crawler = new CrawlerImpl();
         crawler.setWebResourceDataService(webResourceDataService);
         crawler.setContentDataService(contentDataService);
         crawler.setOutputDir(outputDir);
         crawler.setParameterSet(paramSet);
         crawler.setPersistOnTheFly(persistOnTheFly);
         crawler.setCrawlConfigFilePath(crawlConfigFilePath);
+        crawler.setKeepRelCanonicalRefList(keepRelCanonicalRefList);
         return crawler;
     }
 

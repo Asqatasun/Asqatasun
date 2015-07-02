@@ -7,6 +7,13 @@
     <bean id="crawlerFactory" class="org.tanaguru.crawler.CrawlerFactoryImpl">
         <property name="outputDir" value="${heritrixHome}"/>
         <property name="crawlConfigFilePath" value="${crawlConfigFilePath}"/>
+        <property name="keepRelCanonicalRefList">
+            <list>
+                <value>Rgaa30</value>
+                <value>Rgaa22</value>
+                <value>Aw22</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="crawlerService" class="org.tanaguru.service.CrawlerServiceImpl"/>
