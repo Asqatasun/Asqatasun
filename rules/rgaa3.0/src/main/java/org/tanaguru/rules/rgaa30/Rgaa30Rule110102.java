@@ -241,7 +241,8 @@ public class Rgaa30Rule110102 extends AbstractPageRuleMarkupImplementation {
     private void putLabelElementHandlerIntoTheMap() {
         for (Element el : labelElementHandler.get()) {
             Element tmpElement = el.parent();
-            while (StringUtils.isNotBlank(tmpElement.tagName())) {
+            
+            while (tmpElement!=null && StringUtils.isNotBlank(tmpElement.tagName())) {
                 if (tmpElement.tagName().equals(FORM_ELEMENT)) {
                     if (labelFormMap.containsKey(tmpElement)) {
                         Elements els = el.select(FORM_ELEMENT_WITH_ID_CSS_LIKE_QUERY);
