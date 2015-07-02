@@ -108,7 +108,7 @@
         </repository>
         <repository>
             <id>fdvsolution.public</id>
-            <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+            <url>http://nexus.fdvs.com.ar/content/groups/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
