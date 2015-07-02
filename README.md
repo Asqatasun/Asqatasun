@@ -50,28 +50,23 @@ What tests are covered:
 * switch of context
 * ...
 
-By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
+As of January 2014, this represents [~170 accessibility tests](http://www.tanaguru.org/en/content/accessiweb-22-coverage)
 
 ## Contact and discussions
 
 * [Tanaguru discussion space](http://discuss.tanaguru.org) 
-* email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
+* email to `tanaguru AT tanaguru dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @TanaguruApp](https://twitter.com/tanaguruapp)
 
-## Content of this last version (Tanaguru 3.0.6, 2015-06-26)
+## Content of this last version (Tanaguru 3.1.0, 2015-07-02)
 
 Features :
 
-- Most of the implementation of Rgaa3 rules (about 150 rules)
-- Refactoring (clean-up) of Data Service layer usage
-- Package naming modification : now all packages starts with "org.tanaguru"
-- Rules commons improvments : use of Pair to define a combinaison of Result/Message
-- Rule TU improvments : provide new methods to test rule result and remarks
-- Add the "COMPLEX_TABLE_MARKER"
+- Implementation of Rgaa3 rules (173 rules)
 
 See full [Changelog](CHANGELOG.txt)
 
-## Other opensource tools
+## Other Open Source tools
 
 * [KBAccess](http://www.kbaccess.org/) : database of good and bad examples of web accessibility
 * [Tanaguru Contrast-Finder](http://contrast-finder.tanaguru.com/) : for a given wrong contrast, *propose* good color combination
