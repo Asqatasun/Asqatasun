@@ -3,12 +3,12 @@
     <parent>
         <groupId>org.tanaguru</groupId>
         <artifactId>ws</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
     <groupId>org.tanaguru</groupId>
     <artifactId>tanaguru-ws-client</artifactId>
     <name>tanaguru-ws-client</name>
-    <version>3.1.0-SNAPSHOT</version>
+    <version>3.2.0-SNAPSHOT</version>
     <build>
         <resources>
             <resource>
