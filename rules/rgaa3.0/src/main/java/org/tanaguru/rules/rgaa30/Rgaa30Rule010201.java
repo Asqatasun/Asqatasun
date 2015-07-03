@@ -94,11 +94,14 @@ public class Rgaa30Rule010201  extends AbstractMarkerPageRuleImplementation {
      */
     private ElementChecker getLocalRegularElementChecker() {
         
-        CompositeChecker compositeChecker = new CompositeChecker(
+        CompositeChecker compositeChecker = new CompositeChecker(ALT_ATTR, TITLE_ATTR, SRC_ATTR);
+        
+        compositeChecker.addChecker(
                     new TextEmptinessChecker(
                         new TextAttributeOfElementBuilder(ALT_ATTR),
                         new ImmutablePair(PASSED,""),
-                        new ImmutablePair(FAILED,"")),
+                        new ImmutablePair(FAILED,"")));
+        compositeChecker.addChecker(
                     new AttributePresenceChecker(
                         TITLE_ATTR,
                         new ImmutablePair(FAILED,""),

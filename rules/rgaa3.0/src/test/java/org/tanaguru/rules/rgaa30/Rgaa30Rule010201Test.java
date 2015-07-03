@@ -22,6 +22,7 @@ package org.tanaguru.rules.rgaa30;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.tanaguru.entity.audit.*;
 import org.tanaguru.rules.keystore.AttributeStore;
+import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
 import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
 import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
@@ -280,7 +281,10 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                1);
+                1, 
+                new ImmutablePair(ALT_ATTR, "Not empty alt"),
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, "mock-image.jpg"));
         
 
         //----------------------------------------------------------------------
@@ -293,7 +297,10 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                1);
+                1, 
+                new ImmutablePair(ALT_ATTR, ""),
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, "mock-image.jpg"));
         
 
         //----------------------------------------------------------------------
@@ -306,7 +313,10 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                1);
+                1, 
+                new ImmutablePair(ALT_ATTR, "Not empty alt"),
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, "mock-image.jpg"));
         
 
         //----------------------------------------------------------------------
@@ -319,7 +329,10 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                1);
+                1, 
+                new ImmutablePair(ALT_ATTR, ""),
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, "mock-image.jpg"));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-05---------------------------------
@@ -331,7 +344,10 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                1);
+                1, 
+                new ImmutablePair(ALT_ATTR, "Not empty alt"),
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, "mock-image.jpg"));
         
 
         //----------------------------------------------------------------------
@@ -344,7 +360,10 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                1);
+                1, 
+                new ImmutablePair(ALT_ATTR, ""),
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, "mock-image.jpg"));
         
 
         //----------------------------------------------------------------------
@@ -357,31 +376,46 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                1);
+                1, 
+                new ImmutablePair(ALT_ATTR, "description image"),
+                new ImmutablePair(TITLE_ATTR, "description image"),
+                new ImmutablePair(SRC_ATTR, "mock-image1.jpg"));
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                2);
+                2, 
+                new ImmutablePair(ALT_ATTR, "description image"),
+                new ImmutablePair(TITLE_ATTR, ""),
+                new ImmutablePair(SRC_ATTR, "mock-image2.jpg"));
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                3);
+                3, 
+                new ImmutablePair(ALT_ATTR, ""),
+                new ImmutablePair(TITLE_ATTR, "description image"),
+                new ImmutablePair(SRC_ATTR, "mock-image3.jpg"));
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                4);
+                4, 
+                new ImmutablePair(ALT_ATTR, ""),
+                new ImmutablePair(TITLE_ATTR, ""),
+                new ImmutablePair(SRC_ATTR, "mock-image4.jpg"));
         checkRemarkIsPresent(
                 processResult, 
                 TestSolution.NEED_MORE_INFO, 
                 CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG,
                 IMG_ELEMENT, 
-                5);
+                5, 
+                new ImmutablePair(ALT_ATTR, ""),
+                new ImmutablePair(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+                new ImmutablePair(SRC_ATTR, "mock-image5.jpg"));
         
         
         //----------------------------------------------------------------------
