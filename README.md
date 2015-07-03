@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=develop)](https://travis-ci.org/Tanaguru/Tanaguru) 
+[![Build Status](https://travis-ci.org/Tanaguru/Tanaguru.svg?branch=master)](https://travis-ci.org/Tanaguru/Tanaguru) 
 
 # Tanaguru
 
