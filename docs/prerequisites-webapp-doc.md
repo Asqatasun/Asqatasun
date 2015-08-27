@@ -45,8 +45,8 @@ sudo aptitude install tomcat7 libspring-instrument-java
 
 Create the following symlinks : 
 ```sh
-sudo ln -s /usr/share/java/spring3-instrument-tomcat.jar /usr/share/tomcat6/lib/spring3-instrument-tomcat.jar
-sudo ln -s /usr/share/java/mysql-connector-java.jar /usr/share/tomcat6/lib/mysql-connector-java.jar
+sudo ln -s /usr/share/java/spring3-instrument-tomcat.jar /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar
+sudo ln -s /usr/share/java/mysql-connector-java.jar /usr/share/tomcat7/lib/mysql-connector-java.jar
 ```
 
 ## Xvfb
