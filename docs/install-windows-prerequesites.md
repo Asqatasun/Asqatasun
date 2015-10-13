@@ -1,1 +1,1 @@
-# Tanaguru Windows installation: prerequesites
+# Asqatasun Windows installation: prerequesites
