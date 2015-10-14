@@ -1,0 +1,16 @@
+db:
+    image: mysql
+    volumes:
+    - cnf:/etc/mysql/conf.d
+    - /data
+    environment:
+        MYSQL_ROOT_PASSWORD: tanaguru
+        MYSQL_DATABASE: tanaguru_db
+        MYSQL_USER: tanaguru
+        MYSQL_PASSWORD: tanaguru
+tanaguru:
+    build: .
+    links :
+    - db
+    ports:
+    - "8080:8080"
