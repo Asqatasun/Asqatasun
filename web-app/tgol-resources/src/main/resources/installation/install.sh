@@ -100,9 +100,10 @@ usage() {
 	cat << EOF
 
 Usage : $0 [-h] 
-        --mysql-tg-db <Tanaguru mysql db> 
         --mysql-tg-user <Tanaguru mysql user> 
-        --mysql-tg-psswd <Tanaguru mysql password> 
+        --mysql-tg-passwd <Tanaguru mysql password> 
+        --mysql-tg-db <Tanaguru mysql db> 
+        --mysql-tg-host <mysql host> 
         --tanaguru-url <Tanaguru webapp url> 
         --tomcat-webapps <tomcat webapps directory> 
         --tomcat-user <tomcat unix user>
@@ -115,6 +116,7 @@ Installation options :
  --mysql-tg-user             Mysql user for Tanaguru
  --mysql-tg-passwd           Password of the user specified by --mysql-tg-user
  --mysql-tg-db               Database for Tanaguru
+ --mysql-tg-host             Mysql host (FQDN or local hostname)
  --tanaguru-url              URL where tanaguru will be deployed (e.g. http://localhost:8080/)
  --tomcat-webapps            Tomcat webapps directory (e.g./var/lib/tomcat/webapps)
  --tomcat-user               Unix user name for the tomcat service

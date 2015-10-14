@@ -18,7 +18,7 @@ Here is the list of the parameters you can found in the /etc/tanaguru/tanaguru.c
 |**jdbc.username**               | JDBC Username | Depends on the value of the "**--mysql-tg-user**" installation script option |
 |**jdbc.password**               | JDBC Password | Depends on the value of the "**--mysql-tg-passwd**" installation script option |
 |**jpa.showSql**                 | Enable/Disable the log traces in the mysql log file (for debug purpose). | false |
-|**krashReportMailList**         | List of emails (comma-separated list) used to send krash reports. If isAllowedToSendKrashReport property is set to false, this option is ignored, but has to be present, even empty | support@tanaguru.com |
+|**krashReportMailList**         | List of emails (comma-separated list) used to send krash reports. If isAllowedToSendKrashReport property is set to false, this option is ignored, but has to be present, even empty | support@asqatasun.org |
 |**maxSimultaneousAuditPage**    | Determines the number of page audits that can be run simultaneously. In case of low resources server, this value can be reduced to avoid memory issues. | 10 |
 |**maxSimultaneousAuditScenario**| Determines the number of scenario audits that can be run simultaneously. In case of low resources server, this value can be reduced to avoid memory issues. | 2 |
 |**maxSimultaneousAuditSite**    | Determines the number of site audits that can be run simultaneously. In case of low resources server, this value can be reduced to avoid memory issues. | 2 |
