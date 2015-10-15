@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<project xmlns:pom="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+     <parent>
+        <groupId>org.tanaguru</groupId>
+        <artifactId>rules</artifactId>
+        <version>1.3.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>tanaguru-seo-resources</artifactId>
+    <name>seo-resources</name>
+</project>

@@ -1,0 +1,47 @@
+START TRANSACTION;
+SET standard_conforming_strings=off;
+SET escape_string_warning=off;
+SET CONSTRAINTS ALL DEFERRED;
+
+
+INSERT INTO "tgsi_referential" VALUES 
+(2,'Seo','Seo referential',NULL);
+
+
+INSERT INTO "tgsi_option_family" VALUES 
+(5,'Seo_TEST_WEIGHT_MANAGEMENT','',NULL);
+
+
+INSERT INTO "tgsi_option" VALUES 
+('Seo-01011',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-01012',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-01013',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-01021',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-01031',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-01041',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-01051',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-01061',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-02011',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-02012',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-02013',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-03011',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-03012',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-05011',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-05012',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-05013',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-06011',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-06021',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-06031',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-06041',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-06051',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-06052',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-07011',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-07012',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-07021',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-07051',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-07061',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5),
+('Seo-08011',NULL,'Weight of rule Seo-01011 overriden by user',FALSE,5);
+
+
+-- Post-data save --
+COMMIT;

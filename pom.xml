@@ -219,6 +219,12 @@
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
+            <dependency>
+                <groupId>${rulesGroupId}</groupId>
+                <artifactId>tanaguru-seo</artifactId>
+                <version>${rulesVersion}</version>
+                <scope>runtime</scope>
+            </dependency>
 
             <!-- tanaguru-engine dependencies -->
             <dependency>

@@ -84,6 +84,13 @@ web-app/email-sender/target/
 /web-app/security/target/
 /testing-tools/tgol-test-krash-online/target/
 
+/seo/seo/src/main/resources/hsql-db.properties
+/seo/src/main/resources/hsql-db.log
+/seo/src/main/resources/hsql-db.properties
+/seo/src/main/resources/hsql-db.script
+/seo/src/main/resources/hsql-db.tmp
+/seo/nb-configuration.xml
+
 # Eclipse
 .project
 .classpath
