@@ -7,6 +7,7 @@ RUN apt-get update -qq
 
 # Install Tools needed for further installations steps
 RUN apt-get -yqq install wget   #To dl firefox
+RUN apt-get -yqq install apt-utils
 RUN apt-get -yqq install bzip2  #To unarchive firefox.tar.bz2
 RUN apt-get -yqq install openjdk-7-jdk #To compile sources of tanaguru
 
