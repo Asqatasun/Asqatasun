@@ -43,10 +43,6 @@
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-seo-i18n</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-seo-testcases</artifactId>
         </dependency>
         <dependency>
