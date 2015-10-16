@@ -227,12 +227,6 @@
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo-testcases</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
                 <artifactId>tanaguru-seo-all-resources</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>

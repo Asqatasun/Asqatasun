@@ -42,10 +42,6 @@
             <artifactId>tanaguru-rules-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-seo-testcases</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${testingToolsGroupId}</groupId>
             <artifactId>tanaguru-rules-testing-tools</artifactId>
         </dependency>
