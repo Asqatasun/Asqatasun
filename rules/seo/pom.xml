@@ -53,5 +53,11 @@
             <groupId>${testingToolsGroupId}</groupId>
             <artifactId>tanaguru-rules-testing-tools</artifactId>
         </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.tanaguru</groupId>
@@ -23,11 +23,11 @@
                 </configuration>
                 <executions>
                     <execution>
-                    <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                    <phase>package</phase> <!-- append to the packaging phase. -->
-                    <goals>
-                        <goal>assembly</goal> <!-- goals == mojos -->
-                    </goals>
+                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                        <phase>package</phase> <!-- append to the packaging phase. -->
+                        <goals>
+                            <goal>assembly</goal> <!-- goals == mojos -->
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -116,6 +116,36 @@
         <dependency>
             <groupId>${rulesGroupId}</groupId>
             <artifactId>tanaguru-rgaa3.0</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-seo</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-seo-i18n</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-seo-resources</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-seo-testcases</artifactId>
+            <version>${rulesVersion}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${rulesGroupId}</groupId>
+            <artifactId>tanaguru-seo-all-resources</artifactId>
+            <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
