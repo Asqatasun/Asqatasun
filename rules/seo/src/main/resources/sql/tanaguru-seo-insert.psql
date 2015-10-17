@@ -1,5 +1,11 @@
 -- Converted by db_converter
 
+-- 
+-- 2015-10-17 /!\ achtung /!\ Caution /!\
+-- this script *must* be recreated since changes have been made in the mysql "original" one
+-- Suggestion: use PGLoader to recreate it http://pgloader.com/index.html
+--
+
 START TRANSACTION;
 SET standard_conforming_strings=off;
 SET escape_string_warning=off;
