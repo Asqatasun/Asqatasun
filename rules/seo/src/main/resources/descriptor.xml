@@ -1,4 +1,4 @@
-<!-- rgaa3.0 -->
+<!-- seo -->
 <assembly xmlns="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0 http://maven.apache.org/xsd/resources-1.1.0.xsd">
@@ -9,15 +9,23 @@
         <fileSet>
             <directory>${basedir}/src/main/resources/</directory>
             <includes>
-                <include>deploy.sh</include>
+                <include>install-seo.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/</outputDirectory>
         </fileSet>
+<!--        <fileSet>
+            <directory>${basedir}/src/main/resources/conf/context</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>666</fileMode>
+            <outputDirectory>/conf/context</outputDirectory>
+        </fileSet>-->
         <fileSet>
             <directory>${basedir}/src/main/resources/sql</directory>
             <includes>
-                <include>**/*.sql</include>
+                <include>**/*</include>
             </includes>
             <fileMode>666</fileMode>
             <outputDirectory>/sql</outputDirectory>

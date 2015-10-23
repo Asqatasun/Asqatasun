@@ -1,3 +1,4 @@
+ <!-- tanaguru-seo-all-resources --> 
 <assembly xmlns="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0 http://maven.apache.org/xsd/resources-1.1.0.xsd">
