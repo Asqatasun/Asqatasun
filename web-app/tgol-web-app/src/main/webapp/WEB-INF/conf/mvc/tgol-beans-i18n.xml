@@ -37,6 +37,12 @@
                 <value>classpath:i18n/rule-rgaa30-I18N</value>
                 <value>classpath:i18n/rule-remark-rgaa30-I18N</value>
                 
+                <!--seo1.0 i18n files -->
+                <value>classpath:i18n/referential-seo-I18N</value>
+                <value>classpath:i18n/theme-seo-I18N</value>
+                <value>classpath:i18n/criterion-seo-I18N</value>
+                <value>classpath:i18n/rule-seo-I18N</value>
+                
                 <!--rules-commons i18n files -->
                 <value>classpath:i18n/evidence-elements-I18N</value>
                 <value>classpath:i18n/rule-remark-I18N</value>
