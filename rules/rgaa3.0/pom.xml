@@ -8,6 +8,7 @@
     </parent>
     <artifactId>tanaguru-rgaa3.0</artifactId>
     <name>rgaa3.0</name>
+    
     <build>
         <plugins>
             <plugin>
@@ -36,6 +37,7 @@
         </plugins>
         <finalName>rgaa3.0-${rulesVersion}</finalName>
     </build>
+    
     <dependencies>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
