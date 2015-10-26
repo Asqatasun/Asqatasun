@@ -1,4 +1,4 @@
-# Configuration of Tanaguru web application
+# Configuration of Asqatasun web application
 
 Here is the list of the parameters you can found in the /etc/tanaguru/tanaguru.conf file and thus can help you to customize your installation : 
 
@@ -29,7 +29,7 @@ Here is the list of the parameters you can found in the /etc/tanaguru/tanaguru.c
 |**proxyExclusionUrl**           | Defines Url patterns that must ignore the proxy parameters. Possible values are : **127.0.0.1**, **127.0.0.1;localhost;myhost;**, **myhost**, **mydomain.com**, **internalhost;mydomain.com** | *Empty* |
 |**snapshotServiceUrl**          | Defines the Url of the external service used to build the snaphosts of tested site. If empty (which is the default value), tanaguru's logo will be used to illustrate a website | *Empty* |
 |**synchronousAuditDelay**       | The result of a page audit or a group of audit audit is returned synchronously. For many reasons, an audit can last more than a few seconds, and this variable enables to define a delay from which a synchronous audit will be managed in a asynchronous way. After this delay, an audit in progress page is sent back, and the user is alerted by email when the audit is terminated. | 25000 (in ms) |
-|**tanaguruVersion**             | The version of the current instance of Tanaguru (**should't be modified**) | depends on the version |
+|**tanaguruVersion**             | The version of the current instance of Asqatasun (**should't be modified**) | depends on the version |
 |**tempFolderRootPath**          | Path used by the application to copy its temporary files (**should't be modified**) | /var/tmp/tanaguru |
 |**tgol-deployment-path**        | Path that locates the configuration folder embeded by the web application (**should't be modified**) | No default value,  on the value of the "**--tanaguru-url**" and "**tomcat-webapps**" installation script options |
 |**tgol-persistenceXmlLocation** | Path of the file that define the persistence layer of the application. This option **shouldn't be modified**. | classpath:/conf/persistence.xml. |
