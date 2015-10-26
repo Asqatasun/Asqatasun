@@ -106,4 +106,4 @@ All these projects are opensource and also under the umbrella of [Asqatasun Gith
 
 Have Fun
 
-[Asqatasun Team](tanaguru-team.md)
+[Asqatasun Team](asqatasun-team.md)
