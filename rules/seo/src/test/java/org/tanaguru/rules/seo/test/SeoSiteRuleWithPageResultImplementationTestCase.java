@@ -27,8 +27,8 @@ import org.tanaguru.rules.test.AbstractSiteRuleWithPageResultImplementationTestC
  */
 public abstract class SeoSiteRuleWithPageResultImplementationTestCase extends AbstractSiteRuleWithPageResultImplementationTestCase {
 
-    private static final String TESTCASE_FILE_PATH = "../seo-testcases/src/main/resources/testcases/";
-    private static final String INPUT_FILE_DATA_NAME = "../seo-testcases/src/main/resources/dataSets/nomenclatureFlatXmlDataSet.xml";
+    private static final String TESTCASE_FILE_PATH = "src/test/resources/testcases/";
+    private static final String INPUT_FILE_DATA_NAME = "src/test/resources/dataSets/nomenclatureFlatXmlDataSet.xml";
     private static final String REFERENTIAL = "Seo";
     
     public SeoSiteRuleWithPageResultImplementationTestCase(String testName) {
