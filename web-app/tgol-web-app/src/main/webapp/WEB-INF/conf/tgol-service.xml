@@ -51,4 +51,7 @@
     <import resource="tgol-beans-persistence.xml"/>
     <import resource="tgol-beans-tgol.xml"/>
     
+    <!-- SEO imports -->
+    <import resource="classpath:conf/context/seo/engine/seo-beans-engine.xml"/>
+    
 </beans>

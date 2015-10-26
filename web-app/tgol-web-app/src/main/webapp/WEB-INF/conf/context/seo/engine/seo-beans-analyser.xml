@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- Override the BronzeLevelCodeByRefMap to add the bronze level of Seo referential --> 
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref bean="analyserFactory"/>
+        </property>
+        <property name="targetMethod">
+            <value>setTestWeightParameterFamilyCodeList</value>
+        </property>
+        <property name="arguments">
+            <list>
+                <value>Seo_TEST_WEIGHT_MANAGEMENT</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
