@@ -47,7 +47,7 @@ As of october 2015, this represents 173 accessibility tests.
 
 ## Contact and discussions
 
-* Asqatasun forum @@@TODO
+* [Asqatasun forum](http://discuss.asqatasun.org) 
 * email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 
@@ -60,4 +60,4 @@ Features :
 See full [Changelog](CHANGELOG.txt)
 
 Have Fun
-Asqatasun team
+[Asqatasun Team](docs/asqatasun-team.md)
