@@ -8,7 +8,7 @@ Making your website better is hard. Better for users, better for developers,
 better for the client. [W3C standards](http://www.w3.org/TR/) can bring a lot of
  help, but they are kind of tedious to understand and implement.
 
-[Asqatasun](http://www.tanaguru.com/) helps you in making your web site 
+[Asqatasun](http://asqatasun.org/) helps you in making your web site 
 accessible. It tests your pages, whole site,  or application and gives you 
 precise and detailed insights on the identified issues.
 
@@ -83,7 +83,7 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 
 ## Support and discussions
 
-* [Asqatasun discussion space](http://discuss.tanaguru.org) 
+* [Asqatasun discussion space](http://discuss.asqatasun.org) 
 
 ## Contribute
 
@@ -93,7 +93,7 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 
 ## Contact 
 
-* email to `tanaguru AT tanaguru dot org` (only english, french and klingon is spoken :) ) 
+* email to `asqatasun AT asqatasun dot org` (only english, french and klingon is spoken :) ) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 
 ## Other opensource tools
