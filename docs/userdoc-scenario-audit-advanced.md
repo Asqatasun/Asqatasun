@@ -1,4 +1,4 @@
-# Tanaguru scenario advanced usage
+# Asqatasun scenario advanced usage
 
 ## Triggering additional audits in a scenario
 
@@ -22,7 +22,7 @@ about its accessibility.
 
 ![](Images/screenshot_20150309_TANAGURU_SCENARIO_step_M_EXTENDED_added_steps.png)
 
-If sent as is in Tanaguru, the result of the scenario won't show the "third page"
+If sent as is in Asqatasun, the result of the scenario won't show the "third page"
 (precisely the detail of the path shown by the Javascript button *View Details*).
 We have to add a `storeCurrentUrl` command at the end of the scenario.
 
@@ -39,7 +39,7 @@ We have to add a `storeCurrentUrl` command at the end of the scenario.
 The variable must be at least `tanaguru`. You may add a `-my_title_for_this_state_of_the_page`
 to distinguish one `storeCurrentUrl` from another. 
 
-* Upload the scenario to Tanaguru and launch it. You can now see a third "page" tested.
+* Upload the scenario to Asqatasun and launch it. You can now see a third "page" tested.
 
 ![](Images/screenshot_20150309_TANAGURU_SCENARIO_step_P_EXTENDED_List_of_URLs.png)
 

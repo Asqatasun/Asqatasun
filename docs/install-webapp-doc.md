@@ -1,12 +1,12 @@
-# Tanaguru web application installation
+# Asqatasun web application installation
 
-This page describes the steps to follow to install Tanaguru since Version 3.0.0 (and further) from the binary files or from the sources. The sofware has been tested on 12.04 LTS (Precise Pangolin) and 14.04 LTS (Trusty Tahr).
+This page describes the steps to follow to install Asqatasun since Version 3.0.0 (and further) from the binary files or from the sources. The sofware has been tested on 12.04 LTS (Precise Pangolin) and 14.04 LTS (Trusty Tahr).
 
-PLEASE ensure you meet all [prerequisites for Tanaguru 3.x on Ubuntu](#prerequisites).
+PLEASE ensure you meet all [prerequisites for Asqatasun 3.x on Ubuntu](#prerequisites).
 
 ## Download tanaguru tarball and extract content
 
-Retrieve the [lastest version of Tanaguru](http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz) and extract it on your file system. 
+Retrieve the [lastest version of Asqatasun](http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz) and extract it on your file system. 
 
 ```sh
 wget http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz
@@ -45,15 +45,15 @@ sudo ./install.sh --mysql-tg-db <Tanaguru_mysql_db> \
 ### Script options description
 
 
-* **--mysql-tg-user** : Mysql user for Tanaguru
+* **--mysql-tg-user** : Mysql user for Asqatasun
 * **--mysql-tg-passwd** : Password of the user specified by --mysql-tg-user. if this user already exists, please ensure you give its correct password. If not, the user will be automatically created.
-* **--mysql-tg-db** : Database for Tanaguru
+* **--mysql-tg-db** : Database for Asqatasun
 * **--tanaguru-url** : URL where tanaguru will be deployed (e.g. http://localhost:8080/tanaguru)
 * **--tomcat-webapps** : Tomcat webapps directory (e.g. /var/lib/tomcat7/webapps)
 * **--tomcat-user** : Unix user name for the tomcat service (e.g. tomcat7)
-* **--tg-admin-email** : Email of the Tanaguru admin user (by the way, it's you !)
+* **--tg-admin-email** : Email of the Asqatasun admin user (by the way, it's you !)
 * **--tg-admin-passwd** : The tanaguru application admin password
-* **--firefox-esr-path** : Path to Firefox-ESR binary (e.g. /opt/firefox/firefox) you installed in Tanaguru pre-requesites.
+* **--firefox-esr-path** : Path to Firefox-ESR binary (e.g. /opt/firefox/firefox) you installed in Asqatasun pre-requesites.
 * **--display-port** : Xorg display port (e.g. ":99"). For debug purpose, you may want tanaguru to display firefox instances in the current X session (for desktop). In this case, use ":0" as value and execute the "xhost +" in a terminal to authorize the process (owned by tomcat) to use the X server.
 
 ### Example of install-script invocation

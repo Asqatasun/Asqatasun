@@ -1,4 +1,4 @@
-# Tanaguru Assisted Audit
+# Asqatasun Assisted Audit
 
 Assisted audit offers auditors the ability to fulfill an audit. 
 
@@ -66,7 +66,7 @@ After importing the Passed results, you can see the number of Not Tested
 
 ![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_E_Results_Passed_added.png)
 
-You can also note the apparition of the score (see [Tanaguru Accessibility metric](userdoc-accessibility-metrics.md)
+You can also note the apparition of the score (see [Asqatasun Accessibility metric](userdoc-accessibility-metrics.md)
 for the detail of the formula).
 
 ## 4. Add human results
@@ -74,7 +74,7 @@ for the detail of the formula).
 For all the remaining *Not Tested* tests, you can define humanly the result.
 
 To speed up you work you may want to treat a given theme, or leverage the Pre-Qualified
-results. Those ones are results for which Tanaguru does not have enought clues to state
+results. Those ones are results for which Asqatasun does not have enought clues to state
 a definitive results, but can bring information that may help the auditor.
 
 For each remaining tests you have to choose a definitive result (Passed, Failed 
@@ -82,7 +82,7 @@ or Not Applicable).
 
 ![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_F_override0.png)
 
-You can see the clues brought by Tanaguru by expanding the test (simply click on 
+You can see the clues brought by Asqatasun by expanding the test (simply click on 
 the label of the test). Here it is about the relevancy of the headings, which are
 presented with their content and respective levels.
 

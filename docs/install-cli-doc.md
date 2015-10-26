@@ -1,18 +1,18 @@
-# Tanaguru Command Line Interface Installation
+# Asqatasun Command Line Interface Installation
 
-This page describes the steps to follow to install Tanaguru since Version 3.0.0 (and further) from the binary files or from the sources. The sofware has been tested on 12.04 LTS (Precise Pangolin) and 14.04 LTS (Trusty Tahr).
+This page describes the steps to follow to install Asqatasun since Version 3.0.0 (and further) from the binary files or from the sources. The sofware has been tested on 12.04 LTS (Precise Pangolin) and 14.04 LTS (Trusty Tahr).
 
-PLEASE ensure you meet all [prerequisites for Tanaguru 3.x on Ubuntu](#prerequisites).
+PLEASE ensure you meet all [prerequisites for Asqatasun 3.x on Ubuntu](#prerequisites).
 
 ## Download tanaguru tarball and extract content
 
-Retrieve the [lastest version of Tanaguru](http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz). 
+Retrieve the [lastest version of Asqatasun](http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz). 
 
 Extract it on your file system. The extraction will create a "tanaguru" folder. This folder will become the execution context of the installation.
 
 ## Create and populate database
 
-Warning : If this installation is dedicated to work with the Tanaguru Jenkins plugin, this step is not required. The creation of the database is done when installing the tanaguru Web application. The cli installation just needs to be set with the database access properties (see [next paragraph](#configure-context-with-database-access-properties))
+Warning : If this installation is dedicated to work with the Asqatasun Jenkins plugin, this step is not required. The creation of the database is done when installing the tanaguru Web application. The cli installation just needs to be set with the database access properties (see [next paragraph](#configure-context-with-database-access-properties))
 
 ### Create database
 

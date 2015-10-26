@@ -1,4 +1,4 @@
-# Page audit of accessibility with Tanaguru
+# Page audit of accessibility with Asqatasun
 
 ## Quick steps (for the impatient)
 

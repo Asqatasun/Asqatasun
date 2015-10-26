@@ -1,4 +1,4 @@
-# Usage of Tanaguru Command Line Interface
+# Usage of Asqatasun Command Line Interface
 
 To launch tanaguru on URLs, execute the following commands from the tanaguru CLI context folder:
 
