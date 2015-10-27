@@ -59,9 +59,9 @@ error() {
 
 
 cleanup_directories() {
-	rmdir "$TG_CONF_DIR" || error "Unable to remove $TG_CONF_DIR"
-	rmdir "$TG_TMP_DIR" || error "Unable to remove $TG_TMP_DIR"
-	rmdir "$TG_LOG_DIR" || error "Unable to remove $TG_LOG_DIR"
+	rmdir "${prefix}$TG_CONF_DIR" || error "Unable to remove ${prefix}$TG_CONF_DIR"
+	rmdir "${prefix}$TG_TMP_DIR" || error "Unable to remove ${prefix}$TG_TMP_DIR"
+	rmdir "${prefix}$TG_LOG_DIR" || error "Unable to remove ${prefix}$TG_LOG_DIR"
 }
 
 cleanup() {
@@ -212,6 +212,35 @@ Installing Tanaguru with the following configuration :
  - The user "${tomcat_user}" will have the write rights on the directories "${prefix}$TG_LOG_DIR" and "${prefix}$TG_TMP_DIR"
  - Tomcat configuration will be updated to with Xms, Xmx, display and webdriver.firefox.bin options"
 
+
+EOF
+}
+
+write_options() {
+    MY_UNINSTALL="uninstall.txt"
+    touch "${prefix}${TG_CONF_DIR}/${MY_UNINSTALL}"
+    chmod 600 "${prefix}${TG_CONF_DIR}/${MY_UNINSTALL}"
+    cat >"${prefix}${TG_CONF_DIR}/${MY_UNINSTALL}" <<EOF
+#
+# DO NOT DELETE
+# If you delete this file, you won't be able to uninstall
+#
+mysql_tg_user=${mysql_tg_user}
+mysql_tg_passwd=${mysql_tg_passwd}
+mysql_tg_db=${mysql_tg_db}
+mysql_tg_host=${mysql_tg_host}
+
+prefix=${prefix}
+tg_log_dir=${prefix}$TG_LOG_DIR
+tg_conf_dir=${prefix}$TG_CONF_DIR
+tg_tmp_dir=${prefix}$TG_TMP_DIR
+
+tanaguru_url=${tanaguru_url}
+tomcat_webapps=${tomcat_webapps}
+tanaguru_webapp_dir=${tanaguru_webapp_dir}
+tg_webapp_dir_full=${tomcat_webapps}/${tanaguru_webapp_dir}
+
+firefox_esr_path=${firefox_esr_path}
 
 EOF
 }
