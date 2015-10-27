@@ -1,5 +1,11 @@
 #!/bin/bash
 
+set -o errexit
+
+#############################################
+# Init
+#############################################
+
 declare prefix="/"
 
 declare mysql_tg_user=
@@ -96,6 +102,10 @@ prerequesites() {
 	echo ""	
 }
 
+#############################################
+# Usage
+#############################################
+
 usage() {
 	cat << EOF
 
@@ -131,6 +141,9 @@ Script options :
 EOF
 }
 
+#############################################
+# Option management
+#############################################
 proceed_cmdline() {
 	while [[ "$#" -gt 0 ]]; do
 		local var=$(echo ${1#--} | tr '-' '_')
@@ -245,67 +258,73 @@ firefox_esr_path=${firefox_esr_path}
 EOF
 }
 
+#############################################
+# SQL
+#############################################
 create_tables() {
-	
-	cd "$PKG_DIR/install/engine/sql"
-	cat tanaguru-20-create-tables.sql                \
-	    tanaguru-30-insert.sql |                     \
-		mysql --user="${mysql_tg_user}"            \
-		      --password="${mysql_tg_passwd}"      \
-		      --host="${mysql_tg_host}"		\
-                      ${mysql_tg_db} ||                  \
-		fail "Unable to create the engine tables."\
-                     "The mysql user ${mysql_tg_user}" \
-                     "may already exists with a different" \
-                     "password in the database."
 
-	cd "$PKG_DIR/install/web-app/sql"
-	cat tgol-20-create-tables.sql tgol-30-insert.sql | \
-		mysql --user="${mysql_tg_user}"              \
-		      --password="${mysql_tg_passwd}" 	\
-		      --host="${mysql_tg_host}"         \
-                        ${mysql_tg_db} ||     \
-		fail "Unable to create and fill the TGSI tables" \
-                     "The mysql user ${mysql_tg_user}" \
-                     "may already exists with a different" \
-                     "password in the database."
+    cd "$PKG_DIR/install/engine/sql"
+    cat tanaguru-20-create-tables.sql \
+        tanaguru-30-insert.sql | \
+            mysql --user="${mysql_tg_user}" \
+                  --password="${mysql_tg_passwd}"\
+                  --host="${mysql_tg_host}" \
+                  ${mysql_tg_db} || \
+            fail "Unable to create the engine tables."\
+                 "The mysql user ${mysql_tg_user}" \
+                 "may already exists with a different" \
+                 "password in the database."
 
-	cd "$PKG_DIR/install/rules/sql"
-	cat 10-rules-resources-insert.sql                \
-            accessiweb2.2-insert.sql               \
-            rgaa3.0-insert.sql                \
-            rgaa2.2-insert.sql |              \
-		mysql --user="${mysql_tg_user}"            \
-		      --password="${mysql_tg_passwd}"      \
-		      --host="${mysql_tg_host}"	     \
-                      ${mysql_tg_db} || 		\
-		fail "Unable to create the rules tables" \
-                     "The mysql user ${mysql_tg_user}" \
-                     "may already exists with a different" \
-                     "password in the database."
+    cd "$PKG_DIR/install/web-app/sql"
+    cat tgol-20-create-tables.sql tgol-30-insert.sql | \
+            mysql --user="${mysql_tg_user}" \
+                  --password="${mysql_tg_passwd}" \
+                  --host="${mysql_tg_host}" \
+                    ${mysql_tg_db} || \
+            fail "Unable to create and fill the TGSI tables" \
+                 "The mysql user ${mysql_tg_user}" \
+                 "may already exists with a different" \
+                 "password in the database."
+
+    cd "$PKG_DIR/install/rules/sql"
+    cat 10-rules-resources-insert.sql \
+        accessiweb2.2-insert.sql \
+        rgaa3.0-insert.sql \
+        rgaa2.2-insert.sql | \
+            mysql --user="${mysql_tg_user}" \
+                  --password="${mysql_tg_passwd}" \
+                  --host="${mysql_tg_host}" \
+                  ${mysql_tg_db} || \
+            fail "Unable to create the rules tables" \
+                 "The mysql user ${mysql_tg_user}" \
+                 "may already exists with a different" \
+                 "password in the database."
 }
 
+#############################################
+# Directories 
+#############################################
 create_directories() {
 	dirty_directories=true
 	install -dm 700 -o ${tomcat_user} -g root \
-		"${prefix}$TG_CONF_DIR"         \
-		"${prefix}$TG_LOG_DIR"          \
-		"${prefix}$TG_TMP_DIR"          \
+		"${prefix}$TG_CONF_DIR" \
+		"${prefix}$TG_LOG_DIR" \
+		"${prefix}$TG_TMP_DIR" \
 		|| fail "Unable to create Tanaguru directories"
-	install -dm 755 -o ${tomcat_user} -g root                          \
+	install -dm 755 -o ${tomcat_user} -g root \
 		"${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
 		|| fail "Unable to create Tanaguru webapp directory"
 }
 
 install_firefox_profile_files() {
     install -dm 700 -o ${tomcat_user} -g root \
-		"${prefix}$TG_TMP_DIR/.gconf"          \
-		"${prefix}$TG_TMP_DIR/.java"          \
-		"${prefix}$TG_TMP_DIR/.cache"          \
-		"${prefix}$TG_TMP_DIR/.dbus"          \
-		"${prefix}$TG_TMP_DIR/.mozilla"          \
-		"${prefix}$TG_TMP_DIR/.gnome2"          \
-		"${prefix}$TG_TMP_DIR/.gnome2_private"          \
+		"${prefix}$TG_TMP_DIR/.gconf" \
+		"${prefix}$TG_TMP_DIR/.java" \
+		"${prefix}$TG_TMP_DIR/.cache" \
+		"${prefix}$TG_TMP_DIR/.dbus" \
+		"${prefix}$TG_TMP_DIR/.mozilla" \
+		"${prefix}$TG_TMP_DIR/.gnome2" \
+		"${prefix}$TG_TMP_DIR/.gnome2_private" \
 		|| fail "Unable to create Tanaguru directories"
 
     ln -s "${prefix}$TG_TMP_DIR/.gconf" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gconf" 
@@ -320,30 +339,33 @@ install_firefox_profile_files() {
 install_configuration() {
 	dirty_conf=true
 	cp -r "$PKG_DIR"/install/web-app/conf/* \
-	   "${prefix}$TG_CONF_DIR" ||                  \
+	   "${prefix}$TG_CONF_DIR" || \
 		fail "Unable to copy the tanaguru configuration"
 	sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${tanaguru_webapp_dir}/WEB-INF/conf#" \
-	    -e    "s#\$WEB-APP-URL .*#${tanaguru_url}#"               \
-	    -e    "s#\$SQL_SERVER_URL#$mysql_tg_host#"                     \
-	    -e    "s#\$USER#$mysql_tg_user#"                          \
-	    -e    "s#\$PASSWORD#$mysql_tg_passwd#"                    \
-	    -e    "s#\$DATABASE_NAME#$mysql_tg_db#"                   \
-	    "${prefix}$TG_CONF_DIR/tanaguru.conf" ||                    \
+	    -e    "s#\$WEB-APP-URL .*#${tanaguru_url}#" \
+	    -e    "s#\$SQL_SERVER_URL#$mysql_tg_host#" \
+	    -e    "s#\$USER#$mysql_tg_user#" \
+	    -e    "s#\$PASSWORD#$mysql_tg_passwd#" \
+	    -e    "s#\$DATABASE_NAME#$mysql_tg_db#" \
+	    "${prefix}$TG_CONF_DIR/tanaguru.conf" || \
 		fail "Unable to set up the tanaguru configuration"
-	grep '$' "${prefix}$TG_CONF_DIR" >/dev/null &&            \
-		warn "The file ${prefix}$TG_CONF_DIR contains"    \
+	grep '$' "${prefix}$TG_CONF_DIR" >/dev/null &&  \
+		warn "The file ${prefix}$TG_CONF_DIR contains" \
 		     "dollar symboles. Check by yourself that the " \
 		     "replacement worked fine."
 }
 
+#############################################
+# Webapp
+#############################################
 install_webapp() {
 	dirty_webapp=true
-	cd "${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}"        \
+	cd "${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
 		|| fail "Unable to go to the tanaguru webapp directory"
 	unzip -q "$PKG_DIR/install/web-app/$TG_WAR" \
 		|| fail "Unable to extract the tanaguru war"
-        sed -i -e "s#file:///#file://${prefix}#g"              \
-	    "WEB-INF/conf/tgol-service.xml" ||                    \
+        sed -i -e "s#file:///#file://${prefix}#g" \
+	    "WEB-INF/conf/tgol-service.xml" || \
 		fail "Unable to set up the tanaguru configuration"
 }
 
@@ -357,7 +379,7 @@ edit_esapi_configuration_file() {
 	encryptorMasterSalt=$(grep Encryptor.MasterSalt generated_keys.txt)
 	sed -i -e "s#Encryptor.MasterKey=\$MasterKey#${encryptorMasterKey}#"  \
 	    -e    "s#Encryptor.MasterSalt=\$MasterSalt#${encryptorMasterSalt}#" \
-	    "${prefix}$TG_CONF_DIR/ESAPI.properties" ||                    \
+	    "${prefix}$TG_CONF_DIR/ESAPI.properties" || \
 		fail "Unable to set up the esapie configuration"
 	rm -f generated_keys.txt
 }
@@ -365,11 +387,11 @@ edit_esapi_configuration_file() {
 create_first_user() {
         # create admin user for Tanaguru
 	cd "$PKG_DIR/install/web-app/sql-management"
-        sed -i -e "s/^DbUser=.*$/DbUser=$mysql_tg_user/g" 	\
+        sed -i -e "s/^DbUser=.*$/DbUser=$mysql_tg_user/g" \
 	    -e "s/^DbUserPasswd=.*$/DbUserPasswd=$mysql_tg_passwd/g" \
 	    -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
-	    -e "s/^DbHost=.*$/DbHost=$mysql_tg_host/g"  \
-            tg-set-user-admin.sh tg-create-user.sh  ||   \
+	    -e "s/^DbHost=.*$/DbHost=$mysql_tg_host/g" \
+            tg-set-user-admin.sh tg-create-user.sh  || \
 		fail "Unable to create tanaguru admin user"
         sh ./tg-create-user.sh -e "${tg_admin_email}" -p "${tg_admin_passwd}" -l " " -f " " >/dev/null || fail "Error while creating Tanaguru admin user. User may already exists"
         sh ./tg-set-user-admin.sh -u $tg_admin_email >/dev/null || fail "Error while setting Tanaguru user as admin"
@@ -401,6 +423,9 @@ Tanaguru is available at:
 EOF
 }
 
+#############################################
+# main
+#############################################
 main() {
 	# get options
 	proceed_cmdline "${@:2}"
