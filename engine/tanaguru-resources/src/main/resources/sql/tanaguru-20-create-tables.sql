@@ -2,7 +2,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 -- --------------------------------------------------------
 --
--- Structure de la table `AUDIT`
+-- table `AUDIT`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AUDIT` (
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `AUDIT` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `WEB_RESOURCE`
+-- table `WEB_RESOURCE`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `CONTENT`
+-- table `CONTENT`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTENT` (
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `CONTENT` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `CONTENT_RELATIONSHIP`
+-- table `CONTENT_RELATIONSHIP`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTENT_RELATIONSHIP` (
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `CONTENT_RELATIONSHIP` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `SCOPE`
+-- table `SCOPE`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SCOPE` (
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `SCOPE` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `DECISION_LEVEL`
+-- table `DECISION_LEVEL`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DECISION_LEVEL` (
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `DECISION_LEVEL` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `LEVEL`
+-- table `LEVEL`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `LEVEL` (
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `LEVEL` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `THEME`
+-- table `THEME`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `THEME` (
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `THEME` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `REFERENCE`
+-- table `REFERENCE`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `REFERENCE` (
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `REFERENCE` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `CRITERION`
+-- table `CRITERION`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRITERION` (
@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `CRITERION` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `TEST`
+-- table `TEST`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TEST` (
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `TEST` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `AUDIT_TEST`
+-- table `AUDIT_TEST`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AUDIT_TEST` (
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `AUDIT_TEST` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `EVIDENCE`
+-- table `EVIDENCE`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EVIDENCE` (
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `EVIDENCE` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `PROCESS_RESULT`
+-- table `PROCESS_RESULT`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
@@ -340,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `PROCESS_REMARK`
+-- table `PROCESS_REMARK`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROCESS_REMARK` (
@@ -367,7 +367,7 @@ CREATE TABLE IF NOT EXISTS `PROCESS_REMARK` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `EVIDENCE_ELEMENT`
+-- table `EVIDENCE_ELEMENT`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EVIDENCE_ELEMENT` (
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS `EVIDENCE_ELEMENT` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `NOMENCLATURE`
+-- table `NOMENCLATURE`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NOMENCLATURE` (
@@ -410,7 +410,7 @@ CREATE TABLE IF NOT EXISTS `NOMENCLATURE` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `NOMENCLATURE_ELEMENT`
+-- table `NOMENCLATURE_ELEMENT`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NOMENCLATURE_ELEMENT` (
@@ -429,7 +429,7 @@ CREATE TABLE IF NOT EXISTS `NOMENCLATURE_ELEMENT` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `STANDARD_MESSAGE`
+-- table `STANDARD_MESSAGE`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `STANDARD_MESSAGE` (
@@ -443,7 +443,7 @@ CREATE TABLE IF NOT EXISTS `STANDARD_MESSAGE` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `PRE_PROCESS_RESULT`
+-- table `PRE_PROCESS_RESULT`
 --
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
@@ -470,7 +470,7 @@ CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
 
 -- --------------------------------------------------------
 --
--- Structure de la table `SNAPSHOT`
+-- table `SNAPSHOT`
 --
 -- --------------------------------------------------------
 -- CREATE TABLE IF NOT EXISTS `SNAPSHOT` (
