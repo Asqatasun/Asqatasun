@@ -102,6 +102,23 @@ prerequesites() {
 	echo ""	
 }
 
+my_sql_insert() {
+    # Option management
+    if [ ! "$1" ]; then
+        echo "my_sql_insert: missing sql file";
+        exit;
+    fi
+    SQL_FILE="$1"
+
+    # Effective SQL command
+    cat ${SQL_FILE} | \
+            mysql --user="${mysql_tg_user}" \
+                  --password="${mysql_tg_passwd}"\
+                  --host="${mysql_tg_host}" \
+                  --databse="${mysql_tg_db}" || \
+            fail "Unable to run SQL file: ${SQL_FILE}"
+}
+
 #############################################
 # Usage
 #############################################
@@ -190,8 +207,7 @@ proceed_stdin() {
 	done
 }
 
-preprocess_options()
-{
+preprocess_options() {
 	local protocol='\(https\?://\)\?'
 	local domain='[0-9a-z\-]\+\(\.[0-9a-z\-]\+\)*'
 	local port='\(:[0-9]\+\)\?'
@@ -264,41 +280,19 @@ EOF
 create_tables() {
 
     cd "$PKG_DIR/install/engine/sql"
-    cat tanaguru-20-create-tables.sql \
-        tanaguru-30-insert.sql | \
-            mysql --user="${mysql_tg_user}" \
-                  --password="${mysql_tg_passwd}"\
-                  --host="${mysql_tg_host}" \
-                  ${mysql_tg_db} || \
-            fail "Unable to create the engine tables."\
-                 "The mysql user ${mysql_tg_user}" \
-                 "may already exists with a different" \
-                 "password in the database."
-
+    my_sql_insert tanaguru-20-create-tables.sql
+    my_sql_insert tanaguru-30-insert.sql
+    
     cd "$PKG_DIR/install/web-app/sql"
-    cat tgol-20-create-tables.sql tgol-30-insert.sql | \
-            mysql --user="${mysql_tg_user}" \
-                  --password="${mysql_tg_passwd}" \
-                  --host="${mysql_tg_host}" \
-                    ${mysql_tg_db} || \
-            fail "Unable to create and fill the TGSI tables" \
-                 "The mysql user ${mysql_tg_user}" \
-                 "may already exists with a different" \
-                 "password in the database."
+    my_sql_insert tgol-20-create-tables.sql
+    my_sql_insert tgol-tgol-30-insert.sql
 
     cd "$PKG_DIR/install/rules/sql"
-    cat 10-rules-resources-insert.sql \
-        accessiweb2.2-insert.sql \
-        rgaa3.0-insert.sql \
-        rgaa2.2-insert.sql | \
-            mysql --user="${mysql_tg_user}" \
-                  --password="${mysql_tg_passwd}" \
-                  --host="${mysql_tg_host}" \
-                  ${mysql_tg_db} || \
-            fail "Unable to create the rules tables" \
-                 "The mysql user ${mysql_tg_user}" \
-                 "may already exists with a different" \
-                 "password in the database."
+    my_sql_insert 10-rules-resources-insert.sql
+    my_sql_insert accessiweb2.2-insert.sql
+    my_sql_insert rgaa2.2-insert.sql
+    my_sql_insert rgaa3.0-insert.sql
+    my_sql_insert seo1.0-insert.sql
 }
 
 #############################################
@@ -437,6 +431,8 @@ main() {
 	echo_configuration_summary
 	# prerequesites
 	prerequesites
+        # save options for uninstall
+        write_options
 	# create tanaguru directories
 	create_directories
 	echo "Directory creation:	.	.	OK"
