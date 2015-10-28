@@ -59,7 +59,7 @@ while true; do
 done
 
 
-if [ ! "$CONF_DIR" -o "$HELP" ]; then
+if [[ -z "$CONF_DIR" || "$HELP" == "true" ]]; then
     usage
 fi
 
@@ -142,14 +142,17 @@ do_the_purge() {
 #############################################
 # Main
 #############################################
-
 get_option_value
 do_the_remove
 
-echo "DEBUG: PURGE=$PURGE";
-
-if [ "$PURGE" ]; then
+if [[ "$PURGE" == "true" ]]; then
     do_the_purge;
 fi
 
-exit 0
+cat <<EOF
+Asqatasun has been removed.
+Don't forget to restart Tomcat.
+See you soon
+EOF
+
+exit $?
