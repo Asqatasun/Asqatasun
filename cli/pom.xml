@@ -12,6 +12,6 @@
     <packaging>pom</packaging>
     <name>cli</name>
     <modules>
-        <module>tanaguru-cli</module>
+        <module>asqatasun-cli</module>
     </modules>
 </project>

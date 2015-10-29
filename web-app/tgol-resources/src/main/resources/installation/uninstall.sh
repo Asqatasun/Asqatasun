@@ -37,7 +37,7 @@ EOF
 #############################################
 TEMP=`getopt -o c:ph --long conf-dir:,purge,help -- "$@"`
 
-if [ $? != 0 ] ; then
+if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
     exit 1 ;
 fi
@@ -88,12 +88,12 @@ error() {
 }
 
 my_remove_dir() {
-    if [ ! "$1" ]; then
+    if [[ ! "$1" ]]; then
         echo "my_remove_dir: missing directory";
         exit;
     fi
 
-    if [ -e "$1" ]; then
+    if [[ -e "$1" ]]; then
         echo -en "--> $1 \n"
         rm -rfI "$1" || error "Unable to remove $1"
     fi

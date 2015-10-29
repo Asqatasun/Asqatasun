@@ -21,6 +21,6 @@
         <module>tgol-voter</module>
         <module>tgol-report</module>
         <module>tgol-security</module>
-        <module>tgol-web-app</module>
-  </modules>
+        <module>asqatasun-web-app</module>
+    </modules>
 </project>

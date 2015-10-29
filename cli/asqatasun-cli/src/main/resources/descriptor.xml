@@ -141,6 +141,7 @@
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/installation</directory>
             <includes>
                 <include>install.sh</include>
+                <include>uninstall.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>.</outputDirectory>
@@ -200,7 +201,7 @@
             <outputDirectory>/install/web-app/token-master-key-encryptor</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../web-app/tgol-web-app/target</directory>
+            <directory>${basedir}/../../web-app/asqatasun-web-app/target</directory>
             <includes>
                 <include>*.war</include>
             </includes>

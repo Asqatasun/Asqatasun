@@ -8,9 +8,9 @@
         <artifactId>web-app</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tgol-web-app</artifactId>
+    <artifactId>asqatasun-web-app</artifactId>
     <packaging>war</packaging>
-    <name>tgol-web-app</name>
+    <name>asqatasun-web-app</name>
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -313,7 +313,7 @@
                 </configuration>
             </plugin>-->
         </plugins>
-        <finalName>tgol-web-app-${webappVersion}</finalName>
+        <finalName>asqatasun-web-app-${webappVersion}</finalName>
     </build>
     <profiles>
         <profile>
