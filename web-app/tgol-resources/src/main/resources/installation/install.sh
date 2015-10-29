@@ -28,7 +28,7 @@ declare dirty_directories=false
 declare dirty_webapp=false
 
 declare TG_CONF_DIR="etc/tanaguru"
-declare TG_TMP_DIR="var/tmp/tanaguru"
+declare TG_TMP_DIR="var/tmp/asqatasun"
 declare TG_LOG_DIR="var/log/asqatasun"
 declare TOMCAT_HOME_DIR="/usr/share"
 declare PKG_DIR=$(pwd)
