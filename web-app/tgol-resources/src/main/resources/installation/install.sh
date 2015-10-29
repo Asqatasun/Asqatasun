@@ -29,7 +29,7 @@ declare dirty_webapp=false
 
 declare TG_CONF_DIR="etc/tanaguru"
 declare TG_TMP_DIR="var/tmp/tanaguru"
-declare TG_LOG_DIR="var/log/tanaguru"
+declare TG_LOG_DIR="var/log/asqatasun"
 declare TOMCAT_HOME_DIR="/usr/share"
 declare PKG_DIR=$(pwd)
 
@@ -162,69 +162,69 @@ EOF
 # Option management
 #############################################
 proceed_cmdline() {
-	while [[ "$#" -gt 0 ]]; do
-		local var=$(echo ${1#--} | tr '-' '_')
-		local isVar=false
+    while [[ "$#" -gt 0 ]]; do
+        local var=$(echo ${1#--} | tr '-' '_')
+        local isVar=false
 
-		for option in ${OPTIONS[@]}; do
-			if [[ "$option" = "$var" ]]; then
-				eval $var=$2
-				shift 2 || fail_with_usage "Missing argument after $1"
-				isVar=true
-				break
-			fi
-		done
-		$isVar || case "$1" in
-			-h|--help)        usage; exit 0;;
-			*) usage; exit 1;;
-		esac
-	done
+        for option in ${OPTIONS[@]}; do
+            if [[ "$option" = "$var" ]]; then
+                eval $var=$2
+                shift 2 || fail_with_usage "Missing argument after $1"
+                isVar=true
+                break
+            fi
+        done
+        $isVar || case "$1" in
+            -h|--help)        usage; exit 0;;
+            *) usage; exit 1;;
+        esac
+    done
         
 }
 
 getvar() {
-	echo $1 | sed 's/^-\+//' | tr '-' '_'
+    echo $1 | sed 's/^-\+//' | tr '-' '_'
 }
 
 echo_missing_options() {
-	for option in ${OPTIONS[@]}; do
-		[[ -z "$(eval echo \${$option})" ]] && \
-			echo -n "--${option/-/_} "
-	done
+    for option in ${OPTIONS[@]}; do
+            [[ -z "$(eval echo \${$option})" ]] && \
+                    echo -n "--${option/-/_} "
+    done
 }
 
 proceed_stdin() {
-        local missing_options=$(echo_missing_options)
-	[[ ! -z $missing_options ]] && fail_with_usage "Missing options : " $missing_options
-	for option in ${OPTIONS[@]}; do
-		local value=$(eval echo \${$option})
-		while [[ -z "$value" ]]; do
-			$quiet || $script || echo -n "$option : "
-			read $option
-			value=$(eval echo \${$option})
-                        echo $value
-                done
-	done
+    local missing_options=$(echo_missing_options)
+    [[ ! -z $missing_options ]] && fail_with_usage "Missing options : " $missing_options
+    for option in ${OPTIONS[@]}; do
+        local value=$(eval echo \${$option})
+        while [[ -z "$value" ]]; do
+            $quiet || $script || echo -n "$option : "
+            read $option
+            value=$(eval echo \${$option})
+            echo $value
+        done
+    done
 }
 
 preprocess_options() {
-	local protocol='\(https\?://\)\?'
-	local domain='[0-9a-z\-]\+\(\.[0-9a-z\-]\+\)*'
-	local port='\(:[0-9]\+\)\?'
+    local protocol='\(https\?://\)\?'
+    local domain='[0-9a-z\-]\+\(\.[0-9a-z\-]\+\)*'
+    local port='\(:[0-9]\+\)\?'
 
-	tanaguru_webapp_dir=$(
-		echo $tanaguru_url | \
-		sed "s#${protocol}${domain}${port}/\?##"
-	) || fail "--tanaguru-url argument is not a valid url : \"$tanaguru_url\""
+    tanaguru_webapp_dir=$(
+            echo $tanaguru_url | \
+            sed "s#${protocol}${domain}${port}/\?##"
+    ) || fail "--tanaguru-url argument is not a valid url : \"$tanaguru_url\""
 
-	[[ "$prefix" == /* ]] || fail "Invalid --prefix argument"
-        case $prefix in
-	     */) prefix=$prefix;;
-	     *) prefix+='/';;
-	esac
-	if [[ -z "$tanaguru_webapp_dir" ]]; then
-            tanaguru_webapp_dir=ROOT
-        fi
+    [[ "$prefix" == /* ]] || fail "Invalid --prefix argument"
+    case $prefix in
+         */) prefix=$prefix;;
+         *) prefix+='/';;
+    esac
+    if [[ -z "$tanaguru_webapp_dir" ]]; then
+        tanaguru_webapp_dir=ROOT
+    fi
 }
 
 echo_configuration_summary() {
@@ -301,15 +301,15 @@ create_tables() {
 # Directories 
 #############################################
 create_directories() {
-	dirty_directories=true
-	install -dm 700 -o ${tomcat_user} -g root \
-		"${prefix}$TG_CONF_DIR" \
-		"${prefix}$TG_LOG_DIR" \
-		"${prefix}$TG_TMP_DIR" \
-		|| fail "Unable to create Tanaguru directories"
-	install -dm 755 -o ${tomcat_user} -g root \
-		"${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
-		|| fail "Unable to create Tanaguru webapp directory"
+    dirty_directories=true
+    install -dm 700 -o ${tomcat_user} -g root \
+            "${prefix}$TG_CONF_DIR" \
+            "${prefix}$TG_LOG_DIR" \
+            "${prefix}$TG_TMP_DIR" \
+            || fail "Unable to create Tanaguru directories"
+    install -dm 755 -o ${tomcat_user} -g root \
+            "${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
+            || fail "Unable to create Tanaguru webapp directory"
 }
 
 install_firefox_profile_files() {
@@ -333,77 +333,77 @@ install_firefox_profile_files() {
 }
 
 install_configuration() {
-	dirty_conf=true
-	cp -r "$PKG_DIR"/install/web-app/conf/* \
-	   "${prefix}$TG_CONF_DIR" || \
-		fail "Unable to copy the tanaguru configuration"
-	sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${tanaguru_webapp_dir}/WEB-INF/conf#" \
-	    -e    "s#\$WEB-APP-URL .*#${tanaguru_url}#" \
-	    -e    "s#\$SQL_SERVER_URL#$mysql_tg_host#" \
-	    -e    "s#\$USER#$mysql_tg_user#" \
-	    -e    "s#\$PASSWORD#$mysql_tg_passwd#" \
-	    -e    "s#\$DATABASE_NAME#$mysql_tg_db#" \
-	    "${prefix}$TG_CONF_DIR/tanaguru.conf" || \
-		fail "Unable to set up the tanaguru configuration"
-	if [[ $(grep '$' "${prefix}$TG_CONF_DIR" >/dev/null) ]]; then
-		warn "The file ${prefix}$TG_CONF_DIR contains" \
-		     "dollar symboles. Check by yourself that the " \
-		     "replacement worked fine."
-        fi
+    dirty_conf=true
+    cp -r "$PKG_DIR"/install/web-app/conf/* \
+       "${prefix}$TG_CONF_DIR" || \
+            fail "Unable to copy the tanaguru configuration"
+    sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${tanaguru_webapp_dir}/WEB-INF/conf#" \
+        -e    "s#\$WEB-APP-URL .*#${tanaguru_url}#" \
+        -e    "s#\$SQL_SERVER_URL#$mysql_tg_host#" \
+        -e    "s#\$USER#$mysql_tg_user#" \
+        -e    "s#\$PASSWORD#$mysql_tg_passwd#" \
+        -e    "s#\$DATABASE_NAME#$mysql_tg_db#" \
+        "${prefix}$TG_CONF_DIR/tanaguru.conf" || \
+            fail "Unable to set up the tanaguru configuration"
+    if [[ $(grep '$' "${prefix}$TG_CONF_DIR" >/dev/null) ]]; then
+            warn "The file ${prefix}$TG_CONF_DIR contains" \
+                 "dollar symboles. Check by yourself that the " \
+                 "replacement worked fine."
+    fi
 }
 
 #############################################
 # Webapp
 #############################################
 install_webapp() {
-	dirty_webapp=true
-	cd "${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
-		|| fail "Unable to go to the tanaguru webapp directory"
-	unzip -q "$PKG_DIR/install/web-app/$TG_WAR" \
-		|| fail "Unable to extract the tanaguru war"
-        sed -i -e "s#file:///#file://${prefix}#g" \
-	    "WEB-INF/conf/tgol-service.xml" || \
-		fail "Unable to set up the tanaguru configuration"
+    dirty_webapp=true
+    cd "${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
+            || fail "Unable to go to the tanaguru webapp directory"
+    unzip -q "$PKG_DIR/install/web-app/$TG_WAR" \
+            || fail "Unable to extract the tanaguru war"
+    sed -i -e "s#file:///#file://${prefix}#g" \
+        "WEB-INF/conf/tgol-service.xml" || \
+            fail "Unable to set up the tanaguru configuration"
 }
 
 edit_esapi_configuration_file() {
-	dirty_webapp=true
-	cd "$PKG_DIR/"/install/web-app/token-master-key-encryptor/ \
-		|| fail "Unable to go to the generate-encryptor-keys directory"
-	./generate-encryptor-keys.sh  > generated_keys.txt \
-		|| fail "Unable to execute generate-encryptor-keys script"
-	encryptorMasterKey=$(grep Encryptor.MasterKey generated_keys.txt)
-	encryptorMasterSalt=$(grep Encryptor.MasterSalt generated_keys.txt)
-	sed -i -e "s#Encryptor.MasterKey=\$MasterKey#${encryptorMasterKey}#"  \
-	    -e    "s#Encryptor.MasterSalt=\$MasterSalt#${encryptorMasterSalt}#" \
-	    "${prefix}$TG_CONF_DIR/ESAPI.properties" || \
-		fail "Unable to set up the esapie configuration"
-	rm -f generated_keys.txt
+    dirty_webapp=true
+    cd "$PKG_DIR/"/install/web-app/token-master-key-encryptor/ \
+            || fail "Unable to go to the generate-encryptor-keys directory"
+    ./generate-encryptor-keys.sh  > generated_keys.txt \
+            || fail "Unable to execute generate-encryptor-keys script"
+    encryptorMasterKey=$(grep Encryptor.MasterKey generated_keys.txt)
+    encryptorMasterSalt=$(grep Encryptor.MasterSalt generated_keys.txt)
+    sed -i -e "s#Encryptor.MasterKey=\$MasterKey#${encryptorMasterKey}#"  \
+        -e    "s#Encryptor.MasterSalt=\$MasterSalt#${encryptorMasterSalt}#" \
+        "${prefix}$TG_CONF_DIR/ESAPI.properties" || \
+            fail "Unable to set up the esapie configuration"
+    rm -f generated_keys.txt
 }
 
 create_first_user() {
-        # create admin user for Tanaguru
-	cd "$PKG_DIR/install/web-app/sql-management"
-        sed -i -e "s/^DbUser=.*$/DbUser=$mysql_tg_user/g" \
-	    -e "s/^DbUserPasswd=.*$/DbUserPasswd=$mysql_tg_passwd/g" \
-	    -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
-	    -e "s/^DbHost=.*$/DbHost=$mysql_tg_host/g" \
-            tg-set-user-admin.sh tg-create-user.sh  || \
-		fail "Unable to create tanaguru admin user"
-        sh ./tg-create-user.sh -e "${tg_admin_email}" -p "${tg_admin_passwd}" -l " " -f " " >/dev/null || fail "Error while creating Tanaguru admin user. User may already exists"
-        sh ./tg-set-user-admin.sh -u $tg_admin_email >/dev/null || fail "Error while setting Tanaguru user as admin"
+    # create admin user for Tanaguru
+    cd "$PKG_DIR/install/web-app/sql-management"
+    sed -i -e "s/^DbUser=.*$/DbUser=$mysql_tg_user/g" \
+        -e "s/^DbUserPasswd=.*$/DbUserPasswd=$mysql_tg_passwd/g" \
+        -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
+        -e "s/^DbHost=.*$/DbHost=$mysql_tg_host/g" \
+        tg-set-user-admin.sh tg-create-user.sh  || \
+            fail "Unable to create tanaguru admin user"
+    sh ./tg-create-user.sh -e "${tg_admin_email}" -p "${tg_admin_passwd}" -l " " -f " " >/dev/null || fail "Error while creating Tanaguru admin user. User may already exists"
+    sh ./tg-set-user-admin.sh -u $tg_admin_email >/dev/null || fail "Error while setting Tanaguru user as admin"
 }
 
 update_tomcat_configuration() {
-	# we assume the filename is the same as tomcat-user specified by user
-	MY_DEFAULT_TOMCAT=/etc/default/${tomcat_user}
-	local tgOption=` grep "# Tanaguru JVM options" $MY_DEFAULT_TOMCAT `
-	if [[ -z "$tgOption" ]]; then
-	    echo "Adding JAVA_OPTS in tomcat configuration file"
-	    echo "" >>$MY_DEFAULT_TOMCAT
-	    echo "# Tanaguru JVM options" >>$MY_DEFAULT_TOMCAT
-	    echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}$TG_CONF_DIR -DlogDir=${prefix}$TG_LOG_DIR -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
-	fi
+    # we assume the filename is the same as tomcat-user specified by user
+    MY_DEFAULT_TOMCAT=/etc/default/${tomcat_user}
+    local tgOption=` grep "# Asqatasun JVM options" $MY_DEFAULT_TOMCAT `
+    if [[ -z "$tgOption" ]]; then
+        echo "Adding JAVA_OPTS in tomcat configuration file"
+        echo "" >>$MY_DEFAULT_TOMCAT
+        echo "# Asqatasun JVM options" >>$MY_DEFAULT_TOMCAT
+        echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}${TG_CONF_DIR} -DlogDir=${prefix}${TG_LOG_DIR} -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
+    fi
 }
 
 echo_installation_summary() {
@@ -424,45 +424,45 @@ EOF
 # main
 #############################################
 main() {
-	# get options
-	proceed_cmdline "${@:2}"
-	proceed_stdin
-	# if the password is in the command line, hide it
-	# preprocess options
-	preprocess_options
-	# print installation summary
-	echo_configuration_summary
-	# prerequesites
-	prerequesites
-        
-	# create tanaguru directories
-	create_directories
-	echo "Directory creation:	.	.	OK"
-        # save options for uninstall
-        write_options	
-        # filling the SQL database
-	create_tables
-	echo "SQL inserts: 		.	.	OK"
-	# install configuration file
-	install_configuration
-	echo "Tanaguru config files creation:   .       OK"
-	# install webapp
-	install_webapp
-	echo "Tanaguru webapp creation: 	.	OK"
-	# install firefox profile files
-	install_firefox_profile_files
-	echo "Firefox Profile Files creation: 	.	OK"
-	# edit esapi configuration file
-	edit_esapi_configuration_file
-	echo "Tanaguru webapp configuration: 	.	OK"
-	# create first user
-	create_first_user
-	echo "Tanaguru admin creation:          .       OK"
-	# update tomcat configuration
-	update_tomcat_configuration
-	echo "Tomcat configuration: 	.	.	OK"
-	# done
-	echo_installation_summary
+    # get options
+    proceed_cmdline "${@:2}"
+    proceed_stdin
+    # if the password is in the command line, hide it
+    # preprocess options
+    preprocess_options
+    # print installation summary
+    echo_configuration_summary
+    # prerequesites
+    prerequesites
+
+    # create tanaguru directories
+    create_directories
+    echo "Directory creation:	.	.	OK"
+    # save options for uninstall
+    write_options	
+    # filling the SQL database
+    create_tables
+    echo "SQL inserts: 		.	.	OK"
+    # install configuration file
+    install_configuration
+    echo "Tanaguru config files creation:   .       OK"
+    # install webapp
+    install_webapp
+    echo "Tanaguru webapp creation: 	.	OK"
+    # install firefox profile files
+    install_firefox_profile_files
+    echo "Firefox Profile Files creation: 	.	OK"
+    # edit esapi configuration file
+    edit_esapi_configuration_file
+    echo "Tanaguru webapp configuration: 	.	OK"
+    # create first user
+    create_first_user
+    echo "Tanaguru admin creation:          .       OK"
+    # update tomcat configuration
+    update_tomcat_configuration
+    echo "Tomcat configuration: 	.	.	OK"
+    # done
+    echo_installation_summary
 }
 
 main "$0" "$@"
