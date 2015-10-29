@@ -7,7 +7,7 @@
     <bean id="exposedPropertiesConfigurer" class="org.tanaguru.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>#{systemProperties.confDir}/tanaguru.conf</value>
+                <value>#{systemProperties.confDir}/asqatasun.conf</value>
                 <value>#{systemProperties.confDir}/ESAPI.properties</value>
             </list>
 

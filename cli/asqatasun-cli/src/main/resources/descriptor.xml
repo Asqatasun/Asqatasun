@@ -33,7 +33,7 @@
             <directory>${basedir}/src/main/resources/conf/context</directory>
             <includes>
                 <include>*.xml</include>
-                <include>tanaguru.conf</include>
+                <include>asqatasun.conf</include>
                 <include>**/*</include>
             </includes>
             <fileMode>666</fileMode>
@@ -150,7 +150,7 @@
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/conf</directory>
             <includes>
                 <include>ESAPI.properties</include>
-                <include>tanaguru.conf</include>
+                <include>asqatasun.conf</include>
             </includes>
             <fileMode>666</fileMode>
             <outputDirectory>/install/web-app/conf</outputDirectory>

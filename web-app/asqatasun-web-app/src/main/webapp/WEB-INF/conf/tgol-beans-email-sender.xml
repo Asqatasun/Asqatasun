@@ -12,7 +12,7 @@
 
 	<bean id="emailSender" class="org.tanaguru.emailsender.EmailSender">
 		<!-- Uncomment the following lines if you need a specific SMTP configuration. 
-			Values are taken from tanaguru.conf configuration file. -->
+			Values are taken from asqatasun.conf configuration file. -->
 		<!-- <property name="smtpHost" value="${smtp.host}" /> -->
 		<!-- <property name="userName" value="${smtp.user}"/> -->
 		<!-- <property name="from" value="${smtp.from}" /> -->
