@@ -115,7 +115,7 @@ my_sql_insert() {
             mysql --user="${mysql_tg_user}" \
                   --password="${mysql_tg_passwd}"\
                   --host="${mysql_tg_host}" \
-                  --databse="${mysql_tg_db}" || \
+                  --database="${mysql_tg_db}" || \
             fail "Unable to run SQL file: ${SQL_FILE}"
 }
 
@@ -222,7 +222,9 @@ preprocess_options() {
 	     */) prefix=$prefix;;
 	     *) prefix+='/';;
 	esac
-	[[ -z "$tanaguru_webapp_dir" ]] && tanaguru_webapp_dir=ROOT
+	if [[ -z "$tanaguru_webapp_dir" ]]; then
+            tanaguru_webapp_dir=ROOT
+        fi
 }
 
 echo_configuration_summary() {
@@ -285,7 +287,7 @@ create_tables() {
     
     cd "$PKG_DIR/install/web-app/sql"
     my_sql_insert tgol-20-create-tables.sql
-    my_sql_insert tgol-tgol-30-insert.sql
+    my_sql_insert tgol-30-insert.sql
 
     cd "$PKG_DIR/install/rules/sql"
     my_sql_insert 10-rules-resources-insert.sql
@@ -343,10 +345,11 @@ install_configuration() {
 	    -e    "s#\$DATABASE_NAME#$mysql_tg_db#" \
 	    "${prefix}$TG_CONF_DIR/tanaguru.conf" || \
 		fail "Unable to set up the tanaguru configuration"
-	grep '$' "${prefix}$TG_CONF_DIR" >/dev/null &&  \
+	if [[ $(grep '$' "${prefix}$TG_CONF_DIR" >/dev/null) ]]; then
 		warn "The file ${prefix}$TG_CONF_DIR contains" \
 		     "dollar symboles. Check by yourself that the " \
 		     "replacement worked fine."
+        fi
 }
 
 #############################################
@@ -431,12 +434,13 @@ main() {
 	echo_configuration_summary
 	# prerequesites
 	prerequesites
-        # save options for uninstall
-        write_options
+        
 	# create tanaguru directories
 	create_directories
 	echo "Directory creation:	.	.	OK"
-	# filling the SQL database
+        # save options for uninstall
+        write_options	
+        # filling the SQL database
 	create_tables
 	echo "SQL inserts: 		.	.	OK"
 	# install configuration file
