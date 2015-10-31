@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.tanaguru</groupId>
-    <artifactId>tanaguru</artifactId>
+    <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
     <version>3.2.0-SNAPSHOT</version>
-    <name>tanaguru</name>
-    <url>http://www.tanaguru.org</url>
+    <name>asqatasun</name>
+    <url>http://www.asqatasun.org/</url>
     <modules>
         <module>engine</module>
         <module>testing-tools</module>

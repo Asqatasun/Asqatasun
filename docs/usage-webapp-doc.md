@@ -1,6 +1,6 @@
-# Usage of Tanaguru web application
+# Usage of Asqatasun web application
 
-Tanaguru is now available at the URL you set up for the "**--tanaguru-url**" installation script option.
+Asqatasun is now available at the URL you set up for the "**--tanaguru-url**" installation script option.
 
 You may additionnaly place an Apache in front of Tomcat, and connect them with mod_proxy_ajp.
 

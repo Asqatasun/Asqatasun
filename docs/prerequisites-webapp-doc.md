@@ -1,4 +1,4 @@
-# Prerequisites for Tanaguru web application installation
+# Prerequisites for Asqatasun web application installation
 
 ## Open JDK
 

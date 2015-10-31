@@ -1,4 +1,4 @@
-# Prerequisites for Tanaguru Command Line Interface installation
+# Prerequisites for Asqatasun Command Line Interface installation
 
 ## Open JDK
 

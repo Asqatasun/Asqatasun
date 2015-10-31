@@ -1,17 +1,17 @@
-# Scenario audit of accessibility with Tanaguru
+# Scenario audit of accessibility with Asqatasun
 
 ## Quick steps (for the impatient)
 
 1. Have a Firefox and [download SeBuilder extension](http://www.saucelabs.com/addons/selenium-builder-latest.xpi)
 1. Record your scenario (*Selenium 2* format)
 1. Replay locally your scenario to verify it works
-1. Upload the scenario to Tanaguru
+1. Upload the scenario to Asqatasun
 1. Run the scenario audit
 
 ## 0. Prerequesite: Firefox + SeBuilder
 
 You need a Firefox browser with the [SeBuilder extension](http://www.saucelabs.com/addons/selenium-builder-latest.xpi)
-to record scenarios. Tanaguru scenarios are based on Selenium. The format is *Selenium 2* and scenarios are stored in JSON style.
+to record scenarios. Asqatasun scenarios are based on Selenium. The format is *Selenium 2* and scenarios are stored in JSON style.
 
 ## 1. Define a scenario
 
@@ -56,15 +56,15 @@ and *To* field (*Monument*)
 
 ![](Images/screenshot_20150309_TANAGURU_SCENARIO_step_E_run_test_locally.png)
 
-This verification is important. Tanaguru just replays the scenario, he can't check
+This verification is important. Asqatasun just replays the scenario, he can't check
 whether or not the scenario is actually what you wanted (!).
 
-Please refer to [Tanaguru scenario advanced usage](userdoc-scenario-audit-advanced.md)
+Please refer to [Asqatasun scenario advanced usage](userdoc-scenario-audit-advanced.md)
 if the scenario does not replay the way you'd like.
 
-## 4. Upload the scenario to Tanaguru
+## 4. Upload the scenario to Asqatasun
 
-* Log in your Tanaguru, go to your project, *Scenario Audit*
+* Log in your Asqatasun, go to your project, *Scenario Audit*
 
 ![](Images/screenshot_20150309_TANAGURU_SCENARIO_step_F_Tanaguru_goto_scenario_audit.png)
 
@@ -95,7 +95,7 @@ by clicking on the number of pages link
 
 ![](Images/screenshot_20150309_TANAGURU_SCENARIO_step_J_audit_summary.png)
 
-(If the number of pages is not the expected one, please check [Tanaguru scenario advanced usage](userdoc-scenario-audit-advanced.md))
+(If the number of pages is not the expected one, please check [Asqatasun scenario advanced usage](userdoc-scenario-audit-advanced.md))
 
 ![](Images/screenshot_20150309_TANAGURU_SCENARIO_step_K_list_of_pages.png)
 
