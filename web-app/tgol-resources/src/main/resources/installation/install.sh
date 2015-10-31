@@ -12,12 +12,12 @@ declare mysql_tg_user=
 declare mysql_tg_passwd=
 declare mysql_tg_db=
 declare mysql_tg_host=
-declare tanaguru_url=
-declare tanaguru_webapp_dir=
+declare asqatasun_url=
+declare asqatasun_webapp_dir=
 declare tomcat_webapps=
 declare tomcat_user=
-declare tg_admin_email=
-declare tg_admin_passwd=
+declare asqa_admin_email=
+declare asqa_admin_passwd=
 declare firefox_esr_path=
 declare display_port=
 
@@ -45,11 +45,11 @@ declare -a OPTIONS=(
 	mysql_tg_passwd
 	mysql_tg_db
 	mysql_tg_host
-	tanaguru_url
+	asqatasun_url
 	tomcat_webapps
 	tomcat_user
-        tg_admin_email
-        tg_admin_passwd
+        asqa_admin_email
+        asqa_admin_passwd
 	firefox_esr_path
 	display_port
 )
@@ -95,7 +95,7 @@ fail() {
 prerequesites() {
 
 	echo ""
-	echo "Please verify your configuration meets the requirements : http://www.tanaguru.org/en/content/ubuntu-prerequisites-tanaguru-3x"
+	echo "Please verify your configuration meets the requirements : https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md"
 	echo ""	
 	read -p "Are you sure you want to continue installation (yes/no)? " response
 	[[ "${response}" == "yes" ]] || fail "Installation is stopped"
@@ -127,29 +127,29 @@ usage() {
 	cat << EOF
 
 Usage : $0 [-h] 
-        --mysql-tg-user <Tanaguru mysql user> 
-        --mysql-tg-passwd <Tanaguru mysql password> 
-        --mysql-tg-db <Tanaguru mysql db> 
-        --mysql-tg-host <mysql host> 
-        --tanaguru-url <Tanaguru webapp url> 
+        --database-user <Asqatasun database user> 
+        --database-passwd <Asqatasun database password> 
+        --database-db <Asqatasun database db> 
+        --database-host <database host> 
+        --asqatasun-url <Asqatasun webapp url> 
         --tomcat-webapps <tomcat webapps directory> 
         --tomcat-user <tomcat unix user>
-        --tg-admin-email <Tanaguru admin email>
-        --tg-admin-passwd <tanaguru admin password>
-	--firefox-esr-path <path-to-Firefox-ESR>
+        --asqa-admin-email <Asqatasun admin email>
+        --asqa-admin-passwd <Asqatasun admin password>
+	--firefox-esr-binary-path <path-to-Firefox-ESR>
 	--display-port <Xorg-display-port>
 	
 Installation options :
- --mysql-tg-user             Mysql user for Tanaguru
- --mysql-tg-passwd           Password of the user specified by --mysql-tg-user
- --mysql-tg-db               Database for Tanaguru
- --mysql-tg-host             Mysql host (FQDN or local hostname)
- --tanaguru-url              URL where tanaguru will be deployed (e.g. http://localhost:8080/)
+ --database-user             Database user for Asqatasun
+ --database-passwd           Database password for Asqatasun
+ --database-db               Database name for Asqatasun
+ --database-host             Database hostname (FQDN or local hostname)
+ --asqatasun-url             URL where Asqatasun will be deployed (e.g. http://localhost:8080/asqatasun)
  --tomcat-webapps            Tomcat webapps directory (e.g./var/lib/tomcat/webapps)
- --tomcat-user               Unix user name for the tomcat service
- --tg-admin-email            Email of the Tanaguru admin user
- --tg-admin-passwd           The tanaguru application admin password
- --firefox-esr-path	     Path to Firefox-ESR binary (e.g. /opt/firefox-esr/firefox)
+ --tomcat-user               Unix username for the tomcat service
+ --asqa-admin-email          Email for the Asqatasun admin user
+ --asqa-admin-passwd         Pawword for the Asqatasun admin user
+ --firefox-esr-binary-path   Path to Firefox-ESR binary (e.g. /opt/firefox-esr/firefox)
  --display-port              Xorg display port (e.g. ":99.1")
 
 Script options :
@@ -212,34 +212,34 @@ preprocess_options() {
     local domain='[0-9a-z\-]\+\(\.[0-9a-z\-]\+\)*'
     local port='\(:[0-9]\+\)\?'
 
-    tanaguru_webapp_dir=$(
-            echo $tanaguru_url | \
+    asqatasun_webapp_dir=$(
+            echo $asqatasun_url | \
             sed "s#${protocol}${domain}${port}/\?##"
-    ) || fail "--tanaguru-url argument is not a valid url : \"$tanaguru_url\""
+    ) || fail "--asqatasun-url argument is not a valid url : \"$asqatasun_url\""
 
     [[ "$prefix" == /* ]] || fail "Invalid --prefix argument"
     case $prefix in
          */) prefix=$prefix;;
          *) prefix+='/';;
     esac
-    if [[ -z "$tanaguru_webapp_dir" ]]; then
-        tanaguru_webapp_dir=ROOT
+    if [[ -z "$asqatasun_webapp_dir" ]]; then
+        asqatasun_webapp_dir=ROOT
     fi
 }
 
 echo_configuration_summary() {
 	cat << EOF
 
-Installing Tanaguru with the following configuration :
- - The mysql user "${mysql_tg_user}" will be created and used by Tanaguru
- - The mysql database "${mysql_tg_db}" will be created and used by Tanaguru
- - The mysql host is "${mysql_tg_host}"
+Installing Asqatasun with the following configuration :
+ - The database user "${mysql_tg_user}" will be created and used by Asqatasun
+ - The database database "${mysql_tg_db}" will be created and used by Asqatasun
+ - The database host is "${mysql_tg_host}"
  - Path prefix for directories is "${prefix}" 
- - The web application will be installed in "${tomcat_webapps}/${tanaguru_webapp_dir}"
- - The web application will be accessible from "${tanaguru_url}"
- - Tanaguru will write its log file in "${prefix}$TG_LOG_DIR"
- - Tanaguru will use "${prefix}$TG_TMP_DIR" as a temporary directory
- - Tanaguru will read its configuration in "${prefix}$TG_CONF_DIR"
+ - The web application will be installed in "${tomcat_webapps}/${asqatasun_webapp_dir}"
+ - The web application will be accessible from "${asqatasun_url}"
+ - Asqatasun will write its log file in "${prefix}$TG_LOG_DIR"
+ - Asqatasun will use "${prefix}$TG_TMP_DIR" as a temporary directory
+ - Asqatasun will read its configuration in "${prefix}$TG_CONF_DIR"
  - The user "${tomcat_user}" will have the write rights on the directories "${prefix}$TG_LOG_DIR" and "${prefix}$TG_TMP_DIR"
  - Tomcat configuration will be updated to with Xms, Xmx, display and webdriver.firefox.bin options"
 
@@ -266,10 +266,10 @@ tg_log_dir=${prefix}$TG_LOG_DIR
 tg_conf_dir=${prefix}$TG_CONF_DIR
 tg_tmp_dir=${prefix}$TG_TMP_DIR
 
-tanaguru_url=${tanaguru_url}
+asqatasun_url=${asqatasun_url}
 tomcat_webapps=${tomcat_webapps}
-tanaguru_webapp_dir=${tanaguru_webapp_dir}
-tg_webapp_dir_full=${tomcat_webapps}/${tanaguru_webapp_dir}
+asqatasun_webapp_dir=${asqatasun_webapp_dir}
+tg_webapp_dir_full=${tomcat_webapps}/${asqatasun_webapp_dir}
 
 firefox_esr_path=${firefox_esr_path}
 
@@ -306,10 +306,10 @@ create_directories() {
             "${prefix}$TG_CONF_DIR" \
             "${prefix}$TG_LOG_DIR" \
             "${prefix}$TG_TMP_DIR" \
-            || fail "Unable to create Tanaguru directories"
+            || fail "Unable to create Asqatasun directories"
     install -dm 755 -o ${tomcat_user} -g root \
-            "${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
-            || fail "Unable to create Tanaguru webapp directory"
+            "${prefix}${tomcat_webapps}/${asqatasun_webapp_dir}" \
+            || fail "Unable to create Asqatasun webapp directory"
 }
 
 install_firefox_profile_files() {
@@ -321,7 +321,7 @@ install_firefox_profile_files() {
 		"${prefix}$TG_TMP_DIR/.mozilla" \
 		"${prefix}$TG_TMP_DIR/.gnome2" \
 		"${prefix}$TG_TMP_DIR/.gnome2_private" \
-		|| fail "Unable to create Tanaguru directories"
+		|| fail "Unable to create Asqatasun directories"
 
     ln -s "${prefix}$TG_TMP_DIR/.gconf" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gconf" 
     ln -s "${prefix}$TG_TMP_DIR/.java" "${TOMCAT_HOME_DIR}/${tomcat_user}/.java" 
@@ -336,15 +336,15 @@ install_configuration() {
     dirty_conf=true
     cp -r "$PKG_DIR"/install/web-app/conf/* \
        "${prefix}$TG_CONF_DIR" || \
-            fail "Unable to copy the tanaguru configuration"
-    sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${tanaguru_webapp_dir}/WEB-INF/conf#" \
-        -e    "s#\$WEB-APP-URL .*#${tanaguru_url}#" \
+            fail "Unable to copy the Asqatasun configuration"
+    sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${asqatasun_webapp_dir}/WEB-INF/conf#" \
+        -e    "s#\$WEB-APP-URL .*#${asqatasun_url}#" \
         -e    "s#\$SQL_SERVER_URL#$mysql_tg_host#" \
         -e    "s#\$USER#$mysql_tg_user#" \
         -e    "s#\$PASSWORD#$mysql_tg_passwd#" \
         -e    "s#\$DATABASE_NAME#$mysql_tg_db#" \
         "${prefix}$TG_CONF_DIR/asqatasun.conf" || \
-            fail "Unable to set up the tanaguru configuration"
+            fail "Unable to set up the Asqatasun configuration"
     if [[ $(grep '$' "${prefix}$TG_CONF_DIR" >/dev/null) ]]; then
             warn "The file ${prefix}$TG_CONF_DIR contains" \
                  "dollar symboles. Check by yourself that the " \
@@ -357,13 +357,13 @@ install_configuration() {
 #############################################
 install_webapp() {
     dirty_webapp=true
-    cd "${prefix}${tomcat_webapps}/${tanaguru_webapp_dir}" \
-            || fail "Unable to go to the tanaguru webapp directory"
+    cd "${prefix}${tomcat_webapps}/${asqatasun_webapp_dir}" \
+            || fail "Unable to go to the Asqatasun webapp directory"
     unzip -q "$PKG_DIR/install/web-app/$TG_WAR" \
-            || fail "Unable to extract the tanaguru war"
+            || fail "Unable to extract the Asqatasun war"
     sed -i -e "s#file:///#file://${prefix}#g" \
         "WEB-INF/conf/tgol-service.xml" || \
-            fail "Unable to set up the tanaguru configuration"
+            fail "Unable to set up the Asqatasun configuration"
 }
 
 edit_esapi_configuration_file() {
@@ -382,16 +382,16 @@ edit_esapi_configuration_file() {
 }
 
 create_first_user() {
-    # create admin user for Tanaguru
+    # create admin user for Asqatasun
     cd "$PKG_DIR/install/web-app/sql-management"
     sed -i -e "s/^DbUser=.*$/DbUser=$mysql_tg_user/g" \
         -e "s/^DbUserPasswd=.*$/DbUserPasswd=$mysql_tg_passwd/g" \
         -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
         -e "s/^DbHost=.*$/DbHost=$mysql_tg_host/g" \
         tg-set-user-admin.sh tg-create-user.sh  || \
-            fail "Unable to create tanaguru admin user"
-    sh ./tg-create-user.sh -e "${tg_admin_email}" -p "${tg_admin_passwd}" -l " " -f " " >/dev/null || fail "Error while creating Tanaguru admin user. User may already exists"
-    sh ./tg-set-user-admin.sh -u $tg_admin_email >/dev/null || fail "Error while setting Tanaguru user as admin"
+            fail "Unable to create Asqatasun admin user"
+    sh ./tg-create-user.sh -e "${asqa_admin_email}" -p "${asqa_admin_passwd}" -l " " -f " " >/dev/null || fail "Error while creating Asqatasun admin user. User may already exists"
+    sh ./tg-set-user-admin.sh -u $asqa_admin_email >/dev/null || fail "Error while setting Asqatasun user as admin"
 }
 
 update_tomcat_configuration() {
@@ -409,13 +409,13 @@ update_tomcat_configuration() {
 echo_installation_summary() {
 	cat << EOF
 
-Well done, your Tanaguru is installed !
+Well done, your Asqatasun is installed !
 
 Tomcat needs to be restarted (e.g. "sudo service ${tomcat_user} restart", take a coffee while it restarts :) )
 
-Tanaguru is available at:
+Asqatasun is available at:
 
-	${tanaguru_url}
+	${asqatasun_url}
 
 EOF
 }
@@ -435,7 +435,7 @@ main() {
     # prerequesites
     prerequesites
 
-    # create tanaguru directories
+    # create Asqatasun directories
     create_directories
     echo "Directory creation:	.	.	OK"
     # save options for uninstall
@@ -445,22 +445,22 @@ main() {
     echo "SQL inserts: 		.	.	OK"
     # install configuration file
     install_configuration
-    echo "Tanaguru config files creation:   .       OK"
+    echo "Asqatasun config files creation:   .  OK"
     # install webapp
     install_webapp
-    echo "Tanaguru webapp creation: 	.	OK"
+    echo "Asqatasun webapp creation: 	.	OK"
     # install firefox profile files
     install_firefox_profile_files
-    echo "Firefox Profile Files creation: 	.	OK"
+    echo "Firefox Profile Files creation: 	OK"
     # edit esapi configuration file
     edit_esapi_configuration_file
-    echo "Tanaguru webapp configuration: 	.	OK"
+    echo "Asqatasun webapp configuration: .	OK"
     # create first user
     create_first_user
-    echo "Tanaguru admin creation:          .       OK"
+    echo "Asqatasun admin creation:             OK"
     # update tomcat configuration
     update_tomcat_configuration
-    echo "Tomcat configuration: 	.	.	OK"
+    echo "Tomcat configuration: 	.	OK"
     # done
     echo_installation_summary
 }
