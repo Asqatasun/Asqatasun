@@ -8,17 +8,17 @@ set -o errexit
 
 declare prefix="/"
 
-declare mysql_tg_user=
-declare mysql_tg_passwd=
-declare mysql_tg_db=
-declare mysql_tg_host=
+declare database_user=
+declare database_passwd=
+declare database_db=
+declare database_host=
 declare asqatasun_url=
 declare asqatasun_webapp_dir=
 declare tomcat_webapps=
 declare tomcat_user=
 declare asqa_admin_email=
 declare asqa_admin_passwd=
-declare firefox_esr_path=
+declare firefox_esr_binary_path=
 declare display_port=
 
 declare omit_cleanup=true
@@ -41,21 +41,23 @@ declare TG_WAR_VERSION=$TG_VERSION
 declare TG_WAR="asqatasun-web-app-$TG_WAR_VERSION.war"
 
 declare -a OPTIONS=(
-	mysql_tg_user
-	mysql_tg_passwd
-	mysql_tg_db
-	mysql_tg_host
+	database_user
+	database_passwd
+	database_db
+	database_host
 	asqatasun_url
 	tomcat_webapps
 	tomcat_user
         asqa_admin_email
         asqa_admin_passwd
-	firefox_esr_path
+	firefox_esr_binary_path
 	display_port
 )
 
 warn() {
-	$quiet || echo "WARNING : $*"
+	if [[ ! $quiet ]]; then
+            echo "WARNING : $*"
+        fi
 }
 
 error() {
@@ -80,7 +82,9 @@ fail_with_usage() {
 	echo "FAILURE : $*"
         echo ""
         usage
-	$omit_cleanup || cleanup
+	if [[ ! $omit_cleanup ]]; then
+            cleanup
+        fi
 	exit -1
 }
 
@@ -88,7 +92,9 @@ fail() {
         echo ""
 	echo "FAILURE : $*"
         echo ""
-	$omit_cleanup || cleanup
+	if [[ ! $omit_cleanup ]]; then
+            cleanup
+        fi
 	exit -1
 }
 
@@ -98,7 +104,9 @@ prerequesites() {
 	echo "Please verify your configuration meets the requirements : https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md"
 	echo ""	
 	read -p "Are you sure you want to continue installation (yes/no)? " response
-	[[ "${response}" == "yes" ]] || fail "Installation is stopped"
+	if [[ ! "${response}" == "yes" ]]; then
+            fail "Installation is stopped"
+        fi
 	echo ""	
 }
 
@@ -112,10 +120,10 @@ my_sql_insert() {
 
     # Effective SQL command
     cat ${SQL_FILE} | \
-            mysql --user="${mysql_tg_user}" \
-                  --password="${mysql_tg_passwd}"\
-                  --host="${mysql_tg_host}" \
-                  --database="${mysql_tg_db}" || \
+            mysql --user="${database_user}" \
+                  --password="${database_passwd}"\
+                  --host="${database_host}" \
+                  --database="${database_db}" || \
             fail "Unable to run SQL file: ${SQL_FILE}"
 }
 
@@ -174,10 +182,12 @@ proceed_cmdline() {
                 break
             fi
         done
-        $isVar || case "$1" in
-            -h|--help)        usage; exit 0;;
-            *) usage; exit 1;;
-        esac
+        if [[ ! $isVar ]]; then
+            case "$1" in
+                -h|--help)        usage; exit 0;;
+                *) usage; exit 1;;
+            esac
+        fi
     done
         
 }
@@ -231,9 +241,9 @@ echo_configuration_summary() {
 	cat << EOF
 
 Installing Asqatasun with the following configuration :
- - The database user "${mysql_tg_user}" will be created and used by Asqatasun
- - The database database "${mysql_tg_db}" will be created and used by Asqatasun
- - The database host is "${mysql_tg_host}"
+ - The database user "${database_user}" will be created and used by Asqatasun
+ - The database database "${database_db}" will be created and used by Asqatasun
+ - The database host is "${database_host}"
  - Path prefix for directories is "${prefix}" 
  - The web application will be installed in "${tomcat_webapps}/${asqatasun_webapp_dir}"
  - The web application will be accessible from "${asqatasun_url}"
@@ -256,10 +266,10 @@ write_options() {
 # DO NOT DELETE
 # If you delete this file, you won't be able to uninstall
 #
-mysql_tg_user=${mysql_tg_user}
-mysql_tg_passwd=${mysql_tg_passwd}
-mysql_tg_db=${mysql_tg_db}
-mysql_tg_host=${mysql_tg_host}
+database_user=${database_user}
+database_passwd=${database_passwd}
+database_db=${database_db}
+database_host=${database_host}
 
 prefix=${prefix}
 tg_log_dir=${prefix}$TG_LOG_DIR
@@ -271,7 +281,7 @@ tomcat_webapps=${tomcat_webapps}
 asqatasun_webapp_dir=${asqatasun_webapp_dir}
 tg_webapp_dir_full=${tomcat_webapps}/${asqatasun_webapp_dir}
 
-firefox_esr_path=${firefox_esr_path}
+firefox_esr_binary_path=${firefox_esr_binary_path}
 
 EOF
 }
@@ -339,10 +349,10 @@ install_configuration() {
             fail "Unable to copy the Asqatasun configuration"
     sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${asqatasun_webapp_dir}/WEB-INF/conf#" \
         -e    "s#\$WEB-APP-URL .*#${asqatasun_url}#" \
-        -e    "s#\$SQL_SERVER_URL#$mysql_tg_host#" \
-        -e    "s#\$USER#$mysql_tg_user#" \
-        -e    "s#\$PASSWORD#$mysql_tg_passwd#" \
-        -e    "s#\$DATABASE_NAME#$mysql_tg_db#" \
+        -e    "s#\$SQL_SERVER_URL#$database_host#" \
+        -e    "s#\$USER#$database_user#" \
+        -e    "s#\$PASSWORD#$database_passwd#" \
+        -e    "s#\$DATABASE_NAME#$database_db#" \
         "${prefix}$TG_CONF_DIR/asqatasun.conf" || \
             fail "Unable to set up the Asqatasun configuration"
     if [[ $(grep '$' "${prefix}$TG_CONF_DIR" >/dev/null) ]]; then
@@ -384,10 +394,10 @@ edit_esapi_configuration_file() {
 create_first_user() {
     # create admin user for Asqatasun
     cd "$PKG_DIR/install/web-app/sql-management"
-    sed -i -e "s/^DbUser=.*$/DbUser=$mysql_tg_user/g" \
-        -e "s/^DbUserPasswd=.*$/DbUserPasswd=$mysql_tg_passwd/g" \
-        -e "s/^DbName=.*$/DbName=$mysql_tg_db/g"  \
-        -e "s/^DbHost=.*$/DbHost=$mysql_tg_host/g" \
+    sed -i -e "s/^DbUser=.*$/DbUser=$database_user/g" \
+        -e "s/^DbUserPasswd=.*$/DbUserPasswd=$database_passwd/g" \
+        -e "s/^DbName=.*$/DbName=$database_db/g"  \
+        -e "s/^DbHost=.*$/DbHost=$database_host/g" \
         tg-set-user-admin.sh tg-create-user.sh  || \
             fail "Unable to create Asqatasun admin user"
     sh ./tg-create-user.sh -e "${asqa_admin_email}" -p "${asqa_admin_passwd}" -l " " -f " " >/dev/null || fail "Error while creating Asqatasun admin user. User may already exists"
@@ -402,7 +412,7 @@ update_tomcat_configuration() {
         echo "Adding JAVA_OPTS in tomcat configuration file"
         echo "" >>$MY_DEFAULT_TOMCAT
         echo "# Asqatasun JVM options" >>$MY_DEFAULT_TOMCAT
-        echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}${TG_CONF_DIR} -DlogDir=${prefix}${TG_LOG_DIR} -Dwebdriver.firefox.bin=${firefox_esr_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
+        echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}${TG_CONF_DIR} -DlogDir=${prefix}${TG_LOG_DIR} -Dwebdriver.firefox.bin=${firefox_esr_binary_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
     fi
 }
 
@@ -410,12 +420,8 @@ echo_installation_summary() {
 	cat << EOF
 
 Well done, your Asqatasun is installed !
-
 Tomcat needs to be restarted (e.g. "sudo service ${tomcat_user} restart", take a coffee while it restarts :) )
-
-Asqatasun is available at:
-
-	${asqatasun_url}
+Asqatasun is available at: ${asqatasun_url}
 
 EOF
 }
