@@ -11,13 +11,18 @@ USER root
 # ##########################################################
 
 # Install packages
-RUN apt-get update -qq 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -yqq install debconf apt-utils
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install debconf apt-utils
 # Pre-define Mysql root passwd
 RUN echo 'mysql-server mysql-server/root_password password mysqlRootPassword' | debconf-set-selections
 RUN echo 'mysql-server mysql-server/root_password_again password mysqlRootPassword' | debconf-set-selections
-RUN DEBIAN_FRONTEND=noninteractive apt-get -yqq install wget bzip2 mysql-server libspring-instrument-java xvfb && \
-    rm -rf /var/lib/apt/lists/*
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
+    wget \
+    bzip2 \
+    mysql-server \
+    libspring-instrument-java \
+    xvfb \
+    && rm -rf /var/lib/apt/lists/*
 RUN service mysql start
 
 RUN mysql -u root --password="mysqlRootPassword" --execute="show databases;" 
