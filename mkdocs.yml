@@ -13,7 +13,7 @@ pages:
 #- ['admindoc.md',                           'Admin Documentation', 'Admin Documentation']
 #- ['admindoc.md',                           'Admin Documentation', 'Admin Documentation']
 - ['prerequisites-webapp-doc.md',           'Installation Web Application','Prerequisites']
-- ['install-webapp-doc.md',                 'Installation Web Application','Installation']
+- ['INSTALL.md',                            'Installation Web Application','Installation']
 - ['configuration-webapp-doc.md',           'Installation Web Application','Configuration']
 - ['usage-webapp-doc.md',                   'Installation Web Application','Usage']
 - ['prerequisites-cli-doc.md',              'Installation Command Line Interface (CLI)','Prerequisites']
