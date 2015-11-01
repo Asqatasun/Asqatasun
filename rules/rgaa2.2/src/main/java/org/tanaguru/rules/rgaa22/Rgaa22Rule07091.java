@@ -1,5 +1,5 @@
 /*
- * Tanaguru - Automated webpage assessment
+ * Asqatasun - Automated webpage assessment
 * Copyright (C) 2008-2015 Tanaguru.org
  *
  * This program is free software: you can redistribute it and/or modify
