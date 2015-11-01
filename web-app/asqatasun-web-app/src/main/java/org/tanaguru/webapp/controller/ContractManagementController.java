@@ -1,7 +1,7 @@
 package org.tanaguru.webapp.controller;
 
 /*
- * Tanaguru - Automated webpage assessment
+ * Asqatasun - Automated webpage assessment
  * Copyright (C) 2008-2015  Asqatasun.org
  *
  * This file is part of Tanaguru.
