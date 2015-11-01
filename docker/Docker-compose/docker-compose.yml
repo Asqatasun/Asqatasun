@@ -5,9 +5,9 @@ db:
     - /data
     environment:
         MYSQL_ROOT_PASSWORD: tanaguru
-        MYSQL_DATABASE: tanaguru_db
-        MYSQL_USER: tanaguru
-        MYSQL_PASSWORD: tanaguru
+        MYSQL_DATABASE: asqatasun_db
+        MYSQL_USER: asqatasun
+        MYSQL_PASSWORD: asqatasunP4ssW0rd
 tanaguru:
     build: .
     links :
