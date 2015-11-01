@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: tanaguru AT tanaguru DOT org
+ * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 package org.tanaguru.webapp.controller;
 
