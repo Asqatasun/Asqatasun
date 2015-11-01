@@ -11,21 +11,22 @@ USER root
 # ##########################################################
 
 # Install packages
-RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install debconf apt-utils
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get -y --no-install-recommends install debconf apt-utils &&\
+    rm -rf /var/lib/apt/lists/*
 # Pre-define Mysql root passwd
 RUN echo 'mysql-server mysql-server/root_password password mysqlRootPassword' | debconf-set-selections
 RUN echo 'mysql-server mysql-server/root_password_again password mysqlRootPassword' | debconf-set-selections
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get -y --no-install-recommends install \
     wget \
     bzip2 \
     mysql-server \
     libspring-instrument-java \
     xvfb \
     && rm -rf /var/lib/apt/lists/*
-RUN service mysql start
-
-RUN mysql -u root --password="mysqlRootPassword" --execute="show databases;" 
+RUN service mysql start  && \
+    mysql -u root --password="mysqlRootPassword" --execute="show databases;" 
 
 # /!\ TODO /!\
 # custom mysql buffer packet 64M
@@ -49,10 +50,12 @@ RUN mv firefox firefox-31.4.0esr
 RUN ln -s firefox-31.4.0esr firefox
 
 # Create Asqatasun database
-RUN mysql -u root --password="mysqlRootPassword" --execute="GRANT USAGE ON * . * TO 'asqatasun'@'localhost' IDENTIFIED BY 'asqaP4sswd'; \
-    CREATE DATABASE IF NOT EXISTS asqatasun CHARACTER SET utf8; \
-    GRANT ALL PRIVILEGES ON asqatasun . * TO 'asqatasun'@'localhost'; \
-    FLUSH PRIVILEGES;"
+RUN service mysql start && \
+    sleep 5 && \
+    mysql -u root --password="mysqlRootPassword" --execute="GRANT USAGE ON * . * TO 'asqatasun'@'localhost' IDENTIFIED BY 'asqaP4sswd'; \
+        CREATE DATABASE IF NOT EXISTS asqatasun CHARACTER SET utf8; \
+        GRANT ALL PRIVILEGES ON asqatasun . * TO 'asqatasun'@'localhost'; \
+        FLUSH PRIVILEGES;"
 
 # ##########################################################
 #
@@ -63,14 +66,17 @@ RUN mysql -u root --password="mysqlRootPassword" --execute="GRANT USAGE ON * . *
 
 # Add Asqatasun
 WORKDIR /root
-ADD asqatasun-latest.tar.gz /root/
+# @@@TODO: Remplace with download the .tar.gz
+ADD asqatasun-3.2.0-SNAPSHOT.i386.tar.gz /root/
 #RUN ls -Al /root/
 # /!\ Trick here: Docker automacally untars and unzips the ADDed file
 RUN mv asqatasun*/ ./asqatasun/
 
 # Install Asqatasun
 WORKDIR /root/asqatasun
-RUN echo "yes\n" | ./install.sh  --database-db asqatasun \ 
+RUN service mysql start && \
+    sleep 5 && \
+    echo "yes\n" | ./install.sh  --database-db asqatasun \ 
 				 --database-host localhost \
 				 --database-user asqatasun \
 				 --database-passwd asqaP4sswd \
