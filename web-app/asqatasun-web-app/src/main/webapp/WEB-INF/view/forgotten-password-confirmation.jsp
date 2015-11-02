@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 
 <c:set var="tgLogoUrl">
-    <c:url value="/Images/Logo-tanaguru.com-white-75dpi-w78px-h35px-bgTransp.png"/>  
+    <c:url value="/Images/Logo-asqatasun.org-white-75dpi-w78px-h35px-bgTransp.png"/>  
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

@@ -11,13 +11,13 @@
             <jsp:useBean id="now" class="java.util.Date" scope="page" />
             <div id="footer-down">
                 &copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" />
-                <a href="http://www.tanaguru.org/">
-                    Tanaguru.org
+                <a href="http://www.asqatasun.org/">
+                    Asqatasun.org
                 </a> 
                 - 
                 <fmt:message key="footer.poweredBy"/> 
-                <a href="http://www.tanaguru.org/">
-                    Tanaguru v${tanaguruVersion}
+                <a href="http://www.asqatasun.org/">
+                    Asqatasun v${tanaguruVersion}
                 </a>
                 - 
                 <fmt:message key="footer.availableUnder"/> 

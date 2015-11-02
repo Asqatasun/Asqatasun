@@ -6,7 +6,7 @@
     <meta charset="utf-8"/>
     <title>${pageTitle}</title>
     <meta name="description" content="${pageMetaDescription}"/>
-    <meta name="author" content="Tanaguru.org"/>
+    <meta name="author" content="Asqatasun.org"/>
     <!-- Le styles -->
 
 <c:if test="${addJqueryUI}">
@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />
-    <link rel="icon" type="image/ico" href="<c:url value="/Images/tanaguru.ico"/>" />    
+    <link rel="icon" type="image/ico" href="<c:url value="/Images/asqatasun.ico"/>" />    
     <c:set var="modernizrJsUrl" scope="request">
         <c:url value="/External-Js/modernizr.min.js"/>
     </c:set>
