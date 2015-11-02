@@ -10,12 +10,12 @@ PLEASE ensure you meet all [prerequisites for Asqatasun on Ubuntu](prerequisites
 
 ## Download asqatasun tarball and extract content
 
-Retrieve the [lastest version of Asqatasun](http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz) and extract it on your file system. 
+Retrieve the [lastest version of Asqatasun](http://download.asqatasun.org/Asqatasun/asqatasun-latest.tar.gz) and extract it on your file system. 
 
 ```sh
-wget http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz
-tar xzf tanaguru-latest.tar.gz
-cd tanaguru*
+wget http://download.asqatasun.org/Asqatasun/asqatasun-latest.tar.gz
+tar xzf asqatasun-latest.tar.gz
+cd asqatasun*
 ```
 
 ## Create the database
