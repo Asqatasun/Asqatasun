@@ -25,7 +25,7 @@ import com.oceaneconsulting.tanaguru.ws.types.GlobalStatsOrder;
 
 /**
  * Statistics DAO implementation for webservice . This class is based
- *  on Tanaguru model to calculate different audit stats.
+ *  on Asqatasun model to calculate different audit stats.
  *
  * @author shamdi at oceaneconsulting dot com
  *

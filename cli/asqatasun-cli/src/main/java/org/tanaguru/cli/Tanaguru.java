@@ -55,7 +55,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
- * This class launches Tanaguru with urls passed as arguments by the user.
+ * This class launches Asqatasun with urls passed as arguments by the user.
  *
  * @author jkowalczyk
  */
