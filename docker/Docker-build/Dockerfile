@@ -1,61 +1,30 @@
-FROM tomcat:7-jre7
+FROM ubuntu:14.04
 MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
+
+# ##########################################################
+#
+#                      DISCLAIMER
+#
+# This is a fat container, that is absolutly not compliant to Docker best-practices
+# https://docs.docker.com/articles/dockerfile_best-practices/
+# Don't use it for production as all data are wiped out at reboot / rebuild
+# BUT for quick testing, that does the job :)
+#
+# ##########################################################
 
 USER root
 
 # ##########################################################
 #
-# Pre-requesites of Asqatasun first
+# Asqatasun pre-requesites
 # https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md
 #
 # ##########################################################
 
-# Install packages
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y --no-install-recommends install debconf apt-utils &&\
-    rm -rf /var/lib/apt/lists/*
-# Pre-define Mysql root passwd
-RUN echo 'mysql-server mysql-server/root_password password mysqlRootPassword' | debconf-set-selections
-RUN echo 'mysql-server mysql-server/root_password_again password mysqlRootPassword' | debconf-set-selections
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get -y --no-install-recommends install \
-    wget \
-    bzip2 \
-    mysql-server \
-    libspring-instrument-java \
-    xvfb \
-    && rm -rf /var/lib/apt/lists/*
-RUN service mysql start  && \
-    mysql -u root --password="mysqlRootPassword" --execute="show databases;" 
-
-# /!\ TODO /!\
-# custom mysql buffer packet 64M
-
-# Add symlinks 
-RUN ln -s /usr/share/java/spring3-instrument-tomcat.jar /usr/local/tomcat/bin/spring3-instrument-tomcat.jar
-RUN ln -s /usr/share/java/mysql-connector-java.jar /usr/local/tomcat/bin/mysql-connector-java.jar
-
-# Configure XVFB
-ADD xvfb /etc/init.d/
-RUN chmod +x /etc/init.d/xvfb
-RUN /etc/init.d/xvfb start
-RUN update-rc.d xvfb defaults
-RUN service xvfb start
-
-# Install Firefox
-WORKDIR /opt
-RUN wget -q http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/31.4.0esr/linux-i686/en-US/firefox-31.4.0esr.tar.bz2
-RUN tar xvfj firefox-31.4.0esr.tar.bz2
-RUN mv firefox firefox-31.4.0esr
-RUN ln -s firefox-31.4.0esr firefox
-
-# Create Asqatasun database
-RUN service mysql start && \
-    sleep 5 && \
-    mysql -u root --password="mysqlRootPassword" --execute="GRANT USAGE ON * . * TO 'asqatasun'@'localhost' IDENTIFIED BY 'asqaP4sswd'; \
-        CREATE DATABASE IF NOT EXISTS asqatasun CHARACTER SET utf8; \
-        GRANT ALL PRIVILEGES ON asqatasun . * TO 'asqatasun'@'localhost'; \
-        FLUSH PRIVILEGES;"
+WORKDIR /root
+ADD pre-requesites.sh /root/
+ADD xvfb /root/
+RUN /root/pre-requesites.sh
 
 # ##########################################################
 #
@@ -65,11 +34,9 @@ RUN service mysql start && \
 # ##########################################################
 
 # Add Asqatasun
-WORKDIR /root
-# @@@TODO: Remplace with download the .tar.gz
+# @@@TODO: Remplace with downloading the .tar.gz
 ADD asqatasun-3.2.0-SNAPSHOT.i386.tar.gz /root/
-#RUN ls -Al /root/
-# /!\ Trick here: Docker automacally untars and unzips the ADDed file
+# /!\ Trick here: the ADD command automacally untars and unzips the ADDed file
 RUN mv asqatasun*/ ./asqatasun/
 
 # Install Asqatasun
@@ -87,3 +54,6 @@ RUN service mysql start && \
 				 --asqa-admin-passwd emailPassword \
 				 --firefox-esr-binary-path /opt/firefox/firefox \
 				 --display-port :99 
+
+RUN service tomcat7 restart
+RUN tail -f /var/log/asqatasun/asqatasun.log
