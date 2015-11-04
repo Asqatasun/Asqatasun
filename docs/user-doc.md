@@ -6,5 +6,5 @@ Asqatasun is an opensource accessibility validator. It is build with three stron
 * reliability of its results
 * maximum automation and time-savings
 
-If you ever lack some information, feel free to ask on [Asqatasun Forum](http://discuss.asqatasun.org/).
+If you ever lack some information, feel free to ask on [Asqatasun Forum](http://forum.asqatasun.org/).
 

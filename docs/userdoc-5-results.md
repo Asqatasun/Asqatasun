@@ -2,7 +2,7 @@
 
 Asqatasun presents five types of results.
 
-![](Images/screenshot_20150307_TANAGURU_5_types_of_result.png)
+![](Images/screenshot_20150307_ASQATASUN_5_types_of_result.png)
 
 The definitive results (given by the accessibility methodology itself):
 

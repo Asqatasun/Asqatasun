@@ -44,7 +44,7 @@ You can [install Asqatasun by yourself](http://www.tanaguru.org/en/content/ubunt
 
 ## Download
 
-[Asqatasun latest release (.tar.gz, ~100Mb)](http://www.tanaguru.org/Download/tanaguru-latest.tar.gz)
+[Asqatasun latest release (.tar.gz, ~100Mb)](http://download.asqatasun.org/Asqatasun/asqatasun-latest.tar.gz)
 
 ## Demo
 
@@ -83,7 +83,7 @@ By january 2014, this represents [~170 accessibility tests](http://www.tanaguru.
 
 ## Support and discussions
 
-* [Asqatasun discussion space](http://discuss.asqatasun.org) 
+* [Asqatasun discussion space](http://forum.asqatasun.org) 
 
 ## Contribute
 

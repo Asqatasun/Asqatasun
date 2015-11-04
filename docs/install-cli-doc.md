@@ -6,7 +6,7 @@ PLEASE ensure you meet all [prerequisites for Asqatasun 3.x on Ubuntu](#prerequi
 
 ## Download asqatasun tarball and extract content
 
-Retrieve the [lastest version of Asqatasun](http://download.tanaguru.org/Tanaguru/tanaguru-latest.tar.gz). 
+Retrieve the [lastest version of Asqatasun](http://download.asqatasun.org/Asqatasun/asqatasun-latest.tar.gz). 
 
 Extract it on your file system. The extraction will create a "asqatasun" folder. This folder will become the execution context of the installation.
 

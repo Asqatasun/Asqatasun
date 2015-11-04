@@ -1,6 +1,6 @@
 /*
- * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2015 Tanaguru.org
+ * Asqatasun - Automated webpage assessment
+ * Copyright (C) 2008-2015  Asqatasun.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: tanaguru AT tanaguru DOT org
+ * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
 package org.tanaguru.rules.rgaa22;

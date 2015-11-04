@@ -15,7 +15,7 @@
         <module>rules</module>
         <module>web-app</module>
         <module>cli</module>
-        <module>ws</module>
+        <!--<module>ws</module>-->
     </modules>
     <profiles>
         <profile>
@@ -222,12 +222,6 @@
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
                 <artifactId>tanaguru-seo</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo-all-resources</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>

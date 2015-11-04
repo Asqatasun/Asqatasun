@@ -1,10 +1,10 @@
 /*
- * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2015  Tanaguru.org
+ * Asqatasun - Automated webpage assessment
+ * Copyright (C) 2008-2015  Asqatasun.org
  *
- * This file is part of Tanaguru.
+ * This file is part of Asqatasun.
  *
- * Tanaguru is free software: you can redistribute it and/or modify
+ * Asqatasun is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: tanaguru AT tanaguru DOT org
+ * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 package org.tanaguru.webapp.command;
 
