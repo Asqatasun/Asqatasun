@@ -355,7 +355,9 @@ install_configuration() {
         -e    "s#\$DATABASE_NAME#$database_db#" \
         "${prefix}$TG_CONF_DIR/asqatasun.conf" || \
             fail "Unable to set up the Asqatasun configuration"
-    if [[ $(grep '$' "${prefix}$TG_CONF_DIR" >/dev/null) ]]; then
+
+    # @@@TODO find something better than grep for doing an strcompare
+    if [[ $(grep '$' "${prefix}$TG_CONF_DIR" 2>&1 >/dev/null) ]]; then
             warn "The file ${prefix}$TG_CONF_DIR contains" \
                  "dollar symboles. Check by yourself that the " \
                  "replacement worked fine."
