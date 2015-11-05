@@ -80,6 +80,7 @@ apt-get -y --no-install-recommends install \
     bzip2 \
     unzip \
     mysql-server \
+    libmysql-java \
     tomcat7 \
     libspring-instrument-java \
     xvfb \
