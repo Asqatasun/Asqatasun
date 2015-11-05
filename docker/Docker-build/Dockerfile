@@ -43,17 +43,18 @@ RUN mv asqatasun*/ ./asqatasun/
 WORKDIR /root/asqatasun
 RUN service mysql start && \
     sleep 5 && \
-    echo "yes\n" | ./install.sh  --database-db asqatasun \ 
-				 --database-host localhost \
-				 --database-user asqatasun \
-				 --database-passwd asqaP4sswd \
-				 --asqatasun-url http://localhost:8080/asqatasun/ \
-				 --tomcat-webapps /var/lib/tomcat7/webapps \
-				 --tomcat-user tomcat7 \
-				 --asqa-admin-email me@email.org \
-				 --asqa-admin-passwd emailPassword \
-				 --firefox-esr-binary-path /opt/firefox/firefox \
-				 --display-port :99 
-
-RUN service tomcat7 restart
-RUN tail -f /var/log/asqatasun/asqatasun.log
+    service xvfb start && \
+    echo "yes\n" | ./install.sh  \
+        --database-db asqatasun \ 
+        --database-host localhost \
+        --database-user asqatasun \
+        --database-passwd asqaP4sswd \
+        --asqatasun-url http://localhost:8080/asqatasun/ \
+        --tomcat-webapps /var/lib/tomcat7/webapps \
+        --tomcat-user tomcat7 \
+        --asqa-admin-email me@email.org \
+        --asqa-admin-passwd emailPassword \
+        --firefox-esr-binary-path /opt/firefox/firefox \
+        --display-port :99 && \
+    service tomcat7 start && \
+    tail -f /var/log/asqatasun/asqatasun.log
