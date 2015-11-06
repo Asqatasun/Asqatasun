@@ -33,8 +33,9 @@ XVFB_INITSCRIPT_DIR=.
 FIREFOX_PARENT_DIR=/opt
 
 # Please keep *this* version of Firefox
-FIREFOX_i686="http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/31.4.0esr/linux-i686/en-US/firefox-31.4.0esr.tar.bz2";
-FIREFOX_x86_64="http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/31.4.0esr/linux-x86_64/en-US/firefox-31.4.0esr.tar.bz2";
+FIREFOX_BASENAME="firefox-31.4.0esr"
+FIREFOX_i686="http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/31.4.0esr/linux-i686/en-US/${FIREFOX_BASENAME}.tar.bz2";
+FIREFOX_x86_64="http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/31.4.0esr/linux-x86_64/en-US/${FIREFOX_BASENAME}.tar.bz2";
 
 #
 # That's OK, please do not modify things further,
@@ -141,9 +142,10 @@ fi
 
 cd ${FIREFOX_PARENT_DIR}
 wget -q "${FIREFOX_DL}"
-tar xvfj firefox-31.4.0esr.tar.bz2
-mv firefox firefox-31.4.0esr
-ln -s firefox-31.4.0esr firefox
+tar xvfj ${FIREFOX_BASENAME}.tar.bz2
+mv firefox ${FIREFOX_BASENAME}
+ln -s ${FIREFOX_BASENAME} firefox
+rm ${FIREFOX_BASENAME}.tar.bz2
 
 #############################################
 # Clean
