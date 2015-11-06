@@ -333,13 +333,26 @@ install_firefox_profile_files() {
 		"${prefix}$TG_TMP_DIR/.gnome2_private" \
 		|| fail "Unable to create Asqatasun directories"
 
-    ln -s "${prefix}$TG_TMP_DIR/.gconf" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gconf" 
-    ln -s "${prefix}$TG_TMP_DIR/.java" "${TOMCAT_HOME_DIR}/${tomcat_user}/.java" 
-    ln -s "${prefix}$TG_TMP_DIR/.cache" "${TOMCAT_HOME_DIR}/${tomcat_user}/.cache" 
-    ln -s "${prefix}$TG_TMP_DIR/.dbus" "${TOMCAT_HOME_DIR}/${tomcat_user}/.dbus" 
-    ln -s "${prefix}$TG_TMP_DIR/.mozilla" "${TOMCAT_HOME_DIR}/${tomcat_user}/.mozilla" 
-    ln -s "${prefix}$TG_TMP_DIR/.gnome2" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2" 
-    ln -s "${prefix}$TG_TMP_DIR/.gnome2_private" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2_private" 
+    ln -s "${prefix}$TG_TMP_DIR/.gconf" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gconf" \
+        || fail "Unable to create symlink ${TOMCAT_HOME_DIR}/${tomcat_user}/.gconf"
+
+    ln -s "${prefix}$TG_TMP_DIR/.java" "${TOMCAT_HOME_DIR}/${tomcat_user}/.java" \
+        || fail "Unable to create symlink ${TOMCAT_HOME_DIR}/${tomcat_user}/.java"
+
+    ln -s "${prefix}$TG_TMP_DIR/.cache" "${TOMCAT_HOME_DIR}/${tomcat_user}/.cache" \
+        || fail "Unable to create symlink ${TOMCAT_HOME_DIR}/${tomcat_user}/.cache"
+
+    ln -s "${prefix}$TG_TMP_DIR/.dbus" "${TOMCAT_HOME_DIR}/${tomcat_user}/.dbus" \
+        || fail "Unable to create symlink ${TOMCAT_HOME_DIR}/${tomcat_user}/.dbus"
+
+    ln -s "${prefix}$TG_TMP_DIR/.mozilla" "${TOMCAT_HOME_DIR}/${tomcat_user}/.mozilla" \
+        || fail "Unable to create symlink ${TOMCAT_HOME_DIR}/${tomcat_user}/.mozilla"
+
+    ln -s "${prefix}$TG_TMP_DIR/.gnome2" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2" \
+        || fail "Unable to create symlink ${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2"
+
+    ln -s "${prefix}$TG_TMP_DIR/.gnome2_private" "${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2_private" \
+        || fail "Unable to create symlink ${TOMCAT_HOME_DIR}/${tomcat_user}/.gnome2_private"
 }
 
 install_configuration() {
