@@ -147,6 +147,15 @@
             <outputDirectory>.</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/../../docker/Docker-build</directory>
+            <includes>
+                <include>pre-requesite.sh</include>
+                <include>xvfb</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>.</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/../../web-app/tgol-resources/src/main/resources/conf</directory>
             <includes>
                 <include>ESAPI.properties</include>
