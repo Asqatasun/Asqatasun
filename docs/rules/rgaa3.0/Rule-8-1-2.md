@@ -85,7 +85,7 @@ doctype: http://www.w3.org/TR/html4/intro/sgmltut.html
 
 XHTML1: same as HTML4 http://www.w3.org/TR/xhtml1/
 
-From version 2.0, Tanaguru works on the generated html rendered by
+From version 2.0, Asqatasun works on the generated html rendered by
 Firefox. 
 We've noticed that for HTML 4.01 doctypes that define the doctype with
 the "HTML" key in Uppercase, the doctype is transformed and the "HTML"

@@ -63,7 +63,7 @@ HTML4: could not find formal statement about case-sensitiveness of doctype: http
 
 XHTML1: same as HTML4 http://www.w3.org/TR/xhtml1/ 
 
-From version 2.0, Tanaguru works on the generated html rendered by Firefox. \
+From version 2.0, Asqatasun works on the generated html rendered by Firefox. \
 We've noticed that for HTML 4.01 doctypes that define the doctype with the "HTML" key in Uppercase, the doctype is transformed and the "HTML" key is changed to lowercase. \ 
 This behaviour is the same with chromium and opera. \
 Regarding this fact, we decided to consider all the doctypes as case insensitive despite the W3c recommandations.

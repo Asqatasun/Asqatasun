@@ -1,4 +1,4 @@
-:arrow_heading_up:  [Back to Tanaguru wiki](https://github.com/Tanaguru/Tanaguru/wiki)
+:arrow_heading_up:  [Back to Asqatasun wiki](https://github.com/Asqatasun/Asqatasun/wiki)
 
 [[Home|Home]]
 
