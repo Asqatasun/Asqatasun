@@ -73,5 +73,5 @@ CMD service mysql start && \
     sleep 5 && \
     service xvfb start && \
     service tomcat7 start ; \
-    tail -f /var/log/tomcat7/catalina.out
-#    tail -f /var/log/asqatasun/asqatasun.log
+    tail -f /var/log/tomcat7/catalina.out \
+         /var/log/asqatasun/asqatasun.log
