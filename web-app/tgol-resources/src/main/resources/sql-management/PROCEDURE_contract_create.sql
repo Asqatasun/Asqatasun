@@ -6,7 +6,7 @@ use $myDatabaseName;
 -- Example of call:
 --  call contract_create($UserId, \"$SiteLabel\", \"$URL\", $referential, $audit-page, $audit-site, $audit-file, $audit-scenario, $audit-manual, $maxDoc);
 --  call contract_create(1, "Wikipedia RGAA3", "http://en.wikipedia.org/", "RGAA3", 1, 1, 1, 1, 1, 100);
---  call contract_create(1, "Wikipedia FR RGAA3", "http://fr.wikipedia.org/", "RGAA3", 1, 1, 1, 1, 1, 100);
+--  call contract_create(1, "Wikipedia SEO", "http://en.wikipedia.org/", "SEO", 0, 1, 0, 0, 0, 1000);
 
 DROP PROCEDURE IF EXISTS contract_create;
 
