@@ -14,6 +14,19 @@ MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 
 USER root
 
+ENV WWWPORT="8080" \
+    DATABASE_DB="asqatasun" \
+    DATABASE_HOST="localhost" \
+    DATABASE_USER="asqatasun" \
+    DATABASE_PASSWD="asqaP4sswd" \
+    TOMCAT_WEBAPP_DIR="/var/lib/tomcat7/webapps" \
+    TOMCAT_USER="tomcat7" \
+    ASQA_URL="http://localhost:8080/asqatasun/" \
+    ASQA_ADMIN_EMAIL="me@my-email.org" \
+    ASQA_ADMIN_PASSWD="myAsqaPassword" 
+
+EXPOSE $WWWPORT
+
 # ##########################################################
 #
 # Asqatasun pre-requesites
@@ -35,7 +48,7 @@ RUN /root/pre-requesites.sh
 
 # Add Asqatasun
 # @@@TODO: Remplace with downloading the .tar.gz
-ADD asqatasun-3.2.0-20151106-a.i386.tar.gz /root/
+ADD asqatasun-3.2.0-SNAPSHOT.i386.tar.gz /root/
 # /!\ The ADD command automacally untars and unzips the ADDed file
 RUN mv asqatasun*/ ./asqatasun/
 
@@ -43,16 +56,16 @@ RUN mv asqatasun*/ ./asqatasun/
 WORKDIR /root/asqatasun
 RUN service mysql start && \
     sleep 5 && \
-    echo "yes\n" | bash -x ./install.sh  \
-        --database-db asqatasun \ 
-        --database-host localhost \
-        --database-user asqatasun \
-        --database-passwd asqaP4sswd \
-        --asqatasun-url http://localhost:8080/asqatasun/ \
-        --tomcat-webapps /var/lib/tomcat7/webapps \
-        --tomcat-user tomcat7 \
-        --asqa-admin-email me@my-email.org \
-        --asqa-admin-passwd myAsqaPassword \
+    echo "yes\n" | ./install.sh  \
+        --database-db $DATABASE_DB \ 
+        --database-host $DATABASE_HOST \
+        --database-user $DATABASE_USER \
+        --database-passwd $DATABASE_PASSWD \
+        --asqatasun-url $ASQA_URL \
+        --tomcat-webapps $TOMCAT_WEBAPP_DIR \
+        --tomcat-user $TOMCAT_USER \
+        --asqa-admin-email $ASQA_ADMIN_EMAIL \
+        --asqa-admin-passwd $ASQA_ADMIN_PASSWD \
         --firefox-esr-binary-path /opt/firefox/firefox \
         --display-port :99
 
@@ -60,6 +73,5 @@ CMD service mysql start && \
     sleep 5 && \
     service xvfb start && \
     service tomcat7 start ; \
-    sleep 5 && \
     tail -f /var/log/tomcat7/catalina.out
 #    tail -f /var/log/asqatasun/asqatasun.log
