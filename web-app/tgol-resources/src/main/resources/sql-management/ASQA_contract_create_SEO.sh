@@ -25,11 +25,45 @@ MANDATORY_ARGS:
 
 OPTIONS:
 
-    -m <maxPages>       Max number of crawled pages for a site-audit
+    -m <maxPages>   Max number of crawled pages for a site-audit
+    -h | --help     Show this message     
 
 EOF
     exit 2
 }
+
+#############################################
+# Manage options and usage
+#############################################
+TEMP=`getopt -o c:hw:u:m: --long database-user:,database-passwd:,database-db:,database-host:,help -- "$@"`
+
+if [[ $? != 0 ]] ; then
+    echo "Terminating..." >&2 ;
+    exit 1 ;
+fi
+
+# Note the quotes around `$TEMP': they are essential!
+eval set -- "$TEMP"
+
+@@@TODO continue the Work In Progress from here
+
+declare CONF_DIR
+declare PURGE=false
+declare HELP=false
+
+while true; do
+  case "$1" in
+    -c | --conf-dir )   CONF_DIR="$2"; shift 2 ;; 
+    -p | --purge )      PURGE=true; shift ;;
+    -h | --help )       HELP=true; shift ;;
+    * ) break ;;
+  esac
+done
+
+
+if [[ -z "$CONF_DIR" || "$HELP" == "true" ]]; then
+    usage
+fi
 
 # For Getopts: very first ":" for error managing, then a ":" after each option requiring an argument
 DbUser=
