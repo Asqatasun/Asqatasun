@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 2015-11-12 mfaure
+# 2015-11-14 mfaure
 
 #############################################
 # Usage
@@ -8,14 +8,12 @@
 usage () {
     cat <<EOF
 
-$0 creates an SEO contract for a given Asqatasun user on a given website URL
+$0 creates an A11Y RGAA-3 contract for a given Asqatasun user on any URL of the internet
 
 usage: $0 [MANDATORY_ARGS] [OPTIONS]
 
 MANDATORY_ARGS:
 
-    -c <contract-name>   MANDATORY Name of contract as displayed in Asqatasun interface
-    -w <website-url>     MANDATORY Url of the site to be audited (Fully Qualified Domain Name)
     -u <user-id>         MANDATORY Id of the user the contract is bound to
     
     --database-user <db-user>       MANDATORY Asqatasun database user
@@ -25,8 +23,8 @@ MANDATORY_ARGS:
 
 OPTIONS:
 
-    -m <max-pages>   Max number of crawled pages for a site-audit
-    -h | --help     Show this message     
+    --audit-manual      Enable manual fulfill of an existing page-audit 
+    -h | --help         Show this message     
 
 EOF
     exit 2
@@ -35,7 +33,10 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o hc:w:u:m: --long database-user:,database-passwd:,database-db:,database-host:,help -- "$@"`
+TEMP=`getopt \
+    -o hu: \
+    --long help,database-user:,database-passwd:,database-db:,database-host:,audit-page,audit-site,audit-file,audit-scenario,audit-manual \
+    -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -46,22 +47,27 @@ fi
 eval set -- "$TEMP"
 
 declare HELP=false
-declare CONTRACT_NAME
-declare WEBSITE_URL
+declare CONTRACT_NAME="Openbar RGAA-3"
+declare WEBSITE_URL="NULL"
 declare USER_ID
+
 declare DB_USER
 declare DB_PASSWD
 declare DB_NAME
 declare DB_HOST
+
+declare AUDIT_PAGE=1
+declare AUDIT_SITE=0
+declare AUDIT_FILE=1
+declare AUDIT_SCENARIO=1
+
+declare AUDIT_MANUAL=1
 declare MAX_PAGES=NULL
 
 while true; do
   case "$1" in
     -h | --help )       HELP=true; shift ;;
-    -c )                CONTRACT_NAME="$2"; shift 2 ;; 
-    -w )                WEBSITE_URL="$2"; shift 2 ;; 
     -u )                USER_ID="$2"; shift 2 ;; 
-    -m )                MAX_PAGES="$2"; shift 2 ;; 
     --database-user )   DB_USER="$2"; shift 2 ;;
     --database-passwd ) DB_PASSWD="$2"; shift 2 ;;
     --database-db )     DB_NAME="$2"; shift 2 ;;
@@ -70,9 +76,8 @@ while true; do
   esac
 done
 
-
-if [[ -z "$CONTRACT_NAME" || \
-    -z "$WEBSITE_URL" || \
+# Mandatory arguments
+if [[ 
     -z "$USER_ID" || \
     -z "$DB_USER" || \
     -z "$DB_PASSWD" || \
@@ -90,4 +95,15 @@ mysql --user="$DB_USER" \
     --password="$DB_PASSWD" \
     --database="$DB_NAME" \
     --host="$DB_HOST" \
-    -e "call contract_create($USER_ID, \"$CONTRACT_NAME\", \"$WEBSITE_URL\", \"SEO\", 0, 1, 0, 0, 0, $MAX_PAGES);"
+    -e "call contract_create( \
+        $USER_ID, \
+        \"$CONTRACT_NAME\", \
+        \"$WEBSITE_URL\", \
+        \"RGAA3\", \
+        $AUDIT_PAGE, \
+        $AUDIT_SITE, \
+        $AUDIT_FILE, \
+        $AUDIT_SCENARIO, \
+        $AUDIT_MANUAL, \
+        $MAX_PAGES) \
+        ;"
