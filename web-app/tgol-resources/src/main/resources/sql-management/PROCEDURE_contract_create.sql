@@ -12,16 +12,17 @@ DROP PROCEDURE IF EXISTS contract_create;
 
 delimiter |
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `contract_create`(
-IN idUser INT, 
-IN label VARCHAR(255), 
-IN url VARCHAR(1024), 
-IN referential VARCHAR(10), 
-IN audit_page INT, 
-IN audit_site INT, 
-IN audit_file INT, 
-IN audit_scenario INT, 
-IN audit_manual INT, 
-IN maxDoc VARCHAR(5))
+    IN idUser INT, 
+    IN label VARCHAR(255), 
+    IN url VARCHAR(1024), 
+    IN referential VARCHAR(10), 
+    IN audit_page BOOLEAN, 
+    IN audit_site BOOLEAN, 
+    IN audit_file BOOLEAN, 
+    IN audit_scenario BOOLEAN, 
+    IN audit_manual BOOLEAN, 
+    IN maxDoc VARCHAR(5)
+)
 BEGIN
 
     -- hard-coded values from table TGSI_REFERENTIAL
@@ -76,31 +77,31 @@ BEGIN
     END IF;            
 
     -- Audit: page
-    IF audit_page IS NOT NULL THEN 
+    IF audit_page THEN 
         INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
             (contractId, audit_type_id_page);
     END IF;
 
     -- Audit: site
-    IF audit_site IS NOT NULL THEN 
+    IF audit_site THEN 
         INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
             (contractId, audit_type_id_site);
     END IF;
 
     -- Audit: file
-    IF audit_file IS NOT NULL THEN 
+    IF audit_file THEN 
         INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
             (contractId, audit_type_id_file);
     END IF;
 
     -- Audit: scenario
-    IF audit_scenario IS NOT NULL THEN 
+    IF audit_scenario THEN 
         INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
             (contractId, audit_type_id_scenario);
     END IF;
 
     -- Audit: manual
-    IF audit_manual IS NOT NULL THEN 
+    IF audit_manual THEN 
         INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) VALUES
             (contractId, audit_type_id_manual);
     END IF;
