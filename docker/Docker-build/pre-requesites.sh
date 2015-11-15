@@ -90,7 +90,7 @@ apt-get -y --no-install-recommends install \
     tomcat7 \
     libspring-instrument-java \
     xvfb \
-    libdbus-glib-1-2 \ # needed for webdriver communicating with Firefox
+    libdbus-glib-1-2 \
     openjdk-7-jre
     
 #############################################
