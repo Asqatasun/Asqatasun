@@ -48,7 +48,7 @@ eval set -- "$TEMP"
 
 declare HELP=false
 declare CONTRACT_NAME="Openbar RGAA-3"
-declare WEBSITE_URL="NULL"
+declare WEBSITE_URL=""
 declare USER_ID
 
 declare DB_USER
