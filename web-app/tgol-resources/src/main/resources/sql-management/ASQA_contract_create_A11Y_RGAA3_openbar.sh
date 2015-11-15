@@ -14,6 +14,7 @@ usage: $0 [MANDATORY_ARGS] [OPTIONS]
 
 MANDATORY_ARGS:
 
+    -c <contract-name>   MANDATORY Name of contract as displayed in Asqatasun interface
     -u <user-id>         MANDATORY Id of the user the contract is bound to
     
     --database-user <db-user>       MANDATORY Asqatasun database user
@@ -23,7 +24,6 @@ MANDATORY_ARGS:
 
 OPTIONS:
 
-    --audit-manual      Enable manual fulfill of an existing page-audit 
     -h | --help         Show this message     
 
 EOF
@@ -34,7 +34,7 @@ EOF
 # Manage options and usage
 #############################################
 TEMP=`getopt \
-    -o hu: \
+    -o hu:c: \
     --long help,database-user:,database-passwd:,database-db:,database-host:,audit-page,audit-site,audit-file,audit-scenario,audit-manual \
     -- "$@"`
 
@@ -47,7 +47,7 @@ fi
 eval set -- "$TEMP"
 
 declare HELP=false
-declare CONTRACT_NAME="Openbar RGAA-3"
+declare CONTRACT_NAME=
 declare WEBSITE_URL=""
 declare USER_ID
 
@@ -68,6 +68,7 @@ while true; do
   case "$1" in
     -h | --help )       HELP=true; shift ;;
     -u )                USER_ID="$2"; shift 2 ;; 
+    -c )                CONTRACT_NAME="$2"; shift 2 ;; 
     --database-user )   DB_USER="$2"; shift 2 ;;
     --database-passwd ) DB_PASSWD="$2"; shift 2 ;;
     --database-db )     DB_NAME="$2"; shift 2 ;;
@@ -78,12 +79,14 @@ done
 
 # Mandatory arguments
 if [[ 
+    -z "$CONTRACT_NAME" || \
     -z "$USER_ID" || \
     -z "$DB_USER" || \
     -z "$DB_PASSWD" || \
     -z "$DB_NAME" || \
     -z "$DB_HOST" || \
-    "$HELP" == "true" ]]; then
+    "$HELP" == "true" 
+    ]]; then
     usage
 fi
 
