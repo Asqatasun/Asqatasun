@@ -50,7 +50,7 @@ declare DB_PASSWD
 declare DB_NAME
 declare DB_HOST
 
-declare MY_PROCEDURE="PROCEDURE_contract_create.sql"
+declare MY_PROCEDURE_FILE="PROCEDURE_contract_create.sql"
 
 while true; do
   case "$1" in
@@ -78,11 +78,11 @@ fi
 # Do the actual job: create contract
 #############################################
 sed -i \
-    -e    "s#\$myDatabaseName#$DB_NAME#" \
-    -e    "s#\$myDatabaseUser#$DB_USER#" \
-    MY_PROCEDURE
+    -e "s#\$myDatabaseName#$DB_NAME#" \
+    -e "s#\$myDatabaseUser#$DB_USER#" \
+    $MY_PROCEDURE_FILE
 
-cat ${MY_PROCEDURE} | \
+cat $MY_PROCEDURE_FILE | \
     mysql --user="$DB_USER" \
           --password="$DB_PASSWD"\
           --host="$DB_NAME" \
