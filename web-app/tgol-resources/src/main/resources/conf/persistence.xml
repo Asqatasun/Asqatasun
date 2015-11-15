@@ -15,7 +15,7 @@
         <class>org.tanaguru.webapp.entity.option.OptionFamilyImpl</class>
         <class>org.tanaguru.webapp.entity.referential.ReferentialImpl</class>
         <class>org.tanaguru.webapp.entity.scenario.ScenarioImpl</class>
-        <!-- tanaguru classes-->
+        <!-- asqatasun classes-->
         <class>org.tanaguru.entity.reference.CriterionImpl</class>
         <class>org.tanaguru.entity.reference.DecisionLevelImpl</class>
         <class>org.tanaguru.entity.reference.LevelImpl</class>

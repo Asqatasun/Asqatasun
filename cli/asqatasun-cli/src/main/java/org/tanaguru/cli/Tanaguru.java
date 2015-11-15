@@ -424,8 +424,8 @@ public class Tanaguru implements AuditServiceListener {
     }
 
     /**
-     * Create the tanaguru command line interface options
-     * @return the options to launch tanaguru cli
+     * Create the asqatasun command line interface options
+     * @return the options to launch asqatasun cli
      */
     private static Options createOptions() {
         Options options = new Options();

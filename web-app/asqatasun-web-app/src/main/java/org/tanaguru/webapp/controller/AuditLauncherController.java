@@ -273,7 +273,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
     }
 
     /**
-     * This method launches the audit process using the tanaguru orchestrator
+     * This method launches the audit process using the asqatasun orchestrator
      * bean
      *
      * @param contract

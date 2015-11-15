@@ -42,7 +42,7 @@
     </build>
     <dependencies>
 
-        <!-- tanaguru modules dependencies -->
+        <!-- asqatasun modules dependencies -->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-api</artifactId>

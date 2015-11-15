@@ -51,7 +51,7 @@
             <artifactId>security</artifactId>
         </dependency>
         
-        <!-- tanaguru dependencies-->
+        <!-- asqatasun dependencies-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>tanaguru-engine</artifactId>

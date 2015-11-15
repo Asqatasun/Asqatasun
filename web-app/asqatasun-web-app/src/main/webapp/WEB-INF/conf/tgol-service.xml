@@ -17,7 +17,7 @@
         </property>
     </bean>
 
-    <!-- tanaguru imports-->
+    <!-- asqatasun imports-->
     <import resource="classpath:conf/context/beans-audit.xml"/>
     <import resource="classpath:conf/context/beans-analyser.xml"/>
     <import resource="classpath:conf/context/beans-consolidator.xml"/>

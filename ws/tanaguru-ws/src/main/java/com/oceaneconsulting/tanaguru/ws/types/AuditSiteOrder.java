@@ -14,7 +14,7 @@ public class AuditSiteOrder extends CommonOrder {
 	 */
 	private static final long serialVersionUID = 8574438742995163333L;
 	
-	//parameters options in tanaguru
+	//parameters options in asqatasun
 	private String siteURL;
 //	private String level;
 //	private String tblMarker;

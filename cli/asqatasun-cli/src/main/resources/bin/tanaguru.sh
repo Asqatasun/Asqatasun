@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# start-tanaguru -- startup script for the tanaguru engine service
+# start-tanaguru -- startup script for the asqatasun engine service
 # Written by Jérôme Kowalczyk <jk@open-s.com>.
 
 set -e
