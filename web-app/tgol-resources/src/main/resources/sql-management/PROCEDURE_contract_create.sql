@@ -25,17 +25,21 @@ CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `contract_create`(
 )
 BEGIN
 
-    -- hard-coded values from table TGSI_REFERENTIAL
+    -- CONSTANTS hard-coded values from table TGSI_REFERENTIAL
     DECLARE referential_id_RGAA3 int DEFAULT 3;
     DECLARE referential_id_SEO int DEFAULT 4;
     
-    -- hard-coded values from table TGSI_FUNCTIONALITY
+    -- CONSTANTS hard-coded values from table TGSI_FUNCTIONALITY
     DECLARE audit_type_id_page int DEFAULT 1;
     DECLARE audit_type_id_site int DEFAULT 2;
     DECLARE audit_type_id_file int DEFAULT 3;
     DECLARE audit_type_id_scenario int DEFAULT 4;
     DECLARE audit_type_id_manual int DEFAULT 5;
 
+    -- CONSTANTS hard-coded values from table TGSI_OPTION_ELEMENT
+    DECLARE c_OPTION_Id_Option int DEFAULT 3;
+
+    -- Variables actually used
     DECLARE v_Id_Option_Element bigint(20);
     DECLARE v_Id_Option_Element2 bigint(20);
     DECLARE contractId bigint(20);
@@ -56,13 +60,13 @@ BEGIN
     END IF;
 
     -- maxdoc
-    IF maxDoc IS NOT NULL THEN 
-        INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`OPTION_Id_Option`, `Value`) VALUES
-            (3, maxDoc);	
-        select Id_Option_Element into v_Id_Option_Element2 FROM TGSI_OPTION_ELEMENT toe WHERE toe.OPTION_Id_Option=3 AND toe.Value=maxDoc;
-      ELSE 
-        select Id_Option_Element into v_Id_Option_Element2 FROM TGSI_OPTION_ELEMENT toe WHERE toe.OPTION_Id_Option=3 AND toe.Value="1000";
+    IF maxDoc IS NULL THEN 
+        SET maxDoc = "1000";
     END IF;
+    
+    INSERT IGNORE INTO `TGSI_OPTION_ELEMENT` (`OPTION_Id_Option`, `Value`) VALUES
+        (c_OPTION_Id_Option, maxDoc);	
+    select Id_Option_Element into v_Id_Option_Element2 FROM TGSI_OPTION_ELEMENT toe WHERE toe.OPTION_Id_Option=3 AND toe.Value=maxDoc;
 
     INSERT IGNORE INTO `TGSI_CONTRACT_OPTION_ELEMENT` (`CONTRACT_Id_Contract`, `OPTION_ELEMENT_Id_Option_Element`) VALUES
         (contractId,v_Id_Option_Element2);
