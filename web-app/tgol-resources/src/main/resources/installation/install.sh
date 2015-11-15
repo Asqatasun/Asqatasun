@@ -422,8 +422,11 @@ create_first_user() {
 create_first_contracts() {
     # create 3 typical contracts
     cd "$PKG_DIR/install/web-app/sql-management"
+
+    # @@@TODO include SQL procedure contract create
+
     # Contract Wikipedia A11Y
-    sh ./ASQA_contract_create_A11Y_RGAA3 \
+    sh ./ASQA_contract_create_A11Y_RGAA3.sh \
         -c "Wikipedia A11Y RGAA-3" \
         -u 1 \
         -w "http://en.wikipedia.org/" \
@@ -436,9 +439,10 @@ create_first_contracts() {
         --audit-file \
         --audit-scenario \
         --audit-manual \
-        -m 1000
+        -m 1000 ||
+            fail "Unable to create contract: Wikipedia A11Y RGAA-3"
     # Contract Wikipedia SEO
-    sh ./ASQA_contract_create_SEO \
+    sh ./ASQA_contract_create_SEO.sh \
         -c "Wikipedia SEO" \
         -u 1 \
         -w "http://en.wikipedia.org/" \
@@ -446,15 +450,17 @@ create_first_contracts() {
         --database-passwd "$database_passwd" \
         --database-db "$database_db" \
         --database-host "$database_host" \
-        -m 1000
+        -m 1000 ||
+            fail "Unable to create contract: Wikipedia SEO"
     # Contract A11Y Openbar
-    sh ./ASQA_contract_create_A11Y_RGAA3_openbar \
+    sh ./ASQA_contract_create_A11Y_RGAA3_openbar.sh \
         -c "Openbar A11Y RGAA-3" \
         -u 1 \
         --database-user "$database_user" \
         --database-passwd "$database_passwd" \
         --database-db "$database_db" \
-        --database-host "$database_host"
+        --database-host "$database_host"  ||
+            fail "Unable to create contract: Openbar A11Y RGAA-3"
 }
 
 update_tomcat_configuration() {
