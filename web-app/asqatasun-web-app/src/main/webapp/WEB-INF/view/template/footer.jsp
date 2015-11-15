@@ -16,7 +16,7 @@
                 </a> 
                 - 
                 <fmt:message key="footer.poweredBy"/> 
-                <a href="http://www.asqatasun.org/">
+                <a href="https://github.com/Asqatasun/Asqatasun">
                     Asqatasun v${tanaguruVersion}
                 </a>
                 - 
