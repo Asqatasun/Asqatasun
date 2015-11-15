@@ -419,6 +419,44 @@ create_first_user() {
     sh ./tg-set-user-admin.sh -u $asqa_admin_email >/dev/null || fail "Error while setting Asqatasun user as admin"
 }
 
+create_first_contracts() {
+    # create 3 typical contracts
+    cd "$PKG_DIR/install/web-app/sql-management"
+    # Contract Wikipedia A11Y
+    sh ./ASQA_contract_create_A11Y_RGAA3 \
+        -c "Wikipedia A11Y RGAA-3" \
+        -u 1 \
+        -w "http://en.wikipedia.org/" \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host" \
+        --audit-page \
+        --audit-site \
+        --audit-file \
+        --audit-scenario \
+        --audit-manual \
+        -m 1000
+    # Contract Wikipedia SEO
+    sh ./ASQA_contract_create_SEO \
+        -c "Wikipedia SEO" \
+        -u 1 \
+        -w "http://en.wikipedia.org/" \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host" \
+        -m 1000
+    # Contract A11Y Openbar
+    sh ./ASQA_contract_create_A11Y_RGAA3_openbar \
+        -c "Openbar A11Y RGAA-3" \
+        -u 1 \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host"
+}
+
 update_tomcat_configuration() {
     # we assume the filename is the same as tomcat-user specified by user
     MY_DEFAULT_TOMCAT=/etc/default/${tomcat_user}
@@ -458,30 +496,32 @@ main() {
 
     # create Asqatasun directories
     create_directories
-    echo "Directory creation:	.	.	OK"
+    echo "Directory creation:                   OK"
     # save options for uninstall
     write_options	
     # filling the SQL database
     create_tables
-    echo "SQL inserts: 		.	.	OK"
+    echo "SQL inserts:                          OK"
     # install configuration file
     install_configuration
-    echo "Asqatasun config files creation:   .  OK"
+    echo "Asqatasun config files creation:      OK"
     # install webapp
     install_webapp
-    echo "Asqatasun webapp creation: 	.	OK"
+    echo "Asqatasun webapp creation:            OK"
     # install firefox profile files
     install_firefox_profile_files
     echo "Firefox Profile Files creation: 	OK"
     # edit esapi configuration file
     edit_esapi_configuration_file
-    echo "Asqatasun webapp configuration: .	OK"
+    echo "Asqatasun webapp configuration:       OK"
     # create first user
     create_first_user
     echo "Asqatasun admin creation:             OK"
+    create_first_contracts
+    echo "Asqatasun contract creation:          OK"
     # update tomcat configuration
     update_tomcat_configuration
-    echo "Tomcat configuration: 	.	OK"
+    echo "Tomcat configuration:                 OK"
     # done
     echo_installation_summary
 }
