@@ -177,7 +177,7 @@
     <dependencyManagement>
         <dependencies>
 
-            <!-- tanaguru-rules dependencies -->
+            <!-- asqatasun-rules dependencies -->
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
                 <artifactId>tanaguru-rules-commons</artifactId>
@@ -226,7 +226,7 @@
                 <scope>runtime</scope>
             </dependency>
 
-            <!-- tanaguru-engine dependencies -->
+            <!-- asqatasun-engine dependencies -->
             <dependency>
                 <groupId>${engineGroupId}</groupId>
                 <artifactId>tanaguru-commons-entity</artifactId>
@@ -376,7 +376,7 @@
                 <version>${engineVersion}</version>
             </dependency>
 
-            <!-- tanaguru testing-tools -->
+            <!-- asqatasun testing-tools -->
             <dependency>
                 <groupId>${testingToolsGroupId}</groupId>
                 <artifactId>tanaguru-rules-testing-tools</artifactId>
@@ -390,7 +390,7 @@
                 <scope>test</scope>
             </dependency>
 
-            <!-- tanaguru web-app -->
+            <!-- asqatasun web-app -->
             <dependency>
                 <groupId>${webappGroupId}</groupId>
                 <artifactId>tgol-api</artifactId>

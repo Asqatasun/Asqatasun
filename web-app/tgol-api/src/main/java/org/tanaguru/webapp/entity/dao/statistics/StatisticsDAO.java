@@ -38,7 +38,7 @@ import org.tanaguru.webapp.util.HttpStatusCodeFamily;
 
 /**
  * This interface adds more primitives to the WebResourceDAO interface defined
- * in the tanaguru API
+ * in the asqatasun API
  *
  * @author jkowalczyk
  */

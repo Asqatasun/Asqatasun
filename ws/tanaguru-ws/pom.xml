@@ -43,7 +43,7 @@
 
     <dependencies>
 
-        <!-- tanaguru modules compile dependencies -->
+        <!-- asqatasun modules compile dependencies -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>tanaguru-audit</artifactId>
@@ -62,7 +62,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- tanaguru modules runtime dependencies -->
+        <!-- asqatasun modules runtime dependencies -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>tanaguru-engine</artifactId>

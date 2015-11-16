@@ -63,7 +63,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="operatorContactUrl" value="[see override above]"/>
         <property name="jobName" value="[see override above]"/>
         <property name="description" value="[see override above]"/>
-        <property name="userAgentTemplate" value="tanaguru +@OPERATOR_CONTACT_URL@"/>
+        <property name="userAgentTemplate" value="asqatasun +@OPERATOR_CONTACT_URL@"/>
     </bean>
  
  <!-- SEEDS: crawl starting points 

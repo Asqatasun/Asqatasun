@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.com/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <!-- 
-    	In order to run tanaguru-ws project correctly, it's necessary to define the entry below in tanaguru configuration file (/conf/tanaguru.conf)
+    	In order to run tanaguru-ws project correctly, it's necessary to define the entry below in asqatasun configuration file (/conf/tanaguru.conf)
     	- persistenceXmlLocation=classpath:/conf/persistence.xml
      -->
     <persistence-unit name="tanaguruPU" transaction-type="RESOURCE_LOCAL">
@@ -19,7 +19,7 @@
         <class>org.tanaguru.entity.option.OptionFamilyImpl</class>
         <class>org.tanaguru.entity.referential.ReferentialImpl</class>
         <class>org.tanaguru.entity.scenario.ScenarioImpl</class>-->
-        <!-- tanaguru classes-->
+        <!-- asqatasun classes-->
         <class>org.tanaguru.entity.reference.CriterionImpl</class>
         <class>org.tanaguru.entity.reference.DecisionLevelImpl</class>
         <class>org.tanaguru.entity.reference.LevelImpl</class>

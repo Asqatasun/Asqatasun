@@ -93,4 +93,4 @@ In all other cases
 
 ## Notes
 
-We assume here that the links are only composed of a text. (<a href="http://www.tanaguru.org/target.html">` my link`</a>`)
+We assume here that the links are only composed of a text. (<a href="http://www.asqatasun.org/target.html">` my link`</a>`)

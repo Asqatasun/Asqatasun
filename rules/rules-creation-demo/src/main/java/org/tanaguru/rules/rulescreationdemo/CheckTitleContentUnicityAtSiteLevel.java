@@ -26,7 +26,7 @@ import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
 /**
  * Implementation of the rule CheckTitleContentUnicityAtSiteLevel of the referential Rules creation demo.
  *
- *  @see <a href="https://github.com/Tanaguru/Tanaguru/wiki/Create-a-rule-:-Getting-started"> 
+ *  @see <a href="https://github.com/Asqatasun/Asqatasun/wiki/Create-a-rule-:-Getting-started"> 
  * Create a rule : Getting started</a>
  *
  * @author jkowalczyk

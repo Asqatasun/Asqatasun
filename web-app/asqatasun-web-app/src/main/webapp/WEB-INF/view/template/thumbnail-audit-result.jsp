@@ -6,7 +6,7 @@
 <c:set var="height" value="170"/>
 <c:set var="width" value="270"/>
 <c:set var="tgLogoUrl">
-    <c:url value="/Images/Logo-Tanaguru-G-w${width}-h${height}-75dpi-bgTransp.png"/>
+    <c:url value="/Images/Logo-Asqatasun-G-w${width}-h${height}-75dpi-bgTransp.png"/>
 </c:set>
 <div class="${proportion} ${offset}">
     <div class="thumbnail" >

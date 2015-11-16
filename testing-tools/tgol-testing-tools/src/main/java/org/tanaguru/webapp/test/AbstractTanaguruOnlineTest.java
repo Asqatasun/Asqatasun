@@ -30,7 +30,7 @@ import org.tanaguru.entity.audit.TestSolution;
 import org.tanaguru.webapp.test.data.KrashtestResult;
 
 /**
- * This class uses Selenium to automatically test tanaguru in web application
+ * This class uses Selenium to automatically test asqatasun in web application
  * mode. The url of the webapp to test, the user and password to login, the
  * contract id, the firefox binary location and the xvfb display value are
  * passed as JVM arguments

@@ -1,4 +1,4 @@
-Tanaguru-rules-RGAA-3-doc
+Asqatasun-rules-RGAA-3-doc
 =========================
 
-Documentation for Tanaguru rules of referential "RGAA 3"
+Documentation for Asqatasun rules of referential "RGAA 3"

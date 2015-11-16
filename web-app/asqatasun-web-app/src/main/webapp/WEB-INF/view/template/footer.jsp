@@ -9,21 +9,18 @@
         </c:if>
         <footer>
             <jsp:useBean id="now" class="java.util.Date" scope="page" />
-            <div id="footer-down">
-                &copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" />
-                <a href="http://www.tanaguru.org/">
-                    Tanaguru.org
-                </a> 
-                - 
+            <div id="footer-down">                
+                
                 <fmt:message key="footer.poweredBy"/> 
-                <a href="http://www.tanaguru.org/">
-                    Tanaguru v${tanaguruVersion}
-                </a>
+                <a href="https://github.com/Asqatasun/Asqatasun">Asqatasun v${tanaguruVersion}</a>
                 - 
                 <fmt:message key="footer.availableUnder"/> 
-                <a href="http://www.gnu.org/licenses/agpl-3.0.html">
-                    GNU AGPL v3
-                </a>
+                <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
+                    
+                <br>
+                <br>
+		&copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" />
+		 - <a href="http://www.asqatasun.org/">Asqatasun.org</a> 
             </div>
         </footer>
         <%@include file="tracker.jsp" %>

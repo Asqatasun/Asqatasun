@@ -10,7 +10,7 @@ Here is the list of the parameters you can found in the /etc/tanaguru/tanaguru.c
 |**emailSentToUserExclusionList**| The synchronousAuditDelay parameter defines a delay from which a synchronous audit will be managed as an asynchronous audit. When the audit is terminated an email is sent to the used. In some occasions, for some users, we don't want that email to be sent (for the guest user for example). The "emailSentToUserExclusionList" defines the lists of users (by their email and separated by a ";") that won't be alerted by email when the execution of one of the audits they launch has exceeded the synchronous delay. | *Empty*|
 |**enable-account-settings**     | Enable/Disable the access through the login page to the forgotten password page and the access of the user account settings page for an authentified user. | false |
 |**generatedHtmlExplanationLink**| The link that leads to the page that explains the characteristics and constraints of the generated HTML. This parameter is not supposed to be modified. | http://www.tanaguru.org/en/content/generated-html-characteristics  |
-|**heritrixHome**                | Path used by the Crawler (Heritrix) to copy its temporary files (**should't be modified**). | /var/tmp/tanaguru |
+|**heritrixHome**                | Path used by the Crawler (Heritrix) to copy its temporary files (**should't be modified**). | /var/tmp/asqatasun |
 |**hibernate.dialect**           | Represents a dialect of SQL implemented by a particular RDBMS |  |
 |**isAllowedToSendKrashReport**  | Authorize the application to send krash reports | |
 |**jdbc.driverClassName**        | JDBC driver class | com.mysql.jdbc.Driver |
@@ -30,7 +30,7 @@ Here is the list of the parameters you can found in the /etc/tanaguru/tanaguru.c
 |**snapshotServiceUrl**          | Defines the Url of the external service used to build the snaphosts of tested site. If empty (which is the default value), asqatasun's logo will be used to illustrate a website | *Empty* |
 |**synchronousAuditDelay**       | The result of a page audit or a group of audit audit is returned synchronously. For many reasons, an audit can last more than a few seconds, and this variable enables to define a delay from which a synchronous audit will be managed in a asynchronous way. After this delay, an audit in progress page is sent back, and the user is alerted by email when the audit is terminated. | 25000 (in ms) |
 |**tanaguruVersion**             | The version of the current instance of Asqatasun (**should't be modified**) | depends on the version |
-|**tempFolderRootPath**          | Path used by the application to copy its temporary files (**should't be modified**) | /var/tmp/tanaguru |
+|**tempFolderRootPath**          | Path used by the application to copy its temporary files (**should't be modified**) | /var/tmp/asqatasun |
 |**tgol-deployment-path**        | Path that locates the configuration folder embeded by the web application (**should't be modified**) | No default value,  on the value of the "**--tanaguru-url**" and "**tomcat-webapps**" installation script options |
 |**tgol-persistenceXmlLocation** | Path of the file that define the persistence layer of the application. This option **shouldn't be modified**. | classpath:/conf/persistence.xml. |
 |**web-app-url**                 | Url of the web application. This option is needed to send info and links by email (when an audit is terminated for example) | Depends on the value of the "**--tanaguru-url**" installation script option |

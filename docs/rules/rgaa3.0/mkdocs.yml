@@ -1,4 +1,4 @@
-site_name: Tanaguru Rules RGAA3
+site_name: Asqatasun Rules RGAA3
 pages:
 - Home: index.md
 - Images:
@@ -351,4 +351,4 @@ pages:
   - Rule 13.17.2: Rule-13-17-2.md
 
 theme: readthedocs
-repo_url: https://github.com/Tanaguru/Tanaguru
+repo_url: https://github.com/Asqatasun/Asqatasun
