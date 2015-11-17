@@ -24,12 +24,12 @@
     </build>
     <modules>
         <module>rules-commons</module>
-        <module>accessiweb2.2</module>
-        <module>rgaa2.2</module>
-        <module>rgaa3.0</module>
-        <module>seo</module>
         <module>rules-creation-demo</module>
         <module>rules-resources</module>
-  </modules>
+        <module>rules-rgaa3.0</module>
+        <module>rules-rgaa2.2</module>
+        <module>rules-accessiweb2.2</module>
+        <module>rules-seo1.0</module>
+    </modules>
 
 </project>

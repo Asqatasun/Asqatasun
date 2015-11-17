@@ -6,9 +6,8 @@
         <artifactId>rules</artifactId>
         <version>1.3.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-seo</artifactId>
-    <name>seo</name>
-    
+    <artifactId>asqatasun-rules-rgaa2.2</artifactId>
+    <name>rules-rgaa2.2</name>
     <build>
         <plugins>
             <plugin>
@@ -34,19 +33,28 @@
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
+<!--            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/resources/descriptor.xml</descriptor>
+                    </descriptors>
+                    <outputDirectory>target</outputDirectory>
+                    <finalName>tanaguru-rgaa2.2-${rulesVersion}.i386</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                    <id>make-assembly</id>  this is used for inheritance merges 
+                    <phase>package</phase>  append to the packaging phase. 
+                    <goals>
+                        <goal>assembly</goal>  goals == mojos 
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources/</directory>
-                <filtering>true</filtering>
-                <excludes>
-                    <exclude>**/sql/*</exclude>
-                </excludes>
-            </resource>
-        </resources>
-        <finalName>tanaguru-seo-${rulesVersion}</finalName>
+        <finalName>rgaa2.2-${rulesVersion}</finalName>
     </build>
-    
     <dependencies>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
@@ -55,12 +63,6 @@
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
             <artifactId>tanaguru-rules-testing-tools</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

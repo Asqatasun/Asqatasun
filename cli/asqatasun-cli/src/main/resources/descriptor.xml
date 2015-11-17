@@ -79,7 +79,7 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/accessiweb2.2/src/main/resources/sql</directory>
+            <directory>${basedir}/../../rules/rules-accessiweb2.2/src/main/resources/sql</directory>
             <includes>
                 <include>accessiweb2.2-insert.sql</include>
                 <include>accessiweb2.2-insert.psql</include>
@@ -88,7 +88,7 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/rgaa2.2/src/main/resources/sql</directory>
+            <directory>${basedir}/../../rules/rules-rgaa2.2/src/main/resources/sql</directory>
             <includes>
                 <include>rgaa2.2-insert.sql</include>
                 <include>rgaa2.2-insert.psql</include>
@@ -97,7 +97,7 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/rgaa3.0/src/main/resources/sql</directory>
+            <directory>${basedir}/../../rules/rules-rgaa3.0/src/main/resources/sql</directory>
             <includes>
                 <include>rgaa3.0-insert.sql</include>
             </includes>
@@ -105,7 +105,7 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/seo/src/main/resources/sql</directory>
+            <directory>${basedir}/../../rules/rules-seo1.0/src/main/resources/sql</directory>
             <includes>
                 <include>seo1.0-insert.sql</include>
             </includes>

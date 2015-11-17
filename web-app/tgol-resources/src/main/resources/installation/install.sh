@@ -113,10 +113,13 @@ prerequesites() {
 my_sql_insert() {
     # Option management
     if [ ! "$1" ]; then
-        echo "my_sql_insert: missing sql file";
-        exit;
+        fail "my_sql_insert: missing sql file";
     fi
     SQL_FILE="$1"
+
+    if [ ! -f "$SQL_FILE" ]; then
+        fail "$SQL_FILE does not exists";
+    fi
 
     # Effective SQL command
     cat ${SQL_FILE} | \
@@ -411,10 +414,11 @@ update_tomcat_configuration() {
     MY_DEFAULT_TOMCAT=/etc/default/${tomcat_user}
     local tgOption=` grep "# Asqatasun JVM options" $MY_DEFAULT_TOMCAT `
     if [[ -z "$tgOption" ]]; then
-        echo "Adding JAVA_OPTS in tomcat configuration file"
         echo "" >>$MY_DEFAULT_TOMCAT
         echo "# Asqatasun JVM options" >>$MY_DEFAULT_TOMCAT
         echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}${TG_CONF_DIR} -DlogDir=${prefix}${TG_LOG_DIR} -Dwebdriver.firefox.bin=${firefox_esr_binary_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
+    else
+        fail "Unable to set Tomcat configuration in $MY_DEFAULT_TOMCAT"
     fi
 }
 

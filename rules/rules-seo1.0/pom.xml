@@ -6,8 +6,8 @@
         <artifactId>rules</artifactId>
         <version>1.3.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-rgaa3.0</artifactId>
-    <name>rgaa3.0</name>
+    <artifactId>asqatasun-rules-seo1.0</artifactId>
+    <name>rules-seo1.0</name>
     
     <build>
         <plugins>
@@ -35,7 +35,16 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>rgaa3.0-${rulesVersion}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/sql/*</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <finalName>tanaguru-seo-${rulesVersion}</finalName>
     </build>
     
     <dependencies>
@@ -46,6 +55,12 @@
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
             <artifactId>tanaguru-rules-testing-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

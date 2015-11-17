@@ -6,8 +6,8 @@
         <artifactId>rules</artifactId>
         <version>1.3.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-accessiweb2.2</artifactId>
-    <name>accessiweb2.2</name>
+    <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
+    <name>rules-accessiweb2.2</name>
     <build>
         <finalName>accessiweb2.2-${rulesVersion}</finalName>
         <plugins>
