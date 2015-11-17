@@ -18,9 +18,9 @@
             <includes>
                 <include>README</include>
                 <include>CHANGELOG.txt</include>
-                <include>LICENCE</include>
+                <include>LICENSE</include>
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>644</fileMode>
             <outputDirectory>/</outputDirectory>
         </fileSet>
         <fileSet>
