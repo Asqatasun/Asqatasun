@@ -16,7 +16,7 @@
         <fileSet>
             <directory>${basedir}/../../</directory>
             <includes>
-                <include>README</include>
+                <include>README.md</include>
                 <include>CHANGELOG.txt</include>
                 <include>LICENSE</include>
             </includes>
