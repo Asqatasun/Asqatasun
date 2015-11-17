@@ -81,6 +81,8 @@ echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWD}" | d
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWD}" | debconf-set-selections
 
 # Required packages for Asqatasun
+#   Notes:
+#     - libdbus-glib-1-2: needed for Firefox Webdriver
 apt-get -y --no-install-recommends install \
     wget \
     bzip2 \
