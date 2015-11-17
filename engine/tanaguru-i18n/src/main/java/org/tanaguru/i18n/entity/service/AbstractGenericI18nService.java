@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.i18n.entity.service;
+package org.asqatasun.i18n.entity.service;
 
 import java.io.Serializable;
-import org.tanaguru.sdk.entity.Entity;
-import org.tanaguru.sdk.entity.i18n.InternationalizedEntity;
-import org.tanaguru.sdk.entity.i18n.Language;
-import org.tanaguru.sdk.entity.i18n.dao.GenericI18nDAO;
-import org.tanaguru.sdk.entity.i18n.service.GenericI18nService;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.sdk.entity.i18n.InternationalizedEntity;
+import org.asqatasun.sdk.entity.i18n.Language;
+import org.asqatasun.sdk.entity.i18n.dao.GenericI18nDAO;
+import org.asqatasun.sdk.entity.i18n.service.GenericI18nService;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 

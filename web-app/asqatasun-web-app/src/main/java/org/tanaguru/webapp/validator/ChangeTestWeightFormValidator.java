@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.validator;
+package org.asqatasun.webapp.validator;
 
 import java.util.Map;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.webapp.command.ChangeTestWeightCommand;
+import org.asqatasun.webapp.command.ChangeTestWeightCommand;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

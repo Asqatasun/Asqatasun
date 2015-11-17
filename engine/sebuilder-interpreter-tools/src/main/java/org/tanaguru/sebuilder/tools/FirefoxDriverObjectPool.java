@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sebuilder.tools;
+package org.asqatasun.sebuilder.tools;
 
 import org.apache.commons.pool.PoolableObjectFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;

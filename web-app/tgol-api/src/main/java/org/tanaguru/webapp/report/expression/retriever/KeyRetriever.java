@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.expression.retriever;
+package org.asqatasun.webapp.report.expression.retriever;
 
 import java.util.Map;
 

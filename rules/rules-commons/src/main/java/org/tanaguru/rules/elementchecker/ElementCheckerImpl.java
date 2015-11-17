@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker;
+package org.asqatasun.rules.elementchecker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,18 +31,18 @@ import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.keystore.AttributeStore;
-import static org.tanaguru.rules.keystore.AttributeStore.*;
-import org.tanaguru.rules.keystore.EvidenceStore;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.keystore.AttributeStore;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import org.asqatasun.rules.keystore.EvidenceStore;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * This abstract implementation of element checker handles the basic methods

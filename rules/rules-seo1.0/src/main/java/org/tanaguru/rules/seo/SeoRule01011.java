@@ -17,16 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.tanaguru.rules.keystore.AttributeStore;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_MISSING_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_META_DESC_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.keystore.AttributeStore;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.META_DESC_MISSING_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_META_DESC_MSG;
 
 /**
  * Test whether a meta description tag is present on the page

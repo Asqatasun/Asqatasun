@@ -19,10 +19,10 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.textbuilder;
+package org.asqatasun.rules.textbuilder;
 
 import org.jsoup.nodes.Element;
-import org.tanaguru.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.HtmlElementStore;
 
 /**
  * This implementation of the {@link TextualElementBuilder} simply extract the element

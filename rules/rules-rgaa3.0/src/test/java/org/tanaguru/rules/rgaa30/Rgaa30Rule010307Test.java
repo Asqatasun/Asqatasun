@@ -17,20 +17,20 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.ProcessResult;
-import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
-import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
-import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.SVG_ELEMENT;
-import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_INFORMATIVE_IMAGE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_ALTERNATIVE_MSG;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import org.asqatasun.entity.audit.ProcessResult;
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
+import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.ROLE_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.SVG_ELEMENT;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_AT_RESTITUTION_OF_ALTERNATIVE_OF_INFORMATIVE_IMAGE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_ALTERNATIVE_MSG;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 1-3-7 of the referential Rgaa 3.0.
@@ -50,7 +50,7 @@ public class Rgaa30Rule010307Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa30.Rgaa30Rule010307");
+                "org.asqatasun.rules.rgaa30.Rgaa30Rule010307");
     }
 
     @Override

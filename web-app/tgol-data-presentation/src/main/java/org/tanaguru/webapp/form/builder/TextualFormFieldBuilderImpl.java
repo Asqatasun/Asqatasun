@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.builder;
+package org.asqatasun.webapp.form.builder;
 
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.webapp.form.TextualFormField;
-import org.tanaguru.webapp.form.TextualFormFieldImpl;
+import org.asqatasun.webapp.form.TextualFormField;
+import org.asqatasun.webapp.form.TextualFormFieldImpl;
 
 /**
  *

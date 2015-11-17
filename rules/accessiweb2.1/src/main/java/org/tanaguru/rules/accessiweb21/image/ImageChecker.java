@@ -20,7 +20,7 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb21.image;
+package org.asqatasun.rules.accessiweb21.image;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -28,8 +28,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import org.apache.log4j.Logger;
-import org.tanaguru.contentadapter.util.URLIdentifier;
-import org.tanaguru.processor.SSPHandler;
+import org.asqatasun.contentadapter.util.URLIdentifier;
+import org.asqatasun.processor.SSPHandler;
 
 /**
  * This class is used to determine if an image is decorative.

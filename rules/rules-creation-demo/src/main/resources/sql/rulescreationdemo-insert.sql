@@ -24,11 +24,11 @@ UPDATE `CRITERION` SET `Theme_Id_Theme` = (SELECT `Id_Theme` FROM `THEME` WHERE 
 UPDATE `CRITERION` SET `Theme_Id_Theme` = (SELECT `Id_Theme` FROM `THEME` WHERE `Cd_Theme` LIKE 'Rulescreationdemo-4') WHERE `Cd_Criterion` LIKE 'Rulescreationdemo-4-%';
 
 INSERT IGNORE INTO `TEST` (`Cd_Test`, `Description`, `Label`, `Rank`, `Weight`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Decision_Level`, `Id_Level`, `Id_Scope`, `Rule_Design_Url`, `No_Process`) VALUES
-('Rulescreationdemo-1-1-1', '', '1.1', 1, '1.0', 'rulescreationdemo', 'org.tanaguru.rules.rulescreationdemo.DetectH1', NULL, 1, 1, '', b'0'),
-('Rulescreationdemo-1-2-1', '', '1.2', 2, '1.0', 'rulescreationdemo', 'org.tanaguru.rules.rulescreationdemo.DetectIframe', NULL, 1, 1, '', b'0'),
-('Rulescreationdemo-2-1-1', '', '2.1', 3, '1.0', 'rulescreationdemo', 'org.tanaguru.rules.rulescreationdemo.CheckWhetherEachLinkHaventTitleAttribute', NULL, 1, 1, '', b'0'),
-('Rulescreationdemo-3-1-1', '', '3.1', 4, '1.0', 'rulescreationdemo', 'org.tanaguru.rules.rulescreationdemo.CheckTitleContentUnicityAtSiteLevel', NULL, 1, 3, '', b'0'),
-('Rulescreationdemo-4-1-1', '', '4.1', 5, '1.0', 'rulescreationdemo', 'org.tanaguru.rules.rulescreationdemo.CheckTitleTagRelevancy', NULL, 1, 1, '', b'0');
+('Rulescreationdemo-1-1-1', '', '1.1', 1, '1.0', 'rulescreationdemo', 'org.asqatasun.rules.rulescreationdemo.DetectH1', NULL, 1, 1, '', b'0'),
+('Rulescreationdemo-1-2-1', '', '1.2', 2, '1.0', 'rulescreationdemo', 'org.asqatasun.rules.rulescreationdemo.DetectIframe', NULL, 1, 1, '', b'0'),
+('Rulescreationdemo-2-1-1', '', '2.1', 3, '1.0', 'rulescreationdemo', 'org.asqatasun.rules.rulescreationdemo.CheckWhetherEachLinkHaventTitleAttribute', NULL, 1, 1, '', b'0'),
+('Rulescreationdemo-3-1-1', '', '3.1', 4, '1.0', 'rulescreationdemo', 'org.asqatasun.rules.rulescreationdemo.CheckTitleContentUnicityAtSiteLevel', NULL, 1, 3, '', b'0'),
+('Rulescreationdemo-4-1-1', '', '4.1', 5, '1.0', 'rulescreationdemo', 'org.asqatasun.rules.rulescreationdemo.CheckTitleTagRelevancy', NULL, 1, 1, '', b'0');
 
 UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE `Cd_Criterion` LIKE 'Rulescreationdemo-1-1') WHERE `Cd_Test` LIKE 'Rulescreationdemo-1-1-%';
 UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE `Cd_Criterion` LIKE 'Rulescreationdemo-1-2') WHERE `Cd_Test` LIKE 'Rulescreationdemo-1-2-%';

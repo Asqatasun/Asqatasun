@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -35,12 +35,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.annotate.JsonTypeInfo.As;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterImpl;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.reference.TestImpl;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.subject.WebResourceImpl;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterImpl;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.reference.TestImpl;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResourceImpl;
 
 /**
  * 
@@ -172,9 +172,9 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.SSPImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.audit.JavascriptContentImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.audit.StylesheetContentImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.SSPImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.audit.JavascriptContentImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.audit.StylesheetContentImpl.class)})
     public Collection<Content> getContentList() {
         return (Collection)contentList;
     }
@@ -192,8 +192,8 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.IndefiniteResultImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.audit.DefiniteResultImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.IndefiniteResultImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.audit.DefiniteResultImpl.class)})
     public Collection<ProcessResult> getGrossResultList() {
         return (Collection)grossResultList;
     }
@@ -205,7 +205,7 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.entity.audit.DefiniteResultImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.audit.DefiniteResultImpl.class)
     public Collection<ProcessResult> getNetResultList() {
         return (Collection)netResultList;
     }
@@ -217,19 +217,19 @@ public class AuditImpl implements Audit, Serializable {
 
     @Override
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.subject.PageImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.subject.SiteImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.subject.PageImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.subject.SiteImpl.class)})
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.subject.PageImpl.class, name="Page"),
-        @JsonSubTypes.Type(value=org.tanaguru.entity.subject.SiteImpl.class, name="Site")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.subject.PageImpl.class, name="Page"),
+        @JsonSubTypes.Type(value=org.asqatasun.entity.subject.SiteImpl.class, name="Site")})
     public WebResourceImpl getSubject() {
         return subject;
     }
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.entity.reference.TestImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.TestImpl.class)
     public Collection<Test> getTestList() {
         return (Collection)testList;
     }
@@ -323,7 +323,7 @@ public class AuditImpl implements Audit, Serializable {
     @Override
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.parameterization.ParameterImpl.class, name="Parameter")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.parameterization.ParameterImpl.class, name="Parameter")})
     public Collection<Parameter> getParameterSet() {
         if (this.parameterSet == null) {
             this.parameterSet = new HashSet<>();

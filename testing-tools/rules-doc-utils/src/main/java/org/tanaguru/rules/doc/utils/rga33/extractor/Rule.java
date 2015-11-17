@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tanaguru.rules.doc.utils.rga33.extractor;
+package org.asqatasun.rules.doc.utils.rga33.extractor;
 
-import static org.tanaguru.rules.doc.utils.rga33.extractor.Rgaa3Extractor.levelFromCrit;
+import static org.asqatasun.rules.doc.utils.rga33.extractor.Rgaa3Extractor.levelFromCrit;
 
 /**
  *

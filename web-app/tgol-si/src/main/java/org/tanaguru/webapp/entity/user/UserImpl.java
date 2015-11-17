@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.user;
+package org.asqatasun.webapp.entity.user;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -30,10 +30,10 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ContractImpl;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.option.OptionElementImpl;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ContractImpl;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.option.OptionElementImpl;
 
 /**
  *
@@ -235,7 +235,7 @@ public class UserImpl implements User, Serializable {
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.webapp.entity.contract.ContractImpl.class)
+    @XmlElementRef(type = org.asqatasun.webapp.entity.contract.ContractImpl.class)
     public Collection<Contract> getContractSet() {
         return (Collection)contractSet;
     }

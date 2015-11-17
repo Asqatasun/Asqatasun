@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import java.util.Arrays;
 import java.util.Collection;

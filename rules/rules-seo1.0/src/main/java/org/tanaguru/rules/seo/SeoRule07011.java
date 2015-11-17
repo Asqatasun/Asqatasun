@@ -17,16 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
 
 /**
  * This rule tests if each page has at least one <h1> tag

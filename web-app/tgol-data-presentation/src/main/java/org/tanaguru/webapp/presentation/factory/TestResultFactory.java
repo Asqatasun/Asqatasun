@@ -19,26 +19,26 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.factory;
+package org.asqatasun.webapp.presentation.factory;
 
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Scope;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
-import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.entity.service.reference.TestDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.webapp.presentation.data.ManualResult;
-import org.tanaguru.webapp.presentation.data.RemarkInfos;
-import org.tanaguru.webapp.presentation.data.TestResult;
-import org.tanaguru.webapp.presentation.data.TestResultImpl;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Scope;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
+import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.entity.service.reference.TestDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.presentation.data.ManualResult;
+import org.asqatasun.webapp.presentation.data.RemarkInfos;
+import org.asqatasun.webapp.presentation.data.TestResult;
+import org.asqatasun.webapp.presentation.data.TestResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

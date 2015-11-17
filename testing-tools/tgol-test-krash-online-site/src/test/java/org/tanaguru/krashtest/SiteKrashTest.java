@@ -19,14 +19,14 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.krashtest;
+package org.asqatasun.krashtest;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.tanaguru.webapp.test.AbstractTanaguruOnlineTest;
+import org.asqatasun.webapp.test.AbstractTanaguruOnlineTest;
 
 /**
  *

@@ -17,14 +17,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
-import org.tanaguru.entity.audit.IndefiniteResult;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG;
+import org.asqatasun.entity.audit.IndefiniteResult;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.SOURCE_CODE_IDENTICAL_TO_ANOTHER_PAGE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.SOURCE_CODE_NOT_UNIQUE_MSG;
 
 /**
  * For each page of a website or a group of pages, is the source code unique ?

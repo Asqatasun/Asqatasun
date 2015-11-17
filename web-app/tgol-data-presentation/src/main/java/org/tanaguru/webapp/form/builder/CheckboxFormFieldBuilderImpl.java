@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.builder;
+package org.asqatasun.webapp.form.builder;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.tanaguru.webapp.form.CheckboxElement;
-import org.tanaguru.webapp.form.CheckboxFormField;
-import org.tanaguru.webapp.form.CheckboxFormFieldImpl;
+import org.asqatasun.webapp.form.CheckboxElement;
+import org.asqatasun.webapp.form.CheckboxFormField;
+import org.asqatasun.webapp.form.CheckboxFormFieldImpl;
 
 /**
  *

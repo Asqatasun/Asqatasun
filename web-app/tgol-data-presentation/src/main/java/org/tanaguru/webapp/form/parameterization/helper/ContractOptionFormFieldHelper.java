@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.parameterization.helper;
+package org.asqatasun.webapp.form.parameterization.helper;
 
 import java.util.*;
-import org.tanaguru.webapp.form.parameterization.ContractOptionFormField;
-import org.tanaguru.webapp.form.parameterization.builder.ContractOptionFormFieldBuilder;
+import org.asqatasun.webapp.form.parameterization.ContractOptionFormField;
+import org.asqatasun.webapp.form.parameterization.builder.ContractOptionFormFieldBuilder;
 
 /**
  * That class handles utility methods to deal with ContractOptionFormFields. 

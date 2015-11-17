@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.parameterization;
+package org.asqatasun.webapp.form.parameterization;
 
-import org.tanaguru.webapp.entity.option.Option;
-import org.tanaguru.webapp.form.FormField;
-import org.tanaguru.webapp.form.parameterization.builder.ContractOptionFormFieldBuilder;
+import org.asqatasun.webapp.entity.option.Option;
+import org.asqatasun.webapp.form.FormField;
+import org.asqatasun.webapp.form.parameterization.builder.ContractOptionFormFieldBuilder;
 
 /**
  *

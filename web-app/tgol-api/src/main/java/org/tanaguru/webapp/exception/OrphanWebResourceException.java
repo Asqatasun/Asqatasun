@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.exception;
+package org.asqatasun.webapp.exception;
 
 /**
  * This exception is thrown when a webResource is not linked to an audit.

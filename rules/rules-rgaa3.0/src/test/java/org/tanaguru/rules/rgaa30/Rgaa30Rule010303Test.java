@@ -17,15 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 
 /**
@@ -46,7 +46,7 @@ public class Rgaa30Rule010303Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa30.Rgaa30Rule010303");
+                "org.asqatasun.rules.rgaa30.Rgaa30Rule010303");
     }
 
     @Override

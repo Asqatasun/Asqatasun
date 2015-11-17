@@ -17,16 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.IFRAME_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.IFRAME_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING_MSG;
 
 /**
  * * This rule tests if all the iframe tags have a "title" attribute

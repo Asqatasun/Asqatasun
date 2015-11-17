@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.test;
+package org.asqatasun.webapp.test;
 
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.webapp.test.data.KrashtestResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.webapp.test.data.KrashtestResult;
 
 /**
  * This class uses Selenium to automatically test asqatasun in web application

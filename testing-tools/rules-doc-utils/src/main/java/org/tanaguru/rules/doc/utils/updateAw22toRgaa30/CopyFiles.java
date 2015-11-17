@@ -17,7 +17,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.doc.utils.updateAw22toRgaa30;
+package org.asqatasun.rules.doc.utils.updateAw22toRgaa30;
 
 import java.io.File;
 import java.io.FileNotFoundException;

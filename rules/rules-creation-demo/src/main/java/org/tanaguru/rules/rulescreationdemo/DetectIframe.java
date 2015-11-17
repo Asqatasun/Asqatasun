@@ -17,11 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rulescreationdemo;
+package org.asqatasun.rules.rulescreationdemo;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
 
 /**
  * Implementation of the rule DetectIframe of the referential Rules creation demo.

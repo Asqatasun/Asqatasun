@@ -1,10 +1,10 @@
-package org.tanaguru.webapp.validator;
+package org.asqatasun.webapp.validator;
 
 import java.util.List;
 
-import org.tanaguru.entity.audit.DefiniteResultImpl;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.webapp.command.ManualAuditCommand;
+import org.asqatasun.entity.audit.DefiniteResultImpl;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.webapp.command.ManualAuditCommand;
 import org.springframework.validation.Errors;
 
 public class ManualAuditValidator implements org.springframework.validation.Validator {

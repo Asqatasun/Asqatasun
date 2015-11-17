@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import junit.framework.TestCase;
-import org.tanaguru.rules.elementchecker.doctype.DoctypeHtml5Checker;
+import org.asqatasun.rules.elementchecker.doctype.DoctypeHtml5Checker;
 
 /**
  *

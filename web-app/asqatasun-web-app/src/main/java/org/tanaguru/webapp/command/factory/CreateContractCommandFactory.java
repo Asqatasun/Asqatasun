@@ -19,21 +19,21 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command.factory;
+package org.asqatasun.webapp.command.factory;
 
 import java.io.Serializable;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.webapp.command.CreateContractCommand;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.functionality.Functionality;
-import org.tanaguru.webapp.entity.option.Option;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.referential.Referential;
-import org.tanaguru.webapp.entity.service.functionality.FunctionalityDataService;
-import org.tanaguru.webapp.entity.service.option.OptionDataService;
-import org.tanaguru.webapp.entity.service.option.OptionElementDataService;
-import org.tanaguru.webapp.entity.service.referential.ReferentialDataService;
+import org.asqatasun.webapp.command.CreateContractCommand;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.entity.option.Option;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.service.functionality.FunctionalityDataService;
+import org.asqatasun.webapp.entity.service.option.OptionDataService;
+import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
+import org.asqatasun.webapp.entity.service.referential.ReferentialDataService;
 
 /**
  *

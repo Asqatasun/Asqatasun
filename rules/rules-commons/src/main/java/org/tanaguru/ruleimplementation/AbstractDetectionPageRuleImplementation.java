@@ -17,15 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
 
 /**
  * This class should be overridden by concrete {@link RuleImplementation} 

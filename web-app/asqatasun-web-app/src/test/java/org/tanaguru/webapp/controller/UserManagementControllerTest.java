@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,17 +27,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.webapp.command.CreateUserCommand;
-import org.tanaguru.webapp.command.factory.CreateUserCommandFactory;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.service.user.RoleDataService;
-import org.tanaguru.webapp.entity.service.user.UserDataService;
-import org.tanaguru.webapp.entity.user.Role;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.security.userdetails.TgolUserDetails;
-import org.tanaguru.webapp.util.TgolKeyStore;
-import org.tanaguru.webapp.validator.CreateUserFormValidator;
+import org.asqatasun.webapp.command.CreateUserCommand;
+import org.asqatasun.webapp.command.factory.CreateUserCommandFactory;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.service.user.RoleDataService;
+import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.webapp.entity.user.Role;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
+import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.validator.CreateUserFormValidator;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.Authentication;

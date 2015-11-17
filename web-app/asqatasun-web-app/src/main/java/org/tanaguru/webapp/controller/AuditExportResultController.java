@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import java.io.IOException;
@@ -29,16 +29,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.reference.Scope;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.presentation.data.AuditStatistics;
-import org.tanaguru.webapp.presentation.data.TestResult;
-import org.tanaguru.webapp.presentation.factory.TestResultFactory;
-import org.tanaguru.webapp.report.service.ExportService;
-import org.tanaguru.webapp.report.service.exception.NotSupportedExportFormatException;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.reference.Scope;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.presentation.data.AuditStatistics;
+import org.asqatasun.webapp.presentation.data.TestResult;
+import org.asqatasun.webapp.presentation.factory.TestResultFactory;
+import org.asqatasun.webapp.report.service.ExportService;
+import org.asqatasun.webapp.report.service.exception.NotSupportedExportFormatException;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

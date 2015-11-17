@@ -17,18 +17,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21.marker;
+package org.asqatasun.rules.accessiweb21.marker;
 
 import java.util.*;
 import org.apache.commons.collections.CollectionUtils;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
-import org.tanaguru.ruleimplementation.RuleHelper;
-import org.tanaguru.rules.accessiweb21.NodeAndAttributeKeyStore;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleImplementation;
+import org.asqatasun.ruleimplementation.RuleHelper;
+import org.asqatasun.rules.accessiweb21.NodeAndAttributeKeyStore;
 import org.w3c.dom.Node;
 
 /**

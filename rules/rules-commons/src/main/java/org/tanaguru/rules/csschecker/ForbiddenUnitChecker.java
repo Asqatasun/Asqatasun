@@ -20,12 +20,12 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.csschecker;
+package org.asqatasun.rules.csschecker;
 
 import com.phloc.css.decl.CascadingStyleSheet;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.cssvisitor.CheckUnitCSSVisitor;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.cssvisitor.CheckUnitCSSVisitor;
 
 /**
  * This checker enables to control that not relatives units are not used based 

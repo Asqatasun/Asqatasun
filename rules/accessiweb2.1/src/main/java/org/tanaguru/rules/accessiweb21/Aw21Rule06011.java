@@ -17,19 +17,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21;
+package org.asqatasun.rules.accessiweb21;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.RuleHelper;
-import org.tanaguru.rules.accessiweb21.handler.link.AbstractPageRuleLinkThemeImplementation;
-import org.tanaguru.rules.accessiweb21.handler.link.LinkRulesHandler;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.RuleHelper;
+import org.asqatasun.rules.accessiweb21.handler.link.AbstractPageRuleLinkThemeImplementation;
+import org.asqatasun.rules.accessiweb21.handler.link.LinkRulesHandler;
 
 /**
  * For each link text, does the link context allow to understand the link

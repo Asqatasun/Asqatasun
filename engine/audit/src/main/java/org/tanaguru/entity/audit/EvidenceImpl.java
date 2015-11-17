@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -84,7 +84,7 @@ public class EvidenceImpl implements Evidence, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.EvidenceElementImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.EvidenceElementImpl.class)})
     public Collection<EvidenceElement> getElementList() {
         return (HashSet)elementList;
     }

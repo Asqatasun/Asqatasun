@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.voter.restriction;
+package org.asqatasun.webapp.voter.restriction;
 
 import javax.annotation.Nullable;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
 
 /**
  * This interface handles the restriction context to decide if an action can

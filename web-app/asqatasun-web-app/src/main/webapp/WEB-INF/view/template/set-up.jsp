@@ -310,7 +310,7 @@
                         </c:otherwise>
                     </c:choose>
                     <div class="clearfix ${auditParameterErrorClass}">
-                        <c:if test="${! tg:instanceOf(parameter.formField, 'org.tanaguru.webapp.form.CheckboxFormField')}">
+                        <c:if test="${! tg:instanceOf(parameter.formField, 'org.asqatasun.webapp.form.CheckboxFormField')}">
                         <label id="set-up-${i18nKey}" 
                                for="${i18nKey}">
                             <fmt:message key="${i18nKey}"/>
@@ -318,7 +318,7 @@
                         </c:if>
                         <div class="set-up-value input">
                         <c:choose>
-                            <c:when test="${tg:instanceOf(parameter.formField, 'org.tanaguru.webapp.form.SelectFormField')}">
+                            <c:when test="${tg:instanceOf(parameter.formField, 'org.asqatasun.webapp.form.SelectFormField')}">
                                 <form:select id="${i18nKey}" 
                                              path="auditParameter[${code}]">
                                 <c:forEach items="${parameter.formField.selectElementMap}" 
@@ -357,7 +357,7 @@
                                 </c:forEach><!-- for each referentiel -->
                                 </form:select>
                             </c:when>
-                            <c:when test="${tg:instanceOf(parameter.formField, 'org.tanaguru.webapp.form.CheckboxFormField')}">
+                            <c:when test="${tg:instanceOf(parameter.formField, 'org.asqatasun.webapp.form.CheckboxFormField')}">
                                 <ul class="inputs-list">
                                     <c:forEach items="${parameter.formField.checkboxElementList}" 
                                                var="element" 
@@ -382,7 +382,7 @@
                                              cssClass="alert-message error" /><br/>
                                 <span class="help-block">
                                 <c:choose>
-                                    <c:when test="${tg:instanceOf(parameter.formField, 'org.tanaguru.webapp.form.NumericalFormField')}">
+                                    <c:when test="${tg:instanceOf(parameter.formField, 'org.asqatasun.webapp.form.NumericalFormField')}">
                                         <fmt:message key="${i18nKey}-rule">
                                             <fmt:param>${parameter.formField.maxValue}</fmt:param>
                                         </fmt:message>

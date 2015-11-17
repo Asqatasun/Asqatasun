@@ -20,16 +20,16 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.doctype;
+package org.asqatasun.rules.elementchecker.doctype;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.NomenclatureElement;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.INVALID_DOCTYPE_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.NomenclatureElement;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.NomenclatureBasedElementChecker;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.INVALID_DOCTYPE_MSG;
 
 /**
  * 

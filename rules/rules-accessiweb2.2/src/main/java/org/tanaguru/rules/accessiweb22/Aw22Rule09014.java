@@ -18,22 +18,22 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_HEADING_MSG;
-import org.tanaguru.rules.textbuilder.DeepTextElementBuilder;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_HEADING_MSG;
+import org.asqatasun.rules.textbuilder.DeepTextElementBuilder;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * Implementation of the rule 9.1.4 of the referential Accessiweb 2.2.

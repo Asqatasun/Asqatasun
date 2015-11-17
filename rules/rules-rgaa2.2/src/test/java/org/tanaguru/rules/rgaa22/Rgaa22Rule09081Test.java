@@ -17,15 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.keystore.EvidenceStore;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.keystore.EvidenceStore;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 9.8 of the referential
@@ -45,7 +45,7 @@ public class Rgaa22Rule09081Test extends Rgaa22RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa22.Rgaa22Rule09081");
+                "org.asqatasun.rules.rgaa22.Rgaa22Rule09081");
     }
 
     @Override

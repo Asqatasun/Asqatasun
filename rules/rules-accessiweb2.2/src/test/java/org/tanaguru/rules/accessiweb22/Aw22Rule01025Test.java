@@ -17,17 +17,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
-import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 1.2.5 of the referential Accessiweb 2.2.
@@ -46,7 +46,7 @@ public class Aw22Rule01025Test extends Aw22RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.accessiweb22.Aw22Rule01025");
+                "org.asqatasun.rules.accessiweb22.Aw22Rule01025");
     }
 
     @Override

@@ -18,30 +18,30 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
-import org.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.link.LinkPertinenceChecker;
-import org.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.tanaguru.rules.elementselector.CompositeLinkElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandlerImpl;
+import org.asqatasun.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.link.LinkPertinenceChecker;
+import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.asqatasun.rules.elementselector.CompositeLinkElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * Implementation of the rule 6.3.4 of the referential Accessiweb 2.2.

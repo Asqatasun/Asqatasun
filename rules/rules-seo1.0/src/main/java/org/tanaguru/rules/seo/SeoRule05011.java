@@ -17,16 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
-import org.tanaguru.rules.elementchecker.link.LinkPertinenceChecker;
-import org.tanaguru.rules.elementselector.LinkElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.link.LinkPertinenceChecker;
+import org.asqatasun.rules.elementselector.LinkElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_LINK_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_MSG;
 
 /**
  * Is each text of a text link explicit out of context (except in special cases)?

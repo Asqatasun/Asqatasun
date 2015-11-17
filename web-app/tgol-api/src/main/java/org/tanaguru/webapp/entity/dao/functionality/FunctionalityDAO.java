@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.functionality;
+package org.asqatasun.webapp.entity.dao.functionality;
 
-import org.tanaguru.sdk.entity.dao.GenericDAO;
-import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.webapp.entity.functionality.Functionality;
 
 /**
  *

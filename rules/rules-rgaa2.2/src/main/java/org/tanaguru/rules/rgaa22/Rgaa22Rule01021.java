@@ -18,20 +18,20 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.MultipleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.FRAME_WITH_NOT_EMPTY_TITLE_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.IFRAME_WITH_NOT_EMPTY_TITLE_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_FRAME_PERTINENCE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.pertinence.AttributePertinenceChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.MultipleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FRAME_WITH_NOT_EMPTY_TITLE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.IFRAME_WITH_NOT_EMPTY_TITLE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_FRAME_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 
 /**

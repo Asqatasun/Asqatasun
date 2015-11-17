@@ -18,16 +18,16 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_LABEL_PERTINENCE_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_LABEL_PERTINENCE_MSG;
 
 /**
  * Implementation of the rule 3.12 of the referential RGAA 2.2.

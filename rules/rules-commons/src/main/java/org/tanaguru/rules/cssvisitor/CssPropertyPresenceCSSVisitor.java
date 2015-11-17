@@ -19,13 +19,13 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.cssvisitor;
+package org.asqatasun.rules.cssvisitor;
 
 import com.phloc.css.decl.CSSExpressionMemberTermSimple;
 import java.util.Collection;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.TestSolution;
+import org.asqatasun.entity.audit.TestSolution;
 
 /**
  * CSS visitor that only parse selectors regarding a media list and detect the

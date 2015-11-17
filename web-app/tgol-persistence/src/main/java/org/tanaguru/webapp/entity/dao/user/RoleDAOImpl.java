@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.user;
+package org.asqatasun.webapp.entity.dao.user;
 
 import java.util.Collection;
 import javax.persistence.Query;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.webapp.entity.user.Role;
-import org.tanaguru.webapp.entity.user.RoleImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.webapp.entity.user.Role;
+import org.asqatasun.webapp.entity.user.RoleImpl;
 
 /**
  *

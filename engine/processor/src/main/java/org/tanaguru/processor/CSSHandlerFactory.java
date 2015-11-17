@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processor;
+package org.asqatasun.processor;
 
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *

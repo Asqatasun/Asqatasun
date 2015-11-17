@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.subject;
+package org.asqatasun.entity.subject;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -33,10 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditImpl;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.ProcessResultImpl;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditImpl;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.ProcessResultImpl;
 
 /**
  * 
@@ -140,12 +140,12 @@ public abstract class WebResourceImpl implements WebResource, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.IndefiniteResultImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.audit.DefiniteResultImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.IndefiniteResultImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.audit.DefiniteResultImpl.class)})
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.audit.IndefiniteResultImpl.class, name="Indefinite"),
-        @JsonSubTypes.Type(value=org.tanaguru.entity.audit.DefiniteResultImpl.class, name="Definite")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.audit.IndefiniteResultImpl.class, name="Indefinite"),
+        @JsonSubTypes.Type(value=org.asqatasun.entity.audit.DefiniteResultImpl.class, name="Definite")})
     public Collection<ProcessResult> getProcessResultList() {
         return (Collection)processResultSet;
     }

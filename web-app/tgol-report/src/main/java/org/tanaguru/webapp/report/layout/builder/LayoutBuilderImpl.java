@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.layout.builder;
+package org.asqatasun.webapp.report.layout.builder;
 
 import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import org.tanaguru.webapp.presentation.data.AuditStatistics;
-import org.tanaguru.webapp.report.layout.column.builder.ElementColumnBuilder;
+import org.asqatasun.webapp.presentation.data.AuditStatistics;
+import org.asqatasun.webapp.report.layout.column.builder.ElementColumnBuilder;
 
 /**
  *

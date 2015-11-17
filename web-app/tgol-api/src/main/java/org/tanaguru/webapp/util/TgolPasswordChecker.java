@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.util;
+package org.asqatasun.webapp.util;
 
 import java.util.regex.Pattern;
 

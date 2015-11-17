@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentloader;
+package org.asqatasun.contentloader;
 
 import java.util.Map;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.util.factory.DateFactory;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.util.factory.DateFactory;
 
 /**
  * 

@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.nomenclatureloader;
+package org.asqatasun.nomenclatureloader;
 
-import org.tanaguru.entity.reference.Nomenclature;
-import org.tanaguru.entity.service.reference.NomenclatureDataService;
+import org.asqatasun.entity.reference.Nomenclature;
+import org.asqatasun.entity.service.reference.NomenclatureDataService;
 
 /**
  * 

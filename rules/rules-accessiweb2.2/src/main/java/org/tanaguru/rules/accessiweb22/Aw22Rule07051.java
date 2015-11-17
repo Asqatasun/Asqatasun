@@ -18,16 +18,16 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
-import org.tanaguru.rules.elementchecker.helper.RuleCheckHelper;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.CHANGE_CONTEXT_SCRIPT_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CONTEXT_CHANGED_SCRIPT_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
+import org.asqatasun.rules.elementchecker.helper.RuleCheckHelper;
 
 /**
  * Implementation of the rule 7.5.1 of the referential Accessiweb 2.2.

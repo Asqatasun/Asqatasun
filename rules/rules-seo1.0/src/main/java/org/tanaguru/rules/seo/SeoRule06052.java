@@ -17,10 +17,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
-import org.tanaguru.rules.elementchecker.doctype.DoctypeValidityChecker;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.doctype.DoctypeValidityChecker;
 
 /**
  * 

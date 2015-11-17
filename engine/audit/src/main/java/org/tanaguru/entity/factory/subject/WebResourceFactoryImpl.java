@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.factory.subject;
+package org.asqatasun.entity.factory.subject;
 
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.PageImpl;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.SiteImpl;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.PageImpl;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.SiteImpl;
+import org.asqatasun.entity.subject.WebResource;
 
 /**
  * 

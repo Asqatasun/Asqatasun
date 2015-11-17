@@ -18,18 +18,18 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.lang.LangChangeChecker;
-import org.tanaguru.rules.elementchecker.lang.LangChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.textbuilder.OwnTextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.lang.LangChangeChecker;
+import org.asqatasun.rules.elementchecker.lang.LangChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.textbuilder.OwnTextElementBuilder;
 
 /**
  * Implementation of the rule 12.1 of the referential RGAA 2.2.

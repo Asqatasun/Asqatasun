@@ -19,18 +19,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.parameterization;
+package org.asqatasun.entity.service.parameterization;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.dao.parameterization.ParameterDAO;
-import org.tanaguru.entity.factory.parameterization.ParameterFactory;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.parameterization.ParameterFamily;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.dao.parameterization.ParameterDAO;
+import org.asqatasun.entity.factory.parameterization.ParameterFactory;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.parameterization.ParameterFamily;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 
 /**
  *

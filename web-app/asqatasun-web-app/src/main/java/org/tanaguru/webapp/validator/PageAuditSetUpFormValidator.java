@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.validator;
+package org.asqatasun.webapp.validator;
 
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.webapp.command.AuditSetUpCommand;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.command.AuditSetUpCommand;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 

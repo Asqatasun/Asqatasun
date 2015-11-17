@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementchecker.contrast.helper;
+package org.asqatasun.rules.elementchecker.contrast.helper;
 
 import java.awt.Color;
 import junit.framework.TestCase;

@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.scenarioloader.exception;
+package org.asqatasun.scenarioloader.exception;
 
 /**
  *

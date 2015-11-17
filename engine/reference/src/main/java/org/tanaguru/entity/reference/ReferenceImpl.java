@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.reference;
+package org.asqatasun.entity.reference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class ReferenceImpl implements Reference, Serializable {
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.entity.reference.CriterionImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.CriterionImpl.class)
     public List<Criterion> getCriterionList() {
         return (ArrayList<Criterion>)(ArrayList)criterionList;
     }
@@ -110,7 +110,7 @@ public class ReferenceImpl implements Reference, Serializable {
     }
     
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.LevelImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.LevelImpl.class)
     public Level getDefaultLevel() {
         return defaultLevel;
     }

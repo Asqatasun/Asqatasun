@@ -8,15 +8,15 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.tanaguru.entity.statistics.CriterionStatistics;
-import org.tanaguru.entity.statistics.CriterionStatisticsImpl;
-import org.tanaguru.entity.statistics.TestStatistics;
-import org.tanaguru.entity.statistics.TestStatisticsImpl;
-import org.tanaguru.entity.statistics.ThemeStatistics;
-import org.tanaguru.entity.statistics.ThemeStatisticsImpl;
-import org.tanaguru.entity.statistics.WebResourceStatistics;
-import org.tanaguru.entity.statistics.WebResourceStatisticsImpl;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.statistics.CriterionStatistics;
+import org.asqatasun.entity.statistics.CriterionStatisticsImpl;
+import org.asqatasun.entity.statistics.TestStatistics;
+import org.asqatasun.entity.statistics.TestStatisticsImpl;
+import org.asqatasun.entity.statistics.ThemeStatistics;
+import org.asqatasun.entity.statistics.ThemeStatisticsImpl;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
+import org.asqatasun.entity.statistics.WebResourceStatisticsImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 import org.springframework.stereotype.Repository;
 
 import com.oceaneconsulting.tanaguru.dao.StatisticsDAO;

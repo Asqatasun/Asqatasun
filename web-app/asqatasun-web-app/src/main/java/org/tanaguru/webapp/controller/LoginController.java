@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,9 +32,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.security.userdetails.TgolUserDetailsService;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.security.userdetails.TgolUserDetailsService;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

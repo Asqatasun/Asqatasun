@@ -19,15 +19,15 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementchecker.pertinence;
+package org.asqatasun.rules.elementchecker.pertinence;
 
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.keystore.AttributeStore;
-import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.AttributeStore;
+import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  *

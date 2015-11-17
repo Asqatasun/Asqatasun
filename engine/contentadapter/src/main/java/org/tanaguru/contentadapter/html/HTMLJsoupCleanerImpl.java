@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.html;
+package org.asqatasun.contentadapter.html;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Entities;
 import org.jsoup.nodes.Node;
-import org.tanaguru.contentadapter.HTMLCleaner;
+import org.asqatasun.contentadapter.HTMLCleaner;
 
 /**
  * 

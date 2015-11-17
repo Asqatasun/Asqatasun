@@ -19,31 +19,31 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.analyser;
+package org.asqatasun.analyser;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
-import org.tanaguru.entity.service.statistics.TestStatisticsDataService;
-import org.tanaguru.entity.service.statistics.ThemeStatisticsDataService;
-import org.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
-import org.tanaguru.entity.statistics.CriterionStatistics;
-import org.tanaguru.entity.statistics.TestStatistics;
-import org.tanaguru.entity.statistics.ThemeStatistics;
-import org.tanaguru.entity.statistics.WebResourceStatistics;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.entity.service.statistics.CriterionStatisticsDataService;
+import org.asqatasun.entity.service.statistics.TestStatisticsDataService;
+import org.asqatasun.entity.service.statistics.ThemeStatisticsDataService;
+import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataService;
+import org.asqatasun.entity.statistics.CriterionStatistics;
+import org.asqatasun.entity.statistics.TestStatistics;
+import org.asqatasun.entity.statistics.ThemeStatistics;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
 
 /**
  *

@@ -20,14 +20,14 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.webapp.command;
+package org.asqatasun.webapp.command;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.webapp.presentation.data.TestResult;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.webapp.presentation.data.TestResult;
 
 /**
  * 

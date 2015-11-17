@@ -19,16 +19,16 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentloader;
+package org.asqatasun.contentloader;
 
 import java.util.*;
 import junit.framework.TestCase;
 import org.apache.http.HttpStatus;
 import org.easymock.EasyMock;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.subject.*;
-import org.tanaguru.util.factory.DateFactory;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.subject.*;
+import org.asqatasun.util.factory.DateFactory;
 
 /**
  *

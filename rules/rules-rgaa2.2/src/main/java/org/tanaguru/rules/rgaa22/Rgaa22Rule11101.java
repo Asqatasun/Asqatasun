@@ -18,17 +18,17 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.TABLE_WITH_SUMMARY_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.pertinence.AttributePertinenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.SUMMARY_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TABLE_WITH_SUMMARY_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Implementation of the rule 11.10 of the referential RGAA 2.2.

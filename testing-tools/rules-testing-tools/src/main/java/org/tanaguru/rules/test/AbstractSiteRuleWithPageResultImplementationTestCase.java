@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.test;
+package org.asqatasun.rules.test;
 
 import java.util.Collection;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.subject.WebResource;
 
 /**
  *

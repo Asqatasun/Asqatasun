@@ -20,26 +20,26 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.link;
+package org.asqatasun.rules.elementchecker.link;
 
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.ElementCheckerImpl;
-import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
-import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import org.tanaguru.rules.keystore.EvidenceStore;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.textbuilder.LinkTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementCheckerImpl;
+import static org.asqatasun.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import org.asqatasun.rules.keystore.EvidenceStore;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * This checker whether identical links (links with the same text and content

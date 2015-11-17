@@ -19,19 +19,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.audit;
+package org.asqatasun.entity.dao.audit;
 
 import java.util.Collection;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.dao.reference.ScopeDAO;
-import org.tanaguru.entity.dao.reference.ThemeDAO;
-import org.tanaguru.entity.dao.subject.WebResourceDAO;
-import org.tanaguru.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.entity.reference.Scope;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.dao.reference.ScopeDAO;
+import org.asqatasun.entity.dao.reference.ThemeDAO;
+import org.asqatasun.entity.dao.subject.WebResourceDAO;
+import org.asqatasun.entity.dao.test.AbstractDaoTestCase;
+import org.asqatasun.entity.reference.Scope;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.subject.WebResource;
 
 /**
  *

@@ -19,23 +19,23 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.factory.audit;
+package org.asqatasun.entity.factory.audit;
 
 import java.util.Date;
 
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.audit.ImageContent;
-import org.tanaguru.entity.audit.ImageContentImpl;
-import org.tanaguru.entity.audit.JavascriptContent;
-import org.tanaguru.entity.audit.RelatedContent;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.audit.StylesheetContent;
-import org.tanaguru.entity.subject.Page;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.ImageContent;
+import org.asqatasun.entity.audit.ImageContentImpl;
+import org.asqatasun.entity.audit.JavascriptContent;
+import org.asqatasun.entity.audit.RelatedContent;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.audit.StylesheetContent;
+import org.asqatasun.entity.subject.Page;
 
-import org.tanaguru.entity.audit.JavascriptContentImpl;
-import org.tanaguru.entity.audit.RelatedContentImpl;
-import org.tanaguru.entity.audit.SSPImpl;
-import org.tanaguru.entity.audit.StylesheetContentImpl;
+import org.asqatasun.entity.audit.JavascriptContentImpl;
+import org.asqatasun.entity.audit.RelatedContentImpl;
+import org.asqatasun.entity.audit.SSPImpl;
+import org.asqatasun.entity.audit.StylesheetContentImpl;
 
 /**
  * 

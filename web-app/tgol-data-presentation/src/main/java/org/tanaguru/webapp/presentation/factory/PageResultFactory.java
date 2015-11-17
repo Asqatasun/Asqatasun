@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.factory;
+package org.asqatasun.webapp.presentation.factory;
 
-import org.tanaguru.entity.reference.Scope;
-import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.webapp.presentation.data.PageResult;
-import org.tanaguru.webapp.presentation.data.PageResultImpl;
+import org.asqatasun.entity.reference.Scope;
+import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.webapp.presentation.data.PageResult;
+import org.asqatasun.webapp.presentation.data.PageResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

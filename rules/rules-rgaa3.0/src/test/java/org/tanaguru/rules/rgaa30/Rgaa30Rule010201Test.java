@@ -17,23 +17,23 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.keystore.AttributeStore;
-import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.SRC_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.IMG_ELEMENT;
-import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.keystore.AttributeStore;
+import static org.asqatasun.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.IMG_ELEMENT;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG;
 
 /**
  * Unit test class for the implementation of the rule 1-2-1 of the referential Rgaa 3.0.
@@ -52,7 +52,7 @@ public class Rgaa30Rule010201Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName("org.tanaguru.rules.rgaa30.Rgaa30Rule010201");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa30.Rgaa30Rule010201");
     }
 
     @Override

@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementchecker.element;
+package org.asqatasun.rules.elementchecker.element;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,14 +32,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandlerImpl;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *

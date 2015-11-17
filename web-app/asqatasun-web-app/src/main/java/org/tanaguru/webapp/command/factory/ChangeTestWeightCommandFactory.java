@@ -19,20 +19,20 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command.factory;
+package org.asqatasun.webapp.command.factory;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.webapp.command.ChangeTestWeightCommand;
-import org.tanaguru.webapp.entity.option.Option;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.service.option.OptionDataService;
-import org.tanaguru.webapp.entity.service.option.OptionElementDataService;
-import org.tanaguru.webapp.entity.service.user.UserDataService;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.webapp.command.ChangeTestWeightCommand;
+import org.asqatasun.webapp.entity.option.Option;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.service.option.OptionDataService;
+import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
+import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

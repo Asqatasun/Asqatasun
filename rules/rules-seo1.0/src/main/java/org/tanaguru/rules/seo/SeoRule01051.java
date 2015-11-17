@@ -17,7 +17,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -26,15 +26,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.DefiniteResult;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractSiteRuleImplementation;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.ROBOTS_TXT_MSG;
-import org.tanaguru.service.ProcessRemarkService;
-import org.tanaguru.util.http.HttpRequestHandler;
+import org.asqatasun.entity.audit.DefiniteResult;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractSiteRuleImplementation;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.ROBOTS_TXT_MSG;
+import org.asqatasun.service.ProcessRemarkService;
+import org.asqatasun.util.http.HttpRequestHandler;
 
 /**
  * Is the robots.txt file present in the root directory of the site? 

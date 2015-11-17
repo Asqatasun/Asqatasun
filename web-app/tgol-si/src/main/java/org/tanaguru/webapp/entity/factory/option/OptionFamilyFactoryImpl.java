@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.factory.option;
+package org.asqatasun.webapp.entity.factory.option;
 
-import org.tanaguru.webapp.entity.option.OptionFamily;
-import org.tanaguru.webapp.entity.option.OptionFamilyImpl;
+import org.asqatasun.webapp.entity.option.OptionFamily;
+import org.asqatasun.webapp.entity.option.OptionFamilyImpl;
 
 /**
  *

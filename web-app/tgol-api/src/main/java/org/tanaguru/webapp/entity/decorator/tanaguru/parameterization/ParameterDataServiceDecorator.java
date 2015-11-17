@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.decorator.tanaguru.parameterization;
+package org.asqatasun.webapp.entity.decorator.tanaguru.parameterization;
 
 import java.util.Collection;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.option.OptionElement;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.option.OptionElement;
 
 /**
  *

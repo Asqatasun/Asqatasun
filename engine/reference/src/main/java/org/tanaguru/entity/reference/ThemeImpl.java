@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.reference;
+package org.asqatasun.entity.reference;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -77,7 +77,7 @@ public class ThemeImpl implements Theme, Serializable {
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.entity.reference.CriterionImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.CriterionImpl.class)
     public Collection<Criterion> getCriterionList() {
         return (Collection)criterionList;
     }

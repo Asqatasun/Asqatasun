@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler.util;
+package org.asqatasun.crawler.util;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -29,8 +29,8 @@ import java.util.Set;
 import org.apache.commons.httpclient.URIException;
 import org.apache.log4j.Logger;
 import org.archive.net.UURIFactory;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.util.http.HttpRequestHandler;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.util.http.HttpRequestHandler;
 import org.w3c.dom.Document;
 
 /**

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.reference;
+package org.asqatasun.entity.reference;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.tanaguru.entity.service.reference.NomenclatureCssUnit;
+import org.asqatasun.entity.service.reference.NomenclatureCssUnit;
 
 /**
  * 
@@ -85,8 +85,8 @@ public class NomenclatureImpl implements Nomenclature, Serializable {
 
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.reference.NomenclatureElementImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.reference.NomenclatureCssUnitImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.reference.NomenclatureElementImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.reference.NomenclatureCssUnitImpl.class)})
     @Override
     public Collection<NomenclatureElement> getElementList() {
         return (Collection)elementList;

@@ -19,7 +19,7 @@
  */
 package ${package}.${referentiel.toLowerCase()}.test;
 
-import org.tanaguru.rules.test.AbstractRuleImplementationTestCase;
+import org.asqatasun.rules.test.AbstractRuleImplementationTestCase;
 
 /**
  *

@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.voter.restriction;
+package org.asqatasun.webapp.voter.restriction;
 
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.service.contract.ActDataService;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

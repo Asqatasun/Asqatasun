@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.cssvisitor;
+package org.asqatasun.rules.cssvisitor;
 
 import com.phloc.css.ECSSVersion;
 import com.phloc.css.ICSSWriterSettings;
@@ -30,12 +30,12 @@ import com.phloc.css.writer.CSSWriterSettings;
 import java.util.Collection;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.tanaguru.contentadapter.css.CSSContentAdapter;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.keystore.EvidenceStore;
-import org.tanaguru.service.NomenclatureLoaderService;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.contentadapter.css.CSSContentAdapter;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.keystore.EvidenceStore;
+import org.asqatasun.service.NomenclatureLoaderService;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * This abstract class defines basic visitor implementation that needs to 

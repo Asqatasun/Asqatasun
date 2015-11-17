@@ -17,12 +17,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rulescreationdemo;
+package org.asqatasun.rules.rulescreationdemo;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
 
 /**
  * Implementation of the rule CheckWhetherEachLinkHaventTitleAttribute of the referential Rules creation demo.

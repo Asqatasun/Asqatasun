@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.util.webapp;
+package org.asqatasun.webapp.util.webapp;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

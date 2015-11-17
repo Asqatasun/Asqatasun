@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.data;
+package org.asqatasun.webapp.presentation.data;
 
-import org.tanaguru.webapp.util.TgolEscapeUrl;
+import org.asqatasun.webapp.util.TgolEscapeUrl;
 
 /**
  * @author jkowalczyk

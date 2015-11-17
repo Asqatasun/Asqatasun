@@ -20,13 +20,13 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.lang;
+package org.asqatasun.rules.elementchecker.lang;
 
 import javax.annotation.Nonnull;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
  * This class checks whether the lang declaration is valid and relevant

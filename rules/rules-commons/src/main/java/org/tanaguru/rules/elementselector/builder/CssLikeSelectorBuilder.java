@@ -19,13 +19,13 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementselector.builder;
+package org.asqatasun.rules.elementselector.builder;
 
 import java.util.Collection;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.processor.SSPHandler;
-import static org.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
+import org.asqatasun.processor.SSPHandler;
+import static org.asqatasun.rules.keystore.AttributeStore.ID_ATTR;
 
 /**
  * css-selector like queries builder utilities.

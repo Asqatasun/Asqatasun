@@ -18,14 +18,14 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.CODE_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.CODE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
  * Implementation of the rule 13.15.4 of the referential Accessiweb 2.2.

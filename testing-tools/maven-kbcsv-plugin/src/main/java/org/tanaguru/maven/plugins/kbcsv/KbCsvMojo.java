@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.maven.plugins.kbcsv;
+package org.asqatasun.maven.plugins.kbcsv;
 
 import java.io.*;
 import java.net.URL;

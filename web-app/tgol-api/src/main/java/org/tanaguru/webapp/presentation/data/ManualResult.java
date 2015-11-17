@@ -20,7 +20,7 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.webapp.presentation.data;
+package org.asqatasun.webapp.presentation.data;
 
 /**
  * POJO that handles manual result filled-in by user

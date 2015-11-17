@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.test;
+package org.asqatasun.webapp.test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

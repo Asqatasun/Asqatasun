@@ -1,6 +1,6 @@
 package com.oceaneconsulting.tanaguru.dao;
 
-import org.tanaguru.sdk.entity.dao.GenericDAO;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
 
 import com.oceaneconsulting.tanaguru.entity.WsInvocation;
 import com.oceaneconsulting.tanaguru.entity.WsRole;

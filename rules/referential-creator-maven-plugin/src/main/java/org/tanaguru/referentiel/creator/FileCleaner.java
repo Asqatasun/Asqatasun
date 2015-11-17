@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.referentiel.creator;
+package org.asqatasun.referentiel.creator;
 
 import java.io.File;
 import java.io.IOException;

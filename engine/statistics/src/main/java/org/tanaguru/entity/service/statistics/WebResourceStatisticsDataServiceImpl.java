@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.statistics;
+package org.asqatasun.entity.service.statistics;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -29,22 +29,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.dao.statistics.CriterionStatisticsDAO;
-import org.tanaguru.entity.dao.statistics.ThemeStatisticsDAO;
-import org.tanaguru.entity.dao.statistics.WebResourceStatisticsDAO;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.statistics.CriterionStatistics;
-import org.tanaguru.entity.statistics.CriterionStatisticsImpl;
-import org.tanaguru.entity.statistics.ThemeStatistics;
-import org.tanaguru.entity.statistics.ThemeStatisticsImpl;
-import org.tanaguru.entity.statistics.WebResourceStatistics;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.dao.statistics.CriterionStatisticsDAO;
+import org.asqatasun.entity.dao.statistics.ThemeStatisticsDAO;
+import org.asqatasun.entity.dao.statistics.WebResourceStatisticsDAO;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.statistics.CriterionStatistics;
+import org.asqatasun.entity.statistics.CriterionStatisticsImpl;
+import org.asqatasun.entity.statistics.ThemeStatistics;
+import org.asqatasun.entity.statistics.ThemeStatisticsImpl;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler.util;
+package org.asqatasun.crawler.util;
 
 import javax.xml.xpath.XPathExpressionException;
 import org.apache.log4j.Logger;

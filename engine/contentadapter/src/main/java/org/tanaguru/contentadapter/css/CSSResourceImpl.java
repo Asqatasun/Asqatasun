@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.css;
+package org.asqatasun.contentadapter.css;
 
-import org.tanaguru.contentadapter.RsrcLocator;
-import org.tanaguru.contentadapter.util.AbstractResource;
+import org.asqatasun.contentadapter.RsrcLocator;
+import org.asqatasun.contentadapter.util.AbstractResource;
 
 /**
  * 

@@ -20,12 +20,12 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.contentadapter.util;
+package org.asqatasun.contentadapter.util;
 
 import java.util.Collection;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

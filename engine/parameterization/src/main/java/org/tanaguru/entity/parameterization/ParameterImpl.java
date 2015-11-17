@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.parameterization;
+package org.asqatasun.entity.parameterization;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -72,10 +72,10 @@ public class ParameterImpl implements Parameter, Serializable {
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.entity.parameterization.ParameterElementImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.parameterization.ParameterElementImpl.class)
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.parameterization.ParameterElementImpl.class, name="ParameterElement")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.parameterization.ParameterElementImpl.class, name="ParameterElement")})
     public void setParameterElement(ParameterElement parameterElement) {
         this.parameterElement = (ParameterElementImpl)parameterElement;
     }

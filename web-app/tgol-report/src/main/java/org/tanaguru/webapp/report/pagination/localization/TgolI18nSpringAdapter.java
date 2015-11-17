@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.pagination.localization;
+package org.asqatasun.webapp.report.pagination.localization;
 
 import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;

@@ -18,19 +18,19 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.SUMMARY_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
-import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.SUMMARY_MISSING_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.SUMMARY_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
+import static org.asqatasun.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITHOUT_SUMMARY_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TABLE_WITH_SUMMARY_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.SUMMARY_MISSING_MSG;
 
 /**
  * Implementation of the rule 11.8 of the referential RGAA 2.2.

@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementchecker.attribute;
+package org.asqatasun.rules.elementchecker.attribute;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,13 +29,13 @@ import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.keystore.AttributeStore;
-import org.tanaguru.rules.keystore.EvidenceStore;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.keystore.AttributeStore;
+import org.asqatasun.rules.keystore.EvidenceStore;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *

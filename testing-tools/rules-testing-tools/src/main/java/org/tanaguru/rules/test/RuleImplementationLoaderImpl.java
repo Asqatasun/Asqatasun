@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.test;
+package org.asqatasun.rules.test;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.tanaguru.ruleimplementation.RuleImplementation;
-import org.tanaguru.ruleimplementationloader.RuleImplementationLoader;
+import org.asqatasun.ruleimplementation.RuleImplementation;
+import org.asqatasun.ruleimplementationloader.RuleImplementationLoader;
 
 /**
  *

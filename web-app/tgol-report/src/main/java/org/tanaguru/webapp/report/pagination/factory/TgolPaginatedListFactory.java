@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.pagination.factory;
+package org.asqatasun.webapp.report.pagination.factory;
 
 import java.util.Collection;
 import org.apache.log4j.Logger;
 import org.displaytag.pagination.PaginatedList;
 import org.displaytag.properties.SortOrderEnum;
-import org.tanaguru.webapp.report.pagination.TgolPaginatedListImpl;
-import org.tanaguru.webapp.entity.service.statistics.StatisticsDataService;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.webapp.report.pagination.TgolPaginatedListImpl;
+import org.asqatasun.webapp.entity.service.statistics.StatisticsDataService;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

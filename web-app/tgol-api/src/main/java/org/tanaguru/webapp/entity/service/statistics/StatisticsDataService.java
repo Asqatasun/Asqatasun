@@ -19,19 +19,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.service.statistics;
+package org.asqatasun.webapp.entity.service.statistics;
 
 import java.util.Collection;
 import org.displaytag.properties.SortOrderEnum;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.webapp.presentation.data.FailedPageInfo;
-import org.tanaguru.webapp.presentation.data.FailedTestInfo;
-import org.tanaguru.webapp.presentation.data.FailedThemeInfo;
-import org.tanaguru.webapp.presentation.data.PageResult;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.presentation.data.FailedPageInfo;
+import org.asqatasun.webapp.presentation.data.FailedTestInfo;
+import org.asqatasun.webapp.presentation.data.FailedThemeInfo;
+import org.asqatasun.webapp.presentation.data.PageResult;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 
 /**
  *

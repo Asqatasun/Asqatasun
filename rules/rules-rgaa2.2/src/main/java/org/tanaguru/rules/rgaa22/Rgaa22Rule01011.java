@@ -18,19 +18,19 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.MultipleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.FRAME_WITH_TITLE_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.EMPTY_TITLE_OF_FRAME_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.text.TextEmptinessChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.MultipleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FRAME_WITH_TITLE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.EMPTY_TITLE_OF_FRAME_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.1 of the referential RGAA 2.2.

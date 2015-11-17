@@ -18,17 +18,17 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.LABEL_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.OPTGROUP_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.OPTGROUP_WITHOUT_LABEL_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.LABEL_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.OPTGROUP_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.OPTGROUP_WITHOUT_LABEL_MSG;
 
 
 /**

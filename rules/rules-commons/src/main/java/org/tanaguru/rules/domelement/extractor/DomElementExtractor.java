@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.domelement.extractor;
+package org.asqatasun.rules.domelement.extractor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,8 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.rules.domelement.DomElement;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.rules.domelement.DomElement;
 
 /**
  * Utility class that extracts the js Parser results (Pre process result with 

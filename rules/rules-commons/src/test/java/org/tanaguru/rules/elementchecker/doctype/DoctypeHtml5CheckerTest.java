@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tanaguru.rules.elementchecker.doctype;
+package org.asqatasun.rules.elementchecker.doctype;
 
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.select.Elements;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandlerImpl;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *

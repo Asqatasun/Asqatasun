@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.validator;
+package org.asqatasun.webapp.validator;
 
 import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.UrlValidator;
-import org.tanaguru.webapp.command.CreateContractCommand;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.form.parameterization.ContractOptionFormField;
+import org.asqatasun.webapp.command.CreateContractCommand;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.form.parameterization.ContractOptionFormField;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

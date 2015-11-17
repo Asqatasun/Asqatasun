@@ -1,5 +1,5 @@
 package com.oceaneconsulting.tanaguru.entity;
-import org.tanaguru.sdk.entity.Entity;
+import org.asqatasun.sdk.entity.Entity;
 
 /**
  * Interface de l'entite des reles 

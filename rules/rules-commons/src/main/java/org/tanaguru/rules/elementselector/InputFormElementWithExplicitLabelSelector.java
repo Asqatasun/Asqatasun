@@ -19,17 +19,17 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
-import static org.tanaguru.rules.keystore.AttributeStore.FOR_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.rules.elementselector.builder.CssLikeSelectorBuilder;
+import static org.asqatasun.rules.keystore.AttributeStore.FOR_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FORM_ELEMENT_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.LABEL_ELEMENT;
 
 /**
  * 

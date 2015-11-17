@@ -1,6 +1,6 @@
 /engine/commons-entity/target/
 /engine/commons-entity-jpa/target/
-/engine/tanaguru-api/target/
+/engine/asqatasun-api/target/
 /engine/parameterization/target/
 /engine/audit/target/
 /engine/nomenclatureloader/target/
@@ -10,7 +10,7 @@
 /engine/crawler/target/
 /engine/logging/target/
 /engine/scenarioloader/target/
-/engine/tanaguru-engine/target/
+/engine/asqatasun-engine/target/
 /engine/sebuilder-interpreter-tools/target/
 /engine/consolidator/target/
 /engine/contentadapter/target/
@@ -18,7 +18,7 @@
 /engine/commons-processing/target/
 /engine/contentloader/target/
 /engine/processor/target/
-/engine/tanaguru-resources/target/
+/engine/asqatasun-resources/target/
 engine/reference/target/
 /rules/accessiweb2.2/target/
 /rules/rgaa2.2/target/

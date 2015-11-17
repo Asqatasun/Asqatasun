@@ -18,22 +18,22 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractCompositePageRuleMarkupImplementation;
-import org.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.tanaguru.rules.elementselector.AreaElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.*;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.FORM_BUTTON_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.IMG_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.ALT_MISSING_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractCompositePageRuleMarkupImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.AreaElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FORM_BUTTON_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.IMG_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.ALT_MISSING_MSG;
     
 /**
  * Implementation of the rule 4.1 of the referential RGAA 2.2.

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.membership;
+package org.asqatasun.entity.membership;
 
 import java.io.Serializable;
 
@@ -58,7 +58,7 @@ public class OfficeImpl implements Office, Serializable {
         super();
     }
 
-    @XmlElementRef(type = org.tanaguru.entity.membership.OfficeGroupImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.membership.OfficeGroupImpl.class)
     @Override
     public OfficeGroup getGroup() {
         return group;

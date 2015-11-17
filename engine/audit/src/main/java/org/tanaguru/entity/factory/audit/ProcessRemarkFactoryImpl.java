@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.factory.audit;
+package org.asqatasun.entity.factory.audit;
 
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessRemarkImpl;
-import org.tanaguru.entity.audit.TestSolution;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessRemarkImpl;
+import org.asqatasun.entity.audit.TestSolution;
 
 /**
  * 

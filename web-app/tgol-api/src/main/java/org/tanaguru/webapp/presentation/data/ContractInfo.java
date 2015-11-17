@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.data;
+package org.asqatasun.webapp.presentation.data;
 
 import java.util.Collection;
 import java.util.Date;
-import org.tanaguru.webapp.action.Action;
+import org.asqatasun.webapp.action.Action;
 
 /**
  * The interface handles displayable contractInfo data

@@ -19,20 +19,20 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.js;
+package org.asqatasun.contentadapter.js;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
-import org.tanaguru.contentadapter.ContentAdapter;
-import org.tanaguru.contentadapter.Resource;
-import org.tanaguru.contentadapter.util.URLIdentifier;
-import org.tanaguru.contentloader.Downloader;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.service.audit.ContentDataService;
+import org.asqatasun.contentadapter.ContentAdapter;
+import org.asqatasun.contentadapter.Resource;
+import org.asqatasun.contentadapter.util.URLIdentifier;
+import org.asqatasun.contentloader.Downloader;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.service.audit.ContentDataService;
 
 /**
  * 

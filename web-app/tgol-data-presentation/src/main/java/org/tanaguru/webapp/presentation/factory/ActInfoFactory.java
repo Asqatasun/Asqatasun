@@ -19,21 +19,21 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.factory;
+package org.asqatasun.webapp.presentation.factory;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditStatus;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.webapp.entity.contract.Act;
-import org.tanaguru.webapp.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.tanaguru.webapp.entity.service.statistics.StatisticsDataService;
-import org.tanaguru.webapp.presentation.data.ActInfo;
-import org.tanaguru.webapp.presentation.data.ActInfoImpl;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.entity.contract.Act;
+import org.asqatasun.webapp.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
+import org.asqatasun.webapp.entity.service.statistics.StatisticsDataService;
+import org.asqatasun.webapp.presentation.data.ActInfo;
+import org.asqatasun.webapp.presentation.data.ActInfoImpl;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

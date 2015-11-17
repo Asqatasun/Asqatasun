@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -43,7 +43,7 @@ public class Rgaa30Rule050401Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa30.Rgaa30Rule050401");
+                "org.asqatasun.rules.rgaa30.Rgaa30Rule050401");
     }
 
     @Override

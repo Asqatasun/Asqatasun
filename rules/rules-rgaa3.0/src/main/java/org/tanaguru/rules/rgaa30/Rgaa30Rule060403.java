@@ -17,11 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
-import org.tanaguru.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
-import org.tanaguru.rules.elementselector.AreaLinkElementSelector;
+import org.asqatasun.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
+import org.asqatasun.rules.elementselector.AreaLinkElementSelector;
 
 /**
  * Implementation of the rule 6.4.3 of the referential Rgaa 3.0.

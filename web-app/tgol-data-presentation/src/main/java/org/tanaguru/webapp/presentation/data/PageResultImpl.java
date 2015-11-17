@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.data;
+package org.asqatasun.webapp.presentation.data;
 
 import java.util.ResourceBundle;
-import org.tanaguru.webapp.util.TgolEscapeUrl;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.util.TgolEscapeUrl;
+import org.asqatasun.webapp.util.TgolKeyStore;
 
 /**
  * This class handles basics displayable data about a page result

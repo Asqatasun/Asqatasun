@@ -17,14 +17,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.ARIA_LEVEL1_HEADINGS_CSS_LIKE_QUERY;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.ARIA_LEVEL1_HEADINGS_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 9.1.1 of the referential Rgaa 3.0.

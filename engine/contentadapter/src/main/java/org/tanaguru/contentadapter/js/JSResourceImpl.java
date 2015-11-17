@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.js;
+package org.asqatasun.contentadapter.js;
 
-import org.tanaguru.contentadapter.RsrcLocator;
-import org.tanaguru.contentadapter.util.AbstractResource;
+import org.asqatasun.contentadapter.RsrcLocator;
+import org.asqatasun.contentadapter.util.AbstractResource;
 
 public class JSResourceImpl extends AbstractResource implements JSResource {
 

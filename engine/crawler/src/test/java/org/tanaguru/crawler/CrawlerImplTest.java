@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tanaguru.crawler;
+package org.asqatasun.crawler;
 
 import static junit.framework.Assert.assertTrue;
 import junit.framework.TestCase;
-import org.tanaguru.crawler.mock.MockSSP;
-import org.tanaguru.entity.audit.SSP;
+import org.asqatasun.crawler.mock.MockSSP;
+import org.asqatasun.entity.audit.SSP;
 
 /**
  *

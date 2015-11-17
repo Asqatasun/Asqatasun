@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.html;
+package org.asqatasun.contentadapter.html;
 
-import org.tanaguru.contentadapter.HTMLCleaner;
+import org.asqatasun.contentadapter.HTMLCleaner;
 
 /**
  * 

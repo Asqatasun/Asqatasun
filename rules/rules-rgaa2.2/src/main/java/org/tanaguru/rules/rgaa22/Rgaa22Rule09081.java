@@ -17,24 +17,24 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.lang.LangChecker;
-import org.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.LANG_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.XML_LANG_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.*;
-import static org.tanaguru.rules.keystore.HtmlElementStore.HTML_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.lang.LangChecker;
+import org.asqatasun.rules.elementchecker.lang.LangDeclarationValidityChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.LANG_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.XML_LANG_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.*;
+import static org.asqatasun.rules.keystore.HtmlElementStore.HTML_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_HTML_TAG_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.LANG_ATTRIBUTE_MISSING_ON_WHOLE_PAGE_MSG;
 
 /**
  * Implementation of the rule 9.8 of the referential RGAA 2.2. <br/> For more

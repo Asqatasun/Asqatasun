@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.validator;
+package org.asqatasun.webapp.validator;
 
 
 import com.sebuilder.interpreter.IO;
@@ -36,11 +36,11 @@ import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MimeTypes;
 import org.json.JSONException;
-import org.tanaguru.webapp.command.AddScenarioCommand;
-import org.tanaguru.webapp.command.AuditSetUpCommand;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.scenario.Scenario;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.command.AddScenarioCommand;
+import org.asqatasun.webapp.command.AuditSetUpCommand;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.scenario.Scenario;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

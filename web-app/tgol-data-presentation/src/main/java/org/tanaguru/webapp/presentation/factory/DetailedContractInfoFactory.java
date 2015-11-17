@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.factory;
+package org.asqatasun.webapp.presentation.factory;
 
 import java.util.Collection;
-import org.tanaguru.webapp.entity.contract.Act;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.presentation.data.DetailedContractInfo;
-import org.tanaguru.webapp.presentation.data.DetailedContractInfoImpl;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.entity.contract.Act;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.presentation.data.DetailedContractInfo;
+import org.asqatasun.webapp.presentation.data.DetailedContractInfoImpl;
+import org.asqatasun.webapp.util.TgolKeyStore;
 
 /**
  *

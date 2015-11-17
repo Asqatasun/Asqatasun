@@ -17,11 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.ruleimplementation.link.AbstractLinkRuleImplementation;
-import org.tanaguru.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
-import org.tanaguru.rules.elementselector.LinkElementSelector;
+import org.asqatasun.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
+import org.asqatasun.rules.elementselector.LinkElementSelector;
 
 /**
  * Implementation of the rule 6.4.1 of the referential Accessiweb 2.2.

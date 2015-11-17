@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.tanaguru</groupId>
+    <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
     <version>3.2.0-SNAPSHOT</version>
@@ -31,19 +31,19 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <engineGroupId>org.tanaguru</engineGroupId>
+        <engineGroupId>org.asqatasun</engineGroupId>
         <engineVersion>3.2.0-SNAPSHOT</engineVersion>
         
-        <webappGroupId>org.tanaguru</webappGroupId>
+        <webappGroupId>org.asqatasun</webappGroupId>
         <webappVersion>3.2.0-SNAPSHOT</webappVersion>
         
-        <testingToolsGroupId>org.tanaguru</testingToolsGroupId>
+        <testingToolsGroupId>org.asqatasun</testingToolsGroupId>
         <testingToolsVersion>3.2.0-SNAPSHOT</testingToolsVersion>
         
-        <tanaguruCliGroupId>org.tanaguru</tanaguruCliGroupId>
+        <tanaguruCliGroupId>org.asqatasun</tanaguruCliGroupId>
         <tanaguruCliVersion>3.2.0-SNAPSHOT</tanaguruCliVersion>
         
-        <rulesGroupId>org.tanaguru</rulesGroupId>
+        <rulesGroupId>org.asqatasun</rulesGroupId>
         <rulesVersion>1.3.0-SNAPSHOT</rulesVersion>
         
         <springGroupId>org.springframework</springGroupId>
@@ -203,25 +203,25 @@
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.2</artifactId>
+                <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rgaa2.2</artifactId>
+                <artifactId>asqatasun-rules-rgaa2.2</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rgaa3.0</artifactId>
+                <artifactId>asqatasun-rules-rgaa3.0</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-seo</artifactId>
+                <artifactId>asqatasun-rules-seo1.0</artifactId>
                 <version>${rulesVersion}</version>
                 <scope>runtime</scope>
             </dependency>
@@ -239,7 +239,7 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-api</artifactId>
+                <artifactId>asqatasun-api</artifactId>
                 <version>${engineVersion}</version>
                 <exclusions>
                     <exclusion>
@@ -291,7 +291,7 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-jms</artifactId>
+                <artifactId>asqatasun-jms</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
@@ -326,12 +326,12 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-engine</artifactId>
+                <artifactId>asqatasun-engine</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-resources</artifactId>
+                <artifactId>asqatasun-resources</artifactId>
                 <version>${engineVersion}</version>
                 <scope>runtime</scope>
             </dependency>

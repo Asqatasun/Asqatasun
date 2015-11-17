@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.html;
+package org.asqatasun.contentadapter.html;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,10 +28,10 @@ import java.util.Set;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.tanaguru.contentadapter.ContentAdapter;
-import org.tanaguru.contentadapter.HTMLParser;
-import org.tanaguru.contentadapter.css.CSSJsoupPhlocContentAdapterImpl;
-import org.tanaguru.entity.audit.SSP;
+import org.asqatasun.contentadapter.ContentAdapter;
+import org.asqatasun.contentadapter.HTMLParser;
+import org.asqatasun.contentadapter.css.CSSJsoupPhlocContentAdapterImpl;
+import org.asqatasun.entity.audit.SSP;
 
 /**
  * 

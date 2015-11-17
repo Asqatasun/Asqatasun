@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.i18n.entity.service.reference;
+package org.asqatasun.i18n.entity.service.reference;
 
-import org.tanaguru.entity.reference.Level;
-import org.tanaguru.i18n.entity.reference.LevelI18n;
-import org.tanaguru.i18n.entity.service.AbstractGenericI18nService;
-import org.tanaguru.sdk.entity.i18n.InternationalizedEntity;
+import org.asqatasun.entity.reference.Level;
+import org.asqatasun.i18n.entity.reference.LevelI18n;
+import org.asqatasun.i18n.entity.service.AbstractGenericI18nService;
+import org.asqatasun.sdk.entity.i18n.InternationalizedEntity;
 
 /**
  * 

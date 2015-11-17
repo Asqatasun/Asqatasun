@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.test;
+package org.asqatasun.rules.test;
 
-import org.tanaguru.ruleimplementationloader.RuleImplementationLoader;
-import org.tanaguru.ruleimplementationloader.RuleImplementationLoaderFactory;
+import org.asqatasun.ruleimplementationloader.RuleImplementationLoader;
+import org.asqatasun.ruleimplementationloader.RuleImplementationLoaderFactory;
 
 /**
  *

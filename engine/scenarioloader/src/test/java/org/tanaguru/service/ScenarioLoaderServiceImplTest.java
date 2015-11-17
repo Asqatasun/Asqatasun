@@ -19,19 +19,19 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.service;
+package org.asqatasun.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.scenarioloader.ScenarioLoader;
-import org.tanaguru.scenarioloader.ScenarioLoaderFactory;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.scenarioloader.ScenarioLoader;
+import org.asqatasun.scenarioloader.ScenarioLoaderFactory;
 
 /**
  *

@@ -19,19 +19,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.factory;
+package org.asqatasun.webapp.presentation.factory;
 
 import java.util.*;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.service.reference.CriterionDataService;
-import org.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
-import org.tanaguru.entity.statistics.CriterionStatistics;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.webapp.presentation.data.CriterionResult;
-import org.tanaguru.webapp.presentation.data.CriterionResultImpl;
-import org.tanaguru.webapp.presentation.data.TestResult;
-import org.tanaguru.webapp.presentation.data.TestResultImpl;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.service.reference.CriterionDataService;
+import org.asqatasun.entity.service.statistics.CriterionStatisticsDataService;
+import org.asqatasun.entity.statistics.CriterionStatistics;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.presentation.data.CriterionResult;
+import org.asqatasun.webapp.presentation.data.CriterionResultImpl;
+import org.asqatasun.webapp.presentation.data.TestResult;
+import org.asqatasun.webapp.presentation.data.TestResultImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 

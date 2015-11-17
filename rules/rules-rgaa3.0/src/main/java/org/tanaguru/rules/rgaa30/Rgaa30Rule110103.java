@@ -17,32 +17,32 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
-import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.HtmlElementStore.FORM_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.ARIA_LABELLEDBY_EMPTY_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITHOUT_LABEL_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementchecker.text.TextEmptinessChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.elementselector.builder.CssLikeSelectorBuilder;
+import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.ID_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.INPUT_ELEMENT_WITH_ARIA_INSIDE_FORM_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.FORM_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.ARIA_LABELLEDBY_EMPTY_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITHOUT_LABEL_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.FORM_ELEMENT_WITH_NOT_UNIQUE_LABEL_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 11.1.3 of the referential Rgaa 3.0.

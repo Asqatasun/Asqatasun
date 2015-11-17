@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.contract;
+package org.asqatasun.webapp.entity.contract;
 
 import java.io.Serializable;
 import java.util.*;
@@ -27,16 +27,16 @@ import java.util.*;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.tanaguru.webapp.entity.functionality.Functionality;
-import org.tanaguru.webapp.entity.functionality.FunctionalityImpl;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.option.OptionElementImpl;
-import org.tanaguru.webapp.entity.referential.Referential;
-import org.tanaguru.webapp.entity.referential.ReferentialImpl;
-import org.tanaguru.webapp.entity.scenario.Scenario;
-import org.tanaguru.webapp.entity.scenario.ScenarioImpl;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.entity.user.UserImpl;
+import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.entity.functionality.FunctionalityImpl;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.option.OptionElementImpl;
+import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.referential.ReferentialImpl;
+import org.asqatasun.webapp.entity.scenario.Scenario;
+import org.asqatasun.webapp.entity.scenario.ScenarioImpl;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.user.UserImpl;
 
 /**
  *

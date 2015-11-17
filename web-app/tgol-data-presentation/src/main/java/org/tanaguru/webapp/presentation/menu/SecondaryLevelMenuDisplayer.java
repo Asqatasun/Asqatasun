@@ -20,17 +20,17 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.webapp.presentation.menu;
+package org.asqatasun.webapp.presentation.menu;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.referential.Referential;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.ui.Model;
 
 /**

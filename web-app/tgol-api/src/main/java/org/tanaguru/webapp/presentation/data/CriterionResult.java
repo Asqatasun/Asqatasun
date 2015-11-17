@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.data;
+package org.asqatasun.webapp.presentation.data;
 
-import org.tanaguru.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Criterion;
 
 /**
  * This class processes raw results and handles displayable remarks data

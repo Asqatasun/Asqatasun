@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sdk.entity.i18n.dao;
+package org.asqatasun.sdk.entity.i18n.dao;
 
-import org.tanaguru.sdk.entity.i18n.InternationalizedEntity;
-import org.tanaguru.sdk.entity.i18n.Language;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
+import org.asqatasun.sdk.entity.i18n.InternationalizedEntity;
+import org.asqatasun.sdk.entity.i18n.Language;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
 import java.io.Serializable;
 
 /**

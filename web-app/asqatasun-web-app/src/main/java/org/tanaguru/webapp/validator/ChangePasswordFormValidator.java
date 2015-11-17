@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.validator;
+package org.asqatasun.webapp.validator;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.util.MD5Encoder;
-import org.tanaguru.webapp.command.ChangePasswordCommand;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.util.TgolPasswordChecker;
+import org.asqatasun.util.MD5Encoder;
+import org.asqatasun.webapp.command.ChangePasswordCommand;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.util.TgolPasswordChecker;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

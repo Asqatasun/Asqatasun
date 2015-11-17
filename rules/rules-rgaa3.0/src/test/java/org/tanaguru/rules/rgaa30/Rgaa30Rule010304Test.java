@@ -17,19 +17,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.ProcessResult;
-import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
-import static org.tanaguru.rules.keystore.AttributeStore.DATA_ATTR;
-import static org.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import org.asqatasun.entity.audit.ProcessResult;
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.rules.keystore.AttributeStore.DATA_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 1-3-4 of the referential Rgaa 3.0.
@@ -49,7 +49,7 @@ public class Rgaa30Rule010304Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa30.Rgaa30Rule010304");
+                "org.asqatasun.rules.rgaa30.Rgaa30Rule010304");
     }
 
     @Override

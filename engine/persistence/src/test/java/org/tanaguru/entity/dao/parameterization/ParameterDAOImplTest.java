@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.parameterization;
+package org.asqatasun.entity.dao.parameterization;
 
 import java.util.Set;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.dao.audit.AuditDAO;
-import org.tanaguru.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.dao.audit.AuditDAO;
+import org.asqatasun.entity.dao.test.AbstractDaoTestCase;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
 
 /**
  *

@@ -18,28 +18,28 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Nomenclature;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.tanaguru.rules.elementchecker.element.ElementWithAttributePresenceChecker;
-import org.tanaguru.rules.elementselector.MultipleElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Nomenclature;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementchecker.element.ElementWithAttributePresenceChecker;
+import org.asqatasun.rules.elementselector.MultipleElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.elementselector.builder.CssLikeSelectorBuilder;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_DETECTED_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG;
 
 /**
  * Implementation of the rule 7.8 of the referential RGAA 2.2.

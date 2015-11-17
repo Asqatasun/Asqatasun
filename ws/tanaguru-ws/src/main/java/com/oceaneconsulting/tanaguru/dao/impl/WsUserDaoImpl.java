@@ -2,7 +2,7 @@ package com.oceaneconsulting.tanaguru.dao.impl;
 
 import javax.persistence.Query;
 
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 import org.springframework.stereotype.Repository;
 
 import com.oceaneconsulting.tanaguru.dao.WsUserDao;

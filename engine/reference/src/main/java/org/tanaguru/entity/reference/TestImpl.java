@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.reference;
+package org.asqatasun.entity.reference;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -98,16 +98,16 @@ public class TestImpl implements Test, Serializable {
     }
 
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.CriterionImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.CriterionImpl.class)
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.reference.CriterionImpl.class, name="Criterion")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.reference.CriterionImpl.class, name="Criterion")})
     public Criterion getCriterion() {
         return this.criterion;
     }
     
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.DecisionLevelImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.DecisionLevelImpl.class)
     public DecisionLevel getDecisionLevel() {
         return this.decisionLevel;
     }
@@ -147,10 +147,10 @@ public class TestImpl implements Test, Serializable {
     }
 
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.LevelImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.LevelImpl.class)
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.reference.LevelImpl.class, name="Level")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.reference.LevelImpl.class, name="Level")})
     public Level getLevel() {
         return this.level;
     }
@@ -171,10 +171,10 @@ public class TestImpl implements Test, Serializable {
     }
 
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.ScopeImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.ScopeImpl.class)
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.reference.ScopeImpl.class, name="Scope")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.reference.ScopeImpl.class, name="Scope")})
     public Scope getScope() {
         return this.scope;
     }

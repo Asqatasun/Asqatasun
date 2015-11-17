@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,10 +27,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import static org.tanaguru.rules.keystore.HtmlElementStore.BODY_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.HTML_ELEMENT;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import static org.asqatasun.rules.keystore.HtmlElementStore.BODY_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.HTML_ELEMENT;
 
 /**
  * Element selector implementation that searches the "captcha" occurence 

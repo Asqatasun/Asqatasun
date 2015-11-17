@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sebuilder.interpreter.webdriverfactory;
+package org.asqatasun.sebuilder.interpreter.webdriverfactory;
 
 import com.sebuilder.interpreter.webdriverfactory.WebDriverFactory;
 import java.util.HashMap;

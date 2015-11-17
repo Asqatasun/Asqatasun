@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.html.util;
+package org.asqatasun.contentadapter.html.util;
 
 import java.util.Set;
 import org.xml.sax.ContentHandler;

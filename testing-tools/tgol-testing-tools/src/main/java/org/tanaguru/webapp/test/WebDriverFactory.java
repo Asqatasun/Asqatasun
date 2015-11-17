@@ -20,14 +20,14 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.webapp.test;
+package org.asqatasun.webapp.test;
 
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.tanaguru.sebuilder.tools.ProfileFactory;
+import org.asqatasun.sebuilder.tools.ProfileFactory;
 
 /**
  * WebDriverFactory that guarantees that only one instance of webdriver is used 

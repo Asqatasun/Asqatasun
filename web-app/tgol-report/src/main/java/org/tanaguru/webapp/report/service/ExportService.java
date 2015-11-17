@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.service;
+package org.asqatasun.webapp.report.service;
 
 import ar.com.fdvs.dj.core.DynamicJasperHelper;
 import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
@@ -34,10 +34,10 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.log4j.Logger;
-import org.tanaguru.webapp.presentation.data.AuditStatistics;
-import org.tanaguru.webapp.report.format.ExportFormat;
-import org.tanaguru.webapp.report.layout.LayoutFactory;
-import org.tanaguru.webapp.report.service.exception.NotSupportedExportFormatException;
+import org.asqatasun.webapp.presentation.data.AuditStatistics;
+import org.asqatasun.webapp.report.format.ExportFormat;
+import org.asqatasun.webapp.report.layout.LayoutFactory;
+import org.asqatasun.webapp.report.service.exception.NotSupportedExportFormatException;
 
 /**
  * Service for processing DynamicJasper reports

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler;
+package org.asqatasun.crawler;
 
 import java.io.IOException;
 import org.archive.io.RecordingInputStream;

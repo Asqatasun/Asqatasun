@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.subject;
+package org.asqatasun.entity.subject;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

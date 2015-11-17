@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tanaguru.referentiel.creator.exception;
+package org.asqatasun.referentiel.creator.exception;
 
 /**
  *

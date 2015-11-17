@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.validator;
+package org.asqatasun.webapp.validator;
 
 import java.util.regex.Pattern;
 import org.apache.commons.validator.routines.UrlValidator;
-import org.tanaguru.webapp.command.CreateUserCommand;
-import org.tanaguru.webapp.command.UserSignUpCommand;
-import org.tanaguru.webapp.entity.service.user.UserDataService;
-import org.tanaguru.webapp.util.TgolPasswordChecker;
+import org.asqatasun.webapp.command.CreateUserCommand;
+import org.asqatasun.webapp.command.UserSignUpCommand;
+import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.webapp.util.TgolPasswordChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

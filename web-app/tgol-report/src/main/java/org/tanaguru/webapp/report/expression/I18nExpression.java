@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.expression;
+package org.asqatasun.webapp.report.expression;
 
 import ar.com.fdvs.dj.domain.CustomExpression;
 import java.util.*;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.tanaguru.webapp.report.expression.retriever.KeyRetriever;
+import org.asqatasun.webapp.report.expression.retriever.KeyRetriever;
 
 /**
  *

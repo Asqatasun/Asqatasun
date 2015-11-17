@@ -20,18 +20,18 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.service.mock;
+package org.asqatasun.service.mock;
 
 import java.util.Collection;
 import java.util.Set;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.parameterization.ParameterFamily;
-import org.tanaguru.entity.parameterization.ParameterImpl;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
-import org.tanaguru.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.parameterization.ParameterFamily;
+import org.asqatasun.entity.parameterization.ParameterImpl;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.sdk.entity.factory.GenericFactory;
 
 /**
  *

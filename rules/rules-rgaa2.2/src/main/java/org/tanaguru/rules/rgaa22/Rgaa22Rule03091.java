@@ -18,17 +18,17 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.LABEL_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.OPTGROUP_WITH_LABEL_ATTR_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_OPTGROUP_LABEL_PERTINENCE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.NOT_PERTINENT_OPTGROUP_LABEL_MSG;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.pertinence.AttributePertinenceChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.LABEL_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.OPTGROUP_WITH_LABEL_ATTR_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_OPTGROUP_LABEL_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_OPTGROUP_LABEL_MSG;
 
 /**
  * Implementation of the rule 3.9 of the referential RGAA 2.2.

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler.processor.module;
+package org.asqatasun.crawler.processor.module;
 
 import java.util.Set;
 import org.archive.modules.seeds.SeedListener;

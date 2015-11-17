@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.textbuilder;
+package org.asqatasun.rules.textbuilder;
 
 import java.util.Arrays;
 import java.util.Collection;

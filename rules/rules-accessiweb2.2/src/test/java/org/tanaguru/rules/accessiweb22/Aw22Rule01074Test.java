@@ -17,19 +17,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.SourceCodeRemark;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
-import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.CODE_ATTR;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SourceCodeRemark;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.CODE_ATTR;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 1.7.4 of the referential Accessiweb 2.2.
@@ -48,7 +48,7 @@ public class Aw22Rule01074Test extends Aw22RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.accessiweb22.Aw22Rule01074");
+                "org.asqatasun.rules.accessiweb22.Aw22Rule01074");
     }
 
     @Override

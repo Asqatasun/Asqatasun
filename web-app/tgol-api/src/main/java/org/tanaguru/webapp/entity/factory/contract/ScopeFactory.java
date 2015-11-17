@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.factory.contract;
+package org.asqatasun.webapp.entity.factory.contract;
 
-import org.tanaguru.sdk.entity.factory.GenericFactory;
-import org.tanaguru.webapp.entity.contract.Scope;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.webapp.entity.contract.Scope;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
 
 /**
  *

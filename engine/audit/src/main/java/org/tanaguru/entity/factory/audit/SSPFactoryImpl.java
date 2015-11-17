@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.factory.audit;
+package org.asqatasun.entity.factory.audit;
 
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.audit.SSPImpl;
-import org.tanaguru.entity.subject.Page;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.audit.SSPImpl;
+import org.asqatasun.entity.subject.Page;
 import java.util.Date;
 
 /**

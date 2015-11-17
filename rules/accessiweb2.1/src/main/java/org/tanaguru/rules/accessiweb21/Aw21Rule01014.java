@@ -18,13 +18,13 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb21;
+package org.asqatasun.rules.accessiweb21;
 
-import org.tanaguru.entity.audit.DefiniteResult;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.rules.accessiweb21.detection.AbstractTagDetectionPageRuleImplementation;
+import org.asqatasun.entity.audit.DefiniteResult;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.rules.accessiweb21.detection.AbstractTagDetectionPageRuleImplementation;
 
 /**
  * Implementation of the rule 1.1.4 of the referential Accessiweb 2.1.

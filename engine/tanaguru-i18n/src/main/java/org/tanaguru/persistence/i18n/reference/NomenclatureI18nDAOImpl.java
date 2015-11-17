@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.persistence.i18n.reference;
+package org.asqatasun.persistence.i18n.reference;
 
-import org.tanaguru.i18n.entity.dao.reference.NomenclatureI18nDAO;
-import org.tanaguru.entity.reference.Nomenclature;
-import org.tanaguru.i18n.entity.reference.NomenclatureI18nImpl;
-import org.tanaguru.persistence.i18n.AbstractJPAI18nDAO;
+import org.asqatasun.i18n.entity.dao.reference.NomenclatureI18nDAO;
+import org.asqatasun.entity.reference.Nomenclature;
+import org.asqatasun.i18n.entity.reference.NomenclatureI18nImpl;
+import org.asqatasun.persistence.i18n.AbstractJPAI18nDAO;
 
 /**
  * 

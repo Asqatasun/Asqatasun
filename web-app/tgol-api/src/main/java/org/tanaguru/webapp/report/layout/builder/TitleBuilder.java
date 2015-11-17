@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.layout.builder;
+package org.asqatasun.webapp.report.layout.builder;
 
 import java.util.Locale;
-import org.tanaguru.webapp.presentation.data.AuditStatistics;
+import org.asqatasun.webapp.presentation.data.AuditStatistics;
 
 /**
  *

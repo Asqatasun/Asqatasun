@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.parameterization.builder;
+package org.asqatasun.webapp.form.parameterization.builder;
 
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.webapp.form.FormField;
-import org.tanaguru.webapp.form.builder.AbstractGenericFormFieldBuilder;
-import org.tanaguru.webapp.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.webapp.form.FormField;
+import org.asqatasun.webapp.form.builder.AbstractGenericFormFieldBuilder;
+import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
 
 /**
  *

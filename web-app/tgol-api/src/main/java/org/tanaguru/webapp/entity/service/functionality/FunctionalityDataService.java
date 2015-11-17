@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.service.functionality;
+package org.asqatasun.webapp.entity.service.functionality;
 
-import org.tanaguru.sdk.entity.service.GenericDataService;
-import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.webapp.entity.functionality.Functionality;
 
 /**
  *

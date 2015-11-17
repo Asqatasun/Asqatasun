@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.scenario;
+package org.asqatasun.webapp.entity.dao.scenario;
 
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.webapp.entity.scenario.Scenario;
-import org.tanaguru.webapp.entity.scenario.ScenarioImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.webapp.entity.scenario.Scenario;
+import org.asqatasun.webapp.entity.scenario.ScenarioImpl;
 
 /**
  * @author jkowalczyk

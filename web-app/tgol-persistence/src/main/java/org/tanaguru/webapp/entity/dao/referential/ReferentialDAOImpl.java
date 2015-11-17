@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.referential;
+package org.asqatasun.webapp.entity.dao.referential;
 
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.webapp.entity.referential.Referential;
-import org.tanaguru.webapp.entity.referential.ReferentialImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.referential.ReferentialImpl;
 
 /**
  * @author jkowalczyk

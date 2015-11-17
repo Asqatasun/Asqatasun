@@ -20,11 +20,11 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.element;
+package org.asqatasun.rules.elementchecker.element;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
+import org.asqatasun.entity.audit.TestSolution;
 
 /**
  * This class checks whether an element is present on the page.

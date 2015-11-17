@@ -17,19 +17,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.SourceCodeRemark;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SourceCodeRemark;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * Unit test class for the implementation of the rule 10.2 of the referential RGAA 2.2.
@@ -48,7 +48,7 @@ public class Rgaa22Rule10021Test extends Rgaa22RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa22.Rgaa22Rule10021");
+                "org.asqatasun.rules.rgaa22.Rgaa22Rule10021");
     }
 
     @Override

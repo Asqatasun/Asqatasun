@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler.framework;
+package org.asqatasun.crawler.framework;
 
 import org.apache.commons.httpclient.HttpConnection;
 import org.apache.log4j.Logger;
 import org.archive.httpclient.HttpRecorderMethod;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.fetcher.FetchHTTP;
-import org.tanaguru.crawler.frontier.TanaguruBdbFrontier;
+import org.asqatasun.crawler.frontier.TanaguruBdbFrontier;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

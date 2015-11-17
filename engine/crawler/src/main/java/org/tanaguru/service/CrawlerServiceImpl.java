@@ -19,23 +19,23 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.service;
+package org.asqatasun.service;
 
 import java.util.*;
 import org.apache.log4j.Logger;
-import org.tanaguru.crawler.Crawler;
-import org.tanaguru.crawler.CrawlerFactory;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.crawler.Crawler;
+import org.asqatasun.crawler.CrawlerFactory;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.WebResource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.audit.RelatedContent;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.RelatedContent;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 
 /**
  * Implementation of the crawler service.

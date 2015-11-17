@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.factory.parameterization;
+package org.asqatasun.entity.factory.parameterization;
 
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.parameterization.ParameterImpl;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.parameterization.ParameterImpl;
 
 /**
  *

@@ -17,21 +17,21 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.CONTENT_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.CONTENT_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_META_DESC_RELEVANCY_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.META_DESC_NOT_RELEVANT_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Test whether the meta description is relevant on the page

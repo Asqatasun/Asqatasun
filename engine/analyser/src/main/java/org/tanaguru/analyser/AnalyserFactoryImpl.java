@@ -19,27 +19,27 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.analyser;
+package org.asqatasun.analyser;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterFamily;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.entity.service.parameterization.ParameterFamilyDataService;
-import org.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
-import org.tanaguru.entity.service.statistics.TestStatisticsDataService;
-import org.tanaguru.entity.service.statistics.ThemeStatisticsDataService;
-import org.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterFamily;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.service.parameterization.ParameterFamilyDataService;
+import org.asqatasun.entity.service.statistics.CriterionStatisticsDataService;
+import org.asqatasun.entity.service.statistics.TestStatisticsDataService;
+import org.asqatasun.entity.service.statistics.ThemeStatisticsDataService;
+import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

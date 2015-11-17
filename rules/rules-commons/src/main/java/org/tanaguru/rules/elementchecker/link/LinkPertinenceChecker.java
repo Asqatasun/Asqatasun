@@ -20,13 +20,13 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.link;
+package org.asqatasun.rules.elementchecker.link;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.tanaguru.rules.textbuilder.LinkTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * This class checks whether a the text of a link is pertinent by verifying :

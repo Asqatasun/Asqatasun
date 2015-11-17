@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command;
+package org.asqatasun.webapp.command;
 
 import java.io.Serializable;
 import java.util.ArrayList;

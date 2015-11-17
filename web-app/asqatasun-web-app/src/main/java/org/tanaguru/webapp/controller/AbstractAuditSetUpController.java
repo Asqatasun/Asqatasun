@@ -19,27 +19,27 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
-import org.tanaguru.webapp.command.AuditSetUpCommand;
-import org.tanaguru.webapp.command.factory.AuditSetUpCommandFactory;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.functionality.Functionality;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.referential.Referential;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.form.SelectFormField;
-import org.tanaguru.webapp.form.builder.SelectFormFieldBuilderImpl;
-import org.tanaguru.webapp.form.parameterization.AuditSetUpFormField;
-import org.tanaguru.webapp.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
-import org.tanaguru.webapp.form.parameterization.helper.AuditSetUpFormFieldHelper;
-import org.tanaguru.webapp.util.TgolKeyStore;
-import org.tanaguru.webapp.validator.AuditSetUpFormValidator;
+import org.asqatasun.webapp.command.AuditSetUpCommand;
+import org.asqatasun.webapp.command.factory.AuditSetUpCommandFactory;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.form.SelectFormField;
+import org.asqatasun.webapp.form.builder.SelectFormFieldBuilderImpl;
+import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
+import org.asqatasun.webapp.form.parameterization.helper.AuditSetUpFormFieldHelper;
+import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.validator.AuditSetUpFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

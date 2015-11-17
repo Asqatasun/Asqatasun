@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.highlighter;
+package org.asqatasun.webapp.presentation.highlighter;
 
 import com.uwyn.jhighlight.highlighter.ExplicitStateHighlighter;
 import com.uwyn.jhighlight.renderer.XmlXhtmlRenderer;

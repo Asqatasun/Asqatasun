@@ -19,19 +19,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.Calendar;
 import java.util.Collection;
 import org.apache.log4j.Logger;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.entity.service.user.UserDataService;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.presentation.factory.DetailedContractInfoFactory;
-import org.tanaguru.webapp.security.userdetails.TgolUserDetails;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.presentation.factory.DetailedContractInfoFactory;
+import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;

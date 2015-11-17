@@ -17,11 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21.handler.form;
+package org.asqatasun.rules.accessiweb21.handler.form;
 
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleImplementation;
 
 /**
  *

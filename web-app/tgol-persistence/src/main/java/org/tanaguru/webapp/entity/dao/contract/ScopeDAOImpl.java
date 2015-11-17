@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.contract;
+package org.asqatasun.webapp.entity.dao.contract;
 
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.webapp.entity.contract.Scope;
-import org.tanaguru.webapp.entity.contract.TgsiScopeImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.webapp.entity.contract.Scope;
+import org.asqatasun.webapp.entity.contract.TgsiScopeImpl;
 
 /**
  *

@@ -19,27 +19,27 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command.factory;
+package org.asqatasun.webapp.command.factory;
 
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.service.parameterization.ParameterElementDataService;
-import org.tanaguru.webapp.command.AuditSetUpCommand;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.tanaguru.webapp.entity.scenario.Scenario;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.entity.service.scenario.ScenarioDataService;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.form.NumericalFormField;
-import org.tanaguru.webapp.form.SelectFormField;
-import org.tanaguru.webapp.form.parameterization.AuditSetUpFormField;
-import org.tanaguru.webapp.form.parameterization.helper.AuditSetUpFormFieldHelper;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
+import org.asqatasun.webapp.command.AuditSetUpCommand;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
+import org.asqatasun.webapp.entity.scenario.Scenario;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.form.NumericalFormField;
+import org.asqatasun.webapp.form.SelectFormField;
+import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.form.parameterization.helper.AuditSetUpFormFieldHelper;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 

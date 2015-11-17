@@ -17,13 +17,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rulescreationdemo;
+package org.asqatasun.rules.rulescreationdemo;
 
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.SourceCodeRemark;
-import org.tanaguru.entity.audit.SourceCodeRemarkImpl;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.rulescreationdemo.test.RulescreationdemoRuleImplementationTestCase;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SourceCodeRemark;
+import org.asqatasun.entity.audit.SourceCodeRemarkImpl;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.rulescreationdemo.test.RulescreationdemoRuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 
@@ -43,7 +43,7 @@ public class CheckWhetherEachLinkHaventTitleAttributeTest extends Rulescreationd
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rulescreationdemo.CheckWhetherEachLinkHaventTitleAttribute");
+                "org.asqatasun.rules.rulescreationdemo.CheckWhetherEachLinkHaventTitleAttribute");
     }
 
     @Override

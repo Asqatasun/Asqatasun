@@ -17,16 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.element.ElementUnicityChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_H1_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementUnicityChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.MORE_THAN_ONE_H1_MSG;
 
 /**
  * This rule tests if each page has one and only one &lt;h1&gt; tag

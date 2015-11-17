@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentloader;
+package org.asqatasun.contentloader;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.util.factory.DateFactory;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.util.factory.DateFactory;
 
 /**
  * 

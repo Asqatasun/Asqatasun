@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.cli;
+package org.asqatasun.cli;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,23 +33,23 @@ import org.apache.commons.cli.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
-import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.entity.service.parameterization.ParameterElementDataService;
-import org.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.service.AuditService;
-import org.tanaguru.service.AuditServiceListener;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
+import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
+import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.service.AuditService;
+import org.asqatasun.service.AuditServiceListener;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;

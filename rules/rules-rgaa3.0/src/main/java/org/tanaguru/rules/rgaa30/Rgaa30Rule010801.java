@@ -18,17 +18,17 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import static org.tanaguru.entity.audit.TestSolution.*;
-import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.*;
-import static org.tanaguru.rules.keystore.HtmlElementStore.*;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
-import static org.tanaguru.rules.keystore.MarkerStore.*;
+import static org.asqatasun.entity.audit.TestSolution.*;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.HtmlElementStore.*;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
+import static org.asqatasun.rules.keystore.MarkerStore.*;
 
 /**
  * Implementation of the rule 1.8.1 of the referential Rgaa 3.0.

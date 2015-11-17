@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.test;
+package org.asqatasun.webapp.entity.dao.test;
 
 import java.io.FileInputStream;
 import org.apache.log4j.Logger;

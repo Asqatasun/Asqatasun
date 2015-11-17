@@ -19,17 +19,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.audit;
+package org.asqatasun.entity.dao.audit;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Query;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.PreProcessResult;
-import org.tanaguru.entity.audit.PreProcessResultImpl;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.PreProcessResult;
+import org.asqatasun.entity.audit.PreProcessResultImpl;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 

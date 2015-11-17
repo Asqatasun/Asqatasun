@@ -19,12 +19,12 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sebuilder.interpreter.factory;
+package org.asqatasun.sebuilder.interpreter.factory;
 
 import com.sebuilder.interpreter.StepType;
 import com.sebuilder.interpreter.factory.StepTypeFactory;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.sebuilder.interpreter.TgStore;
+import org.asqatasun.sebuilder.interpreter.TgStore;
 
 /**
  *
@@ -32,7 +32,7 @@ import org.tanaguru.sebuilder.interpreter.TgStore;
  */
 public class TgStepTypeFactory extends StepTypeFactory{
 
-    private static final String PRIMARY_PACKAGE_FOR_STEP = "org.tanaguru.sebuilder.interpreter.steptype";
+    private static final String PRIMARY_PACKAGE_FOR_STEP = "org.asqatasun.sebuilder.interpreter.steptype";
     private static final String SECONDARY_PACKAGE_FOR_STEP = "com.sebuilder.interpreter.steptype";
     
     public TgStepTypeFactory() {

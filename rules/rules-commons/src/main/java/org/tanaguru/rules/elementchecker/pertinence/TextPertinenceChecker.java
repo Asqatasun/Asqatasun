@@ -20,20 +20,20 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.pertinence;
+package org.asqatasun.rules.elementchecker.pertinence;
 
 import java.util.Collections;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.elementchecker.CompositeChecker;
-import org.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
-import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
-import org.tanaguru.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
-import org.tanaguru.rules.elementchecker.text.TextOnlyContainsNonAlphanumericalCharactersChecker;
-import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.elementchecker.CompositeChecker;
+import org.asqatasun.rules.elementchecker.text.TextBelongsToBlackListChecker;
+import org.asqatasun.rules.elementchecker.text.TextEmptinessChecker;
+import org.asqatasun.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
+import org.asqatasun.rules.elementchecker.text.TextOnlyContainsNonAlphanumericalCharactersChecker;
+import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * This class checks whether a text is pertinent by verifying :

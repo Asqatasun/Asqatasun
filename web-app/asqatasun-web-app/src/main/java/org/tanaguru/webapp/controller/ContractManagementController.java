@@ -1,4 +1,4 @@
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 /*
  * Asqatasun - Automated webpage assessment
@@ -27,17 +27,17 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.tanaguru.webapp.command.ContractSortCommand;
-import org.tanaguru.webapp.command.CreateContractCommand;
-import org.tanaguru.webapp.command.factory.CreateContractCommandFactory;
-import org.tanaguru.webapp.command.helper.ContractSortCommandHelper;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.form.parameterization.ContractOptionFormField;
-import org.tanaguru.webapp.form.parameterization.helper.ContractOptionFormFieldHelper;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.command.ContractSortCommand;
+import org.asqatasun.webapp.command.CreateContractCommand;
+import org.asqatasun.webapp.command.factory.CreateContractCommandFactory;
+import org.asqatasun.webapp.command.helper.ContractSortCommandHelper;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.form.parameterization.ContractOptionFormField;
+import org.asqatasun.webapp.form.parameterization.helper.ContractOptionFormFieldHelper;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

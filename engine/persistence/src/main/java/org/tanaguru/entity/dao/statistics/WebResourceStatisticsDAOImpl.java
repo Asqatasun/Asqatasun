@@ -11,24 +11,24 @@
  * authorization of OPEN-S.
  */
 
-package org.tanaguru.entity.dao.statistics;
+package org.asqatasun.entity.dao.statistics;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.audit.SSPImpl;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.reference.TestImpl;
-import org.tanaguru.entity.statistics.WebResourceStatistics;
-import org.tanaguru.entity.statistics.WebResourceStatisticsImpl;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.subject.WebResourceImpl;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.audit.SSPImpl;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.reference.TestImpl;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
+import org.asqatasun.entity.statistics.WebResourceStatisticsImpl;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResourceImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 

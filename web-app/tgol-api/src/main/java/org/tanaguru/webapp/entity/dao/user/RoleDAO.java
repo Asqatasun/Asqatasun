@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.user;
+package org.asqatasun.webapp.entity.dao.user;
 
 import java.util.Collection;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
-import org.tanaguru.webapp.entity.user.Role;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.webapp.entity.user.Role;
 
 /**
  *

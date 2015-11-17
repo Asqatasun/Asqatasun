@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.persistence.i18n;
+package org.asqatasun.persistence.i18n;
 
 import java.io.Serializable;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.tanaguru.sdk.entity.Entity;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.sdk.entity.i18n.InternationalizedEntity;
-import org.tanaguru.sdk.entity.i18n.Language;
-import org.tanaguru.sdk.entity.i18n.dao.GenericI18nDAO;
+import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.sdk.entity.i18n.InternationalizedEntity;
+import org.asqatasun.sdk.entity.i18n.Language;
+import org.asqatasun.sdk.entity.i18n.dao.GenericI18nDAO;
 
 /**
  * 

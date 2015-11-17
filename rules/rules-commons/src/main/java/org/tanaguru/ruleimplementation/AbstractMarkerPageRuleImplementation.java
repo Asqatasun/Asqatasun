@@ -17,7 +17,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,11 +27,11 @@ import javax.annotation.Nonnull;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.ROLE_ATTR;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.ROLE_ATTR;
 
 /**
  * This class should be overridden by concrete {@link RuleImplementation}

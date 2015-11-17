@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.markup.validator;
+package org.asqatasun.rules.elementchecker.markup.validator;
 
 //import com.rexsl.w3c.TanaguruValidatorBuilder;
 //import com.rexsl.w3c.ValidationResponse;

@@ -19,27 +19,27 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.io.IOException;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.presentation.data.FailedThemeInfo;
-import org.tanaguru.webapp.presentation.data.ResultCounter;
-import org.tanaguru.webapp.presentation.factory.AuditStatisticsFactory;
-import org.tanaguru.webapp.presentation.factory.ResultCounterFactory;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.presentation.data.FailedThemeInfo;
+import org.asqatasun.webapp.presentation.data.ResultCounter;
+import org.asqatasun.webapp.presentation.factory.AuditStatisticsFactory;
+import org.asqatasun.webapp.presentation.factory.ResultCounterFactory;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

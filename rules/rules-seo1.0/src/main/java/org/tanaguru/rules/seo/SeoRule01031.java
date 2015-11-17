@@ -17,15 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.URL_EXCEEDS_LIMIT_MSG;
 
 /**
  * Test whether the Url of the page exceeds 255 characters

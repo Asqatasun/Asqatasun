@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.cssvisitor;
+package org.asqatasun.rules.cssvisitor;
 
 import com.phloc.css.ECSSUnit;
 import com.phloc.css.decl.CSSExpressionMemberTermSimple;
@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.TestSolution;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.BAD_UNIT_TYPE_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.BAD_UNIT_TYPE_MSG;
 
 /**
  * CSS visitor that only parse selectors regarding a media list, extract values

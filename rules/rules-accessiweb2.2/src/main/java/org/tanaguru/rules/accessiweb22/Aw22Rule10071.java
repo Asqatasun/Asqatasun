@@ -18,24 +18,24 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
 import java.util.Arrays;
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.domelement.DomElement;
-import org.tanaguru.rules.domelement.extractor.DomElementExtractor;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.HtmlElementStore.BODY_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.domelement.DomElement;
+import org.asqatasun.rules.domelement.extractor.DomElementExtractor;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.HtmlElementStore.BODY_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.INVISIBLE_OUTLINE_ON_FOCUS_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG;
 
 /**
  * Implementation of the rule 10.7.1 of the referential Accessiweb 2.2.

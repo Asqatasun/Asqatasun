@@ -19,22 +19,22 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
-import org.tanaguru.entity.reference.Reference;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.service.reference.ReferenceDataService;
-import org.tanaguru.entity.service.reference.TestDataService;
-import org.tanaguru.webapp.command.ChangeTestWeightCommand;
-import org.tanaguru.webapp.command.CreateUserCommand;
-import org.tanaguru.webapp.command.factory.ChangeTestWeightCommandFactory;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.presentation.menu.SecondaryLevelMenuDisplayer;
-import org.tanaguru.webapp.util.TgolKeyStore;
-import org.tanaguru.webapp.validator.ChangeTestWeightFormValidator;
+import org.asqatasun.entity.reference.Reference;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.service.reference.ReferenceDataService;
+import org.asqatasun.entity.service.reference.TestDataService;
+import org.asqatasun.webapp.command.ChangeTestWeightCommand;
+import org.asqatasun.webapp.command.CreateUserCommand;
+import org.asqatasun.webapp.command.factory.ChangeTestWeightCommandFactory;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.presentation.menu.SecondaryLevelMenuDisplayer;
+import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.validator.ChangeTestWeightFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

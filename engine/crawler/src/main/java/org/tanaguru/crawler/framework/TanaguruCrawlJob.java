@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler.framework;
+package org.asqatasun.crawler.framework;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,13 +46,13 @@ import org.archive.crawler.framework.CrawlJob;
 import org.archive.crawler.reporting.AlertThreadGroup;
 import org.archive.modules.deciderules.DecideRuleSequence;
 import org.archive.spring.PathSharingContext;
-import org.tanaguru.crawler.ContentWriter;
-import org.tanaguru.crawler.exception.CrawlerException;
-import org.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
-import org.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
-import org.tanaguru.crawler.processor.TanaguruWriterProcessor;
-import org.tanaguru.crawler.util.CrawlConfigurationUtils;
-import org.tanaguru.entity.parameterization.Parameter;
+import org.asqatasun.crawler.ContentWriter;
+import org.asqatasun.crawler.exception.CrawlerException;
+import org.asqatasun.crawler.extractor.listener.ExtractorCSSListener;
+import org.asqatasun.crawler.extractor.listener.ExtractorHTMLListener;
+import org.asqatasun.crawler.processor.TanaguruWriterProcessor;
+import org.asqatasun.crawler.util.CrawlConfigurationUtils;
+import org.asqatasun.entity.parameterization.Parameter;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationListener;
 import org.w3c.dom.Document;

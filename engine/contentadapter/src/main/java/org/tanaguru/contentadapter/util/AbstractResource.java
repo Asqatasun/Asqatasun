@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.util;
+package org.asqatasun.contentadapter.util;
 
 import java.util.HashSet;
 import java.util.Set;
-import org.tanaguru.contentadapter.Resource;
-import org.tanaguru.contentadapter.RsrcLocator;
+import org.asqatasun.contentadapter.Resource;
+import org.asqatasun.contentadapter.RsrcLocator;
 
 /**
  * 

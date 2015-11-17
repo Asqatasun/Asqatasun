@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.data;
+package org.asqatasun.webapp.presentation.data;
 
 import java.util.List;
 
-import org.tanaguru.entity.audit.DefiniteResult;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.reference.Test;
+import org.asqatasun.entity.audit.DefiniteResult;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.reference.Test;
 
 /**
  * This class processes raw results and handles displayable remarks data

@@ -42,7 +42,7 @@
             <outputDirectory>/conf/context</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../engine/tanaguru-resources/src/main/resources/conf/context/crawler</directory>
+            <directory>${basedir}/../../engine/asqatasun-resources/src/main/resources/conf/context/crawler</directory>
             <includes>
                 <include>*.xml</include>
             </includes>
@@ -58,7 +58,7 @@
             <outputDirectory>/logs</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../engine/tanaguru-resources/src/main/resources/sql</directory>
+            <directory>${basedir}/../../engine/asqatasun-resources/src/main/resources/sql</directory>
             <includes>
                 <include>tanaguru-10-create-user-and-base.sql</include>
                 <include>tanaguru-20-create-tables.sql</include>
@@ -113,7 +113,7 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../engine/tanaguru-resources/src/main/resources/sql-update</directory>
+            <directory>${basedir}/../../engine/asqatasun-resources/src/main/resources/sql-update</directory>
             <includes>
                 <include>**/*</include>
             </includes>

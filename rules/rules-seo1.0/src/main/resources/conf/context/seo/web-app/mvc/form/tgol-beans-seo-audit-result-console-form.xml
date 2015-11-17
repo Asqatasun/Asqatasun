@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <bean id="seoAllThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoAllThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
         <property name="errorI18nKey" value="all-theme-error"/>
@@ -17,7 +17,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoSeoBasisThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoSeoBasisThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo-01"/>
         <property name="i18nKey" value="Seo-01-select"/>
         <property name="errorI18nKey" value="Seo-01-select-error"/>
@@ -25,7 +25,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoImageThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoImageThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo-02"/>
         <property name="i18nKey" value="Seo-02-select"/>
         <property name="errorI18nKey" value="Seo-02-select-error"/>
@@ -33,7 +33,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoFrameThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoFrameThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo-03"/>
         <property name="i18nKey" value="Seo-03-select"/>
         <property name="errorI18nKey" value="Seo-03-select-error"/>
@@ -41,7 +41,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoLinkThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoLinkThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo-05"/>
         <property name="i18nKey" value="Seo-05-select"/>
         <property name="errorI18nKey" value="Seo-05-select-error"/>
@@ -49,7 +49,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoMandatoryElementsThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoMandatoryElementsThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo-06"/>
         <property name="i18nKey" value="Seo-06-select"/>
         <property name="errorI18nKey" value="Seo-06-select-error"/>
@@ -57,7 +57,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoInfoStructureThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoInfoStructureThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo-07"/>
         <property name="i18nKey" value="Seo-07-select"/>
         <property name="errorI18nKey" value="Seo-07-select-error"/>
@@ -65,7 +65,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoNavigationThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoNavigationThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo-08"/>
         <property name="i18nKey" value="Seo-08-select"/>
         <property name="errorI18nKey" value="Seo-08-select-error"/>
@@ -73,7 +73,7 @@
         <property name="enabled" value="true"/>
     </bean>
 
-    <bean id="seoThemeSelectFormFieldBuilder" class="org.tanaguru.webapp.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="seoThemeSelectFormFieldBuilder" class="org.asqatasun.webapp.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
         <property name="value" value="Seo"/>

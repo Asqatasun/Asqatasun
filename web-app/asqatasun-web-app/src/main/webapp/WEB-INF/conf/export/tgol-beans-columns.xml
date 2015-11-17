@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <!-- base column -->
-    <bean id="baseColumnBuilder" class="org.tanaguru.webapp.report.layout.column.builder.ElementColumnBuilderImpl">
+    <bean id="baseColumnBuilder" class="org.asqatasun.webapp.report.layout.column.builder.ElementColumnBuilderImpl">
         <property name="columnWidth" value="70"/>
         <property name="columnTitleBundleName" value="i18n/export-report-I18N"/>
         <property name="headerStyle" ref="headerStyle"/>

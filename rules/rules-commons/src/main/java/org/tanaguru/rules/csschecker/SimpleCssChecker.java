@@ -20,16 +20,16 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.csschecker;
+package org.asqatasun.rules.csschecker;
 
 import com.phloc.css.decl.CascadingStyleSheet;
 import com.phloc.css.decl.visit.CSSVisitor;
 import java.util.Collection;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.cssvisitor.SimpleCssVisitor;
-import org.tanaguru.service.NomenclatureLoaderService;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.cssvisitor.SimpleCssVisitor;
+import org.asqatasun.service.NomenclatureLoaderService;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * This abstract class checker deals with css checks. It uses a css visitor 

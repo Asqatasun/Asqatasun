@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler;
+package org.asqatasun.crawler;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

@@ -19,19 +19,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.reference;
+package org.asqatasun.entity.service.reference;
 
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.dao.reference.TestDAO;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Level;
-import org.tanaguru.entity.reference.Reference;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.dao.reference.TestDAO;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Level;
+import org.asqatasun.entity.reference.Reference;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 

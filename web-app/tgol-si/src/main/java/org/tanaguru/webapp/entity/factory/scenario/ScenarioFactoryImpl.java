@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.factory.scenario;
+package org.asqatasun.webapp.entity.factory.scenario;
 
-import org.tanaguru.webapp.entity.scenario.Scenario;
-import org.tanaguru.webapp.entity.scenario.ScenarioImpl;
+import org.asqatasun.webapp.entity.scenario.Scenario;
+import org.asqatasun.webapp.entity.scenario.ScenarioImpl;
 
 /**
  *

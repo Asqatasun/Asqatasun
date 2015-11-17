@@ -18,10 +18,10 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
-import org.tanaguru.rules.elementchecker.doctype.DoctypePositionChecker;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.doctype.DoctypePositionChecker;
 
 /**
  * Implementation of the rule 8.1.3 of the referential Accessiweb 2.2.

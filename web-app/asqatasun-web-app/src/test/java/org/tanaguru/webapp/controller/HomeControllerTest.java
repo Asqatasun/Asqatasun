@@ -19,25 +19,25 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.*;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.webapp.action.Action;
-import org.tanaguru.webapp.action.voter.ActionHandler;
-import org.tanaguru.webapp.command.helper.ContractSortCommandHelper;
-import org.tanaguru.webapp.entity.contract.Act;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.service.contract.ActDataService;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.form.builder.FormFieldBuilder;
-import org.tanaguru.webapp.presentation.factory.ContractInfoFactory;
-import org.tanaguru.webapp.presentation.factory.DetailedContractInfoFactory;
-import org.tanaguru.webapp.security.userdetails.TgolUserDetails;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.action.Action;
+import org.asqatasun.webapp.action.voter.ActionHandler;
+import org.asqatasun.webapp.command.helper.ContractSortCommandHelper;
+import org.asqatasun.webapp.entity.contract.Act;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.form.builder.FormFieldBuilder;
+import org.asqatasun.webapp.presentation.factory.ContractInfoFactory;
+import org.asqatasun.webapp.presentation.factory.DetailedContractInfoFactory;
+import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.security.authentication.AuthenticationDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

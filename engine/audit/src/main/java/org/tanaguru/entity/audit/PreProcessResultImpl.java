@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlTransient;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.subject.WebResourceImpl;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResourceImpl;
 
 /**
  * 
@@ -71,7 +71,7 @@ public class PreProcessResultImpl implements PreProcessResult, Serializable {
 
     @Override
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.subject.PageImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.subject.PageImpl.class)})
     public WebResource getSubject() {
         return subject;
     }

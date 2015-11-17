@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.sebuilder.interpreter.factory;
+package org.asqatasun.sebuilder.interpreter.factory;
 
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.TestRun;
@@ -32,9 +32,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.tanaguru.sebuilder.interpreter.NewPageListener;
-import org.tanaguru.sebuilder.interpreter.TgTestRun;
-import org.tanaguru.sebuilder.interpreter.webdriverfactory.FirefoxDriverFactory;
+import org.asqatasun.sebuilder.interpreter.NewPageListener;
+import org.asqatasun.sebuilder.interpreter.TgTestRun;
+import org.asqatasun.sebuilder.interpreter.webdriverfactory.FirefoxDriverFactory;
 
 /**
  *

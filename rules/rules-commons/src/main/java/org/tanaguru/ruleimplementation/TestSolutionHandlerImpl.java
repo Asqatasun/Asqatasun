@@ -19,11 +19,11 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import org.tanaguru.entity.audit.TestSolution;
+import org.asqatasun.entity.audit.TestSolution;
 
 /**
  * Default implementation of the {@link TestSolutionHandler} interface.

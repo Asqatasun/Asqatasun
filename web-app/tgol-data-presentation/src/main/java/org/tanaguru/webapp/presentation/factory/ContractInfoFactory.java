@@ -19,19 +19,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.factory;
+package org.asqatasun.webapp.presentation.factory;
 
 import java.util.Calendar;
 import java.util.Collection;
-import org.tanaguru.webapp.action.voter.ActionHandler;
-import org.tanaguru.webapp.entity.contract.Act;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.service.contract.ActDataService;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.presentation.data.AuditProgressionEnum;
-import org.tanaguru.webapp.presentation.data.ContractInfo;
-import org.tanaguru.webapp.presentation.data.ContractInfoImpl;
+import org.asqatasun.webapp.action.voter.ActionHandler;
+import org.asqatasun.webapp.entity.contract.Act;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.presentation.data.AuditProgressionEnum;
+import org.asqatasun.webapp.presentation.data.ContractInfo;
+import org.asqatasun.webapp.presentation.data.ContractInfoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

@@ -20,11 +20,11 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker;
+package org.asqatasun.rules.elementchecker;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.service.NomenclatureLoaderService;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.service.NomenclatureLoaderService;
 
 /**
  * This abstract enables to check elements regarding a nomenclature. The 

@@ -19,22 +19,22 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.contract;
+package org.asqatasun.webapp.entity.dao.contract;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.webapp.entity.dao.user.UserDAO;
-import org.tanaguru.webapp.entity.factory.contract.ContractFactory;
-import org.tanaguru.webapp.entity.functionality.Functionality;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.referential.Referential;
-import org.tanaguru.webapp.entity.scenario.Scenario;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.entity.service.contract.ContractDataServiceImpl;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.dao.test.AbstractDaoTestCase;
+import org.asqatasun.webapp.entity.dao.user.UserDAO;
+import org.asqatasun.webapp.entity.factory.contract.ContractFactory;
+import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.scenario.Scenario;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.entity.service.contract.ContractDataServiceImpl;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

@@ -17,10 +17,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 3.1.3 of the referential Accessiweb 2.2.
@@ -39,7 +39,7 @@ public class Aw22Rule03013Test extends Aw22RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.accessiweb22.Aw22Rule03013");
+                "org.asqatasun.rules.accessiweb22.Aw22Rule03013");
     }
 
     @Override

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.audit;
+package org.asqatasun.entity.dao.audit;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -30,11 +30,11 @@ import org.apache.http.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 

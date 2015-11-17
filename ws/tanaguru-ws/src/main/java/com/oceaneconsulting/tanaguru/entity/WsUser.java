@@ -1,6 +1,6 @@
 package com.oceaneconsulting.tanaguru.entity;
 
-import org.tanaguru.sdk.entity.Entity;
+import org.asqatasun.sdk.entity.Entity;
 
 import com.oceaneconsulting.tanaguru.entity.impl.WsRoleImpl;
 

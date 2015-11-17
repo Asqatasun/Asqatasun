@@ -19,11 +19,11 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.security.userdetails;
+package org.asqatasun.webapp.security.userdetails;
 
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 
 /**

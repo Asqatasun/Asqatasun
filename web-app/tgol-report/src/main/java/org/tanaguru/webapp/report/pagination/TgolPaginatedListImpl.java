@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.pagination;
+package org.asqatasun.webapp.report.pagination;
 
-import org.tanaguru.webapp.presentation.data.PageResult;
+import org.asqatasun.webapp.presentation.data.PageResult;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

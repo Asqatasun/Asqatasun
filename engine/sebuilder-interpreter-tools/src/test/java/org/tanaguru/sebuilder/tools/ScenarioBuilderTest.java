@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sebuilder.tools;
+package org.asqatasun.sebuilder.tools;
 
 import java.util.LinkedList;
 import java.util.List;

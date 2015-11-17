@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sebuilder.interpreter;
+package org.asqatasun.sebuilder.interpreter;
 
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.TestRun;
@@ -37,8 +37,8 @@ import org.apache.commons.logging.Log;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.tanaguru.sebuilder.interpreter.exception.TestRunException;
-import org.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
+import org.asqatasun.sebuilder.interpreter.exception.TestRunException;
+import org.asqatasun.sebuilder.tools.FirefoxDriverObjectPool;
 
 /**
  * A single run of a test getScript().

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.tanaguru</groupId>
+        <groupId>org.asqatasun</groupId>
         <artifactId>web-app</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
@@ -54,15 +54,15 @@
         <!-- asqatasun dependencies-->
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-engine</artifactId>
+            <artifactId>asqatasun-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.tanaguru</groupId>
-            <artifactId>tanaguru-jms</artifactId>
+            <groupId>org.asqatasun</groupId>
+            <artifactId>asqatasun-jms</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-resources</artifactId>
+            <artifactId>asqatasun-resources</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
@@ -108,19 +108,19 @@
         <!-- rules dependencies-->
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-accessiweb2.2</artifactId>
+            <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-rgaa2.2</artifactId>
+            <artifactId>asqatasun-rules-rgaa2.2</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-rgaa3.0</artifactId>
+            <artifactId>asqatasun-rules-rgaa3.0</artifactId>
         </dependency>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-seo</artifactId>
+            <artifactId>asqatasun-rules-seo1.0</artifactId>
             <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>

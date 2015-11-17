@@ -18,14 +18,14 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
-import org.tanaguru.rules.elementchecker.text.TextEndsWithChecker;
-import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.text.TextEndsWithChecker;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 10.13 of the referential RGAA 2.2.

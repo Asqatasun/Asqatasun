@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.csschecker;
+package org.asqatasun.rules.csschecker;
 
 import com.phloc.css.ECSSVersion;
 import com.phloc.css.decl.CascadingStyleSheet;
@@ -36,15 +36,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.contentadapter.css.CSSParserExceptionHandlerImpl;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.StylesheetContent;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.keystore.AttributeStore;
-import org.tanaguru.rules.keystore.EvidenceStore;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.contentadapter.css.CSSParserExceptionHandlerImpl;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.StylesheetContent;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.keystore.AttributeStore;
+import org.asqatasun.rules.keystore.EvidenceStore;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *

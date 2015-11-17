@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command;
+package org.asqatasun.webapp.command;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

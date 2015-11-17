@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.persistence.NoResultException;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.rules.domelement.DomElement;
-import org.tanaguru.rules.domelement.extractor.DomElementExtractor;
-import org.tanaguru.rules.elementchecker.ElementChecker;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.rules.domelement.DomElement;
+import org.asqatasun.rules.domelement.extractor.DomElementExtractor;
+import org.asqatasun.rules.elementchecker.ElementChecker;
 
 /**
  * <p>

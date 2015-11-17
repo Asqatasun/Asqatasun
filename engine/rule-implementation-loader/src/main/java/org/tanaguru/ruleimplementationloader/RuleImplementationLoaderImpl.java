@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementationloader;
+package org.asqatasun.ruleimplementationloader;
 
 import org.apache.log4j.Logger;
-import org.tanaguru.ruleimplementation.RuleImplementation;
+import org.asqatasun.ruleimplementation.RuleImplementation;
 
 /**
  * 

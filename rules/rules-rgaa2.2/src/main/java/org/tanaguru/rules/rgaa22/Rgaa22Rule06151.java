@@ -18,18 +18,18 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.ruleimplementation.link.AbstractAllLinkAggregateRuleImplementation;
-import org.tanaguru.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
-import org.tanaguru.rules.elementselector.AreaLinkElementSelector;
-import org.tanaguru.rules.elementselector.CompositeLinkElementSelector;
-import org.tanaguru.rules.elementselector.LinkElementSelector;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_BUTTON_WITH_SAME_TEXT_LEAD_TO_SAME_ACTION_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.ruleimplementation.link.AbstractAllLinkAggregateRuleImplementation;
+import org.asqatasun.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
+import org.asqatasun.rules.elementselector.AreaLinkElementSelector;
+import org.asqatasun.rules.elementselector.CompositeLinkElementSelector;
+import org.asqatasun.rules.elementselector.LinkElementSelector;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_BUTTON_WITH_SAME_TEXT_LEAD_TO_SAME_ACTION_MSG;
 
 /**
  * Implementation of the rule 6.15 of the referential RGAA 2.2.

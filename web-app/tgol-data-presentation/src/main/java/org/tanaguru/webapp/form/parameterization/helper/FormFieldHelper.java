@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.parameterization.helper;
+package org.asqatasun.webapp.form.parameterization.helper;
 
 import java.util.*;
 import org.apache.commons.collections.CollectionUtils;
-import org.tanaguru.webapp.form.*;
-import org.tanaguru.webapp.form.builder.FormFieldBuilder;
+import org.asqatasun.webapp.form.*;
+import org.asqatasun.webapp.form.builder.FormFieldBuilder;
 
 /**
  * 

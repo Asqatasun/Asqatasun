@@ -17,9 +17,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30.test;
+package org.asqatasun.rules.rgaa30.test;
 
-import org.tanaguru.rules.test.AbstractRuleImplementationTestCase;
+import org.asqatasun.rules.test.AbstractRuleImplementationTestCase;
 
 /**
  *

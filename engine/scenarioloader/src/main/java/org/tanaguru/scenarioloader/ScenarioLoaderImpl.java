@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.scenarioloader;
+package org.asqatasun.scenarioloader;
 
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.Step;
@@ -38,28 +38,28 @@ import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.tanaguru.contentloader.HarFileContentLoaderFactory;
-import org.tanaguru.crawler.util.CrawlUtils;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.audit.PreProcessResult;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.audit.PreProcessResultDataService;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.scenarioloader.exception.ScenarioLoaderException;
-import org.tanaguru.sebuilder.interpreter.NewPageListener;
-import org.tanaguru.sebuilder.interpreter.exception.TestRunException;
-import org.tanaguru.sebuilder.interpreter.factory.TgStepTypeFactory;
-import org.tanaguru.sebuilder.interpreter.factory.TgTestRunFactory;
-import org.tanaguru.sebuilder.tools.FirefoxDriverObjectPool;
-import org.tanaguru.sebuilder.tools.ProfileFactory;
-import org.tanaguru.util.factory.DateFactory;
+import org.asqatasun.contentloader.HarFileContentLoaderFactory;
+import org.asqatasun.crawler.util.CrawlUtils;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.PreProcessResult;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.audit.PreProcessResultDataService;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.scenarioloader.exception.ScenarioLoaderException;
+import org.asqatasun.sebuilder.interpreter.NewPageListener;
+import org.asqatasun.sebuilder.interpreter.exception.TestRunException;
+import org.asqatasun.sebuilder.interpreter.factory.TgStepTypeFactory;
+import org.asqatasun.sebuilder.interpreter.factory.TgTestRunFactory;
+import org.asqatasun.sebuilder.tools.FirefoxDriverObjectPool;
+import org.asqatasun.sebuilder.tools.ProfileFactory;
+import org.asqatasun.util.factory.DateFactory;
 
 /**
  *

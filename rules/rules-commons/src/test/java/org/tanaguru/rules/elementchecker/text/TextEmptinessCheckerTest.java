@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementchecker.text;
+package org.asqatasun.rules.elementchecker.text;
 
 import junit.framework.TestCase;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -28,11 +28,11 @@ import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *

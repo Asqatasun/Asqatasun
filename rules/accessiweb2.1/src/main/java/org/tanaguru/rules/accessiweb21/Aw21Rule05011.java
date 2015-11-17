@@ -17,8 +17,8 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21;
-import org.tanaguru.rules.accessiweb21.marker.AbstractPageRuleWithMarkerImplementation;
+package org.asqatasun.rules.accessiweb21;
+import org.asqatasun.rules.accessiweb21.marker.AbstractPageRuleWithMarkerImplementation;
 import org.w3c.dom.Node;
 
 /**

@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.audit;
+package org.asqatasun.entity.service.audit;
 
 import java.util.Collection;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.PreProcessResult;
-import org.tanaguru.entity.dao.audit.PreProcessResultDAO;
-import org.tanaguru.entity.factory.audit.PreProcessResultFactory;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.PreProcessResult;
+import org.asqatasun.entity.dao.audit.PreProcessResultDAO;
+import org.asqatasun.entity.factory.audit.PreProcessResultFactory;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 

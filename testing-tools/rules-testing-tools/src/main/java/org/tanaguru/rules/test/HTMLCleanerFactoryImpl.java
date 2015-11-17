@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.test;
+package org.asqatasun.rules.test;
 
-import org.tanaguru.contentadapter.HTMLCleaner;
-import org.tanaguru.contentadapter.HTMLCleanerFactory;
+import org.asqatasun.contentadapter.HTMLCleaner;
+import org.asqatasun.contentadapter.HTMLCleanerFactory;
 
 /**
  *

@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
-import org.tanaguru.webapp.command.CreateUserCommand;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.command.CreateUserCommand;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

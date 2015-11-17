@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.exception;
+package org.asqatasun.webapp.exception;
 
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;

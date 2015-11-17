@@ -17,24 +17,24 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleMarkupImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.HtmlElementStore.H1_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG;
-import org.tanaguru.rules.textbuilder.DeepTextElementBuilder;
-import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TITLE_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.IDENTICAL_H1_AND_TITLE_MSG;
+import org.asqatasun.rules.textbuilder.DeepTextElementBuilder;
+import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * Test whether the text content of the Title tag is different from the text

@@ -19,26 +19,26 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.audit;
+package org.asqatasun.entity.service.audit;
 
 import java.util.Collection;
 import java.util.List;
 
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.DefiniteResult;
-import org.tanaguru.entity.audit.IndefiniteResult;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.dao.audit.ProcessResultDAO;
-import org.tanaguru.entity.factory.audit.DefiniteResultFactory;
-import org.tanaguru.entity.factory.audit.IndefiniteResultFactory;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Scope;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.DefiniteResult;
+import org.asqatasun.entity.audit.IndefiniteResult;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.dao.audit.ProcessResultDAO;
+import org.asqatasun.entity.factory.audit.DefiniteResultFactory;
+import org.asqatasun.entity.factory.audit.IndefiniteResultFactory;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Scope;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

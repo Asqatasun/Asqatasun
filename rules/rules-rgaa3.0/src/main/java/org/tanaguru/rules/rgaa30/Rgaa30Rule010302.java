@@ -17,28 +17,28 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import java.util.Collections;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import static org.tanaguru.entity.audit.TestSolution.FAILED;
-import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
-import static org.tanaguru.entity.audit.TestSolution.PASSED;
-import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.tanaguru.rules.elementchecker.CompositeChecker;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.pertinence.AttributePertinenceChecker;
-import org.tanaguru.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
-import org.tanaguru.rules.elementselector.AreaElementSelector;
-import org.tanaguru.rules.elementselector.ImageElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
-import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import static org.asqatasun.entity.audit.TestSolution.FAILED;
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.entity.audit.TestSolution.PASSED;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.CompositeChecker;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.pertinence.AttributePertinenceChecker;
+import org.asqatasun.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
+import org.asqatasun.rules.elementselector.AreaElementSelector;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 1.3.2 of the referential Rgaa 3.0.

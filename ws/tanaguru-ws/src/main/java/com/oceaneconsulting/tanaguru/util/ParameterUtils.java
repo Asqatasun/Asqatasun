@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.apache.commons.lang3.StringUtils;
 
 import com.oceaneconsulting.tanaguru.ws.types.CommonOrder;

@@ -20,14 +20,14 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import org.jsoup.nodes.Element;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
 
 /**
  * Element selector implementation that uses multiple {@link SimpleElementSelector}

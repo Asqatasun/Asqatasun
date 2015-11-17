@@ -4,34 +4,34 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <non-jta-data-source>jdbc/tanaguru-TU</non-jta-data-source>
         
-        <class>org.tanaguru.entity.audit.AuditImpl</class>
-        <class>org.tanaguru.entity.reference.TestImpl</class>
-        <class>org.tanaguru.entity.reference.CriterionImpl</class>
-        <class>org.tanaguru.entity.reference.DecisionLevelImpl</class>
-        <class>org.tanaguru.entity.reference.LevelImpl</class>
-        <class>org.tanaguru.entity.reference.ScopeImpl</class>
-        <class>org.tanaguru.entity.reference.ReferenceImpl</class>
-        <class>org.tanaguru.entity.reference.ThemeImpl</class>
+        <class>org.asqatasun.entity.audit.AuditImpl</class>
+        <class>org.asqatasun.entity.reference.TestImpl</class>
+        <class>org.asqatasun.entity.reference.CriterionImpl</class>
+        <class>org.asqatasun.entity.reference.DecisionLevelImpl</class>
+        <class>org.asqatasun.entity.reference.LevelImpl</class>
+        <class>org.asqatasun.entity.reference.ScopeImpl</class>
+        <class>org.asqatasun.entity.reference.ReferenceImpl</class>
+        <class>org.asqatasun.entity.reference.ThemeImpl</class>
 
-        <class>org.tanaguru.entity.audit.ContentImpl</class>
-        <class>org.tanaguru.entity.audit.ProcessResultImpl</class>
-        <class>org.tanaguru.entity.audit.DefiniteResultImpl</class>
-        <class>org.tanaguru.entity.audit.IndefiniteResultImpl</class>
-        <class>org.tanaguru.entity.subject.WebResourceImpl</class>
-        <class>org.tanaguru.entity.subject.SiteImpl</class>
-        <class>org.tanaguru.entity.subject.PageImpl</class>
-        <class>org.tanaguru.entity.audit.ProcessRemarkImpl</class>
-        <class>org.tanaguru.entity.audit.EvidenceImpl</class>
-        <class>org.tanaguru.entity.audit.EvidenceElementImpl</class>
-        <class>org.tanaguru.entity.audit.SourceCodeRemarkImpl</class>
+        <class>org.asqatasun.entity.audit.ContentImpl</class>
+        <class>org.asqatasun.entity.audit.ProcessResultImpl</class>
+        <class>org.asqatasun.entity.audit.DefiniteResultImpl</class>
+        <class>org.asqatasun.entity.audit.IndefiniteResultImpl</class>
+        <class>org.asqatasun.entity.subject.WebResourceImpl</class>
+        <class>org.asqatasun.entity.subject.SiteImpl</class>
+        <class>org.asqatasun.entity.subject.PageImpl</class>
+        <class>org.asqatasun.entity.audit.ProcessRemarkImpl</class>
+        <class>org.asqatasun.entity.audit.EvidenceImpl</class>
+        <class>org.asqatasun.entity.audit.EvidenceElementImpl</class>
+        <class>org.asqatasun.entity.audit.SourceCodeRemarkImpl</class>
 
-        <class>org.tanaguru.entity.reference.NomenclatureCssUnitImpl</class>
-        <class>org.tanaguru.entity.reference.NomenclatureElementImpl</class>
-        <class>org.tanaguru.entity.reference.NomenclatureImpl</class>
+        <class>org.asqatasun.entity.reference.NomenclatureCssUnitImpl</class>
+        <class>org.asqatasun.entity.reference.NomenclatureElementImpl</class>
+        <class>org.asqatasun.entity.reference.NomenclatureImpl</class>
 
-        <class>org.tanaguru.entity.parameterization.ParameterImpl</class>
-        <class>org.tanaguru.entity.parameterization.ParameterFamilyImpl</class>
-        <class>org.tanaguru.entity.parameterization.ParameterElementImpl</class>
+        <class>org.asqatasun.entity.parameterization.ParameterImpl</class>
+        <class>org.asqatasun.entity.parameterization.ParameterFamilyImpl</class>
+        <class>org.asqatasun.entity.parameterization.ParameterElementImpl</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>

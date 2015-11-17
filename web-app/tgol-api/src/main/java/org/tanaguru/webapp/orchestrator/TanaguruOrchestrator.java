@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.orchestrator;
+package org.asqatasun.webapp.orchestrator;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.webapp.entity.contract.Contract;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.webapp.entity.contract.Contract;
 
 /**
  *

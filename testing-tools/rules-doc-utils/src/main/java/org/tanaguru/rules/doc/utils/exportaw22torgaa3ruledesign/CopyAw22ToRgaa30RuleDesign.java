@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.doc.utils.exportaw22torgaa3ruledesign;
+package org.asqatasun.rules.doc.utils.exportaw22torgaa3ruledesign;
 
 import java.io.IOException;
 import java.util.logging.Level;

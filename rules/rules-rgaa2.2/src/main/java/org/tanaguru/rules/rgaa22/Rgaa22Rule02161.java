@@ -18,10 +18,10 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
-import org.tanaguru.rules.elementchecker.contrast.ContrastChecker;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
 
 /**
  * Implementation of the rule 2.16 of the referential RGAA 2.2.

@@ -10,16 +10,16 @@
  * reproduced  in  any  form  by  any  mean  without   prior  written
  * authorization of OPEN-S.
  */
-package org.tanaguru.rules.accessiweb21.detection;
+package org.asqatasun.rules.accessiweb21.detection;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import org.tanaguru.entity.audit.DefiniteResult;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
+import org.asqatasun.entity.audit.DefiniteResult;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleImplementation;
 import org.w3c.dom.Node;
 
 /**

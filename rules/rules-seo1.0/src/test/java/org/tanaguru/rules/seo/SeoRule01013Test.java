@@ -17,14 +17,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import java.util.Iterator;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.keystore.AttributeStore;
-import org.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.keystore.AttributeStore;
+import org.asqatasun.rules.seo.test.SeoRuleImplementationTestCase;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 
 /**
@@ -40,7 +40,7 @@ public class SeoRule01013Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName("org.tanaguru.rules.seo.SeoRule01013");
+        setRuleImplementationClassName("org.asqatasun.rules.seo.SeoRule01013");
     }
 
     @Override

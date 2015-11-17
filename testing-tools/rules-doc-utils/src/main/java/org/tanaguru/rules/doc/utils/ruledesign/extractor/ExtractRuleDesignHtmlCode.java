@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.doc.utils.ruledesign.extractor;
+package org.asqatasun.rules.doc.utils.ruledesign.extractor;
 
 import java.io.File;
 import java.io.IOException;

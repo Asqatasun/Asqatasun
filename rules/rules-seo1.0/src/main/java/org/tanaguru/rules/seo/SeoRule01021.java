@@ -17,15 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
-import org.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.CONTENT_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.META_DESC_NOT_UNIQUE_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.CONTENT_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.META_DESC_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.META_DESC_IDENTICAL_TO_ANOTHER_PAGE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.META_DESC_NOT_UNIQUE_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * For each page of a site or a group of pages, is the meta description tag

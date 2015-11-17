@@ -19,17 +19,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.js;
+package org.asqatasun.contentadapter.js;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.tanaguru.contentadapter.ContentParser;
-import org.tanaguru.contentadapter.Resource;
-import org.tanaguru.contentadapter.util.*;
-import org.tanaguru.contentloader.Downloader;
-import org.tanaguru.entity.service.audit.ContentDataService;
+import org.asqatasun.contentadapter.ContentParser;
+import org.asqatasun.contentadapter.Resource;
+import org.asqatasun.contentadapter.util.*;
+import org.asqatasun.contentloader.Downloader;
+import org.asqatasun.entity.service.audit.ContentDataService;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;

@@ -19,30 +19,30 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.service.reference.CriterionDataService;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.webapp.command.AuditResultSortCommand;
-import org.tanaguru.webapp.entity.contract.Act;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.presentation.factory.TestResultFactory;
-import org.tanaguru.webapp.presentation.highlighter.HtmlHighlighter;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.service.reference.CriterionDataService;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.command.AuditResultSortCommand;
+import org.asqatasun.webapp.entity.contract.Act;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.presentation.factory.TestResultFactory;
+import org.asqatasun.webapp.presentation.highlighter.HtmlHighlighter;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

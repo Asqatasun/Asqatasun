@@ -19,18 +19,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.tanaguru.webapp.command.AuditSetUpCommand;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.form.parameterization.AuditSetUpFormField;
-import org.tanaguru.webapp.util.TgolKeyStore;
-import org.tanaguru.webapp.validator.AuditSetUpFormValidator;
+import org.asqatasun.webapp.command.AuditSetUpCommand;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.validator.AuditSetUpFormValidator;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

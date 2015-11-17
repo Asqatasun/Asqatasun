@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tanaguru.crawler.framework;
+package org.asqatasun.crawler.framework;
 
 import java.util.List;
 import org.apache.log4j.Logger;

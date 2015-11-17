@@ -17,11 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rulescreationdemo;
+package org.asqatasun.rules.rulescreationdemo;
 
-import org.tanaguru.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.asqatasun.ruleimplementation.AbstractUniqueElementSiteRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
  * Implementation of the rule CheckTitleContentUnicityAtSiteLevel of the referential Rules creation demo.

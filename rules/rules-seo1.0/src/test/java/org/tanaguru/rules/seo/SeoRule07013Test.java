@@ -17,19 +17,19 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.SourceCodeRemark;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.seo.test.SeoRuleImplementationTestCase;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SourceCodeRemark;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.seo.test.SeoRuleImplementationTestCase;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *
@@ -44,7 +44,7 @@ public class SeoRule07013Test extends SeoRuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.seo.SeoRule07013");
+                "org.asqatasun.rules.seo.SeoRule07013");
     }
 
     @Override

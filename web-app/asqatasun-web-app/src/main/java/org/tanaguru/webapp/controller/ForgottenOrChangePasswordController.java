@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -28,19 +28,19 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.emailsender.EmailSender;
-import org.tanaguru.security.tokenmanagement.TokenManager;
-import org.tanaguru.util.MD5Encoder;
-import org.tanaguru.webapp.command.ChangePasswordCommand;
-import org.tanaguru.webapp.command.ForgottenPasswordCommand;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.presentation.menu.SecondaryLevelMenuDisplayer;
-import org.tanaguru.webapp.util.TgolKeyStore;
-import org.tanaguru.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
-import org.tanaguru.webapp.validator.ChangePasswordFormValidator;
-import org.tanaguru.webapp.validator.ForgottenPasswordFormValidator;
+import org.asqatasun.emailsender.EmailSender;
+import org.asqatasun.security.tokenmanagement.TokenManager;
+import org.asqatasun.util.MD5Encoder;
+import org.asqatasun.webapp.command.ChangePasswordCommand;
+import org.asqatasun.webapp.command.ForgottenPasswordCommand;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.presentation.menu.SecondaryLevelMenuDisplayer;
+import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
+import org.asqatasun.webapp.validator.ChangePasswordFormValidator;
+import org.asqatasun.webapp.validator.ForgottenPasswordFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

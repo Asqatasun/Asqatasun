@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.scenarioloader;
+package org.asqatasun.scenarioloader;
 
 import java.io.*;
 import java.net.URI;
@@ -31,13 +31,13 @@ import junit.framework.TestCase;
 import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import org.apache.http.HttpStatus;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.sebuilder.tools.ProfileFactory;
-import org.tanaguru.util.factory.DateFactory;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.sebuilder.tools.ProfileFactory;
+import org.asqatasun.util.factory.DateFactory;
 
 /**
  *
@@ -68,9 +68,9 @@ public class ScenarioLoaderImplTest extends TestCase {
         ProfileFactory.getInstance().setNetExportPath("/tmp/");
         
 //        List<String> extensionList = new ArrayList<>();
-//        extensionList.add("../tanaguru-resources/src/main/resources/firefox/extensions/firebug@software.joehewitt.com.xpi");
-//        extensionList.add("../tanaguru-resources/src/main/resources/firefox/extensions/firestarter@getfirebug.com.xpi");
-//        extensionList.add("../tanaguru-resources/src/main/resources/firefox/extensions/netexport@getfirebug.com.xpi");
+//        extensionList.add("../asqatasun-resources/src/main/resources/firefox/extensions/firebug@software.joehewitt.com.xpi");
+//        extensionList.add("../asqatasun-resources/src/main/resources/firefox/extensions/firestarter@getfirebug.com.xpi");
+//        extensionList.add("../asqatasun-resources/src/main/resources/firefox/extensions/netexport@getfirebug.com.xpi");
 //        ProfileFactory.getInstance().setExtensionPathList(extensionList);
 //        ProfileFactory.getInstance().setFirebugVersion("1.9.2");
         ProfileFactory.getInstance().setDeleteProfileData(true);

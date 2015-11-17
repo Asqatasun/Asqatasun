@@ -19,18 +19,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.reference;
+package org.asqatasun.entity.dao.reference;
 
 import java.util.HashMap;
 import java.util.Map;
 import static junit.framework.Assert.assertEquals;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditImpl;
-import org.tanaguru.entity.audit.AuditStatus;
-import org.tanaguru.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.entity.reference.Level;
-import org.tanaguru.entity.reference.Reference;
-import org.tanaguru.entity.reference.Test;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditImpl;
+import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.dao.test.AbstractDaoTestCase;
+import org.asqatasun.entity.reference.Level;
+import org.asqatasun.entity.reference.Reference;
+import org.asqatasun.entity.reference.Test;
 
 /**
  *

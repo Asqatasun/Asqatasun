@@ -18,15 +18,15 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
-import org.tanaguru.rules.elementchecker.text.TextEndsWithChecker;
-import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.text.TextEndsWithChecker;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 13.6.1 of the referential Accessiweb 2.2.

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -28,8 +28,8 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.PageImpl;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.PageImpl;
 
 /**
  * 
@@ -105,7 +105,7 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
         return dom;
     }
 
-    @XmlElementRef(type = org.tanaguru.entity.subject.PageImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.subject.PageImpl.class)
     @Override
     @XmlTransient
     public Page getPage() {
@@ -134,8 +134,8 @@ public class SSPImpl extends ContentImpl implements SSP, Serializable {
 
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.JavascriptContentImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.audit.StylesheetContentImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.JavascriptContentImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.audit.StylesheetContentImpl.class)})
 //    @XmlTransient
     @Override
     public Collection<RelatedContent> getRelatedContentSet() {

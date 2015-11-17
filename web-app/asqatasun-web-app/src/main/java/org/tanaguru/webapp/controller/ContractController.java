@@ -1,4 +1,4 @@
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 /*
  * Asqatasun - Automated webpage assessment
@@ -27,11 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.functionality.Functionality;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

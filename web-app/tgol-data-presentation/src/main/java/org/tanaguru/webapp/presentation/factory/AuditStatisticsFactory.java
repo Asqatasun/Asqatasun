@@ -19,30 +19,30 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.factory;
+package org.asqatasun.webapp.presentation.factory;
 
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.entity.service.reference.ThemeDataService;
-import org.tanaguru.entity.service.statistics.CriterionStatisticsDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.statistics.CriterionStatistics;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.webapp.entity.service.contract.ActDataService;
-import org.tanaguru.webapp.presentation.data.AuditStatistics;
-import org.tanaguru.webapp.presentation.data.AuditStatisticsImpl;
-import org.tanaguru.webapp.presentation.data.ResultCounter;
-import org.tanaguru.webapp.entity.service.statistics.StatisticsDataService;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.service.reference.ThemeDataService;
+import org.asqatasun.entity.service.statistics.CriterionStatisticsDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.statistics.CriterionStatistics;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.webapp.presentation.data.AuditStatistics;
+import org.asqatasun.webapp.presentation.data.AuditStatisticsImpl;
+import org.asqatasun.webapp.presentation.data.ResultCounter;
+import org.asqatasun.webapp.entity.service.statistics.StatisticsDataService;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

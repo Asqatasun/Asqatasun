@@ -17,14 +17,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import java.util.Iterator;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.keystore.AttributeStore;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.keystore.AttributeStore;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 6.2 of the referential RGAA 2.2.
@@ -43,7 +43,7 @@ public class Rgaa22Rule06021Test extends Rgaa22RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa22.Rgaa22Rule06021");
+                "org.asqatasun.rules.rgaa22.Rgaa22Rule06021");
     }
 
     @Override

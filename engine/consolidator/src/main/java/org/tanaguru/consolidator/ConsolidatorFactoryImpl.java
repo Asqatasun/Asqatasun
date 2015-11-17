@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.consolidator;
+package org.asqatasun.consolidator;
 
 import java.util.Collection;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.ruleimplementation.RuleImplementation;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.ruleimplementation.RuleImplementation;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * Based on the design pattern factory, create instances of ConsolidatorFactory

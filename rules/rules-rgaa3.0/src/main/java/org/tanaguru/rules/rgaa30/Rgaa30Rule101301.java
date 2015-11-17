@@ -18,18 +18,18 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import java.util.Collection;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
-import org.tanaguru.rules.domelement.DomElement;
-import org.tanaguru.rules.domelement.extractor.DomElementExtractor;
-import org.tanaguru.rules.elementchecker.element.ElementPresenceChecker;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.HIDDEN_TEXT_DETECTED_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
+import org.asqatasun.rules.domelement.DomElement;
+import org.asqatasun.rules.domelement.extractor.DomElementExtractor;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.HIDDEN_TEXT_DETECTED_MSG;
 
 /**
  * Implementation of the rule 10.13.1 of the referential Rgaa 3.0.

@@ -17,20 +17,20 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.*;
-import static org.tanaguru.entity.audit.TestSolution.NEED_MORE_INFO;
-import static org.tanaguru.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
-import static org.tanaguru.rules.keystore.AttributeStore.ALT_ATTR;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.HtmlElementStore.AREA_ELEMENT;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG;
+import org.asqatasun.entity.audit.*;
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.HtmlElementStore.AREA_ELEMENT;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG;
 
 /**
  * Unit test class for the implementation of the rule 1-3-2 of the referential Rgaa 3.0.
@@ -49,7 +49,7 @@ public class Rgaa30Rule010302Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName("org.tanaguru.rules.rgaa30.Rgaa30Rule010302");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa30.Rgaa30Rule010302");
     }
 
     @Override

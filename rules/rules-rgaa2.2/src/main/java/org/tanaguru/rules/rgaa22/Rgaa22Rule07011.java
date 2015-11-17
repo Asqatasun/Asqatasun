@@ -18,14 +18,14 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import java.util.Arrays;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractPageRuleCssImplementation;
-import org.tanaguru.rules.csschecker.CssPropertyPresenceChecker;
-import org.tanaguru.rules.keystore.AttributeStore;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CONTENT_CSS_PROPERTY_DETECTED_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleCssImplementation;
+import org.asqatasun.rules.csschecker.CssPropertyPresenceChecker;
+import org.asqatasun.rules.keystore.AttributeStore;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CONTENT_CSS_PROPERTY_DETECTED_MSG;
 
 /**
  * Implementation of the rule 7.1 of the referential RGAA 2.2.

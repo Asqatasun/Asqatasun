@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.layout.column.builder;
+package org.asqatasun.webapp.report.layout.column.builder;
 
 import ar.com.fdvs.dj.domain.CustomExpression;
 import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionalStyle;
-import org.tanaguru.webapp.report.expression.builder.AbstractGenericConditionalStyleBuilder;
-import org.tanaguru.webapp.report.expression.builder.AbstractGenericCustomExpressionBuilder;
+import org.asqatasun.webapp.report.expression.builder.AbstractGenericConditionalStyleBuilder;
+import org.asqatasun.webapp.report.expression.builder.AbstractGenericCustomExpressionBuilder;
 import java.util.List;
 import java.util.Locale;
 

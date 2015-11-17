@@ -17,17 +17,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.commons.lang.StringUtils;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleImplementation;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleImplementation;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * The URL of the page contains parameters, Rewrite Rules should be implemented.

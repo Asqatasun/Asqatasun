@@ -19,20 +19,20 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementchecker.headings;
+package org.asqatasun.rules.elementchecker.headings;
 
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.ElementCheckerImpl;
-import static org.tanaguru.rules.keystore.EvidenceStore.FIRST_H_TAG_INDEX_EE;
-import static org.tanaguru.rules.keystore.EvidenceStore.PREVIOUS_H_TAG_INDEX_EE;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementCheckerImpl;
+import static org.asqatasun.rules.keystore.EvidenceStore.FIRST_H_TAG_INDEX_EE;
+import static org.asqatasun.rules.keystore.EvidenceStore.PREVIOUS_H_TAG_INDEX_EE;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.HEADER_NOT_HIERARCHICALLY_WELL_DEFINED_MSG;
 
 /**
  * This class checks whether the headings hierarchy is well-formed.

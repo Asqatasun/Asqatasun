@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.css;
+package org.asqatasun.contentadapter.css;
 
 import com.phloc.commons.charset.CCharset;
 import com.phloc.commons.io.streamprovider.ByteArrayInputStreamProvider;
@@ -48,17 +48,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.exception.DataException;
 import org.jsoup.nodes.Element;
-import org.tanaguru.contentadapter.ContentParser;
-import org.tanaguru.contentadapter.Resource;
-import org.tanaguru.contentadapter.js.AbstractContentAdapter;
-import org.tanaguru.contentadapter.util.ExternalRsrc;
-import org.tanaguru.contentadapter.util.InlineRsrc;
-import org.tanaguru.contentadapter.util.LocalRsrc;
-import org.tanaguru.contentadapter.util.URLIdentifier;
-import org.tanaguru.contentloader.Downloader;
-import org.tanaguru.entity.audit.StylesheetContent;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.util.http.HttpRequestHandler;
+import org.asqatasun.contentadapter.ContentParser;
+import org.asqatasun.contentadapter.Resource;
+import org.asqatasun.contentadapter.js.AbstractContentAdapter;
+import org.asqatasun.contentadapter.util.ExternalRsrc;
+import org.asqatasun.contentadapter.util.InlineRsrc;
+import org.asqatasun.contentadapter.util.LocalRsrc;
+import org.asqatasun.contentadapter.util.URLIdentifier;
+import org.asqatasun.contentloader.Downloader;
+import org.asqatasun.entity.audit.StylesheetContent;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.util.http.HttpRequestHandler;
 
 /**
  * External resources are adapted on the fly, and inline and local css are

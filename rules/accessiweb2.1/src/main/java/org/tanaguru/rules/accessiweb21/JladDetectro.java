@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.tanaguru.rules.accessiweb21;
+package org.asqatasun.rules.accessiweb21;
 
 /**
  *

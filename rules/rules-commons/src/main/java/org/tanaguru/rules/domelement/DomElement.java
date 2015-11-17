@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.domelement;
+package org.asqatasun.rules.domelement;
 
 import java.util.HashMap;
 import java.util.Map;

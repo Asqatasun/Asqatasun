@@ -19,7 +19,7 @@
  */
 package $package.$referentiel.toLowerCase();
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule $ruleCode of the referential $referentielName.

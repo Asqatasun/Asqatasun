@@ -20,12 +20,12 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITH_CHILDREN_CSS_LIKE_QUERY;
-import org.tanaguru.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITH_CHILDREN_CSS_LIKE_QUERY;
+import org.asqatasun.rules.keystore.HtmlElementStore;
 
 /**
  * Element selector implementation that select svg links. 

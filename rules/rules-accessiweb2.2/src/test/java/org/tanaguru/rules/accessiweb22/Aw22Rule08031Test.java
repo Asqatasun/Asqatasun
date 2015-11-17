@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  *
@@ -37,7 +37,7 @@ public class Aw22Rule08031Test extends Aw22RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName( "org.tanaguru.rules.accessiweb22.Aw22Rule08031");
+        setRuleImplementationClassName( "org.asqatasun.rules.accessiweb22.Aw22Rule08031");
     }
 
     @Override

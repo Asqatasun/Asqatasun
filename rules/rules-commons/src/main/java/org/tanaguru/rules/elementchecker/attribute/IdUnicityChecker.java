@@ -20,17 +20,17 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.attribute;
+package org.asqatasun.rules.elementchecker.attribute;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.ElementCheckerImpl;
-import org.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
-import static org.tanaguru.rules.keystore.AttributeStore.ID_ATTR;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementCheckerImpl;
+import org.asqatasun.rules.elementselector.builder.CssLikeSelectorBuilder;
+import static org.asqatasun.rules.keystore.AttributeStore.ID_ATTR;
 
 /**
  * This checker controls the unicity of the id attribute for a set of elements.

@@ -20,11 +20,11 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.webapp.security.userdetails;
+package org.asqatasun.webapp.security.userdetails;
 
 import java.util.List;
-import org.tanaguru.webapp.entity.service.user.UserDataService;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.webapp.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -19,28 +19,28 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.statistics;
+package org.asqatasun.webapp.entity.dao.statistics;
 
 import java.math.BigInteger;
 import java.util.*;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.displaytag.properties.SortOrderEnum;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.statistics.*;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.webapp.presentation.data.FailedPageInfo;
-import org.tanaguru.webapp.presentation.data.FailedTestInfo;
-import org.tanaguru.webapp.presentation.data.FailedThemeInfo;
-import org.tanaguru.webapp.presentation.data.PageResult;
-import org.tanaguru.webapp.presentation.factory.FailedPageInfoFactory;
-import org.tanaguru.webapp.presentation.factory.FailedTestInfoFactory;
-import org.tanaguru.webapp.presentation.factory.FailedThemeInfoFactory;
-import org.tanaguru.webapp.presentation.factory.PageResultFactory;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.statistics.*;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.webapp.presentation.data.FailedPageInfo;
+import org.asqatasun.webapp.presentation.data.FailedTestInfo;
+import org.asqatasun.webapp.presentation.data.FailedThemeInfo;
+import org.asqatasun.webapp.presentation.data.PageResult;
+import org.asqatasun.webapp.presentation.factory.FailedPageInfoFactory;
+import org.asqatasun.webapp.presentation.factory.FailedTestInfoFactory;
+import org.asqatasun.webapp.presentation.factory.FailedThemeInfoFactory;
+import org.asqatasun.webapp.presentation.factory.PageResultFactory;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 
 /**
  *

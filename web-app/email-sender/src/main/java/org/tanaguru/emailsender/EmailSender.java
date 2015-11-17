@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.emailsender;
+package org.asqatasun.emailsender;
 
 import java.io.IOException;
 import java.util.Properties;

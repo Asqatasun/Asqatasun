@@ -41,7 +41,7 @@ public abstract class AbstactAuditWebServiceTest extends JerseyTest {
 //
 //		try {
 //			jersyTest = new JerseyTest(new WebAppDescriptor.Builder(
-//					"org.tanaguru.ws.impl")
+//					"org.asqatasun.ws.impl")
 //					.contextPath("tanaguru-ws")
 //					.contextParam("contextConfigLocation",
 //							"classpath:beans-ws.xml")

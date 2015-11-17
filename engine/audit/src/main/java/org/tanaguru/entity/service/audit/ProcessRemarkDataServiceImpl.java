@@ -19,17 +19,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.audit;
+package org.asqatasun.entity.service.audit;
 
 import java.util.Collection;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.SourceCodeRemark;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.dao.audit.ProcessRemarkDAO;
-import org.tanaguru.entity.factory.audit.ProcessRemarkFactory;
-import org.tanaguru.entity.factory.audit.SourceCodeRemarkFactory;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SourceCodeRemark;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.dao.audit.ProcessRemarkDAO;
+import org.asqatasun.entity.factory.audit.ProcessRemarkFactory;
+import org.asqatasun.entity.factory.audit.SourceCodeRemarkFactory;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

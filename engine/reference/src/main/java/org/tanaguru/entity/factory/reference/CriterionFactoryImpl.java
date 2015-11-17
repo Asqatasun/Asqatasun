@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.factory.reference;
+package org.asqatasun.entity.factory.reference;
 
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.CriterionImpl;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.CriterionImpl;
 
 /**
  * 

@@ -20,22 +20,22 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
-import org.tanaguru.rules.keystore.CssLikeQueryStore;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.TEXT_LINK_CSS_LIKE_QUERY;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.textbuilder.LinkTextElementBuilder;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
+import org.asqatasun.rules.keystore.CssLikeQueryStore;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TEXT_LINK_CSS_LIKE_QUERY;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
 import org.springframework.util.CollectionUtils;
 
 /**

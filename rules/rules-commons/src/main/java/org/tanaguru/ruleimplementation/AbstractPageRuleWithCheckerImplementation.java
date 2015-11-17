@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import javax.annotation.Nonnull;
-import org.tanaguru.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.ElementChecker;
 
 /**
  * <p>

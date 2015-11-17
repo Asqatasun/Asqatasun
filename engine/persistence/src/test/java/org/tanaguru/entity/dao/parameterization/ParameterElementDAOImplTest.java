@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.parameterization;
+package org.asqatasun.entity.dao.parameterization;
 
-import org.tanaguru.entity.dao.test.AbstractDaoTestCase;
+import org.asqatasun.entity.dao.test.AbstractDaoTestCase;
 
 /**
  *

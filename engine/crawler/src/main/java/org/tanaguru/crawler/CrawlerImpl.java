@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler;
+package org.asqatasun.crawler;
 
 import java.io.IOException;
 import java.net.URI;
@@ -34,15 +34,15 @@ import org.archive.modules.CrawlURI;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.tanaguru.crawler.framework.TanaguruCrawlJob;
-import org.tanaguru.crawler.util.CrawlUtils;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.crawler.framework.TanaguruCrawlJob;
+import org.asqatasun.crawler.util.CrawlUtils;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
 
 /**
  * 

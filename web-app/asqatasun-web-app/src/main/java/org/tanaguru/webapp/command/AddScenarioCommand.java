@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command;
+package org.asqatasun.webapp.command;
 
 import java.io.IOException;
 import java.io.Serializable;
-import org.tanaguru.crawler.util.CrawlUtils;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.crawler.util.CrawlUtils;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**

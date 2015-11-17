@@ -20,22 +20,22 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.link;
+package org.asqatasun.rules.elementchecker.link;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.elementchecker.CompositeChecker;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
-import org.tanaguru.rules.elementchecker.text.TextEmptinessChecker;
-import org.tanaguru.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
-import org.tanaguru.rules.elementchecker.text.TextOnlyContainsNonAlphanumericalCharactersChecker;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.textbuilder.LinkTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.elementchecker.CompositeChecker;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.text.TextBelongsToBlackListChecker;
+import org.asqatasun.rules.elementchecker.text.TextEmptinessChecker;
+import org.asqatasun.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
+import org.asqatasun.rules.elementchecker.text.TextOnlyContainsNonAlphanumericalCharactersChecker;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * This class checks whether the title of a link is pertinent by verifying :

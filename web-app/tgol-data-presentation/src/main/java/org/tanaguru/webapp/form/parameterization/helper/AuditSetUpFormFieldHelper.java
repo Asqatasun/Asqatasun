@@ -19,18 +19,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.parameterization.helper;
+package org.asqatasun.webapp.form.parameterization.helper;
 
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.reference.Reference;
-import org.tanaguru.entity.service.reference.ReferenceDataService;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.form.NumericalFormField;
-import org.tanaguru.webapp.form.SelectElement;
-import org.tanaguru.webapp.form.SelectFormField;
-import org.tanaguru.webapp.form.TextualFormField;
-import org.tanaguru.webapp.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.entity.reference.Reference;
+import org.asqatasun.entity.service.reference.ReferenceDataService;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.form.NumericalFormField;
+import org.asqatasun.webapp.form.SelectElement;
+import org.asqatasun.webapp.form.SelectFormField;
+import org.asqatasun.webapp.form.TextualFormField;
+import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
 
 /**
  * That class handles utility methods (activation/desactivation, restriction application)

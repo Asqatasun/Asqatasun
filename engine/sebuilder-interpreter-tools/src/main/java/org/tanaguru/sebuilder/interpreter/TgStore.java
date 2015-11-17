@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sebuilder.interpreter;
+package org.asqatasun.sebuilder.interpreter;
 
 import com.sebuilder.interpreter.Getter;
 import com.sebuilder.interpreter.Store;

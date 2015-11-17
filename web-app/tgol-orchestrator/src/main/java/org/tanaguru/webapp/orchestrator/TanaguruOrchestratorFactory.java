@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.orchestrator;
+package org.asqatasun.webapp.orchestrator;
 
-import org.tanaguru.emailsender.EmailSender;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.service.AuditService;
-import org.tanaguru.webapp.entity.factory.contract.ActFactory;
-import org.tanaguru.webapp.entity.service.contract.ActDataService;
-import org.tanaguru.webapp.entity.service.contract.ScopeDataService;
-import org.tanaguru.webapp.entity.service.scenario.ScenarioDataService;
+import org.asqatasun.emailsender.EmailSender;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.service.AuditService;
+import org.asqatasun.webapp.entity.factory.contract.ActFactory;
+import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.webapp.entity.service.contract.ScopeDataService;
+import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**

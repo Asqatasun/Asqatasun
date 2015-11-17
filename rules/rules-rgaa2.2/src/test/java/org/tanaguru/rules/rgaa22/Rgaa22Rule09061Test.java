@@ -17,16 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
-import org.tanaguru.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.rgaa22.test.Rgaa22RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 9.6 of the referential RGAA 2.2.
@@ -45,7 +45,7 @@ public class Rgaa22Rule09061Test extends Rgaa22RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa22.Rgaa22Rule09061");
+                "org.asqatasun.rules.rgaa22.Rgaa22Rule09061");
     }
 
     @Override

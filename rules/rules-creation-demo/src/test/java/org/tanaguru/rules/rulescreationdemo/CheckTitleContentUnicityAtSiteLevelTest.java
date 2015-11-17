@@ -17,17 +17,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rulescreationdemo;
+package org.asqatasun.rules.rulescreationdemo;
 
 import java.util.Collection;
 import java.util.List;
 import static junit.framework.Assert.assertEquals;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.rules.test.AbstractSiteRuleWithPageResultImplementationTestCase;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.rules.test.AbstractSiteRuleWithPageResultImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 
@@ -51,7 +51,7 @@ public class CheckTitleContentUnicityAtSiteLevelTest extends AbstractSiteRuleWit
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rulescreationdemo.CheckTitleContentUnicityAtSiteLevel");
+                "org.asqatasun.rules.rulescreationdemo.CheckTitleContentUnicityAtSiteLevel");
     }
 
     @Override

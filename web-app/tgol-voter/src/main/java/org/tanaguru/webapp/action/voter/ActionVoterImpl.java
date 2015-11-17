@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.action.voter;
+package org.asqatasun.webapp.action.voter;
 
-import org.tanaguru.webapp.action.Action;
+import org.asqatasun.webapp.action.Action;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

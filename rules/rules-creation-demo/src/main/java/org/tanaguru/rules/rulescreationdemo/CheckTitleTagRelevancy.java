@@ -17,13 +17,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rulescreationdemo;
+package org.asqatasun.rules.rulescreationdemo;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.text.TextBelongsToBlackListChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import org.tanaguru.rules.textbuilder.SimpleTextElementBuilder;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.text.TextBelongsToBlackListChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
 
 /**
  * Implementation of the rule CheckTitleTagRelevancy of the referential Rules creation demo.

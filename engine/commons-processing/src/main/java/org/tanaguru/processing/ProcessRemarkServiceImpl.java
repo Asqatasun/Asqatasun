@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processing;
+package org.asqatasun.processing;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,11 +34,11 @@ import org.apache.log4j.Logger;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.entity.service.audit.EvidenceDataService;
-import org.tanaguru.entity.service.audit.EvidenceElementDataService;
-import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.entity.service.audit.EvidenceDataService;
+import org.asqatasun.entity.service.audit.EvidenceElementDataService;
+import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
+import org.asqatasun.service.ProcessRemarkService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

@@ -19,20 +19,20 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processor;
+package org.asqatasun.processor;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import org.tanaguru.contentadapter.RsrcLocator;
-import org.tanaguru.contentadapter.js.JSResource;
-import org.tanaguru.entity.audit.JavascriptContent;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.RelatedContent;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
+import org.asqatasun.contentadapter.RsrcLocator;
+import org.asqatasun.contentadapter.js.JSResource;
+import org.asqatasun.entity.audit.JavascriptContent;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.RelatedContent;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
 
 /**
  * 

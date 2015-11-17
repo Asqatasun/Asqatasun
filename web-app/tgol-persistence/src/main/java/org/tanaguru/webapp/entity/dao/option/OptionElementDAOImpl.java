@@ -19,18 +19,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.option;
+package org.asqatasun.webapp.entity.dao.option;
 
 import java.util.Collection;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.webapp.entity.option.Option;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.option.OptionElementImpl;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.entity.user.UserImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.webapp.entity.option.Option;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.option.OptionElementImpl;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.user.UserImpl;
 
 /**
  *

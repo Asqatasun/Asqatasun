@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.crawler.frontier;
+package org.asqatasun.crawler.frontier;
 
 import org.archive.crawler.frontier.BdbFrontier;
 

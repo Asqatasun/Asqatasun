@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.statistics;
+package org.asqatasun.entity.statistics;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -27,10 +27,10 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditImpl;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.subject.WebResourceImpl;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditImpl;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResourceImpl;
 
 /**
  *

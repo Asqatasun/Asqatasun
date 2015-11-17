@@ -19,14 +19,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.statistics;
+package org.asqatasun.entity.statistics;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.CriterionImpl;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.CriterionImpl;
 
 /**
  *

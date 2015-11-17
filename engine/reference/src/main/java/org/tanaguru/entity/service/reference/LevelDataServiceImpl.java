@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.reference;
+package org.asqatasun.entity.service.reference;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.tanaguru.entity.dao.reference.LevelDAO;
-import org.tanaguru.entity.reference.Level;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.dao.reference.LevelDAO;
+import org.asqatasun.entity.reference.Level;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 
 /**
  *

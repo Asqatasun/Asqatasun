@@ -20,17 +20,17 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.service.mock;
+package org.asqatasun.service.mock;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.*;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
-import org.tanaguru.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.*;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.sdk.entity.factory.GenericFactory;
 
 /**
  *

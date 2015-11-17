@@ -19,17 +19,17 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.service.mock;
+package org.asqatasun.service.mock;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditStatus;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
-import org.tanaguru.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.sdk.entity.factory.GenericFactory;
 
 /**
  *

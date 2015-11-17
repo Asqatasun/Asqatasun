@@ -19,11 +19,11 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.scenarioloader;
+package org.asqatasun.scenarioloader;
 
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResource;
 
 /**
  *

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler.processor;
+package org.asqatasun.crawler.processor;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -31,9 +31,9 @@ import org.archive.io.RecordingInputStream;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.Processor;
 import org.archive.net.UURI;
-import org.tanaguru.crawler.ContentWriter;
-import org.tanaguru.crawler.extractor.listener.ExtractorCSSListener;
-import org.tanaguru.crawler.extractor.listener.ExtractorHTMLListener;
+import org.asqatasun.crawler.ContentWriter;
+import org.asqatasun.crawler.extractor.listener.ExtractorCSSListener;
+import org.asqatasun.crawler.extractor.listener.ExtractorHTMLListener;
 
 /**
  * Processor module that convert the results of successful fetches to

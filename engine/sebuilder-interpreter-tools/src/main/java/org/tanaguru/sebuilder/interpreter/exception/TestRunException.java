@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.sebuilder.interpreter.exception;
+package org.asqatasun.sebuilder.interpreter.exception;
 
 import java.io.Serializable;
 

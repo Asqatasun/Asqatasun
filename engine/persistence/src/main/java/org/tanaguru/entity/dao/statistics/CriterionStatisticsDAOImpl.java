@@ -20,7 +20,7 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.entity.dao.statistics;
+package org.asqatasun.entity.dao.statistics;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,15 +29,15 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.statistics.CriterionStatistics;
-import org.tanaguru.entity.statistics.CriterionStatisticsImpl;
-import org.tanaguru.entity.statistics.WebResourceStatistics;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.subject.WebResourceImpl;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.statistics.CriterionStatistics;
+import org.asqatasun.entity.statistics.CriterionStatisticsImpl;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResourceImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  *

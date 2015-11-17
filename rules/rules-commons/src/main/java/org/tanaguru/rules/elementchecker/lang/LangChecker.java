@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.lang;
+package org.asqatasun.rules.elementchecker.lang;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -30,22 +30,22 @@ import org.apache.commons.validator.GenericValidator;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Nomenclature;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.NomenclatureBasedElementChecker;
-import org.tanaguru.rules.elementchecker.lang.detector.LanguageDetectionResult;
-import org.tanaguru.rules.elementchecker.lang.detector.LanguageDetector;
-import org.tanaguru.rules.keystore.AttributeStore;
-import static org.tanaguru.rules.keystore.AttributeStore.LANG_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.XML_LANG_ATTR;
-import static org.tanaguru.rules.keystore.EvidenceStore.*;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
-import org.tanaguru.rules.textbuilder.CompleteTextElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Nomenclature;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.NomenclatureBasedElementChecker;
+import org.asqatasun.rules.elementchecker.lang.detector.LanguageDetectionResult;
+import org.asqatasun.rules.elementchecker.lang.detector.LanguageDetector;
+import org.asqatasun.rules.keystore.AttributeStore;
+import static org.asqatasun.rules.keystore.AttributeStore.LANG_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.XML_LANG_ATTR;
+import static org.asqatasun.rules.keystore.EvidenceStore.*;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
+import org.asqatasun.rules.textbuilder.CompleteTextElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * 

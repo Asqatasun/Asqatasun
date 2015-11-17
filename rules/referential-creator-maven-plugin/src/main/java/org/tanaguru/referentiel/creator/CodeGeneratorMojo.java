@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.referentiel.creator;
+package org.asqatasun.referentiel.creator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,8 +46,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.tanaguru.referentiel.creator.exception.InvalidParameterException;
-import org.tanaguru.referentiel.creator.exception.I18NLanguageNotFoundException;
+import org.asqatasun.referentiel.creator.exception.InvalidParameterException;
+import org.asqatasun.referentiel.creator.exception.I18NLanguageNotFoundException;
 
 /**
  * @goal generate

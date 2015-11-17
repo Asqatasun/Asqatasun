@@ -20,18 +20,18 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.rules.elementselector.builder.CssLikeSelectorBuilder;
-import static org.tanaguru.rules.keystore.AttributeStore.NAME_ATTR;
-import static org.tanaguru.rules.keystore.AttributeStore.USEMAP_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.*;
-import static org.tanaguru.rules.keystore.HtmlElementStore.AREA_ELEMENT;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.rules.elementselector.builder.CssLikeSelectorBuilder;
+import static org.asqatasun.rules.keystore.AttributeStore.NAME_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.USEMAP_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.*;
+import static org.asqatasun.rules.keystore.HtmlElementStore.AREA_ELEMENT;
 
 /**
  * Area selector implementation. This implementation is quite specific due to 

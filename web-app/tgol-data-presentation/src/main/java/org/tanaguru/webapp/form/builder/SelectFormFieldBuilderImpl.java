@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.builder;
+package org.asqatasun.webapp.form.builder;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import org.tanaguru.webapp.form.SelectElement;
-import org.tanaguru.webapp.form.SelectFormField;
-import org.tanaguru.webapp.form.SelectFormFieldImpl;
+import org.asqatasun.webapp.form.SelectElement;
+import org.asqatasun.webapp.form.SelectFormField;
+import org.asqatasun.webapp.form.SelectFormFieldImpl;
 
 /**
  *

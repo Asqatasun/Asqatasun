@@ -19,17 +19,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.analyser;
+package org.asqatasun.analyser;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import junit.framework.TestCase;
-import org.tanaguru.entity.factory.statistics.WebResourceStatisticsFactory;
-import org.tanaguru.entity.factory.statistics.WebResourceStatisticsFactoryImpl;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.service.statistics.WebResourceStatisticsDataService;
-import org.tanaguru.entity.service.statistics.WebResourceStatisticsDataServiceImpl;
-import org.tanaguru.entity.statistics.WebResourceStatistics;
+import org.asqatasun.entity.factory.statistics.WebResourceStatisticsFactory;
+import org.asqatasun.entity.factory.statistics.WebResourceStatisticsFactoryImpl;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataService;
+import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataServiceImpl;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
 
 /**
  *

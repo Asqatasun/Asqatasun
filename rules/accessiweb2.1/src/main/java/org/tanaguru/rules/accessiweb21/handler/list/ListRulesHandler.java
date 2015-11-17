@@ -17,14 +17,14 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21.handler.list;
+package org.asqatasun.rules.accessiweb21.handler.list;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.rules.accessiweb21.NodeAndAttributeKeyStore;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.rules.accessiweb21.NodeAndAttributeKeyStore;
+import org.asqatasun.service.ProcessRemarkService;
 import org.w3c.dom.Node;
 
 /**

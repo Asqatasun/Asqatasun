@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sdk.entity;
+package org.asqatasun.sdk.entity;
 
 /**
  * This interface is used to make an entity reorderable.

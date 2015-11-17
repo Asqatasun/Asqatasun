@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.generator.json;
+package org.asqatasun.rules.generator.json;
 
 import java.io.File;
 import java.io.IOException;

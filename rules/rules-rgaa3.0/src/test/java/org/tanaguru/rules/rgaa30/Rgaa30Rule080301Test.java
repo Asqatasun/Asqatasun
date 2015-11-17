@@ -17,11 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
-import org.tanaguru.rules.keystore.RemarkMessageStore;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 8-3-1 of the referential Rgaa 3.0.
@@ -40,7 +40,7 @@ public class Rgaa30Rule080301Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName("org.tanaguru.rules.rgaa30.Rgaa30Rule080301");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa30.Rgaa30Rule080301");
     }
 
     @Override

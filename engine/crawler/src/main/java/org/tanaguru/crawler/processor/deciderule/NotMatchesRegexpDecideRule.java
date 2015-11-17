@@ -16,7 +16,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.tanaguru.crawler.processor.deciderule;
+package org.asqatasun.crawler.processor.deciderule;
 
 import java.util.List;
 

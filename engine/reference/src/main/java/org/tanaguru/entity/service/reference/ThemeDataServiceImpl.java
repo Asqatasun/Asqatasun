@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.reference;
+package org.asqatasun.entity.service.reference;
 
 import java.util.Collection;
-import org.tanaguru.entity.reference.Criterion;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.reference.Criterion;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 

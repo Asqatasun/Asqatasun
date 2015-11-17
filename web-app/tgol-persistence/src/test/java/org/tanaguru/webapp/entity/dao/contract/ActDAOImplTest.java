@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.contract;
+package org.asqatasun.webapp.entity.dao.contract;
 
-import org.tanaguru.webapp.entity.contract.Act;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.webapp.entity.factory.contract.ActFactory;
-import org.tanaguru.webapp.entity.factory.contract.ContractFactory;
+import org.asqatasun.webapp.entity.contract.Act;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.dao.test.AbstractDaoTestCase;
+import org.asqatasun.webapp.entity.factory.contract.ActFactory;
+import org.asqatasun.webapp.entity.factory.contract.ContractFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,8 +34,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.tanaguru.entity.dao.subject.WebResourceDAO;
-import org.tanaguru.entity.factory.subject.WebResourceFactory;
+import org.asqatasun.entity.dao.subject.WebResourceDAO;
+import org.asqatasun.entity.factory.subject.WebResourceFactory;
 
 /**
  *

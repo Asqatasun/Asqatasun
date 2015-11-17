@@ -18,9 +18,9 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa22;
+package org.asqatasun.rules.rgaa22;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule 6.12 of the referential RGAA 2.2.

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 
@@ -46,7 +46,7 @@ public class RelatedContentImpl extends ContentImpl implements
 
     private static final long serialVersionUID = 4167575969739916971L;
     @ManyToMany(
-        targetEntity=org.tanaguru.entity.audit.SSPImpl.class,
+        targetEntity=org.asqatasun.entity.audit.SSPImpl.class,
         mappedBy="relatedContentSet")
     @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private final Set<ContentImpl> parentContentSet = new HashSet<>();
@@ -84,7 +84,7 @@ public class RelatedContentImpl extends ContentImpl implements
 
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.SSPImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.SSPImpl.class)})
     @XmlTransient
     @Override
     public Set<Content> getParentContentSet() {

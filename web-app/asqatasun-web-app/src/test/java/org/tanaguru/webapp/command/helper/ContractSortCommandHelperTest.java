@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command.helper;
+package org.asqatasun.webapp.command.helper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,11 +27,11 @@ import java.util.List;
 import java.util.Map;
 import junit.framework.TestCase;
 import org.displaytag.properties.SortOrderEnum;
-import org.tanaguru.webapp.command.ContractSortCommand;
-import org.tanaguru.webapp.presentation.data.ActInfo;
-import org.tanaguru.webapp.presentation.data.ActInfoImpl;
-import org.tanaguru.webapp.presentation.data.ContractInfo;
-import org.tanaguru.webapp.presentation.data.ContractInfoImpl;
+import org.asqatasun.webapp.command.ContractSortCommand;
+import org.asqatasun.webapp.presentation.data.ActInfo;
+import org.asqatasun.webapp.presentation.data.ActInfoImpl;
+import org.asqatasun.webapp.presentation.data.ContractInfo;
+import org.asqatasun.webapp.presentation.data.ContractInfoImpl;
 
 /**
  *

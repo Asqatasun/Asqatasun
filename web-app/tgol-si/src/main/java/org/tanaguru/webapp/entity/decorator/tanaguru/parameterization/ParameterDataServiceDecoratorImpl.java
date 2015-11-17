@@ -19,21 +19,21 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.decorator.tanaguru.parameterization;
+package org.asqatasun.webapp.entity.decorator.tanaguru.parameterization;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.parameterization.ParameterFamily;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.entity.service.parameterization.ParameterElementDataService;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.dao.tanaguru.parameterization.TgolParameterDAO;
-import org.tanaguru.webapp.entity.option.OptionElement;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.parameterization.ParameterFamily;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.dao.tanaguru.parameterization.TgolParameterDAO;
+import org.asqatasun.webapp.entity.option.OptionElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

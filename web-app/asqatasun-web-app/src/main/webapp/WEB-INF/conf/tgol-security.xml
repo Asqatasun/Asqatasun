@@ -52,7 +52,7 @@
     
     <beans:bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
    
-    <beans:bean id="tgolAuthenticationProvider" class="org.tanaguru.webapp.security.userdetails.TgolUserDetailsService">
+    <beans:bean id="tgolAuthenticationProvider" class="org.asqatasun.webapp.security.userdetails.TgolUserDetailsService">
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="usersByUsernameQuery">
             <beans:value>SELECT Email1, Password, Activated as enabled

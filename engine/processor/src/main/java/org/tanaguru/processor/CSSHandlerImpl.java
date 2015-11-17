@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processor;
+package org.asqatasun.processor;
 
 import com.phloc.css.decl.CascadingStyleSheet;
 import com.thoughtworks.xstream.XStream;
@@ -28,9 +28,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.http.HttpStatus;
-import org.tanaguru.contentadapter.css.CSSContentAdapter;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.contentadapter.css.CSSContentAdapter;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * 

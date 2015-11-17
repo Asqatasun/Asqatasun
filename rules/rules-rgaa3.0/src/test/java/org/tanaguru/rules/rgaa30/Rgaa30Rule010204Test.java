@@ -17,23 +17,23 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.rules.keystore.AttributeStore;
-import static org.tanaguru.rules.keystore.AttributeStore.TITLE_ATTR;
-import org.tanaguru.rules.keystore.HtmlElementStore;
-import static org.tanaguru.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_SVG_OR_CHILD_WITH_TITLE_ATTRIBUTE;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.DECORATIVE_SVG_WITH_NOT_EMPTY_TITLE_OR_DESC_TAGS;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.SUSPECTED_INFORMATIVE_SVG_WITH_ARIA_ATTRIBUTE_DETECTED_ON_ELEMENT_OR_CHILD;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.SUSPECTED_INFORMATIVE_SVG_WITH_DESC_OR_TITLE_CHILD_TAG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.SUSPECTED_INFORMATIVE_SVG_WITH_TITLE_ATTRIBUTE_ON_ELEMENT_OR_CHILD;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.SUSPECTED_WELL_FORMATED_DECORATIVE_SVG;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.rules.keystore.AttributeStore;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.DECORATIVE_SVG_OR_CHILD_WITH_TITLE_ATTRIBUTE;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.DECORATIVE_SVG_WITH_NOT_EMPTY_TITLE_OR_DESC_TAGS;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.SUSPECTED_INFORMATIVE_SVG_WITH_ARIA_ATTRIBUTE_DETECTED_ON_ELEMENT_OR_CHILD;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.SUSPECTED_INFORMATIVE_SVG_WITH_DESC_OR_TITLE_CHILD_TAG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.SUSPECTED_INFORMATIVE_SVG_WITH_TITLE_ATTRIBUTE_ON_ELEMENT_OR_CHILD;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.SUSPECTED_WELL_FORMATED_DECORATIVE_SVG;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 1-2-4 of the referential
@@ -55,7 +55,7 @@ public class Rgaa30Rule010204Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rgaa30.Rgaa30Rule010204");
+                "org.asqatasun.rules.rgaa30.Rgaa30Rule010204");
     }
 
     @Override

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processor;
+package org.asqatasun.processor;
 
 import com.phloc.css.decl.CascadingStyleSheet;
 import java.awt.image.BufferedImage;
@@ -33,15 +33,15 @@ import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.jsoup.select.Elements;
-import org.tanaguru.contentadapter.util.URLIdentifier;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.entity.reference.Nomenclature;
-import org.tanaguru.entity.service.audit.PreProcessResultDataService;
-import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.ruleimplementation.RuleHelper;
-import org.tanaguru.service.NomenclatureLoaderService;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.contentadapter.util.URLIdentifier;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.entity.reference.Nomenclature;
+import org.asqatasun.entity.service.audit.PreProcessResultDataService;
+import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.ruleimplementation.RuleHelper;
+import org.asqatasun.service.NomenclatureLoaderService;
+import org.asqatasun.service.ProcessRemarkService;
 import org.w3c.dom.Node;
 
 /**

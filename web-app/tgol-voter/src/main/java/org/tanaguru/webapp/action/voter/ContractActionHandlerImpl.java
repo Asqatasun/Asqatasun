@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.action.voter;
+package org.asqatasun.webapp.action.voter;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.webapp.action.Action;
-import org.tanaguru.webapp.action.builder.ActionBuilder;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.action.Action;
+import org.asqatasun.webapp.action.builder.ActionBuilder;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.functionality.Functionality;
 
 /**
  *

@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.tanaguru.parameterization;
+package org.asqatasun.webapp.entity.dao.tanaguru.parameterization;
 
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
 
 /**
  *

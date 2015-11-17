@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command;
+package org.asqatasun.webapp.command;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -28,10 +28,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.presentation.data.ManualResult;
-import org.tanaguru.webapp.presentation.data.TestResult;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.presentation.data.ManualResult;
+import org.asqatasun.webapp.presentation.data.TestResult;
 
 /**
  * 

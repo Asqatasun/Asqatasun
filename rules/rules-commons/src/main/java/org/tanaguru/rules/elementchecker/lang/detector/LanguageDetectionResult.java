@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementchecker.lang.detector;
+package org.asqatasun.rules.elementchecker.lang.detector;
 
 import com.cybozu.labs.langdetect.Language;
 import org.apache.commons.lang3.StringUtils;

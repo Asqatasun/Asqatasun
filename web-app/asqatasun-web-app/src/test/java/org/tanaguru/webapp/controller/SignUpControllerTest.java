@@ -19,22 +19,22 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.*;
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringUtils;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.emailsender.EmailSender;
-import org.tanaguru.webapp.command.CreateUserCommand;
-import org.tanaguru.webapp.command.factory.CreateUserCommandFactory;
-import org.tanaguru.webapp.entity.service.user.RoleDataService;
-import org.tanaguru.webapp.entity.service.user.UserDataService;
-import org.tanaguru.webapp.entity.user.Role;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.util.TgolKeyStore;
-import org.tanaguru.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
-import org.tanaguru.webapp.validator.CreateUserFormValidator;
+import org.asqatasun.emailsender.EmailSender;
+import org.asqatasun.webapp.command.CreateUserCommand;
+import org.asqatasun.webapp.command.factory.CreateUserCommandFactory;
+import org.asqatasun.webapp.entity.service.user.RoleDataService;
+import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.webapp.entity.user.Role;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
+import org.asqatasun.webapp.validator.CreateUserFormValidator;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

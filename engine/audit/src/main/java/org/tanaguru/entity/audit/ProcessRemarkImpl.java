@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -140,10 +140,10 @@ public class ProcessRemarkImpl implements ProcessRemark, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.EvidenceElementImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.EvidenceElementImpl.class)})
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.audit.EvidenceElementImpl.class, name="EvidenceElement")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.audit.EvidenceElementImpl.class, name="EvidenceElement")})
     public Collection<EvidenceElement> getElementList() {
         return (Collection)elementSet;
     }

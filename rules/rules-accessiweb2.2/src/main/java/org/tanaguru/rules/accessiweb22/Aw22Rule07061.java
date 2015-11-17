@@ -18,9 +18,9 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule 7.6.1 of the referential Accessiweb 2.2.

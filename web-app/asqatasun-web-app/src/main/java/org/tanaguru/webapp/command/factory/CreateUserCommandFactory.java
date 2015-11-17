@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command.factory;
+package org.asqatasun.webapp.command.factory;
 
 import java.io.Serializable;
-import org.tanaguru.webapp.command.CreateUserCommand;
-import org.tanaguru.webapp.entity.service.user.RoleDataService;
-import org.tanaguru.webapp.entity.user.Role;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.webapp.command.CreateUserCommand;
+import org.asqatasun.webapp.entity.service.user.RoleDataService;
+import org.asqatasun.webapp.entity.user.Role;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

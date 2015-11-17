@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.option;
+package org.asqatasun.webapp.entity.dao.option;
 
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
-import org.tanaguru.webapp.entity.option.OptionFamily;
-import org.tanaguru.webapp.entity.option.OptionFamilyImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.webapp.entity.option.OptionFamily;
+import org.asqatasun.webapp.entity.option.OptionFamilyImpl;
 
 /**
  *

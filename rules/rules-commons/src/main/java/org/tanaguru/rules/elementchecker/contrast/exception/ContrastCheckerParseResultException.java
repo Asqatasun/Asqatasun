@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.contrast.exception;
+package org.asqatasun.rules.elementchecker.contrast.exception;
 
 /**
  *

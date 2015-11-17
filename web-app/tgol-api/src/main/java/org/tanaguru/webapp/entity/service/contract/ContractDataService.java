@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.service.contract;
+package org.asqatasun.webapp.entity.service.contract;
 
 import java.util.Collection;
-import org.tanaguru.sdk.entity.service.GenericDataService;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

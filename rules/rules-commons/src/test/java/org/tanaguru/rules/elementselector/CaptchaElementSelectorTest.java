@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,11 +30,11 @@ import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.rules.keystore.HtmlElementStore;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.rules.keystore.HtmlElementStore;
 
 /**
  *

@@ -18,22 +18,22 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractMarkerPageRuleImplementation;
-import org.tanaguru.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.TABLE_WITH_CAPTION_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.HtmlElementStore.CAPTION_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
-import static org.tanaguru.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TABLE_WITH_CAPTION_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.CAPTION_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Implementation of the rule 5.2.1 of the referential Rgaa 3.0.

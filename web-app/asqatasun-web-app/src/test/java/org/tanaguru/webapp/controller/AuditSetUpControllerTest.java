@@ -19,32 +19,32 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.*;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.service.parameterization.ParameterElementDataService;
-import org.tanaguru.webapp.command.factory.AuditSetUpCommandFactory;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
-import org.tanaguru.webapp.entity.functionality.Functionality;
-import org.tanaguru.webapp.entity.option.Option;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.referential.Referential;
-import org.tanaguru.webapp.entity.service.contract.ActDataService;
-import org.tanaguru.webapp.entity.service.contract.ContractDataService;
-import org.tanaguru.webapp.entity.service.user.UserDataService;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.form.FormField;
-import org.tanaguru.webapp.form.builder.*;
-import org.tanaguru.webapp.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
-import org.tanaguru.webapp.security.userdetails.TgolUserDetails;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
+import org.asqatasun.webapp.command.factory.AuditSetUpCommandFactory;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
+import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.entity.option.Option;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.form.FormField;
+import org.asqatasun.webapp.form.builder.*;
+import org.asqatasun.webapp.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
+import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.security.authentication.AuthenticationDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

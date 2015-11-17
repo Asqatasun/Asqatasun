@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.factory.audit;
+package org.asqatasun.entity.factory.audit;
 
 import java.util.Collection;
-import org.tanaguru.entity.audit.DefiniteResult;
-import org.tanaguru.entity.audit.DefiniteResultImpl;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.subject.WebResource;
+import org.asqatasun.entity.audit.DefiniteResult;
+import org.asqatasun.entity.audit.DefiniteResultImpl;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.subject.WebResource;
 
 /**
  * 

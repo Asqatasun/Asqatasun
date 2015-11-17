@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.membership;
+package org.asqatasun.entity.membership;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -103,7 +103,7 @@ public class OfficeGroupImpl implements OfficeGroup, Serializable {
 
     @Override
     public void setRoleList(
-            Collection<? extends org.tanaguru.entity.membership.Role> roleList) {
+            Collection<? extends org.asqatasun.entity.membership.Role> roleList) {
         this.roleList = (Collection<RoleImpl>) roleList;
     }
 

@@ -17,7 +17,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21.handler.lang;
+package org.asqatasun.rules.accessiweb21.handler.lang;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,16 +25,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Nomenclature;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.rules.accessiweb21.EvidenceKeyStore;
-import org.tanaguru.rules.accessiweb21.NodeAndAttributeKeyStore;
-import org.tanaguru.rules.elementchecker.lang.detector.LanguageDetectionResult;
-import org.tanaguru.rules.elementchecker.lang.detector.LanguageDetector;
-import org.tanaguru.service.NomenclatureLoaderService;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Nomenclature;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.rules.accessiweb21.EvidenceKeyStore;
+import org.asqatasun.rules.accessiweb21.NodeAndAttributeKeyStore;
+import org.asqatasun.rules.elementchecker.lang.detector.LanguageDetectionResult;
+import org.asqatasun.rules.elementchecker.lang.detector.LanguageDetector;
+import org.asqatasun.service.NomenclatureLoaderService;
+import org.asqatasun.service.ProcessRemarkService;
 import org.w3c.dom.Node;
 
 /**

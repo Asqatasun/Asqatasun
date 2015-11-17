@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command.factory;
+package org.asqatasun.webapp.command.factory;
 
 import java.util.List;
 import java.util.Map;
-import org.tanaguru.webapp.command.ContractSortCommand;
-import org.tanaguru.webapp.form.FormField;
-import org.tanaguru.webapp.form.SelectElement;
-import org.tanaguru.webapp.form.SelectFormField;
-import org.tanaguru.webapp.form.TextualFormField;
+import org.asqatasun.webapp.command.ContractSortCommand;
+import org.asqatasun.webapp.form.FormField;
+import org.asqatasun.webapp.form.SelectElement;
+import org.asqatasun.webapp.form.SelectFormField;
+import org.asqatasun.webapp.form.TextualFormField;
 
 
 /**

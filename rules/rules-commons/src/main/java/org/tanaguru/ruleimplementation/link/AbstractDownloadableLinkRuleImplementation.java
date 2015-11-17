@@ -19,26 +19,26 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.ruleimplementation.link;
+package org.asqatasun.ruleimplementation.link;
 
 import java.net.URI;
 import java.util.Iterator;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.elementchecker.ElementChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.AttributeStore.HREF_ATTR;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.LINK_WITH_HREF_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.HtmlElementStore.FORM_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG;
-import org.tanaguru.rules.elementchecker.helper.RuleCheckHelper;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITH_HREF_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.FORM_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_DOWNLOADABLE_DOCUMENT_FROM_FORM_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_MANUALLY_LINK_WITHOUT_EXT_MSG;
+import org.asqatasun.rules.elementchecker.helper.RuleCheckHelper;
 
 /**
  * This class deals with the tests related with links that point to 

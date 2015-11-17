@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.i18n.entity;
+package org.asqatasun.i18n.entity;
 
 import java.io.Serializable;
 
@@ -29,8 +29,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import org.tanaguru.sdk.entity.i18n.InternationalizedEntity;
-import org.tanaguru.sdk.entity.i18n.Language;
+import org.asqatasun.sdk.entity.i18n.InternationalizedEntity;
+import org.asqatasun.sdk.entity.i18n.Language;
 
 /**
  * 

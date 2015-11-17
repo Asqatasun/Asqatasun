@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.form.builder;
+package org.asqatasun.webapp.form.builder;
 
-import org.tanaguru.webapp.form.CheckboxElement;
-import org.tanaguru.webapp.form.CheckboxElementImpl;
+import org.asqatasun.webapp.form.CheckboxElement;
+import org.asqatasun.webapp.form.CheckboxElementImpl;
 
 /**
  * 

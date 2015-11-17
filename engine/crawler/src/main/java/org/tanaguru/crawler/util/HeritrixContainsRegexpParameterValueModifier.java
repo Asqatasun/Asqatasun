@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.crawler.util;
+package org.asqatasun.crawler.util;
 
 import org.apache.commons.lang3.StringUtils;
 

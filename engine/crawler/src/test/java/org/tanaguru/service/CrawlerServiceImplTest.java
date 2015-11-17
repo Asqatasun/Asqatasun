@@ -19,28 +19,28 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.service;
+package org.asqatasun.service;
 
 import java.util.*;
 import junit.framework.TestCase;
 import org.apache.http.HttpStatus;
-import org.tanaguru.crawler.CrawlerFactory;
-import org.tanaguru.crawler.CrawlerFactoryImpl;
-import org.tanaguru.crawler.util.*;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditImpl;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.parameterization.*;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.service.mock.MockAuditDataService;
-import org.tanaguru.service.mock.MockContentDataService;
-import org.tanaguru.service.mock.MockParameterDataService;
-import org.tanaguru.service.mock.MockWebResourceDataService;
+import org.asqatasun.crawler.CrawlerFactory;
+import org.asqatasun.crawler.CrawlerFactoryImpl;
+import org.asqatasun.crawler.util.*;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditImpl;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.parameterization.*;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.service.mock.MockAuditDataService;
+import org.asqatasun.service.mock.MockContentDataService;
+import org.asqatasun.service.mock.MockParameterDataService;
+import org.asqatasun.service.mock.MockWebResourceDataService;
 
 /**
  * This class is a functionnal test class of the crawler service.

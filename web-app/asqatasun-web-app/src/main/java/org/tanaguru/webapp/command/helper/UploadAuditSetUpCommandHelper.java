@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.command.helper;
+package org.asqatasun.webapp.command.helper;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.tanaguru.crawler.util.CrawlUtils;
+import org.asqatasun.crawler.util.CrawlUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**

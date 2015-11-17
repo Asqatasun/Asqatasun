@@ -20,14 +20,14 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.ElementHandler;
-import org.tanaguru.ruleimplementation.ElementHandlerImpl;
-import static org.tanaguru.rules.keystore.HtmlElementStore.A_ELEMENT;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import static org.asqatasun.rules.keystore.HtmlElementStore.A_ELEMENT;
 
 /**
  * Image elements selector. 

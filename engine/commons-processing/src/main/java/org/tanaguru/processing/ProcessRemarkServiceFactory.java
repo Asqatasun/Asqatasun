@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processing;
+package org.asqatasun.processing;
 
-import org.tanaguru.entity.service.audit.EvidenceDataService;
-import org.tanaguru.entity.service.audit.EvidenceElementDataService;
-import org.tanaguru.entity.service.audit.ProcessRemarkDataService;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.service.audit.EvidenceDataService;
+import org.asqatasun.entity.service.audit.EvidenceElementDataService;
+import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  *

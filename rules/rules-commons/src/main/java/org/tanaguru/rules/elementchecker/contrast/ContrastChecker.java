@@ -20,7 +20,7 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.contrast;
+package org.asqatasun.rules.elementchecker.contrast;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -31,20 +31,20 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.domelement.DomElement;
-import org.tanaguru.rules.domelement.extractor.DomElementExtractor;
-import org.tanaguru.rules.elementchecker.ElementCheckerImpl;
-import org.tanaguru.rules.elementchecker.contrast.exception.ContrastCheckerParseResultException;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_QUERY;
-import static org.tanaguru.rules.keystore.EvidenceStore.*;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.*;
-import org.tanaguru.rules.elementchecker.contrast.helper.ContrastHelper;
-import static org.tanaguru.service.ProcessRemarkService.DEFAULT_EVIDENCE;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.domelement.DomElement;
+import org.asqatasun.rules.domelement.extractor.DomElementExtractor;
+import org.asqatasun.rules.elementchecker.ElementCheckerImpl;
+import org.asqatasun.rules.elementchecker.contrast.exception.ContrastCheckerParseResultException;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.EvidenceStore.*;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
+import org.asqatasun.rules.elementchecker.contrast.helper.ContrastHelper;
+import static org.asqatasun.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
 
 /**

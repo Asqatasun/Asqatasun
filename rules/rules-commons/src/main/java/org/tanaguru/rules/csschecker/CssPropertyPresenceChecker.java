@@ -20,15 +20,15 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.csschecker;
+package org.asqatasun.rules.csschecker;
 
 import com.phloc.css.decl.CascadingStyleSheet;
 import java.util.Arrays;
 import java.util.Collection;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.rules.cssvisitor.CssPropertyPresenceCSSVisitor;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.cssvisitor.CssPropertyPresenceCSSVisitor;
 
 /**
  * This checker enables to control that some css properties are present among 

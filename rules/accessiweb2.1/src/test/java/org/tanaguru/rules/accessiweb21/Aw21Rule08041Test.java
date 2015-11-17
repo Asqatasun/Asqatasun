@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21;
+package org.asqatasun.rules.accessiweb21;
 
-import org.tanaguru.rules.accessiweb21.test.Aw21RuleImplementationTestCase;
+import org.asqatasun.rules.accessiweb21.test.Aw21RuleImplementationTestCase;
 
 /**
  *
@@ -35,7 +35,7 @@ public class Aw21Rule08041Test extends Aw21RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName( "org.tanaguru.rules.accessiweb21.Aw21Rule08041");
+        setRuleImplementationClassName( "org.asqatasun.rules.accessiweb21.Aw21Rule08041");
     }
 
     @Override

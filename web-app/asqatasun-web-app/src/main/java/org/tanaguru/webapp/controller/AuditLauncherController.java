@@ -19,31 +19,31 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditStatus;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.parameterization.ParameterElement;
-import org.tanaguru.entity.service.parameterization.ParameterElementDataService;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.webapp.command.AuditSetUpCommand;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.service.option.OptionElementDataService;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.KrashAuditException;
-import org.tanaguru.webapp.exception.LostInSpaceException;
-import org.tanaguru.webapp.orchestrator.TanaguruOrchestrator;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
-import org.tanaguru.webapp.util.TgolKeyStore;
-import org.tanaguru.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
-import org.tanaguru.webapp.voter.restriction.RestrictionHandler;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.webapp.command.AuditSetUpCommand;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.KrashAuditException;
+import org.asqatasun.webapp.exception.LostInSpaceException;
+import org.asqatasun.webapp.orchestrator.TanaguruOrchestrator;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
+import org.asqatasun.webapp.voter.restriction.RestrictionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

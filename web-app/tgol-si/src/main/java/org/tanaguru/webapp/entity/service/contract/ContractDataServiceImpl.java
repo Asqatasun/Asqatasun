@@ -19,16 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.service.contract;
+package org.asqatasun.webapp.entity.service.contract;
 
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.entity.dao.contract.ContractDAO;
-import org.tanaguru.webapp.entity.functionality.Functionality;
-import org.tanaguru.webapp.entity.option.OptionElement;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.dao.contract.ContractDAO;
+import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

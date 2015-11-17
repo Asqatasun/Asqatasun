@@ -18,12 +18,12 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
-import org.tanaguru.rules.elementchecker.lang.LangDeclarationValidityChecker;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.lang.LangDeclarationValidityChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 8.8.1 of the referential Accessiweb 2.2.

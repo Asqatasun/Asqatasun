@@ -20,10 +20,10 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.contentloader;
+package org.asqatasun.contentloader;
 
 import java.util.Date;
-import org.tanaguru.util.factory.DateFactory;
+import org.asqatasun.util.factory.DateFactory;
 
 /**
  *

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.test;
+package org.asqatasun.rules.test;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,12 +28,12 @@ import javax.persistence.NoResultException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.PreProcessResult;
-import org.tanaguru.entity.service.audit.PreProcessResultDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
-import org.tanaguru.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.PreProcessResult;
+import org.asqatasun.entity.service.audit.PreProcessResultDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.sdk.entity.factory.GenericFactory;
 
 /**
  *

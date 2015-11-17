@@ -19,13 +19,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.expression.builder;
+package org.asqatasun.webapp.report.expression.builder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import org.tanaguru.webapp.report.expression.I18nExpression;
-import org.tanaguru.webapp.report.expression.retriever.KeyRetriever;
+import org.asqatasun.webapp.report.expression.I18nExpression;
+import org.asqatasun.webapp.report.expression.retriever.KeyRetriever;
 
 /**
  *

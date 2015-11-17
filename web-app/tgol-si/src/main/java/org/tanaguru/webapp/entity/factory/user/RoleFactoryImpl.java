@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.factory.user;
+package org.asqatasun.webapp.entity.factory.user;
 
-import org.tanaguru.webapp.entity.user.Role;
-import org.tanaguru.webapp.entity.user.RoleImpl;
+import org.asqatasun.webapp.entity.user.Role;
+import org.asqatasun.webapp.entity.user.RoleImpl;
 
 /**
  *

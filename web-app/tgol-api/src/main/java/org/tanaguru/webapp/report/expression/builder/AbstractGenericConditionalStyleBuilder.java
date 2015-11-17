@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.report.expression.builder;
+package org.asqatasun.webapp.report.expression.builder;
 
 import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionalStyle;
 import java.util.Locale;

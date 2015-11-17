@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.orchestrator;
+package org.asqatasun.webapp.orchestrator;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -31,20 +31,20 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.emailsender.EmailSender;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.AuditStatus;
-import org.tanaguru.entity.parameterization.Parameter;
-import org.tanaguru.entity.service.audit.AuditDataService;
-import org.tanaguru.service.AuditService;
-import org.tanaguru.service.AuditServiceListener;
-import org.tanaguru.webapp.entity.contract.*;
-import org.tanaguru.webapp.entity.factory.contract.ActFactory;
-import org.tanaguru.webapp.entity.scenario.Scenario;
-import org.tanaguru.webapp.entity.service.contract.ActDataService;
-import org.tanaguru.webapp.entity.service.contract.ScopeDataService;
-import org.tanaguru.webapp.entity.service.scenario.ScenarioDataService;
-import org.tanaguru.webapp.exception.KrashAuditException;
+import org.asqatasun.emailsender.EmailSender;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.parameterization.Parameter;
+import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.service.AuditService;
+import org.asqatasun.service.AuditServiceListener;
+import org.asqatasun.webapp.entity.contract.*;
+import org.asqatasun.webapp.entity.factory.contract.ActFactory;
+import org.asqatasun.webapp.entity.scenario.Scenario;
+import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.webapp.entity.service.contract.ScopeDataService;
+import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
+import org.asqatasun.webapp.exception.KrashAuditException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 

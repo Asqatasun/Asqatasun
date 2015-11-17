@@ -19,21 +19,21 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.subject.Page;
-import org.tanaguru.webapp.entity.contract.Contract;
-import org.tanaguru.webapp.exception.AuditParameterMissingException;
-import org.tanaguru.webapp.exception.ForbiddenPageException;
-import org.tanaguru.webapp.exception.ForbiddenScopeException;
-import org.tanaguru.webapp.report.pagination.factory.TgolPaginatedListFactory;
-import org.tanaguru.webapp.util.HttpStatusCodeFamily;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.subject.Page;
+import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.exception.AuditParameterMissingException;
+import org.asqatasun.webapp.exception.ForbiddenPageException;
+import org.asqatasun.webapp.exception.ForbiddenScopeException;
+import org.asqatasun.webapp.report.pagination.factory.TgolPaginatedListFactory;
+import org.asqatasun.webapp.util.HttpStatusCodeFamily;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

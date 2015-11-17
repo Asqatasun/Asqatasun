@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -37,10 +37,10 @@ import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.reference.TestImpl;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.subject.WebResourceImpl;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.reference.TestImpl;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResourceImpl;
 
 /**
  * 
@@ -140,8 +140,8 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.DefiniteResultImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.audit.IndefiniteResultImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.DefiniteResultImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.audit.IndefiniteResultImpl.class)})
     @JsonIgnore
     public Collection<ProcessResult> getChildResultList() {
         return (Collection)childResultSet;
@@ -173,12 +173,12 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
     @Override
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.audit.ProcessRemarkImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.audit.SourceCodeRemarkImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.audit.ProcessRemarkImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.audit.SourceCodeRemarkImpl.class)})
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.audit.ProcessRemarkImpl.class, name="ProcessRemark"), 
-        @JsonSubTypes.Type(value=org.tanaguru.entity.audit.SourceCodeRemarkImpl.class, name="SourceCodeRemark")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.audit.ProcessRemarkImpl.class, name="ProcessRemark"), 
+        @JsonSubTypes.Type(value=org.asqatasun.entity.audit.SourceCodeRemarkImpl.class, name="SourceCodeRemark")})
 //    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     public Collection<ProcessRemark> getRemarkSet() {
         return (Collection)remarkSet;
@@ -186,17 +186,17 @@ public abstract class ProcessResultImpl implements ProcessResult, Serializable {
 
     @Override
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.subject.PageImpl.class),
-    @XmlElementRef(type = org.tanaguru.entity.subject.SiteImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.subject.PageImpl.class),
+    @XmlElementRef(type = org.asqatasun.entity.subject.SiteImpl.class)})
     public WebResource getSubject() {
         return subject;
     }
 
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.TestImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.TestImpl.class)
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.reference.TestImpl.class, name="Test")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.reference.TestImpl.class, name="Test")})
     public Test getTest() {
         return test;
     }

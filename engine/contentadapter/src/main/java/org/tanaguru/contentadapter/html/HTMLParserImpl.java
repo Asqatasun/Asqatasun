@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter.html;
+package org.asqatasun.contentadapter.html;
 
-import org.tanaguru.contentadapter.ContentAdapter;
-import org.tanaguru.contentadapter.html.util.DOMContentHandlerDecorator;
-import org.tanaguru.contentadapter.html.util.DOMContentHandlerDecoratorImpl;
+import org.asqatasun.contentadapter.ContentAdapter;
+import org.asqatasun.contentadapter.html.util.DOMContentHandlerDecorator;
+import org.asqatasun.contentadapter.html.util.DOMContentHandlerDecoratorImpl;
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -37,8 +37,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.contentadapter.HTMLParser;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.contentadapter.HTMLParser;
 
 /**
  * 

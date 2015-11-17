@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.tanaguru</groupId>
+        <groupId>org.asqatasun</groupId>
         <artifactId>testing-tools</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
@@ -14,7 +14,7 @@
         <plugins>
             <plugin>
                 <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>tanaguru-maven-testgenerator-plugin</artifactId>
+                <artifactId>asqatasun-maven-testgenerator-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
@@ -36,7 +36,7 @@
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
+            <artifactId>asqatasun-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

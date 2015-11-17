@@ -19,10 +19,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.dao.user;
+package org.asqatasun.webapp.entity.dao.user;
 
-import org.tanaguru.webapp.entity.dao.test.AbstractDaoTestCase;
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.dao.test.AbstractDaoTestCase;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

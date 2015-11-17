@@ -20,7 +20,7 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.sdk.entity;
+package org.asqatasun.sdk.entity;
 
 /**
  * 

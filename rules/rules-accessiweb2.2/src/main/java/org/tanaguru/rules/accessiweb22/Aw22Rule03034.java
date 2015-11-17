@@ -18,10 +18,10 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
-import org.tanaguru.rules.elementchecker.contrast.ContrastChecker;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
 
 /**
  * Implementation of the rule 3.3.4 of the referential Accessiweb 2.2.

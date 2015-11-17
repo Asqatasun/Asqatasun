@@ -19,11 +19,11 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sebuilder.interpreter.steptype;
+package org.asqatasun.sebuilder.interpreter.steptype;
 
 import com.sebuilder.interpreter.StepType;
 import com.sebuilder.interpreter.TestRun;
-import org.tanaguru.sebuilder.interpreter.TgTestRun;
+import org.asqatasun.sebuilder.interpreter.TgTestRun;
 
 public class SubmitElement implements StepType {
 

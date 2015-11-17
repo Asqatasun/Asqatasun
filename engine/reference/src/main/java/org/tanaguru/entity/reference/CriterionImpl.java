@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.reference;
+package org.asqatasun.entity.reference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -112,23 +112,23 @@ public class CriterionImpl implements Criterion, Serializable {
     }
 
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.ReferenceImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.ReferenceImpl.class)
     public Reference getReference() {
         return reference;
     }
 
     @Override
     @XmlElementWrapper
-    @XmlElementRef(type = org.tanaguru.entity.reference.TestImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.TestImpl.class)
     public Collection<Test> getTestList() {
         return (Collection)testList;
     }
 
     @Override
-    @XmlElementRef(type = org.tanaguru.entity.reference.ThemeImpl.class)
+    @XmlElementRef(type = org.asqatasun.entity.reference.ThemeImpl.class)
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.reference.ThemeImpl.class, name="Theme")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.reference.ThemeImpl.class, name="Theme")})
     public Theme getTheme() {
         return theme;
     }

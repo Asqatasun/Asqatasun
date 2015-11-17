@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import java.util.List;
@@ -82,7 +82,7 @@ public class DefiniteResultImpl extends ProcessResultImpl implements
     @Override
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.audit.TestSolution.class, name="TestSolution")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.audit.TestSolution.class, name="TestSolution")})
     public Object getValue() {
         return getDefiniteValue();
     }

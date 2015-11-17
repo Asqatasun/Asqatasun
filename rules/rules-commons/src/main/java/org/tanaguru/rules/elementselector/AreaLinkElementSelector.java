@@ -19,13 +19,13 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.elementselector;
+package org.asqatasun.rules.elementselector;
 
 import org.jsoup.nodes.Element;
-import org.tanaguru.rules.keystore.AttributeStore;
-import static org.tanaguru.rules.keystore.CssLikeQueryStore.CLICKABLE_AREA_CSS_LIKE_QUERY;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.rules.keystore.AttributeStore;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.CLICKABLE_AREA_CSS_LIKE_QUERY;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * Element selector implementation that selects area links. 

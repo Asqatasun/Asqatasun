@@ -19,7 +19,7 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processing;
+package org.asqatasun.processing;
 
 import junit.framework.TestCase;
 import org.apache.commons.lang3.StringEscapeUtils;

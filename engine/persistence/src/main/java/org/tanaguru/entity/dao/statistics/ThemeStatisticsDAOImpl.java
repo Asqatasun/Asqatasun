@@ -11,19 +11,19 @@
  * authorization of OPEN-S.
  */
 
-package org.tanaguru.entity.dao.statistics;
+package org.asqatasun.entity.dao.statistics;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.entity.statistics.ThemeStatistics;
-import org.tanaguru.entity.statistics.ThemeStatisticsImpl;
-import org.tanaguru.entity.statistics.WebResourceStatistics;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.entity.subject.WebResourceImpl;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.statistics.ThemeStatistics;
+import org.asqatasun.entity.statistics.ThemeStatisticsImpl;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.entity.subject.WebResourceImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  *

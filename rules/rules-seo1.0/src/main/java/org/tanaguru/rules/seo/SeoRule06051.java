@@ -17,10 +17,10 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.seo;
+package org.asqatasun.rules.seo;
 
-import org.tanaguru.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
-import org.tanaguru.rules.elementchecker.doctype.DoctypePresenceChecker;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.doctype.DoctypePresenceChecker;
 
 /**
  * For each Web page, is the &lt;a href="http://www.braillenet.org/accessibilite/referentiel-aw21-en/glossaire.php#mDTD"&gt;

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.subject;
+package org.asqatasun.entity.subject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.tanaguru.entity.audit.Audit;
+import org.asqatasun.entity.audit.Audit;
 
 /**
  * 
@@ -84,8 +84,8 @@ public class SiteImpl extends WebResourceImpl implements Site, Serializable {
 
     @XmlElementWrapper
     @XmlElementRefs({
-        @XmlElementRef(type = org.tanaguru.entity.subject.SiteImpl.class),
-        @XmlElementRef(type = org.tanaguru.entity.subject.PageImpl.class)})
+        @XmlElementRef(type = org.asqatasun.entity.subject.SiteImpl.class),
+        @XmlElementRef(type = org.asqatasun.entity.subject.PageImpl.class)})
     @Override
     public Collection<WebResource> getComponentList() {
         // Bug #540 correction

@@ -17,16 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rulescreationdemo;
+package org.asqatasun.rules.rulescreationdemo;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-import org.tanaguru.entity.audit.ProcessRemarkImpl;
-import org.tanaguru.entity.audit.ProcessResult;
-import org.tanaguru.entity.audit.SourceCodeRemark;
-import org.tanaguru.entity.audit.SourceCodeRemarkImpl;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.rulescreationdemo.test.RulescreationdemoRuleImplementationTestCase;
+import org.asqatasun.entity.audit.ProcessRemarkImpl;
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SourceCodeRemark;
+import org.asqatasun.entity.audit.SourceCodeRemarkImpl;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.rulescreationdemo.test.RulescreationdemoRuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 1-1-1 of the referential 
@@ -46,7 +46,7 @@ public class DetectH1Test extends RulescreationdemoRuleImplementationTestCase {
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.tanaguru.rules.rulescreationdemo.DetectH1");
+                "org.asqatasun.rules.rulescreationdemo.DetectH1");
     }
 
     @Override

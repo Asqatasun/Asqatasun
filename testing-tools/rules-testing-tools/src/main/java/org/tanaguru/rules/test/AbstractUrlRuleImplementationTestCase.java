@@ -19,22 +19,22 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.test;
+package org.asqatasun.rules.test;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import junit.framework.TestCase;
 import static org.easymock.EasyMock.*;
-import org.tanaguru.entity.audit.DefiniteResult;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.reference.Test;
-import org.tanaguru.entity.service.audit.ProcessResultDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.DefiniteResult;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * This abstract test class is use to make tests on an url and not on files.

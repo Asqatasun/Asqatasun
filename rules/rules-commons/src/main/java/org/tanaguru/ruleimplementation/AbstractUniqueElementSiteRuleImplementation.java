@@ -20,22 +20,22 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.ruleimplementation;
+package org.asqatasun.ruleimplementation;
 
 import java.util.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.*;
-import org.tanaguru.entity.subject.Site;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.rules.elementselector.ElementSelector;
-import org.tanaguru.rules.elementselector.SimpleElementSelector;
-import org.tanaguru.rules.keystore.AttributeStore;
-import org.tanaguru.rules.keystore.CssLikeQueryStore;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.*;
+import org.asqatasun.entity.subject.Site;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.keystore.AttributeStore;
+import org.asqatasun.rules.keystore.CssLikeQueryStore;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.service.ProcessRemarkService;
 
 /**
  * This abstract class checks the unicity of each element selected from a css-like

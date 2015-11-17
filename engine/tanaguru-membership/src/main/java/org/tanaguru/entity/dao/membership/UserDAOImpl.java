@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.membership;
+package org.asqatasun.entity.dao.membership;
 
-import org.tanaguru.entity.membership.User;
-import org.tanaguru.entity.membership.UserImpl;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.membership.User;
+import org.asqatasun.entity.membership.UserImpl;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 
 public class UserDAOImpl extends AbstractJPADAO<User, Long> implements UserDAO {
 

@@ -20,17 +20,17 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.lang;
+package org.asqatasun.rules.elementchecker.lang;
 
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.processor.SSPHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandler;
-import org.tanaguru.ruleimplementation.TestSolutionHandlerImpl;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.ruleimplementation.TestSolutionHandlerImpl;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.LANGUAGE_CHANGE_MISSING_MSG;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * 

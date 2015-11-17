@@ -19,19 +19,19 @@
  * 
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.scenarioloader;
+package org.asqatasun.scenarioloader;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.entity.service.audit.ContentDataService;
-import org.tanaguru.entity.service.audit.PreProcessResultDataService;
-import org.tanaguru.entity.service.parameterization.ParameterDataService;
-import org.tanaguru.entity.service.subject.WebResourceDataService;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.util.factory.DateFactory;
+import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.entity.service.audit.PreProcessResultDataService;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

@@ -19,17 +19,17 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.controller;
+package org.asqatasun.webapp.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.tanaguru.webapp.action.voter.ActionHandler;
-import org.tanaguru.webapp.command.ContractSortCommand;
-import org.tanaguru.webapp.command.helper.ContractSortCommandHelper;
-import org.tanaguru.webapp.entity.user.User;
-import org.tanaguru.webapp.exception.ForbiddenUserException;
-import org.tanaguru.webapp.form.builder.FormFieldBuilder;
-import org.tanaguru.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.action.voter.ActionHandler;
+import org.asqatasun.webapp.command.ContractSortCommand;
+import org.asqatasun.webapp.command.helper.ContractSortCommandHelper;
+import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.webapp.exception.ForbiddenUserException;
+import org.asqatasun.webapp.form.builder.FormFieldBuilder;
+import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

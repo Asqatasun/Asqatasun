@@ -19,12 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.presentation.data;
+package org.asqatasun.webapp.presentation.data;
 
 import java.util.Date;
 import java.util.Map;
-import org.tanaguru.entity.reference.Theme;
-import org.tanaguru.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.webapp.entity.contract.ScopeEnum;
 
 /**
  * This interface defines the audit statistics data

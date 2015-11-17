@@ -1,13 +1,13 @@
-package org.tanaguru.service;
+package org.asqatasun.service;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import org.tanaguru.contentadapter.*;
-import org.tanaguru.contentadapter.util.URLIdentifierFactory;
-import org.tanaguru.contentloader.DownloaderFactory;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.service.audit.ContentDataService;
+import org.asqatasun.contentadapter.*;
+import org.asqatasun.contentadapter.util.URLIdentifierFactory;
+import org.asqatasun.contentloader.DownloaderFactory;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.service.audit.ContentDataService;
 
 /**
  * 

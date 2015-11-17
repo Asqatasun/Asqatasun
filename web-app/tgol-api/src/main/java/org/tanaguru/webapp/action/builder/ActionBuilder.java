@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.action.builder;
+package org.asqatasun.webapp.action.builder;
 
-import org.tanaguru.webapp.action.Action;
+import org.asqatasun.webapp.action.Action;
 
 /**
  *

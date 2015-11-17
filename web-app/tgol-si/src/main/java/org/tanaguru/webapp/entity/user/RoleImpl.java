@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.entity.user;
+package org.asqatasun.webapp.entity.user;
 
 import java.io.Serializable;
 import java.util.Collection;

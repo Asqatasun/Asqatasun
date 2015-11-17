@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.service.reference;
+package org.asqatasun.entity.service.reference;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.tanaguru.entity.dao.reference.NomenclatureDAO;
-import org.tanaguru.entity.dao.reference.StandardMessageDAO;
-import org.tanaguru.entity.reference.Nomenclature;
-import org.tanaguru.entity.reference.NomenclatureElement;
-import org.tanaguru.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.dao.reference.NomenclatureDAO;
+import org.asqatasun.entity.dao.reference.StandardMessageDAO;
+import org.asqatasun.entity.reference.Nomenclature;
+import org.asqatasun.entity.reference.NomenclatureElement;
+import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 
 /**
  * 

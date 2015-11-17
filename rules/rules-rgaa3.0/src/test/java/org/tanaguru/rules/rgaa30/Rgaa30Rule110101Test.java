@@ -17,15 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
-import org.tanaguru.entity.audit.ProcessResult;
-import static org.tanaguru.entity.audit.TestSolution.FAILED;
-import static org.tanaguru.rules.keystore.HtmlElementStore.INPUT_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.SELECT_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.TEXTAREA_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.INVALID_FORM_FIELD_MSG;
-import org.tanaguru.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+import org.asqatasun.entity.audit.ProcessResult;
+import static org.asqatasun.entity.audit.TestSolution.FAILED;
+import static org.asqatasun.rules.keystore.HtmlElementStore.INPUT_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.SELECT_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXTAREA_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.INVALID_FORM_FIELD_MSG;
+import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
  * Unit test class for the implementation of the rule 11-1-1 of the referential Rgaa 3.0.
@@ -44,7 +44,7 @@ public class Rgaa30Rule110101Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName("org.tanaguru.rules.rgaa30.Rgaa30Rule110101");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa30.Rgaa30Rule110101");
     }
 
     @Override

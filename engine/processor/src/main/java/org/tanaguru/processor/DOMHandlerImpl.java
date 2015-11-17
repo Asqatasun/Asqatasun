@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.processor;
+package org.asqatasun.processor;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -34,13 +34,13 @@ import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 import org.jsoup.select.Selector.SelectorParseException;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.entity.subject.WebResource;
-import org.tanaguru.exception.IncoherentValueDomainsException;
-import org.tanaguru.ruleimplementation.RuleHelper;
-import org.tanaguru.service.ProcessRemarkService;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.exception.IncoherentValueDomainsException;
+import org.asqatasun.ruleimplementation.RuleHelper;
+import org.asqatasun.service.ProcessRemarkService;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

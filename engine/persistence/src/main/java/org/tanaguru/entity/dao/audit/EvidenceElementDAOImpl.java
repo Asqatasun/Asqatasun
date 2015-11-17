@@ -19,15 +19,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.dao.audit;
+package org.asqatasun.entity.dao.audit;
 
 import java.util.Collection;
 import javax.persistence.Query;
-import org.tanaguru.entity.audit.Evidence;
-import org.tanaguru.entity.audit.EvidenceElement;
-import org.tanaguru.entity.audit.EvidenceElementImpl;
-import org.tanaguru.entity.audit.ProcessRemark;
-import org.tanaguru.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.audit.Evidence;
+import org.asqatasun.entity.audit.EvidenceElement;
+import org.asqatasun.entity.audit.EvidenceElementImpl;
+import org.asqatasun.entity.audit.ProcessRemark;
+import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
 
 /**
  * 

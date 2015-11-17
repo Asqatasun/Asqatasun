@@ -18,15 +18,15 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.accessiweb22;
+package org.asqatasun.rules.accessiweb22;
 
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.ruleimplementation.AbstractDetectionPageRuleImplementation;
-import org.tanaguru.rules.elementselector.MultipleElementSelector;
-import static org.tanaguru.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.EMBED_ELEMENT;
-import static org.tanaguru.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
-import static org.tanaguru.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.MultipleElementSelector;
+import static org.asqatasun.rules.keystore.HtmlElementStore.APPLET_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.EMBED_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.OBJECT_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARNED_IN_CASE_OF_NEW_WINDOW_MSG;
 
 /**
  * Implementation of the rule 13.2.2 of the referential Accessiweb 2.2.

@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.tanaguru.crawler.mock;
+package org.asqatasun.crawler.mock;
 
 import java.util.Collection;
 import java.util.Date;
-import org.tanaguru.entity.audit.Audit;
-import org.tanaguru.entity.audit.RelatedContent;
-import org.tanaguru.entity.audit.SSP;
-import org.tanaguru.entity.subject.Page;
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.RelatedContent;
+import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.subject.Page;
 
 public class MockSSP implements SSP {
 

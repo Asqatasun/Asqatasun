@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.logging;
+package org.asqatasun.logging;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -57,7 +57,7 @@ public class EALoggerImpl {
 
     /*
      * Cette méthode est appelée à chaque fois (et avant) qu'une méthode du
-     * package org.tanaguru.service.* est interceptée
+     * package org.asqatasun.service.* est interceptée
      */
     public void logMethodEntry(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
@@ -83,7 +83,7 @@ public class EALoggerImpl {
 
     /*
      * Cette méthode est appelée à chaque fois (et après) qu'une méthode du
-     * package org.tanaguru.service.* est interceptée.
+     * package org.asqatasun.service.* est interceptée.
      * Elle reçoit en argument 'result' qui est le retour de la méthode
      * interceptée.
      */

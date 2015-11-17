@@ -20,14 +20,14 @@
  *  Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-package org.tanaguru.rules.elementchecker.pertinence;
+package org.asqatasun.rules.elementchecker.pertinence;
 
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
-import org.tanaguru.entity.audit.TestSolution;
-import org.tanaguru.rules.elementchecker.text.TextEndsWithChecker;
-import org.tanaguru.rules.textbuilder.TextAttributeOfElementBuilder;
-import org.tanaguru.rules.textbuilder.TextElementBuilder;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.elementchecker.text.TextEndsWithChecker;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
  * This class checks whether the content of an attribute is pertinent by verifying :

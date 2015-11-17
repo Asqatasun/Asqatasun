@@ -17,7 +17,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.accessiweb21.handler.lang;
+package org.asqatasun.rules.accessiweb21.handler.lang;
 
 import junit.framework.TestCase;
 

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter;
+package org.asqatasun.contentadapter;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -27,12 +27,12 @@ import java.io.IOException;
 import java.util.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
-import org.tanaguru.contentadapter.html.AbstractHTMLCleaner;
-import org.tanaguru.contentadapter.html.HTMLCleanerImpl;
-import org.tanaguru.contentadapter.util.AdaptationActionVoter;
-import org.tanaguru.contentadapter.util.DocumentCaseInsensitiveAdapter;
-import org.tanaguru.entity.audit.Content;
-import org.tanaguru.entity.audit.SSP;
+import org.asqatasun.contentadapter.html.AbstractHTMLCleaner;
+import org.asqatasun.contentadapter.html.HTMLCleanerImpl;
+import org.asqatasun.contentadapter.util.AdaptationActionVoter;
+import org.asqatasun.contentadapter.util.DocumentCaseInsensitiveAdapter;
+import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.SSP;
 
 /**
  * 

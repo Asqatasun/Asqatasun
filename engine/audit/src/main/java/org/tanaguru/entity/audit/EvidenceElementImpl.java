@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.entity.audit;
+package org.asqatasun.entity.audit;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -72,7 +72,7 @@ public class EvidenceElementImpl implements EvidenceElement,
     @Override
     @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
-        @JsonSubTypes.Type(value=org.tanaguru.entity.audit.EvidenceImpl.class, name="Evidence")})
+        @JsonSubTypes.Type(value=org.asqatasun.entity.audit.EvidenceImpl.class, name="Evidence")})
     public Evidence getEvidence() {
         return (Evidence) evidence;
     }

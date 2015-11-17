@@ -19,9 +19,9 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.webapp.exception;
+package org.asqatasun.webapp.exception;
 
-import org.tanaguru.webapp.entity.user.User;
+import org.asqatasun.webapp.entity.user.User;
 
 /**
  *

@@ -10,7 +10,7 @@
 
 
     <!-- Seo select elements -->
-    <bean id="seoBronzeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoBronzeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo;LEVEL_1"/>
         <property name="i18nKey" value="Seo-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="seoSilverSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoSilverSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo;LEVEL_2"/>
         <property name="i18nKey" value="Seo-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="seoGoldSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="seoGoldSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Seo;LEVEL_3"/>
         <property name="i18nKey" value="Seo-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>

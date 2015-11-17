@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.contentadapter;
+package org.asqatasun.contentadapter;
 
 import java.util.Collection;
-import org.tanaguru.contentadapter.util.AdaptationActionVoter;
-import org.tanaguru.entity.audit.Content;
+import org.asqatasun.contentadapter.util.AdaptationActionVoter;
+import org.asqatasun.entity.audit.Content;
 
 /**
  *

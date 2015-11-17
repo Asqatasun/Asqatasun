@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.sdk.entity.dao.jpa;
+package org.asqatasun.sdk.entity.dao.jpa;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -28,8 +28,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.tanaguru.sdk.entity.Entity;
-import org.tanaguru.sdk.entity.dao.GenericDAO;
+import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.sdk.entity.dao.GenericDAO;
 
 /**
  * 
