@@ -369,10 +369,10 @@ install_configuration() {
         "${prefix}$TG_CONF_DIR/asqatasun.conf" || \
             fail "Unable to set up the Asqatasun configuration"
 
-    # @@@TODO find something better than grep for doing an strcompare
-    if [[ $(grep '$' "${prefix}$TG_CONF_DIR" >/dev/null) ]]; then
+    WITHOUT_DOLLAR=$(echo "${prefix}$TG_CONF_DIR" | tr -d '$')
+    if [[ "${prefix}$TG_CONF_DIR" != "$WITHOUT_DOLLAR" ]]; then
             warn "The file ${prefix}$TG_CONF_DIR contains" \
-                 "dollar symboles. Check by yourself that the " \
+                 "dollar symbols. Check by yourself that the " \
                  "replacement worked fine."
     fi
 }
@@ -406,19 +406,6 @@ edit_esapi_configuration_file() {
     rm -f generated_keys.txt
 }
 
-create_first_user() {
-    # create admin user for Asqatasun
-    cd "$PKG_DIR/install/web-app/sql-management"
-    sed -i -e "s/^DbUser=.*$/DbUser=$database_user/g" \
-        -e "s/^DbUserPasswd=.*$/DbUserPasswd=$database_passwd/g" \
-        -e "s/^DbName=.*$/DbName=$database_db/g"  \
-        -e "s/^DbHost=.*$/DbHost=$database_host/g" \
-        tg-set-user-admin.sh tg-create-user.sh  || \
-            fail "Unable to create Asqatasun admin user"
-    sh ./tg-create-user.sh -e "${asqa_admin_email}" -p "${asqa_admin_passwd}" -l " " -f " " >/dev/null || fail "Error while creating Asqatasun admin user. User may already exists"
-    sh ./tg-set-user-admin.sh -u $asqa_admin_email >/dev/null || fail "Error while setting Asqatasun user as admin"
-}
-
 update_tomcat_configuration() {
     # we assume the filename is the same as tomcat-user specified by user
     MY_DEFAULT_TOMCAT=/etc/default/${tomcat_user}
@@ -431,6 +418,77 @@ update_tomcat_configuration() {
     fi
 }
 
+#############################################
+# User & contract creation
+#############################################
+create_first_user() {
+    # create admin user for Asqatasun
+    cd "$PKG_DIR/install/web-app/sql-management"
+    sed -i -e "s/^DbUser=.*$/DbUser=$database_user/g" \
+        -e "s/^DbUserPasswd=.*$/DbUserPasswd=$database_passwd/g" \
+        -e "s/^DbName=.*$/DbName=$database_db/g"  \
+        -e "s/^DbHost=.*$/DbHost=$database_host/g" \
+        tg-set-user-admin.sh tg-create-user.sh  || \
+            fail "Unable to create Asqatasun admin user"
+    sh ./tg-create-user.sh -e "${asqa_admin_email}" -p "${asqa_admin_passwd}" -l " " -f " " >/dev/null || \
+        fail "Error while creating Asqatasun admin user. User may already exists"
+    sh ./tg-set-user-admin.sh -u $asqa_admin_email >/dev/null || \
+        fail "Error while setting Asqatasun user as admin"
+}
+
+create_first_contracts() {
+    # create 3 typical contracts
+    cd "$PKG_DIR/install/web-app/sql-management"
+
+    # add SQL procedure "contract_create"
+    ./PROCEDURE_contract_create.sh \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host" || \
+            fail "Unable to add SQL Procedure 'contract_create'"
+
+    # Contract Wikipedia A11Y
+    ./ASQA_contract_create_A11Y_RGAA3.sh \
+        -c "Wikipedia A11Y RGAA-3" \
+        -u 1 \
+        -w "http://en.wikipedia.org/" \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host" \
+        --audit-page \
+        --audit-site \
+        --audit-file \
+        --audit-scenario \
+        --audit-manual \
+        -m 1000 || \
+            fail "Unable to create contract: Wikipedia A11Y RGAA-3"
+    # Contract Wikipedia SEO
+    ./ASQA_contract_create_SEO.sh \
+        -c "Wikipedia SEO" \
+        -u 1 \
+        -w "http://en.wikipedia.org/" \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host" \
+        -m 1000 || \
+            fail "Unable to create contract: Wikipedia SEO"
+    # Contract A11Y Openbar
+    ./ASQA_contract_create_A11Y_RGAA3_openbar.sh \
+        -c "Openbar A11Y RGAA-3" \
+        -u 1 \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host"  || \
+            fail "Unable to create contract: Openbar A11Y RGAA-3"
+}
+
+#############################################
+# Finish
+#############################################
 echo_installation_summary() {
 	cat << EOF
 
@@ -458,30 +516,32 @@ main() {
 
     # create Asqatasun directories
     create_directories
-    echo "Directory creation:	.	.	OK"
+    echo "Directory creation:                   OK"
     # save options for uninstall
     write_options	
     # filling the SQL database
     create_tables
-    echo "SQL inserts: 		.	.	OK"
+    echo "SQL inserts:                          OK"
     # install configuration file
     install_configuration
-    echo "Asqatasun config files creation:   .  OK"
+    echo "Asqatasun config files creation:      OK"
     # install webapp
     install_webapp
-    echo "Asqatasun webapp creation: 	.	OK"
+    echo "Asqatasun webapp creation:            OK"
     # install firefox profile files
     install_firefox_profile_files
-    echo "Firefox Profile Files creation: 	OK"
+    echo "Firefox Profile Files creation:       OK"
     # edit esapi configuration file
     edit_esapi_configuration_file
-    echo "Asqatasun webapp configuration: .	OK"
+    echo "Asqatasun webapp configuration:       OK"
     # create first user
     create_first_user
     echo "Asqatasun admin creation:             OK"
+    create_first_contracts
+    echo "Asqatasun contract creation:          OK"
     # update tomcat configuration
     update_tomcat_configuration
-    echo "Tomcat configuration: 	.	OK"
+    echo "Tomcat configuration:                 OK"
     # done
     echo_installation_summary
 }

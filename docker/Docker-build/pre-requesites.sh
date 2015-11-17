@@ -81,6 +81,8 @@ echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWD}" | d
 echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASSWD}" | debconf-set-selections
 
 # Required packages for Asqatasun
+#   Notes:
+#     - libdbus-glib-1-2: needed for Firefox Webdriver
 apt-get -y --no-install-recommends install \
     wget \
     bzip2 \
@@ -90,6 +92,7 @@ apt-get -y --no-install-recommends install \
     tomcat7 \
     libspring-instrument-java \
     xvfb \
+    libdbus-glib-1-2 \
     openjdk-7-jre
     
 #############################################
@@ -97,6 +100,7 @@ apt-get -y --no-install-recommends install \
 #############################################
 
 # @@@TODO (and don't forget to add "postfix" to the list of packages to install (just above)
+#          or configure a Mailjet / Mandrill service
 
 #############################################
 # Mysql config
@@ -157,4 +161,4 @@ rm ${FIREFOX_BASENAME}.tar.bz2
 #############################################
 
 # reserved for Docker usage
-# rm -rf /var/lib/apt/lists/*
+rm -rf /var/lib/apt/lists/*

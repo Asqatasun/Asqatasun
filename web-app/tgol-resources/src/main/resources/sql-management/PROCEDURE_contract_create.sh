@@ -1,8 +1,15 @@
 #!/bin/bash
 
-# 2015-11-12 mfaure
+# 2015-11-14 mfaure
 
 set -o errexit
+
+fail() {
+        echo ""
+	echo "FAILURE : $*"
+        echo ""
+	exit -1
+}
 
 #############################################
 # Usage
@@ -10,16 +17,12 @@ set -o errexit
 usage () {
     cat <<EOF
 
-$0 creates an SEO contract for a given Asqatasun user on a given website URL
+$0 inserts the sql stored procedure "contract_create"
 
 usage: $0 [MANDATORY_ARGS] [OPTIONS]
 
 MANDATORY_ARGS:
 
-    -c <contract-name>   MANDATORY Name of contract as displayed in Asqatasun interface
-    -w <website-url>     MANDATORY Url of the site to be audited (Fully Qualified Domain Name)
-    -u <user-id>         MANDATORY Id of the user the contract is bound to
-    
     --database-user <db-user>       MANDATORY Asqatasun database user
     --database-passwd <db-passwd>   MANDATORY Asqatasun database password
     --database-db <db-name>         MANDATORY Asqatasun database db
@@ -27,8 +30,7 @@ MANDATORY_ARGS:
 
 OPTIONS:
 
-    -m <max-pages>   Max number of crawled pages for a site-audit
-    -h | --help     Show this message     
+    -h | --help         Show this message     
 
 EOF
     exit 2
@@ -37,7 +39,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o hc:w:u:m: --long database-user:,database-passwd:,database-db:,database-host:,help -- "$@"`
+TEMP=`getopt -o h --long help,database-user:,database-passwd:,database-db:,database-host: -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -48,22 +50,17 @@ fi
 eval set -- "$TEMP"
 
 declare HELP=false
-declare CONTRACT_NAME
-declare WEBSITE_URL
-declare USER_ID
+
 declare DB_USER
 declare DB_PASSWD
 declare DB_NAME
 declare DB_HOST
-declare MAX_PAGES=NULL
+
+declare MY_PROCEDURE_FILE="PROCEDURE_contract_create.sql"
 
 while true; do
   case "$1" in
     -h | --help )       HELP=true; shift ;;
-    -c )                CONTRACT_NAME="$2"; shift 2 ;; 
-    -w )                WEBSITE_URL="$2"; shift 2 ;; 
-    -u )                USER_ID="$2"; shift 2 ;; 
-    -m )                MAX_PAGES="$2"; shift 2 ;; 
     --database-user )   DB_USER="$2"; shift 2 ;;
     --database-passwd ) DB_PASSWD="$2"; shift 2 ;;
     --database-db )     DB_NAME="$2"; shift 2 ;;
@@ -72,11 +69,8 @@ while true; do
   esac
 done
 
-
-if [[ -z "$CONTRACT_NAME" || \
-    -z "$WEBSITE_URL" || \
-    -z "$USER_ID" || \
-    -z "$DB_USER" || \
+# Mandatory arguments
+if [[ -z "$DB_USER" || \
     -z "$DB_PASSWD" || \
     -z "$DB_NAME" || \
     -z "$DB_HOST" || \
@@ -87,9 +81,17 @@ fi
 #############################################
 # Do the actual job: create contract
 #############################################
+sed -i \
+    -e "s#\$myDatabaseName#$DB_NAME#" \
+    -e "s#\$myDatabaseUser#$DB_USER#" \
+    $MY_PROCEDURE_FILE || \
+        fail "Unable to set database credentials before inserting SQL Procedure"
 
-mysql --user="$DB_USER" \
-    --password="$DB_PASSWD" \
-    --database="$DB_NAME" \
-    --host="$DB_HOST" \
-    -e "call contract_create($USER_ID, \"$CONTRACT_NAME\", \"$WEBSITE_URL\", \"SEO\", 0, 1, 0, 0, 0, $MAX_PAGES);"
+cat $MY_PROCEDURE_FILE | \
+    mysql \
+        --user="$DB_USER" \
+        --password="$DB_PASSWD"\
+        --host="$DB_HOST" \
+        --database="$DB_NAME" || \
+            fail "Unable to add SQL Procedure"
+          
