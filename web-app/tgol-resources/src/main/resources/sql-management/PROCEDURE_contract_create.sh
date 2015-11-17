@@ -2,6 +2,15 @@
 
 # 2015-11-14 mfaure
 
+set -o errexit
+
+fail() {
+        echo ""
+	echo "FAILURE : $*"
+        echo ""
+	exit -1
+}
+
 #############################################
 # Usage
 #############################################
@@ -30,10 +39,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt \
-    -o h \
-    --long help,database-user:,database-passwd:,database-db:,database-host: \
-    -- "$@"`
+TEMP=`getopt -o h --long help,database-user:,database-passwd:,database-db:,database-host: -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -64,13 +70,11 @@ while true; do
 done
 
 # Mandatory arguments
-if [[ 
-    -z "$DB_USER" || \
+if [[ -z "$DB_USER" || \
     -z "$DB_PASSWD" || \
     -z "$DB_NAME" || \
     -z "$DB_HOST" || \
-    "$HELP" == "true" 
-    ]]; then
+    "$HELP" == "true" ]]; then
     usage
 fi
 
@@ -80,10 +84,14 @@ fi
 sed -i \
     -e "s#\$myDatabaseName#$DB_NAME#" \
     -e "s#\$myDatabaseUser#$DB_USER#" \
-    $MY_PROCEDURE_FILE
+    $MY_PROCEDURE_FILE || \
+        fail "Unable to set database credentials before inserting SQL Procedure"
 
 cat $MY_PROCEDURE_FILE | \
-    mysql --user="$DB_USER" \
-          --password="$DB_PASSWD"\
-          --host="$DB_NAME" \
-          --database="$DB_HOST"
+    mysql \
+        --user="$DB_USER" \
+        --password="$DB_PASSWD"\
+        --host="$DB_HOST" \
+        --database="$DB_NAME" || \
+            fail "Unable to add SQL Procedure"
+          
