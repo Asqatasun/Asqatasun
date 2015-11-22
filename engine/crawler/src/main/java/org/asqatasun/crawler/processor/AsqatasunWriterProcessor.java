@@ -41,7 +41,7 @@ import org.asqatasun.crawler.extractor.listener.ExtractorHTMLListener;
  *
  * @author jkowalczyk
  */
-public class TanaguruWriterProcessor extends Processor
+public class AsqatasunWriterProcessor extends Processor
         implements ExtractorHTMLListener, ExtractorCSSListener {
 
     private static final long serialVersionUID = -4411002064139498785L;
@@ -132,7 +132,7 @@ public class TanaguruWriterProcessor extends Processor
     /**
      * Default constructor
      */
-    public TanaguruWriterProcessor() {
+    public AsqatasunWriterProcessor() {
         super();
     }
 

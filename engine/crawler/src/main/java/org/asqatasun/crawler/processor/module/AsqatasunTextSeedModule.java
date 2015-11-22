@@ -42,12 +42,12 @@ import org.springframework.beans.factory.annotation.Required;
  *
  * @author jkowalczyk
  */
-public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSource {
+public class AsqatasunTextSeedModule extends AsqatasunSeedModule implements ReadSource {
 
     private static final long serialVersionUID = 3L;
 
     private static final Logger logger =
-        Logger.getLogger(TanaguruTextSeedModule.class.getName());
+        Logger.getLogger(AsqatasunTextSeedModule.class.getName());
 
     /**
      * Text from which to extract seeds
@@ -61,7 +61,7 @@ public class TanaguruTextSeedModule extends TanaguruSeedModule implements ReadSo
         this.textSource = seedsSource;
     }
 
-    public TanaguruTextSeedModule() {
+    public AsqatasunTextSeedModule() {
     }
 
     /**

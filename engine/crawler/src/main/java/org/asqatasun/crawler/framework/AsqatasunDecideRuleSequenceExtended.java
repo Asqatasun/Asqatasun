@@ -15,7 +15,7 @@ import org.archive.modules.deciderules.DecideRuleSequence;
  *
  * @author alingua
  */
-public class TanaguruDecideRuleSequenceExtended extends DecideRuleSequence {
+public class AsqatasunDecideRuleSequenceExtended extends DecideRuleSequence {
 
     @Override
     public DecideResult innerDecide(CrawlURI uri) {

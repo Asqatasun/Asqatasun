@@ -26,26 +26,26 @@ import org.apache.log4j.Logger;
 import org.archive.httpclient.HttpRecorderMethod;
 import org.archive.modules.CrawlURI;
 import org.archive.modules.fetcher.FetchHTTP;
-import org.asqatasun.crawler.frontier.TanaguruBdbFrontier;
+import org.asqatasun.crawler.frontier.AsqatasunBdbFrontier;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author jkowalczyk
  */
-public class TanaguruFetchHTTP extends FetchHTTP{
+public class AsqatasunFetchHTTP extends FetchHTTP{
 
     private static final long serialVersionUID = 5284296477962226238L;
 
-    private TanaguruBdbFrontier frontier;
+    private AsqatasunBdbFrontier frontier;
     @Autowired
-    public void setFrontier(TanaguruBdbFrontier frontier) {
+    public void setFrontier(AsqatasunBdbFrontier frontier) {
         this.frontier = frontier;
     }
 
     /**
      * 
      */
-    public TanaguruFetchHTTP() {
+    public AsqatasunFetchHTTP() {
         super();
     }
 

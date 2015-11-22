@@ -30,12 +30,12 @@ import org.archive.crawler.frontier.BdbFrontier;
  * This counter is then used to apply the CrawlLimitEnforcer conditions.
  * @author jkowalczyk
  */
-public class TanaguruBdbFrontier extends BdbFrontier{
+public class AsqatasunBdbFrontier extends BdbFrontier{
 
     /**
      * Default constructor
      */
-    public TanaguruBdbFrontier() {
+    public AsqatasunBdbFrontier() {
         super();
     }
     

@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author jkowalczyk
  */
-public abstract class TanaguruSeedModule extends SeedModule {
+public abstract class AsqatasunSeedModule extends SeedModule {
 
     @Override
     @Autowired

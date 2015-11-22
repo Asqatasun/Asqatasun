@@ -50,7 +50,7 @@ import org.asqatasun.crawler.ContentWriter;
 import org.asqatasun.crawler.exception.CrawlerException;
 import org.asqatasun.crawler.extractor.listener.ExtractorCSSListener;
 import org.asqatasun.crawler.extractor.listener.ExtractorHTMLListener;
-import org.asqatasun.crawler.processor.TanaguruWriterProcessor;
+import org.asqatasun.crawler.processor.AsqatasunWriterProcessor;
 import org.asqatasun.crawler.util.CrawlConfigurationUtils;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.springframework.beans.BeansException;
@@ -70,9 +70,9 @@ import org.xml.sax.SAXException;
  * 
  * @author jkowalczyk
  */
-public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
+public class AsqatasunCrawlJob implements ApplicationListener<CrawlStateEvent>{
 
-    private static final Logger LOGGER = Logger.getLogger(TanaguruCrawlJob.class);
+    private static final Logger LOGGER = Logger.getLogger(AsqatasunCrawlJob.class);
     private static final String WRITER_BEAN_NAME = "tanaguruWriter";
     private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
@@ -82,7 +82,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
     private ContentWriter contentWriter;
     private ExtractorCSSListener extractorCSSListener;
     private ExtractorHTMLListener extractorHTMLListener;
-    private TanaguruWriterProcessor tanaguruWriterProcessor;
+    private AsqatasunWriterProcessor tanaguruWriterProcessor;
     private DecideRuleSequence decideRuleSequence;
 
     /**
@@ -94,7 +94,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
      * @param crawlConfigFilePath
      * @param paramSet 
      */
-    public TanaguruCrawlJob(
+    public AsqatasunCrawlJob(
             Collection<String> urlList,
             String heritrixFileName,
             String outputDir,
@@ -331,7 +331,7 @@ public class TanaguruCrawlJob implements ApplicationListener<CrawlStateEvent>{
      */
     private void setListenerToWriter(PathSharingContext ac) {
         tanaguruWriterProcessor =
-                (TanaguruWriterProcessor) ac.getBean(WRITER_BEAN_NAME);
+                (AsqatasunWriterProcessor) ac.getBean(WRITER_BEAN_NAME);
         tanaguruWriterProcessor.setExtractorHTMLListener(extractorHTMLListener);
         tanaguruWriterProcessor.setExtractorCSSListener(extractorCSSListener);
         tanaguruWriterProcessor.setContentWriter(contentWriter);

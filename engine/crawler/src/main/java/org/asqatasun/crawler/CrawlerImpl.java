@@ -34,7 +34,7 @@ import org.archive.modules.CrawlURI;
 import org.archive.modules.deciderules.MatchesFilePatternDecideRule;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
-import org.asqatasun.crawler.framework.TanaguruCrawlJob;
+import org.asqatasun.crawler.framework.AsqatasunCrawlJob;
 import org.asqatasun.crawler.util.CrawlUtils;
 import org.asqatasun.entity.audit.*;
 import org.asqatasun.entity.parameterization.Parameter;
@@ -78,7 +78,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     private WebResource mainWebResource;
     private SSP lastFetchedSSP;
 
-    private TanaguruCrawlJob crawlJob;
+    private AsqatasunCrawlJob crawlJob;
     private final Set<Long> relatedContentSetTemp = new HashSet<>();
     
     private Pattern cssFilePattern = null;
@@ -194,7 +194,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         Collection<String> urlList = new ArrayList<>();
         urlList.add(siteURL);
-        this.crawlJob = new TanaguruCrawlJob(
+        this.crawlJob = new AsqatasunCrawlJob(
                 urlList,
                 HERITRIX_SITE_FILE_NAME,
                 getOutputDir(),
@@ -214,7 +214,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     public void setSiteURL(String siteName, Collection<String> siteURL) {
         mainWebResource = webResourceDataService.createSite(siteName);
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
-        this.crawlJob = new TanaguruCrawlJob(
+        this.crawlJob = new AsqatasunCrawlJob(
                 siteURL,
                 HERITRIX_PAGE_FILE_NAME,
                 outputDir,
@@ -235,7 +235,7 @@ public class CrawlerImpl implements Crawler, ContentWriter {
         mainWebResource = webResourceDataService.saveOrUpdate(mainWebResource);
         Collection<String> urlList = new ArrayList<>();
         urlList.add(pageURL);
-        this.crawlJob = new TanaguruCrawlJob(
+        this.crawlJob = new AsqatasunCrawlJob(
                 urlList,
                 HERITRIX_PAGE_FILE_NAME,
                 outputDir,
