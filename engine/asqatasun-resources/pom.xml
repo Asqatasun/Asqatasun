@@ -20,11 +20,11 @@
                     <exclude>**/sql-update/*</exclude>
                     <exclude>**/scripts/*</exclude>
                     <exclude>**/lib/*</exclude>
-                    <exclude>**/tanaguru-test-conf/*</exclude>
+                    <exclude>**/asqatasun-test-conf/*</exclude>
                     <exclude>**/conf/context/local-app/*</exclude>
                     <exclude>**/conf/context/ws/*</exclude>
                     <exclude>**/conf/context/crawler/*</exclude>
-                    <exclude>**/conf/tanaguru.conf</exclude>
+                    <exclude>**/conf/asqatasun.conf</exclude>
                     <exclude>**/conf/persistence.xml</exclude>
                 </excludes>
             </resource>

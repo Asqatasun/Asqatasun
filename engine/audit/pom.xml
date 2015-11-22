@@ -8,16 +8,16 @@
         <artifactId>engine</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-audit</artifactId>
+    <artifactId>asqatasun-audit</artifactId>
     <name>audit</name>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-reference</artifactId>
+            <artifactId>asqatasun-reference</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-parameterization</artifactId>
+            <artifactId>asqatasun-parameterization</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

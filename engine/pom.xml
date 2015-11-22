@@ -28,12 +28,10 @@
         <module>logging</module>
         <module>parameterization</module>
         <module>statistics</module>
-<!--        <module>tanaguru-i18n</module>-->
         <module>scenarioloader</module>
         <module>sebuilder-interpreter-tools</module>
         <module>asqatasun-api</module>
         <module>asqatasun-engine</module>
-        <module>asqatasun-jms</module>
         <module>asqatasun-resources</module>
     </modules>
 </project>

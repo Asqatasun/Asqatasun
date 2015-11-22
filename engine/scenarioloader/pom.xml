@@ -8,7 +8,7 @@
         <artifactId>engine</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-scenarioloader</artifactId>
+    <artifactId>asqatasun-scenarioloader</artifactId>
     <name>scenarioloader</name>
     <build>
         <testResources>
@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-crawler</artifactId>
+            <artifactId>asqatasun-crawler</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.github.detro.ghostdriver</groupId>
@@ -60,7 +60,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentloader</artifactId>
+            <artifactId>asqatasun-contentloader</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

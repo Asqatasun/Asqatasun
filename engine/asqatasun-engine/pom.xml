@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>org.asqatasun</groupId>
-            <artifactId>tanaguru-audit</artifactId>
+            <artifactId>asqatasun-audit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

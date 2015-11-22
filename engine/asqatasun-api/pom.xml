@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-commons-entity</artifactId>
+            <artifactId>asqatasun-commons-entity</artifactId>
         </dependency>
         <dependency>
             <groupId>${heritrixGroupId}</groupId>

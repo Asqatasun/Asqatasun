@@ -8,7 +8,7 @@
         <artifactId>engine</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-persistence</artifactId>
+    <artifactId>asqatasun-persistence</artifactId>
     <name>persistence</name>
     <build>
         <resources>
@@ -28,19 +28,19 @@
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-audit</artifactId>
+            <artifactId>asqatasun-audit</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-statistics</artifactId>
+            <artifactId>asqatasun-statistics</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-parameterization</artifactId>
+            <artifactId>asqatasun-parameterization</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-commons-entity-jpa</artifactId>
+            <artifactId>asqatasun-commons-entity-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.dbunit</groupId>

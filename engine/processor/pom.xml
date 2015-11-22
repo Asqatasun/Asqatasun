@@ -8,12 +8,12 @@
         <artifactId>engine</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-processor</artifactId>
+    <artifactId>asqatasun-processor</artifactId>
     <name>processor</name>
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-commons-processing</artifactId>
+            <artifactId>asqatasun-commons-processing</artifactId>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>

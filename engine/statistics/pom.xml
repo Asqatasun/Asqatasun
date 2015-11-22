@@ -7,7 +7,7 @@
         <version>3.2.0-SNAPSHOT</version>
     </parent>
     <groupId>org.asqatasun</groupId>
-    <artifactId>tanaguru-statistics</artifactId>
+    <artifactId>asqatasun-statistics</artifactId>
     <name>statistics</name>
     <version>3.2.0-SNAPSHOT</version>
     <url>http://www.tanaguru.org</url>
@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-audit</artifactId>
+            <artifactId>asqatasun-audit</artifactId>
             <version>${engineVersion}</version>
         </dependency>
     </dependencies>
