@@ -37,7 +37,7 @@ import org.asqatasun.crawler.extractor.listener.ExtractorHTMLListener;
 
 /**
  * Processor module that convert the results of successful fetches to
- * tanaguru-like Web-Resources and Contents.
+ * asqatasun-like Web-Resources and Contents.
  *
  * @author jkowalczyk
  */

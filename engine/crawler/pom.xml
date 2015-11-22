@@ -20,7 +20,7 @@
 <!--                    <systemProperties>
                         <property>
                         <name>java.util.logging.config.file</name>
-                        <value>$my_src_folder/Tanaguru/engine/crawler/src/test/resources/logging.properties</value>
+                        <value>$my_src_folder/Asqatasun/engine/crawler/src/test/resources/logging.properties</value>
                         </property>
                     </systemProperties>-->
                 </configuration>

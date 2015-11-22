@@ -61,9 +61,9 @@ public class CrawlerImpl implements Crawler, ContentWriter {
     private static final String UNREACHABLE_RESOURCE_STR =
             "Unreachable resource ";
     private static final String HERITRIX_SITE_FILE_NAME = 
-            "tanaguru-crawler-beans-site.xml";
+            "asqatasun-crawler-beans-site.xml";
     private static final String HERITRIX_PAGE_FILE_NAME = 
-            "tanaguru-crawler-beans-page.xml";
+            "asqatasun-crawler-beans-page.xml";
 
     /**
      * This boolean is used to determine whether a page has already been fetched

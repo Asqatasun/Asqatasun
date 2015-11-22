@@ -281,7 +281,7 @@
         </property>
     </bean>
 
-    <bean id="tanaguruWriter" class="org.asqatasun.crawler.processor.AsqatasunWriterProcessor">
+    <bean id="asqatasunWriter" class="org.asqatasun.crawler.processor.AsqatasunWriterProcessor">
         <property name="htmlRegexp">
             <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
         </property>
@@ -314,7 +314,7 @@
         <property name="processors">
             <list>
                 <!-- write to aggregate archival files... -->
-                <ref bean="tanaguruWriter"/>
+                <ref bean="asqatasunWriter"/>
                 <!-- ...send each outlink candidate URI to CandidatesChain,
                 and enqueue those ACCEPTed to the frontier... -->
                 <ref bean="candidates"/>

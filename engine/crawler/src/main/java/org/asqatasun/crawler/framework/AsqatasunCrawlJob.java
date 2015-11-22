@@ -62,10 +62,10 @@ import org.xml.sax.SAXException;
  * <p>
  * This class embeds a heritrix CrawlJob object and deals with the instanciation,
  * the launch, the stop and the clean-up. Between the instanciation and the launch
- * some listeners have to be set to the TanaguruWriterProcessor component.
+ * some listeners have to be set to the AsqatasunuWriterProcessor component.
  * That explains the rewrite of the CrawlJob launch method.
  * At the end of the process, the files opened by Heritrix while the process
- * are properly closed and the listeners of the TanaguruWriterProcessor are unset.
+ * are properly closed and the listeners of the AsqatasunWriterProcessor are unset.
  * </p>
  * 
  * @author jkowalczyk
@@ -73,16 +73,16 @@ import org.xml.sax.SAXException;
 public class AsqatasunCrawlJob implements ApplicationListener<CrawlStateEvent>{
 
     private static final Logger LOGGER = Logger.getLogger(AsqatasunCrawlJob.class);
-    private static final String WRITER_BEAN_NAME = "tanaguruWriter";
+    private static final String WRITER_BEAN_NAME = "asqatasunWriter";
     private static final String DECIDE_RULE_SEQUENCE_BEAN_NAME = "scope";
     private File currentJobOutputDir;
     private String outputDir = System.getProperty("user.dir")  + "/output";
     private final CrawlJob crawlJob;
-    private String crawlConfigFilePath = "/etc/tanaguru/context/crawler/";
+    private String crawlConfigFilePath = "/etc/asqatasun/context/crawler/";
     private ContentWriter contentWriter;
     private ExtractorCSSListener extractorCSSListener;
     private ExtractorHTMLListener extractorHTMLListener;
-    private AsqatasunWriterProcessor tanaguruWriterProcessor;
+    private AsqatasunWriterProcessor asqatasunWriterProcessor;
     private DecideRuleSequence decideRuleSequence;
 
     /**
@@ -324,24 +324,24 @@ public class AsqatasunCrawlJob implements ApplicationListener<CrawlStateEvent>{
     }
 
     /**
-     * This methods sets the appropriate listeners to the tanaguruWriterProcessor
+     * This methods sets the appropriate listeners to the asqatasunWriterProcessor
      *
      * @param crawljob
      * @param wr
      */
     private void setListenerToWriter(PathSharingContext ac) {
-        tanaguruWriterProcessor =
+        asqatasunWriterProcessor =
                 (AsqatasunWriterProcessor) ac.getBean(WRITER_BEAN_NAME);
-        tanaguruWriterProcessor.setExtractorHTMLListener(extractorHTMLListener);
-        tanaguruWriterProcessor.setExtractorCSSListener(extractorCSSListener);
-        tanaguruWriterProcessor.setContentWriter(contentWriter);
+        asqatasunWriterProcessor.setExtractorHTMLListener(extractorHTMLListener);
+        asqatasunWriterProcessor.setExtractorCSSListener(extractorCSSListener);
+        asqatasunWriterProcessor.setContentWriter(contentWriter);
         decideRuleSequence =
                 (DecideRuleSequence) ac.getBean(DECIDE_RULE_SEQUENCE_BEAN_NAME);
     }
 
     /**
      * This method returns the DecideRuleSequence instance injected to
-     * the tanaguruWriterProcessor.
+     * the asqatasunWriterProcessor.
      * @return
      */
     public DecideRuleSequence getDecideRuleSequence() {
@@ -350,20 +350,20 @@ public class AsqatasunCrawlJob implements ApplicationListener<CrawlStateEvent>{
 
     /**
      * This method returns the HtmlFilePattern instance injected to
-     * the tanaguruWriterProcessor.
+     * the asqatasunWriterProcessor.
      * @return
      */
     public Pattern getHtmlFilePattern() {
-        return tanaguruWriterProcessor.getHtmlFilePattern();
+        return asqatasunWriterProcessor.getHtmlFilePattern();
     }
 
     /**
      * This method returns the CssFilePattern instance injected to
-     * the tanaguruWriterProcessor.
+     * the asqatasunWriterProcessor.
      * @return
      */
     public Pattern getCssFilePattern() {
-        return tanaguruWriterProcessor.getCssFilePattern();
+        return asqatasunWriterProcessor.getCssFilePattern();
     }
 
     public boolean isLaunchable() {
@@ -413,18 +413,18 @@ public class AsqatasunCrawlJob implements ApplicationListener<CrawlStateEvent>{
     }
 
     /**
-     * This method cleans up the resources created by the TanaguruWriterProcessor
-     * class to enable the TanaguruWriterProcessor instance to be garbaged
+     * This method cleans up the resources created by the AsqatasunWriterProcessor
+     * class to enable the AsqatasunWriterProcessor instance to be garbaged
      * @param processor
      */
     private void cleanUpWriterResources(PathSharingContext ac) {
-        if (tanaguruWriterProcessor != null) {
-            tanaguruWriterProcessor.setExtractorCSSListener(null);
-            tanaguruWriterProcessor.setContentWriter(null);
-            tanaguruWriterProcessor.setCssRegexp(null);
-            tanaguruWriterProcessor.setExtractorHTMLListener(null);
-            tanaguruWriterProcessor.setHtmlRegexp(null);
-            tanaguruWriterProcessor = null;
+        if (asqatasunWriterProcessor != null) {
+            asqatasunWriterProcessor.setExtractorCSSListener(null);
+            asqatasunWriterProcessor.setContentWriter(null);
+            asqatasunWriterProcessor.setCssRegexp(null);
+            asqatasunWriterProcessor.setExtractorHTMLListener(null);
+            asqatasunWriterProcessor.setHtmlRegexp(null);
+            asqatasunWriterProcessor = null;
         }
     }
 

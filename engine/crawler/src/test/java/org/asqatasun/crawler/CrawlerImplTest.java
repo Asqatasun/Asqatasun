@@ -15,7 +15,7 @@ import org.asqatasun.entity.audit.SSP;
  */
 public class CrawlerImplTest extends TestCase {
 
-    private static final String URL = "http://test.tanaguru.com/";
+    private static final String URL = "http://test.asqatasun.org";
 
     public CrawlerImplTest(String testName) {
         super(testName);
@@ -61,7 +61,7 @@ public class CrawlerImplTest extends TestCase {
         StringBuilder strb = new StringBuilder();
         strb.append("<html>");
         strb.append("<head>");
-        strb.append("<link rel=\"canonical\" href=\"http://test.tanaguru.com/lol.html\" />");
+        strb.append("<link rel=\"canonical\" href=\"http://test.asqatasun.org/lol.html\" />");
         strb.append("</head>");
         strb.append("</html>");
         ssp.setSource(strb.toString());
@@ -101,7 +101,7 @@ public class CrawlerImplTest extends TestCase {
         StringBuilder strb = new StringBuilder();
         strb.append("<html>");
         strb.append("<head>");
-        strb.append("<base href=\"http://test.tanaguru.com/images\" />");
+        strb.append("<base href=\"http://test.asqatasun.org/images\" />");
         strb.append("<link rel=\"canonical\" href=\"/lol.html\" />");
         strb.append("</head>");
         strb.append("</html>");
@@ -121,27 +121,7 @@ public class CrawlerImplTest extends TestCase {
         StringBuilder strb = new StringBuilder();
         strb.append("<html>");
         strb.append("<head>");
-        strb.append("<base href=\"http://test.tanaguru.com/images\" />");
-        strb.append("<link rel=\"canonical\" href=\"/lol.html\" />");
-        strb.append("</head>");
-        strb.append("</html>");
-        ssp.setSource(strb.toString());
-        CrawlerImpl instance = new CrawlerImpl();
-        assertTrue(instance.isRelCanonicalPage(ssp));
-    }
-    
-    /**
-     * Test of isRelCanonicalPage method, of class CrawlerImpl. In this test,
-     * Base Html element is set.
-     */
-    public void testIsRelCanonicalPageWithBaseElement2() {
-        System.out.println("isRelCanonicalPageWithBaseElement");
-        SSP ssp = new MockSSP();
-        ssp.setURI(URL+"lol.html");
-        StringBuilder strb = new StringBuilder();
-        strb.append("<html>");
-        strb.append("<head>");
-        strb.append("<base href=\"http://test.tanaguru.com/\" />");
+        strb.append("<base href=\"http://test.asqatasun.org/\" />");
         strb.append("<link rel=\"canonical\" href=\"/lol.html\" />");
         strb.append("</head>");
         strb.append("</html>");
