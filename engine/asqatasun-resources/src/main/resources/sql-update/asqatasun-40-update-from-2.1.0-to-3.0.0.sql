@@ -1,5 +1,5 @@
 -- -----------------------------------------------------
--- Table `tanaguru`.`CRITERION_STATISTICS`
+-- Table `CRITERION_STATISTICS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRITERION_STATISTICS` (
   `Id_Criterion_Statistics` bigint(20) NOT NULL AUTO_INCREMENT,

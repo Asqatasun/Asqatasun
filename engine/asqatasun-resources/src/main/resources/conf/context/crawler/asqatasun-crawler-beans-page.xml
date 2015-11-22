@@ -37,7 +37,7 @@
 # This Properties map is specified in the Java 'property list' text format
 # http://java.sun.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29
 
-metadata.operatorContactUrl=http://www.open-s.com
+metadata.operatorContactUrl=http://asqatasun.org
 metadata.jobName=basic
 metadata.description=Basic crawl starting with useful defaults
 
@@ -287,7 +287,7 @@ metadata.description=Basic crawl starting with useful defaults
   
  <!-- DISPOSITION CHAIN -->
  <!-- processors declared as named beans -->
-    <bean id="tanaguruWriter" class="org.asqatasun.crawler.processor.TanaguruWriterProcessor">
+    <bean id="asqatasunWriter" class="org.asqatasun.crawler.processor.TanaguruWriterProcessor">
         <property name="htmlRegexp">
             <value>.*(?i)(/|\.htm|\.html|\.php|\.asp|\.aspx|\.jsp|\.do)$</value>
         </property>
@@ -319,7 +319,7 @@ metadata.description=Basic crawl starting with useful defaults
         <property name="processors">
             <list>
     <!-- write to aggregate archival files... -->
-                <ref bean="tanaguruWriter"/>
+                <ref bean="asqatasunWriter"/>
     <!-- ...send each outlink candidate URI to CandidatesChain, 
          and enqueue those ACCEPTed to the frontier... -->
                 <ref bean="candidates"/>

@@ -567,7 +567,7 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `tanaguru`.`WEB_RESOURCE_STATISTICS`
+-- Table `WEB_RESOURCE_STATISTICS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WEB_RESOURCE_STATISTICS` (
   `Id_Web_Resource_Statistics` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -609,7 +609,7 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
--- Table `tanaguru`.`THEME_STATISTICS`
+-- Table `THEME_STATISTICS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `THEME_STATISTICS` (
   `Id_Theme_Statistics` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -642,7 +642,7 @@ COLLATE = utf8_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `tanaguru`.`CRITERION_STATISTICS`
+-- Table `CRITERION_STATISTICS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRITERION_STATISTICS` (
   `Id_Criterion_Statistics` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -676,7 +676,7 @@ COLLATE = utf8_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `tanaguru`.`TEST_STATISTICS`
+-- Table `TEST_STATISTICS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TEST_STATISTICS` (
   `Id_Test_Statistics` bigint(20) NOT NULL AUTO_INCREMENT,
