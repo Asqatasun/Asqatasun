@@ -17,7 +17,7 @@
     <properties>
         <generator.referentielName>Referentiel Name 1.0</generator.referentielName>
         <generator.referentiel>referentielname1.0</generator.referentiel>
-        <generator.baseFolder>/home/$user/Tanaguru/rules/</generator.baseFolder>
+        <generator.baseFolder>/home/$user/Asqatasun/rules/</generator.baseFolder>
         <generator.dataFile>/home/$user/referentiel.csv</generator.dataFile>
         <generator.delimiter>ø</generator.delimiter>
         <generator.refdescriptor>http://www.example.com/refential-descriptor.html</generator.refdescriptor>

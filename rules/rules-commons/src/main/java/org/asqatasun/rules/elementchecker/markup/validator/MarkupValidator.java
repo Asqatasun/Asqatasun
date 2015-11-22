@@ -22,17 +22,12 @@
 
 package org.asqatasun.rules.elementchecker.markup.validator;
 
-//import com.rexsl.w3c.TanaguruValidatorBuilder;
-//import com.rexsl.w3c.ValidationResponse;
 
 /**
  *
  */
 public final class MarkupValidator {
 
-//    private static Map<Long, ValidationResponse> responseMapByWebResourceId = 
-//            new HashMap<Long, ValidationResponse>();
-//    
     /**
      * The holder that handles the unique instance of MarkupValidator
      */
@@ -82,7 +77,7 @@ public final class MarkupValidator {
 //            responseMapByWebResourceId.remove(webResourceId);
 //            return vr;
 //        } else {
-//            ValidationResponse vr = new TanaguruValidatorBuilder().html().validate(html);
+//            ValidationResponse vr = new AsqatasunValidatorBuilder().html().validate(html);
 //            responseMapByWebResourceId.put(webResourceId, vr);
 //            return vr;
 //        }

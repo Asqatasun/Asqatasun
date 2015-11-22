@@ -6,7 +6,7 @@
         <artifactId>rules</artifactId>
         <version>1.3.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-rules-commons</artifactId>
+    <artifactId>asqatasun-rules-commons</artifactId>
     <name>rules-commons</name>
     <build>
         <plugins>
@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>

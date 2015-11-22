@@ -39,11 +39,11 @@
     <dependencies>
         <dependency>
             <groupId>${rulesGroupId}</groupId>
-            <artifactId>tanaguru-rules-commons</artifactId>
+            <artifactId>asqatasun-rules-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>${testingToolsGroupId}</groupId>
-            <artifactId>tanaguru-rules-testing-tools</artifactId>
+            <artifactId>asqatasun-rules-testing-tools</artifactId>
         </dependency>
     </dependencies>
     <properties>

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TOMCAT_HOST_PATH=/var/lib/tomcat6/webapps/tanaguru
-#TOMCAT_HOST_PATH=/var/lib/tomcat6/vhost-int-tanaguru/ROOT/
+TOMCAT_HOST_PATH=/var/lib/tomcat6/webapps/asqatasun
+#TOMCAT_HOST_PATH=/var/lib/tomcat6/vhost-int-asqatasun/ROOT/
 
 # Copy jar in classpath
 cp lib/*.jar $TOMCAT_HOST_PATH/WEB-INF/lib
