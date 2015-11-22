@@ -40,8 +40,8 @@
         <testingToolsGroupId>org.asqatasun</testingToolsGroupId>
         <testingToolsVersion>3.2.0-SNAPSHOT</testingToolsVersion>
         
-        <tanaguruCliGroupId>org.asqatasun</tanaguruCliGroupId>
-        <tanaguruCliVersion>3.2.0-SNAPSHOT</tanaguruCliVersion>
+        <asqatasunCliGroupId>org.asqatasun</asqatasunCliGroupId>
+        <asqatasunCliVersion>3.2.0-SNAPSHOT</asqatasunCliVersion>
         
         <rulesGroupId>org.asqatasun</rulesGroupId>
         <rulesVersion>1.3.0-SNAPSHOT</rulesVersion>
