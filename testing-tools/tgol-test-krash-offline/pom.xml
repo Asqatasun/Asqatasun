@@ -10,7 +10,6 @@
     </parent>
     <artifactId>tgol-test-krash-offline</artifactId>
     <name>tgol-test-krash-offline</name>
-    <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
             <plugin>

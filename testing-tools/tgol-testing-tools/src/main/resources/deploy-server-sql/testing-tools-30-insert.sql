@@ -1,4 +1,4 @@
-USE tanaguru;
+USE asqatasun;
 
 INSERT INTO `TGSI_USER` (`Id_User`, `Email1`, `Password`, `ROLE_Id_Role`) VALUES
 (1,'xxxxxxxxxx', 'xxxxxxxxxxx','2');

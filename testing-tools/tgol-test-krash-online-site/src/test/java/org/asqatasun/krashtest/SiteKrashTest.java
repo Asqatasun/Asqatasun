@@ -26,13 +26,13 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.asqatasun.webapp.test.AbstractTanaguruOnlineTest;
+import org.asqatasun.webapp.test.AbstractAsqatasunOnlineTest;
 
 /**
  *
  * @author jkowalczyk
  */
-public class SiteKrashTest extends AbstractTanaguruOnlineTest {
+public class SiteKrashTest extends AbstractAsqatasunOnlineTest {
 
     protected Collection<String> contractIds;
 

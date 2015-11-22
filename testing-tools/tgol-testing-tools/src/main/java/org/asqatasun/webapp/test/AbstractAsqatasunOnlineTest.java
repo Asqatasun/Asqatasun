@@ -37,7 +37,7 @@ import org.asqatasun.webapp.test.data.KrashtestResult;
  *
  * @author jkowalczyk
  */
-public abstract class AbstractTanaguruOnlineTest extends TestCase {
+public abstract class AbstractAsqatasunOnlineTest extends TestCase {
 
     private final Logger LOGGER = Logger.getLogger(this.getClass());
     private static final String LOADING_ERROR_STR_EN =
@@ -110,7 +110,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     /**
      * Default constructor
      */
-    public AbstractTanaguruOnlineTest() {
+    public AbstractAsqatasunOnlineTest() {
         initialize();
     }
 
@@ -152,7 +152,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
      * @param url
      * @return
      */
-    protected String launchTanaguru(String siteName, String[] url, boolean displayAllResult) {
+    protected String launchAsqatasun(String siteName, String[] url, boolean displayAllResult) {
         login();
         driver.get(formUrl);
         if (url.length > 1) {
@@ -192,7 +192,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
     }
 
     /**
-     * This method extracts the result for a given test from the tanaguru
+     * This method extracts the result for a given test from the asqatasun
      * response
      *
      * @param testName
@@ -232,7 +232,7 @@ public abstract class AbstractTanaguruOnlineTest extends TestCase {
             driver.findElementByName(LOGIN_BUTTON_NAME).submit();
             Thread.sleep(500);
         } catch (InterruptedException ex) {
-            java.util.logging.Logger.getLogger(AbstractTanaguruOnlineTest.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbstractAsqatasunOnlineTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

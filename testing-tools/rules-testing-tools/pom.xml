@@ -8,7 +8,7 @@
         <artifactId>testing-tools</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>tanaguru-rules-testing-tools</artifactId>
+    <artifactId>asqatasun-rules-testing-tools</artifactId>
     <packaging>jar</packaging>
     <name>rules-testing-tools</name>
     <dependencies>
@@ -18,39 +18,39 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-nomenclatureloader</artifactId>
+            <artifactId>asqatasun-nomenclatureloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-rule-implementation-loader</artifactId>
+            <artifactId>asqatasun-rule-implementation-loader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-persistence</artifactId>
+            <artifactId>asqatasun-persistence</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-crawler</artifactId>
+            <artifactId>asqatasun-crawler</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentloader</artifactId>
+            <artifactId>asqatasun-contentloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentadapter</artifactId>
+            <artifactId>asqatasun-contentadapter</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-processor</artifactId>
+            <artifactId>asqatasun-processor</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-consolidator</artifactId>
+            <artifactId>asqatasun-consolidator</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>

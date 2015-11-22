@@ -6,7 +6,7 @@
 package $class.package;
 import org.asqatasun.webapp.test.data.KrashtestResult;
 
-public class $class.name extends AbstractTanaguruOnlineTest {
+public class $class.name extends AbstractAsqatasunOnlineTest {
 
     private String siteName = "$model.name";
     private String[] url = {"$model.url"};
@@ -20,7 +20,7 @@ public class $class.name extends AbstractTanaguruOnlineTest {
 
     public void testKrashtestWebappResult(){
         assertEquals(KrashtestResult.SUCCESS.toString(), computeWebappResult(
-                launchTanaguru(siteName, url, false)));
+                launchAsqatasun(siteName, url, false)));
     }
 
 }

@@ -8,7 +8,7 @@ package $class.package;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.webapp.test.data.KrashtestResult;
 
-public class $class.name extends AbstractTanaguruOnlineTest {
+public class $class.name extends AbstractAsqatasunOnlineTest {
 
     private String siteName = "$model.name";
     private String[] url = {"$model.url"};
@@ -22,7 +22,7 @@ public class $class.name extends AbstractTanaguruOnlineTest {
     }
 
     public void test$test$model.result () {
-        String response = launchTanaguru(siteName, url, true);
+        String response = launchAsqatasun(siteName, url, true);
         String krashtestResult = computeWebappResult(response);
         if (krashtestResult.equals(KrashtestResult.SUCCESS.toString())) {
             String functionnalResult = computeTestResult(testName);

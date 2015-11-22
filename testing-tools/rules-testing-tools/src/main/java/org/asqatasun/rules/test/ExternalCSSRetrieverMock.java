@@ -35,7 +35,7 @@ import org.asqatasun.entity.audit.StylesheetContent;
  */
 public class ExternalCSSRetrieverMock implements ExternalCSSRetriever {
 
-    private static final String INLINE_CSS_SUFFIX = "#tanaguru-css-";
+    private static final String INLINE_CSS_SUFFIX = "#asqatasun-css-";
     Collection<StylesheetContent> externalCss = new HashSet<StylesheetContent>();
     
     @Override

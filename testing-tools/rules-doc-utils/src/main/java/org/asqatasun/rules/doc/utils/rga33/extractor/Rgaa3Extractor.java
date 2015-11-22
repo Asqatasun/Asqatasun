@@ -44,12 +44,12 @@ public class Rgaa3Extractor {
 
     static final String SOURCES_DIR_PATH = "/home/$user/Documents/Sources/";
     
-    static final String TANAGURU_CONTEXT_PATH = SOURCES_DIR_PATH+"Tanaguru/";
-    static final String DOC_CONTEXT_PATH = SOURCES_DIR_PATH+"Tanaguru-rules-RGAA-3-doc";
+    static final String TANAGURU_CONTEXT_PATH = SOURCES_DIR_PATH+"Asqatasun/";
+    static final String DOC_CONTEXT_PATH = SOURCES_DIR_PATH+"Asqatasun-rules-RGAA-3-doc";
     
     static final String RGAA3_CONTEXT_PATH = TANAGURU_CONTEXT_PATH+"rules/rgaa3.0/";
-    static final String RGAA3_SRC_PATH = RGAA3_CONTEXT_PATH+"src/main/java/org/opens/tanaguru/rules/rgaa30/";
-    static final String RGAA3_TEST_PATH = RGAA3_CONTEXT_PATH+"src/test/java/org/opens/tanaguru/rules/rgaa30/";
+    static final String RGAA3_SRC_PATH = RGAA3_CONTEXT_PATH+"src/main/java/org/opens/asqatasun/rules/rgaa30/";
+    static final String RGAA3_TEST_PATH = RGAA3_CONTEXT_PATH+"src/test/java/org/opens/asqatasun/rules/rgaa30/";
     static final String RGAA3_TESTCASE_PATH = RGAA3_CONTEXT_PATH+"src/test/resources/testcases/rgaa30/";
 
     static final String RGAA3_I18_FILES_PATH = RGAA3_CONTEXT_PATH+"src/main/resources/i18n/";
@@ -224,11 +224,11 @@ public class Rgaa3Extractor {
             sqlInsert.append(rule.getRuleDot());
             sqlInsert.append("', ");
             sqlInsert.append(rank);
-            sqlInsert.append(", '1.0', 'rgaa30', 'org.opens.tanaguru.rules.rgaa30.");
+            sqlInsert.append(", '1.0', 'rgaa30', 'org.opens.asqatasun.rules.rgaa30.");
             sqlInsert.append(rule.getFileName());
             sqlInsert.append("', NULL, ");
             sqlInsert.append(rule.getLevelId());
-            sqlInsert.append(", 1, 'http://tanaguru-rules-rgaa3.readthedocs.org/en/master/Rule-");
+            sqlInsert.append(", 1, 'http://asqatasun-rules-rgaa3.readthedocs.org/en/master/Rule-");
             sqlInsert.append(rule.ruleDash);
             sqlInsert.append("', b'1'),");
             sqlInsert.append("\n");
@@ -338,7 +338,7 @@ public class Rgaa3Extractor {
         }
         
         StringBuilder strb = new StringBuilder();
-        strb.append("site_name: Tanaguru Rules RGAA3");
+        strb.append("site_name: Asqatasun Rules RGAA3");
         strb.append("\n");
         strb.append("pages:");
         strb.append("\n");
@@ -367,7 +367,7 @@ public class Rgaa3Extractor {
         strb.append("\n");
         strb.append("theme: readthedocs");
         strb.append("\n");
-        strb.append("repo_url: https://github.com/Tanaguru/Tanaguru");
+        strb.append("repo_url: https://github.com/Asqatasun/Asqatasun");
         
         FileUtils.write(new File (DOC_CONTEXT_PATH+"/mkdocs.yml"), strb.toString());
     }

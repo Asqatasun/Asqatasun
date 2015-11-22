@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-    <persistence-unit name="tanaguruPU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="asqatasunPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <non-jta-data-source>jdbc/tanaguru-TU</non-jta-data-source>
+        <non-jta-data-source>jdbc/asqatasun-TU</non-jta-data-source>
         
         <class>org.asqatasun.entity.audit.AuditImpl</class>
         <class>org.asqatasun.entity.reference.TestImpl</class>

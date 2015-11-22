@@ -30,9 +30,9 @@ import junit.framework.TestCase;
  *
  * @author jkowalczyk
  */
-public class AbstractTanaguruOnlineTestTest extends TestCase {
+public class AbstractAsqatasunOnlineTestTest extends TestCase {
 
-    public AbstractTanaguruOnlineTestTest(String testName) {
+    public AbstractAsqatasunOnlineTestTest(String testName) {
         super(testName);
     }
 
@@ -71,7 +71,6 @@ public class AbstractTanaguruOnlineTestTest extends TestCase {
         } catch (IOException e) {
             // If another exception is generated, print a stack trace
         }
-//        System.out.println(AbstractTanaguruOnlineTest.computeWebappResult(str.toString(), "6.1.1"));
     }
 
 }
