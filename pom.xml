@@ -15,7 +15,6 @@
         <module>rules</module>
         <module>web-app</module>
         <module>cli</module>
-        <!--<module>ws</module>-->
     </modules>
     <profiles>
         <profile>
