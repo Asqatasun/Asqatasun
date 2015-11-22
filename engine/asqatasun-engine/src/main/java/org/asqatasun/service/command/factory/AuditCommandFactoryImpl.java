@@ -35,7 +35,6 @@ import org.asqatasun.entity.service.audit.ProcessResultDataService;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
-import org.asqatasun.messagin.TanaguruMsgOutService;
 import org.asqatasun.service.AnalyserService;
 import org.asqatasun.service.ConsolidatorService;
 import org.asqatasun.service.ContentAdapterService;
@@ -148,11 +147,6 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     @Autowired
     public void setAdaptationListener(AdaptationListener adaptationListener) {
         this.adaptationListener = adaptationListener;
-    }
-
-    private TanaguruMsgOutService tanaguruMsgOutService;
-    public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
-        this.tanaguruMsgOutService = tanaguruMsgOutService;
     }
 
     private boolean auditPageWithCrawler = false;
@@ -281,10 +275,5 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         auditCommand.setProcessorService(processorService);
         auditCommand.setTestDataService(testDataService);
         auditCommand.setWebResourceDataService(webResourceDataService);
-
-        //service to send message on queu
-        if (tanaguruMsgOutService != null) {
-            auditCommand.setTanaguruMsgOutService(tanaguruMsgOutService);
-        }
     }
 }

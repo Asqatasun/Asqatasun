@@ -92,14 +92,12 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         //FIXME :Taoufiq
         try {
             init();
-            sendMessage("[MSGOUT] AUDIT " + getAudit().getId() + " PENDIG ");
             loadContent();
             adaptContent();
             process();
             consolidate();
             analyse();
             fireAuditCompleted();
-            sendMessage("[MSGOUT] AUDIT " + getAudit().getId() + " FINISHED ");
         } catch (Exception e) {
             fireAuditException(e);
         }
@@ -134,11 +132,6 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     @Override
     public void analyse() {
         auditCommand.analyse();
-    }
-
-    @Override
-    public boolean sendMessage(String urlPage) {
-        return auditCommand.sendMessageOut(urlPage);
     }
 
     private void fireAuditCompleted() {

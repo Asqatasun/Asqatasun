@@ -109,8 +109,6 @@ public class AuditServiceThreadImplTest extends TestCase {
         mockAuditCommand.analyse();
         expectLastCall().once();
         expect(mockAuditCommand.getAudit()).andReturn(mockAudit).anyTimes();
-        expect(mockAuditCommand.sendMessageOut("[MSGOUT] AUDIT 1 PENDIG ")).andReturn(Boolean.TRUE);
-        expect(mockAuditCommand.sendMessageOut("[MSGOUT] AUDIT 1 FINISHED ")).andReturn(Boolean.TRUE);
         
         replay(mockAudit);
         replay(mockAuditCommand);

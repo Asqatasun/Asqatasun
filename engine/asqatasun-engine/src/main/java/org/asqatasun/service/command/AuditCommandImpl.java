@@ -42,7 +42,6 @@ import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.messagin.TanaguruMsgOutService;
 import org.asqatasun.service.*;
 import org.asqatasun.util.MD5Encoder;
 
@@ -189,15 +188,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public void setAnalyserService(AnalyserService analyserService) {
         this.analyserService = analyserService;
     }   
-    
-    //The sender
-    private TanaguruMsgOutService tanaguruMsgOutService;
-    public TanaguruMsgOutService getTanaguruMsgOutService() {
-        return tanaguruMsgOutService;
-    }
-    public void setTanaguruMsgOutService(TanaguruMsgOutService tanaguruMsgOutService) {
-        this.tanaguruMsgOutService = tanaguruMsgOutService;
-    }
 
     // The listeners
 	private AdaptationListener adaptationListener;
@@ -738,14 +728,6 @@ public abstract class AuditCommandImpl implements AuditCommand {
         if (cleanUpRelatedContent) {
             cleanUpTestData(audit);
         }
-    }
-    
-    @Override
-    public boolean sendMessageOut(String ulrPage){
-        if (tanaguruMsgOutService != null) {
-            return tanaguruMsgOutService.send(ulrPage);
-        }
-        return false;
     }
     
     /**
