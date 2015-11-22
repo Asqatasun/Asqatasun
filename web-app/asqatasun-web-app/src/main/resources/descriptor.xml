@@ -133,14 +133,6 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management/Passwdmd5</outputDirectory>
         </fileSet>
-<!--        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/browser-installation</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/web-app/lib</outputDirectory>
-        </fileSet>-->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/token-master-key-encryptor</directory>
             <includes>
