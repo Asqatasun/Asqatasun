@@ -27,19 +27,19 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-audit</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-statistics</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-parameterization</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-commons-entity-jpa</artifactId>
         </dependency>
         <dependency>

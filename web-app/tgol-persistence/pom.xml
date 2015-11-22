@@ -12,15 +12,15 @@
     <name>tgol-persistence</name>
     <dependencies>
         <dependency>
-            <groupId>${webappGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>tgol-si</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-persistence</artifactId>
         </dependency>
         <dependency>
-            <groupId>${webappGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>tgol-data-presentation</artifactId>
         </dependency>
         <dependency>

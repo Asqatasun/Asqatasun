@@ -112,13 +112,5 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
-        <fileSet>
-            <directory>${basedir}/../../engine/asqatasun-resources/src/main/resources/sql-update</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/engine/sql-update</outputDirectory>
-        </fileSet>
     </fileSets>
 </assembly>

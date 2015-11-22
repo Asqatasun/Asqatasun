@@ -12,7 +12,7 @@
     <name>processor</name>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-commons-processing</artifactId>
         </dependency>
         <dependency>

@@ -12,11 +12,11 @@
     <name>tgol-api</name>
     <dependencies>
         <dependency>
-            <groupId>${webappGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>email-sender</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>

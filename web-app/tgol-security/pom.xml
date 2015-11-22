@@ -12,7 +12,7 @@
     <name>tgol-security</name>
     <dependencies>
         <dependency>
-            <groupId>${webappGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>tgol-api</artifactId>
         </dependency>
         <dependency>

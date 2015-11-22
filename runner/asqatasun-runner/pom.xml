@@ -19,7 +19,7 @@
                         <descriptor>src/main/resources/descriptor.xml</descriptor>
                     </descriptors>
                     <outputDirectory>target</outputDirectory>
-                    <finalName>asqatasun-${engineVersion}.i386</finalName>
+                    <finalName>asqatasun-runner-${asqatasunVersion}.i386</finalName>
                 </configuration>
                 <executions>
                     <execution>
@@ -35,93 +35,92 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-engine</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-resources</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-persistence</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-nomenclatureloader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rule-implementation-loader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-crawler</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-contentloader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-contentadapter</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-processor</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-consolidator</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-analyser</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-scenarioloader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-logging</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${rulesGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${rulesGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-rgaa2.2</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${rulesGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-rgaa3.0</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>${rulesGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-seo1.0</artifactId>
-            <version>${rulesVersion}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>

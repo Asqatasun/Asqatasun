@@ -4,7 +4,7 @@
      <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>1.3.0-SNAPSHOT</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-rules-commons</artifactId>
     <name>rules-commons</name>
@@ -26,15 +26,15 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-resources</artifactId>
         </dependency>
         <dependency>

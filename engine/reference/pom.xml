@@ -12,7 +12,7 @@
     <name>reference</name>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>

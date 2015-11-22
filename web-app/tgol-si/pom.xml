@@ -12,11 +12,11 @@
     <name>tgol-si</name>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-audit</artifactId>
         </dependency>
         <dependency>
-            <groupId>${webappGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>tgol-api</artifactId>
         </dependency>
     </dependencies>

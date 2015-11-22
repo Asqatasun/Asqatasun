@@ -12,11 +12,11 @@
     <name>asqatasun-engine</name>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
@@ -32,7 +32,7 @@
             <artifactId>easymockclassextension</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.asqatasun</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-audit</artifactId>
             <scope>test</scope>
         </dependency>

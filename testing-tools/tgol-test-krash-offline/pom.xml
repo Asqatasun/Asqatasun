@@ -13,7 +13,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>${testingToolsGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-maven-testgenerator-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
                 <executions>
@@ -35,12 +35,12 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${testingToolsGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>tgol-testing-tools</artifactId>
         </dependency>
         <dependency>

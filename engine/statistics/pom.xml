@@ -12,14 +12,12 @@
     <version>3.2.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-audit</artifactId>
-            <version>${engineVersion}</version>
         </dependency>
     </dependencies>
 </project>

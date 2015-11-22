@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>1.3.0-SNAPSHOT</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-rules-rgaa3.0</artifactId>
     <name>rules-rgaa3.0</name>
@@ -40,11 +40,11 @@
     
     <dependencies>
         <dependency>
-            <groupId>${rulesGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>${testingToolsGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-testing-tools</artifactId>
         </dependency>
     </dependencies>

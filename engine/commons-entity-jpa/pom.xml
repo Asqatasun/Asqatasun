@@ -12,7 +12,7 @@
     <name>commons-entity-jpa</name>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-commons-entity</artifactId>
         </dependency>
         <dependency>

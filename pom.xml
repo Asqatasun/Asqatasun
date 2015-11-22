@@ -30,20 +30,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <engineGroupId>org.asqatasun</engineGroupId>
-        <engineVersion>3.2.0-SNAPSHOT</engineVersion>
-        
-        <webappGroupId>org.asqatasun</webappGroupId>
-        <webappVersion>3.2.0-SNAPSHOT</webappVersion>
-        
-        <testingToolsGroupId>org.asqatasun</testingToolsGroupId>
-        <testingToolsVersion>3.2.0-SNAPSHOT</testingToolsVersion>
-        
-        <runnerGroupId>org.asqatasun</runnerGroupId>
-        <runnerVersion>3.2.0-SNAPSHOT</runnerVersion>
-        
-        <rulesGroupId>org.asqatasun</rulesGroupId>
-        <rulesVersion>1.3.0-SNAPSHOT</rulesVersion>
+        <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
+        <asqatasunVersion>3.2.0-SNAPSHOT</asqatasunVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
@@ -178,50 +166,50 @@
 
             <!-- asqatasun-rules dependencies -->
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-commons</artifactId>
-                <version>${rulesVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
-                <version>${rulesVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-rgaa2.2</artifactId>
-                <version>${rulesVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-rgaa3.0</artifactId>
-                <version>${rulesVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-seo1.0</artifactId>
-                <version>${rulesVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
 
             <!-- asqatasun-engine dependencies -->
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-commons-entity</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-commons-entity-jpa</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-api</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>slf4j-api</artifactId>
@@ -242,14 +230,14 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-audit</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-crawler</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>poi</groupId>
@@ -266,126 +254,126 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-persistence</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-jms</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-statistics</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-reference</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-parameterization</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-commons-processing</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-contentloader</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-engine</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-resources</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-nomenclatureloader</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rule-implementation-loader</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-contentadapter</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-processor</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-consolidator</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-analyser</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-scenarioloader</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-logging</artifactId>
-                <version>${engineVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
 
             <!-- asqatasun testing-tools -->
             <dependency>
-                <groupId>${testingToolsGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-testing-tools</artifactId>
-                <version>${testingToolsVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>${testingToolsGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-testing-tools</artifactId>
-                <version>${testingToolsVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>test</scope>
             </dependency>
 
             <!-- asqatasun web-app -->
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-api</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-data-presentation</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-si</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -394,15 +382,15 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-orchestrator</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>email-sender</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.apache.commons</groupId>
@@ -415,9 +403,9 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>security</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.apache.commons</groupId>
@@ -430,30 +418,30 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-persistence</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-security</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-voter</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-report</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-resources</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
 
