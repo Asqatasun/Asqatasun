@@ -71,10 +71,4 @@ public interface AuditCommand {
      */
     void analyse();
     
-    /**
-     * 
-     * @param urlPage
-     */
-    boolean sendMessageOut(String urlPage);
-    
 }

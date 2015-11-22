@@ -87,9 +87,4 @@ public interface AuditServiceThread extends Runnable {
      */
     void remove(AuditServiceThreadListener listener);
     
-    /**
-     * 
-     */
-    
-    boolean sendMessage(String urlPage);
 }

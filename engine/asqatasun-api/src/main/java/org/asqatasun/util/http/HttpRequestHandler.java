@@ -56,7 +56,7 @@ import org.apache.log4j.Logger;
  */
 public class HttpRequestHandler {
     
-    private static final String TANAGURU_USER_AGENT = "tanaguru";
+    private static final String ASQATASUN_USER_AGENT = "asqatasun";
     private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
 
     private String proxyPort;
@@ -263,7 +263,7 @@ public class HttpRequestHandler {
         HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
         httpClientBuilder.setDefaultRequestConfig(requestConfig);
         httpClientBuilder.setConnectionManager(new PoolingHttpClientConnectionManager());
-        httpClientBuilder.setUserAgent(TANAGURU_USER_AGENT);
+        httpClientBuilder.setUserAgent(ASQATASUN_USER_AGENT);
         if (isProxySet(url)) {
             LOGGER.debug(("Set proxy with " + proxyHost + " and " + proxyPort));
             httpClientBuilder.setProxy(new HttpHost(proxyHost, Integer.valueOf(proxyPort)));

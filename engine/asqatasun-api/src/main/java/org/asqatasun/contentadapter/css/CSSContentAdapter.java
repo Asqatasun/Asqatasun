@@ -29,8 +29,8 @@ import org.asqatasun.contentadapter.ContentAdapter;
  */
 public interface CSSContentAdapter extends ContentAdapter {
     
-    String INLINE_CSS_PREFIX = "#tanaguru-inline-";
-    String LOCALE_CSS_PREFIX = "#tanaguru-locale-";
+    String INLINE_CSS_PREFIX = "#asqatasun-inline-";
+    String LOCALE_CSS_PREFIX = "#asqatasun-locale-";
     String CSS_ON_ERROR = "CSS_ON_ERROR";
     
 }
