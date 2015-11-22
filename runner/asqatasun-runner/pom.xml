@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.asqatasun</groupId>
-        <artifactId>cli</artifactId>
+        <artifactId>runner</artifactId>
         <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <artifactId>asqatasun-cli</artifactId>
-    <name>asqatasun-cli</name>
+    <artifactId>asqatasun-runner</artifactId>
+    <name>asqatasun-runner</name>
     <build>
         <plugins>
             <plugin>

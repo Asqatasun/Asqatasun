@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.cli;
+package org.asqatasun.runner;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -59,7 +59,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
  *
  * @author jkowalczyk
  */
-public class Tanaguru implements AuditServiceListener {
+public class Asqatasun implements AuditServiceListener {
 
     private static final String APPLICATION_CONTEXT_FILE_PATH = "conf/context/application-context.xml";
     
@@ -94,7 +94,7 @@ public class Tanaguru implements AuditServiceListener {
     
     private static String AUDIT_TYPE = PAGE_AUDIT;
     
-    private static String TANAGURU_HOME;
+    private static String ASQATASUN_HOME;
     
     private AuditService auditService = null;
     private AuditDataService auditDataService = null;
@@ -109,7 +109,7 @@ public class Tanaguru implements AuditServiceListener {
         if (args == null) {
             return;
         }
-        TANAGURU_HOME = System.getenv("TANAGURU_PATH");
+        ASQATASUN_HOME = System.getenv("ASQATASUN_PATH");
         CommandLineParser clp = new BasicParser();
         try {
             CommandLine cl = clp.parse(OPTIONS, args);
@@ -187,19 +187,19 @@ public class Tanaguru implements AuditServiceListener {
                 if (!isValidPageUrl(cl)) {
                     printUsage();
                 } else {
-                    new Tanaguru().runAuditOnline(cl.getArgs(),TANAGURU_HOME, REF, LEVEL);
+                    new Asqatasun().runAuditOnline(cl.getArgs(),ASQATASUN_HOME, REF, LEVEL);
                 }
             } else if (AUDIT_TYPE.equalsIgnoreCase(SCENARIO_AUDIT)) {
                 if (!isValidScenarioPath(cl)) {
                     printUsage();
                 } else {
-                    new Tanaguru().runAuditScenario(cl.getArgs()[0],TANAGURU_HOME, REF, LEVEL);
+                    new Asqatasun().runAuditScenario(cl.getArgs()[0],ASQATASUN_HOME, REF, LEVEL);
                 }
             } else if (AUDIT_TYPE.equalsIgnoreCase(FILE_AUDIT)) {
                 if (!isValidFilePath(cl)) {
                     printUsage();
                 } else {
-                    new Tanaguru().runAuditUpload(cl.getArgs(),TANAGURU_HOME, REF, LEVEL);
+                    new Asqatasun().runAuditUpload(cl.getArgs(),ASQATASUN_HOME, REF, LEVEL);
                 }
             } else if (AUDIT_TYPE.equalsIgnoreCase(SITE_AUDIT)) {
                 if (!isValidSiteUrl(cl)) {
@@ -210,18 +210,18 @@ public class Tanaguru implements AuditServiceListener {
                 }
             }
         } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(Tanaguru.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asqatasun.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
 
-    public Tanaguru() {
+    public Asqatasun() {
         super();
     }
 
-    public void runAuditOnline(String[] urlTab, String tanaguruHome, String ref, String level) {
+    public void runAuditOnline(String[] urlTab, String asqatasunHome, String ref, String level) {
         Logger.getLogger(this.getClass()).info("runAuditOnline");
-        initServices(tanaguruHome);
+        initServices(asqatasunHome);
 
         Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
 
@@ -234,8 +234,8 @@ public class Tanaguru implements AuditServiceListener {
         }
     }
 
-    public void runAuditScenario(String scenarioFilePath, String tanaguruHome, String ref, String level) {
-        initServices(tanaguruHome);
+    public void runAuditScenario(String scenarioFilePath, String asqatasunHome, String ref, String level) {
+        initServices(asqatasunHome);
 
         Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
         System.out.println(scenarioFilePath);
@@ -248,8 +248,8 @@ public class Tanaguru implements AuditServiceListener {
         }
     }
     
-    public void runAuditUpload(String[] uploadFilePath, String tanaguruHome, String ref, String level) {
-        initServices(tanaguruHome);
+    public void runAuditUpload(String[] uploadFilePath, String asqatasunHome, String ref, String level) {
+        initServices(asqatasunHome);
 
         Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
 
@@ -356,10 +356,10 @@ public class Tanaguru implements AuditServiceListener {
 
     /**
      *
-     * @param tanaguruHome
+     * @param asqatasunHome
      */
-    private void initServices(String tanaguruHome) {
-        ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(tanaguruHome + "/" + APPLICATION_CONTEXT_FILE_PATH);
+    private void initServices(String asqatasunHome) {
+        ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(asqatasunHome + "/" + APPLICATION_CONTEXT_FILE_PATH);
         BeanFactory springBeanFactory = springApplicationContext;
         auditService = (AuditService) springBeanFactory.getBean("auditService");
         auditDataService = (AuditDataService) springBeanFactory.getBean("auditDataService");
@@ -497,7 +497,7 @@ public class Tanaguru implements AuditServiceListener {
      */
     private static void printUsage() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("./bin/tanaguru.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...\n", OPTIONS);
+        formatter.printHelp("./bin/asqatasun.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...\n", OPTIONS);
     }
 
     /**

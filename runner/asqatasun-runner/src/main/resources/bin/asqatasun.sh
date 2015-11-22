@@ -1,22 +1,22 @@
 #!/bin/bash
 
-# start-tanaguru -- startup script for the asqatasun engine service
-# Written by Jérôme Kowalczyk <jk@open-s.com>.
+# start-asqatasun -- startup script for the asqatasun engine service
+# Written by Jérôme Kowalczyk <jk-dev@mdeskoj.fr>.
 
 set -e
 
 ###################################
 # Definition of LOCAL_PATH variable
 ###################################
-TANAGURU_PATH=`dirname $0`
-TANAGURU_PATH=$TANAGURU_PATH/..
-export TANAGURU_PATH=$TANAGURU_PATH
+ASQATASUN_PATH=`dirname $0`
+ASQATASUN_PATH=$ASQATASUN_PATH/..
+export ASQATASUN_PATH=$ASQATASUN_PATH
 
 ####################
 # Build-in classpath
 ####################
-TESTS_FILE_DIR=$TANAGURU_PATH/conf
-LIB_DIR=$TANAGURU_PATH/lib
+TESTS_FILE_DIR=$ASQATASUN_PATH/conf
+LIB_DIR=$ASQATASUN_PATH/lib
 
 CLASSPATH=$TESTS_FILE_DIR:/usr/share/java/mysql-connector-java.jar
 
@@ -48,7 +48,7 @@ export JAVA_HOME
 XMX_VALUE=256
 
 # store options in variable before shifting
-TANAGURU_OPTIONS=$@
+ASQATASUN_OPTIONS=$@
 
 while [[ $# > 1 ]]
 do
@@ -81,12 +81,12 @@ fi
 # so the maximum heap size is set to 256M.
 # Set java.awt.headless=true if you work without X11 display
 ##################
-JAVA_OPTS="-Dlog4j.configuration=file:$TANAGURU_PATH/logs/log4j.properties -Djava.util.logging.config.file=file:$TANAGURU_PATH/logs/logging.properties -Xms64M  -Xmx${XMX_VALUE}M -classpath $CLASSPATH  "
+JAVA_OPTS="-Dlog4j.configuration=file:$ASQATASUN_PATH/logs/log4j.properties -Djava.util.logging.config.file=file:$ASQATASUN_PATH/logs/logging.properties -Xms64M  -Xmx${XMX_VALUE}M -classpath $CLASSPATH  "
 JAVA_BIN="$JAVA_HOME/bin/java "
 
 
 ##################
-# LAUNCH_TANAGURU
+# LAUNCH_ASQATASUN
 ##################
 
-$JAVA_BIN $JAVA_OPTS org.asqatasun.cli.Tanaguru ${TANAGURU_OPTIONS}
+$JAVA_BIN $JAVA_OPTS org.asqatasun.runner.Asqatasun ${ASQATASUN_OPTIONS}
