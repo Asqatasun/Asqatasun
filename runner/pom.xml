@@ -12,6 +12,6 @@
     <packaging>pom</packaging>
     <name>runner</name>
     <modules>
-        <module>asqatasun-cli</module>
+        <module>asqatasun-runner</module>
     </modules>
 </project>

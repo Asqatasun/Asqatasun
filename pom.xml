@@ -14,7 +14,7 @@
         <module>testing-tools</module>
         <module>rules</module>
         <module>web-app</module>
-        <module>cli</module>
+        <module>runner</module>
     </modules>
     <profiles>
         <profile>
