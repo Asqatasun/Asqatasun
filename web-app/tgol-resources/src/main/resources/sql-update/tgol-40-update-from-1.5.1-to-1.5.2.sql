@@ -445,7 +445,7 @@ drop procedure create_contract_functionality;
 -- Creation of relation between contract and referential
 -- -----------------------------------------------------------------
 delimiter |
-CREATE DEFINER=`tanaguru`@`localhost` PROCEDURE `create_contract_referential`()
+CREATE DEFINER=`asqatasun`@`localhost` PROCEDURE `create_contract_referential`()
 BEGIN
 
   DECLARE done INT DEFAULT 0;

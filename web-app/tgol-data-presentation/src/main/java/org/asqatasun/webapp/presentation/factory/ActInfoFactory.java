@@ -29,7 +29,7 @@ import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.webapp.entity.contract.Act;
-import org.asqatasun.webapp.entity.decorator.tanaguru.parameterization.ParameterDataServiceDecorator;
+import org.asqatasun.webapp.entity.decorator.asqatasun.parameterization.ParameterDataServiceDecorator;
 import org.asqatasun.webapp.entity.service.statistics.StatisticsDataService;
 import org.asqatasun.webapp.presentation.data.ActInfo;
 import org.asqatasun.webapp.presentation.data.ActInfoImpl;

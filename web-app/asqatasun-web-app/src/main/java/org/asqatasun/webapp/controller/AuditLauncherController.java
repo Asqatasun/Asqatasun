@@ -39,7 +39,7 @@ import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.KrashAuditException;
 import org.asqatasun.webapp.exception.LostInSpaceException;
-import org.asqatasun.webapp.orchestrator.TanaguruOrchestrator;
+import org.asqatasun.webapp.orchestrator.AsqatasunOrchestrator;
 import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.asqatasun.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
@@ -59,13 +59,13 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
 
     private String groupePagesName = "";
     /**
-     * The TanaguruOrchestrator instance needed to launch the audit process
+     * The AsqatasunOrchestrator instance needed to launch the audit process
      */
-    private TanaguruOrchestrator tanaguruExecutor;
+    private AsqatasunOrchestrator asqatasunExecutor;
 
     @Autowired
-    public final void setTanaguruExecutor(TanaguruOrchestrator tanaguruExecutor) {
-        this.tanaguruExecutor = tanaguruExecutor;
+    public final void setAsqatasunExecutor(AsqatasunOrchestrator asqatasunExecutor) {
+        this.asqatasunExecutor = asqatasunExecutor;
     }
     /**
      * The RestrictionHandler instance needed to decide
@@ -191,7 +191,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
             }
             String url = getContractDataService().getUrlFromContractOption(contract);
             if (scope.equals(ScopeEnum.DOMAIN)) {
-                tanaguruExecutor.auditSite(
+                asqatasunExecutor.auditSite(
                         contract,
                         url,
                         getClientIpAddress(),
@@ -199,7 +199,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
                         locale);
                 model.addAttribute(TgolKeyStore.TESTED_URL_KEY, url);
             } else if (scope.equals(ScopeEnum.SCENARIO)) {
-                tanaguruExecutor.auditScenario(
+                asqatasunExecutor.auditScenario(
                         contract,
                         auditSetUpCommand.getScenarioId(),
                         getClientIpAddress(),
@@ -298,7 +298,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
         Set<Parameter> paramSet = getUserParamSet(auditSetUpCommand, contract.getId(), trueUrl.size(), trueUrl.get(0));
         if (trueUrl.size() == 1) {
             LOGGER.debug("Launch " + trueUrl.get(0) + " audit in page mode");
-            return tanaguruExecutor.auditPage(
+            return asqatasunExecutor.auditPage(
                     contract,
                     trueUrl.get(0),
                     getClientIpAddress(),
@@ -311,7 +311,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
             }
             groupePagesName = extractGroupNameFromUrl(finalUrlTab[0]);
             LOGGER.debug("Launch " + groupePagesName + " audit in group of pages mode");
-            return tanaguruExecutor.auditSite(
+            return asqatasunExecutor.auditSite(
                     contract,
                     groupePagesName,
                     trueUrl,
@@ -337,7 +337,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
 
         Map<String, String> fileMap = auditSetUpCommand.getFileMap();
 
-        return tanaguruExecutor.auditPageUpload(
+        return asqatasunExecutor.auditPageUpload(
                 contract,
                 fileMap,
                 getClientIpAddress(),

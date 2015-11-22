@@ -33,7 +33,7 @@ import org.asqatasun.webapp.entity.contract.Contract;
  *
  * @author jkowalczyk
  */
-public interface TanaguruOrchestrator {
+public interface AsqatasunOrchestrator {
 
     /**
      * 

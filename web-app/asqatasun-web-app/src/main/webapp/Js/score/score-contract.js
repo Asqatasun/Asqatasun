@@ -19,8 +19,8 @@ $(document).ready(function() {
                         null, 
                         null, 
                         true, // addText
-                        -46, // tanaguruMeterXOffset
-                        -28, // tanaguruMeterXOffset
+                        -46, // asqatasunMeterXOffset
+                        -28, // asqatasunMeterXOffset
                         -1, // scoreXOffset
                         5, // scoreYOffset
                         36, // percentXOffset

@@ -296,8 +296,8 @@ buildScoreDonut = function() {
                         null, 
                         null, 
                         true, // addText
-                        -44, // tanaguruMeterXOffset
-                        -28, // tanaguruMeterXOffset
+                        -44, // asqatasunMeterXOffset
+                        -28, // asqatasunMeterXOffset
                         -1, // scoreXOffset
                         5, // scoreYOffset
                         36, // percentXOffset

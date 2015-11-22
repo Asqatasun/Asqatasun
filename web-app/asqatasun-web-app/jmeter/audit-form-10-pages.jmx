@@ -29,14 +29,14 @@
         <stringProp name="checkQuery">Select 1</stringProp>
         <stringProp name="connectionAge">5000</stringProp>
         <stringProp name="dataSource">MySQL</stringProp>
-        <stringProp name="dbUrl">jdbc:mysql://localhost:3306/tanaguru</stringProp>
+        <stringProp name="dbUrl">jdbc:mysql://localhost:3306/asqatasun</stringProp>
         <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
         <boolProp name="keepAlive">true</boolProp>
         <stringProp name="password">t4n4guru</stringProp>
         <stringProp name="poolMax">10</stringProp>
         <stringProp name="timeout">10000</stringProp>
         <stringProp name="trimInterval">60000</stringProp>
-        <stringProp name="username">tanaguru</stringProp>
+        <stringProp name="username">asqatasun</stringProp>
       </JDBCDataSource>
       <hashTree/>
       <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">

@@ -8,8 +8,8 @@ function drawScore(selection,
                    selectionClass, 
                    selectionReplacementClass,
                    addText, 
-                   tanaguruMeterXOffset, 
-                   tanaguruMeterYOffset, 
+                   asqatasunMeterXOffset, 
+                   asqatasunMeterYOffset, 
                    scoreXOffset, 
                    scoreYOffset, 
                    percentXOffset,
@@ -63,14 +63,14 @@ function drawScore(selection,
         .attr("class", foregroundClass);
 
     if (addText) {
-        if (tanaguruMeterXOffset !== null && tanaguruMeterYOffset !== null) {
+        if (asqatasunMeterXOffset !== null && asqatasunMeterYOffset !== null) {
             donutSvg.append("text")
                 .attr("text-anchor", "start")
-                .attr("x", tanaguruMeterXOffset)
-                .attr("y", tanaguruMeterYOffset)
+                .attr("x", asqatasunMeterXOffset)
+                .attr("y", asqatasunMeterYOffset)
                 .attr("dy", ".35em")
-                .attr("class", "d3-score-tanaguru-meter")
-                .text("TanaguruMeter");
+                .attr("class", "d3-score-asqatasun-meter")
+                .text("AsqatasunMeter");
         }
         donutText = donutSvg.append("text")
             .attr("text-anchor", "middle")

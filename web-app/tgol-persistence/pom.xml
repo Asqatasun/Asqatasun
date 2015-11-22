@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-persistence</artifactId>
+            <artifactId>asqatasun-persistence</artifactId>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>

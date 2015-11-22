@@ -57,52 +57,48 @@
             <artifactId>asqatasun-engine</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.asqatasun</groupId>
-            <artifactId>asqatasun-jms</artifactId>
-        </dependency>
-        <dependency>
             <groupId>${engineGroupId}</groupId>
             <artifactId>asqatasun-resources</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-nomenclatureloader</artifactId>
+            <artifactId>asqatasun-nomenclatureloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-rule-implementation-loader</artifactId>
+            <artifactId>asqatasun-rule-implementation-loader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-crawler</artifactId>
+            <artifactId>asqatasun-crawler</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentloader</artifactId>
+            <artifactId>asqatasun-contentloader</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentadapter</artifactId>
+            <artifactId>asqatasun-contentadapter</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-processor</artifactId>
+            <artifactId>asqatasun-processor</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-consolidator</artifactId>
+            <artifactId>asqatasun-consolidator</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-analyser</artifactId>
+            <artifactId>asqatasun-analyser</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-logging</artifactId>
+            <artifactId>asqatasun-logging</artifactId>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-scenarioloader</artifactId>
+            <artifactId>asqatasun-scenarioloader</artifactId>
         </dependency>
         
         <!-- rules dependencies-->
@@ -286,32 +282,12 @@
                     <failOnWarning>false</failOnWarning>
                 </configuration>
             </plugin>
-            <!--            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <version>1.1</version>
-                <configuration>
-                    <path>/tgol</path>
-                    <port>8182</port>
-                    <systemProperties>
-                        <WEB-APP-URL>http://$host:$port/tgol</WEB-APP-URL>
-                        <CONFIG_TANAGURU >$path_to_tgol_conf_dir\tanaguru</CONFIG_TANAGURU >
-                        <test.key>true</test.key>
-                        <MAVEN_OPTS>-Xms512m -Xmx512m -XX:PermSize=512m
-                            -XX:MaxPermSize=512m -Dfile.encoding=UTF-8</MAVEN_OPTS>
-                    </systemProperties>
-                    <server>tomcat</server>
-                    <warFile>${project.build.directory}/${project.build.finalName}.war</warFile>
-                    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
-                    <warSourceDirectory>${project.build.directory}/${project.build.finalName}</warSourceDirectory>
-                </configuration>
-            </plugin>-->
         </plugins>
         <finalName>asqatasun-web-app-${webappVersion}</finalName>
     </build>
     <profiles>
         <profile>
-            <id>tanaguru</id>
+            <id>asqatasun</id>
             <properties>
                 <sonar.language>accessibility</sonar.language>
             </properties>
@@ -325,41 +301,6 @@
                     <value>true</value>
                 </property>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <scp  file="${project.build.directory}/${project.build.finalName}.war" 
-                                              todir="${qa.deployPath}/ROOT.war" 
-                                              keyfile="${qa.keyFile}" 
-                                              passphrase="${qa.passPhrase}" />
-                                        <!-- see also: http://ant.apache.org/manual/Tasks/scp.html -->
-                                        <!--                                        <exec executable="/bin/sh">
-                                            <arg value="/root/bin/restart-tg-instance.sh"/>
-                                        </exec>-->
-                                    </target>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>ant</groupId>
-                                <artifactId>ant-jsch</artifactId>
-                                <version>1.6.5</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>

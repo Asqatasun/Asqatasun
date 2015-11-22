@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.webapp.entity.dao.tanaguru.parameterization;
+package org.asqatasun.webapp.entity.dao.asqatasun.parameterization;
 
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;

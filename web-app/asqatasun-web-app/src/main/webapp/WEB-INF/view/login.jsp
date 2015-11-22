@@ -55,7 +55,7 @@
         <div class="topbar">
             <div class="fill">
                 <div class="container">
-                    <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt="Tanaguru"/>
+                    <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt="Asqatasun"/>
                     <ul class="nav secondary-nav">
                         <li>
                             <%@include file="template/lang-box.jsp" %>

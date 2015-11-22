@@ -34,14 +34,14 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  *
  * @author enzolalay
  */
-public final class TanaguruOrchestratorFactory {
+public final class AsqatasunOrchestratorFactory {
 
     /**
      * Factory has private constructor
      */
-    private TanaguruOrchestratorFactory(){}
+    private AsqatasunOrchestratorFactory(){}
 
-    public static TanaguruOrchestrator create(
+    public static AsqatasunOrchestrator create(
             AuditService auditService,
             ActDataService actDataService,
             AuditDataService auditDataService,
@@ -50,7 +50,7 @@ public final class TanaguruOrchestratorFactory {
             ScopeDataService scopeDataService,
             ThreadPoolTaskExecutor threadPoolTaskExecutor,
             EmailSender emailSender) {
-        return new TanaguruOrchestratorImpl(
+        return new AsqatasunOrchestratorImpl(
                 auditService,
                 auditDataService,
                 actDataService,

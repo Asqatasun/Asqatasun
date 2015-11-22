@@ -2881,10 +2881,10 @@ td.occurences {
     font-family: OpenSansRegular;
     opacity: 0.7;
 }
-#d3-audit-score .d3-score-tanaguru-meter, 
-#d3-ie-audit-score .d3-score-tanaguru-meter, 
-#d3-project-score .d3-score-tanaguru-meter, 
-#d3-ie-project-score .d3-score-tanaguru-meter{
+#d3-audit-score .d3-score-asqatasun-meter, 
+#d3-ie-audit-score .d3-score-asqatasun-meter, 
+#d3-project-score .d3-score-asqatasun-meter, 
+#d3-ie-project-score .d3-score-asqatasun-meter{
     font-size: 13px;
     font-family: OpenSansLight;
     opacity: 0.7;
@@ -2917,7 +2917,7 @@ td.occurences {
     font-size: 10px;
     font-family: OpenSansLight;
 }
-#d3-project-score .d3-score-tanaguru-meter, #d3-ie-project-score .d3-score-tanaguru-meter {
+#d3-project-score .d3-score-asqatasun-meter, #d3-ie-project-score .d3-score-asqatasun-meter {
     font-family: OpenSansLight;
     opacity: 0.8;
     font-size: 9px;

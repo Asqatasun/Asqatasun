@@ -86,7 +86,7 @@ public interface Act extends Entity {
     /**
      *
      * @return
-     *      the tanaguru's webresource associated with this act
+     *      the asqatasun's webresource associated with this act
      */
 //    WebResource getWebResource();
 //

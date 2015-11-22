@@ -11,10 +11,10 @@ function drawScore(
             selectionClass, 
             selectionReplacementClass,
             addText, 
-            tanaguruMeterFont,
-            tanaguruMeterFontSize,
-            tanaguruMeterXOffset, 
-            tanaguruMeterYOffset, 
+            asqatasunMeterFont,
+            asqatasunMeterFontSize,
+            asqatasunMeterXOffset, 
+            asqatasunMeterYOffset, 
             scoreFont, 
             scoreFontSize, 
             scoreXOffset, 
@@ -79,17 +79,17 @@ function drawScore(
         .attr("d", arc.endAngle(endAngle));
 
     if(addText) {
-        if (tanaguruMeterXOffset !== null && tanaguruMeterYOffset !== null) {
+        if (asqatasunMeterXOffset !== null && asqatasunMeterYOffset !== null) {
             donutSvg.append("text")
                 .attr("text-anchor", "start")
-                .attr("x", tanaguruMeterXOffset)
-                .attr("y", tanaguruMeterYOffset)
+                .attr("x", asqatasunMeterXOffset)
+                .attr("y", asqatasunMeterYOffset)
                 .attr("dy", ".35em")
-                .attr("font-family", tanaguruMeterFont)
-                .attr("font-size", tanaguruMeterFontSize)
+                .attr("font-family", asqatasunMeterFont)
+                .attr("font-size", asqatasunMeterFontSize)
                 .attr("opacity", "0.7")
-                .attr("class", "d3-score-tanaguru-meter")
-                .text("TanaguruMeter");
+                .attr("class", "d3-score-asqatasun-meter")
+                .text("AsqatasunMeter");
         }
         text = donutSvg.append("text")
             .attr("text-anchor", "middle")

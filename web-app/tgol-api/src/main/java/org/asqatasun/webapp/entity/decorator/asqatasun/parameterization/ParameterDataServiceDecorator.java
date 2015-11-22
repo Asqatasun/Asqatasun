@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.webapp.entity.decorator.tanaguru.parameterization;
+package org.asqatasun.webapp.entity.decorator.asqatasun.parameterization;
 
 import java.util.Collection;
 import org.asqatasun.entity.parameterization.Parameter;

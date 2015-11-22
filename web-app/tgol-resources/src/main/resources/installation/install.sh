@@ -295,8 +295,8 @@ EOF
 create_tables() {
 
     cd "$PKG_DIR/install/engine/sql"
-    my_sql_insert tanaguru-20-create-tables.sql
-    my_sql_insert tanaguru-30-insert.sql
+    my_sql_insert asqatasun-20-create-tables.sql
+    my_sql_insert asqatasun-30-insert.sql
     
     cd "$PKG_DIR/install/web-app/sql"
     my_sql_insert tgol-20-create-tables.sql

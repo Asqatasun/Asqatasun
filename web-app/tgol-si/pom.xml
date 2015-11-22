@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-audit</artifactId>
+            <artifactId>asqatasun-audit</artifactId>
         </dependency>
         <dependency>
             <groupId>${webappGroupId}</groupId>

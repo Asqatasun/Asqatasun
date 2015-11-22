@@ -320,8 +320,8 @@ buildScoreDonut = function() {
                       true, // addText
                       "OpenSansLight",
                       "13px",
-                      0, // tanaguruMeterXOffset
-                      -30, // tanaguruMeterXOffset
+                      0, // asqatasunMeterXOffset
+                      -30, // asqatasunMeterXOffset
                       "OpenSansSemibold",
                       "50px",
                       0, // scoreXOffset

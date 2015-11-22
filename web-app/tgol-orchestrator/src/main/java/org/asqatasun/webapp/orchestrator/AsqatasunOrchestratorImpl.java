@@ -52,9 +52,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  *
  * @author jkowalczyk
  */
-public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
+public class AsqatasunOrchestratorImpl implements AsqatasunOrchestrator {
 
-    private static final Logger LOGGER = Logger.getLogger(TanaguruOrchestratorImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(AsqatasunOrchestratorImpl.class);
     private final AuditService auditService;
     private final ActDataService actDataService;
     private final AuditDataService auditDataService;
@@ -144,7 +144,7 @@ public class TanaguruOrchestratorImpl implements TanaguruOrchestrator {
     }
 
     @Autowired
-    public TanaguruOrchestratorImpl(
+    public AsqatasunOrchestratorImpl(
             AuditService auditService,
             AuditDataService auditDataService,
             ActDataService actDataService,

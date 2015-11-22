@@ -11,7 +11,7 @@
     <!-- Définition d'un validateur -->
     <bean id="tokenManager" class="org.asqatasun.security.tokenmanagement.TokenManager">
         <property name="esapiPropertyName" value="org.owasp.esapi.resources"/>
-        <property name="esapiPropertyValue" value="/etc/tanaguru"/>
+        <property name="esapiPropertyValue" value="/etc/asqatasun"/>
         <property name="tokenDurationValidity" value="3600"/>
     </bean>
    
