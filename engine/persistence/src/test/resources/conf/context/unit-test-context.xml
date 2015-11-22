@@ -14,7 +14,7 @@
        http://jax-ws.dev.java.net/spring/core http://jax-ws.dev.java.net/spring/core.xsd
        http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd">
     
-    <import resource="beans-tanaguru.xml"/>
+    <import resource="beans-asqatasun.xml"/>
     <import resource="beans-persistence.xml"/>
     
 </beans>

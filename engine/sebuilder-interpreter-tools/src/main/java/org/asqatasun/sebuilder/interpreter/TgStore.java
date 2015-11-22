@@ -33,7 +33,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class TgStore extends Store {
 
-    private static final String TANAGURU_GET_PAGE_VARIABLE = "tanaguru-";
+    private static final String ASQATASUN_GET_PAGE_VARIABLE = "asqatasun-";
     
     public TgStore(Getter getter) {
         super(getter);
@@ -42,7 +42,7 @@ public class TgStore extends Store {
     @Override
     public boolean run(TestRun ctx) {
         if (ctx instanceof TgTestRun && 
-                StringUtils.startsWith(ctx.string("variable"), TANAGURU_GET_PAGE_VARIABLE)) {
+                StringUtils.startsWith(ctx.string("variable"), ASQATASUN_GET_PAGE_VARIABLE)) {
             ctx.getLog().debug("Fire New Page From a Store");
             ((TgTestRun)ctx).fireNewPage(ctx.string("variable"));
             return true;

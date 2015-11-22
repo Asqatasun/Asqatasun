@@ -31,12 +31,12 @@ import org.hibernate.dialect.MySQL5InnoDBDialect;
  *
  * @author jkowalczyk
  */
-public class TanaguruMySQL5InnoDBDialect extends MySQL5InnoDBDialect {
+public class AsqatasunMySQL5InnoDBDialect extends MySQL5InnoDBDialect {
 
     /**
      * Constructor
      */
-    public TanaguruMySQL5InnoDBDialect() {
+    public AsqatasunMySQL5InnoDBDialect() {
         super();
     }
     

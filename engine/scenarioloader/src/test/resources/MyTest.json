@@ -4,7 +4,7 @@
   "steps": [
     {
       "type": "get",
-      "url": "http://my.tanaguru.com/"
+      "url": "http://asqatasun.org"
     },
     {
       "type": "storePageSource",
@@ -16,7 +16,7 @@
         "type": "id",
         "value": "j_username"
       },
-      "text": "grom83@gmail.com"
+      "text": "test@test.com"
     },
     {
       "type": "sendKeysToElement",
@@ -24,7 +24,7 @@
         "type": "id",
         "value": "j_password"
       },
-      "text": "T0NY_g059"
+      "text": "hophophop"
     },
     {
       "type": "submitElement",
@@ -37,7 +37,7 @@
       "type": "clickElement",
       "locator": {
         "type": "link text",
-        "value": "Tanaguru Agence"
+        "value": "Asqatasun Agence"
       }
     },
     {

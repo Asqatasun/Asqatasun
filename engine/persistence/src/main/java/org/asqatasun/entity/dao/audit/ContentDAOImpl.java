@@ -381,7 +381,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     + " AND sc.uri not LIKE :inlineUrl "
                     + " AND sc.httpStatusCode != :httpStatusCode");
             query.setParameter(AUDIT_KEY, audit);
-            query.setParameter("inlineUrl", "%#tanaguru-css-%");
+            query.setParameter("inlineUrl", "%#asqatasun-css-%");
             query.setParameter(HTTP_STATUS_CODE_KEY, DEFAULT_HTTP_STATUS_VALUE);
             try {
                 externalCssSet.addAll(query.getResultList());
