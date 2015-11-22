@@ -23,7 +23,7 @@
                 <module>engine</module>
                 <module>rules</module>
                 <module>web-app</module>
-                <module>cli</module>
+                <module>runner</module>
             </modules>
         </profile>
     </profiles>
@@ -39,8 +39,8 @@
         <testingToolsGroupId>org.asqatasun</testingToolsGroupId>
         <testingToolsVersion>3.2.0-SNAPSHOT</testingToolsVersion>
         
-        <asqatasunCliGroupId>org.asqatasun</asqatasunCliGroupId>
-        <asqatasunCliVersion>3.2.0-SNAPSHOT</asqatasunCliVersion>
+        <runnerGroupId>org.asqatasun</runnerGroupId>
+        <runnerVersion>3.2.0-SNAPSHOT</runnerVersion>
         
         <rulesGroupId>org.asqatasun</rulesGroupId>
         <rulesVersion>1.3.0-SNAPSHOT</rulesVersion>
@@ -179,26 +179,8 @@
             <!-- asqatasun-rules dependencies -->
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rules-commons</artifactId>
+                <artifactId>asqatasun-rules-commons</artifactId>
                 <version>${rulesVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.1</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.1-i18n</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.1-testcases</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${rulesGroupId}</groupId>
@@ -228,12 +210,12 @@
             <!-- asqatasun-engine dependencies -->
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-commons-entity</artifactId>
+                <artifactId>asqatasun-commons-entity</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-commons-entity-jpa</artifactId>
+                <artifactId>asqatasun-commons-entity-jpa</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
@@ -261,12 +243,12 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-audit</artifactId>
+                <artifactId>asqatasun-audit</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-crawler</artifactId>
+                <artifactId>asqatasun-crawler</artifactId>
                 <version>${engineVersion}</version>
                 <exclusions>
                     <exclusion>
@@ -285,7 +267,7 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-persistence</artifactId>
+                <artifactId>asqatasun-persistence</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
@@ -295,32 +277,32 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-statistics</artifactId>
+                <artifactId>asqatasun-statistics</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-reference</artifactId>
+                <artifactId>asqatasun-reference</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-parameterization</artifactId>
+                <artifactId>asqatasun-parameterization</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-commons-processing</artifactId>
+                <artifactId>asqatasun-commons-processing</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+                <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-contentloader</artifactId>
+                <artifactId>asqatasun-contentloader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
@@ -336,49 +318,49 @@
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-nomenclatureloader</artifactId>
+                <artifactId>asqatasun-nomenclatureloader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-rule-implementation-loader</artifactId>
+                <artifactId>asqatasun-rule-implementation-loader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-contentadapter</artifactId>
+                <artifactId>asqatasun-contentadapter</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-processor</artifactId>
+                <artifactId>asqatasun-processor</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-consolidator</artifactId>
+                <artifactId>asqatasun-consolidator</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-analyser</artifactId>
+                <artifactId>asqatasun-analyser</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-scenarioloader</artifactId>
+                <artifactId>asqatasun-scenarioloader</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
             <dependency>
                 <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-logging</artifactId>
+                <artifactId>asqatasun-logging</artifactId>
                 <version>${engineVersion}</version>
             </dependency>
 
             <!-- asqatasun testing-tools -->
             <dependency>
                 <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>tanaguru-rules-testing-tools</artifactId>
+                <artifactId>asqatasun-rules-testing-tools</artifactId>
                 <version>${testingToolsVersion}</version>
                 <scope>test</scope>
             </dependency>

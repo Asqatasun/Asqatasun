@@ -46,52 +46,52 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-persistence</artifactId>
+            <artifactId>asqatasun-persistence</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-nomenclatureloader</artifactId>
+            <artifactId>asqatasun-nomenclatureloader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-rule-implementation-loader</artifactId>
+            <artifactId>asqatasun-rule-implementation-loader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-crawler</artifactId>
+            <artifactId>asqatasun-crawler</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentloader</artifactId>
+            <artifactId>asqatasun-contentloader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentadapter</artifactId>
+            <artifactId>asqatasun-contentadapter</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-processor</artifactId>
+            <artifactId>asqatasun-processor</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-consolidator</artifactId>
+            <artifactId>asqatasun-consolidator</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-analyser</artifactId>
+            <artifactId>asqatasun-analyser</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-scenarioloader</artifactId>
+            <artifactId>asqatasun-scenarioloader</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -100,7 +100,7 @@
         </dependency>
         <dependency>
             <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-logging</artifactId>
+            <artifactId>asqatasun-logging</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
