@@ -297,7 +297,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>asqatasun-web-app-${webappVersion}</finalName>
+        <finalName>asqatasun-web-app-${asqatasunVersion}</finalName>
     </build>
     <profiles>
         <profile>
