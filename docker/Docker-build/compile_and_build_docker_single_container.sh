@@ -90,8 +90,8 @@ cp "${SOURCE_DIR}/${TGZ_BASENAME}"*"${TGZ_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" |
     fail "Error building container"
 
 # run container freshly build
-docker stop asqa
-docker rm asqa
+# @@@TODO find a way to test whether a container named "asqa" is already running,
+# and if so, stop it and delete it
 docker run -p 8080:8080 --name asqa asqatasun/asqatasun:${TIMESTAMP}
 
 # functional testing
