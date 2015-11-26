@@ -1,4 +1,4 @@
-# Tanaguru Assisted Audit
+# Asqatasun Assisted Audit
 
 Assisted audit offers auditors the ability to fulfill an audit. 
 
@@ -18,7 +18,7 @@ Let say we work on the [BBC website](http://www.bbc.com/). Launch an
 
 Go to the project page, select a page audit and choose *Start*.
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_A.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_A.png)
 
 ## 3. Workflow of the assisted audit
 
@@ -28,7 +28,7 @@ back later completing your work. When you consider the audit is done, you can cl
 The assisted audit begins "empty", letting the user choose his own way to fulfill
 the audit. 
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_B_empty.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_B_empty.png)
 
 ## 3. Add automated results
 
@@ -50,23 +50,23 @@ Here we have:
 * 81 Not Applicable results imported,
 * There are 165 Not Tested left.
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_C_Results_NA_added.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_C_Results_NA_added.png)
 
 ### Adding Failed Results
 
 After importing the Passed results, we have decreased the number of Not Tested to
 150. You can also note the graph getting shapes.
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_D_Results_Failed_added.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_D_Results_Failed_added.png)
 
 ### Adding Passed results
 
 After importing the Passed results, you can see the number of Not Tested 
 **lowered from 246 to 140**.
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_E_Results_Passed_added.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_E_Results_Passed_added.png)
 
-You can also note the apparition of the score (see [Tanaguru Accessibility metric](userdoc-accessibility-metrics.md)
+You can also note the apparition of the score (see [Asqatasun Accessibility metric](userdoc-accessibility-metrics.md)
 for the detail of the formula).
 
 ## 4. Add human results
@@ -74,24 +74,24 @@ for the detail of the formula).
 For all the remaining *Not Tested* tests, you can define humanly the result.
 
 To speed up you work you may want to treat a given theme, or leverage the Pre-Qualified
-results. Those ones are results for which Tanaguru does not have enought clues to state
+results. Those ones are results for which Asqatasun does not have enought clues to state
 a definitive results, but can bring information that may help the auditor.
 
 For each remaining tests you have to choose a definitive result (Passed, Failed 
 or Not Applicable).
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_F_override0.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_F_override0.png)
 
-You can see the clues brought by Tanaguru by expanding the test (simply click on 
+You can see the clues brought by Asqatasun by expanding the test (simply click on 
 the label of the test). Here it is about the relevancy of the headings, which are
 presented with their content and respective levels.
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_G_override1.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_G_override1.png)
 
 Regarding those clues, you just have to choose a definitive result. If you ever
 select Failed or Not Applicable, you can add a comment to explain your choice.
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_H_override_comment.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_H_override_comment.png)
 
 ## 5. Save and eventually close
 
@@ -99,4 +99,4 @@ Don't forget to save your work with the buttons at the bottom of the page
 
 Once you consider your Assisted Audit done, you can *Close* it.
 
-![](Images/screenshot_20150310_TANAGURU_ASSISTED_AUDIT_step_I_buttons_save_close.png)
+![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_I_buttons_save_close.png)

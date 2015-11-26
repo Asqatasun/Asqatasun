@@ -8,7 +8,7 @@ if [ ! $1 ] || [ ! $2 ] || [ ! $3 ]; then
     echo "$0: extract URLs on error from a test campaign";
     echo "Usage: $0 <ErrorText> <BuildLog> <UrlFile>";
     echo "";
-    echo -en "- ErrorText: \t text given by Tanaguru Engine\n";
+    echo -en "- ErrorText: \t text given by Asqatasun Engine\n";
     echo -en "- BuildLog: \t path to raw log from maven / hudson\n";
     echo -en "- UlrFile: \t path to file URL file (formated this way: key;URL )\n";
     echo "";
@@ -24,7 +24,7 @@ UrlList=$3
 # ---------
 # First: extract URL keys
 # Second: extract URL from its key
-for i in $( /bin/grep --text "${ErrorText}" -B 1 "${BuildLog}" | grep "Running org.tanaguru.webapp.test" | perl -pi -e 's!Running org.tanaguru.webapp.test.(.*)Test!$1!g' | perl -pi -e 's!\_!\-!g' );
+for i in $( /bin/grep --text "${ErrorText}" -B 1 "${BuildLog}" | grep "Running org.asqatasun.webapp.test" | perl -pi -e 's!Running org.asqatasun.webapp.test.(.*)Test!$1!g' | perl -pi -e 's!\_!\-!g' );
 do
     grep "${i};" ${UrlList} | perl -pi -e 's!.*?;(.*)!$1!' ;
 done

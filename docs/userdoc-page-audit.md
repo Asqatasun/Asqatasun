@@ -1,4 +1,4 @@
-# Page audit of accessibility with Tanaguru
+# Page audit of accessibility with Asqatasun
 
 ## Quick steps (for the impatient)
 
@@ -13,13 +13,13 @@
 Let say we have a project for the [BBC website](http://www.bbc.com/), click the
 *Audit pages* link. 
 
-![](Images/screenshot_20150307_TANAGURU_PAGE_audit_BBC_00.png)
+![](Images/screenshot_20150307_ASQATASUN_PAGE_audit_BBC_00.png)
 
 ### Step 2a
 
 Type in the URL of the page to be audited. 
 
-![](Images/screenshot_20150307_TANAGURU_PAGE_audit_BBC_10.png)
+![](Images/screenshot_20150307_ASQATASUN_PAGE_audit_BBC_10.png)
 
 **Notes:**
 
@@ -39,11 +39,11 @@ Click the *Launch the audit* button.
 
 Have the result.
 
-![](Images/screenshot_20150307_TANAGURU_PAGE_audit_BBC_30_result.png)
+![](Images/screenshot_20150307_ASQATASUN_PAGE_audit_BBC_30_result.png)
 
 ## Page audit options
 
-![](Images/screenshot_20150307_TANAGURU_PAGE_audit_BBC_20_options.png)
+![](Images/screenshot_20150307_ASQATASUN_PAGE_audit_BBC_20_options.png)
 
 ### Level
 

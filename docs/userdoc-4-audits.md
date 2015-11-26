@@ -1,6 +1,6 @@
 # Four kinds of audits
 
-Tanaguru offers 4 kinds of audit. Choose the suitable kind depending on your need.
+Asqatasun offers 4 kinds of audit. Choose the suitable kind depending on your need.
 
 ## Typical usages for Page audit
 
@@ -25,7 +25,7 @@ Tanaguru offers 4 kinds of audit. Choose the suitable kind depending on your nee
 * A developer is creating a template which is still on its machine (not yet on the 
 webserver), and wants to have an **early statement of accessibility**
 * User wants to audit an intranet page (not connected to the internet). Just save the 
-page and send it as offline file to Tanaguru
+page and send it as offline file to Asqatasun
 
 
 ## Comparison of audits

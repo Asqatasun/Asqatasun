@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <bean id="rulescreationdemoAllThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="rulescreationdemoAllThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="all-theme"/>
         <property name="i18nKey" value="result.all-theme"/>
         <property name="errorI18nKey" value="all-theme-error"/>
@@ -17,28 +17,28 @@
         <property name="enabled" value="true"/>
     </bean>
 
-        <bean id="rulescreationdemo-1ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+        <bean id="rulescreationdemo-1ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rulescreationdemo-1"/>
         <property name="i18nKey" value="Rulescreationdemo-1"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rulescreationdemo-2ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+        <bean id="rulescreationdemo-2ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rulescreationdemo-2"/>
         <property name="i18nKey" value="Rulescreationdemo-2"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rulescreationdemo-3ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+        <bean id="rulescreationdemo-3ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rulescreationdemo-3"/>
         <property name="i18nKey" value="Rulescreationdemo-3"/>
         <property name="errorI18nKey" value=""/>
         <property name="default" value="false"/>
         <property name="enabled" value="true"/>
     </bean>
-        <bean id="rulescreationdemo-4ThemeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+        <bean id="rulescreationdemo-4ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rulescreationdemo-4"/>
         <property name="i18nKey" value="Rulescreationdemo-4"/>
         <property name="errorI18nKey" value=""/>
@@ -46,7 +46,7 @@
         <property name="enabled" value="true"/>
     </bean>
         
-    <bean id="rulescreationdemoThemeSelectFormFieldBuilder" class="org.tanaguru.webapp.form.builder.SelectFormFieldBuilderImpl">
+    <bean id="rulescreationdemoThemeSelectFormFieldBuilder" class="org.asqatasun.webapp.form.builder.SelectFormFieldBuilderImpl">
         <property name="i18nKey" value="result.theme"/>
         <property name="errorI18nKey" value="result.theme-error"/>
         <property name="value" value="Rulescreationdemo"/>

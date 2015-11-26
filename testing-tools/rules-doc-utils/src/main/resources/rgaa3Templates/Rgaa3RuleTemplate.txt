@@ -1,6 +1,6 @@
 /*
- * Tanaguru - Automated webpage assessment
- * Copyright (C) 2008-2015  Tanaguru.org
+ * Asqatasun - Automated webpage assessment
+ * Copyright (C) 2008-2015  Asqatasun.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -15,16 +15,16 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Contact us by mail: tanaguru AT tanaguru DOT org
+ * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.tanaguru.rules.rgaa30;
+package org.asqatasun.rules.rgaa30;
 
-import org.tanaguru.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule $ruleDot of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-$ruleDash">the rule $ruleDot design page.</a>
+ * For more details about the implementation, refer to <a href="http://asqatasun-rules-rgaa3.readthedocs.org/en/latest/Rule-$ruleDash">the rule $ruleDot design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/sites/default/files/RGAA3_RC2-1/referentiel_technique.htm#test-$ruleDash"> $ruleDot rule specification</a>
  */
 

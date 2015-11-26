@@ -10,7 +10,7 @@ if [ ! $1 ] ; then
     echo "";
     echo -en "- URL: the fully qualified domain name of the site (must begin with http:// )\n";
     echo "";
-    echo "Example: $0 http://www.tanaguru.org/";
+    echo "Example: $0 http://asqatasun.org/";
     exit -1
 fi
 

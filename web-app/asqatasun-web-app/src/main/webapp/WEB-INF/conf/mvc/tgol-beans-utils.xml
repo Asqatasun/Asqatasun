@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- Définition d'un validateur -->
+    <bean id="tokenManager" class="org.asqatasun.security.tokenmanagement.TokenManager">
+        <property name="esapiPropertyName" value="org.owasp.esapi.resources"/>
+        <property name="esapiPropertyValue" value="/etc/asqatasun"/>
+        <property name="tokenDurationValidity" value="3600"/>
+    </bean>
+   
+    <bean id="contractSortCommandHelper" class="org.asqatasun.webapp.command.helper.ContractSortCommandHelper"/>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setExclusionContractSortKey</value>
+        </property>
+        <property name="arguments">
+            <value>label-exclusion-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setInclusionContractSortKey</value>
+        </property>
+        <property name="arguments">
+            <value>label-inclusion-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setSortByKey</value>
+        </property>
+        <property name="arguments">
+            <value>sort-by-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setSortOrderKey</value>
+        </property>
+        <property name="arguments">
+            <value>order-choice</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setLastAuditMarkSortValue</value>
+        </property>
+        <property name="arguments">
+            <value>mark</value>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref local="contractSortCommandHelper"/>
+        </property>
+        <property name="targetMethod">
+            <value>setLastAuditDateSortValue</value>
+        </property>
+        <property name="arguments">
+            <value>date</value>
+        </property>
+    </bean>
+    
+    <bean id="secondaryLevelMenuDisplayer" class="org.asqatasun.webapp.presentation.menu.SecondaryLevelMenuDisplayer">
+        <property name="contractDataService">
+            <ref bean="contractDataService"/>
+        </property>
+    </bean>    
+    
+</beans>

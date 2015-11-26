@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.asqatasun</groupId>
+        <artifactId>engine</artifactId>
+        <version>3.2.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>asqatasun-resources</artifactId>
+    <name>asqatasun-resources</name>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/sql/*</exclude>
+                    <exclude>**/sql-update/*</exclude>
+                    <exclude>**/scripts/*</exclude>
+                    <exclude>**/lib/*</exclude>
+                    <exclude>**/asqatasun-test-conf/*</exclude>
+                    <exclude>**/conf/context/local-app/*</exclude>
+                    <exclude>**/conf/context/ws/*</exclude>
+                    <exclude>**/conf/context/crawler/*</exclude>
+                    <exclude>**/conf/asqatasun.conf</exclude>
+                    <exclude>**/conf/persistence.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+</project>

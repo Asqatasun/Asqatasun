@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+    <bean id="aw22-AllThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="all-theme"/>
+        <property name="i18nKey" value="result.all-theme"/>
+        <property name="errorI18nKey" value="all-theme-error"/>
+        <property name="default" value="true"/>
+        <property name="enabled" value="true"/>
+    </bean>
+
+    <bean id="aw22-1ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-1"/>
+        <property name="i18nKey" value="Aw22-1"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-2ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-2"/>
+        <property name="i18nKey" value="Aw22-2"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-3ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-3"/>
+        <property name="i18nKey" value="Aw22-3"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-4ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-4"/>
+        <property name="i18nKey" value="Aw22-4"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-5ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-5"/>
+        <property name="i18nKey" value="Aw22-5"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-6ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-6"/>
+        <property name="i18nKey" value="Aw22-6"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-7ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-7"/>
+        <property name="i18nKey" value="Aw22-7"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-8ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-8"/>
+        <property name="i18nKey" value="Aw22-8"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-9ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-9"/>
+        <property name="i18nKey" value="Aw22-9"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-10ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-10"/>
+        <property name="i18nKey" value="Aw22-10"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-11ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-11"/>
+        <property name="i18nKey" value="Aw22-11"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-12ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-12"/>
+        <property name="i18nKey" value="Aw22-12"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        <bean id="aw22-13ThemeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="Aw22-13"/>
+        <property name="i18nKey" value="Aw22-13"/>
+        <property name="errorI18nKey" value=""/>
+        <property name="default" value="false"/>
+        <property name="enabled" value="true"/>
+    </bean>
+        
+    <bean id="aw22ThemeSelectFormFieldBuilder" class="org.asqatasun.webapp.form.builder.SelectFormFieldBuilderImpl">
+        <property name="i18nKey" value="result.theme"/>
+        <property name="errorI18nKey" value="result.theme-error"/>
+        <property name="value" value="Aw22"/>
+        <property name="selectElementBuilderMap">
+            <map>
+                <entry key="theme">
+                    <list>
+                        <ref local="aw22-AllThemeSelectElementBuilder"/>
+                        <ref local="aw22-1ThemeSelectElementBuilder"/>
+                        <ref local="aw22-2ThemeSelectElementBuilder"/>
+                        <ref local="aw22-3ThemeSelectElementBuilder"/>
+                        <ref local="aw22-4ThemeSelectElementBuilder"/>
+                        <ref local="aw22-5ThemeSelectElementBuilder"/>
+                        <ref local="aw22-6ThemeSelectElementBuilder"/>
+                        <ref local="aw22-7ThemeSelectElementBuilder"/>
+                        <ref local="aw22-8ThemeSelectElementBuilder"/>
+                        <ref local="aw22-9ThemeSelectElementBuilder"/>
+                        <ref local="aw22-10ThemeSelectElementBuilder"/>
+                        <ref local="aw22-11ThemeSelectElementBuilder"/>
+                        <ref local="aw22-12ThemeSelectElementBuilder"/>
+                        <ref local="aw22-13ThemeSelectElementBuilder"/>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <!--     Add aw22 elements to the audit form field builder   -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject">
+            <ref bean="auditResultController"/>
+        </property>
+        <property name="targetMethod">
+            <value>addFormFieldBuilder</value>
+        </property>
+        <property name="arguments">
+            <ref bean="aw22ThemeSelectFormFieldBuilder"/>
+        </property>
+    </bean>
+
+</beans>

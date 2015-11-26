@@ -3,19 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.tanaguru</groupId>
-    <artifactId>tanaguru</artifactId>
+    <groupId>org.asqatasun</groupId>
+    <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
-    <version>3.1.0</version>
-    <name>tanaguru</name>
-    <url>http://www.tanaguru.org</url>
+    <version>3.2.0-SNAPSHOT</version>
+    <name>asqatasun</name>
+    <url>http://www.asqatasun.org/</url>
     <modules>
         <module>engine</module>
         <module>testing-tools</module>
         <module>rules</module>
         <module>web-app</module>
-        <module>cli</module>
-        <module>ws</module>
+        <module>runner</module>
     </modules>
     <profiles>
         <profile>
@@ -24,27 +23,15 @@
                 <module>engine</module>
                 <module>rules</module>
                 <module>web-app</module>
-                <module>cli</module>
+                <module>runner</module>
             </modules>
         </profile>
     </profiles>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <engineGroupId>org.tanaguru</engineGroupId>
-        <engineVersion>3.1.0</engineVersion>
-        
-        <webappGroupId>org.tanaguru</webappGroupId>
-        <webappVersion>3.1.0</webappVersion>
-        
-        <testingToolsGroupId>org.tanaguru</testingToolsGroupId>
-        <testingToolsVersion>3.1.0</testingToolsVersion>
-        
-        <tanaguruCliGroupId>org.tanaguru</tanaguruCliGroupId>
-        <tanaguruCliVersion>3.1.0</tanaguruCliVersion>
-        
-        <rulesGroupId>org.tanaguru</rulesGroupId>
-        <rulesVersion>1.2.0</rulesVersion>
+        <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
+        <asqatasunVersion>3.2.0-SNAPSHOT</asqatasunVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
@@ -177,64 +164,52 @@
     <dependencyManagement>
         <dependencies>
 
-            <!-- tanaguru-rules dependencies -->
+            <!-- asqatasun-rules dependencies -->
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rules-commons</artifactId>
-                <version>${rulesVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rules-commons</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.1</artifactId>
-                <version>${rulesVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.1-i18n</artifactId>
-                <version>${rulesVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rules-rgaa2.2</artifactId>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.1-testcases</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-accessiweb2.2</artifactId>
-                <version>${rulesVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rules-rgaa3.0</artifactId>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rgaa2.2</artifactId>
-                <version>${rulesVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>${rulesGroupId}</groupId>
-                <artifactId>tanaguru-rgaa3.0</artifactId>
-                <version>${rulesVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rules-seo1.0</artifactId>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
 
-            <!-- tanaguru-engine dependencies -->
+            <!-- asqatasun-engine dependencies -->
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-commons-entity</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-commons-entity</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-commons-entity-jpa</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-commons-entity-jpa</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-api</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-api</artifactId>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>slf4j-api</artifactId>
@@ -255,14 +230,14 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-audit</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-audit</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-crawler</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-crawler</artifactId>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>poi</groupId>
@@ -279,126 +254,126 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-persistence</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-persistence</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-jms</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-jms</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-statistics</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-statistics</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-reference</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-reference</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-parameterization</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-parameterization</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-commons-processing</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-commons-processing</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-contentloader</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-contentloader</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-engine</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-engine</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-resources</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-resources</artifactId>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-nomenclatureloader</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-nomenclatureloader</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-rule-implementation-loader</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rule-implementation-loader</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-contentadapter</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-contentadapter</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-processor</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-processor</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-consolidator</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-consolidator</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-analyser</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-analyser</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-scenarioloader</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-scenarioloader</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
-                <artifactId>tanaguru-logging</artifactId>
-                <version>${engineVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-logging</artifactId>
+                <version>${asqatasunVersion}</version>
             </dependency>
 
-            <!-- tanaguru testing-tools -->
+            <!-- asqatasun testing-tools -->
             <dependency>
-                <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>tanaguru-rules-testing-tools</artifactId>
-                <version>${testingToolsVersion}</version>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rules-testing-tools</artifactId>
+                <version>${asqatasunVersion}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>${testingToolsGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-testing-tools</artifactId>
-                <version>${testingToolsVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>test</scope>
             </dependency>
 
-            <!-- tanaguru web-app -->
+            <!-- asqatasun web-app -->
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-api</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-data-presentation</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-si</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>slf4j-log4j12</artifactId>
@@ -407,15 +382,15 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-orchestrator</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>email-sender</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.apache.commons</groupId>
@@ -428,9 +403,9 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>security</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.apache.commons</groupId>
@@ -443,30 +418,30 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-persistence</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-security</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-voter</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>${engineGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-report</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
-                <groupId>${webappGroupId}</groupId>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-resources</artifactId>
-                <version>${webappVersion}</version>
+                <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
 

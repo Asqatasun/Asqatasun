@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.tanaguru</groupId>
+        <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
         <version>3.1.0</version>
     </parent>
-    <artifactId>tanaguru-scenarioloader</artifactId>
+    <artifactId>asqatasun-scenarioloader</artifactId>
     <name>scenarioloader</name>
     <build>
         <testResources>
@@ -29,12 +29,12 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-crawler</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-crawler</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -45,8 +45,8 @@
             <artifactId>easymock</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.github.detro.ghostdriver</groupId>
@@ -59,8 +59,8 @@
             <artifactId>easymockclassextension</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentloader</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-contentloader</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

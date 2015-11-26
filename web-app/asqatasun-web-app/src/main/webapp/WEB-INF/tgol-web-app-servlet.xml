@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security-3.1.xsd
+           http://www.springframework.org/schema/mvc 
+           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!-- This annotation needs to be defined in the servlet context to be applied
+    at the controller level -->
+    <security:global-method-security 
+            access-decision-manager-ref="accessDecisionManager"/>
+
+    <mvc:annotation-driven />
+
+    <!-- spring mvc imports -->
+    <import resource="conf/mvc/tgol-beans-command-factories.xml"/>
+    <import resource="conf/mvc/tgol-beans-controller.xml"/>
+    <import resource="conf/mvc/tgol-beans-form.xml"/>
+    <import resource="conf/mvc/tgol-beans-handler.xml"/>
+    <import resource="conf/mvc/tgol-beans-i18n.xml"/>
+    <import resource="conf/mvc/tgol-beans-locale.xml"/>
+    <import resource="conf/mvc/tgol-beans-presentation.xml"/>
+    <import resource="conf/mvc/tgol-beans-resolver.xml"/>
+    <import resource="conf/mvc/tgol-beans-utils.xml"/>
+    <import resource="conf/mvc/tgol-beans-validator.xml"/>
+
+    <!-- export function imports -->
+    <import resource="conf/export/tgol-beans-color.xml"/>
+    <import resource="conf/export/tgol-beans-columns.xml"/>
+    <import resource="conf/export/tgol-beans-expression.xml"/>
+    <import resource="conf/export/tgol-beans-format.xml"/>
+    <import resource="conf/export/tgol-beans-layout.xml"/>
+    <import resource="conf/export/tgol-beans-service.xml"/>
+    <import resource="conf/export/tgol-beans-style.xml"/>
+    
+    <!-- SEO imports -->
+    <import resource="classpath:conf/context/seo/web-app/seo-beans-webapp.xml"/>
+
+</beans>

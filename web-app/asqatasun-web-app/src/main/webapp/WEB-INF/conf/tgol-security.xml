@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/security
+      http://www.springframework.org/schema/security/spring-security-3.1.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <http auto-config="true" access-denied-page="/access-denied.html" disable-url-rewriting="true">
+<!--        <intercept-url pattern="/*.html*" requires-channel="https"/>-->
+<!--        <intercept-url pattern="/login.html*" filters="none"/>-->
+        <intercept-url pattern="/admin.html" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/add*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/edit*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/delete*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/manage*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/manage-contracts/*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/manage-contracts/add*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/manage-contracts/delete*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/admin/manage-contracts/edit*" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/home.html" access="ROLE_USER,ROLE_ADMIN"/>
+        <intercept-url pattern="/home/contract*" access="ROLE_USER,ROLE_ADMIN"/>
+        <intercept-url pattern="/home/contract/*" access="ROLE_USER,ROLE_ADMIN"/>
+        <intercept-url pattern="/home/contract/audit*" access="ROLE_USER,ROLE_ADMIN"/>
+        <intercept-url pattern="/home/contract/page*" access="ROLE_USER,ROLE_ADMIN"/>
+        <form-login login-page="/login.html" authentication-failure-url="/login.html?error=errorOnLogin" default-target-url="/dispatch.html"/>
+        <logout delete-cookies="JSESSIONID" invalidate-session="false"/>
+        <session-management invalid-session-url="/login.html"  >
+            <concurrency-control max-sessions="100" error-if-maximum-exceeded="true"  />
+        </session-management>
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="tgolAuthenticationProvider">
+            <password-encoder hash="md5"/>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+        <beans:property name="decisionVoters">
+            <beans:list>
+                <beans:bean class="org.springframework.security.access.vote.RoleVoter"/>
+                <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+    
+    <beans:bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+   
+    <beans:bean id="tgolAuthenticationProvider" class="org.asqatasun.webapp.security.userdetails.TgolUserDetailsService">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="usersByUsernameQuery">
+            <beans:value>SELECT Email1, Password, Activated as enabled
+                    FROM TGSI_USER
+                    WHERE Email1=?</beans:value>
+        </beans:property>
+        <beans:property name="authoritiesByUsernameQuery">
+            <beans:value>SELECT TGSI_USER.Email1, TGSI_ROLE.Role_Name as authorities
+                    FROM TGSI_USER, TGSI_ROLE
+                    WHERE TGSI_USER.Email1 = ? AND TGSI_USER.ROLE_Id_Role=TGSI_ROLE.Id_Role</beans:value>
+        </beans:property>
+    </beans:bean>
+
+</beans:beans>

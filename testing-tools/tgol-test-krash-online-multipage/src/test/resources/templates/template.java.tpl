@@ -1,12 +1,12 @@
-#set($class.package = 'org.tanaguru.webapp.test')
+#set($class.package = 'org.asqatasun.webapp.test')
 #set($testPrefix = 'Test')
 #set($name = $model.name.replace('-', '_'))
 #set($class.name = "$name$testPrefix")
 
 package $class.package;
-import org.tanaguru.webapp.test.data.KrashtestResult;
+import org.asqatasun.webapp.test.data.KrashtestResult;
 
-public class $class.name extends AbstractTanaguruOnlineTest {
+public class $class.name extends AbstractAsqatasunOnlineTest {
 
     private String siteName = "$model.name";
     private String[] urlTab = {"$model.url0", "$model.url1","$model.url2",
@@ -22,7 +22,7 @@ public class $class.name extends AbstractTanaguruOnlineTest {
 
     public void testWebappResult(){
         assertEquals(KrashtestResult.SUCCESS.toString(), computeWebappResult(
-                launchTanaguru(siteName, urlTab, false)));
+                launchAsqatasun(siteName, urlTab, false)));
     }
 
 }

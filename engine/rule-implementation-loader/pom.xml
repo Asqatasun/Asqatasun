@@ -4,16 +4,16 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.tanaguru</groupId>
+        <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
         <version>3.1.0</version>
     </parent>
-    <artifactId>tanaguru-rule-implementation-loader</artifactId>
+    <artifactId>asqatasun-rule-implementation-loader</artifactId>
     <name>rule-implementation-loader</name>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-api</artifactId>
         </dependency>
     </dependencies>
 </project>

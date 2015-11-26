@@ -1,4 +1,4 @@
-site_name: Tanaguru
+site_name: Asqatasun
 pages:
 - ['index.md',                              'Home']
 - ['user-doc.md',                           'User Documentation', 'User Documentation']
@@ -13,7 +13,7 @@ pages:
 #- ['admindoc.md',                           'Admin Documentation', 'Admin Documentation']
 #- ['admindoc.md',                           'Admin Documentation', 'Admin Documentation']
 - ['prerequisites-webapp-doc.md',           'Installation Web Application','Prerequisites']
-- ['install-webapp-doc.md',                 'Installation Web Application','Installation']
+- ['INSTALL.md',                            'Installation Web Application','Installation']
 - ['configuration-webapp-doc.md',           'Installation Web Application','Configuration']
 - ['usage-webapp-doc.md',                   'Installation Web Application','Usage']
 - ['prerequisites-cli-doc.md',              'Installation Command Line Interface (CLI)','Prerequisites']
@@ -29,7 +29,7 @@ pages:
 - ['processor-component.md',                'Developer Documentation', 'Processor component description']
 - ['consolidator-component.md',             'Developer Documentation', 'Consolidator component description']
 - ['analyser-component.md',                  'Developer Documentation', 'Analyser component description']
-- ['tanaguru-team.md',                      'Tanaguru Team']
+- ['asqatasun-team.md',                      'Asqatasun Team']
 
 theme: readthedocs
-repo_url: https://github.com/Tanaguru/Tanaguru
+repo_url: https://github.com/Asqatasun/Asqatasun

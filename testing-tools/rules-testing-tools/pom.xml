@@ -4,57 +4,57 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.tanaguru</groupId>
+        <groupId>org.asqatasun</groupId>
         <artifactId>testing-tools</artifactId>
         <version>3.1.0</version>
     </parent>
-    <artifactId>tanaguru-rules-testing-tools</artifactId>
+    <artifactId>asqatasun-rules-testing-tools</artifactId>
     <packaging>jar</packaging>
     <name>rules-testing-tools</name>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-nomenclatureloader</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-nomenclatureloader</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-rule-implementation-loader</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-rule-implementation-loader</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-persistence</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-persistence</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-crawler</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-crawler</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentloader</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-contentloader</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-contentadapter</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-contentadapter</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-processor</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-processor</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-consolidator</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-consolidator</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-sebuilder-interpreter-tools</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-resources</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-resources</artifactId>
         </dependency>
         <dependency>
             <groupId>${springGroupId}</groupId>

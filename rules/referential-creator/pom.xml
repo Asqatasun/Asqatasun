@@ -2,13 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.tanaguru</groupId>
+        <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>1.2.0</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
-    <groupId>org.tanaguru</groupId>
+    <groupId>org.asqatasun</groupId>
     <artifactId>referential-creator</artifactId>
-    <version>1.2.0</version>
+    <version>3.2.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>referential-creator</name>
@@ -17,7 +17,7 @@
     <properties>
         <generator.referentielName>Referentiel Name 1.0</generator.referentielName>
         <generator.referentiel>referentielname1.0</generator.referentiel>
-        <generator.baseFolder>/home/$user/Tanaguru/rules/</generator.baseFolder>
+        <generator.baseFolder>/home/$user/Asqatasun/rules/</generator.baseFolder>
         <generator.dataFile>/home/$user/referentiel.csv</generator.dataFile>
         <generator.delimiter>ø</generator.delimiter>
         <generator.refdescriptor>http://www.example.com/refential-descriptor.html</generator.refdescriptor>
@@ -26,9 +26,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.tanaguru</groupId>
+                <groupId>org.asqatasun</groupId>
                 <artifactId>referential-creator-maven-plugin</artifactId>
-                <version>1.2.0</version>
+                <version>3.2.0-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <id>generate</id>

@@ -1,6 +1,6 @@
-# Usage of Tanaguru Command Line Interface
+# Usage of Asqatasun Command Line Interface
 
-To launch tanaguru on URLs, execute the following commands from the tanaguru CLI context folder:
+To launch asqatasun on URLs, execute the following commands from the asqatasun CLI context folder:
 
 ```sh
 cd $tanaguruCliContextPath
@@ -40,7 +40,7 @@ usage: ./bin/tanaguru.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
 
 To customize the rules set, use the -l option of the script to choose the appropriate level and its associated rule set.
 
-To launch tanaguru on Scenario (recorded from [SeBuilder firefox add-on](http://sebuilder.github.io/se-builder/)), execute the following commands :
+To launch asqatasun on Scenario (recorded from [SeBuilder firefox add-on](http://sebuilder.github.io/se-builder/)), execute the following commands :
 
 ```sh
 cd $tanaguruCliContextPath

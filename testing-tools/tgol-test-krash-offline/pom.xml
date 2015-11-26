@@ -4,18 +4,17 @@
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.tanaguru</groupId>
+        <groupId>org.asqatasun</groupId>
         <artifactId>testing-tools</artifactId>
         <version>3.1.0</version>
     </parent>
     <artifactId>tgol-test-krash-offline</artifactId>
     <name>tgol-test-krash-offline</name>
-    <url>http://www.tanaguru.org</url>
     <build>
         <plugins>
             <plugin>
-                <groupId>${testingToolsGroupId}</groupId>
-                <artifactId>tanaguru-maven-testgenerator-plugin</artifactId>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-maven-testgenerator-plugin</artifactId>
                 <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
@@ -36,12 +35,12 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>${engineGroupId}</groupId>
-            <artifactId>tanaguru-api</artifactId>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-api</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${testingToolsGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>tgol-testing-tools</artifactId>
         </dependency>
         <dependency>

@@ -14,7 +14,7 @@ Features :
 
 - Most of the implementation of Rgaa3 rules (about 150 rules)
 - Refactoring (clean-up) of Data Service layer usage
-- Package naming modification : now all packages starts with "org.tanaguru"
+- Package naming modification : now all packages starts with "org.asqatasun"
 - Rules commons improvments : use of Pair to define a combinaison of Result/Message
 - Rule TU improvments : provide new methods to test rule result and remarks
 - Add the "COMPLEX_TABLE_MARKER" 

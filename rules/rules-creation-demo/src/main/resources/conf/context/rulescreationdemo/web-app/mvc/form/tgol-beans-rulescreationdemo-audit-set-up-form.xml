@@ -10,7 +10,7 @@
 
 
     <!-- Rulescreationdemo select elements -->
-    <bean id="rulescreationdemoBronzeSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="rulescreationdemoBronzeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rulescreationdemo;LEVEL_1"/>
         <property name="i18nKey" value="Rulescreationdemo-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="rulescreationdemoSilverSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="rulescreationdemoSilverSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rulescreationdemo;LEVEL_2"/>
         <property name="i18nKey" value="Rulescreationdemo-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <bean id="rulescreationdemoGoldSelectElementBuilder" class="org.tanaguru.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="rulescreationdemoGoldSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
         <property name="value" value="Rulescreationdemo;LEVEL_3"/>
         <property name="i18nKey" value="Rulescreationdemo-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>
