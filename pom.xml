@@ -31,7 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
-        <asqatasunVersion>3.2.0-SNAPSHOT</asqatasunVersion>
+        <asqatasunVersion>4.0.0-beta1</asqatasunVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>

@@ -48,7 +48,7 @@ RUN /root/pre-requesites.sh
 
 # Add Asqatasun
 # @@@TODO: Remplace with downloading the .tar.gz
-ADD asqatasun-3.2.0-SNAPSHOT.i386.tar.gz /root/
+ADD asqatasun-4.0.0-beta1.i386.tar.gz /root/
 # /!\ The ADD command automacally untars and unzips the ADDed file
 RUN mv asqatasun*/ ./asqatasun/
 

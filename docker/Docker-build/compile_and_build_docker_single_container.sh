@@ -86,11 +86,13 @@ cp "${SOURCE_DIR}/${TGZ_BASENAME}"*"${TGZ_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" |
 
 # build Docker container
 (cd "${SOURCE_DIR}/${DOCKER_DIR}" ; \
-    docker build -t asqatasun/asqatasun:$TIMESTAMP "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
+    docker build -t asqatasun/asqatasun:${TIMESTAMP} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
     fail "Error building container"
 
 # run container freshly build
-# @@@TODO
+docker stop asqa
+docker rm asqa
+docker run -p 8080:8080 --name asqa asqatasun/asqatasun:${TIMESTAMP}
 
 # functional testing
 # @@@TODO 
