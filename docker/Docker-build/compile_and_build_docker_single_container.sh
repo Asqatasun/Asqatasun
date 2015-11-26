@@ -68,9 +68,9 @@ fail() {
 #############################################
 
 TIMESTAMP=$(date +%Y-%m-%d) # format 2015-11-25, cf man date
-TGZ_DIR="web-app/asqatasun-web-app/target"
 DOCKER_DIR="docker/Docker-build"
-TGZ_FILENAME="${TGZ_DIR}/asqatasun-*.tar.gz"
+TGZ_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
+TGZ_EXT=".tar.gz"
 
 #############################################
 # Do the actual job
@@ -81,12 +81,13 @@ TGZ_FILENAME="${TGZ_DIR}/asqatasun-*.tar.gz"
     fail "Error at build"
  
 # copy TAR?GZ to docker dir
-cp "${SOURCE_DIR}/${TGZ_FILENAME}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
-    fail "Error when copying ${SOURCE_DIR}/${TGZ_FILENAME}"
+cp "${SOURCE_DIR}/${TGZ_BASENAME}"*"${TGZ_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
+    fail "Error copying ${SOURCE_DIR}/${TGZ_FILENAME}"
 
 # build Docker container
 (cd "${SOURCE_DIR}/${DOCKER_DIR}" ; \
-    docker build -t asqatasun/asqatasun:$TIMESTAMP "${SOURCE_DIR}/${DOCKER_DIR}"
+    docker build -t asqatasun/asqatasun:$TIMESTAMP "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
+    fail "Error building container"
 
 # run container freshly build
 # @@@TODO
