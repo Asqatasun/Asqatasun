@@ -51,11 +51,12 @@ As of october 2015, this represents 173 accessibility tests.
 * email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 
-## Content of this last version (Tanaguru 3.1.0, 2015-07-02)
+## Content of this last version (Asqatasun 4.0.0, 2015-12-)
 
 Features :
-
-- Implementation of Rgaa3 rules (173 rules)
+- Run Asqatasun in Docker
+- Implementation of SEO rules
+- Fork from Tanaguru
 
 See full [Changelog](CHANGELOG.txt)
 
