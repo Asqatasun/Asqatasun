@@ -23,7 +23,8 @@ ENV WWWPORT="8080" \
     TOMCAT_USER="tomcat7" \
     ASQA_URL="http://localhost:8080/asqatasun/" \
     ASQA_ADMIN_EMAIL="me@my-email.org" \
-    ASQA_ADMIN_PASSWD="myAsqaPassword" 
+    ASQA_ADMIN_PASSWD="myAsqaPassword"  \
+    ASQA_RELEASE="4.0.0-beta1"
 
 EXPOSE $WWWPORT
 
@@ -35,8 +36,7 @@ EXPOSE $WWWPORT
 # ##########################################################
 
 WORKDIR /root
-ADD pre-requesites.sh /root/
-ADD xvfb /root/
+ADD pre-requesites.sh xvfb /root/
 RUN /root/pre-requesites.sh
 
 # ##########################################################
@@ -47,10 +47,9 @@ RUN /root/pre-requesites.sh
 # ##########################################################
 
 # Add Asqatasun
-# @@@TODO: Remplace with downloading the .tar.gz
-ADD asqatasun-4.0.0-SNAPSHOT.i386.tar.gz /root/
-# /!\ The ADD command automacally untars and unzips the ADDed file
-RUN mv asqatasun*/ ./asqatasun/
+ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
+RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
+    mv asqatasun*/ ./asqatasun/
 
 # Install Asqatasun
 WORKDIR /root/asqatasun
