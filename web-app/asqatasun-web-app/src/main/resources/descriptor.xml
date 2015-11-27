@@ -5,6 +5,7 @@
         <format>tar.gz</format>
     </formats>
     <fileSets>
+        <!-- text FILES -->
         <fileSet>
             <directory>${basedir}/../../</directory>
             <includes>
@@ -15,6 +16,7 @@
             <fileMode>644</fileMode>
             <outputDirectory>/</outputDirectory>
         </fileSet>
+        <!-- SQL engine -->
         <fileSet>
             <directory>${basedir}/../../engine/asqatasun-resources/src/main/resources/sql</directory>
             <includes>
@@ -27,6 +29,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/engine/sql</outputDirectory>
         </fileSet>
+        <!-- SQL Rules resources -->
         <fileSet>
             <directory>${basedir}/../../rules/rules-resources/src/main/resources/sql</directory>
             <includes>
@@ -36,6 +39,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
+        <!-- SQL Rules AccessiWeb 2.2 -->
         <fileSet>
             <directory>${basedir}/../../rules/rules-accessiweb2.2/src/main/resources/sql</directory>
             <includes>
@@ -45,6 +49,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
+        <!-- SQL Rules RGAA 2.2 -->
         <fileSet>
             <directory>${basedir}/../../rules/rules-rgaa2.2/src/main/resources/sql</directory>
             <includes>
@@ -54,6 +59,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
+        <!-- SQL Rules RGAA 3.0 -->
         <fileSet>
             <directory>${basedir}/../../rules/rules-rgaa3.0/src/main/resources/sql</directory>
             <includes>
@@ -62,6 +68,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
+        <!-- SQL Rules SEO 1.0 -->
         <fileSet>
             <directory>${basedir}/../../rules/rules-seo1.0/src/main/resources/sql</directory>
             <includes>
@@ -70,6 +77,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
+        <!-- SQL web-app -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/sql</directory>
             <includes>
@@ -81,6 +89,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql</outputDirectory>
         </fileSet>
+        <!-- Install files -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
             <includes>
@@ -90,6 +99,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>.</outputDirectory>
         </fileSet>
+        <!-- Docker -->
         <fileSet>
             <directory>${basedir}/../../docker/single-container</directory>
             <includes>
@@ -99,6 +109,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>.</outputDirectory>
         </fileSet>
+        <!-- Install web-app conf -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/conf</directory>
             <includes>
@@ -108,6 +119,7 @@
             <fileMode>666</fileMode>
             <outputDirectory>/install/web-app/conf</outputDirectory>
         </fileSet>
+        <!-- Install sql utils -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/sql-management</directory>
             <includes>
@@ -122,6 +134,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management</outputDirectory>
         </fileSet>
+        <!-- Install utils -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/password-encoder</directory>
             <includes>
@@ -132,6 +145,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management/Passwdmd5</outputDirectory>
         </fileSet>
+        <!-- Install web-app utils -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/token-master-key-encryptor</directory>
             <includes>
@@ -140,6 +154,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/token-master-key-encryptor</outputDirectory>
         </fileSet>
+        <!-- WEB APP .war -->
         <fileSet>
             <directory>${basedir}/target</directory>
             <includes>
@@ -147,6 +162,15 @@
             </includes>
             <fileMode>666</fileMode>
             <outputDirectory>/install/web-app/</outputDirectory>
+        </fileSet>
+        <!-- Docs -->
+        <fileSet>
+            <directory>${basedir}/../../docs</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>644</fileMode>
+            <outputDirectory>/docs</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
