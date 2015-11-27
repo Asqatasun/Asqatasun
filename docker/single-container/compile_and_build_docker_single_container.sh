@@ -68,7 +68,7 @@ fail() {
 #############################################
 
 TIMESTAMP=$(date +%Y-%m-%d) # format 2015-11-25, cf man date
-DOCKER_DIR="docker/Docker-build"
+DOCKER_DIR="docker/single-container"
 TGZ_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
 TGZ_EXT=".tar.gz"
 

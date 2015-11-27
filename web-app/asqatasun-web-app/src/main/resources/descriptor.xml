@@ -91,7 +91,7 @@
             <outputDirectory>.</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../docker/Docker-build</directory>
+            <directory>${basedir}/../../docker/single-container</directory>
             <includes>
                 <include>pre-requesite.sh</include>
                 <include>xvfb</include>
