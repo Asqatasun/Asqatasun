@@ -51,10 +51,10 @@ As of october 2015, this represents 173 accessibility tests.
 * email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 
-## Content of this last version (Asqatasun 4.0.0, 2015-12-)
+## Content of this last version (Asqatasun 4.0.0, 2015-12-xx)
 
 Features :
-- Run Asqatasun in Docker
+- Docker images (+ Docker automated builds)
 - Implementation of SEO rules
 - Fork from Tanaguru
 

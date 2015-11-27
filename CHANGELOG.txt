@@ -6,11 +6,9 @@ Asqatasun 4.0.0, 2015-12-xx
 
 Features :
 
-- Run Asqatasun in Docker
+- Docker images (+ Docker automated builds)
 - Implementation of SEO rules
 - Fork from Tanaguru
-
-
 
 --------------------------
 Tanaguru 3.1.0, 2015-07-02

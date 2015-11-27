@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>4.0.0-beta2</version>
     </parent>
     <artifactId>asqatasun-rules-creation-demo</artifactId>
     <name>rules-creation-demo</name>

@@ -80,7 +80,7 @@ TGZ_EXT=".tar.gz"
 (cd "$SOURCE_DIR" ; mvn clean install) ||
     fail "Error at build"
  
-# copy TAR?GZ to docker dir
+# copy TAR.GZ to docker dir
 cp "${SOURCE_DIR}/${TGZ_BASENAME}"*"${TGZ_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
     fail "Error copying ${SOURCE_DIR}/${TGZ_FILENAME}"
 
