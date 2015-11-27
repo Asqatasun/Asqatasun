@@ -1,6 +1,6 @@
 # Configuration of Asqatasun web application
 
-Here is the list of the parameters you can found in the /etc/tanaguru/tanaguru.conf file and thus can help you to customize your installation : 
+Here is the list of the parameters you can found in the /etc/asqatasun/asqatasun.conf file and thus can help you to customize your installation : 
 
 |        Parameter Name          |  Description   |         Default value         |
 | :----------------------------- | :------------- | :---------------------------- |

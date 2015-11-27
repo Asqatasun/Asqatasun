@@ -4,6 +4,6 @@ Asqatasun is now available at the URL you set up for the "**--tanaguru-url**" in
 
 You may additionnaly place an Apache in front of Tomcat, and connect them with mod_proxy_ajp.
 
-Any change of the network configuration (change of hostname, application of domain) would imply a modification of the "**web-app-url**" property in the /etc/tanaguru/tanaguru.conf file 
+Any change of the network configuration (change of hostname, application of domain) would imply a modification of the "**web-app-url**" property in the /etc/asqatasun/asqatasun.conf file 
 
 
