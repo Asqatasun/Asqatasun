@@ -31,9 +31,9 @@ Here is the list of the parameters you can found in the /etc/asqatasun/asqatasun
 |**synchronousAuditDelay**       | The result of a page audit or a group of audit audit is returned synchronously. For many reasons, an audit can last more than a few seconds, and this variable enables to define a delay from which a synchronous audit will be managed in a asynchronous way. After this delay, an audit in progress page is sent back, and the user is alerted by email when the audit is terminated. | 25000 (in ms) |
 |**asqatasunVersion**             | The version of the current instance of Asqatasun (**should't be modified**) | depends on the version |
 |**tempFolderRootPath**          | Path used by the application to copy its temporary files (**should't be modified**) | /var/tmp/asqatasun |
-|**tgol-deployment-path**        | Path that locates the configuration folder embeded by the web application (**should't be modified**) | No default value,  on the value of the "**--tanaguru-url**" and "**tomcat-webapps**" installation script options |
+|**tgol-deployment-path**        | Path that locates the configuration folder embeded by the web application (**should't be modified**) | No default value,  on the value of the "**--asqatasun-url**" and "**tomcat-webapps**" installation script options |
 |**tgol-persistenceXmlLocation** | Path of the file that define the persistence layer of the application. This option **shouldn't be modified**. | classpath:/conf/persistence.xml. |
-|**web-app-url**                 | Url of the web application. This option is needed to send info and links by email (when an audit is terminated for example) | Depends on the value of the "**--tanaguru-url**" installation script option |
+|**web-app-url**                 | Url of the web application. This option is needed to send info and links by email (when an audit is terminated for example) | Depends on the value of the "**--asqatasun-url**" installation script option |
 |**webresourceUrlPrefix**        | This parameter is based on web-app-url and **shouldn't be modified**. It corresponds to the Url of the audit-result page sent to a user when a site audit is terminated | ${web-app-url}/home/contract/audit-result.html |
 
 
