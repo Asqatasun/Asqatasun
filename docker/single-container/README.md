@@ -10,7 +10,7 @@
 ### Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 ```shell
      docker pull asqatasun/asqatasun  
-     docker run -d -p 127.0.0.1:8080:8080  asqatasun/asqatasun  
+     docker run --name asqa_test -d -p 127.0.0.1:8080:8080  asqatasun/asqatasun  
 ```
 
 ### Create a container from the DockerFile
@@ -18,7 +18,7 @@
      git clone https://github.com/Asqatasun/Asqatasun.git  
      cd Asqatasun/docker/single-container 
      docker build -t test_asqatasun . 
-     docker run -d -p 127.0.0.1:8080:8080 test_asqatasun
+     docker run --name asqa_test -d -p 127.0.0.1:8080:8080 test_asqatasun
 ```
 
 ## 2. Use your local Asqatasun
