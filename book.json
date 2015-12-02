@@ -1,6 +1,7 @@
 {
     "plugins": [
-        "github"
+        "github",
+        "search"
     ],
     "pluginsConfig": {}
 }
