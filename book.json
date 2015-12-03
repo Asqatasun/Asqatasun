@@ -4,5 +4,9 @@
         "github",
         "search"
     ],
-    "pluginsConfig": {}
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/Asqatasun/Asqatasun"
+        }
+    }
 }
