@@ -1,6 +1,6 @@
 # Asqatasun User documentation Foreword
 
-Asqatasun is an opensource accessibility validator. It is build with three strong objectives:
+Asqatasun is an opensource validator for accessibility ans SEO. It is build with three strong objectives:
 
 * ease of use
 * reliability of its results

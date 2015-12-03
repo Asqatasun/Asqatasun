@@ -1,6 +1,4 @@
-:arrow_heading_up:  [Back to Asqatasun wiki](https://github.com/Asqatasun/Asqatasun/wiki)
-
-[[Home|Home]]
+# Rules design: AccessiWeb 2.2
 
 ## Theme 1: Images
 
@@ -80,6 +78,7 @@
 * [[Rule 3.4.4|Rule 3.4.4]]
 
 ## Theme 4: Multimedia
+
 * [[Rule 4.1.1|Rule 4.1.1]]
 * [[Rule 4.1.2|Rule 4.1.2]]
 * [[Rule 4.1.3|Rule 4.1.3]]
@@ -206,7 +205,7 @@
 * [[Rule 9.5.1|Rule 9.5.1]]
 * [[Rule 9.5.2|Rule 9.5.2]]
 
-## Theme 10: PResentation of information
+## Theme 10: Presentation of information
 
 * [[Rule 10.1.2|Rule 10.1.2]]
 * [[Rule 10.1.3|Rule 10.1.3]]
