@@ -1,28 +1,8 @@
-/engine/commons-entity/target/
-/engine/commons-entity-jpa/target/
-/engine/asqatasun-api/target/
-/engine/parameterization/target/
-/engine/audit/target/
-/engine/nomenclatureloader/target/
-/engine/rule-implementation-loader/target/
-/engine/persistence/target/
-/engine/statistics/target/
-/engine/crawler/target/
-/engine/logging/target/
-/engine/scenarioloader/target/
-/engine/asqatasun-engine/target/
-/engine/sebuilder-interpreter-tools/target/
-/engine/consolidator/target/
-/engine/contentadapter/target/
-/engine/analyser/target/
-/engine/commons-processing/target/
-/engine/contentloader/target/
-/engine/processor/target/
-/engine/asqatasun-resources/target/
-engine/reference/target/
-/rules/accessiweb2.2/target/
-/rules/rgaa2.2/target/
-/rules/rgaa3.0/target/
+
+# Build
+target
+
+
 /rules/accessiweb2.2/src/main/resources/hsql-db.properties
 /rules/accessiweb2.2/src/main/resources/hsql-db.tmp/
 /rules/accessiweb2.2/src/main/resources/hsql-db.script
@@ -31,22 +11,7 @@ engine/reference/target/
 /rules/rgaa3.0/src/main/resources/hsql-db.tmp/
 /rules/rgaa3.0/main/resources/hsql-db.script
 /rules/rgaa3.0/src/main/resources/hsql-db.log
-/rules/rules-commons/target/
-/rules/accessiweb2.1-testcases/target/
-/rules/accessiweb2.1-i18n/target/
-/rules/accessiweb2.1/target/
-/rules/accessiweb2.1-resources/target/
-/rules/accessiweb2.2-testcases/target/
-/rules/accessiweb2.2-i18n/target/
-/rules/rgaa2.2-testcases/target/
-/rules/rgaa2.2-i18n/target/
-/rules/accessiweb2.2-resources/target/
-/rules/seo/target/
-/rules/seo-i18n/target/
-/rules/seo-testcases/target/
-/rules/rgaa2.2-resources/target/
-/rules/seo-resources/target/
-/rules/rules-resources/target/
+
 /rules/accessiweb2.1/src/main/resources/hsql-db.log
 /rules/accessiweb2.1/src/main/resources/hsql-db.script
 /rules/accessiweb2.1/src/main/resources/hsql-db.properties
@@ -59,30 +24,10 @@ engine/reference/target/
 /rules/rgaa2.2/src/main/resources/hsql-db.properties
 /rules/rgaa2.2/src/main/resources/hsql-db.log
 /rules/rgaa2.2/src/main/resources/hsql-db.script
-cli/tanaguru-cli/target/
-testing-tools/maven-kbcsv-plugin/target/
-testing-tools/maven-testgenerator-plugin/target/
-testing-tools/rules-testing-tools/target/
-testing-tools/tgol-testing-tools/target/
-web-app/tgol-api/target/
-web-app/tgol-data-presentation/target/
-web-app/tgol-email-sender/target/
-web-app/tgol-orchestrator/target/
-web-app/tgol-persistence/target/
-web-app/tgol-report/target/
-web-app/tgol-resources/target/
-web-app/tgol-security/target/
-web-app/tgol-si/target/
-web-app/tgol-voter/target/
-web-app/tgol-web-app/target/
-web-app/security/target/
-web-app/email-sender/target/
 
-/ws/tanaguru-ws/target/
-/testing-tools/tgol-test-krash-online-site/target/
+
+
 /testing-tools/tgol-test-krash-online-site/nbactions.xml
-/web-app/security/target/
-/testing-tools/tgol-test-krash-online/target/
 
 /seo/seo/src/main/resources/hsql-db.properties
 /seo/src/main/resources/hsql-db.log
@@ -101,7 +46,6 @@ org.eclipse.m2e.core.prefs
 
 # Netbeans
 nbproject
-target
 nb-configuration.xml
 nbactions.xml
 hsql-db*
@@ -111,13 +55,7 @@ crowdin.yaml
 
 # saved files
 *~
-
 # Merge temp file
 *.orig
-
 # Mkdocs
 /docs/Site
-
-# Gitbook
-_book/
-node_modules/
