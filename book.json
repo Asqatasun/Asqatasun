@@ -1,12 +1,13 @@
 {
     "title": "Asqatasun documentation",
     "structure": {
-        "readme": "docs/README.md",
-        "summary": "docs/SUMMARY.md"
+        "readme": "README.md",
+        "summary": "SUMMARY.md"
     },
     "plugins": [
         "github",
-        "search"
+        "search",
+        "toggle-chapters"
     ],
     "pluginsConfig": {
         "github": {
