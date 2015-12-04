@@ -23,7 +23,6 @@ nbproject
 nb-configuration.xml
 nbactions.xml
 
-
 # Crowdin (translation tool) configuration file (contains personal data
 crowdin.yaml
 
@@ -35,3 +34,7 @@ crowdin.yaml
 
 # Mkdocs
 /docs/Site
+
+# Gitbook
+_book/
+node_modules/
