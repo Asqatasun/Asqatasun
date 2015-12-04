@@ -1,8 +1,8 @@
 {
     "title": "Asqatasun documentation",
     "structure": {
-        "readme": "docs/en/README.md",
-        "summary": "docs/en/SUMMARY.md"
+        "readme": "docs/README.md",
+        "summary": "docs/SUMMARY.md"
     },
     "plugins": [
         "github",
