@@ -1,40 +1,14 @@
 
 # Build
 target
+hsql-db*
 
-
-/rules/accessiweb2.2/src/main/resources/hsql-db.properties
-/rules/accessiweb2.2/src/main/resources/hsql-db.tmp/
-/rules/accessiweb2.2/src/main/resources/hsql-db.script
-/rules/accessiweb2.2/src/main/resources/hsql-db.log
-/rules/rgaa3.0/src/main/resources/hsql-db.properties
-/rules/rgaa3.0/src/main/resources/hsql-db.tmp/
-/rules/rgaa3.0/main/resources/hsql-db.script
-/rules/rgaa3.0/src/main/resources/hsql-db.log
-
-/rules/accessiweb2.1/src/main/resources/hsql-db.log
-/rules/accessiweb2.1/src/main/resources/hsql-db.script
-/rules/accessiweb2.1/src/main/resources/hsql-db.properties
-/rules/accessiweb2.1/src/main/resources/hsql-db.tmp/
-/rules/seo/src/main/resources/hsql-db.log
-/rules/seo/src/main/resources/hsql-db.script
-/rules/seo/src/main/resources/hsql-db.tmp/
-/rules/seo/src/main/resources/hsql-db.properties
-/rules/rgaa2.2/src/main/resources/hsql-db.tmp/
-/rules/rgaa2.2/src/main/resources/hsql-db.properties
-/rules/rgaa2.2/src/main/resources/hsql-db.log
-/rules/rgaa2.2/src/main/resources/hsql-db.script
 
 
 
 /testing-tools/tgol-test-krash-online-site/nbactions.xml
-
-/seo/seo/src/main/resources/hsql-db.properties
-/seo/src/main/resources/hsql-db.log
-/seo/src/main/resources/hsql-db.properties
-/seo/src/main/resources/hsql-db.script
-/seo/src/main/resources/hsql-db.tmp
 /seo/nb-configuration.xml
+
 
 # Eclipse
 .project
@@ -48,14 +22,16 @@ org.eclipse.m2e.core.prefs
 nbproject
 nb-configuration.xml
 nbactions.xml
-hsql-db*
+
 
 # Crowdin (translation tool) configuration file (contains personal data
 crowdin.yaml
 
 # saved files
 *~
+
 # Merge temp file
 *.orig
+
 # Mkdocs
 /docs/Site
