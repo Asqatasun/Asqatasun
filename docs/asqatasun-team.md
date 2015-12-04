@@ -26,6 +26,7 @@ Lead developer
 
 ## Fabrice GANGLER
 
-* [Fabrice on LinkedIn](https://fr.linkedin.com/in/fabricegangler/)
+Master of SEO
+
+* [Fabrice on LinkedIn](https://www.linkedin.com/in/fabricegangler)
 * [Fabrice on Twitter](http://twitter.com/fabricegangler)
-* [Fabrice on GitHub](https://github.com/dzc34)
