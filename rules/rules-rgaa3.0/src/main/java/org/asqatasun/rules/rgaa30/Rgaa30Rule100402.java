@@ -26,7 +26,7 @@ import org.asqatasun.rules.csschecker.ForbiddenUnitChecker;
 /**
  * Implementation of the rule 10.4.2 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-10-4-2">the rule 10.4.2 design page.</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-10-4-2.html">the rule 10.4.2 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-10-4-2"> 10.4.2 rule specification</a>
  *
  * @author jkowalczyk

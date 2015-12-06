@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 11.2.4 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-11-2-4">the rule 11.2.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-11-2-4.html">the rule 11.2.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-11-2-4"> 11.2.4 rule specification</a>
  */
 

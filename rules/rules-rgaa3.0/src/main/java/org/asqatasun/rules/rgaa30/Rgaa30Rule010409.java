@@ -31,7 +31,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_AT_RESTITUTI
 /**
  * Implementation of the rule 1.4.9 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-4-9">the rule 1.4.9 design page.</a>
+ * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-4-9.html">the rule 1.4.9 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-4-9"> 1.4.9 rule specification</a>
  */
 
