@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 7.3.1 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-7-3-1.html">the rule 7.3.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/07.Scripts/Rule-7-3-1.html">the rule 7.3.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-7-3-1"> 7.3.1 rule specification</a>
  */
 
