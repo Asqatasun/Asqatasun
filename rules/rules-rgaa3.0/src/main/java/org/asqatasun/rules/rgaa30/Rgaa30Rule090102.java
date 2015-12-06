@@ -33,7 +33,7 @@ import static org.asqatasun.rules.keystore.CssLikeQueryStore.ARIA_HEADINGS_CSS_L
  * Implementation of the rule 9.1.2 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a
- * href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-9-1-2.html">the rule 9.1.2
+ * href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/09.Structure_of_information/Rule-9-1-2.html">the rule 9.1.2
  * design page.</a>
  *
  * @see <a
