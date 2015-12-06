@@ -36,7 +36,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IM
  * Implementation of the rule 1.3.9 of the referential Rgaa 3.0.
  *
  * For more details about the implementation, refer to
- * <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-3-9">the
+ * <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/01.Images/Rule-1-3-9">the
  * rule 1.3.9 design page.</a>
  *
  * @see

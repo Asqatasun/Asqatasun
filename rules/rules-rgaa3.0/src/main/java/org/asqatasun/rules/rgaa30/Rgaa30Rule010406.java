@@ -33,7 +33,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTE
 /**
  * Implementation of the rule 1.4.6 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-1-4-6.html">the rule 1.4.6 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/01.Images/Rule-1-4-6.html">the rule 1.4.6 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-4-6"> 1.4.6 rule specification</a>
  */
 
