@@ -26,7 +26,7 @@ import org.asqatasun.rules.elementselector.SvgLinkElementSelector;
 /**
  * Implementation of the rule 6.2.5 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-6-2-5.html">the rule 6.2.5 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/06.Links/Rule-6-2-5.html">the rule 6.2.5 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-2-5"> 6.2.5 rule specification</a>
  */
 
