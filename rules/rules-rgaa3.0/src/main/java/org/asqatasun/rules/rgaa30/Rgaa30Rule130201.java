@@ -37,7 +37,7 @@ import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
 /**
  * Implementation of the rule 13.2.1 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-13-2-1.html">the rule 13.2.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/13.Consultation/Rule-13-2-1.html">the rule 13.2.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-13-2-1"> 13.2.1 rule specification</a>
  *
  * @author jkowalczyk
