@@ -31,7 +31,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.OPTGROUP_WITHOUT_L
 /**
  * Implementation of the rule 11.8.2 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-11-8-2.html">the rule 11.8.2 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/11.Forms/Rule-11-8-2.html">the rule 11.8.2 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-11-8-3"> 11.8.2 rule specification</a>
  *
  */
