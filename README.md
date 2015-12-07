@@ -24,7 +24,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 
 Latest Asqatasun version is available at http://download.asqatasun.org/asqatasun-latest.tar.gz
 
-You can also play with the [Asqatasun Docker images](https://hub.docker.com/asqatasun/asqatasun/)
+You can also play with the [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/)
 (but **DO** read the associated docs or your data will be lost !)
 
 ## Demo
