@@ -4,11 +4,11 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 
 ## Features
 
-* SEO measurement
+* **SEO measurement**
     * run fully automated tests to track SEO issues
     * scan zillions of pages
     * create your own tests
-* web accessibility assessment (RGAA 3, AccessiWeb, WCAG)
+* **web accessibility assessment** (RGAA 3, AccessiWeb, WCAG)
     * scan a whole site for a11y issues (crawler included)
     * scan a given page, and manually fulfill the audit to produce report
     * scan offline file (e.g. template being created but not online yet)
