@@ -39,7 +39,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.INVALID_FORM_FIELD
 /**
  * Implementation of the rule 11.1.1 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-11-1-1">the rule 11.1.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/accessiweb2.2/11.Forms/Rule-11.1.1.html">the rule 11.1.1 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-1-1"> 11.1.1 rule specification</a>
  *
  */

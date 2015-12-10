@@ -25,7 +25,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 12.11.4 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-12-11-4">the rule 12.11.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/accessiweb2.2/12.Navigation/Rule-12.11.4.html">the rule 12.11.4 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-12-11-4"> 12.11.4 rule specification</a>
  *
  * @author jkowalczyk

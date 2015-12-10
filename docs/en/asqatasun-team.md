@@ -26,6 +26,8 @@ Lead developer
 
 ## Fabrice GANGLER
 
+![](https://s.gravatar.com/avatar/e35eefc3d93820e658c6749ec9141cef?s=150)
+
 * [Fabrice on LinkedIn](https://fr.linkedin.com/in/fabricegangler/)
 * [Fabrice on Twitter](http://twitter.com/fabricegangler)
 * [Fabrice on GitHub](https://github.com/dzc34)

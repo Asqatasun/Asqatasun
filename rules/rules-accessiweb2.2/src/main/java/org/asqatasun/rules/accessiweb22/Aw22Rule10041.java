@@ -25,7 +25,7 @@ import org.asqatasun.rules.csschecker.ForbiddenUnitChecker;
 /**
  * Implementation of the rule 10.4.1 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-10-4-1">the rule 10.4.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/accessiweb2.2/10.Presentation_of_information/Rule-10.4.1.html">the rule 10.4.1 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-10-4-1"> 10.4.1 rule specification</a>
  *
  */

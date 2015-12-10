@@ -33,7 +33,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TA
 /**
  * Implementation of the rule 5.7.4 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-5-7-4">the rule 5.7.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/accessiweb2.2/05.Tables/Rule-5.7.4.html">the rule 5.7.4 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-5-7-4"> 5.7.4 rule specification</a>
  *
  */

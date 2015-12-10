@@ -30,7 +30,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_EL
 /**
  * Implementation of the rule 1.9.5 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-1-9-5">the rule 1.9.5 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/accessiweb2.2/01.Images/Rule-1.9.5.html">the rule 1.9.5 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-1-9-5"> 1.9.5 rule specification</a>
  *
  */
