@@ -1,6 +1,6 @@
 # Summary
 
-* [Installation](10_Install_doc/INSTALL.md)
+* [Installation](10_Install_doc/README.md)
 * [User doc](20_User_doc/README-user_doc.md)
 * [Developer doc](30_Developer_doc/README-developer-doc.md)
 * [Rules doc](40_Rules/README.md)
