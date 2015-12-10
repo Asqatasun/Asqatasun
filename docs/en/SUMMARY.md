@@ -659,4 +659,4 @@
             * [Rule 13.16.4](40_Rules/accessiweb2.2/13.Consultation/Rule-13.16.4.md)
             * [Rule 13.17.1](40_Rules/accessiweb2.2/13.Consultation/Rule-13.17.1.md)
             * [Rule 13.17.2](40_Rules/accessiweb2.2/13.Consultation/Rule-13.17.2.md)
-    * [SEO 1.0](40_Rules/seo1.0/README.md)
+    * [SEO 1.0](40_Rules/seo1.0/README-seo1.0.md)

@@ -1,3 +1,3 @@
 # Asqatasun Rules SEO
 
-Rule design of implentation 
+@@@TODO Rule design of implentation
