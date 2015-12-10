@@ -1,1 +1,0 @@
-# Asqatasun Windows installation: prerequesites
