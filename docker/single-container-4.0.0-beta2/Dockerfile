@@ -24,7 +24,7 @@ ENV WWWPORT="8080" \
     ASQA_URL="http://localhost:8080/asqatasun/" \
     ASQA_ADMIN_EMAIL="me@my-email.org" \
     ASQA_ADMIN_PASSWD="myAsqaPassword"  \
-    ASQA_RELEASE="latest"
+    ASQA_RELEASE="4.0.0-beta2"
 
 EXPOSE $WWWPORT
 
@@ -47,9 +47,8 @@ RUN /root/pre-requesites.sh
 # ##########################################################
 
 # Add Asqatasun
-#ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
-ADD http://download.asqatasun.org/asqatasun-${ASQA_RELEASE}.tar.gz /root/
-RUN tar xvfz asqatasun-${ASQA_RELEASE}.tar.gz && \
+ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
+RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
     mv asqatasun*/ ./asqatasun/
 
 # The two following commands are needed for local testing when a release is created

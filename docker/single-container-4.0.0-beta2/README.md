@@ -7,17 +7,16 @@
 
 ## 1. Create a container
 
-### Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
+### Use container from [Asqatasun Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 ```shell
-     docker pull asqatasun/asqatasun  
-     docker run --name asqa_test -d -p 8080:8080  asqatasun/asqatasun  
+     docker pull asqatasun/asqatasun:4.0.0-beta2  
+     docker run --name asqa_test -d -p 8080:8080  asqatasun/asqatasun:4.0.0-beta2
 ```
 
-
-### Create a container from the DockerFile
+### Or build your container from the DockerFile
 ```shell
      git clone https://github.com/Asqatasun/Asqatasun.git  
-     cd Asqatasun/docker/single-container 
+     cd Asqatasun/docker/single-container-4.0.0-beta2
      docker build -t test_asqatasun . 
      docker run --name asqa_test -d -p 8080:8080 test_asqatasun
 ```
