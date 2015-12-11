@@ -170,7 +170,7 @@
                 <include>**/*</include>
             </includes>
             <excludes>
-                <exclude>nbproject/private/**/*</exclude>
+                <exclude>nbproject/**/*</exclude>
             </excludes>
             <fileMode>644</fileMode>
             <outputDirectory>/docs</outputDirectory>
