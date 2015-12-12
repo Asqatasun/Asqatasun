@@ -1,4 +1,4 @@
-# Rule 8.1.2
+# RGAA 3.0 -  Rule 8.1.2
 ## Summary
 
 We check the doctype validity regarding the W3C recommandations ([W3C

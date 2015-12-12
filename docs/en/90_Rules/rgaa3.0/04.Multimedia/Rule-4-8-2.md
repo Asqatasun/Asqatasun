@@ -1,4 +1,4 @@
-# Rule 4.8.2
+# RGAA 3.0 -  Rule 4.8.2
 
 ## Summary
 

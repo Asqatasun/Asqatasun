@@ -1,4 +1,4 @@
-# Rule 7.1.4
+# RGAA 3.0 -  Rule 7.1.4
 
 ## Summary
 

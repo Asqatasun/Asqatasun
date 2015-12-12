@@ -1,4 +1,4 @@
-# Rule 1.9.5
+# RGAA 3.0 -  Rule 1.9.5
 
 ## Summary
 

@@ -1,4 +1,4 @@
-# Rule 5.8.1
+# RGAA 3.0 -  Rule 5.8.1
 ## Summary
 
 This test consists in checking whether each layout table does not use

@@ -1,4 +1,4 @@
-# Rule 9.1.1
+# RGAA 3.0 -  Rule 9.1.1
 
 ## Summary
 

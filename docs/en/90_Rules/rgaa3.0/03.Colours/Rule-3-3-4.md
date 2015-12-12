@@ -1,4 +1,4 @@
-# Rule 3.3.4
+# RGAA 3.0 -  Rule 3.3.4
 ## Summary
 
 This test consists in checking whether the contrast ratio between text

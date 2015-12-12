@@ -1,4 +1,4 @@
-# Rule 6.1.3
+# RGAA 3.0 -  Rule 6.1.3
 
 ## Summary
 

@@ -1,4 +1,4 @@
-# Rule 5.6.2
+# RGAA 3.0 -  Rule 5.6.2
 
 ## Summary
 

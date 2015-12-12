@@ -1,4 +1,4 @@
-# Rule 4.3.2
+# RGAA 3.0 -  Rule 4.3.2
 
 ## Summary
 
