@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 We check the doctype validity regarding the W3C recommandations ([W3C Recommended list of Doctype declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 
-### Business description
+## Business description
 
 Criterion : 8.1
 
@@ -14,20 +14,20 @@ For each Web page is the [document type](http://www.accessiweb.org/index.php/glo
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 The `<!doctype>` tag of the page
 
-#### Process
+### Process
 
 We check the validity of the doctype of the page regarding the "RecommendedDoctypeDeclarations" and "RecommendedCaseInsensitiveDoctypeDeclarations" whitelists 
 
@@ -41,21 +41,21 @@ We check the validity of the doctype of the page regarding the "RecommendedDocty
 -   parameter : none
 -   present in source : no
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no `doctype`)
 
-##### Failed
+#### Failed
 
 The `doctype` is not found among the doctype whitelist
 
-##### Passed
+#### Passed
 
 The `doctype` is found among the doctype whitelist
 
-### Notes
+## Notes
 
 HTML5 doctype is NOT case-sensitive: [http://www.w3.org/TR/html5/syntax.html\#the-doctype](http://www.w3.org/TR/html5/syntax.html#the-doctype "http://www.w3.org/TR/html5/syntax.html#the-doctype")
 

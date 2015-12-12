@@ -1,11 +1,11 @@
-### Summary
+## Summary
 
 This test consists in checking the relevancy of the summary attribute
 for each data table. Data table nodes are characterized by HTML markers.
 When tables cannot be characterized, the test is applied but the result
 is semi- decidable.
 
-### Business description
+## Business description
 
 Criterion : 5.2
 
@@ -20,16 +20,16 @@ relevant?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 (table tags identified as data table from html markers)**
 
@@ -45,7 +45,7 @@ use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
 "DATA\_TABLE\_MARKER" parameter AND a "summary" attribute. That means
 select all the table tags of the page when these parameters are empty.
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -105,7 +105,7 @@ For each element returning true in Test4, raise a MessageD.
 
 ****
 
-#### Analysis
+### Analysis
 
 **Failed :**
 
@@ -121,6 +121,6 @@ identified as presentation table)
 
 In all other cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

@@ -1,10 +1,10 @@
-### Summary
+## Summary
 
 This test consists in checking whether the contrast ratio between text
 and its background is at least 7:1 for the bold under 14px sized textual
 elements
 
-### Business description
+## Business description
 
 Criterion : 3.4
 
@@ -24,16 +24,16 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit3- "Special ca
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1**
 
@@ -49,7 +49,7 @@ or equals to 14px and bold
 
 All the `img` tags
 
-#### Process
+### Process
 
 **Test1**
 
@@ -105,25 +105,25 @@ For each element returning false in Test2, raise a Message4
     Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 -   Set1 AND Set2 are empty
 
-##### Passed
+#### Passed
 
 -   Test1 returns true for all elements AND Set2 AND Set3 are empty
 
-##### Failed
+#### Failed
 
 -   Test1 returns false for at least one element
 
-##### NMI
+#### Pre-qualified
 
 -   In all other cases
 
-### Notes
+## Notes
 
 1.  By approximation, we consider that 1.2em of the default font size is
     equivalent to 14 px.

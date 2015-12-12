@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check rule
 
-### Business description
+## Business description
 
 Criterion : 13.1
 
@@ -19,25 +19,25 @@ For each Web page, does each [refresh process](http://www.accessiweb.org/index.p
  
 Level : Bronze 
 
-### Technical description
+## Technical description
 
 Scope : Page
 
 Decision level : Semi-decidable
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 **Not Tested**
 
-### Notes
+## Notes
 

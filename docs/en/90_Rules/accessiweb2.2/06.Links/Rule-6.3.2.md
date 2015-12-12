@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether the text of an image link is enough explicit to understand the purpose and the target out of its context.
 
-### Business description
+## Business description
 
 Criterion : 6.3
 
@@ -15,16 +15,16 @@ Is each text for an [image link](http://accessiweb.org/index.php/glossary-76.htm
 
 Level : [AAA](/en/category/rules-design/accessiweb-11/level/aaa)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 :**
 
@@ -38,7 +38,7 @@ All the elements of Set1 without own text and with only one child of type img or
 
 All the elements of Set2 with a child tag with a not empty `alt` attribute (assuming [the definition of a link context in AccessiWeb 2.2](http://accessiweb.org/index.php/glossary-76.html#mContexteLien))
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -66,7 +66,7 @@ For each element returning false in Test2, raise a MessageA, raise a MessageB in
 -   parameter : link text, `title` attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 **NA :**
 
@@ -81,6 +81,6 @@ characters)
 
 In all other cases
 
-### Notes
+## Notes
 
 We assume here that the image links with only one child of type `img` or `object`

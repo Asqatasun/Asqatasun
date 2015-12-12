@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether an `applet` causes a flashing effect or a change of luminance with a period inferior or equal to 3 in a second. The implementation consists in checking the presence of the `applet` element on the page.
 
-### Business description
+## Business description
 
 Criterion : 13.16
 
@@ -14,19 +14,19 @@ Test description :
 
 Level : Gold 
 
-### Technical description
+## Technical description
 
 Scope : Page
 
 Decision level : Semi-decidable
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Selection1 : All the `applet` tags
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -38,14 +38,14 @@ For each occurence of the Selection1 raise a MessageA
     parameter : snippet, `code` attribute
     present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no `applet` tag)
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes

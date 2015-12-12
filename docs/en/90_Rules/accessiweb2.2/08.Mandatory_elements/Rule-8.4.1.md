@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 We check whether the language specified for each textual element of the page is correct (regarding the code list given in the following page [http://www.loc.gov/standards/iso639-2/php/code\_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php)) and relevant.
 
-### Business description
+## Business description
 
 Criterion : 8.4
 
@@ -17,18 +17,18 @@ Test8.4.1: For each Web page with a [default human language](http://www.accessiw
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
-#### Selection
+### Selection
 
 ##### Set 1 :
 
@@ -46,7 +46,7 @@ All the textual elements of the page which are not overidden by a `lang` attribu
 
 All the textual elements of the page which are overidden by a `lang` attribute.
 
-#### Process
+### Process
 
 ##### Test 1:
 
@@ -140,24 +140,24 @@ ELSE return PASSED
 -   parameter : the extracted language, the detected language, and an extraction of the text (limited to 200 charachters) from which the detection has been applied
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selections are empty (The page has language declarations, that means that Set1 and Set2 are empty)
 
-##### Failed
+#### Failed
 
 Test1 OR Test2 OR Test3 OR test4 returns FAILED
 
-##### Passed
+#### Passed
 
 Test1 AND Test2 return true AND Test3 AND Test4 return PASSED
 
-##### NMI
+#### Pre-qualified
 
 Test3 OR test4 returns NMI
 
-### Notes
+## Notes
 
 No notes yet for that rule

@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether the user is warned when he's
 about to open a new window via a form control.
 
-### Business description
+## Business description
 
 Criterion : 13.2
 
@@ -16,23 +16,23 @@ is the user warned?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : all the `form`, `select` not within a `form`, `textarea` not
 within a `form`, `input` not within a `form` and `button` not within
 a `form` tags (form, select:not(form select), textarea:not(form
 textarea), input:not(form input), button:not(form button))
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -45,19 +45,19 @@ For each occurence of the Set1 raise a MessageA
 -   parameter : text, title attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Set1 is empty (The page has neither `form`, nor `select` within a
 `form`, nor `input` within a `form`, nor `button`within a `form`,
 nor `textarea` within a `form` tag)
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 We detect the elements of the scope of the test to determine whether the
 test is applicable.

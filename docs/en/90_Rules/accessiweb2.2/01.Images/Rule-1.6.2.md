@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether an informative object image has a detailed description if necessary
 
-### Business description
+## Business description
 
 Criterion : 1.6
 
@@ -18,33 +18,33 @@ Does each `<object>` image that conveys information (`<object>` tag with the att
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `<object>` tags with a `type` attribute that starts with "image/..."
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no `<object>` tag with a `type` attribute that starts with "image/...")
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 No notes yet for that rule

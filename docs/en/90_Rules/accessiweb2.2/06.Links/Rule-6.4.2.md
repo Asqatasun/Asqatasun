@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each indentical image link have
 the same purpose and target
 
-### Business description
+## Business description
 
 Criterion : 6.4
 
@@ -15,16 +15,16 @@ Does each [identical link](http://www.accessiweb.org/index.php/glossary-76.html#
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the image links (see [the definition of an image link in
 AccessiWeb2.2](http://www.accessiweb.org/index.php/glossary-76.html#mLienImage))
@@ -38,7 +38,7 @@ Set3 : All the image links with a `href` attribute, with a context and with an i
 
 -   reference : none
 
-#### Process
+### Process
 
 Test1 : We check whether all the elements of Set1 have an identical `href` attribute
 
@@ -50,7 +50,7 @@ Test3 : We check whether all the elements of Set3 have an identical `href` attri
 
 -   reference : none
 
-#### Analysis
+### Analysis
 
 -   NA : Set1, Set2 and Set3 are empty
 -   Failed :

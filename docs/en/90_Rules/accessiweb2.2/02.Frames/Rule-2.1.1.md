@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking the presence of the title attribute for
 all the frame elements of the page.
 
-### Business description
+## Business description
 
 Criterion : 2.1
 
@@ -17,22 +17,22 @@ tag) have a title attribute?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1**
 
 All the `frame` tags (frame)
 
-#### Process
+### Process
 
 **Test1 :**
 
@@ -47,22 +47,22 @@ For each element returning false in Test1, raise a Message1.
 -   parameter : src attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 The page has no `frame` tag (Set1 is empty)
 
-##### Failed
+#### Failed
 
 At least one `frame` tag has no "title" attribute (Test1 returns false
 for at least one element of Set1)
 
-##### Passed
+#### Passed
 
 All the `frame` tags have an "title" attribute (Test1 returns true for
 all the elements of Set1)
 
-### Notes
+## Notes
 
 No notes yet for that rule

@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each button associated with an
 image that handles information has a relevant `alt` attribute.
 
-### Business description
+## Business description
 
 Criterion : 1.3
 
@@ -18,35 +18,35 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#CP1-3 "Special cases
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `input` tags with a `alt` attribute and the type attribute
 equals to "image"
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no`input` tags with a `alt` attribute
 and the type attribute equals to "image")
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 No notes yet for that rule

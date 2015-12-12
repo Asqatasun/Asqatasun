@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether each downloadable office document have an accessible version.
 
-### Business description
+## Business description
 
 Criterion : 13.7
 
@@ -18,16 +18,16 @@ On each Web page, does each downloading functionality for an electronic document
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `<a>` tags with an `href` attribute (`a[href]`)
 
@@ -37,7 +37,7 @@ Set3 : All the elements from Set2 that have a proper extension (no parameters, a
 
 Set4 : All the `<form>` tags (form)
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -76,7 +76,7 @@ If Test3 returns false (some form are found on the page), raise a Message3.
 -   status: NMI
 -   present in source : no
 
-#### Analysis
+### Analysis
 
 **NA**
 
@@ -87,7 +87,7 @@ If Test3 returns false (some form are found on the page), raise a Message3.
 
 In all other cases
 
-### Notes
+## Notes
 
 We assume that a targetted document (pointed by the `href` attribute of the link) can be characterized by its extension.
 

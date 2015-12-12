@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each fieldset tag is followed by
 a legend tag in the source code.
 
-### Business description
+## Business description
 
 Criterion : 11.6
 
@@ -16,22 +16,22 @@ legend (legend tag) in the source code?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `fieldset` tags.
 
 Set2 : All the `fieldset` tags with a `legend` child tag.
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -46,20 +46,20 @@ For each occurence of false-result of Test1, raise a MessageA
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no fieldset tag)
 
-##### Failed
+#### Failed
 
 Test1 returns false for at least one element.
 
-##### Passed
+#### Passed
 
 Test1 returns true for all the elements.
 
-### Notes
+## Notes
 
 No notes yet for that rule

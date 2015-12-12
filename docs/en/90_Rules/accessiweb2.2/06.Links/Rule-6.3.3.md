@@ -1,10 +1,10 @@
-### Summary
+## Summary
 
 This test consists in checking whether the text of each clickable area
 is enough explicit to understand the purpose and the target out of its
 context.
 
-### Business description
+## Business description
 
 Criterion : 6.3
 
@@ -21,16 +21,16 @@ cases](http://accessiweb.org/index.php/glossary-76.html#cpCrit6- "Special cases 
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 :**
 
@@ -41,7 +41,7 @@ area[href][alt] )
 
 All the elements of Set1 with a not empty `alt` attribute
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -73,7 +73,7 @@ MessageB instead
 -   parameter : link text, title attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 **NA :**
 
@@ -90,6 +90,6 @@ or that only contains non alphanumerical characters)
 
 In all other cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

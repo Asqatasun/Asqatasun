@@ -1,9 +1,11 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.1.2
+
+## Summary
 
 This test consists in checking whether each area of an image map is
 defined with an `alt` attribute
 
-### Business description
+## Business description
 
 Criterion : 1.1
 
@@ -15,16 +17,16 @@ Does each [area](http://www.accessiweb.org/index.php/glossary-76.html#mZone) (ar
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `area` tags, defined in a `map` tag associated with the `usemap` attribute of an `img` tag
 
@@ -32,7 +34,7 @@ All the `area` tags, defined in a `map` tag associated with the `usemap` attribu
 
 -   reference : none
 
-#### Process
+### Process
 
 Test the presence of an `alt` attribute in each element of the selection set.
 
@@ -40,23 +42,23 @@ Test the presence of an `alt` attribute in each element of the selection set.
 
 -   reference : none
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 -   The page has no `img` tag
 -   no `img` tag is defined with an `usemap` attribute
 
-##### Failed
+#### Failed
 
 The `map` associated with the `usemap` attribute of a `img` tag has at
 least one `area` tag without `alt` attribute
 
-##### Passed
+#### Passed
 
 All the `area` tags, defined in a `map` tag associated with the
 `usemap` attribute of an `img` tag have an `alt` attribute
 
-### Notes
+## Notes
 
 No notes yet for that rule

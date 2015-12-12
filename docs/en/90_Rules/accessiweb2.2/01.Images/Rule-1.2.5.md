@@ -1,9 +1,11 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.2.5
+
+## Summary
 
 This test consists in checking whether each embedded image that doesn't
 handle any information has an empty alternative.
 
-### Business description
+## Business description
 
 Criterion : 1.2
 
@@ -19,35 +21,35 @@ that does not convey information, pass one of the conditions below?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `embed` tags with a "type" attribute that starts with
 "image/..."
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no `embed` tag with a "type" attribute
 that starts with "image/...")
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 No notes yet for that rule

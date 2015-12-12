@@ -1,9 +1,11 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.2.1
+
+## Summary
 
 This test consists in checking whether the `alt` attribute of each
 decorative image is empty.
 
-### Business description
+## Business description
 
 Criterion : 1.2
 
@@ -15,16 +17,16 @@ For each [decorative image](http://www.accessiweb.org/index.php/glossary-76.html
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 For this rule, we assume that all `img` tags with a `longdesc`
 attribute are informative images and the `img` tags without `src`
@@ -45,7 +47,7 @@ tag (in this case, the image would be considered as a link)
 -   used nomenclature : none
 -   reference : none
 
-#### Process
+### Process
 
 For this rule, we assume that all `img` tags with a `longdesc`
 attribute are informative images.
@@ -62,16 +64,16 @@ and a not empty `src` attribute
 -   used nomenclature : none
 -   reference : none
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 -   The page has no `img` tag with `alt` attribute (Set2 is empty and
     Test1 returns true)
 -   All the images of the page are informative (Set1 and Set2 have the
     same size and Test1 returns true)
 
-##### NMI
+#### Pre-qualified
 
 All other cases with message:
 
@@ -81,6 +83,6 @@ All other cases with message:
 -   parameter : tag name
 -   present in source : yes
 
-### Notes
+## Notes
 
 No notes yet for that rule

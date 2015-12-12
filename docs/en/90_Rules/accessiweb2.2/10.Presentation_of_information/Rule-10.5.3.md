@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check rule
 
-### Business description
+## Business description
 
 Criterion : 10.5
 
@@ -17,29 +17,29 @@ from a parent?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 ##### Not Tested
 
 In all cases
 
-### Notes
+## Notes
 
 

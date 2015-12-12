@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether the title of each image link is relevant.
 
-### Business description
+## Business description
 
 Criterion : 6.2
 
@@ -14,16 +14,16 @@ For each [image link](index.php/glossary-76.html#mLienImage) with a [link title]
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `<a>` tags with a `href` attribute, with children (`a[href]:has(\*)` )
 
@@ -31,7 +31,7 @@ Set2 : All the elements of Set1 without own text and with only one child of type
 
 Set3 : All the elements of Set2 with a not empty text and a `title` attribute
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -97,23 +97,23 @@ For each element returning false in Test5, raise a Message 4
 
 -   LinkTextBlacklist
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 -   The Set3 is empty
 
-##### Failed
+#### Failed
 
 -   Test1 returns false for at least one element (At least one element of the Set3 has an empty title attribute text content which is blacklisted)
 -   Test2 returns false for at least one element (At least one element of the Set3 has title attribute only composed of non alphanumerical characters)
 -   Test3 returns false for at least one element (At least one element of the Set3 has a title attribute which is blacklisted)
 
-##### NMI
+#### Pre-qualified
 
 -   In all other cases
 
-### Notes
+## Notes
 
 1.  We assume here that the textual alternative of the image corresponds to the link text.
 2.  A link title is regarded as not-pertinent in the following cases : 

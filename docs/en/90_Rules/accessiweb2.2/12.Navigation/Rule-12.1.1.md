@@ -1,7 +1,7 @@
-### Summary
+## Summary
 
 This test is of site scope or group of pages scope. When requesting a page audit, the result is automatically set to "Not Applicable". No check is done instead.
-### Business description
+## Business description
 
 Criterion : 12.1
 
@@ -17,24 +17,24 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit12-1 "Special 
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
-### Technical description
+## Technical description
 
 Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 ##### Not Applicable
 
@@ -44,6 +44,6 @@ Page audit
 
 Group of pages audit or site audit
 
-### Notes
+## Notes
 
 

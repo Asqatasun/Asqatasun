@@ -1,25 +1,25 @@
-### Summary
+## Summary
 
-### Business description
+## Business description
 
 Criterion : Test : Test description :
 
 Level :
 
-### Technical description
+## Technical description
 
 Scope :
 
 Decision level :
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
-#### Process
+### Process
 
-#### Analysis
+### Analysis
 
-### Notes
+## Notes
 
 No notes yet for that rule

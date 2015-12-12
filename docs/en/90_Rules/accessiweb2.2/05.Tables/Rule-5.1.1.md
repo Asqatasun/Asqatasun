@@ -1,11 +1,11 @@
-### Summary
+## Summary
 
 This tests consists in checking the presence of the summary attribute on
 the data table nodes. Data table nodes are characterized by HTML
 markers. When tables cannot be characterized, the test is applied but
 the result is semi- decidable.
 
-### Business description
+## Business description
 
 Criterion : 5.1
 
@@ -19,16 +19,16 @@ table](http://accessiweb.org/index.php/glossary-76.html#mTabDonnee)
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 (table tags identified as data table from html markers)**
 
@@ -44,7 +44,7 @@ use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
 "DATA\_TABLE\_MARKER" parameter. That means select all the table tags of
 the page when these parameters are empty.
 
-#### Process
+### Process
 
 ##### Test1 (only applied when the "DATA\_TABLE\_MARKER" parameter is not empty) :
 
@@ -83,25 +83,25 @@ For each occurence of true-result of Test2, raise a MessageC
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selections are empty (The page has no table tags that means that Set1
 and Set2 are empty)
 
-##### Failed
+#### Failed
 
 Test1 returns false
 
-##### Passed
+#### Passed
 
 Test1 returns true and Set2 is empty
 
-##### NMI:
+#### Pre-qualified:
 
 on all other cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

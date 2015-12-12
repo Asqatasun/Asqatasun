@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in searching patterns indicating that forbidden tags (not `div`, `span` or `table`) are used for layout purpose.
 
-### Business description
+## Business description
 
 Criterion : 8.9
 
@@ -14,22 +14,22 @@ On each Web page tags must not be used (except div, span and table) [only for la
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Selection1 : all the `<a>` tags without `href`, `name` or `id` attribute (`a:not([href]):not([name]):not([id])`)
 
 Selection2 : all the `fieldset` not within a `form` (`fieldset:not(form fieldset):not(\*[role=search] fieldset):not(\*[role=form] fieldset)`)
 
-#### Process
+### Process
 
 **Test1 :**
 
@@ -61,17 +61,17 @@ For each occurence of the Selection2 raise a MessageC
 
 Test1 :
 
-#### Analysis
+### Analysis
 
-##### Failed :
+#### Failed :
 
 Test1 returns false (The page contains a link without `target` or a `fieldset` not within a `form`)
 
-##### NMI :
+#### Pre-qualified :
 
 Test1 returns true
 
-### Notes
+## Notes
 
 On latest webdev data set (2013-10-30, 78,000 pages), links without target (`a:not([href]):not([name]):not([id])`) have been found on 18256 pages, i.e on 23% of the pages.
 

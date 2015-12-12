@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each button "image of text" is
 replaced with styled text.
 
-### Business description
+## Business description
 
 Criterion : 1.9
 
@@ -15,34 +15,34 @@ For each form tag, each button "image of text" (input tag with the attribute typ
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `input` tags with a "type" attribute equals to "image"
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 The selection is empty (The page has no `input` tag with a "type"
 attribute equals to "image")
 
-##### NMI
+#### Pre-qualified
 
 In all other cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

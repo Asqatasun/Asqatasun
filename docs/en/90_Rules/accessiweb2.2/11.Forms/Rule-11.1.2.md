@@ -1,4 +1,4 @@
-### Summary
+## Summary
 
 This test consists in checking the presence and the unicity of the "id"
 attribute of each form field **associated with a label tag**. We assume
@@ -6,7 +6,7 @@ here that a form field is associated with a label tag when its "id"
 attribute corresponds to the "for" attribute of any label tag or
 ﻿﻿﻿﻿﻿﻿when the form field is within the contents of a label element.
 
-### Business description
+## Business description
 
 Criterion : 11.1
 
@@ -21,16 +21,16 @@ Does each [form field](http://www.accessiweb.org/index.php/glossary-76.html#mChp
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 ##### Set1 (fields with explicit label)
 
@@ -54,7 +54,7 @@ Decision level :
     "password" or "checkbox" or "radio" or "file", all the `textarea`
     tags and all the `select` tags within a `label` tag
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -88,21 +88,21 @@ For each occurence of false-result of Test2, raise a MessageB
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Set1 and Set2 are empty (The page has no form fields associated with a
 label tag)
 
-##### Failed
+#### Failed
 
 Test1 or Test 2 return false for at least one element.
 
-##### Passed
+#### Passed
 
 Test1 and Test2 return true for all the elements
 
-### Notes
+## Notes
 
 No notes yet for that rule

@@ -1,10 +1,10 @@
-### Summary
+## Summary
 
 This test consists in checking whether each header of a data table
 applied to the whole row or to the whole column have a unique id
 attribute or a scope attribute.
 
-### Business description
+## Business description
 
 Criterion : 5.7
 
@@ -17,16 +17,16 @@ column have a unique id attribute or a scope attribute?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 (table tags identified as data table from html markers)**
 
@@ -42,7 +42,7 @@ use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
 "DATA\_TABLE\_MARKER" parameter AND with `th` child tags. That means
 select all the table tags of the page when these parameters are empty.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -66,18 +66,18 @@ For each occurence of Set2, raise a MessageB
 -   parameter : snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Set1 AND Set2 are empty (The page has no `table` tag with `th` child
 tags or only tables identified as presentation table)
 
-##### NMI
+#### Pre-qualified
 
 In all other cases
 
-### Notes
+## Notes
 
 We only detect the elements of the scope of the test to determine
 whether the test is applicable

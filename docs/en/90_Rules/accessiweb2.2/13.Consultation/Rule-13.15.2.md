@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check rule
 
-### Business description
+## Business description
 
 Criterion : 13.15
 
@@ -17,25 +17,25 @@ On each Web page, does each [script](http://www.accessiweb.org/index.php/glossar
 
 Level : Bronze 
 
-### Technical description
+## Technical description
 
 Scope : Page
 
 Decision level : Semi-decidable
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 **Not Tested**
 
-### Notes
+## Notes
 

@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking the relevancy of the caption of data
 tables.
 
-### Business description
+## Business description
 
 Criterion : 5.5
 
@@ -19,16 +19,16 @@ the table?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 (table tags identified as data table from html markers) : \
 **
@@ -55,7 +55,7 @@ The `caption` child tag of each element of Set1.
 
 The `caption` child tag of each element of Set2.
 
-#### Process
+### Process
 
 **Test1 :**
 
@@ -123,7 +123,7 @@ MessageD.****
 -   parameter : title attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 **Failed :**
 
@@ -141,6 +141,6 @@ identified as presentation table)
 
 In all other cases
 
-### Notes
+## Notes
 
 

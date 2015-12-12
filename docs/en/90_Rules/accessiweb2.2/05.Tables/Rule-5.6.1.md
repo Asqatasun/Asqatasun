@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each colum header of a data table
 is defined with a `th` tag
 
-### Business description
+## Business description
 
 Criterion : 5.6
 
@@ -19,16 +19,16 @@ have a th tag?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 (table tags identified as data table from html markers)**
 
@@ -43,7 +43,7 @@ equal to the value of the "DATA\_TABLE\_MARKER" parameter or the
 "PRESENTATION\_TABLE\_MARKER" parameter associated with the audit. That
 means select all the table tags of the page when the parameter is empty.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -67,7 +67,7 @@ For each occurence of Set2, raise a MessageB
 -   parameter : snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 **NA : \
 **
@@ -80,7 +80,7 @@ identified as presentation table)
 
 In all others cases
 
-### Notes
+## Notes
 
 We only detect the elements of the scope of the test to determine
 whether the test is applicable

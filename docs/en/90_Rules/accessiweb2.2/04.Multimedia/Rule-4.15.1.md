@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check rule
 
-### Business description
+## Business description
 
 Criterion : 4.15
 
@@ -19,27 +19,27 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4-15 "Special 
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 **Not Tested**
 
-### Notes
+## Notes
 
 

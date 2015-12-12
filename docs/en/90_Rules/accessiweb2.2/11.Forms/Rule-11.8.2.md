@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each `optgroup` in a `select`
 tag has a label attribute.
 
-### Business description
+## Business description
 
 Criterion : 11.8
 
@@ -15,20 +15,20 @@ In each [selection list](http://www.accessiweb.org/index.php/glossary-76.html#mL
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `optgroup` tags within a `select` tag
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -43,18 +43,18 @@ For each occurence of false-result of Test1, raise a MessageA
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no optgroup in a select tag)
 
-##### Failed
+#### Failed
 
 Test1 returns false for at least one element.
 
-##### Passed
+#### Passed
 
 Test1 returns true for all the elements.
 
-### Notes
+## Notes

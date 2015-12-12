@@ -1,11 +1,11 @@
-### Summary
+## Summary
 
 This test consists in checking whether each audio sequence played
 automatically and defined with an `object`, an `embed`, an `applet`
 or a `bgdound` tag can be stopped by the user or the volume can be
 shutdowned
 
-### Business description
+## Business description
 
 Criterion : 4.18
 
@@ -24,21 +24,21 @@ conditions below?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Selection1 : All the `embed`, `object`, `applet` and `bgsound` tags
 (embed, object, bgsound, applet)
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -51,18 +51,18 @@ For each occurence of the Selection1 raise a MessageA
 -   parameter : snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has neither `object`, nor `applet`, nor
 `bgsound`, nor `embed` tag)
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 We detect the elements of the scope of the test to determine whether the
 test is applicable.

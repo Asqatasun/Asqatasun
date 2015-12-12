@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking the relevancy of the label attribute of
 each optgroup tag
 
-### Business description
+## Business description
 
 Criterion : 11.8
 
@@ -16,20 +16,20 @@ the content of the label attribute relevant?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `select` tags within a `form` tag with a "label" attribute
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -42,18 +42,18 @@ For each occurence of the selection raise a MessageA
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no `select` tag within a `form` tag
 with a "label" attribute)
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 We only detect the elements of the scope of the test to determine
 whether the test is applicable

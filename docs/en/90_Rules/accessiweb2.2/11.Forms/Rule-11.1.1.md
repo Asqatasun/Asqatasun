@@ -1,4 +1,4 @@
-### Summary
+## Summary
 
 This test consists in checking whether each form field contains either a
 title attribute or is associated with a label tag. We assume here that a
@@ -6,7 +6,7 @@ form field is associated with label tag when its "id" attribute
 corresponds to the "for" attribute of any label tag or ﻿﻿﻿﻿﻿﻿when the
 form field is within the contents of the label elements
 
-### Business description
+## Business description
 
 Criterion : 11.1
 
@@ -22,16 +22,16 @@ Does each [form field](http://www.accessiweb.org/index.php/glossary-76.html#mChp
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 ##### Set1 (fields without implicit labels)
 
@@ -59,7 +59,7 @@ Decision level :
 -   and all the `select` tags
 -   and **for all of them** within a `label` tag
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -88,21 +88,21 @@ ELSE return result of Test1
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no form fields, that means that Set1
 and Set2 are empty)
 
-##### Failed
+#### Failed
 
 Test2 returns false
 
-##### Passed
+#### Passed
 
 Test2 returns true
 
-### Notes
+## Notes
 
 No notes yet for that rule

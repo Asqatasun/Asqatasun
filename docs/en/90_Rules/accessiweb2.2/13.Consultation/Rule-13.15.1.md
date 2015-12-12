@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check rule
 
-### Business description
+## Business description
 
 Criterion : 13.15
 
@@ -18,25 +18,25 @@ Test description :
 
 Level : Bronze 
 
-### Technical description
+## Technical description
 
 Scope : Page
 
 Decision level : Semi-decidable
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 **Not Tested**
 
-### Notes
+## Notes
 

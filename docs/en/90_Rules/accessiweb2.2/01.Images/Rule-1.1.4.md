@@ -1,8 +1,10 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.1.4
+
+## Summary
 
 This test consists in checking whether each `applet` tag is defined with an `alt` attribute
 
-### Business description
+## Business description
 
 Criterion : 1.1
 
@@ -14,21 +16,21 @@ Does each [applet image](http://www.accessiweb.org/index.php/glossary-76.html#mI
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level : [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1**
 
 All the `applet` tags of the page
 
-#### Process
+### Process
 
 **Test1**
 
@@ -42,16 +44,16 @@ For each element returning false in Test1, raise a Message1
 -   parameter : `code` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 The page has no `applet` tag (Set1 is empty)
 
-##### Failed
+#### Failed
 
 At least one `applet` tag has no `alt` attribute (Test1 returns failed for at least one element)
 
-##### Passed
+#### Passed
 
 All the `applet` tags have an `alt` attribute

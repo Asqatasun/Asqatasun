@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether the content of the summary
 attribute of a layout table is empty
 
-### Business description
+## Business description
 
 Criterion : 5.2
 
@@ -18,16 +18,16 @@ empty (summary=")?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 (table tags identified as presentation table from html markers)**
 
@@ -44,7 +44,7 @@ use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
 "DATA\_TABLE\_MARKER" parameter AND a "summary" attribute. That means
 select all the table tags of the page when these parameters are empty.
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -83,7 +83,7 @@ For each element returning true in Test2, raise a MessageC.
 -   parameter : summary attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 **Failed :**
 
@@ -99,6 +99,6 @@ identified as data table)
 
 In all other cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

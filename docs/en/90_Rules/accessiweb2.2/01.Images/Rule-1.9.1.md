@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in detecting the images on the page.
 
-### Business description
+## Business description
 
 Criterion : 1.9
 
@@ -14,21 +14,21 @@ Each [image of text](http://www.accessiweb.org/index.php/glossary-76.html#mImgTe
 
 Level : [Gold](/en/category/rules-design/accessiweb-11/level/gold)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1**
 
 All the `img` tags of the page
 
-#### Process
+### Process
 
 **Test1**
 
@@ -41,12 +41,12 @@ For each element of Set1, raise a MessageA
 -   parameter : `src` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Set1 is empty (the page has no `img` tag)
 
-##### Pre-qualified
+#### Pre-qualified
 
 In all other cases

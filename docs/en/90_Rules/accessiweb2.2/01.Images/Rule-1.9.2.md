@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each text area associated with an
 image map is replaced with styled text.
 
-### Business description
+## Business description
 
 Criterion : 1.9
 
@@ -16,33 +16,33 @@ For each [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgRe
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `area` tags of the page
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 The selection is empty (The page has no `area` tag)
 
-##### NMI
+#### Pre-qualified
 
 In all other cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

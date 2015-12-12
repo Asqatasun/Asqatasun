@@ -1,8 +1,10 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.2.3
+
+## Summary
 
 This test consists in checking whether each `applet` that doesn't handle any information is defined with an empty `alt` attribute.
 
-### Business description
+## Business description
 
 Criterion : 1.2
 
@@ -14,15 +16,15 @@ For each [applet image](http://www.accessiweb.org/index.php/glossary-76.html#mIm
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level : [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1** (`applet` tags identified as a decorative applet image from html markers)
 
@@ -32,7 +34,7 @@ All the `applet` tags with an `alt` attribute and with an `id` attribute or a `c
 
 All the `applet` tags with an `alt` attribute that don't have an `id` attribute or a `class` attribute or a `role` that matches one the values set by the use through the "DECORATIVE_IMAGE_MARKER" parameter or the "INFORMATIVE_IMAGE_MARKER" parameter. That means select all the `applet` tags with an `alt` attribute of the page when these parameters are empty.
 
-#### Process
+### Process
 
 **Test1** (only applied when the "DECORATIVE_IMAGE_MARKER" parameter is not empty) :
 
@@ -66,17 +68,17 @@ For each element returning true in Test2, raise a MessageC
 -   parameter : `alt` attribute, `code` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### Not Applicable
 
 Set1 and Set2 are empty (The page has no `applet` tag)
 
-##### Failed
+#### Failed
 
 Test1 returns false (one `applet` identified as decorative has a not empty alternative)
 
-##### Passed
+#### Passed
 
 Test1 returns true for all the elements of Set 1 and Set2 is empty (all the `applet` of the page are identified as decorative and they all have an empty alternative)
 

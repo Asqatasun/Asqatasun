@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking the relevancy of the headings hierarchy.
 
-### Business description
+## Business description
 
 Criterion : 9.1
 
@@ -14,16 +14,16 @@ On each Web page, is the hierarchy between the [headings](http://www.accessiweb.
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `<Hx>` tags where x is comprise between 1 and 6
 
@@ -31,7 +31,7 @@ Set1 : All the `<Hx>` tags where x is comprise between 1 and 6
 
 -   reference : none
 
-#### Process
+### Process
  
 We assume that the index of the first encountered `<Hx>` tag represents the index of reference for the document.
 
@@ -43,7 +43,7 @@ Test2 : We check that the index of each element of Set1 is not inferior to the i
 
 -   reference : none
 
-#### Analysis
+### Analysis
 
 -   NA : The page has no `<H>` tag
 -   Failed : Test1 or Test2 return false for at least one element of Set1
@@ -57,6 +57,6 @@ Test2 : We check that the index of each element of Set1 is not inferior to the i
 4.  parameter : tag name
 5.  present in source : yes
 
-### Notes
+## Notes
 
 No notes yet for that rule

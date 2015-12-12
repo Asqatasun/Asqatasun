@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether some help tools are provided for
 each text field
 
-### Business description
+## Business description
 
 Criterion : 11.14
 
@@ -19,16 +19,16 @@ necessary?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 -   All the `input` tags within a `form` with a "type" attribute
     equals to:
@@ -37,7 +37,7 @@ Decision level :
 
 -   AND all the `textarea` tags within a `form`
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -50,17 +50,17 @@ For each occurence of the selection raise a MessageA
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 We only detect the elements of the scope of the test to determine
 whether the test is applicable

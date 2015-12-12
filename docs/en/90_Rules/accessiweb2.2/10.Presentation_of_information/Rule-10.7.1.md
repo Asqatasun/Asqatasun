@@ -1,10 +1,10 @@
-### Summary
+## Summary
 
 This test consists in checking that each html element that can grab the
 focus does not override the outline css properties to make the browser
 visual indication invisible
 
-### Business description
+## Business description
 
 Criterion : 10.7
 
@@ -18,16 +18,16 @@ outline-style). Does this rule have been followed?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1**
 
@@ -39,7 +39,7 @@ All the html elements that can grab the focus and not of type `input`,
 All the html elements that can grab the focus and of type `input`,
 `button`, `iframe`, `textarea` and `select`
 
-#### Process
+### Process
 
 **Test1 :**
 
@@ -80,13 +80,13 @@ If Selection2 is not empty, raise a MessageB
 -   status: Pre-Qualified
 -   present in source : no
 
-#### Analysis
+### Analysis
 
 ##### Not applicable
 
 Set1 AND Set2 are empty (the page has no focusable element)
 
-##### Passed
+#### Passed
 
 Test1 AND Test2 AND Test3 return true for all elements AND Set2 is
 empty (all the elements have a visible focus visual indication and no
@@ -96,7 +96,7 @@ element that needs a human check is present on the page)
 
 In all other cases
 
-### Notes
+## Notes
 
 The value of the css properties outline, outline-color, outline-width,
 outline-style are determined while fetching the page, through a

@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether the font color of each text of an
 `object`, `applet` or `embed` tag can be controlled by the user
 
-### Business description
+## Business description
 
 Criterion : 10.8
 
@@ -16,21 +16,21 @@ font colour be controlled by the user?
 
 Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Selection1 : All the `embed`, `applet` and `object` tags (embed,
 applet, object)
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -43,18 +43,18 @@ For each occurence of the Selection1 raise a MessageA
 -   parameter : "code" attribute", snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has neither `object`, nor `applet` nor
 `embed` tag)
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 We detect the elements of the scope of the test to determine whether the
 test is applicable.

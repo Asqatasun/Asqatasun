@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each label associated with a form
 fields with a same function is defined identicaly
 
-### Business description
+## Business description
 
 Criterion : 11.3
 
@@ -15,20 +15,20 @@ Is each [label](http://www.accessiweb.org/index.php/glossary-76.html#mEtiquette)
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `form` tags with child `label` tags
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -41,18 +41,18 @@ For each occurence of the selection raise a MessageA
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no `form` tag with `label` tag as
 child)
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 -   We only detect the elements of the scope of the test to determine
     whether the test is applicable

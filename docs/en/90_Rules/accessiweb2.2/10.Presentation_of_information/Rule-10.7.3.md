@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check rule
 
-### Business description
+## Business description
 
 Criterion : 10.7
 
@@ -17,25 +17,25 @@ Does each link inside of a text that is conveyed by colour alone follow the cond
 
 Level : Bronze 
 
-### Technical description
+## Technical description
 
 Scope : Page
 
 Decision level : Semi-decidable
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 **Not Tested**
 
-### Notes
+## Notes
 

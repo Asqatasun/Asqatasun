@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each indentical clickable area
 have the same purpose and target
 
-### Business description
+## Business description
 
 Criterion : 6.4
 
@@ -19,16 +19,16 @@ have the same purpose and target?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the clickable area (see [the definition of a clickable
 area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable))
@@ -49,7 +49,7 @@ and with an identical link text (combination of the link text and the
 
 -   reference : none
 
-#### Process
+### Process
 
 Test1 : We check whether all the elements of Set1 have an identical
 "href" attribute
@@ -64,7 +64,7 @@ Test3 : We check whether all the elements of Set3 have an identical
 
 -   reference : none
 
-#### Analysis
+### Analysis
 
 -   NA : Set1, Set2 and Set3 are empty
 -   Failed :
@@ -92,6 +92,6 @@ Test3 : We check whether all the elements of Set3 have an identical
 4.  parameter : tag name
 5.  present in source : yes
 
-### Notes
+## Notes
 
 No notes yet for that rule

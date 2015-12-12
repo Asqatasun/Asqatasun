@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether the context of each clickable
 area is enough explicit to understand the purpose and the target
 
-### Business description
+## Business description
 
 Criterion : 6.1
 
@@ -26,16 +26,16 @@ cases](http://accessiweb.org/index.php/glossary-76.html#cpCrit6- "Special cases 
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 ##### Set1 :
 
@@ -58,7 +58,7 @@ in other words :
 
 size(Set1) = size(Set2) + size(Set3)
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -120,21 +120,21 @@ Message4 instead
 -   parameter : link text, title attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Set1 is empty
 
-##### Failed
+#### Failed
 
 Test1 returns false for at least one element (At least one element of
 the Set2 has a text content which is blacklisted)
 
-##### NMI
+#### Pre-qualified
 
 In all other cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

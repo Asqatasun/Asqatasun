@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether a refresh action declared via the meta tag is immediate
 
-### Business description
+## Business description
 
 Criterion : 13.1
 
@@ -14,20 +14,20 @@ For each Web page, is each redirect process initiated via the meta tag immediate
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `<meta>` tags within a head with a `http-equiv` attribute equals to "refresh" and a `content` attribute that contains the "URL" or "url" occurence.
 
-#### Process
+### Process
 
 Test1 :
 
@@ -46,22 +46,22 @@ Then we check whether the delay value is superior to 0. If true raise a message 
 -   parameter : tag name
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 -   The Set1 is empty
 -   Test1 returns FALSE
 
-##### Failed
+#### Failed
 
 -   Test2 returns TRUE
 
-##### Passed
+#### Passed
 
 -   Test2 returs FALSE
 
-### Notes
+## Notes
 
 We assume that the meta tag has to be defined has follows:
 

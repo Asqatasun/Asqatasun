@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether the detailed description of an informative applet image is relevant.
 
-### Business description
+## Business description
 
 Criterion : 1.7
 
@@ -19,15 +19,15 @@ Does each [applet image](http://www.accessiweb.org/index.php/glossary-76.html#mI
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1** (`applet` tags identified as an informative applet image from html markers)
 
@@ -37,7 +37,7 @@ All the `applet` tags not within an `a` tag (in this case, the applet image woul
 
 All the `applet` tags not within an `a` tag that don't have an `id` attribute or a `class` attribute or a `role` that matches one the values set by the use through the "DECORATIVE_IMAGE_MARKER" parameter or the "INFORMATIVE_IMAGE_MARKER" parameter. That means select all the `applet` tags not within an `a` tag of the page when these parameters are empty.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -61,7 +61,7 @@ For each element of Set2, raise a MessageB.
 -   parameter : `alt` attribute, text, `code` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### Not Applicable
 

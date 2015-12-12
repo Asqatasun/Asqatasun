@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 Check wether a forbidden unit is present in all CSS media types screen,
 tv, handheld and projection.
 
-### Business description
+## Business description
 
 Criterion : 10.4
 
@@ -20,16 +20,16 @@ screen, tv, handheld, projection. Does this rule have been followed?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the css Rules whose media is "screen", "tv", "handheld" or
 "projection".
@@ -38,7 +38,7 @@ Set1 : All the css Rules whose media is "screen", "tv", "handheld" or
 
 -   MediaListNotAcceptingRelativeUnits
 
-#### Process
+### Process
 
 **Test1**
 
@@ -58,7 +58,7 @@ For each occurence returning true, raise a MessageA
 
 -   RelativeCssUnits
 
-#### Analysis
+### Analysis
 
 **Passed**
 
@@ -84,6 +84,6 @@ A messageB is raised indicating that this css have to checked manually
 -   status: NMI
 -   parameter : the resource name
 
-### Notes
+## Notes
 
 No notes yet for that rule

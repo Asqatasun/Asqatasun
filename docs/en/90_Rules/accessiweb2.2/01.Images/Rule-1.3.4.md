@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking the relevancy of the alternative of each `applet` image that handles any information.
 
-### Business description
+## Business description
 
 Criterion : 1.3
 
@@ -14,15 +14,15 @@ For each [applet image](http://www.accessiweb.org/index.php/glossary-76.html#mIm
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level : [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1** (`applet` tags identified as an informative applet from html markers)
 
@@ -32,7 +32,7 @@ All the `applet` tags not within an `a` tag (in this case, the applet would be c
 
 All the `applet` tags not within an `a` tag with an `alt` attribute that don't have an `id` attribute or a `class` attribute or a `role` that matches one the values set by the use through the "DECORATIVE_IMAGE_MARKER" parameter or the "INFORMATIVE_IMAGE_MARKER" parameter. That means select all the `applet` tags not within an `a` tag with an `alt` attribute of the page when these parameters are empty.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -74,13 +74,13 @@ For each element returning true in Test2, raise a MessageD
 -   parameter : `alt` attribute, `code` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### Not Applicable
 
 Set1 and Set2 are empty (The page has no `applet` tag)
 
-##### Failed
+#### Failed
 
 Test1 returns false for at least one element (one `applet` identified as informative has a not pertinent alternative)
 

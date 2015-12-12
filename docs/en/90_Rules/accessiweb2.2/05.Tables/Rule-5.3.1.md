@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether the linearised content of a
 layout table is understandable
 
-### Business description
+## Business description
 
 Criterion : 5.3
 
@@ -17,16 +17,16 @@ is the linearised content still understandable?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 (table tags identified as presentation table from html markers)**
 
@@ -43,7 +43,7 @@ use through the "PRESENTATION\_TABLE\_MARKER" parameter or the
 "DATA\_TABLE\_MARKER" parameter. That means select all the table tags of
 the page when these parameters are empty.
 
-#### Process
+### Process
 
 ##### Test1 (only applied when the "PRESENTATION\_TABLE\_MARKER" parameter is not empty) :
 
@@ -69,18 +69,18 @@ MessageB
 -   parameter : Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 The page has no `table` tag, or only has data table identified by
 markers (Set1 AND Set2 are empty)
 
-##### NMI
+#### Pre-qualified
 
 In all other cases
 
-### Notes
+## Notes
 
 We only detect the elements of the scope of the test to determine
 whether the test is applicable

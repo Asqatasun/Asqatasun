@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consist in checking whether an informative image form button has a detailed description if necessary
 
-### Business description
+## Business description
 
 Criterion : 1.6
 
@@ -18,16 +18,16 @@ Does each image form button (input tag with the attribute type=&quot;image&quot;
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1** (`input` tags with a `type` attribute that starts with "image" identified as an informative image form button from html markers)
 
@@ -37,7 +37,7 @@ All the `input` tags with a `type` attribute that starts with "image" and with a
 
 All the `input` tags with a `type` attribute that starts with "image" that don't have an `id` attribute or a `class` attribute or a `role` that matches one the values set by the use through the "DECORATIVE_IMAGE_MARKER" parameter or the "INFORMATIVE_IMAGE_MARKER" parameter. That means select all the `input` tags with a `type` attribute that starts with "image" of the page when these parameters are empty.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -61,7 +61,7 @@ For each element of Set2, raise a MessageB
 -   parameter : `alt` attribute, `src` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### Not Applicable
 

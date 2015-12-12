@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether the detailed description of an
 informative image is relevant.
 
-### Business description
+## Business description
 
 Criterion : 1.7
 
@@ -31,16 +31,16 @@ pass one of the conditions below?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 ##### Set1
 
@@ -50,21 +50,21 @@ All the `img` tags of the page
 
 All the `input` tags with the "type" attribute equals to "image"
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Set1 AND Set2 are empty (The page has no `img` tag and no `input` tag
 with a type" attribute equals to "image")
 
-##### NMI
+#### Pre-qualified
 
 Set1 OR Set2 is not empty
 
-### Notes
+## Notes
 
 No notes yet for that rule

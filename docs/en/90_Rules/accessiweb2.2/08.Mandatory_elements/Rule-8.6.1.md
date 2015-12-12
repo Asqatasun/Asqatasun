@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking the relevancy of the title tag in the
 page.
 
-### Business description
+## Business description
 
 Criterion : 8.6
 
@@ -15,16 +15,16 @@ Test 8.6.1 : For each Web page with a [page title](http://www.accessiweb.org/ind
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 The content of the `title` tag
 
@@ -32,7 +32,7 @@ The content of the `title` tag
 
 -   reference : none
 
-#### Process
+### Process
 
 We compare the content of the `title` tag with blacklist elements.
 
@@ -40,12 +40,12 @@ We compare the content of the `title` tag with blacklist elements.
 
 -   reference : none
 
-#### Analysis
+### Analysis
 
 -   NA : The page has no `title` tag
 -   Failed : The title of the page has been found in the blacklist
 -   NMI : The title of the page has not been found in the blacklist
 
-### Notes
+## Notes
 
 No notes yet for that rule

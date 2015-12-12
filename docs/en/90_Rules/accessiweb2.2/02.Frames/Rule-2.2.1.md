@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking the relevancy of the title associated
 with each frame tag
 
-### Business description
+## Business description
 
 Criterion : 2.2
 
@@ -18,22 +18,22 @@ relevant?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1 :**
 
 All the `frame` tags with a "title" attribute ( frame[title] )
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -75,7 +75,7 @@ Message2**.**
 -   parameter : title attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 **NA :**
 
@@ -89,7 +89,7 @@ Test1 OR Test2 OR Test3 returns true for at least one element of Set1
 
 In all other cases
 
-### Notes
+## Notes
 
 ***Definition of not-pertinent frame title :***
 

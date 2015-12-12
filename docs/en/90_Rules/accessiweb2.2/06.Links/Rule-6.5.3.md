@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether a server side image map is
 well-defined
 
-### Business description
+## Business description
 
 Criterion : 6.5
 
@@ -18,22 +18,22 @@ Does each server-side [image map](http://www.accessiweb.org/index.php/glossary-7
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `img` tags and the `input` tags with the "type" attribute
 equals to image with the "ismap" attribute (img[ismap] ,
 input[type=image][ismap])
 
-#### Process
+### Process
 
 The selection handles the process.
 
@@ -46,17 +46,17 @@ For each occurence of the selection raise a MessageA
 -   parameter : src attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 We only detect the elements of the scope of the test to determine
 whether the test is applicable

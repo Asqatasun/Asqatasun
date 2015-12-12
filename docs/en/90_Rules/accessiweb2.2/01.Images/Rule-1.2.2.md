@@ -1,9 +1,11 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.2.2
+
+## Summary
 
 This test consists in checking whether each non clickable area that
 doesn't handle any information is defined with an empty `alt` attribute.
 
-### Business description
+## Business description
 
 Criterion : 1.2
 
@@ -16,34 +18,34 @@ For each [non clickable area](http://www.accessiweb.org/index.php/glossary-76.ht
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `area` tags with a "nohref" and a `alt` attribute
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 Selection is empty (The page has no `area` tag with a "nohref" and a
 `alt` attribute)
 
-##### NMI
+#### Pre-qualified
 
 The selection is not empty
 
-### Notes
+## Notes
 
 No notes yet for that rule

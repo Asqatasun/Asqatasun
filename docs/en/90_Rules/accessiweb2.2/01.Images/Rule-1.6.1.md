@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether an informative image has a
 detailed description if necessary
 
-### Business description
+## Business description
 
 Criterion : 1.6
 
@@ -21,33 +21,33 @@ information](http://www.accessiweb.org/index.php/glossary-76.html#mImgInfo)
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the `img` of the page
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
-##### NA:
+#### Not Applicable:
 
 The selection is empty (the page has no `img` tag)
 
-##### NMI:
+#### Pre-qualified:
 
 The seletion is not empty
 
-### Notes
+## Notes
 
 No notes yet for that rule

@@ -1,9 +1,11 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.1.3
+
+## Summary
 
 This test consists in checking whether each form button is defined with
 an `alt` attribute
 
-### Business description
+## Business description
 
 Criterion : 1.1
 
@@ -16,20 +18,20 @@ an alt attribute?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `input` tags with a "type" attribute equals to "image"
 
-#### Process
+### Process
 
 Test1 : Check whether each element of Set1 contains an `alt` attribute.
 
@@ -46,23 +48,23 @@ Test1 : Check whether each element of Set1 contains an `alt` attribute.
 
 -   reference : none
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 The page has no `input` tag with a "type" attribute equals to "image"
 (Set1 is empty)
 
-##### Failed
+#### Failed
 
 At least one form button has no `alt` attribute (Test1 returns false for
 at least one element)
 
-##### Passed
+#### Passed
 
 All the `input` tags with a "type" attribute equals to "image" have an
 `alt` attribut
 
-### Notes
+## Notes
 
 No notes yet for that rule

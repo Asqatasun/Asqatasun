@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 We check whether a language is specified for each textual element of the page
 
-### Business description
+## Business description
 
 Criterion : 8.3
 
@@ -17,16 +17,16 @@ For each Web page with a default [human language](http://www.accessiweb.org/inde
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 ##### Set 1 :
 
@@ -40,18 +40,18 @@ The tags with a `lang` or `xml:lang` attribute.
 
 The textual tags without `lang` or `xml:lang` attribute considering that these attributes can be set to the current tag or to one of its ascendants. (see Notes for the definition of the textual tags)
 
-#### Process
+### Process
 
 The selection handles the process.
 
-#### Analysis
+### Analysis
 
-##### Passed
+#### Passed
 
 -   The `<html>` tag has a `lang` or a `xml:lang` attribute (Set1 is not empty)
 -   The language is provided for each textual element by the tag or by one of its parents (Set1 is empty AND Set2 is not empty AND Set3 is empty)
 
-##### Failed
+#### Failed
 
 -   The page has no language specification (Set2 is empty). In this case, raise a Message 1
 -   Some textual tags are missing the language attribute (Set1 is empty AND Set2 is not empty AND Set3 is not empty). In this case, raise a Message 2
@@ -72,6 +72,6 @@ Message 2: Lang Attribute Missing On Html
 -   parameter : none
 -   present in source : no
 
-### Notes
+## Notes
 
 No notes yet for that rule

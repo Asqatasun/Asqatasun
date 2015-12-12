@@ -1,10 +1,10 @@
-### Summary
+## Summary
 
 This test consists in checking whether the context of each combined link
 is enough explicit to understand the purpose and the target out of its
 context
 
-### Business description
+## Business description
 
 Criterion : 6.3
 
@@ -21,16 +21,16 @@ cases](http://accessiweb.org/index.php/glossary-76.html#cpCrit6- "Special cases 
 
 Level : [AAA](/en/category/rules-design/accessiweb-11/level/aaa)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 ##### Set1 :
 
@@ -46,7 +46,7 @@ only one child not of type `img` or `object` (where "`img ,object[type\^=image],
 
 All the elements of Set2 with a not empty text.
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -74,7 +74,7 @@ For each element returning false in Test2, raise a MessageA, raise a MessageB in
 -   parameter : link text, `title` attribute, snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### **NA :**
 
@@ -88,7 +88,7 @@ Test1 OR Test2 returns false for at least one element (At least one element of t
 
 In all other cases
 
-### Notes
+## Notes
 
 We assume here that the links are only composed of a text. (`<a href="http://www.asqatasun.org/target.html"> my link</a>`)
 

@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether the user is warned when he's about to open a new window via a link or a javascript command.
 
-### Business description
+## Business description
 
 Criterion : 13.2
 
@@ -14,20 +14,20 @@ On each Web page, for each new window opening launched via a link (target="_blan
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `<a>` tags with an `href` attribute AND a not empty `target` attribute with a content different from "_self" (`a[href][target]:not([target=\_self]):not([target\~=\^\\\\s\*$])`)
 
-#### Process
+### Process
 
 **Test1**
 
@@ -48,11 +48,11 @@ Raise a MessageB instead.
 -   status: NMI
 -   present in source : no
 
-#### Analysis
+### Analysis
 
 returns **NMI** in all cases
 
-### Notes
+## Notes
 
 We assume here that a not empty value different from "_self" for the
 `target` attribute lead to the opening of the page in a new window. The

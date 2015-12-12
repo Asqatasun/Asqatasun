@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check Rule
 
-### Business description
+## Business description
 
 Criterion : 3.2
 
@@ -15,27 +15,27 @@ For each [information](http://www.accessiweb.org/index.php/glossary-76.html#mInf
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 returns **NMI** in all cases
 
-### Notes
+## Notes
 
 No notes yet for that rule

@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether the title of each clickable area
 is relevant.
 
-### Business description
+## Business description
 
 Criterion : 6.2
 
@@ -17,16 +17,16 @@ For each [clickable area](index.php/glossary-76.html#mZoneCliquable)
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the `area` tags with a "href" attribute and a "alt attribute
 ( area[href][alt] )
@@ -34,7 +34,7 @@ Set1 : All the `area` tags with a "href" attribute and a "alt attribute
 Set2 : All the elements of Set1 with a not empty alt attribute and a
 title attribute
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -105,13 +105,13 @@ For each element returning false in Test5, raise a Message 4
 
 -   LinkTextBlacklist
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 -   The Set2 is empty
 
-##### Failed
+#### Failed
 
 -   Test1 returns false for at least one element (At least one element
     of the Set2 has an empty title attribute text content which is
@@ -122,11 +122,11 @@ For each element returning false in Test5, raise a Message 4
 -   Test3 returns false for at least one element (At least one element
     of the Set2 has a title attribute which is blacklisted)
 
-##### NMI
+#### Pre-qualified
 
 -   In all other cases
 
-### Notes
+## Notes
 
 1.  We assume here that the textual alternative of the area corresponds
     to the link text.

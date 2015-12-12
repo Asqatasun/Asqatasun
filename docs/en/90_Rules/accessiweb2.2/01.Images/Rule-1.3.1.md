@@ -1,8 +1,10 @@
-### Summary
+# AccessiWeb 2.2 - Rule 1.3.1
+
+## Summary
 
 This test consists in checking the relevancy of the alternative of each `img` that handles any information.
 
-### Business description
+## Business description
 
 Criterion : 1.3
 
@@ -14,15 +16,15 @@ For each [image that conveys information](http://www.accessiweb.org/index.php/gl
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1** (`img` tags identified as an informative image from html markers)
 
@@ -33,7 +35,7 @@ The elements of Set2 with a `longdesc` attribute are added to that collection.
 
 All the `img` tags not within an `a` tag with an `alt` attribute, without a `longdesc` attribute that don't have an `id` attribute or a `class` attribute or a `role` that matches one the values set by the use through the "DECORATIVE_IMAGE_MARKER" parameter or the "INFORMATIVE_IMAGE_MARKER" parameter. That means select all the `img` tags not within an `a` tag with an `alt` attribute of the page when these parameters are empty.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -75,13 +77,13 @@ For each element returning true in Test4, raise a MessageD
 -   parameter : `alt` attribute, `src` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### Not Applicable
 
 Set1 and Set2 are empty (The page has no `img` tag)
 
-##### Failed
+#### Failed
 
 Test1 returns false for at least one element (one `img` identified as informative has a not pertinent alternative)
 

@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking wether the font-size property is always
 defined with a relative unit.
 
-### Business description
+## Business description
 
 Criterion : 10.4
 
@@ -17,20 +17,20 @@ font sizes only use relative units?
 
 Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the css rules with a "font-size" property.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -50,7 +50,7 @@ For each occurence returning true, raise a MessageA
 
 -   RelativeCssUnits
 
-#### Analysis
+### Analysis
 
 **Passed**
 
@@ -76,6 +76,6 @@ A messageB is raised indicating that this css have to checked manually.
 -   status: NMI
 -   parameter : the resource name
 
-### Notes
+## Notes
 
 No notes yet for that rule

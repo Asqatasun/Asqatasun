@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking the pertinence of the altenative associated with an embedded image used as a CAPTCHA.
 
-### Business description
+## Business description
 
 Criterion : 1.4
 
@@ -14,15 +14,15 @@ For each embedded image (embed tag with the attribute type=&quot;image/...&quot;
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1**
 
@@ -32,7 +32,7 @@ If the "captcha" keyword is found on the page, select all the `embed` tags not w
 
 Select from elements of Set1, the ones with an attribute or the text that contains the "captcha" keyword or the ones with a parent whom an attribute or the text contains the "captcha" keyword.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -45,7 +45,7 @@ For each element of Set2, raise a MessageA
 -   parameter : `alt` attribute, `src` attribute, Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### Not Applicable
 

@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether a `h1` tag is present on the
 page.
 
-### Business description
+## Business description
 
 Criterion : 9.1
 
@@ -17,16 +17,16 @@ Is there a level 1
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : `h1` tags included in the `body` tag
 
@@ -34,16 +34,16 @@ Set1 : `h1` tags included in the `body` tag
 
 -   reference : none
 
-#### Process
+### Process
 
 The selection handles the process.
 
-#### Analysis
+### Analysis
 
 -   Passed : at least one `h1` tag is present
 -   Failed : no `h1` tag can be found
 -   Message : none
 
-### Notes
+## Notes
 
 No notes yet for that rule

@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking whether an alternative solution is present for each image used as Captcha
 
-### Business description
+## Business description
 
 Criterion : 1.5
 
@@ -17,15 +17,15 @@ Does each image (img, area, applet, object, embed tags) used as [CAPTCHA](http:/
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 **Set1**
 
@@ -51,7 +51,7 @@ If the "captcha" keyword is found on the page, select all the `embed` tags not w
 
 Select from elements of Set1, Set2, Set3, Set4 and Set5, the ones with an attribute or the text that contains the "captcha" keyword or the ones with a parent whom an attribute or the text contains the "captcha" keyword.
 
-#### Process
+### Process
 
 **Test1**
 
@@ -64,7 +64,7 @@ For each element of Set6, raise a MessageA
 -   parameter : Snippet
 -   present in source : yes
 
-#### Analysis
+### Analysis
 
 ##### Not Applicable
 

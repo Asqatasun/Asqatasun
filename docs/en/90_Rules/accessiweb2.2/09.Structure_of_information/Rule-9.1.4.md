@@ -1,9 +1,9 @@
-### Summary
+## Summary
 
 This test consists in checking whether each heading of the page is
 relevant
 
-### Business description
+## Business description
 
 Criterion : 9.1
 
@@ -17,20 +17,20 @@ tag) relevant?
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 Set1 : All the headings elements of the page (h1, h2, h3, h4, h5, h6)
 
-#### Process
+### Process
 
 ##### Test1
 
@@ -63,13 +63,13 @@ raise a MessageB
 
 NotPertinentHeading
 
-#### Analysis
+### Analysis
 
-##### NA
+#### Not Applicable
 
 -   The Set1 is empty
 
-##### Failed
+#### Failed
 
 -   Test1 returns false for at least one element (At least one element
     of the Set1 has an empty content)
@@ -77,14 +77,14 @@ NotPertinentHeading
     of the Set1 has a content only composed of non alphanumerical
     characters)
 
-##### NMI
+#### Pre-qualified
 
 -   In all other cases
 
-##### NA
+#### Not Applicable
 
 -   The Set2 is empty
 
-### Notes
+## Notes
 
 No notes yet for that rule

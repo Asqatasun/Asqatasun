@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 No-check Rule
 
-### Business description
+## Business description
 
 Criterion : 3.1
 
@@ -14,27 +14,27 @@ For each colour indication provided by a text, [information](http://www.accessiw
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
-
-None
-
-#### Process
+### Selection
 
 None
 
-#### Analysis
+### Process
+
+None
+
+### Analysis
 
 return **NMI** in all case
 
-### Notes
+## Notes
 
 No notes yet for that rule

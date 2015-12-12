@@ -1,8 +1,8 @@
-### Summary
+## Summary
 
 This test consists in checking the use of appropriate tags (`<ol>` and `<li>`) in case of information grouped in ordered list.
 
-### Business description
+## Business description
 
 Criterion : 9.2
 
@@ -14,16 +14,16 @@ On each Web page, does information grouped in ordered [lists](http://www.accessi
 
 Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
 
-### Technical description
+## Technical description
 
 Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
 
 Decision level :
 [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
 
-### Algorithm
+## Algorithm
 
-#### Selection
+### Selection
 
 All the set of tags respecting the following pattern :
 `
@@ -47,11 +47,11 @@ where more than 2 `<br>` tags are encountered and where each text part does not 
 -   used nomenclature : none
 -   reference : none
 
-#### Process
+### Process
 
 The selection handles the process
 
-#### Analysis
+### Analysis
 
 -   NMI : In all cases
 
@@ -63,6 +63,6 @@ The selection handles the process
 4.  parameter : tag name
 5.  present in source : yes
 
-### Notes
+## Notes
 
 No notes yet for that rule
