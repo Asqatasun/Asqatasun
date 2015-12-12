@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 11.10.8 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/11.Forms/Rule-11-10-8.html">the rule 11.10.8 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/11.Forms/Rule-11-10-8.html">the rule 11.10.8 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-11-10-8"> 11.10.8 rule specification</a>
  */
 

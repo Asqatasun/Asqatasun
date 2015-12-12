@@ -25,7 +25,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedSiteRuleImplementation;
 /**
  * Implementation of the rule 12.6.3 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/accessiweb2.2/12.Navigation/Rule-12.6.3.html">the rule 12.6.3 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/accessiweb2.2/12.Navigation/Rule-12.6.3.html">the rule 12.6.3 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-12-6-3"> 12.6.3 rule specification</a>
  *
  * @author jkowalczyk

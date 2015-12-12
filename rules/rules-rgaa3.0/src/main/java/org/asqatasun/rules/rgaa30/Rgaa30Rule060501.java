@@ -40,7 +40,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.EMPTY_LINK_MSG;
 /**
  * Implementation of the rule 6.5.1 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/06.Links/Rule-6-5-1.html">the rule 6.5.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/06.Links/Rule-6-5-1.html">the rule 6.5.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-5-1"> 6.5.1 rule specification</a>
  *
  */

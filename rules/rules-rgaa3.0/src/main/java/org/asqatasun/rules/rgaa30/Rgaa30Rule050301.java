@@ -43,7 +43,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.PRESENTATION_TABLE
  * Implementation of the rule 5.3.1 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a
- * href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/05.Tables/Rule-5-3-1.html">the rule 5.3.1
+ * href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/05.Tables/Rule-5-3-1.html">the rule 5.3.1
  * design page.</a>
  *
  * @see <a

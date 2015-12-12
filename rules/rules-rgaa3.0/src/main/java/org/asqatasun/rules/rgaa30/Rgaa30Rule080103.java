@@ -26,7 +26,7 @@ import org.asqatasun.rules.elementchecker.doctype.DoctypePositionChecker;
 /**
  * Implementation of the rule 8.1.3 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/08.Mandatory_elements/Rule-8-1-3.html">the rule 8.1.3 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/08.Mandatory_elements/Rule-8-1-3.html">the rule 8.1.3 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-1-3"> 8.1.3 rule specification</a>
  *
  */

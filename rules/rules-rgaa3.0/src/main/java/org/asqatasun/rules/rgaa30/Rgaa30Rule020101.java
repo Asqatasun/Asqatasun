@@ -33,7 +33,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING
 /**
  * Implementation of the rule 2.1.1 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/02.Frames/Rule-2-1-1.html">the rule 2.1.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/02.Frames/Rule-2-1-1.html">the rule 2.1.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-2-1-1"> 2.1.1 rule specification</a>
  *
  */

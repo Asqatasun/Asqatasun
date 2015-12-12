@@ -44,7 +44,7 @@ import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
  * Implementation of the rule 1.3.2 of the referential Rgaa 3.0.
  * <br/>
  * For more details about the implementation, refer to <a
- * href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/01.Images/Rule-1-3-2.html">the rule 1.3.2
+ * href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/01.Images/Rule-1-3-2.html">the rule 1.3.2
  * design page.</a>
  *
  * @see <a

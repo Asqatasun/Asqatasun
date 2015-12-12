@@ -34,7 +34,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_WI
 /**
  * Implementation of the rule 6.1.4 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/06.Links/Rule-6-1-4.html">the rule 6.1.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/06.Links/Rule-6-1-4.html">the rule 6.1.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-1-4"> 6.1.4 rule specification</a>
  *
  * @author jkowalczyk

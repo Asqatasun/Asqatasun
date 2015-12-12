@@ -40,7 +40,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 /**
  * Implementation of the rule 1.2.4 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/40_Rules/rgaa3.0/01.Images/Rule-1-2-4.html">the rule 1.2.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/01.Images/Rule-1-2-4.html">the rule 1.2.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-4"> 1.2.4 rule specification</a>
  */
 
