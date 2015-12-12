@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 8.6.1
+
 ## Summary
 
 This test consists in checking the relevancy of the title tag in the

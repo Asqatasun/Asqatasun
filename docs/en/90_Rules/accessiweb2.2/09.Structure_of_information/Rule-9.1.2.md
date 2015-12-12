@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 9.1.2
+
 ## Summary
 
 This test consists in checking the relevancy of the headings hierarchy.

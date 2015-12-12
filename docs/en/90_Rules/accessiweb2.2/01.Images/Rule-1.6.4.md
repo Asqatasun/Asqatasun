@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.6.4
+
 ## Summary
 
 This test consist in checking whether an informative embedded image has a detailed description if necessary

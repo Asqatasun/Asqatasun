@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.4.3
+
 ## Summary
 
 This test consists in checking whether each indentical clickable area

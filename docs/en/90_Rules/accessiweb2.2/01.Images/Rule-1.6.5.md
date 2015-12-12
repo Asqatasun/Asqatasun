@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.6.5
+
 ## Summary
 
 This test consist in checking whether an informative image form button has a detailed description if necessary

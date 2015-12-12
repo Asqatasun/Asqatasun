@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 8.1.2
+
 ## Summary
 
 We check the doctype validity regarding the W3C recommandations ([W3C Recommended list of Doctype declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))

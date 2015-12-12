@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 2.1.1
+
 ## Summary
 
 This test consists in checking the presence of the title attribute for

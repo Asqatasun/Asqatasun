@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.7.3
+
 ## Summary
 
 This test consists in checking whether the detailed description of an informative embedded image is relevant.

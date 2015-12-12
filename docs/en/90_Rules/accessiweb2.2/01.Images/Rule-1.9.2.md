@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.9.2
+
 ## Summary
 
 This test consists in checking whether each text area associated with an

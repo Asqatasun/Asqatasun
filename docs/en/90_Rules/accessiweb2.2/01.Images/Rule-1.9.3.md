@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.9.3
+
 ## Summary
 
 This test consists in checking whether each button "image of text" is

@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 5.6.1
+
 ## Summary
 
 This test consists in checking whether each colum header of a data table

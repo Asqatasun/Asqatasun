@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.9.6
+
 ## Summary
 
 This test consists in detecting the embedded images on the page.

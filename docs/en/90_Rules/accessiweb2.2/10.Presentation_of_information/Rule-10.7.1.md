@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 10.7.1
+
 ## Summary
 
 This test consists in checking that each html element that can grab the

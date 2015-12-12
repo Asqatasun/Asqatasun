@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 4.18.1
+
 ## Summary
 
 This test consists in checking whether each audio sequence played

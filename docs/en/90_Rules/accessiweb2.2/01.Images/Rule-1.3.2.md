@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.3.2
+
 ## Summary
 
 This test consists in checking whether each area of an image map that

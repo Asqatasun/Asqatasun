@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.5.2
+
 ## Summary
 
 This test consists in checking whether an alternative solution is present for each button associated with an image used as Captcha

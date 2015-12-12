@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.2.4
+
 ## Summary
 
 This test consists in checking whether the title of each composite link is relevant.

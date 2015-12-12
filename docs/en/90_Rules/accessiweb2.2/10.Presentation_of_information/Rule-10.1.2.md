@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 10.1.2
+
 ## Summary
 
 This test consists in checking whether the page doesn't contain

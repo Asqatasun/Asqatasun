@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.9.4
+
 ## Summary
 
 This test consists in checking whether each text image applet is

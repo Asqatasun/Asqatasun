@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.9.1
+
 ## Summary
 
 This test consists in detecting the images on the page.

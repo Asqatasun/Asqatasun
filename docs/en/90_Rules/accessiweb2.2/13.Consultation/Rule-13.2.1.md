@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 13.2.1
+
 ## Summary
 
 This test consists in checking whether the user is warned when he's about to open a new window via a link or a javascript command.

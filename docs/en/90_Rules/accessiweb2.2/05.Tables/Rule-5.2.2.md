@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 5.2.2
+
 ## Summary
 
 This test consists in checking whether the content of the summary

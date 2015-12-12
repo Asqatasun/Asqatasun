@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 13.16.4
+
 ## Summary
 
 This test consists in checking whether an `applet` causes a flashing effect or a change of luminance with a period inferior or equal to 3 in a second. The implementation consists in checking the presence of the `applet` element on the page.

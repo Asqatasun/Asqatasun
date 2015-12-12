@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.6.1
+
 ## Summary
 
 This test checks whether the page contains empty links.

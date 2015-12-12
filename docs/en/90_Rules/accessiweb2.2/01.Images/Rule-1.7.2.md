@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.7.2
+
 ## Summary
 
 This test consists in checking whether the detailed description of an informative object image is relevant.

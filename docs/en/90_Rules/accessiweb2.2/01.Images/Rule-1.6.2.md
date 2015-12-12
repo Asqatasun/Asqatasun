@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.6.2
+
 ## Summary
 
 This test consists in checking whether an informative object image has a detailed description if necessary

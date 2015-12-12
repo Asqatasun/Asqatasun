@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.4.2
+
 ## Summary
 
 This test consists in checking whether each indentical image link have

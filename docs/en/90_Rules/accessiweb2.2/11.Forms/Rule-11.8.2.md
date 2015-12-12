@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 11.8.2
+
 ## Summary
 
 This test consists in checking whether each `optgroup` in a `select`

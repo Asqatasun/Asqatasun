@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.2.2
+
 ## Summary
 
 This test consists in checking whether the title of each image link is relevant.

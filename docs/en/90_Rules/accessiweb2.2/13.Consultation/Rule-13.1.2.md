@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 13.1.2
+
 ## Summary
 
 This test consists in checking whether a refresh action declared via the meta tag is immediate

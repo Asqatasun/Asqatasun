@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.1.3
+
 ## Summary
 
 This test consists in checking whether the context of each clickable

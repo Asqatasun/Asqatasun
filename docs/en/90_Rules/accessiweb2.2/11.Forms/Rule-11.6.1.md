@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 11.6.1
+
 ## Summary
 
 This test consists in checking whether each fieldset tag is followed by

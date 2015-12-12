@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 10.13.1
+
 ## Summary
 
 This test consists in checking whether each hidden text of the page can

@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.3.5
+
 ## Summary
 
 This test consists in checking whether each object image that handles information has a relevant `alt` attribute.

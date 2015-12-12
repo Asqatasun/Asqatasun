@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.3.6
+
 ## Summary
 
 This test consists in checking the relevancy of the alternative of each embedded image that handles any information.

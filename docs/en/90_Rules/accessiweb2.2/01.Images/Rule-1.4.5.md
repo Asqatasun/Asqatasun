@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.4.5
+
 ## Summary
 
 This test consists in checking the pertinence of the altenative associated with an object image used as a CAPTCHA.

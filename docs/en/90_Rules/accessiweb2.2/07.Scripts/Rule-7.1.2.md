@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 7.1.2
+
 ## Summary
 
 No-check rule

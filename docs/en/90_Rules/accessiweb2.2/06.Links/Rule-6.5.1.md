@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.5.1
+
 ## Summary
 
 This test consists in checking whether a server side image map is

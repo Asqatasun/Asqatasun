@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.3.3
+
 ## Summary
 
 This test consists in checking whether the text of each clickable area

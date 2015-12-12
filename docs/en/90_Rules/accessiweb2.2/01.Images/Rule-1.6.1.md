@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 1.6.1
+
 ## Summary
 
 This test consists in checking whether an informative image has a

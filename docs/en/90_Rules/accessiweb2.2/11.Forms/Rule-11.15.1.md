@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 11.15.1
+
 ## Summary
 
 This test consists in checking whether each input assistance is relevant

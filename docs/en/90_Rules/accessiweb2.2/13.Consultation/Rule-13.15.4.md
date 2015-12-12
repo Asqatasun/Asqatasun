@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 13.15.4
+
 ## Summary
 
 This test consists in checking whether an `applet` causes a flashing effect or a change of luminance with a period inferior to 3 in a second or whether the covered area of the effects is inferior or equal to 21824 pixels. The implementation consists in checking the presence of the `applet` element on the page.

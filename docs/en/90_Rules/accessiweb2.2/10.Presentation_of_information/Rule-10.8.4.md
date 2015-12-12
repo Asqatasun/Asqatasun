@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 10.8.4
+
 ## Summary
 
 This test consists in checking whether the font color of each text of an

@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 10.4.2
+
 ## Summary
 
 This test consists in checking wether the font-size property is always

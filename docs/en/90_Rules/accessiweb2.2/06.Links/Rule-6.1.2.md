@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 6.1.2
+
 ## Summary
 
 This test consists in checking whether the context of each image link is enough explicit to understand the purpose and the target

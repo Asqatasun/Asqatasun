@@ -1,3 +1,5 @@
+# AccessiWeb 2.2 - Rule 12.5.1
+
 ## Summary
 
 This test is of site scope or group of pages scope. When requesting a page audit, the result is automatically set to "Not Applicable". No check is done instead.
