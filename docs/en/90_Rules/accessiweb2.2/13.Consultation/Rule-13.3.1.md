@@ -14,14 +14,14 @@ Test :
 Test description : On each Web page, the opening of a new window must
 not be launched without user action. Does this rule have been followed?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

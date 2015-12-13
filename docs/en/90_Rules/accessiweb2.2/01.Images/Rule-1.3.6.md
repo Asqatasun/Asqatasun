@@ -14,13 +14,13 @@ Test description :
 
 For each embedded image (embed tag with the attribute type=&quot;image/...&quot;) that conveys information and with a text alternative, is the [text alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltTexteImg) between &lt;noembed&gt; and &lt;/noembed&gt; relevant (except in special cases)?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
-Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+Decision level : semidecidable
 
 ### Selection
 

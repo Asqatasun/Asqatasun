@@ -17,14 +17,14 @@ of the [Web
 site](http://accessiweb.org/index.php/glossary-76.html#mSiteWeb), do
 font sizes only use relative units?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+decidable
 
 ## Algorithm
 

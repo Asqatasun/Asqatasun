@@ -15,14 +15,14 @@ Test description :
 Is each text for an [image link](http://accessiweb.org/index.php/glossary-76.html#mLienImage) (content of the alt attribute or content between `<object>` and `</object>`)
 [explicit out of context](http://accessiweb.org/index.php/glossary-76.html#mLienHorsContexte) ([except in special cases](http://accessiweb.org/index.php/glossary-76.html#cpCrit6- "Special cases for criterion 6.3"))?
 
-Level : [AAA](/en/category/rules-design/accessiweb-11/level/aaa)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

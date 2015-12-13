@@ -14,14 +14,14 @@ Test :
 Test description : For each block of text inside of an HTML element, can
 background colour be controlled by the user?
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

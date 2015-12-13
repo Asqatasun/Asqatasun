@@ -23,14 +23,14 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit7-3 "Special c
     mouse](http://www.accessiweb.org/index.php/glossary-76.html#mAAClavierSouris)
     allowing to perform the same action is available on the page
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

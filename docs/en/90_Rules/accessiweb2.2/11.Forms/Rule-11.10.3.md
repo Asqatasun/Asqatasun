@@ -17,14 +17,14 @@ For each form, is for each mandatory field the [data and/Or format
 type](http://www.accessiweb.org/index.php/glossary-76.html#mTypeDonnes)
 specified, if necessary?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

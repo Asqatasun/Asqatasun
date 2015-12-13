@@ -16,14 +16,14 @@ For each prerecorded synchronised [time-based
 media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp)
 with a sign language interpretation, is this interpretation relevant?
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

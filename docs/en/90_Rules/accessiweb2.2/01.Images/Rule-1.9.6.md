@@ -14,15 +14,15 @@ Test description :
 
 Each embedded image of text (embed tag with the attribute type=&quot;image/...&quot;) must be replaced with styled text. Does this rule have been followed (except in special cases)?
 
-Level : [Gold](/en/category/rules-design/accessiweb-11/level/gold)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+semidecidable
+decidable
 
 ## Algorithm
 

@@ -16,14 +16,14 @@ the ["site map"
 page](http://www.accessiweb.org/index.php/glossary-76.html#mPlanSite)
 located at the same place in the presentation?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

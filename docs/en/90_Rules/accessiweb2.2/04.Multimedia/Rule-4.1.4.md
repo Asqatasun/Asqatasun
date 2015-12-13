@@ -17,14 +17,14 @@ Does each prerecorded [time-based media](index.php/glossary-76.html#mMediaTemp) 
 -   A reference to the [text transcript](index.php/glossary-76.html#mTranscriptTextuel) via a link or an anchor is available between `object` and `</object>`
 -   A reference to the [text transcript](index.php/glossary-76.html#mTranscriptTextuel) via a link or an anchor is available between `<noembed>` and `</noembed>`
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

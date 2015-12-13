@@ -18,7 +18,7 @@ Level : Silver
 
 ## Technical description
 
-Scope : [Group of pages](/en/category/rules-design/accessiweb-11/scope/group_of_pages)
+Scope : Group of pages
 
 Decision level : Semi-decidable
 

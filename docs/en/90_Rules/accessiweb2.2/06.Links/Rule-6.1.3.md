@@ -26,14 +26,14 @@ cases](http://accessiweb.org/index.php/glossary-76.html#cpCrit6- "Special cases 
     context](http://accessiweb.org/index.php/glossary-76.html#mContexteLien)
     allows to understand the link purpose and target
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

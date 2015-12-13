@@ -18,14 +18,14 @@ Does each [text link](http://accessiweb.org/index.php/glossary-76.html#mLienText
 -   A mechanism allows the user to get an explicit link text out of its context
 -   The content of the link title (title attribute) is explicit out of its context
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

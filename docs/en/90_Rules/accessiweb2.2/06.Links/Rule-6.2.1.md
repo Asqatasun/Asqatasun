@@ -13,14 +13,14 @@ Test : [6.2.1](http://accessiweb.org/index.php/accessiweb-22-english-version.htm
 Test description : For each [text link](http://accessiweb.org/index.php/glossary-76.html#mLienTexte) with a [link title](http://accessiweb.org/index.php/glossary-76.html#mTitreLien)
 (title attribute), is the content of this attribute relevant? 
 
-Level : [A](/en/category/rules-design/accessiweb-11/level/a)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

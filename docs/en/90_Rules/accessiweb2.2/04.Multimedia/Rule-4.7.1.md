@@ -17,14 +17,14 @@ Does each video-only prerecorded [time-based media](http://www.accessiweb.org/in
 -    A synchronised [audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDesc) is available
 -    an alternative version with a synchronised [audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDesc) is available
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

@@ -22,14 +22,14 @@ Does each [form field](http://www.accessiweb.org/index.php/glossary-76.html#mChp
 -   The form field has a title attribute
 -   A [label](http://www.accessiweb.org/index.php/glossary-76.html#mEtiquette) (label tag) is associated with the form field
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+decidable
 
 ## Algorithm
 

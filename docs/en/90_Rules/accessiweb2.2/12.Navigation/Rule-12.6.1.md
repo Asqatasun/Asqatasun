@@ -15,14 +15,14 @@ Test description : In each set of pages, is the [search
 function](http://www.accessiweb.org/index.php/glossary-76.html#mMoteurRecherche)
 accessible with an identical functionality?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

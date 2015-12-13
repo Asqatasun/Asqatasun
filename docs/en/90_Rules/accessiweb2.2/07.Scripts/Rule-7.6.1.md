@@ -14,14 +14,14 @@ Test :
 Test description : Can each [script](http://www.accessiweb.org/index.php/glossary-76.html#mScript)
 causing an unrequested [alert](http://www.accessiweb.org/index.php/glossary-76.html#mAlerte) be controlled by the user (except in [special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit7-6 "Special cases for criterion 7.6"))?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

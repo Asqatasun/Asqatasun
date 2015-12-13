@@ -14,13 +14,13 @@ Test description :
 
 For each embedded image (embed tag with the attribute type=&quot;image/...&quot;) used as [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha) or as [test image](http://www.accessiweb.org/index.php/glossary-76.html#mImgTest) and with a text alternative, does the [text alternative](http://www.accessiweb.org/index.php/glossary-76.html#mAltTexteImg) between &lt;noembed&gt; and &lt;/noembed&gt; allow to identify the kind and the purpose of the image?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
-Decision level :[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+Decision level :semidecidable
 
 ## Algorithm
 

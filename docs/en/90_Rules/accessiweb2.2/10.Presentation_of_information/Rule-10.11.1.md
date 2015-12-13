@@ -21,14 +21,14 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit10-11 "Special
 -   The user can reduce the width of each block of text to 80 characters
     when resizing his browser window
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

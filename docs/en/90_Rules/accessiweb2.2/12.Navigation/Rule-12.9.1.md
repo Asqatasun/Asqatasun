@@ -14,14 +14,14 @@ Test :
 Test description : On each Web page, does the breadcrumb trail
 represents the page position in the site structure?
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

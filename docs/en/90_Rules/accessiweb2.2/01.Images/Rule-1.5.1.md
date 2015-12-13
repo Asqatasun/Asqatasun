@@ -17,13 +17,13 @@ Does each image (img, area, applet, object, embed tags) used as [CAPTCHA](http:/
 -   Another form of [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha) at least non grafic is available
 -   Another solution to access the secured functionality of the [CAPTCHA](http://www.accessiweb.org/index.php/glossary-76.html#mcaptcha) is available
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
-Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+Decision level : semidecidable
 
 ## Algorithm
 

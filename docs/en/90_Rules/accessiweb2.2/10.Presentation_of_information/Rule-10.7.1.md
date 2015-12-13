@@ -18,14 +18,14 @@ For each element that receives focus, the browser visual indication must
 not be removed (CSS property outline, outline-color, outline-width,
 outline-style). Does this rule have been followed?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

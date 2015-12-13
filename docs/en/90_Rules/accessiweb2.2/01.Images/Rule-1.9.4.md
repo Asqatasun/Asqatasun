@@ -16,14 +16,14 @@ Test description :
 Each [text image
 applet](http://www.accessiweb.org/index.php/glossary-76.html#mImgTextApplet) (applet tag) must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle) if possible. Does this rule have been followed ([except in special cases] (http://www.accessiweb.org/index.php/glossary-76.html#cpCrit19- "Special cases for criterion 1.9") )?
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

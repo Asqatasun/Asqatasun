@@ -15,14 +15,14 @@ Test description :
 
 Test 8.6.1 : For each Web page with a [page title](http://www.accessiweb.org/index.php/glossary-76.html#mTitrePage) (title tag), is the content of this tag relevant? 
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

@@ -23,14 +23,14 @@ pass one of the conditions below ([except in special cases](http://www.accessiwe
 -   An [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj),
     that can be clearly identified, allows to access to an alternative on the page
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

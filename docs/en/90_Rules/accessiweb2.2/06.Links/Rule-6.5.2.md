@@ -16,14 +16,14 @@ Test description : Does each server-side [image map](http://www.accessiweb.org/i
 -   The link that doubles the [clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable) allows to access to the same function and the same target as the [clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable)
 -   the form submission allows to access the same purpose and the same target as the [clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable).
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

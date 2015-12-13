@@ -23,14 +23,14 @@ Test description : On each Web page, does the first occurence of each [abbreviat
 -   The [abbreviation](http://www.accessiweb.org/index.php/glossary-76.html#mAbbr)
     is implemented via an abbr tag with a title allowing to know its meaning
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

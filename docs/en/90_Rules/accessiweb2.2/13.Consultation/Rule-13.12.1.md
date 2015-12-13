@@ -18,14 +18,14 @@ cryptical syntax) pass one of the conditions below?
 -   the content of the title attribute is relevant
 -   the definition provided by the adjacent context is relevant
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

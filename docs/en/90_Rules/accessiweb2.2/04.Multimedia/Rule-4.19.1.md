@@ -27,14 +27,14 @@ cases](index.php/glossary-76.html#cpCrit4-19 "Special cases for criterion 4.19")
 -   An alternative version in which the dialogue track(s) are 20
     decibels higher than the background sounds is available.
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

@@ -19,14 +19,14 @@ Does each
 -   The [change of context](http://accessiweb.org/index.php/glossary-76.html#mChangContexte) is initiated by an explicit button (input of type submit or button)
 -   The [change of context](http://accessiweb.org/index.php/glossary-76.html#mChangContexte) is initiated by an explicit link
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

@@ -21,14 +21,14 @@ pass the conditions below?
     page](http://www.accessiweb.org/index.php/glossary-76.html#mAccColl)
     of the [collection of pages](http://www.accessiweb.org/index.php/glossary-76.html#mCollecPage)
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

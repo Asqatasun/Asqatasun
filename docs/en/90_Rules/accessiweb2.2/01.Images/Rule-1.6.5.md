@@ -18,13 +18,13 @@ Does each image form button (input tag with the attribute type=&quot;image&quot;
  <li> An [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) (via a [url](http://www.accessiweb.org/index.php/glossary-76.html#mUrl) or an anchor) allowing to access to the content of the [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) is available</li> 
 </ul>
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
-Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+Decision level : semidecidable
 
 
 ## Algorithm

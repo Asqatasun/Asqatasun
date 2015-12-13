@@ -18,14 +18,14 @@ Does each prerecorded synchronised [time-based media](http://www.accessiweb.org/
 -   The synchronised [audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDesc) is relevant
 -   The synchronised [audio description](http://www.accessiweb.org/index.php/glossary-76.html#mAudioDesc) of the alternative version is relevant
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

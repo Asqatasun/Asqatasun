@@ -19,14 +19,14 @@ For each Web page, does each redirect process initiated via a [script](http://ww
 -   The user is warned about the imminence of the redirection and has at least twenty seconds to increase the time limit before the next redirection
 -   The time limit before the redirection is at least twenty hours
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

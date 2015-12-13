@@ -13,14 +13,14 @@ Test :
 
 Test description : On each Web page, is each [heading](http://www.accessiweb.org/index.php/glossary-76.html#mTitre) (h tag) that is necessary to structure information available?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

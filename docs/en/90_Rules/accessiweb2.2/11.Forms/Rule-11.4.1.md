@@ -17,14 +17,14 @@ In each form, are each control
 [label](http://www.accessiweb.org/index.php/glossary-76.html#mEtiquette)
 and its related control positioned next to each other?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

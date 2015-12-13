@@ -21,14 +21,14 @@ image](http://www.accessiweb.org/index.php/glossary-76.html#mImgTest),
 with an alt attribute, does the content of this attribute allow to
 identify the kind and the purpose of the image?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

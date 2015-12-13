@@ -17,14 +17,14 @@ that is repeated in a set of pages pass the conditions below ([except in special
 -   The [navigation bar](http://www.accessiweb.org/index.php/glossary-76.html#mBarreNav) is always located at the same place in the presentation
 -   The [navigation bar](http://www.accessiweb.org/index.php/glossary-76.html#mBarreNav) is always presented in the same relative order in the source code.
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

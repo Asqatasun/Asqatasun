@@ -18,7 +18,7 @@ Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level : Semi-decidable
 

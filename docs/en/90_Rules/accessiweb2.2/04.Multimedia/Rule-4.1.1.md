@@ -19,14 +19,14 @@ Does each prerecorded audio-only [time-based media](http://www.accessiweb.org/in
     (an url or an anchor)
 -   There is an adjacent [text transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel) that can be clearly identified
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

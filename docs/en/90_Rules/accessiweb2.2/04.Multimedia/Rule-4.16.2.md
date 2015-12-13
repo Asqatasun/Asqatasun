@@ -19,14 +19,14 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4-16 "Special 
 -   The page to which the [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) refers is accessible
 -   The alternative on the page to which the [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) refers is accessible.
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

@@ -17,14 +17,14 @@ Does each [image link](http://accessiweb.org/index.php/glossary-76.html#mLienIma
 -   The [link text](http://accessiweb.org/index.php/glossary-76.html#mIntituleLien) alone allows to understand the link purpose and target 
 -   The [link context](http://accessiweb.org/index.php/glossary-76.html#mContexteLien) allows to understand the link purpose and target
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

@@ -14,13 +14,13 @@ Test description :
 
 For each [applet image](http://www.accessiweb.org/index.php/glossary-76.html#mImgApplet) (applet tag) that does not convey information and that has an alt attribute, is the content of this attribute empty (alt=&quot;&quot;)?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
-Decision level : [decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+Decision level : decidable
 
 ## Algorithm
 

@@ -20,14 +20,14 @@ site](http://accessiweb.orgindex.php/glossary-76.html#mSiteWeb), non
 relative units (pt, pc, mm, cm, in) must not be used for media types
 screen, tv, handheld, projection. Does this rule have been followed?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+decidable
 
 ## Algorithm
 

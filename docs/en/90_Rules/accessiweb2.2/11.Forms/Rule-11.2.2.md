@@ -18,14 +18,14 @@ field](http://www.accessiweb.org/index.php/glossary-76.html#mChpSaisie)
 (input tag of type text, password, checkbox, radio, file, or textarea
 and select tags) with which it is associated?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

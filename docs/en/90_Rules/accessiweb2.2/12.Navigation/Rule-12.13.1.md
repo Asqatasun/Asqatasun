@@ -14,14 +14,14 @@ Test description :
 
 On each Web page, is the tabbing order through the content [consistent](http://www.accessiweb.org/index.php/glossary-76.html#mCoherentODL) ?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

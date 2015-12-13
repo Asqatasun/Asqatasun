@@ -14,14 +14,14 @@ Test description :
 
 On each Web page, does information grouped in ordered [lists](http://www.accessiweb.org/index.php/glossary-76.html#mListes) use the ol and li tags?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

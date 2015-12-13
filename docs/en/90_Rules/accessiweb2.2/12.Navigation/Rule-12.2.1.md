@@ -19,14 +19,14 @@ cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit12- "Special c
 -   The [navigation menu](http://www.accessiweb.org/index.php/glossary-76.html#mMenuNav)
     is always presented in the same relative order in the source code.
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

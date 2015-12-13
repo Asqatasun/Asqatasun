@@ -19,14 +19,14 @@ On each Web page, does increasing of [character size](http://www.accessiweb.org/
 -   A mechanism allows to make the use of horizontal scrolling useless
     to read a block of text on a full-screen window
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

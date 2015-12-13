@@ -13,14 +13,14 @@ Test :
 
 Test description : On each [set of pages](http://www.accessiweb.org/index.php/glossary-76.html#mEnsemblePages), do repeated navigation bars have a consistent presentation ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit12- "Special cases for criterion 12.3"))?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

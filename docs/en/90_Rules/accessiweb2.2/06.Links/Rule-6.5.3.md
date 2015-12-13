@@ -18,14 +18,14 @@ Does each server-side [image map](http://www.accessiweb.org/index.php/glossary-7
 -   The [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) is immediately followed, in the source code by the list of links redundant to the areas
 -   The [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) is immediately followed, in the source code by a navigation form redundant with the areas
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

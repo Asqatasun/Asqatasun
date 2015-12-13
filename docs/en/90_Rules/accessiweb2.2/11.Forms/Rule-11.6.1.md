@@ -16,14 +16,14 @@ Test description :
 Test11.6.1: Is each form field grouping (fieldset tag) followed by a
 legend (legend tag) in the source code?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+decidable
 
 ## Algorithm
 

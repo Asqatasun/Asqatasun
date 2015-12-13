@@ -17,14 +17,14 @@ language differing from the [default human language](http://www.accessiweb.org/i
 -   The language specification is provided on the element that contains the text
 -   The language specification is provided on one of the parent elements
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

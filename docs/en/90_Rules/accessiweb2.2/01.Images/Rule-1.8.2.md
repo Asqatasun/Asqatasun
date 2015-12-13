@@ -14,14 +14,14 @@ Test description :
 
 For each [image map](http://www.accessiweb.org/index.php/glossary-76.html#mImgReactive) (img tag or object with the usemap attribute), when an [alternate mechanism](http://www.accessiweb.org/index.php/glossary-76.html#mMecaRempl) is missing, each [text area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneTexte) (area tag) must be replaced with [styled text](http://www.accessiweb.org/index.php/glossary-76.html#mTexteStyle) if possible. Does this rule have been followed ([except in special cases] (http://www.accessiweb.org/index.php/glossary-76.html#cpCrit1-8 "Special cases for criterion 1.8"))?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

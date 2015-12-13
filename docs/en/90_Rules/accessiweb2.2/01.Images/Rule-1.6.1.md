@@ -21,14 +21,14 @@ information](http://www.accessiweb.org/index.php/glossary-76.html#mImgInfo)
 -   An alt attribute that contains the reference to a [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) just next to the image is available
 -   There is an [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) allowing to access to the content of the [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee)
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

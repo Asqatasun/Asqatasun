@@ -18,14 +18,14 @@ Does each `<object>` image that conveys information (`<object>` tag with the att
 -   An [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) (via an [url](http://www.accessiweb.org/index.php/glossary-76.html#mUrl)
     or an anchor) allowing to access to the content of the [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) is available
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

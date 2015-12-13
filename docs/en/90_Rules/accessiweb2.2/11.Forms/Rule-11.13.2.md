@@ -19,14 +19,14 @@ For each form, does data deletion pass one of the conditions below?
 -   An explicit mechanism confirming deletion, via a form field or an
     additional step, is available
 
-Level : [Or](/en/category/rules-design/accessiweb-11/level/or)
+Level : Gold
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

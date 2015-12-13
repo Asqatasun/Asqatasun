@@ -20,14 +20,14 @@ below([except in special cases](http://www.accessiweb.org/index.php/glossary-76.
 -   The contrast ratio between text and its background is at least 3:1
 -   a mechanism allows the user to display text with a contrast ratio of at least 3:1
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

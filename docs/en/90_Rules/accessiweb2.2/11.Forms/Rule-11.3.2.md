@@ -13,14 +13,14 @@ Test :
 
 Test description : Is each [label](http://www.accessiweb.org/index.php/glossary-76.html#mEtiquette) related with a form field with the same function and that is repeated several times in a set of pages consistent?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [site](/en/category/rules-design/accessiweb-11/scope/site)
+Scope : site
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

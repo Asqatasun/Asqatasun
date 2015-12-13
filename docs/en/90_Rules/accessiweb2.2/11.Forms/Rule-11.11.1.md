@@ -17,14 +17,14 @@ For each form, for each input error, are each [data types and
 formats](http://www.accessiweb.org/index.php/glossary-76.html#mTypeDonnes)
 suggested, if necessary?
 
-Level : [Silver](/en/category/rules-design/accessiweb-11/level/argent)
+Level : Silver
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

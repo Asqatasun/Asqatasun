@@ -12,14 +12,14 @@ Test : [6.6.1](http://accessiweb.org/index.php/accessiweb-22-english-version.htm
 
 Test description : On each Web page, does each link (a tag), except in [named anchors](index.php/glossary-76.html#mAncreNom), have a text between `<a>` an `</a>`?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+decidable
 
 ## Algorithm
 

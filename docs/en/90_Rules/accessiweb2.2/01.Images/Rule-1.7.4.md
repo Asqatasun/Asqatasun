@@ -19,13 +19,13 @@ Does each [applet image](http://www.accessiweb.org/index.php/glossary-76.html#mI
  <li> The [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) is accessible via an [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) and is relevant</li> 
 </ul>
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
-Decision level : [semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+Decision level : semidecidable
 
 ## Algorithm
 

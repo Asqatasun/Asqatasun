@@ -14,14 +14,14 @@ Test description :
 
 On each Web page tags must not be used (except div, span and table) [only for layout](index.php/glossary-76.html#mUniquPres). Does this rule have been followed?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

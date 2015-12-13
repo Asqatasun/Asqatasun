@@ -14,13 +14,13 @@ Test description :
 
 For each [image that conveys information](http://www.accessiweb.org/index.php/glossary-76.html#mImgInfo) (img tag) with an alt attribute, is the content of this attribute relevant (except in special cases)?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
-Decision level :[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+Decision level :decidable
 
 ## Algorithm
 

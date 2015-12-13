@@ -15,14 +15,14 @@ Test description :
 
 In each [selection list](http://www.accessiweb.org/index.php/glossary-76.html#mListeChoix) (select tag), does each list item grouping (optgroup tag) have a label attribute?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+decidable
 
 ## Algorithm
 

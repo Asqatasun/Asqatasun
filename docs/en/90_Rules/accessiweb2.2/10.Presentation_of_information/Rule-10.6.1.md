@@ -13,14 +13,14 @@ Test :
 
 Test description : On each Web page, does each [text link](http://www.accessiweb.org/index.php/glossary-76.html#mLienTexte) that is indicated only by colour and whose kind is not obvious have a contrast ratio that is greater than or equal to 3:1 in relation with the surrounding text?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

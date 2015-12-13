@@ -17,14 +17,14 @@ Does each embedded image (`<embed>` tag with the attribute type="image/...") wit
 -   the [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) available on the page and indicated between `<noembed>` and `</noembed>` is relevant
 -   The [detailed description](http://www.accessiweb.org/index.php/glossary-76.html#mDescDetaillee) via an [adjacent link](http://www.accessiweb.org/index.php/glossary-76.html#mLienAdj) is relevant
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[semidecidable](/en/category/rules-design/accessiweb-11/decision-level/semidecidable)
+semidecidable
 
 ## Algorithm
 

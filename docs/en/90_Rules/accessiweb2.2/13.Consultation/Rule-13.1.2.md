@@ -14,14 +14,14 @@ Test description :
 
 For each Web page, is each redirect process initiated via the meta tag immediate ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit13-1 "Special cases for criterion 13.1"))?
 
-Level : [Bronze](/en/category/rules-design/accessiweb-11/level/bronze)
+Level : Bronze
 
 ## Technical description
 
-Scope : [page](/en/category/rules-design/accessiweb-11/scope/page)
+Scope : page
 
 Decision level :
-[decidable](/en/category/rules-design/accessiweb-11/decision-level/decidable)
+decidable
 
 ## Algorithm
 
