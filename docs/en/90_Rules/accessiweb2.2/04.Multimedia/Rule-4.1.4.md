@@ -12,10 +12,10 @@ Test : [4.1.4](http://accessiweb.org/index.php/accessiweb-22-english-version.htm
 
 Test description :
 
-Does each prerecorded [time-based media](index.php/glossary-76.html#mMediaTemp) that is embedded via `object` or `embed` and that requires a [text transcript](index.php/glossary-76.html#mTranscriptTextuel) pass one of the conditions below ([except in special cases](index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.1"))?
+Does each prerecorded [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) that is embedded via `object` or `embed` and that requires a [text transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel) pass one of the conditions below ([except in special cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4- "Special cases for criterion 4.1"))?
 
--   A reference to the [text transcript](index.php/glossary-76.html#mTranscriptTextuel) via a link or an anchor is available between `object` and `</object>`
--   A reference to the [text transcript](index.php/glossary-76.html#mTranscriptTextuel) via a link or an anchor is available between `<noembed>` and `</noembed>`
+-   A reference to the [text transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel) via a link or an anchor is available between `object` and `</object>`
+-   A reference to the [text transcript](http://www.accessiweb.org/index.php/glossary-76.html#mTranscriptTextuel) via a link or an anchor is available between `<noembed>` and `</noembed>`
 
 Level : Bronze
 

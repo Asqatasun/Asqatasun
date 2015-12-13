@@ -12,7 +12,7 @@ Test : [8.9.1](http://accessiweb.org/index.php/accessiweb-22-english-version.htm
 
 Test description :
 
-On each Web page tags must not be used (except div, span and table) [only for layout](index.php/glossary-76.html#mUniquPres). Does this rule have been followed?
+On each Web page tags must not be used (except div, span and table) [only for layout](http://www.accessiweb.org/index.php/glossary-76.html#mUniquPres). Does this rule have been followed?
 
 Level : Bronze
 

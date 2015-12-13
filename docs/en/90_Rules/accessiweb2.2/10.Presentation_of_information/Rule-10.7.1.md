@@ -10,7 +10,7 @@ visual indication invisible
 
 Criterion : 10.7
 
-Test : [10.7.1](www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-10-7-1)
+Test : [10.7.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-10-7-1)
 
 Test description :
 

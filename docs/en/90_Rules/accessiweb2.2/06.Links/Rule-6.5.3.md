@@ -9,7 +9,7 @@ well-defined
 
 Criterion : 6.5
 
-Test : [6.5.3](www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-5-3)
+Test : [6.5.3](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-5-3)
 
 Test description :
 

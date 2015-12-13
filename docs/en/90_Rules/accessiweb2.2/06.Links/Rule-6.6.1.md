@@ -10,7 +10,7 @@ Criterion : 6.6
 
 Test : [6.6.1](http://accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-6-1)
 
-Test description : On each Web page, does each link (a tag), except in [named anchors](index.php/glossary-76.html#mAncreNom), have a text between `<a>` an `</a>`?
+Test description : On each Web page, does each link (a tag), except in [named anchors](http://www.accessiweb.org/index.php/glossary-76.html#mAncreNom), have a text between `<a>` an `</a>`?
 
 Level : Bronze
 

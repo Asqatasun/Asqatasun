@@ -13,8 +13,8 @@ Test : [6.2.3](http://accessiweb.org/index.php/accessiweb-22-english-version.htm
 
 Test description :
 
-For each [clickable area](index.php/glossary-76.html#mZoneCliquable)
-(area tag) with a [link title](index.php/glossary-76.html#mTitreLien)
+For each [clickable area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable)
+(area tag) with a [link title](http://www.accessiweb.org/index.php/glossary-76.html#mTitreLien)
 (title attribute), is the content of this attribute relevant?
 
 Level : Bronze

@@ -14,10 +14,10 @@ Test : [4.19.1](http://accessiweb.org/index.php/accessiweb-22-english-version.ht
 Test description :
 
 Does each audio [time-based
-media](index.php/glossary-76.html#mMediaTemp) that is prerecorded and
+media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) that is prerecorded and
 played via an Object, Applet, Embed tag or that is provided for download
 pass one of the conditions below ([except in special
-cases](index.php/glossary-76.html#cpCrit4-19 "Special cases for criterion 4.19"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4-19 "Special cases for criterion 4.19"))?
 
 -   The background sounds can be turned off
 -   The dialogue track(s) are 20 decibels higher than the background

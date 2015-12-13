@@ -8,7 +8,7 @@ This test consists in checking the relevancy of the headings hierarchy.
 
 Criterion : 9.1
 
-Test : [9.1.2](www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-9-1-2)
+Test : [9.1.2](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-9-1-2)
 
 Test description :
 

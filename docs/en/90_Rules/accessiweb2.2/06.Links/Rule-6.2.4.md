@@ -12,7 +12,7 @@ Test : [6.2.4](http://accessiweb.org/index.php/accessiweb-22-english-version.htm
 
 Test description :
 
-For each [combined link](index.php/glossary-76.html#mLienComposite) with a [link title](index.php/glossary-76.html#mTitreLien) (`title` attribute), is the content of this attribute relevant?
+For each [combined link](http://www.accessiweb.org/index.php/glossary-76.html#mLienComposite) with a [link title](http://www.accessiweb.org/index.php/glossary-76.html#mTitreLien) (`title` attribute), is the content of this attribute relevant?
 
 Level : Bronze
 

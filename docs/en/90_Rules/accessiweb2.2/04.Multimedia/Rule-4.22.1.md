@@ -14,16 +14,16 @@ Test : [4.22.1](http://accessiweb.org/index.php/accessiweb-22-english-version.ht
 
 Test description :
 
-Does each [time-based media](index.php/glossary-76.html#mMediaTemp) and
+Does each [time-based media](http://www.accessiweb.org/index.php/glossary-76.html#mMediaTemp) and
 each non time-based media that is inserted via a Object, Applet or Embed
 tag pass one of the conditions below ([except in special
-cases](index.php/glossary-76.html#cpCrit4-22 "Special cases for criterion 4.22"))?
+cases](http://www.accessiweb.org/index.php/glossary-76.html#cpCrit4-22 "Special cases for criterion 4.22"))?
 
 -   The name, role, value, setting and status changes of the interface
     components are accessible to assistive technologies via an
     accessibility API
 -   An alternative that is [supported by an accessibility
-    API](index.php/glossary-76.html#mCompAccess) allows to access to the
+    API](http://www.accessiweb.org/index.php/glossary-76.html#mCompAccess) allows to access to the
     same functionalities
 
 Level : Bronze

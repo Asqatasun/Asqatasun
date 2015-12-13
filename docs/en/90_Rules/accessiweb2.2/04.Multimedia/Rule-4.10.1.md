@@ -8,7 +8,7 @@ No-check rule
 
 Criterion : 4.10
 
-Test : [4.10.1](www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-4-10-1)
+Test : [4.10.1](http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-4-10-1)
 
 Test description :
 
