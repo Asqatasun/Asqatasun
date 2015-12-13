@@ -54,6 +54,7 @@
 * [Rule 1.8.2](Rule-1.8.2.md)
 * [Rule 1.8.3](Rule-1.8.3.md)
 * [Rule 1.8.4](Rule-1.8.4.md)
+* [Rule 1.8.5](Rule-1.8.5.md)
 * [Rule 1.8.6](Rule-1.8.6.md)
 
 ## Criterion 1.9

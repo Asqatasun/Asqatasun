@@ -21,6 +21,7 @@
 * [Rule 6.3.4](Rule-6.3.4.md)
 
 ## Criterion 6.4
+* [Rule 6.4.1](Rule-6.4.1.md)
 * [Rule 6.4.2](Rule-6.4.2.md)
 * [Rule 6.4.3](Rule-6.4.3.md)
 

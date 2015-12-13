@@ -5,8 +5,10 @@
 ## Criterion 11.1
 * [Rule 11.1.1](Rule-11.1.1.md)
 * [Rule 11.1.2](Rule-11.1.2.md)
+* [Rule 11.1.3](Rule-11.1.3.md)
 
 ## Criterion 11.2
+* [Rule 11.2.1](Rule-11.2.1.md)
 * [Rule 11.2.2](Rule-11.2.2.md)
 
 ## Criterion 11.3
@@ -26,6 +28,7 @@
 * [Rule 11.7.1](Rule-11.7.1.md)
 
 ## Criterion 11.8
+* [Rule 11.8.1](Rule-11.8.1.md)
 * [Rule 11.8.2](Rule-11.8.2.md)
 * [Rule 11.8.3](Rule-11.8.3.md)
 
@@ -42,9 +45,11 @@
 * [Rule 11.11.2](Rule-11.11.2.md)
 
 ## Criterion 11.12
+* [Rule 11.12.1](Rule-11.12.1.md)
 * [Rule 11.12.2](Rule-11.12.2.md)
 
 ## Criterion 11.13
+* [Rule 11.13.1](Rule-11.13.1.md)
 * [Rule 11.13.2](Rule-11.13.2.md)
 
 ## Criterion 11.14

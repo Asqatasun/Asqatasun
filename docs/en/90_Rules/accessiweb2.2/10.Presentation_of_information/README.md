@@ -3,6 +3,7 @@
 
 
 ## Criterion 10.1
+* [Rule 10.1.1](Rule-10.1.1.md)
 * [Rule 10.1.2](Rule-10.1.2.md)
 * [Rule 10.1.3](Rule-10.1.3.md)
 
