@@ -31,7 +31,7 @@ EXPOSE $WWWPORT
 # ##########################################################
 #
 # Asqatasun pre-requesites
-# https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md
+# @@@TODO provide suitable link from http://doc.asqatasun.org/
 #
 # ##########################################################
 
@@ -42,12 +42,11 @@ RUN /root/pre-requesites.sh
 # ##########################################################
 #
 # Asqatasun installation
-# https://github.com/Asqatasun/Asqatasun/blob/master/docs/INSTALL.md
+# @@@TODO provide suitable link from http://doc.asqatasun.org/
 #
 # ##########################################################
 
 # Add Asqatasun
-#ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
 ADD http://download.asqatasun.org/asqatasun-${ASQA_RELEASE}.tar.gz /root/
 RUN tar xvfz asqatasun-${ASQA_RELEASE}.tar.gz && \
     mv asqatasun*/ ./asqatasun/
