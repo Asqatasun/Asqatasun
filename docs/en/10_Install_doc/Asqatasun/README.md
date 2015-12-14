@@ -2,13 +2,12 @@
 
 This page describes the steps to follow to install Asqatasun since Version 3.0.0 
 (and further) from the binary files or from the sources. The software has been 
-tested on 12.04 LTS (Precise Pangolin) and 14.04 LTS (Trusty Tahr).
+tested on 14.04 LTS (Trusty Tahr).
 
-PLEASE ensure you meet all [prerequisites for Asqatasun on Ubuntu](prerequisites-webapp-doc.md).
+If you want to quickly test Asqatasun, you may use the [Asqatasun Docker Image](../Docker/), 
+or you can follow the following full instructions.
 
-/!\ I repeat **DOUBLE CHECK YOU *DO* MEET ALL [requirements](prerequisites-webapp-doc.md)** before installing :)
-
-## Download asqatasun tarball and extract content
+## Download Asqatasun tarball and extract content
 
 Retrieve the [lastest version of Asqatasun](http://download.asqatasun.org/asqatasun-latest.tar.gz) and extract it on your file system. 
 
@@ -17,6 +16,13 @@ wget http://download.asqatasun.org/asqatasun-latest.tar.gz
 tar xzf asqatasun-latest.tar.gz
 cd asqatasun*
 ```
+
+## Install and configure pre-requesites
+
+PLEASE ensure you meet all [prerequisites for Asqatasun on Ubuntu](prerequisites-webapp-doc.md).
+
+/!\ I repeat **DOUBLE CHECK YOU *DO* MEET ALL [requirements](prerequisites-webapp-doc.md)** before installing :)
+
 
 ## Create the database
 
