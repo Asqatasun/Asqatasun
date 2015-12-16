@@ -40,7 +40,7 @@ sudo service mysql restart
 
 Install the following packages :
 ```sh
-sudo aptitude install tomcat7 libspring-instrument-java
+sudo aptitude install libtomcat7-java tomcat7 libspring-instrument-java
 ```
 
 Create the following symlinks : 
