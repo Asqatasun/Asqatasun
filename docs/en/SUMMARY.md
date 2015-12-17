@@ -3,6 +3,7 @@
 * [Installation](10_Install_doc/README.md)
     * [Docker](10_Install_doc/Docker/README.md)
     * [Asqatasun](10_Install_doc/Asqatasun/README.md)
+        * [Asqatasun Pre-requisites](10_Install_doc/Asqatasun/pre-requisites.md)
     * [Asqatasun-Runner](10_Install_doc/Asqatasun-runner/README.md)
 * [User doc](20_User_doc/README-user_doc.md)
 * [Developer doc](30_Developer_doc/README-developer-doc.md)

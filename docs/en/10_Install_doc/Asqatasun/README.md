@@ -19,10 +19,22 @@ cd asqatasun*
 
 ## Install and configure pre-requesites
 
-PLEASE ensure you meet all [prerequisites for Asqatasun on Ubuntu](prerequisites-webapp-doc.md).
 
-/!\ I repeat **DOUBLE CHECK YOU *DO* MEET ALL [requirements](prerequisites-webapp-doc.md)** before installing :)
+To install and setup all pre-requisites, you can run the `pre-requisites.sh` script. 
 
+A few noteworthy information:
+
+* This script is intended to be used on a freshly installed Ubuntu 14.04 (no Mysql, 
+no Tomcat already installed).
+* You can use the default values or adjust them to suite your needs (directly edit the file).
+* This script must be run as root
+* Pre-requisites are important, and **each detail is important** (e.g. Mysql specific 
+configuration, or Tomcat user configuration, or Firefox version requirement...), so please
+do care about it :)
+
+If you have a Tomcat or Mysql already installed, or if you don't feel comfortable
+with running a script as root, you can review it or follow the 
+[pre-requisites **manual** instructions](pre-requisites.md)
 
 ## Create the database
 
