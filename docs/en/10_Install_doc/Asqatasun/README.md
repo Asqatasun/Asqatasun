@@ -4,6 +4,8 @@ This page describes the steps to follow to install Asqatasun since Version 3.0.0
 (and further) from the binary files or from the sources. The software has been 
 tested on 14.04 LTS (Trusty Tahr).
 
+## Docker
+
 If you want to quickly test Asqatasun, you may use the [Asqatasun Docker Image](../Docker/), 
 or you can follow the following full instructions.
 
