@@ -30,14 +30,14 @@ EXPOSE $WWWPORT
 
 # ##########################################################
 #
-# Asqatasun pre-requesites
+# Asqatasun pre-requisites
 # @@@TODO provide suitable link from http://doc.asqatasun.org/
 #
 # ##########################################################
 
 WORKDIR /root
-ADD pre-requesites.sh xvfb /root/
-RUN /root/pre-requesites.sh
+ADD pre-requisites.sh xvfb /root/
+RUN /root/pre-requisites.sh
 
 # ##########################################################
 #

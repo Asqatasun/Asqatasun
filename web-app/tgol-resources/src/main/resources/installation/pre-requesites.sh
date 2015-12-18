@@ -1,1 +1,1 @@
-../../../../../../docker/Docker-build/pre-requesites.sh
+../../../../../../docker/single-container/pre-requisites.sh

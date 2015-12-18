@@ -103,7 +103,7 @@
         <fileSet>
             <directory>${basedir}/../../docker/single-container</directory>
             <includes>
-                <include>pre-requesite.sh</include>
+                <include>pre-requisite.sh</include>
                 <include>xvfb</include>
             </includes>
             <fileMode>755</fileMode>

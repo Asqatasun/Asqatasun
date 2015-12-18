@@ -17,10 +17,14 @@ tar xzf asqatasun-latest.tar.gz
 cd asqatasun*
 ```
 
-## Install and configure pre-requesites
+## Install and configure pre-requisites
 
 
-To install and setup all pre-requisites, you can run the `pre-requisites.sh` script. 
+To install and setup all pre-requisites, you can run the script:
+
+```sh
+pre-requisites.sh
+```
 
 A few noteworthy information:
 
@@ -78,7 +82,7 @@ sudo ./install.sh --database-user <Asqatasunu_dababase_user> \
 * **--tomcat-user** : Unix user name for the tomcat service (e.g. tomcat7)
 * **--asqa-admin-email** : Email of the Asqatasun admin user (by the way, it's you !)
 * **--asqa-admin-passwd** : The asqatasun application admin password
-* **--firefox-esr-binary-path** : Path to Firefox-ESR binary (e.g. /opt/firefox/firefox) you installed in Asqatasun pre-requesites.
+* **--firefox-esr-binary-path** : Path to Firefox-ESR binary (e.g. /opt/firefox/firefox) you installed in Asqatasun pre-requisites.
 * **--display-port** : Xorg display port (e.g. ":99"). For debug purpose, you may want asqatasun to display firefox instances in the current X session (for desktop). In this case, use ":0" as value and execute the "xhost +" in a terminal to authorize the process (owned by tomcat) to use the X server.
 
 ### Example of install-script invocation
