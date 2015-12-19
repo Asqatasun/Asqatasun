@@ -1,14 +1,19 @@
 
 
 ---------------------------
-Asqatasun 4.0.0, 2015-12-xx
+Asqatasun 4.0.0, 2016-01-xx
 ---------------------------
+
+Bugs :
+- [#43](https://github.com/Asqatasun/Asqatasun/issues/43) : Mysql config: add UTF-8 + enhance way to modify conf
 
 Features :
 
 - Docker images (+ Docker automated builds)
 - Implementation of SEO rules
 - Fork from Tanaguru
+
+
 
 --------------------------
 Tanaguru 3.1.0, 2015-07-02
