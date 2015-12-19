@@ -1,6 +1,5 @@
 # Asqatasun
 
-Asqatasun est...  
 @@@TODO
 
 ## Fonctionnalités
@@ -17,8 +16,6 @@ Asqatasun est...
 
 ## Contribuer
 @@@TODO
-
-
 
 
 ## Contact et discussions
