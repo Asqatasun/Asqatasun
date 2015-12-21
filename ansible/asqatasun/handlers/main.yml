@@ -1,0 +1,16 @@
+---
+- name: Restart MySQL
+  service: 
+    name: mysql 
+    state: restarted
+
+- name: Restart Tomcat7
+  service: 
+    name: tomcat7
+    state: restarted
+
+- name: Restart xvfb
+  service: 
+    name: xvfb 
+    pattern: /etc/init.d/xvfb 
+    state: restarted
