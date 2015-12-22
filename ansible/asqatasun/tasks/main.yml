@@ -39,6 +39,15 @@
   notify:
     - Restart MySQL
 
+- name: Copy the asqatasun.cnf template to /etc/mysql/conf.d
+  template:
+    dest: /etc/mysql/conf.d/asqatasun.cnf
+    src: asqatasun.cnf.j2
+    owner: root
+    group: root
+  notify:
+    - Restart MySQL
+    
 - name: Create a soft link for tomcat jar and mysql connector
   file:
     dest: "{{ item.dest }}"
