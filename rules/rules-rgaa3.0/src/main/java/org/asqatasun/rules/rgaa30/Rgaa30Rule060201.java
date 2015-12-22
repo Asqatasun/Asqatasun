@@ -26,7 +26,7 @@ import org.asqatasun.rules.elementselector.LinkElementSelector;
 /**
  * Implementation of the rule 6.2.1 of the referential Rgaa 3.0. <br/> For
  * more details about the implementation, refer to <a
- * href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-6-2-1">the rule 6.2.1
+ * href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/06.Links/Rule-6-2-1.html">the rule 6.2.1
  * design page.</a>
  *
  * @see <a

@@ -42,7 +42,7 @@ import org.asqatasun.service.ProcessRemarkService;
 /**
  * Implementation of the rule 9.1.4 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-9-1-4">the rule 9.1.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/09.Structure_of_information/Rule-9-1-4.html">the rule 9.1.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-9-1-4"> 9.1.4 rule specification</a>
  *
  * @author jkowalczyk

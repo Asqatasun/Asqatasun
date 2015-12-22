@@ -33,7 +33,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.UNEXPLICIT_LINK_WI
 /**
  * Implementation of the rule 6.1.1 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-6-1-1">the rule 6.1.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/accessiweb2.2/06.Links/Rule-6.1.1.html">the rule 6.1.1 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-6-1-1"> 6.1.1 rule specification</a>
  *
  */

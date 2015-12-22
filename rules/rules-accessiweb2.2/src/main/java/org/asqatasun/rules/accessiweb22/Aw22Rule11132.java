@@ -29,7 +29,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_EL
 /**Implementation
  * Implementation of the rule 11.13.2 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-11-13-2">the rule 11.13.2 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/accessiweb2.2/11.Forms/Rule-11.13.2.html">the rule 11.13.2 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-13-2"> 11.13.2 rule specification</a>
  *
  */

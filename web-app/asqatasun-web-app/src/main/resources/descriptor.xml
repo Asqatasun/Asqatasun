@@ -169,6 +169,9 @@
             <includes>
                 <include>**/*</include>
             </includes>
+            <excludes>
+                <exclude>nbproject/**/*</exclude>
+            </excludes>
             <fileMode>644</fileMode>
             <outputDirectory>/docs</outputDirectory>
         </fileSet>

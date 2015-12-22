@@ -19,6 +19,8 @@ fi
 # Mysql
 MYSQL_ROOT_PASSWD=mysqlRootPassword
 MYSQL_CONF_FILE=/etc/mysql/my.cnf
+MYSQL_CONF_DIR=/etc/mysql/conf.d
+MYSQL_CONF_FILE_FOR_ASQATASUN=asqatasun.cnf
 
 # Mysql for Asqatasun
 DATABASE_USER=asqatasun
@@ -106,8 +108,20 @@ apt-get -y --no-install-recommends install \
 # Mysql config
 #############################################
 
-# Max_allowed_packed : set to 64M
-perl -pi -e 's!max_allowed_packet\s*\= 16M!max_allowed_packet \= 64M!o' ${MYSQL_CONF_FILE}
+cat >${MYSQL_CONF_DIR}/${MYSQL_CONF_FILE_FOR_ASQATASUN} <<EOF
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+[mysqld]
+collation-server = utf8_general_ci
+init-connect='SET NAMES utf8'
+character-set-server = utf8
+max_allowed_packet = 64M
+
+EOF
 
 service mysql restart
 

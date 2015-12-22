@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>4.0.0-beta2</version>
+        <version>4.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-persistence</artifactId>
     <name>persistence</name>

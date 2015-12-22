@@ -32,7 +32,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTE
 /**
  * Implementation of the rule 1.4.4 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-1-4-4">the rule 1.4.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/accessiweb2.2/01.Images/Rule-1.4.4.html">the rule 1.4.4 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-1-4-4"> 1.4.4 rule specification</a>
  *
  */
