@@ -1,2 +1,0 @@
-# Asqatasun Developer documentation
-

@@ -1,3 +1,0 @@
-# Asqatasun Rules design
-
-

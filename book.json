@@ -1,0 +1,17 @@
+{
+    "title": "Asqatasun documentation",
+    "structure": {
+        "readme": "README.md",
+        "summary": "SUMMARY.md"
+    },
+    "plugins": [
+        "github",
+        "search",
+        "toggle-chapters"
+    ],
+    "pluginsConfig": {
+        "github": {
+            "url": "https://github.com/Asqatasun/Asqatasun"
+        }
+    }
+}

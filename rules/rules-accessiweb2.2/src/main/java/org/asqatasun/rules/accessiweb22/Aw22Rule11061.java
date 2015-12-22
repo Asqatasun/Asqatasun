@@ -30,7 +30,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.FIELDSET_WITHOUT_L
 /**
  * Implementation of the rule 11.6.1 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-11-6-1">the rule 11.6.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/accessiweb2.2/11.Forms/Rule-11.6.1.html">the rule 11.6.1 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-11-7-1"> 11.6.1 rule specification</a>
  *
  */

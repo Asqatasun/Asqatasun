@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 9.3.3 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-9-3-3">the rule 9.3.3 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/09.Structure_of_information/Rule-9-3-3.html">the rule 9.3.3 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-9-3-3"> 9.3.3 rule specification</a>
  */
 

@@ -26,7 +26,7 @@ import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
 /**
  * Implementation of the rule 3.3.1 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-3-3-1">the rule 3.3.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/03.Colours/Rule-3-3-1.html">the rule 3.3.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-3-3-1"> 3.3.1 rule specification</a>
  *
  * @author jkowalczyk

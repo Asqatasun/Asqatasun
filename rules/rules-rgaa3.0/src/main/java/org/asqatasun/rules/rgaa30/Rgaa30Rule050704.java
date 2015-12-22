@@ -35,7 +35,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TA
 /**
  * Implementation of the rule 5.7.4 of the referential Rgaa 3.0.
  * <br/>
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-5-7-4">the rule 5.7.4 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/05.Tables/Rule-5-7-4.html">the rule 5.7.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-7-4"> 5.7.4 rule specification</a>
  *
  */

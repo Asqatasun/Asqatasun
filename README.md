@@ -1,10 +1,18 @@
 # Asqatasun
 
-Asqatasun is an opensource web site analyser, used for web accessibility (a11y) and SEO.
+Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) and Search Engine Optimization (SEO).
 
 ## Features
 
-@@@TODO
+* **SEO measurement**
+    * run fully automated tests to track SEO issues
+    * scan zillions of pages
+    * create your own tests
+* **web accessibility assessment** (RGAA 3, AccessiWeb, WCAG)
+    * scan a whole site for a11y issues (crawler included)
+    * scan a given page, and manually fulfill the audit to produce report
+    * scan offline file (e.g. template being created but not online yet)
+    * scan a user-workflow like site registration, form completion or e-commerce checkout with **Asqatasun scenarios**.
  
 ## Vision
 
@@ -14,7 +22,10 @@ Asqatasun is an opensource web site analyser, used for web accessibility (a11y) 
 
 ## Download
 
-@@@TODO
+Latest Asqatasun version is available at http://download.asqatasun.org/asqatasun-latest.tar.gz
+
+You can also play with the [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/)
+(but **DO** read the associated docs or your data will be lost !)
 
 ## Demo
 
@@ -22,11 +33,18 @@ Asqatasun is an opensource web site analyser, used for web accessibility (a11y) 
 
 ## Installation and documentation
 
-@@@TODO
+How to install Asqatasun, how to run the Docker images, what hardware to provision.
+All answers are in the [Install Doc](docs/en/10_Install_doc/README.md)
 
 ## Contribute
 
-@@@TODO
+We would be really glad to have you on board ! You can help in many ways:
+
+* [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
+* [Help translate Asqatasun]() @@@TODO Transifex URL
+* Pull Requests are off course welcome
+* [Create your own tests]() @@@TODO link to doc
+
 
 ## Universe: accessibility "a11y"
 
@@ -35,11 +53,11 @@ What tests are covered:
 * all the "tag and attributes tests" like missing alt, table headers check, frame title...
 * color contrast
 * language specification
-* downloadable files / office files (spreadsheet, wordprocessor...)
+* downloadable files / office files (spreadsheet, word-processor...)
 * switch of context
 * ...
 
-As of october 2015, this represents 173 accessibility tests.
+As of October 2015, this represents 173 accessibility tests.
 
 ## Universe: Search Engine Optimisation "SEO"
 
@@ -47,7 +65,7 @@ As of october 2015, this represents 173 accessibility tests.
 
 ## Contact and discussions
 
-* [Asqatasun forum](http://forum.asqatasun.org) 
+* [Asqatasun forum](http://forum.asqatasun.org/) 
 * email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 
@@ -60,5 +78,6 @@ Features :
 
 See full [Changelog](CHANGELOG.txt)
 
+
 Have Fun
-[Asqatasun Team](docs/asqatasun-team.md)
+[Asqatasun Team](docs/en/asqatasun-team.md)

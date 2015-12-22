@@ -26,7 +26,7 @@ import org.asqatasun.rules.elementchecker.doctype.DoctypePositionChecker;
 /**
  * Implementation of the rule 8.1.3 of the referential Accessiweb 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/aw22-rule-8-1-3">the rule 8.1.3 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/accessiweb2.2/08.Mandatory_elements/Rule-8.1.3.html">the rule 8.1.3 design page.</a>
  * @see <a href="http://www.accessiweb.org/index.php/accessiweb-22-english-version.html#test-8-1-3"> 8.1.3 rule specification</a>
  *
  */

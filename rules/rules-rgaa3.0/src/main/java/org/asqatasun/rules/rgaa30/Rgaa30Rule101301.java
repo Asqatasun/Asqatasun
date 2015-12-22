@@ -34,7 +34,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.HIDDEN_TEXT_DETECT
 /**
  * Implementation of the rule 10.13.1 of the referential Rgaa 3.0.
  *
- * For more details about the implementation, refer to <a href="http://tanaguru-rules-rgaa3.readthedocs.org/en/latest/Rule-10-13-1">the rule 10.13.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.0/10.Presentation_of_information/Rule-10-13-1.html">the rule 10.13.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-10-13-1"> 10.13.1 rule specification</a>
  */
 public class Rgaa30Rule101301 extends AbstractPageRuleFromPreProcessImplementation {
