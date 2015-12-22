@@ -30,6 +30,13 @@ asqatasun_version: "asqatasun-4.0.0-beta2"
 # Default is en-US in our example
 fixfox_esr_link: "http://download-origin.cdn.mozilla.net/pub/firefox/releases/31.4.0esr/linux-x86_64/en-US/firefox-31.4.0esr.tar.bz2"
 
+# MySQL variables for Asqatasun
+default_character_set: "utf8"
+collation_server: "utf8_general_ci"
+init_connect: "SET NAMES utf8"
+character_set_server: "utf8"
+mysql_max_allowed_packet: "64M"
+
 asqatasun_parameters:
   db_name: 'asqatasundb'
   db_user: 'asqatasunuser'
