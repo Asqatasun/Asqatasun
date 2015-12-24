@@ -269,5 +269,17 @@ public class UserImpl implements User, Serializable {
             }
         }
     }
-    
+
+    @Override
+    public boolean isRoleAdmin() {
+        if (this.role.getId() != null) {
+            if (this.role.getId() == 3) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }  
 }
