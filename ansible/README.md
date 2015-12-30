@@ -43,8 +43,8 @@ asqatasun_parameters:
   admin_email: 'admin@example.com'
   admin_passwd: 'asqatasun15'
 ```
-- If you want to read about the prerequisites of Asqatasun on Ubuntu, please follow this [link](https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md)
-- [Here](https://github.com/Asqatasun/Asqatasun/blob/master/docs/INSTALL.md) is the official installation procedure on Asqatasun github repo.
+- You may want to read about the [pre-requisites of Asqatasun on Ubuntu](https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md)
+- You may also read the [official installation procedure on Asqatasun github repo](https://github.com/Asqatasun/Asqatasun/blob/master/docs/INSTALL.md).
 
 Also provided the `Vagrantfile` with the role, just run this command:
 ```shell
