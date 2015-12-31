@@ -30,15 +30,6 @@
     state: installed
   with_items: asqatasun_debian_pkgs
 
-- name: Modify the my.cnf file for max_allowed_packet option
-  lineinfile: 
-    dest: /etc/mysql/my.cnf 
-    regexp: '^max_allowed_packet' 
-    line: 'max_allowed_packet  = 64M'
-    state: present
-  notify:
-    - Restart MySQL
-
 - name: Copy the asqatasun.cnf template to /etc/mysql/conf.d
   template:
     dest: /etc/mysql/conf.d/asqatasun.cnf
