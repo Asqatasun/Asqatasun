@@ -5,16 +5,24 @@
 - Don't use it for production as all data are wiped out at reboot / rebuild
 - BUT for quick testing, that does the job :)
 
-## 1. Create a container
+## 1. Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 
-### Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 ```shell
      docker pull asqatasun/asqatasun  
      docker run --name asqa_test -d -p 8080:8080  asqatasun/asqatasun  
 ```
 
+## 2. Use your local Asqatasun
 
-### Create a container from the DockerFile
+- In your browser, go to http://localhost:8080/asqatasun/ 
+- Use this user and this password :
+  - `me@my-email.org`
+  - `myAsqaPassword`
+
+## Developer, you wanna play harder? Come on!
+
+Create a container from the DockerFile:
+
 ```shell
      git clone https://github.com/Asqatasun/Asqatasun.git  
      cd Asqatasun/docker/single-container 
@@ -22,7 +30,7 @@
      docker run --name asqa_test -d -p 8080:8080 test_asqatasun
 ```
 
-## 2. Use your local Asqatasun
+Then play with it:
 
 - In your browser, go to http://localhost:8080/asqatasun/ 
 - Use this user and this password :
