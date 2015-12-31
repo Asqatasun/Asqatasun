@@ -1,50 +1,17 @@
 #Asqatasun Ansible Role
+[Ansible](http://docs.ansible.com/ansible/) is a configuration management tool that allows you to configure and manage other machines remotely. What makes it unique from other configuration management software like Chef or Puppet:
+
+- It uses existing SSH infrastructure
+- No needs for dedicated server, even your laptop can manage 100s of machine
+- Easy to get started with it
+- It uses "Facts", gathers information about system and environment before running the tasks
+- Ansible Tasks are idempotent
+
+* [Ansible Introduction](https://serversforhackers.com/getting-started-with-ansible/) - Very good and detail Ansible Introduction
 This Ansible role will install the` Asqatasun Opensource Accessibility` on Ubuntu 12.04/14.04 LTS.
-Before using this role, you can modify the variables or if you wish, you can continue with the defaults that has been provided with the role.
-``` yaml
----
-asqatasun_debian_pkgs:
-  - wget
-  - bzip2
-  - openjdk-7-jre
-  - unzip
-  - mysql-server
-  - libmysql-java
-  - python-mysqldb
-  - libtomcat7-java
-  - tomcat7 
-  - libspring-instrument-java
-  - xvfb
-  - libdbus-glib-1-2
-  - mailutils
-  - postfix
 
-locale: 'en_US.UTF-8'
-
-asqatasun_download_link: "http://download.asqatasun.org/asqatasun-latest.tar.gz"
-# Asqatasun version that you want to install, get the full list of releases 
-#by clicking in the release tab of the github main interface.
-asqatasun_version: "asqatasun-4.0.0-beta2"
-
-# Go this link to find your desired ESR Firefox
-# For 32-bit architecture
-# http://download-origin.cdn.mozilla.net/pub/firefox/releases/31.4.0esr/linux-i686/
-# For 64-bit architecture
-# http://download-origin.cdn.mozilla.net/pub/firefox/releases/31.4.0esr/linux-x86_64/
-# Default is en-US in our example
-fixfox_esr_link: "http://download-origin.cdn.mozilla.net/pub/firefox/releases/31.4.0esr/linux-x86_64/en-US/firefox-31.4.0esr.tar.bz2"
-
-asqatasun_parameters:
-  db_name: 'asqatasundb'
-  db_user: 'asqatasunuser'
-  db_password: 'AsqatasunPassword'
-  db_host: 'localhost'
-  url: 'http://localhost:8080/asqatasun/'
-  admin_email: 'admin@example.com'
-  admin_passwd: 'asqatasun15'
-```
-- You may want to read about the [pre-requisites of Asqatasun on Ubuntu](https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md)
-- You may also read the [official installation procedure on Asqatasun github repo](https://github.com/Asqatasun/Asqatasun/blob/master/docs/INSTALL.md).
+- If you want to read about the prerequisites of Asqatasun on Ubuntu, please follow this [link](https://github.com/Asqatasun/Asqatasun/blob/master/docs/prerequisites-webapp-doc.md)
+- [Here](https://github.com/Asqatasun/Asqatasun/blob/master/docs/INSTALL.md) is the official installation procedure on Asqatasun github repo.
 
 Also provided the `Vagrantfile` with the role, just run this command:
 ```shell
@@ -71,7 +38,19 @@ TASK: [asqatasun | Update the Ubuntu repos] ***********************************
 ok: [asqatasun]
 ```
 Once the installation will be finished, just enter the following url to your browser to get the default Asqatasun page:
-```http://192.168.33.33:8080/asqatasun/
+```
+http://192.168.33.33:8080/asqatasun/
+```
+Here's the defaults values that role will use, please modify them as per your requirement, if needed:
+``` yaml
+asqatasun_parameters:
+  db_name: 'asqatasundb'
+  db_user: 'asqatasunuser'
+  db_password: 'AsqatasunPassword'
+  db_host: 'localhost'
+  url: 'http://localhost:8080/asqatasun/'
+  admin_email: 'admin@example.com'
+  admin_passwd: 'asqatasun15'
 ```
 Hope this role will help you. Thanks!
 
