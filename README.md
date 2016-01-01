@@ -69,10 +69,11 @@ As of October 2015, this represents 173 accessibility tests.
 * email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 
-## Content of this last version (Asqatasun 4.0.0, 2015-12-xx)
+## Content of this last version (Asqatasun 4.0.0, 2015-01-xx)
 
 Features :
-- Docker images (+ Docker automated builds)
+- devops : Ansible role + Vagrantfile
+- devops : Docker images (+ Docker automated builds)
 - Implementation of SEO rules
 - Fork from Tanaguru
 

@@ -8,8 +8,8 @@ Bugs :
 - [#43](https://github.com/Asqatasun/Asqatasun/issues/43) : Mysql config: add UTF-8 + enhance way to modify conf
 
 Features :
-
-- Docker images (+ Docker automated builds)
+- devops : Ansible role + Vagrantfile
+- devops : Docker images (+ Docker automated builds)
 - Implementation of SEO rules
 - Fork from Tanaguru
 
