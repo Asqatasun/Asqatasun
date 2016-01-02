@@ -271,7 +271,7 @@ element.style {
 }
 .topbar h3 a, .topbar .brand {
     margin-left: -5px;
-    padding: 6px 0 0 0 ;
+    padding: 0 0 0 0 ;
 }
 input, textarea, select {
     color : #404040;
@@ -809,7 +809,7 @@ footer a {
     text-align: right;
 }
 #login-topbar-logo {
-    padding-top: 6px;
+    padding-top: 0;
 }
 .inline-password{
     display : inline-block;
