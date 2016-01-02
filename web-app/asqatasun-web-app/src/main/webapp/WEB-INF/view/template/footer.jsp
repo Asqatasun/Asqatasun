@@ -20,7 +20,7 @@
                 <br>
                 <br>
 		&copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" />
-		 - <a href="http://www.asqatasun.org/">Asqatasun.org</a> 
+		 - <a href="http://asqatasun.org/">Asqatasun.org</a> 
             </div>
         </footer>
         <%@include file="tracker.jsp" %>
