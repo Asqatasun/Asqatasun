@@ -28,6 +28,8 @@ Lead developer
 
 ![](https://s.gravatar.com/avatar/e35eefc3d93820e658c6749ec9141cef?s=150)
 
+Git helpdesk and more...
+
 * [Fabrice on LinkedIn](https://fr.linkedin.com/in/fabricegangler/)
 * [Fabrice on Twitter](http://twitter.com/fabricegangler)
 * [Fabrice on GitHub](https://github.com/dzc34)
