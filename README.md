@@ -34,7 +34,8 @@ You can also play with the [Asqatasun Docker images](https://hub.docker.com/r/as
 ## Installation and documentation
 
 How to install Asqatasun, how to run the Docker images, what hardware to provision.
-All answers are in the [Install Doc](docs/en/10_Install_doc/README.md)
+All answers are in the [Asqatasun Doc](http://doc.asqatasun.org) (or in the `docs/`
+directory if you cloned the repos or downloaded the .tar.gz).
 
 ## Contribute
 
