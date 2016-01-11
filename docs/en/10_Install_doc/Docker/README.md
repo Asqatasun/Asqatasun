@@ -21,13 +21,15 @@
 
 ## Developer, you wanna play harder? Come on!
 
+### Build locally (with downloaded Asqatasun)
+
 Create a container from the DockerFile:
 
 ```shell
-     git clone https://github.com/Asqatasun/Asqatasun.git  
-     cd Asqatasun/docker/single-container 
-     docker build -t test_asqatasun . 
-     docker run --name asqa_test -d -p 8080:8080 test_asqatasun
+git clone https://github.com/Asqatasun/Asqatasun.git  
+cd Asqatasun/docker/single-container 
+docker build -t test_asqatasun . 
+docker run --name asqa_test -d -p 8080:8080 test_asqatasun
 ```
 
 Then play with it:
@@ -36,3 +38,31 @@ Then play with it:
 - Use this user and this password :
   - `me@my-email.org`
   - `myAsqaPassword`
+
+### Build locally with locally built Asqatasun
+
+You van also hack the Dockerfile to use your own locally compiled Asqatsun in your Docker.
+To do so, in the Dockerfile comment the following lines
+
+```
+ADD http://download.asqatasun.org/asqatasun-${ASQA_RELEASE}.tar.gz /root/
+RUN tar xvfz asqatasun-${ASQA_RELEASE}.tar.gz && \
+    mv asqatasun*/ ./asqatasun/
+```
+
+and UNcomment these ones
+
+```
+#ADD asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
+#RUN mv asqatasun*/ ./asqatasun/
+```
+
+Then here is the sequence to build locally:
+
+```sh
+mvn clean install
+cp web-app/asqatasun-web-app/target/asqatasun-*.tar.gz docker/single-container
+cd Asqatasun/docker/single-container 
+docker build -t test_asqatasun . 
+docker run --name asqa_test -d -p 8080:8080 test_asqatasun
+```
