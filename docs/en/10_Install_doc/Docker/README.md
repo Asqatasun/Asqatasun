@@ -41,7 +41,7 @@ Then play with it:
 
 ### Build locally with locally built Asqatasun
 
-You van also hack the Dockerfile to use your own locally compiled Asqatsun in your Docker.
+You can also hack the Dockerfile to use your own locally compiled Asqatsun in your Docker.
 To do so, in the Dockerfile comment the following lines
 
 ```
@@ -57,12 +57,14 @@ and UNcomment these ones
 #RUN mv asqatasun*/ ./asqatasun/
 ```
 
+Adjust  the `ASQA_RELEASE` variable to match the .tar.gz name you just copied.
+
 Then here is the sequence to build locally:
 
 ```sh
 mvn clean install
 cp web-app/asqatasun-web-app/target/asqatasun-*.tar.gz docker/single-container
 cd Asqatasun/docker/single-container 
-docker build -t test_asqatasun . 
-docker run --name asqa_test -d -p 8080:8080 test_asqatasun
+docker build -t asqatasun:local-snapshot . 
+docker run --name asqatasun_local_snapshot -d -p 8080:8080 asqatasun:local-snapshot
 ```
