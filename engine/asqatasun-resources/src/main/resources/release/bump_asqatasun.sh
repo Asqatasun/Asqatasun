@@ -122,6 +122,7 @@ COMMIT_MESSAGE="bump from version $FROM_VERSION to $TO_VERSION"
 if [ "$COMMIT" = true ] ; then
     echo 'commiting all files with message : ' $COMMIT_MESSAGE
     find . -name "pom.xml" | xargs git add -u
+    find . -name "Dockerfile" | xargs git add -u
     git add **/install.sh **/asqatasun.conf
     git commit -m "$COMMIT_MESSAGE"
     echo 'committed all files with message : ' $COMMIT_MESSAGE
