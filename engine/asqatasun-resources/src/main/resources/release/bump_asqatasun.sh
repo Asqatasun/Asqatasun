@@ -150,12 +150,11 @@ fi
 ########################
 # Clean up temporary dir
 ########################
-if [ "$SOURCE_DIR" = "" ]
-then
-    cd /tmp
-    rm -fr Asqatasun
-fi
+#if [ "$SOURCE_DIR" = "" ] ; then
+#    cd /tmp
+#    rm -fr Asqatasun
+#fi
 
-cd ~
+#cd ~
 
 exit 0
