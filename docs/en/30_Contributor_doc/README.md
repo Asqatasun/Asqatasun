@@ -1,3 +1,3 @@
 # Asqatasun Developer documentation
 
-Here you will find information for people will to understand or help for Asqatasun development.
+Here you will find information for people willing to understand the internals of Asqatasun or bring help to its development.
