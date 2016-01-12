@@ -119,11 +119,13 @@ echo 'bumped context with version' $TO_VERSION
 # Automatic Commit with generated message
 #########################################
 if [ "$COMMIT" = true ] ; then
-    COMMIT_MESSAGE="bump from version v$FROM_VERSION to v$TO_VERSION"
+    COMMIT_MESSAGE="Release $TO_VERSION"
     echo 'commiting all files with message : ' $COMMIT_MESSAGE
     find . -name "pom.xml" | xargs git add -u
     find . -name "Dockerfile" | xargs git add -u
-    git add **/install.sh **/asqatasun.conf
+    git add **/install.sh 
+    git add **/asqatasun.conf
+    git add ansible/asqatasun/defaults/main.yml
     git commit -m "$COMMIT_MESSAGE"
     echo 'committed all files with message : ' $COMMIT_MESSAGE
 fi
