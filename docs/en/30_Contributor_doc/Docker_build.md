@@ -74,7 +74,7 @@ docker run -p 8080:8080 --name asqatasun asqatasun/asqatasun:SNAPSHOT
 Your Asqatasun is ready to use when you see on the console something like:
 
 ```shell
-==> /var/log/tomcat7/catalina.out <==
+==> /var/log/tomcat7/catalina.out 
 Dec 14, 2015 5:05:59 PM org.apache.coyote.AbstractProtocol start
 INFO: Starting ProtocolHandler ["http-bio-8080"]
 Dec 14, 2015 5:05:59 PM org.apache.catalina.startup.Catalina start
