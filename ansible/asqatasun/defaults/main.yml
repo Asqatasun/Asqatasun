@@ -20,7 +20,7 @@ locale: 'en_US.UTF-8'
 asqatasun_download_link: "http://download.asqatasun.org/asqatasun-latest.tar.gz"
 # Asqatasun version that you want to install, get the full list of releases 
 #by clicking in the release tab of the github main interface.
-asqatasun_version: "asqatasun-v4.0.0-SNAPSHOT"
+asqatasun_version: "asqatasun-4.0.0-SNAPSHOT"
 
 # Go this link to find your desired ESR Firefox
 # For 32-bit architecture
