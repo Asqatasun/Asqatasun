@@ -89,8 +89,8 @@ fi
 if [ "$AUTOMERGE" = true ] ; then
     #git checkout develop
     #git rebase master
-    git checkout master
-    git merge develop
+    #git checkout master
+    git merge origin/develop
 fi
 
 ################
@@ -104,6 +104,7 @@ POM_PERL_COMMAND2="s!<asqatasunVersion>$FROM_VERSION</asqatasunVersion>!<asqatas
 CONF_PERL_COMMAND="s!asqatasunVersion=$FROM_VERSION!asqatasunVersion=$TO_VERSION!o"
 SH_PERL_COMMAND="s!$FROM_VERSION!$TO_VERSION!o"
 DOCKER_PERL_COMMAND="s!ASQA_RELEASE=\"$FROM_VERSION\"!ASQA_RELEASE=\"$TO_VERSION\"!o"
+ANSIBLE_PERL_COMMAND="s!$FROM_VERSION!$TO_VERSION!o"
 
 echo 'bumping context with version' $TO_VERSION
 find . -name "pom.xml" -exec perl -pi -e $POM_PERL_COMMAND {} \;
@@ -111,15 +112,14 @@ find . -name "pom.xml" -exec perl -pi -e $POM_PERL_COMMAND2 {} \;
 find . -name "install.sh" -exec perl -pi -e $SH_PERL_COMMAND {} \;
 find . -name "asqatasun.conf" -exec perl -pi -e $CONF_PERL_COMMAND {} \;
 find . -name "Dockerfile" -exec perl -pi -e $DOCKER_PERL_COMMAND {} \;
+find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e $ANSIBLE_PERL_COMMAND {} \;
 echo 'bumped context with version' $TO_VERSION
-
-# prepare commit message in case of automatic commit
-COMMIT_MESSAGE="bump from version $FROM_VERSION to $TO_VERSION"
 
 #########################################
 # Automatic Commit with generated message
 #########################################
 if [ "$COMMIT" = true ] ; then
+    COMMIT_MESSAGE="bump from version $FROM_VERSION to $TO_VERSION"
     echo 'commiting all files with message : ' $COMMIT_MESSAGE
     find . -name "pom.xml" | xargs git add -u
     find . -name "Dockerfile" | xargs git add -u
