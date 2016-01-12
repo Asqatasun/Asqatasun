@@ -15,7 +15,7 @@ This is the documentation for releasing a new version for Asqatasun. As an end u
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version vA.B.C-SNAPSHOT --to-version vX.Y.Z-rc.1 --automerge --commit --tag --push
+./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
 ```
 
 x) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests

@@ -119,7 +119,7 @@ echo 'bumped context with version' $TO_VERSION
 # Automatic Commit with generated message
 #########################################
 if [ "$COMMIT" = true ] ; then
-    COMMIT_MESSAGE="bump from version $FROM_VERSION to $TO_VERSION"
+    COMMIT_MESSAGE="bump from version v$FROM_VERSION to v$TO_VERSION"
     echo 'commiting all files with message : ' $COMMIT_MESSAGE
     find . -name "pom.xml" | xargs git add -u
     find . -name "Dockerfile" | xargs git add -u
@@ -141,10 +141,11 @@ fi
 # Automatic tag
 ###############
 if [ "$TAG" = true ] ; then
-    echo 'tagging new ' $TO_VERSION 'tag.'
-    git tag -a $TO_VERSION -m "$TO_VERSION"
-    git push origin $TO_VERSION
-    echo 'tagged new ' $TO_VERSION 'tag.'
+    MY_TAG="v$TO_VERSION"
+    echo 'tagging new ' $MY_TAG 'tag.'
+    git tag -a $MY_TAG -m "$MY_TAG"
+    git push origin $MY_TAG
+    echo 'tagged new ' $MY_TAG 'tag.'
 fi
 
 ########################
