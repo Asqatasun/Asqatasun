@@ -1,8 +1,10 @@
 # Release a version of Asqatasun
 
+This is the documentation for releasing a new version for Asqatasun. As an end user, you won't need it, it is just for developers.
+
 ## Steps to follow
 
-### Prepare RC
+### Prepare Release Candidate
 
 1) Prepare CHANGELOG.txt:
 
@@ -13,8 +15,10 @@
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version A.B.C --to-version X.Y.Z-RC.1 --automerge --commit --tag --push
+./bump_asqatasun.sh --from-version vA.B.C --to-version vX.Y.Z-rc.1 --automerge --commit --tag --push
 ```
+
+x) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
 
 3) In Github, define this tag as "Pre-Release" (as it is a Release Candidate)
 
@@ -36,6 +40,8 @@ n) Prepare communication
 * LinkedIn groups + LinkedIn profiles
 * LinuxFR
 * TooLinux
+
+n) If no blocker is found, proceed to next step, else iterate and increment RC number.
 
 ## Prepare actual release
 

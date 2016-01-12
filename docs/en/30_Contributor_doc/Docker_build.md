@@ -9,6 +9,7 @@ By "locally", we mean we won't download Asqatasun as we will build it.
 
 ```shell
 git clone https://github.com/Asqatasun/Asqatasun.git
+git checkout develop    # Please always work on develop, see CONTRIBUTING.md
 ```
 
 ### 2. Compile Asqatasun
@@ -46,7 +47,7 @@ RUN mv asqatasun*/ ./asqatasun/
 ### 5. Set the release wanted in the Dockerfile
 
 
-At he beginning if the Dockerfile, replace `ASQA_RELEASE="SNAPSHOT"` by `ASQA_RELEASE="4.0.0-SNAPSHOT"`
+At the beginning if the Dockerfile, replace `ASQA_RELEASE="SNAPSHOT"` by `ASQA_RELEASE="4.0.0-SNAPSHOT"`
 
 
 ### 6. Build the Docker Image
