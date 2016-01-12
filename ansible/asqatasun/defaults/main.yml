@@ -20,7 +20,7 @@ locale: 'en_US.UTF-8'
 asqatasun_download_link: "http://download.asqatasun.org/asqatasun-latest.tar.gz"
 # Asqatasun version that you want to install, get the full list of releases 
 #by clicking in the release tab of the github main interface.
-asqatasun_version: "asqatasun-4.0.0-beta2"
+asqatasun_version: "asqatasun-v4.0.0-beta2"
 
 # Go this link to find your desired ESR Firefox
 # For 32-bit architecture
@@ -38,10 +38,10 @@ character_set_server: "utf8"
 mysql_max_allowed_packet: "64M"
 
 asqatasun_parameters:
-  db_name: 'asqatasundb'
-  db_user: 'asqatasunuser'
-  db_password: 'AsqatasunPassword'
+  db_name: 'asqatasun'
+  db_user: 'asqatasun'
+  db_password: 'asqaP4sswd'
   db_host: 'localhost'
   url: 'http://localhost:8080/asqatasun/'
-  admin_email: 'admin@example.com'
-  admin_passwd: 'asqatasun15'
+  admin_email: 'me@my-email.org'
+  admin_passwd: 'myAsqaPassword'
