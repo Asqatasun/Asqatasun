@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>4.0.0-rc.1</version>
+        <version>4.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-rules-seo1.0</artifactId>
     <name>rules-seo1.0</name>
