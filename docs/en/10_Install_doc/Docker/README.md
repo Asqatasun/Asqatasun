@@ -7,17 +7,17 @@
 
 ## 1. Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 
-```shell
-     docker pull asqatasun/asqatasun  
-     docker run --name asqa_test -d -p 8080:8080  asqatasun/asqatasun  
+```sh
+docker pull asqatasun/asqatasun  
+docker run --name asqa_test -d -p 8080:8080  asqatasun/asqatasun  
 ```
 
 ## 2. Use your local Asqatasun
 
 - In your browser, go to http://localhost:8080/asqatasun/ 
 - Use this user and this password :
-  - `me@my-email.org`
-  - `myAsqaPassword`
+    - `me@my-email.org`
+    - `myAsqaPassword`
 
 ## Developer, you wanna play harder? Come on!
 
