@@ -18,15 +18,35 @@ cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
 ```
 
-x) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
+3) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
 
-3) In Github, define this tag as "Pre-Release" (as it is a Release Candidate)
+4) For develop branch, switch back release strings to "-SNAPSHOT"
 
-4) Copy/paste Changelog to Github Pre-Release
+```sh
+cd /tmp/Asqatasun   # Directory used to clone Github repos
+git checkout develop
+git rebase master
+./bump_asqatasun.sh --from-version X.Y.Z-rc.1 --to-version X.Y.Z-SNAPSHOT
+find . -name "pom.xml" | xargs git add -u
+find . -name "Dockerfile" | xargs git add -u
+git add **/install.sh 
+git add **/asqatasun.conf
+git add ansible/asqatasun/defaults/main.yml
+git commit -m "Switch release to 4.0.0-SNAPSHOT"
+git push origin develop
+```
 
-5) Verify Docker image from [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/) is functionnal.
+5) In Github:
 
-6) Warn testers
+* Define this tag as "Pre-Release" (as it is a Release Candidate)
+* Copy/paste Changelog to Github Pre-Release
+* Upload the `.tar.gz` file
+
+n) Update [Download.asqatasun.org](http://Download.asqatasun.org/) so that "latest" points to the last release.
+
+n) Verify Docker image from [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/) is functionnal.
+
+n) Warn testers
 
 * by direct email to well-known people
 * by a message in the [forum](http://forum.asqatasun.org/)
