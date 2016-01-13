@@ -4,12 +4,13 @@ Asqatasun 4.0.0-rc.1, 2016-01-12
 --------------------------------
 
 Bugs:
-- [#43](https://github.com/Asqatasun/Asqatasun/issues/43) : Mysql config: add UTF-8 + enhance way to modify conf
+- [#43](https://github.com/Asqatasun/Asqatasun/issues/43) : Mysql config: add UTF-8 
+to support any type of charset including cyrillic + enhance way to modify Mysql conf
 
 Features:
 - devops: Ansible role + Vagrantfile
-- Documentation: huge refactor; Install doc OK.
-- new logo integrated in the app
+- Documentation: huge refactor; Sections done: Install, Contrib > Docker build, Contrib > Release
+- New logo integrated in the app
 
 ----------------------------------
 Asqatasun 4.0.0-beta.2, 2015-11-27
