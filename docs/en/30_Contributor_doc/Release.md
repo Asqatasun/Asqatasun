@@ -2,25 +2,32 @@
 
 This is the documentation for releasing a new version for Asqatasun. As an end user, you won't need it, it is just for developers.
 
-## Steps to follow
+The process is compound of two main parts:
 
-### Prepare Release Candidate
+1. Releasing the Release Candidate (RC): release, test, eventually iterate
+1. Releasing the Stable version and launching communication.
+
+## Prepare Release Candidate
 
 1) Prepare CHANGELOG.txt:
 
 * add an entry for this RC
 * add differences between this release and previous one
 
-2) Upgrade version strings in code with `engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh`:
+2) Update README.md (THE readme from top directory):
+
+* copy/paste changelog in section "Content of this last version"
+
+3) Upgrade version strings in code with `engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh`:
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
 ```
 
-3) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
+4) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
 
-4) For develop branch, switch back release strings to "-SNAPSHOT"
+5) For develop branch, switch back release strings to "-SNAPSHOT"
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
@@ -36,20 +43,23 @@ git commit -m "Switch release to 4.0.0-SNAPSHOT"
 git push origin develop
 ```
 
-5) In Github:
+6) In Github:
 
 * Define this tag as "Pre-Release" (as it is a Release Candidate)
-* Copy/paste Changelog to Github Pre-Release
+* Copy/paste Changelog to Github Pre-Release comment field
 * Upload the `.tar.gz` file
 
-n) Update [Download.asqatasun.org](http://Download.asqatasun.org/) so that "latest" points to the last release.
+7) Update [Download.asqatasun.org](http://Download.asqatasun.org/) so that "latest" points to the last release.
 
-n) Verify Docker image from [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/) is functionnal.
+n) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/):
 
-n) Warn testers
+* Add a dedicated build for the Github tag (e.g. `4.0.0-rc.1`) with the same tag as Docker tag (`4.0.0-rc.1`)
+(while waiting to have a working regexp :) ).
+* Add another dedicated build for the Github tag (e.g. `4.0.0-rc.1`) with `latest` as Docker tag
 
-* by direct email to well-known people
-* by a message in the [forum](http://forum.asqatasun.org/)
+n) Write a message in the [forum](http://forum.asqatasun.org/)
+
+n) Send an email to close people to ask them if they want to play with the RC.
 
 n) Run the functional tests
 
@@ -65,27 +75,64 @@ n) If no blocker is found, proceed to next step, else iterate and increment RC n
 
 ## Prepare actual release
 
-1) Prepare CHANGELOG.txt:
+n) Prepare CHANGELOG.txt:
 
 * add an entry for this release
 * in a cumulative way, add all the data of previous betas and RCs 
 (reader should have all details between from previous stable release and this one, 
 without having to dig into the previous betas and RCs)
 
-2) Upgrade version strings in code with `engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh`:
+n) Update README.md (THE readme from top directory):
+
+* copy/paste changelog in section "Content of this last version"
+
+n) Upgrade version strings in code with `engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh`:
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version X.Y.Z-RC.1 --to-version X.Y.Z --automerge --commit --tag --push
+./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag --push
+```
+n) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
+
+n) For `develop` branch, switch back release strings to "-SNAPSHOT"
+
+```sh
+cd /tmp/Asqatasun   # Directory used to clone Github repos
+git checkout develop
+git rebase master
+./bump_asqatasun.sh --from-version X.Y.Z --to-version X.Y.Z+1-SNAPSHOT
+find . -name "pom.xml" | xargs git add -u
+find . -name "Dockerfile" | xargs git add -u
+git add **/install.sh 
+git add **/asqatasun.conf
+git add ansible/asqatasun/defaults/main.yml
+git commit -m "Switch release to 4.0.0-SNAPSHOT"
+git push origin develop
 ```
 
-3) In Github, define this tag as "Release" (as this one is the actual Release)
+n) In Github:
 
-4) Copy/paste Changelog to Github Release
+* Copy/paste Changelog to Github Release comment field
+* Upload the `.tar.gz` file
 
-5) Verify Docker image from [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/) is functionnal.
+7) Update [Download.asqatasun.org](http://Download.asqatasun.org/) so that "latest" points to the last release.
 
-n) Launch announces prepared.
+n) In Github, define this tag as "Release" (as this one is the actual Release)
+
+n) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/):
+
+* Add a dedicated build for the Github tag with the same tag as Docker tag 
+(while waiting to have a working regexp :) ).
+* Add another dedicated build for the Github tag with `latest` as Docker tag
+
+n) Launch prepared announces:
+
+* [forum](http://forum.asqatasun.org/)
+* Tweet
+* Facebook 
+* LinkedIn groups + LinkedIn profiles
+* LinuxFR
+* TooLinux
 
 n) Celebrate and [have a beer](http://www.aufutetamesure.fr/) !
 
