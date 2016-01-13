@@ -37,16 +37,6 @@ How to install Asqatasun, how to run the Docker images, what hardware to provisi
 All answers are in the [Asqatasun Doc](http://doc.asqatasun.org) (or in the `docs/`
 directory if you cloned the repos or downloaded the .tar.gz).
 
-## Contribute
-
-We would be really glad to have you on board ! You can help in many ways:
-
-* [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
-* [Help translate Asqatasun]() @@@TODO Transifex URL
-* Pull Requests are off course welcome
-* [Create your own tests]() @@@TODO link to doc
-
-
 ## Universe: accessibility "a11y"
 
 What tests are covered:
@@ -67,8 +57,19 @@ As of October 2015, this represents 173 accessibility tests.
 ## Contact and discussions
 
 * [Asqatasun forum](http://forum.asqatasun.org/) 
-* email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
+* email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
+
+## Contribute
+
+We would be really glad to have you on board ! You can help in many ways:
+
+* [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
+* [Help translate Asqatasun]() @@@TODO Transifex URL
+* Pull Requests are off course welcome
+* [Create your own tests]() @@@TODO link to doc
+
+Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
 
 ## Content of this last version (Asqatasun 4.0.0, 2015-01-xx)
 
