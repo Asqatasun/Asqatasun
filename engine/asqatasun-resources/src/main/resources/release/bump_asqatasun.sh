@@ -97,8 +97,6 @@ fi
 # Effective bump
 ################
 
-# git checkout master
-
 POM_PERL_COMMAND="s!<version>$FROM_VERSION</version>!<version>$TO_VERSION</version>!o"
 POM_PERL_COMMAND2="s!<asqatasunVersion>$FROM_VERSION</asqatasunVersion>!<asqatasunVersion>$TO_VERSION</asqatasunVersion>!o"
 CONF_PERL_COMMAND="s!asqatasunVersion=$FROM_VERSION!asqatasunVersion=$TO_VERSION!o"
