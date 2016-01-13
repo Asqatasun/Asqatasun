@@ -7,11 +7,16 @@
     "plugins": [
         "github",
         "search",
-        "toggle-chapters"
+        "toggle-chapters",
+        "sitemap",
+        "collapsible-menu"
     ],
     "pluginsConfig": {
         "github": {
             "url": "https://github.com/Asqatasun/Asqatasun"
+        },
+        "sitemap": {
+            "hostname": "http://doc.asqatasun.org/"
         }
     }
 }
