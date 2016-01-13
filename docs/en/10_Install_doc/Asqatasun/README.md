@@ -6,7 +6,7 @@ tested on 14.04 LTS (Trusty Tahr).
 
 ## Docker
 
-If you want to quickly test Asqatasun, you may use the [Asqatasun Docker Image](../Docker/), 
+If you want to quickly test Asqatasun, you may use the [Asqatasun Docker Image](../Docker/README.md), 
 or you can follow the following full instructions.
 
 ## Download Asqatasun tarball and extract content
