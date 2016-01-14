@@ -51,13 +51,13 @@ git push origin develop
 
 7) Update [Download.asqatasun.org](http://Download.asqatasun.org/) so that "latest" points to the last release.
 
-n) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/):
+8) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/):
 
 * Add a dedicated build for the Github tag (e.g. `4.0.0-rc.1`) with the same tag as Docker tag (`4.0.0-rc.1`)
 (while waiting to have a working regexp :) ).
 * Add another dedicated build for the Github tag (e.g. `4.0.0-rc.1`) with `latest` as Docker tag
 
-n) Write a message in the [forum](http://forum.asqatasun.org/)
+9) Write a message in the [forum](http://forum.asqatasun.org/)
 
 n) Send an email to close people to ask them if they want to play with the RC.
 
