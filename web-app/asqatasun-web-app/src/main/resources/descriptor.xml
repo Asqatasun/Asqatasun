@@ -171,6 +171,7 @@
             </includes>
             <excludes>
                 <exclude>nbproject/**/*</exclude>
+                <exclude>SUMMARY.md</exclude>		
             </excludes>
             <fileMode>644</fileMode>
             <outputDirectory>/docs</outputDirectory>
