@@ -165,7 +165,7 @@
         </fileSet>
         <!-- Docs -->
         <fileSet>
-            <directory>${basedir}/../../docs</directory>
+            <directory>${basedir}/../../docs/en</directory>
             <includes>
                 <include>**/*</include>
             </includes>
