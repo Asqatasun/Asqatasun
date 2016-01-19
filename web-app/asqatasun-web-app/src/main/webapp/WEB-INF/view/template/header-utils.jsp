@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 
 <c:set var="tgLogoUrl">
-    <c:url value="/Images/Logo-asqatasun.org-white-75dpi-w78px-h35px-bgTransp.png"/>  
+    <c:url value="/Images/Logo/Logo-Asqatasun-webapp-144x55-bgTransp.png"/>  
 </c:set>
 <c:set var="logoutLogoUrl">
     <c:url value="/Images/icon-logout.png"/>  

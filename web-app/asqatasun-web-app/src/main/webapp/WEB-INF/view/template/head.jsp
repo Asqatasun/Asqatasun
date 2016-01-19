@@ -16,9 +16,9 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />   
-    <link rel="icon" type="image/png" href="<c:url value="/Images/favicon-32x32.png"/>" /> 
-    <link rel="apple-touch-icon" type="image/png" href="<c:url value="/Images/favicon-144x144.png"/>" /> 
-    <link rel="icon" sizes="144x144" href="<c:url value="/Images/favicon-144x144.png"/>" /> 
+    <link rel="icon" type="image/png" href="<c:url value="/Images/Logo/favicon-32x32.png"/>" /> 
+    <link rel="apple-touch-icon" type="image/png" href="<c:url value="/Images/Logo/favicon-144x144.png"/>" /> 
+    <link rel="icon" sizes="144x144" href="<c:url value="/Images/Logo/favicon-144x144.png"/>" /> 
     
     <c:set var="modernizrJsUrl" scope="request">
         <c:url value="/External-Js/modernizr.min.js"/>

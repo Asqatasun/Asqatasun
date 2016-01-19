@@ -72,7 +72,7 @@
                     <div class="container">
                         <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
                             <img id="login-topbar-logo" 
-                                 src="<c:url value="/Images/Logo-asqatasun.org-white-75dpi-w78px-h35px-bgTransp.png"/> " 
+                                 src="<c:url value="/Images/Logo/Logo-Asqatasun-webapp-144x55-bgTransp.png"/> " 
                                  alt="<fmt:message key="sign-up.backToLogin"/>" />
                         </a>
                         <ul class="nav secondary-nav">
