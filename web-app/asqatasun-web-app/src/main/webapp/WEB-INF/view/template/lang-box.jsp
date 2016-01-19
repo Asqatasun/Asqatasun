@@ -5,9 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<c:set var="tgLogoUrl">
-    <c:url value="/Images/Logo-Asqatasun.org-75dpi-210x95-transp.png"/>  
-</c:set>
+
 
 <c:set var="properQueryString" scope="page" value="${fn:replace(pageContext.request.queryString, '&', '&amp;')}"/>
 <c:choose>
