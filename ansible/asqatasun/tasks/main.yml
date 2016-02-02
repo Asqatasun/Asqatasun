@@ -97,7 +97,7 @@
   mysql_user: 
     name: "{{ asqatasun_parameters.db_user }}"
     password: "{{ asqatasun_parameters.db_password }}"
-    host: localhost  
+    host: "{{ asqatasun_parameters.db_host }}"  
     priv: "{{ asqatasun_parameters.db_name }}.*:ALL"
     state: present
 
