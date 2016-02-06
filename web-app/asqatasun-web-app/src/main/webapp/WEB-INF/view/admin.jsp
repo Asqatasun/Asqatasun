@@ -136,7 +136,9 @@
                                 <th id="last-name" scope="col" class="col02"><fmt:message key="admin.lastName"/></th>
                                 <th id="first-name" scope="col" class="col03"><fmt:message key="admin.firstName"/></th>
                                 <th id="activated" scope="col" class="col04"><fmt:message key="admin.activated"/></th>
-                                <th id="activated" scope="col" class="col05"><fmt:message key="admin.administrator"/></th>                             
+                                <th id="administrator" scope="col" class="col05">
+				  <abbr title="<fmt:message key="admin.administrator"/>"><fmt:message key="admin.administratorAbbr"/></abbr>
+                                </th>                             
                                 <th id="edit" scope="col" class="col06"><fmt:message key="admin.edit"/></th>
                                 <th id="delete-user" scope="col" class="col07"><fmt:message key="admin.delete"/></th>
                                 <th id="edit-contract" scope="col" class="col08"><fmt:message key="admin.manage"/></th>
@@ -165,7 +167,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td headers="activated" class="col05">
+                                <td headers="administrator" class="col05">
                                     <c:choose>
                                         <c:when test="${user.roleAdmin}">
                                             <fmt:message key="admin.yes"/>
@@ -175,12 +177,12 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td headers="edit" class="col05">
+                                <td headers="edit" class="col06">
                                     <a href="<c:url value="/admin/edit-user.html?user=${user.id}"/>" title="<fmt:message key="admin.editUser"/> ${user.email1}">
                                         <img src="${editUser}" alt="<fmt:message key="admin.editUser"/> ${user.email1}"/>
                                     </a>
                                 </td>
-                                <td headers="delete-user" class="col06">
+                                <td headers="delete-user" class="col07">
                                     <c:choose>
                                         <c:when test="${user.id ne authenticatedUserId}">
                                     <a href="<c:url value="/admin/delete-user.html?user=${user.id}"/>" title="<fmt:message key="admin.deleteUser"/> ${user.email1}">
@@ -192,12 +194,12 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
-                                <td headers="edit-contract" class="col07">
+                                <td headers="edit-contract" class="col08">
                                     <a href="<c:url value="/admin/manage-contracts.html?user=${user.id}"/>" title="<fmt:message key="admin.manageContractsTitle"><fmt:param>${user.email1}</fmt:param></fmt:message>">
                                         <img src="${editContract}" alt="<fmt:message key="admin.manageContractsTitle"><fmt:param>${user.email1}</fmt:param></fmt:message>"/>
                                     </a>
                                 </td>
-                                <td headers="delete-audits" class="col08">
+                                <td headers="delete-audits" class="col09">
                                     <a class="button" href="<c:url value="/admin/delete-user-audits.html?user=${user.id}"/>" title="<fmt:message key="admin.deleteAuditsTitle"><fmt:param>${user.email1}</fmt:param></fmt:message>">
                                         <img src="${deleteAudits}" alt="<fmt:message key="admin.deleteAuditsTitle"><fmt:param>${user.email1}</fmt:param></fmt:message>"/>
                                     </a>
