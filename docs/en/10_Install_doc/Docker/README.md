@@ -9,7 +9,7 @@
 
 ```sh
 docker pull asqatasun/asqatasun  
-docker run --name asqatasun -p 8080:8080  asqatasun/asqatasun  
+docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun  
 ```
 
 ## 2. Use your local Asqatasun
