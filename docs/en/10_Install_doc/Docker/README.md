@@ -21,7 +21,7 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
 
 ## Developer, you wanna play harder? Come on!
 
-Have a look at the Documentation in Contributor Doc > Docker_build
+Have a look at the Documentation in [Contributor Doc > Docker_build](../../30_Contributor_doc/Docker_build.md)
 
 ## Useful links
 
