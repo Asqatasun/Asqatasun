@@ -103,11 +103,11 @@
         <fileSet>
             <directory>${basedir}/../../docker/single-container</directory>
             <includes>
-                <include>pre-requisite.sh</include>
+                <include>pre-requisites.sh</include>
                 <include>xvfb</include>
             </includes>
             <fileMode>755</fileMode>
-            <outputDirectory>.</outputDirectory>
+            <outputDirectory>/install</outputDirectory>
         </fileSet>
         <!-- Install web-app conf -->
         <fileSet>
