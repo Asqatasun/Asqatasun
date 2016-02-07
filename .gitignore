@@ -3,12 +3,10 @@
 target
 hsql-db*
 
-
-
-
-/testing-tools/tgol-test-krash-online-site/nbactions.xml
-/seo/nb-configuration.xml
-
+# Netbeans
+nbproject
+nb-configuration.xml
+nbactions.xml
 
 # Eclipse
 .project
@@ -18,23 +16,21 @@ org.eclipse.core.resources.prefs
 org.eclipse.jdt.core.prefs
 org.eclipse.m2e.core.prefs
 
-# Netbeans
-nbproject
-nb-configuration.xml
-nbactions.xml
-
-# Crowdin (translation tool) configuration file (contains personal data
-crowdin.yaml
 
 # saved files
 *~
 
-# Merge temp file
+# Git - Merge temp file
 *.orig
-
-# Mkdocs
-/docs/Site
 
 # Gitbook
 _book/
 node_modules/
+
+
+# Crowdin (translation tool) configuration file (contains personal data
+crowdin.yaml
+
+# Mkdocs
+/docs/Site
+
