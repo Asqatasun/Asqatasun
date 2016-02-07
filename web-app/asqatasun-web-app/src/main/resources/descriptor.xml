@@ -165,7 +165,7 @@
         </fileSet>
         <!-- Docs -->
         <fileSet>
-            <directory>${basedir}/../../docs/en</directory>
+            <directory>${basedir}/../../documentation/en</directory>
             <includes>
                 <include>**/*</include>
             </includes>
@@ -174,7 +174,7 @@
                 <exclude>SUMMARY.md</exclude>		
             </excludes>
             <fileMode>644</fileMode>
-            <outputDirectory>/docs</outputDirectory>
+            <outputDirectory>/documentation</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>

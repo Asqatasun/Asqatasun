@@ -32,7 +32,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 ## Installation and documentation
 
 How to install Asqatasun, how to run the Docker images, what hardware to provision.
-All answers are in the [Asqatasun Doc](http://doc.asqatasun.org/) (or in the `docs/`
+All answers are in the [Asqatasun Doc](http://doc.asqatasun.org/) (or in the `documentation/`
 directory if you cloned the repos or downloaded the .tar.gz).
 
 ## Universe: accessibility "a11y"
