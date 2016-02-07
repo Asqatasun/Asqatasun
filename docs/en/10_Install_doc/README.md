@@ -2,8 +2,8 @@
 
 ## Asqatasun (whole application)
 
-* Try Asqatasun with Docker (for testing purpose only as all data will be lost)
-* Install Asqatasun on a server
+* [Try Asqatasun with Docker](Docker/README.md) (for testing purpose only as all data will be lost)
+* [Install Asqatasun on a server](Asqatasun/README.md)
 
 ## Asqatasun-Runner
 
