@@ -89,16 +89,24 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql</outputDirectory>
         </fileSet>
-        <!-- Install files -->
+        <!-- Install file -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
             <includes>
                 <include>install.sh</include>
-                <include>uninstall.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>.</outputDirectory>
         </fileSet>
+        <!-- Uninstall file -->
+        <fileSet>
+            <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
+            <includes>
+                <include>uninstall.sh</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/install</outputDirectory>
+        </fileSet>	
         <!-- Docker -->
         <fileSet>
             <directory>${basedir}/../../docker/single-container</directory>
