@@ -834,8 +834,8 @@
                         <artifactId>jericho-html</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>com.lowagie</groupId>
-                        <artifactId>itext</artifactId>
+                        <groupId>com.itextpdf</groupId>
+                        <artifactId>itextpdf</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>junit</groupId>
@@ -1081,8 +1081,8 @@
                         <artifactId>commons-lang</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>com.lowagie</groupId>
-                        <artifactId>itext</artifactId>
+                        <groupId>com.itextpdf</groupId>
+                        <artifactId>itextpdf</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -1137,8 +1137,8 @@
                         <artifactId>bctsp-jdk14</artifactId>
                     </exclusion>
                     <exclusion>
-                        <groupId>com.lowagie</groupId>
-                        <artifactId>itext</artifactId>
+                        <groupId>com.itextpdf</groupId>
+                        <artifactId>itextpdf</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>poi</groupId>
@@ -1168,9 +1168,9 @@
                 <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>com.lowagie</groupId>
-                <artifactId>itext</artifactId>
-                <version>4.2.1</version>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>itextpdf</artifactId>
+                <version>5.5.8</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
