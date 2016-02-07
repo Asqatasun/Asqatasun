@@ -34,3 +34,8 @@ crowdin.yaml
 # Mkdocs
 /docs/Site
 
+# git shortlog -s -n
+#  	file for map author and committer names and email addresses
+#  	to canonical real names and email addresses
+.mailmap
+
