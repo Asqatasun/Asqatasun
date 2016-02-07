@@ -224,5 +224,9 @@ public interface User extends Entity {
      * @param optionElementSet 
      */
     void addAllOptionElement(Collection<OptionElement> optionElementSet);
-    
+   /**
+    * 
+    * @return  if the current is administrator or not
+    */
+    boolean isRoleAdmin();
 }
