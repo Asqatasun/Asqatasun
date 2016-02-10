@@ -1,0 +1,274 @@
+[main]
+host = https://www.transifex.com
+type = UNICODEPROPERTIES
+
+[asqatasun.access-denied-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/access-denied-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/access-denied-page-I18N.properties
+source_lang = en
+
+[asqatasun.account-settings-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/account-settings-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/account-settings-page-I18N.properties
+source_lang = en
+
+[asqatasun.adapting-error-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/adapting-error-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/adapting-error-page-I18N.properties
+source_lang = en
+
+[asqatasun.add-contract]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/add-contract-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/add-contract-I18N.properties
+source_lang = en
+
+[asqatasun.add-user]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/add-user-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/add-user-I18N.properties
+source_lang = en
+
+[asqatasun.admin]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/admin-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/admin-I18N.properties
+source_lang = en
+
+[asqatasun.audit-in-progress-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/audit-in-progress-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/audit-in-progress-page-I18N.properties
+source_lang = en
+
+[asqatasun.audit-set-up]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/audit-set-up-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/audit-set-up-I18N.properties
+source_lang = en
+
+[asqatasun.change-password-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/change-password-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/change-password-page-I18N.properties
+source_lang = en
+
+[asqatasun.contract-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/contract-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/contract-page-I18N.properties
+source_lang = en
+
+[asqatasun.delete-audits]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/delete-audits-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/delete-audits-I18N.properties
+source_lang = en
+
+[asqatasun.delete-contract]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/delete-contract-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/delete-contract-I18N.properties
+source_lang = en
+
+[asqatasun.delete-user]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/delete-user-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/delete-user-I18N.properties
+source_lang = en
+
+[asqatasun.edit-contract]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/edit-contract-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/edit-contract-I18N.properties
+source_lang = en
+
+[asqatasun.edit-user]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/edit-user-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/edit-user-I18N.properties
+source_lang = en
+
+[asqatasun.email-content]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/email-content-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/email-content-I18N.properties
+source_lang = en
+
+[asqatasun.export-audit-format-error-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/export-audit-format-error-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/export-audit-format-error-page-I18N.properties
+source_lang = en
+
+[asqatasun.export-report]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/export-report-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/export-report-I18N.properties
+source_lang = en
+
+[asqatasun.failed-test-list]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/failed-test-list-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/failed-test-list-I18N.properties
+source_lang = en
+
+[asqatasun.footer]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/footer-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/footer-I18N.properties
+source_lang = en
+
+[asqatasun.forgotten-password-confirmation-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/forgotten-password-confirmation-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/forgotten-password-confirmation-page-I18N.properties
+source_lang = en
+
+[asqatasun.forgotten-password-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/forgotten-password-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/forgotten-password-page-I18N.properties
+source_lang = en
+
+[asqatasun.graph]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/graph-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/graph-I18N.properties
+source_lang = en
+
+[asqatasun.greedy-audit]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/greedy-audit-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/greedy-audit-I18N.properties
+source_lang = en
+
+[asqatasun.home-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/home-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/home-page-I18N.properties
+source_lang = en
+
+[asqatasun.loading-error-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/loading-error-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/loading-error-page-I18N.properties
+source_lang = en
+
+[asqatasun.login-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/login-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/login-page-I18N.properties
+source_lang = en
+
+[asqatasun.manage-contracts]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/manage-contracts-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/manage-contracts-I18N.properties
+source_lang = en
+
+[asqatasun.max-file-size-error-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/max-file-size-error-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/max-file-size-error-page-I18N.properties
+source_lang = en
+
+[asqatasun.no-demo-available]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/no-demo-available-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/no-demo-available-I18N.properties
+source_lang = en
+
+[asqatasun.oups-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/oups-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/oups-page-I18N.properties
+source_lang = en
+
+[asqatasun.page-list-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/page-list-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/page-list-page-I18N.properties
+source_lang = en
+
+[asqatasun.parameters]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/parameters-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/parameters-I18N.properties
+source_lang = en
+
+[asqatasun.quota-by-ip-exceeded-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/quota-by-ip-exceeded-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/quota-by-ip-exceeded-page-I18N.properties
+source_lang = en
+
+[asqatasun.quota-exceeded-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/quota-exceeded-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/quota-exceeded-page-I18N.properties
+source_lang = en
+
+[asqatasun.report]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/report-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/report-I18N.properties
+source_lang = en
+
+[asqatasun.result-page-evidence-element]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/result-page-evidence-element-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/result-page-evidence-element-I18N.properties
+source_lang = en
+
+[asqatasun.result-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/result-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/result-page-I18N.properties
+source_lang = en
+
+[asqatasun.rule-result]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/rule-result-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/rule-result-I18N.properties
+source_lang = en
+
+[asqatasun.scenario-management]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/scenario-management-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/scenario-management-I18N.properties
+source_lang = en
+
+[asqatasun.sign-up-confirmation-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/sign-up-confirmation-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/sign-up-confirmation-page-I18N.properties
+source_lang = en
+
+[asqatasun.sign-up-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/sign-up-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/sign-up-page-I18N.properties
+source_lang = en
+
+[asqatasun.sort-contract-console]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/sort-contract-console-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/sort-contract-console-I18N.properties
+source_lang = en
+
+[asqatasun.source-code-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/source-code-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/source-code-page-I18N.properties
+source_lang = en
+
+[asqatasun.synthesis-site-page]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/synthesis-site-page-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/synthesis-site-page-I18N.properties
+source_lang = en
+
+[asqatasun.test-weight]
+file_filter = web-app/asqatasun-web-app/src/main/resources/i18n/test-weight-I18N_<lang>.properties
+source_file = web-app/asqatasun-web-app/src/main/resources/i18n/test-weight-I18N.properties
+source_lang = en
+
+[asqatasun.criterion-rgaa30]
+file_filter = rules/rules-rgaa3.0/src/main/resources/i18n/criterion-rgaa30-I18N_<lang>.properties
+source_file = rules/rules-rgaa3.0/src/main/resources/i18n/criterion-rgaa30-I18N.properties
+source_lang = en
+
+[asqatasun.referential-rgaa30]
+file_filter = rules/rules-rgaa3.0/src/main/resources/i18n/referential-rgaa30-I18N_<lang>.properties
+source_file = rules/rules-rgaa3.0/src/main/resources/i18n/referential-rgaa30-I18N.properties
+source_lang = en
+
+[asqatasun.rule-remark-rgaa30]
+file_filter = rules/rules-rgaa3.0/src/main/resources/i18n/rule-remark-rgaa30-I18N_<lang>.properties
+source_file = rules/rules-rgaa3.0/src/main/resources/i18n/rule-remark-rgaa30-I18N.properties
+source_lang = en
+
+[asqatasun.rule-rgaa30]
+file_filter = rules/rules-rgaa3.0/src/main/resources/i18n/rule-rgaa30-I18N_<lang>.properties
+source_file = rules/rules-rgaa3.0/src/main/resources/i18n/rule-rgaa30-I18N.properties
+source_lang = en
+
+[asqatasun.theme-rgaa30]
+file_filter = rules/rules-rgaa3.0/src/main/resources/i18n/theme-rgaa30-I18N_<lang>.properties
+source_file = rules/rules-rgaa3.0/src/main/resources/i18n/theme-rgaa30-I18N.properties
+source_lang = en
+
+[asqatasun.referential-seo]
+file_filter = rules/rules-seo1.0/src/main/resources/i18n/referential-seo-I18N_<lang>.properties
+source_file = rules/rules-seo1.0/src/main/resources/i18n/referential-seo-I18N.properties
+source_lang = en
+
+[asqatasun.rule-seo]
+file_filter = rules/rules-seo1.0/src/main/resources/i18n/rule-seo-I18N_<lang>.properties
+source_file = rules/rules-seo1.0/src/main/resources/i18n/rule-seo-I18N.properties
+source_lang = en
+
+[asqatasun.theme-seo]
+file_filter = rules/rules-seo1.0/src/main/resources/i18n/theme-seo-I18N_<lang>.properties
+source_file = rules/rules-seo1.0/src/main/resources/i18n/theme-seo-I18N.properties
+source_lang = en
+
