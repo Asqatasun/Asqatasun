@@ -16,6 +16,17 @@ org.eclipse.core.resources.prefs
 org.eclipse.jdt.core.prefs
 org.eclipse.m2e.core.prefs
 
+# Netbeans
+nbproject
+nb-configuration.xml
+nbactions.xml
+
+# Intellij
+.idea
+*.iml
+
+# Crowdin (translation tool) configuration file (contains personal data
+crowdin.yaml
 
 # saved files
 *~
