@@ -228,13 +228,13 @@ public class Rgaa30Rule100102Test extends Rgaa30RuleImplementationTestCase {
                 "PresentationAttrFound",
                 "hr",
                 1,
-                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "height"));
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "width"));
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
                 "PresentationAttrFound",
                 "hr",
-                1,
+                2,
                 new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "height"));
     }
 
