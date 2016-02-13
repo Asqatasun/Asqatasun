@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 
 <c:set var="tgLogoUrl">
-    <c:url value="/Images/Logo/Logo-Asqatasun-webapp-144x55-bgTransp.png"/>  
+    <c:url value="/Images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>  
 </c:set>
 <c:set var="tgLogo1Url">
     <c:url value="/Images/machine.png"/>  

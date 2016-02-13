@@ -273,6 +273,10 @@ element.style {
     margin-left: -5px;
     padding: 0 0 0 0 ;
 }
+.topbar h3 a, .topbar .brand img{
+	margin-top : 4px;
+width: 174px;
+}
 input, textarea, select {
     color : #404040;
     width : 100%;
@@ -810,6 +814,8 @@ footer a {
 }
 #login-topbar-logo {
     padding-top: 0;
+    margin-top: 4px;
+    width:176px;
 }
 .inline-password{
     display : inline-block;
