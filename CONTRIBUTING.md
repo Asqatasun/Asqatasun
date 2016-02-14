@@ -7,7 +7,7 @@ We would be really glad to have you on board !
 You can help in many ways:
 
 * [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
-* [Help translate Asqatasun]() @@@TODO Transifex URL
+* [Help translate Asqatasun](https://www.transifex.com/asqatasun/asqatasun/)
 * Pull Requests are off course welcome
 * [Create your own tests]() @@@TODO link to doc
 
@@ -55,7 +55,7 @@ It should be named something like `asqatasun-X.Y.Z-<flavor>.i386.tar.gz`
 
 6) Install it directly (see [Install doc](http://doc.asqatasun.org/en/10_Install_doc/Asqatasun/index.html))
 or [build your own Docker Image](http://doc.asqatasun.org/en/30_Contributor_doc/Docker_build.html). 
-Tip: all documentation is also the repos (you just cloned) and also in the `.tar.gz`, in the `docs/` directory.
+Tip: all documentation is also the repos (you just cloned) and also in the `.tar.gz`, in the `documentation/` directory.
 
 *Note:* if you want to contribute and provide Pull Requests, you should first 
 fork the repos to your own Github account, then clone your own Asqatasun. (See 

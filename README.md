@@ -63,13 +63,13 @@ As of October 2015, this represents 173 accessibility tests.
 We would be really glad to have you on board ! You can help in many ways:
 
 * [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
-* [Help translate Asqatasun]() @@@TODO Transifex URL
+* [Help translate Asqatasun](https://www.transifex.com/asqatasun/asqatasun/) 
 * Pull Requests are off course welcome
 * [Create your own tests]() @@@TODO link to doc
 
 Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
 
-## Content of this last version (Asqatasun 4.0.0, 2015-01-xx)
+## Content of this last version (Asqatasun 4.0.0, 2015-02-xx)
 
 Features :
 - devops : Ansible role + Vagrantfile
