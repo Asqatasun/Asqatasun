@@ -114,6 +114,17 @@ find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e $ANSIBLE_PER
 echo 'bumped context with version' $TO_VERSION
 
 #########################################
+# Update  contributors.txt 
+#########################################
+echo "Commits    Contributors"                               > contributors.txt 
+echo "--------------------------"                           >> contributors.txt 
+git shortlog -s -n                                          >> contributors.txt 
+echo ''                                                     >> contributors.txt 
+echo ''                                                     >> contributors.txt 
+echo "---- Release $TO_VERSION ----------------------"      >> contributors.txt 
+echo ''                                                     >> contributors.txt 
+
+#########################################
 # Automatic Commit with generated message
 #########################################
 if [ "$COMMIT" = true ] ; then
@@ -124,6 +135,7 @@ if [ "$COMMIT" = true ] ; then
     git add **/install.sh 
     git add **/asqatasun.conf
     git add ansible/asqatasun/defaults/main.yml
+    git add contributors.txt 
     git commit -m "$COMMIT_MESSAGE"
     echo 'committed all files with message : ' $COMMIT_MESSAGE
 fi
