@@ -36,7 +36,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 ## Installation and documentation
 
 How to install Asqatasun, how to run the Docker images, what hardware to provision.
-All answers are in the [Asqatasun Doc](http://doc.asqatasun.org/) (or in the `documentation/`
+All answers are in the [Asqatasun Doc](http://doc.asqatasun.org/en/) (or in the `documentation/`
 directory if you cloned the repos or downloaded the .tar.gz).
 
 ## Universe: accessibility "a11y"
@@ -68,8 +68,8 @@ We would be really glad to have you on board ! You can help in many ways:
 
 * [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
 * [Help translate Asqatasun](https://www.transifex.com/asqatasun/asqatasun/) 
-* Pull Requests are off course welcome
-* [Create your own tests]() @@@TODO link to doc
+* [Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls) are off course welcome
+* [Create your own tests](#) @@@TODO link to doc
 
 Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
 
@@ -86,3 +86,11 @@ See full [Changelog](CHANGELOG.txt)
 
 Have Fun
 [Asqatasun Team](asqatasun-team.md)
+
+
+## License
+
+ [AGPL v3](LICENSE) 
+
+ 
+@@@TODO Build Status - travis-ci.org
