@@ -1,7 +1,6 @@
 # Asqatasun
 
-![](documentation/en/Images/Logo/logo-texte-girafe--RVB-678x300--kranken.io-lossy.jpg)
-
+![](http://forum.asqatasun.org/uploads/default/original/1X/e16a2b9b7f5a4dc756f03630923290c695c762c9.png)
 
 
 Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) and Search Engine Optimization (SEO).
