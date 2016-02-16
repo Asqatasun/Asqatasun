@@ -2,9 +2,9 @@
 
 ## Asqatasun (whole application)
 
-* [Try Asqatasun with Docker](Docker/README.md) (for testing purpose only as all data will be lost)
-* [Ansible role + Vagrantfile](https://github.com/Asqatasun/Asqatasun/tree/master/ansible)
 * [Install Asqatasun on a server](Asqatasun/README.md)
+* [Ansible role + Vagrantfile](https://github.com/Asqatasun/Asqatasun/tree/master/ansible)
+* [Try Asqatasun with Docker](Docker/README.md) (for testing purpose only as all data will be lost)
 
 ## Asqatasun-Runner
 
