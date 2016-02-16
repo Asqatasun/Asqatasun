@@ -19,7 +19,7 @@ a very good and detailed Ansible Introduction
 
 This Ansible role will install the` Asqatasun Opensource Accessibility` on Ubuntu 12.04/14.04 LTS.
 
-- You may want to read about the [pre-requisites of Asqatasun on Ubuntu](../documentation/en/10_Install_doc/prerequisites.md)
+- You may want to read about the [pre-requisites of Asqatasun on Ubuntu](../documentation/en/10_Install_doc/Asqatasun/pre-requisites.md)
 - You may also read the [official installation procedure](../documentation/en/10_Install_doc/README.md).
 
 Also provided the `Vagrantfile` with the role, just run this command:
