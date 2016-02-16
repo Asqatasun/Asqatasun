@@ -24,20 +24,38 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 2. Be 200% reliable (don't give erroneous result)
 3. have technological fun
 
-## Download
 
-* http://download.asqatasun.org/asqatasun-latest.tar.gz
-* [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/) (but do read the associated doc or your data will be lost !)
+---
+
 
 ## Demo
 
 @@@TODO
 
+
 ## Installation and documentation
 
-How to install Asqatasun, how to run the Docker images, what hardware to provision.
+* How to install Asqatasun ?
+* How to run the Docker images ?
+* what hardware to provision ?
+* ...
+
 All answers are in the [Asqatasun Doc](http://doc.asqatasun.org/en/) (or in the `documentation/`
 directory if you cloned the repos or downloaded the .tar.gz).
+
+
+## Download
+
+* http://download.asqatasun.org/asqatasun-latest.tar.gz
+* [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/) (but do read the [associated doc][link_doc_docker] or your data will be lost !)
+
+[link_doc_docker]: http://doc.asqatasun.org/en/10_Install_doc/Docker/index.html  "Use Asqatasun with a single container Docker"
+
+@@@TODO Ansible role + Vagrantfile
+
+
+---
+
 
 ## Universe: accessibility "a11y"
 
@@ -50,11 +68,15 @@ What tests are covered:
 * switch of context
 * ...
 
-As of October 2015, this represents 173 accessibility tests.
+As of February 2016, this represents 173 accessibility tests.
 
 ## Universe: Search Engine Optimisation "SEO"
 
 @@@TODO
+
+
+---
+
 
 ## Contact and discussions
 
@@ -73,6 +95,16 @@ We would be really glad to have you on board ! You can help in many ways:
 
 Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
 
+
+
+
+---
+
+## License
+
+ [AGPL v3](LICENSE) 
+
+
 ## Content of this last version (Asqatasun 4.0.0, 2015-02-xx)
 
 Features :
@@ -88,9 +120,7 @@ Have Fun
 [Asqatasun Team](asqatasun-team.md)
 
 
-## License
-
- [AGPL v3](LICENSE) 
-
  
 @@@TODO Build Status - travis-ci.org
+
+
