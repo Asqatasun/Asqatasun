@@ -70,7 +70,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     protected static final String ASSERT_TEXT_PRESENT_FAILED = "assertTextPresent failed";
     protected static final String ASSERT_TEXT_ABSENT_FAILED = "assertTextAbsence failed";
     protected static final String BUNDLE_NAME = "test";
-    protected static final String NEW_USER_EMAIL = "newUser@open-s.com";
+    protected static final String NEW_USER_EMAIL = "newUser@asqatasun.org";
     protected static final String NEW_USER_NAME = "UserName";
     protected static final String NEW_USER_FIRST_NAME = "UserFirstName";
     protected static final String NEW_USER_PASSWORD = "AabB1234";

@@ -85,7 +85,7 @@ public class ActDAOImplTest extends AbstractDaoTestCase {
 //        WebResource webresource = act.getWebResource();
 //        assertNotNull(webresource);
 //        assertEquals(Long.valueOf(1), webresource.getId());
-//        assertEquals("http://www.open-s.com/", webresource.getURL());
+//        assertEquals("http://www.asqatasun.org/", webresource.getURL());
 //        assertEquals(Float.valueOf(50), webresource.getMark());
 //        Contract contract = contractFactory.create();
 //        contract.setLabel("Contract-test");
