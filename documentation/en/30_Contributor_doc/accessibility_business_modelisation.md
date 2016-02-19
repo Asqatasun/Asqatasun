@@ -1,2 +1,0 @@
-# Accessibility business modelisation
-
