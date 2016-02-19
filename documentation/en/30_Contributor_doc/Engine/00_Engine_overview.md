@@ -1,5 +1,6 @@
 # Asqatasun Developer documentation
 
+
 Main componants of the Asqatasun Engine (logical view)
 
 1. Crawler
@@ -9,3 +10,4 @@ Main componants of the Asqatasun Engine (logical view)
 1. Analyser
 
 ![Asqatasun Engine overview](asqatasun_engine_overview.png)
+[Asqatasun Engine overview (png, 51 Kb)](asqatasun_engine_overview.png)

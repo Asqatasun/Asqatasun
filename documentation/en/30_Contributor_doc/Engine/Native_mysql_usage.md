@@ -1,3 +1,5 @@
+# Native Mysql usage
+
 For performance reasons, some native mysql queries are used in Asqatasun.
 
 These queries are present in 3 classes (found by searching the "createNativeQuery" occurence in the source code) :

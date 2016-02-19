@@ -4,4 +4,5 @@ Download the [*System of information* Data Model in Mysql WorkBench format (17kb
 
 *System of information* Data model for releases 3.x and further:
 
-![Data Modem](SI_data_model.png)
+![Data Model](Asqatasun_System_of_information_Data_model.png)
+[Data Model (png, 330 Kb)](Asqatasun_System_of_information_Data_model.png)
