@@ -59,7 +59,7 @@ and *To* field (*Monument*)
 This verification is important. Asqatasun just replays the scenario, he can't check
 whether or not the scenario is actually what you wanted (!).
 
-Please refer to [Asqatasun scenario advanced usage](userdoc-scenario-audit-advanced.md)
+Please refer to [Asqatasun scenario advanced usage](userdoc-05-scenario-audit-advanced.md)
 if the scenario does not replay the way you'd like.
 
 ## 4. Upload the scenario to Asqatasun
@@ -95,7 +95,7 @@ by clicking on the number of pages link
 
 ![](Images/screenshot_20150309_ASQATASUN_SCENARIO_step_J_audit_summary.png)
 
-(If the number of pages is not the expected one, please check [Asqatasun scenario advanced usage](userdoc-scenario-audit-advanced.md))
+(If the number of pages is not the expected one, please check [Asqatasun scenario advanced usage](userdoc-05-scenario-audit-advanced.md))
 
 ![](Images/screenshot_20150309_ASQATASUN_SCENARIO_step_K_list_of_pages.png)
 

@@ -2,12 +2,12 @@
 
 Asqatasun offers 4 kinds of audit. Choose the suitable kind depending on your need.
 
-## Typical usages for Page audit
+## Typical usages for [Page audit](userdoc-03-page-audit.md)
 
 * *the* typical audit you run on a page to have insights about its level of accessibility
-(be it a quick view, or an in-depth study with [Assisted Audit](userdoc-assisted-audit.md))
+(be it a quick view, or an in-depth study with [Assisted Audit](userdoc-06-assisted-audit.md))
 
-## Typical usages for Scenario audit
+## Typical usages for [Scenario audit](userdoc-04-scenario-audit.md)
 
 * automatically measure a form that is split in several pages 
 * assess the page given by a search result

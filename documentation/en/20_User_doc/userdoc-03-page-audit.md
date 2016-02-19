@@ -52,7 +52,7 @@ For a given referential, select a level (priority), for instance A, AA or AAA.
 ### HTML markers
 
 HTML Markers are used to increase automation. Please see the [dedicated page for 
-HTML markers ](userdoc-HTML-markers.md)
+HTML markers](userdoc-07-HTML-markers.md)
 
 ### Colour contrast
 

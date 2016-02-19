@@ -7,7 +7,7 @@ the user clicks a links or submits a form button).
 
 You may trigger additional audits by adding the Selenium command `storeCurrentUrl`.
 
-Let's enhance the [*Transport for London* example](userdoc-scenario-audit.md).
+Let's enhance the [*Transport for London* example](userdoc-04-scenario-audit.md).
 Say once we have the list of possible paths, we want to evaluate the accessibility
 of the page, *showing the details of a path*.
 

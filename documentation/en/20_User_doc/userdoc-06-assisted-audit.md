@@ -12,7 +12,7 @@ Assisted audit offers auditors the ability to fulfill an audit.
 ## 1. Run a page audit
 
 Let say we work on the [BBC website](http://www.bbc.com/). Launch an 
-[accessibility audit of the page](userdoc-page-audit.md).
+[accessibility audit of the page](userdoc-03-page-audit.md).
 
 ## 2. Begin the Assisted audit
 
@@ -67,7 +67,7 @@ After importing the Passed results, you can see the number of Not Tested
 ![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_E_Results_Passed_added.png)
 
 You can also note the apparition of the score (see [Asqatasun Accessibility metric](userdoc-accessibility-metrics.md)
-for the detail of the formula).
+for the detail of the formula). @@@TODO fix URL
 
 ## 4. Add human results
 
