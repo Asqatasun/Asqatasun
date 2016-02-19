@@ -32,6 +32,7 @@ page and send it as offline file to Asqatasun
 
  Audit:                             | Page          | Scenario      | Site          | Offline file
 ----------------------------------- | ------------- | --------------| ------------- | -------------
-DOM / Generated HTML support        | YES           | YES           |               |
-Treat also CSS                      | YES           | YES           |               |
+DOM / Generated HTML support        | YES           | YES           | No            | No
+Deals with CSS                      | YES           | YES           | No            | No
+Deals with colors                   | YES           | YES           | No            | No
 Comply with [robots.txt](http://www.robotstxt.org) |               |               | YES           | 
