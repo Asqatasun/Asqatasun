@@ -12,6 +12,7 @@
         * [Heritrix configuration](30_Contributor_doc/Engine/Heritrix_configuration.md)
         * [Native Mysql usage](30_Contributor_doc/Engine/Native_mysql_usage.md)
         * [Engine Data model](30_Contributor_doc/Engine/Engine_data_model.md)
+    * [System of Information](30_Contributor_doc/System_of_information/SI_data_model.md)
     * [Docker build](30_Contributor_doc/Docker_build.md)
     * [Release](30_Contributor_doc/Release.md)
 * [Rules doc](90_Rules/README.md)
