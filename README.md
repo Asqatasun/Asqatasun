@@ -1,6 +1,6 @@
 # Asqatasun
 
-![](http://forum.asqatasun.org/uploads/default/original/1X/e16a2b9b7f5a4dc756f03630923290c695c762c9.png)
+![Asqatasun Logo](http://forum.asqatasun.org/uploads/default/original/1X/e16a2b9b7f5a4dc756f03630923290c695c762c9.png)
 
 
 Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) and Search Engine Optimization (SEO).
@@ -23,6 +23,8 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 2. Be 200% reliable (don't give erroneous result)
 3. have technological fun
 
+![5 types of accessibility results](/documentation/en/20_User_doc/Images/screenshot_20150307_ASQATASUN_5_types_of_result.png)
+
 
 ---
 
@@ -30,6 +32,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 ## Demo
 
 @@@TODO
+
 
 
 ## Installation and documentation
