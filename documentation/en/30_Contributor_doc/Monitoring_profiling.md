@@ -1,10 +1,10 @@
 # Monitoring and profiling
 
-This page describes how to profile tanaguru web application with Netbeans Profiler or monitor it with Java VisualVM.
+This page describes how to profile Asqatasun web application with Netbeans Profiler or monitor it with Java VisualVM.
 
 ## Netbeans Profiler
 
-To profile Tanaguru web application with the embedded netbeans profiler, install the profile plugin if not installed, go to the profile section in the menu and select "Attach Profiler".
+To profile Asqatasun web application with the embedded netbeans profiler, install the profile plugin if not installed, go to the profile section in the menu and select "Attach Profiler".
 
 A popup named "Attach Profiler" is displayed to configure the profiler.
 

@@ -1,7 +1,7 @@
 # Heritrix configuration
 
 The Crawler Component of Asqatasun is based on Heritrix. Considering the specific 
-needs of tanaguru in terms of contents filtering and performance considerations, 
+needs of Asqatasun in terms of contents filtering and performance considerations, 
 the default spring configuration file provided by heritrix to define crawl 
 properties has to be adapted. The changes are described below, chain by chain.
 
@@ -17,7 +17,7 @@ please refer to https://webarchive.jira.com/wiki/display/Heritrix/Crawl+Scope).
 
 #### Page Crawl
 
-The Decision Rule Sequence adapted to tanaguru's page crawl needs is defined as follows :
+The Decision Rule Sequence adapted to asqatasun's page crawl needs is defined as follows :
 
 * `RejectDecideRule` with default settings
 * `TooManyHopsDecideRule` with "maxHops" property set to 0 (to limit the crawl of the specified url)
@@ -50,7 +50,7 @@ to include all CSS contents despite their domain:
 
 #### Site Crawl
 
-The Decision Rule Sequence adapted to tanaguru's page crawl needs is defined as follows
+The Decision Rule Sequence adapted to asqatasun's page crawl needs is defined as follows
 
 * `RejectDecideRule` with default settings
 * `SurtPrefixedDecideRule` with "seedsAsSurtPrefixes" property set to true
@@ -92,7 +92,7 @@ ExtractorHtml, ExtractorCss) in case of page crawl and 6 components
  in case of site crawl.
 
 The preselector, extractorJs and extractorSwf components have been removed because 
-they are not adapted to tanaguru's crawl needs. (for more informations about the
+they are not adapted to asqatasun's crawl needs. (for more informations about the
  processors, please refer to https://webarchive.jira.com/wiki/display/Heritrix/Processor+Settings
 
 ### PreconditionEnforcer (in case of Site Crawl)
@@ -143,7 +143,7 @@ The disposation chain is composed of 3 components : The writerProcessor, the can
 ### The WriterProcessor
 
 The original "WarcWriterProcessor" has been replaced by the "TanaguruWriterProcessor".
-This module is specific and corresponds to tanaguru's crawl needs. It converts the 
+This module is specific and corresponds to asqatasun's crawl needs. It converts the 
 results of successful fetches (raw data) to tanaguru-like Web-resources and Contents.
 
 Two properties are needed to define this processor
@@ -202,7 +202,7 @@ This module enables to stop the crawl when some configured limits are reached.
 Three properties can be set :
 
 * `maxBytesDownload` that limits the number of downloaded bytes
-* `maxDocumentsDownload` that limits the number of fetched resources. This property has been set to 10000 in the version1.0.0 of tanaguru.
+* `maxDocumentsDownload` that limits the number of fetched resources. This property has been set to 10000 in the version1.0.0 of Asqatasun.
 * `maxTimeSeconds` that limits the duration of a crawl.
 
 
