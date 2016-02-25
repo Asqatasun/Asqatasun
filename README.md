@@ -107,7 +107,7 @@ Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
  [AGPL v3](LICENSE) 
 
 
-## Content of this last version (Asqatasun 4.0.0, 2015-02-xx)
+## Content of this last version (Asqatasun 4.0.0, 2016-02-xx)
 
 Features :
 - devops : Ansible role + Vagrantfile
@@ -120,9 +120,3 @@ See full [Changelog](CHANGELOG.txt)
 
 Have Fun
 [Asqatasun Team](asqatasun-team.md)
-
-
- 
-@@@TODO Build Status - travis-ci.org
-
-
