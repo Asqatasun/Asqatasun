@@ -24,6 +24,8 @@
     * [Monitoring and profiling](30_Contributor_doc/Monitoring_profiling.md)
     * [Docker build](30_Contributor_doc/Docker_build.md)
     * [Release](30_Contributor_doc/Release.md)
+* [Administrator doc](50_Administrator_doc/README.md)
+    * [Asqatasun.conf](50_Administrator_doc/asqatasun.conf.md)
 * [Rules doc](90_Rules/README.md)
     * [RGAA 3.0](90_Rules/rgaa3.0/README-rgaa3.0.md)
         * [Images](90_Rules/rgaa3.0/01.Images/README.md)
