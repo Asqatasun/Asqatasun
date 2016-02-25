@@ -13,7 +13,7 @@ The Candidate chain is composed of 2 components : the scoper and the preparer
 
 The scoper's work is to define, through a decision rule sequence, the set of 
 possible URIs that can be captured (for more informations about the rules, 
-please refer to https://webarchive.jira.com/wiki/display/Heritrix/Crawl+Scope).
+please refer to https://webarchive.jira.com/wiki/display/Heritrix/Configuring+Crawl+Scope+Using+DecideRules).
 
 #### Page Crawl
 
