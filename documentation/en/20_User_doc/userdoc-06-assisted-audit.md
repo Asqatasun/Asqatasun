@@ -66,7 +66,7 @@ After importing the Passed results, you can see the number of Not Tested
 
 ![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_E_Results_Passed_added.png)
 
-You can also note the apparition of the score (see [Asqatasun Accessibility metric](userdoc-accessibility-metrics.md)
+You can also note the apparition of the score (see [Asqatasun Accessibility metric](userdoc-08-score-asqatasun-meter)
 for the detail of the formula). @@@TODO fix URL
 
 ## 4. Add human results

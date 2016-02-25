@@ -1,4 +1,4 @@
-# Prerequisites for Asqatasun Command Line Interface installation
+# Prerequisites for Asqatasun-Runner 
 
 ## Open JDK
 
