@@ -18,6 +18,7 @@
     * [HTML markers](20_User_doc/userdoc-07-HTML-markers.md)
     * [Asqatasun meter](20_User_doc/userdoc-08-score-asqatasun-meter.md)
 * [Contributor doc](30_Contributor_doc/README.md)
+    * [README FIRST contribute to Asqatasun](30_Contributor_doc/Contribute_to_Asqatasun)
     * [Engine overview](30_Contributor_doc/Engine/00_Engine_overview.md)
         * [Crawler component](30_Contributor_doc/Engine/component-crawler.md)
         * [Heritrix configuration](30_Contributor_doc/Engine/Heritrix_configuration.md)
