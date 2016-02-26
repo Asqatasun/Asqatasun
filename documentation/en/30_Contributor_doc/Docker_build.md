@@ -9,13 +9,14 @@ By "locally", we mean we won't download Asqatasun as we will build it.
 
 ```shell
 git clone https://github.com/Asqatasun/Asqatasun.git
-git checkout develop    # Please always work on develop, see CONTRIBUTING.md
 ```
 
 ### 2. Compile Asqatasun
 
 ```shell
-cd Asqatasun ; mvn clean install
+cd Asqatasun
+git checkout develop    # Please always work on develop, see CONTRIBUTING.md
+mvn clean install
 ```
 (Internet connection needed the very first time to download Maven dependencies).
 
@@ -57,6 +58,20 @@ cd docker/single-container
 docker build -t asqatasun/asqatasun:SNAPSHOT .
 ```
 
+Verify the image is actually built
+
+```shell
+docker images
+```
+
+You should see something like this:
+
+```
+REPOSITORY                   TAG                 IMAGE ID            CREATED             SIZE
+asqatasun/asqatasun          SNAPSHOT            84a5bf7bb437        2 minutes ago       833.1 MB
+```
+
+
 ### 7. Remove old containers
 
 In case you had older containers, just wipe them (so backup before if you want to keep your data)
@@ -81,7 +96,7 @@ Dec 14, 2015 5:05:59 PM org.apache.catalina.startup.Catalina start
 INFO: Server startup in 27268 ms
 ```
 
-You can now browse http://localhost:8080/asqataun/ and login with the following credentials:
+You can now browse http://localhost:8080/asqatasun/ and login with the following credentials:
 
 * login: `me@my-email.org`
 * password: `myAsqaPassword`
