@@ -3,8 +3,9 @@
 ## Asqatasun (whole application)
 
 * [Install Asqatasun on a server](Asqatasun/README.md)
-* [Ansible role + Vagrantfile](https://github.com/Asqatasun/Asqatasun/tree/master/ansible)
 * [Try Asqatasun with Docker](Docker/README.md) (for testing purpose only as all data will be lost)
+* Ansible roles are available in the `/ansible` directory of the 
+[lastest version of Asqatasun, .tar.gz, 75Mb](http://download.asqatasun.org/asqatasun-latest.tar.gz).
 
 ## Asqatasun-Runner
 

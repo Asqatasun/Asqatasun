@@ -15,7 +15,7 @@ or you can follow the following full instructions.
 
 ## Ansible
 
-Ansible roles are available in the `ansible` directory of the [lastest version of Asqatasun](http://download.asqatasun.org/asqatasun-latest.tar.gz).
+Ansible roles are available in the `/ansible` directory of the [lastest version of Asqatasun](http://download.asqatasun.org/asqatasun-latest.tar.gz).
 
 ## Download Asqatasun tarball and extract content
 
