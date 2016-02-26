@@ -28,11 +28,11 @@ webserver), and wants to have an **early statement of accessibility**
 page and send it as offline file to Asqatasun
 
 
-## Comparison of audits
+<h2 id="audit-comparison">Comparison of audits</h2>
 
  Audit:                             | Page          | Scenario      | Site          | Offline file
 ----------------------------------- | ------------- | --------------| ------------- | -------------
 DOM / Generated HTML support        | YES           | YES           | No            | No
 Deals with CSS                      | YES           | YES           | No            | No
 Deals with colors                   | YES           | YES           | No            | No
-Comply with [robots.txt](http://www.robotstxt.org) |               |               | YES           | 
+Comply with [robots.txt](http://www.robotstxt.org) | *Not Applicable* | *Not Applicable* | YES           | *Not Applicable*
