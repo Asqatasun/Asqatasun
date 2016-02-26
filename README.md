@@ -11,7 +11,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
     * run fully automated tests to track SEO issues
     * scan zillions of pages
     * create your own tests
-* **web accessibility assessment** (RGAA 3, AccessiWeb, WCAG)
+* **web accessibility assessment** `#a11y` (RGAA 3, AccessiWeb, WCAG)
     * scan a whole site for a11y issues (crawler included)
     * scan a given page, and manually fulfill the audit to produce report
     * scan offline file (e.g. template being created but not online yet)
@@ -25,39 +25,34 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 
 ![5 types of accessibility results](/documentation/en/20_User_doc/Images/screenshot_20150307_ASQATASUN_5_types_of_result.png)
 
-
 ---
-
 
 ## Demo
 
 @@@TODO
 
-
-
 ## Installation and documentation
 
-* How to install Asqatasun ?
-* How to run the Docker images ?
-* what hardware to provision ?
-* ...
-
+How to install Asqatasun ? How to run the Docker images ? What hardware to provision ?
 All answers are in the [Asqatasun Doc](http://doc.asqatasun.org/en/) (or in the `documentation/`
 directory if you cloned the repos or downloaded the .tar.gz).
 
+Takeaway:
+
+* [Asqatasun doc in PDF, 9Mb](https://www.gitbook.com/download/pdf/book/asqatasun/asqatasun?lang=en)
+* [Asqatasun doc in EPUB, 3Mb](https://www.gitbook.com/download/epub/book/asqatasun/asqatasun?lang=en)
 
 ## Download
 
-* http://download.asqatasun.org/asqatasun-latest.tar.gz
-* [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/) (but do read the [associated doc][link_doc_docker] or your data will be lost !)
+* [lastest version of Asqatasun, .tar.gz, 75Mb](http://download.asqatasun.org/asqatasun-latest.tar.gz)
 
-[link_doc_docker]: http://doc.asqatasun.org/en/10_Install_doc/Docker/index.html  "Use Asqatasun with a single container Docker"
+And also: 
 
-@@@TODO Ansible role + Vagrantfile
-
+* [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/)
+(but do read the [associated doc](http://doc.asqatasun.org/en/10_Install_doc/Docker/index.html) or your data will be lost !)
+* **Ansible** roles are available in the `/ansible` directory of the `.tar.gz`.
 
 ---
-
 
 ## Universe: accessibility "a11y"
 
@@ -76,9 +71,7 @@ As of February 2016, this represents 173 accessibility tests.
 
 @@@TODO
 
-
 ---
-
 
 ## Contact and discussions
 
@@ -97,26 +90,21 @@ We would be really glad to have you on board ! You can help in many ways:
 
 Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
 
-
-
-
 ---
 
 ## License
 
  [AGPL v3](LICENSE) 
 
-
 ## Content of this last version (Asqatasun 4.0.0, 2016-02-xx)
 
-Features :
-- devops : Ansible role + Vagrantfile
-- devops : Docker images (+ Docker automated builds)
+Features:
+- Devops: Ansible role + Vagrantfile
+- Devops: Docker images (+ Docker automated builds)
 - Implementation of SEO rules
 - Fork from Tanaguru
 
 See full [Changelog](CHANGELOG.txt)
-
 
 Have Fun
 [Asqatasun Team](asqatasun-team.md)
