@@ -4,10 +4,18 @@ This page describes the steps to follow to install Asqatasun since Version 3.0.0
 (and further) from the binary files or from the sources. The software has been 
 tested on Linux Ubuntu 14.04 LTS (Trusty Tahr).
 
+## Hardware provisioning
+
+* [Hardware provisioning](Hardware_provisioning.md)
+
 ## Docker
 
 If you want to quickly test Asqatasun, you may use the [Asqatasun Docker Image](../Docker/README.md), 
 or you can follow the following full instructions.
+
+## Ansible
+
+Ansible roles are available in the `ansible` directory of the [lastest version of Asqatasun](http://download.asqatasun.org/asqatasun-latest.tar.gz).
 
 ## Download Asqatasun tarball and extract content
 

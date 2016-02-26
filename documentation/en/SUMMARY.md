@@ -3,6 +3,7 @@
 * [Installation](10_Install_doc/README.md)
     * [Docker](10_Install_doc/Docker/README.md)
     * [Asqatasun](10_Install_doc/Asqatasun/README.md)
+        * [Hardware provisioning](10_Install_doc/Asqatasun/Hardware_provisioning.md)
         * [Asqatasun Pre-requisites](10_Install_doc/Asqatasun/pre-requisites.md)
     * [Asqatasun-Runner](10_Install_doc/Asqatasun-runner/README.md)
         * [Prerequisites](10_Install_doc/Asqatasun-runner/prerequisites-cli-doc.md)
