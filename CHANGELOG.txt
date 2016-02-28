@@ -1,5 +1,26 @@
 
 --------------------------------
+Asqatasun 4.0.0, 2016-02-28
+--------------------------------
+
+Features:
+
+- devops:
+    - Docker images (+ Docker automated builds)
+    - Ansible role + Vagrantfile
+- Implementation of SEO rules
+- RGAA 3 translated in English
+- Documentation: huge refactor 
+- New translation system on Transifex https://www.transifex.com/asqatasun/asqatasun/
+- New logo integrated in the app
+- Fork from Tanaguru
+
+Bugs:
+- [#43](https://github.com/Asqatasun/Asqatasun/issues/43): Mysql config: add UTF-8 
+to support any type of charset including cyrillic + enhance way to modify Mysql conf
+- [#58](https://github.com/Asqatasun/Asqatasun/issues/58): PDF - clicking on it returns to an error page
+
+--------------------------------
 Asqatasun 4.0.0-rc.1, 2016-01-12
 --------------------------------
 
