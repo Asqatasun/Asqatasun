@@ -50,7 +50,7 @@ And also:
 
 * [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/)
 (but do read the [associated doc](http://doc.asqatasun.org/en/10_Install_doc/Docker/index.html) or your data will be lost !)
-* **Ansible** roles are available in the `/ansible` directory of the `.tar.gz`.
+* **Ansible** roles are available in the `/Ansible` directory of the `.tar.gz`.
 
 ---
 
@@ -69,7 +69,22 @@ As of February 2016, this represents 173 accessibility tests.
 
 ## Universe: Search Engine Optimisation "SEO"
 
-@@@TODO
+What tests are covered:
+
+* at the scope of the entire site (i.e. site-wide):
+    * non-uniqueness (duplicate) of `<h1>`
+    * non-uniqueness (duplicate) of `<title>`
+    * non-uniqueness (duplicate) of `<meta description>`
+    * duplicate pages
+    * presence of robots.txt / sitemap.xml
+* at the scope of the page:
+    * non-relevancy of content of `<h1>`
+    * non-relevancy of content of `<title>`
+    * non-relevancy of content of `<meta description>`
+    * non-relevancy of content of link-text `<a href="">...</a>`
+    * non-relevancy of `<h1>`...`<h6>` structure
+    * rewrite-rule presence 
+    * ...
 
 ---
 
@@ -79,16 +94,19 @@ As of February 2016, this represents 173 accessibility tests.
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 * email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 
-## Contribute
+## We want you! (aka Contribute)
 
-We would be really glad to have you on board ! You can help in many ways:
+We would be really glad to have you on board! You can help in many ways:
 
-* [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
-* [Help translate Asqatasun](https://www.transifex.com/asqatasun/asqatasun/) 
-* [Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls) are off course welcome
-* [Create your own tests](#) @@@TODO link to doc
+1. Use Asqatasun on your sites !
+1. [Help translate Asqatasun](https://www.transifex.com/asqatasun/asqatasun/) 
+1. Give us [feedback on the forum](http://forum.asqatasun.org) or [fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
+1. Help us in improving the SEO rules: come, code or [discuss](http://forum.asqatasun.org)!
 
+[Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls) are always welcome! 
 Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
+
+Create your own tests.
 
 ---
 
@@ -96,13 +114,24 @@ Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
 
  [AGPL v3](LICENSE) 
 
-## Content of this last version (Asqatasun 4.0.0, 2016-02-xx)
+## Content of this last version (Asqatasun 4.0.0, 2016-02-28)
 
 Features:
-- Devops: Ansible role + Vagrantfile
-- Devops: Docker images (+ Docker automated builds)
+
+- devops:
+    - Docker images (+ Docker automated builds)
+    - Ansible role + Vagrantfile
 - Implementation of SEO rules
+- RGAA 3 translated in English
+- Documentation: huge refactor 
+- New translation system on Transifex https://www.transifex.com/asqatasun/asqatasun/
+- New logo integrated in the app
 - Fork from Tanaguru
+
+Bugs:
+- [#43](https://github.com/Asqatasun/Asqatasun/issues/43): Mysql config: add UTF-8 
+to support any type of charset including cyrillic + enhance way to modify Mysql conf
+- [#58](https://github.com/Asqatasun/Asqatasun/issues/58): PDF - clicking on it returns to an error page
 
 See full [Changelog](CHANGELOG.txt)
 
