@@ -9,7 +9,7 @@ The process is compound of two main parts:
 
 ## Prepare Release Candidate
 
-1) Prepare CHANGELOG.txt:
+### 1) Prepare CHANGELOG.txt:
 
 * add an entry for this RC
 * add differences between this release and previous one:
@@ -17,56 +17,60 @@ The process is compound of two main parts:
     * review [closed Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls?q=is%3Apr+is%3Aclosed)
     * review [last commits](https://github.com/Asqatasun/Asqatasun/commits/develop)
 
-2) Update README.md (THE readme from top directory):
+### 2) Update README.md (THE readme from top directory):
 
 * copy/paste changelog in section "Content of this last version"
 
-3) Upgrade version strings in code with `engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh`:
+### 3) Upgrade version strings in code with `bump_asqatasun.sh`:
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
 ```
 
-4) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
+### 4) Build local Docker image with locally build Asqatasun
 
-5) For develop branch, switch back release strings to "-SNAPSHOT"
+...and check release is the good one + run some manual tests
+
+### 5) For develop branch, switch back release strings to "-SNAPSHOT"
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
 git checkout develop
 git rebase master
-./bump_asqatasun.sh --from-version X.Y.Z-rc.1 --to-version X.Y.Z-SNAPSHOT
-find . -name "pom.xml" | xargs git add -u
-find . -name "Dockerfile" | xargs git add -u
+./bump_asqatasun.sh --from-version X.Y.Z-rc.1 --to-version X.Y.Z-SNAPSHOT --source-dir /tmp/Asqatasun
+find . -name "pom.xml" | xargs git add -u :/
+find . -name "Dockerfile" | xargs git add -u :/
 git add **/install.sh 
 git add **/asqatasun.conf
 git add ansible/asqatasun/defaults/main.yml
-git commit -m "Switch release to 4.0.0-SNAPSHOT"
+git commit -m "Switch release to X.Y.Z-SNAPSHOT"
 git push origin develop
 ```
 
-6) In Github:
+### 6) In Github:
 
 * Define this tag as "Pre-Release" (as it is a Release Candidate)
 * Copy/paste Changelog to Github Pre-Release comment field
 * Upload the `.tar.gz` file
 
-7) Update [Download.asqatasun.org](http://Download.asqatasun.org/) so that "latest" points to the last release.
+### 7) Update [Download.asqatasun.org](http://Download.asqatasun.org/)
 
-8) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/):
+...so that "latest" points to the last release.
+
+### 8) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/):
 
 * Add a dedicated build for the Github tag (e.g. `4.0.0-rc.1`) with the same tag as Docker tag (`4.0.0-rc.1`)
 (while waiting to have a working regexp :) ).
 * Add another dedicated build for the Github tag (e.g. `4.0.0-rc.1`) with `latest` as Docker tag
 
-9) Write a message in the [forum](http://forum.asqatasun.org/)
+### 9) Write a message in the [forum](http://forum.asqatasun.org/)
 
-n) Send an email to close people to ask them if they want to play with the RC.
+### 10) Send an email to close people to ask them if they want to play with the RC.
 
-n) Run the functional tests
+### 11) Run the functional tests
 
-n) Prepare communication
+### 12) Prepare communication
 
 * Tweet
 * Facebook message
@@ -74,7 +78,7 @@ n) Prepare communication
 * LinuxFR
 * TooLinux
 
-n) If no blocker is found, proceed to next step, else iterate and increment RC number.
+### 13) If no blocker is found, proceed to next step, else iterate and increment RC number.
 
 ## Prepare actual release
 
@@ -108,13 +112,13 @@ cd engine/asqatasun-resources/src/main/resources/release/
 cd /tmp/Asqatasun   # Directory used to clone Github repos
 git checkout develop
 git rebase master
-./bump_asqatasun.sh --from-version X.Y.Z --to-version X.Y.Z+1-SNAPSHOT
+./bump_asqatasun.sh --from-version X.Y.Z --to-version X.Y.Z+1-SNAPSHOT --source-dir /tmp/Asqatasun
 find . -name "pom.xml" | xargs git add -u
 find . -name "Dockerfile" | xargs git add -u
 git add **/install.sh 
 git add **/asqatasun.conf
 git add ansible/asqatasun/defaults/main.yml
-git commit -m "Switch release to 4.0.0-SNAPSHOT"
+git commit -m "Switch release to X.Y.Z+1-SNAPSHOT"
 git push origin develop
 ```
 
