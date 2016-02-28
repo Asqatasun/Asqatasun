@@ -12,7 +12,10 @@ The process is compound of two main parts:
 1) Prepare CHANGELOG.txt:
 
 * add an entry for this RC
-* add differences between this release and previous one
+* add differences between this release and previous one:
+    * review [closed issues](https://github.com/Asqatasun/Asqatasun/issues?q=is%3Aissue+is%3Aclosed)
+    * review [closed Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls?q=is%3Apr+is%3Aclosed)
+    * review [last commits](https://github.com/Asqatasun/Asqatasun/commits/develop)
 
 2) Update README.md (THE readme from top directory):
 
@@ -77,10 +80,13 @@ n) If no blocker is found, proceed to next step, else iterate and increment RC n
 
 n) Prepare CHANGELOG.txt:
 
-* add an entry for this release
-* in a cumulative way, add all the data of previous betas and RCs 
+* Add an entry for this release
+* In a cumulative way, add all the data of previous betas and RCs 
 (reader should have all details between from previous stable release and this one, 
-without having to dig into the previous betas and RCs)
+without having to dig into the previous betas and RCs). For this:
+    * review [closed issues](https://github.com/Asqatasun/Asqatasun/issues?q=is%3Aissue+is%3Aclosed)
+    * review [closed Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls?q=is%3Apr+is%3Aclosed)
+    * review [last commits](https://github.com/Asqatasun/Asqatasun/commits/develop)
 
 n) Update README.md (THE readme from top directory):
 
