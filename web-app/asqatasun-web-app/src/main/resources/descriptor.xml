@@ -107,7 +107,7 @@
             <fileMode>755</fileMode>
             <outputDirectory>/install</outputDirectory>
         </fileSet>	
-        <!-- Docker -->
+        <!-- Files from Docker section -->
         <fileSet>
             <directory>${basedir}/../../docker/single-container</directory>
             <includes>
@@ -183,6 +183,15 @@
             </excludes>
             <fileMode>644</fileMode>
             <outputDirectory>/documentation</outputDirectory>
+        </fileSet>
+        <!-- Ansible -->
+        <fileSet>
+            <directory>${basedir}/../../ansible</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <fileMode>755</fileMode>
+            <outputDirectory>/Ansible</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
