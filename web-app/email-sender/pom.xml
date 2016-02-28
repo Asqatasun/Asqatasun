@@ -6,7 +6,7 @@
     <groupId>org.asqatasun</groupId>
     <artifactId>email-sender</artifactId>
     <name>email-sender</name>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
