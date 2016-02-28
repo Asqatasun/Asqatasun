@@ -78,7 +78,7 @@ n) If no blocker is found, proceed to next step, else iterate and increment RC n
 
 ## Prepare actual release
 
-n) Prepare CHANGELOG.txt:
+### 1) Prepare CHANGELOG.txt:
 
 * Add an entry for this release
 * In a cumulative way, add all the data of previous betas and RCs 
@@ -88,19 +88,21 @@ without having to dig into the previous betas and RCs). For this:
     * review [closed Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls?q=is%3Apr+is%3Aclosed)
     * review [last commits](https://github.com/Asqatasun/Asqatasun/commits/develop)
 
-n) Update README.md (THE readme from top directory):
+### 2) Update README.md (THE readme from top directory):
 
 * copy/paste changelog in section "Content of this last version"
 
-n) Upgrade version strings in code with `engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh`:
+### 3) Upgrade version strings in code with `bump_asqatasun.sh`
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag --push
 ```
-n) Build local Docker image with locally build Asqatasun, and check release is the good one + run some manual tests
+### 4) Build local Docker image with locally build Asqatasun
 
-n) For `develop` branch, switch back release strings to "-SNAPSHOT"
+...and check release is the good one + run some manual tests
+
+### 5) For `develop` branch, switch back release strings to "-SNAPSHOT"
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
@@ -116,22 +118,26 @@ git commit -m "Switch release to 4.0.0-SNAPSHOT"
 git push origin develop
 ```
 
-n) In Github:
+### 6) In Github:
 
 * Copy/paste Changelog to Github Release comment field
 * Upload the `.tar.gz` file
 
-7) Update [Download.asqatasun.org](http://Download.asqatasun.org/) so that "latest" points to the last release.
+### 7) Update [Download.asqatasun.org](http://Download.asqatasun.org/)
 
-n) In Github, define this tag as "Release" (as this one is the actual Release)
+...so that "latest" points to the last release.
 
-n) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/):
+### 8) In Github, define this tag as "Release"
+
+(as this one is the actual Release and not a pre-release)
+
+### 9) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/)
 
 * Add a dedicated build for the Github tag with the same tag as Docker tag 
 (while waiting to have a working regexp :) ).
 * Add another dedicated build for the Github tag with `latest` as Docker tag
 
-n) Launch prepared announces:
+### 10) Launch prepared announces:
 
 * [forum](http://forum.asqatasun.org/)
 * Tweet
@@ -140,7 +146,7 @@ n) Launch prepared announces:
 * LinuxFR
 * TooLinux
 
-n) Celebrate and [have a beer](http://www.aufutetamesure.fr/) !
+### 11) Celebrate and [have a beer](http://www.aufutetamesure.fr/) !
 
 ## Versioning
 
