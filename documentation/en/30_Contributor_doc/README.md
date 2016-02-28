@@ -6,7 +6,7 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 
 ## Getting started
 
-* [README FIRST contribute to Asqatasun](Contribute_to_Asqatasun)
+* [README FIRST contribute to Asqatasun](Contribute_to_Asqatasun.md)
 
 ## Engine & System of Information I overview
 
