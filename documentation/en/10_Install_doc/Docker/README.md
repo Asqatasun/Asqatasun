@@ -20,8 +20,8 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
     - `myAsqaPassword`
 
 ## Developer, you wanna play harder? Come on!
+Have a look at the Documentation in [Contributor Doc > Docker_build](http://doc.asqatasun.org/en/30_Contributor_doc/Docker_build.html)
 
-Have a look at the Documentation in [Contributor Doc > Docker_build](../../30_Contributor_doc/Docker_build.md)
 
 ## Useful links
 
