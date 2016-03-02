@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>4.0.0</version>
+        <version>4.1.0-SNAPSHOT</version>
     </parent>
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun-statistics</artifactId>
     <name>statistics</name>
-    <version>4.0.0</version>
+    <version>4.1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>

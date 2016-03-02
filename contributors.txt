@@ -2,7 +2,7 @@ Commits    Contributors
 --------------------------
   2557	Jérôme Kowalczyk
    554	Jerome Kowalczyk
-   300	Matthieu FAURE
+   301	Matthieu FAURE
    182	Fabrice Gangler
    176	jkowalczyk
     72	Matthieu Faure
@@ -39,5 +39,5 @@ Commits    Contributors
      1	halna
 
 
----- Release 4.0.0 ----------------------
+---- Release 4.1.0-SNAPSHOT ----------------------
 
