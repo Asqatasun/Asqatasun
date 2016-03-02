@@ -114,10 +114,9 @@ Create your own tests.
 
  [AGPL v3](LICENSE) 
 
-## Content of this last version (Asqatasun 4.0.0, 2016-02-28)
+## Content of this last version (Asqatasun 4.0.0, 2016-03-02)
 
 Features:
-
 - devops:
     - Docker images (+ Docker automated builds)
     - Ansible role + Vagrantfile
