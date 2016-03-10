@@ -27,4 +27,4 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 
 ## Our release process
 
-* [Release](Release.md)
+* [Release](Release/README.md)
