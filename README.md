@@ -44,7 +44,7 @@ Takeaway:
 
 ## Download
 
-* [lastest version of Asqatasun, .tar.gz, 75Mb](http://download.asqatasun.org/asqatasun-latest.tar.gz)
+* [lastest version of Asqatasun, .tar.gz, 79Mb](http://download.asqatasun.org/asqatasun-latest.tar.gz)
 
 And also: 
 
@@ -114,7 +114,7 @@ Create your own tests.
 
  [AGPL v3](LICENSE) 
 
-## Content of this last version (Asqatasun 4.0.0, 2016-03-02)
+## Content of this last version (Asqatasun 4.0.1, 2016-03-xx)
 
 Features:
 - devops:
