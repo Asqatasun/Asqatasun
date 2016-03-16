@@ -396,7 +396,7 @@ install_webapp() {
 
 edit_esapi_configuration_file() {
     dirty_webapp=true
-    cd "$PKG_DIR/"/install/web-app/token-master-key-encryptor/ \
+    cd "$PKG_DIR/install/web-app/token-master-key-encryptor/" \
             || fail "Unable to go to the generate-encryptor-keys directory"
     ./generate-encryptor-keys.sh  > generated_keys.txt \
             || fail "Unable to execute generate-encryptor-keys script"
