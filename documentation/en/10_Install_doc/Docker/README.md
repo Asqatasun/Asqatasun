@@ -24,7 +24,13 @@ Have a look at the Documentation in [Contributor Doc > Docker_build](http://doc.
 
 
 ## Useful links
-
-* [Asqatasun on Github](https://github.com/Asqatasun/Asqatasun)
 * [Asqatasun Documentation](http://doc.asqatasun.org)
 * [Asqatasun Forum](http://forum.asqatasun.org/)
+* [Asqatasun on Twitter](https://twitter.com/Asqatasun)
+* [Asqatasun on Github](https://github.com/Asqatasun/Asqatasun)
+
+
+### Docker documentation
+* [Get Started with Docker for Windows](https://docs.docker.com/windows/)
+* [Get Started with Docker for Mac OS X](https://docs.docker.com/mac/)
+* [Get Started with Docker for Linux](https://docs.docker.com/linux/)
