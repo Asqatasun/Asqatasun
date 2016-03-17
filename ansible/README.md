@@ -17,7 +17,7 @@ a very good and detailed Ansible Introduction
 
 ## Ansible and Asqatasun
 
-This Ansible role will install the` Asqatasun Opensource Accessibility` on Ubuntu 12.04/14.04 LTS.
+This Ansible role will install Asqatasun on Ubuntu 12.04/14.04 LTS.
 
 - You may want to read about the [pre-requisites of Asqatasun on Ubuntu](../documentation/en/10_Install_doc/Asqatasun/pre-requisites.md)
 - You may also read the [official installation procedure](../documentation/en/10_Install_doc/README.md).
@@ -50,7 +50,7 @@ TASK: [asqatasun | Update the Ubuntu repos] ***********************************
 ok: [asqatasun]
 ```
 
-Once the installation will be finished, just enter the following URL to your browser 
+Once the installation is finished, just enter the following URL to your browser 
 to get the default Asqatasun page:
 
 ```
