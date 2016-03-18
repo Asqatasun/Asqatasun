@@ -114,7 +114,7 @@ Create your own tests.
 
  [AGPL v3](LICENSE) 
 
-## Content of this last version (Asqatasun 4.0.1, 2016-03-xx)
+## Content of this last version (Asqatasun 4.0.1, 2016-03-18)
 
 Features:
 - devops:
@@ -131,6 +131,8 @@ Bugs:
 - [#43](https://github.com/Asqatasun/Asqatasun/issues/43): Mysql config: add UTF-8 
 to support any type of charset including cyrillic + enhance way to modify Mysql conf
 - [#58](https://github.com/Asqatasun/Asqatasun/issues/58): PDF - clicking on it returns to an error page
+- [#85](https://github.com/Asqatasun/Asqatasun/issues/85): Audit full-site : accept the new gTLDs (eg .jobs, .paris)
+
 
 See full [Changelog](CHANGELOG.txt)
 

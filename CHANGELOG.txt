@@ -1,17 +1,13 @@
 
 --------------------------------
-Asqatasun 4.0.1, 2016-03-xx
+Asqatasun 4.0.1, 2016-03-18
 --------------------------------
 
 Security:
-- [#83](https://github.com/Asqatasun/Asqatasun/issues/83) : Upgrade Apache Commons Collections to v3.2.2
+- [#83](https://github.com/Asqatasun/Asqatasun/issues/83): Upgrade Apache Commons Collections to v3.2.2
 
 Bugs:
-- [#85](https://github.com/Asqatasun/Asqatasun/issues/85) : Audit full-site : accept the new gTLDs (eg .jobs, .paris)
-
-
-
-
+- [#85](https://github.com/Asqatasun/Asqatasun/issues/85): Audit full-site : accept the new gTLDs (eg .jobs, .paris)
 
 --------------------------------
 Asqatasun 4.0.0, 2016-03-02
