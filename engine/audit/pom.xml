@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>4.0.1</version>
     </parent>
     <artifactId>asqatasun-audit</artifactId>
     <name>audit</name>
