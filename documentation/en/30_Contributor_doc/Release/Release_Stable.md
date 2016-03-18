@@ -70,6 +70,10 @@ git push origin develop
 * LinuxFR
 * TooLinux
 
+## 11) Update W3C ERT list
+
+... on https://www.w3.org/WAI/ER/tools/index.html
+
 ## 11) Celebrate and [have a beer](http://www.aufutetamesure.fr/) !
 
 
