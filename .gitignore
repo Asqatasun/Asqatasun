@@ -34,6 +34,9 @@ crowdin.yaml
 # Git - Merge temp file
 *.orig
 
+# vagrant
+.vagrant/
+
 # Gitbook
 _book/
 node_modules/
