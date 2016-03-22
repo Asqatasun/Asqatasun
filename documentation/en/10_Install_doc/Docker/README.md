@@ -92,8 +92,8 @@ docker start asqatasun
 Consider we don't have Docker. The site we want to analyze is reachable via `http://localhost/`
 or `http://127.0.0.1` (or even `http://localhost:9000/my-app/`).
 
-Back to a few Docker basics. Docker's principle is to run *isolated* containers. That means
-the container (say you Asqatasun Docker image) is isolated even from your your physical host.
+Now back to a few Docker basics. Docker's principle is to run *isolated* containers. That means
+the container (your Asqatasun Docker image) is isolated even from your physical host.
 Thus if you ask Asqatasun to analyze 127.0.0.1, it will try to analyze the webserver of the
 Asqatasun Docker image, not your host's one.
 
