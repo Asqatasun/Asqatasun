@@ -25,7 +25,7 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
 
 ### Linux users
 
-* In your browser, go to http://localhost:8080/asqatasun/ 
+* In your browser, go to `http://localhost:8080/asqatasun/` 
 * Use this user and this password :
     * `me@my-email.org`
     * `myAsqaPassword`
@@ -33,10 +33,12 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
 ### MacOSX and Windows users
 
 * Get the IP address with command `docker-machine ip default`
-* In your browser, go to http://<the_IP_address>:8080/asqatasun/ 
+* In your browser, go to `http://<the_IP_address>:8080/asqatasun/` 
 * Use this user and this password :
     * `me@my-email.org`
     * `myAsqaPassword`
+    
+    
 
 <h2 id="docker-tips-tricks">Tips and tricks on using Docker containers</h2>
 
@@ -87,19 +89,4 @@ docker run asqatasun
 ## Developer, you wanna play harder? Come on!
 
 Have a look at the Documentation in [Contributor Doc > Docker_build](http://doc.asqatasun.org/en/30_Contributor_doc/Docker_build.html)
-
-## More links
-
-* More doc on [how to use this Docker image](http://doc.asqatasun.org/en/10_Install_doc/Docker/index.html#docker-tips-tricks)
-   * how to restart a container
-   * how to have your container automatically launched at boot
-   * ...
-* The whole [Documentation of Asqatasun](http://doc.asqatasun.org)
-* Get in touch at the [Asqatasun Forum](http://forum.asqatasun.org/)
-
-And also
-
-* [Asqatasun on Twitter](https://twitter.com/Asqatasun)
-* [Asqatasun on Github](https://github.com/Asqatasun/Asqatasun)
-
 
