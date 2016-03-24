@@ -16,7 +16,7 @@
 
 ```sh
 docker pull asqatasun/asqatasun  
-docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ifconfig docker0| awk '/inet addr/{print substr($2,6)}'` asqatasun/asqatasun
+docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1'` asqatasun/asqatasun
 ```
 
 **AND** wait ~30 seconds before going to the next step (to allow the container to start).
