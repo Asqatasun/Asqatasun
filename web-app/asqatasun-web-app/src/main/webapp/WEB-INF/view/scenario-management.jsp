@@ -8,6 +8,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+
+<!-- external js --> 
+<c:set var="jqueryUrl">
+    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+</c:set>        
+<c:set var="jqueryTableSorterUrl" scope="request">
+    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+</c:set> 
+
+<!-- internal js --> 
+<c:set var="accessibleTableSorterJsUrl" scope="page">
+    <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
+</c:set>
+
 <html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="scenarioManagement.pageTitle">
@@ -115,7 +129,7 @@
             <c:choose>
                 <c:when test="${not empty scenarioList}">
                 <div class="span16 tg-table-container">
-                    <table id="scenario-list-table" class="tg-table">
+                    <table id="scenario-list-table" class="tg-table sortable-table">
                         <caption><fmt:message key="auditSetUpScenario.scenarioList"/></caption>
                         <thead>
                             <tr>
@@ -180,6 +194,9 @@
             </div><!-- class="row"-->
         </div><!-- class="container"-->                    
     <%@include file="template/footer.jsp" %>
+        <script type="text/javascript" src="${jqueryUrl}"></script>
+        <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>
+        <script type="text/javascript" src="${accessibleTableSorterJsUrl}"></script>
     </body>
 </html>
 </compress:html>
