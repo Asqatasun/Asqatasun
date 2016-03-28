@@ -22,6 +22,11 @@
     <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
 </c:set>
 
+<!-- images --> 
+<c:set var="deleteScenario">
+    <c:url value="/Images/remove.png"/>  
+</c:set>
+
 <html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="scenarioManagement.pageTitle">
@@ -176,7 +181,7 @@
                                 </c:set>
                                 <td headers="delete" class="col06">
                                     <a href="<c:url value="/home/contract/delete-scenario.html?cr=${param.cr}&amp;sc=${scenario.id}"/>" title="${deleteLinkTitle}">
-                                        <fmt:message key="scenarioManagement.delete"/>
+                                        <img src="${deleteScenario}" alt="<fmt:message key="scenarioManagement.delete"/>" />
                                     </a>
                                 </td>
                             </tr>
