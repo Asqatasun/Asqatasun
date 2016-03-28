@@ -52,6 +52,15 @@
                     </h1>
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
+
+
+            <div class="row">
+                <div class="alert-message block-message info">
+                  <h2 id="typical-usages-for-scenario-audit"><fmt:message key="scenarioManagement.helpTitle"/></h2>
+                  <fmt:message key="scenarioManagement.helpText"/>
+                </div>                
+            </div><!-- class="row" -->
+
             <div class="row">
                 <c:if test="${newScenarioName != null}">
                 <div class="span15 alert-message block-message info">
