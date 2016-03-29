@@ -18,5 +18,8 @@
         "sitemap": {
             "hostname": "http://doc.asqatasun.org/"
         }
+    },
+    "styles": {
+        "pdf": "Styles/pdf.css"
     }
 }
