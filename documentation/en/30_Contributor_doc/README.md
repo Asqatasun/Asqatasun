@@ -8,7 +8,16 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 
 * [README FIRST contribute to Asqatasun](Contribute_to_Asqatasun.md)
 
-## Engine & System of Information I overview
+## Building
+
+* [Docker build](Build/Docker_build.md)
+
+## Debugging
+
+* [Debugging Asqatasun](Debug_Monitor_Profile/Debugging_Asqatasun.md)
+* [Monitoring and profiling](Debug_Monitor_Profile/Monitoring_profiling.md)
+
+## Engine & System of Information  overview
 
 * [Engine overview](Engine/00_Engine_overview.md)
     * [Crawler component](Engine/component-crawler.md)
@@ -16,14 +25,6 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
     * [Native Mysql usage](Engine/Native_mysql_usage.md)
     * [Engine Data model](Engine/Engine_data_model.md)
 * [System of Information](System_of_information/SI_data_model.md)
-
-## Debugging
-
-* [Monitoring and profiling](Monitoring_profiling.md)
-
-## Building
-
-* [Docker build](Docker_build.md)
 
 ## Our release process
 
