@@ -40,36 +40,6 @@
         <property name="enabled" value="false"/>-->
     </bean>
     
-    <!-- RGAA 2.2 select elements -->
-    <bean id="rgaa22ASelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="Rgaa22;LEVEL_1"/>
-        <property name="i18nKey" value="Rgaa22-LEVEL_1"/>
-        <property name="errorI18nKey" value="A-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-        <!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-    
-    <bean id="rgaa22AASelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="Rgaa22;LEVEL_2"/>
-        <property name="i18nKey" value="Rgaa22-LEVEL_2"/>
-        <property name="errorI18nKey" value="LEVEL_2-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-        <!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
-    
-    <bean id="rgaa22AAASelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="Rgaa22;LEVEL_3"/>
-        <property name="i18nKey" value="Rgaa22-LEVEL_3"/>
-        <property name="errorI18nKey" value="LEVEL_3-error"/>
-        <property name="defaultCode" value="DEFAULT_LEVEL"/>
-        <!--    Default values
-        <property name="default" value="false"/>
-        <property name="enabled" value="false"/>-->
-    </bean>
     
     <!-- RGAA 3.0 select elements -->
     <bean id="rgaa30ASelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
@@ -112,13 +82,6 @@
                         <ref local="aw22BronzeSelectElementBuilder"/>
                         <ref local="aw22SilverSelectElementBuilder"/>
                         <ref local="aw22GoldSelectElementBuilder"/>
-                    </list>
-                </entry>
-                <entry key="Rgaa22">
-                    <list>
-                        <ref local="rgaa22ASelectElementBuilder"/>
-                        <ref local="rgaa22AASelectElementBuilder"/>
-                        <ref local="rgaa22AAASelectElementBuilder"/>
                     </list>
                 </entry>
                 <entry key="Rgaa30">

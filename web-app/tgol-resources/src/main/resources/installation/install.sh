@@ -305,7 +305,6 @@ create_tables() {
     cd "$PKG_DIR/install/rules/sql"
     my_sql_insert 10-rules-resources-insert.sql
     my_sql_insert accessiweb2.2-insert.sql
-    my_sql_insert rgaa2.2-insert.sql
     my_sql_insert rgaa3.0-insert.sql
     my_sql_insert seo1.0-insert.sql
 }

@@ -86,7 +86,6 @@
         <property name="refAndLevelValueBundleList">
             <list>
                 <value>i18n/referential-aw22-I18N</value>
-                <value>i18n/referential-rgaa22-I18N</value>
             </list>
         </property>
         <property name="refBundleName" value="i18n/parameters-I18N"/>

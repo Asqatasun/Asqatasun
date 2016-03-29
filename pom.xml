@@ -176,13 +176,7 @@
                 <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
             </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-rules-rgaa2.2</artifactId>
-                <version>${asqatasunVersion}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
+             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-rgaa3.0</artifactId>
                 <version>${asqatasunVersion}</version>

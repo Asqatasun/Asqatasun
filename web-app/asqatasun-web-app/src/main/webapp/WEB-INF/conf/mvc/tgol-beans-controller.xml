@@ -110,7 +110,6 @@
         <property name="formFieldBuilderList">
             <list>
                 <ref bean="aw22ThemeSelectFormFieldBuilder"/>
-                <ref bean="rgaa22ThemeSelectFormFieldBuilder"/>
                 <ref bean="rgaa30ThemeSelectFormFieldBuilder"/>
                 <ref bean="testResultCheckboxFormFieldBuilder"/>
             </list>

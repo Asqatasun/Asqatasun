@@ -23,13 +23,6 @@
                 <value>classpath:i18n/rule-aw22-I18N</value>
                 <value>classpath:i18n/rule-remark-aw22-I18N</value>
                 
-                <!--rgaa2.2 i18n files -->
-                <value>classpath:i18n/referential-rgaa22-I18N</value>
-                <value>classpath:i18n/theme-rgaa22-I18N</value>
-                <value>classpath:i18n/criterion-rgaa22-I18N</value>
-                <value>classpath:i18n/rule-rgaa22-I18N</value>
-                <value>classpath:i18n/rule-remark-rgaa22-I18N</value>
-                
                 <!--rgaa3 i18n files -->
                 <value>classpath:i18n/referential-rgaa30-I18N</value>
                 <value>classpath:i18n/theme-rgaa30-I18N</value>

@@ -88,15 +88,6 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/../../rules/rules-rgaa2.2/src/main/resources/sql</directory>
-            <includes>
-                <include>rgaa2.2-insert.sql</include>
-                <include>rgaa2.2-insert.psql</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <fileSet>
             <directory>${basedir}/../../rules/rules-rgaa3.0/src/main/resources/sql</directory>
             <includes>
                 <include>rgaa3.0-insert.sql</include>
