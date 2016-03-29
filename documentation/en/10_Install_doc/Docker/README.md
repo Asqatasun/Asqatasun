@@ -14,6 +14,8 @@
 
 ## 1. Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 
+### Linux users
+
 ```sh
 docker pull asqatasun/asqatasun  
 docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1'` asqatasun/asqatasun
@@ -22,6 +24,15 @@ docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ip addr show 
 **AND** wait ~30 seconds before going to the next step (to allow the container to start).
 
 (The `--add-host` is useful to analyze a site on your host's localhost, see [Docker Tips & Tricks](#docker-tips-tricks) below)
+
+### MacOSX and Windows users
+
+```sh
+docker pull asqatasun/asqatasun  
+docker run --name asqatasun -d -p 8080:8080 asqatasun/asqatasun
+```
+
+**AND** wait ~30 seconds before going to the next step (to allow the container to start).
 
 ## 2. Use your local Asqatasun
 
