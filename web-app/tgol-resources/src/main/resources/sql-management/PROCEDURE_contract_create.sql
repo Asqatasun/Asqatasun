@@ -26,8 +26,8 @@ CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `contract_create`(
 BEGIN
 
     -- CONSTANTS hard-coded values from table TGSI_REFERENTIAL
-    DECLARE referential_id_RGAA3 int DEFAULT 3;
-    DECLARE referential_id_SEO int DEFAULT 4;
+    DECLARE referential_id_RGAA3 int DEFAULT 2;
+    DECLARE referential_id_SEO int DEFAULT 3;
     
     -- CONSTANTS hard-coded values from table TGSI_FUNCTIONALITY
     DECLARE audit_type_id_page int DEFAULT 1;
