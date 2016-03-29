@@ -14,25 +14,14 @@
 
 ## 1. Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 
-### Linux users
-
-```sh
-docker pull asqatasun/asqatasun  
-docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1'` asqatasun/asqatasun
-```
-
-**AND** wait ~30 seconds before going to the next step (to allow the container to start).
-
-(The `--add-host` is useful to analyze a site on your host's localhost, see [Docker Tips & Tricks](#docker-tips-tricks) below)
-
-### MacOSX and Windows users
-
 ```sh
 docker pull asqatasun/asqatasun  
 docker run --name asqatasun -d -p 8080:8080 asqatasun/asqatasun
 ```
 
 **AND** wait ~30 seconds before going to the next step (to allow the container to start).
+
+Note: Linux user and willing to test your `localhost` ? See tip [Testing 127.0.0.1 with Asqatasun Docker](#testing-localhost-127.0.0.1-with-Asqatasun-Docker).
 
 ## 2. Use your local Asqatasun
 
@@ -98,7 +87,7 @@ Then you have to start, not run, your (already existing) container:
 docker start asqatasun
 ```
 
-### Testing your `localhost` or `127.0.0.1` webserver
+<h3 id="testing-localhost-127.0.0.1-with-Asqatasun-Docker">Testing your <code>localhost</code> or <code>127.0.0.1</code> webserver (Linux users only)</h3>
 
 Consider we don't have Docker. The site we want to analyze is reachable via `http://localhost/`
 or `http://127.0.0.1` (or even `http://localhost:9000/my-app/`).
@@ -108,7 +97,16 @@ the container (your Asqatasun Docker image) is isolated even from your physical 
 Thus if you ask Asqatasun to analyze 127.0.0.1, it will try to analyze the webserver of the
 Asqatasun Docker image, not your host's one.
 
-To cope with that issue, you just have to type `dockerhost` instead of `localhost`
+To cope with that issue, run the container with one more option (`--add-host` and the suitable value):
+
+```sh
+docker pull asqatasun/asqatasun  
+docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1'` asqatasun/asqatasun
+```
+
+(Don't forget to wait ~30 seconds for the services to be up.)
+
+Then you just have to type `dockerhost` instead of `localhost` for your local site to be analyzed.
 
 Examples:
 
