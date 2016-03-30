@@ -175,8 +175,8 @@ public class PageResultImpl implements PageResult{
             this.weightedMark = "-1";
             this.rawMark = "-1";
         } else {
-            this.weightedMark = String.valueOf(Float.valueOf(weightedMark).intValue());
-            this.rawMark = String.valueOf(Float.valueOf(rawMark).intValue());
+            this.weightedMark = String.valueOf(weightedMark.intValue());
+            this.rawMark = String.valueOf(rawMark.intValue());
         }
         this.httpStatusCode = String.valueOf(httpStatusCode);
         this.rank = rank;
