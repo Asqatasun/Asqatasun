@@ -44,7 +44,7 @@ public final class UploadAuditSetUpCommandHelper  {
      * This method converts the uploaded files into a map where the key is the
      * file name and the value is the file content.
      */
-    public synchronized  static Map<String, String> convertFilesToMap(CommonsMultipartFile[] fileInputList ) {
+    public static synchronized Map<String, String> convertFilesToMap(CommonsMultipartFile[] fileInputList ) {
         Map<String, String> fileMap = new LinkedHashMap<String, String>();
         CommonsMultipartFile tmpMultiFile;
         String tmpCharset;
