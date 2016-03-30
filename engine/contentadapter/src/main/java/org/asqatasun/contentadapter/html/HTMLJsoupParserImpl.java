@@ -39,7 +39,7 @@ import org.asqatasun.entity.audit.SSP;
  */
 public class HTMLJsoupParserImpl implements HTMLParser {
 
-    protected Set<ContentAdapter> contentAdapterSet = Collections.EMPTY_SET;
+    protected Set<ContentAdapter> contentAdapterSet = Collections.emptySet();
     protected boolean initialized = false;
     protected SSP ssp;
 

@@ -245,7 +245,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             flushAndCloseEntityManager();
             return contentList;
         }
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     @Override
@@ -312,7 +312,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             flushAndCloseEntityManager();
             return contentList;
         }
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     @Override

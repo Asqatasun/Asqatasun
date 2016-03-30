@@ -41,7 +41,7 @@ import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
  */
 public final class AuditSetUpFormFieldHelper {
 
-    private static Map<String, String> DEFAULT_LEVEL_BY_REF_MAP = Collections.EMPTY_MAP;
+    private static Map<String, String> DEFAULT_LEVEL_BY_REF_MAP = Collections.emptyMap();
     public static void setDefaultLevelByRefMap(Map<String, String> defaultLevelByRef) {
         DEFAULT_LEVEL_BY_REF_MAP = defaultLevelByRef;
     }

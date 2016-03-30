@@ -39,7 +39,7 @@ import org.w3c.dom.Document;
  */
 public class CrawlConfigurationUtils {
 
-    Map<String, HeritrixConfigurationModifier> paramModifierMap = Collections.EMPTY_MAP;
+    Map<String, HeritrixConfigurationModifier> paramModifierMap = Collections.emptyMap();
     /**
      *
      * @param paramModifierMap
@@ -48,7 +48,7 @@ public class CrawlConfigurationUtils {
         this.paramModifierMap = paramModifierMap;
     }
     
-    List<HeritrixConfigurationModifier> proxyModifierList = Collections.EMPTY_LIST;
+    List<HeritrixConfigurationModifier> proxyModifierList = Collections.emptyList();
     /**
      *
      * @param proxyModifierList
