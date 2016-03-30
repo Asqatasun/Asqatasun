@@ -33,7 +33,7 @@ import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
  */
 public class LevelDataServiceImpl extends AbstractGenericDataService<Level, Long> implements LevelDataService {
 
-    private Map<String, Level> levelMap = new HashMap<String,Level>();
+    private Map<String, Level> levelMap = new HashMap<>();
     
     public LevelDataServiceImpl() {
         super();

@@ -70,7 +70,7 @@ public class HomeControllerTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         instance = new HomeController();
-        List<FormFieldBuilder> formFieldBuilderList = new ArrayList<FormFieldBuilder>();
+        List<FormFieldBuilder> formFieldBuilderList = new ArrayList<>();
         instance.setDisplayOptionFieldsBuilderList(formFieldBuilderList);
         ContractSortCommandHelper.setExclusionContractSortKey("label-exclusion-choice");
         ContractSortCommandHelper.setInclusionContractSortKey("label-inclusion-choice");
@@ -123,7 +123,7 @@ public class HomeControllerTest extends TestCase {
 
     private void setUpUserDataService() {
         mockContract = createMock(Contract.class);
-        Collection<Contract> contractSet = new HashSet<Contract>();
+        Collection<Contract> contractSet = new HashSet<>();
         contractSet.add(mockContract);
 
         expect(mockContract.getLabel()).andReturn("").times(3);
@@ -157,7 +157,7 @@ public class HomeControllerTest extends TestCase {
         replay(mockContractDataService);
         
         mockActionHandler = createMock(ActionHandler.class);
-        List<Action> actionList = new ArrayList<Action>();
+        List<Action> actionList = new ArrayList<>();
         expect(mockActionHandler.getActionList(mockContract)).andReturn(actionList).once();
         
         replay(mockActionHandler);
@@ -191,7 +191,7 @@ public class HomeControllerTest extends TestCase {
     private void setUpMockAuthenticationContext(){
         // initialise the context with the user identified by the email 
         // "test1@test.com" seen as authenticated
-        Collection<GrantedAuthority> gac = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> gac = new ArrayList<>();
         TgolUserDetails tud = new TgolUserDetails("test1@test.com", "", true, false, true, true, gac, mockUser);
         
         mockAuthentication = createMock(Authentication.class);

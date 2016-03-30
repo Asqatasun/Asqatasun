@@ -35,7 +35,7 @@ public class ContractSortCommand implements Serializable {
 
     private static final long serialVersionUID = -4719256000931005819L;
 
-    private Map<String, Object> sortOptionMap=new HashMap<String, Object>();
+    private Map<String, Object> sortOptionMap= new HashMap<>();
     public Map<String, Object> getSortOptionMap() {
         return sortOptionMap;
     }
@@ -44,7 +44,7 @@ public class ContractSortCommand implements Serializable {
         this.sortOptionMap = sortOptionMap;
     }
 
-    List<String> optionList = new ArrayList<String>();
+    List<String> optionList = new ArrayList<>();
     public List<String> getOptionList() {
         return optionList;
     }

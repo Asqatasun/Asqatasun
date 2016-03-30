@@ -36,7 +36,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class ActByScopeLimitationVoterImpl implements RestrictionVoter {
 
-    private Collection<ScopeEnum> scopes = new ArrayList<ScopeEnum>();
+    private Collection<ScopeEnum> scopes = new ArrayList<>();
     public void setScopes(Collection<String> scopes) {
         for (String scope : scopes) {
             this.scopes.add(ScopeEnum.valueOf(scope));

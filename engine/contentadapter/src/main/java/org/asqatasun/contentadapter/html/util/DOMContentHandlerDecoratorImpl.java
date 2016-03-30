@@ -39,7 +39,7 @@ public class DOMContentHandlerDecoratorImpl implements
 
     public DOMContentHandlerDecoratorImpl() {
         super();
-        this.contentHandlerSet = new HashSet<ContentHandler>();
+        this.contentHandlerSet = new HashSet<>();
     }
 
     @Override

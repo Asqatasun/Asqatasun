@@ -34,7 +34,7 @@ import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 public class ReferenceDataServiceImpl extends AbstractGenericDataService<Reference, Long> implements
         ReferenceDataService {
 
-    private Map<String, Reference> referenceMap = new HashMap<String,Reference>();
+    private Map<String, Reference> referenceMap = new HashMap<>();
     
     public ReferenceDataServiceImpl() {
         super();

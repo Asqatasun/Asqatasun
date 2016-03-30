@@ -90,7 +90,7 @@ public class ResultActionHandlerImpl implements ActionHandler {
         }
         String key = (String)object;
         ActionVoter actionAccessibilityVoter = chooseActionAccessibilityVoter(key);
-        List<Action> userContractActionList = new ArrayList<Action>();
+        List<Action> userContractActionList = new ArrayList<>();
         if (actionAccessibilityVoter != null) {
             userContractActionList = actionAccessibilityVoter.getActionList();
         }

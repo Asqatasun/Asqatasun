@@ -51,7 +51,7 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
         
         super(paramSet,auditDataService);
 
-        List<String> localUrlList = new ArrayList<String>();
+        List<String> localUrlList = new ArrayList<>();
         for (String url : pageUrlList) {
             localUrlList.add(FileNaming.addProtocolToUrl(url));
         }

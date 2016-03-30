@@ -49,7 +49,7 @@ public class EALoggerImpl {
         }
         return hostname;
     }
-    protected Map<String, Long> timeMap = new HashMap<String, Long>();
+    protected Map<String, Long> timeMap = new HashMap<>();
 
     public void logException(Throwable exception) {
         Logger.getLogger(EALoggerImpl.class).error(getHostname() + " - " + exception, exception.getCause());

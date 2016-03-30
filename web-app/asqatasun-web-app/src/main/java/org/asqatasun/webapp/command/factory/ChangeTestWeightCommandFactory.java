@@ -108,7 +108,7 @@ public class ChangeTestWeightCommandFactory  implements Serializable {
             Locale locale,
             Collection<Test> testList, 
             String referentialKey) {
-        Map<String, String> userTestWeight = new HashMap<String, String>();
+        Map<String, String> userTestWeight = new HashMap<>();
         NumberFormat nf = NumberFormat.getNumberInstance(locale);
         nf.setMinimumFractionDigits(1);
         nf.setMaximumFractionDigits(1);

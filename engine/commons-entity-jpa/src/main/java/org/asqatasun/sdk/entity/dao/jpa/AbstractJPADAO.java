@@ -120,7 +120,7 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
 
     @Override
     public Collection<E> saveOrUpdate(Collection<E> entitySet) {
-        Collection<E> resultSet = new HashSet<E>();
+        Collection<E> resultSet = new HashSet<>();
         for (E entity : entitySet) {
             resultSet.add(saveOrUpdate(entity));
         }

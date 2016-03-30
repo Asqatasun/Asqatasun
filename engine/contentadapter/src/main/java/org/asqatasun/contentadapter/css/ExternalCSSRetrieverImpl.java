@@ -41,7 +41,7 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
 
     private static final Logger LOGGER = Logger.getLogger(ExternalCSSRetrieverImpl.class);
     private Map<Long, Collection<StylesheetContent>> externalCssMap =
-            new HashMap<Long, Collection<StylesheetContent>>();
+            new HashMap<>();
 
 //    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
     private boolean persistOnTheFly = true;
@@ -63,7 +63,7 @@ public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, Adaptatio
             if (LOGGER.isDebugEnabled()) {
                LOGGER.debug("External css cannot be found in the local map");
             }
-            return new HashSet<StylesheetContent>();
+            return new HashSet<>();
         }
     }
 

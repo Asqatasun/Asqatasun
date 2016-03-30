@@ -47,7 +47,7 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        fileMap = new HashMap<String, String>();
+        fileMap = new HashMap<>();
         mockContentLoaderService = EasyMock.createMock(ContentLoaderService.class);
         mockConstructorCalls();
     }

@@ -34,7 +34,7 @@ public class JavaScriptListImpl implements JavaScriptList {
 
     public JavaScriptListImpl() {
         super();
-        this.javaScriptList = new ArrayList<JSResource>();
+        this.javaScriptList = new ArrayList<>();
     }
 
     @Override

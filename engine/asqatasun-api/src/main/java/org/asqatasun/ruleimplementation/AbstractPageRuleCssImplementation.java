@@ -134,7 +134,7 @@ public abstract class AbstractPageRuleCssImplementation
 
         for (StylesheetContent stylesheetContent : styleSheetsOnError) {
             List<EvidenceElement> evidenceElementList =
-                    new ArrayList<EvidenceElement>();
+                    new ArrayList<>();
             evidenceElementList.add(processRemarkService.getEvidenceElement(
                     ProcessRemarkService.DEFAULT_EVIDENCE,
                     stylesheetContent.getURI()));

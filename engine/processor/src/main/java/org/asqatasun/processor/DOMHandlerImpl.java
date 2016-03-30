@@ -104,7 +104,7 @@ public class DOMHandlerImpl implements DOMHandler {
     public DOMHandler beginXpathSelection() {
         initialize();
         messageCode = null;
-        selectedElementList = new LinkedList<Node>();
+        selectedElementList = new LinkedList<>();
         // reset the processRemark service when beginning a new selection.
         // means the local collection of processRemark are reset
         processRemarkService.resetService();
@@ -185,7 +185,7 @@ public class DOMHandlerImpl implements DOMHandler {
         if (messageCode == null) {
             messageCode = ATTRIBUTE_MISSING_MSG_CODE;
         }
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution processResult = TestSolution.PASSED;
             Node attribute = workingElement.getAttributes().getNamedItem(
@@ -205,7 +205,7 @@ public class DOMHandlerImpl implements DOMHandler {
         if (messageCode == null) {
             messageCode = CHILD_NODE_MISSING_MSG_CODE;
         }
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             NodeList childNodes = workingElement.getChildNodes();
@@ -254,13 +254,13 @@ public class DOMHandlerImpl implements DOMHandler {
             TestSolution testSolution,
             String erroMessageCode) {
         if (whitelist == null) {
-            whitelist = new ArrayList<String>();
+            whitelist = new ArrayList<>();
         }
         if (blacklist == null) {
-            blacklist = new ArrayList<String>();
+            blacklist = new ArrayList<>();
         }
 
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
 
             TestSolution result = TestSolution.NEED_MORE_INFO;
@@ -307,13 +307,13 @@ public class DOMHandlerImpl implements DOMHandler {
             Collection<String> whitelist) {
 
         if (whitelist == null) {
-            whitelist = new ArrayList<String>();
+            whitelist = new ArrayList<>();
         }
         if (blacklist == null) {
-            blacklist = new ArrayList<String>();
+            blacklist = new ArrayList<>();
         }
 
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.NEED_MORE_INFO;
             boolean isInBlackList = false;
@@ -396,7 +396,7 @@ public class DOMHandlerImpl implements DOMHandler {
     
     @Override
     public DOMHandler keepNodesWithAttribute(String attributeName) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(
                     attributeName);
@@ -410,7 +410,7 @@ public class DOMHandlerImpl implements DOMHandler {
 
     @Override
     public DOMHandler selectChildNodes(String childNodeName) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList childNodes = workingElement.getChildNodes();
             for (int i = 0; i < childNodes.getLength(); i++) {
@@ -426,7 +426,7 @@ public class DOMHandlerImpl implements DOMHandler {
 
     protected Collection<Node> selectChildNodesRecursively(
             Collection<String> childNodeNames, Node node) {// XXX
-        List<Node> nodes = new ArrayList<Node>();
+        List<Node> nodes = new ArrayList<>();
         for (String childNodeName : childNodeNames) {
             if (node.getNodeName().equalsIgnoreCase(childNodeName)) {
                 nodes.add(node);
@@ -442,7 +442,7 @@ public class DOMHandlerImpl implements DOMHandler {
 
     @Override
     public DOMHandler selectChildNodesRecursively(String childNodeName) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList childNodes = workingElement.getChildNodes();
             for (int i = 0; i < childNodes.getLength(); i++) {
@@ -456,7 +456,7 @@ public class DOMHandlerImpl implements DOMHandler {
 
     protected Collection<Node> selectChildNodesRecursively(
             String childNodeName, Node node) {// XXX
-        Collection<Node> nodes = new ArrayList<Node>();
+        Collection<Node> nodes = new ArrayList<>();
         if (node.getNodeName().equalsIgnoreCase(childNodeName)) {
             nodes.add(node);
         }
@@ -469,7 +469,7 @@ public class DOMHandlerImpl implements DOMHandler {
 
     protected Collection<Node> selectChildNodeWithAttributeRecursively(
             String attributeName, Node node) {// XXX
-        Collection<Node> nodes = new ArrayList<Node>();
+        Collection<Node> nodes = new ArrayList<>();
         NamedNodeMap attributes = node.getAttributes();
         if (attributes != null) {
             Node attribute = attributes.getNamedItem(attributeName);
@@ -660,7 +660,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler selectDocumentNodesWithAttribute(String attributeName) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         NodeList childNodes = document.getChildNodes();
         for (int i = 0; i < childNodes.getLength(); i++) {
             elements.addAll(selectChildNodeWithAttributeRecursively(
@@ -673,7 +673,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkAttributeValueIsEmpty(String attributeName) {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             Node attribute = workingElement.getAttributes().getNamedItem(
@@ -696,7 +696,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public DOMHandler selectChildNodesRecursively(
             Collection<String> childNodeNames) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList childNodes = workingElement.getChildNodes();
             for (int i = 0; i < childNodes.getLength(); i++) {
@@ -712,7 +712,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public DOMHandler keepNodesWithoutChildNode(
             Collection<String> childNodeNames) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList nodeList = workingElement.getChildNodes();
             boolean found = false;
@@ -736,7 +736,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler keepNodesWithoutChildNode(String childNodeName) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList nodeList = workingElement.getChildNodes();
             boolean found = false;
@@ -758,7 +758,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler selectAttributeByName(String name) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(name);
             if (attribute != null) {
@@ -772,7 +772,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler selectChildNodes(Collection<String> childNodeNames) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList childNodes = workingElement.getChildNodes();
             boolean found = false;
@@ -795,7 +795,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueEquals(String attributeName,
             Collection<String> values) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(
                     attributeName);
@@ -816,7 +816,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueNonEmpty(String attributeName) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(
                     attributeName);
@@ -832,7 +832,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueStartingWith(
             String attributeName, Collection<String> values) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(
                     attributeName);
@@ -855,7 +855,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueStartingWith(
             String attributeName, String value) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(
                     attributeName);
@@ -875,7 +875,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public List<String> getTextContentValues() {
-        List<String> values = new ArrayList<String>();
+        List<String> values = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             values.add(workingElement.getTextContent());
         }
@@ -886,7 +886,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public TestSolution checkTextContentValueLengthLower(int length,
             TestSolution defaultFailResult) {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             String textContent = workingElement.getTextContent();
@@ -904,7 +904,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkTextContentValueNotEmpty() {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             if (workingElement.getTextContent().length() == 0) {
@@ -920,7 +920,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler excludeNodesWithAttribute(String attributeName) {
-        List<Node> nodes = new ArrayList<Node>();
+        List<Node> nodes = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(
                     attributeName);
@@ -935,7 +935,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler excludeNodesWithChildNode(ArrayList<String> childNodeNames) {
-        List<Node> nodes = new ArrayList<Node>();
+        List<Node> nodes = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList nodeList = workingElement.getChildNodes();
             boolean found = false;
@@ -960,7 +960,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler excludeNodesWithChildNode(String childNodeName) {
-        List<Node> nodes = new ArrayList<Node>();
+        List<Node> nodes = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList nodeList = workingElement.getChildNodes();
             boolean found = false;
@@ -982,7 +982,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public List<String> getAttributeValues(String attributeName) {
-        List<String> values = new ArrayList<String>();
+        List<String> values = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             Node attribute = workingElement.getAttributes().getNamedItem(
                     attributeName);
@@ -998,13 +998,13 @@ public class DOMHandlerImpl implements DOMHandler {
     public TestSolution checkTextContentAndAttributeValue(String attributeName,
             Collection<String> blacklist, Collection<String> whitelist) {
         if (whitelist == null) {
-            whitelist = new ArrayList<String>();
+            whitelist = new ArrayList<>();
         }
         if (blacklist == null) {
-            blacklist = new ArrayList<String>();
+            blacklist = new ArrayList<>();
         }
 
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.NEED_MORE_INFO;
             boolean isInWhiteList = false;
@@ -1065,7 +1065,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public DOMHandler keepNodesWithChildNode(String childNodeName) {
-        List<Node> elements = new ArrayList<Node>();
+        List<Node> elements = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             NodeList nodeList = workingElement.getChildNodes();
             for (int i = 0; i < nodeList.getLength(); i++) {
@@ -1082,7 +1082,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             boolean found = false;
@@ -1106,7 +1106,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkContentNotEmpty() {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             if (workingElement.getTextContent().trim().isEmpty()
@@ -1125,7 +1125,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkEachWithXpath(String expr) {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node node : selectedElementList) {
             TestSolution tempResult = TestSolution.PASSED;
             try {
@@ -1150,7 +1150,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Override
     @Deprecated
     public TestSolution checkAttributeValueNotEmpty(String attributeName) {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             Node attribute = workingElement.getAttributes().getNamedItem(
@@ -1181,7 +1181,7 @@ public class DOMHandlerImpl implements DOMHandler {
     @Deprecated
     public TestSolution checkAttributeValueLengthLower(String attributeName,
             int length, TestSolution defaultFailResult) {
-        Collection<TestSolution> resultSet = new ArrayList<TestSolution>();
+        Collection<TestSolution> resultSet = new ArrayList<>();
         for (Node workingElement : selectedElementList) {
             TestSolution result = TestSolution.PASSED;
             String textContent = workingElement.getTextContent();

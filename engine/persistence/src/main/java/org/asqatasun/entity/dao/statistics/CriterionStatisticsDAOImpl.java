@@ -150,7 +150,7 @@ public class CriterionStatisticsDAOImpl extends AbstractJPADAO<CriterionStatisti
         Query query = entityManager.createQuery(strb.toString());
         query.setParameter("webResource", webResource);
         if (hasTestSolution) {
-            Collection<TestSolution> solutions = new ArrayList<TestSolution>();
+            Collection<TestSolution> solutions = new ArrayList<>();
             for (String solution : testSolutions) {
                 solutions.add(TestSolution.valueOf(solution));
             }

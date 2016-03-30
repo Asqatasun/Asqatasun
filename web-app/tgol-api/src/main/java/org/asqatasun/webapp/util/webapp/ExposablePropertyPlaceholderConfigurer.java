@@ -48,7 +48,7 @@ public class ExposablePropertyPlaceholderConfigurer extends PropertyPlaceholderC
     protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess,
             Properties props) throws BeansException {
         super.processProperties(beanFactoryToProcess, props);
-        resolvedProps = new HashMap<String, String>();
+        resolvedProps = new HashMap<>();
         for (Object key : props.keySet()) {
             String keyStr = key.toString();
             resolvedProps.put(keyStr, parseStringValue(props.getProperty(keyStr), props,

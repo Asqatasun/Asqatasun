@@ -57,7 +57,7 @@ public final class FormFieldHelper {
             } else if (ff instanceof CheckboxFormField) {
                 // retrieve the user selection and select the UI elements
                 CheckboxFormField cff = ((CheckboxFormField)ff);
-                Collection<String> selectedValues = new HashSet<String>();
+                Collection<String> selectedValues = new HashSet<>();
                 if ((formValueMap.get(cff.getCode()) instanceof String[])) {
                     CollectionUtils.addAll(selectedValues, ((String[])formValueMap.get(cff.getCode())));
                 } else if ((formValueMap.get(cff.getCode()) instanceof String)) {
@@ -83,7 +83,7 @@ public final class FormFieldHelper {
      */
     public static List<FormField> getFormFieldBuilderCopy(
         List<FormFieldBuilder> formFieldBuilderList) {
-        List<FormField> initialisedFormFielList = new LinkedList<FormField>();
+        List<FormField> initialisedFormFielList = new LinkedList<>();
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
             initialisedFormFielList.add(formFieldBuilder.build());
         }
@@ -99,7 +99,7 @@ public final class FormFieldHelper {
     public static List<FormField> getFormFieldBuilderCopy(
         List<FormFieldBuilder> formFieldBuilderList,
         Map<String, Object> formValueMap) {
-        List<FormField> initialisedFormFieldList = new LinkedList<FormField>();
+        List<FormField> initialisedFormFieldList = new LinkedList<>();
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
             initialisedFormFieldList.add(formFieldBuilder.build());
         }

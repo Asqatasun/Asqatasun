@@ -112,7 +112,7 @@ public class ActDAOImpl extends AbstractJPADAO<Act, Long> implements ActDAO {
             query.setMaxResults(nbOfActs);
         }
         query.setHint(CACHEABLE_OPTION, "true");
-        return new LinkedHashSet<Act>(query.getResultList());
+        return new LinkedHashSet<>(query.getResultList());
     }
 
     @Override

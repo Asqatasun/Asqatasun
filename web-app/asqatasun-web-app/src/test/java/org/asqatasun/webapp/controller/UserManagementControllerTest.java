@@ -572,7 +572,7 @@ public class UserManagementControllerTest extends TestCase {
     private void setUpMockAuthenticationContext(){
         // initialise the context with the user identified by the email 
         // "test1@test.com" seen as authenticated
-        Collection<GrantedAuthority> gac = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> gac = new ArrayList<>();
         TgolUserDetails tud = new TgolUserDetails("test1@test.com", "", true, false, true, true, gac, mockAdminUser);
         mockAuthentication = createMock(Authentication.class);
         
@@ -595,7 +595,7 @@ public class UserManagementControllerTest extends TestCase {
             boolean hasUpdateAdminCall) {
         // initialise the context with the user identified by the email 
         // "test1@test.com" seen as authenticated
-        Collection<User> userCollection = new ArrayList<User>();
+        Collection<User> userCollection = new ArrayList<>();
         mockUserDataService = createMock(UserDataService.class);
         mockAdminUser = createMock(User.class);
         mockUser = createMock(User.class);

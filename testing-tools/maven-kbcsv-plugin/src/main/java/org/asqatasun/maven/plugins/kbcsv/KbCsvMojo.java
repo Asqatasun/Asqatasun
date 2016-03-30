@@ -146,7 +146,7 @@ public class KbCsvMojo extends AbstractMojo {
         Document document = builder.build(new URL(url));
         XPath xpath = new JDOMXPath("//*[@id='resultat']//*[@href]/@href");
         List<Attribute> results = xpath.selectNodes(document);
-        List<String> urls = new ArrayList<String>();
+        List<String> urls = new ArrayList<>();
         for (Attribute attr : results) {
             urls.add(attr.getValue());
         }

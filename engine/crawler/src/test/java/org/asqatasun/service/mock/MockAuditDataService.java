@@ -37,7 +37,7 @@ import org.asqatasun.sdk.entity.factory.GenericFactory;
  */
 public class MockAuditDataService implements AuditDataService {
 
-    private Map<Long, Audit> auditMap = new LinkedHashMap<Long, Audit>();
+    private Map<Long, Audit> auditMap = new LinkedHashMap<>();
 
     private Long id = Long.valueOf(1);
     

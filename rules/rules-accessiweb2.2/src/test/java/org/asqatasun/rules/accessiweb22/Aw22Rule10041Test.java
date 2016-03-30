@@ -215,48 +215,48 @@ public class Aw22Rule10041Test extends Aw22RuleImplementationTestCase {
     }
 
     private void setUpRelatedContentMap(){
-        List<String> relatedContent1 = new ArrayList<String>();
+        List<String> relatedContent1 = new ArrayList<>();
         relatedContent1.add("css/AW22.Test.10.4.1-2Failed-01_1.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-01_1"), relatedContent1);
 
-        List<String> relatedContent2 = new ArrayList<String>();
+        List<String> relatedContent2 = new ArrayList<>();
         relatedContent2.add("css/AW22.Test.10.4.1-2Failed-01_2.css");
         relatedContent2.add("css/AW22.Test.10.4.1-2Failed-01_2_1.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-01_2"), relatedContent2);
 
-        List<String> relatedContent3 = new ArrayList<String>();
+        List<String> relatedContent3 = new ArrayList<>();
         relatedContent3.add("css/AW22.Test.10.4.1-2Failed-01_3.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-01_3"), relatedContent3);
         
-        List<String> relatedContent4 = new ArrayList<String>();
+        List<String> relatedContent4 = new ArrayList<>();
         relatedContent4.add("css/AW22.Test.10.4.1-2Failed-06_1.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_1"), relatedContent4);
         
-        List<String> relatedContent5 = new ArrayList<String>();
+        List<String> relatedContent5 = new ArrayList<>();
         relatedContent5.add("css/AW22.Test.10.4.1-2Failed-06_2.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_2"), relatedContent5);
         
-        List<String> relatedContent6 = new ArrayList<String>();
+        List<String> relatedContent6 = new ArrayList<>();
         relatedContent6.add("css/AW22.Test.10.4.1-2Failed-06_3.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_3"), relatedContent6);
         
-        List<String> relatedContent7 = new ArrayList<String>();
+        List<String> relatedContent7 = new ArrayList<>();
         relatedContent7.add("css/AW22.Test.10.4.1-2Failed-06_4.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_4"), relatedContent7);
         
-        List<String> relatedContent8 = new ArrayList<String>();
+        List<String> relatedContent8 = new ArrayList<>();
         relatedContent8.add("css/AW22.Test.10.4.1-2Failed-06_5.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_5"), relatedContent8);
         
-        List<String> relatedContent9 = new ArrayList<String>();
+        List<String> relatedContent9 = new ArrayList<>();
         relatedContent9.add("css/AW22.Test.10.4.1-2Failed-06_6.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_6"), relatedContent9);
         
-        List<String> relatedContent10 = new ArrayList<String>();
+        List<String> relatedContent10 = new ArrayList<>();
         relatedContent10.add("css/AW22.Test.10.4.1-2Failed-06_7.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_7"), relatedContent10);
         
-        List<String> relatedContent11 = new ArrayList<String>();
+        List<String> relatedContent11 = new ArrayList<>();
         relatedContent11.add("css/AW22.Test.10.4.1-2Failed-06_8.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.1-2Failed-06_8"), relatedContent11);
     }

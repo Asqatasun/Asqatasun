@@ -162,7 +162,7 @@ public class AuditCommandFactoryImplTest extends TestCase {
     public void testCreate_3args_3_1() {
         System.out.println("create GroupOfPagesAuditCommand with crawler");
         String siteUrl = "";
-        List<String> pageUrlList = new ArrayList<String>();
+        List<String> pageUrlList = new ArrayList<>();
         Set<Parameter> paramSet = null;
         
         auditCommandFactory.setAuditPageWithCrawler(true);
@@ -178,7 +178,7 @@ public class AuditCommandFactoryImplTest extends TestCase {
     public void testCreate_3args_3_2() {
         System.out.println("create GroupOfPagesAuditCommand without crawler");
         String siteUrl = "";
-        List<String> pageUrlList = new ArrayList<String>();
+        List<String> pageUrlList = new ArrayList<>();
         Set<Parameter> paramSet = null;
         
         auditCommandFactory.setAuditPageWithCrawler(false);

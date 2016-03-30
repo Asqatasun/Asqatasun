@@ -106,7 +106,7 @@ public final class CriterionResultFactory {
             WebResource webresource,
             String theme,
             Collection<String> testSolution){
-        List<CriterionStatistics> criterionStatList = new ArrayList<CriterionStatistics>();
+        List<CriterionStatistics> criterionStatList = new ArrayList<>();
         criterionStatList.addAll(
                 criterionStatisticsDataService.getCriterionStatisticsByWebResource(
                     webresource,
@@ -124,7 +124,7 @@ public final class CriterionResultFactory {
             List<CriterionStatistics> criterionStatList) {
         // Map that associates a list of results with a theme
         Map<Theme, List<CriterionResult>> criterionResultMap =
-                new LinkedHashMap<Theme, List<CriterionResult>>();
+                new LinkedHashMap<>();
         sortCollection(criterionStatList);
         for (CriterionStatistics crs : criterionStatList) {
                 CriterionResult testResult = getCriterionResult(
@@ -133,7 +133,7 @@ public final class CriterionResultFactory {
                 if (criterionResultMap.containsKey(theme)) {
                     criterionResultMap.get(theme).add(testResult);
                 } else {
-                    List<CriterionResult> criterionResultList = new ArrayList<CriterionResult>();
+                    List<CriterionResult> criterionResultList = new ArrayList<>();
                     criterionResultList.add(testResult);
                     criterionResultMap.put(theme, criterionResultList);
                 }

@@ -54,7 +54,7 @@ public abstract class AbstractPageRuleImplementation extends AbstractRuleImpleme
     @Override
     protected List<ProcessResult> consolidateImpl(
             Map<WebResource, List<ProcessResult>> grossResultMap, ProcessRemarkService processRemarkService) {
-        List<ProcessResult> netResultList = new ArrayList<ProcessResult>();
+        List<ProcessResult> netResultList = new ArrayList<>();
 
         for (Map.Entry<WebResource, List<ProcessResult>> entry : grossResultMap.entrySet()) {
             for (ProcessResult grossResult : entry.getValue()) {

@@ -45,8 +45,8 @@ public final class ContractOptionFormFieldHelper {
             Map<String, List<ContractOptionFormFieldBuilder>> contractOptionFormFieldBuilderMap) {
 
         // Copy the audit setup form field map from the builders
-        Map<String, List<ContractOptionFormField>> initialisedContractOptionFormFielMap = 
-                new LinkedHashMap<String, List<ContractOptionFormField>>();
+        Map<String, List<ContractOptionFormField>> initialisedContractOptionFormFielMap =
+                new LinkedHashMap<>();
         for (Map.Entry<String, List<ContractOptionFormFieldBuilder>> entry : contractOptionFormFieldBuilderMap.entrySet()) {
             initialisedContractOptionFormFielMap.put(
                     entry.getKey(), 
@@ -64,7 +64,7 @@ public final class ContractOptionFormFieldHelper {
      */
     public static List<ContractOptionFormField> getFreshContractOptionFormFieldList(
             List<ContractOptionFormFieldBuilder> contractOptionFormFieldBuilderList) {
-        List<ContractOptionFormField> setUpFormFieldList = new LinkedList<ContractOptionFormField>();
+        List<ContractOptionFormField> setUpFormFieldList = new LinkedList<>();
         for (Iterator<ContractOptionFormFieldBuilder> it = contractOptionFormFieldBuilderList.iterator(); it.hasNext();) {
             ContractOptionFormFieldBuilder seb = it.next();
             setUpFormFieldList.add(seb.build());

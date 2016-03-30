@@ -44,7 +44,7 @@ public class TgolPaginatedListImpl implements PaginatedList {
     public TgolPaginatedListImpl(String defaultSortCriterion) {
         this.sortCriterion = defaultSortCriterion;
     }
-    private List<PageResult> elementsList = new ArrayList<PageResult>();
+    private List<PageResult> elementsList = new ArrayList<>();
 
     /**
      * 
