@@ -55,7 +55,7 @@ public class WebResourceStatisticsDataServiceImpl extends
         AbstractGenericDataService<WebResourceStatistics, Long> implements
         WebResourceStatisticsDataService {
 
-    private static final BigDecimal ZERO = BigDecimal.valueOf(Double.valueOf(0.0));
+    private static final BigDecimal ZERO = BigDecimal.valueOf(0.0);
 
     private CriterionStatisticsDAO criterionStatisticsDAO;
 

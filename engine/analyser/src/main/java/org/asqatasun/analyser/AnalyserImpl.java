@@ -125,8 +125,8 @@ public class AnalyserImpl implements Analyser {
      * the set of audit parameters that handles some overridden values for test
      * weight (needed to compute the raw mark)
      */
-    private final Collection<Parameter> paramSet; 
-    private static final BigDecimal ZERO = BigDecimal.valueOf(Double.valueOf(0.0));
+    private final Collection<Parameter> paramSet;
+    private static final BigDecimal ZERO = BigDecimal.valueOf(0.0);
 
     public AnalyserImpl(
             AuditDataService auditDataService,
