@@ -86,7 +86,7 @@ public class UploadAuditSetUpFormValidator extends AuditSetUpFormValidator {
         boolean emptyFile = true;
         Metadata metadata = new Metadata();
         MimeTypes mimeTypes = TikaConfig.getDefaultConfig().getMimeRepository();
-        String mime = null;
+        String mime;
 
         for (int i=0;i<uploadAuditSetUpCommand.getFileInputList().length;i++ ) {
             try {
