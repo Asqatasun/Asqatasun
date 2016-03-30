@@ -78,7 +78,10 @@ public class Rgaa3Extractor {
     
     static final Map<String, String> levelFromCrit = new LinkedHashMap<>();
     static boolean writeCritInFile = false;
-    
+
+    private Rgaa3Extractor() {
+    }
+
     /**
      * @param args the command line arguments
      * @throws java.io.IOException

@@ -38,6 +38,9 @@ public class ExportDomToCsv {
 
     private static final String FOLDER = "$path_to_csv_file";
 
+    private ExportDomToCsv() {
+    }
+
     /**
      * Before using it please set the FOLDER variable with the path where you
      * want to create your csv file.

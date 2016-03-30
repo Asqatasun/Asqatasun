@@ -30,6 +30,9 @@ public final class RuleCheckHelper {
 
     private static final String MSG_SPACER = "_";
 
+    private RuleCheckHelper() {
+    }
+
     /**
      * 
      * @param msg

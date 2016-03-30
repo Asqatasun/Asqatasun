@@ -32,6 +32,9 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class ProcessRemarkServiceFactory {
 
+    private ProcessRemarkServiceFactory() {
+    }
+
     /**
      *
      * @param processRemarkFactory

@@ -43,6 +43,10 @@ import org.springframework.ui.Model;
 public final class ContractSortCommandHelper  {
 
     private static String lastAuditMarkSortValue;
+
+    private ContractSortCommandHelper() {
+    }
+
     public static String getLastAuditMarkSortValue() {
         return lastAuditMarkSortValue;
     }

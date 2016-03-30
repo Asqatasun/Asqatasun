@@ -39,7 +39,10 @@ public final class UploadAuditSetUpCommandHelper  {
      */
     private static Map<String, Integer> fileNameCounterMap = 
             new HashMap<String, Integer>();
-    
+
+    private UploadAuditSetUpCommandHelper() {
+    }
+
     /**
      * This method converts the uploaded files into a map where the key is the
      * file name and the value is the file content.
