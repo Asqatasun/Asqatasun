@@ -32,7 +32,7 @@ import org.asqatasun.entity.subject.WebResource;
 public interface Analyser {
 
     /**
-     *
+     * @deprecated Kept for backward compatibility.
      * @return the net result list
      */
     @Deprecated
@@ -50,7 +50,7 @@ public interface Analyser {
     void run();
 
     /**
-     *
+     * @deprecated Kept for backward compatibility.
      * @param netResultList the result list to set
      */
     @Deprecated

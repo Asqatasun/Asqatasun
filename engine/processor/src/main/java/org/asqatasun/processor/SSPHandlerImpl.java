@@ -490,25 +490,50 @@ public class SSPHandlerImpl implements SSPHandler {
     public Collection<StylesheetContent> getStyleSheetOnError() {
         return cssHandler.getStyleSheetOnError();
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeName
+     *            the name of the childnode to check
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
         return domHandler.checkChildNodeExistsRecursively(childNodeName);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkContentNotEmpty() {
         return domHandler.checkContentNotEmpty();
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param expr
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkEachWithXpath(String expr) {
         return domHandler.checkEachWithXpath(expr);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @param blacklist
+     *            the list of prevented values
+     * @param whitelist
+     *            the list of granted values
+     * @return
+     */
     @Override  
     @Deprecated
     public TestSolution checkTextContentAndAttributeValue(String attributeName,
@@ -516,7 +541,15 @@ public class SSPHandlerImpl implements SSPHandler {
         return domHandler.checkTextContentAndAttributeValue(attributeName,
                 blacklist, whitelist);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param length
+     *            the length of the text content to check
+     * @param defaultFailResult
+     *            the default return value if the check processing fails
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkTextContentValueLengthLower(int length,
@@ -525,18 +558,34 @@ public class SSPHandlerImpl implements SSPHandler {
                 defaultFailResult);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkTextContentValueNotEmpty() {
         return domHandler.checkTextContentValueNotEmpty();
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler excludeNodesWithAttribute(String attributeName) {
         return domHandler.excludeNodesWithAttribute(attributeName);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childnodes to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler excludeNodesWithChildNode(ArrayList<String> childNodeNames) {
@@ -544,6 +593,12 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeName
+     *            the name of the childNode to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler excludeNodesWithChildNode(String childNodeName) {
@@ -551,18 +606,36 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute targeted
+     * @return
+     */
     @Override
     @Deprecated
     public List<String> getAttributeValues(String attributeName) {
         return domHandler.getAttributeValues(attributeName);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public List<String> getTextContentValues() {
         return domHandler.getTextContentValues();
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @param values
+     *            the values of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler keepNodesWithAttributeValueEquals(String attributeName,
@@ -571,6 +644,12 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler keepNodesWithAttributeValueNonEmpty(String attributeName) {
@@ -578,6 +657,14 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to be filteterd
+     * @param values
+     *            the values of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler keepNodesWithAttributeValueStartingWith(
@@ -587,6 +674,14 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @param value
+     *            the value of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler keepNodesWithAttributeValueStartingWith(
@@ -594,7 +689,13 @@ public class SSPHandlerImpl implements SSPHandler {
         domHandler.keepNodesWithAttributeValueStartingWith(attributeName, value);
         return this;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childnodes to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler keepNodesWithoutChildNode(
@@ -603,13 +704,25 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeName
+     *            the name of the childnode to filter
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler keepNodesWithoutChildNode(String childNodeName) {
         domHandler.keepNodesWithChildNode(childNodeName);
         return this;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the atribute to select
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler selectAttributeByName(String attributeName) {
@@ -617,13 +730,25 @@ public class SSPHandlerImpl implements SSPHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childNodes to select
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler selectChildNodes(Collection<String> childNodeNames) {
         domHandler.selectChildNodes(childNodeNames);
         return this;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childnodes to select recursively
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler selectChildNodesRecursively(
@@ -631,33 +756,67 @@ public class SSPHandlerImpl implements SSPHandler {
         domHandler.selectChildNodesRecursively(childNodeNames);
         return this;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @return
+     */
     @Override
     @Deprecated
     public SSPHandler selectDocumentNodesWithAttribute(String attributeName) {
         domHandler.selectDocumentNodesWithAttribute(attributeName);
         return this;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkAttributeValueIsEmpty(String attributeName) {
         return domHandler.checkAttributeValueIsEmpty(attributeName);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public String getMessageCode() {
         return domHandler.getMessageCode();
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param blacklist
+     *            the list of prevented values
+     * @param whitelist
+     *            the list of granted values
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkNodeValue(Collection<String> blacklist,
             Collection<String> whitelist) {
         return domHandler.checkNodeValue(blacklist, whitelist);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @param length
+     *            the length of the attribute value to check
+     * @param defaultFailResult
+     *            the default return value if the check processing fails
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkAttributeValueLengthLower(String attributeName,
@@ -666,6 +825,12 @@ public class SSPHandlerImpl implements SSPHandler {
                 defaultFailResult);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkAttributeValueNotEmpty(String attributeName) {
