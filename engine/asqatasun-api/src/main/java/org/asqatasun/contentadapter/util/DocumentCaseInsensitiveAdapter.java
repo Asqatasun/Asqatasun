@@ -43,7 +43,7 @@ public abstract class DocumentCaseInsensitiveAdapter {
     public static String removeLowerCaseTags(String cleanHtml) {
         StringBuilder newCleanHtml = new StringBuilder();
         int strPtr=0;
-        int tmpPtr=0;
+        int tmpPtr;
         while (strPtr != cleanHtml.length()){
             if (cleanHtml.charAt(strPtr) == '<') {
                 if (cleanHtml.charAt(strPtr+1) == '!' || 
@@ -90,7 +90,7 @@ public abstract class DocumentCaseInsensitiveAdapter {
     public static String removeUpperCaseTags(String cleanHtml) {
         StringBuilder newCleanHtml = new StringBuilder();
         int strPtr=0;
-        int tmpPtr=0;
+        int tmpPtr;
         while (strPtr != cleanHtml.length()){
             if (cleanHtml.charAt(strPtr) == '<') {
                 if (cleanHtml.charAt(strPtr+1) == '!') { //To ignore the case of <!doctype

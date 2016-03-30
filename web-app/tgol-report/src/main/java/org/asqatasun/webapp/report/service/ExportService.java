@@ -121,7 +121,7 @@ public final class ExportService {
         // This is the stream where the data will be written
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        JRExporter exporter = null;
+        JRExporter exporter;
         try {
             exporter = (JRExporter) Class.forName(exportFormat.getExporterClassName()).newInstance();
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);

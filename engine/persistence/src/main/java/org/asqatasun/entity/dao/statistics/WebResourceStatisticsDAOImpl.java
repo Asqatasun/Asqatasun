@@ -95,7 +95,7 @@ public class WebResourceStatisticsDAOImpl extends
 				+ JOIN_PROCESS_RESULT + JOIN_TEST
 				+ " WHERE (r.id=:id OR r.parent.id=:id)"
 				+ " AND pr.manualDefiniteValue = :value";
-		Query query = null;
+		Query query;
 		if (isManualAudit) {
 			query = entityManager.createQuery(queryStringForManual);
 		} else {
@@ -127,7 +127,7 @@ public class WebResourceStatisticsDAOImpl extends
 				+ JOIN_PROCESS_RESULT + " JOIN pr.remarkSet pk"
 				+ " WHERE (r.id=:id OR r.parent.id=:id)"
 				+ " AND pr.manualDefiniteValue = :value" + " AND pk.issue = :value";
-		Query query = null;
+		Query query;
 		if(isManualAudit){
 			query = entityManager.createQuery(queryStringForManual);
 		} else {
