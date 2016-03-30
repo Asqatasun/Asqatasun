@@ -37,7 +37,7 @@ import org.asqatasun.entity.subject.WebResource;
 public interface AnalyserService {
 
     /**
-     *
+     * @deprecated Kept for backward compatibility.
      * @param netResultList
      * @return
      */
@@ -52,7 +52,7 @@ public interface AnalyserService {
     void analyse(WebResource webResource, Audit audit);
 
     /**
-     * 
+     * @deprecated Kept for backward compatibility.
      * @param analyser
      */
     @Deprecated

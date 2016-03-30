@@ -42,12 +42,21 @@ public class AnalyserServiceImpl implements AnalyserService {
         super();
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param netResultList
+     * @return
+     */
     @Override
     @Deprecated
     public float analyse(List<ProcessResult> netResultList) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param analyser
+     */
     @Override
     @Deprecated
     public void setAnalyser(Analyser analyser) {
