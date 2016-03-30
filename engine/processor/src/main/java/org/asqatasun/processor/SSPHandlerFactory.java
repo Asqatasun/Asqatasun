@@ -32,6 +32,9 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class SSPHandlerFactory {
 
+    private SSPHandlerFactory() {
+    }
+
     public static SSPHandler create(
             ProcessRemarkService processRemarkService, 
             NomenclatureLoaderService nomenclatureLoaderService, 
