@@ -122,7 +122,7 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
         this.parameterFamilyDataService = parameterFamilyDataService;
     }
 
-    private List<String> testWeightParameterFamilyCodeList = Collections.EMPTY_LIST;
+    private List<String> testWeightParameterFamilyCodeList = Collections.emptyList();
     public void setTestWeightParameterFamilyCodeList(List<String> testWeightParameterFamilyCodeList) {
         this.testWeightParameterFamilyCodeList = testWeightParameterFamilyCodeList;
     }

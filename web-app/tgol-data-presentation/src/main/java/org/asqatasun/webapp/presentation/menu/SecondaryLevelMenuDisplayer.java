@@ -42,7 +42,7 @@ import org.springframework.ui.Model;
  */
 public class SecondaryLevelMenuDisplayer {
 
-    List<String> referentialWithModifiableTestWeight = Collections.EMPTY_LIST;
+    List<String> referentialWithModifiableTestWeight = Collections.emptyList();
     public void setReferentialWithModifiableTestWeight(
             List<String> referentialWithModifiableTestWeight) {
         this.referentialWithModifiableTestWeight = referentialWithModifiableTestWeight;

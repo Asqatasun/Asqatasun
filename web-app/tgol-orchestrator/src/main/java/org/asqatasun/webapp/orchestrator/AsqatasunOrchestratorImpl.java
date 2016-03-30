@@ -479,7 +479,7 @@ public class AsqatasunOrchestratorImpl implements AsqatasunOrchestrator {
         emailSender.sendEmail(
                 emailFrom, 
                 emailToSet, 
-                Collections.EMPTY_SET, 
+                Collections.<String>emptySet(), 
                 StringUtils.EMPTY,
                 emailSubject, 
                 emailMessage);

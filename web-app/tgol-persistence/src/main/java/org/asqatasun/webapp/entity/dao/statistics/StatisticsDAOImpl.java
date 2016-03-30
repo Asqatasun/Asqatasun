@@ -254,11 +254,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             List<Object[]> result = (List<Object[]>)query.getResultList();
             if (result.isEmpty()) {
-                return Collections.EMPTY_SET;
+                return Collections.emptySet();
             }
             return convertRawResultAsFailedThemeInfo(result);
         } catch (NoResultException nre) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
     }
 
@@ -333,11 +333,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             List<Object[]> result = (List<Object[]>)query.getResultList();
             if (result.isEmpty()) {
-                return Collections.EMPTY_SET;
+                return Collections.emptySet();
             }
             return convertRawResultAsFailedTestInfo(result);
         } catch (NoResultException e) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
     }
 
@@ -442,11 +442,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             List<Object[]> result = (List<Object[]>)query.getResultList();
             if (result.isEmpty()) {
-                return Collections.EMPTY_SET;
+                return Collections.emptySet();
             }
             return convertRawResultAsFailedPageInfo(result);
         } catch (NoResultException e) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
     }
 
@@ -498,11 +498,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             List<Object[]>  result = (List<Object[]>)query.getResultList();
             if (result.isEmpty()) {
-                return Collections.EMPTY_SET;
+                return Collections.emptySet();
             }
             return convertRawResultAsFailedPageInfo(result);
         } catch (NoResultException e) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
     }
 
@@ -794,11 +794,11 @@ public class StatisticsDAOImpl extends AbstractJPADAO<WebResourceStatistics, Lon
         try {
             List<Object[]> result = (List<Object[]>)query.getResultList();
             if (result.isEmpty()) {
-                return Collections.EMPTY_SET;
+                return Collections.emptySet();
             }
             return convertRawResultAsPageResultSet(result);
         } catch (NoResultException e) {
-            return Collections.EMPTY_SET;
+            return Collections.emptySet();
         }
     }
 
