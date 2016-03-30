@@ -32,14 +32,14 @@ public abstract class HtmlNodeAttr {
      */
     private HtmlNodeAttr() {}
     
-    public final static String CLASS = "class";
-    public final static String HREF = "href";
-    public final static String ID = "id";
-    public final static String LINK = "link";
-    public final static String REL = "rel";
-    public final static String SRC = "src";
-    public final static String STYLE = "style";
-    public final static String MEDIA = "media";
-    public final static String TYPE = "type";
+    public static final String CLASS = "class";
+    public static final String HREF = "href";
+    public static final String ID = "id";
+    public static final String LINK = "link";
+    public static final String REL = "rel";
+    public static final String SRC = "src";
+    public static final String STYLE = "style";
+    public static final String MEDIA = "media";
+    public static final String TYPE = "type";
 
 }

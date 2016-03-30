@@ -61,7 +61,7 @@ public abstract class AbstractPageRuleMarkupImplementation
      * @param sspHandler
      *            the SSP handler to use.
      */
-    abstract protected void select(SSPHandler sspHandler);
+    protected abstract void select(SSPHandler sspHandler);
     
     /**
      * This method defines a check operation . The instance of 
@@ -77,11 +77,11 @@ public abstract class AbstractPageRuleMarkupImplementation
      * @param testSolutionHandler
      *            the testSolutionHandler that handles the computed TestSolutions.
      */
-    abstract protected void check(
+    protected abstract void check(
                 SSPHandler sspHandler,
                 TestSolutionHandler testSolutionHandler);
 
     @Override
-    abstract public int getSelectionSize();
+    public abstract int getSelectionSize();
 
 }

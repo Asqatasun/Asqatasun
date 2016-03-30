@@ -81,13 +81,13 @@ public abstract class AbstractPageRuleDefaultImplementation extends AbstractPage
      * @param testSolutionHandler
      *            the testSolutionHandler that handles the computed TestSolutions.
      */
-    abstract protected void selectAndCheck(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler);
+    protected abstract void selectAndCheck(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler);
     
     /**
      * 
      * @return The total number of elements implied by test.
      */
-    abstract protected int getSelectionSize();
+    protected abstract int getSelectionSize();
     
     /**
      * This method computes the {@link DefiniteResult} of the test from the
