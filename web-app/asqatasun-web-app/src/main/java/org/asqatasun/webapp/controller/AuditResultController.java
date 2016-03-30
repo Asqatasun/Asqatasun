@@ -349,7 +349,7 @@ public class AuditResultController extends AbstractAuditResultController {
             return highlighter.highlightSourceCode(ssp.getDoctype(),
                     ssp.getAdaptedContent());
         } else {
-            return highlighter.highlightSourceCode(ssp.getAdaptedContent());
+            return highlighter.highlightSourceCode(ssp != null ? ssp.getAdaptedContent() : null);
         }
     }
 

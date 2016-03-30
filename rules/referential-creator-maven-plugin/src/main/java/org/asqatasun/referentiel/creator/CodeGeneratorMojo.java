@@ -221,7 +221,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
             Logger.getLogger(CodeGeneratorMojo.class.getName()).log(Level.SEVERE, null, ex);
             lineIterator = null;
         }
-        String[] csvHeaders = lineIterator.next().split(String.valueOf(delimiter));
+        String[] csvHeaders = lineIterator != null? lineIterator.next().split(String.valueOf(delimiter)) : new String[0];
         isCriterionPresent = extractCriterionFromCsvHeader(csvHeaders);
         try {
             extractAvailableLangsFromCsvHeader(csvHeaders);
