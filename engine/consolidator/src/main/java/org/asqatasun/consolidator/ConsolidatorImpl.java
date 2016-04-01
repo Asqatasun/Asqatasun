@@ -76,7 +76,7 @@ public class ConsolidatorImpl implements Consolidator {
             return;
         }
 
-        groupedProcessResultMap = new HashMap<WebResource, List<ProcessResult>>();
+        groupedProcessResultMap = new HashMap<>();
         for (ProcessResult processResult : grossResultList) {
             WebResource webResource = processResult.getSubject();
             WebResource parent;
@@ -87,14 +87,14 @@ public class ConsolidatorImpl implements Consolidator {
                 if (parent == null) {
                     processResultList = groupedProcessResultMap.get(webResource);
                     if (processResultList == null) {
-                        processResultList = new ArrayList<ProcessResult>();
+                        processResultList = new ArrayList<>();
                         groupedProcessResultMap.put(webResource,
                                 processResultList);
                     }
                 } else {
                     processResultList = groupedProcessResultMap.get(parent);
                     if (processResultList == null) {
-                        processResultList = new ArrayList<ProcessResult>();
+                        processResultList = new ArrayList<>();
                         groupedProcessResultMap.put(parent, processResultList);
                     }
                     webResource = parent;

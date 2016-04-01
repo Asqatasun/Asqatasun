@@ -35,7 +35,7 @@ import org.jsoup.nodes.Element;
 public class TextAttributeOfElementBuilder implements TextElementBuilder {
 
     /* the attribute name*/
-    private Collection<String> attributeNames = new HashSet<String>();
+    private Collection<String> attributeNames = new HashSet<>();
     public final void setAttributeName(String attributeName) {
         this.attributeNames.add(attributeName);
     }

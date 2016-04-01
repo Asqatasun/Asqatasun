@@ -50,7 +50,7 @@ public class TgolHandlerExceptionResolver extends DefaultHandlerExceptionResolve
     @SuppressWarnings("unchecked")
     public ModelAndView doResolveException(HttpServletRequest hsr, HttpServletResponse hsr1, Object o, Exception excptn) {
         if (excptn instanceof MaxUploadSizeExceededException) {
-            Map<String, String> model = new HashMap<String, String>();
+            Map<String, String> model = new HashMap<>();
             model.put(TgolKeyStore.CONTRACT_ID_KEY, hsr.getParameter(TgolKeyStore.CONTRACT_ID_KEY));
             return new ModelAndView(TgolKeyStore.MAX_FILE_SIZE_ERROR_VIEW_NAME, model);
         }

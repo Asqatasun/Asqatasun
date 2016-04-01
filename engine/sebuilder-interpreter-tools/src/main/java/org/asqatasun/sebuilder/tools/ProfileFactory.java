@@ -37,7 +37,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
  */
 public final class ProfileFactory {
 
-    private List<String> extensionPathList = new ArrayList<String>();
+    private List<String> extensionPathList = new ArrayList<>();
     public void setExtensionPathList(List<String> extensionPathList) {
         this.extensionPathList.addAll(extensionPathList);
     }
@@ -82,8 +82,8 @@ public final class ProfileFactory {
      * Each profile is started with a specific NetExport path (created randomly).
      * That map associated this path for a given profile
      */
-    private Map<FirefoxProfile, String> netExportPathMap = 
-            new HashMap<FirefoxProfile, String>();
+    private Map<FirefoxProfile, String> netExportPathMap =
+            new HashMap<>();
     
     /**
      * The holder that handles the unique instance of ProfileFactory

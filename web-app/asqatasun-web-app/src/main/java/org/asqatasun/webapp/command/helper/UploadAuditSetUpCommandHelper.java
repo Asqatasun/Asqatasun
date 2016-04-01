@@ -37,15 +37,15 @@ public final class UploadAuditSetUpCommandHelper  {
     /**
      * Local Map to deal with uploaded files with the same name
      */
-    private static Map<String, Integer> fileNameCounterMap = 
-            new HashMap<String, Integer>();
+    private static Map<String, Integer> fileNameCounterMap =
+            new HashMap<>();
     
     /**
      * This method converts the uploaded files into a map where the key is the
      * file name and the value is the file content.
      */
     public synchronized  static Map<String, String> convertFilesToMap(CommonsMultipartFile[] fileInputList ) {
-        Map<String, String> fileMap = new LinkedHashMap<String, String>();
+        Map<String, String> fileMap = new LinkedHashMap<>();
         CommonsMultipartFile tmpMultiFile;
         String tmpCharset;
         fileNameCounterMap.clear();

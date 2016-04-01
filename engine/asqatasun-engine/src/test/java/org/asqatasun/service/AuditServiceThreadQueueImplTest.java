@@ -162,7 +162,7 @@ public class AuditServiceThreadQueueImplTest extends TestCase {
         // the tested instance
         AuditServiceThreadQueueImpl instance = new AuditServiceThreadQueueImpl();
         
-        Collection<AuditCommand> auditCommands = new ArrayList<AuditCommand>();
+        Collection<AuditCommand> auditCommands = new ArrayList<>();
         for(int i=0;i<numberOfSimultaneousRequestedCommand;i++) {
             AuditCommand auditCommand = EasyMock.createMock(AuditCommand.class);
             auditCommands.add(auditCommand);

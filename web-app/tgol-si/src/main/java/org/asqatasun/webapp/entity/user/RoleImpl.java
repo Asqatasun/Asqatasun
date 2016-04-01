@@ -50,7 +50,7 @@ public class RoleImpl implements Role, Serializable {
     private RoleImpl parentRole;
 
     @OneToMany(mappedBy = "parentRole", cascade = CascadeType.ALL)
-    private Collection<RoleImpl> childRoleSet = new HashSet<RoleImpl>();
+    private Collection<RoleImpl> childRoleSet = new HashSet<>();
 
     @Override
     public Long getId() {

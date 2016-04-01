@@ -96,7 +96,7 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
 
     @Override
     public Set<Parameter> updateParameterSet(final Set<Parameter> paramSet, final Set<Parameter> paramsToUpdate) {
-        Set<Parameter> paramToReturn = new HashSet<Parameter>();
+        Set<Parameter> paramToReturn = new HashSet<>();
         for (Parameter parameter : paramSet){
             boolean found = false;
             for (Parameter paramToUpdate : paramsToUpdate) {
@@ -116,7 +116,7 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
 
     @Override
     public Set<Parameter> updateParameter(final Set<Parameter> paramSet, final Parameter paramToUpdate) {
-        Set<Parameter> paramToReturn = new HashSet<Parameter>();
+        Set<Parameter> paramToReturn = new HashSet<>();
         for (Parameter parameter : paramSet) {
             if (parameter.getParameterElement().getParameterElementCode().equals(
                     paramToUpdate.getParameterElement().getParameterElementCode())) {

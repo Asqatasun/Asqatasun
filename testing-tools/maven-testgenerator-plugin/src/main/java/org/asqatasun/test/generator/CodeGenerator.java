@@ -48,8 +48,8 @@ public class CodeGenerator {
     private String generated;
 
     public CodeGenerator(File templateFile) throws GeneratorException {
-        data = new LinkedHashMap<String, String>();
-        results = new LinkedHashMap<String, String>();
+        data = new LinkedHashMap<>();
+        results = new LinkedHashMap<>();
         try {
             Properties props = new Properties();
             props.setProperty("resource.loader", "file");

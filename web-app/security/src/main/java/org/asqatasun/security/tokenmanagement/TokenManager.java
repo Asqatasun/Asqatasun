@@ -53,7 +53,7 @@ public final class TokenManager {
     public void setTokenDurationValidity(int tokenDurationValidity) {
         this.tokenDurationValidity = tokenDurationValidity;
     }
-    private Map<String, Boolean> tokenUsage = new HashMap<String, Boolean>();
+    private Map<String, Boolean> tokenUsage = new HashMap<>();
 
     /**
      * Default constructor

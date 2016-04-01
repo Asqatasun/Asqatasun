@@ -59,7 +59,7 @@ public class UploadAuditSetUpFormValidator extends AuditSetUpFormValidator {
         super(contractDataService);
     }
 
-    public List<String> authorizedMimeType = new ArrayList<String>();
+    public List<String> authorizedMimeType = new ArrayList<>();
     public List<String> getAuthorizedMimeType() {
         return authorizedMimeType;
     }

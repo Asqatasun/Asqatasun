@@ -192,16 +192,16 @@ public class Aw22Rule10042Test extends Aw22RuleImplementationTestCase {
     }
 
     private void setUpRelatedContentMap(){
-        List<String> relatedContent1 = new ArrayList<String>();
+        List<String> relatedContent1 = new ArrayList<>();
         relatedContent1.add("css/AW22.Test.10.4.2-2Failed-01_1.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.2-2Failed-01_1"), relatedContent1);
 
-        List<String> relatedContent2 = new ArrayList<String>();
+        List<String> relatedContent2 = new ArrayList<>();
         relatedContent2.add("css/AW22.Test.10.4.2-2Failed-01_2.css");
         relatedContent2.add("css/AW22.Test.10.4.2-2Failed-01_2_1.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.2-2Failed-01_2"), relatedContent2);
 
-        List<String> relatedContent3 = new ArrayList<String>();
+        List<String> relatedContent3 = new ArrayList<>();
         relatedContent3.add("css/AW22.Test.10.4.2-2Failed-01_3.css");
         getRelatedContentMap().put(getWebResourceMap().get("AW22.Test.10.4.2-2Failed-01_3"), relatedContent3);
         

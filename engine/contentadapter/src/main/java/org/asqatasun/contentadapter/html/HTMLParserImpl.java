@@ -46,7 +46,7 @@ import org.asqatasun.contentadapter.HTMLParser;
  */
 public class HTMLParserImpl implements HTMLParser {
 
-    protected Set<ContentAdapter> contentAdapterSet = new HashSet<ContentAdapter>();
+    protected Set<ContentAdapter> contentAdapterSet = new HashSet<>();
     protected boolean initialized = false;
     protected XMLReader saxReader;
     protected SSP ssp;

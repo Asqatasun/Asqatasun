@@ -37,8 +37,8 @@ public class NomenclatureDataServiceImpl extends AbstractGenericDataService<Nome
         NomenclatureDataService {
 
     protected StandardMessageDAO standardMessageDao;
-    private Map<String, Nomenclature> nomenclatureMapByCode = 
-            new HashMap<String, Nomenclature>();
+    private Map<String, Nomenclature> nomenclatureMapByCode =
+            new HashMap<>();
 
     public NomenclatureDataServiceImpl() {
         super();

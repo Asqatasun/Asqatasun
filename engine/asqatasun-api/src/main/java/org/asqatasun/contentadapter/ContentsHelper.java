@@ -40,7 +40,7 @@ public abstract class ContentsHelper {
      * @return the list of SSP from the content list
      */
     public static Collection<SSP> filterSSP(Collection<Content> contentList) {
-        Collection<SSP> sspList = new ArrayList<SSP>();
+        Collection<SSP> sspList = new ArrayList<>();
         for (Content content : contentList) {
             if (content instanceof SSP) {
                 sspList.add((SSP)content);

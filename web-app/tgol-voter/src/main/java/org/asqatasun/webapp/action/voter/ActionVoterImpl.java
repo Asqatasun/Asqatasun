@@ -40,7 +40,7 @@ public class ActionVoterImpl implements ActionVoter {
         this.actionEnableMap = actionEnableMap;
     }
 
-    private List<Action> actionList = new LinkedList<Action>();
+    private List<Action> actionList = new LinkedList<>();
 
     private String code;
     public String getCode() {

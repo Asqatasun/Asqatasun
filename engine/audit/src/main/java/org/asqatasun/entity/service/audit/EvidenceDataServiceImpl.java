@@ -34,7 +34,7 @@ import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
 public class EvidenceDataServiceImpl extends AbstractGenericDataService<Evidence, Long> implements
         EvidenceDataService {
 
-    private Map<String, Evidence> evidenceMap = new HashMap<String, Evidence>();
+    private Map<String, Evidence> evidenceMap = new HashMap<>();
 
     public EvidenceDataServiceImpl() {
         super();

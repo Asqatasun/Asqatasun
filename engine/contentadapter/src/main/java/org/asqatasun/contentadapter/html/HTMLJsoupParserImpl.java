@@ -65,9 +65,9 @@ public class HTMLJsoupParserImpl implements HTMLParser {
         }
         Document doc = Jsoup.parse(ssp.getDOM(), ssp.getURI());
 
-        Collection<Element> inlineCssElementList = new ArrayList<Element>();
-        Collection<Element> localeCssElementList = new ArrayList<Element>();
-        Collection<Element> externalCssElementList = new ArrayList<Element>();
+        Collection<Element> inlineCssElementList = new ArrayList<>();
+        Collection<Element> localeCssElementList = new ArrayList<>();
+        Collection<Element> externalCssElementList = new ArrayList<>();
         
         for (Element el : doc.select("[style]")) {
             inlineCssElementList.add(el);            

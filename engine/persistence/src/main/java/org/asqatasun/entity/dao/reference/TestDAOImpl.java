@@ -80,7 +80,7 @@ public class TestDAOImpl extends AbstractJPADAO<Test, Long> implements TestDAO {
     @SuppressWarnings("unchecked")
     public List<Test> retrieveAllByCode(String[] codeArray) {
         if (codeArray.length == 0) {
-            return new ArrayList<Test>();
+            return new ArrayList<>();
         }
 
         StringBuilder stringBuilder = new StringBuilder("SELECT t FROM "

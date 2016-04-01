@@ -86,7 +86,7 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
         assertNotNull(contract);
         assertEquals("http://www.contract1.com/", contractDataService.getUrlFromContractOption(contract));
         assertEquals(Long.valueOf("1"), contract.getUser().getId());
-        Set<String> functionalityCodeSet = new HashSet<String>();
+        Set<String> functionalityCodeSet = new HashSet<>();
         for (Functionality functionality : contract.getFunctionalitySet()) {
             functionalityCodeSet.add(functionality.getCode());
         }
@@ -99,7 +99,7 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
         assertNotNull(contract);
         assertEquals("http://www.contract2.com/", contractDataService.getUrlFromContractOption(contract));
         assertEquals(Long.valueOf("1"), contract.getUser().getId());
-        functionalityCodeSet = new HashSet<String>();
+        functionalityCodeSet = new HashSet<>();
         for (Functionality functionality : contract.getFunctionalitySet()) {
             functionalityCodeSet.add(functionality.getCode());
         }
@@ -121,10 +121,10 @@ public class ContractDAOImplTest extends AbstractDaoTestCase {
         Date endDate = new Date();
         Date renewalDate = new Date();
         int nbOfContract = contractDAO.findAll().size();
-        Set<Functionality> functionalitySet = new HashSet<Functionality>();
-        Set<OptionElement> optionElementSet = new HashSet<OptionElement>();
-        Set<Referential> referenceSet = new HashSet<Referential>();
-        Set<Scenario> scenarioSet = new HashSet<Scenario>();
+        Set<Functionality> functionalitySet = new HashSet<>();
+        Set<OptionElement> optionElementSet = new HashSet<>();
+        Set<Referential> referenceSet = new HashSet<>();
+        Set<Scenario> scenarioSet = new HashSet<>();
         Contract contract = contractFactory.createContract(
                 "Contract-test",
                 beginDate,

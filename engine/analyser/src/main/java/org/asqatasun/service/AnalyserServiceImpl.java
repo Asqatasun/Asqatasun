@@ -36,7 +36,7 @@ import org.asqatasun.entity.subject.WebResource;
  */
 public class AnalyserServiceImpl implements AnalyserService {
 
-    private Set<AnalyserFactory> analyserFactorySet = new HashSet<AnalyserFactory>();
+    private Set<AnalyserFactory> analyserFactorySet = new HashSet<>();
 
     public AnalyserServiceImpl() {
         super();

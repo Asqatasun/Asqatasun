@@ -324,7 +324,7 @@ public class AuditSetUpControllerTest extends TestCase {
         // initialise the context with the user identified by the email 
         // "test1@test.com" seen as authenticated
         
-        Collection<GrantedAuthority> gac = new ArrayList<GrantedAuthority>();
+        Collection<GrantedAuthority> gac = new ArrayList<>();
         TgolUserDetails tud = new TgolUserDetails("test1@test.com", "", true, false, true, true, gac, mockUser);
         
         mockAuthentication = createMock(Authentication.class);
@@ -393,7 +393,7 @@ public class AuditSetUpControllerTest extends TestCase {
     private Set<Functionality> setUpMockFunctionalitySet() {
         mockFunctionality = createMock(Functionality.class);
         expect(mockFunctionality.getCode()).andReturn("FUNCTIONALITY1").anyTimes();
-        Set<Functionality> mockFunctionalitySet = new HashSet<Functionality>();
+        Set<Functionality> mockFunctionalitySet = new HashSet<>();
         mockFunctionalitySet.add(mockFunctionality);
         replay(mockFunctionality);
         return mockFunctionalitySet;
@@ -402,7 +402,7 @@ public class AuditSetUpControllerTest extends TestCase {
     private Set<Referential> setUpMockReferentialSet() {
         mockReferential = createMock(Referential.class);
         expect(mockReferential.getCode()).andReturn("").anyTimes();
-        Set<Referential> mockReferentialSet = new HashSet<Referential>();
+        Set<Referential> mockReferentialSet = new HashSet<>();
         mockReferentialSet.add(mockReferential);
         replay(mockReferential);
         return mockReferentialSet;
@@ -414,7 +414,7 @@ public class AuditSetUpControllerTest extends TestCase {
         expect(mockOptionElement.getOption()).andReturn(mockOption).anyTimes();
         expect(mockOption.getCode()).andReturn("").anyTimes();
         
-        Set<OptionElement> mockOptionElementSet = new HashSet<OptionElement>();
+        Set<OptionElement> mockOptionElementSet = new HashSet<>();
         mockOptionElementSet.add(mockOptionElement);
         
         replay(mockOptionElement);
@@ -429,7 +429,7 @@ public class AuditSetUpControllerTest extends TestCase {
      * of the contract
      */
     private void setUpViewFunctionalityBindingMap() {
-        Map<String, String> viewFunctionalityBindingMap =  new HashMap<String, String>();
+        Map<String, String> viewFunctionalityBindingMap = new HashMap<>();
         // The contracts are initialised with a functionality whose code is 
         // FUNCTIONALITY1. We allow all the audit set-up forms for this 
         // functionality by populating the viewFunctionalityBindingMap
@@ -445,7 +445,7 @@ public class AuditSetUpControllerTest extends TestCase {
      * of the contract
      */
     private void setUpEmptyViewFunctionalityBindingMap() {
-        Map<String, String> viewFunctionalityBindingMap =  new HashMap<String, String>();
+        Map<String, String> viewFunctionalityBindingMap = new HashMap<>();
         instance.setViewFunctionalityBindingMap(viewFunctionalityBindingMap);
     }
      
@@ -492,12 +492,12 @@ public class AuditSetUpControllerTest extends TestCase {
         // to fit with the mock of the ParameterElementDataService
         mockAuditSetUpFormFieldBuilder.setParameterCode("TEXTUAL_FORMFIELD");
 
-        List<AuditSetUpFormFieldBuilderImpl> mockAuditSetUpFormFieldBuilderList = 
-                new ArrayList<AuditSetUpFormFieldBuilderImpl>();
+        List<AuditSetUpFormFieldBuilderImpl> mockAuditSetUpFormFieldBuilderList =
+                new ArrayList<>();
         mockAuditSetUpFormFieldBuilderList.add(mockAuditSetUpFormFieldBuilder);
                 
-        Map<String, List<AuditSetUpFormFieldBuilderImpl>> mockOptionAuditSetUpFormFieldList = 
-                new HashMap<String, List<AuditSetUpFormFieldBuilderImpl>>();
+        Map<String, List<AuditSetUpFormFieldBuilderImpl>> mockOptionAuditSetUpFormFieldList =
+                new HashMap<>();
         mockOptionAuditSetUpFormFieldList.put("Option1", mockAuditSetUpFormFieldBuilderList);
         return mockOptionAuditSetUpFormFieldList;
     }
@@ -526,7 +526,7 @@ public class AuditSetUpControllerTest extends TestCase {
             mockParameter2 =  createMock(Parameter.class);
             expect(mockParameter1.getValue()).andReturn("PARAMETER1").anyTimes();
             expect(mockParameter2.getValue()).andReturn("PARAMETER2").anyTimes();
-            Set<Parameter> paramSet = new HashSet<Parameter>();
+            Set<Parameter> paramSet = new HashSet<>();
             paramSet.add(mockParameter1);
             paramSet.add(mockParameter2);
             replay(mockParameter1);
@@ -571,19 +571,19 @@ public class AuditSetUpControllerTest extends TestCase {
         mockSelectElementBuilder.setValue("MockRef;MockLevel");
         
         // the mock select Element list
-        List<SelectElementBuilder> selectElementBuilderList = new ArrayList<SelectElementBuilder>();
+        List<SelectElementBuilder> selectElementBuilderList = new ArrayList<>();
         selectElementBuilderList.add(mockSelectElementBuilder);
         
-        Map<String,List<SelectElementBuilder>> selectElementBuilderMap = 
-                new HashMap<String,List<SelectElementBuilder>>();
+        Map<String,List<SelectElementBuilder>> selectElementBuilderMap =
+                new HashMap<>();
         
         selectElementBuilderMap.put("REFERENTIAL1", selectElementBuilderList);
 
         SelectFormFieldBuilderImpl selectFormFieldBuilder =  new SelectFormFieldBuilderImpl();
         selectFormFieldBuilder.setSelectElementBuilderMap(selectElementBuilderMap);
         
-        List<SelectFormFieldBuilderImpl> mockSelectRefFormFieldList = 
-                new ArrayList<SelectFormFieldBuilderImpl>();
+        List<SelectFormFieldBuilderImpl> mockSelectRefFormFieldList =
+                new ArrayList<>();
         mockSelectRefFormFieldList.add(selectFormFieldBuilder);
         
         return mockSelectRefFormFieldList;

@@ -194,12 +194,12 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
      */
     private Collection<Parameter> getTestWeightParamSet(Audit audit) {
         if (testWeightParameterFamilySet == null) {
-            testWeightParameterFamilySet = new HashSet<ParameterFamily>();
+            testWeightParameterFamilySet = new HashSet<>();
             for (String paramFamilyCode : testWeightParameterFamilyCodeList) {
                 testWeightParameterFamilySet.add(parameterFamilyDataService.getParameterFamily(paramFamilyCode));
             }
         }
-        Collection<Parameter> testWeightParamSet = new HashSet<Parameter>();
+        Collection<Parameter> testWeightParamSet = new HashSet<>();
         for (ParameterFamily pf : testWeightParameterFamilySet) {
                 testWeightParamSet.addAll(parameterDataService.getParameterSet(pf, audit));
         }

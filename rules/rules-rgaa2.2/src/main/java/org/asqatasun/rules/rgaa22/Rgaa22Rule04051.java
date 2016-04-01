@@ -51,8 +51,8 @@ public class Rgaa22Rule04051 extends AbstractCompositePageRuleMarkupImplementati
      */
     public Rgaa22Rule04051() {
         super();
-        Collection<AbstractPageRuleMarkupImplementation> ruleCheckers = 
-                new ArrayList<AbstractPageRuleMarkupImplementation>();
+        Collection<AbstractPageRuleMarkupImplementation> ruleCheckers =
+                new ArrayList<>();
         ruleCheckers.add(new DecorativeImageRuleMarkupImplementation());
         ruleCheckers.add(new DecorativeAppletRuleMarkupImplementation());
         setInnerRuleCheckers(ruleCheckers);

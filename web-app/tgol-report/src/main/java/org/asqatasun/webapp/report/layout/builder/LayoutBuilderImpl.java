@@ -92,7 +92,7 @@ public class LayoutBuilderImpl implements LayoutBuilder {
         this.formatSpecificColumnBuilderList = formatSpecificColumnBuilderList;
     }
 
-    private Map<String, String> fieldMap = new HashMap<String, String>();
+    private Map<String, String> fieldMap = new HashMap<>();
     public void setFieldMap(Map<String, String> fieldMap) {
         for (Map.Entry<String,String> entry : fieldMap.entrySet()) {
             this.fieldMap.put(entry.getKey(), entry.getValue());

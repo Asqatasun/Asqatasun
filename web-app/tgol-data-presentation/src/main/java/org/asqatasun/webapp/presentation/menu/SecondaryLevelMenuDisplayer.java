@@ -76,7 +76,7 @@ public class SecondaryLevelMenuDisplayer {
     public void setModifiableReferentialsForUserToModel(
             User user, 
             Model model) {
-        Collection<String> refList = new HashSet<String>();
+        Collection<String> refList = new HashSet<>();
         for(Contract contract : getContractDataService().getAllContractsByUser(user)) {
             for (Referential ref : contract.getReferentialSet()) {
                 if (referentialWithModifiableTestWeight.contains(ref.getCode())) {

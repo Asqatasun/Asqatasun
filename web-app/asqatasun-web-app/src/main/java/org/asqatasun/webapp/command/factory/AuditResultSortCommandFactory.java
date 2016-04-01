@@ -97,7 +97,7 @@ public final class AuditResultSortCommandFactory {
             } else if (ff instanceof CheckboxFormField) {
                 CheckboxFormField cff = ((CheckboxFormField)ff);
                 String code = cff.getCode();
-                List<String> selectedElements = new ArrayList<String>();
+                List<String> selectedElements = new ArrayList<>();
                 for (CheckboxElement ce : cff.getCheckboxElementList()) {
                     if (ce.getEnabled() && ce.getSelected()) {
                         selectedElements.add(ce.getValue());
@@ -123,7 +123,7 @@ public final class AuditResultSortCommandFactory {
         // is possible. We need to retrieve the appropriate theme list regarding
         // the referential
         // Copy the audit setup form field map from the builders
-        List<FormField> initialisedFormFielList = new LinkedList<FormField>();
+        List<FormField> initialisedFormFielList = new LinkedList<>();
         boolean hasTheme = false;
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
             if (!formFieldBuilder.getI18nKey().equals(themeKey)) {
@@ -150,7 +150,7 @@ public final class AuditResultSortCommandFactory {
         // is possible. We need to retrieve the appropriate theme list regarding
         // the referential
         // Copy the audit setup form field map from the builders
-        List<FormField> initialisedFormFieldList = new LinkedList<FormField>();
+        List<FormField> initialisedFormFieldList = new LinkedList<>();
         boolean hasTheme = false;
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
             if (!formFieldBuilder.getI18nKey().equals(themeKey)) {

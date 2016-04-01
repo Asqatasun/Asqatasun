@@ -97,7 +97,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
                     continue;
                 }
 
-                Map<String, String> templateData = new LinkedHashMap<String, String>();
+                Map<String, String> templateData = new LinkedHashMap<>();
                 for (int i = 0; i < fields.length; i++) {
                     templateData.put(fieldNames[i], fields[i]);
                 }

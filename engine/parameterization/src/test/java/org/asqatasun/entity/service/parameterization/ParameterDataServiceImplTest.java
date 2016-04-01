@@ -48,7 +48,7 @@ public class ParameterDataServiceImplTest extends TestCase {
 
     public void testUpdateParameterSet() {
         ParameterDataService pds = new ParameterDataServiceImpl();
-        Set<Parameter> paramSet = new LinkedHashSet<Parameter>();
+        Set<Parameter> paramSet = new LinkedHashSet<>();
         for (int i=0;i<5;i++) {
             paramSet.add(getParameter(PARAM_FAMILY, PARAM_ELEMENT+String.valueOf(i), String.valueOf(i)));
         }
@@ -59,7 +59,7 @@ public class ParameterDataServiceImplTest extends TestCase {
             assertEquals(val, Integer.valueOf(iter.next().getValue()).intValue());
             val++;
         }
-        Set<Parameter> paramToUpdate = new HashSet<Parameter>();
+        Set<Parameter> paramToUpdate = new HashSet<>();
         for (int i=2;i<5;i++) {
             paramToUpdate.add(getParameter(PARAM_FAMILY, PARAM_ELEMENT+String.valueOf(i), String.valueOf(i+10)));
         }
@@ -79,7 +79,7 @@ public class ParameterDataServiceImplTest extends TestCase {
 
     public void testUpdateParameter() {
         ParameterDataService pds = new ParameterDataServiceImpl();
-        Set<Parameter> paramSet = new LinkedHashSet<Parameter>();
+        Set<Parameter> paramSet = new LinkedHashSet<>();
         for (int i=0;i<5;i++) {
             paramSet.add(getParameter(PARAM_FAMILY, PARAM_ELEMENT+String.valueOf(i), String.valueOf(i)));
         }

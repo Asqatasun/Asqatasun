@@ -80,7 +80,7 @@ public class ScenarioLoaderServiceImplTest extends TestCase {
         mockScenarioLoader.run();
         expectLastCall().once();
         
-        List<Content> contentList = new ArrayList<Content>();
+        List<Content> contentList = new ArrayList<>();
         
         expect(mockScenarioLoader.getResult())
                 .andReturn(contentList)

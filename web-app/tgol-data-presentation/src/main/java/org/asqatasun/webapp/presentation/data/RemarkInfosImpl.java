@@ -85,7 +85,7 @@ public class RemarkInfosImpl implements RemarkInfos{
     }
 
     private List<Map<String, String>> evidenceElementList =
-            new ArrayList<Map<String, String>>();
+            new ArrayList<>();
     /**
      *
      * @return

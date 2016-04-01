@@ -73,15 +73,15 @@ public class Rgaa22Rule07011Test extends Rgaa22RuleImplementationTestCase {
     }
 
     private void setUpRelatedContentMap(){
-        List<String> relatedContent1 = new ArrayList<String>();
+        List<String> relatedContent1 = new ArrayList<>();
         relatedContent1.add("css/RGAA22.Test.7.1-1Passed-02.css");
         getRelatedContentMap().put(getWebResourceMap().get("RGAA22.Test.7.1-1Passed-02"), relatedContent1);
         
-        List<String> relatedContent2 = new ArrayList<String>();
+        List<String> relatedContent2 = new ArrayList<>();
         relatedContent2.add("css/RGAA22.Test.7.1-3NMI-02.css");
         getRelatedContentMap().put(getWebResourceMap().get("RGAA22.Test.7.1-3NMI-02"), relatedContent2);
         
-        List<String> relatedContent3 = new ArrayList<String>();
+        List<String> relatedContent3 = new ArrayList<>();
         relatedContent3.add("css/RGAA22.Test.7.1-4NA-02.css");
         getRelatedContentMap().put(getWebResourceMap().get("RGAA22.Test.7.1-4NA-02"), relatedContent3);
     }
