@@ -27,7 +27,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 2. Be 200% reliable (don't give erroneous result)
 3. have technological fun
 
-![5 types of accessibility results](/documentation/en/20_User_doc/Images/screenshot_20150307_ASQATASUN_5_types_of_result.png)
+![5 types of accessibility results](https://github.com/Asqatasun/Asqatasun/blob/master/documentation/en/20_User_doc/Images/screenshot_20150307_ASQATASUN_5_types_of_result.png)
 
 ---
 
@@ -116,7 +116,7 @@ Create your own tests.
 
 ## License
 
- [AGPL v3](LICENSE) 
+ [AGPL v3](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE) 
 
 ## Content of this last version (Asqatasun 4.0.1, 2016-03-18)
 
@@ -138,7 +138,9 @@ to support any type of charset including cyrillic + enhance way to modify Mysql 
 - [#85](https://github.com/Asqatasun/Asqatasun/issues/85): Audit full-site : accept the new gTLDs (eg .jobs, .paris)
 
 
-See full [Changelog](CHANGELOG.txt)
+See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.txt)
 
 Have Fun
-[Asqatasun Team](asqatasun-team.md)
+[Asqatasun Team](https://github.com/Asqatasun/Asqatasun/blob/master/documentation/en/asqatasun-team.md)
+
+
