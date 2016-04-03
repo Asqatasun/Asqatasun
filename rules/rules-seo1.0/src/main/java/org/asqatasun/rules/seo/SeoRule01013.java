@@ -41,7 +41,7 @@ import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
  */
 public class SeoRule01013 extends AbstractPageRuleMarkupImplementation {
 
-    private final static int MAX_META_DESC_LENGTH = 255;
+    private static final int MAX_META_DESC_LENGTH = 255;
     private final ElementHandler<Element> elementHandler = new ElementHandlerImpl();
     
     /*

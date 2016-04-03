@@ -59,7 +59,7 @@ public class Aw22Rule10071 extends AbstractPageRuleFromPreProcessImplementation 
      * For these elements, the extraction is not trusted, the default value
      * depends on the browser and may be confusable
      */
-    private final static String[] FOCUSABLE_EXCLUDED_LIST = 
+    private static final String[] FOCUSABLE_EXCLUDED_LIST = 
             {HtmlElementStore.INPUT_ELEMENT, 
              HtmlElementStore.BUTTON_ELEMENT, 
              HtmlElementStore.TEXTAREA_ELEMENT, 

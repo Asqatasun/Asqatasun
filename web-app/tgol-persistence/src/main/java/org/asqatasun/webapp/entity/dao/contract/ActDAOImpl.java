@@ -55,7 +55,7 @@ public class ActDAOImpl extends AbstractJPADAO<Act, Long> implements ActDAO {
                 + " WHERE a.contract = :contract");
         query.setParameter("contract", contract);
         query.setHint(CACHEABLE_OPTION, "true");
-        return Long.valueOf((Long)query.getSingleResult()).intValue();
+        return ((Long)query.getSingleResult()).intValue();
     }
 
     @Override

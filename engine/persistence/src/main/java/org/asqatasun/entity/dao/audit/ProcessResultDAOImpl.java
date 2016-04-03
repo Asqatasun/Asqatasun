@@ -228,7 +228,7 @@ public class ProcessResultDAOImpl extends AbstractJPADAO<ProcessResult, Long>
             return new ArrayList<>();
         }
         List<Number> revisions = auditReader.getRevisions(processResultImpl.getClass(), id);
-        DefiniteResult find = null;
+        DefiniteResult find;
         for (int i = 0; i < revisions.size(); i++) {
             Number revision = revisions.get(i);
             find = auditReader.find(DefiniteResultImpl.class, id, revision);

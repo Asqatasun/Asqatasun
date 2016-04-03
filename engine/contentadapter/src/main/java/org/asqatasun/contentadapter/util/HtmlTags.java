@@ -27,9 +27,9 @@ package org.asqatasun.contentadapter.util;
  */
 public abstract class HtmlTags {
 
-    public final static String LINK = "link";
-    public final static String SCRIPT = "script";
-    public final static String STYLE = "style";
-    public final static String BASE = "base";
+    public static final String LINK = "link";
+    public static final String SCRIPT = "script";
+    public static final String STYLE = "style";
+    public static final String BASE = "base";
 
 }

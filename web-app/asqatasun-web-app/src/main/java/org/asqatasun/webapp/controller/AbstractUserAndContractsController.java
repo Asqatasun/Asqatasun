@@ -457,7 +457,7 @@ public class AbstractUserAndContractsController extends AbstractController{
         emailSender.sendEmail(
                 emailFrom, 
                 emailToSet, 
-                Collections.EMPTY_SET, 
+                Collections.<String>emptySet(), 
                 StringUtils.EMPTY,
                 emailSubject, 
                 emailContent);

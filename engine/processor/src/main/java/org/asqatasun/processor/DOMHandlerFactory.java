@@ -27,7 +27,9 @@ import org.asqatasun.service.ProcessRemarkService;
  *
  * @author enzolalay
  */
-public class DOMHandlerFactory {// TODO Write javadoc
+public class DOMHandlerFactory {
+    private DOMHandlerFactory() {
+    }// TODO Write javadoc
 
     public static DOMHandler create(ProcessRemarkService processRemarkService) {
         DOMHandler domHandler = new DOMHandlerImpl();

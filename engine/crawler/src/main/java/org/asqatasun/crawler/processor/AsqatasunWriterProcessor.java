@@ -120,7 +120,7 @@ public class AsqatasunWriterProcessor extends Processor
         this.htmlRegexp = htmlRegexp;
     }
 
-    private Collection<String> authorizedMimeTypes = Collections.EMPTY_LIST;
+    private Collection<String> authorizedMimeTypes = Collections.emptyList();
     public Collection<String> getAuthorizedMimeTypes() {
         return authorizedMimeTypes;
     }

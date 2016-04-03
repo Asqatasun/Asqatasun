@@ -651,12 +651,22 @@ public class DOMHandlerImpl implements DOMHandler {
         this.processRemarkService = processRemarkService;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public String getMessageCode() {
         return messageCode;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler selectDocumentNodesWithAttribute(String attributeName) {
@@ -669,7 +679,13 @@ public class DOMHandlerImpl implements DOMHandler {
         selectedElementList = elements;
         return this;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkAttributeValueIsEmpty(String attributeName) {
@@ -692,6 +708,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childnodes to select recursively
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler selectChildNodesRecursively(
@@ -708,6 +730,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childnodes to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler keepNodesWithoutChildNode(
@@ -733,6 +761,11 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeName
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler keepNodesWithoutChildNode(String childNodeName) {
@@ -755,6 +788,11 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param name
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler selectAttributeByName(String name) {
@@ -769,6 +807,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childNodes to select
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler selectChildNodes(Collection<String> childNodeNames) {
@@ -790,7 +834,15 @@ public class DOMHandlerImpl implements DOMHandler {
         selectedElementList = elements;
         return this;
     }
-  
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @param values
+     *            the values of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueEquals(String attributeName,
@@ -813,6 +865,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueNonEmpty(String attributeName) {
@@ -828,6 +886,14 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to be filteterd
+     * @param values
+     *            the values of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueStartingWith(
@@ -851,6 +917,14 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @param value
+     *            the value of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler keepNodesWithAttributeValueStartingWith(
@@ -872,6 +946,10 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public List<String> getTextContentValues() {
@@ -882,6 +960,14 @@ public class DOMHandlerImpl implements DOMHandler {
         return values;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param length
+     *            the length of the text content to check
+     * @param defaultFailResult
+     *            the default return value if the check processing fails
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkTextContentValueLengthLower(int length,
@@ -901,6 +987,10 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkTextContentValueNotEmpty() {
@@ -917,6 +1007,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler excludeNodesWithAttribute(String attributeName) {
@@ -932,6 +1028,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeNames
+     *            the names of the childnodes to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler excludeNodesWithChildNode(ArrayList<String> childNodeNames) {
@@ -957,6 +1059,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeName
+     *            the name of the childNode to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler excludeNodesWithChildNode(String childNodeName) {
@@ -979,6 +1087,12 @@ public class DOMHandlerImpl implements DOMHandler {
         return this;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute targeted
+     * @return
+     */
     @Override
     @Deprecated
     public List<String> getAttributeValues(String attributeName) {
@@ -993,6 +1107,15 @@ public class DOMHandlerImpl implements DOMHandler {
         return values;
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     * @param blacklist
+     *            the list of prevented values
+     * @param whitelist
+     *            the list of granted values
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkTextContentAndAttributeValue(String attributeName,
@@ -1061,7 +1184,13 @@ public class DOMHandlerImpl implements DOMHandler {
 
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeName
+     *            the name of the attribute to filter
+     * @return
+     */
     @Override
     @Deprecated
     public DOMHandler keepNodesWithChildNode(String childNodeName) {
@@ -1078,7 +1207,13 @@ public class DOMHandlerImpl implements DOMHandler {
         selectedElementList = elements;
         return this;
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param childNodeName
+     *            the name of the childnode to check
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkChildNodeExistsRecursively(String childNodeName) {
@@ -1102,7 +1237,11 @@ public class DOMHandlerImpl implements DOMHandler {
         }
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkContentNotEmpty() {
@@ -1121,7 +1260,12 @@ public class DOMHandlerImpl implements DOMHandler {
         }
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param expr
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkEachWithXpath(String expr) {
@@ -1146,7 +1290,13 @@ public class DOMHandlerImpl implements DOMHandler {
         }
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkAttributeValueNotEmpty(String attributeName) {
@@ -1168,7 +1318,15 @@ public class DOMHandlerImpl implements DOMHandler {
         }
         return RuleHelper.synthesizeTestSolutionCollection(resultSet);
     }
-    
+
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param blacklist
+     *            the list of prevented values
+     * @param whitelist
+     *            the list of granted values
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkNodeValue(Collection<String> blacklist,
@@ -1177,6 +1335,16 @@ public class DOMHandlerImpl implements DOMHandler {
                 "BlackListedValue");
     }
 
+    /**
+     * @deprecated Kept for backward compatibility.
+     * @param attributeName
+     *            the name of the attribute to check
+     * @param length
+     *            the length of the attribute value to check
+     * @param defaultFailResult
+     *            the default return value if the check processing fails
+     * @return
+     */
     @Override
     @Deprecated
     public TestSolution checkAttributeValueLengthLower(String attributeName,

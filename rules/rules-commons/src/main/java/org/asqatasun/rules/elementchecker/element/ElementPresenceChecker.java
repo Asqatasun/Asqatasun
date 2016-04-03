@@ -43,7 +43,7 @@ import org.asqatasun.rules.elementchecker.ElementCheckerImpl;
  */
 public class ElementPresenceChecker extends ElementCheckerImpl {
 
-    public static boolean DEFAULT_CHECK_UNICITY = false;
+    public static final boolean DEFAULT_CHECK_UNICITY = false;
     /**
      * Determine whether the element has to be present and unique.
      */
@@ -52,8 +52,8 @@ public class ElementPresenceChecker extends ElementCheckerImpl {
         this.checkUnicity = checkUnicity;
     }
     
-    public static TestSolution DEFAULT_NOT_DETECTED_SOLUTION = TestSolution.PASSED;
-    public static TestSolution DEFAULT_DETECTED_SOLUTION = TestSolution.FAILED;
+    public static final TestSolution DEFAULT_NOT_DETECTED_SOLUTION = TestSolution.PASSED;
+    public static final TestSolution DEFAULT_DETECTED_SOLUTION = TestSolution.FAILED;
     
     /**
      * The message code associated with a processRemark when the element is

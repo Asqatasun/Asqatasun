@@ -29,6 +29,9 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class CSSHandlerFactory {
 
+    private CSSHandlerFactory() {
+    }
+
     /**
      * 
      * @param processRemarkService

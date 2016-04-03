@@ -95,7 +95,7 @@ public class DownloaderImpl implements Downloader {
 
         // Create a response handler
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
-        String responseBody = null;
+        String responseBody;
         try {
             responseBody = httpclient.execute(httpget, responseHandler);
         } catch (HttpResponseException ex) {

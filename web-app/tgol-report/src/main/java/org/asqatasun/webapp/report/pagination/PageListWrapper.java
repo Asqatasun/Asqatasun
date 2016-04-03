@@ -98,7 +98,7 @@ public class PageListWrapper extends TableDecorator {
             pageResult = ((PageResult) lObject);
         }
         StringBuilder strb = new StringBuilder();
-        strb.append(buildExternalLinkUrl(pageResult.getUrl(), resourceBundle));
+        strb.append(buildExternalLinkUrl(pageResult != null? pageResult.getUrl() : null, resourceBundle));
         strb.append(getUrlLink(pageResult, resourceBundle));
         return strb.toString();
     }
@@ -117,7 +117,7 @@ public class PageListWrapper extends TableDecorator {
         }
 
         StringBuilder strb = new StringBuilder();
-        strb.append(buildExternalLinkUrl(pageResult.getUrl(), resourceBundle));
+        strb.append(buildExternalLinkUrl(pageResult != null? pageResult.getUrl() : null, resourceBundle));
         strb.append(pageResult.getUrl());
         return strb.toString();
     }

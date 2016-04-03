@@ -39,7 +39,7 @@ public class AsqatasunDecideRuleSequenceExtended extends DecideRuleSequence {
             }
         }
         if (fileLogger != null) {
-            fileLogger.info(decisiveRuleNumber + " " + decisiveRule.getClass().getSimpleName() + " " + result + " " + uri);
+            fileLogger.info(decisiveRuleNumber + " " + decisiveRule != null? decisiveRule.getClass().getSimpleName() : null + " " + result + " " + uri);
         }
 
         return result;
