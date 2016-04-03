@@ -1,3 +1,15 @@
+<!---
+*** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING ***
+
+     This page is linked from within the Asqatasun app 
+     in /web-app/asqatasun-web-app/src/main/resources/i18n/scenario-management-I18N(..)
+
+     Do not rename, move or delete please :)
+     
+*** WARNING *** WARNING *** WARNING *** WARNING *** WARNING *** WARNING ***
+-->
+
+
 # Scenario audit of accessibility with Asqatasun
 
 ## Quick steps (for the impatient)
