@@ -1,5 +1,31 @@
 
 --------------------------------
+Asqatasun 4.x.x, 2016-04-xx
+--------------------------------
+
+Security:
+- Upgrade Apache Commons FileUpload to v1.3.1 
+- Upgrade Apache httpclient to v4.3.6
+
+Bugs:
+- [#25](https://github.com/Asqatasun/Asqatasun/issues/25): localhost URLs should not be blocked  
+
+Documentation:
+- [#88](https://github.com/Asqatasun/Asqatasun/issues/88): DOC Docker - Add tip for Mac OS X and Windows users 
+
+Code quality issues (Sonar rules):
+- [#92](https://github.com/Asqatasun/Asqatasun/issues/92): Modifiers should be declared in the correct order 
+- [#93](https://github.com/Asqatasun/Asqatasun/issues/93): Null pointers should not be dereferenced  
+- [#94](https://github.com/Asqatasun/Asqatasun/issues/94): Dead stores should be removed 
+- [#95](https://github.com/Asqatasun/Asqatasun/issues/95): Utility classes should not have public constructors
+- [#96](https://github.com/Asqatasun/Asqatasun/issues/96): "public static" fields should be constant 
+- [#97](https://github.com/Asqatasun/Asqatasun/issues/97): Deprecated elements should have both the annotation and the Javadoc tag
+- [#98](https://github.com/Asqatasun/Asqatasun/issues/98): Boxing and unboxing should not be immediately reversed
+- [#100](https://github.com/Asqatasun/Asqatasun/issues/100): Collections.emptyList(), emptyMap() and emptySet() should be used
+
+
+
+--------------------------------
 Asqatasun 4.0.1, 2016-03-18
 --------------------------------
 
