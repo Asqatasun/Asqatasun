@@ -108,7 +108,7 @@ We would be really glad to have you on board! You can help in many ways:
 1. Help us in improving the SEO rules: come, code or [discuss](http://forum.asqatasun.org)!
 
 [Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls) are always welcome! 
-Everything is summarized in the [CONTRIBUTING](CONTRIBUTING.md) file.
+Everything is summarized in the [CONTRIBUTING](https://github.com/Asqatasun/Asqatasun/blob/master/CONTRIBUTING.md) file.
 
 Create your own tests.
 
