@@ -21,6 +21,7 @@
  */
 package org.asqatasun.tgol.test.scenario;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -95,6 +96,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     private static final String HOST_LOCATION_KEY = "host.location";
     private static final String PASSWORD_KEY = "admin.password";
     private static final String XVFB_DISPLAY_KEY = "xvfb.display";
+    private static final String FIREFOX_PATH = "firefox.path";
     /**
      * Mysql Access Jvm parameters Keys
      */
@@ -122,6 +124,11 @@ public class AbstractWebDriverTestClass extends TestCase {
      * Xvfb display port value used in headless mode
      */
     private String xvfbDisplay;
+    /**
+     * Firefox Path
+     */
+    private String pathToFirefox;
+    
     /**
      * Admin User info
      */
@@ -182,6 +189,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         password = System.getProperty(PASSWORD_KEY);
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
         xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
+        pathToFirefox = System.getProperty(FIREFOX_PATH);
 
 //        createRootUserInDb();
 
@@ -204,7 +212,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         editUserContractUrl = hostLocation + parametersBundle.getString(EDIT_USER_CONTRACT_URL_KEY);
 
         if (driver == null) {
-            FirefoxBinary ffBinary = new FirefoxBinary();
+            FirefoxBinary ffBinary = new FirefoxBinary(new File(pathToFirefox));
             if (xvfbDisplay != null) {
                 Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + xvfbDisplay);
                 ffBinary.setEnvironmentProperty("DISPLAY", xvfbDisplay);

@@ -12,6 +12,11 @@
     <name>tgol-test-scenario</name>
     <dependencies>
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <!--<version>2.53.0</version>-->
+        </dependency>
+        <dependency>
             <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
             <scope>test</scope>
