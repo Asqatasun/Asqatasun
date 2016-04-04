@@ -30,7 +30,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_USER_IS_WARN
 /**
  * Implementation of the rule 6.25 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-25">the rule 6.25 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-6-25">the rule 6.25 design page.</a>
  * @see <a href="http://rgaa.net/Presence-d-un-avertissement,104.html"> 6.25 rule specification </a>
  *
  * @author jkowalczyk

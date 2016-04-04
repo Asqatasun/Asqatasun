@@ -39,7 +39,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.LANG_ATTRIBUTE_MIS
 /**
  * Implementation of the rule 9.8 of the referential RGAA 2.2. <br/> For more
  * details about the implementation, refer to <a
- * href="http://www.tanaguru.org/en/content/rgaa22-rule-9-8">the rule 9.8 design
+ * href="http://www.old-dot-org.org/en/content/rgaa22-rule-9-8">the rule 9.8 design
  * page.</a>
  *
  * @see <a href="http://rgaa.net/Presence-d-une-langue-de.html"> 9.8 rule

@@ -26,7 +26,7 @@ import org.asqatasun.rules.elementchecker.doctype.DoctypeValidityChecker;
 /**
  * Implementation of the rule 9.3 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-9-3">the rule 9.3 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-9-3">the rule 9.3 design page.</a>
  * @see <a href="http://rgaa.net/Conformite-syntaxique-de-la.html"> 9.3 rule specification </a>
  *
  */

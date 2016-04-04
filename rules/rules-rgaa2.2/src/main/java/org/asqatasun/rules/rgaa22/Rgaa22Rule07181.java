@@ -33,7 +33,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.HIDDEN_TEXT_DETECT
 /**
  * Implementation of the rule 7.18 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-7-18">the rule 7.18 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-7-18">the rule 7.18 design page.</a>
  * @see <a href="http://rgaa.net/Restitution-correcte-dans-les.html"> 7.18 rule specification </a>
  *
  * @author jkowalczyk

@@ -34,7 +34,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IM
 /**
  * Implementation of the rule 4.9 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-4-9">the rule 4.9 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-4-9">the rule 4.9 design page.</a>
  * @see <a href="http://rgaa.net/Presence-de-l-attribut-longdesc.html"> 4.9 rule specification </a>
  *
  * @author jkowalczyk

@@ -31,7 +31,7 @@ import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 /**
  * Implementation of the rule 12.2 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-12-2">the rule 12.2 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-12-2">the rule 12.2 design page.</a>
  * @see <a href="http://rgaa.net/Presence-de-l-indication-des,179.html"> 12.2 rule specification </a>
  *
  * @author jkowalczyk

@@ -26,7 +26,7 @@ import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
 /**
  * Implementation of the rule 2.13 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-2-13">the rule 2.13 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-2-13">the rule 2.13 design page.</a>
  * @see <a href="http://rgaa.net/Valeur-du-rapport-de-contraste-du,15.html"> 2.13 rule specification </a>
  *
  * @author jkowalczyk

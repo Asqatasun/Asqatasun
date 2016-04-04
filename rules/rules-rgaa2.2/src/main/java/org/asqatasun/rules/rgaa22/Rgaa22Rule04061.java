@@ -31,7 +31,7 @@ import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 /**
  * Implementation of the rule 4.6 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-4-6">the rule 4.6 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-4-6">the rule 4.6 design page.</a>
  * @see <a href="http://rgaa.net/Longueur-du-contenu-des.html"> 4.6 rule specification </a>
  *
  * @author jkowalczyk

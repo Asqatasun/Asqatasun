@@ -25,7 +25,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 6.5 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-5">the rule 6.5 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-6-5">the rule 6.5 design page.</a>
  * @see <a href="http://rgaa.net/Absence-d-ouverture-de-nouvelles.html"> 6.5 rule specification </a>
  *
  * @author jkowalczyk

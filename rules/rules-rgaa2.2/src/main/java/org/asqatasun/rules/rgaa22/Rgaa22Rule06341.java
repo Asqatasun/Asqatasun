@@ -25,7 +25,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 6.34 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-34">the rule 6.34 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-6-34">the rule 6.34 design page.</a>
  * @see <a href="http://rgaa.net/Presence-d-un-moteur-de-recherche.html"> 6.34 rule specification </a>
  *
  * @author jkowalczyk

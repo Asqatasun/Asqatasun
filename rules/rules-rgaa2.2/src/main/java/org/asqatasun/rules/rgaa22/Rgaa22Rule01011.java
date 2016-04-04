@@ -35,7 +35,7 @@ import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 /**
  * Implementation of the rule 1.1 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-1-1">the rule 1.1 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-1-1">the rule 1.1 design page.</a>
  * @see <a href="http://rgaa.net/1-1-Absence-de-cadres-non-titres.html"> 1.1 rule specification </a>
  *
  */

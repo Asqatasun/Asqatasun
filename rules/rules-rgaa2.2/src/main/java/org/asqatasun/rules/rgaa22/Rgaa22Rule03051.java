@@ -33,7 +33,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.FIELDSET_WITHOUT_L
 /**
  * Implementation of the rule 3.5 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-5">the rule 3.5 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-3-5">the rule 3.5 design page.</a>
  * @see <a href="http://rgaa.net/Absence-d-element-fieldset-sans.html"> 3.5 rule specification </a>
  *
  */

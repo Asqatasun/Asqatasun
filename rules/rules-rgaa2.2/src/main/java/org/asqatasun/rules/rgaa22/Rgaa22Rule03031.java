@@ -30,7 +30,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_EL
 /**
  * Implementation of the rule 3.3 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-3">the rule 3.3 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-3-3">the rule 3.3 design page.</a>
  * @see <a href="http://rgaa.net/Positionnement-correct-des.html"> 3.3 rule specification </a>
  *
  */

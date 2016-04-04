@@ -25,7 +25,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 6.33 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-6-33">the rule 6.33 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-6-33">the rule 6.33 design page.</a>
  * @see <a href="http://rgaa.net/Ordre-des-liens-d-evitement-ou-d.html"> 6.33 rule specification </a>
  *
  * @author jkowalczyk

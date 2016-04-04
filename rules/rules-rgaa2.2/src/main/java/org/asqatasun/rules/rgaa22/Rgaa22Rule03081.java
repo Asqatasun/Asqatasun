@@ -34,7 +34,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.OPTGROUP_WITHOUT_L
 /**
  * Implementation of the rule 3.8 of the referential RGAA 2.2.
  * <br/>
- * For more details about the implementation, refer to <a href="http://www.tanaguru.org/en/content/rgaa22-rule-3-8">the rule 3.8 design page.</a>
+ * For more details about the implementation, refer to <a href="http://www.old-dot-org.org/en/content/rgaa22-rule-3-8">the rule 3.8 design page.</a>
  * @see <a href="http://rgaa.net/Presence-d-un-attribut-label-sur-l.html"> 3.8 rule specification </a>
  *
  */
