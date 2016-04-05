@@ -190,7 +190,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
         xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
         pathToFirefox = System.getProperty(FIREFOX_PATH_KEY);
-
+        
 //        createRootUserInDb();
 
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
