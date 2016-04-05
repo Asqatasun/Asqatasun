@@ -96,7 +96,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     private static final String HOST_LOCATION_KEY = "host.location";
     private static final String PASSWORD_KEY = "admin.password";
     private static final String XVFB_DISPLAY_KEY = "xvfb.display";
-    private static final String FIREFOX_PATH = "firefox.path";
+    private static final String FIREFOX_PATH_KEY = "firefox.path";
     /**
      * Mysql Access Jvm parameters Keys
      */
@@ -189,7 +189,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         password = System.getProperty(PASSWORD_KEY);
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
         xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
-        pathToFirefox = System.getProperty(FIREFOX_PATH);
+        pathToFirefox = System.getProperty(FIREFOX_PATH_KEY);
 
 //        createRootUserInDb();
 
