@@ -17,6 +17,10 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 * [Debugging Asqatasun](Debug_Monitor_Profile/Debugging_Asqatasun.md)
 * [Monitoring and profiling](Debug_Monitor_Profile/Monitoring_profiling.md)
 
+## Testing
+
+* [Running functional tests](Testing/Functional_tests.md)
+
 ## Engine & System of Information  overview
 
 * [Engine overview](Engine/00_Engine_overview.md)
