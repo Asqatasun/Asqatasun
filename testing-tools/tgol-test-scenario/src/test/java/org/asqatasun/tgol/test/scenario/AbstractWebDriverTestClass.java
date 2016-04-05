@@ -60,7 +60,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     protected static String DELETE_USER_FORM_SUBMIT_XPATH_LOCATION =
             "//div[@class='alert-actions']/form/input";
     protected static String NEW_USER_CONTRACT_MNGT_XPATH_LOCATION =
-            "//table[@id='user-list-table']/tbody/tr[x]/td[7]/a/img";
+            "//table[@id='user-list-table']/tbody/tr[x]/td[8]/a/img";
     protected static String USER_TABLE_BODY_XPATH_LOCATION =
             "//table[@id='user-list-table']/tbody";
     private static String EDIT_CONTRACT_FORM_SUBMIT_XPATH_LOCATION =
@@ -551,11 +551,11 @@ public class AbstractWebDriverTestClass extends TestCase {
      */
     protected void createNewUser(boolean activateUser) {
         goToAddUserPage();
-        editWebElement(EMAIL_FIELD_NAME,NEW_USER_EMAIL);
-        editWebElement(PASSWORD_FIELD_NAME , NEW_USER_PASSWORD);
-        editWebElement(CONFIRM_PASSWORD_FIELD_NAME , NEW_USER_PASSWORD);
-        editWebElement(NAME_FIELD_NAME,NEW_USER_NAME);
-        editWebElement(FIRST_NAME_FIELD_NAME,NEW_USER_FIRST_NAME);
+        editWebElement(EMAIL_FIELD_NAME,            NEW_USER_EMAIL);
+        editWebElement(PASSWORD_FIELD_NAME,         NEW_USER_PASSWORD);
+        editWebElement(CONFIRM_PASSWORD_FIELD_NAME, NEW_USER_PASSWORD);
+        editWebElement(NAME_FIELD_NAME,             NEW_USER_NAME);
+        editWebElement(FIRST_NAME_FIELD_NAME,       NEW_USER_FIRST_NAME);
         if (activateUser) {
             selectWebElement(ACTIVATED_ELEMENT_ID);
         }

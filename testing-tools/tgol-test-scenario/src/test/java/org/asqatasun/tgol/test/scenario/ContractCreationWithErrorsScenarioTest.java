@@ -29,25 +29,24 @@ import org.openqa.selenium.By;
  */
 public class ContractCreationWithErrorsScenarioTest extends AbstractWebDriverTestClass {
 
+    private static final String MANDATORY_ELEMENTS_MISSING_MSG
+            = "Some required fields are empty or invalid";
+    private static final String LABEL_MISSING_MSG = "Please enter a label.";
+    private static final String WRONG_URL_MSG
+            = "Please enter a valid URL (ex: http(s)://example.com)";
+    private static final String OUT_OF_BOUND_MSG
+            = "Out of bound value";
+    private static final String WRONG_NB_OF_AUDITS_MSG
+            = "Please enter a valid number of audits per contract.";
+    private static final String WRONG_NB_OF_ACTS_MSG
+            = "Please enter a valid number of audits to display";
+    private static final String BEGIN_DATE_MISSING_MSG
+            = "Please enter a begin date";
+    private static final String END_DATE_ANTERIOR_TO_BEGIN_DATE_MISSING_MSG
+            = "Please choose an end date that is not anterior to the begin date";
 
-    private static String MANDATORY_ELEMENTS_MISSING_MSG = 
-            "Some required fields are empty or invalid";
-    private static String LABEL_MISSING_MSG = "Please enter a label.";
-    private static String WRONG_URL_MSG = 
-            "Please enter a valid URL (ex: http(s)://example.com)";
-    private static String OUT_OF_BOUND_MSG = 
-            "Out of bound value";
-    private static String WRONG_NB_OF_AUDITS_MSG = 
-            "Please enter a valid number of audits per contract.";
-    private static String WRONG_NB_OF_ACTS_MSG = 
-            "Please enter a valid number of audits to display";
-    private static String BEGIN_DATE_MISSING_MSG = 
-            "Please enter a begin date";
-    private static String END_DATE_ANTERIOR_TO_BEGIN_DATE_MISSING_MSG = 
-            "Please choose an end date that is not anterior to the begin date";
-
-   /**
-     * 
+    /**
+     *
      */
     public void testContractCreationWithErrors() {
 
@@ -55,86 +54,86 @@ public class ContractCreationWithErrorsScenarioTest extends AbstractWebDriverTes
         createNewUser(true);
 
         // go to the management contracts page of the new user
-        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION.replaceAll("x",findNewUserRowIndexLocation()))).click();
+        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION.replaceAll("x", findNewUserRowIndexLocation()))).click();
         //----- At this time the id of the new user appears in an url for the first time
         extractedIdOfNewUser();
-        
+
         //-----
         checkTextPresence("Manage contracts");
         checkTextPresence("Contract list");
         checkTextPresence("Add a contract");
         checkTextPresence("No contracts");
-        
+
         goToAddUserContractPage();
         checkTextPresence("Add a contract to");
-        
+
         submitEditUserContract();
         checkTextPresence(MANDATORY_ELEMENTS_MISSING_MSG);
         checkTextPresence(LABEL_MISSING_MSG);
-        
-        editWebElement("beginDate","");
+
+        editWebElement("beginDate", "");
         submitEditUserContract();
         checkTextPresence(MANDATORY_ELEMENTS_MISSING_MSG);
         checkTextPresence(LABEL_MISSING_MSG);
         checkTextPresence(BEGIN_DATE_MISSING_MSG);
-        
-        editWebElement("label","CONTRACT LABEL");
-        editWebElement("beginDate","01/01/2010");
-        editWebElement("endDate","");
+
+        editWebElement("label", "CONTRACT LABEL");
+        editWebElement("beginDate", "01/01/2010");
+        editWebElement("endDate", "");
         submitEditUserContract();
         checkTextPresence(MANDATORY_ELEMENTS_MISSING_MSG);
 
-        editWebElement("endDate","01/01/2009");
+        editWebElement("endDate", "01/01/2009");
         submitEditUserContract();
         checkTextPresence(MANDATORY_ELEMENTS_MISSING_MSG);
         checkTextPresence(END_DATE_ANTERIOR_TO_BEGIN_DATE_MISSING_MSG);
-        
-        editWebElement("endDate","01/01/2020");
-        editWebElement("contractUrl","wrong url");
+
+        editWebElement("endDate", "01/01/2020");
+        editWebElement("contractUrl", "wrong url");
         submitEditUserContract();
         checkTextPresence(WRONG_URL_MSG);
-        
-        editWebElement("contractUrl","http://myUrl.com");
-        editWebElement("nb-max-audits-per-contract","not a number");
+
+        editWebElement("contractUrl", "http://myUrl.com");
+        editWebElement("nb-max-audits-per-contract", "not a number");
         submitEditUserContract();
         checkTextPresence(WRONG_NB_OF_AUDITS_MSG);
-        
-        editWebElement("nb-max-audits-per-contract","");
-        editWebElement("nb-max-acts-per-contract","not a number");
+
+        editWebElement("nb-max-audits-per-contract", "");
+        editWebElement("nb-max-acts-per-contract", "not a number");
         submitEditUserContract();
         checkTextPresence(WRONG_NB_OF_ACTS_MSG);
-        
-        editWebElement("nb-max-acts-per-contract","");
-        editWebElement("depth","30");
+
+        editWebElement("nb-max-acts-per-contract", "");
+        editWebElement("depth", "30");
         submitEditUserContract();
         checkTextPresence(OUT_OF_BOUND_MSG);
-        
-        editWebElement("depth","not a number");
+
+        editWebElement("depth", "not a number");
         submitEditUserContract();
         checkTextPresence(OUT_OF_BOUND_MSG);
-        
-        editWebElement("depth","");
-        editWebElement("max-duration","not a number");
+
+        editWebElement("depth", "");
+        editWebElement("max-duration", "not a number");
         submitEditUserContract();
         checkTextPresence(OUT_OF_BOUND_MSG);
-        
-        editWebElement("max-duration","100000");
+
+        editWebElement("max-duration", "100000");
         submitEditUserContract();
         checkTextPresence(OUT_OF_BOUND_MSG);
-        
-        editWebElement("max-duration","");
-        editWebElement("max-documents","not a number");
+
+        editWebElement("max-duration", "");
+        editWebElement("max-documents", "not a number");
         submitEditUserContract();
         checkTextPresence(OUT_OF_BOUND_MSG);
-        
-        editWebElement("max-documents","10001");
+
+        editWebElement("max-documents", "10001");
         submitEditUserContract();
         checkTextPresence(OUT_OF_BOUND_MSG);
-        
+
         deleteNewUser();
-        
+
         logout();
 
     }
-    
+
 }

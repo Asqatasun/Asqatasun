@@ -29,34 +29,34 @@ import org.openqa.selenium.By;
  */
 public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
 
-    private static String IMPOSSIBLE_ACTION = "Impossible action";
+    private static final String IMPOSSIBLE_ACTION = "Impossible action";
 
-    private static String ADMIN_PAGE_TITLE = "Administration";
-    private static String USER_CREATION_SUCCESS_MSG = 
-            "The user "+NEW_USER_EMAIL +" has been added with success";
-    private static String USER_DELETION_SUCCESS_MSG = 
-            "The user "+NEW_USER_EMAIL+" has been deleted with success";
-    private static String USER_DELETION_CONFIRMATION_MSG = 
-            "You are about to delete the user "+NEW_USER_EMAIL+". Are you sure?";
-    private static String USER_MODIFICATION_SUCCESS_MSG = 
-            "The user "+NEW_USER_EMAIL+" has been modified with success";
-    private static String ACCOUNT_NOT_ACTIVATED_MSG = 
-            "Account not activated.";
-    
-    private static String ADMIN_USER_DELETE_LINK_XPATH_LOCATION = 
-            "//table[@id='user-list-table']/tbody/tr[x]/td[6]";
-    
-    private static String NEW_USER_EDIT_LINK_XPATH_LOCATION = 
-            "//table[@id='user-list-table']/tbody/tr[x]/td[5]/a/img";
-    
-    private static String EDIT_USER_FORM_SUBMIT_XPATH_LOCATION = 
-            "//div[@id='account-settings-form-submit']/input";
-    
-    private static String NEW_USER_ACTIVATION_INFO_XPATH_LOCATION = 
-            "//table[@id='user-list-table']/tbody/tr[x]/td[4]";
-    
+    private static final String ADMIN_PAGE_TITLE = "Administration";
+    private static final String USER_CREATION_SUCCESS_MSG
+            = "The user " + NEW_USER_EMAIL + " has been added with success";
+    private static final String USER_DELETION_SUCCESS_MSG
+            = "The user " + NEW_USER_EMAIL + " has been deleted with success";
+    private static final String USER_DELETION_CONFIRMATION_MSG
+            = "You are about to delete the user " + NEW_USER_EMAIL + ". Are you sure?";
+    private static final String USER_MODIFICATION_SUCCESS_MSG
+            = "The user " + NEW_USER_EMAIL + " has been modified with success";
+    private static final String ACCOUNT_NOT_ACTIVATED_MSG
+            = "Account not activated.";
+
+    private static final String ADMIN_USER_DELETE_LINK_XPATH_LOCATION
+            = "//table[@id='user-list-table']/tbody/tr[x]/td[7]";
+
+    private static final String NEW_USER_EDIT_LINK_XPATH_LOCATION
+            = "//table[@id='user-list-table']/tbody/tr[x]/td[6]/a/img";
+
+    private static final String EDIT_USER_FORM_SUBMIT_XPATH_LOCATION
+            = "//div[@id='account-settings-form-submit']/input";
+
+    private static final String NEW_USER_ACTIVATION_INFO_XPATH_LOCATION
+            = "//table[@id='user-list-table']/tbody/tr[x]/td[4]";
+
     /**
-     * 
+     *
      */
     public void testUserCreation() {
 
@@ -73,7 +73,7 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
 
         // go to the add user page to create a new user
         createNewUser(false);
-        
+
         checkTextPresence(USER_CREATION_SUCCESS_MSG);
         checkTextPresence(NEW_USER_EMAIL);
         checkTextPresence(NEW_USER_NAME);
@@ -88,10 +88,10 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
         // The login of the new user fails, the account is not activated
         loginAsNewUser();
         checkTextPresence(ACCOUNT_NOT_ACTIVATED_MSG);
-        
+
         loginAsRoot();
         goToAdminPage();
-        
+
         String newUserEditLinkXpath = NEW_USER_EDIT_LINK_XPATH_LOCATION.replaceAll("x", findNewUserRowIndexLocation());
         // activate the new user
         driver.findElement(By.xpath(newUserEditLinkXpath)).click();
@@ -100,7 +100,7 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
         //-----
         selectWebElement(ACTIVATED_ELEMENT_ID);
         driver.findElement(By.xpath(EDIT_USER_FORM_SUBMIT_XPATH_LOCATION)).click();
-        
+
         checkTextPresence(USER_MODIFICATION_SUCCESS_MSG);
         checkTextPresence(NEW_USER_NAME);
         checkTextPresence(NEW_USER_FIRST_NAME);
@@ -108,10 +108,10 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
             driver.close();
             throw new RuntimeException(ASSERT_TEXT_FAILED);
         }
-        
+
         logout();
         loginAsNewUser();
-        
+
         // The current user is activated but not admin. All the admin resources
         // are inaccessible
         goToAdminPage();
@@ -123,20 +123,20 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
 
         logout();
         loginAsRoot();
-        
+
         goToAdminPage();
-        
+
         // go to the edit user page and set the user as admin
         goToEditUserPage();
         selectWebElement(ADMIN_ELEMENT_ID);
         driver.findElement(By.xpath(EDIT_USER_FORM_SUBMIT_XPATH_LOCATION)).click();
-        
+
         logout();
         loginAsNewUser();
 
         goToAdminPage();
         checkTextPresence(ADMIN_PAGE_TITLE);
-        
+
         logout();
         loginAsRoot();
 
@@ -148,12 +148,12 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
 
         // validate the user deletion
         driver.findElement(By.xpath(DELETE_USER_FORM_SUBMIT_XPATH_LOCATION)).click();
-        
+
         checkTextPresence(USER_DELETION_SUCCESS_MSG);
         checkTextAbscence(NEW_USER_NAME);
-        
+
         logout();
 
     }
-    
+
 }

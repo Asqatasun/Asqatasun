@@ -28,62 +28,58 @@ import org.openqa.selenium.By;
  * @author jkowalczyk
  */
 public class ContractCreationScenarioTest extends AbstractWebDriverTestClass {
-    
-    private static String NO_AUDIT_KEY= "No audit";
-    
-    private static String AUDIT_PAGES_ELEMENT_NAME= "functionalityMapPAGES1";
-    private static String AUDIT_SITE_ELEMENT_NAME= "functionalityMapDOMAIN1";
-    private static String AUDIT_UPLOAD_ELEMENT_NAME= "functionalityMapUPLOAD1";
-    private static String AUDIT_SCENARIO_ELEMENT_NAME= "functionalityMapSCENARIO1";
-    
-    private static String CONTRACT_LABEL_CSS_SELECTOR = "#project-0 .project-name a";
-    
-    private static String AUDIT_PAGES_XPATH_LOCATION = 
-            "//table[@id='audit-actions']/tbody/tr/td[1]/";
-    
+
+    private static final String NO_AUDIT_KEY = "No audit";
+
+    private static final String AUDIT_PAGES_ELEMENT_NAME = "functionalityMapPAGES1";
+    private static final String AUDIT_SITE_ELEMENT_NAME = "functionalityMapDOMAIN1";
+    private static final String AUDIT_UPLOAD_ELEMENT_NAME = "functionalityMapUPLOAD1";
+    private static final String AUDIT_SCENARIO_ELEMENT_NAME = "functionalityMapSCENARIO1";
+
+    private static final String CONTRACT_LABEL_CSS_SELECTOR = "#project-0 .project-name a";
+
+    private static final String AUDIT_PAGES_XPATH_LOCATION
+            = "//table[@id='audit-actions']/tbody/tr/td[1]/";
+
 //    private static String AUDIT_PAGES_STR = "Audit\rPages\r";
-    
-    private static String AUDIT_SITE_XPATH_LOCATION = 
-            "//table[@id='audit-actions']/tbody/tr/td[2]/";
-    
+    private static final String AUDIT_SITE_XPATH_LOCATION
+            = "//table[@id='audit-actions']/tbody/tr/td[2]/";
+
 //    private static String AUDIT_SITE_STR = "Audit\rFull-site\r";
-    
-    private static String AUDIT_UPLOAD_XPATH_LOCATION = 
-            "//table[@id='audit-actions']/tbody/tr/td[3]/";
-    
+    private static final String AUDIT_UPLOAD_XPATH_LOCATION
+            = "//table[@id='audit-actions']/tbody/tr/td[3]/";
+
 //    private static String AUDIT_UPLOAD_STR = "Audit\rFiles\r";
-    
-    private static String AUDIT_SCENARIO_XPATH_LOCATION = 
-            "//table[@id='audit-actions']/tbody/tr/td[4]/";
-    
+    private static final String AUDIT_SCENARIO_XPATH_LOCATION
+            = "//table[@id='audit-actions']/tbody/tr/td[4]/";
+
 //    private static String AUDIT_SCENARIO_STR = "Audit\rScenario\r";
-    
-    private static String DISABLED_STR = "Disabled";
-    private static String SPAN_STR = "span";
-    private static String A_STR = "a";
-    
+    private static final String DISABLED_STR = "Disabled";
+    private static final String SPAN_STR = "span";
+    private static final String A_STR = "a";
+
     /**
-     * 
+     *
      */
     public void testContractCreation() {
 
         loginAsRoot();
         createNewContract();
-        
+
         logout();
-        
+
         loginAsNewUser();
         checkTextPresence(NO_AUDIT_KEY);
-        checkElementTextPresenceByCssSelector(CONTRACT_LABEL_CSS_SELECTOR,NEW_CONTRACT_LABEL);
-        
+        checkElementTextPresenceByCssSelector(CONTRACT_LABEL_CSS_SELECTOR, NEW_CONTRACT_LABEL);
+
         driver.findElement(By.cssSelector(CONTRACT_LABEL_CSS_SELECTOR)).click();
         extractedIdOfNewContract();
-        
-        checkElementTextPresence(AUDIT_PAGES_XPATH_LOCATION+SPAN_STR, DISABLED_STR);
-        checkElementTextPresence(AUDIT_SITE_XPATH_LOCATION+SPAN_STR, DISABLED_STR);
-        checkElementTextPresence(AUDIT_UPLOAD_XPATH_LOCATION+SPAN_STR, DISABLED_STR);
-        checkElementTextPresence(AUDIT_SCENARIO_XPATH_LOCATION+SPAN_STR, DISABLED_STR);
-        
+
+        checkElementTextPresence(AUDIT_PAGES_XPATH_LOCATION + SPAN_STR, DISABLED_STR);
+        checkElementTextPresence(AUDIT_SITE_XPATH_LOCATION + SPAN_STR, DISABLED_STR);
+        checkElementTextPresence(AUDIT_UPLOAD_XPATH_LOCATION + SPAN_STR, DISABLED_STR);
+        checkElementTextPresence(AUDIT_SCENARIO_XPATH_LOCATION + SPAN_STR, DISABLED_STR);
+
         goToAuditPagesSetUpContractPage();
         checkTextPresence(NOT_ALLOWED_MSG);
         goToAuditSiteSetUpContractPage();
@@ -108,11 +104,11 @@ public class ContractCreationScenarioTest extends AbstractWebDriverTestClass {
 
         goToNewContractPage();
 
-        checkElementTextAbsence(AUDIT_PAGES_XPATH_LOCATION+A_STR, DISABLED_STR);
-        checkElementTextAbsence(AUDIT_SITE_XPATH_LOCATION+A_STR, DISABLED_STR);
-        checkElementTextAbsence(AUDIT_UPLOAD_XPATH_LOCATION+A_STR, DISABLED_STR);
-        checkElementTextAbsence(AUDIT_SCENARIO_XPATH_LOCATION+A_STR, DISABLED_STR);
-        
+        checkElementTextAbsence(AUDIT_PAGES_XPATH_LOCATION + A_STR, DISABLED_STR);
+        checkElementTextAbsence(AUDIT_SITE_XPATH_LOCATION + A_STR, DISABLED_STR);
+        checkElementTextAbsence(AUDIT_UPLOAD_XPATH_LOCATION + A_STR, DISABLED_STR);
+        checkElementTextAbsence(AUDIT_SCENARIO_XPATH_LOCATION + A_STR, DISABLED_STR);
+
         goToAuditPagesSetUpContractPage();
         checkTextAbscence(NOT_ALLOWED_MSG);
         goToAuditSiteSetUpContractPage();
@@ -121,10 +117,10 @@ public class ContractCreationScenarioTest extends AbstractWebDriverTestClass {
         checkTextAbscence(NOT_ALLOWED_MSG);
         goToAuditUploadSetUpContractPage();
         checkTextAbscence(NOT_ALLOWED_MSG);
-        
+
         logout();
         loginAsRoot();
-        
+
         // forbidden for the user, even root, cause the contract does not belong
         // to him
         goToNewContractPage();
@@ -137,11 +133,11 @@ public class ContractCreationScenarioTest extends AbstractWebDriverTestClass {
         checkTextPresence(NOT_ALLOWED_MSG);
         goToAuditUploadSetUpContractPage();
         checkTextPresence(NOT_ALLOWED_MSG);
-        
+
         deleteNewUser();
-        
+
         logout();
 
     }
-    
+
 }
