@@ -8,7 +8,7 @@ This test consists in checking whether each textual node is identified by a lang
 
 ### Criterion
 
-[8.7](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-8-7)
+[8.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-7)
 
 ### Test
 

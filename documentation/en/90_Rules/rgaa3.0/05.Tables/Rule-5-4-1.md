@@ -8,7 +8,7 @@ This tests consists in checking the presence of a caption child node on the data
 
 ### Criterion
 
-[5.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-5-4)
+[5.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-4)
 
 ### Test
 

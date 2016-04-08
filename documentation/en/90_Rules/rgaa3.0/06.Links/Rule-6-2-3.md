@@ -9,7 +9,7 @@ is relevant.
 
 ### Criterion
 
-[6.2](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-6-2)
+[6.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-2)
 
 ### Test
 

@@ -8,7 +8,7 @@ This test consists in checking whether each `<area>` of a server image map is do
 
 ### Criterion
 
-[1.1](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-1)
+[1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-1)
 
 ###Test
 

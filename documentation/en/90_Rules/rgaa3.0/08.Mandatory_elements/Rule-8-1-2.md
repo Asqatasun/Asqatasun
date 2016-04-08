@@ -9,7 +9,7 @@ declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 
 ### Criterion
 
-[8.1](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-8-1)
+[8.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-1)
 
 ### Test
 

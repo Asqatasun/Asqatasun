@@ -10,7 +10,7 @@ To do so, we detect the tables on the page, and let the user make the control ma
 
 ### Criterion
 
-[5.7](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-5-7)
+[5.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-7)
 
 ### Test
 

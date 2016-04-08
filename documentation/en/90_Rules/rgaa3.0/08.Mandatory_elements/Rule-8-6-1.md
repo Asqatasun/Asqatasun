@@ -8,7 +8,7 @@ This test consists in checking the relevancy of the title tag in the page.
 
 ### Criterion
 
-[8.6](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-8-6)
+[8.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-6)
 
 ### Test
 

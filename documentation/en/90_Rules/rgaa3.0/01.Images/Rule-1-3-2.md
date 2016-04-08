@@ -8,7 +8,7 @@ This test consists in checking whether the `alt` attribute of each clickable are
 
 ### Criterion
 
-[1.3](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-3)
+[1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
 
 ###Test
 

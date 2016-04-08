@@ -10,7 +10,7 @@ Checking whether each header of a data table applied to the whole row or to the 
 
 ### Criterion
 
-[5.7](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-5-7)
+[5.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-7)
 
 ### Test
 

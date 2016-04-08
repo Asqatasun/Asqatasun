@@ -10,7 +10,7 @@ elements with a font size superior to 18px.
 
 ### Criterion
 
-[3.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-3-4)
+[3.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-3-4)
 
 ### Test
 

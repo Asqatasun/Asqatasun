@@ -11,7 +11,7 @@ This test consists in detecting patterns that are known to change context automa
 
 ### Criterion
 
-[7.4](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-7-4)
+[7.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-4)
 
 ### Test
 

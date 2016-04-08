@@ -8,7 +8,7 @@ This test consists in detecting the presence of the `<title>` tag
 
 ### Criterion
 
-[8.5](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-8-5)
+[8.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-5)
 
 ###Test
 

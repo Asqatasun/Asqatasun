@@ -8,7 +8,7 @@ No-check rule
 
 ### Criterion
 
-[4.8](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-4-8)
+[4.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-4-8)
 
 ###Test
 

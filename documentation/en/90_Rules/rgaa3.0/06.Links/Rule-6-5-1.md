@@ -8,7 +8,7 @@ This test checks whether the page contains empty links.
 
 ### Criterion
 
-[6.5](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-6-5)
+[6.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-5)
 
 ### Test
 

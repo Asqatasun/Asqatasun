@@ -8,7 +8,7 @@ This test consists in checking whether the text of each clickable area is enough
 
 ### Criterion
 
-[6.1](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-6-1)
+[6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-1)
 
 ### Test
 

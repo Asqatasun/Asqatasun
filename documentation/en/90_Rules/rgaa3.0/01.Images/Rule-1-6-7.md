@@ -10,7 +10,7 @@ Human check will be then needed to determine whether the detected elements provi
 
 ### Criterion
 
-[1.6](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-6)
+[1.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-6)
 
 ###Test
 

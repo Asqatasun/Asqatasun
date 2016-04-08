@@ -8,7 +8,7 @@ This test consists in detecting buttons associated with an image used as a CAPTC
 
 ### Criterion
 
-[1.5](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-1-5)
+[1.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-5)
 
 ###Test
 

@@ -8,7 +8,7 @@ This test consists in checking the relevancy of the caption of complex tables.
 
 ### Criterion
 
-[5.2](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-5-2)
+[5.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-2)
 
 ###Test
 

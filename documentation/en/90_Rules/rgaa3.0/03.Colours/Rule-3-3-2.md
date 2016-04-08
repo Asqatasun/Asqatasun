@@ -10,7 +10,7 @@ textual elements
 
 ### Criterion
 
-[3.3](http://references.modernisation.gouv.fr/referentiel-technique-0#crit-3-3)
+[3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-3-3)
 
 ### Test
 
