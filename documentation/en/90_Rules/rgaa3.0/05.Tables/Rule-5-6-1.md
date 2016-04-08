@@ -14,7 +14,7 @@ To do so, we detect the tables on the page, and let the user make the control ma
 
 ### Test
 
-[5.6.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-6-1)
+[5.6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-6-1)
 
 ### Description
 

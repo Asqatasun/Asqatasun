@@ -13,7 +13,7 @@ This test consists in searching patterns indicating that forbidden tags
 
 ### Test
 
-[8.9.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-9-1)
+[8.9.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-9-1)
 
 ### Description
 

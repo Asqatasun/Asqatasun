@@ -12,7 +12,7 @@ This test consists in checking whether each `<area>` of a server image map is do
 
 ###Test
 
-[1.1.4](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-1-4)
+[1.1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-1-4)
 
 ### Description
 

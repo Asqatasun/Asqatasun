@@ -12,7 +12,7 @@ This test consists in checking whether the text of each image link is enough exp
 
 ### Test
 
-[6.3.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-3-2)
+[6.3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-2)
 
 ### Description
 

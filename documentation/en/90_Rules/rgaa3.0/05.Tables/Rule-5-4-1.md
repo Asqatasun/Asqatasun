@@ -12,7 +12,7 @@ This tests consists in checking the presence of a caption child node on the data
 
 ### Test
 
-[5.4.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-4-1)
+[5.4.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-4-1)
 
 ### Description
 

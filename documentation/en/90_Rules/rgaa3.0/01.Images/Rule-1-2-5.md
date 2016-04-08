@@ -12,7 +12,7 @@ This test consists in checking whether the textual alternative of each decorativ
 
 ###Test
 
-[1.2.5](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-5)
+[1.2.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-5)
 
 ### Description
 

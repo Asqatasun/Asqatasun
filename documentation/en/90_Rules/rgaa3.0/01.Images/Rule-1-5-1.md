@@ -12,7 +12,7 @@ This test consists in detecting images associated with an image used as a CAPTCH
 
 ### Test
 
-[1.5.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-5-1)
+[1.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-5-1)
 
 ### Description
 

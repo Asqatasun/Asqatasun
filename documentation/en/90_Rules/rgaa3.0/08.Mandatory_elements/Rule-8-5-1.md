@@ -12,7 +12,7 @@ This test consists in detecting the presence of the `<title>` tag
 
 ###Test
 
-[8.5.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-5-1)
+[8.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-5-1)
 
 ### Description
 

@@ -12,7 +12,7 @@ This test consists in detecting buttons associated with an image used as a CAPTC
 
 ###Test
 
-[1.5.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-5-2)
+[1.5.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-5-2)
 
 ### Description
 

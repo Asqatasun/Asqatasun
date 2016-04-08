@@ -13,7 +13,7 @@ is relevant.
 
 ### Test
 
-[6.2.3](http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-2-3)
+[6.2.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-2-3)
 
 ### Description
 

@@ -13,7 +13,7 @@ and its background is at least 4.5:1 for the normal weighted, under 18px sized, 
 
 ### Test
 
-[3.3.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-3-3-1)
+[3.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-3-1)
 
 ### Description
 

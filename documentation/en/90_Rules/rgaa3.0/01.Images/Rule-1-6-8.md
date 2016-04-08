@@ -14,7 +14,7 @@ Human check will be then needed to determine whether the detailed description is
 
 ###Test
 
-[1.6.8](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-6-8)
+[1.6.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-6-8)
 
 ### Description
 

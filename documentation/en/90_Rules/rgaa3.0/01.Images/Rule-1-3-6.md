@@ -12,7 +12,7 @@ This test consists in checking for each informative vector image (`<svg>` tag) a
 
 ###Test
 
-[1.3.6](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-3-6)
+[1.3.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-6)
 
 ### Description
 

@@ -12,7 +12,7 @@ This test consists in checking whether the `alt` attribute of non clickable area
 
 ###Test
 
-[1.2.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-2-2)
+[1.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-2)
 
 ### Description
 

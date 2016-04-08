@@ -14,7 +14,7 @@ a font size superior to 14px.
 
 ### Test
 
-[3.4.4](http://references.modernisation.gouv.fr/referentiel-technique-0#test-3-4-4)
+[3.4.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-4-4)
 
 ### Description
 

@@ -12,7 +12,7 @@ No-check rule
 
 ###Test
 
-[8.2.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-2-2)
+[8.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-2-2)
 
 ### Description
 

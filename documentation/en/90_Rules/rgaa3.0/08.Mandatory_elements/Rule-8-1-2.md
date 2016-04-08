@@ -13,7 +13,7 @@ declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 
 ### Test
 
-[8.1.2](http://references.modernisation.gouv.fr/referentiel-technique-0#test-8-1-2)
+[8.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-1-2)
 
 ### Description
 

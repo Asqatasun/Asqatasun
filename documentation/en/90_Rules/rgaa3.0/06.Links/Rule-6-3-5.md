@@ -12,7 +12,7 @@ This test consists in checking whether the text of svg textual link is enough ex
 
 ###Test
 
-[6.3.5](http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-3-5)
+[6.3.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-5)
 
 ### Description
 

@@ -12,7 +12,7 @@ This test consists in checking whether each `<img>` tag is defined with an `"alt
 
 ###Test
 
-[1.1.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-1-1)
+[1.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-1-1)
 
 ### Description
 

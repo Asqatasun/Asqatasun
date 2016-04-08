@@ -14,7 +14,7 @@ Checking whether each header of a data table applied to the whole row or to the 
 
 ### Test
 
-[5.7.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-7-1)
+[5.7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-7-1)
 
 ### Description
 

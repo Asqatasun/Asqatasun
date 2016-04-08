@@ -12,7 +12,7 @@ This test consists in checking whether each heading of the page is relevant
 
 ###Test
 
-[9.1.4](http://references.modernisation.gouv.fr/referentiel-technique-0#test-9-1-4)
+[9.1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-4)
 
 ### Description
 

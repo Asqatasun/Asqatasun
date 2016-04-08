@@ -13,7 +13,7 @@ elements with a font size superior to 18px.
 
 ### Test
 
-[3.3.3](http://references.modernisation.gouv.fr/referentiel-technique-0#test-3-3-3)
+[3.3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-3-3)
 
 ### Description
 

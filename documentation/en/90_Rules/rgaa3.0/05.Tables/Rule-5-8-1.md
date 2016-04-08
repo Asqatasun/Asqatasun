@@ -12,7 +12,7 @@ elements used for data tables.
 
 ### Test
 
-[5.8.1](http://references.modernisation.gouv.fr/referentiel-technique-0#test-5-8-1)
+[5.8.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-8-1)
 
 ### Description
 

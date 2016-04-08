@@ -12,7 +12,7 @@ This test consists in checking whether each indentical clickable area have the s
 
 ### Test
 
-[6.4.3](http://references.modernisation.gouv.fr/referentiel-technique-0#test-6-4-3)
+[6.4.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-4-3)
 
 ### Description
 
