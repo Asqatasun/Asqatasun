@@ -47,9 +47,9 @@ RUN /root/pre-requisites.sh
 # ##########################################################
 
 # Add Asqatasun
-ADD http://download.asqatasun.org/asqatasun-${ASQA_RELEASE}.tar.gz /root/
-RUN tar xvfz asqatasun-${ASQA_RELEASE}.tar.gz && \
-    mv asqatasun*/ ./asqatasun/
+ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz  /root/
+RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
+    mv asqatasun*/ ./asqatasun/ 
 
 # The two following commands are needed for local testing when a release is created
 #ADD asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
