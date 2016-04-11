@@ -270,8 +270,11 @@
                                             <td headers="manual" class="tg-textual-column">
                                                 <c:set var="auditUrl" scope="page" value="/home/contract/manual-audit-result.html?audit=" />
                                                 <c:choose>
-                                                    <c:when test="${actInfo.scope == 'DOMAIN'}">
-
+                                                    <c:when test="${actInfo.scope == 'DOMAIN'       ||
+                                                                    actInfo.scope == 'SCENARIO'     ||
+                                                                    actInfo.scope == 'GROUPOFFILES' ||
+                                                                    actInfo.scope == 'GROUPOFPAGES'   }">
+                                                        
                                                     </c:when>
                                                     <c:when test="${actInfo.manual == 'true'}">
                                                         <a href="<c:url value="${auditUrl}${actInfo.auditId}"/>" 
