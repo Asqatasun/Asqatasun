@@ -27,7 +27,15 @@
                     <span class="synthesis-meta-title"><fmt:message key="auditSetUp.file"/> : </span>${statistics.url}
                 </c:when>
                 <c:when test="${statistics.auditScope == 'SCENARIO'}">
-                    <span class="synthesis-meta-title">Scenario : </span><a href="${statistics.url}">${statistics.url}</a>
+                    <span class="synthesis-meta-title">Scenario : </span>
+                    <c:choose>
+                         <c:when test="${addLinkToSourceCode == 'true'}">
+                             <a href="${statistics.url}">${statistics.url}</a>
+                         </c:when>
+                         <c:otherwise>
+                             ${statistics.url}
+                         </c:otherwise>  
+                    </c:choose>
                 </c:when>
                 <c:otherwise>
                     <span class="synthesis-meta-title">Url : </span><a href="${statistics.url}">${statistics.url}</a>
