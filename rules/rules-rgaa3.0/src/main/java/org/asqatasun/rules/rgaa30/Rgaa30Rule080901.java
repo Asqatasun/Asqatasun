@@ -105,7 +105,7 @@ public class Rgaa30Rule080901 extends AbstractPageRuleMarkupImplementation {
                     testSolutionHandler);
         
         ElementChecker fieldsetNotWithinFormChecker = new ElementPresenceChecker(
-                        new ImmutablePair(TestSolution.FAILED,FIELDSET_NOT_WITHIN_FORM_MSG),
+                        new ImmutablePair(TestSolution.NEED_MORE_INFO,FIELDSET_NOT_WITHIN_FORM_MSG),
                         new ImmutablePair(TestSolution.PASSED,""));
         
         fieldsetNotWithinFormChecker.check(
