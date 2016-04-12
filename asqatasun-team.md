@@ -1,1 +1,0 @@
-documentation/en/asqatasun-team.md
