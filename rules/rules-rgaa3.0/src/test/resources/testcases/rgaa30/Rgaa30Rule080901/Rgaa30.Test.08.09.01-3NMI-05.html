@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head> 
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
-        <title>Rgaa30 Test.8.9.1 NMI 05</title> 
+        <title>Rgaa30 Test.8.9.1 Failed 03</title> 
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.8.9.1 NMI 05</h1> 
+            <h1>Rgaa30 Test.8.9.1 Failed 03</h1> 
             <div class="test-detail" lang="fr"> Dans chaque page Web les balises (à l&apos;exception de 
                 <code>div</code>, 
                 <code>span</code> et 
@@ -14,14 +14,13 @@
                 <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mUniquPres">uniquement à des fins de présentation</a>. Cette règle est-elle respectée ? 
             </div> 
             <div class="testcase"> 
-                <form action="action"> 
-                    <fieldset>
-                         any fieldset not within form 
-                    </fieldset> 
-                </form> 
+                <fieldset>
+                     any fieldset not within form 
+                </fieldset> 
             </div> 
             <div class="test-explanation">
-                 NMI : The page contains a fieldset within a form. Nothing can be deduced, manual check is needed on the page. 
+                NMI : The page contains a fieldset that is not a child of a form element.
+                Using a fieldset without a form is not forbidden. We just raise a warning.
             </div> 
         </div>   
     </body>
