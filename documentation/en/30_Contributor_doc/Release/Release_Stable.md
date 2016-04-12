@@ -74,6 +74,6 @@ git push origin develop
 
 ... on https://www.w3.org/WAI/ER/tools/index.html
 
-## 11) Celebrate and [have a beer](http://www.aufutetamesure.fr/) !
+## 11) Celebrate and have a beer !
 
 
