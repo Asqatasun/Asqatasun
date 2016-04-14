@@ -1,12 +1,6 @@
-
 # Build
 target
 hsql-db*
-
-# Netbeans
-nbproject
-nb-configuration.xml
-nbactions.xml
 
 # Eclipse
 .project
@@ -25,7 +19,7 @@ nbactions.xml
 .idea
 *.iml
 
-# Crowdin (translation tool) configuration file (contains personal data
+# Crowdin (translation tool) configuration file (contains personal data)
 crowdin.yaml
 
 # saved files
@@ -41,15 +35,14 @@ crowdin.yaml
 _book/
 node_modules/
 
-
-# Crowdin (translation tool) configuration file (contains personal data
-crowdin.yaml
-
 # Mkdocs
 /docs/Site
 
 # git shortlog -s -n
 #  	file for map author and committer names and email addresses
 #  	to canonical real names and email addresses
-.mailmap
+/.mailmap
+
+# Dockers: binaries
+docker/**/asqatasun-*gz
 
