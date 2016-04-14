@@ -1,3 +1,14 @@
 language: java
 jdk:
   - openjdk7
+
+env:
+  global:
+    - "ASQA_RELEASE=4.1.0-SNAPSHOT"
+    - "FTP_USER=referenc-asqa"
+    - secure: "j04II4oc/v5TCFSwJ5hcRGcyKUn2c1PhAHpyS5dQxYxUg4h+lSBX9iWWFXBsIZRIKbPtupfJvRRnfLwQPVVIghdrbiFKCVEQxwK80AO3f5vGaHgHxrK2maSJaYIco2VRkJLbWx0W9vu6lAgVnxLI+WHRl6vrFSOLXmOX8J3rlVd43BLlwHIpWtqzsBYU91wryhiZ/o2oZsSqsPt85gQCmD2gGwMSaGMzHi8uXanYZpt1YBYpFuc0IokNYPSpnd7P1oOCAoP5e/Z+J0FOguLFsvfdX6O6e0VjCwtgMan9isCehSRUgXpdeU5qYiurUTlY00LQAnR6KC7I9KB+0WRtKTyuazB1iAYLP+y1UKypntsuLhWxjVARcVtYZnTeb/uE8HkSRoZ00aN5Ndqpqq3UUVRPrBBbF4pVyiKauUomd+5QuKnYgTSXcPUwBbCULlpMiH2/fTyb2FUnibDOjCCpFlj1gjU5mV1hhdQbc/XBpY/O02u2Pv8C/MYFvo5mnFRpRck39fGL1RYUI4ZXlwPIeAWQ5j9LEkajSS3L32PNAl6zlz+q/OMGYtUcadl0zUZamdaZVzSec3UH0kG4/blT9IOlArv4f+6/L9YrrTMUR9w5ivF23/VWz8I0J/BCGrO4XI1LkKusvdgwtc2fKMod4FIyXQJ2pgiTgsqwo61vtpM="
+
+after_success:
+  on:
+    branch: develop
+    "curl --ftp-create-dirs -T asqatasun-$ASQA_RELEASE.i386.tar.gz -u $FTP_USER:$FTP_PASSWORD ftp://ftp.cluster005.ovh.net/asqatasun-$ASQA_RELEASE.i386.tar.gz"
