@@ -110,6 +110,7 @@ find . -name "pom.xml" -exec perl -pi -e $POM_PERL_COMMAND2 {} \;
 find . -name "install.sh" -exec perl -pi -e $SH_PERL_COMMAND {} \;
 find . -name "asqatasun.conf" -exec perl -pi -e $CONF_PERL_COMMAND {} \;
 find . -name "Dockerfile" -exec perl -pi -e $DOCKER_PERL_COMMAND {} \;
+find . -name ".travis.yml" -exec perl -pi -e $DOCKER_PERL_COMMAND {} \;
 find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e $ANSIBLE_PERL_COMMAND {} \;
 echo 'bumped context with version' $TO_VERSION
 
