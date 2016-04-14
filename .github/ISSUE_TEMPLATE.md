@@ -1,10 +1,10 @@
-## Observed behavior
+## Observed behaviour
 
 
-## Expected behavior
+## Expected behaviour
 
 
-## Steps to reproduce the behavior
+## Steps to reproduce the behaviour
 
 
 ## Your configuration

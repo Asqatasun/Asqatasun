@@ -1,17 +1,27 @@
+## I verified my work is based on `develop` branch
 
-## What's this PR do?
+* [ ] yes, keep going
+* [ ] hum... no, because:
+    * [ ] I don't understand the develop / branch / trees / flowers stuff !
+    * [ ] I need help. No worries, we will help you :)
+    * [ ] I'm a super-karma-powered contributor, will not tick this box and will rebase my PR within seconds (thanks :) )
+
+## Purpose of this Pull Request?
 
 
-## Where should the reviewer start?
+## Where should the reviewer start its review?
 
 
-## How should this be manually tested?
+## How the PR could be tested?
 
 
 ## Any background context you want to provide?
 
 
-## What are the relevant tickets?
+## What are the related issues?
 
 
 ## Screenshots (if appropriate)
+
+
+(by the way, thank you **very** much for contributing to Asqatasun!)
