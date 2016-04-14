@@ -25,7 +25,6 @@
     * [Debug / Monitor / Profile](30_Contributor_doc/Debug_Monitor_Profile/README.md)
         * [Debugging Asqatasun](30_Contributor_doc/Debug_Monitor_Profile/Debugging_Asqatasun.md)
         * [Monitoring and profiling](30_Contributor_doc/Debug_Monitor_Profile/Monitoring_profiling.md)    
-        * [Running functional tests](30_Contributor_doc/Debug_Monitor_Profile/Functional_tests.md)
     * [Testing](30_Contributor_doc/Testing/README.md)
         * [Running functional tests](30_Contributor_doc/Testing/Functional_tests.md)
     * [Engine overview](30_Contributor_doc/Engine/00_Engine_overview.md)
