@@ -10,7 +10,8 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 
 ## Building
 
-* [Docker build](Build/Docker_build.md)
+* [Build Asqatasun](Build/Build_asqatasun.md)
+* [Build Docker Image](Build/Build_Docker_image.md)
 
 ## Debugging
 

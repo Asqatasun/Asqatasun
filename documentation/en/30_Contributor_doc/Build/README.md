@@ -1,3 +1,4 @@
 # Building Asqatasun
 
-* [Docker build](Docker_build.md)
+* [Build Asqatasun](Build_asqatasun.md)
+* [Build Docker image](Build_Docker_image.md)
