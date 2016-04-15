@@ -1,6 +1,6 @@
 
 [![License : AGPL v3](https://img.shields.io/badge/License-AGPL3-blue.svg)](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/Asqatasun/Asqatasun.svg)](https://travis-ci.org/Asqatasun/Asqatasun)
+[![Build Status](https://travis-ci.org/Asqatasun/Asqatasun.svg)](https://travis-ci.org/Asqatasun/Asqatasun/branches)
 
 # Asqatasun
 
