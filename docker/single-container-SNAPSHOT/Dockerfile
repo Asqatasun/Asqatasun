@@ -38,14 +38,10 @@ WORKDIR /root
 # ##########################################################
 
 # Add Asqatasun
-ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz  /root/
+ADD http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz  /root/
 RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
     mv asqatasun*/ ./asqatasun/ && \
     ./asqatasun/install/pre-requisites.sh
-
-# The two following commands are needed for local testing when a release is created
-#ADD asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
-#RUN mv asqatasun*/ ./asqatasun/
 
 # Install Asqatasun
 WORKDIR /root/asqatasun
