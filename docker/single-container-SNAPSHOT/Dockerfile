@@ -41,6 +41,7 @@ WORKDIR /root
 ADD http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz  /root/
 RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
     mv asqatasun*/ ./asqatasun/ && \
+    cp ./asqatasun/install/xvfb . && \
     ./asqatasun/install/pre-requisites.sh
 
 # Install Asqatasun
