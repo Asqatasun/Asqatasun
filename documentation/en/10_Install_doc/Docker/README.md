@@ -39,7 +39,33 @@ Note: Linux user and willing to test your `localhost` ? See tip [Testing 127.0.0
 * Use this user and this password :
     * `me@my-email.org`
     * `myAsqaPassword`
-    
+
+## 3. Use "-SNAPSHOT" Docker image (bleeding edge but unstable)
+
+** /!\ Advanced users only /!\ **
+
+We also provide a Docker image for the `develop` branch (called "-SNAPSHOT"). Be aware that this **not for production**, but for testing purpose only. Said differently, this can be broken or can harm your data.
+
+OK now you've been warned, so let's jump into it :) 
+
+First grab the image
+
+```sh
+docker pull asqatasun/asqatasun:SNAPSHOT
+```
+
+Then run you "-SNAPSHOT" container. Here we'll use different port-mapping to have both the "stable" and "unstable" builds of Asqatasun running at the same time:
+
+```sh
+docker run --rm --name asqa-snapshot -p 8282:8080 asqatasun/asqatasun:SNAPSHOT
+```
+
+Explanations:
+
+* `--rm` deletes the container when exiting
+* `-p 8282:8080` maps Asqatasun port (8080) to your 8282 host port
+
+Then to use it, point your browser to http://localhost:8282/asqatasun/ (or adapt the IP if you are on MacOSX / Windows)
 
 <h2 id="docker-tips-tricks">Tips and tricks on using Docker containers</h2>
 
