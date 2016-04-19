@@ -13,5 +13,5 @@ deploy:
   provider: script
   script: "curl --ftp-create-dirs -T web-app/asqatasun-web-app/target/asqatasun-$ASQA_RELEASE.i386.tar.gz -u $FTP_USER:$FTP_PASSWORD ftp://ftp.cluster005.ovh.net/asqatasun-$ASQA_RELEASE.i386.tar.gz"
   on:
-    branch: develop
+    branch: develop, master
 
