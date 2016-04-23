@@ -12,6 +12,7 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 
 * [4 kinds of audit](userdoc-01-4-audits.md)
 * [5 types of result](userdoc-02-5-results.md)
+* [Structure of a result](userdoc-02b-structure_of_a_result.md)
 
 ---
 

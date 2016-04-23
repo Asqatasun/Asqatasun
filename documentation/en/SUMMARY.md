@@ -11,6 +11,7 @@
 * [User doc](20_User_doc/README-user_doc.md)
     * [4 kinds of audit](20_User_doc/userdoc-01-4-audits.md)
     * [5 types of result](20_User_doc/userdoc-02-5-results.md)
+    * [Structure of a result](20_User_doc/userdoc-02b-structure_of_a_result.md)
     * [Page audit](20_User_doc/userdoc-03-page-audit.md)
     * [Scenario audit](20_User_doc/userdoc-04-scenario-audit.md)
     * [Scenario audit advanced](20_User_doc/userdoc-05-scenario-audit-advanced.md)
