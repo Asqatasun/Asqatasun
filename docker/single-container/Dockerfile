@@ -28,32 +28,21 @@ ENV WWWPORT="8080" \
 
 EXPOSE $WWWPORT
 
-# ##########################################################
-#
-# Asqatasun pre-requisites
-# @@@TODO provide suitable link from http://doc.asqatasun.org/
-#
-# ##########################################################
-
 WORKDIR /root
-ADD pre-requisites.sh xvfb /root/
-RUN /root/pre-requisites.sh
 
 # ##########################################################
 #
 # Asqatasun installation
-# @@@TODO provide suitable link from http://doc.asqatasun.org/
+# cf http://doc.asqatasun.org/en/10_Install_doc/
 #
 # ##########################################################
 
 # Add Asqatasun
 ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz  /root/
 RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
-    mv asqatasun*/ ./asqatasun/ 
-
-# The two following commands are needed for local testing when a release is created
-#ADD asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
-#RUN mv asqatasun*/ ./asqatasun/
+    mv asqatasun*/ ./asqatasun/ && \
+    cp ./asqatasun/install/xvfb . && \
+    ./asqatasun/install/pre-requisites.sh
 
 # Install Asqatasun
 WORKDIR /root/asqatasun
