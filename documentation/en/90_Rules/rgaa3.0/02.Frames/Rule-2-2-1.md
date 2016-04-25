@@ -52,7 +52,7 @@ For each occurrence of false-result of **Test1**, raise a MessageB
 
 ##### MessageA
 
--   code : NotPertinentTitleOfFrame
+-   code : NotPertinentTitleOfIframe
 -   status: Failed
 -   parameter : `"title"` attribute, tag name, snippet
 -   present in source : yes
