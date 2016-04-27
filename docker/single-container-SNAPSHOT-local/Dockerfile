@@ -38,9 +38,8 @@ WORKDIR /root
 # ##########################################################
 
 # Add Asqatasun
-ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz  /root/
-RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
-    mv asqatasun*/ ./asqatasun/ && \
+ADD ./asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
+RUN mv asqatasun*/ ./asqatasun/ && \
     cp ./asqatasun/install/xvfb . && \
     ./asqatasun/install/pre-requisites.sh
 
