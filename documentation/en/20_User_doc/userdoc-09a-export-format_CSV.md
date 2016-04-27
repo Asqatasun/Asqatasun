@@ -58,6 +58,7 @@ Nesting level 3:
 * enclosing characters: brackets `[` and `]` 
 * separator: pipe `|`
 
+One may say: this blob looks like Json put into CSV, well that's not false :)
 
 ## Exported data
 
@@ -147,9 +148,6 @@ Level data ,
 Result data ,
     Process Remarks count ø
     Evidence elements headers ø
-    Instance of Evidence element ø
-    Instance of Evidence element ø
-    Instance of Evidence element ø
     Instance of Evidence element ø
     {
         data nesting level 2 ;
