@@ -118,7 +118,7 @@
     </bean>
 
     <bean id="maxDocumentsFormFieldBuilder" class="org.asqatasun.webapp.form.builder.NumericalFormFieldBuilderImpl">
-        <property name="maxValue" value="10000"/>
+        <property name="maxValue" value="1000"/>
         <property name="minValue" value="1"/>
         <property name="i18nKey" value="max-documents"/>
         <property name="errorI18nKey" value="max-documents-error"/>
