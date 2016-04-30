@@ -88,25 +88,17 @@
             <fileMode>755</fileMode>
             <outputDirectory>.</outputDirectory>
         </fileSet>
-        <!-- Uninstall file -->
+        <!-- Install files -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
             <includes>
                 <include>uninstall.sh</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install</outputDirectory>
-        </fileSet>	
-        <!-- Files from Docker section -->
-        <fileSet>
-            <directory>${basedir}/../../docker/single-container</directory>
-            <includes>
                 <include>pre-requisites.sh</include>
                 <include>xvfb</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install</outputDirectory>
-        </fileSet>
+        </fileSet>	
         <!-- Install web-app conf -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/conf</directory>
