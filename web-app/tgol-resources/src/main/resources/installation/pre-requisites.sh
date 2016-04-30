@@ -55,12 +55,9 @@ FIREFOX_x86_64="http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases
 #############################################
 
 fail() {
-        echo ""
+    echo ""
 	echo "FAILURE : $*"
-        echo ""
-	if [[ ! $omit_cleanup ]]; then
-            cleanup
-        fi
+    echo ""
 	exit -1
 }
 
@@ -120,7 +117,7 @@ collation-server = utf8_general_ci
 init-connect='SET NAMES utf8'
 character-set-server = utf8
 max_allowed_packet = 64M
-
+innodb_file_per_table = 1
 EOF
 
 service mysql restart
