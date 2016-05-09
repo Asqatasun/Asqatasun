@@ -1,6 +1,6 @@
 
 --------------------------------
-Asqatasun 4.x.x, 2016-04-xx
+Asqatasun 4.x.x, 2016-05-xx
 --------------------------------
 
 Security:
@@ -9,11 +9,14 @@ Security:
 
 Bugs:
 - [#25](https://github.com/Asqatasun/Asqatasun/issues/25): localhost URLs should not be blocked  
-- [#104](https://github.com/Asqatasun/Asqatasun/issues/#104): Rgaa 3 - rule 8.9.1 : Changed actual result of rule when fieldset is used without form
+- [#104](https://github.com/Asqatasun/Asqatasun/issues/104): Rgaa 3 - rule 8.9.1 : Changed actual result of rule when fieldset is used without form
+- [#105](https://github.com/Asqatasun/Asqatasun/issues/105): MySQL - Enable innodb_file_per_table 
+
+Configuration:
+- max-documents for site-audits lowered from 10'000 to 1'000 
 
 Documentation:
 - [#88](https://github.com/Asqatasun/Asqatasun/issues/88): DOC Docker - Add tip for Mac OS X and Windows users 
-
 
 
 
