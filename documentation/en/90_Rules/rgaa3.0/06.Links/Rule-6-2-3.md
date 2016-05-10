@@ -144,3 +144,11 @@ A link title attribute is regarded as not-pertinent in the following cases :
 3.  Due to the "Note 1" of the [definition of a link title](http://references.modernisation.gouv.fr/referentiel-technique-0#title-titre-de-lien),
     a `"title"` attribute identical to the text link is seen as suspected passed.
 
+
+
+
+##  TestCases 
+
+[TestCases files for rule 6.2.3](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060203/) 
+
+

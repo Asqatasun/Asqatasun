@@ -47,3 +47,11 @@ Chaque composant d'interface qui utilise un role ARIA `application` respecte-t-i
 #### No Tested 
 
 In all cases
+
+
+
+##  TestCases 
+
+[TestCases files for rule 7.1.6](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule070106/) 
+
+

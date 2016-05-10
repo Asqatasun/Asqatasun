@@ -44,3 +44,11 @@ Pour chaque d&eacute;claration de <a href="http://references.modernisation.gouv.
 
 In all cases
 
+
+
+
+##  TestCases 
+
+[TestCases files for rule 8.2.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080202/) 
+
+

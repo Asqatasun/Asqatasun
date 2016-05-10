@@ -93,3 +93,11 @@ key is changed to lowercase.
 This behaviour is the same with chromium and opera. 
 Regarding this fact, we decided to consider all the doctypes as case
 insensitive despite the W3c recommandations.
+
+
+
+##  TestCases 
+
+[TestCases files for rule 8.1.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080102/) 
+
+

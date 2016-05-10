@@ -43,3 +43,11 @@ Dans chaque page Web, chaque bloc de citation utilise-t-il une balise `blockquot
 #### No Tested 
 
 In all cases
+
+
+
+##  TestCases 
+
+[TestCases files for rule 9.6.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule090602/) 
+
+

@@ -71,3 +71,11 @@ The page has no `<img>` tag with a `"ismap"` attribute (**Set1** is empty)
 ## Notes
 
 We only detect the elements of the **Set1** to determine whether the test is applicable
+
+
+
+##  TestCases 
+
+[TestCases files for rule 1.1.4](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010104/) 
+
+

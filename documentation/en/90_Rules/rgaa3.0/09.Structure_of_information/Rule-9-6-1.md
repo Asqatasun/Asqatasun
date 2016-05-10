@@ -43,3 +43,11 @@ Dans chaque page Web, chaque citation courte utilise-t-elle une balise `q` ?
 #### No Tested 
 
 In all cases
+
+
+
+##  TestCases 
+
+[TestCases files for rule 9.6.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule090601/) 
+
+

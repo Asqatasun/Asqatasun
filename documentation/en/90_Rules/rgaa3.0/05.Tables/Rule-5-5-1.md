@@ -115,3 +115,11 @@ The content of the `<caption>` tag is seen as not relevant if :
 
 - empty
 - only composed of non-alphanumerical characters
+
+
+
+##  TestCases 
+
+[TestCases files for rule 5.5.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule050501/) 
+
+

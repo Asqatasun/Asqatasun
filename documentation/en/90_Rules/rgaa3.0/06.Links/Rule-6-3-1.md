@@ -94,3 +94,11 @@ In all other cases
 ## Notes
 
 We assume here that the links are only composed of a text. (<a href="http://www.asqatasun.org/target.html">` my link`</a>`)
+
+
+
+##  TestCases 
+
+[TestCases files for rule 6.3.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060301/) 
+
+

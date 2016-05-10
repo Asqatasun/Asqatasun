@@ -81,3 +81,11 @@ If **Set1** AND **Set2** are empty, raise a MessageB
 #### Pre-qualified
 
 In all cases
+
+
+
+##  TestCases 
+
+[TestCases files for rule 7.4.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule070401/) 
+
+

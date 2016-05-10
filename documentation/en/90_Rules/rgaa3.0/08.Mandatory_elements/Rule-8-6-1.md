@@ -74,3 +74,11 @@ The title of the page has been found in the blacklist (**Test1** returns true)
 
 The title of the page has not been found in the blacklist (**Test1** returns false)
 
+
+
+
+##  TestCases 
+
+[TestCases files for rule 8.6.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080601/) 
+
+

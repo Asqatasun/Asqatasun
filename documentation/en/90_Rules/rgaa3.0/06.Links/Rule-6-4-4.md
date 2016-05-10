@@ -104,3 +104,11 @@ The page has no group of combined links with an identical link text (**Set3**, *
 #### Pre-Qualified
 
 In all other cases
+
+
+
+##  TestCases 
+
+[TestCases files for rule 6.4.4](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060404/) 
+
+

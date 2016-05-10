@@ -88,3 +88,11 @@ In all other cases
 We only detect the elements of the scope of the test to determine whether the test is applicable.
 
 Complex tables are seen as a subset of data tables. That's tables identified as complex tables are added to the set of identified data tables.
+
+
+
+##  TestCases 
+
+[TestCases files for rule 5.7.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule050701/) 
+
+

@@ -138,3 +138,11 @@ In all other cases
     is parsed to extract these info, as well as its
     visibility (`"display"` css property equals to *none* or `"visibility"`
     css property equals to *hidden*) and whether it is a textual node.
+
+
+
+##  TestCases 
+
+[TestCases files for rule 3.4.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule030402/) 
+
+

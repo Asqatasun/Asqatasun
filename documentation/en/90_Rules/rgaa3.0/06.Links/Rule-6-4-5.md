@@ -109,3 +109,11 @@ In all other cases
 
 We assume here that the image links have only one child of type `<svg>`
 
+
+
+
+##  TestCases 
+
+[TestCases files for rule 6.4.5](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060405/) 
+
+

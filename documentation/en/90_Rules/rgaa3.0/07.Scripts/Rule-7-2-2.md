@@ -47,3 +47,11 @@ Chaque &eacute;l&eacute;ment non textuel mis &agrave; jour par un <a href="http:
 #### No Tested 
 
 In all cases
+
+
+
+##  TestCases 
+
+[TestCases files for rule 7.2.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule070202/) 
+
+

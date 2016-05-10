@@ -97,3 +97,11 @@ In all other cases
 ## Notes
 
 All the links that have children different from `<img>`, `<canvas>`, `<svg>` or `<object>`, are considered as combined links.
+
+
+
+##  TestCases 
+
+[TestCases files for rule 6.3.4](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060304/) 
+
+

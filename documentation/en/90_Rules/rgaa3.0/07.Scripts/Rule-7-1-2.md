@@ -43,3 +43,11 @@ Chaque fonctionnalit&eacute; d'insertion de contenu contr&ocirc;l&eacute;e par u
 #### No Tested 
 
 In all cases
+
+
+
+##  TestCases 
+
+[TestCases files for rule 7.1.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule070102/) 
+
+

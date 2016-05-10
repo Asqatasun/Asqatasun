@@ -86,3 +86,11 @@ The content of the "`title`" attribute is seen as not relevant if :
 - only composed of non-alphanumerical characters
 - identical to the `"src"` attribute
 
+
+
+
+##  TestCases 
+
+[TestCases files for rule 2.2.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule020201/) 
+
+

@@ -227,3 +227,11 @@ An element is identified as a CAPTCHA when the "captcha" occurrence is found :
 - or on one attribute of a sibling of the element
 - or within the text of a sibling of the element
 
+
+
+
+##  TestCases 
+
+[TestCases files for rule 1.3.6](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010306/) 
+
+

@@ -98,3 +98,11 @@ All the lang declarations are valid and well-formed (**Test1** AND **Test2** ret
 #### Failed
 
 At least one lang declaration is valid or badly-formed (**Test1** OR **Test2** return false for at least one element of **Set1**)
+
+
+
+##  TestCases 
+
+[TestCases files for rule 8.8.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080801/) 
+
+

@@ -166,3 +166,11 @@ The content of the `"alt"` attribute is seen as not relevant if :
 - only composed of non-alphanumerical characters
 - identical to the `"src"` attribute
 - it has an extension of image type (loaded by the nomenclature named **ImageFileExtensions** composed of : jpg, gif, jpeg, png, bmp)
+
+
+
+##  TestCases 
+
+[TestCases files for rule 1.3.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010302/) 
+
+

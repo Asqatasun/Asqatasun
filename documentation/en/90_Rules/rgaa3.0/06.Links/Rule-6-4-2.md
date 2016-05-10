@@ -101,3 +101,11 @@ In all other cases
 ## Notes
 
 We assume here that the image links have only one child of type `<img>`, `<object>` or `<canvas>`
+
+
+
+##  TestCases 
+
+[TestCases files for rule 6.4.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060402/) 
+
+
