@@ -46,7 +46,7 @@ All the elements of **Set1** with own text or with more than 1 child or with onl
 
 #### Set3
 
-All the elements of **Set2** without `"title"` attribute and without context (assuming [the definition of a link context in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#contexte-du-lien)) and with an identical link text.
+All the elements of **Set2** without `"title"` attribute and without context (assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien)) and with an identical link text.
 
 #### Set4
 
