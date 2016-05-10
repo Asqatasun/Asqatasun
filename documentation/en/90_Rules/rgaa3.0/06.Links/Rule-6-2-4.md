@@ -142,10 +142,10 @@ All the links that have children different from `<img>`, `<canvas>`, `<svg>` or 
 
 examples :
 
--   `<a href="/target.html">` `<span>` my link`</span>``</a>`
--   `<a href="/target.html">` my `<span>`my link`</span>``</a>`
--   `<a href="/target.html">` `<p>`my link`</p>``</a>`
--   `<a href="/target.html">` my `<p>` link`</p>``</a>`
+-   `<a href="/target.html">` `<span>` my link`</span>` `</a>`
+-   `<a href="/target.html">` my `<span>`my link`</span>` `</a>`
+-   `<a href="/target.html">` `<p>`my link`</p>` `</a>`
+-   `<a href="/target.html">` my `<p>` link`</p>` `</a>`
 
 2. **Definition of not-pertinent link title attribute :**
 
