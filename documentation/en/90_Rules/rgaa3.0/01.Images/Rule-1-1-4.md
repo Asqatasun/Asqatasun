@@ -16,7 +16,7 @@ This test consists in checking whether each `<area>` of a server image map is do
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZone">zone</a> (balise `area`) d'une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mImgReactive">image r&eacute;active cot&eacute; serveur</a> est-t-elle doubl&eacute;e d'un lien dans la page ?
+Does each area (<code>area</code> tag) of a server-side image map have an equivalent link in the page?
 
 ### Level
 
