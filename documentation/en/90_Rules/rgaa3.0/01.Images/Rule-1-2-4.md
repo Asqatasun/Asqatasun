@@ -16,12 +16,15 @@ This test consists in checking whether the ARIA attribute of each decorative vec
 
 ### Description
 
-Chaque image vectorielle de d&eacute;coration (balise `<svg>`) non porteuse d'information et poss&eacute;dant une alternative v&eacute;rifie-t-elle ces conditions ? 
- 
- * La balise `<svg>` poss&egrave;de un `role="img"` 
- * La balise `<svg>` ou l'un de ses enfants est d&eacute;pourvue de role, propri&eacute;t&eacute; ou &eacute;tat ARIA visant &agrave; labelliser l'image vectorielle (`aria-label`, `aria-describedby`, `aria-labelledby` par exemple). 
- * Les balises `<title>` et `<desc>` sont absentes ou vides 
- * La balise `<svg>` ou l'un de ses enfants est d&eacute;pourvue d'attribut `title` 
+Does each decorative vector image (<code>svg</code> tag), not conveying any information, and with an alternative, meet the following conditions:
+<ul>
+    <li>The <code>svg</code> tag has a <code>role="img"</code></li>
+    <li>The <code>svg</code> tag, or one of its children, has no ARIA role, property or state,
+        that aims at labeling the vector image (<code>aria-label</code>, <code>aria-describedby</code>, or
+        <code>aria-labelledby</code>, for example)</li>
+    <li>The <code>title</code> and <code>desc</code> tags are missing, or empty</li>
+    <li>The <code>svg</code> tag, or one of its children, has no <code>title</code> attribute</li>
+</ul>
 
 ### Level
 

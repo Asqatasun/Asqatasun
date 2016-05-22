@@ -6,15 +6,18 @@
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.1.2.4 Passed 02</h1> 
-            <div class="test-detail" lang="fr"> Chaque image vectorielle de décoration (balise <code>&lt;svg&gt;</code>) non porteuse d&apos;information et possédant une alternative vérifie-t-elle ces conditions ? 
-                <ul class="ssTests"> 
-                    <li>La balise <code>&lt;svg&gt;</code> possède un role="img"</li> 
-                    <li>La balise <code>&lt;svg&gt;</code> ou l&apos;un de ses enfants est dépourvue de role, propriété ou état ARIA visant à labelliser l&apos;image vectorielle (aria-label, aria-describedby, aria-labelledby par exemple).</li> 
-                    <li>Les balises <code>&lt;title&gt;</code> et <code>&lt;desc&gt;</code> sont absentes ou vides</li> 
-                    <li>La balise <code>&lt;svg&gt;</code> ou l&apos;un de ses enfants est dépourvue d&apos;attribut title</li> 
-                </ul> 
-            </div> 
+            <h1>Rgaa30 Test.1.2.4 Passed 02</h1>
+            <div class="test-detail">
+                Does each decorative vector image (<code>svg</code> tag), not conveying any information, and with an alternative, meet the following conditions:
+                <ul>
+                    <li>The <code>svg</code> tag has a <code>role="img"</code></li>
+                    <li>The <code>svg</code> tag, or one of its children, has no ARIA role, property or state,
+                        that aims at labeling the vector image (<code>aria-label</code>, <code>aria-describedby</code>, or
+                        <code>aria-labelledby</code>, for example)</li>
+                    <li>The <code>title</code> and <code>desc</code> tags are missing, or empty</li>
+                    <li>The <code>svg</code> tag, or one of its children, has no <code>title</code> attribute</li>
+                </ul>
+            </div>
             <div class="testcase"> 
                 <svg class="class-decorative-image" viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" role="img">  
 
