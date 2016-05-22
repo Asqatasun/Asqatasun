@@ -16,7 +16,8 @@ This test consists in checking whether the textual alternative of each decorativ
 
 ### Description
 
-Pour chaque image bitmap de d&eacute;coration (balise `canvas`), le contenu entre `<canvas>` et `</canvas>` doit &ecirc;tre d&eacute;pourvu de contenus textuels, cette r&egrave;gle est-elle respect&eacute;e ?
+For each decorative bitmap image (canvas tag), there must be no text content
+between <canvas> and </canvas>. Has this rule been followed?
 
 ### Level
 
