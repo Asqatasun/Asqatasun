@@ -16,7 +16,7 @@ This test consists in checking whether each `<area>` of an image map is defined 
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZone">zone</a> (balise `area`) d'une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mImgReactive">image r&eacute;active</a> a-t-elle un attribut `alt` ?
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZone">area</a> (<code>area</code> tag) of an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgReactive">image map</a> have an <code>alt</code> attribute?
 
 ### Level
 
