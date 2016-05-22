@@ -16,7 +16,9 @@ This test consists in checking whether the textual alternative of each decorativ
 
 ### Description
 
-Pour chaque image objet sans <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLegendeImage">l&eacute;gende</a> (balise `object` avec l'attribut `type="image/..."`) non porteuse d'information, l'alternative textuelle entre `<object>` et `</object>` est-elle vide ?
+For each image object without caption (<code>object</code> tag with the attribute <code>type="image/…"</code>),
+not conveying any information, is the text alternative between  <code>&lt;object&gt;</code>
+and  <code>&lt;/object&gt;</code> empty?
 
 ### Level
 
