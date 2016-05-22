@@ -6,17 +6,15 @@
     </head> 
     <body> 
         <div> 
-            <h1>Rgaa30 Test.1.2.2 Failed 03</h1> 
-            <div class="test-detail" lang="fr"> Chaque 
-                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneNonCliquable">zone non cliquable</a> (balise 
-                <code>area</code> sans attribut 
-                <code>href</code>), non porteuse d&apos;information et ayant un attribut 
-                <code>alt</code> vérifie-t-elle ces conditions ? 
-                <ul class="ssTests"> 
-                    <li>le contenu de l&apos;attribut <code>alt</code> est vide (<code>alt=&quot;&quot;</code>)</li> 
-                    <li>la zone cliquable ne possède pas d&apos;attribut <code>title</code></li> 
-                </ul> 
-            </div> 
+            <h1>Rgaa30 Test.1.2.2 Failed 03</h1>
+            <div class="test-detail">
+                Does each non clickable area  (<code>area</code> tag with no <code>href</code> attribute),
+                not conveying any  information, and with an <code>alt</code> attribute, meet the following conditions:
+                <ul>
+                    <li>The <code>alt</code> attribute has an empty value (<code>alt=""</code>)</li>
+                    <li>The non clickable area does not have a <code>title</code> attribute</li>
+                </ul>
+            </div>
             <div class="testcase"> 
                 <img alt="" src="mock-image.jpg" usemap="#mock-map" /> 
                 <map id="mock-map" name="mock-map"> <area role="role-decorative-area" alt="Not empty alt"></area> </map> 

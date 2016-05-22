@@ -16,10 +16,12 @@ This test consists in checking whether the `alt` attribute of non clickable area
 
 ### Description
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneNonCliquable">zone non cliquable</a> (balise `area` sans attribut `href`), non porteuse d'information et ayant un attribut `alt` v&eacute;rifie-t-elle ces conditions ? 
- 
- * le contenu de l'attribut `alt` est vide (`alt=""`) 
- * la zone cliquable ne poss&egrave;de pas d'attribut `title` 
+Does each non clickable area  (<code>area</code> tag with no <code>href</code> attribute),
+not conveying any  information, and with an <code>alt</code> attribute, meet the following conditions:
+<ul>
+    <li>The <code>alt</code> attribute has an empty value (<code>alt=""</code>)</li>
+    <li>The non clickable area does not have a <code>title</code> attribute</li>
+</ul>
 
 ### Level
 
