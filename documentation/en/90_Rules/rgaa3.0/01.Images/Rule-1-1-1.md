@@ -16,7 +16,7 @@ This test consists in checking whether each `<img>` tag is defined with an `"alt
 
 ### Description
 
-Chaque image (balise `img`) a-t-elle un attribut `alt` ?
+Does each image (<code>img</code> tag) have an <code>alt</code> attribute?
 
 ### Level
 
