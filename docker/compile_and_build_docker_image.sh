@@ -26,6 +26,7 @@ usage: $0 [OPTIONS]
   --skip-copy                       skip copying .tar.gz (relies on previous .tar.gz, that must exist)
   --skip-docker-build               skip docker build
   --skip-docker-run                 skip docker run
+  --use-sudo-docker		    use "sudo docker" instead of "docker"
 
   -h | --help                       Show this help
 
@@ -36,7 +37,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o s:d:ht --long source-dir:,docker-dir:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run -- "$@"`
+TEMP=`getopt -o s:d:ht --long source-dir:,docker-dir:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -54,6 +55,7 @@ declare SKIP_BUILD=false
 declare SKIP_COPY=false
 declare SKIP_DOCKER_BUILD=false
 declare SKIP_DOCKER_RUN=false
+declare USE_SUDO_DOCKER=false
 
 while true; do
   case "$1" in
@@ -65,6 +67,8 @@ while true; do
     --skip-copy )               SKIP_COPY=true; shift ;;
     --skip-docker-build )       SKIP_DOCKER_BUILD=true; shift ;;
     --skip-docker-run )         SKIP_DOCKER_RUN=true; shift ;;
+    --use-sudo-docker )         USE_SUDO_DOCKER=true; shift ;;
+
     * ) break ;;
   esac
 done
@@ -94,20 +98,23 @@ TGZ_EXT=".tar.gz"
 CONTAINER_NAME="asqa"
 CONTAINER_EXPOSED_PORT="8085"
 
+SUDO=''
+if ${USE_SUDO_DOCKER} ; then   SUDO='sudo'; fi
+
 #############################################
 # Functions
 #############################################
 
 function kill_previous_container() {
     set +e
-    RUNNING=$(sudo docker inspect --format="{{ .State.Status }}" ${CONTAINER_NAME} 2>/dev/null)
+    RUNNING=$(${SUDO} docker inspect --format="{{ .State.Status }}" ${CONTAINER_NAME} 2>/dev/null)
     set -e
 
     if [ ${RUNNING} == "running" ]; then
-        sudo docker stop ${CONTAINER_NAME}
-        sudo docker rm ${CONTAINER_NAME}
+        ${SUDO} docker stop ${CONTAINER_NAME}
+        ${SUDO} docker rm ${CONTAINER_NAME}
     elif [ ${RUNNING} == "exited" ]; then
-        sudo docker rm ${CONTAINER_NAME}
+        ${SUDO} docker rm ${CONTAINER_NAME}
     fi
 }
 
@@ -126,13 +133,13 @@ function do_copy_targz() {
 function do_docker_build() {
     # build Docker container
     (cd "${SOURCE_DIR}/${DOCKER_DIR}" ; \
-        sudo docker build -t asqatasun/asqatasun:${TIMESTAMP} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
+        ${SUDO} docker build -t asqatasun/asqatasun:${TIMESTAMP} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
         fail "Error building container"
 }
 
 function do_docker_run() {
     kill_previous_container
-    sudo docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d asqatasun/asqatasun:${TIMESTAMP}
+    ${SUDO} docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d asqatasun/asqatasun:${TIMESTAMP}
 
     # wait a bit to let container start
     # @@@TODO find a better way to do this (test if URL responds with 200 or anything else)
