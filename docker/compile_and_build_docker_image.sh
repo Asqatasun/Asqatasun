@@ -100,14 +100,14 @@ CONTAINER_EXPOSED_PORT="8085"
 
 function kill_previous_container() {
     set +e
-    RUNNING=$(docker inspect --format="{{ .State.Status }}" ${CONTAINER_NAME} 2>/dev/null)
+    RUNNING=$(sudo docker inspect --format="{{ .State.Status }}" ${CONTAINER_NAME} 2>/dev/null)
     set -e
 
     if [ ${RUNNING} == "running" ]; then
-        docker stop ${CONTAINER_NAME}
-        docker rm ${CONTAINER_NAME}
+        sudo docker stop ${CONTAINER_NAME}
+        sudo docker rm ${CONTAINER_NAME}
     elif [ ${RUNNING} == "exited" ]; then
-        docker rm ${CONTAINER_NAME}
+        sudo docker rm ${CONTAINER_NAME}
     fi
 }
 
@@ -126,13 +126,13 @@ function do_copy_targz() {
 function do_docker_build() {
     # build Docker container
     (cd "${SOURCE_DIR}/${DOCKER_DIR}" ; \
-        docker build -t asqatasun/asqatasun:${TIMESTAMP} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
+        sudo docker build -t asqatasun/asqatasun:${TIMESTAMP} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
         fail "Error building container"
 }
 
 function do_docker_run() {
     kill_previous_container
-    docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d asqatasun/asqatasun:${TIMESTAMP}
+    sudo docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d asqatasun/asqatasun:${TIMESTAMP}
 
     # wait a bit to let container start
     # @@@TODO find a better way to do this (test if URL responds with 200 or anything else)
