@@ -20,6 +20,7 @@ usage: $0 [OPTIONS]
 
   -s | --source-dir <directory>     MANDATORY Absolute path to Asqatasun sources directory 
   -d | --docker-dir <directory>     MANDATORY Path to directory containing the Dockerfile. Path must be relative to SOURCE_DIR
+  -p | --port       <port>          value by default: 8085  
   -t | --functional-tests           also execute functional tests (please check pre-requisites on http://doc.asqatasun.org/en/30_Contributor_doc/Testing/Functional_tests.html)
 
   --skip-build                      skip Maven build (relies on previous build, that must exists)
@@ -37,7 +38,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o s:d:ht --long source-dir:,docker-dir:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
+TEMP=`getopt -o s:d:p:ht --long source-dir:,docker-dir:,port:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -56,11 +57,13 @@ declare SKIP_COPY=false
 declare SKIP_DOCKER_BUILD=false
 declare SKIP_DOCKER_RUN=false
 declare USE_SUDO_DOCKER=false
+declare CONTAINER_EXPOSED_PORT="8085"
 
 while true; do
   case "$1" in
     -s | --source-dir )         SOURCE_DIR="$2"; shift 2 ;;
     -d | --docker-dir )         DOCKER_DIR="$2"; shift 2 ;;
+    -p | --port )               CONTAINER_EXPOSED_PORT="$2"; shift 2 ;;
     -h | --help )               HELP=true; shift ;;
     -t | --functional-tests )   FTESTS=true; shift ;;
     --skip-build )              SKIP_BUILD=true; shift ;;
@@ -96,7 +99,7 @@ TIMESTAMP=$(date +%Y-%m-%d) # format 2015-11-23, cf man date
 TGZ_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
 TGZ_EXT=".tar.gz"
 CONTAINER_NAME="asqa"
-CONTAINER_EXPOSED_PORT="8085"
+
 
 SUDO=''
 if ${USE_SUDO_DOCKER} ; then   SUDO='sudo'; fi
