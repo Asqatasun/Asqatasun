@@ -22,6 +22,7 @@ usage: $0 -s <directory> -d <directory> [OPTIONS]
   -d | --docker-dir      <directory>   MANDATORY Path to directory containing the Dockerfile. Path must be relative to SOURCE_DIR
   -p | --port            <port>        value by default: 8085  
   -n | --container-name  <name>        value by default: asqa
+  -i | --image-name      <name>        value by default: asqatasun/asqatasun
 
   --use-sudo-docker                    use "sudo docker" instead of "docker"
   --skip-build                         skip Maven build (relies on previous build, that must exists)
@@ -40,7 +41,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o s:d:p:n:ht --long source-dir:,docker-dir:,port:,container-name:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
+TEMP=`getopt -o s:d:p:n:i:ht --long source-dir:,docker-dir:,port:,container-name:,image-name:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -61,6 +62,7 @@ declare SKIP_DOCKER_RUN=false
 declare USE_SUDO_DOCKER=false
 declare CONTAINER_EXPOSED_PORT="8085"
 declare CONTAINER_NAME="asqa"
+declare IMAGE_NAME="asqatasun/asqatasun"
 
 while true; do
   case "$1" in
@@ -68,6 +70,7 @@ while true; do
     -d | --docker-dir )         DOCKER_DIR="$2"; shift 2 ;;
     -p | --port )               CONTAINER_EXPOSED_PORT="$2"; shift 2 ;;
     -n | --container-name )     CONTAINER_NAME="$2"; shift 2 ;;
+    -i | --image-name )         IMAGE_NAME="$2"; shift 2 ;;
     -h | --help )               HELP=true; shift ;;
     -t | --functional-tests )   FTESTS=true; shift ;;
     --skip-build )              SKIP_BUILD=true; shift ;;
@@ -140,7 +143,7 @@ function do_copy_targz() {
 function do_docker_build() {
     # build Docker container
     (cd "${SOURCE_DIR}/${DOCKER_DIR}" ; \
-        ${SUDO} docker build -t asqatasun/asqatasun:${TIMESTAMP} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
+        ${SUDO} docker build -t ${IMAGE_NAME}:${TIMESTAMP} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
         fail "Error building container"
 }
 
@@ -153,7 +156,7 @@ function do_docker_run() {
     RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${ASQATASUN_URL})
     set -e
     if [ ${RESULT} == "000" ]; then
-        ${SUDO} docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d asqatasun/asqatasun:${TIMESTAMP}
+        ${SUDO} docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TIMESTAMP}
     else 
         fail  "${CONTAINER_EXPOSED_PORT} port is already allocated"
     fi
