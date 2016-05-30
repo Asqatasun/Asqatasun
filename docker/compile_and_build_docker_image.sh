@@ -90,9 +90,9 @@ fi
 
 fail() {
     echo ""
-	echo "FAILURE : $*"
+    echo "FAILURE : $*"
     echo ""
-	exit -1
+    exit -1
 }
 
 #############################################
@@ -102,7 +102,7 @@ fail() {
 TIMESTAMP=$(date +%Y-%m-%d) # format 2015-11-23, cf man date
 TGZ_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
 TGZ_EXT=".tar.gz"
-ASQATASUN_URL=http://localhost:${CONTAINER_EXPOSED_PORT}/asqatasun/
+ASQATASUN_URL="http://localhost:${CONTAINER_EXPOSED_PORT}/asqatasun/"
 
 
 SUDO=''
@@ -144,13 +144,37 @@ function do_docker_build() {
         fail "Error building container"
 }
 
+
+
 function do_docker_run() {
     kill_previous_container
-    ${SUDO} docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d asqatasun/asqatasun:${TIMESTAMP}
+
+    set +e
+    RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${ASQATASUN_URL})
+    set -e
+    if [ ${RESULT} == "000" ]; then
+        ${SUDO} docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d asqatasun/asqatasun:${TIMESTAMP}
+    else 
+        fail  "${CONTAINER_EXPOSED_PORT} port is already allocated"
+    fi
+
 
     # wait a bit to let container start
-    # @@@TODO find a better way to do this (test if URL responds with 200 or anything else)
-    sleep 25
+    # test if URL responds with 200
+    time=0
+    while ((RESULT!=200))
+    do
+        set +e
+        RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${ASQATASUN_URL})
+        set -e
+        if [ ${RESULT} == "200" ]; then
+            echo "... it's done ... ${RESULT}"
+        else 
+            ((time+=1))
+            echo "... ${time} ... loading ... "
+            sleep 1
+        fi
+    done
 }
 
 function do_functional_testing() {
@@ -159,7 +183,7 @@ function do_functional_testing() {
         mvn test \
         -Dadmin.user=me@my-email.org \
         -Dadmin.password=myAsqaPassword \
-        -Dhost.location=http://localhost:${CONTAINER_EXPOSED_PORT}/asqatasun/ \
+        -Dhost.location=${ASQATASUN_URL} \
         -Dfirefox.path=/opt/firefox/firefox
     )
 }
