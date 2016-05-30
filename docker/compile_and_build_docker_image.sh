@@ -31,11 +31,12 @@ usage: $0 -s <directory> -d <directory> [OPTIONS]
   -i | --image-name      <name>        value by default: asqatasun/asqatasun
   -t | --tag-name        <name>        value by default: ${TIMESTAMP}
 
-  --use-sudo-docker                    use "sudo docker" instead of "docker"
-  --skip-build                         skip Maven build (relies on previous build, that must exists)
-  --skip-copy                          skip copying .tar.gz (relies on previous .tar.gz, that must exist)
-  --skip-docker-build                  skip docker build
-  --skip-docker-run                    skip docker run
+  -l | --only-localhost                container available only on localhost 
+       --use-sudo-docker               use "sudo docker" instead of "docker"
+       --skip-build                    skip Maven build (relies on previous build, that must exists)
+       --skip-copy                     skip copying .tar.gz (relies on previous .tar.gz, that must exist)
+       --skip-docker-build             skip docker build
+       --skip-docker-run               skip docker run
 
   -h | --help                          Show this help
   -t | --functional-tests              also execute functional tests. Please check pre-requisites
@@ -48,7 +49,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o s:d:p:n:i:t:ht --long source-dir:,docker-dir:,port:,container-name:,image-name:,tag-name:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
+TEMP=`getopt -o s:d:p:n:i:t:lht --long source-dir:,docker-dir:,port:,container-name:,image-name:,tag-name:,only-localhost,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -67,6 +68,7 @@ declare SKIP_COPY=false
 declare SKIP_DOCKER_BUILD=false
 declare SKIP_DOCKER_RUN=false
 declare USE_SUDO_DOCKER=false
+declare ONLY_LOCALHOST=false
 declare CONTAINER_EXPOSED_PORT="8085"
 declare CONTAINER_NAME="asqa"
 declare IMAGE_NAME="asqatasun/asqatasun"
@@ -82,6 +84,7 @@ while true; do
     -t | --tag-name  )          TAG_NAME="$2"; shift 2 ;;
     -h | --help )               HELP=true; shift ;;
     -t | --functional-tests )   FTESTS=true; shift ;;
+    -l | --only-localhost )     ONLY_LOCALHOST=true; shift ;;
     --skip-build )              SKIP_BUILD=true; shift ;;
     --skip-copy )               SKIP_COPY=true; shift ;;
     --skip-docker-build )       SKIP_DOCKER_BUILD=true; shift ;;
@@ -114,10 +117,16 @@ fail() {
 TGZ_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
 TGZ_EXT=".tar.gz"
 ASQATASUN_URL="http://localhost:${CONTAINER_EXPOSED_PORT}/asqatasun/"
-
+ADD_IP=''
+ASQATASUN_URL="http://localhost:${CONTAINER_EXPOSED_PORT}/asqatasun/"
+if ${ONLY_LOCALHOST} ; then  
+    ADD_IP="127.0.0.1:";
+    ASQATASUN_URL="http://127.0.0.1:${CONTAINER_EXPOSED_PORT}/asqatasun/"
+fi
 
 SUDO=''
 if ${USE_SUDO_DOCKER} ; then   SUDO='sudo'; fi
+
 
 #############################################
 # Functions
@@ -164,7 +173,7 @@ function do_docker_run() {
     RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${ASQATASUN_URL})
     set -e
     if [ ${RESULT} == "000" ]; then
-        ${SUDO} docker run -p ${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}
+        ${SUDO} docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}
     else 
         fail  "${CONTAINER_EXPOSED_PORT} port is already allocated"
     fi
@@ -210,5 +219,8 @@ if ! ${SKIP_DOCKER_RUN} ; then       do_docker_run; fi
 if ${FTESTS} ; then                  do_functional_testing; fi
 
 echo "------------------------"
-echo "URL ---->   ${ASQATASUN_URL}"
-echo "Log ---->   docker logs -f ${CONTAINER_NAME}"
+echo "Image     ---->   ${IMAGE_NAME}:${TAG_NAME}"
+echo "Container ---->   ${CONTAINER_NAME}"
+echo "Log       ---->   docker logs -f ${CONTAINER_NAME}"
+echo "URL       ---->   ${ASQATASUN_URL}"
+
