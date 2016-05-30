@@ -16,20 +16,22 @@ $0 launches a sequence that:
 - runs a container based the freshly built image
 - execute functional tests
 
-usage: $0 [OPTIONS]
+usage: $0 -s <directory> -d <directory> [OPTIONS]
 
-  -s | --source-dir <directory>     MANDATORY Absolute path to Asqatasun sources directory 
-  -d | --docker-dir <directory>     MANDATORY Path to directory containing the Dockerfile. Path must be relative to SOURCE_DIR
-  -p | --port       <port>          value by default: 8085  
-  -t | --functional-tests           also execute functional tests (please check pre-requisites on http://doc.asqatasun.org/en/30_Contributor_doc/Testing/Functional_tests.html)
+  -s | --source-dir      <directory>   MANDATORY Absolute path to Asqatasun sources directory 
+  -d | --docker-dir      <directory>   MANDATORY Path to directory containing the Dockerfile. Path must be relative to SOURCE_DIR
+  -p | --port            <port>        value by default: 8085  
+  -n | --container-name  <name>        value by default: asqa
 
-  --skip-build                      skip Maven build (relies on previous build, that must exists)
-  --skip-copy                       skip copying .tar.gz (relies on previous .tar.gz, that must exist)
-  --skip-docker-build               skip docker build
-  --skip-docker-run                 skip docker run
-  --use-sudo-docker		    use "sudo docker" instead of "docker"
+  --use-sudo-docker                    use "sudo docker" instead of "docker"
+  --skip-build                         skip Maven build (relies on previous build, that must exists)
+  --skip-copy                          skip copying .tar.gz (relies on previous .tar.gz, that must exist)
+  --skip-docker-build                  skip docker build
+  --skip-docker-run                    skip docker run
 
-  -h | --help                       Show this help
+  -h | --help                          Show this help
+  -t | --functional-tests              also execute functional tests. Please check pre-requisites
+                                       on http://doc.asqatasun.org/en/30_Contributor_doc/Testing/Functional_tests.html
 
 EOF
     exit 2
@@ -38,7 +40,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o s:d:p:ht --long source-dir:,docker-dir:,port:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
+TEMP=`getopt -o s:d:p:n:ht --long source-dir:,docker-dir:,port:,container-name:,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -58,12 +60,14 @@ declare SKIP_DOCKER_BUILD=false
 declare SKIP_DOCKER_RUN=false
 declare USE_SUDO_DOCKER=false
 declare CONTAINER_EXPOSED_PORT="8085"
+declare CONTAINER_NAME="asqa"
 
 while true; do
   case "$1" in
     -s | --source-dir )         SOURCE_DIR="$2"; shift 2 ;;
     -d | --docker-dir )         DOCKER_DIR="$2"; shift 2 ;;
     -p | --port )               CONTAINER_EXPOSED_PORT="$2"; shift 2 ;;
+    -n | --container-name )     CONTAINER_NAME="$2"; shift 2 ;;
     -h | --help )               HELP=true; shift ;;
     -t | --functional-tests )   FTESTS=true; shift ;;
     --skip-build )              SKIP_BUILD=true; shift ;;
@@ -98,7 +102,7 @@ fail() {
 TIMESTAMP=$(date +%Y-%m-%d) # format 2015-11-23, cf man date
 TGZ_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
 TGZ_EXT=".tar.gz"
-CONTAINER_NAME="asqa"
+ASQATASUN_URL=http://localhost:${CONTAINER_EXPOSED_PORT}/asqatasun/
 
 
 SUDO=''
@@ -169,3 +173,7 @@ if ! ${SKIP_COPY} ; then             do_copy_targz; fi
 if ! ${SKIP_DOCKER_BUILD} ; then     do_docker_build; fi
 if ! ${SKIP_DOCKER_RUN} ; then       do_docker_run; fi
 if ${FTESTS} ; then                  do_functional_testing; fi
+
+echo "------------------------"
+echo "URL ---->   ${ASQATASUN_URL}"
+echo "Log ---->   docker logs -f ${CONTAINER_NAME}"
