@@ -19,7 +19,7 @@ Does each vector image (<code>svg</code>
     tag), conveying information, and with an alternative, meet
     one of the following conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
   cases</a>):
-    <ul><li>The <code>svg</code> tag has a <code>role="img"</code>&#xA0;</li>
+    <ul><li>The <code>svg</code> tag has a <code>role="img"</code>&nbsp;</li>
   <li>The <code>svg</code> tag has an <code>aria-label</code> property with a
    relevant value, matching the <code>title</code> attribute of the
    <code>svg</code> tag, if present</li>

@@ -29,7 +29,7 @@ Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_E
   <li> The server-side script language provides access to
    similar content and functionalities</li>
   <li>The alternative
-   available in the same page provides access to&#xA0;
+   available in the same page provides access to&nbsp;
    similar content and functionalities </li>
     </ul> 
 

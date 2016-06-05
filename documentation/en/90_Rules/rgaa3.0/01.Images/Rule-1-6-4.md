@@ -22,11 +22,11 @@ Does each image button (<code>input</code> tag with the attribute
   description</a>, meet one of the following conditions?
     <ul><li>
    An <code>alt</code> attribute containing the reference to a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">
-    detailed  description</a> adjacent&#xA0; to the image is available</li>
+    detailed  description</a> adjacent&nbsp; to the image is available</li>
   <li> There is an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
     link</a> (<a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mUrl">URL</a>
    or  <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>) giving access to the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
-    description</a>&#xA0;</li>
+    description</a>&nbsp;</li>
     </ul> 
 
 

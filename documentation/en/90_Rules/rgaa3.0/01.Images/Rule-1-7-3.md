@@ -18,7 +18,7 @@ Human check will be then needed to determine whether the detected elements provi
 
 ### Description
 Does each embedded image
-    (<code>embed</code> tag with the attribute&#xA0; <code>type="image/&#x2026;"</code>) with a
+    (<code>embed</code> tag with the attribute&nbsp; <code>type="image/&#x2026;"</code>) with a
     detailed description meet one of the following
     conditions?
     <ul><li>The detailed description adjacent to the embedded

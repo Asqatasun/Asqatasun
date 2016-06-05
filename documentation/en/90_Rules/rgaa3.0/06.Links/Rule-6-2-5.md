@@ -15,7 +15,7 @@ This test consists in checking whether the title of each svg link is relevant.
 [6.2.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-2-5)
 
 ### Description
-For each&#xA0; <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
+For each&nbsp; <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
   link</a> with a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitreLien">link
   title</a> (<code>title</code> attribute), is the content of this
     attribute relevant? 

@@ -19,7 +19,7 @@ Human check will be then needed to determine whether the detected elements provi
 ### Description
 Does each bitmap image
     (<code>canvas</code> tag) with a detailed description meet one of the
-    following conditions? &#xA0;&#xA0;&#xA0;
+    following conditions? &nbsp;&nbsp;&nbsp;
     <ul><li>The detailed description adjacent to the bitmap
    image is relevant</li>
   <li>The detailed description available between

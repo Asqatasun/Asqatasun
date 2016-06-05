@@ -19,7 +19,7 @@ Human check will be then needed to determine whether the detected elements provi
 ### Description
 Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgInfo">image
   conveying information</a> (<code>img</code> or <code>input</code>  tag with the
-    attribute&#xA0; <code>type="image"</code>) with a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
+    attribute&nbsp; <code>type="image"</code>) with a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
   description</a> meet one of the following conditions?
     <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
     description</a> referenced via the URL in the

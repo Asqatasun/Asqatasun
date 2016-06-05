@@ -17,7 +17,7 @@ No-check rule
 ### Description
 For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
   media</a> conveying
-    information, <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mInfoCouleur">information</a>&#xA0;
+    information, <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mInfoCouleur">information</a>&nbsp;
     must not be conveyed only through color. Has this rule been
     implemented in a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mPertinence">relevant</a> way? 
 

@@ -15,7 +15,7 @@ This test consists in checking whether the context of each svg link is enough ex
 [6.1.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-1-5)
 
 ### Description
-Does each&#xA0; <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
+Does each&nbsp; <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
   link</a> meet one of the following conditions (except in <a title="Particular cases for criterion 6.1" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
   cases</a>)?
     <ul><li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
