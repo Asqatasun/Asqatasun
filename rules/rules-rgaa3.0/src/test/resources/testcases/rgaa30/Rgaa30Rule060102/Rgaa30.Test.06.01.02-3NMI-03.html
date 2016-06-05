@@ -6,18 +6,13 @@
     </head> 
     <body> 
         <div> 
-            <div class="test-detail" lang="fr"> 
-                Chaque lien image</a> (contenu de l&apos;attribut 
-                <code>alt</code>, texte entre 
-                <code>&lt;canvas&gt;</code> et 
-                <code>&lt;/canvas&gt;</code> ou texte entre 
-                <code>&lt;object&gt;</code> et 
-                <code>&lt;/object&gt;</code>) vérifie-t-il une de ces conditions (hors cas particuliers) ? 
-                <ul class="ssTests"> 
-                    <li>L&apos;intitulé de lien seul permet d&apos;en comprendre la fonction et la destination</li> 
-                    <li>Le contexte du lien permet d&apos;en comprendre la fonction et la destination</li> 
-                </ul> 
-            </div> 
+
+<!-- START [test-detail] - update: 2016-06-06 -->
+<div class="test-detail">
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienImage">image link</a> (content of the <code>alt</code> attribute, text between <code>&lt;canvas&gt;</code> and <code>&lt;/canvas&gt;</code>, or text between <code>&lt;object&gt;</code> and <code>&lt;/object&gt;</code>) meet one of the following conditions (except in <a title="Particular cases for criterion 6.1" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? <ul><li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link text</a> alone is sufficient to understand the link purpose and target</li> <li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link context</a> is sufficient to understand the link purpose and target</li> </ul>
+</div>
+<!-- END [test-detail] -->
+
             <h1> <a href="my-link.html" title="--&gt;;*"> <img src="image.jpg" alt="--&gt;;*" /> </a> </h1> 
             <p class="test-explanation">NMI : The image link only contains non alphanumeric characters but the context may precise the link function and destination. A warning is thrown</p> 
         </div>   

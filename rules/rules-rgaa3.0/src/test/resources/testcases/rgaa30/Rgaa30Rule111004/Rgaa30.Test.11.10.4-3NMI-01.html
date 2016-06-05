@@ -7,15 +7,13 @@
     <body> 
         <div> 
             <h1>Rgaa30 Test.11-10-4 NMI 01</h1> 
-            <div class="test-detail" lang="fr"> Pour chaque formulaire, les erreurs de saisie vérifient-elles une de ces conditions ? 
-                <ul class="ssTests"> 
-                    <li>L&apos;erreur de saisie est indiquée dans l&apos;étiquette (balise <code>label</code>, attribut <code>title</code>, propriété ARIA <code>aria-label</code>, passage de texte lié via la propriété ARIA <code>aria-labelledby</code>) du champ de formulaire</li> 
-                    <li>L&apos;erreur de saisie est indiquée par un passage de texte avant le champ de formulaire</li> 
-                    <li>Le champ de formulaire possède un <code>type</code> qui produit de manière automatique un message d&apos;erreur de saisie</li> 
-                    <li>L&apos;erreur de saisie est indiquée par un passage de texte lié par la propriété ARIA <code>aria-describedby</code></li> 
-                    <li>L’erreur de saisie est indiquée via la propriété ARIA <code>aria-invalid</code></li> 
-                </ul> 
-            </div> 
+
+<!-- START [test-detail] - update: 2016-06-06 -->
+<div class="test-detail">
+For each form, do the input errors meet one of the following conditions? <ul><li> The input error message is provided via the label (<code>label</code> tag, or <code>title</code> attribute, or <code>aria-label</code> property, or labelling chunk of text identified via the <code>aria-labelledby</code> property) of the form field</li> <li>The input error message is provided via a chunk of text before the form field</li> <li>The form field has a type that automatically generates an input error message</li> <li>The input error message is provided via a chunk of text tied to the form field via the ARIA property <code>aria-describedby</code></li> <li>The input error is signaled via the ARIA property <code>aria-invalid</code></li> </ul>
+</div>
+<!-- END [test-detail] -->
+
             <div class="testcase"> 
                 <form action="mock_action"> 
                     <p> <label for="field1">Field1</label> <input type="radio" name="field1" id="field1" /> <br /> <label for="field2">Female</label> <input type="radio" name="field2" id="field2" /> </p> 

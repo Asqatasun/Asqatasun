@@ -8,13 +8,13 @@
          Let&apos;s imagine the body has some text 
         <div> 
             <h1>Rgaa30 Test.8.3.1 Failed 05</h1> 
-            <div class="test-detail" lang="fr"> Pour chaque page Web, l&apos;indication de 
-                <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLangueDefaut"> langue par défaut</a> vérifie-t-elle une de ces conditions ? 
-                <ul class="ssTests"> 
-                    <li> L&apos;indication de la langue de la page (attribut <code>lang</code> et/ou <code>xml:lang</code>) est donnée pour l&apos;élément <code>html</code></li> 
-                    <li> L&apos;indication de la langue de la page (attribut <code>lang</code> et/ou <code>xml:lang</code>) est donnée sur chaque élément de texte ou sur l&apos;un des éléments parents</li> 
-                </ul> 
-            </div> 
+
+<!-- START [test-detail] - update: 2016-06-06 -->
+<div class="test-detail">
+For each Web page, does the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLangueDefaut"> default human language</a> identification meet one of the following conditions? <ul><li> The human language identification (<code>lang</code> and/or <code>xml:lang</code> attribute) for the page is provided via the HTML element</li> <li> The human language identification (<code>lang</code> and/or <code>xml:lang</code> attribute) for the page is provided via each text element or one of the parent elements</li> </ul>
+</div>
+<!-- END [test-detail] -->
+
             <p class="test-explanation"> Failed: the lang attribute is missing and the error is given for the tag of higher level. In this case, the tag of higher level is body. </p> 
         </div>   
     </body>

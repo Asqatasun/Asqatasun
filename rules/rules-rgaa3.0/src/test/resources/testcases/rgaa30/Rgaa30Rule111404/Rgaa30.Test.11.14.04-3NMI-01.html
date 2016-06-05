@@ -7,14 +7,13 @@
     <body> 
         <div> 
             <h1>Rgaa30 Test.11.14.4 NMI 01</h1> 
-            <div class="test-detail" lang="fr"> Chaque champ de type texte vérifie-t-il, si nécessaire, l&apos;une de ces conditions ? 
-                <ul class="ssTests"> 
-                    <li>Un correcteur orthographique est disponible</li> 
-                    <li>Des suggestions de saisie sont disponibles avant le champ du formulaire</li> 
-                    <li>Des suggestions de saisie sont disponibles dans l&apos;étiquette (balise <code>label</code>, attribut <code>title</code>, propriété <code>aria-label</code>, passage de texte lié via la propriété <code>aria-labelledby</code>) du champ de formulaire</li> 
-                    <li>Des suggestions de saisie sont disponibles dans un passage de texte lié par la propriété ARIA <code>aria-describedby</code></li> 
-                </ul> 
-            </div> 
+
+<!-- START [test-detail] - update: 2016-06-06 -->
+<div class="test-detail">
+Does each field of type text meet one of the following conditions, if necessary? <ul><li> A spell checking tool is available</li> <li>Input suggestions are provided before the form field</li> <li>Input suggestions are provided via the form field label (<code>label</code> tag, or <code>title</code> attribute, or <code>aria-label</code> property, or labelling chunk of text identified via the <code>aria-labelledby</code> property)</li> <li>Input suggestions are provided via a chunk of text, tied to the form field via the <code>aria-describedby</code> ARIA property</li> </ul>
+</div>
+<!-- END [test-detail] -->
+
             <div class="testcase"> 
                 <form action="mock_action"> 
                     <p> <label for="field1">Field1</label> <input type="text" name="field1" id="field1" /> <br /> <label for="field2">Female</label> <input type="text" name="field2" id="field2" /> </p> 
