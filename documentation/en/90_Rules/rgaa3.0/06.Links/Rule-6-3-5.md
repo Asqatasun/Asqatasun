@@ -15,8 +15,13 @@ This test consists in checking whether the text of svg textual link is enough ex
 [6.3.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-5)
 
 ### Description
+Is each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
+  link</a>
+    (content of the alternative of the vector image, <code>svg</code>
+    tag) <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mExpliciteHorsContexte">explicit
+  out of context</a> (except
+    in <a title="Particular cases for criterion 6.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? 
 
-Chaque intitul&eacute; de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienVectoriel">lien vectoriel</a> (contenu de l'alternative de l'image vectorielle, balise `svg`) est-il <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienHorsContexte">explicite hors contexte</a> (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.3">hors cas particuliers</a>) ?
 
 ### Level
 

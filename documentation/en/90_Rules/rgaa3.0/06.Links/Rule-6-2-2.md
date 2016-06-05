@@ -16,8 +16,11 @@ relevant.
 [6.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-2-2)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienImage">image
+  link</a> with a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitreLien">link
+  title</a> (<code>title</code> attribute), is the content of this
+    attribute relevant? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#lien-image">lien image</a> ayant un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#content-titre-de-lien">titre de lien</a> (attribut `title`), le contenu de cet attribut est-il pertinent ?
 
 ### Level
 

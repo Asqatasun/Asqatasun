@@ -15,8 +15,11 @@ This test consists in checking whether each indentical combined link have the sa
 [6.4.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-4-4)
 
 ### Description
+For
+    each web page, does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienIdentique">identical
+  link</a> of type combined link have the same purpose
+    and target? 
 
-Pour chaque page web, chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienIdentique">lien identique</a> de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">type composite</a> a-t-il les m&ecirc;mes fonction et destination ?
 
 ### Level
 

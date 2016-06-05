@@ -17,8 +17,10 @@ To do so, we detect the tables on the page, and let the user make the control ma
 [5.6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-6-1)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabDonnee">data
+  table</a> (<code>table</code> tag), does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCelluleTab">column
+  header</a> have a <code>th</code> tag? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`), chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mEnteteTab">en-t&ecirc;te de colonnes</a> a-t-il une balise `th` ?
 
 ### Level
 

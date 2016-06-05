@@ -15,14 +15,12 @@ This test consists in checking whether the `alt` attribute of each decorative im
 [1.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-1)
 
 ### Description
+Does each decorative image (<code>img</code> tag), without caption and with an
+    <code>alt</code> attribute, meet the following conditions:
+    <ul><li>The <code>alt</code> attribute has an empty value (<code>alt=""</code>)</li>
+  <li>The decorative image does not have a <code>title</code> attribute</li>
+    </ul> 
 
-Does each decorative image (<code>img</code> tag),
-without caption and with an <code>alt</code> attribute,
-meet the following conditions:
-<ul>
-    <li>The <code>alt</code> attribute has an empty value (<code>alt=""</code>)</li>
-    <li>The decorative image does not have a <code>title</code> attribute</li>
-</ul>
 
 ### Level
 

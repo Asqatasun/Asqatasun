@@ -17,8 +17,10 @@ Checking whether each header of a data table applied to the whole row or to the 
 [5.7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-7-1)
 
 ### Description
+Does each header cell (<code>th</code>
+    tag) applied to the whole row or to the whole column
+    have a unique <code>id</code> attribute or a <code>scope</code> attribute? 
 
-Chaque en-t&ecirc;te (balise `th`) s'appliquant &agrave; la totalit&eacute; de la ligne ou de la colonne poss&egrave;de-t-il un attribut `id` unique ou un attribut `scope` ?
 
 ### Level
 

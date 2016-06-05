@@ -15,8 +15,9 @@ This test consists in checking the presence of the `"title"` attribute for all t
 [2.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-2-1-1)
 
 ### Description
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCadreEnLigne"><code>iframe</code></a>
+    (<code>iframe</code> tag) have a <code>title</code> attribute? 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCadreEnLigne">cadre en ligne</a> (balise `iframe`) a-t-il un attribut `title` ?
 
 ### Level
 

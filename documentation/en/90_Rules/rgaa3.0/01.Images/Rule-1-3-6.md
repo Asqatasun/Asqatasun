@@ -15,13 +15,22 @@ This test consists in checking for each informative vector image (`<svg>` tag) a
 [1.3.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-6)
 
 ### Description
+Does each vector image (<code>svg</code>
+    tag), conveying information, and with an alternative, meet
+    one of the following conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
+  cases</a>):
+    <ul><li>The <code>svg</code> tag has a <code>role="img"</code>&#xA0;</li>
+  <li>The <code>svg</code> tag has an <code>aria-label</code> property with a
+   relevant value, matching the <code>title</code> attribute of the
+   <code>svg</code> tag, if present</li>
+  <li>The <code>svg</code> tag has a <code>desc</code> tag with a relevant
+   content, equal to the <code>title</code> attribute of the <code>svg</code>
+   tag, if present</li>
+  <li>An adjacent link gives access to an alternative
+   with relevant content, equal to the <code>title</code> attribute
+   of the <code>svg</code> tag, if present</li>
+    </ul> 
 
-Chaque image vectorielle porteuse d'information (balise `svg`) et poss&eacute;dant une alternative v&eacute;rifie-t-elle une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ? 
- 
- * La balise `svg` poss&egrave;de un `role="img"` 
- * La balise `svg` poss&egrave;de une propri&eacute;t&eacute; `"aria-label"` dont le contenu est pertinent et identique &agrave; l'attribut `title` s'il est pr&eacute;sent 
- * La balise `svg` poss&egrave;de une balise `desc` dont le contenu est pertinent et identique &agrave; l'attribut `title` de la balise `svg` s'il est pr&eacute;sent 
- * Un lien adjacent permet d'acc&eacute;der &agrave; une alternative dont le contenu est pertinent et identique &agrave; l'attribut `title` de la balise `svg` s'il est pr&eacute;sent 
 
 ### Level
 

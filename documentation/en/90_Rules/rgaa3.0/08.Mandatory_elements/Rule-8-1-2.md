@@ -16,8 +16,10 @@ declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 [8.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-1-2)
 
 ### Description
+For each Web page is the
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDTD">document
+  type</a> (doctype tag) valid? 
 
-Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#type-de-document">type de document</a> (balise `doctype`) est-il valide ?
 
 ### Level
 

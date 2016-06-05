@@ -15,11 +15,15 @@ No-check rule
 [7.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-2-2)
 
 ### Description
-
-Chaque &eacute;l&eacute;ment non textuel mis &agrave; jour par un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> (dans la page, ou un cadre en ligne) et ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> v&eacute;rifie-t-il ces conditions ? 
- 
- *  L'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> de l'&eacute;l&eacute;ment non textuel est mise &agrave; jour 
- *  L'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> mise &agrave; jour est pertinente 
+Does each non text
+    element that is updated by a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    (in the page or an <code>iframe</code>) and that has an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+    meet the following conditions?
+    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+   of the non text element is updated</li>
+  <li> The updated <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+   is relevant</li>
+    </ul> 
 
 
 ### Level

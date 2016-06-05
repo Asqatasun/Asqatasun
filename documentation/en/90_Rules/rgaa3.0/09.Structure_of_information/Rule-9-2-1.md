@@ -15,15 +15,19 @@ No-check rule
 [9.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-2-1)
 
 ### Description
-
-Dans chaque page Web, la structure du document v&eacute;rifie-t-elle ces conditions ? 
- 
- * La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneHeader">zone d'en-t&ecirc;te de la page</a> est structur&eacute;e via une balise `header` 
- * Les <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMenuNav">zones de navigation principales et secondaires</a> sont structur&eacute;es via une balise `nav` 
- *  La balise `nav` est r&eacute;serv&eacute;e &agrave; la structuration des zones de navigations principales et secondaires 
- * La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneMain">zone de contenu principal</a> est structur&eacute;e via une balise `main` 
- * La structure du document utilise une balise `main` unique 
- * La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneFooter">zone de pied de page</a> est structur&eacute;e via une balise `footer` 
+On each Web page, does
+    the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDocumentOutline">document outline</a> meet the following conditions?
+    <ul><li>the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#PageHeader">page header</a> is identified
+   via a <code>header</code> tag</li>
+  <li>the main and secondary <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMenuNav">navigation areas</a> are identified via a <code>nav</code> tag</li>
+  <li>the <code>nav</code> tag is used only to identify
+   the main and secondary <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMenuNav">navigation areas</a></li>
+  <li>the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMain">main content area</a> is identified
+   via a <code>main</code> tag</li>
+  <li>the <code>main</code> tag is unique in the page</li>
+  <li>the page <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mFooter">footer</a> area is identified
+   via a <code>footer</code> tag</li>
+    </ul> 
 
 
 ### Level

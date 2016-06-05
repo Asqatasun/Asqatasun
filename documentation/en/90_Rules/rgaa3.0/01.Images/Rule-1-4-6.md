@@ -17,11 +17,20 @@ Human check will be then needed to determine whether the alternative is pertinen
 [1.4.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-6)
 
 ### Description
-
-Chaque image vectorielle (balise `svg`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a> et ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a> via la propri&eacute;t&eacute; `aria-label` ou la balise `desc` v&eacute;rifie-t-elle ces conditions ? 
- 
- * l'alternative textuelle impl&eacute;ment&eacute;e via la propri&eacute;t&eacute; `aria-label` permet d'identifier la nature et la fonction de l'image et est identique &agrave; l'attribut `title` s'il est pr&eacute;sent 
- * l'alternative textuelle impl&eacute;ment&eacute;e via la balise `desc` permet d'identifier la nature et la fonction de l'image et est identique &agrave; l'attribut `title` de la balise `svg` s'il est pr&eacute;sent 
+Does each vector image (<code>svg</code>
+    tag), used as a CAPTCHA or test image, with a text alternative provided
+    via the <code>aria-label</code> property or the <code>desc</code> tag, meet the following conditions?
+    <ul><li>The text alternative provided via the
+   <code>aria-label</code> property describes the nature and purpose of the
+   image, and matches the value of the <code>title</code>
+   attribute of the <code>svg</code> tag, if present
+  </li>
+  <li>The text alternative provided via the <code>desc</code>
+   tag describes the nature and purpose of the
+   image, and matches the value of the <code>title</code>
+   attribute of the <code>svg</code> tag, if present
+  </li>
+    </ul> 
 
 
 ### Level

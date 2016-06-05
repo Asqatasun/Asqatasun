@@ -17,12 +17,15 @@ Human check will be then needed to determine whether the detected elements provi
 [1.7.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-7-4)
 
 ### Description
+Does each vector image
+    (<code>svg</code> tag) with a detailed description meet one of the
+    following conditions?
+    <ul><li>The detailed description adjacent to the vector
+   image is relevant</li>
+  <li>The detailed description available via an adjacent
+   link is relevant</li>
+    </ul> 
 
-Chaque image vectorielle (balise `svg`) ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> v&eacute;rifie-t-elle une de ces conditions ? 
- 
- *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> adjacente &agrave; l'image vectorielle est pertinente 
- *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> contenue dans la balise `desc` est pertinente 
- *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> via un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienAdj">lien adjacent</a> est pertinente 
 
 ### Level
 

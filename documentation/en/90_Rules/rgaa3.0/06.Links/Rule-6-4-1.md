@@ -15,8 +15,11 @@ This test consists in checking whether each indentical textual link have the sam
 [6.4.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-4-1)
 
 ### Description
+For
+    each web page, does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienIdentique">identical
+  link</a> of type text have the same purpose and
+    target? 
 
-Pour chaque page web, chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienIdentique">lien identique</a> de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">type texte</a> a-t-il les m&ecirc;mes fonction et destination ?
 
 ### Level
 

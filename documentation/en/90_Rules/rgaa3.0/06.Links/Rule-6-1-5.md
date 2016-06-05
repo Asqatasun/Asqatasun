@@ -15,11 +15,17 @@ This test consists in checking whether the context of each svg link is enough ex
 [6.1.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-1-5)
 
 ### Description
+Does each&#xA0; <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
+  link</a> meet one of the following conditions (except in <a title="Particular cases for criterion 6.1" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
+  cases</a>)?
+    <ul><li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
+    text</a> alone is sufficient to understand the link
+   purpose and target</li>
+  <li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link
+    context</a> is sufficient to understand the link purpose
+   and target</li>
+    </ul> 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienVectoriel">lien vectoriel</a> v&eacute;rifie-t-il une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.1">hors cas particuliers</a>) ? 
- 
- * L'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mIntituleLien">intitul&eacute; de lien</a> seul permet d'en comprendre la fonction et la destination 
- * Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mContexteLien">contexte du lien</a> permet d'en comprendre la fonction et la destination 
 
 ### Level
 

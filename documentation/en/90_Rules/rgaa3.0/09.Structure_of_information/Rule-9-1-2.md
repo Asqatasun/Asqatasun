@@ -15,8 +15,12 @@ This test consists in checking the relevancy of the headings hierarchy.
 [9.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-2)
 
 ### Description
+On each Web page, is the
+    hierarchy between the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitre">headings</a>
+    (<code>h1</code> to <code>h6</code> tags or tags with an ARIA
+    <code>role="heading"</code> associated to an <code>aria-level</code> property)
+    relevant? 
 
-Dans chaque page Web, la hi&eacute;rarchie entre les <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitre">titres</a> (balises `h` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level`) est-elle pertinente ?
 
 ### Level
 

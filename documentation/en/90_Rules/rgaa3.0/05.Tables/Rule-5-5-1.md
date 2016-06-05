@@ -15,8 +15,11 @@ This test consists in checking the relevancy of the caption of data tables.
 [5.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-5-1)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabDonnee">data
+  table</a> (<code>table</code> tag) with a <code>caption</code> tag, does the
+    content of this tag provide the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitreTab">title</a>
+    of the table? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`) ayant une balise `caption`, le contenu de cette balise donne-t-il le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitreTab">titre</a> du tableau ?
 
 ### Level
 

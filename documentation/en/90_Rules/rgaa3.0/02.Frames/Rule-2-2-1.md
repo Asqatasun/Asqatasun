@@ -15,8 +15,10 @@ This test consists in checking the relevancy of the `"title"` attribute for each
 [2.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-2-2-1)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCadreEnLigne"><code>iframe</code></a>
+    (<code>iframe</code> tag) with a <code>title</code> attribute, is the content of
+    this attribute relevant? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCadreEnLigne">cadre en ligne</a> (balise `iframe`) ayant un attribut `title`, le contenu de cet attribut est-il pertinent ?
 
 ### Level
 

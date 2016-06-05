@@ -17,8 +17,12 @@ Human check will be then needed to determine whether the detected elements conta
 [1.9.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-9-2)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgReactive">image
+  map</a> (<code>img</code> or <code>object</code> tag with the <code>usemap</code> attribute),
+    each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZoneTexte">text
+  area</a> (<code>area</code> tag) must be replaced with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
+  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.9" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-9">particular cases</a>)? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgReactive">image r&eacute;active</a> (balise `img` ou `object` avec l'attribut `usemap`), chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneTexte">zone texte</a> (balise `area`) doit si possible &ecirc;tre remplac&eacute;e par du <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTexteStyle">texte styl&eacute;</a>. Cette r&egrave;gle est-elle respect&eacute;e (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit19-" title="Cas particuliers pour le crit&egrave;re 1.9">hors cas particuliers</a>) ?
 
 ### Level
 

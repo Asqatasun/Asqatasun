@@ -15,8 +15,9 @@ No-check rule
 [9.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-5-1)
 
 ### Description
+On each Web page, is the meaning of each abbreviation
+    relevant? 
 
-Dans chaque page Web, la signification de chaque abr&eacute;viation est-elle pertinente ?
 
 ### Level
 

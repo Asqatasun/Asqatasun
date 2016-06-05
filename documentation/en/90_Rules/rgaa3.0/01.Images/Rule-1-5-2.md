@@ -15,11 +15,18 @@ This test consists in detecting buttons associated with an image used as a CAPTC
 [1.5.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-5-2)
 
 ### Description
+Does each button
+    associated with an image (<code>input</code> tag with the attribute
+    <code>type="image"</code>) used as <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+    meet one of the following conditions?
+    <ul><li>Another non graphic form of <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+   is available, at least
+  </li>
+  <li>Another solution to access the functionality
+   protected by the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+   is available</li>
+    </ul> 
 
-Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> v&eacute;rifie-t-il une de ces conditions ? 
- 
- * Il existe une autre forme de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> non graphique, au moins  
- * Il existe une autre solution d'acc&egrave;s &agrave; la fonctionnalit&eacute; s&eacute;curis&eacute;e par le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> 
 
 ### Level
 

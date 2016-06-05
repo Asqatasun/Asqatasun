@@ -15,8 +15,13 @@ This test consists in checking whether the text of each image link is enough exp
 [6.3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-2)
 
 ### Description
+Is each text for an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienImage">image
+  link</a> (content of the <code>alt</code> attribute, text
+    between <code>&lt;canvas&gt;</code> and <code>&lt;/canvas&gt;</code> or text
+    between <code>&lt;object&gt;</code> and <code>&lt;/object&gt;</code>) <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mExpliciteHorsContexte">explicit
+  out of context</a> (except
+    in <a title="Particular cases for criterion 6.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? 
 
-Chaque intitul&eacute; de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienImage">lien image</a> (contenu de l'attribut `alt`, texte entre `<canvas>` et `</canvas>` ou texte entre `<object>` et `</object>`) est-il <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienHorsContexte">explicite hors contexte</a> (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.4">hors cas particuliers</a>) ?
 
 ### Level
 

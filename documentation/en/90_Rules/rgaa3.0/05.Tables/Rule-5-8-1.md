@@ -15,11 +15,15 @@ elements used for data tables.
 [5.8.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-8-1)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> (balise `table`) v&eacute;rifie-t-il ces conditions ? 
- 
- *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> (balise `table`) ne poss&egrave;de pas de balises `caption`, `th`, `thead`, `tfoot` 
- *  Les cellules du <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> (balise `td`) ne poss&egrave;dent pas d'attributs `scope`, `headers`, `colgroup`, `axis`. 
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+  table</a> (<code>table</code> tag) meet the following conditions?
+    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+    table</a> (<code>table</code> tag) does not have any <code>caption</code>,
+   <code>th</code>, <code>thead</code>, <code>tfoot</code> tags</li>
+  <li> The cells of the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+    table</a> (<code>td</code> tag) have no <code>scope</code>, <code>headers</code>,
+   <code>colgroup</code>, <code>axis</code> attributes.</li>
+    </ul> 
 
 
 ### Level

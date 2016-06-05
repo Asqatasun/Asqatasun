@@ -18,12 +18,19 @@ This test consists in detecting patterns that are known to change context automa
 [7.4.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-4-1)
 
 ### Description
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    initiating a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mChangContexte">change
+  of context</a> meet one of the following conditions?
+    <ul><li> The user is warned by a text about the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+   action and the kind of change before it is activated</li>
+  <li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mChangContexte">change
+    of context</a> is initiated by an explicit button
+   (<code>input</code> tag of type submit,
+   button or image, or <code>button</code> tag) </li>
+  <li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mChangContexte">change
+    of context</a> is initiated by an explicit link</li>
+    </ul> 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#script">script</a> qui initie un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#changement-de-contexte">changement de contexte</a> v&eacute;rifie-t-il une de ces conditions ? 
- 
- *  L'utilisateur est averti par un texte de l'action du <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#script">script</a> et du type de changement avant son d&eacute;clenchement 
- *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#changement-de-contexte">changement de contexte</a> est initi&eacute; par un bouton (`input` de type `submit`, `button` ou `image` ou balise `button`) explicite 
- *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#changement-de-contexte">changement de contexte</a> est initi&eacute; par un lien explicite 
 
 ### Level
 

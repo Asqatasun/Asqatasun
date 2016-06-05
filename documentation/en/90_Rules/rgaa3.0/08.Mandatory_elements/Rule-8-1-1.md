@@ -15,8 +15,10 @@ This tests checks whether a document type is available on the page.
 [8.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-1-1)
 
 ### Description
+For each Web page, is the
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDTD">document
+  type</a> (doctype tag) available? 
 
-Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#type-de-document">type de document</a> (balise `doctype`) est-il pr&eacute;sent ?
 
 ### Level
 

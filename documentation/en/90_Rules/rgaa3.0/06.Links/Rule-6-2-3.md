@@ -16,8 +16,11 @@ is relevant.
 [6.2.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-2-3)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZoneCliquable">clickable
+  area</a> (<code>area</code> tag) with a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitreLien">link
+  title</a> (<code>title</code> attribute), is the content of this
+    attribute relevant? 
 
-pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#content-zone-cliquable">zone cliquable</a> (balise `area`) ayant un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitreLien">titre de lien</a> (attribut `title`), le contenu de cet attribut est-il pertinent ?
 
 ### Level
 

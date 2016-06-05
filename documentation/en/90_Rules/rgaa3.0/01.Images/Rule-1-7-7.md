@@ -17,8 +17,12 @@ Human check will be then needed to determine whether the detailed description is
 [1.7.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-7-7)
 
 ### Description
+For each bitmap image
+    (<code>canvas</code> tag) with a detailed description between
+    <code>&lt;canvas&gt;</code> and <code>&lt;/canvas&gt;</code>, is this detailed
+    description <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive
+    technologies? 
 
-Pour chaque image bitmap (balise `canvas`) ayant une description d&eacute;taill&eacute;e entre `<canvas>` et `</canvas>`, cette description d&eacute;taill&eacute;e est-elle <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
 
 ### Level
 

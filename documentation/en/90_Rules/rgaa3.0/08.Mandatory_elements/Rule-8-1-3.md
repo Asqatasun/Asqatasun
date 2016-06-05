@@ -15,8 +15,11 @@
 [8.1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-1-3)
 
 ### Description
+For each Web page with a
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDTD">document
+  type</a> declaration, is this declaration located
+    before the HTML tag in the source code? 
 
-Pour chaque page Web poss&eacute;dant une d&eacute;claration de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#type-de-document">type de document</a>, celle-ci est-elle situ&eacute;e avant la balise `html` dans le code source ?
 
 ### Level
 

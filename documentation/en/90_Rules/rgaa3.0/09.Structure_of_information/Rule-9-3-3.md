@@ -15,8 +15,10 @@ No-check rule
 [9.3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9.3.3)
 
 ### Description
+On each Web page, does
+    information grouped in definition <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mListes">lists</a>
+    use the <code>dl</code> and <code>dt</code>/<code>dd</code> tags? 
 
-Dans chaque page Web, les informations regroup&eacute;es sous forme de listes de d&eacute;finitions utilisent-elles les balises `dl` et `dt`/`dd` ?
 
 ### Level
 

@@ -17,8 +17,10 @@ Human check will be then needed to determine whether the alternative is pertinen
 [1.4.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-8)
 
 ### Description
+For each bitmap image (<code>canvas</code> tag), used
+    as a CAPTCHA or test image, with a text
+    alternative, does this alternative describe the nature and purpose of the image? 
 
-Pour chaque image bitmap (balise `canvas`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme image-test et ayant une alternative textuelle, l'alternative textuelle permet-elle d'identifier la nature et la fonction de l'image ?
 
 ### Level
 

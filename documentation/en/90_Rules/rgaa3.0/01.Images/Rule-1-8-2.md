@@ -17,8 +17,14 @@ Human check will be then needed to determine whether the detected elements conta
 [1.8.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-8-2)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgReactive">image
+  map</a> (<code>img</code> or <code>object</code> tag with the <code>usemap</code> or <code>ismap</code> attribute),
+    when an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMecaRempl">alternate
+  mechanism</a> is missing, each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZoneTexte">text
+  area</a> (<code>area</code> tag) conveying information must be
+    replaced with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
+  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.8" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-8">particular cases</a>)? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgReactive">image r&eacute;active</a> (balise `img` ou `object` avec l'attribut `usemap` ou l'attribut `ismap`), chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneTexte">zone texte</a> (balise `area` ou <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZoneCliquable">zone cliquable</a>) porteuse d'information, en l'absence d'un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMecaRempl">m&eacute;canisme de remplacement</a>, doit si possible &ecirc;tre remplac&eacute;e par du <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTexteStyle">texte styl&eacute;</a>. Cette r&egrave;gle est-elle respect&eacute;e (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-8" title="Cas particuliers pour le crit&egrave;re 1.8">hors cas particuliers</a>) ?
 
 ### Level
 

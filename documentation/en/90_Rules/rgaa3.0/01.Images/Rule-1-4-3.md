@@ -17,11 +17,14 @@ Human check will be then needed to determine whether the alternative is pertinen
 [1.4.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-3)
 
 ### Description
-
-Chaque bouton associ&eacute; &agrave; une image (balise `input` avec l'attribut `type="image"`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a>, ayant un attribut `alt` v&eacute;rifie-t-il ces conditions ? 
- 
- * le contenu de l'attribut `alt` permet d'identifier la nature et la fonction du bouton 
- * s'il est pr&eacute;sent, le contenu de l'attribut `title` est identique au contenu de l'attribut `alt` 
+For each button associated
+    with an image (<code>input</code> tag with the attribute
+    <code>type="image"</code>), used as a CAPTCHA or test image, with an
+    <code>alt</code> attribute, meet the following conditions?
+    <ul><li>The content of the <code>alt</code> attribute describes the nature and purpose of the image </li>
+  <li>If present, the value of the <code>title</code> attribute
+   matches the value of the <code>alt</code> attribute</li>
+    </ul> 
 
 
 ### Level

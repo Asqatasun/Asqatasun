@@ -17,13 +17,20 @@ Human check will be then needed to determine whether the detected elements provi
 [1.6.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-6-5)
 
 ### Description
-
-Chaque image vectorielle (balise `svg`) qui n&eacute;cessite une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> v&eacute;rifie-t-elle une de ces conditions ? 
- 
- * Il existe une propri&eacute;t&eacute; `aria-label` contenant une r&eacute;f&eacute;rence &agrave; une description d&eacute;taill&eacute;e adjacente &agrave; l'image vectorielle 
- * Il existe une balise `desc` contenant une r&eacute;f&eacute;rence &agrave; une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> adjacente &agrave; l'image vectorielle 
- * Il existe une balise `desc` contenant la <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a>  
- * Il existe un lien adjacent (via une balise `url` ou une `ancre`) permettant d'acc&eacute;der au contenu de la <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a>  
+Does each vector image
+    (<code>svg</code> tag) conveying information needing a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
+  description</a>, meet one of the following conditions?
+    <ul><li>There is an <code>aria-label</code> property referencing a
+   detailed description adjacent to the vector image</li>
+  <li>There is a <code>desc</code> tag containing a reference to a
+   detailed description adjacent to the vector image</li>
+  <li>There is a <code>desc</code> tag containing a detailed
+   description</li>
+  <li>There is an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
+    link</a> (URL or  <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>) giving access to the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
+    description</a>
+  </li>
+    </ul> 
 
 
 ### Level

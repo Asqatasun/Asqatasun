@@ -15,8 +15,10 @@ This tests consists in checking the presence of a caption child node on the comp
 [5.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-1-1)
 
 ### Description
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabDonneeComplexe">complex data
+  table</a> (<code>table</code> tag) have a summary, provided
+    through the <code>caption</code> tag? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonneeC">tableau de donn&eacute;es complexe</a> (balise `table`) un r&eacute;sum&eacute; est-il disponible dans la balise `caption` ?
 
 ### Level
 

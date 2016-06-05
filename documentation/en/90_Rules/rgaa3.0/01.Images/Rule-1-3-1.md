@@ -15,11 +15,14 @@ This test consists in checking whether the `alt` attribute of each image that co
 [1.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-1)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgInfo">image porteuse d'information</a> (balise `img`) ayant un attribut `alt` v&eacute;rifie-t-elle ces conditions (hors <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ? 
- 
- * Le contenu de l'attribut `alt` est pertinent 
- * S'il est pr&eacute;sent, le contenu de l'attribut `title` est identique au contenu de l'attribut `alt` 
+Does each image (<code>img</code> tag)
+    conveying information, with an <code>alt</code> attribute, meet
+    the following conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
+  cases</a>):
+    <ul><li>The <code>alt</code> attribute has a relevant value</li>
+  <li>If present, the value of the <code>title</code> attribute
+   matches the value of the <code>alt</code> attribute</li>
+    </ul> 
 
 
 ### Level

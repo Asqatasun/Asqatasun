@@ -15,11 +15,15 @@ No-check rule
 [7.1.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7.1.6)
 
 ### Description
-
-Chaque composant d'interface qui utilise un role ARIA `application` respecte-t-il une de ces conditions ? 
- 
- * Le composant d'interface est <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte"></a><a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte">correctement restitu&eacute;</a> par les technologies d'assistance 
- * Une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> accessible permet d'acc&eacute;der aux m&ecirc;mes fonctionnalit&eacute;s. 
+Does each interface component with an ARIA role
+    <code>application</code> meet one of the following conditions?
+    <ul><li> The interface component
+   is <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies</li>
+  <li>An accessible
+   alternative provides access to the same
+   functionalities
+  </li>
+    </ul> 
 
 
 ### Level

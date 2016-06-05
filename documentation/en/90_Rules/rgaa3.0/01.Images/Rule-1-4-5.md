@@ -17,8 +17,11 @@ Human check will be then needed to determine whether the alternative is pertinen
 [1.4.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-5)
 
 ### Description
+For each embedded image
+    (<code>embed</code> tag with the attribute <code>type="image/&#x2026;"</code>), used
+    as a CAPTCHA or test image, with a text
+    alternative, does the text alternative describe the nature and purpose of the image? 
 
-Pour chaque image embarqu&eacute;e (balise `embed` avec l'attribut `type="image/..."`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a>, et ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a>, l'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a> permet-elle d'identifier la nature et la fonction de l'image ?
 
 ### Level
 

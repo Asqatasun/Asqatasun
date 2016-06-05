@@ -17,8 +17,11 @@ Human check will be then needed to determine whether the alternative is pertinen
 [1.4.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-4)
 
 ### Description
+For each image object (<code>object</code>
+    tag with the attribute <code>type="image/&#x2026;"</code>), used
+    as a CAPTCHA or test image, with a text
+    alternative, does the text alternative describe the nature and purpose of the image? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgObj">image objet</a> (balise `object` avec l'attribut `type="image/..."`) utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a>, et ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a>, l'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltTexteImg">alternative textuelle</a> permet-elle d'identifier la nature et la fonction de l'image ?
 
 ### Level
 

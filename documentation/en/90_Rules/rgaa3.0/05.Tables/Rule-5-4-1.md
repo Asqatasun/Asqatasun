@@ -15,8 +15,9 @@ This tests consists in checking the presence of a caption child node on the data
 [5.4.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-4-1)
 
 ### Description
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabDonnee">data
+  table</a> (<code>table</code> tag) have a <code>caption</code> tag? 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonnee">tableau de donn&eacute;es</a> (balise `table`) a-t-il une balise `caption` ?
 
 ### Level
 

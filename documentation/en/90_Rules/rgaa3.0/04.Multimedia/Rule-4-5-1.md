@@ -15,13 +15,21 @@ No-check rule
 [4.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-5-1)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> seulement audio en direct v&eacute;rifie-t-il, si n&eacute;cessaire, une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit4-" title="Cas particuliers pour le crit&egrave;re 4.5">hors cas particuliers</a>) ? 
- 
- *  Il existe des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> 
- *  Il existe une version ayant des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> accessible via un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienAdj">lien adjacent</a> (une `url` ou une `ancre`) 
- *  Il existe une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTranscriptTextuel">transcription textuelle</a> accessible via un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienAdj">lien adjacent</a> (une `url` ou une `ancre`) 
- *  Il existe une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTranscriptTextuel">transcription textuelle</a> adjacente clairement identifiable 
+Does each live audio-only
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> meet one of the following conditions (except
+    in <a title="Particular cases for criterion 4.5" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit4-">particular cases</a>)?
+    <ul><li> <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+    captions</a> are available</li>
+  <li>a version with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+    captions</a> is accessible via an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
+    link</a> (a URL or an  <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>)</li>
+  <li> a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
+    transcript</a> is accessible via an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
+    link</a> (a URL or an  <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>)</li>
+  <li>an adjacent <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
+    transcript</a> can be clearly identified</li>
+    </ul> 
 
 
 ### Level

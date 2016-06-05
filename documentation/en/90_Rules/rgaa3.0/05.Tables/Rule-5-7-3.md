@@ -18,11 +18,12 @@ To do so, we detect the tables on the page, and let the user make the control ma
 [5.7.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-7-3)
 
 ### Description
-
-Chaque en-t&ecirc;te (balise `th`) ne s'appliquant pas &agrave; la totalit&eacute; de la ligne ou de la colonne v&eacute;rifie-t-il ces conditions ? 
- 
- *  L'en-t&ecirc;te ne poss&egrave;de pas d'attribut `scope` 
- *  L'en-t&ecirc;te poss&egrave;de un attribut `id` unique 
+Does each header cell (<code>th</code>
+    tag) that is not applied to the whole column meet the
+    following conditions?
+    <ul><li> The header does not have a <code>scope</code> attribute</li>
+  <li> The header has a unique <code>id</code> attribute</li>
+    </ul> 
 
 
 ### Level

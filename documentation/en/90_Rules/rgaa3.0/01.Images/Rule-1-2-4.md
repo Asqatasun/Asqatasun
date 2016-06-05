@@ -15,16 +15,14 @@ This test consists in checking whether the ARIA attribute of each decorative vec
 [1.2.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-4)
 
 ### Description
-
 Does each decorative vector image (<code>svg</code> tag), not conveying any information, and with an alternative, meet the following conditions:
-<ul>
-    <li>The <code>svg</code> tag has a <code>role="img"</code></li>
-    <li>The <code>svg</code> tag, or one of its children, has no ARIA role, property or state,
-        that aims at labeling the vector image (<code>aria-label</code>, <code>aria-describedby</code>, or
-        <code>aria-labelledby</code>, for example)</li>
-    <li>The <code>title</code> and <code>desc</code> tags are missing, or empty</li>
-    <li>The <code>svg</code> tag, or one of its children, has no <code>title</code> attribute</li>
-</ul>
+    <ul><li>The <code>svg</code> tag has a <code>role="img"</code></li>
+  <li>The <code>svg</code> tag, or one of its children, has no ARIA role, property or state, that aims at labeling the vector image (<code>aria-label</code>, <code>aria-describedby</code>, or
+   <code>aria-labelledby</code>, for example)</li>
+  <li>The <code>title</code> and <code>desc</code> tags are missing, or empty</li>
+  <li>The <code>svg</code> tag, or one of its children, has no <code>title</code> attribute</li>
+    </ul> 
+
 
 ### Level
 

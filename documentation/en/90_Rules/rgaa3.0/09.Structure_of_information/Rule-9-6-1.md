@@ -15,8 +15,8 @@ No-check rule
 [9.6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-6-1)
 
 ### Description
+On each Web page, does each short quotation use a <code>q</code> tag? 
 
-Dans chaque page Web, chaque citation courte utilise-t-elle une balise `q` ?
 
 ### Level
 

@@ -15,8 +15,12 @@ No-check rule
 [4.9.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-9-1)
 
 ### Description
+Does each prerecorded
+    audio-only <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> have a sign language interpretation if
+    necessary, that is adapted to the media language (except
+    in <a title="Particular cases for criterion 4.9" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit4-">particular cases</a>)? 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> pr&eacute;-enregistr&eacute; seulement audio a-t-il, si n&eacute;cessaire, une interpr&eacute;tation en langue des signes adapt&eacute;e &agrave; la langue du m&eacute;dia (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit4-" title="Cas particuliers pour le crit&egrave;re 4.9">hors cas particuliers</a>) ?
 
 ### Level
 

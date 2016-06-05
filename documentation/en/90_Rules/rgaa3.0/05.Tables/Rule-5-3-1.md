@@ -17,11 +17,14 @@ Checking whether the linearised content is understandable and the table owns a r
 [5.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-3-1)
 
 ### Description
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+  table</a> meet the following conditions?
+    <ul><li>the
+   linearized content is still understandable</li>
+  <li>the <code>table</code>
+   tag has an attribute <code>role="presentation"</code></li>
+    </ul> 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabMiseForme">tableau de mise en forme</a> v&eacute;rifie-t-il ces conditions ? 
- 
- * le contenu lin&eacute;aris&eacute; reste compr&eacute;hensible 
- * la balise `table` poss&egrave;de un attribut `role="presentation"` 
 
 ### Level
 

@@ -15,13 +15,13 @@ This test consists in checking whether the `alt` attribute of non clickable area
 [1.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-2)
 
 ### Description
+Does each non clickable area  (<code>area</code> tag with no
+    <code>href</code> attribute), not conveying any  information, and with an <code>alt</code> attribute,
+    meet the following conditions:
+    <ul><li>The <code>alt</code> attribute has an empty value (<code>alt=""</code>)</li>
+  <li>The non clickable area does not have a <code>title</code> attribute</li>
+    </ul> 
 
-Does each non clickable area  (<code>area</code> tag with no <code>href</code> attribute),
-not conveying any  information, and with an <code>alt</code> attribute, meet the following conditions:
-<ul>
-    <li>The <code>alt</code> attribute has an empty value (<code>alt=""</code>)</li>
-    <li>The non clickable area does not have a <code>title</code> attribute</li>
-</ul>
 
 ### Level
 

@@ -15,12 +15,15 @@ This test consists in checking whether the text of each textual link is enough e
 [6.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-1)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLienTexte">lien texte</a> v&eacute;rifie-t-il une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit6-" title="Cas particuliers pour le crit&egrave;re 6.3">hors cas particuliers</a>) ? 
- 
- * L'intitul&eacute; du lien est explicite hors contexte 
- * Un m&eacute;canisme permet &agrave; l'utilisateur d'obtenir un intitul&eacute; de lien explicite hors contexte 
- * Le contenu du titre de lien (attribut `title`) est explicite hors contexte 
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienTexte">text
+  link</a> meet one of the following conditions (except
+    in <a title="Particular cases for criterion 6.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)?
+    <ul><li>The link text is explicit out of its context</li>
+  <li>The user can get an explicit
+   link text out of its context, via a provided mechanism</li>
+  <li>The content of the link title (<code>title</code> attribute) is
+   explicit out of its context</li>
+    </ul> 
 
 
 ### Level

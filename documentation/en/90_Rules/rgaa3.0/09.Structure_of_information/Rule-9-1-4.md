@@ -15,8 +15,12 @@ This test consists in checking whether each heading of the page is relevant
 [9.1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-4)
 
 ### Description
+On each Web page, is each
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitre">heading</a>
+    (<code>h1</code> to <code>h6</code> tag or a tag with an ARIA
+    <code>role="heading"</code> associated to an <code>aria-level</code> property)
+    relevant? 
 
-Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitre">titre</a> (balise `h` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level`) est-il pertinent ?
 
 ### Level
 

@@ -15,14 +15,23 @@ No-check rule
 [7.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-2-1)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> d&eacute;butant par la balise `script` et ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> v&eacute;rifie-t-il une de ces conditions ? 
- 
- *  L'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> entre `<noscript>` et `</noscript>` permet d'acc&eacute;der &agrave; des contenus et des fonctionnalit&eacute;s similaires 
- *  La page affich&eacute;e, lorsque JavaScript est d&eacute;sactiv&eacute;, permet d'acc&eacute;der &agrave; des contenus et des fonctionnalit&eacute;s similaires 
- *  La page <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> permet d'acc&eacute;der &agrave; des contenus et des fonctionnalit&eacute;s similaires 
- *  Le langage de `script` c&ocirc;t&eacute; serveur permet d'acc&eacute;der &agrave; des contenus et des fonctionnalit&eacute;s similaires 
- *  L'alternative, pr&eacute;sente dans la page, permet d'acc&eacute;der &agrave; des contenus et des fonctionnalit&eacute;s similaires 
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    beginning with the <code>script</code> tag, and having an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>,
+    meet one of the following conditions?
+    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+   between <code>&lt;noscript&gt;</code> and <code>&lt;/noscript&gt;</code>
+   provides access to similar content and functionalities</li>
+  <li> When JavaScript is disabled, the displayed page
+   provides access to  similar content and functionalities</li>
+  <li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+   page provides access to similar content and
+   functionalities</li>
+  <li> The server-side script language provides access to
+   similar content and functionalities</li>
+  <li>The alternative
+   available in the same page provides access to&#xA0;
+   similar content and functionalities </li>
+    </ul> 
 
 
 ### Level

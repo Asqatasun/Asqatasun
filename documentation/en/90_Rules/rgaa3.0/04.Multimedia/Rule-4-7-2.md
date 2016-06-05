@@ -15,11 +15,15 @@ No-check rule
 [4.7.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-7-2)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; pr&eacute;-enregistr&eacute; v&eacute;rifie-t-il, si n&eacute;cessaire, une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit4-" title="Cas particuliers pour le crit&egrave;re 4.7">hors cas particuliers</a>) ? 
- 
- * Il existe une piste pour l'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAudioDesc">audio-description</a> synchronis&eacute;e 
- * Il existe une version alternative avec une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAudioDesc">audio-description</a> synchronis&eacute;e 
+Does each prerecorded
+    synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> meet one of the following conditions (except
+    in <a title="Particular cases for criterion 4.7" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit4-">particular cases</a>)?
+    <ul><li>A sound track for the synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
+    description</a> is available</li>
+  <li>An alternative version with a synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
+    description</a> is available</li>
+    </ul> 
 
 
 ### Level

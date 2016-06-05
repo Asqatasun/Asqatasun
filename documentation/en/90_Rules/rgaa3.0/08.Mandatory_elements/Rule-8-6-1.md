@@ -15,8 +15,11 @@ This test consists in checking the relevancy of the title tag in the page.
 [8.6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-6-1)
 
 ### Description
+For each Web page with a
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitrePage">page
+  title</a> (<code>title</code> tag), is the content of this tag
+    relevant? 
 
-Pour chaque page Web ayant un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitrePage">titre de page</a> (balise `title`), le contenu de cette balise est-il pertinent ?
 
 ### Level
 

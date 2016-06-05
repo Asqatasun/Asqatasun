@@ -15,8 +15,8 @@ No-check rule
 [9.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-2-2)
 
 ### Description
+On each Web page, is the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDocumentOutline">document outline</a> coherent? 
 
-Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mArboDoc">l'arborescence du document</a> est-elle coh&eacute;rente ?
 
 ### Level
 

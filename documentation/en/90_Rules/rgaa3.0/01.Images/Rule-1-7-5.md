@@ -17,8 +17,11 @@ Human check will be then needed to determine whether the detailed description is
 [1.7.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-7-5)
 
 ### Description
+For each vector image (<code>svg</code>
+    tag) with a detailed description, is this detailed
+    description <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive
+    technologies? 
 
-Pour chaque image vectorielle (balise `svg`) ayant une description d&eacute;taill&eacute;e impl&eacute;ment&eacute;e via la balise `desc`, cette description d&eacute;taill&eacute;e est-elle <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mRestitutionCorrecte">correctement restitu&eacute;e</a> par les technologies d'assistance ?
 
 ### Level
 

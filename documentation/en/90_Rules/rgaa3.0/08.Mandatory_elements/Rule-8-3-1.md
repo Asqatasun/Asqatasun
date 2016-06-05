@@ -15,11 +15,17 @@ We check whether a language is specified for each textual element of the page
 [8.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-3-1)
 
 ### Description
-
-Pour chaque page Web, l'indication de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLangueDefaut"> langue par d&eacute;faut</a> v&eacute;rifie-t-elle une de ces conditions ? 
- 
- *  L'indication de la langue de la page (attribut `lang` et/ou `xml:lang`) est donn&eacute;e pour l'&eacute;l&eacute;ment `html` 
- *  L'indication de la langue de la page (attribut `lang` et/ou `xml:lang`) est donn&eacute;e sur chaque &eacute;l&eacute;ment de texte ou sur l'un des &eacute;l&eacute;ments parents 
+For each Web page, does
+    the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLangueDefaut">
+  default human language</a> identification meet one of
+    the following conditions?
+    <ul><li> The human language identification (<code>lang</code> and/or
+   <code>xml:lang</code> attribute) for the page is provided via the
+   HTML element</li>
+  <li> The human language identification (<code>lang</code> and/or
+   <code>xml:lang</code> attribute) for the page is provided via
+   each text element or one of the parent elements</li>
+    </ul> 
 
 
 ### Level

@@ -15,8 +15,12 @@ No-check rule
 [4.3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4.3.2)
 
 ### Description
+For each prerecorded
+    synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+  captions</a> provided&#xA0;through a <code>track</code> tag, does the
+    <code>track</code> tag have an attribute <code>kind="captions"</code>? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> synchronis&eacute; pr&eacute;-enregistr&eacute; poss&eacute;dant des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> diffus&eacute;s via une balise `track`, la balise `track` poss&egrave;de-t-elle un attribut `kind="captions"`
 
 ### Level
 

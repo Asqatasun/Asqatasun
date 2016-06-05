@@ -15,8 +15,11 @@ No-check rule
 [7.3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-3-3)
 
 ### Description
+A <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    must not remove focus from an element that receives it.
+    Has this rule been followed (except
+    in <a title="Particular cases for criterion 7.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit7-3">particular cases</a>)? 
 
-Un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> ne doit pas supprimer le `focus` d'un &eacute;l&eacute;ment qui le re&ccedil;oit. Cette r&egrave;gle est-elle respect&eacute;e (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit7-3" title="Cas particuliers pour le crit&egrave;re 7.3">hors cas particuliers</a>) ?
 
 ### Level
 

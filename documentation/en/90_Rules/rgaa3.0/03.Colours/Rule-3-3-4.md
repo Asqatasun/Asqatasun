@@ -16,11 +16,16 @@ font size superior to 14px.
 [3.3.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-3-4)
 
 ### Description
-
-Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTailleCaract%C3%A8re"><strong>&agrave; partir de 120%</strong> de la taille de police par d&eacute;faut</a> (ou 1.2em), le texte et le texte en image en gras v&eacute;rifient-ils une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit3-" title="Cas particuliers pour le crit&egrave;re 3.3">hors cas particuliers</a>) ? 
- 
- *  le rapport de contraste entre le texte et son arri&egrave;re-plan est de 3:1, au moins 
- *  un m&eacute;canisme permet &agrave; l'utilisateur d'afficher le texte avec un rapport de contraste de 3:1, au moins 
+On each Web page, do bold
+    texts and images of bold text with font sizes larger than <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mFontSize">120%
+  of the default font size</a> (or 1.2em), meet one
+    of the following conditions (except
+    in <a title="Particular cases for criterion 3.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit3-">particular cases</a>)?
+    <ul><li> The contrast ratio between text and its
+   background is at least 3:1</li>
+  <li>The user can display the text with a
+   contrast ratio of at least 3:1, via a provided mechanism</li>
+    </ul> 
 
 
 ### Level

@@ -15,12 +15,18 @@ No-check rule
 [7.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-1-1)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#script">script</a> qui g&eacute;n&egrave;re ou contr&ocirc;le un composant d'interface v&eacute;rifie-t-il, si n&eacute;cessaire, une de ces conditions ? 
- 
- *  <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mNomRole">Le nom, le r&ocirc;le, la valeur, le param&eacute;trage et les changements d'&eacute;tats</a> sont accessibles aux technologies d'assistance via une API d'accessibilit&eacute; 
- *  un composant d'interface accessible permettant d'acc&eacute;der aux m&ecirc;mes fonctionnalit&eacute;s est pr&eacute;sent dans la page ; 
- *  une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAltScript">alternative</a> accessible permet d'acc&eacute;der aux m&ecirc;mes fonctionnalit&eacute;s. 
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    generating or controlling an interface component meet
+    one of the following conditions, if necessary?
+    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mNameRole">name, role, value,
+    settings and states changes</a> are accessible to
+   assistive technologies via an accessibility API </li>
+  <li> An accessible interface
+   component, allowing access to the same
+   functionalities, is available in the page</li>
+  <li> An accessible <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+   provides the same functionalities.</li>
+    </ul> 
 
 
 ### Level

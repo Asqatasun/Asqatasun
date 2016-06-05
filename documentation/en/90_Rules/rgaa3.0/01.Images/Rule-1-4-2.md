@@ -17,11 +17,12 @@ Human check will be then needed to determine whether the alternative is pertinen
 [1.4.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-2)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mZone">zone</a> (balise `area`) d'une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgReactive">image r&eacute;active</a>, utilis&eacute;e comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mcaptcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mimgTest">image-test</a>, et ayant un attribut `alt` v&eacute;rifie-t-elle ces conditions ? 
- 
- * le contenu de l'attribut `alt` permet d'identifier la nature et la fonction de la zone 
- * s'il est pr&eacute;sent, le contenu de l'attribut `title` est identique au contenu de l'attribut `alt` 
+Does each area (<code>area</code> tag) of an image map used as a CAPTCHA or test
+    image, with an <code>alt</code> attribute, meet the following conditions?
+    <ul><li>The content of the <code>alt</code> attribute describes the nature and purpose of the image </li>
+  <li>If present, the value of the <code>title</code> attribute
+   matches the value of the <code>alt</code> attribute</li>
+    </ul> 
 
 
 ### Level

@@ -15,11 +15,17 @@ This test consists in checking whether each textual node is identified by a lang
 [8.7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-7-1)
 
 ### Description
+On each Web page, does
+    each text written in a language differing from the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLangueDefaut">
+  default human language</a> meet one of the following
+    conditions (except
+    in <a title="Particular cases for criterion 8.7" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit8-7">particular cases</a>)?
+    <ul><li> The human language identification is provided via
+   the element containing the text</li>
+  <li> The human language identification is provided via
+   one of the parent elements</li>
+    </ul> 
 
-Dans chaque page Web, chaque texte &eacute;crit dans une langue diff&eacute;rente de la <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLangueDefaut"> langue par d&eacute;faut</a> v&eacute;rifie-t-il une de ces conditions (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit8-7" title="Cas particuliers pour le crit&egrave;re 8.7">hors cas particuliers</a>) ? 
- 
- *  L'indication de langue est donn&eacute;e sur l'&eacute;l&eacute;ment contenant le texte 
- *  L'indication de langue est donn&eacute;e sur un des &eacute;l&eacute;ments parents 
 
 ### Level
 

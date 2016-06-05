@@ -15,8 +15,8 @@ This test consists in checking whether each `<area>` of a server image map is do
 [1.1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-1-4)
 
 ### Description
+Does each area (<code>area</code> tag) of a server-side image map have an equivalent link in the page? 
 
-Does each area (<code>area</code> tag) of a server-side image map have an equivalent link in the page?
 
 ### Level
 

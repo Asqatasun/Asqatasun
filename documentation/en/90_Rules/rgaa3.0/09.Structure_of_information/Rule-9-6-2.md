@@ -15,8 +15,9 @@ No-check rule
 [9.6.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-6-2)
 
 ### Description
+On each Web page, does each long
+  quotation use a <code>blockquote</code> tag? 
 
-Dans chaque page Web, chaque bloc de citation utilise-t-il une balise `blockquote` ?
 
 ### Level
 

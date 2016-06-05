@@ -18,11 +18,16 @@ and relevant.
 [8.4.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-4-1)
 
 ### Description
+For each Web page with a
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLangueDefaut">
+  default human language</a>, does the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCodeLangue">
+  language code</a> meet the following conditions?
+    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCodeLangue">language
+    code</a> is valid</li>
+  <li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCodeLangue">language
+    code</a> is appropriate</li>
+    </ul> 
 
-Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mLangueDefaut"> langue par d&eacute;faut</a>, le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> v&eacute;rifie-t-il ces conditions ? 
- 
- *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> est valide 
- *  Le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mCodeLangue">code de langue</a> est pertinent 
 
 ### Level
 

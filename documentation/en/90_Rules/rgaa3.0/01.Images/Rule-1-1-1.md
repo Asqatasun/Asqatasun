@@ -15,8 +15,8 @@ This test consists in checking whether each `<img>` tag is defined with an `"alt
 [1.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-1-1)
 
 ### Description
+Does each image (<code>img</code> tag) have an <code>alt</code> attribute? 
 
-Does each image (<code>img</code> tag) have an <code>alt</code> attribute?
 
 ### Level
 

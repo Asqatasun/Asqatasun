@@ -15,8 +15,11 @@ This test checks whether the page contains empty links.
 [6.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-5-1)
 
 ### Description
+On each Web page, does
+    each link (<code>a</code> tag with an <code>href</code>
+    attribute), except in <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchors</a>,
+    have a text between <code>&lt;a&gt;</code> and <code>&lt;/a&gt;</code>? 
 
-Dans chaque page Web, chaque lien (balise `a` avec un attribut `href`), &agrave; l'exception des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#content-ancre">ancres</a>, a-t-il un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#intitul-de-lien">intitul&eacute;</a> entre `<a>` et `</a>` ?
 
 ### Level
 

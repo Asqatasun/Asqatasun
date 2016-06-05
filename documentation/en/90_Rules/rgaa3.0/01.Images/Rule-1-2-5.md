@@ -15,9 +15,10 @@ This test consists in checking whether the textual alternative of each decorativ
 [1.2.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-5)
 
 ### Description
+For each decorative bitmap image (<code>canvas</code> tag), there must be no text content
+    between <code>&lt;canvas&gt;</code> and <code>&lt;/canvas&gt;</code>. Has this
+    rule been followed? 
 
-For each decorative bitmap image (canvas tag), there must be no text content
-between <canvas> and </canvas>. Has this rule been followed?
 
 ### Level
 

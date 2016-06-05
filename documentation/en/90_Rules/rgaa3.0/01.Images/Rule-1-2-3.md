@@ -15,10 +15,9 @@ This test consists in checking whether the textual alternative of each decorativ
 [1.2.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-3)
 
 ### Description
+For each image object without caption (<code>object</code> tag with the attribute <code>type="image/&#x2026;"</code>), not conveying any information, is the text alternative between
+    <code>&lt;object&gt;</code> and  <code>&lt;/object&gt;</code> empty? 
 
-For each image object without caption (<code>object</code> tag with the attribute <code>type="image/…"</code>),
-not conveying any information, is the text alternative between  <code>&lt;object&gt;</code>
-and  <code>&lt;/object&gt;</code> empty?
 
 ### Level
 

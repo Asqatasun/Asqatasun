@@ -17,12 +17,20 @@ Human check will be then needed to determine whether an alternative is present a
 [1.3.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-5)
 
 ### Description
+Does each embedded image
+    (<code>embed</code> tag with the attribute <code>type="image/&#x2026;"</code>),
+    conveying information, meet one of the following
+    conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
+  cases</a>)?
+    <ul><li>The embedded image is immediately followed by an
+   adjacent link giving access to a page or a chunk
+   of text containing a relevant alternative</li>
+  <li>The user can replace the embedded image
+   by a relevant text alternative, via a provided mechanism</li>
+  <li>The user can replace the embedded image
+   by an image with a relevant alternative, via a provided mechanism</li>
 
-Chaque image embarqu&eacute;e (balise `embed` avec l'attribut `type="image/..."`) porteuse d'information v&eacute;rifie-t-elle une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-3" title="Cas particuliers pour le crit&egrave;re 1.3">cas particuliers</a>) ? 
- 
- * L'image embarqu&eacute;e est imm&eacute;diatement suivie d'un lien adjacent permettant d'afficher une page ou un passage de texte contenant une alternative pertinente. 
- * Un m&eacute;canisme permet &agrave; l'utilisateur de remplacer l'image embarqu&eacute;e par un texte alternatif pertinent 
- * Un m&eacute;canisme permet &agrave; l'utilisateur de remplacer l'image embarqu&eacute;e par une image poss&eacute;dant une alternative pertinente. 
+    </ul> 
 
 
 ### Level

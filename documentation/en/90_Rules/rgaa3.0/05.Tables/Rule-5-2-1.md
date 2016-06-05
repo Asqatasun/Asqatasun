@@ -15,8 +15,10 @@ This test consists in checking the relevancy of the caption of complex tables.
 [5.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-2-1)
 
 ### Description
+For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabDonneeComplexe">complex data
+  table</a> (<code>table</code> tag) with a summary, is this
+    summary relevant? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTabDonneeC">tableau de donn&eacute;e complexes</a> (balise `table`) ayant un r&eacute;sum&eacute;, celui-ci est-il pertinent ?
 
 ### Level
 

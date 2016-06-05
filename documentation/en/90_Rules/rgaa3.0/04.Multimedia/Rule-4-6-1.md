@@ -15,12 +15,17 @@ No-check rule
 [4.6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-6-1)
 
 ### Description
-
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> seulement audio en direct v&eacute;rifie-t-il une de ces conditions ? 
- 
- *  Les <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> sont pertinents 
- *  Les <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mSsTitreSynchro">sous-titres synchronis&eacute;s</a> de la version alternative sont pertinents 
- *  La <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTranscriptTextuel">transcription textuelle</a> est pertinente 
+Does each audio-only live
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> meet one of the following conditions?
+    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+    captions</a> are relevant</li>
+  <li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+    captions</a> of the alternative version are
+   relevant</li>
+  <li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
+    transcript</a> is relevant</li>
+    </ul> 
 
 
 ### Level

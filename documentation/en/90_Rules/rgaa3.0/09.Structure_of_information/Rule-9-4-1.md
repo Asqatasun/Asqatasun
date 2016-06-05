@@ -15,14 +15,22 @@ No-check rule
 [9.4.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-4-1)
 
 ### Description
-
-Dans chaque page Web, la premi&egrave;re occurrence de chaque abr&eacute;viation v&eacute;rifie-t-elle une de ces conditions ? 
- 
- * L'abr&eacute;viation est accompagn&eacute;e de sa signification sous forme d'un texte adjacent 
- * L'abr&eacute;viation est impl&eacute;ment&eacute;e via un lien r&eacute;f&eacute;ren&ccedil;ant une page ou un emplacement dans la page qui permet d'en conna&icirc;tre la signification 
- * L'abr&eacute;viation fait partie d'un lien poss&eacute;dant un attribut `title` qui permet d'en conna&icirc;tre la signification 
- * La signification de l'abr&eacute;viation est pr&eacute;sente dans un glossaire pr&eacute;sent sur le site 
- * L'abr&eacute;viation est impl&eacute;ment&eacute;e via une balise `abbr` poss&eacute;dant un attribut `title` qui permet d'en conna&icirc;tre la signification 
+On each Web page, does the first occurence of each abbreviation
+    meet one of the following conditions?
+    <ul><li> The abbreviation
+   is provided with its meaning as an adjacent link</li>
+  <li> The abbreviation
+   is implemented via a link referring to a page or a
+   location in the page, providing its meaning</li>
+  <li> The abbreviation
+   is included in a link with a <code>title</code> attribute
+   providing its meaning</li>
+  <li> The meaning of the abbreviation
+   is available in a glossary on the website</li>
+  <li> The abbreviation
+   is implemented via an <code>abbr</code> tag with a <code>title</code> attribute
+   providing its meaning</li>
+    </ul> 
 
 
 ### Level

@@ -17,12 +17,18 @@ Human check will be then needed to determine whether the detected elements provi
 [1.6.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-6-7)
 
 ### Description
-
-Chaque image bitmap (balise `canvas`) qui n&eacute;cessite une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> v&eacute;rifie-t-elle une de ces conditions ? 
- 
- * Il existe un passage de texte entre `<canvas>` et `</canvas>` contenant une r&eacute;f&eacute;rence &agrave; une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> adjacente &agrave; l'image bitmap 
- * Il existe un contenu textuel entre `<canvas>` et `</canvas>` faisant office de <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a>. 
- * Il existe un lien adjacent (via une `url` ou une `ancre`) permettant d'acc&eacute;der au contenu de la <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDescDetaillee">description d&eacute;taill&eacute;e</a> 
+Does each bitmap image
+    (<code>canvas</code> tag) conveying information needing a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
+  description</a>, meet one of the following conditions?
+    <ul><li>There is a chunk of text between <code>&lt;canvas&gt;</code>
+   and <code>&lt;/canvas&gt;</code> referencing a detailed
+   description adjacent to the bitmap image</li>
+  <li>There is a text content between <code>&lt;canvas&gt;</code> and
+   <code>&lt;/canvas&gt;</code> serving as a detailed description</li>
+  <li>There is an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
+    link</a> (URL or  <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>) giving access to the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
+    description</a></li>
+    </ul> 
 
 
 ### Level

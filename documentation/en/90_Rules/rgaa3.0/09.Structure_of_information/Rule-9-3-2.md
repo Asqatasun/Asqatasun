@@ -15,11 +15,14 @@ No-check rule
 [9.3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-3-2)
 
 ### Description
-
-Dans chaque page Web, les informations regroup&eacute;es sous forme de listes ordonn&eacute;es v&eacute;rifient-elles une de ces conditions ? 
- 
- * La liste utilise les balises HTML `ol` et `li` 
- * La liste utilise les roles ARIA `list` et `listitem` 
+On each Web page, does
+    information grouped in ordered <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mListes">lists</a>
+    meet one of the following conditions?
+    <ul><li>the list uses the <code>ol</code> and <code>li</code> tags</li>
+  <li>the list
+   uses the ARIA roles <code>list</code> and <code>listitem</code>
+  </li>
+    </ul> 
 
 
 ### Level

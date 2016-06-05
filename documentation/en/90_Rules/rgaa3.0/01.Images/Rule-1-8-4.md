@@ -17,8 +17,13 @@ Human check will be then needed to determine whether the detected elements conta
 [1.8.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-8-4)
 
 ### Description
+When an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMecaRempl">alternate
+  mechanism</a> is missing, each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgTextObj">object
+  image of text</a> (<code>object</code> tag with the attribute
+    <code>type="image/&#x2026;"</code>) conveying information must be replaced
+    with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
+  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.8" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-8">particular cases</a>)? 
 
-Chaque image texte objet (balise `object` avec l'attribut `type="image/..."`) porteuse d'information, en l'absence d'un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMecaRempl">m&eacute;canisme de remplacement</a>, doit si possible &ecirc;tre remplac&eacute;e par du <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTexteStyle">texte styl&eacute;</a>. Cette r&egrave;gle est-elle respect&eacute;e (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#cpCrit1-8" title="Cas particuliers pour le crit&egrave;re 1.8">hors cas particuliers</a>) ?
 
 ### Level
 

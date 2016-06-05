@@ -15,8 +15,11 @@ No-check rule
 [4.8.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-8-1)
 
 ### Description
+For each prerecorded
+    video-only <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> with a synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
+  description</a>, is this audio description relevant? 
 
-Pour chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMediaTemp">m&eacute;dia temporel</a> pr&eacute;-enregistr&eacute; seulement vid&eacute;o ayant une <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mAudioDesc">audio-description</a> synchronis&eacute;e, celle-ci est-elle pertinente ?
 
 ### Level
 

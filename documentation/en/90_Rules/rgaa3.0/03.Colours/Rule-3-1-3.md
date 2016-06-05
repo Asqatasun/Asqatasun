@@ -15,8 +15,11 @@ No-check rule
 [3.1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-1-3)
 
 ### Description
+For each image <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mInfoDonneeCouleur">conveying
+  information</a>, <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mInfoCouleur">information</a>
+    must not be conveyed only through color. Has this rule been
+    followed? 
 
-Pour chaque image <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mInfoDonneeCouleur">v&eacute;hiculant une information</a>, l'<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mInfoCouleur">information</a> ne doit pas &ecirc;tre donn&eacute;e uniquement par la couleur. Cette r&egrave;gle est-elle respect&eacute;e ?
 
 ### Level
 

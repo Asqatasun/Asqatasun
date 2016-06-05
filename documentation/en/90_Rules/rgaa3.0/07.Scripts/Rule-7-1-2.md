@@ -15,8 +15,11 @@ No-check rule
 [7.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-1-2)
 
 ### Description
+Does each functionality for content insertion
+    controlled by a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>,
+    use <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDOM">properties and methods compliant with the DOM
+  (Document Object Model) specification</a>? 
 
-Chaque fonctionnalit&eacute; d'insertion de contenu contr&ocirc;l&eacute;e par un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mScript">script</a> utilise-t-elle des <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mDomSpec">propri&eacute;t&eacute;s et m&eacute;thodes conformes &agrave; la sp&eacute;cification DOM (Document Object Model)</a> ?
 
 ### Level
 

@@ -15,8 +15,10 @@ No-check rule
 [7.1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7.1.4)
 
 ### Description
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mChangeNativeRole">change of native role of an HTML element</a>
+    respect the rules and recommendations of the HTML5
+    specifications, and the associated technical notes? 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mModifRole">modification du r&ocirc;le natif</a> d'un &eacute;l&eacute;ment HTML respecte-t-elle les r&egrave;gles et pr&eacute;conisations indiqu&eacute;es dans la sp&eacute;cification HTML5 et les notes techniques associ&eacute;es ?
 
 ### Level
 

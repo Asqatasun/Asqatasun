@@ -16,8 +16,10 @@ This test consists in searching patterns indicating that forbidden tags
 [8.9.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-9-1)
 
 ### Description
+On each Web page, tags
+    must not be used (except <code>div</code>, <code>span</code> and <code>table</code>) <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mUniquPres">only
+  for layout</a>. Has this rule been followed? 
 
-Dans chaque page Web les balises (&agrave; l'exception de `div`, `span` et `table`) ne doivent pas &ecirc;tre utilis&eacute;es <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mUniquPres">uniquement &agrave; des fins de pr&eacute;sentation</a>. Cette r&egrave;gle est-elle respect&eacute;e ?
 
 ### Level
 

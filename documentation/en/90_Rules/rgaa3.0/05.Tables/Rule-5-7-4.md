@@ -17,11 +17,14 @@ To do so, we detect the tables on the page, and let the user make the control ma
 [5.7.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-7-4)
 
 ### Description
+Does each cell (<code>td</code> or <code>th</code>
+    tag) associated with one or several headers with an <code>id</code> attribute meet the following conditions?
+    <ul><li> The cell has a <code>headers</code> attribute</li>
+  <li> The <code>headers</code> attribute contains a list of values
+   matching the <code>id</code> attributes of the headers associated
+   with the cell.</li>
+    </ul> 
 
-Chaque cellule (balise `td` ou `th`) associ&eacute;e &agrave; un ou plusieurs en-t&ecirc;tes poss&eacute;dant un attribut `id` v&eacute;rifie-t-elle ces conditions ? 
- 
- *  La cellule poss&egrave;de un attribut `headers` 
- *  L'attribut `headers` poss&egrave;de la liste des valeurs des en-t&ecirc;tes associ&eacute;s &agrave; la cellule. 
 
 ### Level
 

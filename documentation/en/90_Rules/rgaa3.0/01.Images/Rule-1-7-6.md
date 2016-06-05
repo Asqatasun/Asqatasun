@@ -17,12 +17,16 @@ Human check will be then needed to determine whether the detected elements provi
 [1.7.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-7-6)
 
 ### Description
-
-Chaque image bitmap (balise `canvas`) ayant une description d&eacute;taill&eacute;e v&eacute;rifie-t-elle une de ces conditions ? 
- 
- * La description d&eacute;taill&eacute;e adjacente &agrave; l'image bitmap est pertinente 
- * La description d&eacute;taill&eacute;e contenue entre `<canvas>` et `</canvas>` est pertinente 
- * La description d&eacute;taill&eacute;e via un lien adjacent est pertinente 
+Does each bitmap image
+    (<code>canvas</code> tag) with a detailed description meet one of the
+    following conditions? &#xA0;&#xA0;&#xA0;
+    <ul><li>The detailed description adjacent to the bitmap
+   image is relevant</li>
+  <li>The detailed description available between
+   <code>&lt;canvas&gt;</code> and <code>&lt;/canvas&gt;</code> is relevant</li>
+  <li>The detailed description available via an adjacent
+   link is relevant</li>
+    </ul> 
 
 
 ### Level

@@ -15,8 +15,10 @@ This test consists in detecting the presence of the `<title>` tag
 [8.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-5-1)
 
 ### Description
+Does each Web page have a
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitrePage">page
+  title</a> (<code>title</code> tag)? 
 
-Chaque page Web a-t-elle un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitrePage">titre de page</a> (balise `title`) ?
 
 ### Level
 

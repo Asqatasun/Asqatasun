@@ -15,8 +15,12 @@ This test consists in checking whether the text of each combined link is enough 
 [6.3.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-4)
 
 ### Description
+Is each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienComposite">combined
+  link</a> (content of the text and of the <code>alt</code>
+    attribute) <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mExpliciteHorsContexte">explicit
+  out of context</a> (except
+    in <a title="Particular cases for criterion 6.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? 
 
-Chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#lien-composite">lien composite</a> (contenu texte et de l'attribut `alt`) est-il <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#content-lien-explicite-hors-contexte">explicite hors contexte</a> (<a href="http://references.modernisation.gouv.fr/referentiel-technique-0#critres-61-et-63" title="Cas particuliers pour le crit&egrave;re 6.4">hors cas particuliers</a>)
 
 ### Level
 

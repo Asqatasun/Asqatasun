@@ -15,8 +15,9 @@ This test consists in checking whether each `<area>` of an image map is defined 
 [1.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-1-2)
 
 ### Description
+Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZone">area</a> (<code>area</code> tag) of an
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgReactive">image map</a> have an <code>alt</code> attribute? 
 
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZone">area</a> (<code>area</code> tag) of an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgReactive">image map</a> have an <code>alt</code> attribute?
 
 ### Level
 

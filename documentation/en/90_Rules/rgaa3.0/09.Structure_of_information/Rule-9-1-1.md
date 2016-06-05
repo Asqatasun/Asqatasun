@@ -15,8 +15,11 @@ This test consists in checking whether a heading of level 1 is present on the pa
 [9.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-1)
 
 ### Description
+Is there a level 1 <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitre">heading</a>
+    (<code>h1</code> tag or a tag with an ARIA
+    <code>role="heading"</code> associated to an <code>aria-level="1"</code>
+    property) on each Web page? 
 
-Dans chaque page Web, y a-t-il un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitre">titre</a> de niveau 1 (balise `h1` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level="1"`) ?
 
 ### Level
 

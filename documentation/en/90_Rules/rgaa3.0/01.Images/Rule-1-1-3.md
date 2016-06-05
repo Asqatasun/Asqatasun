@@ -15,7 +15,10 @@ This test consists in checking whether each form button is defined with an `"alt
 [1.1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-1-3)
 
 ### Description
-Does each form button (<code>input</code> tag with the <code>type="image"</code> attribute) have an <code>alt</code> attribute?
+Does each form button
+    (<code>input</code> tag with the <code>type="image"</code> attribute) have an <code>alt</code>
+    attribute? 
+
 
 ### Level
 

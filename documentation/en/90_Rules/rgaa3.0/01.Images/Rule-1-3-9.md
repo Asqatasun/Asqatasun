@@ -17,8 +17,11 @@ Human check will be then needed to determine whether the provided pertinence is 
 [1.3.9](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-9)
 
 ### Description
+For each bitmap image (<code>canvas</code> tag),
+    conveying information, and with an alternative
+    (content between <code>&lt;canvas&gt;</code> and
+    <code>&lt;/canvas&gt;</code>), is this alternative relevant? 
 
-Pour chaque image bitmap porteuse d'information (balise `canvas`) et poss&eacute;dant une alternative (contenu entre `<canvas>` et `</canvas>`), cette alternative est-elle pertinente ?
 
 ### Level
 

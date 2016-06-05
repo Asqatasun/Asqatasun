@@ -17,11 +17,15 @@ Checking whether each header of a data table applied to the whole row or to the 
 [5.7.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-7-2)
 
 ### Description
-
-Chaque en-t&ecirc;te (balise `th`) s'appliquant &agrave; la totalit&eacute; de la ligne ou de la colonne et poss&eacute;dant un attribut `scope` v&eacute;rifie-t-il une de ces conditions ? 
- 
- *  L'en-t&ecirc;te poss&egrave;de un attribut `scope` avec la valeur `"row"` pour les en-t&ecirc;tes de ligne 
- *  L'en-t&ecirc;te poss&egrave;de un attribut `scope` avec la valeur `"col"` pour les en-t&ecirc;tes de colonne 
+Does each header cell (<code>th</code>
+    tag) applied to the whole row or the whole column and
+    having a <code>scope</code> attribute meet one of the following
+    conditions?
+    <ul><li> The header has a <code>scope</code> attribute with the value
+   "<code>row</code>" for row headers</li>
+  <li> The header has a <code>scope</code> attribute with the value
+   "<code>col</code>" for column headers</li>
+    </ul> 
 
 
 ### Level

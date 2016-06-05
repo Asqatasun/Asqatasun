@@ -15,8 +15,12 @@ No-check rule
 [9.1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-3)
 
 ### Description
+On each Web page, when a
+    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitre">heading</a>
+    (<code>h1</code> to <code>h6</code> tag or a tag with an ARIA
+    <code>role="heading"</code> associated to an <code>aria-level</code> property),
+    is necessary to structure information, is this heading available? 
 
-Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mTitre">titre</a> (balise `h` ou balise poss&eacute;dant un role ARIA `"heading"` associ&eacute; &agrave; une propri&eacute;t&eacute; `aria-level`) n&eacute;cessaire &agrave; la structure de l'information est-il pr&eacute;sent ?
 
 ### Level
 

@@ -15,12 +15,21 @@ No-check rule
 [7.3.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-3-4)
 
 ### Description
-
-Chaque composant d'interface impl&eacute;ment&eacute; via un r&ocirc;le d&eacute;fini par l'API ARIA et correspondant &agrave; un <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMotifConception">motif de conception</a> respecte-t-il une de ces conditions ? 
- 
- * Les interactions au clavier sont conformes au comportement d&eacute;fini par le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMotifConception">motif de conception</a> pour les touches `Echap`, `Barre d'espace`, `Tabulation` et `Fl&egrave;ches de direction` au moins 
- * Un composant d'interface pr&eacute;sent sur la page, permettant de r&eacute;aliser la m&ecirc;me action, poss&egrave;de des interactions au clavier conformes au comportement d&eacute;fini par le <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#mMotifConception">motif de conception</a> , pour les touches `Echap`, `Barre d'espace`, `Tabulation` et `Fl&egrave;ches de direction` au moins 
- * Une alternative permettant d'acc&eacute;der aux m&ecirc;mes fonctionnalit&eacute;s est contr&ocirc;lable par le clavier et &agrave; la souris. 
+Does each interface
+    component implemented via a role defined by the ARIA
+    API, and matching a Design Pattern, meet one of the
+    following conditions?
+    <ul><li> The keyboard interactions comply with the Design
+   Pattern for the Esc, Space bar, Tab, and arrow keys,
+   at least</li>
+  <li> An interface component available in the page,
+   performing the same action, has keyboard
+   interactions complying with the Design Pattern for
+   the Esc, Space bar, Tab, and arrow keys, at least</li>
+  <li>An alternative providing access to the same
+   functionalities can be controlled by the keyboard
+   and the mouse.</li>
+    </ul> 
 
 
 ### Level

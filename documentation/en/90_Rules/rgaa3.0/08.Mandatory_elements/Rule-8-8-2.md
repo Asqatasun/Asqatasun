@@ -15,8 +15,10 @@ This test consists in checking whether each change of language is valid
 [8.8.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-8-2)
 
 ### Description
+On each Web page, is each
+    change in human language identification (lang and/or
+    xml:lang attribute) relevant? 
 
-Dans chaque page Web, chaque changement de langue (attribut `lang` et/ou `xml:lang`) est-il pertinent ?
 
 ### Level
 
