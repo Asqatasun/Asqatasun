@@ -18,7 +18,7 @@ Human check will be then needed to determine whether an alternative is present a
 
 ### Description
 Does each embedded image
-    (<code>embed</code> tag with the attribute <code>type="image/&#x2026;"</code>),
+    (<code>embed</code> tag with the attribute <code>type="image/…"</code>),
     conveying information, meet one of the following
     conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
   cases</a>)?

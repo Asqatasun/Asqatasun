@@ -18,7 +18,7 @@ Human check will be then needed to determine whether the alternative is pertinen
 
 ### Description
 For each embedded image
-    (<code>embed</code> tag with the attribute <code>type="image/&#x2026;"</code>), used
+    (<code>embed</code> tag with the attribute <code>type="image/…"</code>), used
     as a CAPTCHA or test image, with a text
     alternative, does the text alternative describe the nature and purpose of the image? 
 

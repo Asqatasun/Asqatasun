@@ -18,7 +18,7 @@ Human check will be then needed to determine whether the detected elements provi
 
 ### Description
 Does each embedded image
-    (<code>embed</code> tag with an attribute <code>type="image/&#x2026;"</code>) conveying
+    (<code>embed</code> tag with an attribute <code>type="image/…"</code>) conveying
     information needing a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDescDetaillee">detailed
   description</a>, meet one of the following conditions?
     <ul><li>There is an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent

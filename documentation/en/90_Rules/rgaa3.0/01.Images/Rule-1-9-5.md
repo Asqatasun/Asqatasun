@@ -18,7 +18,7 @@ Human check will be then needed to determine whether the detected elements conta
 
 ### Description
 Each embedded image of
-    text (<code>embed</code> tag with the attribute <code>type="image/&#x2026;"</code>)
+    text (<code>embed</code> tag with the attribute <code>type="image/…"</code>)
     must be replaced with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
   text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.9" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-9">particular cases</a>)? 
 

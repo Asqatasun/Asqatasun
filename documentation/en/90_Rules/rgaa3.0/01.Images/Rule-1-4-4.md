@@ -18,7 +18,7 @@ Human check will be then needed to determine whether the alternative is pertinen
 
 ### Description
 For each image object (<code>object</code>
-    tag with the attribute <code>type="image/&#x2026;"</code>), used
+    tag with the attribute <code>type="image/…"</code>), used
     as a CAPTCHA or test image, with a text
     alternative, does the text alternative describe the nature and purpose of the image? 
 
