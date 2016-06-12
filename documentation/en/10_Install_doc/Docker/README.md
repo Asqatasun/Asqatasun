@@ -150,5 +150,5 @@ See [Docker Commands and Best Practices Cheat Sheet](http://zeroturnaround.com/r
 
 ## Developer, you wanna play harder? Come on!
 
-Have a look at the Documentation in [Contributor Doc > Docker_build](http://doc.asqatasun.org/en/30_Contributor_doc/Docker_build.html)
+Have a look at the Documentation in [Contributor Doc > Build > Build Docker image](../../30_Contributor_doc/Build/Build_Docker_image.md)
 
