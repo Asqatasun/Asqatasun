@@ -1,6 +1,6 @@
 
 [![License : AGPL v3](https://img.shields.io/badge/License-AGPL3-blue.svg)](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE)
-[![Build Status](https://travis-ci.org/Asqatasun/Asqatasun.svg)](https://travis-ci.org/Asqatasun/Asqatasun/branches)
+[![Build Status](https://api.travis-ci.org/Asqatasun/Asqatasun.svg?branch=master)](https://travis-ci.org/Asqatasun/Asqatasun/branches)
 
 # Asqatasun
 
@@ -48,7 +48,7 @@ Takeaway:
 
 ## Download
 
-* [lastest version of Asqatasun, .tar.gz, 79Mb](http://download.asqatasun.org/asqatasun-latest.tar.gz)
+* [lastest version of Asqatasun, .tar.gz, 83Mb](http://download.asqatasun.org/asqatasun-latest.tar.gz)
 
 And also: 
 
@@ -69,7 +69,7 @@ What tests are covered:
 * switch of context
 * ...
 
-As of February 2016, this represents 173 accessibility tests.
+As of June 2016, this represents 173 accessibility tests.
 
 ## Universe: Search Engine Optimisation "SEO"
 

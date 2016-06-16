@@ -1,7 +1,10 @@
 
 --------------------------------
-Asqatasun 4.x.x, 2016-05-xx
+Asqatasun 4.0.2, 2016-06-xx
 --------------------------------
+
+Features:
+None
 
 Security:
 - Upgrade Apache Commons FileUpload to v1.3.1 
@@ -14,6 +17,7 @@ Bugs:
 
 Configuration:
 - max-documents for site-audits lowered from 10'000 to 1'000 
+- disable rules Rgaa 2
 
 Documentation:
 - [#88](https://github.com/Asqatasun/Asqatasun/issues/88): DOC Docker - Add tip for Mac OS X and Windows users 
