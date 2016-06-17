@@ -35,7 +35,7 @@ declare PKG_DIR=$(pwd)
 
 declare ARCH="i386"
 
-declare TG_VERSION="4.1.0-SNAPSHOT"
+declare TG_VERSION="4.0.2"
 declare TG_ARCHIVE="asqatasun-$TG_VERSION.$ARCH"
 declare TG_WAR_VERSION=$TG_VERSION
 declare TG_WAR="asqatasun-web-app-$TG_WAR_VERSION.war"

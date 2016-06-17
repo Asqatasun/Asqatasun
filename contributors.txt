@@ -1,44 +1,32 @@
 Commits    Contributors
 --------------------------
-  2557	Jérôme Kowalczyk
-   554	Jerome Kowalczyk
-   307	Matthieu FAURE
-   187	Fabrice Gangler
-   176	jkowalczyk
-    72	Matthieu Faure
-    64	lingua
+  3321	Jérôme Kowalczyk
+   453	Matthieu FAURE
+   256	Fabrice Gangler
+    66	Anthony Lingua
     52	neyo2010
     51	sofien-hamdi
-    31	tellouze
-    26	koj
+    34	Toufik ELLOUZE
     25	elhamdouni
     25	medsob
     23	ioulachbar
     22	Régis Lapeze
     17	diamamp
     15	Lalaina Ralambomanana
-    11	mfaure
-     8	Arbab Nazar
+    13	KEBRI Mustapha
+     9	Arbab Nazar
      8	François Poyer
+     8	ayman abdelghany
      5	sondes22
-     5	wellcom
-     4	KEBRI Mustapha
-     4	meskoj
-     3	Toufik ELLOUZE
      3	aouchani
-     3	kaho
-     2	Anthony
      2	Baptiste Le Bail
-     2	Koj
      1	Ben Stewart
      1	Dougal Matthews
-     1	Jérome Kowalczyk
      1	Marc Laporte
      1	Mark Sadecki
-     1	Mustapha KEBRI
-     1	arbabnazar
+     1	Matthieu Faure
      1	halna
 
 
----- Release 4.1.0-SNAPSHOT ----------------------
+---- Release 4.0.2 ----------------------
 
