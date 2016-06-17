@@ -6,7 +6,7 @@
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.2</version>
+    <version>4.1.0-SNAPSHOT</version>
     <name>asqatasun</name>
     <url>http://www.asqatasun.org/</url>
     <modules>
@@ -31,7 +31,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
-        <asqatasunVersion>4.0.2</asqatasunVersion>
+        <asqatasunVersion>4.1.0-SNAPSHOT</asqatasunVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>

@@ -2,7 +2,7 @@ Commits    Contributors
 --------------------------
   3321	Jérôme Kowalczyk
    453	Matthieu FAURE
-   256	Fabrice Gangler
+   257	Fabrice Gangler
     66	Anthony Lingua
     52	neyo2010
     51	sofien-hamdi
@@ -28,5 +28,5 @@ Commits    Contributors
      1	halna
 
 
----- Release 4.0.2 ----------------------
+---- Release 4.1.0-SNAPSHOT ----------------------
 
