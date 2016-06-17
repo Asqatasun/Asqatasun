@@ -12,7 +12,7 @@ We are really glad to have you on board !
 * You may assign an issue to yourself, meaning to others "I'm actually working on this issue".
 * When closing an issue, please *always* add a comment explaining why you are closing it.
 
-## Contribution to the code
+## Contribution to the code / Pull Request
 
 Please always work on `develop` branch. 
 
@@ -21,7 +21,7 @@ thus only contains tagged releases.
 
 Those resources are meant to help:
 
-* [Asqatasun developer doc](doc.asqatasun.org/en/30_Contributor_doc/), 
+* [Asqatasun developer doc](http://doc.asqatasun.org/en/30_Contributor_doc/), 
 * and especially [Asqatasun, Git, Github: getting started](http://doc.asqatasun.org/en/30_Contributor_doc/Contribute_to_Asqatasun.html)
 * and anyway the [Forum](http://forum.asqatasun.org)
 
