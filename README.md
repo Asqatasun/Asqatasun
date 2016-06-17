@@ -118,29 +118,42 @@ Create your own tests.
 
  [AGPL v3](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE) 
 
-## Content of this last version (Asqatasun 4.0.1, 2016-03-18)
+## Content of this last version (Asqatasun 4.0.2, 2016-06-17)
 
-Features:
-- devops:
-    - Docker images (+ Docker automated builds)
-    - Ansible role + Vagrantfile
-- Implementation of SEO rules
-- RGAA 3 translated in English
-- Documentation: huge refactor 
-- New translation system on Transifex https://www.transifex.com/asqatasun/asqatasun/
-- New logo integrated in the app
-- Fork from Tanaguru
+### Features
 
-Bugs:
-- [#43](https://github.com/Asqatasun/Asqatasun/issues/43): Mysql config: add UTF-8 
-to support any type of charset including cyrillic + enhance way to modify Mysql conf
-- [#58](https://github.com/Asqatasun/Asqatasun/issues/58): PDF - clicking on it returns to an error page
-- [#85](https://github.com/Asqatasun/Asqatasun/issues/85): Audit full-site : accept the new gTLDs (eg .jobs, .paris)
+- Enhanced script `docker/compile_and_build_docker_image.sh`
 
+### Security
+
+- Upgrade Apache Commons FileUpload to v1.3.1 
+- Upgrade Apache httpclient to v4.3.6
+
+### Bugs
+
+* [#25](https://github.com/Asqatasun/Asqatasun/issues/25): localhost URLs should not be blocked  
+* [#104](https://github.com/Asqatasun/Asqatasun/issues/104): Rgaa 3 rule 8.9.1 : Changed actual result of rule when fieldset is used without form
+* [#105](https://github.com/Asqatasun/Asqatasun/issues/105): MySQL - Enable `innodb_file_per_table` 
+
+### Configuration
+
+* max-documents for site-audits lowered from 10'000 to 1'000 
+* disabled Rgaa-2 rules
+
+### Documentation
+
+- [#88](https://github.com/Asqatasun/Asqatasun/issues/88): DOC Docker - Add tip for Mac OS X and Windows users 
+
+### Upgrade-o-meter 
+
+- no database change, just replace .war and 
 
 See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.txt)
 
-Have Fun
+### Have Fun
+
+Happy coding !
+
 [Asqatasun Team](https://github.com/Asqatasun/Asqatasun/blob/master/documentation/en/asqatasun-team.md)
 
 
