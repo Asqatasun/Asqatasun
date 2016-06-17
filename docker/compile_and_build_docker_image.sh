@@ -26,20 +26,20 @@ usage: $0 -s <directory> -d <directory> [OPTIONS]
 
   -s | --source-dir      <directory>   MANDATORY Absolute path to Asqatasun sources directory 
   -d | --docker-dir      <directory>   MANDATORY Path to directory containing the Dockerfile. Path must be relative to SOURCE_DIR
-  -p | --port            <port>        value by default: 8085  
-  -n | --container-name  <name>        value by default: asqa
-  -i | --image-name      <name>        value by default: asqatasun/asqatasun
-  -t | --tag-name        <name>        value by default: ${TIMESTAMP}
+  -p | --port            <port>        Default value: 8085
+  -n | --container-name  <name>        Default value: asqa
+  -i | --image-name      <name>        Default value: asqatasun/asqatasun
+  -t | --tag-name        <name>        Default value: ${TIMESTAMP}
 
-  -l | --only-localhost                container available only on localhost 
-       --use-sudo-docker               use "sudo docker" instead of "docker"
-       --skip-build                    skip Maven build (relies on previous build, that must exists)
-       --skip-copy                     skip copying .tar.gz (relies on previous .tar.gz, that must exist)
-       --skip-docker-build             skip docker build
-       --skip-docker-run               skip docker run
+  -l | --only-localhost                Container available only on localhost
+       --use-sudo-docker               Use "sudo docker" instead of "docker"
+       --skip-build                    Skip Maven build (relies on previous build, that must exists)
+       --skip-copy                     Skip copying .tar.gz (relies on previous .tar.gz, that must exist)
+       --skip-docker-build             Skip docker build
+       --skip-docker-run               Skip docker run
 
   -h | --help                          Show this help
-  -t | --functional-tests              also execute functional tests. Please check pre-requisites
+  -t | --functional-tests              Also execute functional tests. Please check pre-requisites
                                        on http://doc.asqatasun.org/en/30_Contributor_doc/Testing/Functional_tests.html
 
 EOF
