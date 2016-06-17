@@ -76,6 +76,7 @@ fi
 if [ "$SOURCE_DIR" != "" ]
 then
     cd "$SOURCE_DIR"
+    git checkout master
 else
     cd /tmp
     git clone git@github.com:Asqatasun/Asqatasun.git
@@ -141,14 +142,7 @@ if [ "$COMMIT" = true ] ; then
     echo 'committed all files with message : ' $COMMIT_MESSAGE
 fi
 
-################################
-# Automatic push to $BRANCH_NAME
-################################
-if [ "$PUSH" = true ] ; then
-    echo 'pushing to master'
-    git push origin master
-    echo 'pushed to master'
-fi
+
 
 ###############
 # Automatic tag
@@ -157,8 +151,21 @@ if [ "$TAG" = true ] ; then
     MY_TAG="v$TO_VERSION"
     echo 'tagging new ' $MY_TAG 'tag.'
     git tag -a $MY_TAG -m "$MY_TAG"
-    git push origin $MY_TAG
     echo 'tagged new ' $MY_TAG 'tag.'
+fi
+
+##########################################
+# Automatic push to $BRANCH_NAME + $MY_TAG
+##########################################
+if [ "$PUSH" = true ] ; then
+    echo 'pushing to master'
+    git push origin master
+    echo 'pushed to master'
+    if [ "$TAG" = true ] ; then
+        echo 'pushing new ' $MY_TAG 'tag.'
+        git push origin $MY_TAG
+        echo 'pushed new ' $MY_TAG 'tag.'
+    fi
 fi
 
 ########################
