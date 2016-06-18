@@ -76,11 +76,15 @@ fi
 if [ "$SOURCE_DIR" != "" ]
 then
     cd "$SOURCE_DIR"
-    git checkout master
+        # @@@TODO fix (cf @dzc34)
+        # git checkout master
 else
     cd /tmp
     git clone git@github.com:Asqatasun/Asqatasun.git
     cd Asqatasun
+    git checkout origin/develop
+    git checkout -b develop
+    git checkout master
 fi
 
 

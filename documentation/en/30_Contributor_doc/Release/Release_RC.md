@@ -32,7 +32,8 @@ cd engine/asqatasun-resources/src/main/resources/release/
 cd /tmp/Asqatasun   # Directory used to clone Github repos
 git checkout develop
 git rebase master
-engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh --from-version X.Y.Z-rc.1 --to-version X.Y.Z-SNAPSHOT --source-dir /tmp/Asqatasun
+cd engine/asqatasun-resources/src/main/resources/release/
+./bump_asqatasun.sh --from-version X.Y.Z-rc.1 --to-version X.Y.Z-SNAPSHOT --source-dir /tmp/Asqatasun
 find . -name "pom.xml" | xargs git add -u :/
 find . -name "Dockerfile" | xargs git add -u :/
 git add **/install.sh 

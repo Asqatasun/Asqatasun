@@ -20,19 +20,31 @@ without having to dig into the previous betas and RCs). For this:
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag --push
+./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag
 ```
+
+do not use the option `--push`
+
+
 ## 4) Build local Docker image with locally build Asqatasun
 
 ...and check release is the good one + run some manual tests
 
-## 5) For `develop` branch, switch back release strings to "-SNAPSHOT"
+## 5) Push `master` branch and new `X.Y.Z` tag
+```sh
+git push origin master
+git push origin X.Y.Z
+```
+
+
+## 6) For `develop` branch, switch back release strings to "-SNAPSHOT"
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
 git checkout develop
 git rebase master
-engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh --from-version X.Y.Z --to-version X.Y.Z+1-SNAPSHOT --source-dir /tmp/Asqatasun
+cd engine/asqatasun-resources/src/main/resources/release/
+./bump_asqatasun.sh --from-version X.Y.Z --to-version X.Y.Z+1-SNAPSHOT --source-dir /tmp/Asqatasun
 find . -name "pom.xml" | xargs git add -u :/
 find . -name "Dockerfile" | xargs git add -u :/
 git add **/install.sh 
@@ -42,26 +54,28 @@ git commit -m "Switch release to X.Y.Z+1-SNAPSHOT"
 git push origin develop
 ```
 
-## 6) In Github:
+## 7) In Github:
 
 * Copy/paste Changelog to Github Release comment field
-* Upload the `.tar.gz` file
+* Upload the `.tar.gz` files
+  * `/tmp/Asqatasun/web-app/asqatasun-web-app/target/asqatasun-X.Y.Z.i386.tar.gz`
+  * `/tmp/Asqatasun/runner/asqatasun-runner/target/asqatasun-runner-X.Y.Z.i386.tar.gz`
 
-## 7) Update [Download.asqatasun.org](http://Download.asqatasun.org/)
+## 8) Update [Download.asqatasun.org](http://Download.asqatasun.org/)
 
 ...so that "latest" points to the last release.
 
-## 8) In Github, define this tag as "Release"
+## 9) In Github, define this tag as "Release"
 
 (as this one is the actual Release and not a pre-release)
 
-## 9) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/)
+## 10) In [Asqatasun Docker hub](https://hub.docker.com/r/asqatasun/asqatasun/tags/)
 
 * Add a dedicated build for the Github tag with the same tag as Docker tag 
 (while waiting to have a working regexp :) ).
 * Add another dedicated build for the Github tag with `latest` as Docker tag
 
-## 10) Launch prepared announces:
+## 11) Launch prepared announces:
 
 * [forum](http://forum.asqatasun.org/)
 * Tweet
