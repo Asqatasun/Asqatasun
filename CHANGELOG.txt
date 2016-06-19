@@ -3,6 +3,8 @@
 Asqatasun 4.x.x, 2016-xx-xx
 --------------------------------
 
+* docker/single-container : reduced weight ((461 MB ---> 294 MB)
+
 Features:
 None
 

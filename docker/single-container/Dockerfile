@@ -38,18 +38,22 @@ WORKDIR /root
 # ##########################################################
 
 # Add Asqatasun
-ADD https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz  /root/
-RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
+# Install Asqatasun
+RUN apt-get update && \
+    apt-get -y --no-install-recommends install \
+                                       wget \
+                                       ca-certificates && \
+    cd /root/ && \
+    wget https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
+    tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
     mv asqatasun*/ ./asqatasun/ && \
     cp ./asqatasun/install/xvfb . && \
-    ./asqatasun/install/pre-requisites.sh
-
-# Install Asqatasun
-WORKDIR /root/asqatasun
-RUN service mysql start && \
+    ./asqatasun/install/pre-requisites.sh && \
+    service mysql start && \
     sleep 5 && \
+    cd /root/asqatasun/ && \
     echo "yes\n" | ./install.sh  \
-        --database-db $DATABASE_DB \ 
+        --database-db $DATABASE_DB \
         --database-host $DATABASE_HOST \
         --database-user $DATABASE_USER \
         --database-passwd $DATABASE_PASSWD \
@@ -59,7 +63,8 @@ RUN service mysql start && \
         --asqa-admin-email $ASQA_ADMIN_EMAIL \
         --asqa-admin-passwd $ASQA_ADMIN_PASSWD \
         --firefox-esr-binary-path /opt/firefox/firefox \
-        --display-port :99
+        --display-port :99 && \
+    rm -rvf  /root/asqatasun*
 
 CMD service mysql start && \
     sleep 5 && \
