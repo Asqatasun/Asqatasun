@@ -23,12 +23,17 @@ cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag
 ```
 
-do not use the option `--push`
+do not use the `--push` option 
 
 
 ## 4) Build local Docker image with locally build Asqatasun
 
 ...and check release is the good one + run some manual tests
+
+```sh
+cd /tmp/Asqatasun   # Directory used to clone Github repos
+docker/compile_and_build_docker_image.sh --skip-build -s /tmp/Asqatasun -d docker/single-container-SNAPSHOT-local 
+```
 
 ## 5) Push `master` branch and new `X.Y.Z` tag
 ```sh
