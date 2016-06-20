@@ -1,6 +1,6 @@
 # Use Asqatasun with a single container Docker
 
-- This is a fat container, that is absolutely not compliant to [Docker best-practices](https://docs.docker.com/articles/dockerfile_best-practices/)
+- This is a fat container, that is absolutely not compliant to [Docker best-practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
 - Don't use it for production as all data are wiped out at reboot / rebuild
 - BUT for quick testing, that does the job :)
 
@@ -8,9 +8,9 @@
 
 ... begin here !
 
-* Get Started with [Docker for Windows](https://docs.docker.com/windows/)
-* Get Started with [Docker for Mac OS X](https://docs.docker.com/mac/)
-* Get Started with [Docker for Linux](https://docs.docker.com/linux/)
+* Get Started with [Docker for Windows](https://docs.docker.com/engine/installation/windows/)
+* Get Started with [Docker for Mac OS X](https://docs.docker.com/engine/installation/mac/)
+* Get Started with [Docker for Linux](https://docs.docker.com/engine/installation/linux/)
 
 ## 1. Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 
@@ -20,7 +20,7 @@ docker run --name asqatasun -d -p 8080:8080 asqatasun/asqatasun
 ```
 
 **AND** wait ~30 seconds before going to the next step (to allow the container to start).
-
+ 
 Note: Linux user and willing to test your `localhost` ? See tip [Testing 127.0.0.1 with Asqatasun Docker](#testing-localhost-127.0.0.1-with-Asqatasun-Docker).
 
 ## 2. Use your local Asqatasun
@@ -65,11 +65,11 @@ Explanations:
 * `--rm` deletes the container when exiting
 * `-p 8282:8080` maps Asqatasun port (8080) to your 8282 host port
 
-Then to use it, point your browser to http://localhost:8282/asqatasun/ (or adapt the IP if you are on MacOSX / Windows)
+Then to use it, point your browser to `http://localhost:8282/asqatasun/` (or adapt the IP if you are on MacOSX / Windows)
 
 <h2 id="docker-tips-tricks">Tips and tricks on using Docker containers</h2>
 
-(The more [docker doc](https://docs.docker.com/engine/userguide/containers/usingdocker/) you read, the stronger you are. (c) Yoda)
+(The more [docker doc](https://docs.docker.com/engine/tutorials/usingdocker/) you read, the stronger you are. (c) Yoda)
 
 ### Get the logs
 

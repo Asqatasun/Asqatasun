@@ -73,7 +73,7 @@ apt-get -y --no-install-recommends install \
     apt-utils
     
 # Remember: don't do apt-get upgrade|safe-update|dist-upgrade in Docker
-# https://docs.docker.com/articles/dockerfile_best-practices/#run
+# https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#run
 
 # Pre-define Mysql root passwd
 echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASSWD}" | debconf-set-selections

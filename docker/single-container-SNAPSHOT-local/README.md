@@ -1,6 +1,6 @@
 # Use Asqatasun with a single container Docker
 
-- This is a fat container, that is absolutely not compliant to [Docker best-practices](https://docs.docker.com/articles/dockerfile_best-practices/)
+- This is a fat container, that is absolutely not compliant to [Docker best-practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
 - Don't use it for production as all data are wiped out at reboot / rebuild
 - BUT for quick testing, that does the job :)
 
@@ -8,9 +8,9 @@
 
 ... begin here !
 
-* Get Started with [Docker for Windows](https://docs.docker.com/windows/)
-* Get Started with [Docker for Mac OS X](https://docs.docker.com/mac/)
-* Get Started with [Docker for Linux](https://docs.docker.com/linux/)
+* Get Started with [Docker for Windows](https://docs.docker.com/engine/installation/windows/)
+* Get Started with [Docker for Mac OS X](https://docs.docker.com/engine/installation/mac/)
+* Get Started with [Docker for Linux](https://docs.docker.com/engine/installation/linux/)
 
 ## 1. Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
 
@@ -45,7 +45,7 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
    * how to have your container automatically launched at boot
    * ...
 * The whole [Documentation of Asqatasun](http://doc.asqatasun.org)
-* Get in touch at the [Asqatasun Forum](http://forum.asqatasun.org/)
+* Get in touch at the [Asqatasun Forum](http://forum.asqatasun.org/en/)
 
 And also
 

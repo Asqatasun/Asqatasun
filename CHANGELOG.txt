@@ -38,6 +38,7 @@ Bugs:
 - [#25](https://github.com/Asqatasun/Asqatasun/issues/25): localhost URLs should not be blocked  
 - [#104](https://github.com/Asqatasun/Asqatasun/issues/104): Rgaa 3 - rule 8.9.1 : Changed actual result of rule when fieldset is used without form
 - [#105](https://github.com/Asqatasun/Asqatasun/issues/105): MySQL - Enable innodb_file_per_table 
+- release/bump_asqatasun.sh : use --push option for pushing new tag
 
 Configuration:
 - max-documents for site-audits lowered from 10'000 to 1'000 
