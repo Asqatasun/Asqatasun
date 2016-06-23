@@ -25,6 +25,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.RegexValidator;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.asqatasun.webapp.command.CreateContractCommand;
 import org.asqatasun.webapp.entity.user.User;
@@ -230,7 +231,7 @@ public class CreateContractFormValidator implements Validator {
         }
         String[] schemes = {"http","https"};
         long validatorOptions = UrlValidator.ALLOW_2_SLASHES + UrlValidator.ALLOW_LOCAL_URLS;
-        UrlValidator urlValidator = new UrlValidator (schemes, validatorOptions);
+        UrlValidator urlValidator = new UrlValidator (schemes, new RegexValidator(".*"), validatorOptions);
         if (!urlValidator.isValid(url)) {
             errors.rejectValue(CONTRACT_URL_KEY, INVALID_URL_KEY);
             return false;
