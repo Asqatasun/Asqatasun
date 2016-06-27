@@ -1,21 +1,23 @@
 # Referential-Creator helps the referential creation
 
+@@@TODO refactor this doc
+
 ## Prerequisite : 
-Build tanaguru (it may take a while !!)
+Build asqatasun (it may take a while !!)
 ```sh
-cd Tanaguru/
+cd Asqatasun/
 mvn clean install
 ```
 
 Install manually the apache commons-csv library.
 ```sh
-cd Tanaguru/rules/referential-creator-maven-plugin/src/main/resources/lib/
+cd Asqatasun/rules/referential-creator-maven-plugin/src/main/resources/lib/
 ./install_lib.sh
 ```
 
 Build the referential-creator maven plugin
 ```sh
-cd Tanaguru/rules/referential-creator-maven-plugin/
+cd Asqatasun/rules/referential-creator-maven-plugin/
 mvn clean install
 ```
 
@@ -60,13 +62,13 @@ The first and second columns are for the themes. The first for the theme number,
 Header line with multiple languages : `theme;theme_en;theme_fr;test;test-label_en;test-label_fr`<br/>
 Note that if you have to translate the themes, you must translate the others columns : each language must have a translation for theme, and test-label.
 
-You can see [our CSV example](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-creation-demo/src/main/resources/referential-creator-csv-src/referentiel.csv).
+You can see [our CSV example](https://github.com/Asqatasun/Asqatasun/blob/master/rules/rules-creation-demo/src/main/resources/referential-creator-csv-src/referentiel.csv).
 
 ### Generate your referential (from data)
 
 * Go to the referentiel-context-creator project.<br/>
 ```sh
-cd Tanaguru/rules/referential-creator/
+cd Asqatasun/rules/referential-creator/
 ```
 * Edit the pom.xml file and set the properties between the `<properties>` tag. 
  1. In the `<generator.referentielName>` tag, set the complete name of your referential (i.e. Rgaa 3.0) 
@@ -82,27 +84,33 @@ mvn referential-creator:generate
 ```
 
 Your referential is now ready to implement what you need !
+
 ## The generated referential context
+
 ### Rules classes
 The Java rules classes files are available under<br/> 
-`$my-generated-ref/src/main/java/org/opens/tanaguru/rules/$myRef/`
+`$my-generated-ref/src/main/java/org/asqatasun/rules/$myRef/`
+
 ### Test classes (JUnit) and the testcases (HTML)
 The Java test classes files are available under<br/> 
-`$my-generated-ref/src/test/java/org/opens/tanaguru/rules/$myRef/`
+`$my-generated-ref/src/test/java/org/asqatasun/rules/$myRef/`
 
 The HTML testcases files are available under<br/>
 `$my-generated-ref/src/test/resources/testcases/$myRef/`
+
 ### Sql insertion script
 The SQL insertion script file is available under<br/>
 `$my-generated-ref/src/main/resources/sql/`
+
 ### I18n files
 The I18n files are available under<br/>
 `$my-generated-ref/src/main/resources/i18n/`
+
 ### Spring configuration files (to be rendered in the UI)
 The Spring configuration files are available under<br/>
 `$my-generated-ref/src/main/resources/conf/`
 
-## How to generate the new referential and make it usable from the Tanaguru web application? 
+## How to generate the new referential and make it usable from the Asqatasun web application? 
 ### Build
 ```sh
 cd $myGeneratedReferential
@@ -110,19 +118,23 @@ mvn clean install
 cd target
 tar xvf tgz
 ```
+
 ### Install in database
 ```sh
 cd tgz-extract-folder/sql/
-mysql -u $username -p$myPassword $tanaguruDatabase < $ref-insert.sql
+mysql -u $username -p$myPassword $asqatasunDatabase < $ref-insert.sql
 ```
+
 ### Deploy in the web application context
 
 ```sh
 cd tgz-extract-folder/
-vi deploy.sh ## Set $TOMCAT_HOST_PATH with your tomcat tanaguru web-app folder path. 
+vi deploy.sh ## Set $TOMCAT_HOST_PATH with your tomcat asqatasun web-app folder path. 
 ./deploy.sh
 ```
 Then restart tomcat
 ```sh
 sudo invoke-rc.d $tomcatVersion restart
 ```
+
+

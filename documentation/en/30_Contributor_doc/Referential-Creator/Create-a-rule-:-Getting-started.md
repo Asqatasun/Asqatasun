@@ -1,12 +1,14 @@
 # Getting started
 
+@@@TODO refactor this doc
+
 ## Prerequisites
 
-Start by [creating your test referential context](/Tanaguru/Tanaguru/wiki/How-to-create-your-own-referential) by using the referential-creator maven plugin. 
+Start by [creating your test referential context](How-to-create-your-own-referential.md) by using the referential-creator maven plugin. 
 
 Once created, let's implement some rules !
 
-##Detection rule
+## Detection rule
 
 To create a detection rule, implement a class that extends the `AbstractDetectionPageRuleImplementation` abstract class. 
 
@@ -34,7 +36,7 @@ public class DetectH1 extends AbstractDetectionPageRuleImplementation {
 
 }
 ```
-This test will return PASSED when at least one `h1` element is present on the page, FAILED instead, producing the internationalisable message "H1TagMissing" (see How to internationalize the messages thrown by a test to properly render it in the Tanaguru web-app interface)
+This test will return PASSED when at least one `h1` element is present on the page, FAILED instead, producing the internationalisable message "H1TagMissing" (see How to internationalize the messages thrown by a test to properly render it in the Asqatasun web-app interface)
 
 Let's consider the opposite : checking whether an unwished element, like `iframe`, is absent on the page should be implemented as follows : 
 ```java
@@ -54,9 +56,9 @@ public class DetectIframe extends AbstractDetectionPageRuleImplementation {
     }
 }
 ```
-This test will return PASSED when no `iframe` has been found on the page, FAILED instead, producing the internationalisable message "IframeDetected" for each occurence found on the page. Thus, each occurence will be rendered in the  Tanaguru web-app interface with its line number, and snippet of HTML source representing the element.
+This test will return PASSED when no `iframe` has been found on the page, FAILED instead, producing the internationalisable message "IframeDetected" for each occurence found on the page. Thus, each occurence will be rendered in the  Asqatasun web-app interface with its line number, and snippet of HTML source representing the element.
 
-##Selection and check rule
+## Selection and check rule
 Detection is great, but you often need to perform checks on selected elements. To do so, implement a class that extends the `AbstractPageRuleWithSelectorAndCheckerImplementation` abstract class.  
 Let's say that you want to check that all the links (`a` tags) of a page have not a `title` attribute. Here is what your class would look like : 
 
@@ -86,9 +88,9 @@ public class CheckWhetherEachLinkHaventTitleAttribute extends
 }
 ```
 ## Site level rule
-Tanaguru enables to create rules at site level, in other words, make cross-pages checks.
+Asqatasun enables to create rules at site level, in other words, make cross-pages checks.
 
-The most obvious example is the verification of the unicity of the title tag for each page. Tanaguru provides
+The most obvious example is the verification of the unicity of the title tag for each page. Asqatasun provides
 the `AbstractUniqueElementSiteRuleImplementation` abstract class that can be used as follows in this case : 
 
 ```java
@@ -114,12 +116,12 @@ public class CheckTitleContentUnicityAtSiteLevel
     }
 }
 ``` 
-This example introduces a new usefull interface called [TextElementBuilder](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#textelementbuilder), that produces a String representation for a given Element. The [SimpleTextElementBuilder](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-commons/src/main/java/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.java) used in the example simply returns the content of the title element. You may need to use other [text element builder implementations](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#the-existing-textelementbuilder-implementations) or implement your own ones.
+This example introduces a new usefull interface called [TextElementBuilder](Create-a-rule-:-the-framework.md#textelementbuilder), that produces a String representation for a given Element. The [SimpleTextElementBuilder](https://github.com/Asqatasun/Asqatasun/blob/master/rules/rules-commons/src/main/java/org/asqatasun/rules/elementselector/SimpleElementSelector.java) used in the example simply returns the content of the title element. You may need to use other [text element builder implementations](Create-a-rule-:-the-framework.md#the-existing-textelementbuilder-implementations) or implement your own ones.
 
 ## Nomenclature based Check rule
-Tanaguru uses the concept of nomenclature to create dynamic lists that then can be used as white lists or black lists. 
+Asqatasun uses the concept of nomenclature to create dynamic lists that then can be used as white lists or black lists. 
 
-Let's consider the check of the doctype validity. To avoid to hard-code in the rule implementation the exhaustive list of allowed doctype declarations, a nomenclature (seen as a whitelist here) can be used to handle them. The addition of a new one (HTML6 ?) consists in inserting a new entry in database, without modifying a line of the code. You can have a look at the [DoctypeValidityChecker implementation](https://github.com/Tanaguru/Tanaguru/blob/master/rules/rules-commons/src/main/java/org/opens/tanaguru/rules/elementchecker/doctype/DoctypeValidityChecker.java) for more details.
+Let's consider the check of the doctype validity. To avoid to hard-code in the rule implementation the exhaustive list of allowed doctype declarations, a nomenclature (seen as a whitelist here) can be used to handle them. The addition of a new one (HTML6 ?) consists in inserting a new entry in database, without modifying a line of the code. You can have a look at the [DoctypeValidityChecker implementation](https://github.com/Asqatasun/Asqatasun/blob/master/rules/rules-commons/src/main/java/org/asqatasun/rules/elementchecker/doctype/DoctypeValidityChecker.java) for more details.
 
 The concept of nomenclature can also lead to the check of relevancy. Dealing with this problematic is very difficult and is often taken up with complex algorithms. The usage of a nomenclature as a blacklist enables to detect, in an easy and collaborative way, common irrelevant cases.
 From this approach, the relevancy of the title of a page can be compared with a list of definitive irrelevant titles such as 'Document', 'Home', 'Welcome'. That list can be then populated from feedbacks by just inserting entries in database. The rule that implements this case could be written as follows : 
@@ -148,23 +150,23 @@ public class CheckTitleTagRelevancy extends
 
 }
 ```
-To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#create-a-nomenclature-and-populate-it)" section for more details.
+To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](Create-a-rule-:-the-framework.md#create-a-nomenclature-and-populate-it)" section for more details.
 
 
-##More About Selection
-You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](http://jsoup.org) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](http://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
+## More About Selection
+You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](https://jsoup.org/) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](https://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
 
-You can use also use one of [our selection implementations](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#the-existing-elementselector-implementations) or even implement your own ones. 
+You can use also use one of [our selection implementations](Create-a-rule-:-the-framework.md#the-existing-elementselector-implementations) or even implement your own ones. 
 
-##More About Check
+## More About Check
 Based on the implementation of accessiblity rules, many checkers have been implemented and can be reused.
-Regarding your need, you can use one of [our check implementations](/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework#the-existing-elementchecker-implementations) or even implement your own ones.
+Regarding your need, you can use one of [our check implementations](Create-a-rule-:-the-framework.md#the-existing-elementchecker-implementations) or even implement your own ones.
 
-##More About More
-Tanaguru can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the Accessiweb 2.2 rules implementations](https://github.com/Tanaguru/Tanaguru/tree/master/rules/accessiweb2.2/src/main/java/org/opens/tanaguru/rules/accessiweb22) or the [RGAA v2.2 rules implementation](https://github.com/Tanaguru/Tanaguru/tree/master/rules/rgaa2.2/src/main/java/org/opens/tanaguru/rules/rgaa22) to get more examples of how to implement a rule. 
+## More About More
+Asqatasun can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the Accessiweb 2.2 rules implementations](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-accessiweb2.2/src/main/java/org/asqatasun/rules/accessiweb22) or the [RGAA v3.0 rules implementation](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/main/java/org/asqatasun/rules/rgaa30) to get more examples of how to implement a rule. 
 
-Want really more ? see [Create a rule : the framework](https://github.com/Tanaguru/Tanaguru/wiki/Create-a-rule-:-the-framework)
+Want really more ? see [Create a rule : the framework](Create-a-rule-:-the-framework.md)
 
-##Any questions?
+## Any questions?
 
-Let's discuss [Tanaguru on StackOverflow](http://stackoverflow.com/search?q=tanaguru)
+[Let's discuss Asqatasun](http://forum.asqatasun.org/)

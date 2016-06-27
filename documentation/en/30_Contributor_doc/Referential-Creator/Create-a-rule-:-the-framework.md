@@ -1,4 +1,7 @@
 ## Rules input/output
+
+@@@TODO refactor this doc
+
 ### Input
 
 * DOM
@@ -20,10 +23,10 @@ This interface defines a selection applied to the DOM, to set the scope of the r
 
 #### The existing ElementSelector implementations 
 Here is a not exhaustive list of existing ElementSelector implementations : 
-* [SimpleElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/SimpleElementSelector.html)
-* [MultipleElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/MultipleElementSelector.html)
-* [LinkElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/LinkElementSelector.html)
-* [ImageElementSelector](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementselector/ImageElementSelector.html)
+* [SimpleElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/SimpleElementSelector.html)
+* [MultipleElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/MultipleElementSelector.html)
+* [LinkElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/LinkElementSelector.html)
+* [ImageElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/ImageElementSelector.html)
 * ...
 
 ### The `ElementChecker`
@@ -51,17 +54,17 @@ This interface defines a check to be done on elements
 #### Abstract implementation
 #### The existing ElementChecker implementations 
 Here is a not exhaustive list of existing ElementChecker implementations : 
-* [ElementPresenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/element/ElementPresenceChecker.html)
-* [ChildElementPresenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/element/ChildElementPresenceChecker.html)
-* [ElementUnicityChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/element/ElementUnicityChecker.html)
-* [AttributePresenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/attribute/AttributePresenceChecker.html)
-* [TextEmptinessChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/text/TextEmptinessChecker.html)
-* [TextLengthChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/text/TextLengthChecker.html)
-* [TextBelongsToBlackListChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/text/TextBelongsToBlackListChecker.html)
-* [DoctypeValidityChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/doctype/DoctypeValidityChecker.html)
-* [HeadingsHierarchyChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/headings/HeadingsHierarchyChecker.html)
-* [LangChangeChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/lang/LangChangeChecker.html)
-* [LinkPertinenceChecker](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/elementchecker/link/LinkPertinenceChecker.html)
+* [ElementPresenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ElementPresenceChecker.html)
+* [ChildElementPresenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ChildElementPresenceChecker.html)
+* [ElementUnicityChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ElementUnicityChecker.html)
+* [AttributePresenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/attribute/AttributePresenceChecker.html)
+* [TextEmptinessChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextEmptinessChecker.html)
+* [TextLengthChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextLengthChecker.html)
+* [TextBelongsToBlackListChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextBelongsToBlackListChecker.html)
+* [DoctypeValidityChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/doctype/DoctypeValidityChecker.html)
+* [HeadingsHierarchyChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/headings/HeadingsHierarchyChecker.html)
+* [LangChangeChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/lang/LangChangeChecker.html)
+* [LinkPertinenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/link/LinkPertinenceChecker.html)
 * ...
 
 ### The `TextElementBuilder`
@@ -75,16 +78,16 @@ This builder is in charge of creating a textual representation of an HTML elemen
  */
 String buildTextFromElement(Element element);
 ```
-Take a look at the [online javadoc of the Jsoup Element](http://jsoup.org/apidocs/org/jsoup/nodes/Element.html). 
+Take a look at the [online javadoc of the Jsoup Element](https://jsoup.org/apidocs/org/jsoup/nodes/Element.html). 
 #### The existing TextElementBuilder implementations 
 Here is the list of existing TextElementBuilder implementations : 
-* [SimpleTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/SimpleTextElementBuilder.html)
-* [OwnTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/OwnTextElementBuilder.html)
-* [TextAttributeOfElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/TextAttributeOfElementBuilder.html)
-* [DeepTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/DeepTextElementBuilder.html)
-* [CompleteTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/CompleteTextElementBuilder.html)
-* [LinkTextElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/LinkTextElementBuilder.html)
-* [PathElementBuilder](http://tanaguru.org/Javadoc/LATEST/org/opens/tanaguru/rules/textbuilder/PathElementBuilder.html)
+* [SimpleTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/SimpleTextElementBuilder.html)
+* [OwnTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/OwnTextElementBuilder.html)
+* [TextAttributeOfElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/TextAttributeOfElementBuilder.html)
+* [DeepTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/DeepTextElementBuilder.html)
+* [CompleteTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/CompleteTextElementBuilder.html)
+* [LinkTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/LinkTextElementBuilder.html)
+* [PathElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/PathElementBuilder.html)
 
 ## Test context
 ### Create a nomenclature and populate it
