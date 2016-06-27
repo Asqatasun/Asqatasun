@@ -9,9 +9,11 @@
 
             <h1>$referentiel Test.$ruleCode $state 01</h1>
 
+<!-- START [test-detail] -->
             <div class="test-detail" lang="fr">
                 ${testLabel}
             </div>
+<!-- END [test-detail] -->
 
             <div class="testcase">
             </div>
