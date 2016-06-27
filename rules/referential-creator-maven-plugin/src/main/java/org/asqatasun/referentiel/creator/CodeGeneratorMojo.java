@@ -56,7 +56,7 @@ import org.asqatasun.referentiel.creator.exception.I18NLanguageNotFoundException
  */
 public class CodeGeneratorMojo extends AbstractMojo {
 
-    private static final String PACKAGE_NAME = "org.opens.tanaguru.rules";
+    private static final String PACKAGE_NAME = "org.asqatasun.rules";
     private static final String THEME_LABEL_COLUMN_NAME = "theme_";
     private static final String CRITERION_LABEL_COLUMN_NAME = "critere-label_";
     private static final String TEST_LABEL_COLUMN_NAME = "test-label_";
