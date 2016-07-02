@@ -3,8 +3,8 @@
 To launch asqatasun on URLs, execute the following commands from the asqatasun CLI context folder:
 
 ```sh
-cd $tanaguruCliContextPath
-./bin/tanaguru.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
+cd $asqatasunCliContextPath
+./bin/asqatasun.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
 ```
 
 where [URL OR FILE OR SCENARIO] is a blank-separated list of Urls or Files or Scenario to be tested.
@@ -12,7 +12,7 @@ where [URL OR FILE OR SCENARIO] is a blank-separated list of Urls or Files or Sc
 Here is the usage of the script
 
 ```
-usage: ./bin/tanaguru.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
+usage: ./bin/asqatasun.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
                          
  -d,--display <arg>       Value of the display
  -f,--firefox-bin <arg>   Path to the firefox bin
@@ -43,8 +43,8 @@ To customize the rules set, use the -l option of the script to choose the approp
 To launch asqatasun on Scenario (recorded from [SeBuilder firefox add-on](http://sebuilder.github.io/se-builder/)), execute the following commands :
 
 ```sh
-cd $tanaguruCliContextPath
-./bin/tanaguru.sh -t Scenario ${path_to_json_file}
+cd $asqatasunCliContextPath
+./bin/asqatasun.sh -t Scenario ${path_to_json_file}
 ```
 
 where $path_to_json_file is a local path to your scenario file (.json).

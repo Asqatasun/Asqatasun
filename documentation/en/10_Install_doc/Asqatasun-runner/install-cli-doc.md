@@ -32,23 +32,23 @@ where $tgUser is the asqatasun user, $tgPassword is the asqatasun user password,
 Execute the table creation script and data insertion scripts
 
 ```sh
-mysql -u ${tanaguru-user} -p < install/engine/sql/tanaguru-20-create-tables.sql
-mysql -u ${tanaguru-user} -p < install/engine/sql/tanaguru-30-insert.sql 
-mysql -u ${tanaguru-user} -p < install/rules/sql/10-rules-resources-insert.sql
+mysql -u ${asqatasun-user} -p < install/engine/sql/asqatasun-20-create-tables.sql
+mysql -u ${asqatasun-user} -p < install/engine/sql/asqatasun-30-insert.sql 
+mysql -u ${asqatasun-user} -p < install/rules/sql/10-rules-resources-insert.sql
 ```
 
 Then, modify the 3 following scripts, install/rules/sql/accessiweb2.2-insert.sql, install/rules/sql/rgaa2.2-insert.sql and install/rules/sql/rgaa3.0-insert.sql by removing the lines starting with "INSERT IGNORE INTO `TGSI_REFERENTIAL`" and execute the scripts
 
 ```sh
-mysql -u ${tanaguru-user} -p < install/rules/sql/accessiweb2.2-insert.sql
-mysql -u ${tanaguru-user} -p < install/rules/sql/rgaa2.2-insert.sql
-mysql -u ${tanaguru-user} -p < install/rules/sql/rgaa3.0-insert.sql
+mysql -u ${asqatasun-user} -p < install/rules/sql/accessiweb2.2-insert.sql
+mysql -u ${asqatasun-user} -p < install/rules/sql/rgaa2.2-insert.sql
+mysql -u ${asqatasun-user} -p < install/rules/sql/rgaa3.0-insert.sql
 ```
 
 ## Configure context with database access properties
 
-Edit tanaguru.conf file and replace all stars '\*\*\*\*\*\*\*\*\*' with the correct user and password for your asqatasun mysql and replace the content of the jdbc.url variable with the right settings.
+Edit asqatasun.conf file and replace all stars '\*\*\*\*\*\*\*\*\*' with the correct user and password for your asqatasun mysql and replace the content of the jdbc.url variable with the right settings.
 
 ```sh
-vi conf/context/tanaguru.conf
+vi conf/context/asqatasun.conf
 ```
