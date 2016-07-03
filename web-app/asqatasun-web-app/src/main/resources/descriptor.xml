@@ -26,7 +26,7 @@
                 <include>asqatasun-30-insert.sql</include>
                 <include>asqatasun-insert.psql</include>
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>664</fileMode>
             <outputDirectory>/install/engine/sql</outputDirectory>
         </fileSet>
         <!-- SQL Rules resources -->
@@ -36,7 +36,7 @@
                 <include>10-rules-resources-insert.sql</include>
                 <include>10-rules-resources-insert.psql</include>
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <!-- SQL Rules AccessiWeb 2.2 -->
@@ -46,7 +46,7 @@
                 <include>accessiweb2.2-insert.sql</include>
                 <include>accessiweb2.2-insert.psql</include>
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <!-- SQL Rules RGAA 3.0 -->
@@ -55,7 +55,7 @@
             <includes>
                 <include>rgaa3.0-insert.sql</include>
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <!-- SQL Rules SEO 1.0 -->
@@ -64,7 +64,7 @@
             <includes>
                 <include>seo1.0-insert.sql</include>
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <!-- SQL web-app -->
@@ -76,7 +76,7 @@
                 <include>tgol-create-tables.psql</include>
                 <include>tgol-insert.psql</include>
             </includes>
-            <fileMode>755</fileMode>
+            <fileMode>664</fileMode>
             <outputDirectory>/install/web-app/sql</outputDirectory>
         </fileSet>
         <!-- Install file -->
