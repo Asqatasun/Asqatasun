@@ -21,15 +21,24 @@ without having to dig into the previous betas and RCs). For this:
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag
+./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag 
 ```
 
 do not use the `--push` option 
 
 
+
+(We don't push yet, do the testing stuff before :) ) 
+
 ## 4) Build local Docker image with locally build Asqatasun
 
 ...and check release is the good one + run some manual tests
 
+## 5) Push
+
+@@@TODO
+
+## 5) For `develop` branch, switch back release strings to "-SNAPSHOT"
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
 docker/compile_and_build_docker_image.sh --skip-build -s /tmp/Asqatasun -d docker/single-container-SNAPSHOT-local 
