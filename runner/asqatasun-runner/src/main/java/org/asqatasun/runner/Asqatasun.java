@@ -71,6 +71,7 @@ public class Asqatasun implements AuditServiceListener {
     private static final String AW22_REF = "Aw22";
     private static final String RGAA22_REF = "Rgaa22";
     private static final String RGAA30_REF = "Rgaa30";
+    private static final String SEO_REF    = "Seo";
     private static String REF = AW22_REF;
     
     private static final String BRONZE_LEVEL = "Bz";
@@ -458,7 +459,8 @@ public class Asqatasun implements AuditServiceListener {
                              .withDescription("Referential : \n"
                 + "- \"Aw22\" for Accessiweb 2.2 (default)\n"
                 + "- \"Rgaa22\" for Rgaa 2.2\n"
-                + "- \"Rgaa30\" for Rgaa 3.0\n")
+                + "- \"Rgaa30\" for Rgaa 3.0\n"
+                + "- \"Seo\" for SEO 1.0\n")
                              .hasArg()
                              .isRequired(false)
                              .create("r"));
@@ -546,7 +548,8 @@ public class Asqatasun implements AuditServiceListener {
     private static boolean isValidReferential(String ref) {
         if (StringUtils.equals(ref, AW22_REF) ||
                 StringUtils.equals(ref, RGAA22_REF) ||
-                    StringUtils.equals(ref, RGAA30_REF)) {
+                StringUtils.equals(ref, RGAA30_REF) ||
+                StringUtils.equals(ref, SEO_REF)) {
             return true;
         }
         System.out.println("\nThe referential \"" + ref + "\" doesn't exist.\n");
