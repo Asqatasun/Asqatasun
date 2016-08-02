@@ -3,7 +3,12 @@
 Asqatasun 4.x.x, 2016-xx-xx
 --------------------------------
 
-* docker/single-container : reduced weight (461 MB ---> 294 MB)
+- DOC - Updated runner doc (WIP)
+- DOC - Added "the referential creation" + "Create-a-rule" (WIP)
+
+- RGAA 3.0 english translation (source : https://github.com/DISIC/rgaa_referentiel_en)
+- docker/single-container : reduced weight (461 MB ---> 294 MB)
+- runner : Rgaa3.0 by default, enabled Seo and disabled Rgaa2 
 
 Features:
 None
@@ -12,7 +17,7 @@ Security:
 None
 
 Bugs:
-None
+- [#114](https://github.com/Asqatasun/Asqatasun/issues/114) Runner - install/engine folder not present in the tarball
 
 Configuration:
 None

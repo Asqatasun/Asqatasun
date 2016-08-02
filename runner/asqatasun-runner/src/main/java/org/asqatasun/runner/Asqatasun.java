@@ -69,10 +69,9 @@ public class Asqatasun implements AuditServiceListener {
     private static final String SITE_AUDIT = "File";
     
     private static final String AW22_REF = "Aw22";
-    private static final String RGAA22_REF = "Rgaa22";
     private static final String RGAA30_REF = "Rgaa30";
     private static final String SEO_REF    = "Seo";
-    private static String REF = AW22_REF;
+    private static String REF = RGAA30_REF;
     
     private static final String BRONZE_LEVEL = "Bz";
     private static final String A_LEVEL = "A";
@@ -379,7 +378,7 @@ public class Asqatasun implements AuditServiceListener {
      * @return 
      */
     private Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
-        if (ref.equalsIgnoreCase(RGAA22_REF) || ref.equalsIgnoreCase(RGAA30_REF)) {
+        if (ref.equalsIgnoreCase(RGAA30_REF)) {
             if (level.equalsIgnoreCase(BRONZE_LEVEL)) {
                 level=A_LEVEL;
             } else if (level.equalsIgnoreCase(SILVER_LEVEL)) {
@@ -457,9 +456,8 @@ public class Asqatasun implements AuditServiceListener {
         
         options.addOption(OptionBuilder.withLongOpt("referential")
                              .withDescription("Referential : \n"
-                + "- \"Aw22\" for Accessiweb 2.2 (default)\n"
-                + "- \"Rgaa22\" for Rgaa 2.2\n"
-                + "- \"Rgaa30\" for Rgaa 3.0\n"
+                + "- \"Aw22\" for Accessiweb 2.2\n"
+                + "- \"Rgaa30\" for Rgaa 3.0 (default)\n"
                 + "- \"Seo\" for SEO 1.0\n")
                              .hasArg()
                              .isRequired(false)
@@ -547,7 +545,6 @@ public class Asqatasun implements AuditServiceListener {
      */
     private static boolean isValidReferential(String ref) {
         if (StringUtils.equals(ref, AW22_REF) ||
-                StringUtils.equals(ref, RGAA22_REF) ||
                 StringUtils.equals(ref, RGAA30_REF) ||
                 StringUtils.equals(ref, SEO_REF)) {
             return true;
