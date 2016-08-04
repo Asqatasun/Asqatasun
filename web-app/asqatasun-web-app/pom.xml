@@ -255,6 +255,7 @@
                     </descriptors>
                     <outputDirectory>target</outputDirectory>
                     <finalName>asqatasun-${asqatasunVersion}.i386</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>

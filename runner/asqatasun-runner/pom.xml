@@ -20,6 +20,7 @@
                     </descriptors>
                     <outputDirectory>target</outputDirectory>
                     <finalName>asqatasun-runner-${asqatasunVersion}.i386</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>
