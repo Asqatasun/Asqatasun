@@ -5,3 +5,4 @@ It is to be used with command line only. It is typically used for [Asqatasun Jen
 
 * [Asqatasun-Runner Prerequisites](prerequisites-runner.md)
 * [Asqatasun-Runner installation](install-runner.md)
+* [Asqatasun-Runner usage](usage-runner.md)

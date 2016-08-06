@@ -8,6 +8,7 @@
     * [Asqatasun-Runner](10_Install_doc/Asqatasun-runner/README.md)
         * [Prerequisites](10_Install_doc/Asqatasun-runner/prerequisites-runner.md)
         * [Install](10_Install_doc/Asqatasun-runner/install-runner.md)
+        * [Usage](10_Install_doc/Asqatasun-runner/usage-runner.md)
 * [User doc](20_User_doc/README.md)
     * [5 types of result](20_User_doc/userdoc-02-5-results.md)
     * [4 kinds of audit](20_User_doc/userdoc-01-4-audits.md)
