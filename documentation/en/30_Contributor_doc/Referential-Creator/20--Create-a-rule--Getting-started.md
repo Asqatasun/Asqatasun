@@ -116,7 +116,7 @@ public class CheckTitleContentUnicityAtSiteLevel
     }
 }
 ``` 
-This example introduces a new usefull interface called [TextElementBuilder](Create-a-rule-:-the-framework.md#textelementbuilder), that produces a String representation for a given Element. The [SimpleTextElementBuilder](https://github.com/Asqatasun/Asqatasun/blob/master/rules/rules-commons/src/main/java/org/asqatasun/rules/elementselector/SimpleElementSelector.java) used in the example simply returns the content of the title element. You may need to use other [text element builder implementations](Create-a-rule-:-the-framework.md#the-existing-textelementbuilder-implementations) or implement your own ones.
+This example introduces a new usefull interface called [TextElementBuilder](30--Create-a-rule--the-framework.md#textelementbuilder), that produces a String representation for a given Element. The [SimpleTextElementBuilder](https://github.com/Asqatasun/Asqatasun/blob/master/rules/rules-commons/src/main/java/org/asqatasun/rules/elementselector/SimpleElementSelector.java) used in the example simply returns the content of the title element. You may need to use other [text element builder implementations](30--Create-a-rule--the-framework.md#the-existing-textelementbuilder-implementations) or implement your own ones.
 
 ## Nomenclature based Check rule
 Asqatasun uses the concept of nomenclature to create dynamic lists that then can be used as white lists or black lists. 
@@ -150,22 +150,22 @@ public class CheckTitleTagRelevancy extends
 
 }
 ```
-To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](Create-a-rule-:-the-framework.md#create-a-nomenclature-and-populate-it)" section for more details.
+To make this test work, an entry named "IrrelevantTitleNomenclature" has to exist in the NOMENCLATURE table of the database. Please refer to the "[Create a nomenclature and populate it](30--Create-a-rule--the-framework.md#create-a-nomenclature-and-populate-it)" section for more details.
 
 
 ## More About Selection
 You need to perform more complex selection? The `SimpleElementSelector` is based on [Jsoup](https://jsoup.org/) and its powerfull CSS (or jquery) like selector syntax to find matching elements. Have a look to the [Jsoup selector-syntax description page](https://jsoup.org/cookbook/extracting-data/selector-syntax) to know more about what you can do.
 
-You can use also use one of [our selection implementations](Create-a-rule-:-the-framework.md#the-existing-elementselector-implementations) or even implement your own ones. 
+You can use also use one of [our selection implementations](30--Create-a-rule--the-framework.md#the-existing-elementselector-implementations) or even implement your own ones. 
 
 ## More About Check
 Based on the implementation of accessiblity rules, many checkers have been implemented and can be reused.
-Regarding your need, you can use one of [our check implementations](Create-a-rule-:-the-framework.md#the-existing-elementchecker-implementations) or even implement your own ones.
+Regarding your need, you can use one of [our check implementations](30--Create-a-rule--the-framework.md#the-existing-elementchecker-implementations) or even implement your own ones.
 
 ## More About More
 Asqatasun can also make controls on CSS, combine selectors, checkers, use data extracted from a javascript script executing while fetching the page and more, characterise elements by using a marker approach (use the "decorative-image" class to identify all the decoration images of the page). You can browse [the Accessiweb 2.2 rules implementations](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-accessiweb2.2/src/main/java/org/asqatasun/rules/accessiweb22) or the [RGAA v3.0 rules implementation](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/main/java/org/asqatasun/rules/rgaa30) to get more examples of how to implement a rule. 
 
-Want really more ? see [Create a rule : the framework](Create-a-rule-:-the-framework.md)
+Want really more ? see [Create a rule : the framework](30--Create-a-rule--the-framework.md)
 
 ## Any questions?
 
