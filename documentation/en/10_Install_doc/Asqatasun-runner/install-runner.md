@@ -2,17 +2,17 @@
 
 This page describes the steps to follow to install Asqatasun since Version 3.0.0 (and further) from the binary files or from the sources. The sofware has been tested on 12.04 LTS (Precise Pangolin) and 14.04 LTS (Trusty Tahr).
 
-PLEASE ensure you meet all [prerequisites for Asqatasun 3.x on Ubuntu](#prerequisites).
+PLEASE ensure you meet all [prerequisites for Asqatasun-Runner 4.x on Ubuntu](prerequisites-runner.md).
 
 ## Download asqatasun tarball and extract content
 
-Retrieve the [lastest version of Asqatasun](http://download.asqatasun.org/Asqatasun/asqatasun-latest.tar.gz). 
+Retrieve the [lastest version of Asqatasun](https://github.com/Asqatasun/Asqatasun/releases/latest). 
 
-Extract it on your file system. The extraction will create a "asqatasun" folder. This folder will become the execution context of the installation.
+Extract it on your file system. The extraction will create a `asqatasun-runner-<version>.<arch>` folder. This folder will become the **execution context** of the installation.
 
 ## Create and populate database
 
-Warning : If this installation is dedicated to work with the Asqatasun Jenkins plugin, this step is not required. The creation of the database is done when installing the asqatasun Web application. The cli installation just needs to be set with the database access properties (see [next paragraph](#configure-context-with-database-access-properties))
+**Warning** : If this installation is dedicated to work with the Asqatasun Jenkins plugin, this step is not required. The creation of the database is done when installing the asqatasun Web application. The cli installation just needs to be set with the database access properties (see [next paragraph](#configure-context-with-database-access-properties))
 
 ### Create database
 
@@ -52,3 +52,8 @@ Edit asqatasun.conf file and replace all stars '\*\*\*\*\*\*\*\*\*' with the cor
 ```sh
 vi conf/context/asqatasun.conf
 ```
+
+## Next
+
+See [Asqatasun-Runner usage](usage-runner.md)
+

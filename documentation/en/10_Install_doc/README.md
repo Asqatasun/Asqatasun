@@ -12,6 +12,6 @@
 Asqatasun-Runner is an Asqatasun without web-app (thus not needing server like Apache and Tomcat). 
 It is to be used with command line only. It is typically used for [Asqatasun Jenkins plugin](https://github.com/Asqatasun/Asqatasun-Jenkins-Plugin).
 
-* Install Asqatasun-Runner on a server
+* [Install Asqatasun-Runner](Asqatasun-runner/README.md) on a server
 
 

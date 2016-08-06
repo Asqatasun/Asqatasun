@@ -1,14 +1,15 @@
-# Usage of Asqatasun Command Line Interface
+# Usage of Asqatasun-Runner
 
-To launch asqatasun on URLs, execute the following commands from the asqatasun CLI context folder:
+To launch Asqatasun-Runner on URLs, execute the following commands from the Asqatasun-Runner installation directory:
 
 ```sh
-cd $asqatasunCliContextPath
 ./bin/asqatasun.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
 ```
 
-where [URL OR FILE OR SCENARIO] is a blank-separated list of Urls or Files or Scenario to be tested.
+where \[URL OR FILE OR SCENARIO\] is a blank-separated list of Urls or Files or Scenario to be tested.
 
+## Options
+ 
 Here is the usage of the script
 
 ```
@@ -38,13 +39,18 @@ usage: ./bin/asqatasun.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
 
 ```
 
-To customize the rules set, use the -l option of the script to choose the appropriate level and its associated rule set.
+To customize the rule set, use the `-l` option of the script to choose the appropriate level and its associated rule set.
 
-To launch asqatasun on Scenario (recorded from [SeBuilder firefox add-on](http://sebuilder.github.io/se-builder/)), execute the following commands :
+To launch Asqatasun on Scenario (recorded from [SeBuilder firefox add-on](http://sebuilder.github.io/se-builder/)), execute the following commands :
 
 ```sh
-cd $asqatasunCliContextPath
 ./bin/asqatasun.sh -t Scenario ${path_to_json_file}
 ```
 
-where $path_to_json_file is a local path to your scenario file (.json).
+where `$path_to_json_file` is a local path to your scenario file (.json).
+
+## Example
+
+```sh
+./bin/asqatasun.sh -f /opt/firefox-31.4.0esr/firefox/ -d 99 -o /tmp/result_output.txt -r Rgaa30 http://asqatasun.org/
+```
