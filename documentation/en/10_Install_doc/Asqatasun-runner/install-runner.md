@@ -12,7 +12,7 @@ Extract it on your file system. The extraction will create a `asqatasun-runner-<
 
 ## Create and populate database
 
-**Warning** : If this installation is dedicated to work with the Asqatasun Jenkins plugin, this step is not required. The creation of the database is done when installing the asqatasun Web application. The cli installation just needs to be set with the database access properties (see [next paragraph](#configure-context-with-database-access-properties))
+**Warning** : If this installation is dedicated to work with the Asqatasun Jenkins plugin, this step is not required. The creation of the database is done when installing the asqatasun Web application. The runner installation just needs to be set with the database access properties (see [next paragraph](#configure-context-with-database-access-properties))
 
 ### Create database
 

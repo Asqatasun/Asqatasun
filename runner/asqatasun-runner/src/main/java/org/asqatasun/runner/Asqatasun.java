@@ -205,7 +205,7 @@ public class Asqatasun implements AuditServiceListener {
                 if (!isValidSiteUrl(cl)) {
                     printUsage();
                 } else {
-                    System.out.println("Functionnality is not working on cli interface");
+                    System.out.println("Functionnality is not working on runner interface");
                     printUsage();
                 }
             }
@@ -425,7 +425,7 @@ public class Asqatasun implements AuditServiceListener {
 
     /**
      * Create the asqatasun command line interface options
-     * @return the options to launch asqatasun cli
+     * @return the options to launch asqatasun runner
      */
     private static Options createOptions() {
         Options options = new Options();

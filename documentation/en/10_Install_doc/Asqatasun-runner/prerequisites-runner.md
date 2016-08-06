@@ -42,9 +42,9 @@ Install the following packages
 sudo aptitude install xvfb
 ```
 
-Create the startup script in /etc/init.d/xvfb-asqatasun-cli
+Create the startup script in /etc/init.d/xvfb-asqatasun-runner
 ```sh
-sudo touch /etc/init.d/xvfb-asqatasun-cli
+sudo touch /etc/init.d/xvfb-asqatasun-runner
 ```
 
 Add the following content to the xvfb startup script. Don't forget to replace the $My_User string with the name of the user that will perform the analysis (jenkins for instance)
@@ -56,7 +56,7 @@ set -e
 RUN_AS_USER=$My_User
 OPTS=":99 -screen 1 1024x768x24 -nolisten tcp"
 XVFB_DIR=/usr/bin
-PIDFILE=/var/run/xvfb-asqatasun-cli
+PIDFILE=/var/run/xvfb-asqatasun-runner
 
 case $1 in
 
@@ -88,13 +88,13 @@ exit 0
 
 start Xvfb
 ```sh
-sudo chmod +x /etc/init.d/xvfb-asqatasun-cli
-sudo /etc/init.d/xvfb-asqatasun-cli start
+sudo chmod +x /etc/init.d/xvfb-asqatasun-runner
+sudo /etc/init.d/xvfb-asqatasun-runner start
 ```
 
 Configure Xvfb to run at startup
 ```sh
-sudo update-rc.d xvfb-asqatasun-cli defaults
+sudo update-rc.d xvfb-asqatasun-runner defaults
 ```
 
 ## Firefox
