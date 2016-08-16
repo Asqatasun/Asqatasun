@@ -110,6 +110,7 @@ DOCKER_PERL_COMMAND="s!ASQA_RELEASE=\"$FROM_VERSION\"!ASQA_RELEASE=\"$TO_VERSION
 ANSIBLE_PERL_COMMAND="s!$FROM_VERSION!$TO_VERSION!o"
 
 echo 'bumping context with version' $TO_VERSION
+find . -name "pom.vm"  -exec perl -pi -e $POM_PERL_COMMAND {} \;
 find . -name "pom.xml" -exec perl -pi -e $POM_PERL_COMMAND {} \;
 find . -name "pom.xml" -exec perl -pi -e $POM_PERL_COMMAND2 {} \;
 find . -name "install.sh" -exec perl -pi -e $SH_PERL_COMMAND {} \;
