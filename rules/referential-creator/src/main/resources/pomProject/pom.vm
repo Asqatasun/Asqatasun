@@ -4,13 +4,10 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+        <version>4.1.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-${referentielFolder.toLowerCase()}</artifactId>
     <name>${referentielFolder.toLowerCase()}</name>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <build>
         <plugins>
             <plugin>
@@ -36,35 +33,16 @@
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/resources/descriptor.xml</descriptor>
-                    </descriptors>
-                    <outputDirectory>target</outputDirectory>
-                    <finalName>asqatasun-${referentielFolder.toLowerCase()}-${rulesVersion}.i386</finalName>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>  <!-- this is used for inheritance merges -->
-                        <phase>package</phase>  <!-- append to the packaging phase. -->
-                        <goals>
-                            <goal>assembly</goal>  <!-- goals == mojos -->
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
         <finalName>${referentielFolder.toLowerCase()}-${rulesVersion}</finalName>
     </build>
     <dependencies>
         <dependency>
-            <groupId>${rulesGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-commons</artifactId>
         </dependency>
         <dependency>
-            <groupId>${testingToolsGroupId}</groupId>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-testing-tools</artifactId>
         </dependency>
     </dependencies>
