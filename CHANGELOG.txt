@@ -1,6 +1,6 @@
 
 --------------------------------
-Asqatasun 4.x.x, 2016-xx-xx
+Asqatasun 4.0.3, 2016-08-xx
 --------------------------------
 
 - DOC - Updated runner doc (WIP)
@@ -10,6 +10,7 @@ Asqatasun 4.x.x, 2016-xx-xx
 - docker/single-container : reduced weight (461 MB ---> 294 MB)
 - runner : Rgaa3.0 by default, enabled Seo and disabled Rgaa2 
 
+
 Features:
 None
 
@@ -17,7 +18,10 @@ Security:
 None
 
 Bugs:
+- [#115](https://github.com/Asqatasun/Asqatasun/issues/115) Build failure on project asqatasun-engine with openJDK-8
+- [#113](https://github.com/Asqatasun/Asqatasun/issues/113) Build failure on the projects webApp and runner with openJDK-8 on Ubuntu 16.04
 - [#114](https://github.com/Asqatasun/Asqatasun/issues/114) Runner - install/engine folder not present in the tarball
+- [#117](https://github.com/Asqatasun/Asqatasun/issues/117) fixed /rules/referential-creator/(...)/pom.vm 
 
 Configuration:
 None
@@ -26,7 +30,8 @@ Documentation:
 None
 
 Upgrade-o-meter (borrowed from folks at Gitlab):
-None
+- no database change, just replace .war
+
 
 --------------------------------
 Asqatasun 4.0.2, 2016-06-17
