@@ -3,35 +3,29 @@
 Asqatasun 4.0.3, 2016-08-xx
 --------------------------------
 
-- DOC - Updated runner doc (WIP)
-- DOC - Added "the referential creation" + "Create-a-rule" (WIP)
-
-- RGAA 3.0 english translation (source : https://github.com/DISIC/rgaa_referentiel_en)
-- docker/single-container : reduced weight (461 MB ---> 294 MB)
-- runner : Rgaa3.0 by default, enabled Seo and disabled Rgaa2 
-
-
 Features:
-None
+- Referential RGAA 3.0: english translation added (source : https://github.com/DISIC/rgaa_referentiel_en)
+- Docker/single-container: reduced weight from 450MB to 290MB
+- Asqatasun-Runner: RGAA 3.0 by default, enabled SEO and disabled RGAA 2
 
 Security:
 None
 
 Bugs:
-- [#115](https://github.com/Asqatasun/Asqatasun/issues/115) Build failure on project asqatasun-engine with openJDK-8
-- [#113](https://github.com/Asqatasun/Asqatasun/issues/113) Build failure on the projects webApp and runner with openJDK-8 on Ubuntu 16.04
-- [#114](https://github.com/Asqatasun/Asqatasun/issues/114) Runner - install/engine folder not present in the tarball
-- [#117](https://github.com/Asqatasun/Asqatasun/issues/117) fixed /rules/referential-creator/(...)/pom.vm 
+- [#115 Build failure on project asqatasun-engine with openJDK-8](https://github.com/Asqatasun/Asqatasun/issues/115)
+- [#113 Build failure on the projects webApp and runner with openJDK-8 on Ubuntu 16.04](https://github.com/Asqatasun/Asqatasun/issues/113)
+- [#114 Runner - install/engine folder not present in the tarball](https://github.com/Asqatasun/Asqatasun/issues/114)
+- [#117 Fixed /rules/referential-creator/(...)/pom.vm](https://github.com/Asqatasun/Asqatasun/issues/117)
 
 Configuration:
 None
 
 Documentation:
-None
+- Updated runner doc (WIP)
+- Added "the referential creation" + "Create-a-rule" (WIP)
 
 Upgrade-o-meter (borrowed from folks at Gitlab):
-- no database change, just replace .war
-
+- no database change, just replace the `.war` file
 
 --------------------------------
 Asqatasun 4.0.2, 2016-06-17
