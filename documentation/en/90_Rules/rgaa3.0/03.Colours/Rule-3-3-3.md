@@ -34,7 +34,7 @@ On each Web page, do
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

@@ -37,7 +37,7 @@ Does each
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

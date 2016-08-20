@@ -31,7 +31,7 @@ For each image object (<code>object</code>
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

@@ -36,7 +36,7 @@ On each Web page, do bold
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

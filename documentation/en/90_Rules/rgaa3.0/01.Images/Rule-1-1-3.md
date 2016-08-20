@@ -28,7 +28,7 @@ Does each form button
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

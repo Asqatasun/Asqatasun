@@ -34,7 +34,7 @@ Does each header cell (<code>th</code>
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

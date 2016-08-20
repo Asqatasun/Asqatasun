@@ -38,7 +38,7 @@ Does each image object
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

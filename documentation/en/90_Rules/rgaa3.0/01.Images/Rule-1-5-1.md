@@ -33,7 +33,7 @@ Does each image (<code>img</code>,
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

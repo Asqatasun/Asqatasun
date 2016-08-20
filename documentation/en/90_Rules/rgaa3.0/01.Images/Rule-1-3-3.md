@@ -29,7 +29,7 @@ For each button associated
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

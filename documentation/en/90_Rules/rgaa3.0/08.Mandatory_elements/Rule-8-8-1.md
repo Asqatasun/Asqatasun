@@ -28,7 +28,7 @@ On each Web page, is each
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

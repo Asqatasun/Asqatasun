@@ -36,7 +36,7 @@ Does each embedded image
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

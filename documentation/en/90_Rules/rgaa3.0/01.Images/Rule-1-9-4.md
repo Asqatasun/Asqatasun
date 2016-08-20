@@ -31,7 +31,7 @@ Each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_Englis
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

@@ -29,7 +29,7 @@ For
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

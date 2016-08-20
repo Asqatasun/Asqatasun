@@ -34,7 +34,7 @@ Does each cell (<code>td</code> or <code>th</code>
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

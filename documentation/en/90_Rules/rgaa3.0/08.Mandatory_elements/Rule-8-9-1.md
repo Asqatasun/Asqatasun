@@ -29,7 +29,7 @@ On each Web page, tags
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

@@ -27,7 +27,7 @@ For each image object without caption (<code>object</code> tag with the attribut
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 

@@ -33,7 +33,7 @@ For each <code>form</code> tag, when
 
 ### Scope
 
-**page**
+**Page**
 
 ### Decision level
 
