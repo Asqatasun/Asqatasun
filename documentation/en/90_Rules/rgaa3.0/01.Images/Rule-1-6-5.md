@@ -45,7 +45,7 @@ Does each vector image
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

@@ -33,7 +33,7 @@ On each Web page, tags
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

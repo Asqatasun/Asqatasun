@@ -35,7 +35,7 @@ For each bitmap image (<code>canvas</code> tag),
 
 ### Decision level
 
-**Semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

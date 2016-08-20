@@ -39,7 +39,7 @@ On each Web page, does
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

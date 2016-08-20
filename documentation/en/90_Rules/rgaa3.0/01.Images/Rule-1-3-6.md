@@ -44,7 +44,7 @@ Does each vector image (<code>svg</code>
 
 ### Decision level
 
-**Semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

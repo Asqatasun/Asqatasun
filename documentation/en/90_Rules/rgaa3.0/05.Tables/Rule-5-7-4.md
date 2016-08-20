@@ -38,7 +38,7 @@ Does each cell (<code>td</code> or <code>th</code>
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

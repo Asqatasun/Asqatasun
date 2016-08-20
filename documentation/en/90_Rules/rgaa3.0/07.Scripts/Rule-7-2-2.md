@@ -38,7 +38,7 @@ Does each non text
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

@@ -42,7 +42,7 @@ Does each image object
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

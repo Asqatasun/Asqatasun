@@ -38,7 +38,7 @@ Does each interface component with an ARIA role
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

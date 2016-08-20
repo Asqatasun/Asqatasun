@@ -41,7 +41,7 @@ Does each bitmap image
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

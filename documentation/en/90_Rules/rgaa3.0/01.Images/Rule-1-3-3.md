@@ -33,7 +33,7 @@ For each button associated
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

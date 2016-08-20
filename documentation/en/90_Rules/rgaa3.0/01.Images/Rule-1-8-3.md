@@ -37,7 +37,7 @@ For each <code>form</code> tag, when
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

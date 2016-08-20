@@ -35,7 +35,7 @@ For each vector image (<code>svg</code> tag), with a
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

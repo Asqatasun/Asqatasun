@@ -41,7 +41,7 @@ For each Web page with a
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

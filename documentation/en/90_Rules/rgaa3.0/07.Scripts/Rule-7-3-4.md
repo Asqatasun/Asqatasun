@@ -44,7 +44,7 @@ Does each interface
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

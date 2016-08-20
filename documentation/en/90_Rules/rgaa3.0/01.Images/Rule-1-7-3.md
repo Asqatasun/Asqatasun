@@ -40,7 +40,7 @@ Does each embedded image
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

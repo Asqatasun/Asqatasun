@@ -38,7 +38,7 @@ Does each header cell (<code>th</code>
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

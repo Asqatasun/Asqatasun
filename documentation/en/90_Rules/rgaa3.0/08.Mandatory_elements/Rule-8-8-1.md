@@ -32,7 +32,7 @@ On each Web page, is each
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

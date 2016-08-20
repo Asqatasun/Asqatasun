@@ -38,7 +38,7 @@ Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_E
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

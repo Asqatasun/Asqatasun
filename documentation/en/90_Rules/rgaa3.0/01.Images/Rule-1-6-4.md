@@ -42,7 +42,7 @@ Does each image button (<code>input</code> tag with the attribute
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

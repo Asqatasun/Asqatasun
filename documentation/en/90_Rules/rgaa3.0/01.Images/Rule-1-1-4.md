@@ -30,7 +30,7 @@ Does each area (<code>area</code> tag) of a server-side image map have an equiva
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

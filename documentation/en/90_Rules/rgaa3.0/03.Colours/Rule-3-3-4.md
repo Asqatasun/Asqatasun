@@ -40,7 +40,7 @@ On each Web page, do bold
 
 ### Decision level
 
-**semidecidable**
+**Semi-Decidable**
 
 ## Algorithm
 

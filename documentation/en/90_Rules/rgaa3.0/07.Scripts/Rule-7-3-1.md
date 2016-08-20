@@ -39,7 +39,7 @@ Does each element with an
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

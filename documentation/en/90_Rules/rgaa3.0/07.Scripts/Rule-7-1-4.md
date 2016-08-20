@@ -32,7 +32,7 @@ Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_E
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 

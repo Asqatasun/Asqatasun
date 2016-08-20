@@ -33,7 +33,7 @@ Does each functionality for content insertion
 
 ### Decision level
 
-**Semi-decidable**
+**Semi-Decidable**
 
 ## Algorithm
 
