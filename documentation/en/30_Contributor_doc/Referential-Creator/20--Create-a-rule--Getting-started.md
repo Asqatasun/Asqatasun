@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-Start by [creating your test referential context](How-to-create-your-own-referential.md) by using the referential-creator maven plugin. 
+Start by [creating your test referential context](10--How-to-create-your-own-referential.md) by using the referential-creator maven plugin. 
 
 Once created, let's implement some rules !
 
