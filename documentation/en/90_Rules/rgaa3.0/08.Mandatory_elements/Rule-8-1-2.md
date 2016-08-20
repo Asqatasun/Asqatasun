@@ -33,7 +33,7 @@ For each Web page is the
 
 ### Decision level
 
-**decidable**
+**Decidable**
 
 ## Algorithm
 

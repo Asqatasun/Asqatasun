@@ -40,7 +40,7 @@ For each Web page, does
 
 ### Decision level
 
-**decidable**
+**Decidable**
 
 ## Algorithm
 
