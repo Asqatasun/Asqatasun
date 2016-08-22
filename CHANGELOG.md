@@ -1,5 +1,28 @@
 
 --------------------------------
+Asqatasun 4.x.x, 2016-xx-xx
+---------------------------
+
+Features:
+None
+
+Security:
+None
+
+Bugs:
+None
+
+Configuration:
+None
+
+Documentation:
+None
+
+Upgrade-o-meter (borrowed from folks at Gitlab):
+None
+
+
+--------------------------------
 Asqatasun 4.0.3, 2016-08-22
 --------------------------------
 
