@@ -1,12 +1,12 @@
 
 --------------------------------
-Asqatasun 4.0.3, 2016-08-xx
+Asqatasun 4.0.3, 2016-08-22
 --------------------------------
 
 Features:
-- Referential RGAA 3.0: english translation added (source : https://github.com/DISIC/rgaa_referentiel_en)
-- Docker/single-container: reduced weight from 450MB to 290MB
+- Docker/single-container: reduced weight from 450 MB to 290 MB
 - Asqatasun-Runner: RGAA 3.0 by default, enabled SEO and disabled RGAA 2
+- Referential RGAA 3.0: english translation added (source : https://github.com/DISIC/rgaa_referentiel_en)
 
 Security:
 None
@@ -26,6 +26,7 @@ Documentation:
 
 Upgrade-o-meter (borrowed from folks at Gitlab):
 - no database change, just replace the `.war` file
+
 
 --------------------------------
 Asqatasun 4.0.2, 2016-06-17
@@ -54,6 +55,7 @@ Documentation:
 Upgrade-o-meter (borrowed from folks at Gitlab):
 - no database change, just replace .war
 
+
 --------------------------------
 Asqatasun 4.0.1, 2016-03-18
 --------------------------------
@@ -63,6 +65,7 @@ Security:
 
 Bugs:
 - [#85](https://github.com/Asqatasun/Asqatasun/issues/85): Audit full-site : accept the new gTLDs (eg .jobs, .paris)
+
 
 --------------------------------
 Asqatasun 4.0.0, 2016-03-02
@@ -84,6 +87,7 @@ Bugs:
 - [#43](https://github.com/Asqatasun/Asqatasun/issues/43): Mysql config: add UTF-8 
 to support any type of charset including cyrillic + enhance way to modify Mysql conf
 - [#58](https://github.com/Asqatasun/Asqatasun/issues/58): PDF - clicking on it returns to an error page
+
 
 --------------------------------
 Asqatasun 4.0.0-rc.1, 2016-01-12

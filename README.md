@@ -119,37 +119,32 @@ Create your own tests.
 
  [AGPL v3](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE) 
 
-## Content of this last version (Asqatasun 4.0.2, 2016-06-17)
+## Content of this last version (Asqatasun 4.0.3, 2016-08-22)
 
 ### Features
 
-- Enhanced script `docker/compile_and_build_docker_image.sh`
-
-### Security
-
-- Upgrade Apache Commons FileUpload to v1.3.1 
-- Upgrade Apache httpclient to v4.3.6
+* Docker/single-container: reduced weight from 450 MB to 290 MB
+* Asqatasun-Runner: RGAA 3.0 by default, enabled SEO and disabled RGAA 2
+* Referential RGAA 3.0: english translation added (source : https://github.com/DISIC/rgaa_referentiel_en)
 
 ### Bugs
 
-* [#25](https://github.com/Asqatasun/Asqatasun/issues/25): localhost URLs should not be blocked  
-* [#104](https://github.com/Asqatasun/Asqatasun/issues/104): Rgaa 3 rule 8.9.1 : Changed actual result of rule when fieldset is used without form
-* [#105](https://github.com/Asqatasun/Asqatasun/issues/105): MySQL - Enable `innodb_file_per_table` 
-
-### Configuration
-
-* max-documents for site-audits lowered from 10'000 to 1'000 
-* disabled Rgaa-2 rules
+* [#115 Build failure on project asqatasun-engine with openJDK-8](https://github.com/Asqatasun/Asqatasun/issues/115)
+* [#113 Build failure on the projects webApp and runner with openJDK-8 on Ubuntu 16.04](https://github.com/Asqatasun/Asqatasun/issues/113)
+* [#114 Runner - install/engine folder not present in the tarball](https://github.com/Asqatasun/Asqatasun/issues/114)
+* [#117 Fixed /rules/referential-creator/(...)/pom.vm](https://github.com/Asqatasun/Asqatasun/issues/117)
 
 ### Documentation
 
-- [#88](https://github.com/Asqatasun/Asqatasun/issues/88): DOC Docker - Add tip for Mac OS X and Windows users 
+* Updated runner doc (WIP)
+* Added "the referential creation" + "Create-a-rule" (WIP)
 
 ### Upgrade-o-meter 
 
-- no database change, just replace .war and 
+* no database change, just replace the `.war` file
 
 See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.txt)
+
 
 ### Have Fun
 
