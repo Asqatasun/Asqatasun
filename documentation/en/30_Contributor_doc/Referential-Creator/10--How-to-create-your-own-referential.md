@@ -62,23 +62,24 @@ The first and second columns are for the themes. The first for the theme number,
 Header line with multiple languages : `theme;theme_en;theme_fr;test;test-label_en;test-label_fr`<br/>
 Note that if you have to translate the themes, you must translate the others columns : each language must have a translation for theme, and test-label.
 
-You can see [our CSV example](https://github.com/Asqatasun/Asqatasun/blob/master/rules/rules-creation-demo/src/main/resources/referential-creator-csv-src/referentiel.csv).
+You can see [our CSV example](https://github.com/Asqatasun/Asqatasun/blob/master/rules/rules-creation-demo/src/main/resources/referential-creator-csv-src/referential.csv)
+or [another CSV exemple](https://github.com/Asqatasun/Asqatasun/blob/master/rules/referential-creator/src/main/resources/referential/referential.csv).
 
 ### Generate your referential (from data)
 
-* Go to the referentiel-context-creator project.<br/>
+* Go to the referential-context-creator project.<br/>
 ```sh
 cd Asqatasun/rules/referential-creator/
 ```
 * Edit the pom.xml file and set the properties between the `<properties>` tag. 
- 1. In the `<generator.referentielName>` tag, set the complete name of your referential (i.e. Rgaa 3.0) 
- 1. In the `<generator.referentiel>` tag, set the of your referential name with lowercase letters, a version and without whitespace. (i.e. rgaa3.0)
+ 1. In the `<generator.referentialName>` tag, set the complete name of your referential (i.e. Rgaa 3.0) 
+ 1. In the `<generator.referential>` tag, set the of your referential name with lowercase letters, a version and without whitespace. (i.e. rgaa3.0)
  1. In the `<generator.baseFolder>` tag, set the absolute path where you want to install the referential.
  1. In the `<generator.dataFile>` tag, set the absolute path to your CSV file.
  1. In the `<generator.delimiter>` is optional. Set the character who's delimite each CSV columns. (Default value is `;` character). 
  1. In the `<generator.refDescriptor>` is optional, if you have an web page that describe your referential, set this url between refDescriptor tag.
 
-* Build this project (referentiel-context-creator) :
+* Build this project (referential-context-creator) :
 ```sh
 mvn referential-creator:generate
 ```
