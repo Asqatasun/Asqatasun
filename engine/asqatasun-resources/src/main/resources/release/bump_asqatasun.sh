@@ -138,6 +138,7 @@ if [ "$COMMIT" = true ] ; then
     COMMIT_MESSAGE="Release $TO_VERSION"
     echo 'commiting all files with message : ' $COMMIT_MESSAGE
     find . -name "pom.xml" | xargs git add -u
+    find . -name "pom.vm"  | xargs git add -u
     find . -name "Dockerfile" | xargs git add -u
     git add **/install.sh 
     git add **/asqatasun.conf
