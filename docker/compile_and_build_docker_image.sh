@@ -221,6 +221,6 @@ if ${FTESTS} ; then                  do_functional_testing; fi
 echo "------------------------"
 echo "Image     ---->   ${IMAGE_NAME}:${TAG_NAME}"
 echo "Container ---->   ${CONTAINER_NAME}"
-echo "Log       ---->   docker logs -f ${CONTAINER_NAME}"
+echo "Log       ---->  ${SUDO} docker logs -f ${CONTAINER_NAME}"
 echo "URL       ---->   ${ASQATASUN_URL}"
 

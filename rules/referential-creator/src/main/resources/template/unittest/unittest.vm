@@ -24,7 +24,7 @@ import org.asqatasun.entity.audit.ProcessResult;
 import ${package}.${referentiel.toLowerCase()}.test.${referentiel}RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule ${ruleCode} of the referential ${referentiel}Name.
+ * Unit test class for the implementation of the rule ${ruleCode} of the referential ${referentielName}.
  *
  * @author
  */
@@ -32,6 +32,7 @@ public class ${rule}Test extends ${referentiel}RuleImplementationTestCase {
 
     /**
      * Default constructor
+     * @param testName
      */
     public ${rule}Test (String testName){
         super(testName);

@@ -15,10 +15,10 @@
     <url>http://maven.apache.org</url>
     <!-- Here is what you need to set-uo before launching generation-->
     <properties>
-        <generator.referentielName>Referentiel Name 1.0</generator.referentielName>
-        <generator.referentiel>referentielname1.0</generator.referentiel>
+        <generator.referentielName>Referential Name 1.0</generator.referentielName>
+        <generator.referentiel>ReferentialName1.0</generator.referentiel>
         <generator.baseFolder>/home/$user/Asqatasun/rules/</generator.baseFolder>
-        <generator.dataFile>/home/$user/referentiel.csv</generator.dataFile>
+        <generator.dataFile>/home/$user/referential.csv</generator.dataFile>
         <generator.delimiter>ø</generator.delimiter>
         <generator.refdescriptor>http://www.example.com/refential-descriptor.html</generator.refdescriptor>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

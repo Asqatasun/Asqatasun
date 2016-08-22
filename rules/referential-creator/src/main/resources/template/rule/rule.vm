@@ -22,11 +22,11 @@ package $package.$referentiel.toLowerCase();
 import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
- * Implementation of the rule $ruleCode of the referential $referentielName.
+ * Implementation of the rule $ruleCode of the referential $referentielName
  *
 #set ($empty = "empty")
 #if ( $refDescriptor != $empty )
- * @see <a href="${refDescriptor}#test-$ruleCode"> $ruleCode rule specification</a>
+ * @see <a href="${refDescriptor}#test-$ruleCode">$ruleCode rule specification</a>
  *
 #end
  * @author
