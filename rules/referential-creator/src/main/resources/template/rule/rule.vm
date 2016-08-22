@@ -17,12 +17,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package $package.$referentiel.toLowerCase();
+package $package.$referential.toLowerCase();
 
 import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
- * Implementation of the rule $ruleCode of the referential $referentielName
+ * Implementation of the rule $ruleCode of the referential $referentialName
  *
 #set ($empty = "empty")
 #if ( $refDescriptor != $empty )

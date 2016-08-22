@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.referentiel.creator;
+package org.asqatasun.referential.creator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,8 +46,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.asqatasun.referentiel.creator.exception.InvalidParameterException;
-import org.asqatasun.referentiel.creator.exception.I18NLanguageNotFoundException;
+import org.asqatasun.referential.creator.exception.InvalidParameterException;
+import org.asqatasun.referential.creator.exception.I18NLanguageNotFoundException;
 
 /**
  * @goal generate
@@ -138,11 +138,11 @@ public class CodeGeneratorMojo extends AbstractMojo {
     /**
      * @parameter
      */
-    String referentiel;
+    String referential;
     /**
      * @parameter
      */
-    String referentielLabel;
+    String referentialLabel;
     /**
      * @parameter default-value="empty"
      */
@@ -347,7 +347,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
         // Create a context and add data to the templateRule placeholder
         VelocityContext context = new VelocityContext();
         // Fetch templateRule into a StringWriter
-        FileGenerator fg = new FileGenerator(referentiel, referentielLabel,
+        FileGenerator fg = new FileGenerator(referential, referentialLabel,
                 destinationFolder, refDescriptor, isCriterionPresent);
         fg.createI18NFiles(langSet);
 
@@ -364,7 +364,7 @@ public class CodeGeneratorMojo extends AbstractMojo {
             if (!isCriterionPresent) {
                 test = test.concat("-1");
             }
-            context = fg.getContextRuleClassFile(referentiel, PACKAGE_NAME, test, testLabelDefault, context);
+            context = fg.getContextRuleClassFile(referential, PACKAGE_NAME, test, testLabelDefault, context);
             fg.writeFileCodeGenerate(context, ruleTemplate, getClassNameFromCsvColumn(record));
             fg.writeUnitTestGenerate(context, unitTestTemplate, testLabelDefault, getClassNameFromCsvColumn(record));
             String[] testsCasesState = {"Passed", "Failed", "NMI", "NA"};
@@ -475,8 +475,8 @@ public class CodeGeneratorMojo extends AbstractMojo {
                 || String.valueOf(delimiter).isEmpty()
                 || dataFile == null
                 || StringUtils.isBlank(destinationFolder)
-                || StringUtils.isBlank(referentiel)
-                || StringUtils.isBlank(referentielLabel)) {
+                || StringUtils.isBlank(referential)
+                || StringUtils.isBlank(referentialLabel)) {
             throw new InvalidParameterException("One or several parameter(s) set to the pom file is/are invalid(s)");
         }
     }

@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.referentiel.creator;
+package org.asqatasun.referential.creator;
 
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -33,10 +33,10 @@ import java.util.Set;
 public class VelocityParametersContext {
 
     private List<String> classRule = new LinkedList();
-    private String referentielLabel;
+    private String referentialLabel;
     private String classString;
     private String testCode;
-    private String referentiel;
+    private String referential;
     private String packageString;
     private String destinationFolder;
     private String refDescriptor;
@@ -74,20 +74,20 @@ public class VelocityParametersContext {
         this.packageString = packageString;
     }
 
-    public String getReferentiel() {
-        return referentiel;
+    public String getReferential() {
+        return referential;
     }
 
-    public void setReferentiel(String referentiel) {
-        this.referentiel = referentiel;
+    public void setReferential(String referential) {
+        this.referential = referential;
     }
 
-    public String getReferentielLabel() {
-        return referentielLabel;
+    public String getReferentialLabel() {
+        return referentialLabel;
     }
 
-    public void setReferentielLabel(String referentielLabel) {
-        this.referentielLabel = referentielLabel;
+    public void setReferentialLabel(String referentialLabel) {
+        this.referentialLabel = referentialLabel;
     }
 
     public List<String> getClassRule() {

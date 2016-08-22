@@ -9,10 +9,10 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <!-- ${referentiel} select elements -->
-    <bean id="${referentiel.toLowerCase()}BronzeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="${referentiel};LEVEL_1"/>
-        <property name="i18nKey" value="${referentiel}-LEVEL_1"/>
+    <!-- ${referential} select elements -->
+    <bean id="${referential.toLowerCase()}BronzeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="${referential};LEVEL_1"/>
+        <property name="i18nKey" value="${referential}-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--    Default values
@@ -20,9 +20,9 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="${referentiel.toLowerCase()}SilverSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="${referentiel};LEVEL_2"/>
-        <property name="i18nKey" value="${referentiel}-LEVEL_2"/>
+    <bean id="${referential.toLowerCase()}SilverSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="${referential};LEVEL_2"/>
+        <property name="i18nKey" value="${referential}-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--Default values-->
@@ -30,9 +30,9 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <bean id="${referentiel.toLowerCase()}GoldSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
-        <property name="value" value="${referentiel};LEVEL_3"/>
-        <property name="i18nKey" value="${referentiel}-LEVEL_3"/>
+    <bean id="${referential.toLowerCase()}GoldSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+        <property name="value" value="${referential};LEVEL_3"/>
+        <property name="i18nKey" value="${referential}-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>
         <property name="defaultCode" value="DEFAULT_LEVEL"/>
         <!--Default values-->
@@ -40,7 +40,7 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <!-- Add ${referentiel.toLowerCase()} elements to the audit form field builder  --> 
+    <!-- Add ${referential.toLowerCase()} elements to the audit form field builder  -->
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetObject">
             <ref bean="levelSelectFormFieldBuilder"/>
@@ -50,11 +50,11 @@
         </property>
         <property name="arguments">
             <list>
-                <value>${referentiel}</value>
+                <value>${referential}</value>
                 <list>
-                    <ref bean="${referentiel.toLowerCase()}BronzeSelectElementBuilder"/>
-                    <ref bean="${referentiel.toLowerCase()}SilverSelectElementBuilder"/>
-                    <ref bean="${referentiel.toLowerCase()}GoldSelectElementBuilder"/>
+                    <ref bean="${referential.toLowerCase()}BronzeSelectElementBuilder"/>
+                    <ref bean="${referential.toLowerCase()}SilverSelectElementBuilder"/>
+                    <ref bean="${referential.toLowerCase()}GoldSelectElementBuilder"/>
                 </list>
             </list>
         </property>

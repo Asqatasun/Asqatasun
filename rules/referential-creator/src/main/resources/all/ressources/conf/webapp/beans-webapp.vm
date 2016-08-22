@@ -4,9 +4,9 @@
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <!-- ${referentiel.toLowerCase()} imports -->
-    <import resource="mvc/form/tgol-beans-${referentiel.toLowerCase()}-audit-result-console-form.xml"/>
-    <import resource="mvc/form/tgol-beans-${referentiel.toLowerCase()}-audit-set-up-form.xml"/>
-    <import resource="export/tgol-beans-${referentiel.toLowerCase()}-expression.xml"/>
+    <!-- ${referential.toLowerCase()} imports -->
+    <import resource="mvc/form/tgol-beans-${referential.toLowerCase()}-audit-result-console-form.xml"/>
+    <import resource="mvc/form/tgol-beans-${referential.toLowerCase()}-audit-set-up-form.xml"/>
+    <import resource="export/tgol-beans-${referential.toLowerCase()}-expression.xml"/>
 
 </beans>

@@ -15,8 +15,8 @@
     <url>http://maven.apache.org</url>
     <!-- Here is what you need to set-uo before launching generation-->
     <properties>
-        <generator.referentielName>Referential Name 1.0</generator.referentielName>
-        <generator.referentiel>ReferentialName1.0</generator.referentiel>
+        <generator.referentialName>Referential Name 1.0</generator.referentialName>
+        <generator.referential>ReferentialName1.0</generator.referential>
         <generator.baseFolder>/home/$user/Asqatasun/rules/</generator.baseFolder>
         <generator.dataFile>/home/$user/referential.csv</generator.dataFile>
         <generator.delimiter>ø</generator.delimiter>
@@ -39,11 +39,11 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <destinationFolder>${generator.baseFolder}/${generator.referentiel}</destinationFolder>
+                    <destinationFolder>${generator.baseFolder}/${generator.referential}</destinationFolder>
                     <dataFile>${generator.dataFile}</dataFile>
                     <delimiter>${generator.delimiter}</delimiter>
-                    <referentiel>${generator.referentiel}</referentiel>
-                    <referentielLabel>${generator.referentielName}</referentielLabel>
+                    <referential>${generator.referential}</referential>
+                    <referentialLabel>${generator.referentialName}</referentialLabel>
                     <refDescriptor>${generator.refdescriptor}</refDescriptor>
                 </configuration>
             </plugin>

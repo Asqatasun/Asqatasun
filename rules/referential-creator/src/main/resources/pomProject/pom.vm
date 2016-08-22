@@ -6,8 +6,8 @@
         <artifactId>rules</artifactId>
         <version>4.1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>asqatasun-${referentielFolder.toLowerCase()}</artifactId>
-    <name>${referentielFolder.toLowerCase()}</name>
+    <artifactId>asqatasun-${referentialFolder.toLowerCase()}</artifactId>
+    <name>${referentialFolder.toLowerCase()}</name>
     <build>
         <plugins>
             <plugin>
@@ -34,7 +34,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>${referentielFolder.toLowerCase()}-${rulesVersion}</finalName>
+        <finalName>${referentialFolder.toLowerCase()}-${rulesVersion}</finalName>
     </build>
     <dependencies>
         <dependency>

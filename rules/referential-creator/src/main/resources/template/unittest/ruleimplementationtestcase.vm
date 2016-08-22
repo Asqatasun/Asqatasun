@@ -17,7 +17,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package ${package}.${referentiel.toLowerCase()}.test;
+package ${package}.${referential.toLowerCase()}.test;
 
 import org.asqatasun.rules.test.AbstractRuleImplementationTestCase;
 
@@ -25,21 +25,21 @@ import org.asqatasun.rules.test.AbstractRuleImplementationTestCase;
  *
  * @author
  */
-public abstract class ${referentiel}RuleImplementationTestCase extends AbstractRuleImplementationTestCase {
+public abstract class ${referential}RuleImplementationTestCase extends AbstractRuleImplementationTestCase {
 
     private static final String TESTCASE_FILE_PATH = "src/test/resources/testcases/";
     private static final String INPUT_FILE_DATA_NAME = "src/test/resources/dataSets/emptyFlatXmlDataSet.xml";
 
-    public ${referentiel}RuleImplementationTestCase(String testName) {
+    public ${referential}RuleImplementationTestCase(String testName) {
         super(testName, INPUT_FILE_DATA_NAME, TESTCASE_FILE_PATH);
     }
     
-    public ${referentiel}RuleImplementationTestCase(String testName, String inputFileDataName) {
+    public ${referential}RuleImplementationTestCase(String testName, String inputFileDataName) {
         super(testName, inputFileDataName, TESTCASE_FILE_PATH);
     }
 
     @Override
     protected String getRefKey() {
-        return "${referentiel.toLowerCase()}";
+        return "${referential.toLowerCase()}";
     }
 }

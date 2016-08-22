@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.referentiel.creator;
+package org.asqatasun.referential.creator;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,15 +43,15 @@ public class FileGenerator {
     private final VelocityParametersContext vpc;
     private final boolean isCriterionPresent;
 
-    public FileGenerator(String referentiel,
-            String referentielLabel,
+    public FileGenerator(String referential,
+            String referentialLabel,
             String destinationFolder,
             String refDescriptor,
             boolean isCriterionPresent) {
         vpc = new VelocityParametersContext();
-        vpc.setReferentiel(String.valueOf(referentiel.charAt(0)).toUpperCase()
-                + referentiel.substring(1));
-        vpc.setReferentielLabel(referentielLabel);
+        vpc.setReferential(String.valueOf(referential.charAt(0)).toUpperCase()
+                + referential.substring(1));
+        vpc.setReferentialLabel(referentialLabel);
         vpc.setDestinationFolder(destinationFolder);
         vpc.setRefDescriptor(refDescriptor);
         this.isCriterionPresent = isCriterionPresent;
@@ -60,7 +60,7 @@ public class FileGenerator {
     protected File getSqlFile() {
         return new File(vpc.getDestinationFolder()
                 + "/src/main/resources/sql/"
-                + vpc.getReferentiel().toLowerCase()
+                + vpc.getReferential().toLowerCase()
                 + "-insert.sql");
     }
 
@@ -68,7 +68,7 @@ public class FileGenerator {
         return new File(vpc.getDestinationFolder()
                 + "/src/main/resources/i18n/"
                 + category + "-"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "-I18N.properties");
     }
 
@@ -76,12 +76,12 @@ public class FileGenerator {
         return new File(vpc.getDestinationFolder()
                 + "/src/main/resources/i18n/"
                 + category + "-"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "-I18N_" + lang.toLowerCase() + ".properties");
     }
 
     public VelocityContext getContextRuleClassFile(
-            String referentielLower, String packageName, String test,
+            String referentialLower, String packageName, String test,
             String testLabel, VelocityContext context) throws IOException {
         String[] testCodeArray = test.split("-");
         vpc.getThemes().add(Integer.valueOf(testCodeArray[0]));
@@ -89,13 +89,13 @@ public class FileGenerator {
         vpc.setTestCode(test);
         vpc.setPackageString(packageName);
         String[] twoDigitTestCode = normalize2Digits(testCodeArray);
-        vpc.setClassString(vpc.getReferentiel().replace(".", "") + "Rule"
+        vpc.setClassString(vpc.getReferential().replace(".", "") + "Rule"
                 + twoDigitTestCode[0] + twoDigitTestCode[1] + twoDigitTestCode[2]);
-        context.put("referentiel", vpc.getReferentiel().replace(".", ""));
-        context.put("referentielFolder", vpc.getReferentiel());
+        context.put("referential", vpc.getReferential().replace(".", ""));
+        context.put("referentialFolder", vpc.getReferential());
         context.put("rule", vpc.getClassString());
         context.put("ruleCode", vpc.getTestCode());
-        context.put("referentielName", vpc.getReferentielLabel());
+        context.put("referentialName", vpc.getReferentialLabel());
         context.put("testLabel", testLabel);
         context.put("package", vpc.getPackageString());
         context.put("refDescriptor", vpc.getRefDescriptor());
@@ -131,7 +131,7 @@ public class FileGenerator {
         File classFile = new File(vpc.getDestinationFolder()
                 + "/src/main/java/"
                 + vpc.getPackageString().replace('.', '/') + "/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase() + "/"
+                + vpc.getReferential().replace(".", "").toLowerCase() + "/"
                 + vpc.getClassString() + ".java");
         FileUtils.writeStringToFile(classFile, wr.toString());
     }
@@ -154,8 +154,8 @@ public class FileGenerator {
         temp.merge(context, wr);
         File testCaseFile = new File(vpc.getDestinationFolder()
                 + "/src/test/resources/testcases/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase() + "/"
-                + vpc.getClassString() + "/" + vpc.getReferentiel().replace(".", "")
+                + vpc.getReferential().replace(".", "").toLowerCase() + "/"
+                + vpc.getClassString() + "/" + vpc.getReferential().replace(".", "")
                 + ".Test." + vpc.getTestCode().replace('-', '.')
                 + "-" + testCaseNumber + context.get("state") + "-01.html");
         FileUtils.writeStringToFile(testCaseFile, wr.toString());
@@ -172,7 +172,7 @@ public class FileGenerator {
         File testCaseFile = new File(vpc.getDestinationFolder()
                 + "/src/test/java/"
                 + vpc.getPackageString().replace('.', '/') + "/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase() + "/"
+                + vpc.getReferential().replace(".", "").toLowerCase() + "/"
                 + vpc.getClassString() + "Test.java");
         FileUtils.writeStringToFile(testCaseFile, wr.toString());
     }
@@ -184,8 +184,8 @@ public class FileGenerator {
         File testCaseFile = new File(vpc.getDestinationFolder()
                 + "/src/test/java/"
                 + vpc.getPackageString().replace('.', '/') + "/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase() + "/test/"
-                + vpc.getReferentiel().replace(".", "")
+                + vpc.getReferential().replace(".", "").toLowerCase() + "/test/"
+                + vpc.getReferential().replace(".", "")
                 + "RuleImplementationTestCase.java");
         FileUtils.writeStringToFile(testCaseFile, wr.toString());
     }
@@ -205,7 +205,7 @@ public class FileGenerator {
         }
         String desc = cleanI18NString(categoryMap.values().iterator().next().toString());
         StringBuilder sb = new StringBuilder();
-        sb.append(vpc.getReferentiel().replace(".", ""));
+        sb.append(vpc.getReferential().replace(".", ""));
         sb.append("-").append(code).append("=").append(desc).append("\n");
         if (category.equals("rule")) {
             writeTestUrlI18NFile(vpc.getRefDescriptor(), code, sb);
@@ -229,7 +229,7 @@ public class FileGenerator {
     }
 
     private StringBuilder writeTestUrlI18NFile(String refDescriptor, Object code, StringBuilder sb) {
-        sb.append(vpc.getReferentiel().replace(".", ""));
+        sb.append(vpc.getReferential().replace(".", ""));
         sb.append("-").append(code).append("-url=");
         if (!refDescriptor.equalsIgnoreCase("empty")) {
             sb.append(refDescriptor).append("#test-").append(code);
@@ -242,11 +242,11 @@ public class FileGenerator {
 
     private void writeI18NReferentialFile(String lang, String defaultLanguage, String category) throws IOException {
         StringBuilder sb = new StringBuilder();
-        sb.append(vpc.getReferentiel().replace(".", "")).append("=").append(vpc.getReferentielLabel()).append("\n");
-        sb.append(vpc.getReferentiel().replace(".", "")).append("-optgroup=").append(vpc.getReferentielLabel()).append("\n");
-        sb.append(vpc.getReferentiel().replace(".", "")).append("-LEVEL_1=A\n");
-        sb.append(vpc.getReferentiel().replace(".", "")).append("-LEVEL_2=AA\n");
-        sb.append(vpc.getReferentiel().replace(".", "")).append("-LEVEL_3=AAA");
+        sb.append(vpc.getReferential().replace(".", "")).append("=").append(vpc.getReferentialLabel()).append("\n");
+        sb.append(vpc.getReferential().replace(".", "")).append("-optgroup=").append(vpc.getReferentialLabel()).append("\n");
+        sb.append(vpc.getReferential().replace(".", "")).append("-LEVEL_1=A\n");
+        sb.append(vpc.getReferential().replace(".", "")).append("-LEVEL_2=AA\n");
+        sb.append(vpc.getReferential().replace(".", "")).append("-LEVEL_3=AAA");
         if (!FileUtils.readFileToString(getI18nFile(lang, category), UTF_8).contains(sb.toString())) {
             FileUtils.writeStringToFile(FileUtils.getFile(getI18nFile(lang, category)), sb.toString(), UTF_8, true);
         }
@@ -294,9 +294,9 @@ public class FileGenerator {
         temp.merge(context, wr);
         File beansWebappFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "/web-app/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "-beans-webapp.xml");
         FileUtils.writeStringToFile(beansWebappFile, wr.toString());
     }
@@ -307,9 +307,9 @@ public class FileGenerator {
         temp.merge(context, wr);
         File beansWebappFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "/web-app/export/" + "tgol-beans-"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "-expression.xml");
         FileUtils.writeStringToFile(beansWebappFile, wr.toString());
     }
@@ -321,9 +321,9 @@ public class FileGenerator {
         temp.merge(context, wr);
         File beansAuditResultConsoleFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "/web-app/mvc/form/" + "tgol-beans-"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "-audit-result-console-form.xml");
         FileUtils.writeStringToFile(beansAuditResultConsoleFile, wr.toString());
     }
@@ -334,9 +334,9 @@ public class FileGenerator {
         temp.merge(context, wr);
         File beansAuditResultConsoleFile = new File(vpc.getDestinationFolder()
                 + "/src/main/resources/conf/context/"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "/web-app/mvc/form/" + "tgol-beans-"
-                + vpc.getReferentiel().replace(".", "").toLowerCase()
+                + vpc.getReferential().replace(".", "").toLowerCase()
                 + "-audit-set-up-form.xml");
         FileUtils.writeStringToFile(beansAuditResultConsoleFile, wr.toString());
     }
@@ -345,9 +345,9 @@ public class FileGenerator {
         FileUtils.touch(getSqlFile());
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `REFERENCE` (`Cd_Reference`, `Description`, `Label`, `Url`, `Rank`, `Id_Default_Level`) VALUES\n");
-        strb.append("(\'").append(vpc.getReferentiel().replace(".", "")).append("\', NULL, \'").append(vpc.getReferentielLabel()).append("\', \'\', 2000, 1);\n\n");
+        strb.append("(\'").append(vpc.getReferential().replace(".", "")).append("\', NULL, \'").append(vpc.getReferentialLabel()).append("\', \'\', 2000, 1);\n\n");
         strb.append("INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES\n");
-        strb.append("(\'").append(vpc.getReferentiel().replace(".", "")).append("\', \'").append(vpc.getReferentielLabel()).append("\');\n\n");
+        strb.append("(\'").append(vpc.getReferential().replace(".", "")).append("\', \'").append(vpc.getReferentialLabel()).append("\');\n\n");
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
@@ -375,7 +375,7 @@ public class FileGenerator {
         for (int i = 0; i < criteres.size(); i++) {
             strb.append("(\'").append(criteres.get(i).split("=")[0]);
             strb.append("\', \'").append(criteres.get(i).split("=")[1].replace("\'", ""));
-            strb.append("\', \'").append(criteres.get(i).split("=")[0].substring(vpc.getReferentiel().length()).replace("-", "."));
+            strb.append("\', \'").append(criteres.get(i).split("=")[0].substring(vpc.getReferential().length()).replace("-", "."));
             strb.append("\', \'\', ");
             strb.append(String.valueOf(i + 1)).append(")");
             if (i < criteres.size() - 1) {
@@ -385,9 +385,9 @@ public class FileGenerator {
             }
         }
         strb.append("UPDATE `CRITERION` SET `Reference_Id_Reference` = (SELECT `Id_Reference` FROM `REFERENCE` WHERE `Cd_Reference` LIKE \'");
-        strb.append(vpc.getReferentiel().replace(".", ""));
+        strb.append(vpc.getReferential().replace(".", ""));
         strb.append("\') WHERE `Cd_Criterion` LIKE \'");
-        strb.append(vpc.getReferentiel().replace(".", "")).append("-%\';\n");
+        strb.append(vpc.getReferential().replace(".", "")).append("-%\';\n");
         for (int i = 0; i < themesList.size(); i++) {
             strb.append("UPDATE `CRITERION` SET `Theme_Id_Theme` = (SELECT `Id_Theme` FROM `THEME` WHERE `Cd_Theme` LIKE \'");
             strb.append(themesList.get(i).split("=")[0]);
@@ -403,9 +403,9 @@ public class FileGenerator {
     public void createSqlParameters() throws IOException {
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES\n");
-        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "")).append(";LEVEL_1\', b\'0\'),\n");
-        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "")).append(";LEVEL_2\', b\'0\'),\n");
-        strb.append("(5, \'").append(vpc.getReferentiel().replace(".", "")).append(";LEVEL_3\', b\'0\');\n\n");
+        strb.append("(5, \'").append(vpc.getReferential().replace(".", "")).append(";LEVEL_1\', b\'0\'),\n");
+        strb.append("(5, \'").append(vpc.getReferential().replace(".", "")).append(";LEVEL_2\', b\'0\'),\n");
+        strb.append("(5, \'").append(vpc.getReferential().replace(".", "")).append(";LEVEL_3\', b\'0\');\n\n");
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }
 
@@ -417,16 +417,16 @@ public class FileGenerator {
         strb.append("INSERT IGNORE INTO `TEST` (`Cd_Test`, `Description`, `Label`, `Rank`, `Weight`, `Rule_Archive_Name`, `Rule_Class_Name`, `Id_Decision_Level`, `Id_Level`, `Id_Scope`, `Rule_Design_Url`, `No_Process`) VALUES\n");
         for (int i = 0; i < tests.size(); i += 2) {
             strb.append("(\'").append(tests.get(i).split("=")[0]).append("\', \'\', \'");
-            String tmpLabel = tests.get(i).substring(vpc.getReferentiel().replace(".", "").length() + 1).split("=")[0].replace("-", ".");
+            String tmpLabel = tests.get(i).substring(vpc.getReferential().replace(".", "").length() + 1).split("=")[0].replace("-", ".");
             if (!isCriterionPresent) {
                 strb.append(tmpLabel.substring(0, tmpLabel.length() - 2));
             } else {
                 strb.append(tmpLabel);
             }
             strb.append("\', ").append(String.valueOf(i - (i / 2) + 1)).append(", ").append("\'1.0\', \'");
-            strb.append(vpc.getReferentiel().replace(".", "").replace(" ", "").toLowerCase()).append("\', \'");
+            strb.append(vpc.getReferential().replace(".", "").replace(" ", "").toLowerCase()).append("\', \'");
             strb.append(vpc.getPackageString()).append('.');
-            strb.append(vpc.getReferentiel().replace(".", "").toLowerCase()).append(".");
+            strb.append(vpc.getReferential().replace(".", "").toLowerCase()).append(".");
             strb.append(String.valueOf(vpc.getClassRule().get(i - (i / 2)))).append("\', ");
             strb.append("NULL, ").append(getLevelColum(levelColum.get(i - (i / 2))));
             strb.append(", ").append(scopeColum.get(i - (i / 2)));
