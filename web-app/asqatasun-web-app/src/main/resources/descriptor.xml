@@ -11,7 +11,7 @@
             <directory>${basedir}/../../</directory>
             <includes>
                 <include>README.md</include>
-                <include>CHANGELOG.txt</include>
+                <include>CHANGELOG.md</include>
                 <include>LICENSE</include>
             </includes>
             <fileMode>644</fileMode>

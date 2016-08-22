@@ -2,7 +2,7 @@
 
 This is the documentation for releasing a new version for Asqatasun. As an end user, you won't need it, it is just for developers.
 
-## 1) Prepare CHANGELOG.txt:
+## 1) Prepare CHANGELOG.md:
 
 * Add an entry for this release
 * In a cumulative way, add all the data of previous betas and RCs 

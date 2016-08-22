@@ -143,7 +143,7 @@ Create your own tests.
 
 * no database change, just replace the `.war` file
 
-See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.txt)
+See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.md)
 
 
 ### Have Fun

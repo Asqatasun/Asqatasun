@@ -137,9 +137,9 @@ Tanaguru 3.0.5, 2015-03-16
 --------------------------
 Bugs:
 
-- [#tg107](https://github.com/Tanaguru/Tanaguru/issues/107) : Provide a way to set-up proxy credentials
-- [#tg105](https://github.com/Tanaguru/Tanaguru/issues/105) : Set "esapiPropertyValue" property of tokenManager bean to use the system property confDir value instead of hard-coded value
-- [#tg102](https://github.com/Tanaguru/Tanaguru/issues/102) : Assisted Audit : Complete action is ineffective
+- #tg-github-107 : Provide a way to set-up proxy credentials
+- #tg-github-105 : Set "esapiPropertyValue" property of tokenManager bean to use the system property confDir value instead of hard-coded value
+- #tg-github-102 : Assisted Audit : Complete action is ineffective
 
 Features : 
 
@@ -152,8 +152,8 @@ Tanaguru 3.0.4, 2015-02-12
 --------------------------
 Bugs:
 
-- [#tg95](https://github.com/Tanaguru/Tanaguru/issues/95) : Provide mechanism to set the size of the firefox screen when loading the page
-- [#tg93](https://github.com/Tanaguru/Tanaguru/issues/93) : CLI install instructions broken 
+- #tg-github-95 : Provide mechanism to set the size of the firefox screen when loading the page
+- #tg-github-93 : CLI install instructions broken 
 
 
 Features :
@@ -170,7 +170,7 @@ Tanaguru 3.0.3, 2014-07-06
 --------------------------
 Bugs:
 
-- [#tg86](https://github.com/Tanaguru/Tanaguru/issues/86) : AW22 8.8.1 Case sensitivity of lang definition
+- #tg-github-86 : AW22 8.8.1 Case sensitivity of lang definition
 
 Features :
 
@@ -186,16 +186,16 @@ Features :
 Tanaguru 3.0.2, 2014-05-16
 --------------------------
 Bugs:
-#tg71 : Crawl parameters: included URL pattern is not shown in audit details (https://github.com/Tanaguru/Tanaguru/issues/71)
+- #tg71 : Crawl parameters: included URL pattern is not shown in audit details 
 
 Features :
-#tg74 : Top 5 invalid tests: add level of test (https://github.com/Tanaguru/Tanaguru/issues/73)
-#tg73 : Add link to contrast finder (https://github.com/Tanaguru/Tanaguru/issues/73)
-#tg68 : List of pages invalidating a given test: enhance links (https://github.com/Tanaguru/Tanaguru/issues/68) 
-#tg67 : List of pages invalidating a given test: add test label (https://github.com/Tanaguru/Tanaguru/issues/67)
-#tg66 : Fix weighted formula (https://github.com/Tanaguru/Tanaguru/issues/67)
-#tg65 : Add UnicityChecker (https://github.com/Tanaguru/Tanaguru/issues/65) 
-#tg64 : Number of "pages tested" is not the good one (https://github.com/Tanaguru/Tanaguru/issues/64)
+- #tg74 : Top 5 invalid tests: add level of test 
+- #tg73 : Add link to contrast finder 
+- #tg68 : List of pages invalidating a given test: enhance links  
+- #tg67 : List of pages invalidating a given test: add test label 
+- #tg66 : Fix weighted formula 
+- #tg65 : Add UnicityChecker  
+- #tg64 : Number of "pages tested" is not the good one 
 Manage levels more generically (level 1,2,3) and delegate the naming to the referential i18n project
 
 --------------------------
@@ -212,32 +212,32 @@ Features :
 Tanaguru 3.0.0, 2014-02-19
 --------------------------
 Bugs :
-#tg47 : The language detection tests return bad results for uppercase submitted text (https://github.com/Tanaguru/Tanaguru/issues/47)
+- #tg47 : The language detection tests return bad results for uppercase submitted text 
 
 Features : 
 - Rgaa 2.2 referential full supported
 - Postgresql management (creation and insertion scripts)
 - Crawl optimisations (deal with canonical, improve fetch counting, improve fetch of testable data)
-#tg50 : Provide a way to set-up whether the cookies have to be considered while crawling (https://github.com/Tanaguru/Tanaguru/issues/50)
-#tg49 : [SEO 6.4.1] For a given title value, sort URLs (https://github.com/Tanaguru/Tanaguru/issues/49)
-#tg46 : Override default user agent used by apache library to test URL before launching effectively the audit (https://github.com/Tanaguru/Tanaguru/issues/46)
-#tg43 : Disable the load of Css content for audit of SEO type (https://github.com/Tanaguru/Tanaguru/issues/43)
-#tg37 : Mail server is not configurable (https://github.com/Tanaguru/Tanaguru/issues/37)
+- #tg50 : Provide a way to set-up whether the cookies have to be considered while crawling 
+- #tg49 : [SEO 6.4.1] For a given title value, sort URLs 
+- #tg46 : Override default user agent used by apache library to test URL before launching effectively the audit 
+- #tg43 : Disable the load of Css content for audit of SEO type 
+- #tg37 : Mail server is not configurable 
 
 --------------------------
 Tanaguru 3.0.0-beta9, 2014-01-17
 --------------------------
 Bugs :
-#tg637 : Tanaguru rejects pages with the time type "application/xhtml+xml" on site audit (https://dev.tanaguru.org/redmine/issues/637)
+- #tg637 : Tanaguru rejects pages with the time type "application/xhtml+xml" on site audit 
 
 Features : 
-#tg638 : Crawler : the pages that defines a link tag with the rel attribute equals to canonical must be excluded from the crawl (https://dev.tanaguru.org/redmine/issues/638)
+- #tg638 : Crawler : the pages that defines a link tag with the rel attribute equals to canonical must be excluded from the crawl 
 
 --------------------------
 Tanaguru 3.0.0-beta8, 2013-12-18
 --------------------------
 Bugs : 
-#tg636 : Clean-up step at the end of audit may cause deadlock on CONTENT table (https://dev.tanaguru.org/redmine/issues/636)
+- #tg636 : Clean-up step at the end of audit may cause deadlock on CONTENT table 
 
 --------------------------
 Tanaguru 3.0.0-beta7, 2013-12-11
@@ -271,13 +271,13 @@ SEO referential :
 Tanaguru 3.0.0-beta5, 2013-10-21
 --------------------------
 Features :
-#tg634 : Installation script (https://dev.tanaguru.org/redmine/issues/634)
-#tg633 : Refactor js script that extract colors to only use native Javascript (https://dev.tanaguru.org/redmine/issues/633)
-#tg631 : Clean-up maven configuration (https://dev.tanaguru.org/redmine/issues/631)
+- #tg634 : Installation script 
+- #tg633 : Refactor js script that extract colors to only use native Javascript 
+- #tg631 : Clean-up maven configuration 
 
 Bugs : 
-#tg632 : Css adaptation : catch exception when trying to retrieve file as external resource (https://dev.tanaguru.org/redmine/issues/632)
-#tg630 : Encoding issue with filled-in URL (https://dev.tanaguru.org/redmine/issues/630) 
+- #tg632 : Css adaptation : catch exception when trying to retrieve file as external resource 
+- #tg630 : Encoding issue with filled-in URL  
 
 --------------------------
 Tanaguru 3.0.0-beta4, 2013-10-09
@@ -290,7 +290,7 @@ Improvment of UI
 Tanaguru 3.0.0-beta3, 2013-08-02
 --------------------------
 Bugs:
-#tg596: Only consider pages with Http status code equals to 200 in the Top 10 of invalid URLs tables of the synthesis page (https://dev.tanaguru.org/redmine/issues/595)
+- #tg596: Only consider pages with Http status code equals to 200 in the Top 10 of invalid URLs tables of the synthesis page 
 
 --------------------------
 Tanaguru 3.0.0-beta2, 2013-06-04
@@ -298,126 +298,126 @@ Tanaguru 3.0.0-beta2, 2013-06-04
 Bugs:
 
 Features:
-#tg595 : 	Management of Krash audits (https://dev.tanaguru.org/redmine/issues/595)
-#tg593 :	Link the act entity to the audit instead of the webresource (https://dev.tanaguru.org/redmine/issues/593)
-#tg592 :	Embed a java library to highlight source code instead of using geshi (https://dev.tanaguru.org/redmine/issues/592)
-#tg591 :  Upgrade apache commons libraries (https://dev.tanaguru.org/redmine/issues/591)
+- #tg595 : 	Management of Krash audits 
+- #tg593 :	Link the act entity to the audit instead of the webresource 
+- #tg592 :	Embed a java library to highlight source code instead of using geshi 
+- #tg591 :  Upgrade apache commons libraries 
 
 --------------------------
 Tanaguru 3.0.0-beta1, 2013-04-05
 --------------------------
 
 Bugs : 
-#tg538 : The sort contract by mark doesn't work in the contract view (https://dev.tanaguru.org/redmine/issues/538)
+- #tg538 : The sort contract by mark doesn't work in the contract view 
 
 Features:
-#tg590 : Provide a self-structured csv entry that handles ProcessRemarks info and Evidence Elements data (https://dev.tanaguru.org/redmine/issues/590)
-#tg583 : Use css-phloc as css adapter and parser (https://dev.tanaguru.org/redmine/issues/583)
-#tg582 : Use jsoup as html adapter (https://dev.tanaguru.org/redmine/issues/582)
-#tg581 : Create sebuilder-interpreter-tool subproject based on sebuilder-interpreter api
-#tg580 : Upgrade to Heritrix 3.1.0 version
-#tg579 : Clean-up dependencies
-#tg552 : Clean-up SSPHandler and DOMHandler to remove unused primitives
-#tg551 : Provide a mechanism to avoid to launch tests that return NOT_TESTED as result [OPTIMIZATION]
-#tg550 : Improve ergonomy of audit result pages
-#tg549 : Compute criterion results while analysing
-#tg548 : Introduce the criterionStatistics entity
-#tg547 : Add an audit result view with criterion results
-#tg534 : Button "audit again"
-#tg283 : Separate NMI from Untested
-#tg163 : Add a "please wait" page after submit and before audit result
+- #tg590 : Provide a self-structured csv entry that handles ProcessRemarks info and Evidence Elements data 
+- #tg583 : Use css-phloc as css adapter and parser 
+- #tg582 : Use jsoup as html adapter 
+- #tg581 : Create sebuilder-interpreter-tool subproject based on sebuilder-interpreter api
+- #tg580 : Upgrade to Heritrix 3.1.0 version
+- #tg579 : Clean-up dependencies
+- #tg552 : Clean-up SSPHandler and DOMHandler to remove unused primitives
+- #tg551 : Provide a mechanism to avoid to launch tests that return NOT_TESTED as result [OPTIMIZATION]
+- #tg550 : Improve ergonomy of audit result pages
+- #tg549 : Compute criterion results while analysing
+- #tg548 : Introduce the criterionStatistics entity
+- #tg547 : Add an audit result view with criterion results
+- #tg534 : Button "audit again"
+- #tg283 : Separate NMI from Untested
+- #tg163 : Add a "please wait" page after submit and before audit result
 
 Tanaguru 2.1.1, 2013-04-15
 --------------------------
 Bugs:
-#tg589 -> syntax of web.xml invalid (https://dev.tanaguru.org/redmine/issues/589)
-#tg588 -> Provide a mechanism to avoid multiple form validation when submitting an audit (https://dev.tanaguru.org/redmine/issues/588)
-#tg587 -> Downgrade version of commons-collections due to compatibily issue encountered on deployment on Jboss (https://dev.tanaguru.org/redmine/issues/587)
-#tg540 -> CastException occured while auditing multiple files. (https://dev.tanaguru.org/redmine/issues/540)
+- #tg589 -> syntax of web.xml invalid 
+- #tg588 -> Provide a mechanism to avoid multiple form validation when submitting an audit 
+- #tg587 -> Downgrade version of commons-collections due to compatibily issue encountered on deployment on Jboss 
+- #tg540 -> CastException occured while auditing multiple files. 
 
 --------------------------
 Tanaguru 2.1.0, 2012-11-07
 --------------------------
 
 Bugs:
-#tg516 : site-wide exports: add "page+site" results (https://dev.tanaguru.org/redmine/issues/516)
-#tg327 : Error on adaptation encountered on some pages of a site audit causes Fatal error in processor component (https://dev.tanaguru.org/redmine/issues/327)
+- #tg516 : site-wide exports: add "page+site" results 
+- #tg327 : Error on adaptation encountered on some pages of a site audit causes Fatal error in processor component 
 
 Features:
-#tg524 -> Provide a UI to override test weights for a given user  (https://dev.tanaguru.org/redmine/issues/524)
-#tg523 -> Add weight field to the TEST entity and use it to compute the raw mark  (https://dev.tanaguru.org/redmine/issues/523)
-#tg522 -> Provide a page that lists the pages invalidating a given test  (https://dev.tanaguru.org/redmine/issues/522)
-#tg520 -> Provide a back office interface  (https://dev.tanaguru.org/redmine/issues/520)
-#tg515 -> list of pages: change link destination (audit // page itself)  (https://dev.tanaguru.org/redmine/issues/515)
-#tg514 -> Bar graph on page audit-synthesis: put red at the bottom  (https://dev.tanaguru.org/redmine/issues/514)
-#tg416 -> Avoid the usage of type wildcard  (https://dev.tanaguru.org/redmine/issues/416)
-#tg271 -> Add console to the project-page  (https://dev.tanaguru.org/redmine/issues/271)
+- #tg524 -> Provide a UI to override test weights for a given user  
+- #tg523 -> Add weight field to the TEST entity and use it to compute the raw mark  
+- #tg522 -> Provide a page that lists the pages invalidating a given test  
+- #tg520 -> Provide a back office interface  
+- #tg515 -> list of pages: change link destination (audit // page itself)  
+- #tg514 -> Bar graph on page audit-synthesis: put red at the bottom  
+- #tg416 -> Avoid the usage of type wildcard  
+- #tg271 -> Add console to the project-page  
 
 --------------------------
 Tanaguru 2.0.1, 2012-09-19
 --------------------------
 Bugs:
-#tg510 -> The externalCssRetriever when a new css is fetched during adaptationThe cssContentAdapter implementation doesn't alert (https://dev.tanaguru.org/redmine/issues/510)
+- #tg510 -> The externalCssRetriever when a new css is fetched during adaptationThe cssContentAdapter implementation doesn't alert 
 
 Features:
-#tg509 ->	Make the different treatment window parameters of the AuditCommand implementation configurable (https://dev.tanaguru.org/redmine/issues/509)
-#tg506 -> Linkify the URLs (SEO 6.4.1 + SEO 7.6.1) (https://dev.tanaguru.org/redmine/issues/506)
+- #tg509 ->	Make the different treatment window parameters of the AuditCommand implementation configurable 
+- #tg506 -> Linkify the URLs (SEO 6.4.1 + SEO 7.6.1) 
 
 --------------------------
 Tanaguru 2.0.0, 2012-08-30
 --------------------------
 Bugs:
-#tg446 -> Audit crash on www.letc.fr: infinite loop with @import (https://dev.tanaguru.org/redmine/issues/446)
-#tg428 -> the getImageFromUrl() method of the SSPHandler implementation can't deal with embedded pictures (https://dev.tanaguru.org/redmine/issues/428)
-#tg426 -> The snapshot displayed in the synthesis result page in the case of a Scenario Audit is wrong (https://dev.tanaguru.org/redmine/issues/426)
-#tg424 -> The content of the scenario, present as a hidden field in the audit scenario set-up form, has to be removed (https://dev.tanaguru.org/redmine/issues/424)
-#tg422 -> Site-audit unable to run -> mail content shrunk (https://dev.tanaguru.org/redmine/issues/422)
-#tg419 -> Page audit fails if "http://" is missing in the URL (https://dev.tanaguru.org/redmine/issues/419)
-#tg414 -> .ods Export for SEO doesn't work (https://dev.tanaguru.org/redmine/issues/414)
-#tg407 -> bad link in email sent for a scenario audit (https://dev.tanaguru.org/redmine/issues/407)
-#tg404 -> Site audits crash when at least one SSP among the set of SSP hasn't been adapted (https://dev.tanaguru.org/redmine/issues/404)
-#tg398 -> Audit Options: rename "Accessibility level" into "Level" (https://dev.tanaguru.org/redmine/issues/398)
-#tg395 -> Parts of <head> deleted by Adapter Component (https://dev.tanaguru.org/redmine/issues/395)
+- #tg446 -> Audit crash on www.letc.fr: infinite loop with @import 
+- #tg428 -> the getImageFromUrl() method of the SSPHandler implementation can't deal with embedded pictures 
+- #tg426 -> The snapshot displayed in the synthesis result page in the case of a Scenario Audit is wrong 
+- #tg424 -> The content of the scenario, present as a hidden field in the audit scenario set-up form, has to be removed 
+- #tg422 -> Site-audit unable to run -> mail content shrunk 
+- #tg419 -> Page audit fails if "http://" is missing in the URL 
+- #tg414 -> .ods Export for SEO doesn't work 
+- #tg407 -> bad link in email sent for a scenario audit 
+- #tg404 -> Site audits crash when at least one SSP among the set of SSP hasn't been adapted 
+- #tg398 -> Audit Options: rename "Accessibility level" into "Level" 
+- #tg395 -> Parts of <head> deleted by Adapter Component 
 
 Features:
-#tg425 -> Add getter/setter to the "timeout" attribute of the TgolHighlighter class to allow to overidde the default value by spring configuration (https://dev.tanaguru.org/redmine/issues/425)
-#tg418 -> Launch page-audits via webdriver (https://dev.tanaguru.org/redmine/issues/418)
-#tg408 -> Email sent for a scenario: should include the scenario name (https://dev.tanaguru.org/redmine/issues/408)
-#tg406 -> Add a link to the source code in the page result page (https://dev.tanaguru.org/redmine/issues/406)
-#tg405 -> Remove the weighted mark from the different views (https://dev.tanaguru.org/redmine/issues/405)
-#tg402 -> Add new view to set-up scenario and launch audit (https://dev.tanaguru.org/redmine/issues/402)
-#tg401 -> Implementation of Har file reader (https://dev.tanaguru.org/redmine/issues/401)
-#tg400 -> Retrieve external CSS while adapting SSP (if not already retrieved during the crawl) (https://dev.tanaguru.org/redmine/issues/400)
-#tg399 -> Add a rank field to the WebResource entity (https://dev.tanaguru.org/redmine/issues/399)
-#tg365 -> Add referential info in the audit list contract info page (https://dev.tanaguru.org/redmine/issues/365)
-#tg337 -> Evolution of AuditService API to enable to launch a scenario audit (https://dev.tanaguru.org/redmine/issues/337)
-#tg336 -> Create a new Scenario loader module with an implementation that uses the WebDriver API (https://dev.tanaguru.org/redmine/issues/336)
-#tg280 -> Export: PDF format (https://dev.tanaguru.org/redmine/issues/280)
-#tg279 -> Export: CSV format (https://dev.tanaguru.org/redmine/issues/279) 
-#tg270 -> Audit sites with a given scenario (https://dev.tanaguru.org/redmine/issues/270)
-#tg269 -> Audit sites with authentication (https://dev.tanaguru.org/redmine/issues/269)
+- #tg425 -> Add getter/setter to the "timeout" attribute of the TgolHighlighter class to allow to overidde the default value by spring configuration 
+- #tg418 -> Launch page-audits via webdriver 
+- #tg408 -> Email sent for a scenario: should include the scenario name 
+- #tg406 -> Add a link to the source code in the page result page 
+- #tg405 -> Remove the weighted mark from the different views 
+- #tg402 -> Add new view to set-up scenario and launch audit 
+- #tg401 -> Implementation of Har file reader 
+- #tg400 -> Retrieve external CSS while adapting SSP (if not already retrieved during the crawl) 
+- #tg399 -> Add a rank field to the WebResource entity 
+- #tg365 -> Add referential info in the audit list contract info page 
+- #tg337 -> Evolution of AuditService API to enable to launch a scenario audit 
+- #tg336 -> Create a new Scenario loader module with an implementation that uses the WebDriver API 
+- #tg280 -> Export: PDF format 
+- #tg279 -> Export: CSV format  
+- #tg270 -> Audit sites with a given scenario 
+- #tg269 -> Audit sites with authentication 
 
 
 --------------------------
 Tanaguru 1.5.2-RC1, 2012-05-04
 --------------------------
 Bugs:
-#tg285 -> The css parser misinterprets selectors with multiple values (https://dev.tanaguru.org/redmine/issues/285)
-#tg330 -> Controller parameters type not controlled when converted as Numbers (https://dev.tanaguru.org/redmine/issues/330)
+- #tg285 -> The css parser misinterprets selectors with multiple values 
+- #tg330 -> Controller parameters type not controlled when converted as Numbers 
 
 Features:
-#tg288 -> Provide a way to externalise web-app resources (use of a cdn) (https://dev.tanaguru.org/redmine/issues/288)
-#tg318 -> Handle the "base" tag in Css adaptation to get external resources (https://dev.tanaguru.org/redmine/issues/318)
-#tg319 -> Create a "work in progress" page for a page audit that lasts longer than a given delay (https://dev.tanaguru.org/redmine/issues/319)
-#tg331 -> TGSI Model update : change TGSI_RESTRICTION table to TGSI_OPTION table with a "Is_Restriction" field (https://dev.tanaguru.org/redmine/issues/331)
-#tg332 -> TGSI Model update : Refactoring due to Contract management modifications (https://dev.tanaguru.org/redmine/issues/332)
-#tg333 -> Create CHANGELOG.txt that list the features and bugs of each version (https://dev.tanaguru.org/redmine/issues/333)
+- #tg288 -> Provide a way to externalise web-app resources (use of a cdn) 
+- #tg318 -> Handle the "base" tag in Css adaptation to get external resources 
+- #tg319 -> Create a "work in progress" page for a page audit that lasts longer than a given delay 
+- #tg331 -> TGSI Model update : change TGSI_RESTRICTION table to TGSI_OPTION table with a "Is_Restriction" field 
+- #tg332 -> TGSI Model update : Refactoring due to Contract management modifications 
+- #tg333 -> Create CHANGELOG.txt that list the features and bugs of each version 
 
 --------------------------
 Tanaguru 1.5.1, 2012-05-04
 --------------------------
 Bugs:
-#tg325 -> The upload module doesn't work when the Proxy properties (ProxyPort and ProxyPort) are set (https://dev.tanaguru.org/redmine/issues/325)
+- #tg325 -> The upload module doesn't work when the Proxy properties (ProxyPort and ProxyPort) are set 
 
 Features:
 None
@@ -439,16 +439,16 @@ Same as 1.5.0-RC1
 Tanaguru 1.5.0-RC1, 2012-01-24
 ------------------------------
 Bugs:
-#tg236 -> Add a licence file (https://dev.tanaguru.org/redmine/issues/236)
-#tg248 -> The page list of an audit is sorted by weighted mark instead of raw mark (https://dev.tanaguru.org/redmine/issues/248)
+- #tg236 -> Add a licence file 
+- #tg248 -> The page list of an audit is sorted by weighted mark instead of raw mark 
 
 Features : 
-#tg184 -> have a specific TITLE tag for audit 1page / 10pages / site (https://dev.tanaguru.org/redmine/issues/184)
-#tg250 -> Modify the name of the user-agent used by heritrix (https://dev.tanaguru.org/redmine/issues/250)
-#tg254 -> Evolution of the web-application interface to use the bootstrap UI toolkit (https://dev.tanaguru.org/redmine/issues/254)
-#tg255 -> Add a console to sort results in the result page (https://dev.tanaguru.org/redmine/issues/255)
-#tg256 -> Display all the audits of a contract in the contract page (https://dev.tanaguru.org/redmine/issues/256)
-#tg257 -> Add an indicator to indicate that an audit is running for a given contract (https://dev.tanaguru.org/redmine/issues/257)
+- #tg184 -> have a specific TITLE tag for audit 1page / 10pages / site 
+- #tg250 -> Modify the name of the user-agent used by heritrix 
+- #tg254 -> Evolution of the web-application interface to use the bootstrap UI toolkit 
+- #tg255 -> Add a console to sort results in the result page 
+- #tg256 -> Display all the audits of a contract in the contract page 
+- #tg257 -> Add an indicator to indicate that an audit is running for a given contract 
 
 
 ------------------------------
@@ -458,19 +458,19 @@ Bugs :
 None 
 
 Features : 
-#tg249 -> Allow Tanaguru to be used behind a web proxy (https://dev.tanaguru.org/redmine/issues/249)
+- #tg249 -> Allow Tanaguru to be used behind a web proxy 
 
 
 ------------------------------
 Tanaguru 1.4.0-RC1, 2011-10-26
 ------------------------------
 Bugs :
-#tg45 -> add licence header to all source files (https://dev.tanaguru.org/redmine/issues/45)
+- #tg45 -> add licence header to all source files 
 
 Features:
-#tg229 -> ContentLoader Implementation (https://dev.tanaguru.org/redmine/issues/229)
-#tg228 -> AuditService interface (https://dev.tanaguru.org/redmine/issues/228)
-#tg227 -> Update the ContentDAO interface to add a boolean option when retrieve a Content with its RelatedContent (https://dev.tanaguru.org/redmine/issues/227)
+- #tg229 -> ContentLoader Implementation 
+- #tg228 -> AuditService interface 
+- #tg227 -> Update the ContentDAO interface to add a boolean option when retrieve a Content with its RelatedContent 
 
 
 ------------------------------
@@ -480,15 +480,15 @@ Bugs :
 None
 
 Features:
-#tg199 -> Add tunable parameters for the crawler component (https://dev.tanaguru.org/redmine/issues/199)
-#tg208 -> Parameterization component (https://dev.tanaguru.org/redmine/issues/208)
+- #tg199 -> Add tunable parameters for the crawler component 
+- #tg208 -> Parameterization component 
 
 
 ------------------------------
 Tanaguru 1.2.1-RC2, 2011-07-07
 ------------------------------
 Bugs:
-#tg207 -> Tanaguru consolidation can cause java heap space error in case of large set of pages in the same audit (https://dev.tanaguru.org/redmine/issues/207)
+- #tg207 -> Tanaguru consolidation can cause java heap space error in case of large set of pages in the same audit 
 
 Features:
 None
@@ -498,18 +498,18 @@ None
 Tanaguru 1.2.0, 2011-06-21
 --------------------------
 Bugs :
-#tg197 -> Crawler : remove the version of tanaguru in the heritrix user-agent declaration (https://dev.tanaguru.org/redmine/issues/197)
+- #tg197 -> Crawler : remove the version of tanaguru in the heritrix user-agent declaration 
 
 Features:
-#tg193 -> Realize content relationship association while adapting instead of while crawling (https://dev.tanaguru.org/redmine/issues/193)
+- #tg193 -> Realize content relationship association while adapting instead of while crawling 
 
 
 --------------------------
 Tanaguru 1.0.0, 2011-04-08
 --------------------------
 Bugs :
-#tg57 -> Tanaguru web-app cannot deal with URL containing special characters (https://dev.tanaguru.org/redmine/issues/57)
-#tg134 -> Have a simple README at the root of the svn to get people started (https://dev.tanaguru.org/redmine/issues/134)
+- #tg57 -> Tanaguru web-app cannot deal with URL containing special characters 
+- #tg134 -> Have a simple README at the root of the svn to get people started 
 
 Features : 
-#tg58 -> Tanaguru web-app is not thread safe (https://dev.tanaguru.org/redmine/issues/58)
+- #tg58 -> Tanaguru web-app is not thread safe 
