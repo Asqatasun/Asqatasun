@@ -13,7 +13,7 @@ No-check rule
 [1.7.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-7-3)
 
 ### Description
-Chaque image objet (balise object avec l’attribut type="image/…") porteuse d’information, ayant une description détaillée, vérifie-t-elle une de ces conditions ? La description détaillée adjacente à l’image objet est pertinente ; La description détaillée via un lien adjacent est pertinente.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-objet">image objet</a> (balise <code lang="en">object</code> avec l&#x2019;attribut <code lang="en">type="image/…"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#description-dtaille-image">description d&#xE9;taill&#xE9;e</a>, v&#xE9;rifie-t-elle une de ces conditions&nbsp;? <ul><li>La description d&#xE9;taill&#xE9;e adjacente &#xE0; l&#x2019;image objet est pertinente&nbsp;;</li> <li>La description d&#xE9;taill&#xE9;e <i>via</i> un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> est pertinente.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque image objet (balise object avec l’attribut type="image/…") porteuse d
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

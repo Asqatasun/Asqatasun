@@ -13,7 +13,7 @@ No-check rule
 [8.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-5-1)
 
 ### Description
-Chaque page Web a-t-elle un titre de page (balise title) ?
+<div lang="fr">Chaque page Web a-t-elle un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titrePage">titre de page</a> (balise <code lang="en">title</code>)&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque page Web a-t-elle un titre de page (balise title) ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

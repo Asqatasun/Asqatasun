@@ -13,7 +13,7 @@ No-check rule
 [8.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-1-2)
 
 ### Description
-Pour chaque page Web, le type de document (balise doctype) est-il valide ?
+<div lang="fr">Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#type-de-document">type de document</a> (balise <code lang="en">doctype</code>) est-il valide&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque page Web, le type de document (balise doctype) est-il valide ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

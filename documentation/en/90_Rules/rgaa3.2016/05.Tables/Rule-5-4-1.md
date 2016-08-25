@@ -13,7 +13,7 @@ No-check rule
 [5.4.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-4-1)
 
 ### Description
-Chaque tableau de données (balise table) a-t-il une balise caption ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes">tableau de donn&#xE9;es</a> (balise <code lang="en">table</code>) a-t-il une balise <code lang="en">caption</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque tableau de données (balise table) a-t-il une balise caption ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

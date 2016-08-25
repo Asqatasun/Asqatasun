@@ -13,7 +13,7 @@ No-check rule
 [8.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-1-1)
 
 ### Description
-Pour chaque page Web, le type de document (balise doctype) est-il présent ?
+<div lang="fr">Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#type-de-document">type de document</a> (balise <code lang="en">doctype</code>) est-il pr&#xE9;sent&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque page Web, le type de document (balise doctype) est-il présent ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

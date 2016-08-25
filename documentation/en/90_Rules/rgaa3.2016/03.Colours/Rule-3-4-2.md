@@ -13,7 +13,7 @@ No-check rule
 [3.4.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-3-4-2)
 
 ### Description
-Dans chaque page Web, jusqu’à 120% de la taille de police par défaut (ou 1.2em), le texte et le texte en image en gras vérifient-ils une de ces conditions (hors cas particuliers) ? Le rapport de contraste entre le texte et son arrière-plan est de 7:1, au moins ; Un mécanisme permet à l’utilisateur d’afficher le texte avec un rapport de contraste de 7:1, au moins.
+<div lang="fr">Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#taille-caracteres-contraste">jusqu&#x2019;&#xE0; 120% de la taille de police par d&#xE9;faut</a> (ou 1.2em), le texte et le texte en image en gras v&#xE9;rifient-ils une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-3-3,3-4" title="Cas particuliers pour le crit&#xE8;re 3.4">cas particuliers</a>)&nbsp;? <ul><li>Le rapport de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#contraste">contraste</a> entre le texte et son arri&#xE8;re-plan est de 7:1, au moins&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur d&#x2019;afficher le texte avec un rapport de contraste de 7:1, au moins.</li> </ul></div>
 
 ### Level
 **AAA**
@@ -25,6 +25,7 @@ Dans chaque page Web, jusqu’à 120% de la taille de police par défaut (ou 1.2
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

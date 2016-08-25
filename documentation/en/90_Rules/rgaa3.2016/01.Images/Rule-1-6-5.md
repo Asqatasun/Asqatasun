@@ -13,7 +13,7 @@ No-check rule
 [1.6.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-6-5)
 
 ### Description
-Chaque bouton de type image (balise input avec l’attribut type="image") porteur d’information, qui implémente une référence à une description détaillée adjacente via une propriété aria-describedby, vérifie-t-il ces conditions ? Le passage de texte est identifié via un attribut id ; La valeur de l’attribut id est unique ; La valeur de la propriété ARIA aria-describedby est égale à la valeur de l’attribut id.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#bouton-formulaire">bouton</a> de type image (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteur d&#x2019;information</a>, qui impl&#xE9;mente une r&#xE9;f&#xE9;rence &#xE0; une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#description-dtaille-image">description d&#xE9;taill&#xE9;e</a> adjacente <i>via</i> une propri&#xE9;t&#xE9; <code lang="en">aria-describedby</code>, v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>Le passage de texte est identifi&#xE9; <i>via</i> un attribut <code lang="en">id</code>&nbsp;;</li> <li>La valeur de l&#x2019;attribut <code lang="en">id</code> est unique&nbsp;;</li> <li>La valeur de la propri&#xE9;t&#xE9; ARIA <code lang="en">aria-describedby</code> est &#xE9;gale &#xE0; la valeur de l&#x2019;attribut <code lang="en">id</code>.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque bouton de type image (balise input avec l’attribut type="image") porteu
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

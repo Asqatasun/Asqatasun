@@ -13,7 +13,7 @@ No-check rule
 [8.4.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-4-1)
 
 ### Description
-Pour chaque page Web ayant une langue par défaut, le code de langue vérifie-t-il ces conditions ? Le code de langue est valide ; Le code de langue est pertinent.
+<div lang="fr">Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#langue-par-dfaut">langue par d&#xE9;faut</a>, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#code-de-langue">code de langue</a> v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>Le code de langue est valide&nbsp;;</li> <li>Le code de langue est pertinent.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque page Web ayant une langue par défaut, le code de langue vérifie-t-
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

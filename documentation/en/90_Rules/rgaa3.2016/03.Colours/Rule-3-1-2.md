@@ -13,7 +13,7 @@ No-check rule
 [3.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-3-1-2)
 
 ### Description
-Pour chaque indication de couleur donnée par un texte, l’information ne doit pas être donnée uniquement par la couleur. Cette règle est-elle respectée ?
+<div lang="fr">Pour chaque indication de couleur donn&#xE9;e par un texte, l&#x2019;<a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#information-donne-par-la-couleur">information</a> ne doit pas &#xEA;tre donn&#xE9;e uniquement par la couleur. Cette r&#xE8;gle est-elle respect&#xE9;e&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque indication de couleur donnée par un texte, l’information ne doit 
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

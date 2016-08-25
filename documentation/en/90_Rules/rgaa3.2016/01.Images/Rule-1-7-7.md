@@ -13,7 +13,7 @@ No-check rule
 [1.7.7](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-7-7)
 
 ### Description
-Chaque image bitmap (balise canvas) porteuse d’information, ayant une description détaillée, vérifie-t-elle une de ces conditions ? La description détaillée adjacente à l’image bitmap est pertinente ; La description détaillée contenue entre <canvas> et </canvas> est pertinente ; La description détaillée via un lien adjacent est pertinente.
+<div lang="fr">Chaque image <span lang="en">bitmap</span> (balise <code lang="en">canvas</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#description-dtaille-image">description d&#xE9;taill&#xE9;e</a>, v&#xE9;rifie-t-elle une de ces conditions&nbsp;? <ul><li>La description d&#xE9;taill&#xE9;e adjacente &#xE0; l&#x2019;image <span lang="en">bitmap</span> est pertinente&nbsp;;</li> <li>La description d&#xE9;taill&#xE9;e contenue entre <code lang="en">&lt;canvas&gt;</code> et <code lang="en">&lt;/canvas&gt;</code> est pertinente&nbsp;;</li> <li>La description d&#xE9;taill&#xE9;e <i>via</i> un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> est pertinente.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque image bitmap (balise canvas) porteuse d’information, ayant une descript
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

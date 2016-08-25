@@ -13,7 +13,7 @@ No-check rule
 [8.8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-8-1)
 
 ### Description
-Dans chaque page Web, chaque changement de langue (attribut lang et/ou xml:lang) est-il valide ?
+<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#changement-de-langue">changement de langue</a> (attribut <code lang="en">lang</code> et/ou <code lang="en">xml:lang</code>) est-il valide&nbsp;?</div>
 
 ### Level
 **AA**
@@ -25,6 +25,7 @@ Dans chaque page Web, chaque changement de langue (attribut lang et/ou xml:lang)
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

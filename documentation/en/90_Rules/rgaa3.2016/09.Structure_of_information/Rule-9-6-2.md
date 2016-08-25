@@ -13,7 +13,7 @@ No-check rule
 [9.6.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-6-2)
 
 ### Description
-Dans chaque page Web, chaque bloc de citation utilise-t-il une balise blockquote ?
+<div lang="fr">Dans chaque page Web, chaque bloc de citation utilise-t-il une balise <code lang="en">blockquote</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, chaque bloc de citation utilise-t-il une balise blockquote
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

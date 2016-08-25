@@ -13,7 +13,7 @@ No-check rule
 [3.2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-3-2-1)
 
 ### Description
-Pour chaque mot ou ensemble de mots dont la mise en couleur est porteuse d’information, l’information ne doit pas être donnée uniquement par la couleur. Cette règle est-elle implémentée de façon pertinente ?
+<div lang="fr">Pour chaque mot ou ensemble de mots dont la mise en couleur est porteuse d&#x2019;<a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#information-donne-par-la-couleur">information</a>, l&#x2019;<a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#information-donne-par-la-couleur">information</a> ne doit pas &#xEA;tre donn&#xE9;e uniquement par la couleur. Cette r&#xE8;gle est-elle impl&#xE9;ment&#xE9;e de fa&#xE7;on <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#pertinence-information-autrement-que-par-la-couleur">pertinente</a>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque mot ou ensemble de mots dont la mise en couleur est porteuse d’inf
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

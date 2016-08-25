@@ -13,7 +13,7 @@ No-check rule
 [7.1.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-7-1-5)
 
 ### Description
-Chaque script qui génère ou contrôle un composant d’interface via des rôles, des états ou des propriétés définis par l’API ARIA respecte-t-il une de ces conditions ? Le composant d’interface est correctement restitué par les technologies d’assistance ; Une alternative accessible permet d’accéder aux mêmes fonctionnalités.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#script">script</a> qui g&#xE9;n&#xE8;re ou contr&#xF4;le un composant d&#x2019;interface <i>via</i> des r&#xF4;les, des &#xE9;tats ou des propri&#xE9;t&#xE9;s d&#xE9;finis par l&#x2019;API ARIA respecte-t-il une de ces conditions&nbsp;? <ul><li>Le composant d&#x2019;interface est <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#correctement-restitue-par-les-technologies-dassistance">correctement restitu&#xE9;</a> par les technologies d&#x2019;assistance&nbsp;;</li> <li>Une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#alternative--script">alternative</a> accessible permet d&#x2019;acc&#xE9;der aux m&#xEA;mes fonctionnalit&#xE9;s.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque script qui génère ou contrôle un composant d’interface via des rôle
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

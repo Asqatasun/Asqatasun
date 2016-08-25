@@ -13,7 +13,7 @@ No-check rule
 [1.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-2)
 
 ### Description
-Chaque zone (balise area) d’une image réactive a-t-elle un attribut alt ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#zone-dune-image-ractive">zone</a> (balise <code lang="en">area</code>) d&#x2019;une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-ractive">image r&#xE9;active</a> a-t-elle un attribut <code lang="en">alt</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque zone (balise area) d’une image réactive a-t-elle un attribut alt ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

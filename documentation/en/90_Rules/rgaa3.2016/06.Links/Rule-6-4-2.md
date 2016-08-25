@@ -13,7 +13,7 @@ No-check rule
 [6.4.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-4-2)
 
 ### Description
-Pour chaque page Web, chaque lien identique de type image a-t-il les mêmes fonction et destination ?
+<div lang="fr">Pour chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#liens-identiques">lien identique</a> de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-image">type image</a> a-t-il les m&#xEA;mes fonction et destination&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque page Web, chaque lien identique de type image a-t-il les mêmes fonc
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

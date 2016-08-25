@@ -13,7 +13,7 @@ No-check rule
 [6.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-2-2)
 
 ### Description
-Pour chaque lien image ayant un titre de lien (attribut title), le contenu de cet attribut est-il pertinent ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-image">lien image</a> ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre-de-lien">titre de lien</a> (attribut <code lang="en">title</code>), le contenu de cet attribut est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque lien image ayant un titre de lien (attribut title), le contenu de ce
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

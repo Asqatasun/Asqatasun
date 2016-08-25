@@ -13,7 +13,7 @@ No-check rule
 [4.8.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-4-8-2)
 
 ### Description
-Pour chaque média temporel synchronisé ayant une audio-description synchronisée, celle-ci est-elle pertinente ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> synchronis&#xE9; ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#audiodescription-synchronise-media-temporel">audio-description</a> synchronis&#xE9;e, celle-ci est-elle pertinente&nbsp;?</div>
 
 ### Level
 **AA**
@@ -25,6 +25,7 @@ Pour chaque média temporel synchronisé ayant une audio-description synchronis�
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [1.4.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-4-3)
 
 ### Description
-Chaque bouton associé à une image (balise input avec l’attribut type="image") utilisée comme CAPTCHA ou comme image-test, ayant un attribut alt, vérifie-t-il ces conditions ? Le contenu de l’attribut alt permet de comprendre la nature et la fonction du bouton ; S’il est présent, le contenu de l’attribut title est identique au contenu de l’attribut alt ; S’il est présent, le contenu de la propriété aria-label est identique au contenu de l’attribut alt ; S’il est présent, le contenu du passage de texte lié via la propriété aria-labelledby est identique au contenu de l’attribut alt.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#bouton-formulaire">bouton</a> associ&#xE9; &#xE0; une image (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) utilis&#xE9;e comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#captcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-test">image-test</a>, ayant un attribut <code lang="en">alt</code>, v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>Le contenu de l&#x2019;attribut <code lang="en">alt</code> permet de comprendre la nature et la fonction du bouton&nbsp;;</li> <li>S&#x2019;il est pr&#xE9;sent, le contenu de l&#x2019;attribut <code lang="en">title</code> est identique au contenu de l&#x2019;attribut <code lang="en">alt</code>&nbsp;;</li> <li>S&#x2019;il est pr&#xE9;sent, le contenu de la propri&#xE9;t&#xE9; <code lang="en">aria-label</code> est identique au contenu de l&#x2019;attribut <code lang="en">alt</code>&nbsp;;</li> <li>S&#x2019;il est pr&#xE9;sent, le contenu du passage de texte li&#xE9; <i>via</i> la propri&#xE9;t&#xE9; <code lang="en">aria-labelledby</code> est identique au contenu de l&#x2019;attribut <code lang="en">alt</code>.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque bouton associé à une image (balise input avec l’attribut type="image"
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

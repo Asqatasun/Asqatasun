@@ -13,7 +13,7 @@ No-check rule
 [6.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-5-1)
 
 ### Description
-Dans chaque page Web, chaque lien (balise a avec un attribut href), à l’exception des ancres, a-t-il un intitulé entre <a> et </a> ?
+<div lang="fr">Dans chaque page Web, chaque lien (balise <code lang="en">a</code> avec un attribut <code lang="en">href</code>), &#xE0; l&#x2019;exception des <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#ancre">ancres</a>, a-t-il un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#intitul-de-lien">intitul&#xE9;</a> entre <code lang="en">&lt;a&gt;</code> et <code lang="en">&lt;/a&gt;</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, chaque lien (balise a avec un attribut href), à l’excep
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [2.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-2-1-1)
 
 ### Description
-Chaque cadre en ligne (balise iframe) a-t-il un attribut title ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a> (balise <code lang="en">iframe</code>) a-t-il un attribut <code lang="en">title</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque cadre en ligne (balise iframe) a-t-il un attribut title ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

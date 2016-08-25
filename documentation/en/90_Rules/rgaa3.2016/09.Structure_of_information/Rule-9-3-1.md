@@ -13,7 +13,7 @@ No-check rule
 [9.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-3-1)
 
 ### Description
-Dans chaque page Web, les informations regroupées sous forme de listes non ordonnées vérifient-elles une de ces conditions ? La liste utilise les balises HTML ul et li ; La liste utilise les rôles ARIA list et listitem ;
+<div lang="fr">Dans chaque page Web, les informations regroup&#xE9;es sous forme de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#listes">listes</a> non ordonn&#xE9;es v&#xE9;rifient-elles une de ces conditions&nbsp;? <ul><li>La liste utilise les balises HTML <code lang="en">ul</code> et <code lang="en">li</code>&nbsp;;</li> <li>La liste utilise les r&#xF4;les ARIA <code lang="en">list</code> et <code lang="en">listitem</code>&nbsp;;</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, les informations regroupées sous forme de listes non ordo
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

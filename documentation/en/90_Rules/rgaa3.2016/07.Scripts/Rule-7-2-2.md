@@ -13,7 +13,7 @@ No-check rule
 [7.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-7-2-2)
 
 ### Description
-Chaque élément non textuel mis à jour par un script (dans la page, ou un cadre en ligne) et ayant une alternative vérifie-t-il ces conditions ? L’alternative de l’élément non textuel est mise à jour ; L’alternative mise à jour est pertinente.
+<div lang="fr">Chaque &#xE9;l&#xE9;ment non textuel mis &#xE0; jour par un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#script">script</a> (dans la page, ou un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a>) et ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#alternative--script">alternative</a> v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>L&#x2019;alternative de l&#x2019;&#xE9;l&#xE9;ment non textuel est mise &#xE0; jour&nbsp;;</li> <li>L&#x2019;alternative mise &#xE0; jour est pertinente.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque élément non textuel mis à jour par un script (dans la page, ou un cadr
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

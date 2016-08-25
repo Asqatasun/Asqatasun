@@ -13,7 +13,7 @@ No-check rule
 [3.1.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-3-1-4)
 
 ### Description
-Pour chaque propriété CSS déterminant une couleur et véhiculant une information, l’information ne doit pas être donnée uniquement par la couleur. Cette règle est-elle respectée ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#proprit-css-dterminant-une-couleur">propri&#xE9;t&#xE9; CSS d&#xE9;terminant une couleur</a> et v&#xE9;hiculant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#information-donne-par-la-couleur">information</a>, l&#x2019;<a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#information-donne-par-la-couleur">information</a> ne doit pas &#xEA;tre donn&#xE9;e uniquement par la couleur. Cette r&#xE8;gle est-elle respect&#xE9;e&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque propriété CSS déterminant une couleur et véhiculant une informat
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

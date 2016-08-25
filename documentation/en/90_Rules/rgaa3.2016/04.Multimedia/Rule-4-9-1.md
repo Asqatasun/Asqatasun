@@ -13,7 +13,7 @@ No-check rule
 [4.9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-4-9-1)
 
 ### Description
-Chaque média temporel pré-enregistré seulement audio a-t-il, si nécessaire, une interprétation en langue des signes adaptée à la langue du média (hors cas particuliers) ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> pr&#xE9;-enregistr&#xE9; seulement audio a-t-il, si n&#xE9;cessaire, une interpr&#xE9;tation en langue des signes adapt&#xE9;e &#xE0; la langue du m&#xE9;dia (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-4-1,4-2,4-3,4-5,4-7,4-9,4-11,4-13" title="Cas particuliers pour le crit&#xE8;re 4.9">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **AAA**
@@ -25,6 +25,7 @@ Chaque média temporel pré-enregistré seulement audio a-t-il, si nécessaire, 
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

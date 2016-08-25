@@ -13,7 +13,7 @@ No-check rule
 [8.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-1-3)
 
 ### Description
-Pour chaque page Web possédant une déclaration de type de document, celle-ci est-elle située avant la balise html dans le code source ?
+<div lang="fr">Pour chaque page Web poss&#xE9;dant une d&#xE9;claration de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#type-de-document">type de document</a>, celle-ci est-elle situ&#xE9;e avant la balise <code lang="en">html</code> dans le code source&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque page Web possédant une déclaration de type de document, celle-ci e
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

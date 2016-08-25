@@ -13,7 +13,7 @@ No-check rule
 [6.3.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-3-3)
 
 ### Description
-Chaque lien composite (contenu texte et de l’attribut alt) est-il explicite hors contexte (hors cas particuliers) ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-composite">lien composite</a> (contenu texte et de l&#x2019;attribut <code lang="en">alt</code>) est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-explicite-hors-contexte">explicite hors contexte</a> (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.3">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **AAA**
@@ -25,6 +25,7 @@ Chaque lien composite (contenu texte et de l’attribut alt) est-il explicite ho
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

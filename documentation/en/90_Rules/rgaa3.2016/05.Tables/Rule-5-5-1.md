@@ -13,7 +13,7 @@ No-check rule
 [5.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-5-1)
 
 ### Description
-Pour chaque tableau de données (balise table) ayant une balise caption, le contenu de cette balise donne-t-il le titre du tableau ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes">tableau de donn&#xE9;es</a> (balise <code lang="en">table</code>) ayant une balise <code lang="en">caption</code>, le contenu de cette balise donne-t-il le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titreTab">titre du tableau</a>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque tableau de données (balise table) ayant une balise caption, le cont
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [7.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-7-1-1)
 
 ### Description
-Chaque script qui génère ou contrôle un composant d’interface vérifie-t-il, si nécessaire, une de ces conditions ? Le nom, le rôle, la valeur, le paramétrage et les changements d’états sont accessibles aux technologies d’assistance via une API d’accessibilité ; Un composant d’interface accessible permettant d’accéder aux mêmes fonctionnalités est présent dans la page ; Une alternative accessible permet d’accéder aux mêmes fonctionnalités.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#script">script</a> qui g&#xE9;n&#xE8;re ou contr&#xF4;le un composant d&#x2019;interface v&#xE9;rifie-t-il, si n&#xE9;cessaire, une de ces conditions&nbsp;? <ul><li><a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#le-nom-le-rle-la-valeur-le-paramtrage-et-les-changements-dtats">Le nom, le r&#xF4;le, la valeur, le param&#xE9;trage et les changements d&#x2019;&#xE9;tats</a> sont accessibles aux technologies d&#x2019;assistance <i>via</i> une API d&#x2019;accessibilit&#xE9;&nbsp;;</li> <li>Un composant d&#x2019;interface accessible permettant d&#x2019;acc&#xE9;der aux m&#xEA;mes fonctionnalit&#xE9;s est pr&#xE9;sent dans la page&nbsp;;</li> <li>Une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#alternative--script">alternative</a> accessible permet d&#x2019;acc&#xE9;der aux m&#xEA;mes fonctionnalit&#xE9;s.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque script qui génère ou contrôle un composant d’interface vérifie-t-il
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

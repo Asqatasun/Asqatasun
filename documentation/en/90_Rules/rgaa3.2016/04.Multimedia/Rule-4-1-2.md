@@ -13,7 +13,7 @@ No-check rule
 [4.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-4-1-2)
 
 ### Description
-Chaque média temporel pré-enregistré seulement vidéo vérifie-t-il, si nécessaire, l’une de ces conditions (hors cas particuliers) ? Il existe une version alternative « audio seulement » accessible via un lien adjacent (une url ou une ancre) ; Il existe une transcription textuelle accessible via un lien adjacent (une url ou une ancre) ; Il existe une transcription textuelle adjacente clairement identifiable ; Il existe une audio-description synchronisée ; Il existe une version alternative avec une audio-description synchronisée accessible via un lien adjacent (une url ou une ancre).
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> pr&#xE9;-enregistr&#xE9; seulement vid&#xE9;o v&#xE9;rifie-t-il, si n&#xE9;cessaire, l&#x2019;une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-4-1,4-2,4-3,4-5,4-7,4-9,4-11,4-13" title="Cas particuliers pour le crit&#xE8;re 4.1">cas particuliers</a>)&nbsp;? <ul><li>Il existe une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#version-alternative-audio-seulement">version alternative &#xAB;&nbsp;audio seulement&nbsp;&#xBB;</a> accessible <i>via</i> un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> (une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#url">url</a> ou une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#ancre">ancre</a>)&nbsp;;</li> <li>Il existe une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#transcription-textuelle-media-temporel">transcription textuelle</a> accessible <i>via</i> un lien adjacent (une url ou une ancre)&nbsp;;</li> <li>Il existe une transcription textuelle adjacente clairement identifiable&nbsp;;</li> <li>Il existe une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#audiodescription-synchronise-media-temporel">audio-description</a> synchronis&#xE9;e&nbsp;;</li> <li>Il existe une version alternative avec une audio-description synchronis&#xE9;e accessible <i>via</i> un lien adjacent (une url ou une ancre).</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque média temporel pré-enregistré seulement vidéo vérifie-t-il, si néce
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

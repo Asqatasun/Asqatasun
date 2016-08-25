@@ -13,7 +13,7 @@ No-check rule
 [5.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-1-1)
 
 ### Description
-Pour chaque tableau de données complexe (balise table) un résumé est-il disponible dans la balise caption ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes-complexe">tableau de donn&#xE9;es complexe</a> (balise <code lang="en">table</code>) un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#rsum-de-tableau">r&#xE9;sum&#xE9;</a> est-il disponible dans la balise <code lang="en">caption</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque tableau de données complexe (balise table) un résumé est-il dispo
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [4.6.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-4-6-2)
 
 ### Description
-Chaque média temporel synchronisé en direct vérifie-t-il une de ces conditions ? Les sous-titres synchronisés sont pertinents ; Les sous-titres synchronisés de la version alternative sont pertinents ; La transcription textuelle est pertinente.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> synchronis&#xE9; en direct v&#xE9;rifie-t-il une de ces conditions&nbsp;? <ul><li>Les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#soustitres-synchroniss-objet-multimdia">sous-titres synchronis&#xE9;s</a> sont pertinents&nbsp;;</li> <li>Les sous-titres synchronis&#xE9;s de la version alternative sont pertinents&nbsp;;</li> <li>La <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#transcription-textuelle-media-temporel">transcription textuelle</a> est pertinente.</li> </ul></div>
 
 ### Level
 **AA**
@@ -25,6 +25,7 @@ Chaque média temporel synchronisé en direct vérifie-t-il une de ces condition
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

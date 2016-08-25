@@ -13,7 +13,7 @@ No-check rule
 [9.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-2-2)
 
 ### Description
-Dans chaque page Web, l’arborescence du document est-elle cohérente ?
+<div lang="fr">Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#arborescence-du-document">l&#x2019;arborescence du document</a> est-elle coh&#xE9;rente&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, l’arborescence du document est-elle cohérente ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

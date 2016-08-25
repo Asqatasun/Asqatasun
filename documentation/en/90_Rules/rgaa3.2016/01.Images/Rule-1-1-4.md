@@ -13,7 +13,7 @@ No-check rule
 [1.1.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-4)
 
 ### Description
-Chaque zone cliquable d’une image réactive coté serveur est-t-elle doublée d’un lien dans la page ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#zone-cliquable">zone cliquable</a> d&#x2019;une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-ractive">image r&#xE9;active</a> cot&#xE9; serveur est-t-elle doubl&#xE9;e d&#x2019;un lien dans la page&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque zone cliquable d’une image réactive coté serveur est-t-elle doublée 
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

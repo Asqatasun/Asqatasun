@@ -13,7 +13,7 @@ No-check rule
 [7.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-7-3-1)
 
 ### Description
-Chaque élément possédant un gestionnaire d’événement contrôlé par un script vérifie-t-il une de ces conditions (hors cas particuliers) ? L’élément est accessible par le clavier et la souris ; Un élément accessible par le clavier et la souris permettant de réaliser la même action est présent dans la page.
+<div lang="fr">Chaque &#xE9;l&#xE9;ment poss&#xE9;dant un gestionnaire d&#x2019;&#xE9;v&#xE9;nement contr&#xF4;l&#xE9; par un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#script">script</a> v&#xE9;rifie-t-il une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-7-3" title="Cas particuliers pour le crit&#xE8;re 7.3">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;&#xE9;l&#xE9;ment est <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#accessible-et-activable-par-le-clavier-et-la-souris">accessible par le clavier et la souris</a>&nbsp;;</li> <li>Un &#xE9;l&#xE9;ment accessible par le clavier et la souris permettant de r&#xE9;aliser la m&#xEA;me action est pr&#xE9;sent dans la page.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque élément possédant un gestionnaire d’événement contrôlé par un sc
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

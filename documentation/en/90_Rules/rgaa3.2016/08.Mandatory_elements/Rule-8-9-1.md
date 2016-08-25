@@ -13,7 +13,7 @@ No-check rule
 [8.9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-9-1)
 
 ### Description
-Dans chaque page Web les balises (à l’exception de div, span et table) ne doivent pas être utilisées uniquement à des fins de présentation. Cette règle est-elle respectée ?
+<div lang="fr">Dans chaque page Web les balises (&#xE0; l&#x2019;exception de <code lang="en">div</code>, <code lang="en">span</code> et <code lang="en">table</code>) ne doivent pas &#xEA;tre utilis&#xE9;es <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#uniquement--des-fins-de-prsentation">uniquement &#xE0; des fins de pr&#xE9;sentation</a>. Cette r&#xE8;gle est-elle respect&#xE9;e&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web les balises (à l’exception de div, span et table) ne doi
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

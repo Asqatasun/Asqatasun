@@ -13,7 +13,7 @@ No-check rule
 [9.6.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-6-1)
 
 ### Description
-Dans chaque page Web, chaque citation courte utilise-t-elle une balise q ?
+<div lang="fr">Dans chaque page Web, chaque citation courte utilise-t-elle une balise <code lang="en">q</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, chaque citation courte utilise-t-elle une balise q ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [9.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-5-1)
 
 ### Description
-Dans chaque page Web, la signification de chaque abréviation est-elle pertinente ?
+<div lang="fr">Dans chaque page Web, la signification de chaque abr&#xE9;viation est-elle pertinente&nbsp;?</div>
 
 ### Level
 **AAA**
@@ -25,6 +25,7 @@ Dans chaque page Web, la signification de chaque abréviation est-elle pertinent
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

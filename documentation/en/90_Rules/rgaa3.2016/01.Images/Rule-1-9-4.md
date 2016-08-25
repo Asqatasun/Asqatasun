@@ -13,7 +13,7 @@ No-check rule
 [1.9.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-9-4)
 
 ### Description
-Chaque image texte embarquée (balise embed avec l’attribut type="image/…") porteuse d’information doit si possible être remplacée par du texte stylé. Cette règle est-elle respectée (hors cas particuliers) ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-texte">image texte</a> embarqu&#xE9;e (balise <code lang="en">embed</code> avec l&#x2019;attribut <code lang="en">type="image/…"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a> doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-9" title="Cas particuliers pour le crit&#xE8;re 1.9">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **AAA**
@@ -25,6 +25,7 @@ Chaque image texte embarquée (balise embed avec l’attribut type="image/…") 
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

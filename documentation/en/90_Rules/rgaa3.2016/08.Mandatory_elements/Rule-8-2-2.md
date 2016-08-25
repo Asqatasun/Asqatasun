@@ -13,7 +13,7 @@ No-check rule
 [8.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-2-2)
 
 ### Description
-Pour chaque déclaration de type de document, le code source de la page ne doit pas utiliser d’éléments obsolètes. Cette règle est-elle respectée (hors cas particuliers) ?
+<div lang="fr">Pour chaque d&#xE9;claration de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#type-de-document">type de document</a>, le code source de la page ne doit pas utiliser d&#x2019;&#xE9;l&#xE9;ments obsol&#xE8;tes. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-8-2" title="Cas particuliers pour le crit&#xE8;re 8.2">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque déclaration de type de document, le code source de la page ne doit 
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

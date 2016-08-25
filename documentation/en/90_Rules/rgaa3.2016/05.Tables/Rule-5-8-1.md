@@ -13,7 +13,7 @@ No-check rule
 [5.8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-8-1)
 
 ### Description
-Chaque tableau de mise en forme (balise table) vérifie-t-il ces conditions ? Le tableau de mise en forme (balise table) ne possède pas de balises caption, th, thead, tfoot ; Les cellules du tableau de mise en forme (balise td) ne possèdent pas d’attributs scope, headers, colgroup, axis.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-mise-en-forme">tableau de mise en forme</a> (balise <code lang="en">table</code>) v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>Le tableau de mise en forme (balise <code lang="en">table</code>) ne poss&#xE8;de pas de balises <code lang="en">caption</code>, <code lang="en">th</code>, <code lang="en">thead</code>, <code lang="en">tfoot</code>&nbsp;;</li> <li>Les cellules du tableau de mise en forme (balise <code lang="en">td</code>) ne poss&#xE8;dent pas d&#x2019;attributs <code lang="en">scope</code>, <code lang="en">headers</code>, <code lang="en">colgroup</code>, <code lang="en">axis</code>.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque tableau de mise en forme (balise table) vérifie-t-il ces conditions ? L
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

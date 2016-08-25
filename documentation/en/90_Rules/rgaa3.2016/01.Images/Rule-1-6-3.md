@@ -13,7 +13,7 @@ No-check rule
 [1.6.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-6-3)
 
 ### Description
-Chaque image embarquée (balise embed) porteuse d’information, qui nécessite une description détaillée, vérifie-t-elle une de ces conditions ? Il existe un lien adjacent (via une url ou une ancre) permettant d’accéder au contenu de la description détaillée ; Il existe une description détaillée clairement identifiable adjacente à l’image embarquée.
+<div lang="fr">Chaque image embarqu&#xE9;e (balise <code lang="en">embed</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, qui n&#xE9;cessite une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#description-dtaille-image">description d&#xE9;taill&#xE9;e</a>, v&#xE9;rifie-t-elle une de ces conditions&nbsp;? <ul><li>Il existe un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> (<i>via</i> une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#url">url</a> ou une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#ancre">ancre</a>) permettant d&#x2019;acc&#xE9;der au contenu de la description d&#xE9;taill&#xE9;e&nbsp;;</li> <li>Il existe une description d&#xE9;taill&#xE9;e clairement identifiable adjacente &#xE0; l&#x2019;image embarqu&#xE9;e.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque image embarquée (balise embed) porteuse d’information, qui nécessite 
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

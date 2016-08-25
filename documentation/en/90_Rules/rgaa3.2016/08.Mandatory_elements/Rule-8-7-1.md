@@ -13,7 +13,7 @@ No-check rule
 [8.7.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-7-1)
 
 ### Description
-Dans chaque page Web, chaque texte écrit dans une langue différente de la langue par défaut vérifie-t-il une de ces conditions (hors cas particuliers) ? L’indication de langue est donnée sur l’élément contenant le texte ; L’indication de langue est donnée sur un des éléments parents.
+<div lang="fr">Dans chaque page Web, chaque texte &#xE9;crit dans une langue diff&#xE9;rente de la <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#langue-par-dfaut">langue par d&#xE9;faut</a> v&#xE9;rifie-t-il une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-8-7" title="Cas particuliers pour le crit&#xE8;re 8.7">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;indication de langue est donn&#xE9;e sur l&#x2019;&#xE9;l&#xE9;ment contenant le texte&nbsp;;</li> <li>L&#x2019;indication de langue est donn&#xE9;e sur un des &#xE9;l&#xE9;ments parents.</li> </ul></div>
 
 ### Level
 **AA**
@@ -25,6 +25,7 @@ Dans chaque page Web, chaque texte écrit dans une langue différente de la lang
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [6.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-1-3)
 
 ### Description
-Chaque lien composite vérifie-t-il une de ces conditions (hors cas particuliers) ? L’intitulé de lien seul permet d’en comprendre la fonction et la destination ; Le contexte du lien permet d’en comprendre la fonction et la destination.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-composite">lien composite</a> v&#xE9;rifie-t-il une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.1">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;<a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#intitul-de-lien">intitul&#xE9; de lien</a> seul permet d&#x2019;en comprendre la fonction et la destination&nbsp;;</li> <li>Le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#contexte-du-lien">contexte du lien</a> permet d&#x2019;en comprendre la fonction et la destination.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque lien composite vérifie-t-il une de ces conditions (hors cas particuliers
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

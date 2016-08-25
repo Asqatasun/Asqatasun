@@ -13,7 +13,7 @@ No-check rule
 [5.7.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-7-3)
 
 ### Description
-Chaque en-tête (balise th) ne s’appliquant pas à la totalité de la ligne ou de la colonne vérifie-t-il ces conditions ? L’en-tête ne possède pas d’attribut scope ; L’en-tête possède un attribut id unique.
+<div lang="fr">Chaque en-t&#xEA;te (balise <code lang="en">th</code>) ne s&#x2019;appliquant pas &#xE0; la totalit&#xE9; de la ligne ou de la colonne v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>L&#x2019;en-t&#xEA;te ne poss&#xE8;de pas d&#x2019;attribut <code lang="en">scope</code>&nbsp;;</li> <li>L&#x2019;en-t&#xEA;te poss&#xE8;de un attribut <code lang="en">id</code> unique.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque en-tête (balise th) ne s’appliquant pas à la totalité de la ligne ou
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [1.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-2-2)
 
 ### Description
-Chaque zone non cliquable (balise area sans attribut href) de décoration, et ayant un attribut alt, vérifie-t-elle ces conditions ? Le contenu de l’attribut alt est vide (alt="") ; La zone non cliquable ne possède pas d’attribut title ; La balise area est dépourvue de rôle, propriété ou état ARIA visant à labelliser l’image (aria-label, aria-describedby, aria-labelledby par exemple).
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#zone-non-cliquable">zone non cliquable</a> (balise <code lang="en">area</code> sans attribut <code lang="en">href</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-de-dcoration">de d&#xE9;coration</a>, et ayant un attribut <code lang="en">alt</code>, v&#xE9;rifie-t-elle ces conditions&nbsp;? <ul><li>Le contenu de l&#x2019;attribut <code lang="en">alt</code> est vide (<code lang="en">alt=""</code>)&nbsp;;</li> <li>La zone non cliquable ne poss&#xE8;de pas d&#x2019;attribut <code lang="en">title</code>&nbsp;;</li> <li>La balise <code lang="en">area</code> est d&#xE9;pourvue de r&#xF4;le, propri&#xE9;t&#xE9; ou &#xE9;tat ARIA visant &#xE0; labelliser l&#x2019;image (<code lang="en">aria-label</code>, <code lang="en">aria-describedby</code>, <code lang="en">aria-labelledby</code> par exemple).</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque zone non cliquable (balise area sans attribut href) de décoration, et ay
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

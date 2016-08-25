@@ -13,7 +13,7 @@ No-check rule
 [6.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-3-1)
 
 ### Description
-Chaque lien texte vérifie-t-il une de ces conditions (hors cas particuliers) ? L’intitulé du lien est explicite hors contexte ; Un mécanisme permet à l’utilisateur d’obtenir un intitulé de lien explicite hors contexte ; Le contenu du titre de lien (attribut title) est explicite hors contexte.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-texte">lien texte</a> v&#xE9;rifie-t-il une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.3">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;intitul&#xE9; du lien est <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-explicite-hors-contexte">explicite hors contexte</a>&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur d&#x2019;obtenir un intitul&#xE9; de lien explicite hors contexte&nbsp;;</li> <li>Le contenu du titre de lien (attribut <code lang="en">title</code>) est explicite hors contexte.</li> </ul></div>
 
 ### Level
 **AAA**
@@ -25,6 +25,7 @@ Chaque lien texte vérifie-t-il une de ces conditions (hors cas particuliers) ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

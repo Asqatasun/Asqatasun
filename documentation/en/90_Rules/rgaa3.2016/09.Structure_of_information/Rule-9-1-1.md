@@ -13,7 +13,7 @@ No-check rule
 [9.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-1)
 
 ### Description
-Dans chaque page Web, y a-t-il un titre de niveau 1 (balise h1 ou balise possédant un rôle ARIA "heading" associé à une propriété aria-level="1") ?
+<div lang="fr">Dans chaque page Web, y a-t-il un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre">titre</a> de niveau 1 (balise <code lang="en">h1</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level="1"</code>)&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, y a-t-il un titre de niveau 1 (balise h1 ou balise posséd
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [9.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-2)
 
 ### Description
-Dans chaque page Web, la hiérarchie entre les titres (balise h ou balise possédant un rôle ARIA "heading" associé à une propriété aria-level) est-elle pertinente ?
+<div lang="fr">Dans chaque page Web, la hi&#xE9;rarchie entre les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre">titres</a> (balise <code lang="en">h</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level</code>) est-elle pertinente&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, la hiérarchie entre les titres (balise h ou balise possé
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [1.6.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-6-4)
 
 ### Description
-Chaque bouton de type image (balise input avec l’attribut type="image") porteur d’information, qui nécessite une description détaillée, vérifie-t-il une de ces conditions ? Il existe un attribut alt contenant la référence à une description détaillée adjacente à l’image ; Il existe un lien adjacent (via une url ou une ancre) permettant d’accéder au contenu de la description détaillée ; Il existe une propriété aria-describedby référençant un passage de texte faisant office de description détaillée.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#bouton-formulaire">bouton</a> de type image (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteur d&#x2019;information</a>, qui n&#xE9;cessite une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#description-dtaille-image">description d&#xE9;taill&#xE9;e</a>, v&#xE9;rifie-t-il une de ces conditions&nbsp;? <ul><li>Il existe un attribut <code lang="en">alt</code> contenant la r&#xE9;f&#xE9;rence &#xE0; une description d&#xE9;taill&#xE9;e adjacente &#xE0; l&#x2019;image&nbsp;;</li> <li>Il existe un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> (<i>via</i> une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#url">url</a> ou une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#ancre">ancre</a>) permettant d&#x2019;acc&#xE9;der au contenu de la description d&#xE9;taill&#xE9;e&nbsp;;</li> <li>Il existe une propri&#xE9;t&#xE9; <code lang="en">aria-describedby</code> r&#xE9;f&#xE9;ren&#xE7;ant un passage de texte faisant office de description d&#xE9;taill&#xE9;e.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque bouton de type image (balise input avec l’attribut type="image") porteu
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [2.2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-2-2-1)
 
 ### Description
-Pour chaque cadre en ligne (balise iframe) ayant un attribut title, le contenu de cet attribut est-il pertinent ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a> (balise <code lang="en">iframe</code>) ayant un attribut <code lang="en">title</code>, le contenu de cet attribut est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque cadre en ligne (balise iframe) ayant un attribut title, le contenu d
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

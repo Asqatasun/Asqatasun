@@ -13,7 +13,7 @@ No-check rule
 [1.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-1)
 
 ### Description
-Chaque image (balise img) a-t-elle un attribut alt ?
+<div lang="fr">Chaque image (balise <code lang="en">img</code>) a-t-elle un attribut <code lang="en">alt</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque image (balise img) a-t-elle un attribut alt ?
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [5.2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-2-1)
 
 ### Description
-Pour chaque tableau de donnée complexes (balise table) ayant un résumé, celui-ci est-il pertinent ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes-complexe">tableau de donn&#xE9;e complexes</a> (balise <code lang="en">table</code>) ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#rsum-de-tableau">r&#xE9;sum&#xE9;</a>, celui-ci est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque tableau de donnée complexes (balise table) ayant un résumé, celui
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

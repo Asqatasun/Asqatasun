@@ -13,7 +13,7 @@ No-check rule
 [1.8.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-8-3)
 
 ### Description
-Chaque image texte objet (balise object avec l’attribut type="image/…") porteuse d’information, en l’absence d’un mécanisme de remplacement, doit si possible être remplacée par du texte stylé. Cette règle est-elle respectée (hors cas particuliers) ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-texteObj">image texte objet</a> (balise <code lang="en">object</code> avec l&#x2019;attribut <code lang="en">type="image/…"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, en l&#x2019;absence d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mcanisme-de-remplacement">m&#xE9;canisme de remplacement</a>, doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-8" title="Cas particuliers pour le crit&#xE8;re 1.8">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **AA**
@@ -25,6 +25,7 @@ Chaque image texte objet (balise object avec l’attribut type="image/…") port
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

@@ -13,7 +13,7 @@ No-check rule
 [1.6.6](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-6-6)
 
 ### Description
-Chaque image vectorielle (balise svg) porteuse d’information, qui nécessite une description détaillée, vérifie-t-elle une de ces conditions ? Il existe une propriété aria-label contenant une référence à une description détaillée adjacente à l’image vectorielle ; Il existe une balise desc contenant une référence à une description détaillée adjacente à l’image vectorielle ; Il existe une balise desc contenant la description détaillée ; Il existe un lien adjacent (via une url ou une ancre) permettant d’accéder au contenu de la description détaillée.
+<div lang="fr">Chaque image vectorielle (balise <code lang="en">svg</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, qui n&#xE9;cessite une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#description-dtaille-image">description d&#xE9;taill&#xE9;e</a>, v&#xE9;rifie-t-elle une de ces conditions&nbsp;? <ul><li>Il existe une propri&#xE9;t&#xE9; <code lang="en">aria-label</code> contenant une r&#xE9;f&#xE9;rence &#xE0; une description d&#xE9;taill&#xE9;e adjacente &#xE0; l&#x2019;image vectorielle&nbsp;;</li> <li>Il existe une balise <code lang="en">desc</code> contenant une r&#xE9;f&#xE9;rence &#xE0; une description d&#xE9;taill&#xE9;e adjacente &#xE0; l&#x2019;image vectorielle&nbsp;;</li> <li>Il existe une balise <code lang="en">desc</code> contenant la description d&#xE9;taill&#xE9;e&nbsp;;</li> <li>Il existe un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> (<i>via</i> une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#url">url</a> ou une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#ancre">ancre</a>) permettant d&#x2019;acc&#xE9;der au contenu de la description d&#xE9;taill&#xE9;e.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque image vectorielle (balise svg) porteuse d’information, qui nécessite u
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

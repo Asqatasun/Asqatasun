@@ -13,7 +13,7 @@ No-check rule
 [4.2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-4-2-1)
 
 ### Description
-Pour chaque média temporel pré-enregistré seulement audio, ayant une transcription textuelle, celle-ci est-elle pertinente (hors cas particuliers) ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> pr&#xE9;-enregistr&#xE9; seulement audio, ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#transcription-textuelle-media-temporel">transcription textuelle</a>, celle-ci est-elle pertinente (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-4-1,4-2,4-3,4-5,4-7,4-9,4-11,4-13" title="Cas particuliers pour le crit&#xE8;re 4.2">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque média temporel pré-enregistré seulement audio, ayant une transcri
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

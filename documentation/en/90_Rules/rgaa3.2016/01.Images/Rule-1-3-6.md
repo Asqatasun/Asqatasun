@@ -13,7 +13,7 @@ No-check rule
 [1.3.6](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-3-6)
 
 ### Description
-Chaque image embarquée (balise embed avec l’attribut type="image/…") porteuse d’information vérifie-t-elle une de ces conditions (hors cas particuliers) ? L’image embarquée est immédiatement suivie d’un lien adjacent permettant d’afficher une page ou un passage de texte contenant une alternative pertinente ; Un mécanisme permet à l’utilisateur de remplacer l’image embarquée par un texte alternatif pertinent ; Un mécanisme permet à l’utilisateur de remplacer l’image embarquée par une image possédant une alternative pertinente.
+<div lang="fr">Chaque image embarqu&#xE9;e (balise <code lang="en">embed</code> avec l&#x2019;attribut <code lang="en">type="image/…"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a> v&#xE9;rifie-t-elle une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-3" title="Cas particuliers pour le crit&#xE8;re 1.3">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;image embarqu&#xE9;e est imm&#xE9;diatement suivie d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> permettant d&#x2019;afficher une page ou un passage de texte contenant une alternative pertinente&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur de remplacer l&#x2019;image embarqu&#xE9;e par un texte alternatif pertinent&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur de remplacer l&#x2019;image embarqu&#xE9;e par une image poss&#xE9;dant une alternative pertinente.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque image embarquée (balise embed avec l’attribut type="image/…") porteu
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

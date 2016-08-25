@@ -13,7 +13,7 @@ No-check rule
 [1.5.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-5-2)
 
 ### Description
-Chaque bouton associé à une image (balise input avec l’attribut type="image") utilisée comme CAPTCHA vérifie-t-il une de ces conditions ? Il existe une autre forme de CAPTCHA non graphique, au moins ; Il existe une autre solution d’accès à la fonctionnalité sécurisée par le CAPTCHA.
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#bouton-formulaire">bouton</a> associ&#xE9; &#xE0; une image (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) utilis&#xE9;e comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#captcha">CAPTCHA</a> v&#xE9;rifie-t-il une de ces conditions&nbsp;? <ul><li>Il existe une autre forme de CAPTCHA non graphique, au moins&nbsp;;</li> <li>Il existe une autre solution d&#x2019;acc&#xE8;s &#xE0; la fonctionnalit&#xE9; s&#xE9;curis&#xE9;e par le CAPTCHA.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque bouton associé à une image (balise input avec l’attribut type="image"
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

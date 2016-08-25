@@ -13,7 +13,7 @@ No-check rule
 [1.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-3)
 
 ### Description
-Chaque bouton de formulaire (balise input avec l’attribut type="image") a-t-il un attribut alt ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#bouton-formulaire">bouton</a> de formulaire (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) a-t-il un attribut <code lang="en">alt</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque bouton de formulaire (balise input avec l’attribut type="image") a-t-il
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

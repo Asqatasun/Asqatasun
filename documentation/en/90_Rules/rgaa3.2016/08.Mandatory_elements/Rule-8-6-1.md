@@ -13,7 +13,7 @@ No-check rule
 [8.6.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-6-1)
 
 ### Description
-Pour chaque page Web ayant un titre de page (balise title), le contenu de cette balise est-il pertinent ?
+<div lang="fr">Pour chaque page Web ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titrePage">titre de page</a> (balise <code lang="en">title</code>), le contenu de cette balise est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Pour chaque page Web ayant un titre de page (balise title), le contenu de cette 
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

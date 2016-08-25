@@ -13,7 +13,7 @@ No-check rule
 [1.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-3-1)
 
 ### Description
-Chaque image (balise img) porteuse d’information, ayant un attribut alt, vérifie-t-elle ces conditions (hors cas particuliers) ? Le contenu de l’attribut alt est pertinent ; S’il est présent, le contenu de l’attribut title est identique au contenu de l’attribut alt ; S’il est présent, le contenu de la propriété aria-label est identique au contenu de l’attribut alt ; S’il est présent, le contenu du passage de texte lié via la propriété aria-labelledby est identique au contenu de l’attribut alt.
+<div lang="fr">Chaque image (balise <code lang="en">img</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, ayant un attribut <code lang="en">alt</code>, v&#xE9;rifie-t-elle ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-3" title="Cas particuliers pour le crit&#xE8;re 1.3">cas particuliers</a>)&nbsp;? <ul><li>Le contenu de l&#x2019;attribut <code lang="en">alt</code> est pertinent&nbsp;;</li> <li>S&#x2019;il est pr&#xE9;sent, le contenu de l&#x2019;attribut <code lang="en">title</code> est identique au contenu de l&#x2019;attribut <code lang="en">alt</code>&nbsp;;</li> <li>S&#x2019;il est pr&#xE9;sent, le contenu de la propri&#xE9;t&#xE9; <code lang="en">aria-label</code> est identique au contenu de l&#x2019;attribut <code lang="en">alt</code>&nbsp;;</li> <li>S&#x2019;il est pr&#xE9;sent, le contenu du passage de texte li&#xE9; <i>via</i> la propri&#xE9;t&#xE9; <code lang="en">aria-labelledby</code> est identique au contenu de l&#x2019;attribut <code lang="en">alt</code>.</li> </ul></div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Chaque image (balise img) porteuse d’information, ayant un attribut alt, véri
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm

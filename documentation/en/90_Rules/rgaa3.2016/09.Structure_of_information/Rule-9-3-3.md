@@ -13,7 +13,7 @@ No-check rule
 [9.3.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-3-3)
 
 ### Description
-Dans chaque page Web, les informations regroupées sous forme de listes de définitions utilisent-elles les balises dl et dt/dd ?
+<div lang="fr">Dans chaque page Web, les informations regroup&#xE9;es sous forme de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#listes">listes</a> de d&#xE9;finitions utilisent-elles les balises <code lang="en">dl</code> et <code lang="en">dt</code>/<code lang="en">dd</code>&nbsp;?</div>
 
 ### Level
 **A**
@@ -25,6 +25,7 @@ Dans chaque page Web, les informations regroupées sous forme de listes de défi
 **Page**
 
 ### Decision level
+@@@TODO
 
 
 ## Algorithm
