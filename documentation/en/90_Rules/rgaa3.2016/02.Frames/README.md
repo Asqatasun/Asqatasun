@@ -2,11 +2,11 @@
 # RGAA 3.2016 Theme 2: Frames
 
 ## Criterion 2.1
-Chaque cadre en ligne a-t-il un titre de cadre ?
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a> a-t-il un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre-de-cadre">titre de cadre</a>&nbsp;?</div>
 * [Rule 2.1.1](Rule-2-1-1.md)
 
 ## Criterion 2.2
-Pour chaque cadre en ligne ayant un titre de cadre, ce titre de cadre est-il pertinent ?
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a> ayant un titre de cadre, ce <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre-de-cadre">titre de cadre</a> est-il pertinent&nbsp;?</div>
 * [Rule 2.2.1](Rule-2-2-1.md)
 
 
