@@ -22,16 +22,15 @@ package $package.$referential.toLowerCase();
 import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
- * Implementation of the rule $ruleCode of the referential $referentialName
- *
+ * Implementation of the rule ${ruleCode.replace('-', '.')} of the referential $referentialName
+ * 
 #set ($empty = "empty")
 #if ( $refDescriptor != $empty )
- * @see <a href="${refDescriptor}#test-$ruleCode">$ruleCode rule specification</a>
+ * @see <a href="${refDescriptor}#test-$ruleCode">${ruleCode.replace('-', '.')} rule specification</a>
  *
 #end
  * @author
  */
-
 public class $rule extends AbstractNotTestedRuleImplementation {
 
     /**

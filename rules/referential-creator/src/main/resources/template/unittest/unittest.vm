@@ -24,7 +24,7 @@ import org.asqatasun.entity.audit.ProcessResult;
 import ${package}.${referential.toLowerCase()}.test.${referential}RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule ${ruleCode} of the referential ${referentialName}.
+ * Unit test class for the implementation of the rule ${ruleCode.replace('-', '.')} of the referential ${referentialName}
  *
  * @author
  */
