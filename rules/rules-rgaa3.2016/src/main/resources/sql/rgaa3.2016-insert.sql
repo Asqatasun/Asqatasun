@@ -640,6 +640,21 @@ UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE
 UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE `Cd_Criterion` LIKE 'Rgaa32016-13-16') WHERE `Cd_Test` LIKE 'Rgaa32016-13-16-%';
 UPDATE `TEST` SET `Id_Criterion` = (SELECT `Id_Criterion` FROM `CRITERION` WHERE `Cd_Criterion` LIKE 'Rgaa32016-13-17') WHERE `Cd_Test` LIKE 'Rgaa32016-13-17-%';
 
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('01.Images/Rule-',                       SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-1-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('02.Frames/Rule-',                       SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-2-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('03.Colours/Rule-',                      SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-3-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('04.Multimedia/Rule-',                   SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-4-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('05.Tables/Rule-',                       SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-5-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('06.Links/Rule-',                        SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-6-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('07.Scripts/Rule-',                      SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-7-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('08.Mandatory_elements/Rule-',           SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-8-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('09.Structure_of_information/Rule-',     SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-9-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('10.Presentation_of_information/Rule-',  SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-10-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('11.Forms/Rule-',                        SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-11-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('12.Navigation/Rule-',                   SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-12-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('13.Consultation/Rule-',                 SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa32016-13-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/', `Rule_Design_Url`)     WHERE `Cd_Test` LIKE 'Rgaa32016-%';
+
 INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_Default`) VALUES
 (5, 'Rgaa32016;LEVEL_1', b'0'),
 (5, 'Rgaa32016;LEVEL_2', b'0'),
