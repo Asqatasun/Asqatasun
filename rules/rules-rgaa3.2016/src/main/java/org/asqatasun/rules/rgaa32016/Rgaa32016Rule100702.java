@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 10.7.2 of the referential RGAA 3.2016
  * <br/>
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/@@@FixMe/Rule-10-7-2.html">the rule 10.7.2 design page.</a>
+ * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/10.Presentation_of_information/Rule-10-7-2.html">the rule 10.7.2 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-10-7-2">10.7.2 rule specification</a>
  *
  * @author
