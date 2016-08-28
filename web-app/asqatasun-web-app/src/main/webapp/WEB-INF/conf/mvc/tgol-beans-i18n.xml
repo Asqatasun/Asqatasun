@@ -23,12 +23,19 @@
                 <value>classpath:i18n/rule-aw22-I18N</value>
                 <value>classpath:i18n/rule-remark-aw22-I18N</value>
                 
-                <!--rgaa3 i18n files -->
+                <!--rgaa3.0 i18n files -->
                 <value>classpath:i18n/referential-rgaa30-I18N</value>
                 <value>classpath:i18n/theme-rgaa30-I18N</value>
                 <value>classpath:i18n/criterion-rgaa30-I18N</value>
                 <value>classpath:i18n/rule-rgaa30-I18N</value>
                 <value>classpath:i18n/rule-remark-rgaa30-I18N</value>
+
+                <!--rgaa3.2016 i18n files -->
+                <value>classpath:i18n/referential-rgaa32016-I18N</value>
+                <value>classpath:i18n/theme-rgaa32016-I18N</value>
+                <value>classpath:i18n/criterion-rgaa32016-I18N</value>
+                <value>classpath:i18n/rule-rgaa32016-I18N</value>
+                <value>classpath:i18n/rule-remark-rgaa32016-I18N</value>
                 
                 <!--seo1.0 i18n files -->
                 <value>classpath:i18n/referential-seo-I18N</value>
