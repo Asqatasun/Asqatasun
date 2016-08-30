@@ -2,9 +2,7 @@
  * Asqatasun - Automated webpage assessment
  * Copyright (C) 2008-2015  Asqatasun.org
  *
- * This file is part of Asqatasun.
- *
- * Asqatasun is free software: you can redistribute it and/or modify
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -31,6 +29,7 @@ import static org.asqatasun.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
+ * Unit test class for the implementation of the rule 5-4-1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */
