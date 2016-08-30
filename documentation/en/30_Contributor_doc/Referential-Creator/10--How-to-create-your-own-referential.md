@@ -9,12 +9,6 @@ cd Asqatasun/
 mvn clean install
 ```
 
-Install manually the apache commons-csv library.
-```sh
-cd Asqatasun/rules/referential-creator-maven-plugin/src/main/resources/lib/
-./install_lib.sh
-```
-
 Build the referential-creator maven plugin
 ```sh
 cd Asqatasun/rules/referential-creator-maven-plugin/
