@@ -35,6 +35,10 @@ import org.asqatasun.rules.keystore.RemarkMessageStore;
  */
 public class Rgaa30Rule050401Test extends Rgaa30RuleImplementationTestCase {
 
+    /**
+     * Default constructor
+     * @param testName
+     */
     public Rgaa30Rule050401Test(String testName) {
         super(testName);
     }
