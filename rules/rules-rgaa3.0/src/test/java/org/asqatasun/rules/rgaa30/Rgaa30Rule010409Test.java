@@ -28,7 +28,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_AT_RESTITUTI
 import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule 1-4-9 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.4.9 of the referential Rgaa 3.0.
  *
  * @author
  */

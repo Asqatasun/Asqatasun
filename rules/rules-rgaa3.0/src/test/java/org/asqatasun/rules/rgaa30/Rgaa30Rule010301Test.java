@@ -38,7 +38,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_ALT_
 import static org.asqatasun.rules.keystore.RemarkMessageStore.TITLE_NOT_IDENTICAL_TO_ALT_MSG;
 
 /**
- * Unit test class for the implementation of the rule 1-3-1 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.3.1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

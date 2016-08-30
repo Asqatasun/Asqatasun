@@ -33,7 +33,7 @@ import org.asqatasun.rules.keystore.RemarkMessageStore;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_ALT_PERTINENCE_OF_INFORMATIVE_IMG_MSG;
 
 /**
- * Unit test class for the implementation of the rule 1-3-2 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.3.2 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

@@ -28,7 +28,7 @@ import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 611 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 6.1.1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

@@ -27,7 +27,7 @@ import static org.asqatasun.rules.keystore.MarkerStore.*;
 import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule 5-1-1 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 5.1.1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

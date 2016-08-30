@@ -29,7 +29,7 @@ import static org.asqatasun.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 5-4-1 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 5.4.1 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

@@ -28,7 +28,7 @@ import static org.asqatasun.rules.keystore.HtmlElementStore.AREA_ELEMENT;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
 
 /**
- * Unit test class for the implementation of the rule 1-4-2 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.4.2 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

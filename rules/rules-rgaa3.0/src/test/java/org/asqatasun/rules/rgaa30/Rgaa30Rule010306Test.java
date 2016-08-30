@@ -38,7 +38,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.SVG_WITHOUT_ROLE_I
 import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule 1-3-6 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.3.6 of the referential Rgaa 3.0.
  *
  * @author
  */

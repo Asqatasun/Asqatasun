@@ -30,7 +30,7 @@ import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
- * Unit test class for the implementation of the rule 1-8-4 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.8.4 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

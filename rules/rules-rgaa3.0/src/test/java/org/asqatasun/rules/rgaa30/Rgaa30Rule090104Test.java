@@ -28,7 +28,7 @@ import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.service.ProcessRemarkService;
 
 /**
- * Unit test class for the implementation of the rule 9-1-4 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 9.1.4 of the referential Rgaa 3.0.
  *
  * @author jkowalczyk
  */

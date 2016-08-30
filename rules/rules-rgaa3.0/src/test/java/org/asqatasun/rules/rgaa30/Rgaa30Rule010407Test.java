@@ -31,7 +31,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTE
 import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 
 /**
- * Unit test class for the implementation of the rule 1-4-7 of the referential Rgaa 3.0.
+ * Unit test class for the implementation of the rule 1.4.7 of the referential Rgaa 3.0.
  *
  * @author
  */
