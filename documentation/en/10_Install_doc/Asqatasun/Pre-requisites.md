@@ -7,13 +7,16 @@ You should have already done these steps:
 
 ## Check Pre-requisites : automated way
 
-Once you have extrated the tarball, to Check pre-requisites, you can run the script:
+### Pre-requisites script
+
+Once you have extracted the tarball, to Check pre-requisites, you can run the script:
 
 ```sh
-install/pre-requisites.sh
+cd install
+./pre-requisites.sh
 ```
 
-A few noteworthy information:
+### A few noteworthy information
 
 * This script is intended to be used on a freshly installed Ubuntu 14.04 (no Mysql, 
 no Tomcat already installed).
@@ -23,10 +26,17 @@ no Tomcat already installed).
 configuration, or Tomcat user configuration, or Firefox version requirement...), so please
 do care about it :)
 
-If you have a Tomcat or Mysql already installed, or if you don't feel comfortable
-with running a script as root, you can review the Manual way just below.
+### Pre-defined values for MYSQL
 
-## Next step
+* Mysql root password: `mysqlRootPassword`
+* Mysql asqatasun password: `asqaP4sswd`
+
+### Don't like our script ?
+
+If you have a Tomcat or Mysql already installed, or if you don't feel comfortable
+with running a script as root, you can review the manual way just below.
+
+## Next step (after automated way)
 
 Go to [Installation](Installation.md).
 
