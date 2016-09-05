@@ -29,7 +29,6 @@ do not use the `--push` option
 (We don't push yet, do the testing stuff before :) ) 
 
 
-
 ## 4) Build local Docker image with locally build Asqatasun
 
 ...and check release is the good one + run some manual tests

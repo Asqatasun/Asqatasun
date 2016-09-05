@@ -1,8 +1,46 @@
 # Prerequisites for Asqatasun web application installation
 
-In few words : install packages, then configure.
+You should have already done these steps:
 
-## Packages to install
+1. [Check Hardware provisioning](Hardware_provisioning.md)
+2. [Download Asqatasun](Download.md)
+
+## Check Pre-requisites : automated way
+
+Once you have extrated the tarball, to Check pre-requisites, you can run the script:
+
+```sh
+install/pre-requisites.sh
+```
+
+A few noteworthy information:
+
+* This script is intended to be used on a freshly installed Ubuntu 14.04 (no Mysql, 
+no Tomcat already installed).
+* You can use the default values or adjust them to suite your needs (directly edit the file).
+* This script must be run as root
+* Pre-requisites are important, and **each detail is important** (e.g. Mysql specific 
+configuration, or Tomcat user configuration, or Firefox version requirement...), so please
+do care about it :)
+
+If you have a Tomcat or Mysql already installed, or if you don't feel comfortable
+with running a script as root, you can review the Manual way just below.
+
+## Next step
+
+Go to [Installation](Installation.md).
+
+
+## Check Pre-requisites : manual way
+
+If you don't feel comfortable with running a script as root, here are the
+required steps for completing the pre-requisites.
+
+In a few words : install packages, then configure.
+
+(Ever need help ? Go to [Asqatasun Forum](http://forum.asqatasun.org))
+
+### Packages to install
 
 ```sh
 sudo apt-get -y --no-install-recommends install \
@@ -18,13 +56,13 @@ sudo apt-get -y --no-install-recommends install \
     openjdk-7-jre
 ```
 
-## Configure Open JDK as default
+### Configure Open JDK as default
 
 ```sh
 sudo update-java-alternatives -s java-1.7.0-openjdk
 ```
 
-## Mysql Configuration
+### Mysql Configuration
 
 Create a config file for Mysql dedicated to Asqatasun:
 
@@ -50,7 +88,7 @@ Restart mysql service
 sudo service mysql restart
 ```
 
-## Configure Tomcat 
+### Configure Tomcat 
 
 Create the following symlinks : 
 ```sh
@@ -58,7 +96,7 @@ sudo ln -s /usr/share/java/spring3-instrument-tomcat.jar /usr/share/tomcat7/lib/
 sudo ln -s /usr/share/java/mysql-connector-java.jar /usr/share/tomcat7/lib/mysql-connector-java.jar
 ```
 
-## Configure Xvfb
+### Configure Xvfb
 
 Create the startup script in /etc/init.d/xvfb
 
@@ -123,9 +161,9 @@ sudo /etc/init.d/xvfb start
 
 ```
 
-## Firefox
+### Firefox
 
-### For 32-bit architecture
+#### For 32-bit architecture
 
 Retrieve the [Firefox ESR v31](http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/31.4.0esr/linux-i686/en-US/firefox-31.4.0esr.tar.bz2).
 
@@ -139,7 +177,7 @@ sudo mv firefox firefox-31.4.0esr
 sudo ln -s firefox-31.4.0esr firefox
 ```
 
-### For 64-bit architecture
+#### For 64-bit architecture
 
 Retrieve the [Firefox ESR 31](http://download.cdn.mozilla.net/pub/mozilla.org/firefox/releases/31.4.0esr/linux-x86_64/en-US/firefox-31.4.0esr.tar.bz2).
 
@@ -153,7 +191,7 @@ sudo mv firefox firefox-31.4.0esr
 sudo ln -s firefox-31.4.0esr firefox
 ```
 
-## Mail SMTP
+### Mail SMTP
 
 Asqatasun works better with email (informing you when an audit is finished, or if gives an error).
 Here a the steps to install locally an SMTP server. You can also use online services 
@@ -169,3 +207,8 @@ Once the configuration is displayed, options are :
 * configuration type: satellite
 * SMTP relay: &lt;none&gt; (this is the trick, don't type anything here)
 
+## Next step
+
+Congratulations, you survived the manual pre-requisites stage :)
+
+You can go to [Installation](Installation.md).
