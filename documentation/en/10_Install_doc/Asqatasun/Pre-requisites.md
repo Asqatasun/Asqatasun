@@ -98,6 +98,21 @@ Restart mysql service
 sudo service mysql restart
 ```
 
+### Mysql: database creation
+
+Create an empty schema and a asqatasun user. Grant this asqatasun user permissions 
+to create, update and delete objects for this schema. The charset of the database 
+has to be set to "UTF-8".
+
+```sql
+GRANT USAGE ON * . * TO '$AsqatasunUser'@'localhost' IDENTIFIED BY '$AsqatasunPassword';
+CREATE DATABASE IF NOT EXISTS `$AsqatasunDatabase` CHARACTER SET utf8;
+GRANT ALL PRIVILEGES ON `$AsqatasunDatabase` . * TO '$AsqatasunUser'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+where `$AsqatasunUser` is the asqatasun user, `$AsqatasunPassword` is the asqatasun user password, and `$AsqatasunDatabase` is the asqatasun database.
+
 ### Configure Tomcat 
 
 Create the following symlinks : 
