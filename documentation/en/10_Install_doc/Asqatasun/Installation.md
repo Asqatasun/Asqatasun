@@ -43,6 +43,7 @@ sudo ./install.sh --database-user <Asqatasunu_dababase_user> \
 sudo ./install.sh --database-user asqatasun \
                   --database-passwd $MyAsqatasunPassWord \
                   --database-db asqatasun \
+                  --database-host localhost \
                   --asqatasun-url http://localhost:8080/asqatasun/ \
                   --tomcat-webapps /var/lib/tomcat7/webapps/ \
                   --tomcat-user tomcat7 \
