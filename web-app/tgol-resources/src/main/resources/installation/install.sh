@@ -102,7 +102,7 @@ fail() {
 prerequesites() {
 
 	echo ""
-	echo "Please verify your configuration meets the requirements : http://doc.asqatasun.org/en/10_Install_doc/Asqatasun/pre-requisites.html"
+	echo "Please verify your configuration meets the requirements : http://doc.asqatasun.org/en/10_Install_doc/Asqatasun/Pre-requisites.html"
 	echo ""	
 	read -p "Are you sure you want to continue installation (yes/no)? " response
 	if [[ ! "${response}" == "yes" ]]; then
