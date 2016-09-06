@@ -99,7 +99,7 @@ fail() {
 	exit -1
 }
 
-prerequesites() {
+prerequisites() {
 
 	echo ""
 	echo "Please verify your configuration meets the requirements : http://doc.asqatasun.org/en/10_Install_doc/Asqatasun/Pre-requisites.html"
@@ -515,8 +515,8 @@ main() {
     preprocess_options
     # print installation summary
     echo_configuration_summary
-    # prerequesites
-    prerequesites
+    # prerequisites
+    prerequisites
 
     # create Asqatasun directories
     create_directories
