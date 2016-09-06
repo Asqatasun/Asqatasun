@@ -22,6 +22,7 @@ declare firefox_esr_binary_path=
 declare display_port=
 
 declare omit_cleanup=true
+declare quiet=false
 
 declare dirty_database=false
 declare dirty_directories=false
@@ -212,7 +213,7 @@ proceed_stdin() {
     for option in ${OPTIONS[@]}; do
         local value=$(eval echo \${$option})
         while [[ -z "$value" ]]; do
-            $quiet || $script || echo -n "$option : "
+            ${quiet} || echo -n "$option : "
             read $option
             value=$(eval echo \${$option})
             echo $value
@@ -244,8 +245,8 @@ echo_configuration_summary() {
 	cat << EOF
 
 Installing Asqatasun with the following configuration :
- - The database user "${database_user}" will be created and used by Asqatasun
- - The database database "${database_db}" will be created and used by Asqatasun
+ - The database user "${database_user}" will be used by Asqatasun
+ - The database database "${database_db}" will be used by Asqatasun
  - The database host is "${database_host}"
  - Path prefix for directories is "${prefix}" 
  - The web application will be installed in "${tomcat_webapps}/${asqatasun_webapp_dir}"
