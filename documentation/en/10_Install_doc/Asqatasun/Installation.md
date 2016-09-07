@@ -2,7 +2,7 @@
 
 You should have already done these steps:
 
-1. [Check Hardware provisioning](Hardware_provisioning.md)
+1. [Check Hardware provisioning](Hardware_network_provisioning.md)
 2. [Download Asqatasun](Download.md)
 3. [Check pre-requisites](Pre-requisites.md)
 

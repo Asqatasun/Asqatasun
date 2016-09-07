@@ -2,7 +2,7 @@
 
 You should have already done this step:
 
-1. [Check Hardware provisioning](Hardware_provisioning.md)
+1. [Check Hardware provisioning](Hardware_network_provisioning.md)
 
 ## Download Asqatasun tarball and extract content
 

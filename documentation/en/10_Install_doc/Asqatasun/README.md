@@ -6,7 +6,7 @@ tested on Linux Ubuntu 14.04 LTS (Trusty Tahr).
 
 ## Steps to install (recommanded)
 
-1. [Check Hardware provisioning](Hardware_provisioning.md)
+1. [Check Hardware and network provisioning](Hardware_network_provisioning.md)
 2. [Download Asqatasun](Download.md)
 3. [Check pre-requisites](Pre-requisites.md)
 4. [Install](Installation.md)

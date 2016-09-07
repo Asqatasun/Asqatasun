@@ -3,7 +3,7 @@
 * [Installation](10_Install_doc/README.md)
     * [Docker](10_Install_doc/Docker/README.md)
     * [Asqatasun](10_Install_doc/Asqatasun/README.md)
-        * [Hardware provisioning](10_Install_doc/Asqatasun/Hardware_provisioning.md)
+        * [Hardware network provisioning](10_Install_doc/Asqatasun/Hardware_network_provisioning.md)
         * [Download](10_Install_doc/Asqatasun/Download.md)
         * [Pre-requisites](10_Install_doc/Asqatasun/Pre-requisites.md)
         * [Installation](10_Install_doc/Asqatasun/Installation.md)
