@@ -1,4 +1,4 @@
-# Setting up an Apache with HTTPS as a front-end to Tomcat
+# Setting up an Apache front-end with HTTPS
  
 ## Overview
 
@@ -16,7 +16,8 @@ Let's define the following:
 
 * `myasqatasun.mycompany.com`
   The FQDN (fully qualified domain name) of the machine hosting Asqatasun
-* Asqatasun has been [installed on a server](../10_Install_doc/Asqatasun/README.md) and is available at http://myasqatasun.mycompany.com:8080/asqatasun/  
+* Asqatasun has been [installed on a server](../10_Install_doc/Asqatasun/README.md) (Ubuntu Linux 14.04) 
+* ...and is available at http://myasqatasun.mycompany.com:8080/asqatasun/
 
 ## 1. TOMCAT configure an AJP connector
  
