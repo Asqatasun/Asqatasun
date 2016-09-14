@@ -16,7 +16,9 @@ Configuration:
 None
 
 Documentation:
-None
+- Reorganised INSTALL section
+- Added "howto configuring Apache frontend with AJP connector and HTTPS Let's Encrypt"
+- Added "Crawler management" with howto increase maxDocuments in site-audit
 
 Upgrade-o-meter (borrowed from folks at Gitlab):
 None
