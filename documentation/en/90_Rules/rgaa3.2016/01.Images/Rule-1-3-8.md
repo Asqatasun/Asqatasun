@@ -44,6 +44,6 @@ In all cases
 
 ##  TestCases
 
-[TestCases files for rule 1.3.8](https://github.com/Asqatasun/Asqatasun/tree/RGAA_3.2016/rules/rules-rgaa3.2016/src/test/resources/testcases/rgaa32016/Rgaa32016Rule010308/)
+[TestCases files for rule 1.3.8](https://github.com/Asqatasun/Asqatasun/tree/develop/rules/rules-rgaa3.2016/src/test/resources/testcases/rgaa32016/Rgaa32016Rule010308/)
 
 
