@@ -19,23 +19,39 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.LABEL_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.OPTGROUP_WITHIN_SELECT_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.OPTGROUP_WITHOUT_LABEL_MSG;
 
 /**
  * Implementation of the rule 11.8.2 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/11.Forms/Rule-11-8-2.html">the rule 11.8.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-11-8-2">11.8.2 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-11-8-3">11.8.2 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule110802 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule110802 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
-     * Default constructor
+     * Constructor
      */
     public Rgaa32016Rule110802 () {
-        super();
-    }
+        super(
+                new SimpleElementSelector(OPTGROUP_WITHIN_SELECT_CSS_LIKE_QUERY), 
+                new AttributePresenceChecker(
+                    // the attribute to search
+                    LABEL_ATTR, 
+                    // passed when attribute is found, empty message
+                    new ImmutablePair(TestSolution.PASSED, ""),
+                    // failed when attribute is not found
+                    new ImmutablePair(TestSolution.FAILED, OPTGROUP_WITHOUT_LABEL_MSG)
+                )
+            );
+    }   
 
 }
