@@ -838,3 +838,5 @@ UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-14-1';
 
 UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-14-4';
 
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-15-1';
+
