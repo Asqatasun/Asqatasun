@@ -19,23 +19,54 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import java.util.Iterator;
+import java.util.regex.Pattern;
+import org.jsoup.nodes.Element;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.headings.HeadingsHierarchyChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.ARIA_HEADINGS_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 9.1.2 of the referential RGAA 3.2016
  * <br/>
- * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/09.Structure_of_information/Rule-9-1-2.html">the rule 9.1.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-2">9.1.2 rule specification</a>
+ * For more details about the implementation, refer to <a
+ * href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/09.Structure_of_information/Rule-9-1-2.html">the rule 9.1.2
+ * design page.</a>
  *
- * @author
+ * @see <a
+ * href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-2">
+ * 9.1.2 rule specification</a>
+ *
  */
-public class Rgaa32016Rule090102 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule090102 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+
+    private static final Pattern PATTERN = Pattern.compile("[1-9][0-9]?");
 
     /**
      * Default constructor
      */
     public Rgaa32016Rule090102 () {
-        super();
+        super(
+                new SimpleElementSelector(
+                HEADINGS_CSS_LIKE_QUERY + ", " + ARIA_HEADINGS_CSS_LIKE_QUERY),
+                new HeadingsHierarchyChecker());
     }
 
+    @Override
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        Iterator<Element> elementsIterator = getElements().get().iterator();
+        while (elementsIterator.hasNext()) {
+            Element element = elementsIterator.next();
+            if (element.hasAttr("aria-level")) {
+                if (!PATTERN.matcher(element.attr("aria-level")).matches()) {
+                    elementsIterator.remove();
+                }
+            }
+        }
+    }
+    
 }
