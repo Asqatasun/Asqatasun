@@ -17,9 +17,27 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jsoup.nodes.Element;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITHOUT_TARGET_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.FIELDSET_NOT_WITHIN_FORM_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.LINK_WITHOUT_TARGET_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
+import org.asqatasun.rules.elementchecker.helper.RuleCheckHelper;
 
 /**
  * Implementation of the rule 8.9.1 of the referential RGAA 3.2016
@@ -27,15 +45,78 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-9-1.html">the rule 8.9.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-9-1">8.9.1 rule specification</a>
  *
- * @author
+ * @author jkowalczyk
  */
-public class Rgaa32016Rule080901 extends AbstractNotTestedRuleImplementation {
 
+public class Rgaa32016Rule080901 extends AbstractPageRuleMarkupImplementation {
+
+    /* the links without target */
+    ElementHandler<Element> linkWithoutTarget = new ElementHandlerImpl();
+    /* the fieldset not within form*/
+    ElementHandler<Element> fieldsetNotWithinForm = new ElementHandlerImpl();
+    /* the total number of elements */
+    int totalNumberOfElements = 0;
+            
     /**
      * Default constructor
      */
-    public Rgaa32016Rule080901 () {
+    public Rgaa32016Rule080901  () {
         super();
     }
+    
+    @Override
+    protected void select(SSPHandler sspHandler) {
+        // Selection of all links without target
+        ElementSelector linkWithoutTargetSelector = 
+                new SimpleElementSelector(LINK_WITHOUT_TARGET_CSS_LIKE_QUERY);
+        linkWithoutTargetSelector.selectElements(sspHandler, linkWithoutTarget);
+        
+        // Selection of all links without target
+        ElementSelector fielsetNotWithinFormSelector = 
+                new SimpleElementSelector(FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY);
+        fielsetNotWithinFormSelector.selectElements(sspHandler, fieldsetNotWithinForm);
+        
+        totalNumberOfElements = sspHandler.getTotalNumberOfElements();
+    }
 
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            TestSolutionHandler testSolutionHandler) {
+
+        if (linkWithoutTarget.isEmpty() && fieldsetNotWithinForm.isEmpty()) {
+            sspHandler.getProcessRemarkService().addProcessRemark(
+                    TestSolution.NEED_MORE_INFO, 
+                    RuleCheckHelper.specifyMessageToRule(
+                        NO_PATTERN_DETECTED_MSG, 
+                        this.getTest().getCode())
+                    );
+            testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
+            return;
+        }
+        
+        ElementChecker linkWithoutTargetChecker = new ElementPresenceChecker(
+                        new ImmutablePair(TestSolution.FAILED,LINK_WITHOUT_TARGET_MSG),
+                        new ImmutablePair(TestSolution.PASSED,""));
+        
+        linkWithoutTargetChecker.check(
+                    sspHandler, 
+                    linkWithoutTarget, 
+                    testSolutionHandler);
+        
+        ElementChecker fieldsetNotWithinFormChecker = new ElementPresenceChecker(
+                        new ImmutablePair(TestSolution.NEED_MORE_INFO,FIELDSET_NOT_WITHIN_FORM_MSG),
+                        new ImmutablePair(TestSolution.PASSED,""));
+        
+        fieldsetNotWithinFormChecker.check(
+                    sspHandler, 
+                    fieldsetNotWithinForm, 
+                    testSolutionHandler);
+    }
+
+    @Override
+    public int getSelectionSize () {
+        return totalNumberOfElements;
+    }
+    
 }
