@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa32016 Test.1.6.1 Failed 01</title>
+        <title>Rgaa32016 Test.1.6.1 NMI 03</title>
     </head>
-    <body class="Failed">
+    <body class="NMI">
         <div>
-            <h1>Rgaa32016 Test.1.6.1 Failed 01</h1>
+            <h1>Rgaa32016 Test.1.6.1 NMI 03</h1>
 
 <!-- START [test-detail] -->
             <div class="test-detail" lang="fr">
@@ -14,11 +14,14 @@
             </div>
 <!-- END [test-detail] -->
 
-            <div class="testcase">
-            </div>
 
+            <div class="testcase">
+                <img alt="" src="mock_image1.jpg" /> 
+                <img id="id-informative-image" alt="" src="mock_image2.jpg" /> 
+                <img class="class-decorative-image" alt="" src="mock_image3.jpg" /> 
+            </div>
             <div class="test-explanation">
-                Failed.
+                 NMI : 3 &lt;img&gt; are found on the page. The second is identified as informative by marker usage. The last &lt;img&gt; is identified as decorative by marker usage, it is out of scope. 
             </div>
         </div>
     </body>
