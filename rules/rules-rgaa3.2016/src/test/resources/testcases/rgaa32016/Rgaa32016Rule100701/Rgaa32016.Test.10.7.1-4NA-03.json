@@ -1,0 +1,148 @@
+[
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": true,
+        "isHidden": false,
+        "isTextNode": false,
+        "outlineColorFocus": "rgb(0; 0; 0)",
+        "outlineStyleFocus": "none",
+        "outlineWidthFocus": "0px",
+        "path": "body",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": false,
+        "path": "body > div:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "32px",
+        "fontWeight": 700,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > h1:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(1)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(2)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(3)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "12px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(1) > code:eq(4)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": false,
+        "path": "body > div:eq(0) > div:eq(2)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(220; 218; 213)",
+        "color": "rgb(117; 117; 117)",
+        "fontSize": "13.8833px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": false,
+        "path": "body > div:eq(0) > div:eq(2) > select:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(220; 218; 213)",
+        "color": "rgb(117; 117; 117)",
+        "fontSize": "13.8833px",
+        "fontWeight": 700,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": false,
+        "path": "body > div:eq(0) > div:eq(2) > select:eq(0) > optgroup:eq(0)",
+        "textAlign": "start"
+    },
+    {
+        "bgColor": "rgb(255; 255; 255)",
+        "color": "rgb(0; 0; 0)",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "isFocusable": false,
+        "isHidden": false,
+        "isTextNode": true,
+        "path": "body > div:eq(0) > div:eq(3)",
+        "textAlign": "start"
+    }
+]
