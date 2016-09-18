@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa32016 Test.11.1.1 NA 01</title>
+        <title>Rgaa32016 Test.11.01.1 Passed 05</title>
     </head>
-    <body class="NA">
+    <body class="Passed">
         <div>
-            <h1>Rgaa32016 Test.11.1.1 NA 01</h1>
+            <h1>Rgaa32016 Test.11.01.1 Passed 05</h1>
 
 <!-- START [test-detail] -->
             <div class="test-detail" lang="fr">
@@ -14,12 +14,22 @@
             </div>
 <!-- END [test-detail] -->
 
-            <div class="testcase">
-            </div>
 
-            <div class="test-explanation">
-                NA.
+            <ul> 
+                <li> The form field has a title attribute</li> 
+                <li> A label (label tag) is associated with the form field</li> 
+            </ul>  
+            <p></p> 
+            <div class="testcase">
+                <form action="http://action.html" method="post"> 
+                    <p> 
+                        <label for="file">file : </label>
+                        <input type="file" id="file" />
+                        <input type="submit" value="Send" />
+                        <input type="reset" /> </p> 
+                </form> 
             </div>
+            <p class="test-explanation"> Passed: All the form field have either a title attribute or an associated label tag </p> 
         </div>
     </body>
 </html>
