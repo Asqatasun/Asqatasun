@@ -1,8 +1,7 @@
 # RGAA 3.2016 - Rule 6.5.1
 
 ## Summary
-No-check rule
-
+This test checks whether the page contains empty links.
 
 ## Business description
 
@@ -18,28 +17,59 @@ No-check rule
 ### Level
 **A**
 
-
 ## Technical description
 
 ### Scope
 **Page**
 
 ### Decision level
-@@@TODO
-
+**Decidable**
 
 ## Algorithm
 
 ### Selection
-None
+
+#### Set1** 
+
+All the `<a>` tags of the page that are not an anchor (
+a:not([name]):not([id]) )
+
+#### Set2
+
+All the tags from **Set1** that have an empty text (including
+children text) and that have not children with a not empty `"alt"`
+attribute
 
 ### Process
-None
+
+For each element of **Set2**, raise a MessageA
+
+##### MessageA : Empty link
+
+-   code : EmptyLink
+-   status: Failed
+-   parameter : `"href"` attribute, snippet
+-   present in source : yes
 
 ### Analysis
 
-#### No Tested
-In all cases
+#### Not Applicable
+
+The page has no `<a>` tag (**Set1** is empty)
+
+#### Passed
+
+The page only doesn't contain empty links (**Set2** is empty)
+
+#### Failed
+
+The page only contains empty links (**Set2** is not empty)
+
+## Notes
+
+A `<a>` tag is seen as an anchor if and only if it has either a "name" or
+an "id" attribute (assuming [the definition of an anchor in Rgaa3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#content-ancre))
+
 
 
 ##  TestCases
