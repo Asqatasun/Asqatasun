@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa32016 Test.6.3.3 NA 04</title>
+    </head>
+    <body class="NA">
+        <div>
+            <h1>Rgaa32016 Test.6.3.3 NA 04</h1>
+
+<!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-composite">lien composite</a> (contenu texte et de l&#x2019;attribut <code lang="en">alt</code>) est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-explicite-hors-contexte">explicite hors contexte</a> (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.3">cas particuliers</a>)&nbsp;?
+            </div>
+<!-- END [test-detail] -->
+
+
+            <div class="testcase">
+                <a> <img src="image.jpg" alt="This is a combined link" /> wihtout href, context doesn&apos;t change anything </a> 
+                <a> <object data="data.png"> --&gt;;* </object> --&gt; </a> 
+            </div>
+            <p class="test-explanation">NA : The page doesn&apos;t contain any &lt;a&gt; tag with a href attribute. The tag is ignored despite the context</p> 
+        </div>
+    </body>
+</html>
