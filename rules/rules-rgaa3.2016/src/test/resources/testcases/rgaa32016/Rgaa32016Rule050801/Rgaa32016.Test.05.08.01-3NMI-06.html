@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa32016 Test.5.8.1 NMI 06</title>
+    </head>
+    <body class="NMI">
+        <div>
+            <h1>Rgaa32016 Test.5.8.1 NMI 06</h1>
+
+<!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-mise-en-forme">tableau de mise en forme</a> (balise <code lang="en">table</code>) v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>Le tableau de mise en forme (balise <code lang="en">table</code>) ne poss&#xE8;de pas de balises <code lang="en">caption</code>, <code lang="en">th</code>, <code lang="en">thead</code>, <code lang="en">tfoot</code>&nbsp;;</li> <li>Les cellules du tableau de mise en forme (balise <code lang="en">td</code>) ne poss&#xE8;dent pas d&#x2019;attributs <code lang="en">scope</code>, <code lang="en">headers</code>, <code lang="en">colgroup</code>, <code lang="en">axis</code>.</li> </ul>
+            </div>
+<!-- END [test-detail] -->
+
+
+            <div class="testcase">
+                <table id="table-test"> 
+                    <tbody>
+                        <tr> 
+                            <td scope="row">Scope attribute Forbidden for presentation table</td> 
+                        </tr> 
+                    </tbody>
+                </table> 
+            </div>
+            <div class="test-explanation">
+                 NMI : A not identified table is found with data table markup. 
+            </div>
+        </div>
+    </body>
+</html>
