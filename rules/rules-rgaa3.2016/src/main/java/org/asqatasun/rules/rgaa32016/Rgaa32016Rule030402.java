@@ -17,9 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
 
 /**
  * Implementation of the rule 3.4.2 of the referential RGAA 3.2016
@@ -27,15 +29,26 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/03.Colours/Rule-3-4-2.html">the rule 3.4.2 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-3-4-2">3.4.2 rule specification</a>
  *
- * @author
+ * @author jkowalczyk
  */
-public class Rgaa32016Rule030402 extends AbstractNotTestedRuleImplementation {
+
+public class Rgaa32016Rule030402 extends AbstractPageRuleWithCheckerImplementation {
+    
+    /** The contrast checker with a value of ratio set to 7*/
+    private final ContrastChecker contrastChecker = 
+            new ContrastChecker(7f, false, true, true);
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule030402 () {
+    public Rgaa32016Rule030402  () {
         super();
+        setElementChecker(contrastChecker);
+    }
+
+    @Override
+    public int getSelectionSize () {
+        return contrastChecker.getElementCounter();
     }
 
 }
