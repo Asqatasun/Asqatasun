@@ -19,7 +19,14 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.AreaElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.ALT_MISSING_MSG;
 
 /**
  * Implementation of the rule 1.1.2 of the referential RGAA 3.2016
@@ -27,15 +34,24 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-1-2.html">the rule 1.1.2 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-2">1.1.2 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule010102 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule010102 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa32016Rule010102 () {
-        super();
+        super(
+                new AreaElementSelector(), 
+                new AttributePresenceChecker(
+                        ALT_ATTR, 
+                        // passed when attribute is found, empty message
+                        new ImmutablePair(TestSolution.PASSED, ""),
+                        // failed when attribute is not found, altMissingMessage
+                        new ImmutablePair(TestSolution.FAILED, ALT_MISSING_MSG),
+                        // evidence elements,
+                        HREF_ATTR)
+            );
     }
 
 }

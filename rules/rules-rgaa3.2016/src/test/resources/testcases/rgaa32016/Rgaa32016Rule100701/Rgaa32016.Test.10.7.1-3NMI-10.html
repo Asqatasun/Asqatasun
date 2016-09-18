@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Rgaa32016 Test.10.7.1 NMI 10</title>
+        <style type="text/css">
+            #input:focus {
+                outline-color : red;
+            }
+            body {
+                background-color: red;
+            }
+        </style> 
+    </head>
+    <body class="NMI">
+        <div>
+            <h1>Rgaa32016 Test.10.7.1 NMI 10</h1>
+
+<!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                Pour chaque &#xE9;l&#xE9;ment recevant le focus, l&#x2019;indication visuelle du navigateur ne doit pas &#xEA;tre supprim&#xE9;e (propri&#xE9;t&#xE9; CSS <code lang="en">outline</code>, <code lang="en">outline-color</code>, <code lang="en">outline-width</code>, <code lang="en">outline-style</code>). Cette r&#xE8;gle est-elle respect&#xE9;e&nbsp;?
+            </div>
+<!-- END [test-detail] -->
+
+
+            <div class="testcase">
+                <input id="input" type="text" /> 
+            </div>
+            <p class="test-explanation"> NMI : The &quot;input&quot; element can grab the focus, but its outline value can&apos;t be trustly extracted. A manual check is needed </p> 
+        </div>
+    </body>
+</html>

@@ -19,7 +19,12 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.HtmlElementStore.H1_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.H1_TAG_MISSING_MSG;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.ARIA_LEVEL1_HEADINGS_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 9.1.1 of the referential RGAA 3.2016
@@ -27,15 +32,23 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/09.Structure_of_information/Rule-9-1-1.html">the rule 9.1.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-1">9.1.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule090101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule090101 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule090101 () {
-        super();
+    public Rgaa32016Rule090101  () {
+        super(
+                new SimpleElementSelector(H1_ELEMENT + ", " + ARIA_LEVEL1_HEADINGS_CSS_LIKE_QUERY),
+                // solution when at least one element is found
+                TestSolution.PASSED,
+                // solution when no element is found
+                TestSolution.FAILED,
+                null,
+                // manual check message
+                H1_TAG_MISSING_MSG
+            );
     }
 
 }

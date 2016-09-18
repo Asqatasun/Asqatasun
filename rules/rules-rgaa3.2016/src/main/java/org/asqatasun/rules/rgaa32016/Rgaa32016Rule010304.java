@@ -19,23 +19,56 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.entity.audit.TestSolution.NOT_APPLICABLE;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.DATA_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.OBJECT_TYPE_IMG_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG;
 
 /**
  * Implementation of the rule 1.3.4 of the referential RGAA 3.2016
- * <br/>
+ *
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-3-4.html">the rule 1.3.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-3-4">1.3.4 rule specification</a>
- *
- * @author
  */
-public class Rgaa32016Rule010304 extends AbstractNotTestedRuleImplementation {
+
+public class Rgaa32016Rule010304 extends AbstractMarkerPageRuleImplementation {
 
     /**
-     * Default constructor
+     * Constructor
      */
     public Rgaa32016Rule010304 () {
-        super();
+        super(
+                new ImageElementSelector(OBJECT_TYPE_IMG_CSS_LIKE_QUERY, true, false),
+
+                // the informative images are part of the scope
+                INFORMATIVE_IMAGE_MARKER, 
+
+                // the decorative images are not part of the scope
+                DECORATIVE_IMAGE_MARKER, 
+
+                // checker for elements identified by marker
+                new ElementPresenceChecker(
+                    new ImmutablePair(NEED_MORE_INFO,CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG),
+                    new ImmutablePair(NOT_APPLICABLE,""),
+                    TEXT_ELEMENT2,
+                    DATA_ATTR),
+                
+                // checker for elements not identified by marker
+                new ElementPresenceChecker(
+                    new ImmutablePair(NEED_MORE_INFO,CHECK_NATURE_AND_PRESENCE_OF_ALTERNATIVE_MECHANISM_MSG),
+                    new ImmutablePair(NOT_APPLICABLE,""),
+                    TEXT_ELEMENT2,
+                    DATA_ATTR)
+            );
     }
 
 }

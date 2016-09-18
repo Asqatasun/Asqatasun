@@ -662,3 +662,221 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (5, 'Rgaa32016;LEVEL_2', b'0'),
 (5, 'Rgaa32016;LEVEL_3', b'0');
 
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-1-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-1-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-3-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-5-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-5-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-6-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-6-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-6-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-8-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-1-9-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-2-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-2-2-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-3-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-3-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-3-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-3-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-4-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-4-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-4-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-3-4-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-4-22-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-4-22-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-2-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-4-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-5-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-6-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-6-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-7-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-7-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-7-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-7-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-5-8-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-6-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-6-2-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-6-2-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-6-3-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-6-4-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-6-4-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-6-5-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-7-4-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-1-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-1-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-3-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-4-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-5-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-6-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-7-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-8-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-8-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-8-9-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-9-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-9-1-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-9-1-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-1-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-4-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-4-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-7-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-8-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-8-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-10-13-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-1-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-2-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-2-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-3-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-3-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-4-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-5-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-6-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-7-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-8-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-8-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-8-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-10-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-10-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-10-7';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-11-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-11-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-12-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-12-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-13-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-13-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-14-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-14-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-15-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-1-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-2-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-2-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-3-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-3-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-5-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-5-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-5-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-6-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-6-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-6-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-7-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-12-11-4';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-13-1-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-13-2-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-13-2-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-13-6-1';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-13-6-2';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-13-6-3';
+
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-13-7-1';
+

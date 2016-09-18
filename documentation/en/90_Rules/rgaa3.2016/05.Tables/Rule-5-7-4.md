@@ -1,8 +1,9 @@
 # RGAA 3.2016 - Rule 5.7.4
-
 ## Summary
-No-check rule
+This test consists in checking whether each cell associated with one or
+several headers is well-defined.
 
+To do so, we detect the tables on the page, and let the user make the control manually.
 
 ## Business description
 
@@ -18,28 +19,74 @@ No-check rule
 ### Level
 **A**
 
-
 ## Technical description
 
 ### Scope
 **Page**
 
 ### Decision level
-@@@TODO
-
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
-None
+
+#### Set1 (table tags identified as data table from html markers)
+
+All the `<table>` tags with an "id" attribute or a "class" attribute or a
+"role" attribute that matches one of the values set by the user through
+the "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with `<th>` child tags OR with `<td>` child tags.
+
+#### Set2 (table tags not identified as data table from html markers)
+
+All the `<table>` tags that don't have an "id" attribute or a "class"
+attribute or a "role" attribute that matches one the values set by the
+use through the "PRESENTATION_TABLE_MARKER" parameter or the
+"DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter AND with `<th>` child tags OR with `<td>` child tags. That means
+select all the table tags of the page when these parameters are empty.
 
 ### Process
-None
+
+#### Test1
+
+For each occurence of **Set1**, raise a MessageA
+
+#### Test2
+
+For each occurence of **Set2**, raise a MessageB
+
+###### MessageA : Check the definition of headers for data tables
+
+-   code :CheckDefinitionOfHeaderForDataTable
+-   status: Pre-Qualified
+-   parameter : snippet
+-   present in source : yes
+
+###### MessageB : Check the nature of table and the definition of headers for data tables
+
+-   code :CheckNatureOfTableAndHeadersDefinition
+-   status: Pre-Qualified
+-   parameter : snippet
+-   present in source : yes
 
 ### Analysis
 
-#### No Tested
-In all cases
+#### Not Applicable
+
+The page has no `<table>` tag with `<th>` child
+tags `<td>` child tags or only tables identified as presentation table (**Set1** AND **Set2** are empty)
+
+#### Pre-Qualified 
+
+In all other cases
+
+## Notes
+
+We only detect the elements of the scope of the test to determine
+whether the test is applicable.
+
+Complex tables are seen as a subset of data tables. That's tables identified as complex tables are added to the set of identified data tables.
+
 
 
 ##  TestCases

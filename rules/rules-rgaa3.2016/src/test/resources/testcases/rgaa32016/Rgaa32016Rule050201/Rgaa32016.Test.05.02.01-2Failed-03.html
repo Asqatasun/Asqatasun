@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa32016 Test.5.2.1 Failed 03</title>
+    </head>
+    <body class="Failed">
+        <div>
+            <h1>Rgaa32016 Test.5.2.1 Failed 03</h1>
+
+<!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes-complexe">tableau de donn&#xE9;e complexes</a> (balise <code lang="en">table</code>) ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#rsum-de-tableau">r&#xE9;sum&#xE9;</a>, celui-ci est-il pertinent&nbsp;?
+            </div>
+<!-- END [test-detail] -->
+
+
+            <div class="testcase">
+                <table id="id-complex-table"> 
+                  <caption>       </caption>
+                </table> 
+                <table id="id-presentation-table"> 
+                  <caption>       </caption>
+                </table> 
+                <table id="id-data-table"> 
+                  <caption>       </caption>
+                </table> 
+                <table> 
+                  <caption>Caption of table without marker</caption>
+                </table> 
+                <table> 
+                  <caption>$$##&apos;&apos;&apos;&apos;</caption>
+                </table> 
+            </div>
+            <div class="test-explanation">
+                 Failed : A table identified as complex table by marker has an empty caption. <br/>
+                 The second table with an empty caption is identified as presentation table by marker. It is out of scope.<br/>
+                 The third table with an empty caption is identified as data table by marker. It is out of scope.<br/>
+                 The fourth is not identified as complex table. Its caption needs to be checked. <br/>
+                 The fifth table is not identified as complex table and its caption is not pertinent. 
+            </div>
+        </div>
+    </body>
+</html>

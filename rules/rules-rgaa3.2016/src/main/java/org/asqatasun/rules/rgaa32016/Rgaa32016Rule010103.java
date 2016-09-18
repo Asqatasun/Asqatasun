@@ -19,7 +19,15 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FORM_BUTTON_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.ALT_MISSING_MSG;
 
 /**
  * Implementation of the rule 1.1.3 of the referential RGAA 3.2016
@@ -27,15 +35,24 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-1-3.html">the rule 1.1.3 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-3">1.1.3 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule010103 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule010103 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa32016Rule010103 () {
-        super();
+        super(
+                new SimpleElementSelector(FORM_BUTTON_CSS_LIKE_QUERY), 
+                new AttributePresenceChecker(
+                        ALT_ATTR, 
+                        // passed when attribute is found, empty message
+                        new ImmutablePair(TestSolution.PASSED, ""),
+                        // failed when attribute is not found, altMissingMessage
+                        new ImmutablePair(TestSolution.FAILED, ALT_MISSING_MSG),
+                        // evidence elements
+                        SRC_ATTR)
+            );
     }
 
 }

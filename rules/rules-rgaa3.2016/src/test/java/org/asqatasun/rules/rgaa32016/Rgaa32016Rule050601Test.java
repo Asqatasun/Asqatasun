@@ -19,14 +19,16 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.rgaa32016.test.Rgaa32016RuleImplementationTestCase;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 5.6.1 of the referential RGAA 3.2016
  *
- * @author
+ * @author jkowalczyk
  */
 public class Rgaa32016Rule050601Test extends Rgaa32016RuleImplementationTestCase {
 
@@ -40,67 +42,75 @@ public class Rgaa32016Rule050601Test extends Rgaa32016RuleImplementationTestCase
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-                "org.asqatasun.rules.rgaa32016.Rgaa32016Rule050601");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa32016.Rgaa32016Rule050601");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa32016.Test.5.6.1-1Passed-01");
-//        addWebResource("Rgaa32016.Test.5.6.1-2Failed-01");
-        addWebResource("Rgaa32016.Test.5.6.1-3NMI-01");
-//        addWebResource("Rgaa32016.Test.5.6.1-4NA-01");
+        addWebResource("Rgaa32016.Test.05.06.01-3NMI-01");
+        addWebResource("Rgaa32016.Test.05.06.01-3NMI-02",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa32016.Test.05.06.01-3NMI-03",
+                    createParameter("Rules", "DATA_TABLE_MARKER", "class-data-table"));
+        addWebResource("Rgaa32016.Test.05.06.01-4NA-01");
+        addWebResource("Rgaa32016.Test.05.06.01-4NA-02",
+                    createParameter("Rules", "PRESENTATION_TABLE_MARKER", "id-presentation-table"));
+
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
+        //------------------------------3NMI-01--------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa32016.Test.5.6.1-1Passed-01"), 1);
-
+        ProcessResult processResult = processPageTest("Rgaa32016.Test.05.06.01-3NMI-01");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_HEADERS_USAGE_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                1);        
+        
         //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
+        //------------------------------3NMI-02--------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa32016.Test.5.6.1-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        processResult = processPageTest("Rgaa32016.Test.05.06.01-3NMI-02");
+        checkResultIsPreQualified(processResult, 1,  1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                1);        
+        
         //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
+        //------------------------------3NMI-03--------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa32016.Test.5.6.1-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        processResult = processPageTest("Rgaa32016.Test.05.06.01-3NMI-03");
+        checkResultIsPreQualified(processResult, 2,  2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_USAGE_OF_HEADERS_FOR_DATA_TABLE_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.CHECK_NATURE_OF_TABLE_AND_HEADERS_USAGE_MSG,
+                HtmlElementStore.TABLE_ELEMENT,
+                2);        
+        
+        //----------------------------------------------------------------------
+        //------------------------------4NA-01------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.05.06.01-4NA-01"));        
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.5.6.1-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.05.06.01-4NA-02"));
     }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa32016.Test.5.6.1-3NMI-01").getValue());
-}
 
 }
