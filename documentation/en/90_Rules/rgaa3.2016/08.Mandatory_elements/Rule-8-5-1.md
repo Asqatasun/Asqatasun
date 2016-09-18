@@ -1,8 +1,7 @@
 # RGAA 3.2016 - Rule 8.5.1
 
 ## Summary
-No-check rule
-
+This test consists in detecting the presence of the `<title>` tag
 
 ## Business description
 
@@ -18,28 +17,44 @@ No-check rule
 ### Level
 **A**
 
-
 ## Technical description
 
 ### Scope
 **Page**
 
 ### Decision level
-@@@TODO
-
+**Decidable**
 
 ## Algorithm
 
 ### Selection
-None
+
+#### Set1
+
+The `<title>` tag of the page within the `<head>` tag (head title)
 
 ### Process
-None
+
+#### Test1
+
+Test whether **Set1** is not empty. If false, raise a MessageA.
+
+###### MessageA : Title tag missing
+
+-   code : TitleTagMissing
+-   status: Pre-Qualified
+-   present in source : no
 
 ### Analysis
 
-#### No Tested
-In all cases
+#### Passed
+
+The `<title>` tag is present on the page (**Test1** returns true)
+
+#### Failed
+
+The `<title>` tag is not present on the page (**Test1** returns false)
+
 
 
 ##  TestCases
