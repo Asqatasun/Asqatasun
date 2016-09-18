@@ -14,11 +14,14 @@
             </div>
 <!-- END [test-detail] -->
 
-            <div class="testcase">
-            </div>
 
+            <div class="testcase">
+                <embed src="mock-embed-object1.png" type="image/png" /> 
+                <embed id="id-informative-embed" src="mock-embed-object2.png" type="image/png" /> 
+                <embed class="class-decorative-embed" src="mock-embed-object3.png" type="image/png" /> 
+            </div>
             <div class="test-explanation">
-                NMI.
+                 NMI : 3 &lt;embed&gt; are found on the page. The second is identified as informative by marker usage. The last &lt;embed&gt; is identified as decorative by marker usage, it is out of scope. 
             </div>
         </div>
     </body>
