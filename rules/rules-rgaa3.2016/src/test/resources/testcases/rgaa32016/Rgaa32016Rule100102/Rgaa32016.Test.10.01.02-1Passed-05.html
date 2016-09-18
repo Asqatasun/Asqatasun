@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa32016 Test.10.1.2 Failed 01</title>
+        <title>Rgaa32016 Test.10.01.2 Passed 05</title>
     </head>
-    <body class="Failed">
+    <body class="Passed">
         <div>
-            <h1>Rgaa32016 Test.10.1.2 Failed 01</h1>
+            <h1>Rgaa32016 Test.10.01.2 Passed 05</h1>
 
 <!-- START [test-detail] -->
             <div class="test-detail" lang="fr">
@@ -16,10 +16,13 @@
 
 
             <div class="testcase">
+                <object data="dummy-ojbect.htm" width="200" height="200" />  
+                <canvas id="mon_canvas" width="350" height="350"> 
+                    Texte alternatif pour les navigateurs ne supportant pas Canvas.
+                </canvas> 
+                <embed type="video/quicktime" src="film.mov" width="640" height="480">
             </div>
-            <div class="test-explanation">
-                 Failed. 
-            </div>
+            <p class="test-explanation"> Passed: &quot;wigth&quot; and &quot;heigth&quot; attributes are only allowed for the &lt;object&gt;, &lt;canvas&gt; and &lt;embed&gt; tags  </p> 
         </div>
     </body>
 </html>
