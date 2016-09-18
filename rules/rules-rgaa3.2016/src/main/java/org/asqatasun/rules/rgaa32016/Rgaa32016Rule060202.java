@@ -19,7 +19,9 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.link.LinkTitlePertinenceChecker;
+import org.asqatasun.rules.elementselector.CompositeLinkElementSelector;
 
 /**
  * Implementation of the rule 6.2.2 of the referential RGAA 3.2016
@@ -27,15 +29,14 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/06.Links/Rule-6-2-2.html">the rule 6.2.2 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-2-2">6.2.2 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule060202 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule060202 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule060202 () {
-        super();
+    public Rgaa32016Rule060202  () {
+        super(new CompositeLinkElementSelector(false, true), 
+              new LinkTitlePertinenceChecker(true));
     }
-
 }
