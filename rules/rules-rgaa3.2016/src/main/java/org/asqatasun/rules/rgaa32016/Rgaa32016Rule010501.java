@@ -17,9 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.CaptchaElementSelector;
+import org.asqatasun.rules.elementselector.MultipleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.*;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG;
 
 /**
  * Implementation of the rule 1.5.1 of the referential RGAA 3.2016
@@ -27,15 +33,33 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-5-1.html">the rule 1.5.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-5-1">1.5.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule010501 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule010501 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule010501 () {
-        super();
+    public Rgaa32016Rule010501  () {
+        super(
+                new CaptchaElementSelector(
+                        new MultipleElementSelector(
+                                IMG_NOT_IN_LINK_CSS_LIKE_QUERY,
+                                AREA_NOT_IN_LINK_CSS_LIKE_QUERY,
+                                SVG_NOT_IN_LINK_CSS_LIKE_QUERY,
+                                CANVAS_NOT_IN_LINK_CSS_LIKE_QUERY,
+                                OBJECT_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY,
+                                EMBED_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY
+                        )
+                ),
+
+                // solution when at least one element is found
+                TestSolution.NEED_MORE_INFO,
+                // solution when no element is found
+                TestSolution.NOT_APPLICABLE,
+                // manual check message
+                CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG,
+                null
+            );
     }
 
 }
