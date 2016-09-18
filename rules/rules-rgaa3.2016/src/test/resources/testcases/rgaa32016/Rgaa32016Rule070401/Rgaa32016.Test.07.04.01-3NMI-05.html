@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa32016 Test.7.4.1 Failed 01</title>
+        <title>Rgaa32016 Test.7.4.1 NMI 05</title>
     </head>
-    <body class="Failed">
+    <body class="NMI">
         <div>
-            <h1>Rgaa32016 Test.7.4.1 Failed 01</h1>
+            <h1>Rgaa32016 Test.7.4.1 NMI 05</h1>
 
 <!-- START [test-detail] -->
             <div class="test-detail" lang="fr">
@@ -15,11 +15,18 @@
 <!-- END [test-detail] -->
 
 
+            <ul> 
+                <li> The user is warned by a text about the script action and the kind of change before it is activated</li> 
+                <li> The change of context is initiated by an explicit button (input of type submit or button) </li> 
+                <li> The change of context is initiated by an explicit link</li> 
+            </ul> 
+            <p></p> 
             <div class="testcase">
+                <form action="http://somesite.com/prog/component-select" method="post"> 
+                    <p> <select multiple="multiple" size="4" name="component-select"> <option selected="selected" value="Component_1_a">Component_1</option> <option selected="selected" value="Component_1_b">Component_2</option> <option>Component_3</option> <option>Component_4</option> <option>Component_5</option> <option>Component_6</option> <option>Component_7</option> </select> <input type="submit" value="Send" /> <input type="reset" /> </p> 
+                </form> 
             </div>
-            <div class="test-explanation">
-                 Failed. 
-            </div>
+            <p class="test-explanation"> NMI : no script that changes the context is detected </p> 
         </div>
     </body>
 </html>
