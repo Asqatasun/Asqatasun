@@ -19,14 +19,16 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.rgaa32016.test.Rgaa32016RuleImplementationTestCase;
+import static org.asqatasun.rules.keystore.HtmlElementStore.*;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Unit test class for the implementation of the rule 10.7.1 of the referential RGAA 3.2016
  *
- * @author
+ * @author jkowalczyk
  */
 public class Rgaa32016Rule100701Test extends Rgaa32016RuleImplementationTestCase {
 
@@ -46,10 +48,31 @@ public class Rgaa32016Rule100701Test extends Rgaa32016RuleImplementationTestCase
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa32016.Test.10.7.1-1Passed-01");
-//        addWebResource("Rgaa32016.Test.10.7.1-2Failed-01");
+        addWebResource("Rgaa32016.Test.10.7.1-1Passed-01");
+        addWebResource("Rgaa32016.Test.10.7.1-1Passed-02");
+        addWebResource("Rgaa32016.Test.10.7.1-2Failed-01");
+        addWebResource("Rgaa32016.Test.10.7.1-2Failed-02");
+        addWebResource("Rgaa32016.Test.10.7.1-2Failed-03");
+        addWebResource("Rgaa32016.Test.10.7.1-2Failed-04");
+        addWebResource("Rgaa32016.Test.10.7.1-2Failed-05");
+        addWebResource("Rgaa32016.Test.10.7.1-2Failed-06");
+        addWebResource("Rgaa32016.Test.10.7.1-2Failed-07");
         addWebResource("Rgaa32016.Test.10.7.1-3NMI-01");
-//        addWebResource("Rgaa32016.Test.10.7.1-4NA-01");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-02");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-03");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-04");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-05");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-06");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-07");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-08");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-09");
+        addWebResource("Rgaa32016.Test.10.7.1-3NMI-10");
+        addWebResource("Rgaa32016.Test.10.7.1-4NA-01");
+        addWebResource("Rgaa32016.Test.10.7.1-4NA-02");
+        addWebResource("Rgaa32016.Test.10.7.1-4NA-03");
+        addWebResource("Rgaa32016.Test.10.7.1-4NA-04");
+        addWebResource("Rgaa32016.Test.10.7.1-4NA-05");
+        addWebResource("Rgaa32016.Test.10.7.1-4NA-06");
     }
 
     @Override
@@ -57,50 +80,317 @@ public class Rgaa32016Rule100701Test extends Rgaa32016RuleImplementationTestCase
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa32016.Test.10.7.1-1Passed-01"), 1);
+        checkResultIsPassed(processPageTest("Rgaa32016.Test.10.7.1-1Passed-01"),1);
 
+
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa32016.Test.10.7.1-1Passed-02"),1);
+
+        
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa32016.Test.10.7.1-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        ProcessResult pr = processPageTest("Rgaa32016.Test.10.7.1-2Failed-01");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-02------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-2Failed-02");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-03------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-2Failed-03");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-2Failed-04");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                DIV_ELEMENT, 
+                1);
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-2Failed-05");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-2Failed-06");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                A_ELEMENT, 
+                1);
+
+
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-2Failed-07");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                INVISIBLE_OUTLINE_ON_FOCUS_MSG, 
+                SPAN_ELEMENT, 
+                1);
+
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa32016.Test.10.7.1-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-01");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+        
+        
+        //----------------------------------------------------------------------
+        //---------------------------------3NMI-02------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-02");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-03------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-03");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-04------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-04");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-05------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-05");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-06------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-06");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-07------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-07");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-08------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-08");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-09------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-09");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
+
+
+	//----------------------------------------------------------------------
+        //---------------------------------3NMI-10------------------------------
+        //----------------------------------------------------------------------
+        pr = processPageTest("Rgaa32016.Test.10.7.1-3NMI-10");
+        checkResultIsPreQualified(pr,1,1);
+        checkRemarkIsPresent(
+                pr, 
+                TestSolution.NEED_MORE_INFO, 
+                CHECK_MANUALLY_OUTLINE_FOR_FORM_ELEMENT_AND_IFRAME_MSG, 
+                1);
 
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.10.7.1-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.10.7.1-4NA-01"));
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.10.7.1-4NA-02"));
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-03----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.10.7.1-4NA-03"));
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-04----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.10.7.1-4NA-04"));
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-05----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.10.7.1-4NA-05"));
+
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-06----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.10.7.1-4NA-06"));
     }
 
     @Override
     protected void setConsolidate() {
+        assertEquals(TestSolution.PASSED,
+                consolidate("Rgaa32016.Test.10.7.1-1Passed-01").getValue());
+        assertEquals(TestSolution.PASSED,
+                consolidate("Rgaa32016.Test.10.7.1-1Passed-02").getValue());
 
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-2Failed-01").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-2Failed-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-2Failed-03").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-2Failed-04").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-2Failed-05").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-2Failed-06").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-2Failed-07").getValue());
+
+        assertEquals(TestSolution.NEED_MORE_INFO,
                 consolidate("Rgaa32016.Test.10.7.1-3NMI-01").getValue());
-}
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-02").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-03").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-04").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-05").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-06").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-07").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-08").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-09").getValue());
+        assertEquals(TestSolution.NEED_MORE_INFO,
+                consolidate("Rgaa32016.Test.10.7.1-3NMI-10").getValue());
 
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa32016.Test.10.7.1-4NA-01").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa32016.Test.10.7.1-4NA-02").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa32016.Test.10.7.1-4NA-03").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa32016.Test.10.7.1-4NA-04").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa32016.Test.10.7.1-4NA-05").getValue());
+        assertEquals(TestSolution.NOT_APPLICABLE,
+                consolidate("Rgaa32016.Test.10.7.1-4NA-06").getValue());
+
+    }
+    
 }

@@ -2,11 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa32016 Test.10.7.1 NMI 01</title>
+        <title>Rgaa32016 Test.10.7.1 Failed 05</title>
+        <style type="text/css">
+            a:focus{
+                outline:none;
+            }
+        </style> 
     </head>
-    <body class="NMI">
+    <body class="Failed">
         <div>
-            <h1>Rgaa32016 Test.10.7.1 NMI 01</h1>
+            <h1>Rgaa32016 Test.10.7.1 Failed 05</h1>
 
 <!-- START [test-detail] -->
             <div class="test-detail" lang="fr">
@@ -16,10 +21,10 @@
 
 
             <div class="testcase">
-                <select> <optgroup> <option>Option 1</option> <option>Option 2</option> </optgroup> </select> 
+                <a href="my-link.html">My link</a> 
             </div>
             <div class="test-explanation">
-                 NMI : The &quot;select&quot; element can grab the focus, but its outline value can&apos;t be trustly extracted. A manual check is needed 
+                 Failed : the css property outline is set to none for the link element when this element has the focus. The test is failed. 
             </div>
         </div>
     </body>
