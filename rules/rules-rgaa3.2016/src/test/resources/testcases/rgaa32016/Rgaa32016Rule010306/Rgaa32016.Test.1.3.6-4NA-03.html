@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa32016 Test.1.3.6 NA 03</title>
+    </head>
+    <body class="NA">
+        <div>
+            <h1>Rgaa32016 Test.1.3.6 NA 03</h1>
+
+<!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                Chaque image embarqu&#xE9;e (balise <code lang="en">embed</code> avec l&#x2019;attribut <code lang="en">type="image/…"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a> v&#xE9;rifie-t-elle une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-3" title="Cas particuliers pour le crit&#xE8;re 1.3">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;image embarqu&#xE9;e est imm&#xE9;diatement suivie d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> permettant d&#x2019;afficher une page ou un passage de texte contenant une alternative pertinente&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur de remplacer l&#x2019;image embarqu&#xE9;e par un texte alternatif pertinent&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur de remplacer l&#x2019;image embarqu&#xE9;e par une image poss&#xE9;dant une alternative pertinente.</li> </ul>
+            </div>
+<!-- END [test-detail] -->
+
+
+            <div class="testcase">
+                <embed id="id-decorative-embed" src="mock-embed.png" type="image/png" /> 
+            </div>
+            <div class="test-explanation">
+                 NMI : An embed image identified as decorative by marker is present on the page. It is out of scope.
+            </div>
+        </div>
+    </body>
+</html>
