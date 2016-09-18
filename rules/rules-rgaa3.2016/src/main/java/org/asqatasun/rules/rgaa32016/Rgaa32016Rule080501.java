@@ -19,7 +19,13 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.TITLE_TAG_MISSING_MSG;
 
 /**
  * Implementation of the rule 8.5.1 of the referential RGAA 3.2016
@@ -27,15 +33,27 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-5-1.html">the rule 8.5.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-5-1">8.5.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule080501 extends AbstractNotTestedRuleImplementation {
-
+public class Rgaa32016Rule080501 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+    
     /**
      * Default constructor
      */
-    public Rgaa32016Rule080501 () {
-        super();
+    public Rgaa32016Rule080501(){
+        super(
+                new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY), 
+                
+                new ElementPresenceChecker(
+                    // check unicity
+                    true,
+                    // result when element detected
+                    new ImmutablePair(TestSolution.PASSED,""),
+                    // result when element not detected
+                    new ImmutablePair(TestSolution.FAILED,TITLE_TAG_MISSING_MSG),
+                    // no message when multiple elements
+                    null
+                )
+            );
     }
-
+    
 }

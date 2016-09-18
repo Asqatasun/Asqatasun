@@ -17,25 +17,50 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_MSG;
 
 /**
- * Implementation of the rule 8.6.1 of the referential RGAA 3.2016
+ * Implementation of the rule 8.6.1 of the referential Accessiweb 4.1.
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-6-1.html">the rule 8.6.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-6-1">8.6.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-6-2">8.6.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule080601 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule080601 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
+    /* Title blacklisted nomenclature */
+    private static final String TITLE_BLACKLIST_NOM = "UnexplicitPageTitle";
+    
     /**
      * Default constructor
      */
-    public Rgaa32016Rule080601 () {
-        super();
+    public Rgaa32016Rule080601  () {
+        super(
+                new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY),
+                new TextPertinenceChecker(
+                    // check emptiness
+                    true, 
+                    // no comparison with other attribute
+                    null, 
+                    // blacklist nomenclature name
+                    TITLE_BLACKLIST_NOM, 
+                    // not pertinent message
+                    NOT_PERTINENT_TITLE_MSG, 
+                    // manual check message
+                    CHECK_TITLE_PERTINENCE_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2
+                )
+            );
     }
 
 }

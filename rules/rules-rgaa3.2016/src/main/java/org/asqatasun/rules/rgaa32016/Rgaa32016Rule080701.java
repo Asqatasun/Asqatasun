@@ -17,9 +17,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.lang.LangChangeChecker;
+import org.asqatasun.rules.elementchecker.lang.LangChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  * Implementation of the rule 8.7.1 of the referential RGAA 3.2016
@@ -27,15 +36,34 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-7-1.html">the rule 8.7.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-7-1">8.7.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule080701 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule080701 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+
+    private final LangChecker ec = new LangChangeChecker();
 
     /**
      * Default constructor
      */
     public Rgaa32016Rule080701 () {
         super();
+        setElementSelector(new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY));
+        setElementChecker(ec);
+    }
+
+    @Override
+    public void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
+        super.check(sspHandler, testSolutionHandler);
+        // add extra remark at the end of the test, if the result is NMI
+        if (testSolutionHandler.getTestSolution().equals(TestSolution.NEED_MORE_INFO)) {
+            sspHandler.getProcessRemarkService().addProcessRemark(
+                    TestSolution.NEED_MORE_INFO, 
+                    RemarkMessageStore.CHECK_SHORT_TEST_MSG);
+        }
+    }
+    
+    @Override
+    public int getSelectionSize () {
+        return ec.getNbOfElementsTested();
     }
 
 }

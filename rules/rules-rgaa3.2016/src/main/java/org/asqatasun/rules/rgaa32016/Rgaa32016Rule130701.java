@@ -17,9 +17,15 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.text.TextEndsWithChecker;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 13.7.1 of the referential RGAA 3.2016
@@ -27,15 +33,31 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/13.Consultation/Rule-13-7-1.html">the rule 13.7.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-13-7-1">13.7.1 rule specification</a>
  *
- * @author
+ * @author jkowalczyk
  */
-public class Rgaa32016Rule130701 extends AbstractNotTestedRuleImplementation {
+
+public class Rgaa32016Rule130701 extends AbstractDownloadableLinkRuleImplementation {
+    
+    /* the office document extensions nomenclature */
+    private static final String OFFICE_DOC_EXT_NOM = "OfficeDocumentExtensions";
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule130701 () {
-        super();
+    public Rgaa32016Rule130701  () {
+        super(
+                new TextEndsWithChecker(
+                    // the href attribute is tested
+                    new TextAttributeOfElementBuilder(HREF_ATTR), 
+                    // the nomenclature listing the extensions to test
+                    OFFICE_DOC_EXT_NOM, 
+                    // the result when detected
+                    TestSolution.NEED_MORE_INFO, 
+                    // the message when detected
+                    OFFICE_DOCUMENT_DETECTED_MSG, 
+                    // the evidence elements
+                    HREF_ATTR)
+            );
     }
-
+    
 }

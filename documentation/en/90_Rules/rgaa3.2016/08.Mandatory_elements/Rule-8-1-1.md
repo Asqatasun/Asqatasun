@@ -1,8 +1,7 @@
 # RGAA 3.2016 - Rule 8.1.1
 
 ## Summary
-No-check rule
-
+This tests checks whether a document type is available on the page.
 
 ## Business description
 
@@ -18,28 +17,36 @@ No-check rule
 ### Level
 **A**
 
-
 ## Technical description
 
 ### Scope
 **Page**
 
 ### Decision level
-@@@TODO
-
+**Decidable**
 
 ## Algorithm
 
 ### Selection
-None
+
+#### Set1
+
+The `<!doctype>` tag on the page
 
 ### Process
-None
+
+The selection handles the process
 
 ### Analysis
 
-#### No Tested
-In all cases
+#### Failed
+
+The page has no doctype (**Set1** is empty)
+
+#### Passed
+
+A doctype is available on the page (**Set1** is empty)
+
 
 
 ##  TestCases

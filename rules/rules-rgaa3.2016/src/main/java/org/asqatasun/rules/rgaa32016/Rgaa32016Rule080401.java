@@ -17,9 +17,13 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.lang.LangDeclarationValidityChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
 
 /**
  * Implementation of the rule 8.4.1 of the referential RGAA 3.2016
@@ -27,15 +31,17 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-4-1.html">the rule 8.4.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-4-1">8.4.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule080401 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule080401 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /**
+     /**
      * Default constructor
      */
-    public Rgaa32016Rule080401 () {
-        super();
+    public Rgaa32016Rule080401  () {
+        super(
+                new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY),
+                new LangDeclarationValidityChecker(true, true)
+            );
     }
 
 }

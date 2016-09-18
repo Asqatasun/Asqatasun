@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <title>Rgaa32016 Test.6.5.1 Failed 01</title>
+    </head>
+    <body class="Failed">
+        <div>
+            <h1>Rgaa32016 Test.6.5.1 Failed 01</h1>
+
+<!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                Dans chaque page Web, chaque lien (balise <code lang="en">a</code> avec un attribut <code lang="en">href</code>), &#xE0; l&#x2019;exception des <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#ancre">ancres</a>, a-t-il un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#intitul-de-lien">intitul&#xE9;</a> entre <code lang="en">&lt;a&gt;</code> et <code lang="en">&lt;/a&gt;</code>&nbsp;?
+            </div>
+<!-- END [test-detail] -->
+
+
+            <div class="testcase">
+                <a href="my-link.html"> <span title="bou"> </span> </a> 
+            </div>
+            <p class="test-explanation">Failed : The link has no text content and its child node has no title attribute</p> 
+        </div>
+    </body>
+</html>

@@ -19,7 +19,9 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.link.AbstractLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.link.IdenticalLinkWithDifferentTargetChecker;
+import org.asqatasun.rules.elementselector.LinkElementSelector;
 
 /**
  * Implementation of the rule 6.4.1 of the referential RGAA 3.2016
@@ -27,15 +29,16 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/06.Links/Rule-6-4-1.html">the rule 6.4.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-4-1">6.4.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule060401 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule060401 extends AbstractLinkRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule060401 () {
-        super();
+    public Rgaa32016Rule060401  () {
+        // context is taken into consideration 
+        super(new LinkElementSelector(false, true), 
+              new IdenticalLinkWithDifferentTargetChecker(false),
+              new IdenticalLinkWithDifferentTargetChecker(true));
     }
-
 }

@@ -17,25 +17,54 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import java.util.Collection;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jsoup.nodes.Element;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleFromPreProcessImplementation;
+import org.asqatasun.rules.domelement.DomElement;
+import org.asqatasun.rules.domelement.extractor.DomElementExtractor;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.HIDDEN_TEXT_DETECTED_MSG;
 
 /**
  * Implementation of the rule 10.13.1 of the referential RGAA 3.2016
- * <br/>
+ *
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/10.Presentation_of_information/Rule-10-13-1.html">the rule 10.13.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-10-13-1">10.13.1 rule specification</a>
- *
- * @author
  */
-public class Rgaa32016Rule101301 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule101301 extends AbstractPageRuleFromPreProcessImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule101301 () {
-        super();
+    public Rgaa32016Rule101301  () {
+        super(
+                new ElementPresenceChecker(
+                    // if some elements are found
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, HIDDEN_TEXT_DETECTED_MSG),
+                    // if no found element
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE, "")
+                )
+            );
     }
+
+    @Override
+    protected void doSelect(
+            Collection<DomElement> domElements, 
+            SSPHandler sspHandler) {
+        for (DomElement element : domElements) {
+            if (element.isHidden() && element.isTextNode()) {
+                Element el = DomElementExtractor.getElementFromDomElement(element, sspHandler);
+                if (el != null) {
+                    getElements().add(el);
+                }
+            }
+        }
+    }   
 
 }
