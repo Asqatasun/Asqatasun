@@ -19,23 +19,57 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG;
 
 /**
  * Implementation of the rule 1.6.9 of the referential RGAA 3.2016
- * <br/>
+ *
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-6-9.html">the rule 1.6.9 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-6-9">1.6.9 rule specification</a>
- *
- * @author
  */
-public class Rgaa32016Rule010609 extends AbstractNotTestedRuleImplementation {
+
+public class Rgaa32016Rule010609 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa32016Rule010609 () {
-        super();
-    }
+        super(
+                new ImageElementSelector(CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY),
 
+                // the informative images are part of the scope
+                INFORMATIVE_IMAGE_MARKER, 
+
+                // the decorative images are not part of the scope
+                DECORATIVE_IMAGE_MARKER, 
+
+                // checker for elements identified by marker
+                new ElementPresenceChecker(
+                    // solution when at least one element is found
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_AT_RESTITUTION_OF_DESC_OF_INFORMATIVE_IMG_MSG),
+                    // solution when no element is found
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,""), 
+                    // evidence elements
+                    TEXT_ELEMENT2),
+                
+                // checker for elements not identified by marker
+                new ElementPresenceChecker(
+                    // solution when at least one element is found
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_NATURE_OF_IMAGE_AND_AT_RESTITUTION_OF_PERTINENCE_MSG),
+                    // solution when no element is found
+                    new ImmutablePair(TestSolution.NOT_APPLICABLE,""), 
+                    // evidence elements
+                    TEXT_ELEMENT2)
+            );
+    }
 }
