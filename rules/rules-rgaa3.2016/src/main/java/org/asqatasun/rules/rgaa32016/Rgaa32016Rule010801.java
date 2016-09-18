@@ -17,9 +17,18 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import static org.asqatasun.entity.audit.TestSolution.*;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.HtmlElementStore.*;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
+import static org.asqatasun.rules.keystore.MarkerStore.*;
 
 /**
  * Implementation of the rule 1.8.1 of the referential RGAA 3.2016
@@ -27,15 +36,30 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-8-1.html">the rule 1.8.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-8-1">1.8.1 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule010801 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule010801 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule010801 () {
-        super();
+    public Rgaa32016Rule010801  () {
+        super(
+                new ImageElementSelector(IMG_ELEMENT),
+                INFORMATIVE_IMAGE_MARKER,
+                DECORATIVE_IMAGE_MARKER,
+                new ElementPresenceChecker(
+                        new ImmutablePair(NEED_MORE_INFO, CHECK_TEXT_STYLED_PRESENCE_OF_INFORMATIVE_IMG_MSG),
+                        new ImmutablePair(NOT_APPLICABLE, ""),
+                        // evidence elements
+                        SRC_ATTR
+                ),
+                new ElementPresenceChecker(
+                        new ImmutablePair(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_AND_TEXT_STYLED_PRESENCE_MSG),
+                        new ImmutablePair(NOT_APPLICABLE, ""),
+                        // evidence elements
+                        SRC_ATTR
+                )
+            );
     }
 
 }
