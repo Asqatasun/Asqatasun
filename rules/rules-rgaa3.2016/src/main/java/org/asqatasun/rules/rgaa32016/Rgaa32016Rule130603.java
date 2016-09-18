@@ -17,9 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.text.TextEndsWithChecker;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of the rule 13.6.3 of the referential RGAA 3.2016
@@ -27,15 +34,32 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/13.Consultation/Rule-13-6-3.html">the rule 13.6.3 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-13-6-3">13.6.3 rule specification</a>
  *
- * @author
+ * @author jkowalczyk
  */
-public class Rgaa32016Rule130603 extends AbstractNotTestedRuleImplementation {
+
+public class Rgaa32016Rule130603 extends AbstractDownloadableLinkRuleImplementation {
+
+    /* the browser readable extensions nomenclature */
+    private static final String OFFICE_DOC_EXT_NOM = "DownloadableDocumentExtensions";
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule130603 () {
-        super();
+    public Rgaa32016Rule130603  () {
+        super(
+                new TextEndsWithChecker(
+                    // the href attribute is tested
+                    new TextAttributeOfElementBuilder(HREF_ATTR), 
+                    // the nomenclature listing the extensions to test
+                    OFFICE_DOC_EXT_NOM, 
+                    // the result when detected
+                    TestSolution.NEED_MORE_INFO, 
+                    // the message when detected
+                    DOWNLOADABLE_FILE_DETECTED_CHECK_LANG_MSG, 
+                    // the evidence elements
+                    HREF_ATTR, 
+                    TITLE_ATTR)
+            );
     }
-
+    
 }
