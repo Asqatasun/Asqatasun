@@ -17,9 +17,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.*;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Implementation of the rule 1.9.4 of the referential RGAA 3.2016
@@ -27,15 +34,20 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-9-4.html">the rule 1.9.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-9-4">1.9.4 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule010904 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule010904 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa32016Rule010904 () {
-        super();
+    public Rgaa32016Rule010904  () {
+        super(
+                new ImageElementSelector(EMBED_TYPE_IMG_CSS_LIKE_QUERY),
+                new ImmutablePair(TestSolution.NEED_MORE_INFO,MANUAL_CHECK_ON_ELEMENTS_MSG),
+                new ImmutablePair(TestSolution.NOT_APPLICABLE,""),
+                // evidence elements
+                SRC_ATTR
+            );
     }
 
 }
