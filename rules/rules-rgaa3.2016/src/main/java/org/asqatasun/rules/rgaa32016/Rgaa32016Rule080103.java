@@ -17,9 +17,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
+
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.doctype.DoctypePositionChecker;
 
 /**
  * Implementation of the rule 8.1.3 of the referential RGAA 3.2016
@@ -27,15 +29,12 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-1-3.html">the rule 8.1.3 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-1-3">8.1.3 rule specification</a>
  *
- * @author
  */
-public class Rgaa32016Rule080103 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule080103 extends AbstractPageRuleWithCheckerImplementation {
 
-    /**
-     * Default constructor
-     */
+    
     public Rgaa32016Rule080103 () {
-        super();
+        super(new DoctypePositionChecker());
     }
 
 }

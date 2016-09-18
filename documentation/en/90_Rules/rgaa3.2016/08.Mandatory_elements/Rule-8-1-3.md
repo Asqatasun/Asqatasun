@@ -1,8 +1,7 @@
 # RGAA 3.2016 - Rule 8.1.3
 
 ## Summary
-No-check rule
-
+@@@ TO-DO
 
 ## Business description
 
@@ -18,28 +17,55 @@ No-check rule
 ### Level
 **A**
 
-
 ## Technical description
 
 ### Scope
 **Page**
 
 ### Decision level
-@@@TODO
-
+**Decidable**
 
 ## Algorithm
 
 ### Selection
-None
+
+#### Set1
+
+The `<!doctype>` tag of the page
+
+#### Set2
+
+The `<html>` tag of the page
 
 ### Process
-None
+
+#### Test1 
+
+Test whether the position of element of **Set1** is before the position of element of **Set2**. 
+
+If **Test1** returns false, raise a MessageA
+
+###### MessageA : Bad Doctype Location
+
+-   code : BadDoctypeLocation
+-   status: Failed
+-   parameter : none
+-   present in source : no
 
 ### Analysis
 
-#### No Tested
-In all cases
+#### Passed
+
+The doctype is declared before the `<html>` tag (**Test1** returns true)
+
+#### Failed
+
+The doctype is declared after the `<html>` tag (**Test1** returns false)
+
+#### Not Applicable
+
+The page has no doctype (**Set1**)
+
 
 
 ##  TestCases
