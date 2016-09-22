@@ -28,6 +28,7 @@ BEGIN
     -- CONSTANTS hard-coded values from table TGSI_REFERENTIAL
     DECLARE referential_id_RGAA3 int DEFAULT 2;
     DECLARE referential_id_SEO int DEFAULT 3;
+    DECLARE referential_id_RGAA32016 int DEFAULT 4;
     
     -- CONSTANTS hard-coded values from table TGSI_FUNCTIONALITY
     DECLARE audit_type_id_page int DEFAULT 1;
@@ -75,6 +76,9 @@ BEGIN
     IF referential = "SEO" THEN 
         INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`) VALUES
 	    (contractId, referential_id_SEO);
+    ELSEIF referential = "RGAA32016" THEN
+        INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`) VALUES
+	    (contractId, referential_id_RGAA32016);
     ELSEIF referential = "RGAA3" THEN
         INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`) VALUES
 	    (contractId, referential_id_RGAA3);

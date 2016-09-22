@@ -126,6 +126,7 @@
                 <include>ASQA_contract_create_A11Y_RGAA3_openbar.sh</include>
                 <include>PROCEDURE_ACT_list_running_acts.sql</include>
                 <include>PROCEDURE_AUDIT_last_audits.sql</include>
+                <include>ASQA_contract_create_A11Y_RGAA32016_openbar.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management</outputDirectory>
