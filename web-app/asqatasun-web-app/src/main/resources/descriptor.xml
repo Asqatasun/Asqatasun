@@ -130,6 +130,7 @@
                 <include>ASQA_contract_create_SEO.sh</include>
                 <include>ASQA_contract_create_A11Y_RGAA3.sh</include>
                 <include>ASQA_contract_create_A11Y_RGAA3_openbar.sh</include>
+                <include>ASQA_contract_create_A11Y_RGAA32016_openbar.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management</outputDirectory>
