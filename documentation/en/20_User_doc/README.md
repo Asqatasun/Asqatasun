@@ -18,6 +18,7 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 * [Assisted audit](userdoc-06-assisted-audit.md)
 * [HTML markers](userdoc-07-HTML-markers.md)
 * [Asqatasun meter](userdoc-08-score-asqatasun-meter.md)
+* [How generated HTML is treated](userdoc-20-generated-HTML.md)
 * [Export](userdoc-09-export.md)
     * [Export CSV format description](userdoc-09a-export-format_CSV.md)
 

@@ -21,6 +21,7 @@
     * [Assisted audit](20_User_doc/userdoc-06-assisted-audit.md)
     * [HTML markers](20_User_doc/userdoc-07-HTML-markers.md)
     * [Asqatasun meter](20_User_doc/userdoc-08-score-asqatasun-meter.md)
+    * [How generated HTML is treated](20_User_doc/userdoc-20-generated-HTML.md)
     * [Export](20_User_doc/userdoc-09-export.md)
         * [Export CSV format description](20_User_doc/userdoc-09a-export-format_CSV.md)
 * [Contributor doc](30_Contributor_doc/README.md)
