@@ -766,6 +766,7 @@ UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-8-1';
 UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-8-2';
 UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-8-3';
 UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-9-1';
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-9-2';
 UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-10-1';
 UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-10-4';
 UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa32016-11-10-7';
