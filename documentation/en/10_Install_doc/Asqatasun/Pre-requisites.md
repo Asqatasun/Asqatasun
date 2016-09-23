@@ -20,7 +20,7 @@ cd install
 
 * This script is intended to be used on a freshly installed Ubuntu 14.04 (no Mysql, 
 no Tomcat already installed).
-* You can use the default values or adjust them to suite your needs (directly edit the file).
+* You can use the default values or **adjust them** to suite your needs (directly edit the file).
 * This script must be run as root
 * Pre-requisites are important, and **each detail is important** (e.g. Mysql specific 
 configuration, or Tomcat user configuration, or Firefox version requirement...), so please

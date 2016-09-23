@@ -30,7 +30,7 @@ sudo ./install.sh --database-user <Asqatasunu_dababase_user> \
 * **--database-passwd** : Password of the user specified by --database-user. if this user already exists, please ensure you give its correct password. If not, the user will be automatically created.
 * **--database-db** : Database for Asqatasun
 * **--asqatasun-url** : URL where asqatasun will be deployed (e.g. http://localhost:8080/asqatasun)
-* **--tomcat-webapps** : Tomcat webapps directory (e.g. /var/lib/tomcat7/webapps)
+* **--tomcat-webapps** : Tomcat webapps directory, without trailing slash (e.g. /var/lib/tomcat7/webapps)
 * **--tomcat-user** : Unix user name for the tomcat service (e.g. tomcat7)
 * **--asqa-admin-email** : Email of the Asqatasun admin user (by the way, it's you !)
 * **--asqa-admin-passwd** : The asqatasun application admin password
@@ -45,7 +45,7 @@ sudo ./install.sh --database-user asqatasun \
                   --database-db asqatasun \
                   --database-host localhost \
                   --asqatasun-url http://localhost:8080/asqatasun/ \
-                  --tomcat-webapps /var/lib/tomcat7/webapps/ \
+                  --tomcat-webapps /var/lib/tomcat7/webapps \
                   --tomcat-user tomcat7 \
                   --asqa-admin-email me@email.com \
                   --asqa-admin-passwd toto42 \
