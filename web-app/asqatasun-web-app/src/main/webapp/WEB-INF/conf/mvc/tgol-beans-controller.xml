@@ -179,7 +179,7 @@
     </bean>
     
     <bean id="auditSetUpController" class="org.asqatasun.webapp.controller.AuditSetUpController">
-        <property name="defaultReferential" value="Rgaa30"/>            
+        <property name="defaultReferential" value="Rgaa32016"/>
         <property name="referentialAndLevelFormFieldBuilderList">
             <ref bean="levelSelectFormFieldBuilder"/>
         </property>
