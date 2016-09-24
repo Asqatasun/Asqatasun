@@ -486,7 +486,7 @@ create_first_contracts() {
             fail "Unable to create contract: Wikipedia SEO"
     # Contract A11Y Openbar
     ./ASQA_contract_create_A11Y_RGAA3_openbar.sh \
-        -c "Openbar A11Y RGAA-3.0" \
+        -c "openbar A11Y RGAA3.0" \
         -u 1 \
         --database-user "$database_user" \
         --database-passwd "$database_passwd" \
@@ -495,7 +495,7 @@ create_first_contracts() {
             fail "Unable to create contract: Openbar A11Y RGAA-3.0"
     # Contract A11Y Openbar RGAA32016
     ./ASQA_contract_create_A11Y_RGAA32016_openbar.sh \
-        -c "Openbar A11Y RGAA-3.2016" \
+        -c "openbar A11Y RGAA3.2016" \
         -u 1 \
         --database-user "$database_user" \
         --database-passwd "$database_passwd" \
