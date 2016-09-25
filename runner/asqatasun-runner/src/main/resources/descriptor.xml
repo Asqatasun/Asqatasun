@@ -63,9 +63,7 @@
             <includes>
                 <include>asqatasun-10-create-user-and-base.sql</include>
                 <include>asqatasun-20-create-tables.sql</include>
-                <include>asqatasun-create-tables.psql</include>
                 <include>asqatasun-30-insert.sql</include>
-                <include>asqatasun-insert.psql</include>
             </includes>
             <fileMode>664</fileMode>
             <outputDirectory>/install/engine/sql</outputDirectory>
@@ -74,7 +72,6 @@
             <directory>${basedir}/../../rules/rules-resources/src/main/resources/sql</directory>
             <includes>
                 <include>10-rules-resources-insert.sql</include>
-                <include>10-rules-resources-insert.psql</include>
             </includes>
             <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
@@ -83,7 +80,6 @@
             <directory>${basedir}/../../rules/rules-accessiweb2.2/src/main/resources/sql</directory>
             <includes>
                 <include>accessiweb2.2-insert.sql</include>
-                <include>accessiweb2.2-insert.psql</include>
             </includes>
             <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
