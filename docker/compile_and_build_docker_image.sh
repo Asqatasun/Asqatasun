@@ -173,6 +173,7 @@ function do_docker_run() {
     RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${ASQATASUN_URL})
     set -e
     if [ ${RESULT} == "000" ]; then
+        DOCKER_RUN="${SUDO} docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}"
         ${SUDO} docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}
     else 
         fail  "${CONTAINER_EXPOSED_PORT} port is already allocated"
@@ -219,8 +220,10 @@ if ! ${SKIP_DOCKER_RUN} ; then       do_docker_run; fi
 if ${FTESTS} ; then                  do_functional_testing; fi
 
 echo "------------------------"
+echo "CMD       ---->   ${DOCKER_RUN}"
 echo "Image     ---->   ${IMAGE_NAME}:${TAG_NAME}"
 echo "Container ---->   ${CONTAINER_NAME}"
+echo "Shell     ---->  ${SUDO} docker exec -ti ${CONTAINER_NAME}  /bin/bash"
 echo "Log       ---->  ${SUDO} docker logs -f ${CONTAINER_NAME}"
 echo "URL       ---->   ${ASQATASUN_URL}"
 
