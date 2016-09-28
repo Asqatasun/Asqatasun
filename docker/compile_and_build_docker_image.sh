@@ -174,7 +174,7 @@ function do_docker_run() {
     set -e
     if [ ${RESULT} == "000" ]; then
         DOCKER_RUN="${SUDO} docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}"
-        ${SUDO} docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}
+        eval ${DOCKER_RUN}
     else 
         fail  "${CONTAINER_EXPOSED_PORT} port is already allocated"
     fi
