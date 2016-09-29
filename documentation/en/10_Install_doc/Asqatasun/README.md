@@ -10,6 +10,7 @@ tested on Linux Ubuntu 14.04 LTS (Trusty Tahr).
 2. [Download Asqatasun](Download.md)
 3. [Check pre-requisites](Pre-requisites.md)
 4. [Install](Installation.md)
+5. [Set up an Apache frontend with HTTPS](Apache_frontend.md) (optional)
 
 Ever need help ? Go to [Asqatasun Forum](http://forum.asqatasun.org).
 
