@@ -19,7 +19,11 @@
  */
 package org.asqatasun.rules.rgaa32016;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_DIR_ATTR_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
  * Implementation of the rule 8.10.2 of the referential RGAA 3.2016
@@ -29,13 +33,20 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  *
  * @author
  */
-public class Rgaa32016Rule081002 extends AbstractNotTestedRuleImplementation {
+public class Rgaa32016Rule081002 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa32016Rule081002 () {
-        super();
+        super(
+                new SimpleElementSelector(ELEMENT_WITH_DIR_ATTR_CSS_LIKE_QUERY),// the selector implementation that performs the selection
+                TestSolution.NEED_MORE_INFO,  // solution when at least one element is found
+                TestSolution.NOT_APPLICABLE,  // solution when no element is found
+                MANUAL_CHECK_ON_ELEMENTS_MSG, // message associated with each detected element
+                null                          // no message created when no element is found because NA doesn't produce message
+        );
+       // setElementSelector(new SimpleElementSelector(ELEMENT_WITH_DIR_ATTR_CSS_LIKE_QUERY));
     }
 
 }
