@@ -123,9 +123,10 @@ EOF
 service mysql restart
 
 # Create Asqatasun database
+# Note: \` are mandatory to ensure database name is protected (thus allowing names containing hyphens)
 mysql -u root --password="${MYSQL_ROOT_PASSWD}" --execute="GRANT USAGE ON * . * TO '${DATABASE_USER}'@'${DATABASE_HOST}' IDENTIFIED BY '${DATABASE_PASSWD}'; \
-    CREATE DATABASE IF NOT EXISTS ${DATABASE_DBNAME} CHARACTER SET utf8; \
-    GRANT ALL PRIVILEGES ON ${DATABASE_DBNAME} . * TO '${DATABASE_USER}'@'${DATABASE_HOST}'; \
+    CREATE DATABASE IF NOT EXISTS \`${DATABASE_DBNAME}\` CHARACTER SET utf8; \
+    GRANT ALL PRIVILEGES ON \`${DATABASE_DBNAME}\` . * TO '${DATABASE_USER}'@'${DATABASE_HOST}'; \
     FLUSH PRIVILEGES;"
 
 #############################################
