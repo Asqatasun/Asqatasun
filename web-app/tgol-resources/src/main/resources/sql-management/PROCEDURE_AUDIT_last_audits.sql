@@ -1,8 +1,6 @@
 -- -----------------------------------------------------------------
 -- show last audits procedure
 -- -----------------------------------------------------------------
-use $myDatabaseName;
-
 DROP PROCEDURE IF EXISTS last_audits;
 
 delimiter |
