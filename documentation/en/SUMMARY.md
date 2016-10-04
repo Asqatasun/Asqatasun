@@ -55,6 +55,7 @@
     * [Access to the BackOffice](50_Administrator_doc/backoffice.md)
     * [Asqatasun.conf](50_Administrator_doc/asqatasun.conf.md)
     * [Crawler management](50_Administrator_doc/Crawler_management.md)
+    * [SQL Procedures](50_Administrator_doc/SQL_procedures.md)
 * [Rules doc](90_Rules/README.md)
     * [RGAA 3.0](90_Rules/rgaa3.0/README-rgaa3.0.md)
         * [Images](90_Rules/rgaa3.0/01.Images/README.md)
