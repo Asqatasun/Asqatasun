@@ -310,7 +310,7 @@ create_tables() {
     my_sql_insert seo1.0-insert.sql
     my_sql_insert rgaa3.2016-insert.sql
 
-    cd "$PKG_DIR/install/engine/sql"
+    cd "$PKG_DIR/install/web-app/sql-management"
     my_sql_insert PROCEDURE_ACT_list_running_acts.sql
     my_sql_insert PROCEDURE_AUDIT_last_audits.sql
 }
