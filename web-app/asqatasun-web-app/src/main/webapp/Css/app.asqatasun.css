@@ -108,6 +108,9 @@ btn.orange:hover {
 html {
     background: #F8F8F8;
 }
+html.app-page-login {
+    background-image: url("../Images/bg-noise.png");
+}
 body {
     font-family: "OpenSansRegular",Arial,sans-serif;
     background: #F8F8F8; /* Old browsers */

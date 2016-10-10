@@ -11,12 +11,11 @@
     <c:url value="/Images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>  
 </c:set>
 
-<html lang="${tg:lang(pageContext)}">
+<html class="app-page-login" lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
         <fmt:message key="forgotten-password-confirmation.pageTitle"/>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/app.asqatasun-login.css"/>" />
     <body id="tgm-forgotten-password-confirmation">
         <div class="topbar">
             <div class="fill">

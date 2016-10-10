@@ -8,7 +8,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
-<html lang="${tg:lang(pageContext)}">
+<html class="app-page-login" lang="${tg:lang(pageContext)}">
     <c:choose>
         <c:when test="${changeUserPasswordFromAdmin == true}">
             <c:set var="pageTitle" scope="page">
@@ -65,7 +65,6 @@
             </c:if>
             </c:when>
             <c:otherwise>
-        <link rel="stylesheet" type="text/css" href="<c:url value="/Css/app.asqatasun-login.css"/>" />
         <body id="tgm-reset-password">
             <div class="topbar">
                 <div class="fill">

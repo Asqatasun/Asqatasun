@@ -25,7 +25,7 @@
     <c:url value="/Images/machine.png"/>  
 </c:set>
 
-<html lang="${tg:lang(pageContext)}">
+<html  class="app-page-login" lang="${tg:lang(pageContext)}">
     <c:if test="${not empty param.error}">
         <c:choose>
             <c:when test="${param.error == 'sessionTimeout'}">
@@ -50,7 +50,6 @@
         </c:if>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/app.asqatasun-login.css"/>" />
     <body id="tgm-login">
         <div class="topbar">
             <div class="fill">
