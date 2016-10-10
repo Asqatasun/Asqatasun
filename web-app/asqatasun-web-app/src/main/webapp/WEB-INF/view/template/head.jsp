@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/prettify.min.css"/>"/>
 </c:if>
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/app.asqatasun.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />
     <style>
         .asqatasun-link-svg svg {

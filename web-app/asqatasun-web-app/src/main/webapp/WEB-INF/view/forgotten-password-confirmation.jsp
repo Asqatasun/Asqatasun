@@ -16,7 +16,7 @@
         <fmt:message key="forgotten-password-confirmation.pageTitle"/>
     </c:set>
     <%@include file="template/head.jsp" %>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-login.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/app.asqatasun-login.css"/>" />
     <body id="tgm-forgotten-password-confirmation">
         <div class="topbar">
             <div class="fill">

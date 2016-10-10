@@ -65,7 +65,7 @@
             </c:if>
             </c:when>
             <c:otherwise>
-        <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm-login.css"/>" />
+        <link rel="stylesheet" type="text/css" href="<c:url value="/Css/app.asqatasun-login.css"/>" />
         <body id="tgm-reset-password">
             <div class="topbar">
                 <div class="fill">
