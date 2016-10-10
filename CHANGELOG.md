@@ -3,6 +3,9 @@
 Asqatasun 4.x.x, 2016-xx-xx
 ---------------------------
 
+- [#126 create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
+- SQL new procedure: list_running_acts and Last_audit
+
 Features:
 None
 
@@ -10,7 +13,7 @@ Security:
 None
 
 Bugs:
-None
+- enhanced pre-requisites to allow database name containing hyphen "-"
 
 Configuration:
 None
@@ -65,9 +68,9 @@ Security:
 - Upgrade Apache httpclient to v4.3.6
 
 Bugs:
-- [#25](https://github.com/Asqatasun/Asqatasun/issues/25): localhost URLs should not be blocked  
-- [#104](https://github.com/Asqatasun/Asqatasun/issues/104): Rgaa 3 - rule 8.9.1 : Changed actual result of rule when fieldset is used without form
-- [#105](https://github.com/Asqatasun/Asqatasun/issues/105): MySQL - Enable innodb_file_per_table 
+- [#25 localhost URLs should not be blocked](https://github.com/Asqatasun/Asqatasun/issues/25)
+- [#104 Rgaa 3 - rule 8.9.1 : Changed actual result of rule when fieldset is used without form](https://github.com/Asqatasun/Asqatasun/issues/104) 
+- [#105 MySQL - Enable innodb_file_per_table ](https://github.com/Asqatasun/Asqatasun/issues/105)
 - release/bump_asqatasun.sh : use --push option for pushing new tag
 
 Configuration:
@@ -75,7 +78,7 @@ Configuration:
 - disabled Rgaa-2 rules
 
 Documentation:
-- [#88](https://github.com/Asqatasun/Asqatasun/issues/88): DOC Docker - Add tip for Mac OS X and Windows users 
+- [#88 DOC Docker - Add tip for Mac OS X and Windows users](https://github.com/Asqatasun/Asqatasun/issues/88) 
 
 Upgrade-o-meter (borrowed from folks at Gitlab):
 - no database change, just replace .war
@@ -86,10 +89,10 @@ Asqatasun 4.0.1, 2016-03-18
 --------------------------------
 
 Security:
-- [#83](https://github.com/Asqatasun/Asqatasun/issues/83): Upgrade Apache Commons Collections to v3.2.2
+- [#83 Upgrade Apache Commons Collections to v3.2.2](https://github.com/Asqatasun/Asqatasun/issues/83) 
 
 Bugs:
-- [#85](https://github.com/Asqatasun/Asqatasun/issues/85): Audit full-site : accept the new gTLDs (eg .jobs, .paris)
+- [#85 Audit full-site : accept the new gTLDs (eg .jobs, .paris)](https://github.com/Asqatasun/Asqatasun/issues/85)
 
 
 --------------------------------
@@ -109,9 +112,10 @@ Features:
 - Fork from Tanaguru
 
 Bugs:
-- [#43](https://github.com/Asqatasun/Asqatasun/issues/43): Mysql config: add UTF-8 
-to support any type of charset including cyrillic + enhance way to modify Mysql conf
-- [#58](https://github.com/Asqatasun/Asqatasun/issues/58): PDF - clicking on it returns to an error page
+- [#58 PDF - clicking on it returns to an error page](https://github.com/Asqatasun/Asqatasun/issues/58)
+- [#43 Mysql config: add UTF-8 
+       to support any type of charset including cyrillic + enhance way to modify Mysql conf](https://github.com/Asqatasun/Asqatasun/issues/43)
+
 
 
 --------------------------------
