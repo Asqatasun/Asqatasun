@@ -15,7 +15,13 @@
 </c:if>
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/tgm.css"/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />   
+    <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />
+    <style>
+        .asqatasun-link-svg svg {
+            width:1em;
+            height:1em;
+        }
+    </style>
 
    <!-- Favicon -->                        
     <link rel="apple-touch-icon" sizes="57x57" href="<c:url value="/Images/Logo/favicon/apple-touch-icon-57x57.png"/>" /> 
