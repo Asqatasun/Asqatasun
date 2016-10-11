@@ -16,12 +16,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/External-Css/bootstrap.min.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/app.asqatasun.css"/>" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/Css/font-open.css"/>" />
-    <style>
-        .asqatasun-link-svg svg {
-            width:1em;
-            height:1em;
-        }
-    </style>
+    <style> .asqatasun-link-svg  svg { width:1em; height:1em; } </style>
 
    <!-- Favicon -->                        
     <link rel="apple-touch-icon" sizes="57x57" href="<c:url value="/Images/Logo/favicon/apple-touch-icon-57x57.png"/>" /> 
@@ -44,9 +39,18 @@
     <meta name="msapplication-TileColor" content="#4e348e" /> 
     <meta name="msapplication-TileImage" content="<c:url value="/Images/Logo/favicon/mstile-144x144.png"/>" /> 
     <meta name="msapplication-config" content="<c:url value="/Images/Logo/favicon/browserconfig.xml"/>" /> 
-    <meta name="theme-color" content="#ffffff" /> 
+    <meta name="theme-color" content="#ffffff" />
 
-    
+    <!-- social networks - Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- <meta name="twitter:card" content="summary" /> -->
+    <meta name="twitter:site" content="@Asqatasun" />
+    <meta name="twitter:title" content="Asqatasun: accessibility testing. Automated, reliable, efficient (really)" />
+    <meta name="twitter:description" content="Opensource software. Speed your accessibility and SEO testing width Asqatasun. Asqatasun automates SEO tests and accessibility tests (RGAA 3). Evaluating a page, an entire site or a web application is reliable and intuitive." />
+    <meta name="twitter:image" content="http://forum.asqatasun.org/uploads/default/original/1X/e16a2b9b7f5a4dc756f03630923290c695c762c9.png" />
+    <meta name="twitter:image:alt" content="Asqatasun" />
+
+
     <c:set var="modernizrJsUrl" scope="request">
         <c:url value="/External-Js/modernizr.min.js"/>
     </c:set>
