@@ -1,6 +1,7 @@
 # Configuration of Asqatasun web application
 
-Here is the list of the parameters you can found in the `/etc/asqatasun/asqatasun.conf` file and thus can help you to customize your installation : 
+Here is the list of the parameters you can found in the [/etc/asqatasun/asqatasun.conf](https://github.com/Asqatasun/Asqatasun/blob/master/web-app/tgol-resources/src/main/resources/conf/asqatasun.conf) 
+ file and thus can help you to customize your installation : 
 
 |        Parameter Name          |  Description   |         Default value         |
 | :----------------------------- | :------------- | :---------------------------- |
@@ -10,7 +11,7 @@ Here is the list of the parameters you can found in the `/etc/asqatasun/asqatasu
 |**crawlConfigFilePath**         | This parameter is based on tgol-deployment-path and **shouldn't be modified**. It corresponds to the path that locates the configuration files needed by the crawler (heritrix). | `${tgol-deployment-path}/crawler/` |
 |**emailSentToUserExclusionList**| The synchronousAuditDelay parameter defines a delay from which a synchronous audit will be managed as an asynchronous audit. When the audit is terminated an email is sent to the used. In some occasions, for some users, we don't want that email to be sent (for the guest user for example). The "emailSentToUserExclusionList" defines the lists of users (by their email and separated by a ";") that won't be alerted by email when the execution of one of the audits they launch has exceeded the synchronous delay. | *Empty*|
 |**enable-account-settings**     | Enable/Disable the access through the login page to the forgotten password page and the access of the user account settings page for an authentified user. | false |
-|**generatedHtmlExplanationLink**| The link that leads to the page that explains the characteristics and constraints of the generated HTML. This parameter is not supposed to be modified. | https://github.com/Asqatasun/Asqatasun/wiki/Treatment-of-generate-HTML-and-DOM  |
+|**generatedHtmlExplanationLink**| The link that leads to the page that explains the characteristics and constraints of the generated HTML. This parameter is not supposed to be modified. | https://doc.asqatasun.org/en/20_User_doc/userdoc-20-generated-HTML.html  |
 |**heritrixHome**                | Path used by the Crawler (Heritrix) to copy its temporary files (**should't be modified**). | `/var/tmp/asqatasun` |
 |**hibernate.dialect**           | Represents a dialect of SQL implemented by a particular RDBMS |  |
 |**isAllowedToSendKrashReport**  | Authorize the application to send krash reports | |
@@ -27,7 +28,13 @@ Here is the list of the parameters you can found in the `/etc/asqatasun/asqatasu
 |**pageLoadTimeout**             | Timeout from which a page is seen as fully loaded | 20 (in seconds) |
 |**proxyHost**                   | Defines the value of the proxy host when the server accesses the web through a proxy. Has to be present but empty when no proxy is used. **Caution:** do not prefix the hostname with `http://` | *Empty* |
 |**proxyPort**                   | Defines the value of the proxy port when the server accesses the web through a proxy. Has to be present with an empty when no proxy is used. | *Empty* |
+|**proxyUser**                   | Defines the value of the proxy user when the server accesses the web through a proxy. Has to be present with an empty when no proxy is used. | *Empty* |
+|**proxyPassword**               | Defines the value of the proxy password when the server accesses the web through a proxy. Has to be present with an empty when no proxy is used. | *Empty* | 
 |**proxyExclusionUrl**           | Defines Url patterns that must ignore the proxy parameters. Possible values are : `127.0.0.1`, `127.0.0.1;localhost;myhost;`, `myhost`, `mydomain.com`, `internalhost;mydomain.com` Caution: do not prefix the hostname with `http://` | *Empty* |
+|**smtp.host**                   | SMTP host to connect to to send mails | localhost |
+|**smtp.from**                   | From: mail addresse to use | r2d2@asqatasun.org |
+|**smtp.user**                   | Login to connect to the SMTP server  | *Empty* |
+|**smtp.password**               | Password to connect to the SMTP server  | *Empty* |
 |**snapshotServiceUrl**          | Defines the Url of the external service used to build the snaphosts of tested site. If empty (which is the default value), asqatasun's logo will be used to illustrate a website | *Empty* |
 |**synchronousAuditDelay**       | The result of a page audit or a group of audit audit is returned synchronously. For many reasons, an audit can last more than a few seconds, and this variable enables to define a delay from which a synchronous audit will be managed in a asynchronous way. After this delay, an audit in progress page is sent back, and the user is alerted by email when the audit is terminated. | 25000 (in ms) |
 |**tempFolderRootPath**          | Path used by the application to copy its temporary files (**should't be modified**) | `/var/tmp/asqatasun` |
