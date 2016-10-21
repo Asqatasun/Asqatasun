@@ -21,7 +21,11 @@ package org.asqatasun.rules.rgaa32016;
 
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.audit.ProcessResult;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
+
 import org.asqatasun.rules.rgaa32016.test.Rgaa32016RuleImplementationTestCase;
+
+
 
 /**
  * Unit test class for the implementation of the rule 8.10.2 of the referential RGAA 3.2016
@@ -49,7 +53,7 @@ public class Rgaa32016Rule081002Test extends Rgaa32016RuleImplementationTestCase
 //        addWebResource("Rgaa32016.Test.8.10.2-1Passed-01");
 //        addWebResource("Rgaa32016.Test.8.10.2-2Failed-01");
         addWebResource("Rgaa32016.Test.8.10.2-3NMI-01");
-//        addWebResource("Rgaa32016.Test.8.10.2-4NA-01");
+        addWebResource("Rgaa32016.Test.8.10.2-4NA-01");
     }
 
     @Override
@@ -76,31 +80,12 @@ public class Rgaa32016Rule081002Test extends Rgaa32016RuleImplementationTestCase
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa32016.Test.8.10.2-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        checkResultIsPreQualified(processResult, 3, 3);
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.8.10.2-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa32016.Test.8.10.2-4NA-01"));
     }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by 
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa32016.Test.8.10.2-3NMI-01").getValue());
-}
 
 }

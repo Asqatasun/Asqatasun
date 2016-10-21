@@ -261,6 +261,10 @@ public final class CssLikeQueryStore {
                     + "form input[type=image] , "
                     + "form button ";
 
+    // Dir css-like queries
+    public static final String ELEMENT_WITH_DIR_ATTR_CSS_LIKE_QUERY =
+            "html [dir]";
+
     // Lang css-like queries
     public static final String ELEMENT_WITH_LANG_ATTR_CSS_LIKE_QUERY = 
                     "html [lang], html [xml:lang]";
