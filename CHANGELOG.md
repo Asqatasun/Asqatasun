@@ -5,6 +5,7 @@ Asqatasun 4.x.x, 2016-xx-xx
 
 - [#126 create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
 - SQL new procedure: list_running_acts and Last_audit
+- RGAA 3.2016
 
 Features:
 None

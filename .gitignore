@@ -1,6 +1,22 @@
-# Build
+
+##### Build
 target
 hsql-db*
+*.log
+
+
+##### GIT
+
+# Git - Merge temp file
+*.orig
+
+# git shortlog -s -n
+#  	file for map author and committer names and email addresses
+#  	to canonical real names and email addresses
+/.mailmap
+
+
+##### IDE / Text editor
 
 # Eclipse
 .project
@@ -19,17 +35,20 @@ nbactions.xml
 .idea
 *.iml
 
-# Crowdin (translation tool) configuration file (contains personal data)
-crowdin.yaml
-
 # saved files
 *~
 
-# Git - Merge temp file
-*.orig
+
+##### DevOps
+
+# Dockers: binaries
+docker/**/asqatasun-*gz
 
 # vagrant
 .vagrant/
+
+
+#### Documentation / Translation tool
 
 # Gitbook
 _book/
@@ -38,11 +57,8 @@ node_modules/
 # Mkdocs
 /docs/Site
 
-# git shortlog -s -n
-#  	file for map author and committer names and email addresses
-#  	to canonical real names and email addresses
-/.mailmap
+# Crowdin (translation tool) configuration file (contains personal data)
+crowdin.yaml
 
-# Dockers: binaries
-docker/**/asqatasun-*gz
+
 
