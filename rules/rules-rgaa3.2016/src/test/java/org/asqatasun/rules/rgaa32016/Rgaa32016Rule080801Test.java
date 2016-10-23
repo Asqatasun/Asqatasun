@@ -67,28 +67,28 @@ public class Rgaa32016Rule080801Test extends Rgaa32016RuleImplementationTestCase
         //----------------------------------------------------------------------
         //---------------------------1Passed-01---------------------------------
         //----------------------------------------------------------------------
-        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-01"),2);        
+        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-01"),4);
         
         //----------------------------------------------------------------------
         //---------------------------1Passed-02---------------------------------
         //----------------------------------------------------------------------
-        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-02"),2);        
+        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-02"),4);
         
         //----------------------------------------------------------------------
         //---------------------------1Passed-03---------------------------------
         //----------------------------------------------------------------------
-        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-03"),2);        
+        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-03"),4);
         
         //----------------------------------------------------------------------
         //---------------------------1Passed-04---------------------------------
         //----------------------------------------------------------------------
-        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-04"),2);        
+        checkResultIsPassed(processPageTest("Rgaa32016.Test.08.08.01-1Passed-04"),4);
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa32016.Test.08.08.01-2Failed-01");
-        checkResultIsFailed(processResult, 2, 1);
+        checkResultIsFailed(processResult, 4, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -101,7 +101,7 @@ public class Rgaa32016Rule080801Test extends Rgaa32016RuleImplementationTestCase
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.08.01-2Failed-02");
-        checkResultIsFailed(processResult, 2, 1);
+        checkResultIsFailed(processResult, 4, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -114,7 +114,7 @@ public class Rgaa32016Rule080801Test extends Rgaa32016RuleImplementationTestCase
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.08.01-2Failed-03");
-        checkResultIsFailed(processResult, 2, 1);
+        checkResultIsFailed(processResult, 4, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -127,7 +127,7 @@ public class Rgaa32016Rule080801Test extends Rgaa32016RuleImplementationTestCase
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.08.01-2Failed-04");
-        checkResultIsFailed(processResult, 2, 1);
+        checkResultIsFailed(processResult, 4, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -140,7 +140,7 @@ public class Rgaa32016Rule080801Test extends Rgaa32016RuleImplementationTestCase
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.08.01-2Failed-05");
-        checkResultIsFailed(processResult, 2, 1);
+        checkResultIsFailed(processResult, 4, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
