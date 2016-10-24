@@ -102,7 +102,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------2Failed-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa32016.Test.08.07.01-2Failed-01");
-        checkResultIsFailed(processResult, 6, 1);
+        checkResultIsFailed(processResult, 10, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -117,7 +117,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------2Failed-02---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-2Failed-02");
-        checkResultIsFailed(processResult, 6, 1);
+        checkResultIsFailed(processResult, 10, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -133,7 +133,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------2Failed-03---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-2Failed-03");
-        checkResultIsFailed(processResult, 6, 1);
+        checkResultIsFailed(processResult, 10, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -149,7 +149,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------2Failed-04---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-2Failed-04");
-        checkResultIsFailed(processResult, 6, 1);
+        checkResultIsFailed(processResult, 10, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -165,7 +165,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------2Failed-05---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-2Failed-05");
-        checkResultIsFailed(processResult, 6, 1);
+        checkResultIsFailed(processResult, 10, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -181,7 +181,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------2Failed-06---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-2Failed-06");
-        checkResultIsFailed(processResult, 6, 1);
+        checkResultIsFailed(processResult, 10, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -197,7 +197,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------2Failed-07---------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-2Failed-07");
-        checkResultIsFailed(processResult, 6, 1);
+        checkResultIsFailed(processResult, 10, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -213,7 +213,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------3NMI-01------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-3NMI-01");
-        checkResultIsPreQualified(processResult, 6,  1);
+        checkResultIsPreQualified(processResult, 10,  1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
@@ -225,7 +225,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------3NMI-02------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-3NMI-02");
-        checkResultIsPreQualified(processResult, 5,  1);
+        checkResultIsPreQualified(processResult, 9,  1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
@@ -237,7 +237,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------3NMI-03------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-3NMI-03");
-        checkResultIsPreQualified(processResult, 5,  1);
+        checkResultIsPreQualified(processResult, 9,  1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
@@ -249,7 +249,7 @@ public class Rgaa32016Rule080701Test extends Rgaa32016RuleImplementationTestCase
         //---------------------------3NMI-04------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa32016.Test.08.07.01-3NMI-04");
-        checkResultIsPreQualified(processResult, 5,  1);
+        checkResultIsPreQualified(processResult, 9,  1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.NEED_MORE_INFO,
