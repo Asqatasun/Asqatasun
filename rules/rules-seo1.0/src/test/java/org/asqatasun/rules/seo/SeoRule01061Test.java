@@ -52,19 +52,19 @@ public class SeoRule01061Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        Site site = getWebResourceFactory().createSite("http://site-robot.tgqa.org");
+        Site site = getWebResourceFactory().createSite("http://site-robot.asqatasun.ovh");
         getWebResourceMap().put("Seo.Test.1.6.1-2Failed-01", site);
-        Page page = getWebResourceFactory().createPage("http://site-robot.tgqa.org");
+        Page page = getWebResourceFactory().createPage("http://site-robot.asqatasun.ovh");
         site.addChild(page);
         
-        site = getWebResourceFactory().createSite("http://site.tgqa.org");
+        site = getWebResourceFactory().createSite("http://site.asqatasun.ovh");
         getWebResourceMap().put("Seo.Test.1.6.1-2Failed-02", site);
-        page = getWebResourceFactory().createPage("http://site.tgqa.org");
+        page = getWebResourceFactory().createPage("http://site.asqatasun.ovh");
         site.addChild(page);
         
-        site = getWebResourceFactory().createSite("http://site-sitemap.tgqa.org");
+        site = getWebResourceFactory().createSite("http://site-sitemap.asqatasun.ovh");
         getWebResourceMap().put("Seo.Test.1.6.1-1Passed-01", site);
-        page = getWebResourceFactory().createPage("http://site-sitemap.tgqa.org");
+        page = getWebResourceFactory().createPage("http://site-sitemap.asqatasun.ovh");
         site.addChild(page);
     }
     

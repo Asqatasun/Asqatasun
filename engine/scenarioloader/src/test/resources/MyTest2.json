@@ -4,7 +4,7 @@
   "steps": [
     {
       "type": "get",
-      "url": "http://site.tgqa.org/"
+      "url": "http://site.asqatasun.ovh/"
     },
     {
       "type": "clickElement",

@@ -46,10 +46,10 @@ import org.asqatasun.util.factory.DateFactory;
 public class ScenarioLoaderImplTest extends TestCase {
     
     private Map<String, String> pageMap;
-    private static final String ROOT_PAGE_URL = "http://site.tgqa.org/";
-    private static final String PAGE_1_URL = "http://site.tgqa.org/page-1.html";
-    private static final String PAGE_2_URL = "http://site.tgqa.org/page-2.html";
-    private static final String PAGE_ACCESS_FORBIDDEN_URL = "http://site.tgqa.org/page-access-forbidden-for-robots.html";
+    private static final String ROOT_PAGE_URL = "http://site.asqatasun.ovh/";
+    private static final String PAGE_1_URL = "http://site.asqatasun.ovh/page-1.html";
+    private static final String PAGE_2_URL = "http://site.asqatasun.ovh/page-2.html";
+    private static final String PAGE_ACCESS_FORBIDDEN_URL = "http://site.asqatasun.ovh/page-access-forbidden-for-robots.html";
     
     public ScenarioLoaderImplTest(String testName) {
         super(testName);
@@ -82,23 +82,23 @@ public class ScenarioLoaderImplTest extends TestCase {
     }
 
     /**
-     * For this test, we use the pages hosted at http://site.tgqa.org/.
+     * For this test, we use the pages hosted at http://site.asqatasun.ovh/.
      * The sequence is : 
-     *      - get the page "http://site.tgqa.org/."
+     *      - get the page "http://site.asqatasun.ovh/."
      *      - click on "This page won't be crawled due to the robots.txt restrictrion" link 
-     *      - get the page "http://site.tgqa.org/page-access-forbidden-for-robots.html"
+     *      - get the page "http://site.asqatasun.ovh/page-access-forbidden-for-robots.html"
      *      - click on "Back" button
-     *      - get the page "http://site.tgqa.org/."
+     *      - get the page "http://site.asqatasun.ovh/."
      *      - click on "This page will be crawled" link  
-     *      - get the page "http://site.tgqa.org/page-1.html"
+     *      - get the page "http://site.asqatasun.ovh/page-1.html"
      *      - click on "This page won't be crawled due to the robots.txt restrictrion" link 
-     *      - get the page "http://site.tgqa.org/page-access-forbidden-for-robots.html"
+     *      - get the page "http://site.asqatasun.ovh/page-access-forbidden-for-robots.html"
      *      - click on "Back" button
-     *      - get the page "http://site.tgqa.org/page-1.html"
+     *      - get the page "http://site.asqatasun.ovh/page-1.html"
      *      - click on "This page will be crawled" link
-     *      - get the page "http://site.tgqa.org/page-2.html"
+     *      - get the page "http://site.asqatasun.ovh/page-2.html"
      *      - click on "This page won't be crawled due to the robots.txt restrictrion" link 
-     *      - get the page "http://site.tgqa.org/page-access-forbidden-for-robots.html"
+     *      - get the page "http://site.asqatasun.ovh/page-access-forbidden-for-robots.html"
      * 
      * For each retrieved page, a webResource is created and added to the 
      * parent WebResource and a SSP is created that handles the source code of 
