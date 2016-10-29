@@ -1,13 +1,12 @@
 -- -----------------------------------------------------------------
 -- Deletion of contract 
 -- -----------------------------------------------------------------
-use $myDatabaseName;
 
 DROP PROCEDURE IF EXISTS delete_contract_from_id;
 DROP PROCEDURE IF EXISTS delete_contract_from_label;
 
 delimiter |
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `delete_contract_from_id`(
+CREATE DEFINER=`asqatasun`@`localhost` PROCEDURE `delete_contract_from_id`(
 IN contractId INT)
 BEGIN
 
@@ -20,7 +19,7 @@ BEGIN
 
 END  |
 
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `delete_contract_from_label`(
+CREATE DEFINER=`asqatasun`@`localhost` PROCEDURE `delete_contract_from_label`(
 IN contractLabel VARCHAR(255), 
 IN userEmail VARCHAR(255))
 BEGIN
