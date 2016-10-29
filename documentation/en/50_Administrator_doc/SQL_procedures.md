@@ -10,10 +10,10 @@ call last_audit(10);
 
 List 10 last audits.
 
-## List current acts
+## List running acts
 
 ```mysql
-call list_current_acts;
+call list_running_acts();
 ```
 
 List all running acts. May be useful if an audit crashes, you can find its `Id_Act`s and `Id_Audit` and delete them manually.
