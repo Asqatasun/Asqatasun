@@ -291,31 +291,6 @@ EOF
 }
 
 #############################################
-# SQL
-#############################################
-create_tables() {
-
-    cd "$PKG_DIR/install/engine/sql"
-    my_sql_insert asqatasun-20-create-tables.sql
-    my_sql_insert asqatasun-30-insert.sql
-    
-    cd "$PKG_DIR/install/web-app/sql"
-    my_sql_insert tgol-20-create-tables.sql
-    my_sql_insert tgol-30-insert.sql
-
-    cd "$PKG_DIR/install/rules/sql"
-    my_sql_insert 10-rules-resources-insert.sql
-    my_sql_insert accessiweb2.2-insert.sql
-    my_sql_insert rgaa3.0-insert.sql
-    my_sql_insert seo1.0-insert.sql
-    my_sql_insert rgaa3.2016-insert.sql
-
-    cd "$PKG_DIR/install/web-app/sql-management"
-    my_sql_insert PROCEDURE_ACT_list_running_acts.sql
-    my_sql_insert PROCEDURE_AUDIT_last_audits.sql
-}
-
-#############################################
 # Directories 
 #############################################
 create_directories() {
@@ -537,9 +512,6 @@ main() {
     echo "Directory creation:                   OK"
     # save options for uninstall
     write_options	
-    # filling the SQL database
-    create_tables
-    echo "SQL inserts:                          OK"
     # install configuration file
     install_configuration
     echo "Asqatasun config files creation:      OK"

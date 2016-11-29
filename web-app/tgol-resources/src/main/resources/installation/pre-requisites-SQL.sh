@@ -70,8 +70,7 @@ apt-get -y --no-install-recommends install \
     wget \
     bzip2 \
     unzip \
-    mysql-server \
-    libmysql-java
+    mysql-server
 
 #############################################
 # Mysql config
