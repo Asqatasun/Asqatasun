@@ -63,7 +63,7 @@ RUN  cd  /root                                      && \
         --asqa-admin-passwd $ASQA_ADMIN_PASSWD \
         --firefox-esr-binary-path /opt/firefox/firefox \
         --display-port      :99                     && \
-     rm -rvf  /root/asqatasun*
+     rm -rf  /root/asqatasun*
 
 CMD service mysql start                             && \
     sleep   5                                       && \
