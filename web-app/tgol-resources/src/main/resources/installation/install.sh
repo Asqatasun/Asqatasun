@@ -340,7 +340,7 @@ install_firefox_profile_files() {
 
 install_configuration() {
     dirty_conf=true
-    cp -r "$PKG_DIR"/install/web-app/conf/* \
+    cp -r "$PKG_DIR"/web-app/conf/* \
        "${prefix}$TG_CONF_DIR" || \
             fail "Unable to copy the Asqatasun configuration"
     sed -i -e "s#\$TGOL-DEPLOYMENT-PATH .*#${tomcat_webapps}/${asqatasun_webapp_dir}/WEB-INF/conf#" \
@@ -367,7 +367,7 @@ install_webapp() {
     dirty_webapp=true
     cd "${prefix}${tomcat_webapps}/${asqatasun_webapp_dir}" \
             || fail "Unable to go to the Asqatasun webapp directory"
-    unzip -q "$PKG_DIR/install/web-app/$TG_WAR" \
+    unzip -q "$PKG_DIR/web-app/$TG_WAR" \
             || fail "Unable to extract the Asqatasun war"
     sed -i -e "s#file:///#file://${prefix}#g" \
         "WEB-INF/conf/tgol-service.xml" || \
@@ -376,7 +376,7 @@ install_webapp() {
 
 edit_esapi_configuration_file() {
     dirty_webapp=true
-    cd "$PKG_DIR/install/web-app/token-master-key-encryptor/" \
+    cd "$PKG_DIR/web-app/token-master-key-encryptor/" \
             || fail "Unable to go to the generate-encryptor-keys directory"
     ./generate-encryptor-keys.sh  > generated_keys.txt \
             || fail "Unable to execute generate-encryptor-keys script"
@@ -407,7 +407,7 @@ update_tomcat_configuration() {
 #############################################
 create_first_user() {
     # create admin user for Asqatasun
-    cd "$PKG_DIR/install/web-app/sql-management"
+    cd "$PKG_DIR/web-app/sql-management"
     sed -i -e "s/^DbUser=.*$/DbUser=$database_user/g" \
         -e "s/^DbUserPasswd=.*$/DbUserPasswd=$database_passwd/g" \
         -e "s/^DbName=.*$/DbName=$database_db/g"  \
@@ -422,7 +422,7 @@ create_first_user() {
 
 create_first_contracts() {
     # create 3 typical contracts
-    cd "$PKG_DIR/install/web-app/sql-management"
+    cd "$PKG_DIR/web-app/sql-management"
 
     # add SQL procedure "contract_create"
     ./PROCEDURE_contract_create.sh \

@@ -83,19 +83,11 @@
             <fileMode>664</fileMode>
             <outputDirectory>/install/web-app/sql</outputDirectory>
         </fileSet>
-        <!-- Install file -->
-        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
-            <includes>
-                <include>install.sh</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>.</outputDirectory>
-        </fileSet>
         <!-- Install files -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
             <includes>
+                <include>install.sh</include>
                 <include>install-SQL.sh</include>
                 <include>uninstall.sh</include>
                 <include>pre-requisites.sh</include>
