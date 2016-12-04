@@ -45,12 +45,13 @@ RUN  cd  /root                                      && \
      ./asqatasun/install/pre-requisites-SQL.sh      && \
      service mysql start                            && \
      sleep 5                                        && \
-     cd   /root/asqatasun                           && \
+     cd   /root/asqatasun/install/                  && \
      echo "yes\n" | ./install-SQL.sh           \
         --database-db       $DATABASE_DB       \
         --database-host     $DATABASE_HOST     \
         --database-user     $DATABASE_USER     \
         --database-passwd   $DATABASE_PASSWD        && \
+     cd   /root/asqatasun                           && \
      echo "yes\n" | ./install.sh               \
         --database-db       $DATABASE_DB       \
         --database-host     $DATABASE_HOST     \
