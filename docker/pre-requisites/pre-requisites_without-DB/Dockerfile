@@ -41,5 +41,6 @@ RUN  cd  /root                                      && \
      ./pre-requisites.sh                            && \
      rm -rf  /root/asqatasun*
 
-CMD  service tomcat7 start                          ;  \
+CMD  service xvfb start                             && \
+     service tomcat7 start                          ;  \
      tail -f /var/log/tomcat7/catalina.out
