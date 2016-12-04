@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM asqatasun/asqatasun:base_wget
 MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 
 # ##########################################################
@@ -31,9 +31,6 @@ EXPOSE $DATABASE_PORT
 
 #
 RUN  cd  /root                                      && \
-     apt-get update                                 && \
-     apt-get -y --no-install-recommends      \
-                install wget ca-certificates        && \
      wget http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz  && \
      tar  xvfz asqatasun-*.tar.gz                   && \
      mv   asqatasun*/  ./asqatasun/                 && \
@@ -46,7 +43,11 @@ RUN  cd  /root                                      && \
         --database-host     $DATABASE_HOST     \
         --database-user     $DATABASE_USER     \
         --database-passwd   $DATABASE_PASSWD        && \
-     rm -rf  /root/asqatasun*
+     rm -rf  /root/asqatasun*                       && \
+     apt-get clean                                  && \
+     apt-get autoremove                             && \
+     rm -rf  /var/lib/apt/lists/*
+
 
 CMD  service mysql start                            && \
      sleep   5                                      && \

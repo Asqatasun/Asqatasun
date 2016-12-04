@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM asqatasun/asqatasun:base_wget
 MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 
 # ##########################################################
@@ -39,7 +39,10 @@ RUN  cd  /root                                      && \
      mv   asqatasun*/  ./asqatasun/                 && \
      cd   asqatasun/install/                        && \
      ./pre-requisites.sh                            && \
-     rm -rf  /root/asqatasun*
+     rm -rf  /root/asqatasun*                       && \
+     apt-get clean                                  && \
+     apt-get autoremove                             && \
+     rm -rf  /var/lib/apt/lists/*
 
 CMD  service xvfb start                             && \
      service tomcat7 start                          ;  \
