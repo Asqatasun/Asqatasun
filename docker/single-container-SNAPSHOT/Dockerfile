@@ -13,22 +13,20 @@ MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 # ##########################################################
 
 USER root
-
-ENV WWWPORT="8080" \
-    DATABASE_DB="asqatasun" \
-    DATABASE_HOST="localhost" \
-    DATABASE_USER="asqatasun" \
-    DATABASE_PASSWD="asqaP4sswd" \
-    TOMCAT_WEBAPP_DIR="/var/lib/tomcat7/webapps" \
-    TOMCAT_USER="tomcat7" \
-    ASQA_URL="http://localhost:8080/asqatasun/" \
-    ASQA_ADMIN_EMAIL="me@my-email.org" \
-    ASQA_ADMIN_PASSWD="myAsqaPassword"  \
-    ASQA_RELEASE="4.1.0-SNAPSHOT"
+ENV  WWWPORT="8080"                                    \
+     DATABASE_DB="asqatasun"                           \
+     DATABASE_HOST="localhost"                         \
+     DATABASE_USER="asqatasun"                         \
+     DATABASE_PASSWD="asqaP4sswd"                      \
+     TOMCAT_WEBAPP_DIR="/var/lib/tomcat7/webapps"      \
+     TOMCAT_USER="tomcat7"                             \
+     ASQA_URL="http://localhost:8080/asqatasun/"       \
+     ASQA_ADMIN_EMAIL="me@my-email.org"                \
+     ASQA_ADMIN_PASSWD="myAsqaPassword"                \
+     ASQA_RELEASE="4.1.0-SNAPSHOT"
 
 EXPOSE $WWWPORT
 
-WORKDIR /root
 
 # ##########################################################
 #
@@ -39,36 +37,41 @@ WORKDIR /root
 
 # Add Asqatasun
 # Install Asqatasun
-RUN apt-get update && \
-    apt-get -y --no-install-recommends install \
-                                       wget \
-                                       ca-certificates && \
-    cd /root/ && \
-    wget http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
-    tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
-    mv asqatasun*/ ./asqatasun/ && \
-    cp ./asqatasun/install/xvfb . && \
-    ./asqatasun/install/pre-requisites.sh && \
-    service mysql start && \
-    sleep 5 && \
-    cd /root/asqatasun/ && \
-    echo "yes\n" | ./install.sh  \
-        --database-db $DATABASE_DB \
-        --database-host $DATABASE_HOST \
-        --database-user $DATABASE_USER \
-        --database-passwd $DATABASE_PASSWD \
-        --asqatasun-url $ASQA_URL \
-        --tomcat-webapps $TOMCAT_WEBAPP_DIR \
-        --tomcat-user $TOMCAT_USER \
-        --asqa-admin-email $ASQA_ADMIN_EMAIL \
+RUN  cd  /root                                      && \
+     apt-get update                                 && \
+     apt-get -y --no-install-recommends        \
+                install wget ca-certificates        && \
+     wget http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
+     tar  xvfz asqatasun-*.tar.gz                   && \
+     mv   asqatasun*/               ./asqatasun/    && \
+     cp   ./asqatasun/install/xvfb  .               && \
+     ./asqatasun/install/pre-requisites.sh          && \
+     ./asqatasun/install/pre-requisites-SQL.sh      && \
+     service mysql start                            && \
+     sleep 5                                        && \
+     cd   /root/asqatasun/install/                  && \
+     echo "yes\n" | ./install-SQL.sh           \
+        --database-db       $DATABASE_DB       \
+        --database-host     $DATABASE_HOST     \
+        --database-user     $DATABASE_USER     \
+        --database-passwd   $DATABASE_PASSWD        && \
+     echo "yes\n" | ./install.sh               \
+        --database-db       $DATABASE_DB       \
+        --database-host     $DATABASE_HOST     \
+        --database-user     $DATABASE_USER     \
+        --database-passwd   $DATABASE_PASSWD   \
+        --asqatasun-url     $ASQA_URL          \
+        --tomcat-webapps    $TOMCAT_WEBAPP_DIR \
+        --tomcat-user       $TOMCAT_USER       \
+        --asqa-admin-email  $ASQA_ADMIN_EMAIL  \
         --asqa-admin-passwd $ASQA_ADMIN_PASSWD \
         --firefox-esr-binary-path /opt/firefox/firefox \
-        --display-port :99 && \
-    rm -rvf  /root/asqatasun*
+        --display-port      :99                     && \
+     rm -rf  /root/asqatasun*
 
-CMD service mysql start && \
-    sleep 5 && \
-    service xvfb start && \
-    service tomcat7 start ; \
-    tail -f /var/log/tomcat7/catalina.out \
-         /var/log/asqatasun/asqatasun.log
+CMD  service mysql start                            && \
+     sleep   5                                      && \
+     service xvfb start                             && \
+     service tomcat7 start                          ;  \
+     tail -f /var/log/tomcat7/catalina.out     \
+             /var/log/asqatasun/asqatasun.log

@@ -13,7 +13,6 @@ MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 # ##########################################################
 
 USER root
-
 ENV  WWWPORT="8080"                                    \
      DATABASE_DB="asqatasun"                           \
      DATABASE_HOST="localhost"                         \
@@ -65,9 +64,9 @@ RUN  cd  /root                                      && \
         --display-port      :99                     && \
      rm -rf  /root/asqatasun*
 
-CMD service mysql start                             && \
-    sleep   5                                       && \
-    service xvfb start                              && \
-    service tomcat7 start                           ;  \
-    tail -f /var/log/tomcat7/catalina.out      \
-            /var/log/asqatasun/asqatasun.log
+CMD  service mysql start                            && \
+     sleep   5                                      && \
+     service xvfb start                             && \
+     service tomcat7 start                          ;  \
+     tail -f /var/log/tomcat7/catalina.out     \
+             /var/log/asqatasun/asqatasun.log
