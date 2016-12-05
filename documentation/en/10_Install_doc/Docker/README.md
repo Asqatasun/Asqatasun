@@ -127,7 +127,7 @@ To cope with that issue, run the container with one more option (`--add-host` an
 
 ```sh
 docker pull asqatasun/asqatasun  
-docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1'` asqatasun/asqatasun
+docker run --name asqatasun -d -p 8080:8080 --add-host dockerhost:`ip addr show docker0 | grep 'inet ' | awk '{print $2}' | cut -d/ -f1` asqatasun/asqatasun
 ```
 
 (Don't forget to wait ~30 seconds for the services to be up.)
