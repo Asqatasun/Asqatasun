@@ -32,16 +32,16 @@ EXPOSE $WWWPORT
 # ##########################################################
 
 #
-RUN  cd  /root                                      && \
-     apt-get update                                 && \
-     apt-get -y --no-install-recommends      \
-                install wget ca-certificates        && \
+RUN  cd      /root                                  && \
      wget http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz  && \
-     tar  xvfz asqatasun-*.tar.gz                   && \
-     mv   asqatasun*/  ./asqatasun/                 && \
-     cd   asqatasun/install/                        && \
+     tar     xvfz asqatasun-*.tar.gz                && \
+     mv      asqatasun*/  ./asqatasun/              && \
+     cd      asqatasun/install/                     && \
      ./pre-requisites-SQL.sh                        && \
-     rm -rf  /root/asqatasun*
+     rm -rf  /root/asqatasun*                       && \
+     apt-get clean                                  && \
+     apt-get autoremove                             && \
+     rm -rf  /var/lib/apt/lists/*            
 
 CMD  service mysql start                            && \
      sleep   5                                      && \

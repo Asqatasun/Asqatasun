@@ -108,6 +108,6 @@ mysql \
 #############################################
 
 # For Docker usage
-apt-get clean
-apt-get autoremove
-rm -rf /var/lib/apt/lists/*
+# apt-get clean
+# apt-get autoremove
+# rm -rf /var/lib/apt/lists/*

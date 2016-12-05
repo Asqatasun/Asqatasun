@@ -128,6 +128,6 @@ rm ${FIREFOX_BASENAME}.tar.bz2
 #############################################
 
 # For Docker usage
-apt-get clean
-apt-get autoremove
-rm -rf /var/lib/apt/lists/*
+# apt-get clean
+# apt-get autoremove
+# rm -rf /var/lib/apt/lists/*
