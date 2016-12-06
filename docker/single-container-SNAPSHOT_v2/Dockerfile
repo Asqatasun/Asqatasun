@@ -10,13 +10,7 @@ MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 # Don't use it for production as all data are wiped out at reboot / rebuild
 # BUT for quick testing, that does the job :)
 #
-# #### FROM  ######################################################
-#   Ubuntu:14.04
-#   |-- asqatasun/asqatasun:base_wget
-#       |-- asqatasun/asqatasun:only-DB
-#           |-- asqatasun/asqatasun:pre-requisites_without-DB
-#               |-- asqatasun/asqatasun:pre-requisites_with-empty-DB  
-###################################################################
+# ##########################################################
 
 USER root
 ENV  WWWPORT="8080"                                    \
@@ -41,13 +35,12 @@ EXPOSE $WWWPORT
 #
 # ##########################################################
 
-
 # Add Asqatasun
-ADD ./asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
-
 # Install Asqatasun
 RUN  cd  /root                                      && \
-     mv   asqatasun*/    ./asqatasun/               && \
+     wget http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
+     tar  xvfz asqatasun-*.tar.gz                   && \
+     mv   asqatasun*/               ./asqatasun/    && \
      service mysql start                            && \
      sleep 5                                        && \
      cd   /root/asqatasun/install/                  && \
@@ -76,5 +69,3 @@ CMD  service mysql start                            && \
      service tomcat7 start                          ;  \
      tail -f /var/log/tomcat7/catalina.out     \
              /var/log/asqatasun/asqatasun.log
-
-
