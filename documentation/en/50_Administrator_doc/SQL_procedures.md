@@ -5,7 +5,7 @@ Here is the list of SQL procedures available since Asqatasun 4.0.4+
 ## Last_audit
 
 ```mysql
-call last_audit(10);
+call last_audits(10);
 ```
 
 List 10 last audits.
