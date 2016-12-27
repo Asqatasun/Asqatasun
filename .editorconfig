@@ -1,0 +1,20 @@
+# This file is for unifying the coding style 
+# for different editors and IDEs.
+#
+# More information at http://editorconfig.org/
+##############################################
+
+root = true
+
+##############################################
+#      default charset
+#    + Unix-style newlines
+#    + 4 space indentation
+##############################################
+[*]
+end_of_line  = lf
+indent_style = space
+indent_size  = 4
+charset      = utf-8
+
+
