@@ -137,10 +137,10 @@ function kill_previous_container() {
     RUNNING=$(${SUDO} docker inspect --format="{{ .State.Status }}" ${CONTAINER_NAME} 2>/dev/null)
     set -e
 
-    if [ ${RUNNING} == "running" ]; then
+    if [ "${RUNNING}" == "running" ]; then
         ${SUDO} docker stop ${CONTAINER_NAME}
         ${SUDO} docker rm ${CONTAINER_NAME}
-    elif [ ${RUNNING} == "exited" ]; then
+    elif [ "${RUNNING}" == "exited" ]; then
         ${SUDO} docker rm ${CONTAINER_NAME}
     fi
 }
@@ -172,7 +172,7 @@ function do_docker_run() {
     set +e
     RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${ASQATASUN_URL})
     set -e
-    if [ ${RESULT} == "000" ]; then
+    if [ "${RESULT}" == "000" ]; then
         DOCKER_RUN="${SUDO} docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}"
         eval ${DOCKER_RUN}
     else 
@@ -188,7 +188,7 @@ function do_docker_run() {
         set +e
         RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${ASQATASUN_URL})
         set -e
-        if [ ${RESULT} == "200" ]; then
+        if [ "${RESULT}" == "200" ]; then
             echo "... it's done ... ${RESULT}"
         else 
             ((time+=1))
@@ -224,6 +224,6 @@ echo "CMD       ---->   ${DOCKER_RUN}"
 echo "Image     ---->   ${IMAGE_NAME}:${TAG_NAME}"
 echo "Container ---->   ${CONTAINER_NAME}"
 echo "Shell     ---->  ${SUDO} docker exec -ti ${CONTAINER_NAME}  /bin/bash"
-echo "Log       ---->  ${SUDO} docker logs -f ${CONTAINER_NAME}"
+echo "Log       ---->  ${SUDO} docker logs -f  ${CONTAINER_NAME}"
 echo "URL       ---->   ${ASQATASUN_URL}"
 
