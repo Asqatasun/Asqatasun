@@ -54,8 +54,7 @@ Here we have:
 
 ### Adding Failed Results
 
-After importing the Passed results, we have decreased the number of Not Tested to
-150. You can also note the graph getting shapes.
+After importing the Passed results, we have decreased the number of Not Tested to 150. You can also note the graph getting shapes.
 
 ![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_D_Results_Failed_added.png)
 
@@ -66,16 +65,16 @@ After importing the Passed results, you can see the number of Not Tested
 
 ![](Images/screenshot_20150310_ASQATASUN_ASSISTED_AUDIT_step_E_Results_Passed_added.png)
 
-You can also note the apparition of the score (see [Asqatasun Accessibility metric](userdoc-08-score-asqatasun-meter)
+You can also note the apparition of the score (see [Asqatasun Accessibility metric](userdoc-08-score-asqatasun-meter.md)
 for the detail of the formula). @@@TODO fix URL
 
 ## 4. Add human results
 
 For all the remaining *Not Tested* tests, you can define humanly the result.
 
-To speed up you work you may want to treat a given theme, or leverage the Pre-Qualified
-results. Those ones are results for which Asqatasun does not have enought clues to state
-a definitive results, but can bring information that may help the auditor.
+To speed up your work, you may want to treat a given theme, or leverage the Pre-Qualified
+results. Those ones are results for which Asqatasun does not have enough clues to state
+a definitive result, but can bring information that may help the auditor.
 
 For each remaining tests you have to choose a definitive result (Passed, Failed 
 or Not Applicable).
