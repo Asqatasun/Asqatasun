@@ -1,15 +1,8 @@
 #!/bin/bash
 
-# 2015-11-14 mfaure
+# 2017-02-03 mfaure
 
 set -o errexit
-
-fail() {
-        echo ""
-	echo "FAILURE : $*"
-        echo ""
-	exit -1
-}
 
 #############################################
 # Usage
@@ -17,12 +10,14 @@ fail() {
 usage () {
     cat <<EOF
 
-$0 inserts the sql stored procedure "contract_create"
+$0 deletes an audit based on its technical id
 
 usage: $0 [MANDATORY_ARGS] [OPTIONS]
 
 MANDATORY_ARGS:
 
+    -i <audit-id>                   MANDATORY id of the audit to delete
+    
     --database-user <db-user>       MANDATORY Asqatasun database user
     --database-passwd <db-passwd>   MANDATORY Asqatasun database password
     --database-db <db-name>         MANDATORY Asqatasun database db
@@ -30,7 +25,7 @@ MANDATORY_ARGS:
 
 OPTIONS:
 
-    -h | --help         Show this message     
+    -h | --help     Show this message
 
 EOF
     exit 2
@@ -39,7 +34,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o h --long help,database-user:,database-passwd:,database-db:,database-host: -- "$@"`
+TEMP=`getopt -o hi: --long database-user:,database-passwd:,database-db:,database-host:,help -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -50,17 +45,16 @@ fi
 eval set -- "$TEMP"
 
 declare HELP=false
-
+declare AUDIT_ID
 declare DB_USER
 declare DB_PASSWD
 declare DB_NAME
 declare DB_HOST
 
-declare MY_PROCEDURE_FILE="PROCEDURE_contract_create.sql"
-
 while true; do
   case "$1" in
     -h | --help )       HELP=true; shift ;;
+    -i )                AUDIT_ID="$2"; shift 2 ;;
     --database-user )   DB_USER="$2"; shift 2 ;;
     --database-passwd ) DB_PASSWD="$2"; shift 2 ;;
     --database-db )     DB_NAME="$2"; shift 2 ;;
@@ -69,8 +63,8 @@ while true; do
   esac
 done
 
-# Mandatory arguments
-if [[ -z "$DB_USER" || \
+if [[ -z "$AUDIT_ID" || \
+    -z "$DB_USER" || \
     -z "$DB_PASSWD" || \
     -z "$DB_NAME" || \
     -z "$DB_HOST" || \
@@ -79,19 +73,11 @@ if [[ -z "$DB_USER" || \
 fi
 
 #############################################
-# Do the actual job: create contract
+# Do the actual job
 #############################################
-sed -i \
-    -e "s#\$myDatabaseName#$DB_NAME#" \
-    -e "s#\$myDatabaseUser#$DB_USER#" \
-    $MY_PROCEDURE_FILE || \
-        fail "Unable to set database credentials before inserting SQL Procedure"
 
-cat $MY_PROCEDURE_FILE | \
-    mysql \
-        --user="$DB_USER" \
-        --password="$DB_PASSWD"\
-        --host="$DB_HOST" \
-        --database="$DB_NAME" || \
-            fail "Unable to add SQL Procedure"
-          
+mysql --user="$DB_USER" \
+    --password="$DB_PASSWD" \
+    --database="$DB_NAME" \
+    --host="$DB_HOST" \
+    -e "call delete_audit_from_id($AUDIT_ID)"
