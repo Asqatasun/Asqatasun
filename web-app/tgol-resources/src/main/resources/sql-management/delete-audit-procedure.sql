@@ -1,9 +1,3 @@
--- -----------------------------------------------------------------
--- Deletion of contract 
--- -----------------------------------------------------------------
-use $myDatabaseName;
-
-DROP PROCEDURE IF EXISTS delete_audit_from_id;
 DROP PROCEDURE IF EXISTS delete_all_audit;
 DROP PROCEDURE IF EXISTS clean_up_audit_from_contract;
 DROP PROCEDURE IF EXISTS clean_up_audit_from_user_id;
@@ -11,6 +5,9 @@ DROP PROCEDURE IF EXISTS clean_up_audit_from_user_email;
 
 delimiter |
 
+-- -----------------------------------------------------------------
+-- Delete all audits
+-- -----------------------------------------------------------------
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `delete_all_audit`()
 BEGIN
 
@@ -18,20 +15,11 @@ BEGIN
 
 END  |
 
-CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `delete_audit_from_id`(
-IN auditId INT)
-BEGIN
-
-    UPDATE TGSI_ACT as ta 
-        LEFT JOIN TGSI_ACT_WEB_RESOURCE as tawr on (ta.Id_Act=tawr.ACT_Id_Act) 
-        LEFT JOIN WEB_RESOURCE as w on (w.Id_Web_Resource=tawr.WEB_RESOURCE_Id_Web_Resource) 
-            SET Status='DELETED' 
-                WHERE w.Id_Audit=auditId;
-
-    DELETE FROM AUDIT WHERE Id_Audit=auditId;
-
-END  |
-
+-- -----------------------------------------------------------------
+-- Clean up audit from contract
+--
+-- /!\ depends on: delete_audit_from_id
+-- -----------------------------------------------------------------
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `clean_up_audit_from_contract`(
 IN contractId INT)
 BEGIN
@@ -58,6 +46,11 @@ BEGIN
 
 END |
 
+-- -----------------------------------------------------------------
+-- Clean up audit from user_id
+--
+-- /!\ depends on: delete_audit_from_id
+-- -----------------------------------------------------------------
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `clean_up_audit_from_user_id`(
 IN userId INT)
 BEGIN
@@ -85,6 +78,9 @@ BEGIN
 
 END |
 
+-- -----------------------------------------------------------------
+-- Clean up audit from user email
+-- -----------------------------------------------------------------
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `clean_up_audit_from_user_email`(
 IN userEmail VARCHAR(255))
 BEGIN
