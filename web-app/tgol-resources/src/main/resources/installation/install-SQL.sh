@@ -181,7 +181,6 @@ EOF
 # SQL
 #############################################
 create_tables() {
-
     cd "$PKG_DIR/engine/sql"
     my_sql_insert asqatasun-20-create-tables.sql
     my_sql_insert asqatasun-30-insert.sql
@@ -196,17 +195,20 @@ create_tables() {
     my_sql_insert rgaa3.0-insert.sql
     my_sql_insert seo1.0-insert.sql
     my_sql_insert rgaa3.2016-insert.sql
-
-    cd "$PKG_DIR/web-app/sql-management"
-    my_sql_insert PROCEDURE_ACT_list_running_acts.sql
-    my_sql_insert PROCEDURE_AUDIT_last_audits.sql
 }
 
 #############################################
 # SQL Scripts & procedure
 #############################################
+add_procedures() {
+    cd "$PKG_DIR/web-app/sql-management"
+    my_sql_insert PROCEDURE_ACT_list_running_acts.sql
+    my_sql_insert PROCEDURE_AUDIT_last_audits.sql
+    my_sql_insert PROCEDURE_AUDIT_delete_from_id.sql
+    my_sql_insert PROCEDURE_CONTRACT_creation.sql
+}
 
-# @@@TODO copy maintenance scripts & SQl procedures
+# TODO copy associated shell scripts (but where ? /usr/local/bin ?)
 
 #############################################
 # Finish
@@ -234,6 +236,8 @@ main() {
     # filling the SQL database
     create_tables
     echo "SQL inserts:                          OK"
+    add_procedures
+    echo "SQL procedures:                       OK"
     # done
     echo_installation_summary
 }
