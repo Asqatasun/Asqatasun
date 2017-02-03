@@ -205,7 +205,7 @@ add_procedures() {
     my_sql_insert PROCEDURE_ACT_list_running_acts.sql
     my_sql_insert PROCEDURE_AUDIT_last_audits.sql
     my_sql_insert PROCEDURE_AUDIT_delete_from_id.sql
-    my_sql_insert PROCEDURE_CONTRACT_creation.sql
+    my_sql_insert PROCEDURE_CONTRACT_create.sql
 }
 
 # TODO copy associated shell scripts (but where ? /usr/local/bin ?)

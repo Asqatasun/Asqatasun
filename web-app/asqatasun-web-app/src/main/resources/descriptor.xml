@@ -114,7 +114,7 @@
                 <include>PROCEDURE_ACT_list_running_acts.sql</include>
                 <include>PROCEDURE_AUDIT_last_audits.sql</include>
                 <include>PROCEDURE_AUDIT_delete_from_id.sql</include>
-                <include>PROCEDURE_CONTRACT_creation.sql</include>
+                <include>PROCEDURE_CONTRACT_create.sql</include>
                 <include>tg-set-user-admin.sh</include>
                 <include>tg-create-user.sh</include>
                 <include>ASQA_contract_create_SEO.sh</include>
