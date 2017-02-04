@@ -1,7 +1,7 @@
 FROM asqatasun/asqatasun:pre-requisites_with-empty-DB
 MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 
-# ##########################################################
+# #################################################################
 #
 #                      DISCLAIMER
 #
@@ -33,14 +33,12 @@ ENV  WWWPORT="8080"                                    \
 
 EXPOSE $WWWPORT
 
-
 # ##########################################################
 #
 # Asqatasun installation
 # cf http://doc.asqatasun.org/en/10_Install_doc/
 #
 # ##########################################################
-
 
 # Add Asqatasun
 ADD ./asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/

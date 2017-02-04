@@ -181,32 +181,68 @@ EOF
 # SQL
 #############################################
 create_tables() {
-
-    cd "$PKG_DIR/engine/sql"
+    cd "${PKG_DIR}/engine/sql"
     my_sql_insert asqatasun-20-create-tables.sql
     my_sql_insert asqatasun-30-insert.sql
     
-    cd "$PKG_DIR/web-app/sql"
+    cd "${PKG_DIR}/web-app/sql"
     my_sql_insert tgol-20-create-tables.sql
     my_sql_insert tgol-30-insert.sql
 
-    cd "$PKG_DIR/rules/sql"
+    cd "${PKG_DIR}/rules/sql"
     my_sql_insert 10-rules-resources-insert.sql
     my_sql_insert accessiweb2.2-insert.sql
     my_sql_insert rgaa3.0-insert.sql
     my_sql_insert seo1.0-insert.sql
     my_sql_insert rgaa3.2016-insert.sql
-
-    cd "$PKG_DIR/web-app/sql-management"
-    my_sql_insert PROCEDURE_ACT_list_running_acts.sql
-    my_sql_insert PROCEDURE_AUDIT_last_audits.sql
 }
 
 #############################################
 # SQL Scripts & procedure
 #############################################
+add_procedures() {
+    cd "${PKG_DIR}/web-app/sql-management"
+    my_sql_insert PROCEDURE_ACT_list_running_acts.sql
+    my_sql_insert PROCEDURE_AUDIT_last_audits.sql
+    my_sql_insert PROCEDURE_AUDIT_delete_from_id.sql
+    my_sql_insert PROCEDURE_CONTRACT_create.sql
+}
 
-# @@@TODO copy maintenance scripts & SQl procedures
+echo_error_message_SCRIPT_BIN_DIR() {
+    SCRIPT_DIR="$1"
+    DIAGNOSIS_MESSAGE="$2"
+    echo "WARNING: system directory ${SCRIPT_DIR} ${DIAGNOSIS_MESSAGE}."
+    echo "Unable to copy shell scripts for SQL procedures."
+    echo "No worry, you can grab them from \"${PKG_DIR}/web-app/sql-management\" and copy them where you want."
+    echo -en "\n"
+}
+
+copy_shell_scripts_for_procedures() {
+    cd "${PKG_DIR}/web-app/sql-management"
+    SCRIPT_BIN_DIR="/usr/local/bin"
+
+    if [! -d "${SCRIPT_BIN_DIR}" ]; then
+        echo_error_message_SCRIPT_BIN_DIR "${SCRIPT_BIN_DIR}" "does not exist"
+        return;
+    fi
+    if [! -r "${SCRIPT_BIN_DIR}" ]; then
+        echo_error_message_SCRIPT_BIN_DIR "${SCRIPT_BIN_DIR}" "is not readable"
+        return;
+    fi
+    if [! -x "${SCRIPT_BIN_DIR}" ]; then
+        echo_error_message_SCRIPT_BIN_DIR "${SCRIPT_BIN_DIR}" "is not executable"
+        return;
+    fi
+
+    for i in ASQA_audit_delete_from_id.sh \
+                ASQA_contract_create_SEO.sh \
+                ASQA_contract_create_A11Y_RGAA3.sh \
+                ASQA_contract_create_A11Y_RGAA3_openbar.sh \
+                ASQA_contract_create_A11Y_RGAA32016_openbar.sh ;
+                do
+                    cp ${i} "${SCRIPT_BIN_DIR}/"
+                done
+}
 
 #############################################
 # Finish
@@ -234,6 +270,10 @@ main() {
     # filling the SQL database
     create_tables
     echo "SQL inserts:                          OK"
+    add_procedures
+    echo "SQL procedures:                       OK"
+    copy_shell_scripts_for_procedures
+    echo "Shell scripts for procedures:         OK"
     # done
     echo_installation_summary
 }

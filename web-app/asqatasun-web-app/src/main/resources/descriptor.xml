@@ -1,6 +1,8 @@
-<assembly xmlns="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0 http://maven.apache.org/xsd/resources-1.1.0.xsd">
+<assembly
+    xmlns="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0
+    http://maven.apache.org/xsd/resources-1.1.0.xsd">
     <id>asqatasun_webapp</id>
     <formats>
         <format>tar.gz</format>
@@ -96,7 +98,7 @@
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install</outputDirectory>
-        </fileSet>	
+        </fileSet>
         <!-- Install web-app conf -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/conf</directory>
@@ -111,15 +113,16 @@
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/sql-management</directory>
             <includes>
-                <include>PROCEDURE_contract_create.sql</include>
-                <include>PROCEDURE_contract_create.sh</include>
+                <include>PROCEDURE_ACT_list_running_acts.sql</include>
+                <include>PROCEDURE_AUDIT_last_audits.sql</include>
+                <include>PROCEDURE_AUDIT_delete_from_id.sql</include>
+                <include>PROCEDURE_CONTRACT_create.sql</include>
                 <include>tg-set-user-admin.sh</include>
                 <include>tg-create-user.sh</include>
+                <include>ASQA_audit_delete_from_id.sh</include>
                 <include>ASQA_contract_create_SEO.sh</include>
                 <include>ASQA_contract_create_A11Y_RGAA3.sh</include>
                 <include>ASQA_contract_create_A11Y_RGAA3_openbar.sh</include>
-                <include>PROCEDURE_ACT_list_running_acts.sql</include>
-                <include>PROCEDURE_AUDIT_last_audits.sql</include>
                 <include>ASQA_contract_create_A11Y_RGAA32016_openbar.sh</include>
             </includes>
             <fileMode>755</fileMode>
@@ -162,7 +165,7 @@
             </includes>
             <excludes>
                 <exclude>nbproject/**/*</exclude>
-                <exclude>SUMMARY.md</exclude>		
+                <exclude>SUMMARY.md</exclude>
             </excludes>
             <fileMode>644</fileMode>
             <outputDirectory>/documentation</outputDirectory>

@@ -424,14 +424,6 @@ create_first_contracts() {
     # create 3 typical contracts
     cd "$PKG_DIR/web-app/sql-management"
 
-    # add SQL procedure "contract_create"
-    ./PROCEDURE_contract_create.sh \
-        --database-user "$database_user" \
-        --database-passwd "$database_passwd" \
-        --database-db "$database_db" \
-        --database-host "$database_host" || \
-            fail "Unable to add SQL Procedure 'contract_create'"
-
     # Contract Wikipedia A11Y
     ./ASQA_contract_create_A11Y_RGAA3.sh \
         -c "Wikipedia A11Y RGAA-3" \
@@ -448,6 +440,7 @@ create_first_contracts() {
         --audit-manual \
         -m 1000 || \
             fail "Unable to create contract: Wikipedia A11Y RGAA-3"
+
     # Contract Wikipedia SEO
     ./ASQA_contract_create_SEO.sh \
         -c "Wikipedia SEO" \
@@ -459,6 +452,7 @@ create_first_contracts() {
         --database-host "$database_host" \
         -m 1000 || \
             fail "Unable to create contract: Wikipedia SEO"
+
     # Contract A11Y Openbar
     ./ASQA_contract_create_A11Y_RGAA3_openbar.sh \
         -c "openbar A11Y RGAA3.0" \
@@ -468,6 +462,7 @@ create_first_contracts() {
         --database-db "$database_db" \
         --database-host "$database_host"  || \
             fail "Unable to create contract: Openbar A11Y RGAA-3.0"
+
     # Contract A11Y Openbar RGAA32016
     ./ASQA_contract_create_A11Y_RGAA32016_openbar.sh \
         -c "openbar A11Y RGAA3.2016" \
