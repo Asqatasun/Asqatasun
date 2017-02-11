@@ -1,9 +1,10 @@
 
 --------------------------------
-Asqatasun 4.x.x, 2016-xx-xx
+Asqatasun 4.x.x, 2017-xx-xx
 ---------------------------
 
-- [#126 create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
+- [#145 compile_and_build_docker_image.sh : added --build-only-* options](https://github.com/Asqatasun/Contrast-Finder/issues/145)
+- [#144 compile_and_build_docker_image.sh : added option to skip unit tests](https://github.com/Asqatasun/Contrast-Finder/issues/144)
 - SQL new procedure: list_running_acts and Last_audit
 - RGAA 3.2016
 
@@ -14,6 +15,8 @@ Security:
 None
 
 Bugs:
+- [#126 create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
+- [#142 fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Contrast-Finder/issues/142)
 - enhanced pre-requisites to allow database name containing hyphen "-"
 
 Configuration:

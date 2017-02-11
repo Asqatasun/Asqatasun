@@ -24,23 +24,27 @@ $0 launches a sequence that:
 
 usage: $0 -s <directory> -d <directory> [OPTIONS]
 
-  -s | --source-dir      <directory>   MANDATORY Absolute path to Asqatasun sources directory 
-  -d | --docker-dir      <directory>   MANDATORY Path to directory containing the Dockerfile. Path must be relative to SOURCE_DIR
-  -p | --port            <port>        Default value: 8085
-  -n | --container-name  <name>        Default value: asqa
-  -i | --image-name      <name>        Default value: asqatasun/asqatasun
-  -t | --tag-name        <name>        Default value: ${TIMESTAMP}
+  -s | --source-dir     <directory> MANDATORY Absolute path to Asqatasun sources directory
+  -d | --docker-dir     <directory> MANDATORY Path to directory containing the Dockerfile.
+                                    Path must be relative to SOURCE_DIR
+  -p | --port           <port>      Default value: 8085
+  -n | --container-name <name>      Default value: asqa
+  -i | --image-name     <name>      Default value: asqatasun/asqatasun
+  -t | --tag-name       <name>      Default value: ${TIMESTAMP}
 
-  -l | --only-localhost                Container available only on localhost
-       --use-sudo-docker               Use "sudo docker" instead of "docker"
-       --skip-build                    Skip Maven build (relies on previous build, that must exists)
-       --skip-copy                     Skip copying .tar.gz (relies on previous .tar.gz, that must exist)
-       --skip-docker-build             Skip docker build
-       --skip-docker-run               Skip docker run
+  -b | --build-only-dir <directory> Build only webapp and <directory> (relative to SOURCE_DIR)
+  -w | --build-only-webapp          Build only webapp (relies on previous build)
+  -l | --only-localhost             Container available only on localhost
+       --use-sudo-docker            Use "sudo docker" instead of "docker"
+       --skip-build-test            Skip unit tests on Maven build
+       --skip-build                 Skip Maven build (relies on previous build, that must exists)
+       --skip-copy                  Skip copying .tar.gz (relies on previous .tar.gz, that must exist)
+       --skip-docker-build          Skip docker build
+       --skip-docker-run            Skip docker run
 
-  -h | --help                          Show this help
-  -t | --functional-tests              Also execute functional tests. Please check pre-requisites
-                                       on http://doc.asqatasun.org/en/30_Contributor_doc/Testing/Functional_tests.html
+  -h | --help                       Show this help
+  -t | --functional-tests           Also execute functional tests. Please check pre-requisites
+                                    on http://doc.asqatasun.org/en/30_Contributor_doc/Testing/Functional_tests.html
 
 EOF
     exit 2
@@ -49,7 +53,7 @@ EOF
 #############################################
 # Manage options and usage
 #############################################
-TEMP=`getopt -o s:d:p:n:i:t:lht --long source-dir:,docker-dir:,port:,container-name:,image-name:,tag-name:,only-localhost,help,functional-tests,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
+TEMP=`getopt -o s:d:p:n:i:t:b:lwht --long source-dir:,docker-dir:,port:,container-name:,image-name:,tag-name:,build-only-dir:,only-localhost,build-only-webapp,help,functional-tests,skip-build-test,skip-build,skip-copy,skip-docker-build,skip-docker-run,use-sudo-docker -- "$@"`
 
 if [[ $? != 0 ]] ; then
     echo "Terminating..." >&2 ;
@@ -64,11 +68,15 @@ declare DOCKER_DIR
 declare HELP=false
 declare FTESTS=false
 declare SKIP_BUILD=false
+declare SKIP_BUILD_TEST=false
 declare SKIP_COPY=false
 declare SKIP_DOCKER_BUILD=false
 declare SKIP_DOCKER_RUN=false
 declare USE_SUDO_DOCKER=false
 declare ONLY_LOCALHOST=false
+declare BUILD_ONLY_WEBAPP=false
+declare BUILD_ONLY_DIR=false
+declare WEBAPP_DIR="web-app/asqatasun-web-app"
 declare CONTAINER_EXPOSED_PORT="8085"
 declare CONTAINER_NAME="asqa"
 declare IMAGE_NAME="asqatasun/asqatasun"
@@ -82,9 +90,13 @@ while true; do
     -n | --container-name )     CONTAINER_NAME="$2"; shift 2 ;;
     -i | --image-name )         IMAGE_NAME="$2"; shift 2 ;;
     -t | --tag-name  )          TAG_NAME="$2"; shift 2 ;;
+    -b | --build-only-dir )     BUILD_ONLY_DIR="$2"; shift 2 ;;
+    -w | --build-only-webapp )  BUILD_ONLY_WEBAPP=true; shift ;;
     -h | --help )               HELP=true; shift ;;
     -t | --functional-tests )   FTESTS=true; shift ;;
     -l | --only-localhost )     ONLY_LOCALHOST=true; shift ;;
+
+    --skip-build-test )         SKIP_BUILD_TEST=true; shift ;;
     --skip-build )              SKIP_BUILD=true; shift ;;
     --skip-copy )               SKIP_COPY=true; shift ;;
     --skip-docker-build )       SKIP_DOCKER_BUILD=true; shift ;;
@@ -146,9 +158,30 @@ function kill_previous_container() {
 }
 
 function do_build() {
+    MAVEN_OPTION=''
+    if ${SKIP_BUILD_TEST} ; then
+        MAVEN_OPTION=' -Dmaven.test.skip=true '; # skip unit tests
+    fi
+
     # clean and build
-    (cd "$SOURCE_DIR" ; mvn clean install) ||
-        fail "Error at build"
+    if [[ -n "$BUILD_ONLY_DIR" && "$BUILD_ONLY_DIR" != "false" ]]  ; then
+        if [[ -d "${SOURCE_DIR}/${BUILD_ONLY_DIR}" ]] ; then
+            # clean and build only $BUILD_ONLY_DIR directory and webapp
+            (   cd "${SOURCE_DIR}/${BUILD_ONLY_DIR}"; mvn clean install ${MAVEN_OPTION}; \
+                cd "${SOURCE_DIR}/${WEBAPP_DIR}";     mvn clean install ${MAVEN_OPTION}) ||
+                   fail "Error at build"
+        else
+            fail "not valid directory ${SOURCE_DIR}/${BUILD_ONLY_DIR}"
+        fi
+    elif ${BUILD_ONLY_WEBAPP} ; then
+        # clean and build only webapp
+        (cd "${SOURCE_DIR}/${WEBAPP_DIR}"; mvn clean install ${MAVEN_OPTION}) ||
+            fail "Error at build"
+    else
+        # clean and build
+        (cd "$SOURCE_DIR"; mvn clean install ${MAVEN_OPTION}) ||
+            fail "Error at build"
+    fi
 }
 
 function do_copy_targz() {
