@@ -29,7 +29,7 @@ call list_running_acts();
 Delete an audit based on its id.
 
 ```mysql
-call list_running_acts(id);
+call delete_audit_from_id(id);
 ```
 
 With:
