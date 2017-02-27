@@ -27,7 +27,7 @@
                 </executions>
                 <configuration>
                     <template>src/test/resources/templates/template.java.tpl</template>
-                    <dataFile>src/test/resources/url-lists/LIST-repos.kbaccess.org-all-sites.txt</dataFile>
+                    <dataFile>src/test/resources/url-lists/LIST-nonreg.asqatasun.ovh-all-sites.txt</dataFile>
                     <delimiter>;</delimiter>
                 </configuration>
             </plugin>
