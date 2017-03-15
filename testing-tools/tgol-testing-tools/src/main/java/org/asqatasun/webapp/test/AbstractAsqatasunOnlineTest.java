@@ -163,13 +163,16 @@ public abstract class AbstractAsqatasunOnlineTest extends TestCase {
             LOGGER.info("testing   " + url[i]);
             driver.findElementById(fieldName + i).sendKeys(url[i]);
         }
+        LOGGER.debug("URL typed in form");
         driver.findElementById(SUBMIT_BUTTON_NAME).submit();
+        LOGGER.debug("Submut button pressed");
         if (displayAllResult) {
             driver.findElementById("sortOptionMaptest-result5").click();
             driver.findElementByCssSelector("#result-option-console-update input").submit();
             driver.findElementByCssSelector("#expand-all").click();
         }
         String responseBody = driver.getPageSource();
+        LOGGER.debug("ResponseBody: " + responseBody);
         return responseBody;
     }
 
@@ -227,10 +230,11 @@ public abstract class AbstractAsqatasunOnlineTest extends TestCase {
     protected void login() {
         driver.get(loginUrl);
         try {
-
             driver.findElementById(userFieldName).sendKeys(user);
             driver.findElementById(passwordFieldName).sendKeys(password);
+            LOGGER.debug("Authentication form: login & password typed in");
             driver.findElementByName(LOGIN_BUTTON_NAME).submit();
+            LOGGER.debug("Authentication form: submit button actioned");
             Thread.sleep(500);
         } catch (InterruptedException ex) {
             java.util.logging.Logger.getLogger(AbstractAsqatasunOnlineTest.class.getName()).log(Level.SEVERE, null, ex);
