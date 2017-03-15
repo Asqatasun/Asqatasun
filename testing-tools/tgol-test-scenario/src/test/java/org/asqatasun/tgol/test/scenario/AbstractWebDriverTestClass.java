@@ -21,17 +21,6 @@
  */
 package org.asqatasun.tgol.test.scenario;
 
-import junit.framework.TestCase;
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.asqatasun.util.MD5Encoder;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -39,13 +28,45 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import junit.framework.TestCase;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.asqatasun.util.MD5Encoder;
 
 /**
+ *
  * @author jkowalczyk
  */
 public class AbstractWebDriverTestClass extends TestCase {
 
     protected static final String LOGIN_BUTTON_NAME = "Login";
+    protected static String EMAIL_FIELD_NAME = "email";
+    protected static String NAME_FIELD_NAME = "lastName";
+    protected static String FIRST_NAME_FIELD_NAME = "firstName";
+    protected static String PASSWORD_FIELD_NAME = "password";
+    protected static String CONFIRM_PASSWORD_FIELD_NAME = "confirmPassword";
+    protected static String LABEL_FIELD_NAME = "label";
+    protected static String ADMIN_ELEMENT_ID = "admin1";
+    protected static String ACTIVATED_ELEMENT_ID = "activated1";
+    private static final String HTML_TAG_NAME = "html";
+    protected static String ADD_USER_FORM_SUBMIT_XPATH_LOCATION =
+            "//div[@id='sign-up-submit']/input";
+    protected static String DELETE_USER_FORM_SUBMIT_XPATH_LOCATION =
+            "//div[@class='alert-actions']/form/input";
+    protected static String NEW_USER_CONTRACT_MNGT_XPATH_LOCATION =
+            "//table[@id='user-list-table']/tbody/tr[x]/td[8]/a/img";
+    protected static String USER_TABLE_BODY_XPATH_LOCATION =
+            "//table[@id='user-list-table']/tbody";
+    private static String EDIT_CONTRACT_FORM_SUBMIT_XPATH_LOCATION =
+            "//div[@id='edit-contract-form-submit']/input";
+    protected static String NOT_ALLOWED_MSG =
+            "You are not allowed to access this resource.";
     protected static final String ASSERT_TEXT_FAILED = "assertText failed";
     protected static final String ASSERT_TEXT_PRESENT_FAILED = "assertTextPresent failed";
     protected static final String ASSERT_TEXT_ABSENT_FAILED = "assertTextAbsence failed";
@@ -55,7 +76,6 @@ public class AbstractWebDriverTestClass extends TestCase {
     protected static final String NEW_USER_FIRST_NAME = "UserFirstName";
     protected static final String NEW_USER_PASSWORD = "AabB1234";
     protected static final String NEW_CONTRACT_LABEL = "CONTRACT LABEL";
-    private static final String HTML_TAG_NAME = "html";
     private static final String LOGIN_URL_KEY = "login_url";
     private static final String LOGOUT_URL_KEY = "logout_url";
     private static final String ADD_USER_URL_KEY = "add_user_url";
@@ -84,30 +104,6 @@ public class AbstractWebDriverTestClass extends TestCase {
     private static final String DB_USER_KEY = "dbUser";
     private static final String DB_PASSWORD_KEY = "dbPassword";
     private static final String DB_URL_KEY = "dbUrl";
-    protected static String EMAIL_FIELD_NAME = "email";
-    protected static String NAME_FIELD_NAME = "lastName";
-    protected static String FIRST_NAME_FIELD_NAME = "firstName";
-    protected static String PASSWORD_FIELD_NAME = "password";
-    protected static String CONFIRM_PASSWORD_FIELD_NAME = "confirmPassword";
-    protected static String LABEL_FIELD_NAME = "label";
-    protected static String ADMIN_ELEMENT_ID = "admin1";
-    protected static String ACTIVATED_ELEMENT_ID = "activated1";
-    protected static String ADD_USER_FORM_SUBMIT_XPATH_LOCATION =
-        "//div[@id='sign-up-submit']/input";
-    protected static String DELETE_USER_FORM_SUBMIT_XPATH_LOCATION =
-        "//div[@class='alert-actions']/form/input";
-    protected static String NEW_USER_CONTRACT_MNGT_XPATH_LOCATION =
-        "//table[@id='user-list-table']/tbody/tr[x]/td[8]/a/img";
-    protected static String USER_TABLE_BODY_XPATH_LOCATION =
-        "//table[@id='user-list-table']/tbody";
-    protected static String NOT_ALLOWED_MSG =
-        "You are not allowed to access this resource.";
-    private static String EDIT_CONTRACT_FORM_SUBMIT_XPATH_LOCATION =
-        "//div[@id='edit-contract-form-submit']/input";
-    /**
-     * The firefox driver
-     */
-    FirefoxDriver driver;
     /*
      * mysql parameters
      */
@@ -120,6 +116,10 @@ public class AbstractWebDriverTestClass extends TestCase {
      * Context info
      */
     private String hostLocation;
+
+    public String getHostLocation() {
+        return hostLocation;
+    }
     /**
      * Xvfb display port value used in headless mode
      */
@@ -128,7 +128,7 @@ public class AbstractWebDriverTestClass extends TestCase {
      * Firefox Path
      */
     private String pathToFirefox;
-
+    
     /**
      * Admin User info
      */
@@ -152,12 +152,12 @@ public class AbstractWebDriverTestClass extends TestCase {
     // field names to edit user info and login
     private String userFieldName;
     private String passwordFieldName;
+    /**
+     * The firefox driver
+     */
+    FirefoxDriver driver;
     private String newUserId;
     private String newContractId;
-
-    public String getHostLocation() {
-        return hostLocation;
-    }
 
     @Override
     public void setUp() throws Exception {
@@ -190,7 +190,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         hostLocation = System.getProperty(HOST_LOCATION_KEY);
         xvfbDisplay = System.getProperty(XVFB_DISPLAY_KEY);
         pathToFirefox = System.getProperty(FIREFOX_PATH_KEY);
-
+        
 //        createRootUserInDb();
 
         ResourceBundle parametersBundle = ResourceBundle.getBundle(BUNDLE_NAME);
@@ -279,9 +279,9 @@ public class AbstractWebDriverTestClass extends TestCase {
             }
         }
     }
-
+    
     /**
-     * Initialises the Db connection
+     * Initialises the Db connection 
      */
     private void initDb() {
         dataSource = new BasicDataSource();
@@ -310,6 +310,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param userName
      * @param password
      */
@@ -412,6 +413,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param elementName
      * @return
      */
@@ -420,6 +422,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param userValue
      */
     private void editUserField(String userValue) {
@@ -427,6 +430,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param passwordValue
      */
     private void editPasswordField(String passwordValue) {
@@ -434,6 +438,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param elementName
      * @param elementValue
      */
@@ -445,6 +450,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param elementName
      * @param elementValue
      */
@@ -455,6 +461,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param text
      */
     protected void checkTextPresence(String text) {
@@ -465,8 +472,8 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
-     * @param element The HTML element to look for
-     * @param value   The value of the HTML element
+     *
+     * @param text
      */
     protected void checkElementTextPresence(String element, String value) {
         if (!driver.findElement(By.xpath(element)).getText().contains(value)) {
@@ -476,8 +483,8 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
-     * @param element The HTML element to look for
-     * @param value   The value of the HTML element
+     *
+     * @param text
      */
     protected void checkElementTextAbsence(String element, String value) {
         if (driver.findElement(By.xpath(element)).getText().contains(value)) {
@@ -487,8 +494,8 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
-     * @param element The HTML element to look for
-     * @param value   The value of the HTML element
+     *
+     * @param text
      */
     protected void checkElementTextPresenceByCssSelector(String element, String value) {
         if (!driver.findElement(By.cssSelector(element)).getText().contains(value)) {
@@ -498,6 +505,7 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param text
      */
     protected void checkTextAbscence(String text) {
@@ -538,15 +546,16 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
+     *
      * @param activateUser
      */
     protected void createNewUser(boolean activateUser) {
         goToAddUserPage();
-        editWebElement(EMAIL_FIELD_NAME, NEW_USER_EMAIL);
-        editWebElement(PASSWORD_FIELD_NAME, NEW_USER_PASSWORD);
+        editWebElement(EMAIL_FIELD_NAME,            NEW_USER_EMAIL);
+        editWebElement(PASSWORD_FIELD_NAME,         NEW_USER_PASSWORD);
         editWebElement(CONFIRM_PASSWORD_FIELD_NAME, NEW_USER_PASSWORD);
-        editWebElement(NAME_FIELD_NAME, NEW_USER_NAME);
-        editWebElement(FIRST_NAME_FIELD_NAME, NEW_USER_FIRST_NAME);
+        editWebElement(NAME_FIELD_NAME,             NEW_USER_NAME);
+        editWebElement(FIRST_NAME_FIELD_NAME,       NEW_USER_FIRST_NAME);
         if (activateUser) {
             selectWebElement(ACTIVATED_ELEMENT_ID);
         }
@@ -576,16 +585,16 @@ public class AbstractWebDriverTestClass extends TestCase {
         createNewUser(true);
         // go to the management contracts page of the new user
 
-        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION.replaceAll("x", findNewUserRowIndexLocation()))).click();
+        driver.findElement(By.xpath(NEW_USER_CONTRACT_MNGT_XPATH_LOCATION.replaceAll("x",findNewUserRowIndexLocation()))).click();
         //----- At this time the id of the new user appears in an url for the first time
         extractedIdOfNewUser();
         goToAddUserContractPage();
 
-        editWebElement(LABEL_FIELD_NAME, NEW_CONTRACT_LABEL);
+        editWebElement(LABEL_FIELD_NAME,NEW_CONTRACT_LABEL);
         submitEditUserContract();
     }
 
-    protected String findNewUserRowIndexLocation() {
+    protected String findNewUserRowIndexLocation () {
         WebElement we = driver.findElement(By.xpath(USER_TABLE_BODY_XPATH_LOCATION));
         if (!StringUtils.equals(we.getTagName(), "tbody")) {
             throw new RuntimeException();
@@ -593,7 +602,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         return String.valueOf(we.findElements(By.tagName("tr")).size());
     }
 
-    protected String findAdminUserRowIndexLocation() {
+    protected String findAdminUserRowIndexLocation () {
         WebElement we = driver.findElement(By.xpath(USER_TABLE_BODY_XPATH_LOCATION));
         if (!StringUtils.equals(we.getTagName(), "tbody")) {
             throw new RuntimeException();

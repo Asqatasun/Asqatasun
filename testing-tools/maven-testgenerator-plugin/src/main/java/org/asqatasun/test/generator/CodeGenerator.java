@@ -21,18 +21,18 @@
  */
 package org.asqatasun.test.generator;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
 import java.io.File;
 import java.io.StringWriter;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 
 /**
+ *
  * @author Vivien Barousse
  */
 public class CodeGenerator {
@@ -54,9 +54,9 @@ public class CodeGenerator {
             Properties props = new Properties();
             props.setProperty("resource.loader", "file");
             props.setProperty("file.resource.loader.description",
-                "Velocity File Resource Loader");
+                    "Velocity File Resource Loader");
             props.setProperty("file.resource.loader.class",
-                "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
+                    "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
             props.setProperty("file.resource.loader.path", "/");
             VelocityEngine engine = new VelocityEngine();
             engine.init(props);
@@ -74,7 +74,7 @@ public class CodeGenerator {
     public void generateClass() throws GeneratorException {
         try {
             results.clear();
-
+            
             StringWriter writer = new StringWriter();
             template.merge(context, writer);
             generated = writer.toString();

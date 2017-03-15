@@ -22,46 +22,49 @@
 
 package org.asqatasun.webapp.test;
 
+import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.asqatasun.sebuilder.tools.ProfileFactory;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.concurrent.TimeUnit;
+import org.asqatasun.sebuilder.tools.ProfileFactory;
 
 /**
- * WebDriverFactory that guarantees that only one instance of webdriver is used
+ * WebDriverFactory that guarantees that only one instance of webdriver is used 
  * for a whole campaign.
- *
+ * 
  * @author jkowalczyk
  */
 public class WebDriverFactory {
 
     private FirefoxDriver webDriver;
-
+    
+    /**
+     * The holder that handles the unique instance of WebDriverFactory
+     */
+    private static class WebDriverFactoryHolder {
+        private static final WebDriverFactory INSTANCE = new WebDriverFactory();
+    }
+    
     /**
      * Private constructor
      */
-    private WebDriverFactory() {
-    }
-
+    private WebDriverFactory() {}
+    
     /**
-     * Singleton pattern based on the "Initialization-on-demand
+     * Singleton pattern based on the "Initialization-on-demand 
      * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     *
      * @return the unique instance of WebDriverFactory
      */
     public static WebDriverFactory getInstance() {
         return WebDriverFactoryHolder.INSTANCE;
     }
-
+    
     /**
-     * This methods creates a firefoxDriver instance and set a DISPLAY
+     * This methods creates a firefoxDriver instance and set a DISPLAY 
      * environment variable
-     *
      * @param display
-     * @return an instance of firefoxDriver
+     * @return an instance of firefoxDriver 
      */
     public FirefoxDriver getFirefoxDriver(String display) {
         if (webDriver == null) {
@@ -77,12 +80,5 @@ public class WebDriverFactory {
         }
         return webDriver;
     }
-
-    /**
-     * The holder that handles the unique instance of WebDriverFactory
-     */
-    private static class WebDriverFactoryHolder {
-        private static final WebDriverFactory INSTANCE = new WebDriverFactory();
-    }
-
+    
 }

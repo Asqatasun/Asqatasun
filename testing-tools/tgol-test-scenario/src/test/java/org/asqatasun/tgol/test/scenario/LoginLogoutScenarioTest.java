@@ -21,16 +21,19 @@
  */
 package org.asqatasun.tgol.test.scenario;
 
+import org.openqa.selenium.By;
+
 /**
+ *
  * @author mfaure
  */
 public class LoginLogoutScenarioTest extends AbstractWebDriverTestClass {
-
+  
     public void testLoginLogout() {
 
         loginAsRoot();
         //createNewContract();
         logout();
     }
-
+    
 }

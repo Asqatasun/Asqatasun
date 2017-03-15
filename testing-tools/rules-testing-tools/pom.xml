@@ -10,7 +10,7 @@
     </parent>
     <artifactId>asqatasun-rules-testing-tools</artifactId>
     <packaging>jar</packaging>
-    <name>asqatasun-rules-testing-tools</name>
+    <name>rules-testing-tools</name>
     <dependencies>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>

@@ -24,6 +24,7 @@ package org.asqatasun.tgol.test.scenario;
 import org.openqa.selenium.By;
 
 /**
+ *
  * @author jkowalczyk
  */
 public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
@@ -32,27 +33,27 @@ public class UserCreationScenarioTest extends AbstractWebDriverTestClass {
 
     private static final String ADMIN_PAGE_TITLE = "Administration";
     private static final String USER_CREATION_SUCCESS_MSG
-        = "The user " + NEW_USER_EMAIL + " has been added with success";
+            = "The user " + NEW_USER_EMAIL + " has been added with success";
     private static final String USER_DELETION_SUCCESS_MSG
-        = "The user " + NEW_USER_EMAIL + " has been deleted with success";
+            = "The user " + NEW_USER_EMAIL + " has been deleted with success";
     private static final String USER_DELETION_CONFIRMATION_MSG
-        = "You are about to delete the user " + NEW_USER_EMAIL + ". Are you sure?";
+            = "You are about to delete the user " + NEW_USER_EMAIL + ". Are you sure?";
     private static final String USER_MODIFICATION_SUCCESS_MSG
-        = "The user " + NEW_USER_EMAIL + " has been modified with success";
+            = "The user " + NEW_USER_EMAIL + " has been modified with success";
     private static final String ACCOUNT_NOT_ACTIVATED_MSG
-        = "Account not activated.";
+            = "Account not activated.";
 
     private static final String ADMIN_USER_DELETE_LINK_XPATH_LOCATION
-        = "//table[@id='user-list-table']/tbody/tr[x]/td[7]";
+            = "//table[@id='user-list-table']/tbody/tr[x]/td[7]";
 
     private static final String NEW_USER_EDIT_LINK_XPATH_LOCATION
-        = "//table[@id='user-list-table']/tbody/tr[x]/td[6]/a/img";
+            = "//table[@id='user-list-table']/tbody/tr[x]/td[6]/a/img";
 
     private static final String EDIT_USER_FORM_SUBMIT_XPATH_LOCATION
-        = "//div[@id='account-settings-form-submit']/input";
+            = "//div[@id='account-settings-form-submit']/input";
 
     private static final String NEW_USER_ACTIVATION_INFO_XPATH_LOCATION
-        = "//table[@id='user-list-table']/tbody/tr[x]/td[4]";
+            = "//table[@id='user-list-table']/tbody/tr[x]/td[4]";
 
     /**
      *

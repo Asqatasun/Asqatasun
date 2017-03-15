@@ -16,7 +16,7 @@
             <plugin>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-maven-testgenerator-plugin</artifactId>
-                <version>4.1.0-SNAPSHOT</version>
+                <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
                         <id>generate-tests</id>

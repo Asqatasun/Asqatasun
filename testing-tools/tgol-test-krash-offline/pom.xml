@@ -15,7 +15,7 @@
             <plugin>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-maven-testgenerator-plugin</artifactId>
-                <version>4.1.0-SNAPSHOT</version>
+                <version>${testingToolsVersion}</version>
                 <executions>
                     <execution>
                         <id>generate-tests</id>
@@ -27,7 +27,7 @@
                 </executions>
                 <configuration>
                     <template>src/test/resources/templates/template.java.tpl</template>
-                    <dataFile>src/test/resources/url-lists/LIST-nonreg.asqatasun.ovh-all-sites.txt</dataFile>
+                    <dataFile>src/test/resources/url-lists/LIST-repos.kbaccess.org-all-sites.txt</dataFile>
                     <delimiter>;</delimiter>
                 </configuration>
             </plugin>

@@ -24,25 +24,26 @@ package org.asqatasun.tgol.test.scenario;
 import org.openqa.selenium.By;
 
 /**
+ *
  * @author jkowalczyk
  */
 public class ContractCreationWithErrorsScenarioTest extends AbstractWebDriverTestClass {
 
     private static final String MANDATORY_ELEMENTS_MISSING_MSG
-        = "Some required fields are empty or invalid";
+            = "Some required fields are empty or invalid";
     private static final String LABEL_MISSING_MSG = "Please enter a label.";
     private static final String WRONG_URL_MSG
-        = "Please enter a valid URL (ex: http(s)://example.com)";
+            = "Please enter a valid URL (ex: http(s)://example.com)";
     private static final String OUT_OF_BOUND_MSG
-        = "Out of bound value";
+            = "Out of bound value";
     private static final String WRONG_NB_OF_AUDITS_MSG
-        = "Please enter a valid number of audits per contract.";
+            = "Please enter a valid number of audits per contract.";
     private static final String WRONG_NB_OF_ACTS_MSG
-        = "Please enter a valid number of audits to display";
+            = "Please enter a valid number of audits to display";
     private static final String BEGIN_DATE_MISSING_MSG
-        = "Please enter a begin date";
+            = "Please enter a begin date";
     private static final String END_DATE_ANTERIOR_TO_BEGIN_DATE_MISSING_MSG
-        = "Please choose an end date that is not anterior to the begin date";
+            = "Please choose an end date that is not anterior to the begin date";
 
     /**
      *
