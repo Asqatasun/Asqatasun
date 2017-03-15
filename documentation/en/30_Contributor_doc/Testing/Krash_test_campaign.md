@@ -30,9 +30,10 @@ cd testing-tools/tgol-test-krash-offline
 mvn test \
     -Duser=me@my-email.org \
     -Dpassword=myAsqaPassword \
-    -Dhost.location=http://localhost:8080/asqatasun/ \
+    -Dhost.location=http://localhost:8085/asqatasun/ \
     -Dcontract.id=3 \
-    -Dxvfb.display=":0"
+    -Dxvfb.display=":0" \
+    -Dwebdriver.firefox.bin=/opt/firefox/firefox
 ```
 
 ### Notes (to be ordered)
