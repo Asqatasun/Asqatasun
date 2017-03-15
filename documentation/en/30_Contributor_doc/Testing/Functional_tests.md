@@ -24,7 +24,7 @@ mvn test \
 ## Running one given functional test
 
 Say you just want to debug the ["login/logout" test](https://github.com/Asqatasun/Asqatasun/blob/develop/testing-tools/tgol-test-scenario/src/test/java/org/asqatasun/tgol/test/scenario/LoginLogoutScenarioTest.java),
-you have to add the `-Dtest=...` and add if **before** the `test` command:
+you have to add the `-Dtest=...` and add it **before** the `test` command:
 
 ```sh
 cd testing-tools/tgol-test-scenario

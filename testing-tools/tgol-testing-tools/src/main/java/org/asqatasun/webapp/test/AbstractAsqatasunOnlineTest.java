@@ -21,13 +21,14 @@
  */
 package org.asqatasun.webapp.test;
 
-import java.util.ResourceBundle;
-import java.util.logging.Level;
 import junit.framework.TestCase;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.webapp.test.data.KrashtestResult;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 /**
  * This class uses Selenium to automatically test asqatasun in web application
@@ -39,23 +40,8 @@ import org.asqatasun.webapp.test.data.KrashtestResult;
  */
 public abstract class AbstractAsqatasunOnlineTest extends TestCase {
 
-    private final Logger LOGGER = Logger.getLogger(this.getClass());
-    private static final String LOADING_ERROR_STR_EN =
-            "A problem occured while loading the content of the page";
-    private static final String PROCESSING_ERROR_STR_EN =
-            "A problem occured while adapting the page";
-    /**
-     * Keys in result page that enable to determine the result of the test
-     */
-    private static final String PASSED_KEY = "Passed";
-    private static final String FAILED_KEY = "Failed";
-    private static final String NMI_KEY = "Need More Information";
-    private static final String NA_KEY = "Not Applicable";
-    private static final String NT_KEY = "Not tested";
-    private static final String SUCCESS_STR1 = "tgm-result-page"; // class associated with result page
-    private static final String SUCCESS_STR2 = "tgm-page-list-f2xx"; // class associated with page-list-f2xx
     public static final String RULE_NOT_YET_IMPLEMENTED =
-            "RULE_NOT_YET_IMPLEMENTED";
+        "RULE_NOT_YET_IMPLEMENTED";
     /**
      * Parameters keys retrieved through property file
      */
@@ -79,6 +65,21 @@ public abstract class AbstractAsqatasunOnlineTest extends TestCase {
      */
     protected static final String SUBMIT_BUTTON_NAME = "launch-audit-submit";
     protected static final String LOGIN_BUTTON_NAME = "Login";
+    private static final String LOADING_ERROR_STR_EN =
+        "A problem occured while loading the content of the page";
+    private static final String PROCESSING_ERROR_STR_EN =
+        "A problem occured while adapting the page";
+    /**
+     * Keys in result page that enable to determine the result of the test
+     */
+    private static final String PASSED_KEY = "Passed";
+    private static final String FAILED_KEY = "Failed";
+    private static final String NMI_KEY = "Need More Information";
+    private static final String NA_KEY = "Not Applicable";
+    private static final String NT_KEY = "Not tested";
+    private static final String SUCCESS_STR1 = "tgm-result-page"; // class associated with result page
+    private static final String SUCCESS_STR2 = "tgm-page-list-f2xx"; // class associated with page-list-f2xx
+    private final Logger LOGGER = Logger.getLogger(this.getClass());
     // Application urls used to navigate
     protected String loginUrl;
     protected String logoutUrl;
@@ -162,13 +163,16 @@ public abstract class AbstractAsqatasunOnlineTest extends TestCase {
             LOGGER.info("testing   " + url[i]);
             driver.findElementById(fieldName + i).sendKeys(url[i]);
         }
+        LOGGER.debug("URL typed in form");
         driver.findElementById(SUBMIT_BUTTON_NAME).submit();
+        LOGGER.debug("Submut button pressed");
         if (displayAllResult) {
             driver.findElementById("sortOptionMaptest-result5").click();
             driver.findElementByCssSelector("#result-option-console-update input").submit();
             driver.findElementByCssSelector("#expand-all").click();
         }
         String responseBody = driver.getPageSource();
+        LOGGER.debug("ResponseBody: " + responseBody);
         return responseBody;
     }
 
@@ -201,7 +205,7 @@ public abstract class AbstractAsqatasunOnlineTest extends TestCase {
     protected String computeTestResult(String testName) {
         LOGGER.info("Searching result for test " + testName);
         String result = driver.findElementByXPath(
-                "//h4[text()='"
+            "//h4[text()='"
                 + testName
                 + "']/parent::*/parent::*/child::*/img").getAttribute("alt");
         LOGGER.info("Found Result " + result);
@@ -226,10 +230,11 @@ public abstract class AbstractAsqatasunOnlineTest extends TestCase {
     protected void login() {
         driver.get(loginUrl);
         try {
-
             driver.findElementById(userFieldName).sendKeys(user);
             driver.findElementById(passwordFieldName).sendKeys(password);
+            LOGGER.debug("Authentication form: login & password typed in");
             driver.findElementByName(LOGIN_BUTTON_NAME).submit();
+            LOGGER.debug("Authentication form: submit button actioned");
             Thread.sleep(500);
         } catch (InterruptedException ex) {
             java.util.logging.Logger.getLogger(AbstractAsqatasunOnlineTest.class.getName()).log(Level.SEVERE, null, ex);
