@@ -74,7 +74,7 @@
     </c:otherwise>
 </c:choose>
 <div id="lang-switcher">
-    <a href="${enUrl}" title="Umsteigen auf Deutsch" lang="de">
+    <a href="${deUrl}" title="Umsteigen auf Deutsch" lang="de">
         <abbr title="Deutsch">DE</abbr>
     </a>
     <a href="${enUrl}" title="Switch to english" lang="en">
