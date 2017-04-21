@@ -396,7 +396,7 @@ update_tomcat_configuration() {
     if [[ -z "$tgOption" ]]; then
         echo "" >>$MY_DEFAULT_TOMCAT
         echo "# Asqatasun JVM options" >>$MY_DEFAULT_TOMCAT
-        echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -DconfDir=file://${prefix}${TG_CONF_DIR} -DlogDir=${prefix}${TG_LOG_DIR} -Dwebdriver.firefox.bin=${firefox_esr_binary_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
+        echo "JAVA_OPTS=\"\$JAVA_OPTS -Xms512M -Xmx2048M -XX:PermSize=256M -XX:MaxPermSize=512M -DconfDir=file://${prefix}${TG_CONF_DIR} -DlogDir=${prefix}${TG_LOG_DIR} -Dwebdriver.firefox.bin=${firefox_esr_binary_path} -Ddisplay=${display_port}\"" >>$MY_DEFAULT_TOMCAT
     else
         fail "Unable to set Tomcat configuration in $MY_DEFAULT_TOMCAT"
     fi
