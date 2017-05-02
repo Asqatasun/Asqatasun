@@ -68,6 +68,18 @@ RUN  cd  /root                                      && \
         --display-port      :99                     && \
      rm -rf  /root/asqatasun*
 
+# Health Check of the Docker Container
+HEALTHCHECK --timeout=3s    \
+            CMD curl --fail http://localhost:8080/ || exit 1
+            ######################################################################
+            # doc: https://docs.docker.com/engine/reference/builder/#healthcheck
+            # options:  --interval=DURATION (default: 30s)
+            #           --timeout=DURATION (default: 30s)
+            #           --retries=N (default: 3)
+            # can be overridden at the command line 'docker run --health-cmd (...)'
+            ######################################################################
+
+
 CMD  service mysql start                            && \
      sleep   5                                      && \
      service xvfb start                             && \
