@@ -179,6 +179,36 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
             </plugin>
+    <!--    Generate standalone Javadocs
+               https://maven.apache.org/plugins/maven-javadoc-plugin/
+               https://maven.apache.org/plugins/maven-javadoc-plugin/usage.html
+               https://maven.apache.org/plugins/maven-javadoc-plugin/javadoc-mojo.html
+               JavaDoc: target/site/apidocs
+                        target/site/testapidocs
+               Usage:   mvn javadoc:javadoc
+                        mvn javadoc:aggregate
+                        mvn javadoc:test-javadoc
+                        mvn javadoc:test-aggregate           -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <show>private</show>
+                    <author>false</author>
+                    <linksource>true</linksource> <!-- Creates an HTML version of each source file (with line numbers) -->
+                    <doctitle> --  Javadocs for ${project.name} ${project.version}</doctitle>
+                    <windowtitle>Javadocs for ${project.name} ${project.version}</windowtitle>
+                    <header> -- ${project.name} v${project.version}</header>
+                    <footer>${project.name} v${project.version}  -- </footer>
+                    <bottom>
+                        <![CDATA[
+                            &#169; 2008&#x2013;{currentYear}
+                            <a href="http://asqatasun.org">Asqatasun.org<a>
+                        ]]>
+                    </bottom>
+                </configuration>
+            </plugin>
     <!--    OWASP Dependency-Check
                 https://www.owasp.org/index.php/OWASP_Dependency_Check
                 http://jeremylong.github.io/DependencyCheck/
