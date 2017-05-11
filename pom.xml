@@ -179,6 +179,29 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
             </plugin>
+    <!--    OWASP Dependency-Check
+                https://www.owasp.org/index.php/OWASP_Dependency_Check
+                http://jeremylong.github.io/DependencyCheck/
+                http://jeremylong.github.io/DependencyCheck/dependency-check-maven/
+                report: target/dependency-check-report.html
+                usage:  mvn dependency-check:check
+                        mvn dependency-check:aggregate
+                        mvn dependency-check:help -Ddetail=true -Dgoal=aggregate       -->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>1.4.5</version>
+        <!--    <configuration>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>       -->
+            </plugin>
         </plugins>
     </build>
 
