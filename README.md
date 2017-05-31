@@ -24,6 +24,9 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 
 ## Demo
 https://app.asqatasun.org
+
+[![https://app.asqatasun.org](https://github.com/Asqatasun/Asqatasun/blob/develop/documentation/en/Images/app.asqatasun.org_FR_690x340.png)](https://app.asqatasun.org)
+
  
 ## Vision
 
