@@ -12,7 +12,7 @@ where \[URL OR FILE OR SCENARIO\] is a blank-separated list of Urls or Files or 
 ## Example
 
 ```sh
-./bin/asqatasun.sh -f /opt/firefox-31.4.0esr/firefox/ -d 99 -o /tmp/result_output.txt -r Rgaa30 http://asqatasun.org/
+./bin/asqatasun.sh -f /opt/firefox-31.4.0esr/firefox/ -d 99 -o /tmp/result_output.txt -r Rgaa30 https://asqatasun.org/
 ```
 
 
@@ -48,7 +48,7 @@ usage: ./bin/asqatasun.sh [OPTIONS]... [URL OR FILE OR SCENARIO]...
 
 To customize the rule set, use the `-l` option of the script to choose the appropriate level and its associated rule set.
 
-To launch Asqatasun on Scenario (recorded from [SeBuilder firefox add-on](http://seleniumbuilder.github.io/se-builder/)), execute the following commands :
+To launch Asqatasun on Scenario (recorded from [SeBuilder firefox add-on](https://seleniumbuilder.github.io/se-builder/)), execute the following commands :
 
 ```sh
 ./bin/asqatasun.sh -t Scenario ${path_to_json_file}
