@@ -15,10 +15,10 @@
                 <a href="https://github.com/Asqatasun/Asqatasun/releases">Asqatasun v${asqatasunVersion}</a>
                 - 
                 <fmt:message key="footer.availableUnder"/> 
-                <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
+                <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
                 <br><br>
                 &copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" />
-                - <a href="http://asqatasun.org/">Asqatasun.org</a>
+                - <a href="https://asqatasun.org/">Asqatasun.org</a>
 
 
                 <div id="footer-asqatasun-link">
