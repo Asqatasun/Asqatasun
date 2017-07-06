@@ -3,6 +3,8 @@
 target
 hsql-db*
 *.log
+*.deb
+*.rpm
 
 
 ##### GIT
@@ -37,6 +39,8 @@ nbactions.xml
 
 # saved files
 *~
+*.bak
+*.swp
 
 
 ##### DevOps

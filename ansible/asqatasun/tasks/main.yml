@@ -125,4 +125,3 @@
   when: "asqatasun_app.stdout.find('/etc/asqatasun') == -1"
   notify:
     - Restart Tomcat7
-

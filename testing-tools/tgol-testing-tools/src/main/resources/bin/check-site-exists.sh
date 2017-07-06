@@ -10,17 +10,18 @@ if [ ! $1 ] ; then
     echo "";
     echo -en "- URL: the fully qualified domain name of the site (must begin with http:// )\n";
     echo "";
-    echo "Example: $0 http://asqatasun.org/";
+    echo "Example: $0 https://asqatasun.org/";
     exit -1
 fi
 
 if [ ! -e /usr/bin/lynx ]; then
     echo "ERROR: lynx not found"
     exit -1
-fi;
+fi
 
 # main
 # ----
 
 Url=$1
-/usr/bin/lynx -source -head "$i"  >/dev/null 2>&1 || echo "Unexistant website: $i"
+/usr/bin/lynx -source -head "$i"  >/dev/null 2>&1 || \
+    echo "Unexistant website: $i"
