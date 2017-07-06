@@ -1,0 +1,8 @@
+Package: asqatasun
+Architecture: all
+Depends: tomcat7, mysql-server
+Section: java
+Priority: extra
+Description: Web site analyzer, used for web accessibility and SEO
+ Asqatasun is an open-source web site analyzer, used for
+ web accessibility (a11y) and Search Engine Optimization (SEO).
