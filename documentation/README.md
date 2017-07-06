@@ -2,6 +2,3 @@
 
 - [English](en/) 
 - [Français](fr/) 
-
-
-

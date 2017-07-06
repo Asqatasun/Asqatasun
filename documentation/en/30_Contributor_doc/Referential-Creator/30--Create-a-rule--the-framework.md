@@ -29,10 +29,10 @@ This interface defines a selection applied to the DOM, to set the scope of the r
 
 Here is a not exhaustive list of existing ElementSelector implementations:
 
-* [SimpleElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/SimpleElementSelector.html)
-* [MultipleElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/MultipleElementSelector.html)
-* [LinkElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/LinkElementSelector.html)
-* [ImageElementSelector ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/ImageElementSelector.html)
+* [SimpleElementSelector ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/SimpleElementSelector.html)
+* [MultipleElementSelector ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/MultipleElementSelector.html)
+* [LinkElementSelector ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/LinkElementSelector.html)
+* [ImageElementSelector ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementselector/ImageElementSelector.html)
 * ...
 
 ### The `ElementChecker`
@@ -68,17 +68,17 @@ This interface defines a check to be done on elements
 
 Here is a not exhaustive list of existing ElementChecker implementations:
 
-* [ElementPresenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ElementPresenceChecker.html)
-* [ChildElementPresenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ChildElementPresenceChecker.html)
-* [ElementUnicityChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ElementUnicityChecker.html)
-* [AttributePresenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/attribute/AttributePresenceChecker.html)
-* [TextEmptinessChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextEmptinessChecker.html)
-* [TextLengthChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextLengthChecker.html)
-* [TextBelongsToBlackListChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextBelongsToBlackListChecker.html)
-* [DoctypeValidityChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/doctype/DoctypeValidityChecker.html)
-* [HeadingsHierarchyChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/headings/HeadingsHierarchyChecker.html)
-* [LangChangeChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/lang/LangChangeChecker.html)
-* [LinkPertinenceChecker ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/link/LinkPertinenceChecker.html)
+* [ElementPresenceChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ElementPresenceChecker.html)
+* [ChildElementPresenceChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ChildElementPresenceChecker.html)
+* [ElementUnicityChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/element/ElementUnicityChecker.html)
+* [AttributePresenceChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/attribute/AttributePresenceChecker.html)
+* [TextEmptinessChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextEmptinessChecker.html)
+* [TextLengthChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextLengthChecker.html)
+* [TextBelongsToBlackListChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/text/TextBelongsToBlackListChecker.html)
+* [DoctypeValidityChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/doctype/DoctypeValidityChecker.html)
+* [HeadingsHierarchyChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/headings/HeadingsHierarchyChecker.html)
+* [LangChangeChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/lang/LangChangeChecker.html)
+* [LinkPertinenceChecker ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/elementchecker/link/LinkPertinenceChecker.html)
 * ...
 
 ### The `TextElementBuilder`
@@ -103,13 +103,13 @@ Take a look at the [online javadoc of the Jsoup Element](https://jsoup.org/apido
 
 Here is the list of existing TextElementBuilder implementations:
 
-* [SimpleTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/SimpleTextElementBuilder.html)
-* [OwnTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/OwnTextElementBuilder.html)
-* [TextAttributeOfElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/TextAttributeOfElementBuilder.html)
-* [DeepTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/DeepTextElementBuilder.html)
-* [CompleteTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/CompleteTextElementBuilder.html)
-* [LinkTextElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/LinkTextElementBuilder.html)
-* [PathElementBuilder ---> @@@TODO fix URL](#http://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/PathElementBuilder.html)
+* [SimpleTextElementBuilder ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/SimpleTextElementBuilder.html)
+* [OwnTextElementBuilder ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/OwnTextElementBuilder.html)
+* [TextAttributeOfElementBuilder ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/TextAttributeOfElementBuilder.html)
+* [DeepTextElementBuilder ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/DeepTextElementBuilder.html)
+* [CompleteTextElementBuilder ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/CompleteTextElementBuilder.html)
+* [LinkTextElementBuilder ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/LinkTextElementBuilder.html)
+* [PathElementBuilder ---> @@@TODO fix URL](#https://asqatasun.org/Javadoc/LATEST/org/asqatasun/rules/textbuilder/PathElementBuilder.html)
 
 ## Test context
 

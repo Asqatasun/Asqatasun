@@ -6,7 +6,7 @@ You should have already done these steps:
 2. [Download Asqatasun](Download.md)
 3. [Check pre-requisites](Pre-requisites.md)
 
-(Ever need help ? Go to [Asqatasun Forum](http://forum.asqatasun.org).)
+(Ever need help ? Go to [Asqatasun Forum](https://forum.asqatasun.org).)
 
 ## Execute the installation script
 
@@ -26,7 +26,7 @@ sudo ./install.sh --database-user <Asqatasunu_dababase_user> \
 
 ### Script options description
 
-* **--database-user** : Mysql user for Asqatasun
+* **--database-user** : MySQL user for Asqatasun
 * **--database-passwd** : Password of the user specified by --database-user. if this user already exists, please ensure you give its correct password. If not, the user will be automatically created.
 * **--database-db** : Database for Asqatasun
 * **--asqatasun-url** : URL where asqatasun will be deployed (e.g. http://localhost:8080/asqatasun)

@@ -4,7 +4,7 @@
 Essayer Asqatasun grâce à un unique conteneur Docker.
 
 - C'est un gros conteneur qui n'est absolument pas conforme avec les [bonnes pratiques Docker](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
-- Ne l'utiliser pas en production, car toutes les données seront perdues au reboot ou au rebuild du conteneur
+- Ne l'utiliser pas en production, car toutes les données seront perdues au redémarrage ou à la reconstruction du conteneur
 - MAIS pour tester rapidement Asqatasun, il est parfait. :)
 
 ## 1. Créer un conteneur
