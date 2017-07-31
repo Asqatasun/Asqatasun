@@ -3,8 +3,8 @@
 Asqatasun 4.x.x, 2017-xx-xx
 ---------------------------
 
-- [#145 compile_and_build_docker_image.sh : added --build-only-* options](https://github.com/Asqatasun/Contrast-Finder/issues/145)
-- [#144 compile_and_build_docker_image.sh : added option to skip unit tests](https://github.com/Asqatasun/Contrast-Finder/issues/144)
+- [#145 build_and_run-with-docker.sh : added --build-only-* options](https://github.com/Asqatasun/Contrast-Finder/issues/145)
+- [#144 build_and_run-with-docker.sh : added option to skip unit tests](https://github.com/Asqatasun/Contrast-Finder/issues/144)
 - SQL new procedure: list_running_acts and Last_audit
 - RGAA 3.2016
 
@@ -65,7 +65,7 @@ Asqatasun 4.0.2, 2016-06-17
 --------------------------------
 
 Features:
-- Enhanced script docker/compile_and_build_docker_image.sh
+- Enhanced script docker/build_and_run-with-docker.sh
 
 Security:
 - Upgrade Apache Commons FileUpload to v1.3.1 

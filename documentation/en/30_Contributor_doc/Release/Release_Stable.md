@@ -35,7 +35,7 @@ do not use the `--push` option
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
-docker/compile_and_build_docker_image.sh --skip-build -s /tmp/Asqatasun -d docker/single-container-SNAPSHOT-local 
+docker/build_and_run-with-docker.sh --skip-build -s /tmp/Asqatasun -d docker/single-container-SNAPSHOT-local 
 ```
 
 ## 5) Push `master` branch and new `X.Y.Z` tag
