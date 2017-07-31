@@ -71,6 +71,7 @@ public class Asqatasun implements AuditServiceListener {
     private static final String AW22_REF      = "Aw22";
     private static final String RGAA30_REF    = "Rgaa30";
     private static final String RGAA32016_REF = "Rgaa32016";
+    private static final String RGAA32017_REF = "Rgaa32017";
     private static final String SEO_REF       = "Seo";
     private static String REF = RGAA30_REF;
     
@@ -379,7 +380,9 @@ public class Asqatasun implements AuditServiceListener {
      * @return 
      */
     private Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
-        if (ref.equalsIgnoreCase(RGAA30_REF) || ref.equalsIgnoreCase(RGAA32016_REF) ) {
+        if (        ref.equalsIgnoreCase(RGAA30_REF)
+                ||  ref.equalsIgnoreCase(RGAA32016_REF)
+                ||  ref.equalsIgnoreCase(RGAA32017_REF) ) {
             if (level.equalsIgnoreCase(BRONZE_LEVEL)) {
                 level=A_LEVEL;
             } else if (level.equalsIgnoreCase(SILVER_LEVEL)) {
@@ -460,6 +463,7 @@ public class Asqatasun implements AuditServiceListener {
                 + "- \"Aw22\" for Accessiweb 2.2\n"
                 + "- \"Rgaa30\" for Rgaa 3.0 (default)\n"
                 + "- \"Rgaa32016\" for Rgaa 3.2016\n"
+                + "- \"Rgaa32017\" for Rgaa 3.2017\n"
                 + "- \"Seo\" for SEO 1.0\n")
                              .hasArg()
                              .isRequired(false)
@@ -546,9 +550,10 @@ public class Asqatasun implements AuditServiceListener {
      * @return whether the given referential is valid
      */
     private static boolean isValidReferential(String ref) {
-        if (StringUtils.equals(ref, AW22_REF) ||
-                StringUtils.equals(ref, RGAA30_REF) ||
-                StringUtils.equals(ref, RGAA32016_REF) ||
+        if (StringUtils.equals(ref, AW22_REF)           ||
+                StringUtils.equals(ref, RGAA30_REF)     ||
+                StringUtils.equals(ref, RGAA32016_REF)  ||
+                StringUtils.equals(ref, RGAA32017_REF)  ||
                 StringUtils.equals(ref, SEO_REF)) {
             return true;
         }
