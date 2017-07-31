@@ -105,6 +105,7 @@
                 <value>Aw22</value>
                 <value>Rgaa30</value>
                 <value>Rgaa32016</value>
+                <value>Rgaa32017</value>
             </list>
         </property>
         <property name="actionHandler" ref="resultActionHandler"/>
@@ -179,7 +180,7 @@
     </bean>
     
     <bean id="auditSetUpController" class="org.asqatasun.webapp.controller.AuditSetUpController">
-        <property name="defaultReferential" value="Rgaa32016"/>
+        <property name="defaultReferential" value="Rgaa32017"/>
         <property name="referentialAndLevelFormFieldBuilderList">
             <ref bean="levelSelectFormFieldBuilder"/>
         </property>
