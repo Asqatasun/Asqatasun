@@ -101,6 +101,14 @@
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${basedir}/../../rules/rules-rgaa3.2017/src/main/resources/sql</directory>
+            <includes>
+                <include>rgaa3.2017-insert.sql</include>
+            </includes>
+            <fileMode>664</fileMode>
+            <outputDirectory>/install/rules/sql</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${basedir}/../../rules/rules-seo1.0/src/main/resources/sql</directory>
             <includes>
                 <include>seo1.0-insert.sql</include>
