@@ -472,6 +472,16 @@ create_first_contracts() {
         --database-db "$database_db" \
         --database-host "$database_host"  || \
             fail "Unable to create contract: Openbar A11Y RGAA-3.2016"
+
+    # Contract A11Y Openbar RGAA32017
+    ./ASQA_contract_create_A11Y_RGAA32017_openbar.sh \
+        -c "openbar A11Y RGAA3.2017" \
+        -u 1 \
+        --database-user "$database_user" \
+        --database-passwd "$database_passwd" \
+        --database-db "$database_db" \
+        --database-host "$database_host"  || \
+            fail "Unable to create contract: Openbar A11Y RGAA-3.2017"
 }
 
 #############################################
