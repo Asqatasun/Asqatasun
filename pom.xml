@@ -264,6 +264,12 @@
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-rules-rgaa3.2017</artifactId>
+                <version>${asqatasunVersion}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-seo1.0</artifactId>
                 <version>${asqatasunVersion}</version>
                 <scope>runtime</scope>
