@@ -2,7 +2,7 @@
 # RGAA 3.2016 Theme 9: Structure of information
 
 ## Criterion 9.1
-<div lang="fr">Dans chaque page Web, l&#x2019;information est-elle structur&#xE9;e par l&#x2019;utilisation appropri&#xE9;e de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre">titres</a>&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, l&#x2019;information est-elle structur&#xE9;e par l&#x2019;utilisation appropri&#xE9;e de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titre">titres</a>&nbsp;?</div>
 * [Rule 9.1.1](Rule-9-1-1.md)
 * [Rule 9.1.2](Rule-9-1-2.md)
 * [Rule 9.1.3](Rule-9-1-3.md)
@@ -14,7 +14,7 @@
 * [Rule 9.2.2](Rule-9-2-2.md)
 
 ## Criterion 9.3
-<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#listes">liste</a> est-elle correctement structur&#xE9;e&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#listes">liste</a> est-elle correctement structur&#xE9;e&nbsp;?</div>
 * [Rule 9.3.1](Rule-9-3-1.md)
 * [Rule 9.3.2](Rule-9-3-2.md)
 * [Rule 9.3.3](Rule-9-3-3.md)

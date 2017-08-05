@@ -13,7 +13,7 @@ No-check rule
 [7.1.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-7-1-4)
 
 ### Description
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#modification-du-rle-natif-dun-lment-html">modification du r&#xF4;le natif</a> d&#x2019;un &#xE9;l&#xE9;ment HTML respecte-t-elle les r&#xE8;gles et pr&#xE9;conisations indiqu&#xE9;es dans la sp&#xE9;cification HTML5 et les notes techniques associ&#xE9;es&nbsp;?</div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#modification-du-rle-natif-dun-lment-html">modification du r&#xF4;le natif</a> d&#x2019;un &#xE9;l&#xE9;ment HTML respecte-t-elle les r&#xE8;gles et pr&#xE9;conisations indiqu&#xE9;es dans la sp&#xE9;cification HTML5 et les notes techniques associ&#xE9;es&nbsp;?</div>
 
 ### Level
 **A**

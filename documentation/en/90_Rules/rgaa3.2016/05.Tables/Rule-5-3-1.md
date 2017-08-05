@@ -13,7 +13,7 @@ No-check rule
 [5.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-5-3-1)
 
 ### Description
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-mise-en-forme">tableau de mise en forme</a> v&#xE9;rifie-t-il ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-5-3" title="Cas particuliers pour le crit&#xE8;re 5.3">cas particuliers</a>)&nbsp;? <ul><li>Le contenu lin&#xE9;aris&#xE9; reste compr&#xE9;hensible&nbsp;;</li> <li>La balise <code lang="en">table</code> poss&#xE8;de un attribut <code lang="en">role="presentation"</code>.</li> </ul></div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#tableau-de-mise-en-forme">tableau de mise en forme</a> v&#xE9;rifie-t-il ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-5-3" title="Cas particuliers pour le crit&#xE8;re 5.3">cas particuliers</a>)&nbsp;? <ul><li>Le contenu lin&#xE9;aris&#xE9; reste compr&#xE9;hensible&nbsp;;</li> <li>La balise <code lang="en">table</code> poss&#xE8;de un attribut <code lang="en">role="presentation"</code>.</li> </ul></div>
 
 ### Level
 **A**

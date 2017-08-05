@@ -12,7 +12,7 @@ This test consists in detecting buttons associated with an image used as a CAPTC
 [1.5.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-5-2)
 
 ### Description
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#bouton-formulaire">bouton</a> associ&#xE9; &#xE0; une image (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) utilis&#xE9;e comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#captcha">CAPTCHA</a> v&#xE9;rifie-t-il une de ces conditions&nbsp;? <ul><li>Il existe une autre forme de CAPTCHA non graphique, au moins&nbsp;;</li> <li>Il existe une autre solution d&#x2019;acc&#xE8;s &#xE0; la fonctionnalit&#xE9; s&#xE9;curis&#xE9;e par le CAPTCHA.</li> </ul></div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#bouton-formulaire">bouton</a> associ&#xE9; &#xE0; une image (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) utilis&#xE9;e comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#captcha">CAPTCHA</a> v&#xE9;rifie-t-il une de ces conditions&nbsp;? <ul><li>Il existe une autre forme de CAPTCHA non graphique, au moins&nbsp;;</li> <li>Il existe une autre solution d&#x2019;acc&#xE8;s &#xE0; la fonctionnalit&#xE9; s&#xE9;curis&#xE9;e par le CAPTCHA.</li> </ul></div>
 
 ### Level
 **A**

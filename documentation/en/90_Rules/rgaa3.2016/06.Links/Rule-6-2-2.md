@@ -13,7 +13,7 @@ relevant.
 [6.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-6-2-2)
 
 ### Description
-<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-image">lien image</a> ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre-de-lien">titre de lien</a> (attribut <code lang="en">title</code>), le contenu de cet attribut est-il pertinent&nbsp;?</div>
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#lien-image">lien image</a> ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titre-de-lien">titre de lien</a> (attribut <code lang="en">title</code>), le contenu de cet attribut est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**

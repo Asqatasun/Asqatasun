@@ -14,7 +14,7 @@ Human check will be then needed to determine whether the alternative is well ren
 [1.3.9](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-3-9)
 
 ### Description
-<div lang="fr">Pour chaque image vectorielle (balise <code lang="en">svg</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a> et poss&#xE9;dant une alternative, cette alternative est-elle <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#correctement-restitue-par-les-technologies-dassistance">correctement restitu&#xE9;e</a> par les technologies d&#x2019;assistance&nbsp;?</div>
+<div lang="fr">Pour chaque image vectorielle (balise <code lang="en">svg</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a> et poss&#xE9;dant une alternative, cette alternative est-elle <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#correctement-restitue-par-les-technologies-dassistance">correctement restitu&#xE9;e</a> par les technologies d&#x2019;assistance&nbsp;?</div>
 
 ### Level
 **A**

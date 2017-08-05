@@ -12,7 +12,7 @@ This tests consists in checking the presence of a caption child node on the data
 [5.4.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-5-4-1)
 
 ### Description
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes">tableau de donn&#xE9;es</a> (balise <code lang="en">table</code>) a-t-il une balise <code lang="en">caption</code>&nbsp;?</div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#tableau-de-donnes">tableau de donn&#xE9;es</a> (balise <code lang="en">table</code>) a-t-il une balise <code lang="en">caption</code>&nbsp;?</div>
 
 ### Level
 **A**

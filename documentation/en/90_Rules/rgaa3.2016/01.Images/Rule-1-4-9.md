@@ -13,7 +13,7 @@ No-check rule
 [1.4.9](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-4-9)
 
 ### Description
-<div lang="fr">Pour chaque image vectorielle (balise <code lang="en">svg</code>) utilis&#xE9;e comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#captcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-test">image-test</a>, poss&#xE9;dant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#alternative-svg">alternative</a>, cette alternative est-elle <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#correctement-restitue-par-les-technologies-dassistance">correctement restitu&#xE9;e</a> par les technologies d&#x2019;assistance&nbsp;?</div>
+<div lang="fr">Pour chaque image vectorielle (balise <code lang="en">svg</code>) utilis&#xE9;e comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#captcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-test">image-test</a>, poss&#xE9;dant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#alternative-svg">alternative</a>, cette alternative est-elle <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#correctement-restitue-par-les-technologies-dassistance">correctement restitu&#xE9;e</a> par les technologies d&#x2019;assistance&nbsp;?</div>
 
 ### Level
 **A**

@@ -13,7 +13,7 @@ No-check rule
 [9.3.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-3-3)
 
 ### Description
-<div lang="fr">Dans chaque page Web, les informations regroup&#xE9;es sous forme de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#listes">listes</a> de d&#xE9;finitions utilisent-elles les balises <code lang="en">dl</code> et <code lang="en">dt</code>/<code lang="en">dd</code>&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, les informations regroup&#xE9;es sous forme de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#listes">listes</a> de d&#xE9;finitions utilisent-elles les balises <code lang="en">dl</code> et <code lang="en">dt</code>/<code lang="en">dd</code>&nbsp;?</div>
 
 ### Level
 **A**

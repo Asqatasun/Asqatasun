@@ -13,7 +13,7 @@ declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 [8.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-1-2)
 
 ### Description
-<div lang="fr">Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#type-de-document">type de document</a> (balise <code lang="en">doctype</code>) est-il valide&nbsp;?</div>
+<div lang="fr">Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#type-de-document">type de document</a> (balise <code lang="en">doctype</code>) est-il valide&nbsp;?</div>
 
 ### Level
 **A**

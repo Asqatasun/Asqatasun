@@ -12,7 +12,7 @@ This test consists in checking the relevancy of the `"title"` attribute for each
 [2.2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-2-2-1)
 
 ### Description
-<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a> (balise <code lang="en">iframe</code>) ayant un attribut <code lang="en">title</code>, le contenu de cet attribut est-il pertinent&nbsp;?</div>
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#cadre-en-ligne">cadre en ligne</a> (balise <code lang="en">iframe</code>) ayant un attribut <code lang="en">title</code>, le contenu de cet attribut est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**

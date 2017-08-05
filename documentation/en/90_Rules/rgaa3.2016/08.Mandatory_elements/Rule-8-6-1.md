@@ -12,7 +12,7 @@ This test consists in checking the relevancy of the title tag in the page.
 [8.6.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-6-1)
 
 ### Description
-<div lang="fr">Pour chaque page Web ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titrePage">titre de page</a> (balise <code lang="en">title</code>), le contenu de cette balise est-il pertinent&nbsp;?</div>
+<div lang="fr">Pour chaque page Web ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titrePage">titre de page</a> (balise <code lang="en">title</code>), le contenu de cette balise est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**

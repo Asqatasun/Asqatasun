@@ -13,7 +13,7 @@ No-check rule
 [4.4.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-4-4-1)
 
 ### Description
-<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> synchronis&#xE9; pr&#xE9;-enregistr&#xE9; ayant des <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#soustitres-synchroniss-objet-multimdia">sous-titres synchronis&#xE9;s</a>, ces sous-titres sont-ils pertinents&nbsp;?</div>
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> synchronis&#xE9; pr&#xE9;-enregistr&#xE9; ayant des <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#soustitres-synchroniss-objet-multimdia">sous-titres synchronis&#xE9;s</a>, ces sous-titres sont-ils pertinents&nbsp;?</div>
 
 ### Level
 **A**

@@ -12,7 +12,7 @@ We check whether a language is specified for each textual element of the page
 [8.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-3-1)
 
 ### Description
-<div lang="fr">Pour chaque page Web, l&#x2019;indication de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#langue-par-dfaut">langue par d&#xE9;faut</a> v&#xE9;rifie-t-elle une de ces conditions&nbsp;? <ul><li>L&#x2019;indication de la langue de la page (attribut <code lang="en">lang</code> et/ou <code lang="en">xml:lang</code>) est donn&#xE9;e pour l&#x2019;&#xE9;l&#xE9;ment <code lang="en">html</code>&nbsp;;</li> <li>L&#x2019;indication de la langue de la page (attribut <code lang="en">lang</code> et/ou <code lang="en">xml:lang</code>) est donn&#xE9;e sur chaque &#xE9;l&#xE9;ment de texte ou sur l&#x2019;un des &#xE9;l&#xE9;ments parents.</li> </ul></div>
+<div lang="fr">Pour chaque page Web, l&#x2019;indication de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#langue-par-dfaut">langue par d&#xE9;faut</a> v&#xE9;rifie-t-elle une de ces conditions&nbsp;? <ul><li>L&#x2019;indication de la langue de la page (attribut <code lang="en">lang</code> et/ou <code lang="en">xml:lang</code>) est donn&#xE9;e pour l&#x2019;&#xE9;l&#xE9;ment <code lang="en">html</code>&nbsp;;</li> <li>L&#x2019;indication de la langue de la page (attribut <code lang="en">lang</code> et/ou <code lang="en">xml:lang</code>) est donn&#xE9;e sur chaque &#xE9;l&#xE9;ment de texte ou sur l&#x2019;un des &#xE9;l&#xE9;ments parents.</li> </ul></div>
 
 ### Level
 **A**

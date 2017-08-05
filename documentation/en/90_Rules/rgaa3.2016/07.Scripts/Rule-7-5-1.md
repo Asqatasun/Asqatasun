@@ -13,7 +13,7 @@ No-check rule
 [7.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-7-5-1)
 
 ### Description
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#script">script</a> qui provoque une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#alerte">alerte</a> non sollicit&#xE9;e est-il contr&#xF4;lable par l&#x2019;utilisateur (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-7-5" title="Cas particuliers pour le crit&#xE8;re 7.5">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#script">script</a> qui provoque une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#alerte">alerte</a> non sollicit&#xE9;e est-il contr&#xF4;lable par l&#x2019;utilisateur (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-7-5" title="Cas particuliers pour le crit&#xE8;re 7.5">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **AAA**

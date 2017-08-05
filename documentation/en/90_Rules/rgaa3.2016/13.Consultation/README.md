@@ -33,11 +33,11 @@
 * [Rule 13.6.3](Rule-13-6-3.md)
 
 ## Criterion 13.7
-<div lang="fr">Dans chaque page Web, chaque document bureautique en t&#xE9;l&#xE9;chargement poss&#xE8;de-t-il, si n&#xE9;cessaire, une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#version-accessible-document">version accessible</a>&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, chaque document bureautique en t&#xE9;l&#xE9;chargement poss&#xE8;de-t-il, si n&#xE9;cessaire, une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#version-accessible-document">version accessible</a>&nbsp;?</div>
 * [Rule 13.7.1](Rule-13-7-1.md)
 
 ## Criterion 13.8
-<div lang="fr">Pour chaque document bureautique ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#version-accessible-document">version accessible</a>, cette version offre-t-elle la m&#xEA;me information&nbsp;?</div>
+<div lang="fr">Pour chaque document bureautique ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#version-accessible-document">version accessible</a>, cette version offre-t-elle la m&#xEA;me information&nbsp;?</div>
 * [Rule 13.8.1](Rule-13-8-1.md)
 
 ## Criterion 13.9
@@ -65,19 +65,19 @@
 * [Rule 13.14.1](Rule-13-14-1.md)
 
 ## Criterion 13.15
-<div lang="fr">Dans chaque page Web, les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#changements-brusques-de-luminosite">changements brusques de luminosit&#xE9; ou les effets de flash</a> sont-ils correctement utilis&#xE9;s&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#changements-brusques-de-luminosite">changements brusques de luminosit&#xE9; ou les effets de flash</a> sont-ils correctement utilis&#xE9;s&nbsp;?</div>
 * [Rule 13.15.1](Rule-13-15-1.md)
 * [Rule 13.15.2](Rule-13-15-2.md)
 * [Rule 13.15.3](Rule-13-15-3.md)
 
 ## Criterion 13.16
-<div lang="fr">Dans chaque page Web, les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#changements-brusques-de-luminosite">changements brusques de luminosit&#xE9; ou les effets de flash</a> ont-ils une fr&#xE9;quence inf&#xE9;rieure ou &#xE9;gale &#xE0; 3 par seconde&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#changements-brusques-de-luminosite">changements brusques de luminosit&#xE9; ou les effets de flash</a> ont-ils une fr&#xE9;quence inf&#xE9;rieure ou &#xE9;gale &#xE0; 3 par seconde&nbsp;?</div>
 * [Rule 13.16.1](Rule-13-16-1.md)
 * [Rule 13.16.2](Rule-13-16-2.md)
 * [Rule 13.16.3](Rule-13-16-3.md)
 
 ## Criterion 13.17
-<div lang="fr">Dans chaque page Web, chaque contenu en mouvement ou clignotant est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#controle-mouvement">contr&#xF4;lable</a> par l&#x2019;utilisateur&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, chaque contenu en mouvement ou clignotant est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#controle-mouvement">contr&#xF4;lable</a> par l&#x2019;utilisateur&nbsp;?</div>
 * [Rule 13.17.1](Rule-13-17-1.md)
 * [Rule 13.17.2](Rule-13-17-2.md)
 

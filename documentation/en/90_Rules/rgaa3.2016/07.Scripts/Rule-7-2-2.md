@@ -13,7 +13,7 @@ No-check rule
 [7.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-7-2-2)
 
 ### Description
-<div lang="fr">Chaque &#xE9;l&#xE9;ment non textuel mis &#xE0; jour par un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#script">script</a> (dans la page, ou un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a>) et ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#alternative--script">alternative</a> v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>L&#x2019;alternative de l&#x2019;&#xE9;l&#xE9;ment non textuel est mise &#xE0; jour&nbsp;;</li> <li>L&#x2019;alternative mise &#xE0; jour est pertinente.</li> </ul></div>
+<div lang="fr">Chaque &#xE9;l&#xE9;ment non textuel mis &#xE0; jour par un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#script">script</a> (dans la page, ou un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#cadre-en-ligne">cadre en ligne</a>) et ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#alternative--script">alternative</a> v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>L&#x2019;alternative de l&#x2019;&#xE9;l&#xE9;ment non textuel est mise &#xE0; jour&nbsp;;</li> <li>L&#x2019;alternative mise &#xE0; jour est pertinente.</li> </ul></div>
 
 ### Level
 **A**
