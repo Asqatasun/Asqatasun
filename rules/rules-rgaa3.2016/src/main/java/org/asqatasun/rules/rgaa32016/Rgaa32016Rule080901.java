@@ -43,7 +43,7 @@ import org.asqatasun.rules.elementchecker.helper.RuleCheckHelper;
  * Implementation of the rule 8.9.1 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-9-1.html">the rule 8.9.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-9-1">8.9.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-9-1">8.9.1 rule specification</a>
  *
  * @author jkowalczyk
  */

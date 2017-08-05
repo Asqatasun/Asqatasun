@@ -43,7 +43,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
  * Implementation of the rule 5.8.1 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/05.Tables/Rule-5-8-1.html">the rule 5.8.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-8-1">5.8.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-5-8-1">5.8.1 rule specification</a>
  *
  */
 public class Rgaa32016Rule050801 extends AbstractMarkerPageRuleImplementation {

@@ -30,7 +30,7 @@ import org.asqatasun.rules.elementselector.LinkElementSelector;
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-2-1">
+ * href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-6-2-1">
  * 6.2.1 rule specification</a>
  *
  */

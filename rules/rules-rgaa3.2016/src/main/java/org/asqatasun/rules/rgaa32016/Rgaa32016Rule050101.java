@@ -36,7 +36,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TABLE_WITH_C
  * Implementation of the rule 5.1.1 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/05.Tables/Rule-5-1-1.html">the rule 5.1.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-1-1">5.1.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-5-1-1">5.1.1 rule specification</a>
  *
  */
 public class Rgaa32016Rule050101 extends AbstractMarkerPageRuleImplementation {

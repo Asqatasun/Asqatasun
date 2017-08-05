@@ -36,7 +36,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_TA
  * Implementation of the rule 5.7.4 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/05.Tables/Rule-5-7-4.html">the rule 5.7.4 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-7-4">5.7.4 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-5-7-4">5.7.4 rule specification</a>
  *
  */
 public class Rgaa32016Rule050704 extends AbstractMarkerPageRuleImplementation {

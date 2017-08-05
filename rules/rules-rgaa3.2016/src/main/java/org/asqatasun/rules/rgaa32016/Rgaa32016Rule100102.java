@@ -47,7 +47,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_
  * Implementation of the rule 10.1.2 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/10.Presentation_of_information/Rule-10-1-1.html">the rule 10.1.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-10-1-1">10.1.2 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-10-1-1">10.1.2 rule specification</a>
  *
  */
 public class Rgaa32016Rule100102 extends AbstractPageRuleMarkupImplementation {

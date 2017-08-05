@@ -63,7 +63,7 @@ import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-11-1-2">
+ * href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-11-1-2">
  * 11.1.2 rule specification</a>
  *
  */

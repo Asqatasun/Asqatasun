@@ -37,7 +37,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TEXT_STYLED_
  * Implementation of the rule 1.8.5 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-8-5.html">the rule 1.8.5 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-8-5"> 1.8.5 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-8-5"> 1.8.5 rule specification</a>
  *
  */
 public class Rgaa32016Rule010803 extends AbstractMarkerPageRuleImplementation {

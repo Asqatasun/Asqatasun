@@ -27,7 +27,7 @@ import org.asqatasun.rules.elementselector.LinkElementSelector;
  * Implementation of the rule 6.4.1 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/06.Links/Rule-6-4-1.html">the rule 6.4.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-4-1">6.4.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-6-4-1">6.4.1 rule specification</a>
  *
  */
 public class Rgaa32016Rule060401 extends AbstractLinkRuleImplementation {

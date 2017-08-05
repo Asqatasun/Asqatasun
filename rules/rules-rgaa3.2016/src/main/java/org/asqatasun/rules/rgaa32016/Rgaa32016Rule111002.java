@@ -25,7 +25,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * Implementation of the rule 11.10.2 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/11.Forms/Rule-11-10-2.html">the rule 11.10.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-11-10-2">11.10.2 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-11-10-2">11.10.2 rule specification</a>
  *
  * @author
  */
