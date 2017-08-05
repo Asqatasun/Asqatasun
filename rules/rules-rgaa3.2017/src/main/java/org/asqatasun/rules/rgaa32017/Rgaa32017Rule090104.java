@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 9.1.4 of the referential RGAA 3.2017
  *
- * For more details about the implementation, refer to <a href="https://doc.asqatasun.org/en/90_Rules/rgaa3.2017/@@@FixMe/Rule-9-1-4.html">the rule 9.1.4 design page.</a>
+ * For more details about the implementation, refer to <a href="https://doc.asqatasun.org/en/90_Rules/rgaa3.2017/09.Structure_of_information/Rule-9-1-4.html">the rule 9.1.4 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-4">9.1.4 rule specification</a>
  *
  * @author

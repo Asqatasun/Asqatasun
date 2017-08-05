@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of the rule 12.5.1 of the referential RGAA 3.2017
  *
- * For more details about the implementation, refer to <a href="https://doc.asqatasun.org/en/90_Rules/rgaa3.2017/@@@FixMe/Rule-12-5-1.html">the rule 12.5.1 design page.</a>
+ * For more details about the implementation, refer to <a href="https://doc.asqatasun.org/en/90_Rules/rgaa3.2017/12.Navigation/Rule-12-5-1.html">the rule 12.5.1 design page.</a>
  * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-12-5-1">12.5.1 rule specification</a>
  *
  * @author
