@@ -8,10 +8,10 @@ Human check will be then needed to determine whether an alternative is present a
 ## Business description
 
 ### Criterion
-[1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-1-3)
+[1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-1-3)
 
 ### Test
-[1.3.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-3-4)
+[1.3.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-3-4)
 
 ### Description
 <div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-objet">image objet</a> (balise <code lang="en">object</code> avec l&#x2019;attribut <code lang="en">type="image/…"</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a> v&#xE9;rifie-t-elle une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-3" title="Cas particuliers pour le crit&#xE8;re 1.3">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;image objet est imm&#xE9;diatement suivie d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> permettant d&#x2019;afficher une page ou un passage de texte contenant une alternative pertinente.&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur de remplacer l&#x2019;image objet par un texte alternatif pertinent&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur de remplacer l&#x2019;image objet par une image poss&#xE9;dant une alternative pertinente.</li> </ul></div>

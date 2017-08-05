@@ -7,10 +7,10 @@ No-check rule
 ## Business description
 
 ### Criterion
-[4.8](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-4-8)
+[4.8](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-4-8)
 
 ### Test
-[4.8.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-4-8-2)
+[4.8.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-4-8-2)
 
 ### Description
 <div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mdia-temporel-type-son-vido-et-synchronis">m&#xE9;dia temporel</a> synchronis&#xE9; ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#audiodescription-synchronise-media-temporel">audio-description</a> synchronis&#xE9;e, celle-ci est-elle pertinente&nbsp;?</div>

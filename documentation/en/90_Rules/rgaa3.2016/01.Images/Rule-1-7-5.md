@@ -8,10 +8,10 @@ Human check will be then needed to determine whether the detected elements provi
 ## Business description
 
 ### Criterion
-[1.7](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-1-7)
+[1.7](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-1-7)
 
 ### Test
-[1.7.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-7-5)
+[1.7.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-7-5)
 
 ### Description
 <div lang="fr">Chaque image vectorielle (balise <code lang="en">svg</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#description-dtaille-image">description d&#xE9;taill&#xE9;e</a>, v&#xE9;rifie-t-elle une de ces conditions&nbsp;? <ul><li>La description d&#xE9;taill&#xE9;e adjacente &#xE0; l&#x2019;image vectorielle est pertinente&nbsp;;</li> <li>La description d&#xE9;taill&#xE9;e contenue dans la balise <code lang="en">desc</code> est pertinente&nbsp;;</li> <li>La description d&#xE9;taill&#xE9;e <i>via</i> un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-adjacent">lien adjacent</a> est pertinente.</li> </ul></div>

@@ -7,10 +7,10 @@ No-check rule
 ## Business description
 
 ### Criterion
-[9.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-9-5)
+[9.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-9-5)
 
 ### Test
-[9.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-5-1)
+[9.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-5-1)
 
 ### Description
 <div lang="fr">Dans chaque page Web, la signification de chaque abr&#xE9;viation est-elle pertinente&nbsp;?</div>

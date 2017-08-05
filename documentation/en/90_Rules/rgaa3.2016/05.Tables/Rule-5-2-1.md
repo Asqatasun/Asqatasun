@@ -6,10 +6,10 @@ This test consists in checking the relevancy of the caption of complex tables.
 ## Business description
 
 ### Criterion
-[5.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-5-2)
+[5.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-5-2)
 
 ### Test
-[5.2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-2-1)
+[5.2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-5-2-1)
 
 ### Description
 <div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes-complexe">tableau de donn&#xE9;e complexes</a> (balise <code lang="en">table</code>) ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#rsum-de-tableau">r&#xE9;sum&#xE9;</a>, celui-ci est-il pertinent&nbsp;?</div>

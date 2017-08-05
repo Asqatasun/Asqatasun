@@ -7,10 +7,10 @@ No-check rule
 ## Business description
 
 ### Criterion
-[9.6](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-9-6)
+[9.6](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-9-6)
 
 ### Test
-[9.6.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-6-2)
+[9.6.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-6-2)
 
 ### Description
 <div lang="fr">Dans chaque page Web, chaque bloc de citation utilise-t-il une balise <code lang="en">blockquote</code>&nbsp;?</div>

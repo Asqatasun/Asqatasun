@@ -6,10 +6,10 @@ This test consists in checking the presence of the `"title"` attribute for all t
 ## Business description
 
 ### Criterion
-[2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-2-1)
+[2.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-2-1)
 
 ### Test
-[2.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-2-1-1)
+[2.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-2-1-1)
 
 ### Description
 <div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#cadre-en-ligne">cadre en ligne</a> (balise <code lang="en">iframe</code>) a-t-il un attribut <code lang="en">title</code>&nbsp;?</div>

@@ -6,10 +6,10 @@
 ## Business description
 
 ### Criterion
-[8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-8-1)
+[8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-8-1)
 
 ### Test
-[8.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-1-3)
+[8.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-1-3)
 
 ### Description
 <div lang="fr">Pour chaque page Web poss&#xE9;dant une d&#xE9;claration de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#type-de-document">type de document</a>, celle-ci est-elle situ&#xE9;e avant la balise <code lang="en">html</code> dans le code source&nbsp;?</div>

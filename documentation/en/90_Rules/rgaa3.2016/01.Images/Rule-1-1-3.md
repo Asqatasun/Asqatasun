@@ -6,10 +6,10 @@ This test consists in checking whether each form button is defined with an `"alt
 ## Business description
 
 ### Criterion
-[1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-1-1)
+[1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-1-1)
 
 ### Test
-[1.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-3)
+[1.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-1-3)
 
 ### Description
 <div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#bouton-formulaire">bouton</a> de formulaire (balise <code lang="en">input</code> avec l&#x2019;attribut <code lang="en">type="image"</code>) a-t-il un attribut <code lang="en">alt</code>&nbsp;?</div>

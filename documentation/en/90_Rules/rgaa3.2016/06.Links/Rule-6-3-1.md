@@ -6,10 +6,10 @@ This test consists in checking whether the text of each textual link is enough e
 ## Business description
 
 ### Criterion
-[6.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-6-3)
+[6.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-6-3)
 
 ### Test
-[6.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-3-1)
+[6.3.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-6-3-1)
 
 ### Description
 <div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-texte">lien texte</a> v&#xE9;rifie-t-il une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.3">cas particuliers</a>)&nbsp;? <ul><li>L&#x2019;intitul&#xE9; du lien est <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-explicite-hors-contexte">explicite hors contexte</a>&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur d&#x2019;obtenir un intitul&#xE9; de lien explicite hors contexte&nbsp;;</li> <li>Le contenu du titre de lien (attribut <code lang="en">title</code>) est explicite hors contexte.</li> </ul></div>

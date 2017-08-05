@@ -6,10 +6,10 @@ This test consists in checking whether each change of language is valid
 ## Business description
 
 ### Criterion
-[8.8](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-8-8)
+[8.8](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-8-8)
 
 ### Test
-[8.8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-8-1)
+[8.8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-8-1)
 
 ### Description
 <div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#changement-de-langue">changement de langue</a> (attribut <code lang="en">lang</code> et/ou <code lang="en">xml:lang</code>) est-il valide&nbsp;?</div>

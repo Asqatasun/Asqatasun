@@ -6,10 +6,10 @@ This test consists in checking whether each `<area>` of an image map is defined 
 ## Business description
 
 ### Criterion
-[1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-1-1)
+[1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-1-1)
 
 ### Test
-[1.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-2)
+[1.1.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-1-2)
 
 ### Description
 <div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#zone-dune-image-ractive">zone</a> (balise <code lang="en">area</code>) d&#x2019;une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-ractive">image r&#xE9;active</a> a-t-elle un attribut <code lang="en">alt</code>&nbsp;?</div>

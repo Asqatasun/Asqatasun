@@ -7,10 +7,10 @@ No-check rule
 ## Business description
 
 ### Criterion
-[1.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-1-4)
+[1.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-1-4)
 
 ### Test
-[1.4.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-4-5)
+[1.4.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-4-5)
 
 ### Description
 <div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-objet">image objet</a> (balise <code lang="en">object</code> avec l&#x2019;attribut <code lang="en">type="image/…"</code>) utilis&#xE9;e comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#captcha">CAPTCHA</a> ou comme <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-test">image-test</a>, qui utilise une propri&#xE9;t&#xE9; <code lang="en">aria-label</code>, <code lang="en">aria-labelledby</code> ou un attribut <code lang="en">title</code>, v&#xE9;rifie-t-elle ces conditions&nbsp;? <ul><li>S&#x2019;il est pr&#xE9;sent, le contenu de l&#x2019;attribut <code lang="en">title</code> est identique au contenu de l&#x2019;attribut <code lang="en">aria-label</code>&nbsp;;</li> <li>S&#x2019;il est pr&#xE9;sent, le contenu de l&#x2019;attribut <code lang="en">title</code> est identique au passage de texte li&#xE9; par la propri&#xE9;t&#xE9; <code lang="en">aria-labelledby</code>.</li> </ul></div>

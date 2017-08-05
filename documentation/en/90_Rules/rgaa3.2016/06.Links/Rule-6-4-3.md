@@ -6,10 +6,10 @@ This test consists in checking whether each indentical combined link have the sa
 ## Business description
 
 ### Criterion
-[6.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-6-4)
+[6.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-6-4)
 
 ### Test
-[6.4.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-4-3)
+[6.4.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-6-4-3)
 
 ### Description
 <div lang="fr">Pour chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#liens-identiques">lien identique</a> de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-composite">type composite</a> a-t-il les m&#xEA;mes fonction et destination&nbsp;?</div>

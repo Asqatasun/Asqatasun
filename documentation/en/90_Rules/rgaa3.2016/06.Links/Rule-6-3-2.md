@@ -7,10 +7,10 @@ No-check rule
 ## Business description
 
 ### Criterion
-[6.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-6-3)
+[6.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-6-3)
 
 ### Test
-[6.3.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-3-2)
+[6.3.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-6-3-2)
 
 ### Description
 <div lang="fr">Chaque intitul&#xE9; de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-image">lien image</a> est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-explicite-hors-contexte">explicite hors contexte</a> (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.3">cas particuliers</a>)&nbsp;?</div>
