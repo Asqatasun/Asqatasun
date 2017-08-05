@@ -9,13 +9,13 @@ and relevant.
 ## Business description
 
 ### Criterion
-[8.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-8-4)
+[8.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-8-4)
 
 ### Test
-[8.4.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-4-1)
+[8.4.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-4-1)
 
 ### Description
-<div lang="fr">Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#langue-par-dfaut">langue par d&#xE9;faut</a>, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#code-de-langue">code de langue</a> v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>Le code de langue est valide&nbsp;;</li> <li>Le code de langue est pertinent.</li> </ul></div>
+<div lang="fr">Pour chaque page Web ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#langue-par-dfaut">langue par d&#xE9;faut</a>, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#code-de-langue">code de langue</a> v&#xE9;rifie-t-il ces conditions&nbsp;? <ul><li>Le code de langue est valide&nbsp;;</li> <li>Le code de langue est pertinent.</li> </ul></div>
 
 ### Level
 **A**

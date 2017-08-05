@@ -6,13 +6,13 @@ This test consists in checking whether each heading of the page is relevant
 ## Business description
 
 ### Criterion
-[9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-9-1)
+[9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-9-1)
 
 ### Test
-[9.1.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-4)
+[9.1.4](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-1-4)
 
 ### Description
-<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre">titre</a> (balise <code lang="en">h</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level</code>) est-il pertinent&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titre">titre</a> (balise <code lang="en">h</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level</code>) est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**

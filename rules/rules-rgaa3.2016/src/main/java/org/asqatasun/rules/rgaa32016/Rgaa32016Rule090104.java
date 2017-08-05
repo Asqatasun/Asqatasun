@@ -43,7 +43,7 @@ import org.asqatasun.service.ProcessRemarkService;
  * Implementation of the rule 9.1.4 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/09.Structure_of_information/Rule-9-1-4.html">the rule 9.1.4 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-4">9.1.4 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-1-4">9.1.4 rule specification</a>
  *
  * @author jkowalczyk
  */

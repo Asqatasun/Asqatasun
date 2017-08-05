@@ -12,7 +12,7 @@ This test consists in checking whether the title of each composite link is relev
 [6.2.3](https://references.modernisation.gouv.fr/referentiel-technique-0#test-6-2-3)
 
 ### Description
-<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#lien-composite">lien composite</a> ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre-de-lien">titre de lien</a> (attribut <code lang="en">title</code>), le contenu de cet attribut est-il pertinent&nbsp;?</div>
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#lien-composite">lien composite</a> ayant un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titre-de-lien">titre de lien</a> (attribut <code lang="en">title</code>), le contenu de cet attribut est-il pertinent&nbsp;?</div>
 
 ### Level
 **A**

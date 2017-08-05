@@ -6,13 +6,13 @@ This test consists in checking whether a heading of level 1 is present on the pa
 ## Business description
 
 ### Criterion
-[9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-9-1)
+[9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-9-1)
 
 ### Test
-[9.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-1)
+[9.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-1-1)
 
 ### Description
-<div lang="fr">Dans chaque page Web, y a-t-il un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre">titre</a> de niveau 1 (balise <code lang="en">h1</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level="1"</code>)&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, y a-t-il un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titre">titre</a> de niveau 1 (balise <code lang="en">h1</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level="1"</code>)&nbsp;?</div>
 
 ### Level
 **A**

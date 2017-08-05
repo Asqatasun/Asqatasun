@@ -6,13 +6,13 @@ This tests consists in checking the presence of a caption child node on the comp
 ## Business description
 
 ### Criterion
-[5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-5-1)
+[5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-5-1)
 
 ### Test
-[5.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-5-1-1)
+[5.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-5-1-1)
 
 ### Description
-<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#tableau-de-donnes-complexe">tableau de donn&#xE9;es complexe</a> (balise <code lang="en">table</code>) un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#rsum-de-tableau">r&#xE9;sum&#xE9;</a> est-il disponible dans la balise <code lang="en">caption</code>&nbsp;?</div>
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#tableau-de-donnes-complexe">tableau de donn&#xE9;es complexe</a> (balise <code lang="en">table</code>) un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#rsum-de-tableau">r&#xE9;sum&#xE9;</a> est-il disponible dans la balise <code lang="en">caption</code>&nbsp;?</div>
 
 ### Level
 **A**

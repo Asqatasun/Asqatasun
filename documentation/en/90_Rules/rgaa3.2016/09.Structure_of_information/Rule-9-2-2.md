@@ -7,13 +7,13 @@ No-check rule
 ## Business description
 
 ### Criterion
-[9.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-9-2)
+[9.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-9-2)
 
 ### Test
-[9.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-2-2)
+[9.2.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-2-2)
 
 ### Description
-<div lang="fr">Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#arborescence-du-document">l&#x2019;arborescence du document</a> est-elle coh&#xE9;rente&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#arborescence-du-document">l&#x2019;arborescence du document</a> est-elle coh&#xE9;rente&nbsp;?</div>
 
 ### Level
 **A**

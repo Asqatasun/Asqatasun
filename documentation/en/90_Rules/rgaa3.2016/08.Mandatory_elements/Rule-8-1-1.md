@@ -6,13 +6,13 @@ This tests checks whether a document type is available on the page.
 ## Business description
 
 ### Criterion
-[8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-8-1)
+[8.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-8-1)
 
 ### Test
-[8.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-1-1)
+[8.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-1-1)
 
 ### Description
-<div lang="fr">Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#type-de-document">type de document</a> (balise <code lang="en">doctype</code>) est-il pr&#xE9;sent&nbsp;?</div>
+<div lang="fr">Pour chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#type-de-document">type de document</a> (balise <code lang="en">doctype</code>) est-il pr&#xE9;sent&nbsp;?</div>
 
 ### Level
 **A**

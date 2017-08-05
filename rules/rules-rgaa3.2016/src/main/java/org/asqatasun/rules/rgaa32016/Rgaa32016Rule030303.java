@@ -27,7 +27,7 @@ import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
  * Implementation of the rule 3.3.3 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/03.Colours/Rule-3-3-3.html">the rule 3.3.3 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-3-3-3">3.3.3 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-3-3-3">3.3.3 rule specification</a>
  *
  * @author jkowalczyk
  */

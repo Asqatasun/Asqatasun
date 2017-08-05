@@ -6,10 +6,10 @@ This test consists in checking whether each `<img>` tag is defined with an `"alt
 ## Business description
 
 ### Criterion
-[1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-1-1)
+[1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-1-1)
 
 ### Test
-[1.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-1)
+[1.1.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-1-1)
 
 ### Description
 <div lang="fr">Chaque image (balise <code lang="en">img</code>) a-t-elle un attribut <code lang="en">alt</code>&nbsp;?</div>

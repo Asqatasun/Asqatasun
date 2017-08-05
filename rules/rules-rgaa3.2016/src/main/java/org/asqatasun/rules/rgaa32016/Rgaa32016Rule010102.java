@@ -32,7 +32,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.ALT_MISSING_MSG;
  * Implementation of the rule 1.1.2 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/01.Images/Rule-1-1-2.html">the rule 1.1.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-1-2">1.1.2 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-1-2">1.1.2 rule specification</a>
  *
  */
 public class Rgaa32016Rule010102 extends AbstractPageRuleWithSelectorAndCheckerImplementation {

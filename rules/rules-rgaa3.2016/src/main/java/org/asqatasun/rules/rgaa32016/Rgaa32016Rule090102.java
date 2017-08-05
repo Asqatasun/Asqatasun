@@ -37,7 +37,7 @@ import static org.asqatasun.rules.keystore.CssLikeQueryStore.ARIA_HEADINGS_CSS_L
  * design page.</a>
  *
  * @see <a
- * href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-2">
+ * href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-1-2">
  * 9.1.2 rule specification</a>
  *
  */

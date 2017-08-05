@@ -31,7 +31,7 @@ import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
  * Implementation of the rule 13.7.1 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/13.Consultation/Rule-13-7-1.html">the rule 13.7.1 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-13-7-1">13.7.1 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-13-7-1">13.7.1 rule specification</a>
  *
  * @author jkowalczyk
  */

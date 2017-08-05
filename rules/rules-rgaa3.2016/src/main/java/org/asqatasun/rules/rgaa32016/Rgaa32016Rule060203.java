@@ -27,7 +27,7 @@ import org.asqatasun.rules.elementselector.CompositeLinkElementSelector;
  * Implementation of the rule 6.2.3 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/06.Links/Rule-6-2-3.html">the rule 6.2.3 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-6-2-3">6.2.3 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-6-2-3">6.2.3 rule specification</a>
  *
  */
 public class Rgaa32016Rule060203 extends AbstractPageRuleWithSelectorAndCheckerImplementation {

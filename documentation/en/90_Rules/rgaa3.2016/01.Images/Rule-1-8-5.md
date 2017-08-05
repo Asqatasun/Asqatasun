@@ -8,13 +8,13 @@ Human check will be then needed to determine whether the detected elements conta
 ## Business description
 
 ### Criterion
-[1.8](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-1-8)
+[1.8](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-1-8)
 
 ### Test
-[1.8.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-1-8-5)
+[1.8.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-1-8-5)
 
 ### Description
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-texte">image texte</a> <span lang="en">bitmap</span> (balise <code lang="en">canvas</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, en l&#x2019;absence d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#mcanisme-de-remplacement">m&#xE9;canisme de remplacement</a>, doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-8" title="Cas particuliers pour le crit&#xE8;re 1.8">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-texte">image texte</a> <span lang="en">bitmap</span> (balise <code lang="en">canvas</code>) <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, en l&#x2019;absence d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#mcanisme-de-remplacement">m&#xE9;canisme de remplacement</a>, doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-1-8" title="Cas particuliers pour le crit&#xE8;re 1.8">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **AA**

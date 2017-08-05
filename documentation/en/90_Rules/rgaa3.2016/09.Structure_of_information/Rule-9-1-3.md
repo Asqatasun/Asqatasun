@@ -7,13 +7,13 @@ No-check rule
 ## Business description
 
 ### Criterion
-[9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-9-1)
+[9.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-9-1)
 
 ### Test
-[9.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-9-1-3)
+[9.1.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-9-1-3)
 
 ### Description
-<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titre">titre</a> (balise <code lang="en">h</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level</code>) n&#xE9;cessaire &#xE0; la structure de l&#x2019;information est-il pr&#xE9;sent&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titre">titre</a> (balise <code lang="en">h</code> ou balise poss&#xE9;dant un r&#xF4;le ARIA <code lang="en">"heading"</code> associ&#xE9; &#xE0; une propri&#xE9;t&#xE9; <code lang="en">aria-level</code>) n&#xE9;cessaire &#xE0; la structure de l&#x2019;information est-il pr&#xE9;sent&nbsp;?</div>
 
 ### Level
 **A**

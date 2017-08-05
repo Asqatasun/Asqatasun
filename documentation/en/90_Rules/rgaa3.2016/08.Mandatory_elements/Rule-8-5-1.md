@@ -6,13 +6,13 @@ This test consists in detecting the presence of the `<title>` tag
 ## Business description
 
 ### Criterion
-[8.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-8-5)
+[8.5](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-8-5)
 
 ### Test
-[8.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-5-1)
+[8.5.1](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-5-1)
 
 ### Description
-<div lang="fr">Chaque page Web a-t-elle un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#titrePage">titre de page</a> (balise <code lang="en">title</code>)&nbsp;?</div>
+<div lang="fr">Chaque page Web a-t-elle un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#titrePage">titre de page</a> (balise <code lang="en">title</code>)&nbsp;?</div>
 
 ### Level
 **A**

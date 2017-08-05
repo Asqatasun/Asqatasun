@@ -39,7 +39,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_IMMEDIATE_REDI
  * Implementation of the rule 13.1.2 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/13.Consultation/Rule-13-1-2.html">the rule 13.1.2 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-13-1-2">13.1.2 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-13-1-2">13.1.2 rule specification</a>
  *
  */
 public class Rgaa32016Rule130102 extends AbstractPageRuleWithSelectorAndCheckerImplementation {

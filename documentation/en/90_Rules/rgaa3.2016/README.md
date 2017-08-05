@@ -19,10 +19,11 @@ RGAA 3.2016 is compound of 13 themes:
 -----
 
 * Rgaa 3.2016
-  * http://references.modernisation.gouv.fr/rgaa/
-  * http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html
+  * http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html
 
 ----
 
-* Diff http://references.modernisation.gouv.fr/rgaa/changelog.html
-* Rgaa 3.0 http://references.modernisation.gouv.fr/rgaa-accessibilite/3.0
+* Diff 
+  * 3.0    to 3.2016 http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/changelog.html
+* Rgaa 
+  * 3.0         http://references.modernisation.gouv.fr/rgaa-accessibilite/3.0

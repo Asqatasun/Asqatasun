@@ -27,7 +27,7 @@ import org.asqatasun.rules.elementchecker.doctype.DoctypePositionChecker;
  * Implementation of the rule 8.1.3 of the referential RGAA 3.2016
  * <br/>
  * For more details about the implementation, refer to <a href="http://doc.asqatasun.org/en/90_Rules/rgaa3.2016/08.Mandatory_elements/Rule-8-1-3.html">the rule 8.1.3 design page.</a>
- * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-8-1-3">8.1.3 rule specification</a>
+ * @see <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-8-1-3">8.1.3 rule specification</a>
  *
  */
 public class Rgaa32016Rule080103 extends AbstractPageRuleWithCheckerImplementation {

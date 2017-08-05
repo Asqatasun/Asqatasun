@@ -7,13 +7,13 @@ elements with a font size superior to 18px.
 ## Business description
 
 ### Criterion
-[3.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#crit-3-3)
+[3.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#crit-3-3)
 
 ### Test
-[3.3.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/criteres.html#test-3-3-3)
+[3.3.3](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-3-3-3)
 
 ### Description
-<div lang="fr">Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#taille-caracteres-contraste">&#xE0; partir de 150% de la taille de police par d&#xE9;faut</a> (ou 1.5em), le texte et le texte en image sans effet de graisse v&#xE9;rifient-ils une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-3-3,3-4" title="Cas particuliers pour le crit&#xE8;re 3.3">cas particuliers</a>)&nbsp;? <ul><li>Le rapport de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/glossaire.html#contraste">contraste</a> entre le texte et son arri&#xE8;re-plan est de 3:1, au moins&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur d&#x2019;afficher le texte avec un rapport de contraste de 3:1, au moins.</li> </ul></div>
+<div lang="fr">Dans chaque page Web, <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#taille-caracteres-contraste">&#xE0; partir de 150% de la taille de police par d&#xE9;faut</a> (ou 1.5em), le texte et le texte en image sans effet de graisse v&#xE9;rifient-ils une de ces conditions (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-3-3,3-4" title="Cas particuliers pour le crit&#xE8;re 3.3">cas particuliers</a>)&nbsp;? <ul><li>Le rapport de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#contraste">contraste</a> entre le texte et son arri&#xE8;re-plan est de 3:1, au moins&nbsp;;</li> <li>Un m&#xE9;canisme permet &#xE0; l&#x2019;utilisateur d&#x2019;afficher le texte avec un rapport de contraste de 3:1, au moins.</li> </ul></div>
 
 ### Level
 **AA**
