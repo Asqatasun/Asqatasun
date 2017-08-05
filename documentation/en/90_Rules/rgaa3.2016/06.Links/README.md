@@ -2,7 +2,7 @@
 # RGAA 3.2016 Theme 6: Links
 
 ## Criterion 6.1
-<div lang="fr">Chaque lien est-il explicite (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.1">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Chaque lien est-il explicite (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.1">cas particuliers</a>)&nbsp;?</div>
 * [Rule 6.1.1](Rule-6-1-1.md)
 * [Rule 6.1.2](Rule-6-1-2.md)
 * [Rule 6.1.3](Rule-6-1-3.md)
@@ -14,7 +14,7 @@
 * [Rule 6.2.3](Rule-6-2-3.md)
 
 ## Criterion 6.3
-<div lang="fr">Chaque intitul&#xE9; de lien seul est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#lien-explicite-hors-contexte">explicite hors contexte</a> (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.3">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Chaque intitul&#xE9; de lien seul est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#lien-explicite-hors-contexte">explicite hors contexte</a> (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-6-1,6-3" title="Cas particuliers pour le crit&#xE8;re 6.3">cas particuliers</a>)&nbsp;?</div>
 * [Rule 6.3.1](Rule-6-3-1.md)
 * [Rule 6.3.2](Rule-6-3-2.md)
 * [Rule 6.3.3](Rule-6-3-3.md)

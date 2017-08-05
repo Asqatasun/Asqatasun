@@ -18,7 +18,7 @@
 * [Rule 1.2.6](Rule-1-2-6.md)
 
 ## Criterion 1.3
-<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">image porteuse d&#x2019;information</a> ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#alternative-textuelle-image">alternative textuelle</a>, cette alternative est-elle pertinente (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-3" title="Cas particuliers pour le crit&#xE8;re 1.3">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">image porteuse d&#x2019;information</a> ayant une <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#alternative-textuelle-image">alternative textuelle</a>, cette alternative est-elle pertinente (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-1-3" title="Cas particuliers pour le crit&#xE8;re 1.3">cas particuliers</a>)&nbsp;?</div>
 * [Rule 1.3.1](Rule-1-3-1.md)
 * [Rule 1.3.2](Rule-1-3-2.md)
 * [Rule 1.3.3](Rule-1-3-3.md)
@@ -78,7 +78,7 @@
 * [Rule 1.7.8](Rule-1-7-8.md)
 
 ## Criterion 1.8
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-texte">image texte</a> <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, en l&#x2019;absence d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#mcanisme-de-remplacement">m&#xE9;canisme de remplacement</a>, doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-8" title="Cas particuliers pour le crit&#xE8;re 1.8">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-texte">image texte</a> <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, en l&#x2019;absence d&#x2019;un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#mcanisme-de-remplacement">m&#xE9;canisme de remplacement</a>, doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-1-8" title="Cas particuliers pour le crit&#xE8;re 1.8">cas particuliers</a>)&nbsp;?</div>
 * [Rule 1.8.1](Rule-1-8-1.md)
 * [Rule 1.8.2](Rule-1-8-2.md)
 * [Rule 1.8.3](Rule-1-8-3.md)
@@ -86,7 +86,7 @@
 * [Rule 1.8.5](Rule-1-8-5.md)
 
 ## Criterion 1.9
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-texte">image texte</a> <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-1-9" title="Cas particuliers pour le crit&#xE8;re 1.9">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-texte">image texte</a> <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#image-porteuse-dinformation">porteuse d&#x2019;information</a>, doit si possible &#xEA;tre remplac&#xE9;e par du <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#texte-styl">texte styl&#xE9;</a>. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-1-9" title="Cas particuliers pour le crit&#xE8;re 1.9">cas particuliers</a>)&nbsp;?</div>
 * [Rule 1.9.1](Rule-1-9-1.md)
 * [Rule 1.9.2](Rule-1-9-2.md)
 * [Rule 1.9.3](Rule-1-9-3.md)

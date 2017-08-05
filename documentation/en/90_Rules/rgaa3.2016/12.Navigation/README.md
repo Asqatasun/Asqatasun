@@ -2,16 +2,16 @@
 # RGAA 3.2016 Theme 12: Navigation
 
 ## Criterion 12.1
-<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#ensemble-de-pages">ensemble de pages</a> dispose-t-il de deux <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#systeme-de-navigation">syst&#xE8;mes de navigation</a> diff&#xE9;rents, au moins (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-12-1" title="Cas particuliers pour le crit&#xE8;re 12.1">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#ensemble-de-pages">ensemble de pages</a> dispose-t-il de deux <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#systeme-de-navigation">syst&#xE8;mes de navigation</a> diff&#xE9;rents, au moins (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-12-1" title="Cas particuliers pour le crit&#xE8;re 12.1">cas particuliers</a>)&nbsp;?</div>
 * [Rule 12.1.1](Rule-12-1-1.md)
 
 ## Criterion 12.2
-<div lang="fr">Dans chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#ensemble-de-pages">ensemble de pages</a>, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#menu-de-navigation">menu</a> et les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#barre-de-navigation">barres de navigation</a> sont-ils toujours &#xE0; la m&#xEA;me place (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-12-2,12-3" title="Cas particuliers pour le crit&#xE8;re 12.2">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#ensemble-de-pages">ensemble de pages</a>, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#menu-de-navigation">menu</a> et les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#barre-de-navigation">barres de navigation</a> sont-ils toujours &#xE0; la m&#xEA;me place (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-12-2,12-3" title="Cas particuliers pour le crit&#xE8;re 12.2">cas particuliers</a>)&nbsp;?</div>
 * [Rule 12.2.1](Rule-12-2-1.md)
 * [Rule 12.2.2](Rule-12-2-2.md)
 
 ## Criterion 12.3
-<div lang="fr">Dans chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#ensemble-de-pages">ensemble de pages</a>, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#menu-de-navigation">menu</a> et les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#barre-de-navigation">barres de navigation</a> ont-ils une pr&#xE9;sentation coh&#xE9;rente (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-12-2,12-3" title="Cas particuliers pour le crit&#xE8;re 12.3">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#ensemble-de-pages">ensemble de pages</a>, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#menu-de-navigation">menu</a> et les <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#barre-de-navigation">barres de navigation</a> ont-ils une pr&#xE9;sentation coh&#xE9;rente (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-12-2,12-3" title="Cas particuliers pour le crit&#xE8;re 12.3">cas particuliers</a>)&nbsp;?</div>
 * [Rule 12.3.1](Rule-12-3-1.md)
 * [Rule 12.3.2](Rule-12-3-2.md)
 
@@ -38,7 +38,7 @@
 * [Rule 12.7.1](Rule-12-7-1.md)
 
 ## Criterion 12.8
-<div lang="fr">Dans chaque page Web, un fil d&#x2019;Ariane est-il pr&#xE9;sent (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-12-8" title="Cas particuliers pour le crit&#xE8;re 12.8">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, un fil d&#x2019;Ariane est-il pr&#xE9;sent (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-12-8" title="Cas particuliers pour le crit&#xE8;re 12.8">cas particuliers</a>)&nbsp;?</div>
 * [Rule 12.8.1](Rule-12-8-1.md)
 
 ## Criterion 12.9
@@ -53,7 +53,7 @@
 * [Rule 12.10.4](Rule-12-10-4.md)
 
 ## Criterion 12.11
-<div lang="fr">Dans chaque page Web, des <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#liens-dvitement-ou-daccs-rapide">liens d&#x2019;&#xE9;vitement ou d&#x2019;acc&#xE8;s rapide</a> aux groupes de liens importants et &#xE0; la <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#zone-main">zone de contenu</a> sont-ils pr&#xE9;sents (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-12-11" title="Cas particuliers pour le crit&#xE8;re 12.11">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, des <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#liens-dvitement-ou-daccs-rapide">liens d&#x2019;&#xE9;vitement ou d&#x2019;acc&#xE8;s rapide</a> aux groupes de liens importants et &#xE0; la <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#zone-main">zone de contenu</a> sont-ils pr&#xE9;sents (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-12-11" title="Cas particuliers pour le crit&#xE8;re 12.11">cas particuliers</a>)&nbsp;?</div>
 * [Rule 12.11.1](Rule-12-11-1.md)
 * [Rule 12.11.2](Rule-12-11-2.md)
 * [Rule 12.11.3](Rule-12-11-3.md)

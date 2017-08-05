@@ -8,7 +8,7 @@
 * [Rule 8.1.3](Rule-8-1-3.md)
 
 ## Criterion 8.2
-<div lang="fr">Pour chaque page Web, le code source est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#code-valide">valide</a> selon le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#type-de-document">type de document</a> sp&#xE9;cifi&#xE9; (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-8-2" title="Cas particuliers pour le crit&#xE8;re 8.2">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Pour chaque page Web, le code source est-il <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#code-valide">valide</a> selon le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#type-de-document">type de document</a> sp&#xE9;cifi&#xE9; (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-8-2" title="Cas particuliers pour le crit&#xE8;re 8.2">cas particuliers</a>)&nbsp;?</div>
 * [Rule 8.2.1](Rule-8-2-1.md)
 * [Rule 8.2.2](Rule-8-2-2.md)
 
@@ -29,7 +29,7 @@
 * [Rule 8.6.1](Rule-8-6-1.md)
 
 ## Criterion 8.7
-<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#changement-de-langue">changement de langue</a> est-il indiqu&#xE9; dans le code source (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-8-7" title="Cas particuliers pour le crit&#xE8;re 8.7">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#changement-de-langue">changement de langue</a> est-il indiqu&#xE9; dans le code source (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-8-7" title="Cas particuliers pour le crit&#xE8;re 8.7">cas particuliers</a>)&nbsp;?</div>
 * [Rule 8.7.1](Rule-8-7-1.md)
 
 ## Criterion 8.8

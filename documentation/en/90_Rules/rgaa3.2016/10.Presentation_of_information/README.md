@@ -53,7 +53,7 @@
 * [Rule 10.10.1](Rule-10-10-1.md)
 
 ## Criterion 10.11
-<div lang="fr">Pour chaque page Web, les blocs de texte ont-ils une largeur inf&#xE9;rieure ou &#xE9;gale &#xE0; 80 caract&#xE8;res (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-10-11" title="Cas particuliers pour le crit&#xE8;re 10.11">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Pour chaque page Web, les blocs de texte ont-ils une largeur inf&#xE9;rieure ou &#xE9;gale &#xE0; 80 caract&#xE8;res (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-10-11" title="Cas particuliers pour le crit&#xE8;re 10.11">cas particuliers</a>)&nbsp;?</div>
 * [Rule 10.11.1](Rule-10-11-1.md)
 
 ## Criterion 10.12

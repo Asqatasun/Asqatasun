@@ -10,7 +10,7 @@
 * [Rule 5.2.1](Rule-5-2-1.md)
 
 ## Criterion 5.3
-<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#tableau-de-mise-en-forme">tableau de mise en forme</a>, le contenu lin&#xE9;aris&#xE9; reste-t-il compr&#xE9;hensible (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-5-3" title="Cas particuliers pour le crit&#xE8;re 5.3">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Pour chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#tableau-de-mise-en-forme">tableau de mise en forme</a>, le contenu lin&#xE9;aris&#xE9; reste-t-il compr&#xE9;hensible (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-5-3" title="Cas particuliers pour le crit&#xE8;re 5.3">cas particuliers</a>)&nbsp;?</div>
 * [Rule 5.3.1](Rule-5-3-1.md)
 
 ## Criterion 5.4

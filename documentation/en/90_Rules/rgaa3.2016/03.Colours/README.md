@@ -20,14 +20,14 @@
 * [Rule 3.2.6](Rule-3-2-6.md)
 
 ## Criterion 3.3
-<div lang="fr">Dans chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#contraste">contraste</a> entre la couleur du texte et la couleur de son arri&#xE8;re-plan est-il suffisamment &#xE9;lev&#xE9; (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-3-3,3-4" title="Cas particuliers pour le crit&#xE8;re 3.3">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#contraste">contraste</a> entre la couleur du texte et la couleur de son arri&#xE8;re-plan est-il suffisamment &#xE9;lev&#xE9; (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-3-3,3-4" title="Cas particuliers pour le crit&#xE8;re 3.3">cas particuliers</a>)&nbsp;?</div>
 * [Rule 3.3.1](Rule-3-3-1.md)
 * [Rule 3.3.2](Rule-3-3-2.md)
 * [Rule 3.3.3](Rule-3-3-3.md)
 * [Rule 3.3.4](Rule-3-3-4.md)
 
 ## Criterion 3.4
-<div lang="fr">Dans chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#contraste">contraste</a> entre la couleur du texte et la couleur de son arri&#xE8;re-plan est-il am&#xE9;lior&#xE9; (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-3-3,3-4" title="Cas particuliers pour le crit&#xE8;re 3.4">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, le <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#contraste">contraste</a> entre la couleur du texte et la couleur de son arri&#xE8;re-plan est-il am&#xE9;lior&#xE9; (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-3-3,3-4" title="Cas particuliers pour le crit&#xE8;re 3.4">cas particuliers</a>)&nbsp;?</div>
 * [Rule 3.4.1](Rule-3-4-1.md)
 * [Rule 3.4.2](Rule-3-4-2.md)
 * [Rule 3.4.3](Rule-3-4-3.md)

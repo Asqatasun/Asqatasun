@@ -13,7 +13,7 @@ No-check rule
 [7.3.2](http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/criteres.html#test-7-3-2)
 
 ### Description
-<div lang="fr">Un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#script">script</a> ne doit pas supprimer le focus d&#x2019;un &#xE9;l&#xE9;ment qui le re&#xE7;oit. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-7-3" title="Cas particuliers pour le crit&#xE8;re 7.3">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Un <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#script">script</a> ne doit pas supprimer le focus d&#x2019;un &#xE9;l&#xE9;ment qui le re&#xE7;oit. Cette r&#xE8;gle est-elle respect&#xE9;e (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-7-3" title="Cas particuliers pour le crit&#xE8;re 7.3">cas particuliers</a>)&nbsp;?</div>
 
 ### Level
 **A**

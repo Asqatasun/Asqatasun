@@ -2,7 +2,7 @@
 # RGAA 3.2016 Theme 13: Consultation
 
 ## Criterion 13.1
-<div lang="fr">Pour chaque page Web, l&#x2019;utilisateur a-t-il le contr&#xF4;le de chaque limite de temps modifiant le contenu (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-13-1" title="Cas particuliers pour le crit&#xE8;re 13.1">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Pour chaque page Web, l&#x2019;utilisateur a-t-il le contr&#xF4;le de chaque limite de temps modifiant le contenu (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-13-1" title="Cas particuliers pour le crit&#xE8;re 13.1">cas particuliers</a>)&nbsp;?</div>
 * [Rule 13.1.1](Rule-13-1-1.md)
 * [Rule 13.1.2](Rule-13-1-2.md)
 * [Rule 13.1.3](Rule-13-1-3.md)
@@ -27,7 +27,7 @@
 * [Rule 13.5.1](Rule-13-5-1.md)
 
 ## Criterion 13.6
-<div lang="fr">Dans chaque page Web, pour chaque fichier en t&#xE9;l&#xE9;chargement, des informations relatives &#xE0; sa consultation sont-elles pr&#xE9;sentes (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/cas-particuliers.html#cp-13-6" title="Cas particuliers pour le crit&#xE8;re 13.6">cas particuliers</a>)&nbsp;?</div>
+<div lang="fr">Dans chaque page Web, pour chaque fichier en t&#xE9;l&#xE9;chargement, des informations relatives &#xE0; sa consultation sont-elles pr&#xE9;sentes (hors <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/cas-particuliers.html#cp-13-6" title="Cas particuliers pour le crit&#xE8;re 13.6">cas particuliers</a>)&nbsp;?</div>
 * [Rule 13.6.1](Rule-13-6-1.md)
 * [Rule 13.6.2](Rule-13-6-2.md)
 * [Rule 13.6.3](Rule-13-6-3.md)
