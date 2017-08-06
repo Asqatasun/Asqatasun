@@ -66,6 +66,15 @@
             <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
+        <!-- SQL Rules RGAA 3.2017 -->
+        <fileSet>
+            <directory>${basedir}/../../rules/rules-rgaa3.2017/src/main/resources/sql</directory>
+            <includes>
+                <include>rgaa3.2017-insert.sql</include>
+            </includes>
+            <fileMode>664</fileMode>
+            <outputDirectory>/install/rules/sql</outputDirectory>
+        </fileSet>
         <!-- SQL Rules SEO 1.0 -->
         <fileSet>
             <directory>${basedir}/../../rules/rules-seo1.0/src/main/resources/sql</directory>
@@ -124,6 +133,7 @@
                 <include>ASQA_contract_create_A11Y_RGAA3.sh</include>
                 <include>ASQA_contract_create_A11Y_RGAA3_openbar.sh</include>
                 <include>ASQA_contract_create_A11Y_RGAA32016_openbar.sh</include>
+                <include>ASQA_contract_create_A11Y_RGAA32017_openbar.sh</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install/web-app/sql-management</outputDirectory>
