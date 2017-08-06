@@ -28,6 +28,7 @@ CREATE PROCEDURE `contract_create`(
         DECLARE referential_id_RGAA3 INT DEFAULT 2;
         DECLARE referential_id_SEO INT DEFAULT 3;
         DECLARE referential_id_RGAA32016 INT DEFAULT 4;
+        DECLARE referential_id_RGAA32017 INT DEFAULT 5;
 
         -- CONSTANTS hard-coded values from table TGSI_FUNCTIONALITY
         DECLARE audit_type_id_page INT DEFAULT 1;
@@ -90,6 +91,11 @@ CREATE PROCEDURE `contract_create`(
             INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`)
             VALUES
                 (contractId, referential_id_SEO);
+        ELSEIF referential = "RGAA32017"
+            THEN
+                INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`)
+                VALUES
+                    (contractId, referential_id_RGAA32017);
         ELSEIF referential = "RGAA32016"
             THEN
                 INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`)
