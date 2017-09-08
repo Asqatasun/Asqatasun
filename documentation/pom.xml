@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.asqatasun</groupId>
+        <artifactId>asqatasun</artifactId>
+        <version>4.1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>documentation</artifactId>
+    <version>0.5.2-dev</version>
+    <packaging>jar</packaging>
+    <name>asqatasun-documentation</name>
+
+    <licenses>
+        <license>
+            <name>GNU Affero General Public License v3.0</name>
+            <url>https://www.gnu.org/licenses/agpl-3.0.txt</url>
+            <distribution>manual</distribution>
+        </license>
+    </licenses>
+    <url>http://www.asqatasun.org/</url>
+    <organization>
+        <name>Asqatasun.org</name>
+        <url>http://asqatasun.org</url>
+    </organization>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ruleoftech</groupId>
+            <artifactId>markdown-page-generator-plugin</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+               <plugin>
+                <groupId>com.ruleoftech</groupId>
+                <artifactId>markdown-page-generator-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <inputDirectory>${project.basedir}/en/</inputDirectory>
+                    <outputDirectory>${project.build.directory}/doc_html/</outputDirectory>
+                    <inputEncoding>UTF-8</inputEncoding>
+                    <outputEncoding>UTF-8</outputEncoding>
+                    <recursiveInput>true</recursiveInput>
+                    <transformRelativeMarkdownLinks>true</transformRelativeMarkdownLinks>
+                    <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS,AUTOLINKS</pegdownExtensions>
+                    <!-- <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS,AUTOLINKS, ANCHORLINKS, EXTANCHORLINKS</pegdownExtensions>  -->
+                    <!--
+                        <copyDirectories>images/logo/</copyDirectories>
+                        <copyDirectories>images/screenshot/</copyDirectories>
+                        <headerHtmlFile>${project.basedir}/../resources/src/main/resources/markdown/html/header.html</headerHtmlFile>
+                        <footerHtmlFile>${project.basedir}/../resources/src/main/resources/markdown/html/footer.html</footerHtmlFile>
+                    -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

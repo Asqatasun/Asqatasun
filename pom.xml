@@ -35,6 +35,7 @@
         <module>rules</module>
         <module>web-app</module>
         <module>runner</module>
+        <module>documentation</module>
     </modules>
     <profiles>
         <profile>

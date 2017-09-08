@@ -9,6 +9,19 @@
     <artifactId>engine</artifactId>
     <packaging>pom</packaging>
     <name>engine</name>
+
+    <licenses>
+        <license>
+            <name>GNU Affero General Public License v3.0</name>
+            <url>https://www.gnu.org/licenses/agpl-3.0.txt</url>
+            <distribution>manual</distribution>
+        </license>
+    </licenses>
+    <url>http://www.asqatasun.org/</url>
+    <organization>
+        <name>Asqatasun.org</name>
+        <url>http://asqatasun.org</url>
+    </organization>
    
     <modules>
         <module>commons-entity</module>
