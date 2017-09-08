@@ -4,7 +4,7 @@
   "steps": [
     {
       "type": "get",
-      "url": "http://asqatasun.org"
+      "url": "https://asqatasun.org"
     },
     {
       "type": "storePageSource",

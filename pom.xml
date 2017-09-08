@@ -15,7 +15,7 @@
     </description>
     <organization>
         <name>Asqatasun.org</name>
-        <url>http://asqatasun.org</url>
+        <url>https://asqatasun.org</url>
     </organization>
     <licenses>
         <license>
@@ -205,7 +205,7 @@
                     <bottom>
                         <![CDATA[
                             &#169; 2008&#x2013;{currentYear}
-                            <a href="http://asqatasun.org">Asqatasun.org<a>
+                            <a href="https://asqatasun.org">Asqatasun.org<a>
                         ]]>
                     </bottom>
                 </configuration>
