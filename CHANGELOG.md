@@ -2,11 +2,12 @@
 
 Asqatasun 4.x.x, 2017-xx-xx
 ---------------------------
-
-- [#145 - build_and_run-with-docker.sh : added --build-only-* options](https://github.com/Asqatasun/Contrast-Finder/issues/145)
-- [#144 - build_and_run-with-docker.sh : added option to skip unit tests](https://github.com/Asqatasun/Contrast-Finder/issues/144)
+- WIP ---> [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Contrast-Finder/issues/163) 
 - SQL new procedure: list_running_acts and Last_audit
-- RGAA 3.2017
+- `build_and_run-with-docker.sh` script:
+    - [#169 - Added --log-build    option](https://github.com/Asqatasun/Contrast-Finder/issues/169) 
+    - [#145 - Added --build-only-* options](https://github.com/Asqatasun/Contrast-Finder/issues/145)
+    - [#144 - Added option to skip unit tests](https://github.com/Asqatasun/Contrast-Finder/issues/144)
 
 ### Upgrade-o-meter
 None
@@ -40,7 +41,8 @@ none
 - Added "Crawler management" with howto increase maxDocuments in site-audit
 
 ### Task
-none
+- [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Contrast-Finder/issues/168)
+- [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Contrast-Finder/issues/145)
 
 
 
