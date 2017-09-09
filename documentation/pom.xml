@@ -33,7 +33,11 @@
     </dependencies>
     <build>
         <plugins>
-               <plugin>
+            <!--    Generate HTML files
+                    in target/doc_html/ directory  (used in tar.gz)
+                       https://github.com/walokra/markdown-page-generator-plugin
+                       https://github.com/sirthias/pegdown                         -->
+            <plugin>
                 <groupId>com.ruleoftech</groupId>
                 <artifactId>markdown-page-generator-plugin</artifactId>
                 <version>1.0.0</version>
@@ -53,14 +57,14 @@
                     <recursiveInput>true</recursiveInput>
                     <transformRelativeMarkdownLinks>true</transformRelativeMarkdownLinks>
                     <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS,AUTOLINKS</pegdownExtensions>
-                    <!-- <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS,AUTOLINKS, ANCHORLINKS, EXTANCHORLINKS</pegdownExtensions>  -->
-                    <!--
-                        <copyDirectories>images/logo/</copyDirectories>
-                        <copyDirectories>images/screenshot/</copyDirectories>
-                        <headerHtmlFile>${project.basedir}/../resources/src/main/resources/markdown/html/header.html</headerHtmlFile>
-                        <footerHtmlFile>${project.basedir}/../resources/src/main/resources/markdown/html/footer.html</footerHtmlFile>
-                    -->
-                </configuration>
+               <!-- <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS,AUTOLINKS, ANCHORLINKS, EXTANCHORLINKS</pegdownExtensions>  -->
+                    <headerHtmlFile>${project.basedir}/../testing-tools/resources/html_template/header.html</headerHtmlFile>
+                    <footerHtmlFile>${project.basedir}/../testing-tools/resources/html_template/footer.html</footerHtmlFile>
+                    <copyDirectories>Images/</copyDirectories>
+                    <copyDirectories>Images/Logo/</copyDirectories>
+                    <copyDirectories>20_User_doc/Images/</copyDirectories>
+                    <!--    Bug: only the last <copyDirectories>  is used   -->
+              </configuration>
             </plugin>
         </plugins>
     </build>

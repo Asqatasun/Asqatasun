@@ -233,6 +233,36 @@
                     </execution>
                 </executions>       -->
             </plugin>
+
+
+            <!--    Generate HTML files (README, CHANGELOG, ...)
+                    in target/html/ directory  (used in tar.gz)
+                       https://github.com/walokra/markdown-page-generator-plugin
+                       https://github.com/sirthias/pegdown                         -->
+            <plugin>
+                <groupId>com.ruleoftech</groupId>
+                <artifactId>markdown-page-generator-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <inputDirectory>${project.basedir}</inputDirectory>
+                    <outputDirectory>${project.build.directory}/html/</outputDirectory>
+                    <inputEncoding>UTF-8</inputEncoding>
+                    <outputEncoding>UTF-8</outputEncoding>
+                    <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS</pegdownExtensions>
+                    <!-- <pegdownExtensions>TABLES,FENCED_CODE_BLOCKS,AUTOLINKS, ANCHORLINKS, EXTANCHORLINKS</pegdownExtensions>  -->
+                    <!-- <transformRelativeMarkdownLinks>true</transformRelativeMarkdownLinks> -->
+                    <headerHtmlFile>${project.basedir}/testing-tools/resources/html_template/header.html</headerHtmlFile>
+                    <footerHtmlFile>${project.basedir}/testing-tools/resources/html_template/footer.html</footerHtmlFile>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -1489,6 +1519,13 @@
                 <artifactId>jersey-test-framework-core</artifactId>
                 <version>${jersey.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- markdown-page-generator -->
+            <dependency>
+                <groupId>com.ruleoftech</groupId>
+                <artifactId>markdown-page-generator-plugin</artifactId>
+                <version>1.0.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

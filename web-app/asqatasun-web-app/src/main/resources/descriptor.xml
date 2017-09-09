@@ -8,17 +8,41 @@
         <format>tar.gz</format>
     </formats>
     <fileSets>
-        <!-- text FILES -->
+        <!-- text FILES : License -->
         <fileSet>
             <directory>${basedir}/../../</directory>
             <includes>
-                <include>README.md</include>
-                <include>CHANGELOG.md</include>
                 <include>LICENSE</include>
             </includes>
             <fileMode>644</fileMode>
             <outputDirectory>/</outputDirectory>
         </fileSet>
+
+        <!-- README / CHANGELOG : html FILES -->
+        <fileSet>
+            <directory>${basedir}/../../target/html/</directory>
+            <includes>
+                <include>README.html</include>
+                <include>CHANGELOG.html</include>
+            </includes>
+            <fileMode>644</fileMode>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+
+        <!-- Documentation: html FILES -->
+        <fileSet>
+            <directory>${basedir}/../../documentation/target/doc_html/</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <excludes>
+                <exclude>nbproject/**/*</exclude>
+                <exclude>SUMMARY.md</exclude>
+            </excludes>
+            <fileMode>644</fileMode>
+            <outputDirectory>/documentation</outputDirectory>
+        </fileSet>
+
         <!-- SQL engine -->
         <fileSet>
             <directory>${basedir}/../../engine/asqatasun-resources/src/main/resources/sql</directory>
@@ -94,6 +118,7 @@
             <fileMode>664</fileMode>
             <outputDirectory>/install/web-app/sql</outputDirectory>
         </fileSet>
+
         <!-- Install files -->
         <fileSet>
             <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
@@ -167,19 +192,7 @@
             <fileMode>666</fileMode>
             <outputDirectory>/install/web-app/</outputDirectory>
         </fileSet>
-        <!-- Docs -->
-        <fileSet>
-            <directory>${basedir}/../../documentation/en</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-            <excludes>
-                <exclude>nbproject/**/*</exclude>
-                <exclude>SUMMARY.md</exclude>
-            </excludes>
-            <fileMode>644</fileMode>
-            <outputDirectory>/documentation</outputDirectory>
-        </fileSet>
+
         <!-- Ansible -->
         <fileSet>
             <directory>${basedir}/../../ansible</directory>
