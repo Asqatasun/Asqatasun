@@ -1,5 +1,5 @@
 INSERT IGNORE INTO `REFERENCE` (`Cd_Reference`, `Description`, `Label`, `Url`, `Rank`, `Id_Default_Level`) VALUES
-('Rgaa32017', NULL, 'RGAA 3.2017', '', 2000, 1);
+('Rgaa32017', NULL, 'RGAA 3.2017', '', 2000, 2);
 
 INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
 ('Rgaa32017', 'RGAA 3.2017');
