@@ -135,7 +135,7 @@
                         <c:if test="${detailedContractInfo.url != ''}">
                             <div id="project-url">
                                 <span class="project-meta-title">Url : </span>
-                                <a href="${detailedContractInfo.url}">${detailedContractInfo.url}</a>
+                                <a rel="noreferrer noopener" href="${detailedContractInfo.url}">${detailedContractInfo.url}</a>
                             </div>
                         </c:if>
                         <div id="project-expiration-date"><span class="project-meta-title"><fmt:message key="contract.expireOn"/> : </span><fmt:formatDate type="date" value="${detailedContractInfo.contractExpirationDate}" dateStyle="long"/></div>
@@ -228,7 +228,7 @@
                                         <td headers="page-url" class="tg-textual-column">
                                             <c:if test="${actInfo.scope != 'GROUPOFFILES' && actInfo.scope != 'FILE'}">
                                                 <span class="open-external-url-icon">
-                                                    <a title="<fmt:message key="pageList.goTo"/> ${actInfo.url}" href="${actInfo.url}">
+                                                    <a rel="noreferrer noopener" title="<fmt:message key="pageList.goTo"/> ${actInfo.url}" href="${actInfo.url}">
                                                         <img alt="<fmt:message key="pageList.goTo"/> ${actInfo.url}" src="${goToImgUrl}">
                                                     </a>
                                                 </span>

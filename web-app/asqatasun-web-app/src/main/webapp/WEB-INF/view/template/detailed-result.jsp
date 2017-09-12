@@ -197,7 +197,7 @@
                                             </c:if>
                                             <h4 id="test-${testResult.testShortLabel}">${testResult.testShortLabel} <span class="test-result sr-only"> <fmt:message key="${testResult.resultCode}"/> </span></h4>
                                             <span class="rule-detail-link">
-                                                <a title="<fmt:message key="resultPage.more"/> ${testResult.testShortLabel}" href="<fmt:message key="${testResult.testCode}-url"/>">
+                                                <a rel="noreferrer noopener" title="<fmt:message key="resultPage.more"/> ${testResult.testShortLabel}" href="<fmt:message key="${testResult.testCode}-url"/>">
                                                     <img alt="<fmt:message key="resultPage.more"/> ${testResult.testShortLabel}" src="${testInfoLinkImg}">
                                                 </a>
                                             </span>
@@ -210,7 +210,7 @@
                                             <div class="row">
                                                 <div class="span1 test-details">
                                                     <c:if test="${displayAlgorithm == 'true'}">
-                                                        <a title="<fmt:message key="resultPage.ruleDesignUrl"/> ${testResult.testShortLabel}" href="${testResult.ruleDesignUrl}">
+                                                        <a rel="noreferrer noopener" title="<fmt:message key="resultPage.ruleDesignUrl"/> ${testResult.testShortLabel}" href="${testResult.ruleDesignUrl}">
                                                             <img alt="<fmt:message key="resultPage.ruleDesignUrl"/> ${testResult.testShortLabel}" src="${algoLinkImg}">
                                                         </a>
                                                     </c:if>

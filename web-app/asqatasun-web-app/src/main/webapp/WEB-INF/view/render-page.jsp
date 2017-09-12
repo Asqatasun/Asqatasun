@@ -43,7 +43,7 @@
 
                 </div>
                 <div class="span16">
-                    <a href="${configProperties['generatedHtmlExplanationLink']}">
+                    <a rel="noreferrer noopener" href="${configProperties['generatedHtmlExplanationLink']}">
                         <fmt:message key="sourceCode.characteristic"/>
                     </a>
                 </div>

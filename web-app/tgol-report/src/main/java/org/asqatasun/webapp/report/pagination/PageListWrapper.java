@@ -127,7 +127,7 @@ public class PageListWrapper extends TableDecorator {
             ResourceBundle resourceBundle) {
         StringBuilder strb = new StringBuilder();
         strb.append("<span class=\"open-external-url-icon\">");
-        strb.append("<a href=\"");
+        strb.append("<a rel=\"noreferrer noopener\" href=\"");
         strb.append(url);
         strb.append("\" title=\"");
         strb.append(getUrlLinkTitle(resourceBundle, url));

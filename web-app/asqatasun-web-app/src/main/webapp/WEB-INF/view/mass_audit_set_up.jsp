@@ -83,7 +83,7 @@
                                 <img src="${gearImgUrl}" title="<fmt:message key="home.actRunning"/>" alt="<fmt:message key="home.actRunning"/>" class="running-audit"/>
                                 </c:if>
                             </h2>
-                            <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
+                            <div class="project-url"><a rel="noreferrer noopener" href="${contract.url}">${contract.url}</a></div>
                             <c:choose>
                                 <c:when test='${contract.lastActInfo != null}'>
                                     <div class="project-status"><fmt:message key="home.lastAudit"/> : <fmt:formatDate type="date" value="${contract.lastActInfo.date}" dateStyle="long"/> <fmt:message key="home.at"/> <fmt:formatDate type="time" value="${contract.lastActInfo.date}"/></div>
@@ -122,7 +122,7 @@
                         <div class="span12">
                             <h2 class="project-name">${contract.label}</h2>
                             <div class="project-expiration"><fmt:message key="home.projectHasExpired"/></div>
-                            <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
+                            <div class="project-url"><a rel="noreferrer noopener" href="${contract.url}">${contract.url}</a></div>
                         </div><!-- class="span11 one-project" -->
                             </c:otherwise>
                         </c:choose>

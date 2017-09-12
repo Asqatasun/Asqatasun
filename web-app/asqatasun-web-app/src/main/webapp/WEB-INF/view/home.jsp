@@ -98,7 +98,7 @@
                                 </c:if>
                             </h2>
                             <c:if test="${not empty contract.url}">
-                            <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
+                            <div class="project-url"><a rel="noreferrer noopener" href="${contract.url}">${contract.url}</a></div>
                             </c:if>
                             <c:choose>
                                 <c:when test='${contract.lastActInfo != null}'>
@@ -196,7 +196,7 @@
                         <td class="project-expired">
                             <h2 class="project-name">${contract.label}</h2>
                             <div class="project-expiration"><fmt:message key="home.projectHasExpired"/></div>
-                            <div class="project-url"><a href="${contract.url}">${contract.url}</a></div>
+                            <div class="project-url"><a rel="noreferrer noopener" href="${contract.url}">${contract.url}</a></div>
                         </td>
                             </c:otherwise>
                         </c:choose>

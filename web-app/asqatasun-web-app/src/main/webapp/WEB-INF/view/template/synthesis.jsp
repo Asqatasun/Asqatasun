@@ -30,7 +30,7 @@
                     <span class="synthesis-meta-title">Scenario : </span>
                     <c:choose>
                          <c:when test="${addLinkToSourceCode == 'true'}">
-                             <a href="${statistics.url}">${statistics.url}</a>
+                             <a  rel="noreferrer noopener" href="${statistics.url}">${statistics.url}</a>
                          </c:when>
                          <c:otherwise>
                              ${statistics.url}
@@ -38,7 +38,7 @@
                     </c:choose>
                 </c:when>
                 <c:otherwise>
-                    <span class="synthesis-meta-title">Url : </span><a href="${statistics.url}">${statistics.url}</a>
+                    <span class="synthesis-meta-title">Url : </span><a  rel="noreferrer noopener" href="${statistics.url}">${statistics.url}</a>
                 </c:otherwise>
             </c:choose>
             <c:if test="${addLinkToSourceCode == 'true'}">

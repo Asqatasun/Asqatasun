@@ -156,7 +156,7 @@
                                     </fmt:message>
                                 </c:set>
                                 <td class="${evidenceElement2.key}">
-                                    <a title="${cfLogoDescription}" target="_blank" href="${configProperties['contrastfinderServiceUrl']}/result.html?foreground=${fn:replace(fgColorHexa, "#", "%23")}&background=${fn:replace(bgColorHexa, "#", "%23")}&isBackgroundTested=false&ratio=${testResult.colorTestContrastRatio}&algo=HSV"><img alt="${cfLogoDescription}" style="margin-left: 15px;" src="<c:url value="/Images/contrast-finder.png"/>"/></a>
+                                    <a title="${cfLogoDescription}" rel="noreferrer noopener" target="_blank" href="${configProperties['contrastfinderServiceUrl']}/result.html?foreground=${fn:replace(fgColorHexa, "#", "%23")}&background=${fn:replace(bgColorHexa, "#", "%23")}&isBackgroundTested=false&ratio=${testResult.colorTestContrastRatio}&algo=HSV"><img alt="${cfLogoDescription}" style="margin-left: 15px;" src="<c:url value="/Images/contrast-finder.png"/>"/></a>
                                 </td>
                             </c:if>
                         </tr>

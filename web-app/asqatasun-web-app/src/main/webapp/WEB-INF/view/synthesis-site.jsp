@@ -201,7 +201,7 @@
                             <tr>
                                 <td headers="pageUrlTop5FailedUrlByTest" class="tg-textual-column">
                                     <span class="open-external-url-icon">
-                                        <a href="${failedPageInfo.webResourceUrl}" title="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
+                                        <a rel="noreferrer noopener" href="${failedPageInfo.webResourceUrl}" title="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
                                             <img src="${goToImgUrl}" alt="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
                                         </a>
                                     </span>
@@ -251,7 +251,7 @@
                             <tr>
                                 <td headers="pageUrlTop5FailedUrlByOccurrence" class="tg-textual-column">
                                     <span class="open-external-url-icon">
-                                        <a href="${failedPageInfo.webResourceUrl}" title="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
+                                        <a rel="noreferrer noopener" href="${failedPageInfo.webResourceUrl}" title="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
                                             <img src="${goToImgUrl}" alt="<fmt:message key="pageList.goTo"/> ${failedPageInfo.webResourceUrl}">
                                         </a>
                                     </span>
