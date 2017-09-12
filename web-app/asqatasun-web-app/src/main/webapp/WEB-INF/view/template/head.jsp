@@ -50,6 +50,10 @@
     <meta name="twitter:image" content="https://forum.asqatasun.org/uploads/default/original/1X/e16a2b9b7f5a4dc756f03630923290c695c762c9.png" />
     <meta name="twitter:image:alt" content="Asqatasun" />
 
+    <!-- browsers not send referrer information  -->
+    <meta name="referrer" content="never">
+            <!-- Documentation
+                 https://html.spec.whatwg.org/multipage/semantics.html#meta-referrer    -->
 
     <c:set var="modernizrJsUrl" scope="request">
         <c:url value="/External-Js/modernizr.min.js"/>
