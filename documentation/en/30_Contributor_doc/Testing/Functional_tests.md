@@ -7,7 +7,7 @@ Functional tests are done with Selenium WebDriver. The actual tests are in the `
 Provided you have:
 
 * a running Linux environnement with graphical environment (i.e. an XServer running)
-* your local Asqatasun Docker image running at http://localhost:8080/asqatasun/ 
+* your local Asqatasun Docker image running at `http://localhost:8080/asqatasun/` 
 * your Firefox ESR 31.4 installed in `/opt/firefox/`, 
 
 ...you may run all the functional tests with:

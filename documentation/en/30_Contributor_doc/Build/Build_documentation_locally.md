@@ -19,4 +19,4 @@ gitbook serve
 Then: 
 
 * Carefully examine `warn` or `error` messages while building and fix them.
-* View the documentation at http://localhost:4000
+* View the documentation at `http://localhost:4000`
