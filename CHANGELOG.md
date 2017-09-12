@@ -1,19 +1,15 @@
 # CHANGELOG
 
-Asqatasun 4.x.x, 2017-xx-xx
+Asqatasun 4.1.0, 2017-xx-xx
 ---------------------------
-- WIP ---> [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Contrast-Finder/issues/163) 
-- SQL new procedure: list_running_acts and Last_audit
-- `build_and_run-with-docker.sh` script:
-    - [#169 - Added --log-build    option](https://github.com/Asqatasun/Contrast-Finder/issues/169) 
-    - [#145 - Added --build-only-* options](https://github.com/Asqatasun/Contrast-Finder/issues/145)
-    - [#144 - Added option to skip unit tests](https://github.com/Asqatasun/Contrast-Finder/issues/144)
+- WIP ---> [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
 
 ### Upgrade-o-meter
 None
 
 ### Features
-None
+- [#172 - i18n: Add german translation](https://github.com/Asqatasun/Asqatasun/issues/172) 
+- SQL new procedure: list_running_acts and Last_audit
 
 ### Security
 None
@@ -23,14 +19,19 @@ none
 
 ### Bugs
 - [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
-- [#142 - Fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Contrast-Finder/issues/142)
+- [#142 - Fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
 - Enhanced pre-requisites to allow database name containing hyphen "-"
 
 ### Configuration
 None
 
 ### Improvement 
-none
+- [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
+- [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Asqatasun/issues/45)
+- `build_and_run-with-docker.sh` script:
+    - [#169 - Added --log-build    option](https://github.com/Asqatasun/Asqatasun/issues/169) 
+    - [#145 - Added --build-only-* options](https://github.com/Asqatasun/Asqatasun/issues/145)
+    - [#144 - Added option to skip unit tests](https://github.com/Asqatasun/Asqatasun/issues/144)
 
 ### Refactoring
 none
@@ -41,8 +42,7 @@ none
 - Added "Crawler management" with howto increase maxDocuments in site-audit
 
 ### Task
-- [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Contrast-Finder/issues/168)
-- [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Contrast-Finder/issues/145)
+none
 
 
 

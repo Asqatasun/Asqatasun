@@ -4,7 +4,7 @@ This is the documentation for releasing a new version for Asqatasun. As an end u
 
 
 ## 1) Prepare CHANGELOG.md:
-
+* use [CHANGELOG_template.md](CHANGELOG_template.md)
 * add an entry for this RC
 * add differences between this release and previous one:
     * review [closed issues](https://github.com/Asqatasun/Asqatasun/issues?q=is%3Aissue+is%3Aclosed)
