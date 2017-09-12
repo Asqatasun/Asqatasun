@@ -65,7 +65,7 @@ For each extracted lang attribute, we check its validity regarding the
 
 -   Used nomenclature : "ValidLanguageCode", "XhtmlDoctypeDeclarations"
 -   Reference : All the valid language codes recommanded in
-    [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php%20 "http://www.loc.gov/standards/iso639-2/php/code_list.php ")
+    [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php "http://www.loc.gov/standards/iso639-2/php/code_list.php")
     and all the xhtml doctypes declarations recommanded in
     [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html "http://www.w3.org/TR/html4/index/elements.html")
 
