@@ -8,20 +8,20 @@ No-check rule
 
 ### Criterion
 
-[7.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-2)
+[7.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-2)
 
 ###Test
 
-[7.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-2-2)
+[7.2.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-2-2)
 
 ### Description
 Does each non text
-    element that is updated by a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
-    (in the page or an <code>iframe</code>) and that has an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+    element that is updated by a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    (in the page or an <code>iframe</code>) and that has an <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
     meet the following conditions?
-    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+    <ul><li> The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
    of the non text element is updated</li>
-  <li> The updated <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+  <li> The updated <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
    is relevant</li>
     </ul> 
 

@@ -8,26 +8,26 @@ No-check rule
 
 ### Criterion
 
-[4.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-4-5)
+[4.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-4-5)
 
 ###Test
 
-[4.5.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-5-2)
+[4.5.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-4-5-2)
 
 ### Description
 Does each synchronized
-    live <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+    live <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
   media</a> meet one of the following conditions (except
-    in <a title="Particular cases for criterion 4.5" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit4-">particular cases</a>)?
-    <ul><li> <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+    in <a title="Particular cases for criterion 4.5" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit4-">particular cases</a>)?
+    <ul><li> <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
     captions</a> are available</li>
-  <li> a version with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
-    captions</a> is accessible via an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
-    link</a> (a URL or an  <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>)</li>
-  <li> a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
-    transcript</a> is accessible via an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
-    link</a> (a URL or an  <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>)</li>
-  <li>an adjacent <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
+  <li> a version with <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+    captions</a> is accessible via an <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
+    link</a> (a URL or an  <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>)</li>
+  <li> a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
+    transcript</a> is accessible via an <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLienAdj">adjacent
+    link</a> (a URL or an  <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchor</a>)</li>
+  <li>an adjacent <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
     transcript</a> can be clearly identified</li>
     </ul> 
 

@@ -35,11 +35,11 @@ All the `<a>` tags with a `"href"` attribute, without children (a[href]:not(:has
 
 ##### Set2
 
-All the elements of **Set1** with a not empty text and without context (assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
+All the elements of **Set1** with a not empty text and without context (assuming [the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
 
 ##### Set3
 
-All the elements of **Set1** with a not empty text, with a context (assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
+All the elements of **Set1** with a not empty text, with a context (assuming [the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
 
 in other words :
 

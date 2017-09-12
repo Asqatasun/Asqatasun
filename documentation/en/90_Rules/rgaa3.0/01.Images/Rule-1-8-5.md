@@ -10,18 +10,18 @@ Human check will be then needed to determine whether the detected elements conta
 
 ### Criterion
 
-[1.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-8)
+[1.8](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-8)
 
 ### Test
 
-[1.8.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-8-5)
+[1.8.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-8-5)
 
 ### Description
-When an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMecaRempl">alternate
+When an <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mMecaRempl">alternate
   mechanism</a> is missing, each embedded image of text
     (<code>embed</code> tag with the attribute <code>type="image/…"</code>)
-    conveying information must be replaced with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
-  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.8" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-8">particular cases</a>)? 
+    conveying information must be replaced with <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
+  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.8" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-8">particular cases</a>)? 
 
 
 ### Level

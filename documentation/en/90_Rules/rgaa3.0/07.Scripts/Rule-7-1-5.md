@@ -8,19 +8,19 @@ No-check rule
 
 ### Criterion
 
-[7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
+[7.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
 
 ###Test
 
-[7.1.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7.1.5)
+[7.1.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7.1.5)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
     generating or controlling an interface component, via
     roles, states or properties defined by the ARIA API,
     meet one of the following conditions?
     <ul><li> The interface component
-   is <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies</li>
+   is <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies</li>
   <li>An accessible
    alternative provides access to the same
    functionalities

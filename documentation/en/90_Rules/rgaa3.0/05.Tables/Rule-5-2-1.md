@@ -8,14 +8,14 @@ This test consists in checking the relevancy of the caption of complex tables.
 
 ### Criterion
 
-[5.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-2)
+[5.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-5-2)
 
 ###Test
 
-[5.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-2-1)
+[5.2.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-5-2-1)
 
 ### Description
-For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabDonneeComplexe">complex data
+For each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTabDonneeComplexe">complex data
   table</a> (<code>table</code> tag) with a summary, is this
     summary relevant? 
 

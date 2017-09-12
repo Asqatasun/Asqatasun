@@ -8,19 +8,19 @@ This test consists in checking whether the text of svg textual link is enough ex
 
 ### Criterion
 
-[6.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-3)
+[6.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-6-3)
 
 ###Test
 
-[6.3.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-5)
+[6.3.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-6-3-5)
 
 ### Description
-Is each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
+Is each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mVectorLink">vector
   link</a>
     (content of the alternative of the vector image, <code>svg</code>
-    tag) <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mExpliciteHorsContexte">explicit
+    tag) <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mExpliciteHorsContexte">explicit
   out of context</a> (except
-    in <a title="Particular cases for criterion 6.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? 
+    in <a title="Particular cases for criterion 6.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? 
 
 
 ### Level

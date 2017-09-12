@@ -8,11 +8,11 @@ No-check rule
 
 ### Criterion
 
-[7.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-3)
+[7.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-3)
 
 ###Test
 
-[7.3.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-3-4)
+[7.3.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-3-4)
 
 ### Description
 Does each interface

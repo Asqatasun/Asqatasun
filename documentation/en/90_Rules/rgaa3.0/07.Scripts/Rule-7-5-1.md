@@ -8,16 +8,16 @@ No-check rule
 
 ### Criterion
 
-[7.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-5)
+[7.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-5)
 
 ###Test
 
-[7.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-5-1)
+[7.5.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-5-1)
 
 ### Description
-Can each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
-    causing an unrequested <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAlerte">alert</a>
-    be controlled by the user (except in <a title="Particular cases for criterion 7.5" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit7-5">particular
+Can each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    causing an unrequested <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAlerte">alert</a>
+    be controlled by the user (except in <a title="Particular cases for criterion 7.5" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit7-5">particular
   cases</a>)? 
 
 

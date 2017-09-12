@@ -8,16 +8,16 @@ No-check rule
 
 ### Criterion
 
-[7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
+[7.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
 
 ###Test
 
-[7.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-1-2)
+[7.1.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-1-2)
 
 ### Description
 Does each functionality for content insertion
-    controlled by a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>,
-    use <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDOM">properties and methods compliant with the DOM
+    controlled by a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>,
+    use <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mDOM">properties and methods compliant with the DOM
   (Document Object Model) specification</a>? 
 
 

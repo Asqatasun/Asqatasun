@@ -8,22 +8,22 @@ This test consists in checking whether the text of each clickable area is enough
 
 ### Criterion
 
-[6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-1)
+[6.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-6-1)
 
 ### Test
 
-[6.1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-1-3)
+[6.1.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-6-1-3)
 
 ### Description
 Does each
-    link that doubles a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZoneCliquable">clickable
+    link that doubles a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mZoneCliquable">clickable
   area</a> of a server-side image map meet one
-    of the following conditions (except in <a title="Particular cases for criterion 6.1" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
+    of the following conditions (except in <a title="Particular cases for criterion 6.1" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
   cases</a>)?
-    <ul><li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
+    <ul><li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
     text</a> alone is sufficient to understand the link
    purpose and target</li>
-  <li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link
+  <li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link
     context</a> is sufficient to understand the link purpose
    and target</li>
     </ul> 
@@ -53,11 +53,11 @@ All the `<area>` tags with a `"href"` attribute and a `"alt"` attribute (area[hr
 
 ##### Set2
 
-All the elements of **Set1** with a not empty text and without context (assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
+All the elements of **Set1** with a not empty text and without context (assuming [the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
 
 ##### Set3
 
-All the elements of **Set2** with a not empty text, with a context (assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
+All the elements of **Set2** with a not empty text, with a context (assuming [the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
 
 In other words :
 

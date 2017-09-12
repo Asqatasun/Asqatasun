@@ -8,15 +8,15 @@ This test consists in checking the relevancy of the title tag in the page.
 
 ### Criterion
 
-[8.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-6)
+[8.6](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-8-6)
 
 ### Test
 
-[8.6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-6-1)
+[8.6.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-8-6-1)
 
 ### Description
 For each Web page with a
-    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitrePage">page
+    <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTitrePage">page
   title</a> (<code>title</code> tag), is the content of this tag
     relevant? 
 

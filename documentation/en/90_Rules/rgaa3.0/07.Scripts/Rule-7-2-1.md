@@ -8,22 +8,22 @@ No-check rule
 
 ### Criterion
 
-[7.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-2)
+[7.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-2)
 
 ###Test
 
-[7.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-2-1)
+[7.2.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-2-1)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
-    beginning with the <code>script</code> tag, and having an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>,
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    beginning with the <code>script</code> tag, and having an <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>,
     meet one of the following conditions?
-    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+    <ul><li> The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
    between <code>&lt;noscript&gt;</code> and <code>&lt;/noscript&gt;</code>
    provides access to similar content and functionalities</li>
   <li> When JavaScript is disabled, the displayed page
    provides access to  similar content and functionalities</li>
-  <li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+  <li> The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
    page provides access to similar content and
    functionalities</li>
   <li> The server-side script language provides access to

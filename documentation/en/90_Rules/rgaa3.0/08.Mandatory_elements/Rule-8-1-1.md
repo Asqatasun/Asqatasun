@@ -8,15 +8,15 @@ This tests checks whether a document type is available on the page.
 
 ### Criterion
 
-[8.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-1)
+[8.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-8-1)
 
 ### Test
 
-[8.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-1-1)
+[8.1.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-8-1-1)
 
 ### Description
 For each Web page, is the
-    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDTD">document
+    <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mDTD">document
   type</a> (doctype tag) available? 
 
 

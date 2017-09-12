@@ -8,16 +8,16 @@ No-check rule
 
 ### Criterion
 
-[4.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-4-3)
+[4.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-4-3)
 
 ###Test
 
-[4.3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4.3.2)
+[4.3.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-4.3.2)
 
 ### Description
 For each prerecorded
-    synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
-  media</a> with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
+    synchronized <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> with <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mSsTitreSynchro">synchronized
   captions</a> provided&nbsp;through a <code>track</code> tag, does the
     <code>track</code> tag have an attribute <code>kind="captions"</code>? 
 

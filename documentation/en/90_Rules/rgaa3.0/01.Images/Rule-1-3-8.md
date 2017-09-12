@@ -10,17 +10,17 @@ Human check will be then needed to determine whether the alternative is well ren
 
 ### Criterion
 
-[1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
+[1.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
 
 ###Test
 
-[1.3.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-8)
+[1.3.8](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-3-8)
 
 ### Description
 For each bitmap image (<code>canvas</code> tag),
     conveying information, and with an alternative
     (content between <code>&lt;canvas&gt;</code> and
-    <code>&lt;/canvas&gt;</code>), is this alternative <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies? 
+    <code>&lt;/canvas&gt;</code>), is this alternative <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies? 
 
 
 ### Level

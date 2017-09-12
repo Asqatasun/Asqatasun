@@ -8,22 +8,22 @@ This test consists in detecting buttons associated with an image used as a CAPTC
 
 ### Criterion
 
-[1.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-5)
+[1.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-5)
 
 ###Test
 
-[1.5.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-5-2)
+[1.5.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-5-2)
 
 ### Description
 Does each button
     associated with an image (<code>input</code> tag with the attribute
-    <code>type="image"</code>) used as <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+    <code>type="image"</code>) used as <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
     meet one of the following conditions?
-    <ul><li>Another non graphic form of <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+    <ul><li>Another non graphic form of <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
    is available, at least
   </li>
   <li>Another solution to access the functionality
-   protected by the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+   protected by the <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
    is available</li>
     </ul> 
 

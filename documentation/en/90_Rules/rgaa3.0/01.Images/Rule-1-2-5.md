@@ -8,11 +8,11 @@ This test consists in checking whether the textual alternative of each decorativ
 
 ### Criterion
 
-[1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-2)
+[1.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-2)
 
 ###Test
 
-[1.2.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-5)
+[1.2.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-2-5)
 
 ### Description
 For each decorative bitmap image (<code>canvas</code> tag), there must be no text content

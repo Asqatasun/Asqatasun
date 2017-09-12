@@ -10,17 +10,17 @@ Human check will be then needed to determine whether the detailed description is
 
 ### Criterion
 
-[1.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-6)
+[1.6](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-6)
 
 ###Test
 
-[1.6.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-6-6)
+[1.6.6](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-6-6)
 
 ### Description
 For each vector image (<code>svg</code> tag), with a
     reference to a detailed description provided via an
     <code>aria-label</code> property or a <code>desc</code> tag, is this reference
-    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies? 
+    <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies? 
 
 
 ### Level

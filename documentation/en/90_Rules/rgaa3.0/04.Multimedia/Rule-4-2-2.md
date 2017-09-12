@@ -8,25 +8,25 @@ No-check rule
 
 ### Criterion
 
-[4.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-4-2)
+[4.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-4-2)
 
 ###Test
 
-[4.2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-2-2)
+[4.2.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-4-2-2)
 
 ### Description
 Does each prerecorded
-    video-only <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+    video-only <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
   media</a> meet one of the following conditions (except
-    in <a title="Particular cases for criterion 4.2" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit4-">particular cases</a>)?
-    <ul><li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
+    in <a title="Particular cases for criterion 4.2" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit4-">particular cases</a>)?
+    <ul><li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTranscriptTextuel">text
     transcript</a> is relevant</li>
-  <li>The synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
+  <li>The synchronized <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
     description</a> is relevant</li>
-  <li>The synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
+  <li>The synchronized <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
     description</a> of the alternative version is
    relevant</li>
-  <li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAudioOnly">alternative audio-only version</a> is relevant </li>
+  <li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAudioOnly">alternative audio-only version</a> is relevant </li>
 
     </ul> 
 

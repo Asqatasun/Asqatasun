@@ -8,15 +8,15 @@ No-check rule
 
 ### Criterion
 
-[4.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-4-8)
+[4.8](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-4-8)
 
 ###Test
 
-[4.8.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-4-8-2)
+[4.8.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-4-8-2)
 
 ### Description
-For each synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
-  media</a> with a synchronized <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
+For each synchronized <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mMediaTemp">time-based
+  media</a> with a synchronized <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAudioDesc">audio
   description</a>, is this audio description relevant? 
 
 

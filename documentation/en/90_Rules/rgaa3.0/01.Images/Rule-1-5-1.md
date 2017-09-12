@@ -8,19 +8,19 @@ This test consists in detecting images associated with an image used as a CAPTCH
 
 ### Criterion
 
-[1.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-5)
+[1.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-5)
 
 ### Test
 
-[1.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-5-1)
+[1.5.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-5-1)
 
 ### Description
 Does each image (<code>img</code>,
-    area, <code>object</code>, <code>embed</code>, <code>svg</code>, <code>canvas</code> tags) used as <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>  meet one of the following conditions?
-    <ul><li>Another non graphic form of <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+    area, <code>object</code>, <code>embed</code>, <code>svg</code>, <code>canvas</code> tags) used as <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>  meet one of the following conditions?
+    <ul><li>Another non graphic form of <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
    is available, at least</li>
   <li>Another solution to access the functionality
-   protected by the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
+   protected by the <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mcaptcha">CAPTCHA</a>
    is available</li>
     </ul> 
 

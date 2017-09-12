@@ -15,14 +15,14 @@ This test consists in checking whether the context of each combined link is enou
 [6.1.4](https://references.modernisation.gouv.fr/referentiel-technique-0#test-6-1-4)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienComposite">combined
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLienComposite">combined
   link</a> meet one of the following conditions (except
-    in <a title="Particular cases for criterion 6.1" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
+    in <a title="Particular cases for criterion 6.1" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
   cases</a>)?
-    <ul><li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
+    <ul><li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
     text</a> alone is sufficient to understand the link
    purpose and target</li>
-  <li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link
+  <li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link
     context</a> is sufficient to understand the link purpose
    and target</li>
     </ul> 

@@ -9,15 +9,15 @@ This test consists in searching patterns indicating that forbidden tags
 
 ### Criterion
 
-[8.9](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-9)
+[8.9](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-8-9)
 
 ### Test
 
-[8.9.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-9-1)
+[8.9.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-8-9-1)
 
 ### Description
 On each Web page, tags
-    must not be used (except <code>div</code>, <code>span</code> and <code>table</code>) <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mUniquPres">only
+    must not be used (except <code>div</code>, <code>span</code> and <code>table</code>) <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mUniquPres">only
   for layout</a>. Has this rule been followed? 
 
 

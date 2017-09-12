@@ -8,16 +8,16 @@ This test consists in checking whether the `alt` attribute of each clickable are
 
 ### Criterion
 
-[1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
+[1.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
 
 ###Test
 
-[1.3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-2)
+[1.3.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-3-2)
 
 ### Description
 Does each area (<code>area</code> tag),
     conveying information, and with an <code>alt</code> attribute,
-    meet the following conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
+    meet the following conditions (except in <a title="Particular cases for criterion 1.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
   cases</a>):
     <ul><li>The <code>alt</code> attribute has a relevant value</li>
   <li>If present, the value of the <code>title</code> attribute

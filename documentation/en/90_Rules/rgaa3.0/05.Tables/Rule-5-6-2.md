@@ -11,15 +11,15 @@ To do so, we detect the tables on the page, and let the user make the control ma
 
 ### Criterion
 
-[5.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-6)
+[5.6](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-5-6)
 
 ### Test
 
-[5.6.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-6-2)
+[5.6.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-5-6-2)
 
 ### Description
-For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabDonnee">data
-  table</a> (<code>table</code> tag), does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCelluleTab">row
+For each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTabDonnee">data
+  table</a> (<code>table</code> tag), does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mCelluleTab">row
   header</a> have a <code>th</code> tag? 
 
 

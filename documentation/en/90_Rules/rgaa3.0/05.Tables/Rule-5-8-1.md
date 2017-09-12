@@ -8,19 +8,19 @@ elements used for data tables.
 
 ### Criterion
 
-[5.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-8)
+[5.8](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-5-8)
 
 ### Test
 
-[5.8.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-8-1)
+[5.8.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-5-8-1)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
   table</a> (<code>table</code> tag) meet the following conditions?
-    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+    <ul><li> The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
     table</a> (<code>table</code> tag) does not have any <code>caption</code>,
    <code>th</code>, <code>thead</code>, <code>tfoot</code> tags</li>
-  <li> The cells of the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+  <li> The cells of the <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
     table</a> (<code>td</code> tag) have no <code>scope</code>, <code>headers</code>,
    <code>colgroup</code>, <code>axis</code> attributes.</li>
     </ul> 

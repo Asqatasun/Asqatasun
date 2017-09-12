@@ -8,23 +8,23 @@ No-check rule
 
 ### Criterion
 
-[7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
+[7.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
 
 ###Test
 
-[7.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-1-1)
+[7.1.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-1-1)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
     generating or controlling an interface component meet
     one of the following conditions, if necessary?
-    <ul><li> The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mNameRole">name, role, value,
+    <ul><li> The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mNameRole">name, role, value,
     settings and states changes</a> are accessible to
    assistive technologies via an accessibility API </li>
   <li> An accessible interface
    component, allowing access to the same
    functionalities, is available in the page</li>
-  <li> An accessible <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
+  <li> An accessible <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAltScript">alternative</a>
    provides the same functionalities.</li>
     </ul> 
 

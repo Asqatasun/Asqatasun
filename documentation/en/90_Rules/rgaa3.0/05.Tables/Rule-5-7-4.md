@@ -10,11 +10,11 @@ To do so, we detect the tables on the page, and let the user make the control ma
 
 ### Criterion
 
-[5.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-7)
+[5.7](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-5-7)
 
 ### Test
 
-[5.7.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-7-4)
+[5.7.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-5-7-4)
 
 ### Description
 Does each cell (<code>td</code> or <code>th</code>

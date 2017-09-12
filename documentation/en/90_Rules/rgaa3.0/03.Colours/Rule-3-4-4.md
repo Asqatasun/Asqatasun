@@ -10,18 +10,18 @@ a font size superior to 14px.
 
 ### Criterion
 
-[3.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-3-4)
+[3.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-3-4)
 
 ### Test
 
-[3.4.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-4-4)
+[3.4.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-3-4-4)
 
 ### Description
 On each Web page, do bold
-    texts and images of bold text with font sizes larger than <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mFontSize">120%
+    texts and images of bold text with font sizes larger than <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mFontSize">120%
   of the default font size</a> (or 1.2em), meet one
     of the following conditions (except
-    in <a title="Particular cases for criterion 3.4" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit3-">particular cases</a>)?
+    in <a title="Particular cases for criterion 3.4" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit3-">particular cases</a>)?
     <ul><li> The contrast ratio between text and its
    background is at least 4.5:1</li>
   <li>The user can display the text with

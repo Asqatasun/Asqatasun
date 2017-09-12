@@ -10,14 +10,14 @@ Checking whether the linearised content is understandable and the table owns a r
 
 ### Criterion
 
-[5.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-3)
+[5.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-5-3)
 
 ###Test
 
-[5.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-3-1)
+[5.3.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-5-3-1)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTabMiseForme">layout
   table</a> meet the following conditions?
     <ul><li>the
    linearized content is still understandable</li>

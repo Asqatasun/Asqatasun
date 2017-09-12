@@ -8,18 +8,18 @@ This test consists in checking whether each textual node is identified by a lang
 
 ### Criterion
 
-[8.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-7)
+[8.7](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-8-7)
 
 ### Test
 
-[8.7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-7-1)
+[8.7.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-8-7-1)
 
 ### Description
 On each Web page, does
-    each text written in a language differing from the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLangueDefaut">
+    each text written in a language differing from the <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLangueDefaut">
   default human language</a> meet one of the following
     conditions (except
-    in <a title="Particular cases for criterion 8.7" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit8-7">particular cases</a>)?
+    in <a title="Particular cases for criterion 8.7" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit8-7">particular cases</a>)?
     <ul><li> The human language identification is provided via
    the element containing the text</li>
   <li> The human language identification is provided via

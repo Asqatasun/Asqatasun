@@ -8,15 +8,15 @@ This test consists in checking the relevancy of the headings hierarchy.
 
 ### Criterion
 
-[9.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-9-1)
+[9.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-9-1)
 
 ###Test
 
-[9.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-2)
+[9.1.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-9-1-2)
 
 ### Description
 On each Web page, is the
-    hierarchy between the <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitre">headings</a>
+    hierarchy between the <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTitre">headings</a>
     (<code>h1</code> to <code>h6</code> tags or tags with an ARIA
     <code>role="heading"</code> associated to an <code>aria-level</code> property)
     relevant? 

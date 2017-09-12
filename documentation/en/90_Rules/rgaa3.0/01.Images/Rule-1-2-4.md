@@ -8,11 +8,11 @@ This test consists in checking whether the ARIA attribute of each decorative vec
 
 ### Criterion
 
-[1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-2)
+[1.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-2)
 
 ###Test
 
-[1.2.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-2-4)
+[1.2.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-2-4)
 
 ### Description
 Does each decorative vector image (<code>svg</code> tag), not conveying any information, and with an alternative, meet the following conditions:

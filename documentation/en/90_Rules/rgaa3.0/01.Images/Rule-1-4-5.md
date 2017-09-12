@@ -10,11 +10,11 @@ Human check will be then needed to determine whether the alternative is pertinen
 
 ### Criterion
 
-[1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-4)
+[1.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-4)
 
 ###Test
 
-[1.4.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-5)
+[1.4.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-4-5)
 
 ### Description
 For each embedded image

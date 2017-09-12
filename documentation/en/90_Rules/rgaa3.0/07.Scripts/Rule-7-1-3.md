@@ -8,14 +8,14 @@ No-check rule
 
 ### Criterion
 
-[7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
+[7.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
 
 ###Test
 
-[7.1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7.1.3)
+[7.1.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7.1.3)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
     generating or controlling an interface component,
     having roles, states or properties matching with an
     ARIA API Design Pattern, meet one of the following
@@ -27,7 +27,7 @@ Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_E
    available in the page, providing access to the same
    functionalities, complies
    with the Design Pattern defined by the ARIA API</li>
-  <li>The interface component <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAdaptsARIADP">adapts a Design Pattern defined by the ARIA API</a></li>
+  <li>The interface component <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAdaptsARIADP">adapts a Design Pattern defined by the ARIA API</a></li>
   <li>An accessible interface
    component providing access to the same
    functionalities is available in the page</li>

@@ -8,16 +8,16 @@ This test checks whether the page contains empty links.
 
 ### Criterion
 
-[6.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-5)
+[6.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-6-5)
 
 ### Test
 
-[6.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-5-1)
+[6.5.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-6-5-1)
 
 ### Description
 On each Web page, does
     each link (<code>a</code> tag with an <code>href</code>
-    attribute), except in <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchors</a>,
+    attribute), except in <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAncreNom">anchors</a>,
     have a text between <code>&lt;a&gt;</code> and <code>&lt;/a&gt;</code>? 
 
 

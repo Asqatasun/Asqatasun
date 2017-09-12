@@ -10,17 +10,17 @@ Human check will be then needed to determine whether the detected elements conta
 
 ### Criterion
 
-[1.9](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-9)
+[1.9](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-9)
 
 ###Test
 
-[1.9.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-9-5)
+[1.9.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-9-5)
 
 ### Description
 Each embedded image of
     text (<code>embed</code> tag with the attribute <code>type="image/…"</code>)
-    must be replaced with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
-  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.9" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-9">particular cases</a>)? 
+    must be replaced with <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
+  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.9" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-9">particular cases</a>)? 
 
 
 ### Level

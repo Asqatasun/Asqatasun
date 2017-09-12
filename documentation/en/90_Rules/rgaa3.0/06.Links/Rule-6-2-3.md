@@ -9,15 +9,15 @@ is relevant.
 
 ### Criterion
 
-[6.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-2)
+[6.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-6-2)
 
 ### Test
 
-[6.2.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-2-3)
+[6.2.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-6-2-3)
 
 ### Description
-For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZoneCliquable">clickable
-  area</a> (<code>area</code> tag) with a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitreLien">link
+For each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mZoneCliquable">clickable
+  area</a> (<code>area</code> tag) with a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTitreLien">link
   title</a> (<code>title</code> attribute), is the content of this
     attribute relevant? 
 

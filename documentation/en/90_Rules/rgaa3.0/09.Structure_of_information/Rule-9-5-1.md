@@ -8,11 +8,11 @@ No-check rule
 
 ### Criterion
 
-[9.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-9-5)
+[9.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-9-5)
 
 ###Test
 
-[9.5.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-5-1)
+[9.5.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-9-5-1)
 
 ### Description
 On each Web page, is the meaning of each abbreviation

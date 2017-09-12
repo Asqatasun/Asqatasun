@@ -8,17 +8,17 @@ No-check rule
 
 ### Criterion
 
-[3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-3-2)
+[3.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-3-2)
 
 ###Test
 
-[3.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-2-1)
+[3.2.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-3-2-1)
 
 ### Description
 For each word or a group
-    of words, whose color conveys information, <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mInfoCouleur">information</a>
+    of words, whose color conveys information, <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mInfoCouleur">information</a>
     must not be conveyed only through color. Has this rule been
-    implemented in a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mPertinence">relevant</a> way? 
+    implemented in a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mPertinence">relevant</a> way? 
 
 
 ### Level

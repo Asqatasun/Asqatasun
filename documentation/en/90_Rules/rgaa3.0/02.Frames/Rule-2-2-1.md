@@ -8,14 +8,14 @@ This test consists in checking the relevancy of the `"title"` attribute for each
 
 ### Criterion
 
-[2.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-2-2)
+[2.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-2-2)
 
 ### Test
 
-[2.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-2-2-1)
+[2.2.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-2-2-1)
 
 ### Description
-For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCadreEnLigne"><code>iframe</code></a>
+For each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mCadreEnLigne"><code>iframe</code></a>
     (<code>iframe</code> tag) with a <code>title</code> attribute, is the content of
     this attribute relevant? 
 

@@ -8,17 +8,17 @@ No-check rule
 
 ### Criterion
 
-[7.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-3)
+[7.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-3)
 
 ###Test
 
-[7.3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-3-3)
+[7.3.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-3-3)
 
 ### Description
-A <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+A <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
     must not remove focus from an element that receives it.
     Has this rule been followed (except
-    in <a title="Particular cases for criterion 7.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit7-3">particular cases</a>)? 
+    in <a title="Particular cases for criterion 7.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit7-3">particular cases</a>)? 
 
 
 ### Level

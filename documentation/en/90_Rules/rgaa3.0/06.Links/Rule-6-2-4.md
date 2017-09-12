@@ -15,8 +15,8 @@ This test consists in checking whether the title of each composite link is relev
 [6.2.4](https://references.modernisation.gouv.fr/referentiel-technique-0#test-6-2-4)
 
 ### Description
-For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienComposite">combined
-  link</a> with a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitreLien">link
+For each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLienComposite">combined
+  link</a> with a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTitreLien">link
   title</a> (<code>title</code> attribute), is the content of this
     attribute relevant? 
 

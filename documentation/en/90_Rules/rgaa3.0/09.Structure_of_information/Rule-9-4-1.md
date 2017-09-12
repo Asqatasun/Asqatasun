@@ -8,11 +8,11 @@ No-check rule
 
 ### Criterion
 
-[9.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-9-4)
+[9.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-9-4)
 
 ###Test
 
-[9.4.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-4-1)
+[9.4.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-9-4-1)
 
 ### Description
 On each Web page, does the first occurence of each abbreviation

@@ -9,18 +9,18 @@ and its background is at least 4.5:1 for the normal weighted, under 18px sized, 
 
 ### Criterion
 
-[3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-3-3)
+[3.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-3-3)
 
 ### Test
 
-[3.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-3-3-1)
+[3.3.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-3-3-1)
 
 ### Description
 On each Web page, do
-    non-bold texts and images of non-bold text with font sizes&nbsp;smaller than or equal&nbsp;to <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mFontSize">150% of
+    non-bold texts and images of non-bold text with font sizes&nbsp;smaller than or equal&nbsp;to <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mFontSize">150% of
   the default font size</a> (or 1.5em)&nbsp; meet one of the
     following conditions (except
-    in <a title="Particular cases for criterion 3.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit3-">particular cases</a>)?
+    in <a title="Particular cases for criterion 3.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit3-">particular cases</a>)?
     <ul><li> The contrast ratio between text and its
    background is at least 4.5:1</li>
   <li>The user can display the text with

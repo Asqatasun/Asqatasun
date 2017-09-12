@@ -8,11 +8,11 @@ This test consists in checking whether each change of language is valid
 
 ### Criterion
 
-[8.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-8)
+[8.8](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-8-8)
 
 ### Test
 
-[8.8.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-8-1)
+[8.8.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-8-8-1)
 
 ### Description
 On each Web page, is each

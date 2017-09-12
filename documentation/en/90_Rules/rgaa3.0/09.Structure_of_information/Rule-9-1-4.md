@@ -8,15 +8,15 @@ This test consists in checking whether each heading of the page is relevant
 
 ### Criterion
 
-[9.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-9-1)
+[9.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-9-1)
 
 ###Test
 
-[9.1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-4)
+[9.1.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-9-1-4)
 
 ### Description
 On each Web page, is each
-    <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitre">heading</a>
+    <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTitre">heading</a>
     (<code>h1</code> to <code>h6</code> tag or a tag with an ARIA
     <code>role="heading"</code> associated to an <code>aria-level</code> property)
     relevant? 

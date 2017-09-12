@@ -8,15 +8,15 @@ No-check rule
 
 ### Criterion
 
-[9.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-9-3)
+[9.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-9-3)
 
 ###Test
 
-[9.3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9.3.3)
+[9.3.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-9.3.3)
 
 ### Description
 On each Web page, does
-    information grouped in definition <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mListes">lists</a>
+    information grouped in definition <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mListes">lists</a>
     use the <code>dl</code> and <code>dt</code>/<code>dd</code> tags? 
 
 

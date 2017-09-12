@@ -10,17 +10,17 @@ Human check will be then needed to determine whether an alternative is present a
 
 ### Criterion
 
-[1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
+[1.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
 
 ###Test
 
-[1.3.5](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-5)
+[1.3.5](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-3-5)
 
 ### Description
 Does each embedded image
     (<code>embed</code> tag with the attribute <code>type="image/…"</code>),
     conveying information, meet one of the following
-    conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
+    conditions (except in <a title="Particular cases for criterion 1.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
   cases</a>)?
     <ul><li>The embedded image is immediately followed by an
    adjacent link giving access to a page or a chunk

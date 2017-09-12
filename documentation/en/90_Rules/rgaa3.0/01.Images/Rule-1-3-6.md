@@ -8,16 +8,16 @@ This test consists in checking for each informative vector image (`<svg>` tag) a
 
 ### Criterion
 
-[1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
+[1.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
 
 ###Test
 
-[1.3.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-6)
+[1.3.6](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-3-6)
 
 ### Description
 Does each vector image (<code>svg</code>
     tag), conveying information, and with an alternative, meet
-    one of the following conditions (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
+    one of the following conditions (except in <a title="Particular cases for criterion 1.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular
   cases</a>):
     <ul><li>The <code>svg</code> tag has a <code>role="img"</code>&nbsp;</li>
   <li>The <code>svg</code> tag has an <code>aria-label</code> property with a

@@ -8,23 +8,23 @@ This test consists in checking whether the context of each image link is enough 
 
 ### Criterion
 
-[6.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-1)
+[6.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-6-1)
 
 ### Test
 
-[6.1.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-1-2)
+[6.1.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-6-1-2)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienImage">image
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLienImage">image
   link</a> (content of the <code>alt</code> attribute, text between
     <code>&lt;canvas&gt;</code> and <code>&lt;/canvas&gt;</code>, or text between
     <code>&lt;object&gt;</code> and <code>&lt;/object&gt;</code>) meet one of the
-    following conditions (except in <a title="Particular cases for criterion 6.1" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
+    following conditions (except in <a title="Particular cases for criterion 6.1" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular
   cases</a>)?
-    <ul><li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
+    <ul><li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mIntituleLien">link
     text</a> alone is sufficient to understand the link
    purpose and target</li>
-  <li>The <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link
+  <li>The <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien">link
     context</a> is sufficient to understand the link purpose
    and target</li>
     </ul> 
@@ -62,12 +62,12 @@ object[data$=jpg],object[data$=bmp], object[data$=gif], canvas)
 ##### Set3
 
 All the elements of **Set2** with a not empty text and without context
-(assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
+(assuming [the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
 
 ##### Set4
 
 All the elements of **Set2** with a not empty text, with a context (assuming
-[the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
+[the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien))
 
 in other words :
 

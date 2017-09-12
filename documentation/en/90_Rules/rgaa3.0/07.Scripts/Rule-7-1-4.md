@@ -8,14 +8,14 @@ No-check rule
 
 ### Criterion
 
-[7.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
+[7.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-1)
 
 ###Test
 
-[7.1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7.1.4)
+[7.1.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7.1.4)
 
 ### Description
-Does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mChangeNativeRole">change of native role of an HTML element</a>
+Does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mChangeNativeRole">change of native role of an HTML element</a>
     respect the rules and recommendations of the HTML5
     specifications, and the associated technical notes? 
 

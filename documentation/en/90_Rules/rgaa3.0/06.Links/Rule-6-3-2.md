@@ -8,19 +8,19 @@ This test consists in checking whether the text of each image link is enough exp
 
 ### Criterion
 
-[6.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-3)
+[6.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-6-3)
 
 ### Test
 
-[6.3.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-3-2)
+[6.3.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-6-3-2)
 
 ### Description
-Is each text for an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienImage">image
+Is each text for an <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLienImage">image
   link</a> (content of the <code>alt</code> attribute, text
     between <code>&lt;canvas&gt;</code> and <code>&lt;/canvas&gt;</code> or text
-    between <code>&lt;object&gt;</code> and <code>&lt;/object&gt;</code>) <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mExpliciteHorsContexte">explicit
+    between <code>&lt;object&gt;</code> and <code>&lt;/object&gt;</code>) <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mExpliciteHorsContexte">explicit
   out of context</a> (except
-    in <a title="Particular cases for criterion 6.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? 
+    in <a title="Particular cases for criterion 6.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit6-">particular cases</a>)? 
 
 
 ### Level

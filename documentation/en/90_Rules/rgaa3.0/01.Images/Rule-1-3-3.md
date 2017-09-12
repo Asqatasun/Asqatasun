@@ -8,17 +8,17 @@ This test consists in checking whether each button associated with an image that
 
 ### Criterion
 
-[1.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
+[1.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-3)
 
 ### Test
 
-[1.3.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-3-3)
+[1.3.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-3-3)
 
 ### Description
 For each button associated
     with an image (<code>input</code> tag with the attribute
     <code>type="image"</code>), and with an <code>alt</code> attribute, is the content
-    of this attribute relevant (except in <a title="Particular cases for criterion 1.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular cases</a>)? 
+    of this attribute relevant (except in <a title="Particular cases for criterion 1.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-3">particular cases</a>)? 
 
 
 ### Level

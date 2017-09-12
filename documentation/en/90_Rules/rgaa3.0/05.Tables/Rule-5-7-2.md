@@ -10,11 +10,11 @@ Checking whether each header of a data table applied to the whole row or to the 
 
 ### Criterion
 
-[5.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-5-7)
+[5.7](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-5-7)
 
 ### Test
 
-[5.7.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-5-7-2)
+[5.7.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-5-7-2)
 
 ### Description
 Does each header cell (<code>th</code>

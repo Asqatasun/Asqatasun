@@ -8,16 +8,16 @@ No-check rule
 
 ### Criterion
 
-[8.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-8-2)
+[8.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-8-2)
 
 ###Test
 
-[8.2.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-8-2-1)
+[8.2.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-8-2-1)
 
 ### Description
-For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mDTD">document
+For each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mDTD">document
   type</a> declaration, does the page source code meet
-    the following conditions (except in <a title="Particular cases for criterion 8.2" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit8-2">particular cases</a>)?
+    the following conditions (except in <a title="Particular cases for criterion 8.2" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit8-2">particular cases</a>)?
     <ul><li> Tags follow the writing rules</li>
   <li> Tag nesting is conform</li>
   <li> Tag opening and closing are conform</li>

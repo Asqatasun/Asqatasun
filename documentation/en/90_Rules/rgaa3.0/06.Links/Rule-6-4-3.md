@@ -8,16 +8,16 @@ This test consists in checking whether each indentical clickable area have the s
 
 ### Criterion
 
-[6.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-6-4)
+[6.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-6-4)
 
 ### Test
 
-[6.4.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-6-4-3)
+[6.4.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-6-4-3)
 
 ### Description
 For
-    each web page, does each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mLienIdentique">identical
-  link</a> of type <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZoneCliquable">clickable
+    each web page, does each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mLienIdentique">identical
+  link</a> of type <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mZoneCliquable">clickable
   area</a> have the same purpose and target? 
 
 
@@ -45,7 +45,7 @@ All the `<area>` tags with a `"href"` attribute and a `"alt"` attribute (area[hr
 
 #### Set2
 
-All the elements of **Set1** without `"title"` attribute and without context (assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien)) and with an identical link text.
+All the elements of **Set1** without `"title"` attribute and without context (assuming [the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien)) and with an identical link text.
 
 #### Set3
 

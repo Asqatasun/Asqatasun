@@ -8,14 +8,14 @@ This test consists in checking whether a heading of level 1 is present on the pa
 
 ### Criterion
 
-[9.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-9-1)
+[9.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-9-1)
 
 ###Test
 
-[9.1.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-9-1-1)
+[9.1.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-9-1-1)
 
 ### Description
-Is there a level 1 <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTitre">heading</a>
+Is there a level 1 <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTitre">heading</a>
     (<code>h1</code> tag or a tag with an ARIA
     <code>role="heading"</code> associated to an <code>aria-level="1"</code>
     property) on each Web page? 

@@ -10,20 +10,20 @@ Human check will be then needed to determine whether the detected elements conta
 
 ### Criterion
 
-[1.8](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-8)
+[1.8](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-8)
 
 ### Test
 
-[1.8.2](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-8-2)
+[1.8.2](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-8-2)
 
 ### Description
-For each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mImgReactive">image
+For each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mImgReactive">image
   map</a> (<code>img</code> or <code>object</code> tag with the <code>usemap</code> or <code>ismap</code> attribute),
-    when an <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mMecaRempl">alternate
-  mechanism</a> is missing, each <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mZoneTexte">text
+    when an <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mMecaRempl">alternate
+  mechanism</a> is missing, each <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mZoneTexte">text
   area</a> (<code>area</code> tag) conveying information must be
-    replaced with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
-  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.8" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-8">particular cases</a>)? 
+    replaced with <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
+  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.8" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-8">particular cases</a>)? 
 
 
 ### Level

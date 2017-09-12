@@ -10,16 +10,16 @@ Human check will be then needed to determine whether the detected elements conta
 
 ### Criterion
 
-[1.9](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-9)
+[1.9](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-9)
 
 ###Test
 
-[1.9.6](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-9-6)
+[1.9.6](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-9-6)
 
 ### Description
 Each bitmap image of text
-    (<code>canvas</code> tag) must be replaced with <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
-  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.9" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-9">particular cases</a>)? 
+    (<code>canvas</code> tag) must be replaced with <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mTexteStyle">styled
+  text</a> if possible. Has this rule been followed (except in <a title="Particular cases for criterion 1.9" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit1-9">particular cases</a>)? 
 
 
 ### Level

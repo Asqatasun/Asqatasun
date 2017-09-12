@@ -32,7 +32,7 @@ This test consists in checking whether each indentical image link have the same 
 #### Set1
 
 All the image links (see [the definition of an image link in Rgaa 3.0](http://references.modernisation.gouv.fr/referentiel-technique-0#title-lien-image))
-with a `"href"` attribute, without `"title"` attribute, without context (assuming [the definition of a link context in Rgaa3.0](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mContexteLien)) and with an identical link text.
+with a `"href"` attribute, without `"title"` attribute, without context (assuming [the definition of a link context in Rgaa3.0](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mContexteLien)) and with an identical link text.
 
 #### Set2
 

@@ -10,15 +10,15 @@ Human check will be then needed to determine whether the alternative is well ren
 
 ### Criterion
 
-[1.4](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-1-4)
+[1.4](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-1-4)
 
 ###Test
 
-[1.4.7](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-1-4-7)
+[1.4.7](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-1-4-7)
 
 ### Description
 For each vector image (<code>svg</code> tag), used  as a CAPTCHA or test image, with a text
-    alternative, is this alternative <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies? 
+    alternative, is this alternative <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mCorrectlyRendered">correctly rendered</a> by assistive technologies? 
 
 
 ### Level

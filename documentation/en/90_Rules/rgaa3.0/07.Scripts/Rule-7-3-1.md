@@ -8,20 +8,20 @@ No-check rule
 
 ### Criterion
 
-[7.3](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#crit-7-3)
+[7.3](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#crit-7-3)
 
 ###Test
 
-[7.3.1](http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Criteria_English_version_v1.html#test-7-3-1)
+[7.3.1](http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Criteria_English_version_v1.html#test-7-3-1)
 
 ### Description
 Does each element with an
-    event handler controlled by a <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
+    event handler controlled by a <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mScript">script</a>
     meet one of the following conditions (except
-    in <a title="Particular cases for criterion 7.3" href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit7-3">particular cases</a>)?
-    <ul><li> The element is <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAAClavierSouris">accessible
+    in <a title="Particular cases for criterion 7.3" href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Particular_cases_English_version_v1.html#cpCrit7-3">particular cases</a>)?
+    <ul><li> The element is <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAAClavierSouris">accessible
     with keyboard and mouse</a></li>
-  <li> An element that is <a href="http://disic.github.io/rgaa_referentiel_en/RGAA3.0_Glossary_English_version_v1.html#mAAClavierSouris">accessible
+  <li> An element that is <a href="http://asqatasun.github.io/RGAA--3.0--EN/RGAA3.0_Glossary_English_version_v1.html#mAAClavierSouris">accessible
     with keyboard and mouse</a>, performing
    the same action, is available in the page</li>
     </ul> 
