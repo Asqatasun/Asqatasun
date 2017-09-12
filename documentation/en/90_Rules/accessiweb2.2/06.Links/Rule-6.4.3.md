@@ -36,7 +36,7 @@ Set1 : All the clickable area (see [the definition of a clickable
 area](http://www.accessiweb.org/index.php/glossary-76.html#mZoneCliquable))
 with a "href" attribute, without "title" attribute, without context
 (assuming [the definition of a link context in AccessiWeb
-2.2](http://www.accessiweb.org/glossaire.html#mContexteLien))
+2.2](http://www.accessiweb.org/index.php/glossary-76.html#mContexteLien))
 and with an identical link text.
 
 Set2 : All the clickable area with a "href" attribute, a not empty

@@ -14,13 +14,13 @@ Test : [10.13.1](http://accessiweb.org/index.php/accessiweb-22-english-version.h
 Test description :
 
 On each Web page, does each [hidden
-text](http://accessiweb.org/glossaire.html#mTexteCache) pass one of the
+text](http://accessiweb.org/index.php/glossary-76.html#mTexteCache) pass one of the
 conditions below?
 
 -   The text is not intended to be rendered by assistive technologies
 -   The text is made visible on user action on the element itself or on
     an element before the [hidden
-    text](http://accessiweb.org/glossaire.html#mTexteCache)
+    text](http://accessiweb.org/index.php/glossary-76.html#mTexteCache)
 
 Level : Bronze
 
