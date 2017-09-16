@@ -83,6 +83,6 @@ In all other cases
 
 ## Notes
 
-We assume here that the links are only composed of a text. (`<a href="http://www.asqatasun.org/target.html"> my link</a>`)
+We assume here that the links are only composed of a text. (`<a href="https://asqatasun.org/target.html"> my link</a>`)
 
 All the links that have children different from `img` or `object`, are considered as combined links

@@ -9,7 +9,7 @@
     <version>4.1.0-SNAPSHOT</version>
 
     <name>asqatasun</name>
-    <url>http://www.asqatasun.org/</url>
+    <url>https://asqatasun.org/</url>
     <description>
         Asqatasun is an opensource web site analyzer, used for web accessibility (a11y).
     </description>
