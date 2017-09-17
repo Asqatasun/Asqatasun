@@ -42,7 +42,9 @@ none
 - Added "Crawler management" with howto increase maxDocuments in site-audit
 
 ### Task
-none
+- [#170 - webapp + rules: converted i18n files in UTF8 character encoding](https://github.com/Asqatasun/Asqatasun/issues/170)
+- [#173 - webapp / i18n files: converted all HTML entities to their applicable UTF-8 characters](https://github.com/Asqatasun/Asqatasun/issues/173)
+- [#174 - webapp / i18n files: removing unnecessary escaped characters](https://github.com/Asqatasun/Asqatasun/issues/174)
 
 
 
