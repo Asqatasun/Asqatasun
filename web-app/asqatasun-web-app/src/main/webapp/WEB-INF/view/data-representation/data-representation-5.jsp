@@ -156,7 +156,38 @@
                                     </fmt:message>
                                 </c:set>
                                 <td class="${evidenceElement2.key}">
-                                    <a title="${cfLogoDescription}" rel="noreferrer noopener" target="_blank" href="${configProperties['contrastfinderServiceUrl']}/result.html?foreground=${fn:replace(fgColorHexa, "#", "%23")}&background=${fn:replace(bgColorHexa, "#", "%23")}&isBackgroundTested=false&ratio=${testResult.colorTestContrastRatio}&algo=HSV"><img alt="${cfLogoDescription}" style="margin-left: 15px;" src="<c:url value="/Images/contrast-finder.png"/>"/></a>
+                                <%-- (1) INITIAL CODE    ----> not works ----> @@@TODO fixme
+                                    <c:set var="cfRatio" value="${testResult.colorTestContrastRatio}"/>
+                                --%>
+                                <%-- (1) Dirty alternative ----> it work ----> @@@TODO fixme  (START) --%>
+                                    <c:choose>
+                                        <c:when test="${testCode == 'Rgaa30-3-3-3'     ||
+                                                        testCode == 'Rgaa30-3-3-4'     ||
+                                                        testCode == 'Rgaa32016-3-3-3'  ||
+                                                        testCode == 'Rgaa32016-3-3-4'  ||
+                                                        testCode == 'Aw22-03033'       ||
+                                                        testCode == 'Aw22-03034'          }" >
+                                            <c:set var="cfRatio" value="3"/>
+                                        </c:when>
+                                        <c:when test="${testCode == 'Rgaa30-3-4-1'     ||
+                                                        testCode == 'Rgaa30-3-4-2'     ||
+                                                        testCode == 'Rgaa32016-3-4-1'  ||
+                                                        testCode == 'Rgaa32016-3-4-2'  ||
+                                                        testCode == 'Aw22-03041'       ||
+                                                        testCode == 'Aw22-03042'          }" >
+                                            <c:set var="cfRatio" value="7"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:set var="cfRatio" value="4.5"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                <%-- (1) Dirty alternative  (END) --%>
+                                
+                                    <c:set var="cfURL" value="${configProperties['contrastfinderServiceUrl']}/result.html"/>
+                                    <a title="${cfLogoDescription}"
+                                       href="${cfURL}?foreground=${fn:replace(fgColorHexa, "#", "%23")}&background=${fn:replace(bgColorHexa, "#", "%23")}&isBackgroundTested=false&ratio=${cfRatio}&algo=Rgb"
+                                       rel="noreferrer noopener"
+                                       target="_blank"><img alt="${cfLogoDescription}" style="margin-left: 15px;" src="<c:url value="/Images/contrast-finder.png"/>"/></a>
                                 </td>
                             </c:if>
                         </tr>
