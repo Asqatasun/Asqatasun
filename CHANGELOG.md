@@ -2,7 +2,10 @@
 
 Asqatasun 4.1.0, 2017-xx-xx
 ---------------------------
-- WIP ---> [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
+- WIP 
+  - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
+  - [#173 - webapp / i18n files: converted all HTML entities to their applicable UTF-8 characters](https://github.com/Asqatasun/Asqatasun/issues/173)
+  - [#174 - webapp / i18n files: removing unnecessary escaped characters](https://github.com/Asqatasun/Asqatasun/issues/174)
 
 ### Upgrade-o-meter
 None
@@ -18,9 +21,10 @@ None
 none
 
 ### Bugs
+- [#138 - Webapp, <form:errors path="scenarioFile">, allowed <abbr> in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
+- [#119 - Webapp, contrast ratio link : fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
 - [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
 - [#142 - Fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
-- [#138 - <form:errors path="scenarioFile">, allowed <abbr> in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
 - Enhanced pre-requisites to allow database name containing hyphen "-"
 
 ### Configuration
@@ -44,8 +48,7 @@ none
 
 ### Task
 - [#170 - webapp + rules: converted i18n files in UTF8 character encoding](https://github.com/Asqatasun/Asqatasun/issues/170)
-- [#173 - webapp / i18n files: converted all HTML entities to their applicable UTF-8 characters](https://github.com/Asqatasun/Asqatasun/issues/173)
-- [#174 - webapp / i18n files: removing unnecessary escaped characters](https://github.com/Asqatasun/Asqatasun/issues/174)
+
 
 
 
