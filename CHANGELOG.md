@@ -20,6 +20,7 @@ none
 ### Bugs
 - [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
 - [#142 - Fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
+- [#138 - <form:errors path="scenarioFile">, allowed <abbr> in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
 - Enhanced pre-requisites to allow database name containing hyphen "-"
 
 ### Configuration

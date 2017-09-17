@@ -117,7 +117,7 @@
                                 </label>
                                 <div class="scenario-file-input input">
                                     <form:input path="scenarioFile" cssClass="input-file" cssErrorClass="input-file error" title="${scenarioFile}" type="file"/>
-                                    <form:errors path="scenarioFile" cssClass="alert-message error" />
+                                    <form:errors path="scenarioFile" cssClass="alert-message error" htmlEscape="false" />
                                 </div>
                             </div>
                             <div id="add-scenario-form-submit" class="actions">
