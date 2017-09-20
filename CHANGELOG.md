@@ -4,15 +4,12 @@ Asqatasun 4.1.0, 2017-xx-xx
 ---------------------------
 - WIP 
   - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
-  - [#173 - webapp / i18n files: converted all HTML entities to their applicable UTF-8 characters](https://github.com/Asqatasun/Asqatasun/issues/173)
-  - [#174 - webapp / i18n files: removing unnecessary escaped characters](https://github.com/Asqatasun/Asqatasun/issues/174)
 
 ### Upgrade-o-meter
 None
 
 ### Features
 - [#172 - i18n: Add german translation](https://github.com/Asqatasun/Asqatasun/issues/172) 
-- SQL new procedure: list_running_acts and Last_audit
 
 ### Security
 None
@@ -31,6 +28,7 @@ none
 None
 
 ### Improvement 
+- [#139 - Install.sh - Added new SQL procedures: list_running_acts + Last_audits](https://github.com/Asqatasun/Asqatasun/issues/139)
 - [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
 - [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Asqatasun/issues/45)
 - `build_and_run-with-docker.sh` script:
@@ -48,8 +46,8 @@ none
 
 ### Task
 - [#170 - webapp + rules: converted i18n files in UTF8 character encoding](https://github.com/Asqatasun/Asqatasun/issues/170)
-
-
+- [#173 - webapp / i18n files: converted all HTML entities to their applicable UTF-8 characters](https://github.com/Asqatasun/Asqatasun/issues/173)
+- [#174 - webapp / i18n files: removing unnecessary escaped characters](https://github.com/Asqatasun/Asqatasun/issues/174)
 
 
 Asqatasun 4.0.3, 2016-08-22
@@ -72,8 +70,6 @@ Asqatasun 4.0.3, 2016-08-22
 ### Documentation
 - Updated runner doc (WIP)
 - Added "the referential creation" + "Create-a-rule" (WIP)
-
-
 
 
 Asqatasun 4.0.2, 2016-06-17
