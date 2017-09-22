@@ -222,15 +222,15 @@ copy_shell_scripts_for_procedures() {
     cd "${PKG_DIR}/web-app/sql-management"
     SCRIPT_BIN_DIR="/usr/local/bin"
 
-    if [! -d "${SCRIPT_BIN_DIR}" ]; then
+    if [ ! -d "${SCRIPT_BIN_DIR}" ]; then
         echo_error_message_SCRIPT_BIN_DIR "${SCRIPT_BIN_DIR}" "does not exist"
         return;
     fi
-    if [! -r "${SCRIPT_BIN_DIR}" ]; then
+    if [ ! -r "${SCRIPT_BIN_DIR}" ]; then
         echo_error_message_SCRIPT_BIN_DIR "${SCRIPT_BIN_DIR}" "is not readable"
         return;
     fi
-    if [! -x "${SCRIPT_BIN_DIR}" ]; then
+    if [ ! -x "${SCRIPT_BIN_DIR}" ]; then
         echo_error_message_SCRIPT_BIN_DIR "${SCRIPT_BIN_DIR}" "is not executable"
         return;
     fi
