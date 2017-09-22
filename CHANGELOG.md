@@ -18,8 +18,9 @@ None
 none
 
 ### Bugs
-- [#138 - Webapp, <form:errors path="scenarioFile">, allowed <abbr> in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
 - [#119 - Webapp, contrast ratio link : fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
+- [#146 - Webapp, site-audit in error: added "check for redirection" as possible explanation](https://github.com/Asqatasun/Asqatasun/issues/146)
+- [#138 - Webapp, `<form:errors path="scenarioFile">`, allowed `<abbr>` in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
 - [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
 - [#142 - Fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
 - Enhanced pre-requisites to allow database name containing hyphen "-"
@@ -43,6 +44,7 @@ none
 - Reorganised INSTALL section
 - Added "howto configuring Apache frontend with AJP connector and HTTPS Let's Encrypt"
 - Added "Crawler management" with howto increase maxDocuments in site-audit
+- [#166 - Updated "Contributor > Build a Docker image"](https://github.com/Asqatasun/Asqatasun/issues/166)
 
 ### Task
 - [#170 - webapp + rules: converted i18n files in UTF8 character encoding](https://github.com/Asqatasun/Asqatasun/issues/170)

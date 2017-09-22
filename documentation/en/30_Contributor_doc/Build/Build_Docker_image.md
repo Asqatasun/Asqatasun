@@ -90,7 +90,7 @@ asqatasun/asqatasun          SNAPSHOT            84a5bf7bb437        2 minutes a
 ```
 
 
-### 7. Remove old containers
+### 5. Remove old containers
 
 In case you had older containers, just wipe them (so backup before if you want to keep your data)
 
@@ -98,7 +98,7 @@ In case you had older containers, just wipe them (so backup before if you want t
 docker stop asqatasun ; docker rm asqatasun
 ```
 
-### 8. Run Docker Image
+### 6. Run Docker Image
 
 ```shell
 docker run -p 8080:8080 --name asqatasun asqatasun/asqatasun:SNAPSHOT
@@ -119,5 +119,5 @@ You can now browse `http://localhost:8080/asqatasun/` and login with the followi
 * login: `me@my-email.org`
 * password: `myAsqaPassword`
 
-### 9. Troubleshooting
+### 7. Troubleshooting
 
