@@ -45,6 +45,7 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
     * `myAsqaPassword`
 
 ### More links
+
 * The whole [Documentation of Asqatasun](http://doc.asqatasun.org/en/)
 * More doc on [how to use this Docker image](http://doc.asqatasun.org/en/10_Install_doc/Docker/index.html#docker-tips-tricks)
     * how to restart a container

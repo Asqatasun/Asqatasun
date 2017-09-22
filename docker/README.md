@@ -19,6 +19,7 @@ Work in progress
 - runs a container based the freshly built image
 
 ###  Linux users
+
 ```bash
 git clone https://github.com/Asqatasun/Asqatasun
 cd  Asqatasun

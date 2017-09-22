@@ -1,6 +1,42 @@
 # Build Docker images for Asqatasun
 
-## Build locally
+**Note:** [Docker 1.12 (at least)](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) is required.
+
+## Build with our automated script (recommended)
+
+We have created a shell script to ease the tasks of building locally with Docker. Basically, the script:
+
+1. compiles Asqatasun,
+1. creates a docker image,
+1. runs a container from this image,
+1. displays all info to connect to the container
+1. eventually runs the functional tests
+
+
+To enjoy it, **from the Asqatasun source directory**, do:
+
+```
+./docker/build_and_run-with-docker.sh --source-dir $(pwd) --docker-dir docker/single-container-SNAPSHOT-local
+```
+
+Example of output:
+
+```
+ -------------------------------------------------------
+ Asqatasun is now running ........ HTTP code = 200
+ -------------------------------------------------------
+ Container .. asqa
+ Image ...... asqatasun/asqatasun:2017-09-22
+ CMD ........ docker run -p 8085:8080 --name asqa -d asqatasun/asqatasun:2017-09-22
+ -------------------------------------------------------
+ Shell ...... docker exec -ti asqa /bin/bash
+ Log ........ docker logs -f  asqa
+ URL ........ http://localhost:8085/asqatasun/
+```
+
+A lot of useful options are also available to speed up the process when you want to build / test / iterate. You may run `./docker/build_and_run-with-docker.sh -h` to see them.
+
+## Build manually
 
 Let say we want to compile Asqatasun 4.0.0 "SNAPSHOT" release and create a Docker image with it.
 By "locally", we mean we won't download Asqatasun as we will build it.
