@@ -1,6 +1,10 @@
 # Build Docker images for Asqatasun
 
-**Note:** [Docker 1.12 (at least)](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) is required.
+## Prerequisites
+* maven 
+* Docker
+
+**Note:** [Docker 1.12 (at least)](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/) and Maven 3.1 (at least) are required. 
 
 ## Build with our automated script (recommended)
 
@@ -36,9 +40,10 @@ Example of output:
 
 A lot of useful options are also available to speed up the process when you want to build / test / iterate. You may run `./docker/build_and_run-with-docker.sh -h` to see them.
 
+
 ## Build manually
 
-Let say we want to compile Asqatasun 4.0.0 "SNAPSHOT" release and create a Docker image with it.
+Let say we want to compile Asqatasun 4.x.y "SNAPSHOT" release and create a Docker image with it.
 By "locally", we mean we won't download Asqatasun as we will build it.
 
 ### 1. Grab source code
@@ -61,36 +66,13 @@ In the meantime, enjoy your coffee break :)
 ### 3. Copy Asqatasun tar.gz to the suitable Docker directory
 
 ```shell
-cp web-app/asqatasun-web-app/target/asqatasun-4.0.0-SNAPSHOT.i386.tar.gz docker/single-container
+cp web-app/asqatasun-web-app/target/asqatasun-*-SNAPSHOT.i386.tar.gz docker/single-container-SNAPSHOT-local
 ```
 
-### 4. Modify the Dockerfile for local usage
-
-Comment the following line :
+### 4. Build the Docker Image
 
 ```shell
-#ADD http://download.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
-#RUN tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
-#    mv asqatasun*/ ./asqatasun/
-```
-
-... and uncomment the following ones
-
-```shell
-ADD asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
-RUN mv asqatasun*/ ./asqatasun/
-```
-
-### 5. Set the release wanted in the Dockerfile
-
-
-At the beginning if the Dockerfile, replace `ASQA_RELEASE="SNAPSHOT"` by `ASQA_RELEASE="4.0.0-SNAPSHOT"`
-
-
-### 6. Build the Docker Image
-
-```shell
-cd docker/single-container
+cd docker/single-container-SNAPSHOT-local
 docker build -t asqatasun/asqatasun:SNAPSHOT .
 ```
 
