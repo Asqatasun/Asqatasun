@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <import resource="classpath:context/beans-factories.xml"/>
+    <import resource="classpath:context/beans-persistence.xml"/>
+
+    <import resource="classpath:context/beans-contentloader.xml"/>
+    <import resource="classpath:context/beans-contentadapter.xml"/>
+    <import resource="classpath:context/beans-processor.xml"/>
+    <import resource="classpath:context/beans-consolidator.xml"/>
+
+    <import resource="classpath:context/beans-ruleimplementationloader.xml"/>
+    <import resource="classpath:context/beans-nomenclatureloader.xml"/>
+
+    <bean id="testDAO" class="org.asqatasun.entity.dao.reference.TestDAOImpl"/>
+
+</beans>
+
