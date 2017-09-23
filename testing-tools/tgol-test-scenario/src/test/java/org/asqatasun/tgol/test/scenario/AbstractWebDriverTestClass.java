@@ -21,6 +21,17 @@
  */
 package org.asqatasun.tgol.test.scenario;
 
+import junit.framework.TestCase;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.asqatasun.util.MD5Encoder;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -28,16 +39,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import junit.framework.TestCase;
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.asqatasun.util.MD5Encoder;
 
 /**
  *
@@ -472,8 +473,8 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
-     *
-     * @param text
+     * @param element The HTML element to look for
+     * @param value   The value of the HTML element
      */
     protected void checkElementTextPresence(String element, String value) {
         if (!driver.findElement(By.xpath(element)).getText().contains(value)) {
@@ -483,8 +484,8 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
-     *
-     * @param text
+     * @param element The HTML element to look for
+     * @param value   The value of the HTML element
      */
     protected void checkElementTextAbsence(String element, String value) {
         if (driver.findElement(By.xpath(element)).getText().contains(value)) {
@@ -494,8 +495,8 @@ public class AbstractWebDriverTestClass extends TestCase {
     }
 
     /**
-     *
-     * @param text
+     * @param element The HTML element to look for
+     * @param value   The value of the HTML element
      */
     protected void checkElementTextPresenceByCssSelector(String element, String value) {
         if (!driver.findElement(By.cssSelector(element)).getText().contains(value)) {
