@@ -17,7 +17,7 @@ cd testing-tools/tgol-test-scenario
 mvn test \
     -Dadmin.user=me@my-email.org \
     -Dadmin.password=myAsqaPassword \
-    -Dhost.location=http://localhost:8080/asqatasun/ \
+    -Dhost.location=http://localhost:8085/asqatasun/ \
     -Dfirefox.path=/opt/firefox/firefox
 ```
 
@@ -33,7 +33,7 @@ mvn \
     test \
     -Dadmin.user=me@my-email.org \
     -Dadmin.password=myAsqaPassword \
-    -Dhost.location=http://localhost:8080/asqatasun/ \
+    -Dhost.location=http://localhost:8085/asqatasun/ \
     -Dfirefox.path=/opt/firefox/firefox
 ```
 
