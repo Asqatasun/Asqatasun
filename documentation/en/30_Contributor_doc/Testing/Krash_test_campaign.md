@@ -12,7 +12,7 @@
 * a Linux environnement with:
     * graphical environment (i.e. an XServer running),
     * Asqatasun source code (your current working directory),
-* an Asqatasun instance running at, say,  http://localhost:8080/asqatasun/
+* an Asqatasun instance running at, say,  `http://localhost:8085/asqatasun/`
 * your Firefox ESR 31.4 installed in `/opt/firefox/`,
 
 ## Offline krash test campaign
@@ -40,4 +40,4 @@ mvn test \
 
 * Set the property file, find where and with what content
 * Distinguish the Asqatasun instance being tested and the tools required to make the test (XVFB...)
-* Explain how to get the value "3" for contract.id
+* Explain how to get the value "3" for contract.id (it is the id of the openbar contract created by the installer)
