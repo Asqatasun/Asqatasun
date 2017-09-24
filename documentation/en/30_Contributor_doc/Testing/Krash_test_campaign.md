@@ -30,13 +30,15 @@ cd testing-tools/tgol-test-krash-offline
 mvn test \
     -Duser=me@my-email.org \
     -Dpassword=myAsqaPassword \
-    -Dhost.location=http://localhost:8085/asqatasun/ \
+    -Dhost.location=http://localhost:8085/asqatasun \
     -Dcontract.id=3 \
     -Dxvfb.display=":0" \
     -Dwebdriver.firefox.bin=/opt/firefox/firefox
 ```
 
-### Notes (to be ordered)
+**Warning:** do _not_ add a trailing slash to your `host.location` otherwise the tests can't be run.
+
+### Notes to doc writers (to be ordered)
 
 * Set the property file, find where and with what content
 * Distinguish the Asqatasun instance being tested and the tools required to make the test (XVFB...)
