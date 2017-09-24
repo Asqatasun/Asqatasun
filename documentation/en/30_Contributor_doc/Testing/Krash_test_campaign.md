@@ -1,4 +1,4 @@
-# Krash test campaign.md
+# Krash test campaign
 
 ## Kind of krash test campaigns
 
@@ -7,11 +7,11 @@
 
 ## Pre-requisites
 
-* a Linux environnement with:
+* a Linux environment with:
     * graphical environment (i.e. an XServer running),
     * Asqatasun source code (your current working directory),
-* an Asqatasun instance running at, say,  `http://localhost:8085/asqatasun/`
-* your Firefox ESR 31.4 installed in `/opt/firefox/`,
+* an Asqatasun docker instance running at `http://localhost:8085/asqatasun/`
+* a Firefox ESR 31.4 installed in `/opt/firefox/`,
 
 ## Offline krash test campaign
 
