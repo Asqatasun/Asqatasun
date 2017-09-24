@@ -12,9 +12,9 @@
     <packaging>pom</packaging>
     <name>testing-tools</name>
     <modules>
-        <module>rules-testing-tools</module>
-        <module>maven-kbcsv-plugin</module>
-        <module>maven-testgenerator-plugin</module>
+        <module>asqatasun-rules-testing-tools</module>
+        <module>asqatasun-maven-kbcsv-plugin</module>
+        <module>asqatasun-maven-testgenerator-plugin</module>
         <module>tgol-testing-tools</module>
         <module>rules-doc-utils</module>
 <!--        <module>tgol-test-scenario</module>-->

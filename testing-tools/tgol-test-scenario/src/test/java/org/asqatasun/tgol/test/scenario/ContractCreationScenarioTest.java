@@ -24,7 +24,6 @@ package org.asqatasun.tgol.test.scenario;
 import org.openqa.selenium.By;
 
 /**
- *
  * @author jkowalczyk
  */
 public class ContractCreationScenarioTest extends AbstractWebDriverTestClass {
@@ -39,21 +38,21 @@ public class ContractCreationScenarioTest extends AbstractWebDriverTestClass {
     private static final String CONTRACT_LABEL_CSS_SELECTOR = "#project-0 .project-name a";
 
     private static final String AUDIT_PAGES_XPATH_LOCATION
-            = "//table[@id='audit-actions']/tbody/tr/td[1]/";
+        = "//table[@id='audit-actions']/tbody/tr/td[1]/";
 
-//    private static String AUDIT_PAGES_STR = "Audit\rPages\r";
+    //    private static String AUDIT_PAGES_STR = "Audit\rPages\r";
     private static final String AUDIT_SITE_XPATH_LOCATION
-            = "//table[@id='audit-actions']/tbody/tr/td[2]/";
+        = "//table[@id='audit-actions']/tbody/tr/td[2]/";
 
-//    private static String AUDIT_SITE_STR = "Audit\rFull-site\r";
+    //    private static String AUDIT_SITE_STR = "Audit\rFull-site\r";
     private static final String AUDIT_UPLOAD_XPATH_LOCATION
-            = "//table[@id='audit-actions']/tbody/tr/td[3]/";
+        = "//table[@id='audit-actions']/tbody/tr/td[3]/";
 
-//    private static String AUDIT_UPLOAD_STR = "Audit\rFiles\r";
+    //    private static String AUDIT_UPLOAD_STR = "Audit\rFiles\r";
     private static final String AUDIT_SCENARIO_XPATH_LOCATION
-            = "//table[@id='audit-actions']/tbody/tr/td[4]/";
+        = "//table[@id='audit-actions']/tbody/tr/td[4]/";
 
-//    private static String AUDIT_SCENARIO_STR = "Audit\rScenario\r";
+    //    private static String AUDIT_SCENARIO_STR = "Audit\rScenario\r";
     private static final String DISABLED_STR = "Disabled";
     private static final String SPAN_STR = "span";
     private static final String A_STR = "a";
