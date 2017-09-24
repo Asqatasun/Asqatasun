@@ -69,14 +69,14 @@ With:
 We want to create a contract:
 
 * to user whose id is 1,
-* on http://en.wikipedia.org/
+* on https://en.wikipedia.org/
 * for accessibility (referential RGAA3),
 * allowing only site-audit (none of the other kinds of audit),
 * in this case manual-audit is not relevant,
 * and we limit the crawler action to 1000 pages
 
 ```mysql
-call contract_create(1, "Wikipedia RGAA", "http://en.wikipedia.org/", "RGAA3", 0, 1, 0, 0, 0, "1000");
+call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "RGAA3", 0, 1, 0, 0, 0, "1000");
 ```
 
 ### Example of contract: Site-wide audit on Wikipedia for SEO
@@ -84,7 +84,7 @@ call contract_create(1, "Wikipedia RGAA", "http://en.wikipedia.org/", "RGAA3", 0
 We want to create the same contract but only for SEO. Easy, just change the referential (don't forget, this is the technical codename of the referential that must be passed as argument)
 
 ```mysql
-call contract_create(1, "Wikipedia RGAA", "http://en.wikipedia.org/", "SEO", 0, 1, 0, 0, 0, "1000");
+call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "SEO", 0, 1, 0, 0, 0, "1000");
 ```
 
 ### Example of contract: Site-wide audit + page-audit + manual-audit on Wikipedia for accessibility
@@ -92,7 +92,7 @@ call contract_create(1, "Wikipedia RGAA", "http://en.wikipedia.org/", "SEO", 0, 
 Like the previous one, but we add the page-audit feature, and enable the manual-audit option.
 
 ```mysql
-call contract_create(1, "Wikipedia RGAA", "http://en.wikipedia.org/", "SEO", 1, 1, 0, 0, 1, "1000");
+call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "SEO", 1, 1, 0, 0, 1, "1000");
 ```
 
 Note: the manual-audit option concerns only page-audit.

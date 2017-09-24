@@ -428,7 +428,7 @@ create_first_contracts() {
     ./ASQA_contract_create_A11Y_RGAA3.sh \
         -c "Wikipedia A11Y RGAA-3" \
         -u 1 \
-        -w "http://en.wikipedia.org/" \
+        -w "https://en.wikipedia.org/" \
         --database-user "$database_user" \
         --database-passwd "$database_passwd" \
         --database-db "$database_db" \
@@ -445,7 +445,7 @@ create_first_contracts() {
     ./ASQA_contract_create_SEO.sh \
         -c "Wikipedia SEO" \
         -u 1 \
-        -w "http://en.wikipedia.org/" \
+        -w "https://en.wikipedia.org/" \
         --database-user "$database_user" \
         --database-passwd "$database_passwd" \
         --database-db "$database_db" \

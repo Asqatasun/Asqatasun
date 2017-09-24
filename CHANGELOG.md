@@ -4,6 +4,7 @@ Asqatasun 4.1.0, 2017-xx-xx
 ---------------------------
 - WIP 
   - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
+  - [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137) 
 
 ### Upgrade-o-meter
 None
@@ -20,7 +21,9 @@ none
 ### Bugs
 - [#119 - Webapp, contrast ratio link : fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
 - [#146 - Webapp, site-audit in error: added "check for redirection" as possible explanation](https://github.com/Asqatasun/Asqatasun/issues/146)
+- [#179 - Webapp, site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
 - [#138 - Webapp, `<form:errors path="scenarioFile">`, allowed `<abbr>` in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
+- [#128 - Fixed Rgaa 3.0, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#128) 
 - [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
 - [#142 - Fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
 - Enhanced pre-requisites to allow database name containing hyphen "-"
@@ -41,10 +44,11 @@ None
 none
 
 ### Documentation
-- Reorganised INSTALL section
+- [#166 - Updated "Contributor > Build a Docker image"](https://github.com/Asqatasun/Asqatasun/issues/166)
+- [#147 - Added documentation on how to run a krashtest campaign](https://github.com/Asqatasun/Asqatasun/issues/147)
 - Added "howto configuring Apache frontend with AJP connector and HTTPS Let's Encrypt"
 - Added "Crawler management" with howto increase maxDocuments in site-audit
-- [#166 - Updated "Contributor > Build a Docker image"](https://github.com/Asqatasun/Asqatasun/issues/166)
+- Reorganised INSTALL section
 
 ### Task
 - [#170 - webapp + rules: converted i18n files in UTF8 character encoding](https://github.com/Asqatasun/Asqatasun/issues/170)
