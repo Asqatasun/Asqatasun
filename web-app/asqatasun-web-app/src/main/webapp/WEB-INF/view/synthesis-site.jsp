@@ -325,7 +325,9 @@
                                 <ul>
                                     <li><spring:message code="errorLoadingPage.explanationSiteDetail1"/></li>
                                     <c:choose>
-                                        <c:when test="${fn:endsWith(statistics.url, '/')}">
+                                    <%--    the following code don't work:  ${fn:endsWith(url, '/')}
+                                            replaced by:  ${fn:substring(url, fn:length(url)-1, fn:length(url)) == '/'}    --%>
+                                        <c:when test="${fn:substring(statistics.url, fn:length(statistics.url)-1, fn:length(statistics.url)) == '/'}">
                                             <c:set var="robotsUrl" scope="page">
                                                 ${statistics.url}robots.txt
                                             </c:set>
