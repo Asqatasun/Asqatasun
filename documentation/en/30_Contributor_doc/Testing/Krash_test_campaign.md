@@ -1,10 +1,8 @@
 # Krash test campaign.md
 
-**Remark**: `/!\` 2017-02-27 this document is being written
-
 ## Kind of krash test campaigns
 
-* offline campaign: based on archived webpages
+* offline campaign: based on archived webpages hosted at http://nonreg.asqatasun.ovh/
 * online campaign: based on a selection of live websites
 
 ## Pre-requisites
@@ -38,8 +36,4 @@ mvn test \
 
 **Warning:** do _not_ add a trailing slash to your `host.location` otherwise the tests can't be run.
 
-### Notes to doc writers (to be ordered)
-
-* Set the property file, find where and with what content
-* Distinguish the Asqatasun instance being tested and the tools required to make the test (XVFB...)
-* Explain how to get the value "3" for contract.id (it is the id of the openbar contract created by the installer)
+**Note:** the value "3" for `contract.id` is the id of the "openbar" contract created by the installer
