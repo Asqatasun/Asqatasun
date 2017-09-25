@@ -40,6 +40,7 @@
         * [Monitoring and profiling](30_Contributor_doc/Debug_Monitor_Profile/Monitoring_profiling.md)    
     * [Testing](30_Contributor_doc/Testing/README.md)
         * [Running functional tests](30_Contributor_doc/Testing/Functional_tests.md)
+        * [Running Krashtest campaigns](30_Contributor_doc/Testing/Krash_test_campaign.md)
     * [Engine](30_Contributor_doc/Engine/README.md)
         * [Engine overview](30_Contributor_doc/Engine/00_Engine_overview.md)
         * [Crawler component](30_Contributor_doc/Engine/component-crawler.md)
