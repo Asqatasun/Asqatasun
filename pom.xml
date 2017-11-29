@@ -49,7 +49,14 @@
         </profile>
     </profiles>
     <properties>
+        <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
+        <!-- JDK version -->
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
         <asqatasunVersion>4.1.0-SNAPSHOT</asqatasunVersion>
@@ -62,9 +69,6 @@
 
         <hibernateGroupId>org.hibernate</hibernateGroupId>
         <hibernateVersion>4.3.5.Final</hibernateVersion>
-        
-        <junitGroupId>junit</junitGroupId>
-        <junitVersion>3.8.2</junitVersion>
 
         <log4jGroupId>log4j</log4jGroupId>
         <log4jVersion>1.2.15</log4jVersion>
@@ -72,6 +76,17 @@
         <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
         
         <jersey.version>2.13</jersey.version>
+
+        <!-- Dependency Versions -->
+        <markdown-page-generator-plugin.version>2.0.0</markdown-page-generator-plugin.version>
+        <junitGroupId>junit</junitGroupId>
+        <junitVersion>3.8.2</junitVersion>
+            <!-- <junit.version>4.12</junit.version> -->
+
+        <!-- Plugin Versions -->
+        <maven-javadoc-plugin.version>3.0.0-M1</maven-javadoc-plugin.version>
+        <dependency-check-maven.version>3.0.2</dependency-check-maven.version>
+        <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
     </properties>
     <repositories>
         <repository>
@@ -193,7 +208,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
+                <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <show>private</show>
                     <author>false</author>
@@ -221,7 +236,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>1.4.5</version>
+                <version>${dependency-check-maven.version}</version>
         <!--    <configuration>
                     <failBuildOnCVSS>8</failBuildOnCVSS>
                 </configuration>
@@ -235,14 +250,39 @@
             </plugin>
 
 
-            <!--    Generate HTML files (README, CHANGELOG, ...)
-                    in target/html/ directory  (used in tar.gz)
-                       https://github.com/walokra/markdown-page-generator-plugin
-                       https://github.com/sirthias/pegdown                         -->
+    <!--    Jacoco - Code coverage
+                http://www.jacoco.org/jacoco/
+                https://github.com/jacoco/jacoco/
+                report: target/site/jacoco
+                usage:  mvn clean install                     -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+    <!--    Generate HTML files (README, CHANGELOG, ...)
+            in target/html/ directory  (used in tar.gz)
+               https://github.com/walokra/markdown-page-generator-plugin
+               https://github.com/sirthias/pegdown                         -->
             <plugin>
                 <groupId>com.ruleoftech</groupId>
                 <artifactId>markdown-page-generator-plugin</artifactId>
-                <version>1.0.0</version>
                 <executions>
                     <execution>
                         <phase>process-sources</phase>
@@ -1525,7 +1565,7 @@
             <dependency>
                 <groupId>com.ruleoftech</groupId>
                 <artifactId>markdown-page-generator-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>${markdown-page-generator-plugin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
