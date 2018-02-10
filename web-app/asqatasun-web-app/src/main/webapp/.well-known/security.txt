@@ -1,0 +1,15 @@
+#######################################################
+# If you would like to report a security issue
+# you may report it to us on Github.
+#######################################################
+Contact: https://github.com/Asqatasun/Asqatasun/issues/
+Contact: https://twitter.com/Asqatasun
+
+
+#######################################################
+# security.txt is currently an Internet draft
+# that has been submitted for RFC review.
+#   https://securitytxt.org/
+#   https://github.com/securitytxt/security-txt
+#   https://tools.ietf.org/html/draft-foudil-securitytxt
+######################################################

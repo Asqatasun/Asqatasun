@@ -1,0 +1,34 @@
+{
+    "name":         "Asqatasun",
+    "description":  "Asqatasun is an opensource web site analyzer, used for web accessibility (a11y)",
+    "repository": {
+        "license":  "AGPL v3",
+        "type":     "git",
+        "url":      "https://github.com/Asqatasun/Asqatasun",
+        "clone":    "https://github.com/Asqatasun/Asqatasun.git",
+        "tests":    "https://travis-ci.org/Asqatasun/Asqatasun"
+    },
+    "bugs": {
+        "list":      "https://github.com/Asqatasun/Asqatasun/issues",
+        "report":    "https://github.com/Asqatasun/Asqatasun/issues/new"
+    },
+    "participate": {
+        "docs":     "https://doc.asqatasun.org/en/",
+        "home":     "https://asqatasun.org/"
+    },
+    "urls": {
+        "prod":     "https://app.asqatasun.org/"
+    },
+    "keywords": [
+        "a11y",
+        "accessibility",
+        "web accessibility",
+        "wcag",
+        "rgaa",
+        "web site analyzer",
+        "continuous integration",
+        "java",
+        "spring"
+    ]
+}
+
