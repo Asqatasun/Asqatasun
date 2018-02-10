@@ -43,8 +43,12 @@ https://app.asqatasun.org
 
 ## Installation and documentation
 
-How to install Asqatasun ? How to run the Docker images ? What hardware to provision ?
-All answers are in the [Asqatasun Doc](http://doc.asqatasun.org/en/) (or in the `documentation/`
+* How to install Asqatasun ?
+* How to run the Docker images ?
+* What hardware to provision ?
+* ...
+
+All answers are in the [Asqatasun Documentation](http://doc.asqatasun.org/en/) (or in the `documentation/`
 directory if you cloned the repos or downloaded the .tar.gz).
 
 Takeaway:
