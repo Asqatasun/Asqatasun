@@ -28,6 +28,7 @@
         <dependency>
             <groupId>com.ruleoftech</groupId>
             <artifactId>markdown-page-generator-plugin</artifactId>
+            <version>${markdown-page-generator-plugin.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -39,6 +40,7 @@
             <plugin>
                 <groupId>com.ruleoftech</groupId>
                 <artifactId>markdown-page-generator-plugin</artifactId>
+                <version>${markdown-page-generator-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>process-sources</phase>
