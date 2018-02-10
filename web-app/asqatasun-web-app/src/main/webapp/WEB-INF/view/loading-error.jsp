@@ -9,10 +9,10 @@
 <!DOCTYPE html>
 
 <c:set var="loadingErrorImgUrl">
-    <c:url value="/Images/error_loading.jpg"/>  
+    <c:url value="/public/images/error_loading.jpg"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/Images/creative_common_logo.png"/>
+    <c:url value="/public/images/creative_common_logo.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

@@ -34,7 +34,7 @@
 .awesome,
 .awesome:visited {
     border: 0 none;
-    background: #222 url(../Images/alert-overlay.png) repeat-x;
+    background: #222 url(../images/alert-overlay.png) repeat-x;
     display: inline-block;
     padding: 5px 10px 6px;
     color: #fff;
@@ -109,7 +109,7 @@ html {
     background: #F8F8F8;
 }
 html.app-page-login {
-    background-image: url("../Images/bg-noise.png");
+    background-image: url("../images/bg-noise.png");
 }
 body {
     font-family: "OpenSansRegular",Arial,sans-serif;
@@ -217,7 +217,7 @@ h1, h2, h3, h4 {
     display: inline-block;
     margin-left: 10px;
     padding: 0;
-    background-image: url("../Images/divider.png");
+    background-image: url("../images/divider.png");
     background-repeat: no-repeat;
     background-position: center;
     width: 19px;
@@ -657,7 +657,7 @@ footer a {
     padding-top : 0;
 }
 .option-console-update > .update-action {
-    background-image: url("../Images/update-view.png");
+    background-image: url("../images/update-view.png");
     background-position: 10% center;
     background-repeat: no-repeat;
     padding-left: 35px;
@@ -776,12 +776,12 @@ footer a {
 #tgm-login {
     font-family: "OpenSansRegular",Arial,sans-serif;
     background: #F8F8F8; /* Old browsers */
-    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
-    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
-    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
-    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    background-image: url("../images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
 }
 #tgm-login .container{
@@ -970,12 +970,12 @@ table.sortable-table .header:focus, .sortable-table .header:hover {
 #tgm-forgotten-password {
     font-family: "OpenSansRegular",Arial,sans-serif;
     background: #F8F8F8; /* Old browsers */
-    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
-    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
-    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
-    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    background-image: url("../images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
 }
 #tgm-forgotten-password .container{
@@ -1026,12 +1026,12 @@ table.sortable-table .header:focus, .sortable-table .header:hover {
 #tgm-forgotten-password-confirmation {
     font-family: "OpenSansRegular",Arial,sans-serif;
     background: #F8F8F8; /* Old browsers */
-    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
-    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
-    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
-    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    background-image: url("../images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
 }
 #tgm-forgotten-password-confirmation .container{
@@ -1056,12 +1056,12 @@ table.sortable-table .header:focus, .sortable-table .header:hover {
 #tgm-reset-password {
     font-family: "OpenSansRegular",Arial,sans-serif;
     background: #F8F8F8; /* Old browsers */
-    background-image: url("../Images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
-    background-image: url("../Images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
-    background-image: url("../Images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
-    background-image: url("../Images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
-    background-image: url("../Images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
+    background-image: url("../images/bg-noise.png"), -moz-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* FF3.6+ */
+    background-image: url("../images/bg-noise.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#F8F8F8)); /* Chrome,Safari4+ */
+    background-image: url("../images/bg-noise.png"), -webkit-linear-gradient(top,  #F4F4F4 55px, #F8F8F8 100%); /* Chrome10+,Safari5.1+ */
+    background-image: url("../images/bg-noise.png"), -o-linear-gradient(top, #F4F4F4 55px, #F8F8F8 100%); /* Opera 11.10+ */
+    background-image: url("../images/bg-noise.png"), -ms-linear-gradient(top, #F4F4F4 55px,  #F8F8F8 100%); /* IE10+ */
+    background-image: url("../images/bg-noise.png"), linear-gradient(to bottom, #F4F4F4 55px, #F8F8F8 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F2F2F2', endColorstr='#F8F8F8',GradientType=0 ); /* IE6-9 */
 }
 #tgm-reset-password .container{
@@ -1186,7 +1186,7 @@ td.project-info {
 }
 .project-status.running {
     padding-left: 20px;
-    background: 0 50% url(../Images/gears-running.png) no-repeat;
+    background: 0 50% url(../images/gears-running.png) no-repeat;
 }
 .running-audit {
     margin-left: 1em;
@@ -1217,7 +1217,7 @@ td.project-info {
     padding-left: 20px;
     text-align:left;
     margin: 0;
-    background: url("../Images/icon-info.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
+    background: url("../images/icon-info.png") no-repeat scroll 0 3px rgba(0, 0, 0, 0);
 }
 .contract-explanation td {
     border: none;
@@ -1317,7 +1317,7 @@ td.action-button {
  */
 #audit-set-up-form {}
 .master-input, .master-audit-options {
-    background-image: url(../Images/minus.png);
+    background-image: url(../images/minus.png);
     background-repeat: no-repeat;
 }
 .master-input {
@@ -1349,10 +1349,10 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     background-color: #ffffe1;
 }
 .master-input.expanded, .master-audit-options.expanded {
-    background-image: url(../Images/minus.png);
+    background-image: url(../images/minus.png);
 }
 .master-input.collapsed, .master-audit-options.collapsed {
-    background-image: url(../Images/plus.png);
+    background-image: url(../images/plus.png);
 }
 .parameters-legend {
     font-size: 123.1%;
@@ -1591,79 +1591,79 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     vertical-align: bottom;
 }
 .passed {
-    background: url(../Images/ico-passed-l.png) left bottom no-repeat;
+    background: url(../images/ico-passed-l.png) left bottom no-repeat;
 }
 .passed-th {
-    background: url(../Images/ico-passed-m.png) 5px 50% no-repeat;
+    background: url(../images/ico-passed-m.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .passed-pr {
-    background: url(../Images/ico-passed-s.png) 5px 50% no-repeat;
+    background: url(../images/ico-passed-s.png) 5px 50% no-repeat;
     padding-left: 2em;
 }
 .passed-th-gray {
-    background: url(../Images/ico-passed-m-gray.png) 5px 50% no-repeat;
+    background: url(../images/ico-passed-m-gray.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .failed {
-    background: url(../Images/ico-failed-l.png) left bottom no-repeat;
+    background: url(../images/ico-failed-l.png) left bottom no-repeat;
 }
 .failed-th {
-    background: url(../Images/ico-failed-m.png) 5px 50% no-repeat;
+    background: url(../images/ico-failed-m.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .failed-pr {
-    background: url(../Images/ico-failed-s.png) 5px 50% no-repeat;
+    background: url(../images/ico-failed-s.png) 5px 50% no-repeat;
     padding-left: 2em;
 }
 .failed-th-gray {
-    background: url(../Images/ico-failed-m-gray.png) 5px 50% no-repeat;
+    background: url(../images/ico-failed-m-gray.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .nmi {
-    background: url(../Images/ico-nmi-l.png) left bottom no-repeat;
+    background: url(../images/ico-nmi-l.png) left bottom no-repeat;
 }
 .nmi-th {
-    background: url(../Images/ico-nmi-m.png) 5px 50% no-repeat;
+    background: url(../images/ico-nmi-m.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .nmi-pr {
-    background: url(../Images/ico-nmi-s.png) 5px 50% no-repeat;
+    background: url(../images/ico-nmi-s.png) 5px 50% no-repeat;
     padding-left: 2em;
 }
 .nmi-th-gray {
-    background: url(../Images/ico-nmi-m-gray.png) 5px 50% no-repeat;
+    background: url(../images/ico-nmi-m-gray.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .na {
-    background: url(../Images/ico-na-l.png) left bottom no-repeat;
+    background: url(../images/ico-na-l.png) left bottom no-repeat;
 }
 .na-th {
-    background: url(../Images/ico-na-m.png) 5px 50% no-repeat;
+    background: url(../images/ico-na-m.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .na-pr {
-    background: url(../Images/ico-na-s.png) 5px 50% no-repeat;
+    background: url(../images/ico-na-s.png) 5px 50% no-repeat;
     padding-left: 2em;
 }
 .na-th-gray {
-    background: url(../Images/ico-na-m-gray.png) 5px 50% no-repeat;
+    background: url(../images/ico-na-m-gray.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .nt {
-    background: url(../Images/ico-nt-l.png) left bottom no-repeat;
+    background: url(../images/ico-nt-l.png) left bottom no-repeat;
     padding-left: 3em;
 }
 .nt-th {
-    background: url(../Images/ico-nt-m.png) 5px 50% no-repeat;
+    background: url(../images/ico-nt-m.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 .nt-pr {
-    background: url(../Images/ico-nt-s.png) 5px 50% no-repeat;
+    background: url(../images/ico-nt-s.png) 5px 50% no-repeat;
     padding-left: 2em;
 }
 .nt-th-gray {
-    background: url(../Images/ico-nt-m-gray.png) 5px 50% no-repeat;
+    background: url(../images/ico-nt-m-gray.png) 5px 50% no-repeat;
     padding-left: 2.2em;
 }
 #audit-result-synthesis-actions {
@@ -1702,7 +1702,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     margin-left: 0;
 }
 #master-audit-parameters {
-    background-image: url(../Images/expanded-s.png);
+    background-image: url(../images/expanded-s.png);
     background-repeat: no-repeat;
 }
 #master-audit-parameters {
@@ -1710,16 +1710,16 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     background-position: 0px;
 }
 #master-audit-parameters.expanded {
-    background-image: url(../Images/expanded-s.png);
+    background-image: url(../images/expanded-s.png);
 }
 #master-audit-parameters.collapsed {
-    background-image: url(../Images/collapsed-s.png);
+    background-image: url(../images/collapsed-s.png);
 }
 #page-source-code-link {
     margin-left : 2em;
 }
 #page-source-code-link > .result-page-action{
-    background-image: url("../Images/icon-source-code.png");
+    background-image: url("../images/icon-source-code.png");
     background-position: 10% center;
     background-repeat: no-repeat;
     padding-left: 20px;
@@ -1757,7 +1757,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     margin-bottom: 5px;
 }
 #relaunch-audit-form-submit .relaunch-button {
-    background-image: url("../Images/relaunch-audit.png");
+    background-image: url("../images/relaunch-audit.png");
     background-position: 5% center;
     background-repeat: no-repeat;
     padding-left: 20px;
@@ -2038,7 +2038,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     }
     .bs-docs-sidenav a {
         color: #333;
-        background-image: url("../Images/dash-nav.png");
+        background-image: url("../images/dash-nav.png");
         background-position: 0 center;
         background-repeat: no-repeat;
     }
@@ -2183,7 +2183,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 }
 #expand-all {
     display: none;
-    background-image: url("../Images/expand-all.png");
+    background-image: url("../images/expand-all.png");
     background-position: 6% center;
     background-repeat: no-repeat;
     padding-left: 20px;
@@ -2195,7 +2195,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
 }
 #collapse-all {
     display: none;
-    background-image: url("../Images/collapse-all.png");
+    background-image: url("../images/collapse-all.png");
     background-position: 6% center;
     background-repeat: no-repeat;
     padding-left: 20px;
@@ -2387,7 +2387,7 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="url"]:focus,
     margin-left: 0;
 }
 .subcounter {
-    background-image: url("../Images/subcounter.png");
+    background-image: url("../images/subcounter.png");
     background-position: 10% center;
     background-repeat: no-repeat;
     padding-left: 35px;
@@ -2435,7 +2435,7 @@ td.occurences {
     margin-bottom: 40px;
 }
 .all-remarks-link {
-    background-image: url("../Images/criterion-detail.png");
+    background-image: url("../images/criterion-detail.png");
     background-position: 7% center;
     background-repeat: no-repeat;
     font-family : OpenSansSemibold;
@@ -2458,7 +2458,7 @@ td.occurences {
     margin-bottom: 20px;
 }
 .back-link{
-    background-image: url("../Images/back.png");
+    background-image: url("../images/back.png");
     background-position: 5% center;
     background-repeat: no-repeat;
     font-family : OpenSansSemibold;

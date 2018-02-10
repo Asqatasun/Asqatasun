@@ -8,35 +8,35 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.9.1.min.js"/>
 </c:set>        
 <c:set var="codePrettifierJsUrl" scope="request">
-    <c:url value="/External-Js/prettify.min.js"/>
+    <c:url value="/public/external_js/prettify.min.js"/>
 </c:set> 
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+    <c:url value="/public/external_js/jquery.tablesorter.min.js"/>
 </c:set> 
 
 <!-- internal js -->
 <c:set var="displayExternalImgJsUrl" scope="request">
-    <c:url value="/Js/result-page/add-img-snapshot-min.js"/>
+    <c:url value="/public/js/result-page/add-img-snapshot-min.js"/>
 </c:set>        
 <c:set var="prettyPrintJsUrl" scope="request">
-    <c:url value="/Js/result-page/pretty-print-min.js"/>
+    <c:url value="/public/js/result-page/pretty-print-min.js"/>
 </c:set> 
 <c:set var="accessibleTableSorterJsUrl" scope="page">
-    <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
+    <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js"/>
 </c:set>
 
 <!-- external images -->
 <c:set var="testInfoLinkImg" scope="request">
-    <c:url value="/Images/test-info-link.png"/>
+    <c:url value="/public/images/test-info-link.png"/>
 </c:set> 
 <c:set var="algoLinkImg" scope="request">
-    <c:url value="/Images/algo-link.png"/>
+    <c:url value="/public/images/algo-link.png"/>
 </c:set> 
 <c:set var="sourceCodeImg" scope="request">
-    <c:url value="/Images/html-source-icon.png"/>
+    <c:url value="/public/images/html-source-icon.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

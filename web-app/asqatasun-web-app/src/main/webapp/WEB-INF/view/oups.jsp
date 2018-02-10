@@ -8,16 +8,16 @@
 <!DOCTYPE html>
 
 <c:set var="oupsImg1Url">
-    <c:url value="/Images/oups1.jpg"/>  
+    <c:url value="/public/images/oups1.jpg"/>
 </c:set>
 <c:set var="oupsImg2Url">
-    <c:url value="/Images/oups2.jpg"/>  
+    <c:url value="/public/images/oups2.jpg"/>
 </c:set>
 <c:set var="oupsImg3Url">
-    <c:url value="/Images/oups3.jpg"/>  
+    <c:url value="/public/images/oups3.jpg"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/Images/creative_common_logo.png"/>
+    <c:url value="/public/images/creative_common_logo.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

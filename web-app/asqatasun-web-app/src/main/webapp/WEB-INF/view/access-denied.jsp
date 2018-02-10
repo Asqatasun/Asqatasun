@@ -8,13 +8,13 @@
 <!DOCTYPE html>
 
 <c:set var="accessDenied1ImgUrl">
-    <c:url value="/Images/access_denied1.jpg"/>  
+    <c:url value="/public/images/access_denied1.jpg"/>
 </c:set>
 <c:set var="accessDenied2ImgUrl">
-    <c:url value="/Images/access_denied2.JPG"/>  
+    <c:url value="/public/images/access_denied2.JPG"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/Images/creative_common_logo.png"/>
+    <c:url value="/public/images/creative_common_logo.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

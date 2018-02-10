@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 
 <c:set var="warningImgUrl">
-    <c:url value="/Images/warning.png"/>  
+    <c:url value="/public/images/warning.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

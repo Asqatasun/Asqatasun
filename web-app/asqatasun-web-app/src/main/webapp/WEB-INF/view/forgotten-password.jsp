@@ -9,7 +9,7 @@
 <!DOCTYPE html>
  
 <c:set var="tgLogoUrl">
-    <c:url value="/Images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>  
+    <c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>
 </c:set>
  
 <html class="app-page-login" lang="${tg:lang(pageContext)}">

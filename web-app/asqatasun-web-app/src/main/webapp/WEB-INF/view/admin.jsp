@@ -13,35 +13,35 @@
 
 <!-- external js --> 
 <c:set var="jqueryUrl">
-    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.9.1.min.js"/>
 </c:set>        
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+    <c:url value="/public/external_js/jquery.tablesorter.min.js"/>
 </c:set> 
 
 <!-- internal js --> 
 <c:set var="accessibleTableSorterJsUrl" scope="page">
-    <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
+    <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js"/>
 </c:set>
 
 <!-- images --> 
 <c:set var="addUser">
-    <c:url value="/Images/user.png"/>  
+    <c:url value="/public/images/user.png"/>
 </c:set>
 <c:set var="editUser">
-    <c:url value="/Images/edit.png"/>  
+    <c:url value="/public/images/edit.png"/>
 </c:set>
 <c:set var="deleteUser">
-    <c:url value="/Images/remove.png"/>  
+    <c:url value="/public/images/remove.png"/>
 </c:set>
 <c:set var="editContract">
-    <c:url value="/Images/folder_open.png"/>
+    <c:url value="/public/images/folder_open.png"/>
 </c:set>
 <c:set var="deleteAudits">
-    <c:url value="/Images/bin.png"/>
+    <c:url value="/public/images/bin.png"/>
 </c:set>
 <c:set var="addContract">
-    <c:url value="/Images/plus_2.png"/>
+    <c:url value="/public/images/plus_2.png"/>
 </c:set>
 
 <c:set var="authenticatedUserId" scope="page">

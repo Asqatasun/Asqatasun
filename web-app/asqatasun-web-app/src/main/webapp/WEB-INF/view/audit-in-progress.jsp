@@ -8,10 +8,10 @@
 <!DOCTYPE html>
 
 <c:set var="auditInProgressImgUrl">
-    <c:url value="/Images/work-in-progress.jpg"/>  
+    <c:url value="/public/images/work-in-progress.jpg"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/Images/creative_common_logo.png"/>
+    <c:url value="/public/images/creative_common_logo.png"/>
 </c:set>
 
 <c:choose>

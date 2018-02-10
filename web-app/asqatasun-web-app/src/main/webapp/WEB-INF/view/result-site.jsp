@@ -9,71 +9,71 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.9.1.min.js"/>
 </c:set>        
 <c:set var="d3JsUrl" scope="request">
-    <c:url value="/External-Js/d3.v3.min.js"/>
+    <c:url value="/public/external_js/d3.v3.min.js"/>
 </c:set> 
 <c:set var="r2d3JsUrl" scope="request">
-    <c:url value="/External-Js/r2d3.v2.min.js"/>
+    <c:url value="/public/external_js/r2d3.v2.min.js"/>
 </c:set> 
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+    <c:url value="/public/external_js/jquery.tablesorter.min.js"/>
 </c:set> 
 
 <!-- internal js -->
 <c:set var="resultPageChartsIEJsUrl" scope="request">
-    <c:url value="/Js/ie/result-page/result-page-charts-ie-min.js"/>
+    <c:url value="/public/js/ie/result-page/result-page-charts-ie-min.js"/>
 </c:set>
 <c:set var="scoreJsUrl" scope="request">
-    <c:url value="/Js/score/score-min.js"/>
+    <c:url value="/public/js/score/score-min.js"/>
 </c:set>
 <c:set var="siteScopeScoreJsUrl" scope="request">
-    <c:url value="/Js/score/score-page-list-min.js"/>
+    <c:url value="/public/js/score/score-page-list-min.js"/>
 </c:set>
 <c:set var="scoreIEJsUrl" scope="request">
-    <c:url value="/Js/ie/score/score-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-ie-min.js"/>
 </c:set>
 <c:set var="siteScopeScoreIEJsUrl" scope="request">
-    <c:url value="/Js/ie/score/score-page-list-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-page-list-ie-min.js"/>
 </c:set>
 <c:set var="testDetailsJsUrl" scope="page">
-    <c:url value="/Js/expand-collapse/test-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/test-details-min.js"/>
 </c:set>
 <c:set var="themeDetailsJsUrl" scope="page">
-    <c:url value="/Js/expand-collapse/theme-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/theme-details-min.js"/>
 </c:set>
 <c:set var="auditParametersDetailsJsUrl" scope="page">
-    <c:url value="/Js/expand-collapse/audit-parameters-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/audit-parameters-details-min.js"/>
 </c:set>
 <c:set var="accessibleTableSorterJsUrl" scope="page">
-    <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
+    <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js"/>
 </c:set>
 <c:set var="displaySnapshotJsUrl" scope="page">
-    <c:url value="/Js/snapshot/snapshot-min.js"/>
+    <c:url value="/public/js/snapshot/snapshot-min.js"/>
 </c:set>
 
 <!-- external images -->
 <c:set var="testInfoLinkImg" scope="request">
-    <c:url value="/Images/test-info-link.png"/>
+    <c:url value="/public/images/test-info-link.png"/>
 </c:set> 
 <c:set var="algoLinkImg" scope="request">
-    <c:url value="/Images/algo-link.png"/>
+    <c:url value="/public/images/algo-link.png"/>
 </c:set> 
 <c:set var="expandedImg" scope="request">
-    <c:url value="/Images/expanded.png"/>
+    <c:url value="/public/images/expanded.png"/>
 </c:set> 
 <c:set var="expandedSmallImg" scope="request">
-    <c:url value="/Images/expanded-s.png"/>
+    <c:url value="/public/images/expanded-s.png"/>
 </c:set> 
 <c:set var="collapsedImg" scope="request">
-    <c:url value="/Images/collapsed.png"/>
+    <c:url value="/public/images/collapsed.png"/>
 </c:set> 
 <c:set var="collapsedSmallImg" scope="request">
-    <c:url value="/Images/collapsed-s.png"/>
+    <c:url value="/public/images/collapsed-s.png"/>
 </c:set> 
 <c:set var="sourceCodeImg" scope="request">
-    <c:url value="/Images/html-source-icon.png"/>
+    <c:url value="/public/images/html-source-icon.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

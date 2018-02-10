@@ -11,20 +11,20 @@
 
 <!-- external js --> 
 <c:set var="jqueryUrl">
-    <c:url value="/External-Js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.9.1.min.js"/>
 </c:set>        
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/External-Js/jquery.tablesorter.min.js"/>
+    <c:url value="/public/external_js/jquery.tablesorter.min.js"/>
 </c:set> 
 
 <!-- internal js --> 
 <c:set var="accessibleTableSorterJsUrl" scope="page">
-    <c:url value="/Js/table-sorter/accessible-table-sorter-min.js"/>
+    <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js"/>
 </c:set>
 
 <!-- images --> 
 <c:set var="deleteScenario">
-    <c:url value="/Images/remove.png"/>  
+    <c:url value="/public/images/remove.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

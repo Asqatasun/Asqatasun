@@ -10,10 +10,10 @@
 <!DOCTYPE html>
 
 <c:set var="jqueryUrl">
-    <c:url value="/External-Js/jquery-1.9.1.min.js"/>  
+    <c:url value="/public/external_js/jquery-1.9.1.min.js"/>
 </c:set>
 <c:set var="auditSetUpDetailsJsUrl">
-    <c:url value="/Js/expand-collapse/audit-set-up-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/audit-set-up-details-min.js"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

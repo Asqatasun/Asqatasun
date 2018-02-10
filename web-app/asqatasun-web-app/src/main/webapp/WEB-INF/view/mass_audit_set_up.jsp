@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 
 <c:set var="gearImgUrl">
-    <c:url value="/Images/gear.png"/>  
+    <c:url value="/public/images/gear.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">
