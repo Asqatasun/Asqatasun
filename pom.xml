@@ -85,7 +85,7 @@
 
         <!-- Plugin Versions -->
         <maven-javadoc-plugin.version>3.0.0-M1</maven-javadoc-plugin.version>
-        <dependency-check-maven.version>3.0.2</dependency-check-maven.version>
+        <dependency-check-maven.version>3.1.1</dependency-check-maven.version>
         <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
     </properties>
     <repositories>
