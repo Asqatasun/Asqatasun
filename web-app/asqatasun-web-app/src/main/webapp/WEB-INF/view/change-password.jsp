@@ -8,6 +8,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 <html class="app-page-login" lang="${tg:lang(pageContext)}">
     <c:choose>
         <c:when test="${changeUserPasswordFromAdmin == true}">
@@ -71,7 +72,7 @@
                     <div class="container">
                         <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
                             <img id="login-topbar-logo" 
-                                 src="<c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/> "
+                                 src="<c:url value="/public/${asqatasunVersion}/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/> "
                                  alt="<fmt:message key="sign-up.backToLogin"/>" />
                         </a>
                         <ul class="nav secondary-nav">

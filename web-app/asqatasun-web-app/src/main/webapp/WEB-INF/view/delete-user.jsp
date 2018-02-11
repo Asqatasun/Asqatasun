@@ -9,12 +9,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="warningImgUrl">
-    <c:url value="/public/images/warning.jpg"/>
+    <c:url value="/public/${asqatasunVersion}/images/warning.jpg"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/public/images/creative_common_logo.png"/>
+    <c:url value="/public/${asqatasunVersion}/images/creative_common_logo.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

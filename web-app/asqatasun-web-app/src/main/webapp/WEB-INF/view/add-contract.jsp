@@ -10,6 +10,7 @@
 <%@ taglib prefix="function" uri="http://tagutils"%>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 <c:if test="${userName == null && not empty userList}">
     <c:set var="multipleUser" value="true"/>
 </c:if>

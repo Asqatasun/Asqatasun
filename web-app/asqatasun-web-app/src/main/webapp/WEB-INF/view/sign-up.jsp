@@ -7,9 +7,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="tgLogoUrl">
-    <c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>
+    <c:url value="/public/${asqatasunVersion}/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

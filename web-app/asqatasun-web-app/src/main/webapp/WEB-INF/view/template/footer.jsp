@@ -2,11 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-        <c:if test="${not empty configProperties['asqatasunVersion']}">
-            <c:set var="asqatasunVersion">
-                ${configProperties['asqatasunVersion']}
-            </c:set>    
-        </c:if>
         <footer>
             <jsp:useBean id="now" class="java.util.Date" scope="page" />
             <div id="footer-down">                

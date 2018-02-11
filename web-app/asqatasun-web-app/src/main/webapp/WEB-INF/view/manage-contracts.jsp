@@ -9,32 +9,33 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     <%@ taglib uri="http://tagutils" prefix="tg" %>
     <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
     <!-- external js -->
     <c:set var="jqueryUrl">
-        <c:url value="/public/external_js/jquery-1.9.1.min.js"/>
+        <c:url value="/public/${asqatasunVersion}/external_js/jquery-1.9.1.min.js"/>
     </c:set>
     <c:set var="jqueryTableSorterUrl" scope="request">
-        <c:url value="/public/external_js/jquery.tablesorter.min.js"/>
+        <c:url value="/public/${asqatasunVersion}/external_js/jquery.tablesorter.min.js"/>
     </c:set>
 
     <!-- internal js -->
     <c:set var="accessibleTableSorterJsUrl" scope="page">
-        <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js"/>
+        <c:url value="/public/${asqatasunVersion}/js/table-sorter/accessible-table-sorter-min.js"/>
     </c:set>
 
     <!-- images -->
     <c:set var="editContract">
-        <c:url value="/public/images/edit.png"/>
+        <c:url value="/public/${asqatasunVersion}/images/edit.png"/>
     </c:set>
     <c:set var="deleteContract">
-        <c:url value="/public/images/remove.png"/>
+        <c:url value="/public/${asqatasunVersion}/images/remove.png"/>
     </c:set>
     <c:set var="deleteAudits">
-        <c:url value="/public/images/bin.png"/>
+        <c:url value="/public/${asqatasunVersion}/images/bin.png"/>
     </c:set>
     <c:set var="addContract">
-        <c:url value="/public/images/plus_2.png"/>
+        <c:url value="/public/${asqatasunVersion}/images/plus_2.png"/>
     </c:set>
 
     <html lang="${tg:lang(pageContext)}">

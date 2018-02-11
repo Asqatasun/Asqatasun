@@ -98,7 +98,7 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <img src="<c:url value="/public/images/ico-passed-m-gray.png"/>" title="${passedTitle}" alt="${passedTitle}"/>
+                                        <img src="<c:url value="/public/${asqatasunVersion}/images/ico-passed-m-gray.png"/>" title="${passedTitle}" alt="${passedTitle}"/>
                                         <span class="theme-result" title="${passedTitle}">${counterByThemeMap[entry.key].passedCount}</span>
                                         <c:set scope="page" var="failedTitle">
                                             <fmt:message key="resultPage.tests">
@@ -108,7 +108,7 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <img src="<c:url value="/public/images/ico-failed-m-gray.png"/>" title="${failedTitle}" alt="${failedTitle}"/>
+                                        <img src="<c:url value="/public/${asqatasunVersion}/images/ico-failed-m-gray.png"/>" title="${failedTitle}" alt="${failedTitle}"/>
                                         <span class="theme-result" title="${failedTitle}">${counterByThemeMap[entry.key].failedCount}</span>
                                         <c:if test="${isManualAudit != 'true'}">
                                             <c:set scope="page" var="nmiTitle">
@@ -120,7 +120,7 @@
                                                 <fmt:message key="${entry.key.code}"/>
                                                 <!-- test git commit -->
                                             </c:set>
-                                        <img src="<c:url value="/public/images/ico-nmi-m-gray.png"/>" title="${nmiTitle}" alt="${nmiTitle}"/>
+                                        <img src="<c:url value="/public/${asqatasunVersion}/images/ico-nmi-m-gray.png"/>" title="${nmiTitle}" alt="${nmiTitle}"/>
                                         <span class="theme-result" title="${nmiTitle}">${counterByThemeMap[entry.key].nmiCount}</span>
                                         </c:if>
                                         <c:set scope="page" var="naTitle">
@@ -131,7 +131,7 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <img src="<c:url value="/public/images/ico-na-m-gray.png"/>" title="${naTitle}" alt="${naTitle}"/>
+                                        <img src="<c:url value="/public/${asqatasunVersion}/images/ico-na-m-gray.png"/>" title="${naTitle}" alt="${naTitle}"/>
                                         <span class="theme-result" title="${naTitle}">${counterByThemeMap[entry.key].naCount}</span> 
 
                                         <c:set scope="page" var="ntTitle">
@@ -142,7 +142,7 @@
                                             <fmt:message key="resultPage.forTheTheme"/>
                                             <fmt:message key="${entry.key.code}"/>
                                         </c:set>
-                                        <img src="<c:url value="/public/images/ico-nt-m-gray.png"/>" title="${ntTitle}" alt="${ntTitle}"/>
+                                        <img src="<c:url value="/public/${asqatasunVersion}/images/ico-nt-m-gray.png"/>" title="${ntTitle}" alt="${ntTitle}"/>
                                         <span class="theme-result" title="${ntTitle}">${counterByThemeMap[entry.key].ntCount}</span>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@
                                                     </c:if>
                                                 </div>
                                                 <div class="${rowBgClass} span1 test-result" >
-                                                    <img src="<c:url value="/public/images/ico-${testResult.resultCode}-m.png"/>" alt="test ${testResult.testShortLabel} <fmt:message key="${testResult.resultCode}"/>"/>
+                                                    <img src="<c:url value="/public/${asqatasunVersion}/images/ico-${testResult.resultCode}-m.png"/>" alt="test ${testResult.testShortLabel} <fmt:message key="${testResult.resultCode}"/>"/>
                                                 </div>
                                                 <c:choose>
                                                     <c:when test="${isManualAudit}">

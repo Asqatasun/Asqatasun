@@ -7,35 +7,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <!-- external js-->
 <c:set var="jqueryUrl">
-    <c:url value="/public/external_js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/${asqatasunVersion}/external_js/jquery-1.9.1.min.js"/>
 </c:set>        
 <c:set var="d3JsUrl" scope="request">
-    <c:url value="/public/external_js/d3.v3.min.js"/>
+    <c:url value="/public/${asqatasunVersion}/external_js/d3.v3.min.js"/>
 </c:set> 
 <c:set var="r2d3JsUrl" scope="request">
-    <c:url value="/public/external_js/r2d3.v2.min.js"/>
+    <c:url value="/public/${asqatasunVersion}/external_js/r2d3.v2.min.js"/>
 </c:set> 
 
 <!-- internal js-->
 <c:set var="scoreJsUrl" scope="request">
-    <c:url value="/public/js/score/score-min.js"/>
+    <c:url value="/public/${asqatasunVersion}/js/score/score-min.js"/>
 </c:set>
 <c:set var="scoreIEJsUrl" scope="request">
-    <c:url value="/public/js/ie/score/score-ie-min.js"/>
+    <c:url value="/public/${asqatasunVersion}/js/ie/score/score-ie-min.js"/>
 </c:set>
 <c:set var="pageListScoreJsUrl" scope="request">
-    <c:url value="/public/js/score/score-page-list-f2xx-min.js"/>
+    <c:url value="/public/${asqatasunVersion}/js/score/score-page-list-f2xx-min.js"/>
 </c:set>
 <c:set var="pageListScoreIEJsUrl" scope="request">
-    <c:url value="/public/js/ie/score/score-page-list-f2xx-ie-min.js"/>
+    <c:url value="/public/${asqatasunVersion}/js/ie/score/score-page-list-f2xx-ie-min.js"/>
 </c:set>
 
 <!--images -->
 <c:set var="externalLinkImgUrl">
-    <c:url value="/public/images/window-duplicate.png"/>
+    <c:url value="/public/${asqatasunVersion}/images/window-duplicate.png"/>
 </c:set>
 
 <c:set var="invalidTestCriterion" value="false"/>
