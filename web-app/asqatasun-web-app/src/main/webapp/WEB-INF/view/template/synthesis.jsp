@@ -5,6 +5,12 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%-- ----------------------------------
+     .jsp file used with <c:import> tag
+     ----------------------------------  --%>
+
+<%-- Allowed the use of ${asqatasunVersion} --%>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:if test="${hasSynthesisTitle == 'true'}">
     <div class="row">

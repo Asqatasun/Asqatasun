@@ -3,6 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
+<%-- ----------------------------------
+     .jsp file used with <c:import> tag
+     ----------------------------------  --%>
+
+<%-- Allowed the use of ${asqatasunVersion} --%>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <div class="theme-nav bs-docs-sidebar">
     <ul class="nav-list bs-docs-sidenav">
