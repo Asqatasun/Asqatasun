@@ -46,6 +46,12 @@ ADD ./asqatasun-${ASQA_RELEASE}.i386.tar.gz /root/
 # Install Asqatasun
 RUN  cd  /root                                      && \
      mv   asqatasun*/    ./asqatasun/               && \
+            ls -l /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar      && \
+            ls -l /usr/share/java/spring3-instrument-tomcat.jar             && \
+            ls -l /usr/share/java/spring3-instrument-tomcat-3.x.jar         && \
+            apt-get remove -y libspring-instrument-java                     && \
+            apt-get autoremove -y                                           && \
+            unlink  /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar    && \
      service mysql start                            && \
      sleep 5                                        && \
      cd   /root/asqatasun/install/                  && \
@@ -84,6 +90,9 @@ CMD  service mysql start                            && \
      sleep   5                                      && \
      service xvfb start                             && \
      service tomcat7 start                          ;  \
+            ls -l /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar  ;  \
+            ls -l /usr/share/java/spring3-instrument-tomcat.jar         ;  \
+            ls -l /usr/share/java/spring3-instrument-tomcat-3.x.jar     ;  \
      tail -f /var/log/tomcat7/catalina.out     \
              /var/log/asqatasun/asqatasun.log
 
