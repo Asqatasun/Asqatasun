@@ -1,0 +1,11 @@
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="UTF-8" %>
+
+<%-- APP version --%>
+<c:if test="${not empty configProperties['asqatasunVersion']}">
+    <c:set var="asqatasunVersion">
+        ${configProperties['asqatasunVersion']}
+    </c:set>
+</c:if>
+<%--<c:set var="asqatasunVersion"    value="x.x.x-SNAPSHOT"/> --%>
+

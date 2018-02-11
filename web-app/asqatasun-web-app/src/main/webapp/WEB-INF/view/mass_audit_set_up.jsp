@@ -9,9 +9,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="gearImgUrl">
-    <c:url value="/public/images/gear.png"/>
+    <c:url value="/public/${asqatasunVersion}/images/gear.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

@@ -8,9 +8,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
 <!DOCTYPE html>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="warningImgUrl">
-    <c:url value="/public/images/warning.png"/>
+    <c:url value="/public/${asqatasunVersion}/images/warning.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">
