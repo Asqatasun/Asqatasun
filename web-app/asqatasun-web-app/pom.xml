@@ -296,52 +296,59 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>native2ascii-maven-plugin</artifactId>
-                <version>1.0-beta-1</version>
+                <version>2.0.1</version>
+           <!-- <version>${native2ascii-maven-plugin.version}</version> -->
                 <executions>
                     <execution>
                         <id>native2ascii-utf8-properties</id>
                         <goals>
-                            <goal>native2ascii</goal>
+                            <goal>resources</goal>
                         </goals>
+                        <phase>process-resources</phase><!-- default -->
                         <configuration>
                             <encoding>UTF8</encoding>
-                            <includes>**/*.properties</includes>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>yuicompressor-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compress</goal>
-                        </goals>
-                    </execution>
-                </executions>        
-                <configuration>
-                    <excludes>
-                        <exclude>**/*min.js</exclude>
-                        <exclude>**/*.css</exclude>
-                    </excludes>
-                    <failOnWarning>false</failOnWarning>
-                </configuration>
-            </plugin>
-        </plugins>
-        <finalName>asqatasun-web-app-${asqatasunVersion}</finalName>
-    </build>
-    <profiles>
-        <profile>
-            <id>asqatasun</id>
-            <properties>
-                <sonar.language>accessibility</sonar.language>
-            </properties>
-        </profile>
-        <profile>
-            <activation>
-                <!-- the "activation" command offer the ability to run this profile only if "property" is set
-                See http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->
+                      <!--  <encoding>${project.build.sourceEncoding}</encoding> --> <!-- default -->
+                            <srcDir>src/main/resources/i18n</srcDir>
+                            <includes>
+                                <include>**/*.properties</include>
+                           <!-- <include>**/*_utf8*.properties</include> -->
+                            </includes>
+                         </configuration>
+                     </execution>
+                 </executions>
+             </plugin>
+             <plugin>
+                 <groupId>net.alchim31.maven</groupId>
+                 <artifactId>yuicompressor-maven-plugin</artifactId>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>compress</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+                 <configuration>
+                     <excludes>
+                         <exclude>**/*min.js</exclude>
+                         <exclude>**/*.css</exclude>
+                     </excludes>
+                     <failOnWarning>false</failOnWarning>
+                 </configuration>
+             </plugin>
+         </plugins>
+         <finalName>asqatasun-web-app-${asqatasunVersion}</finalName>
+     </build>
+     <profiles>
+         <profile>
+             <id>asqatasun</id>
+             <properties>
+                 <sonar.language>accessibility</sonar.language>
+             </properties>
+         </profile>
+         <profile>
+             <activation>
+                 <!-- the "activation" command offer the ability to run this profile only if "property" is set
+                 See http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->
                 <property>
                     <name>qa.deployInt</name>
                     <value>true</value>

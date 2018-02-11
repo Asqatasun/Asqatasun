@@ -84,9 +84,14 @@
             <!-- <junit.version>4.12</junit.version> -->
 
         <!-- Plugin Versions -->
-        <maven-javadoc-plugin.version>3.0.0-M1</maven-javadoc-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
+        <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
+        <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
+        <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
+        <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
         <dependency-check-maven.version>3.1.1</dependency-check-maven.version>
-        <jacoco-maven-plugin.version>0.7.9</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.0</jacoco-maven-plugin.version>
     </properties>
     <repositories>
         <repository>
@@ -146,7 +151,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -156,7 +161,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.17</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration> 
 <!--                    <skipTests>true</skipTests>-->
                     <encoding>UTF-8</encoding>
@@ -195,6 +200,7 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
             </plugin>
+
     <!--    Generate standalone Javadocs
                https://maven.apache.org/plugins/maven-javadoc-plugin/
                https://maven.apache.org/plugins/maven-javadoc-plugin/usage.html
@@ -225,6 +231,7 @@
                     </bottom>
                 </configuration>
             </plugin>
+
     <!--    OWASP Dependency-Check
                 https://www.owasp.org/index.php/OWASP_Dependency_Check
                 http://jeremylong.github.io/DependencyCheck/
@@ -248,7 +255,6 @@
                     </execution>
                 </executions>       -->
             </plugin>
-
 
     <!--    Jacoco - Code coverage
                 http://www.jacoco.org/jacoco/
@@ -306,6 +312,58 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <!-- Reporting
+         http://maven.apache.org/guides/mini/guide-configuring-plugins.html#Using_the_reporting_Tag_VS_build_Tag -->
+    <reporting> <!-- usage: mvn site  -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+            </plugin>
+
+            <!--    JXR produces a cross-reference of the project's sources (needed for maven-checkstyle-plugin)
+                        http://maven.apache.org/jxr/maven-jxr-plugin/
+                        https://github.com/apache/maven-jxr
+                        report: target/site/xref
+                        usage:  mvn site
+                                mvn jxr:aggregate
+                                mvn jxr:test-aggregate
+                                mvn jxr:jxr
+                                mvn jxr:test-jxr               -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${maven-jxr-plugin.version}</version>
+                <!-- <configuration>
+                         <linkJavadoc>true</linkJavadoc>
+                         <javadocDir>/path/to/javadocs</javadocDir>
+                         <excludes>
+                             <exclude>**/Abstract*.java</exclude>
+                         </excludes>
+                     </configuration> -->
+            </plugin>
+
+            <!--    Checkstyle
+                        http://checkstyle.sourceforge.net/
+                        http://maven.apache.org/plugins/maven-checkstyle-plugin/
+                        report: target/site/checkstyle-aggregate.html
+                        usage:  mvn site
+                                mvn checkstyle:checkstyle-aggregate
+                                mvn checkstyle:checkstyle                            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
 
     <dependencyManagement>
         <dependencies>
