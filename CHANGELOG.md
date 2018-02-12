@@ -1,13 +1,20 @@
 # CHANGELOG
 
-Asqatasun 4.1.0, 2017-xx-xx
+Asqatasun 4.1.0, 2018-0x-xx
 ---------------------------
 - WIP 
   - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
   - [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137) 
+  - refactoring install.sh and pre-requisites.sh
+    - added install-SQL.sh and pre-requisites-SQL.sh
+    - @@@TODO test docker images
+    - @@@TODO update documentation
+    - @@@TODO fix ansible
+    - @@@TODO test tomcat8
+
 
 ### Upgrade-o-meter
-None
+- [#154 - Build - Maven 3.1 is required (needed for org.owasp:dependency-check-maven)](https://github.com/Asqatasun/Asqatasun/issues/154)
 
 ### Features
 - [#172 - i18n: Add german translation](https://github.com/Asqatasun/Asqatasun/issues/172) 
@@ -16,32 +23,44 @@ None
 None
 
 ### Outdated dependencies
-none
+- [#199 - Upgraded maven plugins: compiler, surefire](https://github.com/Asqatasun/Asqatasun/issues/199)
 
 ### Bugs
-- [#119 - Webapp, contrast ratio link : fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
-- [#146 - Webapp, site-audit in error: added "check for redirection" as possible explanation](https://github.com/Asqatasun/Asqatasun/issues/146)
-- [#179 - Webapp, site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
-- [#138 - Webapp, `<form:errors path="scenarioFile">`, allowed `<abbr>` in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
-- [#128 - Fixed Rgaa 3.0, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#128) 
-- [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
-- [#142 - Fix SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
+- [#128 - Fixed Rgaa 3.0, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#128)
+- [#183 - Fixed build_and_run-with-docker.sh: "-t" option is used 2 times](https://github.com/Asqatasun/Asqatasun/issues/183)
+- [#142 - Fixed SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
+- [#149 - Fixed install.sh: tomcat parameters are missing](https://github.com/Asqatasun/Asqatasun/issues/149)
 - Enhanced pre-requisites to allow database name containing hyphen "-"
+- Webapp:
+    - [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
+    - [#119 - contrast ratio link: fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
+    - [#146 - site-audit in error: added "check for redirection" as possible explanation](https://github.com/Asqatasun/Asqatasun/issues/146)
+    - [#179 - site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
+    - [#138 - `<form:errors path="scenarioFile">`, allowed `<abbr>` in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
+
 
 ### Configuration
 None
 
-### Improvement 
+### Improvement
+- [#197 - Webapp - Allowed the HTTP header "Cache-Control: immutable" for static files (css, js, png,...)](https://github.com/Asqatasun/Asqatasun/issues/197)
 - [#139 - Install.sh - Added new SQL procedures: list_running_acts + Last_audits](https://github.com/Asqatasun/Asqatasun/issues/139)
 - [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
 - [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Asqatasun/issues/45)
+- Added some maven report plugins:
+    - [#185 - Unit tests coverage report (Jacocoo)](https://github.com/Asqatasun/Asqatasun/issues/185)
+    - [#155 - OWASP Dependency-Check](https://github.com/Asqatasun/Asqatasun/issues/155)
+    - [#198 - Checkstyle](https://github.com/Asqatasun/Asqatasun/issues/198)
+    - [#156 - Javadoc](https://github.com/Asqatasun/Asqatasun/issues/156)
 - `build_and_run-with-docker.sh` script:
+    - [#182 - Added --krash-test   option](https://github.com/Asqatasun/Asqatasun/issues/182)
     - [#169 - Added --log-build    option](https://github.com/Asqatasun/Asqatasun/issues/169) 
     - [#145 - Added --build-only-* options](https://github.com/Asqatasun/Asqatasun/issues/145)
     - [#144 - Added option to skip unit tests](https://github.com/Asqatasun/Asqatasun/issues/144)
 
 ### Refactoring
-none
+- [#200 - Prerequisites : libspring-instrument-java is not needed](https://github.com/Asqatasun/Asqatasun/issues/200)
+- [#127 - Unit tests : replaced tgqa.org domain name by asqatasun.ovh](https://github.com/Asqatasun/Asqatasun/issues/127)
 
 ### Documentation
 - [#166 - Updated "Contributor > Build a Docker image"](https://github.com/Asqatasun/Asqatasun/issues/166)

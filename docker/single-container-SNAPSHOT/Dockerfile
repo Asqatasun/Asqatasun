@@ -70,12 +70,6 @@ RUN  cd  /root                                      && \
      rm -rf  /root/asqatasun*                       && \
      apt-get clean                                  && \
      apt-get autoremove                             && \
-            ls -l /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar      && \
-            ls -l /usr/share/java/spring3-instrument-tomcat.jar             && \
-            ls -l /usr/share/java/spring3-instrument-tomcat-3.x.jar         && \
-            apt-get remove -y libspring-instrument-java                     && \
-            apt-get autoremove -y                                           && \
-            unlink  /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar    && \
      rm -rf  /var/lib/apt/lists/*
 
 CMD  service mysql start                            && \

@@ -60,7 +60,6 @@ sudo apt-get -y --no-install-recommends install \
     mysql-server \
     libmysql-java \
     tomcat7 \
-    libspring-instrument-java \
     xvfb \
     libdbus-glib-1-2 \
     openjdk-7-jre
@@ -117,7 +116,6 @@ where `$AsqatasunUser` is the asqatasun user, `$AsqatasunPassword` is the asqata
 
 Create the following symlinks : 
 ```sh
-sudo ln -s /usr/share/java/spring3-instrument-tomcat.jar /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar
 sudo ln -s /usr/share/java/mysql-connector-java.jar /usr/share/tomcat7/lib/mysql-connector-java.jar
 ```
 

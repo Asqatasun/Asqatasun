@@ -8,8 +8,7 @@ asqatasun_debian_pkgs:
   - libmysql-java
   - python-mysqldb
   - libtomcat7-java
-  - tomcat7 
-  - libspring-instrument-java
+  - tomcat7
   - xvfb
   - libdbus-glib-1-2
   - mailutils
