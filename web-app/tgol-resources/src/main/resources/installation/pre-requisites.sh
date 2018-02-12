@@ -72,7 +72,6 @@ apt-get -y --no-install-recommends install \
     unzip \
     libmysql-java \
     tomcat7 \
-    libspring-instrument-java \
     xvfb \
     libdbus-glib-1-2 \
     openjdk-7-jre
@@ -88,7 +87,6 @@ apt-get -y --no-install-recommends install \
 # Tomcat config
 #############################################
 
-ln -s /usr/share/java/spring3-instrument-tomcat.jar ${TOMCAT_LIB_DIR}/spring3-instrument-tomcat.jar
 ln -s /usr/share/java/mysql-connector-java.jar ${TOMCAT_LIB_DIR}/mysql-connector-java.jar
 
 #############################################
