@@ -1,16 +1,22 @@
 FROM asqatasun/asqatasun:pre-requisites_with-empty-DB
-MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 
-# ##########################################################
+# #### DISCLAIMER ###################################################################
 #
-#                      DISCLAIMER
+#   This is a fat container, that is absolutly not compliant to Docker best-practices
+#   https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 #
-# This is a fat container, that is absolutly not compliant to Docker best-practices
-# https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
-# Don't use it for production as all data are wiped out at reboot / rebuild
-# BUT for quick testing, that does the job :)
-#
-# ##########################################################
+#   Don't use it for production as all data are wiped out at reboot / rebuild
+#   BUT for quick testing, that does the job :)
+# ###################################################################################
+
+
+# #### FROM  #######################################################
+#   Ubuntu:14.04
+#   |-- asqatasun/asqatasun:base_wget
+#       |-- asqatasun/asqatasun:only-DB
+#           |-- asqatasun/asqatasun:pre-requisites_without-DB
+#               |-- asqatasun/asqatasun:pre-requisites_with-empty-DB
+####################################################################
 
 USER root
 ENV  WWWPORT="8080"                                    \
@@ -62,6 +68,19 @@ RUN  cd  /root                                      && \
         --firefox-esr-binary-path /opt/firefox/firefox \
         --display-port      :99                     && \
      rm -rf  /root/asqatasun*
+
+
+# Health Check of the Docker Container
+HEALTHCHECK --timeout=3s    \
+            --interval=10s  \
+            CMD curl --fail http://localhost:8080/asqatasun/ || exit 1
+            ######################################################################
+            # doc: https://docs.docker.com/engine/reference/builder/#healthcheck
+            # options:  --interval=DURATION (default: 30s)
+            #           --timeout=DURATION (default: 30s)
+            #           --retries=N (default: 3)
+            # can be overridden at the command line 'docker run --health-cmd (...)'
+            ######################################################################
 
 CMD  service mysql start                            && \
      sleep   5                                      && \

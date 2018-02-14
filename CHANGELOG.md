@@ -47,6 +47,7 @@ None
 - [#139 - Install.sh - Added new SQL procedures: list_running_acts + Last_audits](https://github.com/Asqatasun/Asqatasun/issues/139)
 - [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
 - [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Asqatasun/issues/45)
+- [#152 - Dockerfile: add HEALTHCHECK instruction](https://github.com/Asqatasun/Asqatasun/issues/152)
 - Added some maven report plugins:
     - [#185 - Unit tests coverage report (Jacocoo)](https://github.com/Asqatasun/Asqatasun/issues/185)
     - [#155 - OWASP Dependency-Check](https://github.com/Asqatasun/Asqatasun/issues/155)

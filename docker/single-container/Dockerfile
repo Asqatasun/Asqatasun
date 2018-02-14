@@ -1,19 +1,16 @@
 FROM ubuntu:14.04
 MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 
-# ##########################################################
+# #### DISCLAIMER ###################################################################
 #
-#                      DISCLAIMER
+#   This is a fat container, that is absolutly not compliant to Docker best-practices
+#   https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
 #
-# This is a fat container, that is absolutly not compliant to Docker best-practices
-# https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/
-# Don't use it for production as all data are wiped out at reboot / rebuild
-# BUT for quick testing, that does the job :)
-#
-# ##########################################################
+#   Don't use it for production as all data are wiped out at reboot / rebuild
+#   BUT for quick testing, that does the job :)
+# ###################################################################################
 
 USER root
-
 ENV WWWPORT="8080" \
     DATABASE_DB="asqatasun" \
     DATABASE_HOST="localhost" \
@@ -24,7 +21,8 @@ ENV WWWPORT="8080" \
     ASQA_URL="http://localhost:8080/asqatasun/" \
     ASQA_ADMIN_EMAIL="me@my-email.org" \
     ASQA_ADMIN_PASSWD="myAsqaPassword"  \
-    ASQA_RELEASE="4.1.0-SNAPSHOT"
+    ASQA_RELEASE="4.0.3"
+    # ASQA_RELEASE="4.1.0-SNAPSHOT"
 
 EXPOSE $WWWPORT
 
@@ -39,11 +37,12 @@ WORKDIR /root
 
 # Add Asqatasun
 # Install Asqatasun
-RUN apt-get update && \
-    apt-get -y --no-install-recommends install \
-                                       wget \
-                                       ca-certificates && \
-    cd /root/ && \
+RUN  apt-get update                                 && \
+     apt-get -y --no-install-recommends   \
+                  install wget            \
+                          curl            \
+                          ca-certificates           && \
+    cd /root/                                       && \
     wget https://github.com/Asqatasun/Asqatasun/releases/download/v${ASQA_RELEASE}/asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
     tar xvfz asqatasun-${ASQA_RELEASE}.i386.tar.gz && \
     mv asqatasun*/ ./asqatasun/ && \
@@ -65,6 +64,19 @@ RUN apt-get update && \
         --firefox-esr-binary-path /opt/firefox/firefox \
         --display-port :99 && \
     rm -rvf  /root/asqatasun*
+
+
+# Health Check of the Docker Container
+HEALTHCHECK --timeout=3s    \
+            --interval=10s  \
+            CMD curl --fail http://localhost:8080/asqatasun/ || exit 1
+            ######################################################################
+            # doc: https://docs.docker.com/engine/reference/builder/#healthcheck
+            # options:  --interval=DURATION (default: 30s)
+            #           --timeout=DURATION (default: 30s)
+            #           --retries=N (default: 3)
+            # can be overridden at the command line 'docker run --health-cmd (...)'
+            ######################################################################
 
 CMD service mysql start && \
     sleep 5 && \
