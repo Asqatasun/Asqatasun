@@ -24,7 +24,7 @@ Work in progress
 git clone https://github.com/Asqatasun/Asqatasun
 cd  Asqatasun
 git checkout develop
-docker/build_and_run-with-docker.sh -l -s ${PWD} -d docker/single-container-SNAPSHOT-local
+docker/build_and_run-with-docker.sh -l -s ${PWD} -d docker/SNAPSHOT-local
 ```
 
 In your browser, go to

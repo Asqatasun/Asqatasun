@@ -28,7 +28,7 @@ cd engine/asqatasun-resources/src/main/resources/release/
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
-docker/build_and_run-with-docker.sh --skip-build -s /tmp/Asqatasun -d docker/single-container-SNAPSHOT-local 
+docker/build_and_run-with-docker.sh --skip-build -s /tmp/Asqatasun -d docker/SNAPSHOT-local
 ```
 
 ## 5) For develop branch, switch back release strings to "-SNAPSHOT"

@@ -132,7 +132,7 @@ Create your own tests.
 
 ### Features
 
-* Docker/single-container: reduced weight from 450 MB to 290 MB
+* Docker/RELEASE: reduced weight from 450 MB to 290 MB
 * Asqatasun-Runner: RGAA 3.0 by default, enabled SEO and disabled RGAA 2
 * Referential RGAA 3.0: english translation added (source : https://github.com/DISIC/rgaa_referentiel_en)
 

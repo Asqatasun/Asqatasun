@@ -20,7 +20,7 @@ We have created a shell script to ease the tasks of building locally with Docker
 To enjoy it, **from the Asqatasun source directory**, do:
 
 ```
-./docker/build_and_run-with-docker.sh --source-dir $(pwd) --docker-dir docker/single-container-SNAPSHOT-local
+./docker/build_and_run-with-docker.sh --source-dir $(pwd) --docker-dir docker/SNAPSHOT-local
 ```
 
 Example of output:
@@ -66,13 +66,13 @@ In the meantime, enjoy your coffee break :)
 ### 3. Copy Asqatasun tar.gz to the suitable Docker directory
 
 ```shell
-cp web-app/asqatasun-web-app/target/asqatasun-*-SNAPSHOT.i386.tar.gz docker/single-container-SNAPSHOT-local
+cp web-app/asqatasun-web-app/target/asqatasun-*-SNAPSHOT.i386.tar.gz docker/SNAPSHOT-local
 ```
 
 ### 4. Build the Docker Image
 
 ```shell
-cd docker/single-container-SNAPSHOT-local
+cd docker/SNAPSHOT-local
 docker build -t asqatasun/asqatasun:SNAPSHOT .
 ```
 
