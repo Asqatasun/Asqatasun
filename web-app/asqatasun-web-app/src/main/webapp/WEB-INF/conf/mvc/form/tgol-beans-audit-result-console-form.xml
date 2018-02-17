@@ -285,7 +285,7 @@
         <property name="i18nKey" value="passed"/>
         <property name="errorI18nKey" value="passed-error"/>
         <property name="enabled" value="true"/>
-        <property name="selected" value="true"/>
+        <property name="selected" value="false"/>
     </bean>
 
     <bean id="failedCheckboxElementBuilder" class="org.asqatasun.webapp.form.builder.CheckboxElementBuilderImpl">
@@ -309,7 +309,7 @@
         <property name="i18nKey" value="na"/>
         <property name="errorI18nKey" value="na-error"/>
         <property name="enabled" value="true"/>
-        <property name="selected" value="true"/>
+        <property name="selected" value="false"/>
     </bean>
     
     <bean id="ntCheckboxElementBuilder" class="org.asqatasun.webapp.form.builder.CheckboxElementBuilderImpl">
