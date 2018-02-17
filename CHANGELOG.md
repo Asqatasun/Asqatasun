@@ -2,12 +2,17 @@
 
 Asqatasun 4.1.0, 2018-0x-xx
 ---------------------------
-- WIP 
+
+- thanks:
+  - @selfthinker - Feature request #202
+
+- WIP:
   - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
   - [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137) 
   - refactoring install.sh and pre-requisites.sh
     - added install-SQL.sh and pre-requisites-SQL.sh
     - @@@TODO test docker images
+    - @@@TODO Docker Hub: update build config (new paths)
     - @@@TODO update documentation
     - @@@TODO fix ansible
     - @@@TODO test tomcat8
@@ -40,7 +45,7 @@ None
 
 
 ### Configuration
-None
+- [#202 - Webapp: changed the default to only show "failed" and "pre-qualified" results)](https://github.com/Asqatasun/Asqatasun/issues/202)
 
 ### Improvement
 - [#197 - Webapp - Allowed the HTTP header "Cache-Control: immutable" for static files (css, js, png,...)](https://github.com/Asqatasun/Asqatasun/issues/197)
