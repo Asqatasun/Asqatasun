@@ -62,6 +62,8 @@ public class CreateContractFormValidator implements Validator {
             = "sign-up.invalidUrl";
     private static final String MISSING_URL_KEY
             = "edit-contract.missingDomainURL"; // needed for DOMAIN audits
+    private static final String NO_REFERENTIAL_SELECTED
+            = "edit-contract.NoReferentialSelected";
     private static final String COMBINATION_NOT_ALLOWED
             = "edit-contract.typeAuditCombinationIsNotAllowed";
 
@@ -117,7 +119,6 @@ public class CreateContractFormValidator implements Validator {
                 hasMandatoryElementWrong = true;
             }
         }
-
         if (!checkDates(ccc, errors)) {
             hasMandatoryElementWrong = true;
         }
@@ -128,6 +129,9 @@ public class CreateContractFormValidator implements Validator {
         if (hasMandatoryElementWrong) { // if no URL is filled-in
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);
+        }
+        if (!checkReferentials(ccc, errors)) {
+            errors.rejectValue(GENERAL_ERROR_MSG_KEY, NO_REFERENTIAL_SELECTED);
         }
     }
 
@@ -205,6 +209,41 @@ public class CreateContractFormValidator implements Validator {
         }
         return true;
     }
+
+
+
+    /**
+     *
+     * @param userSubscriptionCommand
+     * @param errors
+     * @return
+     */
+    private boolean checkReferentials(CreateContractCommand ccc, Errors errors) {
+
+        // Allow no referential is selected if no audit types selected
+        boolean selectedFunctionality = false;
+        for (Entry<String, Boolean> it : ccc.getFunctionalityMap().entrySet()) {
+            if (it.getValue() != null) {
+                selectedFunctionality = true;
+            }
+        }
+        if (selectedFunctionality == false){
+            return true;
+        }
+
+        // verify at least one referential is selected
+        boolean selectedReferential = false;
+        for (Map.Entry<String,Boolean> entry : ccc.getReferentialMap().entrySet()){
+            if (entry.getValue() != null) {
+                selectedReferential = true;
+            }
+        }
+        if (selectedReferential == false){
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      *
