@@ -60,6 +60,8 @@ public class CreateContractFormValidator implements Validator {
             = "edit-contract.endDateAnteriorToBeginDate";
     private static final String INVALID_URL_KEY
             = "sign-up.invalidUrl";
+    private static final String MISSING_URL_KEY
+            = "edit-contract.missingDomainURL"; // needed for DOMAIN audits
     private static final String COMBINATION_NOT_ALLOWED
             = "edit-contract.typeAuditCombinationIsNotAllowed";
 
@@ -227,8 +229,17 @@ public class CreateContractFormValidator implements Validator {
     private boolean checkContractUrl(CreateContractCommand createContractCommand, Errors errors) {
         String url = createContractCommand.getContractUrl().trim();
         if (StringUtils.isBlank(url)) {
+            // forbid contract without URL and with website audit enabled
+            Map<String, Boolean> functionalityMap = createContractCommand.getFunctionalityMap();
+            for (Entry<String, Boolean> it : functionalityMap.entrySet()) {
+                if (it.getKey().equals("DOMAIN") && it.getValue() != null) {
+                    errors.rejectValue(CONTRACT_URL_KEY, MISSING_URL_KEY);
+                    return false;
+                }
+            }
             return true;
         }
+
         String[] schemes = {"http","https"};
         long validatorOptions = UrlValidator.ALLOW_2_SLASHES + UrlValidator.ALLOW_LOCAL_URLS;
         UrlValidator urlValidator = new UrlValidator (schemes, new RegexValidator(".*"), validatorOptions);
