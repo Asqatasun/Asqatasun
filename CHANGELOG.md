@@ -43,6 +43,7 @@ None
     - [#179 - site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
     - [#138 - `<form:errors path="scenarioFile">`, allowed `<abbr>` in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
     - [#203 - No allow starting an audit if no referential is activated for the current project](https://github.com/Asqatasun/Asqatasun/issues/203)
+    - [#204 - No allow starting website audit if URL is not defined for the current project](https://github.com/Asqatasun/Asqatasun/issues/204)
 
 
 ### Configuration

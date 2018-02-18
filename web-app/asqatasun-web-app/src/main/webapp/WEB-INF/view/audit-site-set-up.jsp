@@ -42,24 +42,36 @@
                         <fmt:message key="auditSetUpSite.h1"/>
                     </h1>
                 </div><!-- class="span16" -->
-                <c:if test="${defaultParamSet == 'false'}">
-                <div class="span16">
-                    <div class="alert-message block-message warning">
-                        <fmt:message key="auditSetUp.keptLastAuditParameters">
-                            <fmt:param>${url}</fmt:param>
-                        </fmt:message>
-                    </div><!-- class="alert-message warning" -->
-                </div><!-- class="span16" -->
-                </c:if>
-                <div class="span16">
-                    <div class="alert-message block-message info">
-                        <p><fmt:message key="auditSetUp.message"/></p>
-                    </div>
-                </div><!-- class="span16" -->
-                <c:set var="postUrl" scope="page">
-                    <c:url value="/home/contract/launch-audit-site.html?cr=${contractIdValue}"/>
-                </c:set>
-                <%@include file="template/set-up.jsp" %>
+                <c:choose>
+                    <c:when test="${url == ''}">
+                        <div class="alert-message block-message error span16">
+                            <h2><fmt:message key="auditSetUp.projectConfigurationError"/> </h2>
+                            <p><fmt:message key="auditSetUp.errorNoSiteURL"/>    </p>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:if test="${defaultParamSet == 'false'}">
+                            <div class="span16">
+                                <div class="alert-message block-message warning">
+                                    <fmt:message key="auditSetUp.keptLastAuditParameters">
+                                        <fmt:param>${url}</fmt:param>
+                                    </fmt:message>
+                                </div><!-- class="alert-message warning" -->
+                            </div><!-- class="span16" -->
+                        </c:if>
+                        <div class="span16">
+                            <div class="alert-message block-message info">
+                                URL : <a rel="noreferrer noopener" href="${url}">${url}</a>
+                                <br>
+                                <p><fmt:message key="auditSetUp.message"/></p>
+                            </div>
+                        </div><!-- class="span16" -->
+                        <c:set var="postUrl" scope="page">
+                            <c:url value="/home/contract/launch-audit-site.html?cr=${contractIdValue}"/>
+                        </c:set>
+                        <%@include file="template/set-up.jsp" %>
+                    </c:otherwise>
+                </c:choose>
             </div><!-- class="row" -->
         </div><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
