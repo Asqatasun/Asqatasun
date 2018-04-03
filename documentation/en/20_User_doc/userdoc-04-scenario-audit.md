@@ -20,9 +20,14 @@
 1. Upload the scenario to Asqatasun
 1. Run the scenario audit
 
-## 0. Prerequesite: Firefox + SeBuilder
+## Prerequisite
+* You need a user account with at least 1 project configured with the **Scenario audit** option.
+* If this is not the case, you must contact the administrator of your Asqatasun instance.
+* If you have an administrator account, you can add or update projects directly in the [back-office](../50_Administrator_doc/backoffice.md).
 
-You need a Firefox browser with the [SeBuilder extension](http://www.saucelabs.com/addons/selenium-builder-latest.xpi)
+### Firefox ESR 52 + SeBuilder
+
+You need a [Firefox ESR 52](https://www.mozilla.org/en-US/firefox/organizations/all/) browser with the [SeBuilder extension](http://www.saucelabs.com/addons/selenium-builder-latest.xpi)
 to record scenarios. Asqatasun scenarios are based on Selenium. The format is *Selenium 2* and scenarios are stored in JSON style.
 
 ## 1. Define a scenario

@@ -9,6 +9,11 @@ Assisted audit offers auditors the ability to fulfill an audit.
 1. Fulfill the whole audit, eventually in differents steps (work can be saved),
 1. Terminate the audit.
 
+## Prerequisite
+* You need a user account with at least 1 project configured with the **Assisted Audit** option in addition to the **Page Audit** or **File Audit** option.
+* If this is not the case, you must contact the administrator of your Asqatasun instance.
+* If you have an administrator account, you can add or update projects directly in the [back-office](../50_Administrator_doc/backoffice.md).
+
 ## 1. Run a page audit
 
 Let say we work on the [BBC website](http://www.bbc.com/). Launch an 

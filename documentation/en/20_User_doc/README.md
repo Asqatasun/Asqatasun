@@ -8,6 +8,11 @@ Asqatasun is an opensource validator for accessibility ans SEO. It is build with
 
 If you ever lack some information, feel free to ask on [Asqatasun Forum](http://forum.asqatasun.org/).
 
+## Pre-repquisite
+* You need a user account with at least 1 project configured.
+* If this is not the case, you must contact the administrator of your Asqatasun instance.
+* If you have an administrator account, you can add or update projects directly in the [back-office](../50_Administrator_doc/backoffice.md).
+
 ## User documentation
 * [5 types of result](userdoc-02-5-results.md)
 * [4 kinds of audit](userdoc-01-4-audits.md)

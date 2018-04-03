@@ -8,6 +8,11 @@
 
 ## Detailed steps
 
+### Prerequisite
+* You need a user account with at least 1 project configured with **Page audit** option.
+* If this is not the case, you must contact the administrator of your Asqatasun instance.
+* If you have an administrator account, you can add or update projects directly in the [back-office](../50_Administrator_doc/backoffice.md).
+
 ### Step 1
 
 Let say we have a project for the [BBC website](http://www.bbc.com/), click the
