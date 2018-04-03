@@ -5,6 +5,7 @@ Asqatasun 4.1.0, 2018-0x-xx
 
 - thanks:
   - @selfthinker - Feature request #202
+  - @mgifford    - User feedback: #205, #206 and #208
 
 - WIP:
   - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
@@ -51,6 +52,7 @@ None
 - [#202 - Webapp: changed the default to only show "failed" and "pre-qualified" results)](https://github.com/Asqatasun/Asqatasun/issues/202)
 
 ### Improvement
+- [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
 - [#197 - Webapp - Allowed the HTTP header "Cache-Control: immutable" for static files (css, js, png,...)](https://github.com/Asqatasun/Asqatasun/issues/197)
 - [#139 - Install.sh - Added new SQL procedures: list_running_acts + Last_audits](https://github.com/Asqatasun/Asqatasun/issues/139)
 - [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
@@ -72,6 +74,7 @@ None
 - [#127 - Unit tests : replaced tgqa.org domain name by asqatasun.ovh](https://github.com/Asqatasun/Asqatasun/issues/127)
 
 ### Documentation
+- [#206 - Improved user documentation](https://github.com/Asqatasun/Asqatasun/issues/206)
 - [#166 - Updated "Contributor > Build a Docker image"](https://github.com/Asqatasun/Asqatasun/issues/166)
 - [#147 - Added documentation on how to run a krashtest campaign](https://github.com/Asqatasun/Asqatasun/issues/147)
 - Added "howto configuring Apache frontend with AJP connector and HTTPS Let's Encrypt"

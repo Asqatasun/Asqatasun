@@ -49,6 +49,12 @@
 <c:set var="stableLogoUrl">
     <c:url value="/public/${asqatasunVersion}/images/stable-narrow.png"/>
 </c:set>
+<c:set var="imgSrcAddContract">
+    <c:url value="/public/${asqatasunVersion}/images/plus_2.png"/>
+</c:set>
+<c:set var="imgSrcEditContract">
+    <c:url value="/public/${asqatasunVersion}/images/folder_open.png"/>
+</c:set>
 
 <html lang="${tg:lang(pageContext)}">
     <c:set var="pageTitle" scope="page">
@@ -221,6 +227,23 @@
                         </c:if>
                     </table>
                 </c:forEach>
+
+                    <%-- Admin user can quickly add a new project to his account --%>
+                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                        <c:set var="currentUserId" scope="page">
+                            <security:authentication property="principal.user.id" />
+                        </c:set>
+                        <a class="btn btn-primary" href="<c:url value="/admin/manage-contracts.html?user=${currentUserId}"/>">
+                            <img src="${imgSrcEditContract}" alt="">
+                            <fmt:message key="admin.manageContracts" />
+                        </a>
+                        &nbsp;
+                        <a class="btn btn-primary"
+                           href="<c:url value="/admin/manage-contracts/add-contract.html?user=${currentUserId}"/>">
+                            <img src="${imgSrcAddContract}" alt="">
+                            <fmt:message key="manage-contracts.addContract"/>
+                        </a>
+                    </security:authorize>
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
         </div><!-- class="container" -->
