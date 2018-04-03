@@ -14,13 +14,13 @@
 
 ## Quick steps (for the impatient)
 
-1. Have a Firefox and [download SeBuilder extension](http://www.saucelabs.com/addons/selenium-builder-latest.xpi)
+1. Have a Firefox **ESR 52** and [download SeBuilder extension](http://www.saucelabs.com/addons/selenium-builder-latest.xpi)
 1. Record your scenario (*Selenium 2* format)
 1. Replay locally your scenario to verify it works
 1. Upload the scenario to Asqatasun
 1. Run the scenario audit
 
-## Prerequisite
+## Step 1 - Prerequisite
 * You need a user account with at least 1 project configured with the **Scenario audit** option.
 * If this is not the case, you must contact the administrator of your Asqatasun instance.
 * If you have an administrator account, you can add or update projects directly in the [back-office](../50_Administrator_doc/backoffice.md).
@@ -30,7 +30,9 @@
 You need a [Firefox ESR 52](https://www.mozilla.org/en-US/firefox/organizations/all/) browser with the [SeBuilder extension](http://www.saucelabs.com/addons/selenium-builder-latest.xpi)
 to record scenarios. Asqatasun scenarios are based on Selenium. The format is *Selenium 2* and scenarios are stored in JSON style.
 
-## 1. Define a scenario
+## Step 2 - Define and record the scenario
+
+### Define a scenario
 
 Let say we are in London at *Piccadilly Circus* and want to go to *Monument*. Let
 use the [Transport for London website](http://www.tfl.gov.uk/) to help us define our journey.
@@ -45,7 +47,7 @@ Let's begin.
 
 ![](Images/screenshot_20150309_ASQATASUN_SCENARIO_step_A1_transport_for_london.png)
 
-## 2. Record the scenario
+### Record the scenario
 
 * Open SeBuilder: Tools > Web developer > Launch Selenium Builder (or keyboard 
 shortcut `CTRL-ALT-B`), and select *Selenium 2*.
@@ -67,7 +69,7 @@ and *To* field (*Monument*)
 
 * Save your scenario : File > Save as...
 
-## 3. Verify and adjust the scenario
+## Step 3 - Verify and adjust the scenario
 
 * In the SeBuilder window, choose Run > run test locally
 
@@ -79,7 +81,7 @@ whether or not the scenario is actually what you wanted (!).
 Please refer to [Asqatasun scenario advanced usage](userdoc-05-scenario-audit-advanced.md)
 if the scenario does not replay the way you'd like.
 
-## 4. Upload the scenario to Asqatasun
+## Step 4 - Upload the scenario to Asqatasun
 
 * Log in your Asqatasun, go to your project, *Scenario Audit*
 
@@ -89,7 +91,7 @@ if the scenario does not replay the way you'd like.
 
 ![](Images/screenshot_20150309_ASQATASUN_SCENARIO_step_G_upload_scenario.png)
 
-## 5. Launch the audit of the scenario
+## Step 5 - Launch the audit of the scenario
 
 * Now run the scenario: click *Launch audit*
 
@@ -101,7 +103,7 @@ The scenario audit is ran in *asynchronous* mode, meaning you will receive an
 email when the audit is done (depending on the lenght of the audit, but typically
 a few minutes).
 
-## 6. See the results
+## Step 6 - See the results
 
 * Go back to your project page, click on the last audit 
 
