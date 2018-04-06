@@ -14,13 +14,13 @@ We are really glad to have you on board !
 
 ## Contribution to the code / Pull Request
 
-### Pre-requesites
+### Pre-requisites
 
-* Docker
-* Maven
-* Git (off course)
+* [Docker](https://www.docker.com/)
+* [Maven](https://maven.apache.org/)
+* [Git](https://git-scm.com/downloads) (of course)
 
-### Pre-requesites for Ubuntu 16.04
+### Pre-requisites for Ubuntu 16.04
 
 * [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 * `sudo apt install maven git`
@@ -31,7 +31,7 @@ Either choose an existing issue on which you'd like to work or create a new one.
 
 ### Fork the project
 
-From Github, fork the project. You've got your own personal Asqatasun under your Github user's environment (`https://github.com/<user>/Asqatasun`).
+From Github, fork the project. You've got your own personal Asqatasun under your Github user environment (`https://github.com/<user>/Asqatasun`).
 
 ### Work locally
 
