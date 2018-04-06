@@ -14,13 +14,13 @@ We are really glad to have you on board !
 
 ## Contribution to the code / Pull Request
 
-### Pre-requesites
+### Pre-requisites
 
 * [Docker](https://www.docker.com/)
 * [Maven](https://maven.apache.org/)
 * [Git](https://git-scm.com/downloads) (of course)
 
-### Pre-requesites for Ubuntu 16.04
+### Pre-requisites for Ubuntu 16.04
 
 * [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 * `sudo apt install maven git`
