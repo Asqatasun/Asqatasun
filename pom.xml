@@ -78,7 +78,7 @@
         <jersey.version>2.13</jersey.version>
 
         <!-- Dependency Versions -->
-        <markdown-page-generator-plugin.version>2.0.1</markdown-page-generator-plugin.version>
+        <markdown-page-generator-plugin.version>2.1.0</markdown-page-generator-plugin.version>
         <junitGroupId>junit</junitGroupId>
         <junitVersion>3.8.2</junitVersion>
             <!-- <junit.version>4.12</junit.version> -->
