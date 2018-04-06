@@ -16,9 +16,9 @@ We are really glad to have you on board !
 
 ### Pre-requesites
 
-* Docker
-* Maven
-* Git (off course)
+* [Docker](https://www.docker.com/)
+* [Maven](https://maven.apache.org/)
+* [Git](https://git-scm.com/downloads) (of course)
 
 ### Pre-requesites for Ubuntu 16.04
 
