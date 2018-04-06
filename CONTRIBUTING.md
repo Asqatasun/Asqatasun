@@ -31,7 +31,7 @@ Either choose an existing issue on which you'd like to work or create a new one.
 
 ### Fork the project
 
-From Github, fork the project. You've got your own personal Asqatasun under your Github user's environment (`https://github.com/<user>/Asqatasun`).
+From Github, fork the project. You've got your own personal Asqatasun under your Github user environment (`https://github.com/<user>/Asqatasun`).
 
 ### Work locally
 
