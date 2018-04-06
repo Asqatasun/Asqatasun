@@ -108,19 +108,14 @@ What tests are covered:
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
 * email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
 
-## We want you! (aka Contribute)
+## Contribute
 
 We would be really glad to have you on board! You can help in many ways:
 
 1. Use Asqatasun on your sites !
-1. [Help translate Asqatasun](https://www.transifex.com/asqatasun/asqatasun/) 
-1. Give us [feedback on the forum](http://forum.asqatasun.org) or [fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
-1. Help us in improving the SEO rules: come, code or [discuss](http://forum.asqatasun.org)!
-
-[Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls) are always welcome! 
-Everything is summarized in the [CONTRIBUTING](https://github.com/Asqatasun/Asqatasun/blob/master/CONTRIBUTING.md) file.
-
-Create your own tests.
+1. Give us [feedback on the forum](http://forum.asqatasun.org)
+1. [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
+1. [Contribute](CONTRIBUTING.md) code
 
 ---
 
