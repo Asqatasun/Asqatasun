@@ -48,7 +48,7 @@ CREATE PROCEDURE `contract_create`(
         -- Contract
         INSERT INTO TGSI_CONTRACT (Label, Begin_Date, End_Date, USER_Id_User)
         VALUES (label, date(now()),
-                date_add(date(now()), INTERVAL 1
+                date_add(date(now()), INTERVAL 3
                          YEAR), idUser);
 
         SELECT LAST_INSERT_ID()
