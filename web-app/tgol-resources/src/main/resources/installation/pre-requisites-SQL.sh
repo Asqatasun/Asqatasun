@@ -78,15 +78,15 @@ apt-get -y --no-install-recommends install \
 
 cat >${MYSQL_CONF_DIR}/${MYSQL_CONF_FILE_FOR_ASQATASUN} <<EOF
 [client]
-default-character-set=utf8
+default-character-set=utf8mb4
 
 [mysql]
-default-character-set=utf8
+default-character-set=utf8mb4
 
 [mysqld]
-collation-server = utf8_general_ci
-init-connect='SET NAMES utf8'
-character-set-server = utf8
+collation-server = utf8mb4_general_ci
+init-connect='SET NAMES utf8mb4'
+character-set-server = utf8mb4
 max_allowed_packet = 64M
 innodb_file_per_table = 1
 EOF
@@ -99,7 +99,7 @@ mysql \
     -u root \
     --password="${MYSQL_ROOT_PASSWD}" \
     --execute="GRANT USAGE ON * . * TO '${DATABASE_USER}'@'${DATABASE_HOST}' IDENTIFIED BY '${DATABASE_PASSWD}'; \
-        CREATE DATABASE IF NOT EXISTS \`${DATABASE_DBNAME}\` CHARACTER SET utf8; \
+        CREATE DATABASE IF NOT EXISTS \`${DATABASE_DBNAME}\` CHARACTER SET utf8mb4; \
         GRANT ALL PRIVILEGES ON \`${DATABASE_DBNAME}\` . * TO '${DATABASE_USER}'@'${DATABASE_HOST}'; \
         FLUSH PRIVILEGES;"
 
