@@ -82,7 +82,7 @@ END |
 -- Clean up audit from user email
 -- -----------------------------------------------------------------
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `clean_up_audit_from_user_email`(
-IN userEmail VARCHAR(255))
+IN userEmail VARCHAR(191))
 BEGIN
 
     DECLARE done INT DEFAULT 0;

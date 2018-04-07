@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_ACT_AUDIT` (
     ON UPDATE NO ACTION
 )
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_general_ci;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_general_ci;
 
 drop procedure if exists populate_tgsi_act_audit;
 delimiter |
