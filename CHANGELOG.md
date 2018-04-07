@@ -28,6 +28,7 @@ Asqatasun 4.1.0, 2018-0x-xx
 
 ### Upgrade-o-meter
 - [#154 - Build - Maven 3.1 is required (needed for org.owasp:dependency-check-maven)](https://github.com/Asqatasun/Asqatasun/issues/154)
+- [#213 - SQL procedure / CONTRACT_create requires 2 added parameters (timeSpan, timeSpanUnit)](https://github.com/Asqatasun/Asqatasun/issues/213)
 
 ### Features
 - [#172 - i18n: Add german translation](https://github.com/Asqatasun/Asqatasun/issues/172) 
@@ -39,8 +40,8 @@ None
 - [#221 - Upgraded mysql-connector-java (5.1.46 instead of 5.1.15)](https://github.com/Asqatasun/Asqatasun/issues/221)
 - [#230 - Upgraded maven-jar-plugin (3.0.2 instead of 2.5)](https://github.com/Asqatasun/Asqatasun/issues/230)
 - [#229 - Upgraded maven-war-plugin (3.2.0 instead of 2.4)](https://github.com/Asqatasun/Asqatasun/issues/229)
-- [#219 - Upgraded maven-surefire-plugin (2.21.0 instead of 2.17](https://github.com/Asqatasun/Asqatasun/issues/219)
-- [#199 - Upgraded maven-compiler-plugin (3.7.0 instead of 3.1](https://github.com/Asqatasun/Asqatasun/issues/199)
+- [#219 - Upgraded maven-surefire-plugin (2.21.0 instead of 2.17)](https://github.com/Asqatasun/Asqatasun/issues/219)
+- [#199 - Upgraded maven-compiler-plugin (3.7.0 instead of 3.1)](https://github.com/Asqatasun/Asqatasun/issues/199)
 
 ### Bugs
 - [#128 - Fixed Rgaa 3.0, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#128)
