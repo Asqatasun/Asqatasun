@@ -3,9 +3,13 @@
 -- -----------------------------------------------------------------
 
 -- Example of call:
---  call contract_create($UserId, \"$SiteLabel\", \"$URL\", $referential, $audit-page, $audit-site, $audit-file, $audit-scenario, $audit-manual, $maxDoc);
---  call contract_create(1, "Wikipedia RGAA3", "https://en.wikipedia.org/", "RGAA3", 1, 1, 1, 1, 1, 100);
---  call contract_create(1, "Wikipedia SEO", "https://en.wikipedia.org/", "SEO", 0, 1, 0, 0, 0, 1000);
+--  call contract_create($UserId, \"$SiteLabel\", \"$URL\", $referential, $audit-page, $audit-site, $audit-file, $audit-scenario, $audit-manual, $maxDoc, $timeSpan, $timeSpanUnit);
+--  call contract_create(1, "Wikipedia RGAA3", "https://en.wikipedia.org/", "RGAA3", 1, 1, 1, 1, 1, 100,  NULL, NULL);
+--  call contract_create(1, "Wikipedia SEO",   "https://en.wikipedia.org/", "SEO",   0, 1, 0, 0, 0, 1000, NULL, NULL);
+--  call contract_create(1, "Wikipedia SEO",   "https://en.wikipedia.org/", "SEO",   0, 1, 0, 0, 0, 1000, 1,   'YEAR');
+--  call contract_create(1, "Wikipedia SEO",   "https://en.wikipedia.org/", "SEO",   0, 1, 0, 0, 0, 1000, 2,   'MONTH');
+--  call contract_create(1, "Wikipedia SEO",   "https://en.wikipedia.org/", "SEO",   0, 1, 0, 0, 0, 1000, 7,   'DAY');
+
 
 DROP PROCEDURE IF EXISTS contract_create;
 
@@ -20,9 +24,16 @@ CREATE PROCEDURE `contract_create`(
     IN audit_file     BOOLEAN,
     IN audit_scenario BOOLEAN,
     IN audit_manual   BOOLEAN,
-    IN maxDoc         VARCHAR(5)
+    IN maxDoc         VARCHAR(5),
+    IN timeSpan       INT,
+    IN timeSpanUnit   VARCHAR(5)
 )
+
     BEGIN
+
+        -- CONSTANTS default values
+        DECLARE default_timeSpan     INT        DEFAULT  3;
+        DECLARE default_timeSpanUnit VARCHAR(5) DEFAULT 'YEAR';
 
         -- CONSTANTS hard-coded values from table TGSI_REFERENTIAL
         DECLARE referential_id_RGAA3 INT DEFAULT 2;
@@ -41,16 +52,39 @@ CREATE PROCEDURE `contract_create`(
         DECLARE c_OPTION_Id_Option INT DEFAULT 3;
 
         -- Variables actually used
-        DECLARE v_Id_Option_Element BIGINT(20);
+        DECLARE v_Id_Option_Element  BIGINT(20);
         DECLARE v_Id_Option_Element2 BIGINT(20);
-        DECLARE contractId BIGINT(20);
+        DECLARE contractId           BIGINT(20);
+        DECLARE beginDate            DATE;
+        DECLARE endDate              DATE;
+
+        -- Duration contract unit : YEAR, MONTH or DAY
+        IF timeSpanUnit != 'YEAR' AND timeSpanUnit != 'MONTH' AND timeSpanUnit != 'DAY'
+        THEN
+            SET timeSpan     = NULL ;
+            SET timeSpanUnit = default_timeSpanUnit ;
+        END IF;
+
+        -- Duration contract
+        IF timeSpan IS NULL OR timeSpan < 1
+        THEN
+            SET timeSpan     = default_timeSpan ;
+            SET timeSpanUnit = default_timeSpanUnit ;
+        END IF;
+
+        -- Begin and End dates of contract
+        SET beginDate = date(now());
+        IF     timeSpanUnit = 'YEAR'    THEN
+            SET endDate = date_add(date(now()), INTERVAL timeSpan YEAR);
+        ELSEIF timeSpanUnit = 'MONTH'   THEN
+            SET endDate = date_add(date(now()), INTERVAL timeSpan MONTH);
+        ELSEIF timeSpanUnit = 'DAY'     THEN
+            SET endDate = date_add(date(now()), INTERVAL timeSpan DAY);
+        END IF;
 
         -- Contract
         INSERT INTO TGSI_CONTRACT (Label, Begin_Date, End_Date, USER_Id_User)
-        VALUES (label, date(now()),
-                date_add(date(now()), INTERVAL 3
-                         YEAR), idUser);
-
+                           VALUES (label, beginDate,  endDate,  idUser);
         SELECT LAST_INSERT_ID()
         INTO contractId;
 

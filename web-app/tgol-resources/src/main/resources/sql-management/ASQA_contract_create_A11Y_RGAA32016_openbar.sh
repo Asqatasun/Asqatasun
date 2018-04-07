@@ -66,6 +66,11 @@ declare AUDIT_SCENARIO=1
 declare AUDIT_MANUAL=1
 declare MAX_PAGES=NULL
 
+# Contract duration
+declare TIME_SPAN=5
+declare TIME_SPAN_UNIT="YEAR"
+        # Allowed values : DAY, MONTH and YEAR
+
 while true; do
   case "$1" in
     -h | --help )       HELP=true; shift ;;
@@ -110,5 +115,7 @@ mysql --user="$DB_USER" \
         $AUDIT_FILE, \
         $AUDIT_SCENARIO, \
         $AUDIT_MANUAL, \
-        $MAX_PAGES) \
+        $MAX_PAGES, \
+        $TIME_SPAN, \
+        \"$TIME_SPAN_UNIT\" ) \
         ;"
