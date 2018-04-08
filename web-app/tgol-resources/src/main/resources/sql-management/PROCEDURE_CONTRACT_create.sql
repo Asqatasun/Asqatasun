@@ -16,7 +16,7 @@ DROP PROCEDURE IF EXISTS contract_create;
 DELIMITER |
 CREATE PROCEDURE `contract_create`(
     IN idUser         INT,
-    IN label          VARCHAR(255),
+    IN label          VARCHAR(191),
     IN url            VARCHAR(1024),
     IN referential    VARCHAR(10),
     IN audit_page     BOOLEAN,
