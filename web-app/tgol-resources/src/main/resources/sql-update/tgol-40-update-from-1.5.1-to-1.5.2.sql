@@ -9,14 +9,14 @@ ALTER TABLE TGSI_ACT_WEB_RESOURCE ADD UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`ACT_Id_
 CREATE TABLE IF NOT EXISTS `TGSI_FUNCTIONALITY` (
   `Id_Functionality` bigint(20) NOT NULL AUTO_INCREMENT ,
   `Code` VARCHAR(45) NOT NULL ,
-  `Label` VARCHAR(191) NULL ,
+  `Label` VARCHAR(255) NULL ,
   `Description` VARCHAR(1000) NULL ,
   PRIMARY KEY (`Id_Functionality`) ,
   UNIQUE INDEX `UNIQUE_INDEX_TGSI_FUNCTIONALITY_Code` (`Code` ASC) 
 )
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_REFERENCE`
@@ -24,14 +24,14 @@ COLLATE = utf8mb4_general_ci;
 CREATE TABLE IF NOT EXISTS `TGSI_REFERENTIAL` (
   `Id_Referential` bigint(20) NOT NULL AUTO_INCREMENT,
   `Code` varchar(45) NOT NULL,
-  `Label` varchar(191) DEFAULT NULL,
+  `Label` varchar(255) DEFAULT NULL,
   `Description` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`Id_Referential`),
   UNIQUE INDEX `UNIQUE_INDEX_TGSI_REFERENTIAL_Code` (`Code` ASC)
 ) 
 ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARSET=utf8 
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_SCENARIO`
@@ -39,9 +39,9 @@ COLLATE = utf8mb4_general_ci;
 CREATE TABLE IF NOT EXISTS `TGSI_SCENARIO` (
   `Id_Scenario` bigint(20) NOT NULL AUTO_INCREMENT,
   `Date_Of_Creation` DATETIME NOT NULL ,
-  `Label` varchar(191) NOT NULL,
+  `Label` varchar(255) NOT NULL,
   `Content` mediumtext NOT NULL,
-  `Description` varchar(191) DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
   `CONTRACT_Id_Contract` bigint(20) NOT NULL, 
   PRIMARY KEY (`Id_Scenario`), 
   INDEX `INDEX_TGSI_SCENARIO_CONTRACT_Id_Contract` (`CONTRACT_Id_Contract` ASC),
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_SCENARIO` (
     ON UPDATE NO ACTION
 ) 
 ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARSET=utf8 
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_OPTION_FAMILY`
@@ -61,13 +61,13 @@ COLLATE = utf8mb4_general_ci;
 CREATE  TABLE IF NOT EXISTS `TGSI_OPTION_FAMILY` (
   `Id_Option_Family` bigint(20) NOT NULL AUTO_INCREMENT ,
   `Code` VARCHAR(45) NOT NULL ,
-  `Label` VARCHAR(191) NULL ,
+  `Label` VARCHAR(255) NULL ,
   `Description` VARCHAR(2048) NULL,
   PRIMARY KEY (`Id_Option_Family`) ,
   UNIQUE INDEX `UNIQUE_INDEX_TGSI_OPTION_FAMILY_Code` (`Code` ASC))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_OPTION`
@@ -75,7 +75,7 @@ COLLATE = utf8mb4_general_ci;
 CREATE  TABLE IF NOT EXISTS `TGSI_OPTION` (
   `Id_Option` bigint(20) NOT NULL AUTO_INCREMENT ,
   `Code` VARCHAR(45) NOT NULL ,
-  `Label` VARCHAR(191) NULL ,
+  `Label` VARCHAR(255) NULL ,
   `Description` VARCHAR(2048) NULL ,
   `Is_Restriction` bit(1) DEFAULT b'1',
   `OPTION_FAMILY_Id_Option_Family` bigint(20) NOT NULL ,
@@ -87,8 +87,8 @@ CREATE  TABLE IF NOT EXISTS `TGSI_OPTION` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_OPTION_ELEMENT`
@@ -96,7 +96,7 @@ COLLATE = utf8mb4_general_ci;
 CREATE TABLE IF NOT EXISTS `TGSI_OPTION_ELEMENT` (
   `Id_Option_Element` bigint(20) NOT NULL AUTO_INCREMENT ,
   `OPTION_Id_Option` bigint(20) NOT NULL ,
-  `Value` VARCHAR(191) NULL ,
+  `Value` VARCHAR(255) NULL ,
   PRIMARY KEY (`Id_Option_Element`) ,
   UNIQUE INDEX `INDEX_UNIQUE_PAIR` (`OPTION_Id_Option`, `Value`),
   CONSTRAINT `FK_TGSI_OPTION_ELEMENT_TGSI_OPTION`
@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_OPTION_ELEMENT` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 INSERT IGNORE INTO `TGSI_FUNCTIONALITY` (`Id_Functionality`, `Code`, `Label`, `Description`) VALUES
 (1, 'PAGES', 'Audit Pages (Up to 10)', ''),
@@ -166,8 +166,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_OPTION_ELEMENT` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_CONTRACT_FUNCTIONALITY`
@@ -190,8 +190,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_FUNCTIONALITY` (
     ON UPDATE NO ACTION
 )
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_CONTRACT_REFERENTIAL`
@@ -214,8 +214,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_REFERENTIAL` (
     ON UPDATE NO ACTION
 ) 
 ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT CHARSET=utf8 
+COLLATE = utf8_general_ci;
 
 -- -----------------------------------------------------------------
 -- Copy content of TGSI_CONTRACT_RESTRICTION TO TGSI_CONTRACT_OPTION
@@ -308,7 +308,7 @@ BEGIN
                 DECLARE nb_Failed int(11);
                 DECLARE nb_Nmi int(11);
                 DECLARE nb_Na int(11);
-                DECLARE criterion_result varchar(191);
+                DECLARE criterion_result varchar(255);
 
                 SELECT COUNT(pr.Id_ProcessResult) INTO nb_Passed FROM PROCESS_RESULT as pr
                     LEFT JOIN TEST as t on (t.Id_Test=pr.Id_Test)
