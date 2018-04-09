@@ -57,6 +57,11 @@ declare DB_NAME
 declare DB_HOST
 declare MAX_PAGES=NULL
 
+# Contract duration
+declare TIME_SPAN=5
+declare TIME_SPAN_UNIT="YEAR"
+        # Allowed values : DAY, MONTH and YEAR
+
 while true; do
   case "$1" in
     -h | --help )       HELP=true; shift ;;
@@ -92,4 +97,17 @@ mysql --user="$DB_USER" \
     --password="$DB_PASSWD" \
     --database="$DB_NAME" \
     --host="$DB_HOST" \
-    -e "call contract_create($USER_ID, \"$CONTRACT_NAME\", \"$WEBSITE_URL\", \"SEO\", 0, 1, 0, 0, 0, $MAX_PAGES);"
+    -e "call contract_create(
+            $USER_ID,               \
+            \"$CONTRACT_NAME\",     \
+            \"$WEBSITE_URL\",       \
+            \"SEO\",                \
+            0,                      \
+            1,                      \
+            0,                      \
+            0,                      \
+            0,                      \
+            $MAX_PAGES,             \
+            $TIME_SPAN,             \
+            \"$TIME_SPAN_UNIT\"     \
+        );"

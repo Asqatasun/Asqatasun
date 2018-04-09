@@ -41,7 +41,7 @@ With:
 Create a contract for a given user.
 
 ```mysql
-call contract_create(idUser, label, url, referential, audit_page, audit_site, audit_file, audit_scenario, audit_manual, maxDoc);
+call contract_create(idUser, label, url, referential, audit_page, audit_site, audit_file, audit_scenario, audit_manual, maxDoc, timeSpan, timeSpanUnit);
 ```
 
 With:
@@ -56,6 +56,8 @@ With:
 * `audit_scenario`: BOOLEAN, whether to authorize audit of scenarios
 * `audit_manual`: BOOLEAN, whether to authorize a manual audit to be ran (after the automated audit is complete). Works only for page-audit.
 * `maxDoc`: for site audit, maximum number of pages the crawler has to browse (say 1'000). Warning: 10'000 is a huge value. Important note: for contract without site-audit permitted, `maxDoc` **must** have a `NULL` value.
+* `timeSpan`: duration contract. You can use `NULL` value for default duration (`3`).
+* `timeSpanUnit`: duration contract unit : `YEAR`, `MONTH` or `DAY`. You can use `NULL` value for default unit (`YEAR`).
 
 ### Mandatory fields
 
@@ -74,17 +76,20 @@ We want to create a contract:
 * allowing only site-audit (none of the other kinds of audit),
 * in this case manual-audit is not relevant,
 * and we limit the crawler action to 1000 pages
+* and we limit the contract duration to the default duration (3 years)
 
 ```mysql
-call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "RGAA3", 0, 1, 0, 0, 0, "1000");
+call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "RGAA3", 0, 1, 0, 0, 0, "1000", NULL, NULL);
 ```
+Note the `NULL` value for `timeSpan` and `timeSpanUnit` parameters.
+
 
 ### Example of contract: Site-wide audit on Wikipedia for SEO
 
 We want to create the same contract but only for SEO. Easy, just change the referential (don't forget, this is the technical codename of the referential that must be passed as argument)
 
 ```mysql
-call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "SEO", 0, 1, 0, 0, 0, "1000");
+call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "SEO", 0, 1, 0, 0, 0, "1000", NULL, NULL);
 ```
 
 ### Example of contract: Site-wide audit + page-audit + manual-audit on Wikipedia for accessibility
@@ -92,7 +97,7 @@ call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "SEO", 0,
 Like the previous one, but we add the page-audit feature, and enable the manual-audit option.
 
 ```mysql
-call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "SEO", 1, 1, 0, 0, 1, "1000");
+call contract_create(1, "Wikipedia RGAA", "https://en.wikipedia.org/", "SEO", 1, 1, 0, 0, 1, "1000", NULL, NULL);
 ```
 
 Note: the manual-audit option concerns only page-audit.
@@ -102,7 +107,7 @@ Note: the manual-audit option concerns only page-audit.
 This time, we do not provide any `url` parameter. We use to call this kind of contract "openbar".
 
 ```mysql
-call contract_create(1, "Openbar RGAA", "", "RGAA3", 1, 0, 0, 0, 0, "NULL");
+call contract_create(1, "Openbar RGAA", "", "RGAA3", 1, 0, 0, 0, 0, NULL, NULL, NULL);
 ```
 
 Note the `NULL` value for `maxDoc` parameter.
@@ -112,5 +117,15 @@ Note the `NULL` value for `maxDoc` parameter.
 Taking the previous example, we just add features file-audit and scenario-audit, and enable the manual-audit option.
 
 ```mysql
-call contract_create(1, "Openbar RGAA", "", "RGAA3", 1, 0, 1, 1, 1, "NULL");
+call contract_create(1, "Openbar RGAA", "", "RGAA3", 1, 0, 1, 1, 1, NULL, NULL, NULL);
+```
+
+### Examples of contract: 10 years, 2 months or 7 days
+
+Taking the previous example, we just provide the `timeSpan` and `timeSpanUnit` parameters.
+
+```mysql
+call contract_create(1, "Openbar RGAA - 10 YEARS", "", "RGAA3", 1, 0, 1, 1, 1, NULL, 10, "YEAR");
+call contract_create(1, "Openbar RGAA - 2 MONTHS", "", "RGAA3", 1, 0, 1, 1, 1, NULL,  2, "MONTH");
+call contract_create(1, "Openbar RGAA - 7 DAYS",   "", "RGAA3", 1, 0, 1, 1, 1, NULL,  7, "DAY");
 ```

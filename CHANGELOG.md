@@ -4,12 +4,21 @@ Asqatasun 4.1.0, 2018-0x-xx
 ---------------------------
 
 - thanks:
-  - @selfthinker - Feature request #202
-  - @mgifford    - User feedback: #205, #206 and #208
+  - @Barogthor       for [PR #228](https://github.com/Asqatasun/Asqatasun/issues/228)
+  - @Grey360         for [PR #227](https://github.com/Asqatasun/Asqatasun/issues/227)
+  - @Tyraelium       for [PR #226](https://github.com/Asqatasun/Asqatasun/issues/226)
+  - @Mickaeldicurzio for [PR #224](https://github.com/Asqatasun/Asqatasun/issues/224)
+  - @allrib          for [PR #223](https://github.com/Asqatasun/Asqatasun/issues/223)
+                     and [PR #231](https://github.com/Asqatasun/Asqatasun/issues/231)
+  - @selfthinker - Feature request [#202](https://github.com/Asqatasun/Asqatasun/issues/202)
+  - @mgifford    - User feedback: [#205](https://github.com/Asqatasun/Asqatasun/issues/205),
+                                  [#206](https://github.com/Asqatasun/Asqatasun/issues/206)
+                              and [#208](https://github.com/Asqatasun/Asqatasun/issues/208)
 
 - WIP:
-  - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163) 
-  - [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137) 
+  - [#123 - Incorrect string value: '\xF0\x9F\x99\x82" ...' for column 'Source'](https://github.com/Asqatasun/Asqatasun/issues/123)
+  - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163)
+  - [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137)
   - refactoring install.sh and pre-requisites.sh
     - added install-SQL.sh and pre-requisites-SQL.sh
     - @@@TODO test docker images
@@ -21,6 +30,7 @@ Asqatasun 4.1.0, 2018-0x-xx
 
 ### Upgrade-o-meter
 - [#154 - Build - Maven 3.1 is required (needed for org.owasp:dependency-check-maven)](https://github.com/Asqatasun/Asqatasun/issues/154)
+- [#213 - SQL procedure / CONTRACT_create requires 2 added parameters (timeSpan, timeSpanUnit)](https://github.com/Asqatasun/Asqatasun/issues/213)
 
 ### Features
 - [#172 - i18n: Add german translation](https://github.com/Asqatasun/Asqatasun/issues/172) 
@@ -29,7 +39,15 @@ Asqatasun 4.1.0, 2018-0x-xx
 None
 
 ### Outdated dependencies
-- [#199 - Upgraded maven plugins: compiler, surefire](https://github.com/Asqatasun/Asqatasun/issues/199)
+- [#234 - Upgraded itextpdf (5.5.13 instead of 5.5.8)](https://github.com/Asqatasun/Asqatasun/issues/234)
+- [#235 - Upgraded jhighlight (1.0.3 instead of 1.0)](https://github.com/Asqatasun/Asqatasun/issues/235)
+- [#221 - Upgraded mysql-connector-java (5.1.46 instead of 5.1.15)](https://github.com/Asqatasun/Asqatasun/issues/221)
+- [#233 - Upgraded yuicompressor-maven-plugin (1.5.1 instead of 1.3.0)](https://github.com/Asqatasun/Asqatasun/issues/233)
+- [#232 - Upgraded maven-clean-plugin (3.0.0 instead of 2.5)](https://github.com/Asqatasun/Asqatasun/issues/232)
+- [#230 - Upgraded maven-jar-plugin (3.0.2 instead of 2.5)](https://github.com/Asqatasun/Asqatasun/issues/230)
+- [#229 - Upgraded maven-war-plugin (3.2.0 instead of 2.4)](https://github.com/Asqatasun/Asqatasun/issues/229)
+- [#219 - Upgraded maven-surefire-plugin (2.21.0 instead of 2.17)](https://github.com/Asqatasun/Asqatasun/issues/219)
+- [#199 - Upgraded maven-compiler-plugin (3.7.0 instead of 3.1)](https://github.com/Asqatasun/Asqatasun/issues/199)
 
 ### Bugs
 - [#128 - Fixed Rgaa 3.0, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#128)
@@ -53,7 +71,10 @@ None
 
 ### Improvement
 - [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
+- [#211 - Webapp UX - Admin user can quickly update his expired contract](https://github.com/Asqatasun/Asqatasun/issues/211)
 - [#197 - Webapp - Allowed the HTTP header "Cache-Control: immutable" for static files (css, js, png,...)](https://github.com/Asqatasun/Asqatasun/issues/197)
+- [#215 - SQL procedure / CONTRACT_create: increase the default contract duration (3 years instead of 1 years)](https://github.com/Asqatasun/Asqatasun/issues/215)
+- [#213 - SQL procedure / CONTRACT_create: add option to choose the contract duration in year, month or day](https://github.com/Asqatasun/Asqatasun/issues/213)
 - [#139 - Install.sh - Added new SQL procedures: list_running_acts + Last_audits](https://github.com/Asqatasun/Asqatasun/issues/139)
 - [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
 - [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Asqatasun/issues/45)
@@ -74,6 +95,8 @@ None
 - [#127 - Unit tests : replaced tgqa.org domain name by asqatasun.ovh](https://github.com/Asqatasun/Asqatasun/issues/127)
 
 ### Documentation
+- [#227 - Minor orthographic fixes to CONTRIBUTING.md](https://github.com/Asqatasun/Asqatasun/issues/227)
+- [#222 - Have CONTRIBUTING.md more friendly and explicit for beginners](https://github.com/Asqatasun/Asqatasun/issues/222)
 - [#206 - Improved user documentation](https://github.com/Asqatasun/Asqatasun/issues/206)
 - [#166 - Updated "Contributor > Build a Docker image"](https://github.com/Asqatasun/Asqatasun/issues/166)
 - [#147 - Added documentation on how to run a krashtest campaign](https://github.com/Asqatasun/Asqatasun/issues/147)
