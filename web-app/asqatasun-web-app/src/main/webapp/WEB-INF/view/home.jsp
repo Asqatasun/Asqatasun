@@ -52,8 +52,11 @@
 <c:set var="imgSrcAddContract">
     <c:url value="/public/${asqatasunVersion}/images/plus_2.png"/>
 </c:set>
-<c:set var="imgSrcEditContract">
+<c:set var="imgSrcManageContracts">
     <c:url value="/public/${asqatasunVersion}/images/folder_open.png"/>
+</c:set>
+<c:set var="imgSrcEditContract">
+    <c:url value="/public/${asqatasunVersion}/images/edit.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">
@@ -200,9 +203,26 @@
                         </td>
                             </c:when>
                             <c:otherwise>
+                   <%-- Expired contract --%>
                         <td class="project-expired">
                             <h2 class="project-name">${contract.label}</h2>
-                            <div class="project-expiration"><fmt:message key="home.projectHasExpired"/></div>
+                            <div class="project-expiration">
+                                <fmt:message key="home.projectHasExpired"/>
+                                <security:authorize access="hasRole('ROLE_USER')">
+                                    <br/>  <fmt:message key="home.projectHasExpired.user"/>
+                                </security:authorize>
+
+                           <%-- Admin user can quickly update the expired contract --%>
+                                <security:authorize access="hasRole('ROLE_ADMIN')">
+                                    &nbsp;
+                                    <a class="btn btn-primary"
+                                       title="<fmt:message key="home.projectHasExpired.admin.title"><fmt:param>${contract.label}</fmt:param></fmt:message>"
+                                       href="<c:url value="/admin/manage-contracts/edit-contract.html?cr=${contract.id}"/>"">
+                                        <img src="${imgSrcEditContract}" alt="">
+                                        <fmt:message key="home.projectHasExpired.admin" />
+                                    </a>
+                                </security:authorize>
+                            </div>
                             <div class="project-url"><a rel="noreferrer noopener" href="${contract.url}">${contract.url}</a></div>
                         </td>
                             </c:otherwise>
@@ -234,7 +254,7 @@
                             <security:authentication property="principal.user.id" />
                         </c:set>
                         <a class="btn btn-primary" href="<c:url value="/admin/manage-contracts.html?user=${currentUserId}"/>">
-                            <img src="${imgSrcEditContract}" alt="">
+                            <img src="${imgSrcManageContracts}" alt="">
                             <fmt:message key="admin.manageContracts" />
                         </a>
                         &nbsp;
