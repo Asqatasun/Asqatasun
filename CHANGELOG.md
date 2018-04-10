@@ -73,7 +73,7 @@ None
 ### Improvement
 - [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
 - [#211 - Webapp UX - Admin user can quickly update his expired contract](https://github.com/Asqatasun/Asqatasun/issues/211)
-- [#216 - Webapp UX - i18n: standardize "project" and "contract" appelations (en/fr)](https://github.com/Asqatasun/Asqatasun/issues/216)
+- [#216 - Webapp UX - i18n: standardize "project" and "contract" appelations (en/fr/es)](https://github.com/Asqatasun/Asqatasun/issues/216)
 - [#197 - Webapp - Allowed the HTTP header "Cache-Control: immutable" for static files (css, js, png,...)](https://github.com/Asqatasun/Asqatasun/issues/197)
 - [#215 - SQL procedure / CONTRACT_create: increase the default contract duration (3 years instead of 1 years)](https://github.com/Asqatasun/Asqatasun/issues/215)
 - [#213 - SQL procedure / CONTRACT_create: add option to choose the contract duration in year, month or day](https://github.com/Asqatasun/Asqatasun/issues/213)
