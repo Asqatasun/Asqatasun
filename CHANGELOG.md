@@ -8,6 +8,7 @@ Asqatasun 4.1.0, 2018-0x-xx
   - @Grey360         for [PR #227](https://github.com/Asqatasun/Asqatasun/issues/227)
   - @Tyraelium       for [PR #226](https://github.com/Asqatasun/Asqatasun/issues/226)
   - @Mickaeldicurzio for [PR #224](https://github.com/Asqatasun/Asqatasun/issues/224)
+  - @Haradwaith      for [PR #236](https://github.com/Asqatasun/Asqatasun/issues/236)
   - @allrib          for [PR #223](https://github.com/Asqatasun/Asqatasun/issues/223)
                      and [PR #231](https://github.com/Asqatasun/Asqatasun/issues/231)
   - @selfthinker - Feature request [#202](https://github.com/Asqatasun/Asqatasun/issues/202)
@@ -72,6 +73,7 @@ None
 ### Improvement
 - [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
 - [#211 - Webapp UX - Admin user can quickly update his expired contract](https://github.com/Asqatasun/Asqatasun/issues/211)
+- [#216 - Webapp UX - i18n: standardize "project" and "contract" appelations (en/fr)](https://github.com/Asqatasun/Asqatasun/issues/216)
 - [#197 - Webapp - Allowed the HTTP header "Cache-Control: immutable" for static files (css, js, png,...)](https://github.com/Asqatasun/Asqatasun/issues/197)
 - [#215 - SQL procedure / CONTRACT_create: increase the default contract duration (3 years instead of 1 years)](https://github.com/Asqatasun/Asqatasun/issues/215)
 - [#213 - SQL procedure / CONTRACT_create: add option to choose the contract duration in year, month or day](https://github.com/Asqatasun/Asqatasun/issues/213)
