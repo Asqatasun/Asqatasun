@@ -12,6 +12,7 @@ Asqatasun 4.1.0, 2018-0x-xx
   - @allrib          for [PR #223](https://github.com/Asqatasun/Asqatasun/issues/223)
                      and [PR #231](https://github.com/Asqatasun/Asqatasun/issues/231)
   - @selfthinker - Feature request [#202](https://github.com/Asqatasun/Asqatasun/issues/202)
+  - @jeremychauvet - Bug report: [#239](https://github.com/Asqatasun/Asqatasun/issues/239)
   - @mgifford    - User feedback: [#205](https://github.com/Asqatasun/Asqatasun/issues/205),
                                   [#206](https://github.com/Asqatasun/Asqatasun/issues/206)
                               and [#208](https://github.com/Asqatasun/Asqatasun/issues/208)
@@ -40,6 +41,7 @@ Asqatasun 4.1.0, 2018-0x-xx
 None
 
 ### Outdated dependencies
+- [#239 - PHPLoc repository no longer responds](https://github.com/Asqatasun/Asqatasun/issues/239)
 - [#234 - Upgraded itextpdf (5.5.13 instead of 5.5.8)](https://github.com/Asqatasun/Asqatasun/issues/234)
 - [#235 - Upgraded jhighlight (1.0.3 instead of 1.0)](https://github.com/Asqatasun/Asqatasun/issues/235)
 - [#221 - Upgraded mysql-connector-java (5.1.46 instead of 5.1.15)](https://github.com/Asqatasun/Asqatasun/issues/221)

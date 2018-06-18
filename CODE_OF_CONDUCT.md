@@ -68,14 +68,15 @@ members of the project's leadership.
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
-available at [http://contributor-covenant.org/version/1/4][version]
+available at [https://contributor-covenant.org/version/1/4][version]
 
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
+[homepage]: https://contributor-covenant.org
+[version]: https://contributor-covenant.org/version/1/4/
 
 ## Translations
 
-* [Español](http://contributor-covenant.org/version/1/4/es/)
-* [Français](http://contributor-covenant.org/version/1/4/fr/)
+* [Español](https://contributor-covenant.org/version/1/4/es/)
+* [Français](https://contributor-covenant.org/version/1/4/fr/)
 
-[All available translations](http://contributor-covenant.org/i18n/)
+[All available translations](https://contributor-covenant.org/i18n/)
+
