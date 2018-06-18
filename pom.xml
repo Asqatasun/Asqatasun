@@ -137,16 +137,6 @@
             </snapshots>
         </repository>
         <repository>
-            <id>phlocRepos</id>
-            <url>http://repo.phloc.com/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>heritrixRepos</id>
             <url>http://builds.archive.org:8080/maven2/</url>
             <releases>
@@ -1545,12 +1535,12 @@
             <dependency>
                 <groupId>com.phloc</groupId>
                 <artifactId>phloc-css</artifactId>
-                <version>3.6.0</version>
+                <version>3.8.0</version>
             </dependency>
             <dependency>
                 <groupId>com.phloc</groupId>
                 <artifactId>phloc-commons</artifactId>
-                <version>4.0.11</version>
+                <version>4.4.13</version>
             </dependency>
             <dependency>
                 <groupId>org.json</groupId>
