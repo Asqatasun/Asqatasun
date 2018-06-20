@@ -83,6 +83,7 @@ None
 - [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
 - [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Asqatasun/issues/45)
 - [#152 - Dockerfile: add HEALTHCHECK instruction](https://github.com/Asqatasun/Asqatasun/issues/152)
+- [#241 - Added some information to the MANIFEST.MF files : commit, buid timestamp](https://github.com/Asqatasun/Asqatasun/issues/241)
 - Added some maven report plugins:
     - [#185 - Unit tests coverage report (Jacocoo)](https://github.com/Asqatasun/Asqatasun/issues/185)
     - [#155 - OWASP Dependency-Check](https://github.com/Asqatasun/Asqatasun/issues/155)
