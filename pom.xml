@@ -195,6 +195,13 @@
                 <configuration> 
 <!--                    <skipTests>true</skipTests>-->
                     <encoding>UTF-8</encoding>
+
+                <!-- Fixes a bug related to the surefire plugin
+                     that will be solved in the next version of the plugin (after 2.22.1)
+                                   and we can then remove this patch
+                     see:   https://github.com/Asqatasun/Asqatasun/issues/243
+                            https://issues.apache.org/jira/browse/SUREFIRE-1588     -->
+                    <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
             <plugin>
