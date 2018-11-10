@@ -226,7 +226,7 @@
                         </manifest>   -->
                         <manifestEntries>
                             <Project>${project.name}</Project>
-                            <Built-By>${organization.name}</Built-By>
+                            <Built-By>${project.organization.name}</Built-By>
                             <!-- overwritting default value (user name) -->
                         </manifestEntries>
                         <manifestSections>
@@ -243,7 +243,7 @@
                                 <name>Git</name>
                                 <manifestEntries>
                                     <git-branch>${scmBranch}</git-branch>
-                                    <git-commit-url>${commitUrlPrefix}${buildNumber}</git-commit-url>
+                                    <git-url>${commitUrlPrefix}${buildNumber}</git-url>
                                     <git-commit>${buildNumber}</git-commit>
                                 </manifestEntries>
                             </manifestSection>
@@ -274,7 +274,7 @@
                         </manifest>   -->
                         <manifestEntries>
                             <Project>${project.name}</Project>
-                            <Built-By>${organization.name}</Built-By>
+                            <Built-By>${project.organization.name}</Built-By>
                             <!-- overwritting default value (user name) -->
                         </manifestEntries>
                         <manifestSections>
@@ -291,7 +291,7 @@
                                 <name>Git</name>
                                 <manifestEntries>
                                     <git-branch>${scmBranch}</git-branch>
-                                    <git-commit-url>${commitUrlPrefix}${buildNumber}</git-commit-url>
+                                    <git-url>${commitUrlPrefix}${buildNumber}</git-url>
                                     <git-commit>${buildNumber}</git-commit>
                                 </manifestEntries>
                             </manifestSection>
@@ -309,7 +309,10 @@
                 </configuration>
             </plugin>
             <plugin><!-- used by maven-jar-plugin
-                                 maven-war-plugin  -->
+                                 maven-war-plugin
+
+                         https://www.mojohaus.org/build-helper-maven-plugin
+                         https://github.com/mojohaus/build-helper-maven-plugin  -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>${build-helper-maven-plugin.version}</version>
@@ -324,12 +327,16 @@
                             <name>current.date</name>
                             <pattern>yyyy-MM-dd'T'HH:mm:ssZ</pattern>
                             <timeZone>UTC</timeZone>
+                            <locale>en,US</locale>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin><!-- used by maven-jar-plugin
-                                 maven-war-plugin  -->
+                                 maven-war-plugin
+
+                         https://www.mojohaus.org/buildnumber-maven-plugin
+                         https://github.com/mojohaus/buildnumber-maven-plugin  -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
                 <version>${buildnumber-maven-plugin.version}</version>
