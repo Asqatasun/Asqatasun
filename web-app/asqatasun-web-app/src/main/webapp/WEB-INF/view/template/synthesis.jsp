@@ -143,7 +143,16 @@
     <c:set var="scoreId" scope="page" value="audit-score"/>
     <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
     <c:set var="spanClass" scope="page" value="span3"/>
+
+<c:choose>
+    <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
+    <c:set var="scoreClass" scope="page" value="audit-grade"/>
+    <%@include file="../template/grade.jsp" %>
+    </c:when>
+    <c:otherwise>
     <%@include file="../template/score.jsp" %>
+    </c:otherwise>
+</c:choose>
 </div> <!-- class="row" -->
 <c:if test="${hasResultDispatchTitle == 'true'}">
     <div class="row">
