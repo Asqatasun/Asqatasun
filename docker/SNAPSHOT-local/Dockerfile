@@ -18,15 +18,19 @@ FROM asqatasun/asqatasun:pre-requisites_with-empty-DB
 #               |-- asqatasun/asqatasun:pre-requisites_with-empty-DB  
 ####################################################################
 
+RUN apt-get update && apt-get -y install software-properties-common && add-apt-repository --yes ppa:openjdk-r/ppa && apt-get update && \
+    apt-get -y install openjdk-8-jdk && update-java-alternatives -s java-1.8.0-openjdk-amd64
+
 USER root
-ENV  WWWPORT="8080"                                    \
+ENV  JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"    \
+     WWWPORT="8080"                                    \
      DATABASE_DB="asqatasun"                           \
      DATABASE_HOST="localhost"                         \
      DATABASE_USER="asqatasun"                         \
      DATABASE_PASSWD="asqaP4sswd"                      \
      TOMCAT_WEBAPP_DIR="/var/lib/tomcat7/webapps"      \
      TOMCAT_USER="tomcat7"                             \
-     ASQA_URL="http://localhost:8080/asqatasun/"       \
+     ASQA_URL="http://localhost:8080/"       \
      ASQA_ADMIN_EMAIL="me@my-email.org"                \
      ASQA_ADMIN_PASSWD="myAsqaPassword"                \
      ASQA_RELEASE="4.1.0-SNAPSHOT"
@@ -84,6 +88,7 @@ HEALTHCHECK --timeout=3s    \
 CMD  service mysql start                            && \
      sleep   5                                      && \
      service xvfb start                             && \
+     echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/" >> /etc/default/tomcat7 && \
      service tomcat7 start                          ;  \
             ls -l /usr/share/tomcat7/lib/spring3-instrument-tomcat.jar  ;  \
             ls -l /usr/share/java/spring3-instrument-tomcat.jar         ;  \
