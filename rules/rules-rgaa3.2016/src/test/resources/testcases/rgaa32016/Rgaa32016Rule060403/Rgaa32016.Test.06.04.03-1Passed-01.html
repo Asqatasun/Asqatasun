@@ -2,21 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-        <title>Rgaa32016 Test.6.4.3 Passed 03</title>
+        <title>Rgaa32016 Test.6.4.3 Passed 01</title>
     </head>
     <body class="Passed">
         <div>
 
 <!-- START [test-detail] -->
             <div class="test-detail" lang="fr">
-                Pour chaque page Web, chaque <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#liens-identiques">lien identique</a> de <a href="http://references.modernisation.gouv.fr/rgaa-accessibilite/2016/glossaire.html#lien-composite">type composite</a> a-t-il les m&#xEA;mes fonction et destination&nbsp;?
+                Pour chaque page Web, chaque lien identique de type composite a-t-il les m&#xEA;mes fonction et destination&nbsp;?
             </div>
 <!-- END [test-detail] -->
 
 
             <div class="testcase">
-                <a href="my-link.html"> <object data="data.png"> cliquez </object> ici </a> 
-                <a href="my-link.html"> CLIQUEZ <object data="data.png"> ICI </object> </a> 
+                <a href="my-link.html" title="This is a combined link"> <span>CLIQUEZ ICI&quot;</span> </a> 
+                <a href="my-link.html" title="This is a combined link"> <span>cliquez ici&quot;</span> </a> 
             </div>
             <p class="test-explanation">Passed : The page contains only two identical image links without context and with the same target</p> 
         </div>
