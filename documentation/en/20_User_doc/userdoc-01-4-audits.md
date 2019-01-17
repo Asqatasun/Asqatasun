@@ -30,7 +30,7 @@ page and send it as offline file to Asqatasun
 
 <h2 id="audit-comparison">Comparison of audits</h2>
 
- Audit:                             | Page          | Scenario      | Site          | Offline file
+ Audit                              | Page          | Scenario      | Site          | Offline file
 ----------------------------------- | ------------- | --------------| ------------- | -------------
 DOM / Generated HTML support        | YES           | YES           | No            | No
 Deals with CSS                      | YES           | YES           | No            | No
