@@ -29,7 +29,7 @@ $(document).ready(function() {
                 grade='grade-e';
             } else {
                 gradeText='F';
-                grade='grade-F';
+                grade = 'grade-f';
             }
             scoreElement.empty();
             $(this).addClass('page-list-xxx');
