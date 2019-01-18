@@ -2886,22 +2886,22 @@ td.occurences {
 }
 .d3-score-graph .grade-a{
     fill:#a0d261;
-} /* >90% */
+}
 .d3-score-graph .grade-b{
     fill:#bbda58;
-} /* <90% */
+}
 .d3-score-graph .grade-c{
     fill:#f9a535;
-} /* <80% */
+}
 .d3-score-graph .grade-d{
     fill:#f28739;
-} /* <70% */
+}
 .d3-score-graph .grade-e{
     fill:#eb6240;
-} /* <60% */
+}
 .d3-score-graph .grade-f{
     fill:#ed4b63;
-} /* <50% */
+}
 #d3-audit-score {
     margin-top: 12px;
     text-align: right;
@@ -3014,7 +3014,7 @@ td.occurences {
 }
 
 .grade-b {
-    background: rgb(170, 170, 57);
+    background: rgb(155, 153, 52);
     border: solid 6px rgb(128, 128, 21);
 }
 
