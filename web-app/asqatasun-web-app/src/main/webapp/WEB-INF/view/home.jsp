@@ -175,11 +175,19 @@
                             <c:choose>
                                 <c:when test="${contract.lastActInfo.status == 'COMPLETED'}">
                             <c:set var="mark" scope="page" value="${contract.lastActInfo.rawMark}"/>
-                            <c:set var="scoreClass" scope="page" value="one-project-score"/>
                             <c:set var="scoreId" scope="page" value=""/>
                             <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
                             <c:set var="spanClass" scope="page" value=""/>
-                            <%@include file="template/score.jsp" %>
+                                <c:choose>
+                                    <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
+                                        <c:set var="scoreClass" scope="page" value="one-project-grade"/>
+                                        <%@include file="template/grade.jsp" %>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var="scoreClass" scope="page" value="one-project-score"/>
+                                        <%@include file="template/score.jsp" %>
+                                    </c:otherwise>
+                                </c:choose>
                                 </c:when>
                                 <c:otherwise>
                                 <span class="project-fail"><fmt:message key="${contract.lastActInfo.status}"/></span>
@@ -269,21 +277,16 @@
         </div><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
+        <c:if test="${configProperties['displayGradeAsResult'] == 'false'}">
+            <script type="text/javascript" src="${d3JsUrl}"></script>
+            <script type="text/javascript" src="${scoreJsUrl}"></script>
+            <script type="text/javascript" src="${homeScoreJsUrl}"></script>
+        </c:if>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>
         <script type="text/javascript" src="${scoreIEJsUrl}"></script>
         <script type="text/javascript" src="${homeScoreIEJsUrl}"></script>
         <![endif]-->
-        <!--[if gt IE 8]>
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${homeScoreJsUrl}"></script>
-        <![endif]-->
-        <!--[if !IE]><!-->
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${homeScoreJsUrl}"></script>
-        <!--<![endif]-->
     </body>
 </html>
 </compress:html>

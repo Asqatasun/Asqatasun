@@ -2886,22 +2886,22 @@ td.occurences {
 }
 .d3-score-graph .grade-a{
     fill:#a0d261;
-} /* >90% */
+}
 .d3-score-graph .grade-b{
     fill:#bbda58;
-} /* <90% */
+}
 .d3-score-graph .grade-c{
     fill:#f9a535;
-} /* <80% */
+}
 .d3-score-graph .grade-d{
     fill:#f28739;
-} /* <70% */
+}
 .d3-score-graph .grade-e{
     fill:#eb6240;
-} /* <60% */
+}
 .d3-score-graph .grade-f{
     fill:#ed4b63;
-} /* <50% */
+}
 #d3-audit-score {
     margin-top: 12px;
     text-align: right;
@@ -2968,6 +2968,71 @@ td.occurences {
     opacity: 0.7;
     font-family: OpenSansSemibold;
 }*/
+
+/* grades */
+.grade-container {
+    border-radius: 12px;
+    color: #ffffff;
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-right: 4px;
+    text-align: center;
+
+}
+.one-project-grade > .grade-container  {
+    width: 80px;
+    height: 80px;
+    line-height: 1.3;
+    font-size: 65px;
+    padding-right: 0;
+}
+.one-project-grade {
+    margin-top: 0;
+}
+.project-grade > .grade-container, .audit-grade > .grade-container{
+    margin-top: 10px;
+    padding: 0;
+    width: 135px;
+    height: 135px;
+    line-height: 1.25;
+    font-size: 105px;
+}
+.act-score{
+    text-align: center;
+}
+.act-score > .grade-container, .page-list-xxx > .grade-container{
+    border-width: 3px;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin-left: 5px;
+}
+.grade-a {
+    background: rgb(45, 136, 45);
+    border: solid 6px rgb(17, 102, 17);
+}
+
+.grade-b {
+    background: rgb(155, 153, 52);
+    border: solid 6px rgb(128, 128, 21);
+}
+
+.grade-c {
+    background: rgb(170, 112, 57);
+    border: solid 6px rgb(128, 73, 21);
+}
+
+.grade-d, .grade-e {
+    background: rgb(101, 39, 112);
+    border: solid 6px rgb(74, 16, 84);
+}
+
+.grade-f {
+    background: rgb(170, 57, 57);
+    border: solid 6px rgb(128, 21, 21);
+}
+
 /*
  * d3 Graphics : trend chart
  * ------------------------------------------------- 

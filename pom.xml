@@ -87,8 +87,8 @@
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
         <!-- JDK version -->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
         <asqatasunVersion>4.1.0-SNAPSHOT</asqatasunVersion>
@@ -183,8 +183,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -192,8 +192,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
-                <configuration> 
-<!--                    <skipTests>true</skipTests>-->
+                <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>

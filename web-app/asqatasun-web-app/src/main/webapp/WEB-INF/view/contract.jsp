@@ -158,9 +158,18 @@
                         <c:when test="${detailedContractInfo.lastActInfo.status == 'COMPLETED'}">
                             <c:set var="mark" scope="page" value="${detailedContractInfo.lastActInfo.rawMark}"/>
                             <c:set var="scoreId" scope="page" value="project-score"/>
+
                             <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
                             <c:set var="spanClass" scope="page" value="span2"/>
-                            <%@include file="template/score.jsp" %>
+                            <c:choose>
+                                <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
+                                    <c:set var="scoreClass" scope="page" value="project-grade"/>
+                                    <%@include file="template/grade.jsp" %>
+                                </c:when>
+                                <c:otherwise>
+                                    <%@include file="template/score.jsp" %>
+                                </c:otherwise>
+                            </c:choose>
                         </c:when>
                         <c:otherwise>
                             <div class="span2">
@@ -249,7 +258,14 @@
                                                     <c:set var="displayWeightedMark" scope="page" value="false"/>
                                                     <c:set var="hasProgressInfo" scope="page" value="false"/>
                                                     <c:set var="spanClass" scope="page" value=""/>
-                                                    <%@include file="template/score.jsp" %>
+                                                    <c:choose>
+                                                        <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
+                                                            <%@include file="template/grade.jsp" %>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <%@include file="template/score.jsp" %>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div> -- </div>
@@ -306,24 +322,18 @@
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>
         <script type="text/javascript" src="${accessibleTableSorterJsUrl}"></script>
+        <script type="text/javascript" src="${d3JsUrl}"></script>
+        <script type="text/javascript" src="${trendChartJsUrl}"></script>
+        <c:if test="${configProperties['displayGradeAsResult'] == 'false'}">
+            <script type="text/javascript" src="${scoreJsUrl}"></script>
+            <script type="text/javascript" src="${contractScoreJsUrl}"></script>
+        </c:if>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${raphaelJsUrl}"></script>
         <script type="text/javascript" src="${trendChartIEJsUrl}"></script>
         <script type="text/javascript" src="${scoreIEJsUrl}"></script>
         <script type="text/javascript" src="${contractScoreIEJsUrl}"></script>
         <![endif]-->
-        <!--[if gt IE 8]>
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${trendChartJsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${contractScoreJsUrl}"></script>
-        <![endif]-->
-        <!--[if !IE]><!-->
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${trendChartJsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${contractScoreJsUrl}"></script>
-        <!--<![endif]-->
     </body>
 </html>
 </compress:html>

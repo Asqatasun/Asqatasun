@@ -30,6 +30,10 @@
 <c:set var="pageListScoreJsUrl" scope="request">
     <c:url value="/public/${asqatasunVersion}/js/score/score-page-list-f2xx-min.js"/>
 </c:set>
+
+<c:set var="pageListGradeJsUrl" scope="request">
+    <c:url value="/public/${asqatasunVersion}/js/score/grade-page-list-f2xx-min.js"/>
+</c:set>
 <c:set var="pageListScoreIEJsUrl" scope="request">
     <c:url value="/public/${asqatasunVersion}/js/ie/score/score-page-list-f2xx-ie-min.js"/>
 </c:set>
@@ -293,21 +297,21 @@
         </div><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
+        <c:choose>
+            <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
+                <script type="text/javascript" src="${pageListGradeJsUrl}"></script>
+            </c:when>
+            <c:otherwise>
+                <script type="text/javascript" src="${d3JsUrl}"></script>
+                <script type="text/javascript" src="${scoreJsUrl}"></script>
+                <script type="text/javascript" src="${pageListScoreJsUrl}"></script>
+            </c:otherwise>
+        </c:choose>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>
         <script type="text/javascript" src="${scoreIEJsUrl}"></script>
         <script type="text/javascript" src="${pageListScoreIEJsUrl}"></script>
         <![endif]-->
-        <!--[if gt IE 8]>
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${pageListScoreJsUrl}"></script>
-        <![endif]-->
-        <!--[if !IE]><!-->
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${pageListScoreJsUrl}"></script>
-        <!--<![endif]-->
     </body>
 </html>
 </compress:html>
