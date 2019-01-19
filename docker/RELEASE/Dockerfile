@@ -10,6 +10,10 @@ MAINTAINER Matthieu Faure <mfaure@asqatasun.org>
 #   BUT for quick testing, that does the job :)
 # ###################################################################################
 
+
+RUN apt-get update && apt-get -y install software-properties-common && add-apt-repository --yes ppa:openjdk-r/ppa && apt-get update && \
+    apt-get -y install openjdk-8-jdk && update-java-alternatives -s java-1.8.0-openjdk-amd64
+
 USER root
 ENV WWWPORT="8080" \
     DATABASE_DB="asqatasun" \
@@ -81,6 +85,7 @@ HEALTHCHECK --timeout=3s    \
 CMD service mysql start && \
     sleep 5 && \
     service xvfb start && \
+    echo "JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/" >> /etc/default/tomcat7 && \
     service tomcat7 start ; \
     tail -f /var/log/tomcat7/catalina.out \
          /var/log/asqatasun/asqatasun.log

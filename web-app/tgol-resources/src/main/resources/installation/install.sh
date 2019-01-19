@@ -367,7 +367,7 @@ install_webapp() {
     dirty_webapp=true
     cd "${prefix}${tomcat_webapps}/${asqatasun_webapp_dir}" \
             || fail "Unable to go to the Asqatasun webapp directory"
-    unzip -q "$PKG_DIR/web-app/$TG_WAR" \
+    unzip -o -q "$PKG_DIR/web-app/$TG_WAR" \
             || fail "Unable to extract the Asqatasun war"
     sed -i -e "s#file:///#file://${prefix}#g" \
         "WEB-INF/conf/tgol-service.xml" || \

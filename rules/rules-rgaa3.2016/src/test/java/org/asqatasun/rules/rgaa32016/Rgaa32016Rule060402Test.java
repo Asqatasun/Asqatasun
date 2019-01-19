@@ -121,53 +121,7 @@ public class Rgaa32016Rule060402Test extends Rgaa32016RuleImplementationTestCase
         getWebResourceMap().put("Rgaa32016.Test.06.04.03-3NMI-03",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060403/Rgaa32016.Test.06.04.03-3NMI-03.html"));
-        
-        // 06.04.04 testcases
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-1Passed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-1Passed-01.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-1Passed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-1Passed-02.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-1Passed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-1Passed-03.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-1Passed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-1Passed-04.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-01.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-02.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-03.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-04",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-04.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-05",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-05.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-06.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-07.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-2Failed-08",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-2Failed-08.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-3NMI-01",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-3NMI-01.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-3NMI-02",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-3NMI-02.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.04.04-3NMI-03",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060404/Rgaa32016.Test.06.04.04-3NMI-03.html"));
+
     }
 
     @Override
@@ -348,38 +302,7 @@ public class Rgaa32016Rule060402Test extends Rgaa32016RuleImplementationTestCase
                 processPageTest("Rgaa32016.Test.06.04.03-3NMI-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 processPageTest("Rgaa32016.Test.06.04.03-3NMI-03").getValue());
-        
-        // 06.04.04 testcases : All is Not Applicable
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-1Passed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-1Passed-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-1Passed-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-1Passed-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-07").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-2Failed-08").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-3NMI-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-3NMI-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                processPageTest("Rgaa32016.Test.06.04.04-3NMI-03").getValue());
+
     }
 
     @Override
@@ -462,38 +385,7 @@ public class Rgaa32016Rule060402Test extends Rgaa32016RuleImplementationTestCase
                 consolidate("Rgaa32016.Test.06.04.03-3NMI-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa32016.Test.06.04.03-3NMI-03").getValue());
-        
-                // 06.04.04 testcases : All is Not Applicable
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-1Passed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-1Passed-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-1Passed-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-1Passed-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-03").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-04").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-07").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-2Failed-08").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-3NMI-01").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-3NMI-02").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.04.04-3NMI-03").getValue());
+
     }
 
 }

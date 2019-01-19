@@ -241,21 +241,16 @@
         <script type="text/javascript" src="${detailResultManualJsUrl}"></script>
         <script type="text/javascript" src="${applyAutoResultsJsUrl}"></script>
         </c:if>
+        <script type="text/javascript" src="${d3JsUrl}"></script>
+        <script type="text/javascript" src="${resultPageChartsJsUrl}"></script>
+        <c:if test="${configProperties['displayGradeAsResult'] == 'false'}">
+            <script type="text/javascript" src="${scoreJsUrl}"></script>
+        </c:if>
         <!--[if lte IE 8]>
         <script type="text/javascript" src="${r2d3JsUrl}"></script>
         <script type="text/javascript" src="${scoreIEJsUrl}"></script>
         <script type="text/javascript" src="${resultPageChartsIEJsUrl}"></script>
         <![endif]-->
-        <!--[if gt IE 8]>
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${resultPageChartsJsUrl}"></script>
-        <![endif]-->
-        <!--[if !IE]><!-->
-        <script type="text/javascript" src="${d3JsUrl}"></script>
-        <script type="text/javascript" src="${scoreJsUrl}"></script>
-        <script type="text/javascript" src="${resultPageChartsJsUrl}"></script>
-        <!--<![endif]-->
         <script type="text/javascript" src="${displaySnapshotJsUrl}"></script>
     </body>
 </html>

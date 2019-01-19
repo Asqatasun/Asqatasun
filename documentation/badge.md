@@ -19,6 +19,9 @@
 [![GitHub issues](https://img.shields.io/github/issues/asqatasun/asqatasun.svg?style=flat-square)](https://github.com/Asqatasun/Asqatasun/issues)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed/asqatasun/asqatasun.svg?style=flat-square)](https://github.com/Asqatasun/Asqatasun/issues?q=is%3Aissue+is%3Aclosed)
 
+## Commits
+[![Commits](https://img.shields.io/github/commit-activity/y/asqatasun/asqatasun.svg)](https://github.com/Asqatasun/Asqatasun/commits/develop)
+
 ## Average time to resolve an issue / PR
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/asqatasun/asqatasun.svg)](http://isitmaintained.com/project/asqatasun/asqatasun "Average time to resolve an issue")
 
@@ -47,6 +50,9 @@ Some issues are ignored based on their labels (example of ignored labels: "enhan
 
 ## Code of Conduct
 [![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/Asqatasun/Asqatasun/blob/develop/CODE_OF_CONDUCT.md)
+
+## GitHub contributors
+[![GitHub contributors](https://img.shields.io/github/contributors/asqatasun/asqatasun.svg)](https://github.com/Asqatasun/Asqatasun/graphs/contributors)
 
 ---
 http://shields.io/
