@@ -298,13 +298,13 @@
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <c:choose>
-            <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
-                <script type="text/javascript" src="${pageListGradeJsUrl}"></script>
-            </c:when>
-            <c:otherwise>
+            <c:when test="${configProperties['displayGradeAsResult'] == 'false'}">
                 <script type="text/javascript" src="${d3JsUrl}"></script>
                 <script type="text/javascript" src="${scoreJsUrl}"></script>
                 <script type="text/javascript" src="${pageListScoreJsUrl}"></script>
+            </c:when>
+            <c:otherwise> <%-- displayGradeAsResult = true --%>
+                <script type="text/javascript" src="${pageListGradeJsUrl}"></script>
             </c:otherwise>
         </c:choose>
         <!--[if lte IE 8]>

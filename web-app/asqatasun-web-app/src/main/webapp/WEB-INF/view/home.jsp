@@ -179,13 +179,13 @@
                             <c:set var="hasScoreFormulaLink" scope="page" value="false"/>
                             <c:set var="spanClass" scope="page" value=""/>
                                 <c:choose>
-                                    <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
-                                        <c:set var="scoreClass" scope="page" value="one-project-grade"/>
-                                        <%@include file="template/grade.jsp" %>
-                                    </c:when>
-                                    <c:otherwise>
+                                    <c:when test="${configProperties['displayGradeAsResult'] == 'false'}">
                                         <c:set var="scoreClass" scope="page" value="one-project-score"/>
                                         <%@include file="template/score.jsp" %>
+                                    </c:when>
+                                    <c:otherwise> <%-- displayGradeAsResult = true --%>
+                                        <c:set var="scoreClass" scope="page" value="one-project-grade"/>
+                                        <%@include file="template/grade.jsp" %>
                                     </c:otherwise>
                                 </c:choose>
                                 </c:when>
