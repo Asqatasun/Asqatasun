@@ -55,6 +55,10 @@ fail() {
 
 # Packages for unattended installs
 export DEBIAN_FRONTEND=noninteractive
+
+# Java8: PPA needed for Ubuntu 14.04
+add-apt-repository -y ppa:openjdk-r/ppa
+
 apt-get update
 apt-get -y --no-install-recommends install \
     debconf \
@@ -74,8 +78,10 @@ apt-get -y --no-install-recommends install \
     tomcat7 \
     xvfb \
     libdbus-glib-1-2 \
-    openjdk-7-jre
-    
+    openjdk-8-jre
+
+update-java-alternatives -s java-1.8.0-openjdk-amd64
+
 #############################################
 # Mail config
 #############################################
