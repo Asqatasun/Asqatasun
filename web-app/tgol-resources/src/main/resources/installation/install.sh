@@ -300,6 +300,8 @@ create_directories() {
             "${prefix}$TG_LOG_DIR" \
             "${prefix}$TG_TMP_DIR" \
             || fail "Unable to create Asqatasun directories"
+    install -dm 600 -o ${tomcat_user} -g root \
+            "${prefix}${TG_TMP_DIR}/asqatasun.log"
     install -dm 755 -o ${tomcat_user} -g root \
             "${prefix}${tomcat_webapps}/${asqatasun_webapp_dir}" \
             || fail "Unable to create Asqatasun webapp directory"
