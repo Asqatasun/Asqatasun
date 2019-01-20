@@ -145,12 +145,12 @@
     <c:set var="spanClass" scope="page" value="span3"/>
 
 <c:choose>
-    <c:when test="${configProperties['displayGradeAsResult'] == 'true'}">
-    <c:set var="scoreClass" scope="page" value="audit-grade"/>
-    <%@include file="../template/grade.jsp" %>
+    <c:when test="${configProperties['displayGradeAsResult'] == 'false'}">
+        <%@include file="../template/score.jsp" %>
     </c:when>
-    <c:otherwise>
-    <%@include file="../template/score.jsp" %>
+    <c:otherwise> <%-- displayGradeAsResult = true --%>
+        <c:set var="scoreClass" scope="page" value="audit-grade"/>
+        <%@include file="../template/grade.jsp" %>
     </c:otherwise>
 </c:choose>
 </div> <!-- class="row" -->
