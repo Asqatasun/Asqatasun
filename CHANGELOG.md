@@ -18,7 +18,7 @@ Asqatasun 4.1.0, 2018-1x-xx
                               and [#208](https://github.com/Asqatasun/Asqatasun/issues/208)
 
 - WIP:
-  - [#123 - Incorrect string value: '\xF0\x9F\x99\x82" ...' for column 'Source'](https://github.com/Asqatasun/Asqatasun/issues/123)
+  - [#256 - Create upgrade script and doc for utf8mb4 migration](https://github.com/Asqatasun/Asqatasun/issues/256) 
   - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163)
   - [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137)
   - refactoring install.sh and pre-requisites.sh
@@ -33,8 +33,11 @@ Asqatasun 4.1.0, 2018-1x-xx
 ### Upgrade-o-meter
 - [#154 - Build - Maven 3.1 is required (needed for org.owasp:dependency-check-maven)](https://github.com/Asqatasun/Asqatasun/issues/154)
 - [#213 - SQL procedure / CONTRACT_create requires 2 added parameters (timeSpan, timeSpanUnit)](https://github.com/Asqatasun/Asqatasun/issues/213)
+- [#253 - Adapt installer to Java8](https://github.com/Asqatasun/Asqatasun/issues/253)
+- [#255 - db conversion to utf8mb4](https://github.com/Asqatasun/Asqatasun/issues/255)
 
 ### Features
+- [#248 - Webapp UX - Provide a new representation of the asqatasun meter](https://github.com/Asqatasun/Asqatasun/issues/248) 
 - [#172 - i18n: Add german translation](https://github.com/Asqatasun/Asqatasun/issues/172) 
 
 ### Security
@@ -51,8 +54,11 @@ None
 - [#229 - Upgraded maven-war-plugin (3.2.0 instead of 2.4)](https://github.com/Asqatasun/Asqatasun/issues/229)
 - [#245 - Upgraded maven-surefire-plugin (3.0.0-M1 instead of 2.17)](https://github.com/Asqatasun/Asqatasun/issues/245)
 - [#199 - Upgraded maven-compiler-plugin (3.7.0 instead of 3.1)](https://github.com/Asqatasun/Asqatasun/issues/199)
+- [#257 - Upgraded tika-core (1.20 instead of 1.3)](https://github.com/Asqatasun/Asqatasun/issues/257)
+- [#258 - Upgraded commons-fileupload (1.3.3 instead of 1.3.1)](https://github.com/Asqatasun/Asqatasun/issues/258)
 
 ### Bugs
+- [#123 - Fixed incorrect string value: '\xF0\x9F\x99\x82' for column 'Source'](https://github.com/Asqatasun/Asqatasun/issues/123)
 - [#128 - Fixed Rgaa 3.0, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#128)
 - [#183 - Fixed build_and_run-with-docker.sh: "-t" option is used 2 times](https://github.com/Asqatasun/Asqatasun/issues/183)
 - [#142 - Fixed SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
