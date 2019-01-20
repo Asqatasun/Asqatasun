@@ -14,6 +14,7 @@ Once you have extracted the tarball, to Check pre-requisites, you can run the sc
 ```sh
 cd install
 ./pre-requisites.sh
+./pre-requisites-SQL.sh
 ```
 
 ### A few noteworthy information
@@ -62,7 +63,7 @@ sudo apt-get -y --no-install-recommends install \
     tomcat7 \
     xvfb \
     libdbus-glib-1-2 \
-    openjdk-7-jre
+    openjdk-8-jre
 ```
 
 ### Configure Open JDK as default

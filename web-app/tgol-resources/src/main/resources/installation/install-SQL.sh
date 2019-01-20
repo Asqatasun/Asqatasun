@@ -253,7 +253,7 @@ echo_installation_summary() {
 	cat << EOF
 
 Well done, your SQL for Asqatasun is installed !
-Please proceed with pre-requisites.sh and install.sh
+Please proceed with install.sh
 EOF
 }
 
