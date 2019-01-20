@@ -18,7 +18,7 @@ DROP PROCEDURE IF EXISTS remove_ref_to_contract_from_contract_label;
 
 delimiter |
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_funct_to_contract_from_contract_id`(
-IN contractId INT, 
+IN contractId INT,
 IN functId INT)
 BEGIN
 
@@ -27,7 +27,7 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_funct_to_contract_from_contract_id`(
-IN contractId INT, 
+IN contractId INT,
 IN functId INT)
 BEGIN
 
@@ -36,52 +36,52 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_funct_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(255), 
-IN userEmail VARCHAR(255), 
+IN contractLabel VARCHAR(191),
+IN userEmail VARCHAR(191),
 IN functId INT)
 BEGIN
 
-    DECLARE contractId bigint(20);  
+    DECLARE contractId bigint(20);
 
-    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc 
+    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc
         LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tc.Label like contractLabel
             AND tu.Email1 like userEmail;
 
-    INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` 
-        (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) 
+    INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY`
+        (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`)
         VALUES (contractId,functId);
 
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_funct_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(255), 
-IN userEmail VARCHAR(255), 
+IN contractLabel VARCHAR(191),
+IN userEmail VARCHAR(191),
 IN functId INT)
 BEGIN
 
-    DECLARE contractId bigint(20);  
+    DECLARE contractId bigint(20);
 
-    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc 
-        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User) 
+    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc
+        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tc.Label like contractLabel
-            AND tu.Email1 like userEmail; 
+            AND tu.Email1 like userEmail;
 
-    DELETE FROM `TGSI_CONTRACT_FUNCTIONALITY` 
-            WHERE `CONTRACT_Id_Contract`=contractId 
+    DELETE FROM `TGSI_CONTRACT_FUNCTIONALITY`
+            WHERE `CONTRACT_Id_Contract`=contractId
             AND `FUNCTIONALITY_Id_Functionality`=functId;
 
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_funct_to_contract_from_user_email`(
-IN userEmail VARCHAR(255), 
+IN userEmail VARCHAR(191),
 IN functId INT)
 BLOCK1: BEGIN
 
     DECLARE done INT DEFAULT 0;
     DECLARE v_Id_Contract BIGINT(20);
-    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc 
-        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User) 
+    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc
+        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tu.Email1=userEmail;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
@@ -91,22 +91,22 @@ BLOCK1: BEGIN
         IF done = 1 THEN
             LEAVE LOOP1;
         END IF;
-        INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY` 
-            (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`) 
+        INSERT IGNORE INTO `TGSI_CONTRACT_FUNCTIONALITY`
+            (`CONTRACT_Id_Contract`, `FUNCTIONALITY_Id_Functionality`)
             VALUES (v_Id_Contract,functId);
     END loop LOOP1;
 
 END BLOCK1 |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_funct_to_contract_from_user_email`(
-IN userEmail VARCHAR(255), 
+IN userEmail VARCHAR(191),
 IN functId INT)
 BLOCK1: BEGIN
 
     DECLARE done INT DEFAULT 0;
     DECLARE v_Id_Contract BIGINT(20);
-    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc 
-        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User) 
+    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc
+        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tu.Email1=userEmail;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
@@ -116,15 +116,15 @@ BLOCK1: BEGIN
         IF done = 1 THEN
             LEAVE LOOP1;
         END IF;
-        DELETE FROM `TGSI_CONTRACT_FUNCTIONALITY` 
-                WHERE `CONTRACT_Id_Contract`=v_Id_Contract 
+        DELETE FROM `TGSI_CONTRACT_FUNCTIONALITY`
+                WHERE `CONTRACT_Id_Contract`=v_Id_Contract
                 AND `FUNCTIONALITY_Id_Functionality`=functId;
     END loop LOOP1;
 
 END BLOCK1 |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_ref_to_contract_from_contract_id`(
-IN contractId INT, 
+IN contractId INT,
 IN refId INT)
 BEGIN
 
@@ -133,7 +133,7 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_ref_to_contract_from_contract_id`(
-IN contractId INT, 
+IN contractId INT,
 IN refId INT)
 BEGIN
 
@@ -142,52 +142,52 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_ref_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(255), 
-IN userEmail VARCHAR(255), 
+IN contractLabel VARCHAR(191),
+IN userEmail VARCHAR(191),
 IN refId INT)
 BEGIN
 
-    DECLARE contractId bigint(20);  
+    DECLARE contractId bigint(20);
 
-    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc 
+    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc
         LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tc.Label like contractLabel
             AND tu.Email1 like userEmail;
 
-    INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` 
-        (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`) 
+    INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL`
+        (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`)
         VALUES (contractId,refId);
 
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_ref_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(255), 
-IN userEmail VARCHAR(255), 
+IN contractLabel VARCHAR(191),
+IN userEmail VARCHAR(191),
 IN refId INT)
 BEGIN
 
-    DECLARE contractId bigint(20);  
+    DECLARE contractId bigint(20);
 
-    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc 
-        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User) 
+    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc
+        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tc.Label like contractLabel
-            AND tu.Email1 like userEmail; 
+            AND tu.Email1 like userEmail;
 
-    DELETE FROM `TGSI_CONTRACT_REFERENTIAL` 
-            WHERE `CONTRACT_Id_Contract`=contractId 
+    DELETE FROM `TGSI_CONTRACT_REFERENTIAL`
+            WHERE `CONTRACT_Id_Contract`=contractId
             AND `REFERENTIAL_Id_Referential`=refId;
 
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_ref_to_contract_from_user_email`(
-IN userEmail VARCHAR(255), 
+IN userEmail VARCHAR(191),
 IN refId INT)
 BLOCK1: BEGIN
 
     DECLARE done INT DEFAULT 0;
     DECLARE v_Id_Contract BIGINT(20);
-    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc 
-        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User) 
+    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc
+        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tu.Email1=userEmail;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
@@ -197,22 +197,22 @@ BLOCK1: BEGIN
         IF done = 1 THEN
             LEAVE LOOP1;
         END IF;
-        INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL` 
-            (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`) 
+        INSERT IGNORE INTO `TGSI_CONTRACT_REFERENTIAL`
+            (`CONTRACT_Id_Contract`, `REFERENTIAL_Id_Referential`)
             VALUES (v_Id_Contract,refId);
     END loop LOOP1;
 
 END BLOCK1 |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_ref_to_contract_from_user_email`(
-IN userEmail VARCHAR(255), 
+IN userEmail VARCHAR(191),
 IN refId INT)
 BLOCK1: BEGIN
 
     DECLARE done INT DEFAULT 0;
     DECLARE v_Id_Contract BIGINT(20);
-    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc 
-        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User) 
+    DECLARE contracts CURSOR FOR SELECT tc.Id_Contract FROM TGSI_CONTRACT tc
+        LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tu.Email1=userEmail;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
@@ -222,8 +222,8 @@ BLOCK1: BEGIN
         IF done = 1 THEN
             LEAVE LOOP1;
         END IF;
-        DELETE FROM `TGSI_CONTRACT_REFERENTIAL` 
-                WHERE `CONTRACT_Id_Contract`=v_Id_Contract 
+        DELETE FROM `TGSI_CONTRACT_REFERENTIAL`
+                WHERE `CONTRACT_Id_Contract`=v_Id_Contract
                 AND `REFERENTIAL_Id_Referential`=refId;
     END loop LOOP1;
 

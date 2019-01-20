@@ -1,5 +1,5 @@
 -- -----------------------------------------------------------------
--- Deletion of contract 
+-- Deletion of contract
 -- -----------------------------------------------------------------
 
 DROP PROCEDURE IF EXISTS delete_contract_from_id;
@@ -20,19 +20,19 @@ BEGIN
 END  |
 
 CREATE DEFINER=`asqatasun`@`localhost` PROCEDURE `delete_contract_from_label`(
-IN contractLabel VARCHAR(255), 
-IN userEmail VARCHAR(255))
+IN contractLabel VARCHAR(191),
+IN userEmail VARCHAR(191))
 BEGIN
 
-    DECLARE contractId bigint(20);  
+    DECLARE contractId bigint(20);
 
-    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc 
+    SELECT tc.Id_Contract INTO contractId FROM TGSI_CONTRACT tc
         LEFT JOIN TGSI_USER as tu on (tc.USER_Id_User=tu.Id_User)
             WHERE tc.Label like contractLabel
             AND tu.Email1 like userEmail;
-    
+
     call delete_contract_from_id(contractId);
-            
+
 END  |
 
 delimiter ;
