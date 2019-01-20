@@ -191,9 +191,9 @@ function display_step_msg() {
 
 # Check URL (return HTTP code)
 function check_URL() {
-    local URL=$1
+    local URL="$1"
     set +e
-    local RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' ${URL})
+    local RESULT=$(curl -o /dev/null --silent --write-out '%{http_code}\n' "${URL}")
     set -e
     echo "${RESULT}"
 }
@@ -204,10 +204,10 @@ function kill_previous_container() {
     set +e
     local RUNNING=$(${SUDO} docker inspect --format="{{ .State.Status }}" ${CONTAINER_NAME} 2>/dev/null)
     set -e
-    if [ "${RUNNING}" == "running" ]; then
+    if [[ "${RUNNING}" == "running" ]]; then
         ${SUDO} docker stop ${CONTAINER_NAME}
         ${SUDO} docker rm ${CONTAINER_NAME}
-    elif [ "${RUNNING}" == "exited" ]; then
+    elif [[ "${RUNNING}" == "exited" ]]; then
         ${SUDO} docker rm ${CONTAINER_NAME}
     fi
 }
@@ -216,10 +216,10 @@ function kill_previous_container() {
 function check_Tomcat_loading() {
     local  time=0
     local  RESULT=$(check_URL ${URL_TOMCAT})
-    while ((RESULT!=200))
+    while ((${RESULT}!=200))
     do
         RESULT=$(check_URL ${URL_TOMCAT})
-        if [ "${RESULT}" == "200" ]; then
+        if [[ "${RESULT}" == "200" ]]; then
             display_step_msg "Tomcat server is now running .......... HTTP code = ${BOLD}${GREEN}${RESULT}${NORM}"
         else
             ((time+=1))
@@ -233,13 +233,13 @@ function check_Tomcat_loading() {
 function check_App_loading() {
     local  time=0
     local  RESULT=$(check_URL ${URL_APP}/)
-    if [ "${RESULT}" == "200" ]; then
+    if [[ "${RESULT}" == "200" ]]; then
             display_step_msg "Asqatasun     is now running .......... HTTP code = ${BOLD}${GREEN}${RESULT}${NORM}"
     else
-        while ((RESULT!=200))
+        while ((${RESULT}!=200))
         do
             RESULT=$(check_URL ${URL_APP}/)
-            if [ "${RESULT}" == "200" ]; then
+            if [[ "${RESULT}" == "200" ]]; then
                 display_step_msg "${APP_NAME} is now running ....... HTTP code = ${BOLD}${GREEN}${RESULT}${NORM}"
             else
                 ((time+=1))
@@ -340,12 +340,12 @@ function do_maven_log_processing() {
 function check_firefox_binary() {
 
     # FIREFOX_BIN is file
-    if [ ! -f ${FIREFOX_BIN} ] ;   then
+    if [[ ! -f ${FIREFOX_BIN} ]] ;   then
         fail "Error: ${FIREFOX_BIN} does not exist!"
     fi
 
     # FIREFOX_BIN  is executable by the user
-    if [ ! -x ${FIREFOX_BIN} ] ;   then
+    if [[ ! -x ${FIREFOX_BIN} ]] ;   then
         fail "Error: ${FIREFOX_BIN} is not an executable!"
     fi
 

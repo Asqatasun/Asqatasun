@@ -300,6 +300,8 @@ create_directories() {
             "${prefix}$TG_LOG_DIR" \
             "${prefix}$TG_TMP_DIR" \
             || fail "Unable to create Asqatasun directories"
+    install -dm 600 -o ${tomcat_user} -g root \
+            "${prefix}${TG_TMP_DIR}/asqatasun.log"
     install -dm 755 -o ${tomcat_user} -g root \
             "${prefix}${tomcat_webapps}/${asqatasun_webapp_dir}" \
             || fail "Unable to create Asqatasun webapp directory"
@@ -462,26 +464,6 @@ create_first_contracts() {
         --database-db "$database_db" \
         --database-host "$database_host"  || \
             fail "Unable to create contract: Openbar A11Y RGAA-3.0"
-
-    # Contract A11Y Openbar RGAA32016
-    ./ASQA_contract_create_A11Y_RGAA32016_openbar.sh \
-        -c "openbar A11Y RGAA3.2016" \
-        -u 1 \
-        --database-user "$database_user" \
-        --database-passwd "$database_passwd" \
-        --database-db "$database_db" \
-        --database-host "$database_host"  || \
-            fail "Unable to create contract: Openbar A11Y RGAA-3.2016"
-
-    # Contract A11Y Openbar RGAA32017
-    ./ASQA_contract_create_A11Y_RGAA32017_openbar.sh \
-        -c "openbar A11Y RGAA3.2017" \
-        -u 1 \
-        --database-user "$database_user" \
-        --database-passwd "$database_passwd" \
-        --database-db "$database_db" \
-        --database-host "$database_host"  || \
-            fail "Unable to create contract: Openbar A11Y RGAA-3.2017"
 }
 
 #############################################

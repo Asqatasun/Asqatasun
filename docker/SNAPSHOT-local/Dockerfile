@@ -18,8 +18,13 @@ FROM asqatasun/asqatasun:pre-requisites_with-empty-DB
 #               |-- asqatasun/asqatasun:pre-requisites_with-empty-DB  
 ####################################################################
 
-RUN apt-get update && apt-get -y install software-properties-common && add-apt-repository --yes ppa:openjdk-r/ppa && apt-get update && \
-    apt-get -y install openjdk-8-jdk && update-java-alternatives -s java-1.8.0-openjdk-amd64
+RUN \
+    apt-get update && \
+    apt-get -y install software-properties-common && \
+    add-apt-repository -y ppa:openjdk-r/ppa && \
+    apt-get update && \
+    apt-get -y install openjdk-8-jdk && \
+    update-java-alternatives -s java-1.8.0-openjdk-amd64
 
 USER root
 ENV  JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"    \
