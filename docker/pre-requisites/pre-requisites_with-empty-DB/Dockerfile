@@ -33,12 +33,10 @@ EXPOSE $WWWPORT
 
 #
 RUN  cd      /root                                  && \
-     wget http://binaries.asqatasun.org/asqatasun-${ASQA_RELEASE}.i386.tar.gz  && \
-     tar     xvfz asqatasun-*.tar.gz                && \
-     mv      asqatasun*/  ./asqatasun/              && \
-     cd      asqatasun/install/                     && \
+     wget https://raw.githubusercontent.com/Asqatasun/Asqatasun/develop/web-app/tgol-resources/src/main/resources/installation/pre-requisites-SQL.sh  && \
+     chmod +x pre-requisites-SQL.sh                 && \
      ./pre-requisites-SQL.sh                        && \
-     rm -rf  /root/asqatasun*                       && \
+     rm -f  pre-requisites-SQL.sh                   && \
      apt-get clean                                  && \
      apt-get autoremove                             && \
      rm -rf  /var/lib/apt/lists/*            
