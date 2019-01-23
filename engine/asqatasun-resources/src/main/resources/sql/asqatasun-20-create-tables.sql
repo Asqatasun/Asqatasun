@@ -545,7 +545,7 @@ COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `AUDIT_PARAMETER_VALUE`
+-- Table `AUDIT_PARAMETER`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `AUDIT_PARAMETER` (
   `Id_Audit` BIGINT(20) NOT NULL ,
