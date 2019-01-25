@@ -37,15 +37,25 @@ init-connect='SET NAMES utf8mb4'
 character-set-server = utf8mb4
 ```
 
-## 3. Apply new character set + collation + reduction of size on index columns
+## 3. Backup database
+
+Yes do it, because you know you should :)
+
+```shell
+mysqldump -u asqatasun -p asqatasun >/tmp/BACKUP_asqatasun_$(date +%Y-%m-%d).sql
+```
+
+## 4. Apply new character set + collation + reduction of size on index columns
 
 Apply to the `asqatasun` database the following two scripts:
 
-```
-engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql
-web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql
+TODO: backup database
+
+```shell
+/usr/bin/mysql -u asqatasun -p asqatasun < engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql
 ```
 
-## 4. Adjust `asqatasun.conf`
+## 5. Adjust `asqatasun.conf`
 
-## 5. Copy new WAR file
+## 6. Copy new WAR file
