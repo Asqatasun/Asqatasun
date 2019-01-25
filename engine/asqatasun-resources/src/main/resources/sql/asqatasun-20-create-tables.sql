@@ -12,7 +12,11 @@ CREATE TABLE IF NOT EXISTS `AUDIT` (
   `Manual_Audit_Dt_Creation` datetime DEFAULT NULL,
   `Status` varchar(191) DEFAULT NULL,
   PRIMARY KEY (`Id_Audit`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -43,7 +47,11 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE` (
       ON UPDATE CASCADE,
   INDEX `Url_Index` (`Url` ASC),
   INDEX `DTYPE_Index` (`DTYPE` ASC)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -80,7 +88,11 @@ CREATE TABLE IF NOT EXISTS `CONTENT` (
   INDEX `Uri_Index` (`Uri` ASC),
   INDEX `DTYPE_Index` (`DTYPE` ASC),
   INDEX `Http_Status_Code_Index` (`Http_Status_Code` ASC)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 --
@@ -103,7 +115,10 @@ CREATE TABLE IF NOT EXISTS `CONTENT_RELATIONSHIP` (
       REFERENCES `CONTENT` (`Id_Content`)
       ON UPDATE NO ACTION
       ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- --------------------------------------------------------
@@ -117,7 +132,11 @@ CREATE TABLE IF NOT EXISTS `SCOPE` (
   `Description` varchar(191) DEFAULT NULL,
   `Label` varchar(191) NOT NULL,
   PRIMARY KEY (`Id_Scope`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -131,7 +150,11 @@ CREATE TABLE IF NOT EXISTS `DECISION_LEVEL` (
   `Description` varchar(191) DEFAULT NULL,
   `Label` varchar(191) NOT NULL,
   PRIMARY KEY (`Id_Decision_Level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -146,7 +169,11 @@ CREATE TABLE IF NOT EXISTS `LEVEL` (
   `Label` varchar(191) DEFAULT NULL,
   `Rank` int(11) DEFAULT NULL,
   PRIMARY KEY (`Id_Level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -163,7 +190,11 @@ CREATE TABLE IF NOT EXISTS `THEME` (
   PRIMARY KEY (`Id_Theme`),
   UNIQUE INDEX `Cd_Theme_UNIQUE` (`Cd_Theme` ASC),
   INDEX `Cd_Theme_Index` (`Cd_Theme` ASC)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -185,7 +216,11 @@ CREATE TABLE IF NOT EXISTS `REFERENCE` (
       CONSTRAINT `fk_Ref_Level`
           FOREIGN KEY Id_Default_Level_Index (`Id_Default_Level`)
           REFERENCES `LEVEL` (`Id_Level`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -212,7 +247,11 @@ CREATE TABLE IF NOT EXISTS `CRITERION` (
   CONSTRAINT `FKBCFA1E81D03CE506`
       FOREIGN KEY Reference_Id_Reference_Index (`Reference_Id_Reference`)
       REFERENCES `REFERENCE` (`Id_Reference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -250,7 +289,11 @@ CREATE TABLE IF NOT EXISTS `TEST` (
   CONSTRAINT `FK273C9272343A84`
       FOREIGN KEY Id_Level_Index (`Id_Level`)
       REFERENCES `LEVEL` (`Id_Level`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -273,7 +316,10 @@ CREATE TABLE IF NOT EXISTS `AUDIT_TEST` (
       REFERENCES `TEST` (`Id_Test`)
       ON UPDATE NO ACTION
       ON DELETE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci ;
 
 
 -- --------------------------------------------------------
@@ -287,7 +333,11 @@ CREATE TABLE IF NOT EXISTS `EVIDENCE` (
   `Description` varchar(191) DEFAULT NULL,
   `Long_Label` varchar(191) DEFAULT NULL,
   PRIMARY KEY (`Id_Evidence`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -335,7 +385,11 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT` (
       REFERENCES `AUDIT` (`Id_Audit`)
       ON DELETE CASCADE,
   INDEX `Definite_Value_Index` (`Definite_Value` ASC)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -362,7 +416,11 @@ CREATE TABLE IF NOT EXISTS `PROCESS_REMARK` (
       REFERENCES `PROCESS_RESULT` (`Id_Process_Result`)
       ON DELETE CASCADE,
   INDEX `Issue_Index` (`Issue` ASC)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -385,7 +443,11 @@ CREATE TABLE IF NOT EXISTS `EVIDENCE_ELEMENT` (
       FOREIGN KEY PROCESS_REMARK_Id_Process_Remark_Index (`PROCESS_REMARK_Id_Process_Remark`)
       REFERENCES `PROCESS_REMARK` (`Id_Process_Remark`)
       ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -405,7 +467,11 @@ CREATE TABLE IF NOT EXISTS `NOMENCLATURE` (
   CONSTRAINT `FKBF856B7795431825`
       FOREIGN KEY Id_Nomenclature_Parent_Index (`Id_Nomenclature_Parent`)
       REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -424,7 +490,11 @@ CREATE TABLE IF NOT EXISTS `NOMENCLATURE_ELEMENT` (
   CONSTRAINT `FK44F856145FAB5EF2`
       FOREIGN KEY Id_Nomenclature_Index (`Id_Nomenclature`)
       REFERENCES `NOMENCLATURE` (`Id_Nomenclature`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -438,7 +508,11 @@ CREATE TABLE IF NOT EXISTS `STANDARD_MESSAGE` (
   `Label` varchar(191) DEFAULT NULL,
   `Text` varchar(191) DEFAULT NULL,
   PRIMARY KEY (`Id_Standard_Message`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -466,7 +540,11 @@ CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
     REFERENCES `WEB_RESOURCE` (`Id_Web_Resource` )
     ON DELETE CASCADE
     ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci
+AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 --
@@ -484,7 +562,7 @@ CREATE TABLE IF NOT EXISTS `PRE_PROCESS_RESULT` (
 --    REFERENCES `WEB_RESOURCE` (`Id_Web_Resource` )
 --    ON DELETE CASCADE
 --    ON UPDATE NO ACTION
--- ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+-- ) ENGINE=InnoDB  DEFAULT CHARACTER SET=utf8mb4 AUTO_INCREMENT=1 ;
 
 
 -- -----------------------------------------------------
@@ -518,9 +596,11 @@ CREATE  TABLE IF NOT EXISTS `PARAMETER_ELEMENT` (
     FOREIGN KEY (`Id_Parameter_Family` )
     REFERENCES `PARAMETER_FAMILY` (`Id_Parameter_Family` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -538,10 +618,11 @@ CREATE  TABLE IF NOT EXISTS `PARAMETER` (
     FOREIGN KEY (`Id_Parameter_Element` )
     REFERENCES `PARAMETER_ELEMENT` (`Id_Parameter_Element` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -561,9 +642,11 @@ CREATE  TABLE IF NOT EXISTS `AUDIT_PARAMETER` (
     FOREIGN KEY (`Id_Parameter` )
     REFERENCES `PARAMETER` (`Id_Parameter` )
     ON DELETE CASCADE
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -606,7 +689,7 @@ CREATE TABLE IF NOT EXISTS `WEB_RESOURCE_STATISTICS` (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `THEME_STATISTICS`
@@ -638,7 +721,7 @@ CREATE TABLE IF NOT EXISTS `THEME_STATISTICS` (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -672,7 +755,7 @@ CREATE TABLE IF NOT EXISTS `CRITERION_STATISTICS` (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -705,7 +788,7 @@ CREATE TABLE IF NOT EXISTS `TEST_STATISTICS` (
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_general_ci;
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- ---------------------------------------------------------------------------------------------------------
 -- Hibernate envers technical table to refer the hibernate changes versions
@@ -714,7 +797,11 @@ CREATE TABLE IF NOT EXISTS `REVINFO` (
   `REV` int(11) NOT NULL AUTO_INCREMENT,
   `REVTSTMP` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`REV`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+)
+ENGINE=InnoDB
+AUTO_INCREMENT=17
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- ---------------------------------------------------------------------------------------------------------
 -- Creating the hibernate audit table of process_result
@@ -732,4 +819,7 @@ CREATE TABLE IF NOT EXISTS `PROCESS_RESULT_AUD` (
   PRIMARY KEY (`Id_Process_Result`,`REV`),
   KEY `FK5411075EDF74E053` (`REV`),
   CONSTRAINT `FK5411075EDF74E053` FOREIGN KEY (`REV`) REFERENCES `REVINFO` (`REV`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+DEFAULT COLLATE = utf8mb4_general_ci;
