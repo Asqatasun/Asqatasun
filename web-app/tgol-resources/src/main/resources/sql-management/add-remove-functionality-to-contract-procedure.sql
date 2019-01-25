@@ -36,7 +36,7 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_funct_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(191),
+IN contractLabel VARCHAR(255),
 IN userEmail VARCHAR(191),
 IN functId INT)
 BEGIN
@@ -55,7 +55,7 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_funct_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(191),
+IN contractLabel VARCHAR(255),
 IN userEmail VARCHAR(191),
 IN functId INT)
 BEGIN
@@ -142,7 +142,7 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `add_ref_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(191),
+IN contractLabel VARCHAR(255),
 IN userEmail VARCHAR(191),
 IN refId INT)
 BEGIN
@@ -161,7 +161,7 @@ BEGIN
 END  |
 
 CREATE DEFINER=`$myDatabaseUser`@`localhost` PROCEDURE `remove_ref_to_contract_from_contract_label`(
-IN contractLabel VARCHAR(191),
+IN contractLabel VARCHAR(255),
 IN userEmail VARCHAR(191),
 IN refId INT)
 BEGIN

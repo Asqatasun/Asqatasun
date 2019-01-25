@@ -19,9 +19,8 @@ BEGIN
 
 END  |
 
-CREATE DEFINER=`asqatasun`@`localhost` PROCEDURE `delete_contract_from_label`(
-IN contractLabel VARCHAR(191),
-IN userEmail VARCHAR(191))
+CREATE DEFINER=`asqatasun`@`localhost` PROCEDURE `delete_contract_from_label`(IN contractLabel VARCHAR(255),
+                                                                              IN userEmail VARCHAR(191))
 BEGIN
 
     DECLARE contractId bigint(20);
