@@ -3,8 +3,11 @@
 -- ------ convert utf8 DB to utf8mb4 ------------------------------
 -- ----------------------------------------------------------------
 
--- WIP see: https://github.com/Asqatasun/Asqatasun/issues/123
-
+-- see: https://github.com/Asqatasun/Asqatasun/issues/123
+--
+-- /!\ This the **webapp** part of the SQL update
+-- /!\ do not forget to run the **engine** part,
+--     located in engine/asqatasun-resources/src/main/resources/sql-update
 
 -- 1. Change the character set and collation properties of the database
 -- -----------------------------------------------------------------
@@ -31,54 +34,17 @@ ALTER TABLE `TGSI_REFERENTIAL`             CONVERT TO CHARACTER SET utf8mb4 COLL
 ALTER TABLE `TGSI_CONTRACT_REFERENTIAL`    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `TGSI_SCENARIO`                CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-ALTER TABLE `AUDIT`                        CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `WEB_RESOURCE`                 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `CONTENT`                      CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `CONTENT_RELATIONSHIP`         CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `SCOPE`                        CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `DECISION_LEVEL`               CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `LEVEL`                        CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `THEME`                        CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `REFERENCE`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `CRITERION`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TEST`                         CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `AUDIT_TEST`                   CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `EVIDENCE`                     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `PROCESS_RESULT`               CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `PROCESS_REMARK`               CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `EVIDENCE_ELEMENT`             CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `NOMENCLATURE`                 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `NOMENCLATURE_ELEMENT`         CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `STANDARD_MESSAGE`             CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `PRE_PROCESS_RESULT`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
--- ALTER TABLE `SNAPSHOT`                  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `PARAMETER_FAMILY`             CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `PARAMETER_ELEMENT`            CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `PARAMETER`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `AUDIT_PARAMETER`              CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `WEB_RESOURCE_STATISTICS`      CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `THEME_STATISTICS`             CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `CRITERION_STATISTICS`         CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TEST_STATISTICS`              CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `REVINFO`                      CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `PROCESS_RESULT_AUD`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
 
 -- 3. Change the character set, collation properties
---    and maximum length of each VARCHAR or TEXT column
+--    and maximum length of each VARCHAR or TEXT column **which is an index**
 -- ----------------------------------------------------------------
 
-    -- example:
-    --          ALTER TABLE       table_name
-    --              CHANGE        column_name   column_name
-    --              VARCHAR(191)
-    --              CHARACTER SET utf8mb4
-    --              COLLATE       utf8mb4_general_ci;
-    --
-    -- /!\  Don’t blindly copy-paste this!  /!\
-    --      The exact statement depends on the column type, maximum length,
-    --      and other properties. The above line is just an example for a VARCHAR column.
-
+ALTER TABLE `TGSI_USER`
+    CHANGE `Email1` `Email1` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_SCOPE`
+    CHANGE `Code` `Code` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION_ELEMENT`
+    CHANGE `Value` `Value` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 4. Repair and optimize all tables
 -- ----------------------------------------------------------------
@@ -86,7 +52,7 @@ ALTER TABLE `PROCESS_RESULT_AUD`           CONVERT TO CHARACTER SET utf8mb4 COLL
     --  with cli:
     --      mysqlcheck -u root -p --auto-repair --optimize --all-databases
 
--- If you  don't perform those repairing and optimizing, you may run into some weird bugs
+-- If you don't perform those repairing and optimizing, you may run into some weird bugs
 -- where UPDATE statements don't  have any effect, even though no errors were thrown.
 --    source:  http://hanoian.com/content/index.php/24-automate-the-converting-a-mysql-database-character-set-to-utf8mb4
 
@@ -108,38 +74,6 @@ REPAIR TABLE `TGSI_REFERENTIAL`;
 REPAIR TABLE `TGSI_CONTRACT_REFERENTIAL`;
 REPAIR TABLE `TGSI_SCENARIO`;
 
-REPAIR TABLE `AUDIT`;
-REPAIR TABLE `WEB_RESOURCE`;
-REPAIR TABLE `CONTENT`;
-REPAIR TABLE `CONTENT_RELATIONSHIP`;
-REPAIR TABLE `SCOPE`;
-REPAIR TABLE `DECISION_LEVEL`;
-REPAIR TABLE `LEVEL`;
-REPAIR TABLE `THEME`;
-REPAIR TABLE `REFERENCE`;
-REPAIR TABLE `CRITERION`;
-REPAIR TABLE `TEST`;
-REPAIR TABLE `AUDIT_TEST`;
-REPAIR TABLE `EVIDENCE`;
-REPAIR TABLE `PROCESS_RESULT`;
-REPAIR TABLE `PROCESS_REMARK`;
-REPAIR TABLE `EVIDENCE_ELEMENT`;
-REPAIR TABLE `NOMENCLATURE`;
-REPAIR TABLE `NOMENCLATURE_ELEMENT`;
-REPAIR TABLE `STANDARD_MESSAGE`;
-REPAIR TABLE `PRE_PROCESS_RESULT`;
--- REPAIR TABLE `SNAPSHOT`;
-REPAIR TABLE `PARAMETER_FAMILY`;
-REPAIR TABLE `PARAMETER_ELEMENT`;
-REPAIR TABLE `PARAMETER`;
-REPAIR TABLE `AUDIT_PARAMETER`;
-REPAIR TABLE `WEB_RESOURCE_STATISTICS`;
-REPAIR TABLE `THEME_STATISTICS`;
-REPAIR TABLE `CRITERION_STATISTICS`;
-REPAIR TABLE `TEST_STATISTICS`;
-REPAIR TABLE `REVINFO`;
-REPAIR TABLE `PROCESS_RESULT_AUD`;
-
 -- Optimize all tables
 OPTIMIZE TABLE `TGSI_ROLE`;
 OPTIMIZE TABLE `TGSI_USER`;
@@ -157,35 +91,3 @@ OPTIMIZE TABLE `TGSI_CONTRACT_FUNCTIONALITY`;
 OPTIMIZE TABLE `TGSI_REFERENTIAL`;
 OPTIMIZE TABLE `TGSI_CONTRACT_REFERENTIAL`;
 OPTIMIZE TABLE `TGSI_SCENARIO`;
-
-OPTIMIZE TABLE `AUDIT`;
-OPTIMIZE TABLE `WEB_RESOURCE`;
-OPTIMIZE TABLE `CONTENT`;
-OPTIMIZE TABLE `CONTENT_RELATIONSHIP`;
-OPTIMIZE TABLE `SCOPE`;
-OPTIMIZE TABLE `DECISION_LEVEL`;
-OPTIMIZE TABLE `LEVEL`;
-OPTIMIZE TABLE `THEME`;
-OPTIMIZE TABLE `REFERENCE`;
-OPTIMIZE TABLE `CRITERION`;
-OPTIMIZE TABLE `TEST`;
-OPTIMIZE TABLE `AUDIT_TEST`;
-OPTIMIZE TABLE `EVIDENCE`;
-OPTIMIZE TABLE `PROCESS_RESULT`;
-OPTIMIZE TABLE `PROCESS_REMARK`;
-OPTIMIZE TABLE `EVIDENCE_ELEMENT`;
-OPTIMIZE TABLE `NOMENCLATURE`;
-OPTIMIZE TABLE `NOMENCLATURE_ELEMENT`;
-OPTIMIZE TABLE `STANDARD_MESSAGE`;
-OPTIMIZE TABLE `PRE_PROCESS_RESULT`;
--- OPTIMIZE TABLE `SNAPSHOT`;
-OPTIMIZE TABLE `PARAMETER_FAMILY`;
-OPTIMIZE TABLE `PARAMETER_ELEMENT`;
-OPTIMIZE TABLE `PARAMETER`;
-OPTIMIZE TABLE `AUDIT_PARAMETER`;
-OPTIMIZE TABLE `WEB_RESOURCE_STATISTICS`;
-OPTIMIZE TABLE `THEME_STATISTICS`;
-OPTIMIZE TABLE `CRITERION_STATISTICS`;
-OPTIMIZE TABLE `TEST_STATISTICS`;
-OPTIMIZE TABLE `REVINFO`;
-OPTIMIZE TABLE `PROCESS_RESULT_AUD`;
