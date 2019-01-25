@@ -1,4 +1,3 @@
-
 -- ----------------------------------------------------------------
 -- ------ convert utf8 DB to utf8mb4 ------------------------------
 -- ----------------------------------------------------------------
@@ -13,32 +12,11 @@
 -- -----------------------------------------------------------------
 ALTER DATABASE `asqatasun`
     CHARACTER SET = utf8mb4
-    COLLATE       = utf8mb4_general_ci;
+    COLLATE = utf8mb4_general_ci;
 
--- 2. Change the character set and collation properties of each tables
--- ----------------------------------------------------------------
-ALTER TABLE `TGSI_ROLE`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_USER`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_SCOPE`                   CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_FUNCTIONALITY`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT`                CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_ACT`                     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_ACT_AUDIT`               CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION_FAMILY`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION`                  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION_ELEMENT`          CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_OPTION_ELEMENT` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_USER_OPTION_ELEMENT`     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_FUNCTIONALITY`  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_REFERENTIAL`             CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_REFERENTIAL`    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_SCENARIO`                CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-
-
--- 3. Change the character set, collation properties
+-- 2. Change the character set, collation properties
 --    and maximum length of each VARCHAR or TEXT column **which is an index**
 -- ----------------------------------------------------------------
-
 ALTER TABLE `TGSI_USER`
     CHANGE `Email1` `Email1` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `TGSI_SCOPE`
@@ -46,33 +24,50 @@ ALTER TABLE `TGSI_SCOPE`
 ALTER TABLE `TGSI_OPTION_ELEMENT`
     CHANGE `Value` `Value` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
+-- 3. Change the character set and collation properties of each tables
+-- ----------------------------------------------------------------
+ALTER TABLE `TGSI_ROLE`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_USER`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_SCOPE`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_FUNCTIONALITY`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_ACT`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_ACT_AUDIT`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION_FAMILY`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION_ELEMENT`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT_OPTION_ELEMENT`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_USER_OPTION_ELEMENT`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT_FUNCTIONALITY`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_REFERENTIAL`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT_REFERENTIAL`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_SCENARIO`
+    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
 -- 4. Repair and optimize all tables
 -- ----------------------------------------------------------------
 
-    --  with cli:
-    --      mysqlcheck -u root -p --auto-repair --optimize --all-databases
+--  with cli:
+--      mysqlcheck -u root -p --auto-repair --optimize --all-databases
 
 -- If you don't perform those repairing and optimizing, you may run into some weird bugs
 -- where UPDATE statements don't  have any effect, even though no errors were thrown.
 --    source:  http://hanoian.com/content/index.php/24-automate-the-converting-a-mysql-database-character-set-to-utf8mb4
-
--- Repair all tables
-REPAIR TABLE `TGSI_ROLE`;
-REPAIR TABLE `TGSI_USER`;
-REPAIR TABLE `TGSI_SCOPE`;
-REPAIR TABLE `TGSI_FUNCTIONALITY`;
-REPAIR TABLE `TGSI_CONTRACT`;
-REPAIR TABLE `TGSI_ACT`;
-REPAIR TABLE `TGSI_ACT_AUDIT`;
-REPAIR TABLE `TGSI_OPTION_FAMILY`;
-REPAIR TABLE `TGSI_OPTION`;
-REPAIR TABLE `TGSI_OPTION_ELEMENT`;
-REPAIR TABLE `TGSI_CONTRACT_OPTION_ELEMENT`;
-REPAIR TABLE `TGSI_USER_OPTION_ELEMENT`;
-REPAIR TABLE `TGSI_CONTRACT_FUNCTIONALITY`;
-REPAIR TABLE `TGSI_REFERENTIAL`;
-REPAIR TABLE `TGSI_CONTRACT_REFERENTIAL`;
-REPAIR TABLE `TGSI_SCENARIO`;
 
 -- Optimize all tables
 OPTIMIZE TABLE `TGSI_ROLE`;
