@@ -5,19 +5,19 @@ You may use the provided script to automate it.
 
 ## Scripted upgrade
 
+TBD
+
 ## Steps
 
 The following steps detail what has to be done.
 
-## Stop Tomcat
+## 1. Stop Tomcat
 
 ```
 service tomcat7 stop
 ```
 
-## Upgrade database schema with utf8mb4
-
-### 1. Change mysql-client parameters
+## 2. Change mysql-client parameters for utf8mb4
 
 It is **important to change this first** and foremost, or the mysql-client could not be able to have a
 correct communication with the storage engine.
@@ -37,15 +37,15 @@ init-connect='SET NAMES utf8mb4'
 character-set-server = utf8mb4
 ```
 
-### 2. Reduce size of VARCHAR columns and indexes
+## 3. Apply new character set + collation + reduction of size on index columns
 
-### 3. Apply new character set + collation
+Apply to the `asqatasun` database the following two scripts:
 
-* to columns
-* to tables
-* to database
-* to procedures
+```
+engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql
+web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql
+```
 
-## Adjust `asqatasun.conf`
+## 4. Adjust `asqatasun.conf`
 
-## Copy new WAR file
+## 5. Copy new WAR file
