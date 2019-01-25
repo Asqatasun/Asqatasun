@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_ROLE`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_USER`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_SCOPE`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_FUNCTIONALITY`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_ACT`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI`.`TGSI_ACT_AUDIT`
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_ACT_AUDIT`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_OPTION_FAMILY`
@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_OPTION_FAMILY`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_OPTION`
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_OPTION`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_OPTION_ELEMENT`
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_OPTION_ELEMENT`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_CONTRACT_OPTION_ELEMENT`
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_OPTION_ELEMENT`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_USER_OPTION_ELEMENT`
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_USER_OPTION_ELEMENT`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_CONTRACT_FUNCTIONALITY`
@@ -292,7 +292,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_FUNCTIONALITY`
 )
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_REFERENTIAL`
@@ -307,8 +307,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_REFERENTIAL`
     UNIQUE INDEX `UNIQUE_INDEX_TGSI_REFERENTIAL_Code` (`Code` ASC)
 )
     ENGINE = InnoDB
-    DEFAULT CHARSET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT CHARACTER SET = utf8mb4
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_CONTRACT_REFERENTIAL`
@@ -332,8 +332,8 @@ CREATE TABLE IF NOT EXISTS `TGSI_CONTRACT_REFERENTIAL`
             ON UPDATE NO ACTION
 )
     ENGINE = InnoDB
-    DEFAULT CHARSET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT CHARACTER SET = utf8mb4
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
 -- -----------------------------------------------------
 -- Table `TGSI_SCENARIO`
@@ -355,6 +355,6 @@ CREATE TABLE IF NOT EXISTS `TGSI_SCENARIO`
             ON UPDATE CASCADE
 )
     ENGINE = InnoDB
-    DEFAULT CHARSET = utf8mb4
-    COLLATE = utf8mb4_general_ci;
+    DEFAULT CHARACTER SET = utf8mb4
+    DEFAULT COLLATE = utf8mb4_general_ci;
 
