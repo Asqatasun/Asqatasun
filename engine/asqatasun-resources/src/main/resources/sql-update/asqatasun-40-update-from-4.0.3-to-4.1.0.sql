@@ -29,6 +29,8 @@ ALTER TABLE `PRE_PROCESS_RESULT`    CHANGE `Pre_Process_Key`        `Pre_Process
 ALTER TABLE `PARAMETER_FAMILY`      CHANGE `Cd_Parameter_Family`    `Cd_Parameter_Family`   varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `PARAMETER_ELEMENT`     CHANGE `Cd_Parameter_Element`   `Cd_Parameter_Element`  varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
+ALTER TABLE `PARAMETER` DROP KEY `Unique_Param_Element_Type_Param_value`;
+ALTER TABLE `PARAMETER` ADD UNIQUE KEY `Unique_Param_Element_Type_Param_value` (`Parameter_Value`(191), `Id_Parameter_Element`);
 
 -- 3. Change the character set and collation properties of each tables
 -- ----------------------------------------------------------------

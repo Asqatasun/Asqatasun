@@ -613,7 +613,7 @@ CREATE  TABLE IF NOT EXISTS `PARAMETER` (
   `Is_Default` BIT NULL DEFAULT 0 ,
   PRIMARY KEY (`Id_Parameter`) ,
   INDEX `fk_PARAMETER_PARAMETER_ELEMENT` (`Id_Parameter_Element` ASC) ,
-  UNIQUE KEY `Unique_Param_Element_Type_Param_value` (`Parameter_Value`(255), `Id_Parameter_Element`),
+  UNIQUE KEY `Unique_Param_Element_Type_Param_value` (`Parameter_Value`(191), `Id_Parameter_Element`),
   CONSTRAINT `fk_PARAMETER_PARAMETER_ELEMENT`
     FOREIGN KEY (`Id_Parameter_Element` )
     REFERENCES `PARAMETER_ELEMENT` (`Id_Parameter_Element` )
