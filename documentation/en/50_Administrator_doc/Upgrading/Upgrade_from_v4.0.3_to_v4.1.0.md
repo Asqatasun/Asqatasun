@@ -56,6 +56,22 @@ TODO: backup database
 /usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql
 ```
 
-## 5. Adjust `asqatasun.conf`
+## X. Delete + recreate SQL procedures
 
-## 6. Copy new WAR file
+```shell
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_AUDIT_delete_from_user_email.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_delete_from_label.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_add_from_contract_label.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_add_from_user_email.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_remove_from_contract_label.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_remove_from_user_email.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_add_from_contract_label.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_add_from_user_email.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_remove_from_contract_label.sql
+/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_remove_from_user_email.sql
+```
+
+
+## X. Adjust `asqatasun.conf`
+
+## X. Copy new WAR file
