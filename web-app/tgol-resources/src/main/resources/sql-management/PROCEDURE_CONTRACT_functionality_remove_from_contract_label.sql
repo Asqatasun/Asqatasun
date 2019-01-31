@@ -8,7 +8,7 @@ DROP PROCEDURE IF EXISTS remove_funct_to_contract_from_contract_label;
 
 DELIMITER |
 CREATE
-    DEFINER =`$myDatabaseUser`@`localhost` PROCEDURE `remove_funct_to_contract_from_contract_label`
+    DEFINER =`asqatasun`@`localhost` PROCEDURE `remove_funct_to_contract_from_contract_label`
     (
         IN contractLabel VARCHAR(255),
         IN userEmail     VARCHAR(191),
