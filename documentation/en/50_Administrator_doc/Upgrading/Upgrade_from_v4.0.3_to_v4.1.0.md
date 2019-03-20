@@ -22,7 +22,7 @@ service tomcat7 stop
 It is **important to change this first** and foremost, or the mysql-client could not be able to have a
 correct communication with the storage engine.
 
-In you `/etc/mysql/conf.d/asqatasun.cnf`, adjust the following values
+In your `/etc/mysql/conf.d/asqatasun.cnf`, adjust the following values
 
 ```
 [client]
@@ -48,8 +48,6 @@ mysqldump -u asqatasun -p asqatasun >/tmp/BACKUP_asqatasun_$(date +%Y-%m-%d).sql
 ## 4. Apply new character set + collation + reduction of size on index columns
 
 Apply to the `asqatasun` database the following two scripts:
-
-TODO: backup database
 
 ```shell
 /usr/bin/mysql -u asqatasun -p asqatasun < engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql
