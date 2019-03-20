@@ -15,22 +15,10 @@
             <resource>
                 <directory>src/main/resources/</directory>
                 <filtering>true</filtering>
-                <excludes>
-                    <exclude>**/browser-installation/*</exclude>
-                    <exclude>**/conf/tgol.conf</exclude>
-                    <exclude>**/conf/ESAPI.properties</exclude>
-                    <exclude>**/conf/google-code.properties</exclude>
-                    <exclude>**/conf/s.properties</exclude>
-                    <exclude>**/installation/*</exclude>
-                    <exclude>**/lib/*</exclude>
-                    <exclude>**/password-encoder/*</exclude>
-                    <exclude>**/runtime-lib/*</exclude>
-                    <exclude>**/sql/*</exclude>
-                    <exclude>**/sql-management/*</exclude>
-                    <exclude>**/sql-update/*</exclude>
-                    <exclude>**/token-master-key-encryptor/*</exclude>
-                    <exclude>**/upgrade/*</exclude>
-                </excludes>
+                <includes>
+                    <include>src/main/resources/conf/asqatasun.conf</include>
+                    <include>src/main/resources/conf/persistence.xml</include>
+                </includes>
             </resource>
         </resources>
     </build>
