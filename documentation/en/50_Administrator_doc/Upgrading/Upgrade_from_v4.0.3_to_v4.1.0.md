@@ -22,7 +22,7 @@ service tomcat7 stop
 It is **important to change this first** and foremost, or the mysql-client could not be able to have a
 correct communication with the storage engine.
 
-In your `/etc/mysql/conf.d/asqatasun.cnf`, adjust the following values
+In your `/etc/mysql/conf.d/asqatasun.cnf`, as user **root**, adjust the following values
 
 ```
 [client]
@@ -50,26 +50,62 @@ mysqldump -u asqatasun -p asqatasun >/tmp/BACKUP_asqatasun_$(date +%Y-%m-%d).sql
 Apply to the `asqatasun` database the following two scripts:
 
 ```shell
-/usr/bin/mysql -u asqatasun -p asqatasun < engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql
+cd engine/asqatasun-resources/src/main/resources/sql-update/
+/usr/bin/mysql -u asqatasun -p asqatasun <asqatasun-40-update-from-4.0.3-to-4.1.0.sql
+cd web-app/tgol-resources/src/main/resources/sql-update/
+/usr/bin/mysql -u asqatasun -p asqatasun <tgol-40-update-from-4.0.3-to-4.1.0.sql
 ```
 
 ## X. Delete + recreate SQL procedures
 
 ```shell
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_AUDIT_delete_from_user_email.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_delete_from_label.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_add_from_contract_label.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_add_from_user_email.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_remove_from_contract_label.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_functionality_remove_from_user_email.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_add_from_contract_label.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_add_from_user_email.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_remove_from_contract_label.sql
-/usr/bin/mysql -u asqatasun -p asqatasun < web-app/tgol-resources/src/main/resources/sql-management/PROCEDURE_CONTRACT_referential_remove_from_user_email.sql
+cd web-app/tgol-resources/src/main/resources/sql-management/
+cat /dev/null >all-procedures.sql
+for i in \
+    PROCEDURE_AUDIT_delete_from_user_email.sql \
+    PROCEDURE_CONTRACT_delete_from_label.sql \
+    PROCEDURE_CONTRACT_functionality_add_from_contract_label.sql \
+    PROCEDURE_CONTRACT_functionality_add_from_user_email.sql \
+    PROCEDURE_CONTRACT_functionality_remove_from_contract_label.sql \
+    PROCEDURE_CONTRACT_functionality_remove_from_user_email.sql \
+    PROCEDURE_CONTRACT_referential_add_from_contract_label.sql \
+    PROCEDURE_CONTRACT_referential_add_from_user_email.sql \
+    PROCEDURE_CONTRACT_referential_remove_from_contract_label.sql \
+    PROCEDURE_CONTRACT_referential_remove_from_user_email.sql \
+    ; do
+    cat "${i}" >>all-procedures.sql
+done
+/usr/bin/mysql -u asqatasun -p asqatasun <all-procedures.sql
 ```
-
 
 ## X. Adjust `asqatasun.conf`
 
+* change jdbc.url=
+* Switch correct Contrast-Finder URL: `contrastfinderServiceUrl=http://contrast-finder.tanaguru.com`
+* change release: `asqatasunVersion=4.0.3`
+
+NOTE: /!\ do not forget to update the original asqatasun.conf file
+
 ## X. Copy new WAR file
+
+```shell
+tar cvfz /tmp/SAVE-asqatasun-webapp.tar.gz /var/lib/tomcat7/webapps/asqatasun/
+rm -rf  /var/lib/tomcat7/webapps/asqatasun/
+cp asqatasun-web-app-4.1.0-SNAPSHOT.war /var/lib/tomcat7/webapps/asqatasun.war
+```
+
+## X. Reload Mysql
+
+```shell
+service mysql restart
+```
+
+## X. Restart Tomcat
+
+```shell
+service tomcat7 start
+```
+
+## X. Verify
+
+`tail -f /var/log/tomcat7/catalina.out /var/log/asqatasun/asqatasun.log`
