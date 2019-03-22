@@ -7,6 +7,10 @@ You should have already done these steps:
 
 ## Check Pre-requisites : automated way
 
+### Note: Java8 required since v4.1.0
+
+Since Asqatasun v4.1.0, Java 8 (OpenJDK8) is required. 
+
 ### Pre-requisites script
 
 Once you have extracted the tarball, to Check pre-requisites, you can run the script:
