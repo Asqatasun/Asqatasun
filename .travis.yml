@@ -11,6 +11,9 @@ env:
         - "FTP_USER=contrastdh"
         - secure: "mh0D77MSnR4UGnpGiSuIRnEUsBF9+f2wCNXAExSm/LY3JSRoDW6ZBHZyvxA5Aw4av9kxgc0KDo6h7Ak6gcu3A8g5cb/7l6CyZemmc1DvpAIf3wdkhAP25QUGYFzQ38lIYYZWjrj5K6uq1QfnG7SAjU9nrvUzEfFvgXf91IpFVFtdmM6ad6h32CLv6Hf2eKPUZScw/fkRWMUWrVzivH8al++PYoXwZJTd4H3fxWN/yrJnth6Dw5GTQfZP5hJq7t2NS/XGUn/bkpCS9gUuH3ebIysbnY2EUFbzG94RPLN9jNpmhobMHdKKiy8xRPYe0d3ZowJcd3dEmMxO+agGnS/kSVNZcJAWJmtdv5d065Ki45S2aTKxCWJfsYnmMklCa9YwzGjdjxX+Aag3rdneNLKu3bFZGaUxkIg7yFc2gTnn4oHO5ZsjWZtRKyS8xC3Qkfk1yMaCOGLFlfQnRnM7dM3VLePEcyfVUUZtWt+kkjdu03WJvRSVeN7cd+G3GL4gxiY+pupobpd3CWwaks+hvDTOMVnF4hrbWzqYzeciJ2kAWJFHGWzRrfZa3jN8hYLmPKgp5Kzk18TxgHo/I3n2WhtwGvM+XXh/fN+ElZTnI9llOeWxB/68dnuQJYXBhPVtzZUplkWWWKVJhbY6LU+7liX3khmUkpxqKS8f5xW6Kpvwtxo="
 
+before_deploy:
+    - curl -u $FTP_USER:$FTP_PASSWORD ftp://ftp.cluster021.hosting.ovh.net/ -Q "DELE /www/Asqatasun/asqatasun-$ASQA_RELEASE.i386.tar.gz" || return 0
+
 deploy:
     skip_cleanup: true
     provider: script
