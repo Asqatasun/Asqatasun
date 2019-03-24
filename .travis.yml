@@ -3,20 +3,25 @@ jdk:
     - openjdk8
 
 before_install:
-    - mvn install:install-file -DgroupId=com.saucelabs -DartifactId=sebuilder-interpreter -Dversion=1.0.2 -Dpackaging=jar -Dfile=engine/asqatasun-resources/src/main/resources/lib/sebuilder-interpreter-1.0.2.jar
+    - openssl aes-256-cbc -K $encrypted_b2eab4d5de19_key -iv $encrypted_b2eab4d5de19_iv
+        -in deploy_rsa.enc -out deploy_rsa -d
+    - mvn install:install-file -DgroupId=com.saucelabs -DartifactId=sebuilder-interpreter
+        -Dversion=1.0.2 -Dpackaging=jar -Dfile=engine/asqatasun-resources/src/main/resources/lib/sebuilder-interpreter-1.0.2.jar
 
 env:
     global:
-        - "ASQA_RELEASE=4.1.0-SNAPSHOT"
-        - "FTP_USER=contrastdh"
-        - secure: "mh0D77MSnR4UGnpGiSuIRnEUsBF9+f2wCNXAExSm/LY3JSRoDW6ZBHZyvxA5Aw4av9kxgc0KDo6h7Ak6gcu3A8g5cb/7l6CyZemmc1DvpAIf3wdkhAP25QUGYFzQ38lIYYZWjrj5K6uq1QfnG7SAjU9nrvUzEfFvgXf91IpFVFtdmM6ad6h32CLv6Hf2eKPUZScw/fkRWMUWrVzivH8al++PYoXwZJTd4H3fxWN/yrJnth6Dw5GTQfZP5hJq7t2NS/XGUn/bkpCS9gUuH3ebIysbnY2EUFbzG94RPLN9jNpmhobMHdKKiy8xRPYe0d3ZowJcd3dEmMxO+agGnS/kSVNZcJAWJmtdv5d065Ki45S2aTKxCWJfsYnmMklCa9YwzGjdjxX+Aag3rdneNLKu3bFZGaUxkIg7yFc2gTnn4oHO5ZsjWZtRKyS8xC3Qkfk1yMaCOGLFlfQnRnM7dM3VLePEcyfVUUZtWt+kkjdu03WJvRSVeN7cd+G3GL4gxiY+pupobpd3CWwaks+hvDTOMVnF4hrbWzqYzeciJ2kAWJFHGWzRrfZa3jN8hYLmPKgp5Kzk18TxgHo/I3n2WhtwGvM+XXh/fN+ElZTnI9llOeWxB/68dnuQJYXBhPVtzZUplkWWWKVJhbY6LU+7liX3khmUkpxqKS8f5xW6Kpvwtxo="
+        - ASQA_RELEASE=4.1.0-SNAPSHOT
+        - FTP_USER=contrastdh
+        - secure: mh0D77MSnR4UGnpGiSuIRnEUsBF9+f2wCNXAExSm/LY3JSRoDW6ZBHZyvxA5Aw4av9kxgc0KDo6h7Ak6gcu3A8g5cb/7l6CyZemmc1DvpAIf3wdkhAP25QUGYFzQ38lIYYZWjrj5K6uq1QfnG7SAjU9nrvUzEfFvgXf91IpFVFtdmM6ad6h32CLv6Hf2eKPUZScw/fkRWMUWrVzivH8al++PYoXwZJTd4H3fxWN/yrJnth6Dw5GTQfZP5hJq7t2NS/XGUn/bkpCS9gUuH3ebIysbnY2EUFbzG94RPLN9jNpmhobMHdKKiy8xRPYe0d3ZowJcd3dEmMxO+agGnS/kSVNZcJAWJmtdv5d065Ki45S2aTKxCWJfsYnmMklCa9YwzGjdjxX+Aag3rdneNLKu3bFZGaUxkIg7yFc2gTnn4oHO5ZsjWZtRKyS8xC3Qkfk1yMaCOGLFlfQnRnM7dM3VLePEcyfVUUZtWt+kkjdu03WJvRSVeN7cd+G3GL4gxiY+pupobpd3CWwaks+hvDTOMVnF4hrbWzqYzeciJ2kAWJFHGWzRrfZa3jN8hYLmPKgp5Kzk18TxgHo/I3n2WhtwGvM+XXh/fN+ElZTnI9llOeWxB/68dnuQJYXBhPVtzZUplkWWWKVJhbY6LU+7liX3khmUkpxqKS8f5xW6Kpvwtxo=
 
 before_deploy:
-    - curl -u $FTP_USER:$FTP_PASSWORD ftp://ftp.cluster021.hosting.ovh.net/ -Q "DELE /www/Asqatasun/asqatasun-$ASQA_RELEASE.i386.tar.gz" || return 0
+    - curl -u $FTP_USER:$FTP_PASSWORD ftp://ftp.cluster021.hosting.ovh.net/ -Q "DELE /www/Asqatasun/asqatasun-$ASQA_RELEASE.i386.tar.gz"
+        || return 0
 
 deploy:
     skip_cleanup: true
     provider: script
-    script: "curl --ftp-create-dirs -T web-app/asqatasun-web-app/target/asqatasun-$ASQA_RELEASE.i386.tar.gz -u $FTP_USER:$FTP_PASSWORD ftp://ftp.cluster021.hosting.ovh.net/www/Asqatasun/asqatasun-$ASQA_RELEASE.i386.tar.gz"
+    script: curl --ftp-create-dirs -T web-app/asqatasun-web-app/target/asqatasun-$ASQA_RELEASE.i386.tar.gz
+        -u $FTP_USER:$FTP_PASSWORD ftp://ftp.cluster021.hosting.ovh.net/www/Asqatasun/asqatasun-$ASQA_RELEASE.i386.tar.gz
     on:
         branch: develop
