@@ -5,7 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
+
+### Added
+
+WIP:
+
+* [#163 - Added version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163)
+
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
 
 ## Asqatasun 4.1.0, 2019-03-xx
 
@@ -23,124 +35,80 @@ Thanks:
 - @mgifford    - User feedback: [#205](https://github.com/Asqatasun/Asqatasun/issues/205),
                               [#206](https://github.com/Asqatasun/Asqatasun/issues/206)
                           and [#208](https://github.com/Asqatasun/Asqatasun/issues/208)
+- Asqatasun team: @dzc34, @jkowalczyk, @mfaure
 
-WIP:
+### Added
 
-  - [#256 - Create upgrade script and doc for utf8mb4 migration](https://github.com/Asqatasun/Asqatasun/issues/256) 
-  - [#163 - Added the new version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163)
-  - [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137)
-  - refactoring install.sh and pre-requisites.sh
-    - added install-SQL.sh and pre-requisites-SQL.sh
-    - @@@TODO test docker images
-    - @@@TODO Docker Hub: update build config (new paths)
-    - @@@TODO update documentation
-    - @@@TODO fix ansible
-    - @@@TODO test tomcat8
+For users:
 
+* New grade (Asqatasun meter) made of A, B, C, D, E, F instead of 0-100% [#252](https://github.com/Asqatasun/Asqatasun/pull/252), [#248](https://github.com/Asqatasun/Asqatasun/pull/248)
+* SQL procedure: Add option to choose the contract duration [#213](https://github.com/Asqatasun/Asqatasun/issues/213)
+* I18N: Add german translation [#172](https://github.com/Asqatasun/Asqatasun/issues/172)
 
-### Upgrade-o-meter
+For developers and ops:
 
-- [#154 - Build - Maven 3.1 is required (needed for org.owasp:dependency-check-maven)](https://github.com/Asqatasun/Asqatasun/issues/154)
-- [#213 - SQL procedure / CONTRACT_create requires 2 added parameters (timeSpan, timeSpanUnit)](https://github.com/Asqatasun/Asqatasun/issues/213)
-- [#253 - Adapt installer to Java8](https://github.com/Asqatasun/Asqatasun/issues/253)
-- [#255 - db conversion to utf8mb4](https://github.com/Asqatasun/Asqatasun/issues/255)
-
-### Features
-
-- [#248 - Webapp UX - Provide a new representation of the asqatasun meter](https://github.com/Asqatasun/Asqatasun/issues/248) 
-- [#172 - i18n: Add german translation](https://github.com/Asqatasun/Asqatasun/issues/172) 
-
-### Security
-
-None
-
-### Outdated dependencies
-
-- [#239 - PHPLoc repository no longer responds](https://github.com/Asqatasun/Asqatasun/issues/239)
-- [#234 - Upgraded itextpdf (5.5.13 instead of 5.5.8)](https://github.com/Asqatasun/Asqatasun/issues/234)
-- [#235 - Upgraded jhighlight (1.0.3 instead of 1.0)](https://github.com/Asqatasun/Asqatasun/issues/235)
-- [#221 - Upgraded mysql-connector-java (5.1.46 instead of 5.1.15)](https://github.com/Asqatasun/Asqatasun/issues/221)
-- [#233 - Upgraded yuicompressor-maven-plugin (1.5.1 instead of 1.3.0)](https://github.com/Asqatasun/Asqatasun/issues/233)
-- [#232 - Upgraded maven-clean-plugin (3.0.0 instead of 2.5)](https://github.com/Asqatasun/Asqatasun/issues/232)
-- [#230 - Upgraded maven-jar-plugin (3.0.2 instead of 2.5)](https://github.com/Asqatasun/Asqatasun/issues/230)
-- [#229 - Upgraded maven-war-plugin (3.2.0 instead of 2.4)](https://github.com/Asqatasun/Asqatasun/issues/229)
-- [#245 - Upgraded maven-surefire-plugin (3.0.0-M1 instead of 2.17)](https://github.com/Asqatasun/Asqatasun/issues/245)
-- [#199 - Upgraded maven-compiler-plugin (3.7.0 instead of 3.1)](https://github.com/Asqatasun/Asqatasun/issues/199)
-- [#257 - Upgraded tika-core (1.20 instead of 1.3)](https://github.com/Asqatasun/Asqatasun/issues/257)
-- [#258 - Upgraded commons-fileupload (1.3.3 instead of 1.3.1)](https://github.com/Asqatasun/Asqatasun/issues/258)
-
-### Bugs
-
-- [#123 - Fixed incorrect string value: '\xF0\x9F\x99\x82' for column 'Source'](https://github.com/Asqatasun/Asqatasun/issues/123)
-- [#128 - Fixed Rgaa 3.0, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#128)
-- [#183 - Fixed build_and_run-with-docker.sh: "-t" option is used 2 times](https://github.com/Asqatasun/Asqatasun/issues/183)
-- [#142 - Fixed SQL Procedure delete-audit-by-id](https://github.com/Asqatasun/Asqatasun/issues/142)
-- [#149 - Fixed install.sh: tomcat parameters are missing](https://github.com/Asqatasun/Asqatasun/issues/149)
-- [#243 - Fixed Build on debian/ubuntu: failed to execute goal maven-surefire](https://github.com/Asqatasun/Asqatasun/issues/243)
-- Enhanced pre-requisites to allow database name containing hyphen "-"
-
-Webapp:
-
-- [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
-- [#119 - contrast ratio link: fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
-- [#146 - site-audit in error: added "check for redirection" as possible explanation](https://github.com/Asqatasun/Asqatasun/issues/146)
-- [#179 - site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
-- [#138 - `<form:errors path="scenarioFile">`, allowed `<abbr>` in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
-- [#203 - No allow starting an audit if no referential is activated for the current project](https://github.com/Asqatasun/Asqatasun/issues/203)
-- [#204 - No allow starting website audit if URL is not defined for the current project](https://github.com/Asqatasun/Asqatasun/issues/204)
-- [#27 - Contract creation: verify at least one referential is selected](https://github.com/Asqatasun/Asqatasun/issues/27)
-- [#28 - Contract creation: forbid contract without URL and with website audit enabled](https://github.com/Asqatasun/Asqatasun/issues/28)
-
-### Configuration
-
-- [#202 - Webapp: changed the default to only show "failed" and "pre-qualified" results)](https://github.com/Asqatasun/Asqatasun/issues/202)
-
-### Improvement
-
-- [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
-- [#211 - Webapp UX - Admin user can quickly update his expired contract](https://github.com/Asqatasun/Asqatasun/issues/211)
-- [#216 - Webapp UX - i18n: standardize "project" and "contract" appelations (en/fr/es)](https://github.com/Asqatasun/Asqatasun/issues/216)
-- [#197 - Webapp - Allowed the HTTP header "Cache-Control: immutable" for static files (css, js, png,...)](https://github.com/Asqatasun/Asqatasun/issues/197)
-- [#215 - SQL procedure / CONTRACT_create: increase the default contract duration (3 years instead of 1 years)](https://github.com/Asqatasun/Asqatasun/issues/215)
-- [#213 - SQL procedure / CONTRACT_create: add option to choose the contract duration in year, month or day](https://github.com/Asqatasun/Asqatasun/issues/213)
-- [#139 - Install.sh - Added new SQL procedures: list_running_acts + Last_audits](https://github.com/Asqatasun/Asqatasun/issues/139)
-- [#168 - Tar.gz - CHANGELOG and README files in html format](https://github.com/Asqatasun/Asqatasun/issues/168)
-- [#45  - Tar.gz - Documentation files in html format](https://github.com/Asqatasun/Asqatasun/issues/45)
-- [#152 - Dockerfile: add HEALTHCHECK instruction](https://github.com/Asqatasun/Asqatasun/issues/152)
-- [#241 - Added some information to the MANIFEST.MF files : commit, buid timestamp](https://github.com/Asqatasun/Asqatasun/issues/241)
-- Added some maven report plugins:
+* Enhanced pre-requisites to allow database name containing hyphen "-"
+* [#215 - SQL procedure / CONTRACT_create: increase the default contract duration (3 years instead of 1 years)](https://github.com/Asqatasun/Asqatasun/issues/215)
+* [#213 - SQL procedure / CONTRACT_create: add option to choose the contract duration in year, month or day](https://github.com/Asqatasun/Asqatasun/issues/213)
+* [#139 - Install.sh - Added new SQL procedures: list_running_acts + Last_audits](https://github.com/Asqatasun/Asqatasun/issues/139)
+* added code quality tools
     - [#185 - Unit tests coverage report (Jacocoo)](https://github.com/Asqatasun/Asqatasun/issues/185)
     - [#155 - OWASP Dependency-Check](https://github.com/Asqatasun/Asqatasun/issues/155)
     - [#198 - Checkstyle](https://github.com/Asqatasun/Asqatasun/issues/198)
     - [#156 - Javadoc](https://github.com/Asqatasun/Asqatasun/issues/156)
-- `build_and_run-with-docker.sh` script:
+* `build_and_run-with-docker.sh` script:
     - [#182 - Added --krash-test   option](https://github.com/Asqatasun/Asqatasun/issues/182)
     - [#169 - Added --log-build    option](https://github.com/Asqatasun/Asqatasun/issues/169) 
     - [#145 - Added --build-only-* options](https://github.com/Asqatasun/Asqatasun/issues/145)
     - [#144 - Added option to skip unit tests](https://github.com/Asqatasun/Asqatasun/issues/144)
+* Documentation :
+    - [#222 - Have CONTRIBUTING.md more friendly and explicit for beginners](https://github.com/Asqatasun/Asqatasun/issues/222)
+    - [#147 - Added documentation on how to run a krashtest campaign](https://github.com/Asqatasun/Asqatasun/issues/147)
+    - Added "howto configuring Apache frontend with AJP connector and HTTPS Let's Encrypt"
+    - Added "Crawler management" with howto increase maxDocuments in site-audit
 
-### Refactoring
+### Changed
 
-- [#200 - Prerequisites : libspring-instrument-java is not needed](https://github.com/Asqatasun/Asqatasun/issues/200)
+* JDK upgraded from Java7 to Java8 [#253](https://github.com/Asqatasun/Asqatasun/issues/253)
+* DB character encoding is now `utf8mb4` [#255](https://github.com/Asqatasun/Asqatasun/issues/255)
+* Build - Maven 3.1 is required (needed for org.owasp:dependency-check-maven) [#154](https://github.com/Asqatasun/Asqatasun/issues/154)
+* [#202 - Changed the default to only show "failed" and "pre-qualified" results)](https://github.com/Asqatasun/Asqatasun/issues/202)
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+For users:
+
+* Incorrect string value: '\xF0\x9F\x99\x82" ...' for column 'Source', aka utf8mb4 should default encoding to be able to deal with smileys [#123](https://github.com/Asqatasun/Asqatasun/issues/123) 
+* [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137)
+* [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
+* [#119 - contrast ratio link: fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
+* [#146 - site-audit in error: added "check for redirection" as possible explanation](https://github.com/Asqatasun/Asqatasun/issues/146)
+* [#179 - site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
+* [#203 - No allow starting an audit if no referential is activated for the current project](https://github.com/Asqatasun/Asqatasun/issues/203)
+* [#204 - No allow starting website audit if URL is not defined for the current project](https://github.com/Asqatasun/Asqatasun/issues/204)
+* [#27 - Contract creation: verify at least one referential is selected](https://github.com/Asqatasun/Asqatasun/issues/27)
+* [#28 - Contract creation: forbid contract without URL and with website audit enabled](https://github.com/Asqatasun/Asqatasun/issues/28)
+* [#216 - I18N: standardize "project" and "contract" naming (en/fr/es)](https://github.com/Asqatasun/Asqatasun/issues/216)
+* [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
+* [#211 - Webapp UX - Admin user can quickly update his expired contract](https://github.com/Asqatasun/Asqatasun/issues/211)
+
+For developers and ops:
+
+* [#138 - `<form:errors path="scenarioFile">`, allowed `<abbr>` in error message](https://github.com/Asqatasun/Asqatasun/issues/138)
+- [#200 - Prerequisites : libspring-instrument-java is no more needed](https://github.com/Asqatasun/Asqatasun/issues/200)
 - [#127 - Unit tests : replaced tgqa.org domain name by asqatasun.ovh](https://github.com/Asqatasun/Asqatasun/issues/127)
+* I18N:
+    * [#170 - webapp + rules: converted i18n files in UTF8 character encoding](https://github.com/Asqatasun/Asqatasun/issues/170)
+    * [#173 - webapp / i18n files: converted all HTML entities to their applicable UTF-8 characters](https://github.com/Asqatasun/Asqatasun/issues/173)
+    * [#174 - webapp / i18n files: removing unnecessary escaped characters](https://github.com/Asqatasun/Asqatasun/issues/174)
 
-### Documentation
+### Upgrade-o-meter
 
-- [#227 - Minor orthographic fixes to CONTRIBUTING.md](https://github.com/Asqatasun/Asqatasun/issues/227)
-- [#222 - Have CONTRIBUTING.md more friendly and explicit for beginners](https://github.com/Asqatasun/Asqatasun/issues/222)
-- [#206 - Improved user documentation](https://github.com/Asqatasun/Asqatasun/issues/206)
-- [#166 - Updated "Contributor > Build a Docker image"](https://github.com/Asqatasun/Asqatasun/issues/166)
-- [#147 - Added documentation on how to run a krashtest campaign](https://github.com/Asqatasun/Asqatasun/issues/147)
-- Added "howto configuring Apache frontend with AJP connector and HTTPS Let's Encrypt"
-- Added "Crawler management" with howto increase maxDocuments in site-audit
-- Reorganised INSTALL section
-
-### Task
-
-- [#170 - webapp + rules: converted i18n files in UTF8 character encoding](https://github.com/Asqatasun/Asqatasun/issues/170)
-- [#173 - webapp / i18n files: converted all HTML entities to their applicable UTF-8 characters](https://github.com/Asqatasun/Asqatasun/issues/173)
-- [#174 - webapp / i18n files: removing unnecessary escaped characters](https://github.com/Asqatasun/Asqatasun/issues/174)
-
+TBD
 
 ## Asqatasun 4.0.3, 2016-08-22
 
