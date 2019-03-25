@@ -74,9 +74,6 @@ For developers and ops:
 * Build - Maven 3.1 is required (needed for org.owasp:dependency-check-maven) [#154](https://github.com/Asqatasun/Asqatasun/issues/154)
 * [#202 - Changed the default to only show "failed" and "pre-qualified" results)](https://github.com/Asqatasun/Asqatasun/issues/202)
 
-### Deprecated
-
-### Removed
 
 ### Fixed
 
@@ -90,11 +87,11 @@ For users:
 * [#179 - site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
 * [#203 - No allow starting an audit if no referential is activated for the current project](https://github.com/Asqatasun/Asqatasun/issues/203)
 * [#204 - No allow starting website audit if URL is not defined for the current project](https://github.com/Asqatasun/Asqatasun/issues/204)
-* [#27 - Contract creation: verify at least one referential is selected](https://github.com/Asqatasun/Asqatasun/issues/27)
-* [#28 - Contract creation: forbid contract without URL and with website audit enabled](https://github.com/Asqatasun/Asqatasun/issues/28)
 * [#216 - I18N: standardize "project" and "contract" naming (en/fr/es)](https://github.com/Asqatasun/Asqatasun/issues/216)
 * [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
 * [#211 - Webapp UX - Admin user can quickly update his expired contract](https://github.com/Asqatasun/Asqatasun/issues/211)
+* [#27 - Contract creation: verify at least one referential is selected](https://github.com/Asqatasun/Asqatasun/issues/27)
+* [#28 - Contract creation: forbid contract without URL and with website audit enabled](https://github.com/Asqatasun/Asqatasun/issues/28)
 
 For developers and ops:
 
@@ -108,7 +105,9 @@ For developers and ops:
 
 ### Upgrade-o-meter
 
-TBD
+The recommended upgrade path consists in exporting Asqatasun data, installing v4.1.0 as a new intance (along Java8) and re-importing data.
+
+We are aware that this may be difficult to some installations, but contributions are welcomed and we are always happy to bring in new contibutors :)
 
 ## Asqatasun 4.0.3, 2016-08-22
 
