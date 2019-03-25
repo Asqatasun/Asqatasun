@@ -3,8 +3,11 @@
 -- ------ convert utf8 DB to utf8mb4 ------------------------------
 -- ----------------------------------------------------------------
 
--- WIP see: https://github.com/Asqatasun/Asqatasun/issues/123
-
+-- see: https://github.com/Asqatasun/Asqatasun/issues/123
+--
+-- /!\ This the **engine** part of the SQL update
+-- /!\ do not forget to run the **webapp** part,
+--     located in web-app/tgol-resources/src/main/resources/sql-update
 
 -- 1. Change the character set and collation properties of the database
 -- -----------------------------------------------------------------
@@ -12,25 +15,25 @@ ALTER DATABASE `asqatasun`
     CHARACTER SET = utf8mb4
     COLLATE       = utf8mb4_general_ci;
 
--- 2. Change the character set and collation properties of each tables
+-- 2. Change the character set, collation properties
+--    and maximum length of each VARCHAR or TEXT column **which is an index**
 -- ----------------------------------------------------------------
-ALTER TABLE `TGSI_ROLE`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_USER`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_SCOPE`                   CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_FUNCTIONALITY`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT`                CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_ACT`                     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_ACT_AUDIT`               CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION_FAMILY`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION`                  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION_ELEMENT`          CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_OPTION_ELEMENT` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_USER_OPTION_ELEMENT`     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_FUNCTIONALITY`  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_REFERENTIAL`             CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_REFERENTIAL`    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_SCENARIO`                CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
+ALTER TABLE `THEME`                 CHANGE `Cd_Theme`               `Cd_Theme`              varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `REFERENCE`             CHANGE `Cd_Reference`           `Cd_Reference`          varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `CRITERION`             CHANGE `Cd_Criterion`           `Cd_Criterion`          varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TEST`                  CHANGE `Cd_Test`                `Cd_Test`               varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `PROCESS_RESULT`        CHANGE `Definite_Value`         `Definite_Value`        varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `PROCESS_REMARK`        CHANGE `Issue`                  `Issue`                 varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `PRE_PROCESS_RESULT`    CHANGE `Pre_Process_Key`        `Pre_Process_Key`       varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `PARAMETER_FAMILY`      CHANGE `Cd_Parameter_Family`    `Cd_Parameter_Family`   varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `PARAMETER_ELEMENT`     CHANGE `Cd_Parameter_Element`   `Cd_Parameter_Element`  varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+ALTER TABLE `PARAMETER` DROP KEY `Unique_Param_Element_Type_Param_value`;
+ALTER TABLE `PARAMETER` ADD UNIQUE KEY `Unique_Param_Element_Type_Param_value` (`Parameter_Value`(191), `Id_Parameter_Element`);
+
+-- 3. Change the character set and collation properties of each tables
+-- ----------------------------------------------------------------
 ALTER TABLE `AUDIT`                        CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `WEB_RESOURCE`                 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ALTER TABLE `CONTENT`                      CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -64,100 +67,17 @@ ALTER TABLE `REVINFO`                      CONVERT TO CHARACTER SET utf8mb4 COLL
 ALTER TABLE `PROCESS_RESULT_AUD`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 
--- 3. Change the character set, collation properties
---    and maximum length of each VARCHAR or TEXT column
--- ----------------------------------------------------------------
-
-    -- example:
-    --          ALTER TABLE       table_name
-    --              CHANGE        column_name   column_name
-    --              VARCHAR(191)
-    --              CHARACTER SET utf8mb4
-    --              COLLATE       utf8mb4_general_ci;
-    --
-    -- /!\  Don’t blindly copy-paste this!  /!\
-    --      The exact statement depends on the column type, maximum length,
-    --      and other properties. The above line is just an example for a VARCHAR column.
-
-
 -- 4. Repair and optimize all tables
 -- ----------------------------------------------------------------
 
     --  with cli:
     --      mysqlcheck -u root -p --auto-repair --optimize --all-databases
 
--- If you  don't perform those repairing and optimizing, you may run into some weird bugs
+-- If you don't perform those repairing and optimizing, you may run into some weird bugs
 -- where UPDATE statements don't  have any effect, even though no errors were thrown.
 --    source:  http://hanoian.com/content/index.php/24-automate-the-converting-a-mysql-database-character-set-to-utf8mb4
 
--- Repair all tables
-REPAIR TABLE `TGSI_ROLE`;
-REPAIR TABLE `TGSI_USER`;
-REPAIR TABLE `TGSI_SCOPE`;
-REPAIR TABLE `TGSI_FUNCTIONALITY`;
-REPAIR TABLE `TGSI_CONTRACT`;
-REPAIR TABLE `TGSI_ACT`;
-REPAIR TABLE `TGSI_ACT_AUDIT`;
-REPAIR TABLE `TGSI_OPTION_FAMILY`;
-REPAIR TABLE `TGSI_OPTION`;
-REPAIR TABLE `TGSI_OPTION_ELEMENT`;
-REPAIR TABLE `TGSI_CONTRACT_OPTION_ELEMENT`;
-REPAIR TABLE `TGSI_USER_OPTION_ELEMENT`;
-REPAIR TABLE `TGSI_CONTRACT_FUNCTIONALITY`;
-REPAIR TABLE `TGSI_REFERENTIAL`;
-REPAIR TABLE `TGSI_CONTRACT_REFERENTIAL`;
-REPAIR TABLE `TGSI_SCENARIO`;
-
-REPAIR TABLE `AUDIT`;
-REPAIR TABLE `WEB_RESOURCE`;
-REPAIR TABLE `CONTENT`;
-REPAIR TABLE `CONTENT_RELATIONSHIP`;
-REPAIR TABLE `SCOPE`;
-REPAIR TABLE `DECISION_LEVEL`;
-REPAIR TABLE `LEVEL`;
-REPAIR TABLE `THEME`;
-REPAIR TABLE `REFERENCE`;
-REPAIR TABLE `CRITERION`;
-REPAIR TABLE `TEST`;
-REPAIR TABLE `AUDIT_TEST`;
-REPAIR TABLE `EVIDENCE`;
-REPAIR TABLE `PROCESS_RESULT`;
-REPAIR TABLE `PROCESS_REMARK`;
-REPAIR TABLE `EVIDENCE_ELEMENT`;
-REPAIR TABLE `NOMENCLATURE`;
-REPAIR TABLE `NOMENCLATURE_ELEMENT`;
-REPAIR TABLE `STANDARD_MESSAGE`;
-REPAIR TABLE `PRE_PROCESS_RESULT`;
--- REPAIR TABLE `SNAPSHOT`;
-REPAIR TABLE `PARAMETER_FAMILY`;
-REPAIR TABLE `PARAMETER_ELEMENT`;
-REPAIR TABLE `PARAMETER`;
-REPAIR TABLE `AUDIT_PARAMETER`;
-REPAIR TABLE `WEB_RESOURCE_STATISTICS`;
-REPAIR TABLE `THEME_STATISTICS`;
-REPAIR TABLE `CRITERION_STATISTICS`;
-REPAIR TABLE `TEST_STATISTICS`;
-REPAIR TABLE `REVINFO`;
-REPAIR TABLE `PROCESS_RESULT_AUD`;
-
 -- Optimize all tables
-OPTIMIZE TABLE `TGSI_ROLE`;
-OPTIMIZE TABLE `TGSI_USER`;
-OPTIMIZE TABLE `TGSI_SCOPE`;
-OPTIMIZE TABLE `TGSI_FUNCTIONALITY`;
-OPTIMIZE TABLE `TGSI_CONTRACT`;
-OPTIMIZE TABLE `TGSI_ACT`;
-OPTIMIZE TABLE `TGSI_ACT_AUDIT`;
-OPTIMIZE TABLE `TGSI_OPTION_FAMILY`;
-OPTIMIZE TABLE `TGSI_OPTION`;
-OPTIMIZE TABLE `TGSI_OPTION_ELEMENT`;
-OPTIMIZE TABLE `TGSI_CONTRACT_OPTION_ELEMENT`;
-OPTIMIZE TABLE `TGSI_USER_OPTION_ELEMENT`;
-OPTIMIZE TABLE `TGSI_CONTRACT_FUNCTIONALITY`;
-OPTIMIZE TABLE `TGSI_REFERENTIAL`;
-OPTIMIZE TABLE `TGSI_CONTRACT_REFERENTIAL`;
-OPTIMIZE TABLE `TGSI_SCENARIO`;
-
 OPTIMIZE TABLE `AUDIT`;
 OPTIMIZE TABLE `WEB_RESOURCE`;
 OPTIMIZE TABLE `CONTENT`;
