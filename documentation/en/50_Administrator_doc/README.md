@@ -2,6 +2,7 @@
 
 Here is all documentation related to administration and configuration of Asqatasun.
 
+* [Upgrading](Upgrading/README.md)
 * [BackOffice](backoffice.md)
     * Access to the BackOffice
     * Create / update / delete users
