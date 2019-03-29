@@ -1,10 +1,9 @@
 # Release a *Relase Candidate* version of Asqatasun
 
-This is the documentation for releasing a new version for Asqatasun. As an end user, you won't need it, it is just for developers.
-
+This is the documentation for releasing a new version **Release Candidate** for Asqatasun. As an end user, you won't need it, it is just for developers.
 
 ## 1) Prepare CHANGELOG.md:
-* use [CHANGELOG_template.md](CHANGELOG_template.md)
+
 * add an entry for this RC
 * add differences between this release and previous one:
     * review [closed issues](https://github.com/Asqatasun/Asqatasun/issues?q=is%3Aissue+is%3Aclosed)
@@ -16,6 +15,8 @@ This is the documentation for releasing a new version for Asqatasun. As an end u
 * copy/paste changelog in section "Content of this last version"
 
 ## 3) Upgrade version strings in code with `bump_asqatasun.sh`:
+
+/!\ Be sure to be on the `develop` branch **before** launching the following script.
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/

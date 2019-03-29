@@ -25,6 +25,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
     * scan a user-workflow like site registration, form completion or e-commerce checkout with **Asqatasun scenarios**.
 
 ## Demo
+
 https://app.asqatasun.org
 
 [![https://app.asqatasun.org](https://github.com/Asqatasun/Asqatasun/blob/develop/documentation/en/Images/app.asqatasun.org_FR_690x340.png)](https://app.asqatasun.org)
@@ -36,25 +37,15 @@ https://app.asqatasun.org
 2. Be 200% reliable (don't give erroneous result)
 3. have technological fun
 
-![5 types of accessibility results](https://github.com/Asqatasun/Asqatasun/blob/master/documentation/en/20_User_doc/Images/screenshot_20150307_ASQATASUN_5_types_of_result.png)
-
----
-
 
 ## Installation and documentation
 
-* How to install Asqatasun ?
-* How to run the Docker images ?
-* What hardware to provision ?
-* ...
+Four ways to read the doc:
 
-All answers are in the [Asqatasun Documentation](http://doc.asqatasun.org/en/) (or in the `documentation/`
-directory if you cloned the repos or downloaded the .tar.gz).
-
-Takeaway:
-
-* [Asqatasun doc in PDF, 9Mb](https://www.gitbook.com/download/pdf/book/asqatasun/asqatasun?lang=en)
-* [Asqatasun doc in EPUB, 3Mb](https://www.gitbook.com/download/epub/book/asqatasun/asqatasun?lang=en)
+* Online: [doc.asqatasun.org](http://doc.asqatasun.org/en/) 
+* In the `documentation/` directory if you cloned the repos or downloaded the .tar.gz
+* Download [Asqatasun doc in PDF format, 9Mb](https://www.gitbook.com/download/pdf/book/asqatasun/asqatasun?lang=en)
+* Download [Asqatasun doc in EPUB format, 3Mb](https://www.gitbook.com/download/epub/book/asqatasun/asqatasun?lang=en)
 
 ## Download
 
@@ -106,7 +97,7 @@ What tests are covered:
 
 * [Asqatasun forum](http://forum.asqatasun.org/) 
 * [Twitter @Asqatasun](https://twitter.com/Asqatasun)
-* email to `asqatasun AT asqatasun dot org` (only English, French and klingon is spoken :) ) 
+* email to `asqatasun AT asqatasun dot org` (only English, French and Klingon is spoken :) ) 
 
 ## Contribute
 
@@ -123,36 +114,44 @@ We would be really glad to have you on board! You can help in many ways:
 
  [AGPL v3](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE) 
 
-## Content of this last version (Asqatasun 4.0.3, 2016-08-22)
+## Major changes of this last version (Asqatasun 4.1.0-RC.1, 2019-03-29)
 
-### Features
+(See CHANGELOG.md for detailed info)
 
-* Docker/RELEASE: reduced weight from 450 MB to 290 MB
-* Asqatasun-Runner: RGAA 3.0 by default, enabled SEO and disabled RGAA 2
-* Referential RGAA 3.0: english translation added (source : https://github.com/DISIC/rgaa_referentiel_en)
+Major features:
 
-### Bugs
+* New grade (Asqatasun meter) made of A, B, C, D, E, F instead of 0-100% [#252](https://github.com/Asqatasun/Asqatasun/pull/252), [#248](https://github.com/Asqatasun/Asqatasun/pull/248)
+* I18N: Add german translation [#172](https://github.com/Asqatasun/Asqatasun/issues/172)
+* JDK upgraded from Java7 to Java8 [#253](https://github.com/Asqatasun/Asqatasun/issues/253)
+* DB character encoding is now `utf8mb4` [#255](https://github.com/Asqatasun/Asqatasun/issues/255)
 
-* [#115 Build failure on project asqatasun-engine with openJDK-8](https://github.com/Asqatasun/Asqatasun/issues/115)
-* [#113 Build failure on the projects webApp and runner with openJDK-8 on Ubuntu 16.04](https://github.com/Asqatasun/Asqatasun/issues/113)
-* [#114 Runner - install/engine folder not present in the tarball](https://github.com/Asqatasun/Asqatasun/issues/114)
-* [#117 Fixed /rules/referential-creator/(...)/pom.vm](https://github.com/Asqatasun/Asqatasun/issues/117)
+Major bug fixes:
 
-### Documentation
+* Incorrect string value: '\xF0\x9F\x99\x82" ...' for column 'Source', aka utf8mb4 should default encoding to be able to deal with smileys [#123](https://github.com/Asqatasun/Asqatasun/issues/123) 
+* [#137 - Fixed Rgaa 3.2016, 8.9.1: unit tests fail](https://github.com/Asqatasun/Asqatasun/issues/#137)
+* [#126 - Create a contract pointing to an internal URL, even if the domain does not end with a valid gTLD](https://github.com/Asqatasun/Asqatasun/issues/126)
+* [#119 - contrast ratio link: fixed ratio parameter](https://github.com/Asqatasun/Asqatasun/issues/119)
+* [#146 - site-audit in error: added "check for redirection" as possible explanation](https://github.com/Asqatasun/Asqatasun/issues/146)
+* [#179 - site-audit in error: fixed the robots.txt URL in error message](https://github.com/Asqatasun/Asqatasun/issues/179)
+* [#203 - No allow starting an audit if no referential is activated for the current project](https://github.com/Asqatasun/Asqatasun/issues/203)
+* [#204 - No allow starting website audit if URL is not defined for the current project](https://github.com/Asqatasun/Asqatasun/issues/204)
+* [#216 - I18N: standardize "project" and "contract" naming (en/fr/es)](https://github.com/Asqatasun/Asqatasun/issues/216)
+* [#208 - Webapp UX - Admin user can quickly add a new project to his account](https://github.com/Asqatasun/Asqatasun/issues/208)
+* [#211 - Webapp UX - Admin user can quickly update his expired contract](https://github.com/Asqatasun/Asqatasun/issues/211)
+* [#27 - Contract creation: verify at least one referential is selected](https://github.com/Asqatasun/Asqatasun/issues/27)
+* [#28 - Contract creation: forbid contract without URL and with website audit enabled](https://github.com/Asqatasun/Asqatasun/issues/28)
 
-* Updated runner doc (WIP)
-* Added "the referential creation" + "Create-a-rule" (WIP)
 
-### Upgrade-o-meter 
+Upgrade-o-meter: 
 
-* no database change, just replace the `.war` file
+* Please see Documentation > Administrator_doc > Upgrading
 
-See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.md)
+See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.md) for details.
 
 
-### Have Fun
+## Have Fun
 
-Happy coding !
+Happy testing !
 
 [Asqatasun Team](https://github.com/Asqatasun/Asqatasun/blob/master/documentation/en/asqatasun-team.md)
 
