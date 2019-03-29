@@ -19,7 +19,7 @@ WIP:
 ### Fixed
 ### Security
 
-## Asqatasun 4.1.0, 2019-03-xx
+## Asqatasun 4.1.0-rc.1, 2019-03-29
 
 Thanks:
 
