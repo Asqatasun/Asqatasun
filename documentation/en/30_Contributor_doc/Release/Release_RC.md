@@ -16,6 +16,8 @@ This is the documentation for releasing a new version **Release Candidate** for 
 
 ## 3) Upgrade version strings in code with `bump_asqatasun.sh`:
 
+/!\ Be sure to be on the `develop` branch **before** launching the following script.
+
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
