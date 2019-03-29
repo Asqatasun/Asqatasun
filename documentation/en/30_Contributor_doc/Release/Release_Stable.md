@@ -1,6 +1,6 @@
 # Release a *stable* version of Asqatasun
 
-This is the documentation for releasing a new version for Asqatasun. As an end user, you won't need it, it is just for developers.
+This is the documentation for releasing a new **stable** version for Asqatasun. As an end user, you won't need it, it is just for developers.
 
 ## 1) Prepare CHANGELOG.md:
 
