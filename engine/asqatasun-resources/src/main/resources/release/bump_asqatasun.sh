@@ -7,21 +7,19 @@ TEMP=`getopt -o acpt --long commit,push,tag,automerge,source-dir:,from-version:,
 
 if [[ $? != 0 ]] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
-usage ()
-{
-
-echo 'usage: ./bump_asqatasun.sh [OPTIONS]...'
-echo ''
-echo '  --from-version <arg>         MANDATORY : The version number to modify.'
-echo '  --to-version <arg>           MANDATORY : The new version number to apply.'
-echo '  --source-dir <arg>           OPTIONAL : Path to the source directory (must be absolute). If not provided, Github repos is used.'
-echo '  -a, --automerge              OPTIONAL : Auto merge from develop to master before bumping.'
-echo '  -c, --commit                 OPTIONAL : Commit automatically modifications.'
-echo '  -p, --push                   OPTIONAL : Push automatically commit on remote.'
-echo '  -t, --tag                    OPTIONAL : Tag automatically version from --to-version arg.'
-echo ''
-echo ''
-exit 2
+usage () {
+    echo 'usage: ./bump_asqatasun.sh [OPTIONS]...'
+    echo ''
+    echo '  --from-version <arg>         MANDATORY : The version number to modify.'
+    echo '  --to-version <arg>           MANDATORY : The new version number to apply.'
+    echo '  --source-dir <arg>           OPTIONAL : Path to the source directory (must be absolute). If not provided, Github repos is used.'
+    echo '  -a, --automerge              OPTIONAL : Auto merge from develop to master before bumping.'
+    echo '  -c, --commit                 OPTIONAL : Commit automatically modifications.'
+    echo '  -p, --push                   OPTIONAL : Push automatically commit on remote.'
+    echo '  -t, --tag                    OPTIONAL : Tag automatically version from --to-version arg.'
+    echo ''
+    echo ''
+    exit 2
 }
 
 # Note the quotes around `$TEMP': they are essential!
@@ -70,7 +68,6 @@ then
     usage
 fi
 
-
 ####################################################################
 # change directory to local repos or download it to temporary folder
 ####################################################################
@@ -78,8 +75,7 @@ fi
 if [[ "$SOURCE_DIR" != "" ]]
 then
     cd "$SOURCE_DIR"
-        # @@@TODO fix (cf @dzc34)
-        # git checkout master
+    git checkout master
 else
     cd /tmp
     git clone git@github.com:Asqatasun/Asqatasun.git
@@ -89,15 +85,11 @@ else
     git checkout master
 fi
 
-
 ############
 # Auto merge
 ############
 
 if [[ "$AUTOMERGE" = true ]] ; then
-    #git checkout develop
-    #git rebase master
-    #git checkout master
     git merge origin/develop
 fi
 
@@ -126,6 +118,7 @@ echo 'bumped context with version' $TO_VERSION
 #########################################
 # Update  contributors.txt 
 #########################################
+
 echo "Commits    Contributors"                               > contributors.txt 
 echo "--------------------------"                           >> contributors.txt 
 git shortlog -s -n                                          >> contributors.txt 
@@ -151,8 +144,6 @@ if [[ "$COMMIT" = true ]] ; then
     git commit -m "$COMMIT_MESSAGE"
     echo 'committed all files with message : ' $COMMIT_MESSAGE
 fi
-
-
 
 ###############
 # Automatic tag
