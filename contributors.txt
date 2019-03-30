@@ -1,31 +1,54 @@
 Commits    Contributors
 --------------------------
-  3363	Jérôme Kowalczyk
-   496	Matthieu FAURE
-   299	Fabrice Gangler
-   137	Anthony Lingua
+  2600	Jérôme Kowalczyk
+   690	Fabrice Gangler
+   554	Jerome Kowalczyk
+   525	Matthieu FAURE
+   176	jkowalczyk
+   104	Matthieu Faure
+    73	Anthony
+    64	lingua
     52	neyo2010
     51	sofien-hamdi
-    34	Toufik ELLOUZE
+    48	koj
+    37	mfaure
+    31	tellouze
     25	elhamdouni
     25	medsob
     23	ioulachbar
     22	Régis Lapeze
     17	diamamp
     15	Lalaina Ralambomanana
-    13	KEBRI Mustapha
+    13	Haradwaith
     12	François Poyer
-     9	Arbab Nazar
+     9	Mustapha KEBRI
+     8	Arbab Nazar
      8	ayman abdelghany
+     5	Gailor PETEMOYA
      5	sondes22
+     5	wellcom
+     4	Alexis
+     4	KEBRI Mustapha
+     4	meskoj
+     3	Toufik ELLOUZE
      3	aouchani
+     3	kaho
      2	Baptiste Le Bail
+     2	Barogthor
+     2	Koj
+     2	Nicola Spanti (RyDroid)
      1	Ben Stewart
      1	Dougal Matthews
+     1	Jérome Kowalczyk
      1	Marc Laporte
      1	Mark Sadecki
+     1	allrib
+     1	arbabnazar
+     1	bureau-si1a-soda
      1	halna
+     1	mickaeldicurzio@gmail.com
+     1	nisan
 
 
----- Release 4.1.0-SNAPSHOT ----------------------
+---- Release 4.1.0-rc.1 ----------------------
 

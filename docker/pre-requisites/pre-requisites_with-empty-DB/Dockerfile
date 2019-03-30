@@ -18,7 +18,7 @@ ENV  WWWPORT="8080"                                    \
      DATABASE_HOST="localhost"                         \
      DATABASE_USER="asqatasun"                         \
      DATABASE_PASSWD="asqaP4sswd"                      \
-     ASQA_RELEASE="4.1.0-SNAPSHOT"
+     ASQA_RELEASE="4.1.0-rc.1"
 
 EXPOSE $WWWPORT
 
