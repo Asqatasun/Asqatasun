@@ -5,7 +5,7 @@ set -o errexit
 TEMP=`getopt -o acpt --long commit,push,tag,automerge,source-dir:,from-version:,to-version: \
              -n 'javawrap' -- "$@"`
 
-if [ $? != 0 ] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+if [[ $? != 0 ]] ; then echo "Terminating..." >&2 ; exit 1 ; fi
 
 usage ()
 {
@@ -54,14 +54,15 @@ done
 #############################################
 # check mandatory options
 #############################################
-if [ "$FROM_VERSION" = "" ]
+
+if [[ "$FROM_VERSION" = "" ]]
 then
     echo ''
     echo 'Mandatory option is missing'
     echo ''
     usage
 fi
-if [ "$TO_VERSION" = "" ]
+if [[ "$TO_VERSION" = "" ]]
 then
     echo ''
     echo 'Mandatory option is missing'
@@ -73,7 +74,8 @@ fi
 ####################################################################
 # change directory to local repos or download it to temporary folder
 ####################################################################
-if [ "$SOURCE_DIR" != "" ]
+
+if [[ "$SOURCE_DIR" != "" ]]
 then
     cd "$SOURCE_DIR"
         # @@@TODO fix (cf @dzc34)
@@ -91,7 +93,8 @@ fi
 ############
 # Auto merge
 ############
-if [ "$AUTOMERGE" = true ] ; then
+
+if [[ "$AUTOMERGE" = true ]] ; then
     #git checkout develop
     #git rebase master
     #git checkout master
@@ -134,7 +137,8 @@ echo ''                                                     >> contributors.txt
 #########################################
 # Automatic Commit with generated message
 #########################################
-if [ "$COMMIT" = true ] ; then
+
+if [[ "$COMMIT" = true ]] ; then
     COMMIT_MESSAGE="Release $TO_VERSION"
     echo 'commiting all files with message : ' $COMMIT_MESSAGE
     find . -name "pom.xml" | xargs git add -u
@@ -153,7 +157,8 @@ fi
 ###############
 # Automatic tag
 ###############
-if [ "$TAG" = true ] ; then
+
+if [[ "$TAG" = true ]] ; then
     MY_TAG="v$TO_VERSION"
     echo 'tagging new ' $MY_TAG 'tag.'
     git tag -a $MY_TAG -m "$MY_TAG"
@@ -163,11 +168,12 @@ fi
 ##########################################
 # Automatic push to $BRANCH_NAME + $MY_TAG
 ##########################################
-if [ "$PUSH" = true ] ; then
+
+if [[ "$PUSH" = true ]] ; then
     echo 'pushing to master'
     git push origin master
     echo 'pushed to master'
-    if [ "$TAG" = true ] ; then
+    if [[ "$TAG" = true ]] ; then
         echo 'pushing new ' $MY_TAG 'tag.'
         git push origin $MY_TAG
         echo 'pushed new ' $MY_TAG 'tag.'
@@ -177,7 +183,7 @@ fi
 ########################
 # Clean up temporary dir
 ########################
-#if [ "$SOURCE_DIR" = "" ] ; then
+#if [[ "$SOURCE_DIR" = "" ]] ; then
 #    cd /tmp
 #    rm -fr Asqatasun
 #fi
