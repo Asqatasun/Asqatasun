@@ -20,7 +20,7 @@ This is the documentation for releasing a new version **Release Candidate** for 
 
 ```sh
 cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
+./bump_asqatasun.sh --source ABSOLUTE_PATH_TO_ASQATASUN_Sources --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
 ```
 
 ## 4) Build local Docker image with locally build Asqatasun
