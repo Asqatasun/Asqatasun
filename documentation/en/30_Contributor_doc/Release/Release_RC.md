@@ -41,6 +41,7 @@ git rebase master
 cd engine/asqatasun-resources/src/main/resources/release/
 ./bump_asqatasun.sh --from-version X.Y.Z-rc.1 --to-version X.Y.Z-SNAPSHOT --source-dir /tmp/Asqatasun
 find . -name "pom.xml" | xargs git add -u :/
+find . -name "pom.vm" | xargs git add -u :/
 find . -name "Dockerfile" | xargs git add -u :/
 git add **/install.sh 
 git add **/asqatasun.conf

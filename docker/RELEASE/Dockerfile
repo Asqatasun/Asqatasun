@@ -26,7 +26,7 @@ ENV WWWPORT="8080" \
     ASQA_ADMIN_EMAIL="me@my-email.org" \
     ASQA_ADMIN_PASSWD="myAsqaPassword"  \
     ASQA_RELEASE="4.0.3"
-    # ASQA_RELEASE="4.1.0-rc.1"
+    # ASQA_RELEASE="4.1.0-SNAPSHOT"
 
 EXPOSE $WWWPORT
 

@@ -38,7 +38,7 @@ ENV  JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"    \
      ASQA_URL="http://localhost:8080/asqatasun/"       \
      ASQA_ADMIN_EMAIL="me@my-email.org"                \
      ASQA_ADMIN_PASSWD="myAsqaPassword"                \
-     ASQA_RELEASE="4.1.0-rc.1"
+     ASQA_RELEASE="4.1.0-SNAPSHOT"
 
 EXPOSE $WWWPORT
 
