@@ -21,8 +21,12 @@ TOMCAT_LIB_DIR=/usr/share/tomcat8/lib
 TOMCAT_USER=tomcat8
 
 # XVFB
-XVFB_INITSCRIPT_FILENAME=xvfb
+XVFB_INITSCRIPT_BASENAME=xvfb@
+XVFB_INITSCRIPT_FILENAME="${XVFB_INITSCRIPT_BASENAME}.service"
 XVFB_INITSCRIPT_DIR=.
+XVFB_DISPLAY=:99
+SYSTEMD_UNIT_DIR=/etc/systemd/system/
+SYSTEMCTL=/bin/systemctl
 
 # Firefox ESR
 FIREFOX_PARENT_DIR=/opt
@@ -96,14 +100,10 @@ update-java-alternatives -s java-1.8.0-openjdk-amd64
 # XVFB config
 #############################################
 
-cp ${XVFB_INITSCRIPT_DIR}/${XVFB_INITSCRIPT_FILENAME} ${XVFB_INITSCRIPT_DIR}/${XVFB_INITSCRIPT_FILENAME}.old
-
-SH_PERL_COMMAND="s!RUN_AS_USER=tomcat8!RUN_AS_USER=${TOMCAT_USER}!o"
-perl -pi -e "${SH_PERL_COMMAND}" ${XVFB_INITSCRIPT_DIR}/${XVFB_INITSCRIPT_FILENAME}
-
-cp ${XVFB_INITSCRIPT_DIR}/${XVFB_INITSCRIPT_FILENAME} /etc/init.d/
-update-rc.d ${XVFB_INITSCRIPT_FILENAME} defaults
-service ${XVFB_INITSCRIPT_FILENAME} start
+cp "${XVFB_INITSCRIPT_DIR}/${XVFB_INITSCRIPT_FILENAME}" "${SYSTEMD_UNIT_DIR}/"
+chmod +x "${SYSTEMD_UNIT_DIR}/${XVFB_INITSCRIPT_FILENAME}"
+"${SYSTEMCTL}" enable "${XVFB_INITSCRIPT_BASENAME}${XVFB_DISPLAY}.service"
+"${SYSTEMCTL}" start "${XVFB_INITSCRIPT_BASENAME}${XVFB_DISPLAY}.service"
 
 #############################################
 # Firefox ESR config
