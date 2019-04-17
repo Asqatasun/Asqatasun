@@ -22,18 +22,8 @@
 
 package org.asqatasun.crawler.extractor.listener;
 
-import org.archive.modules.CrawlURI;
-
 /**
- *
+ * @TODO : To be removed
  * @author jkowalczyk
  */
-public interface ExtractorCSSListener {
-
-    /**
-     * 
-     * @param curi
-     */
-    public void computeCSSResource(CrawlURI curi);
-
-}
+public interface ExtractorCSSListener {}

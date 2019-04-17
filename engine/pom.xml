@@ -30,7 +30,6 @@
         <module>audit</module>
         <module>rule-implementation-loader</module>
         <module>nomenclatureloader</module>
-        <module>crawler</module>
         <module>contentloader</module>
         <module>contentadapter</module>
         <module>commons-processing</module>

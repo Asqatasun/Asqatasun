@@ -96,9 +96,6 @@
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
 
-        <heritrixGroupId>org.archive.heritrix</heritrixGroupId>
-        <heritrixVersion>3.1.1</heritrixVersion>
-
         <hibernateGroupId>org.hibernate</hibernateGroupId>
         <hibernateVersion>4.3.5.Final</hibernateVersion>
 
@@ -148,16 +145,6 @@
         <repository>
             <id>saucelabs-repository</id>
             <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>heritrixRepos</id>
-            <url>http://builds.archive.org:8080/maven2/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -1155,149 +1142,6 @@
                     <exclusion>
                         <groupId>${springGroupId}</groupId>
                         <artifactId>spring-context-support</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
-            <!-- heritrix dependencies -->
-            <dependency>
-                <groupId>${heritrixGroupId}</groupId>
-                <artifactId>heritrix-commons</artifactId>
-                <version>${heritrixVersion}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-codec</groupId>
-                        <artifactId>commons-codec</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>poi</groupId>
-                        <artifactId>poi</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>poi</groupId>
-                        <artifactId>poi-scratchpad</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-net</groupId>
-                        <artifactId>commons-net</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-io</groupId>
-                        <artifactId>commons-io</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-collections</groupId>
-                        <artifactId>commons-collections</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-lang</groupId>
-                        <artifactId>commons-lang</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>commons-cli</groupId>
-                        <artifactId>commons-cli</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>net.htmlparser.jericho</groupId>
-                        <artifactId>jericho-html</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.itextpdf</groupId>
-                        <artifactId>itextpdf</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>junit</groupId>
-                        <artifactId>junit</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>net.java.dev.jets3t</groupId>
-                        <artifactId>jets3t</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.anotherbigidea</groupId>
-                        <artifactId>javaswf</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>joda-time</groupId>
-                        <artifactId>joda-time</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.json</groupId>
-                        <artifactId>json</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.esotericsoftware</groupId>
-                        <artifactId>reflectasm</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>${heritrixGroupId}</groupId>
-                <artifactId>heritrix-engine</artifactId>
-                <version>${heritrixVersion}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>jetty</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>jetty-util</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>jetty-sslengine</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.mortbay.jetty</groupId>
-                        <artifactId>servlet-api-2.5</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.restlet</groupId>
-                        <artifactId>org.restlet</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.noelios.restlet</groupId>
-                        <artifactId>com.noelios.restlet</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.noelios.restlet</groupId>
-                        <artifactId>com.noelios.restlet.ext.jetty</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>${heritrixGroupId}</groupId>
-                <artifactId>heritrix-modules</artifactId>
-                <version>${heritrixVersion}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>${springGroupId}</artifactId>
-                        <groupId>spring-beans</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>${springGroupId}</artifactId>
-                        <groupId>spring-context</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>${springGroupId}</artifactId>
-                        <groupId>spring-core</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.beanshell</groupId>
-                        <artifactId>bsh</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-all</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>

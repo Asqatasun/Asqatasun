@@ -16,8 +16,8 @@
             <artifactId>asqatasun-commons-entity</artifactId>
         </dependency>
         <dependency>
-            <groupId>${heritrixGroupId}</groupId>
-            <artifactId>heritrix-modules</artifactId>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-beans</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

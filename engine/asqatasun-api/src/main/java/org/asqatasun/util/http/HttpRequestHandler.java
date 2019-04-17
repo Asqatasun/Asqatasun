@@ -23,15 +23,15 @@
 package org.asqatasun.util.http;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.apache.commons.httpclient.URIException;
-import org.apache.commons.httpclient.util.URIUtil;
+import java.util.*;
+
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
@@ -58,6 +58,23 @@ public class HttpRequestHandler {
     
     private static final String ASQATASUN_USER_AGENT = "asqatasun";
     private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
+
+    protected static String defaultProtocolCharset = "UTF-8";
+    protected static String defaultDocumentCharset = null;
+    protected static String defaultDocumentCharsetByLocale = null;
+    protected static String defaultDocumentCharsetByPlatform = null;
+    protected static final BitSet uric;
+    protected static final BitSet allowed_query;
+    protected static final BitSet reserved;
+    protected static final BitSet alphanum;
+    protected static final BitSet mark;
+    protected static final BitSet unreserved;
+    protected static final BitSet escaped;
+    protected static final char[] rootPath;
+    protected static final BitSet percent;
+    protected static final BitSet digit;
+    protected static final BitSet alpha;
+    protected static final BitSet hex;
 
     private String proxyPort;
     public void setProxyPort(String proxyPort) {
@@ -199,14 +216,15 @@ public class HttpRequestHandler {
             return "";
         }
         String encodedUrl = getEncodedUrl(url);
+        LOGGER.info(encodedUrl);
         CloseableHttpClient httpClient = getHttpClient(encodedUrl);
         HttpGet get = new HttpGet(encodedUrl);
         try {
-            LOGGER.debug("executing request to retrieve content on " + get.getURI());
+            LOGGER.info("executing request to retrieve content on " + get.getURI());
             HttpResponse response = httpClient.execute(get);
-            LOGGER.debug("received " + response.getStatusLine().getStatusCode() + " from get request");
+            LOGGER.info("received " + response.getStatusLine().getStatusCode() + " from get request");
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                LOGGER.debug("status == HttpStatus.SC_OK " );
+                LOGGER.info("status == HttpStatus.SC_OK " );
                 return EntityUtils.toString(response.getEntity(), Charset.defaultCharset());
             } else {
                 LOGGER.debug("status != HttpStatus.SC_OK " );
@@ -294,11 +312,10 @@ public class HttpRequestHandler {
         LOGGER.debug("isProxySet:  " + (StringUtils.isNotEmpty(proxyHost) && StringUtils.isNotEmpty(proxyPort)));
         return StringUtils.isNotEmpty(proxyHost) && StringUtils.isNotEmpty(proxyPort);
     }
-    
+
     /**
-     * 
-     * @param url
-     * @return 
+     *
+     * @return whether the proxy credential is set
      */
     private boolean isProxyCredentialSet() {
         LOGGER.debug("isProxyCredentialSet" + (StringUtils.isNotEmpty(proxyUser) && StringUtils.isNotEmpty(proxyPassword)));
@@ -362,13 +379,287 @@ public class HttpRequestHandler {
         }
     }
     
-    private String getEncodedUrl(String url) {
+    public String getEncodedUrl(String url) {
         try {
-            return URIUtil.encodeQuery(URIUtil.decode(url));
-        } catch (URIException ue) {
-            LOGGER.warn("URIException on " + url);
+            return HttpRequestHandler.encodeQuery(HttpRequestHandler.decode(url));
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.warn("Exception on encoding " + url + " "  + e.getMessage());
+            return url;
+        } catch (DecoderException e) {
+            LOGGER.warn("Exception on encoding " + url + " "  + e.getMessage());
             return url;
         }
     }
 
+    /**
+     * Escape and encode a string regarded as the query component of an URI with
+     * the default protocol charset.
+     * When a query string is not misunderstood the reserved special characters
+     * ("&amp;", "=", "+", ",", and "$") within a query component, this method
+     * is recommended to use in encoding the whole query.
+     *
+     * @param unescaped an unescaped string
+     * @return the escaped string
+     *
+     *
+     */
+    private static String encodeQuery(String unescaped) throws UnsupportedEncodingException {
+        byte[] rawData = URLCodec.encodeUrl(allowed_query, HttpRequestHandler.getBytes(unescaped, defaultProtocolCharset));
+        return HttpRequestHandler.getAsciiString(rawData);
+    }
+
+    /**
+     * Converts the specified string to a byte array.  If the charset is not supported the
+     * default system charset is used.
+     *
+     * @param data the string to be encoded
+     * @param charset the desired character encoding
+     * @return The resulting byte array.
+     *
+     */
+    private static byte[] getBytes(final String data, String charset) {
+
+        if (data == null) {
+            throw new IllegalArgumentException("data may not be null");
+        }
+
+        if (charset == null || charset.length() == 0) {
+            throw new IllegalArgumentException("charset may not be null or empty");
+        }
+
+        try {
+            return data.getBytes(charset);
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.warn("Unsupported encoding: " + charset + ". System encoding used.");
+            return data.getBytes();
+        }
+    }
+
+    /**
+     * Converts the byte array of ASCII characters to a string. This method is
+     * to be used when decoding content of HTTP elements (such as response
+     * headers)
+     *
+     * @param data the byte array to be encoded
+     * @return The string representation of the byte array
+     *
+     * @since 3.0
+     */
+    private static String getAsciiString(final byte[] data) throws UnsupportedEncodingException {
+
+        if (data == null) {
+            throw new IllegalArgumentException("Parameter may not be null");
+        }
+
+        return new String(data, 0, data.length, "US-ASCII");
+    }
+
+    /**
+     * Unescape and decode a given string regarded as an escaped string with the
+     * default protocol charset.
+     *
+     * @param escaped a string
+     * @return the unescaped string
+     *
+     *
+     */
+    public static String decode(String escaped) throws UnsupportedEncodingException, DecoderException {
+        byte[] rawdata = URLCodec.decodeUrl(HttpRequestHandler.getAsciiBytes(escaped));
+        return HttpRequestHandler.getString(rawdata, defaultProtocolCharset);
+    }
+
+    /**
+     * Converts the byte array of HTTP content characters to a string. If
+     * the specified charset is not supported, default system encoding
+     * is used.
+     *
+     * @param data the byte array to be encoded
+     * @param charset the desired character encoding
+     * @return The result of the conversion.
+     *
+     * @since 3.0
+     */
+    private static String getString(
+        final byte[] data,
+        String charset
+    ) {
+
+        if (data == null) {
+            throw new IllegalArgumentException("Parameter may not be null");
+        }
+
+        if (charset == null || charset.length() == 0) {
+            throw new IllegalArgumentException("charset may not be null or empty");
+        }
+
+        try {
+            return new String(data, 0, data.length, charset);
+        } catch (UnsupportedEncodingException e) {
+
+            LOGGER.warn("Unsupported encoding: " + charset + ". System encoding used");
+            return new String(data, 0, data.length);
+        }
+    }
+
+    /**
+     * Converts the specified string to byte array of ASCII characters.
+     *
+     * @param data the string to be encoded
+     * @return The string as a byte array.
+     *
+     * @since 3.0
+     */
+    private static byte[] getAsciiBytes(final String data) throws UnsupportedEncodingException {
+
+        if (data == null) {
+            throw new IllegalArgumentException("Parameter may not be null");
+        }
+
+        return data.getBytes("US-ASCII");
+    }
+
+    static {
+        Locale locale = Locale.getDefault();
+        if (locale != null) {
+            defaultDocumentCharsetByLocale = LocaleToCharsetMap.getCharset(locale);
+            defaultDocumentCharset = defaultDocumentCharsetByLocale;
+        }
+
+        try {
+            defaultDocumentCharsetByPlatform = System.getProperty("file.encoding");
+        } catch (SecurityException var2) {
+        }
+
+        if (defaultDocumentCharset == null) {
+            defaultDocumentCharset = defaultDocumentCharsetByPlatform;
+        }
+
+        rootPath = new char[]{'/'};
+        percent = new BitSet(256);
+        percent.set(37);
+        digit = new BitSet(256);
+
+        int i;
+        for(i = 48; i <= 57; ++i) {
+            digit.set(i);
+        }
+
+        alpha = new BitSet(256);
+
+        for(i = 97; i <= 122; ++i) {
+            alpha.set(i);
+        }
+
+        for(i = 65; i <= 90; ++i) {
+            alpha.set(i);
+        }
+
+        alphanum = new BitSet(256);
+        alphanum.or(alpha);
+        alphanum.or(digit);
+        hex = new BitSet(256);
+        hex.or(digit);
+
+        for(i = 97; i <= 102; ++i) {
+            hex.set(i);
+        }
+
+        for(i = 65; i <= 70; ++i) {
+            hex.set(i);
+        }
+
+        escaped = new BitSet(256);
+        escaped.or(percent);
+        escaped.or(hex);
+        mark = new BitSet(256);
+        mark.set(45);
+        mark.set(95);
+        mark.set(46);
+        mark.set(33);
+        mark.set(126);
+        mark.set(42);
+        mark.set(39);
+        mark.set(40);
+        mark.set(41);
+        unreserved = new BitSet(256);
+        unreserved.or(alphanum);
+        unreserved.or(mark);
+        reserved = new BitSet(256);
+        reserved.set(59);
+        reserved.set(47);
+        reserved.set(63);
+        reserved.set(58);
+        reserved.set(64);
+        reserved.set(38);
+        reserved.set(61);
+        reserved.set(43);
+        reserved.set(36);
+        reserved.set(44);
+        uric = new BitSet(256);
+        uric.or(reserved);
+        uric.or(unreserved);
+        uric.or(escaped);
+        allowed_query = new BitSet(256);
+        allowed_query.or(uric);
+        allowed_query.clear(37);
+    }
+
+    public static class LocaleToCharsetMap {
+        private static final Hashtable LOCALE_TO_CHARSET_MAP = new Hashtable();
+
+        public LocaleToCharsetMap() {
+        }
+
+        public static String getCharset(Locale locale) {
+            String charset = (String)LOCALE_TO_CHARSET_MAP.get(locale.toString());
+            if (charset != null) {
+                return charset;
+            } else {
+                charset = (String)LOCALE_TO_CHARSET_MAP.get(locale.getLanguage());
+                return charset;
+            }
+        }
+
+        static {
+            LOCALE_TO_CHARSET_MAP.put("ar", "ISO-8859-6");
+            LOCALE_TO_CHARSET_MAP.put("be", "ISO-8859-5");
+            LOCALE_TO_CHARSET_MAP.put("bg", "ISO-8859-5");
+            LOCALE_TO_CHARSET_MAP.put("ca", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("cs", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("da", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("de", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("el", "ISO-8859-7");
+            LOCALE_TO_CHARSET_MAP.put("en", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("es", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("et", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("fi", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("fr", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("hr", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("hu", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("is", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("it", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("iw", "ISO-8859-8");
+            LOCALE_TO_CHARSET_MAP.put("ja", "Shift_JIS");
+            LOCALE_TO_CHARSET_MAP.put("ko", "EUC-KR");
+            LOCALE_TO_CHARSET_MAP.put("lt", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("lv", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("mk", "ISO-8859-5");
+            LOCALE_TO_CHARSET_MAP.put("nl", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("no", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("pl", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("pt", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("ro", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("ru", "ISO-8859-5");
+            LOCALE_TO_CHARSET_MAP.put("sh", "ISO-8859-5");
+            LOCALE_TO_CHARSET_MAP.put("sk", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("sl", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("sq", "ISO-8859-2");
+            LOCALE_TO_CHARSET_MAP.put("sr", "ISO-8859-5");
+            LOCALE_TO_CHARSET_MAP.put("sv", "ISO-8859-1");
+            LOCALE_TO_CHARSET_MAP.put("tr", "ISO-8859-9");
+            LOCALE_TO_CHARSET_MAP.put("uk", "ISO-8859-5");
+            LOCALE_TO_CHARSET_MAP.put("zh", "GB2312");
+            LOCALE_TO_CHARSET_MAP.put("zh_TW", "Big5");
+        }
+    }
 }
