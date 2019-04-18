@@ -28,6 +28,9 @@ import com.sebuilder.interpreter.factory.ScriptFactory.SuiteException;
 import com.sebuilder.interpreter.factory.TestRunFactory;
 import com.sebuilder.interpreter.steptype.Get;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,9 +40,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
+import org.mozilla.universalchardet.UniversalDetector;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.asqatasun.contentloader.HarFileContentLoaderFactory;
-import org.asqatasun.crawler.util.CrawlUtils;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.PreProcessResult;
@@ -91,16 +94,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     public void setWebResource(WebResource webResource) {
         this.webResource = webResource;
     }
-    
-//    private SnapshotDataService snapshotDataService;
-//    public void setSnapshotDataService(SnapshotDataService snapshotDataService) {
-//        this.snapshotDataService = snapshotDataService;
-//    }
-//    
-//    private SnapshotFactory snapshotFactory;
-//    public void setSnapshotFactory(SnapshotFactory snapshotFactory) {
-//        this.snapshotFactory = snapshotFactory;
-//    }    
     
     /**
      * 
@@ -241,7 +234,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         }
         String charset = UFT8;
         try {
-            charset = CrawlUtils.extractCharset(IOUtils.toInputStream(sourceCode));
+            charset = extractCharset(IOUtils.toInputStream(sourceCode));
         } catch (IOException ex) {
             Logger.getLogger(this.getClass()).warn(ex);
         }
@@ -255,13 +248,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         ssp.setCharset(charset);
         contentDataService.saveOrUpdate(ssp);
         result.add(ssp);
-        
-//        if (snapshotContent != null) {
-//            Snapshot snapshot = snapshotFactory.create(
-//                    page, 
-//                    snapshotContent);
-//            snapshotDataService.saveOrUpdate(snapshot);
-//        }
         
         Audit audit = null;
         if (page.getAudit() != null) {
@@ -400,5 +386,48 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         }
         return true;
     }
-    
+
+    /**
+     * This method extracts the charset from the html source code.
+     * If the charset is not specified, it is set to UTF-8 by default
+     * @param is
+     * @return
+     */
+    private static String extractCharset(InputStream is) throws java.io.IOException {
+        byte[] buf = new byte[4096];
+        UniversalDetector detector = new UniversalDetector(null);
+        int nread;
+        while ((nread = is.read(buf)) > 0 && !detector.isDone()) {
+            detector.handleData(buf, 0, nread);
+        }
+        detector.dataEnd();
+
+        String encoding = detector.getDetectedCharset();
+        if (encoding != null) {
+            LOGGER.debug("Detected encoding = " + encoding);
+        } else {
+            LOGGER.debug("No encoding detected.");
+        }
+
+        detector.reset();
+        if (encoding != null && isValidCharset(encoding)) {
+            return encoding;
+        } else {
+            return UFT8;
+        }
+    }
+
+    /**
+     * This methods tests if a charset is valid regarding the charset nio API.
+     * @param charset
+     * @return
+     */
+    private static boolean isValidCharset(String charset) {
+        try {
+            Charset.forName(charset);
+        } catch (UnsupportedCharsetException e) {
+            return false;
+        }
+        return true;
+    }
 }
