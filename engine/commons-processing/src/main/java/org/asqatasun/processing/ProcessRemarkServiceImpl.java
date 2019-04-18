@@ -50,8 +50,7 @@ import org.w3c.dom.NodeList;
 public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
     private static final Logger LOGGER = Logger.getLogger(ProcessRemarkServiceImpl.class);
-    
-//    private static final String ESCAPED_DOUBLE_QUOTE = "&quot;";
+
     private static final String ESCAPED_OPEN_TAG = "&lt;";
     private static final String ESCAPED_CLOSE_TAG = "&gt;";
     private static final String CLOSURE_TAG_OCCUR = "/";
@@ -421,7 +420,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     
     /**
      * 
-     * @param node
+     * @param element
      * @return
      */
     private int searchElementLineNumber(Element element) {
@@ -504,7 +503,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     /**
      * This methods search the line where the current node is present in
      * the source code
-     * @param node
+     * @param element
      * @return
      */
     private int getElementIndex(Element element) {
@@ -545,7 +544,7 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
      * Initialisation of a local map that handles each source code line, 
      * keyed by the line number
      * 
-     * @param adaptedContent
+     * @param rawSource
      */
     private void initializeRawSourceCodeMap(String rawSource) {
         rawSourceCodeWithLine = new LinkedHashMap<>();
