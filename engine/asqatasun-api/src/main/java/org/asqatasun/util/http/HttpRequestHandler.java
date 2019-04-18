@@ -23,11 +23,13 @@
 package org.asqatasun.util.http;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.*;
 
 import org.apache.commons.codec.DecoderException;
@@ -49,6 +51,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.mozilla.universalchardet.UniversalDetector;
 
 /**
  *
@@ -389,6 +392,50 @@ public class HttpRequestHandler {
             LOGGER.warn("Exception on encoding " + url + " "  + e.getMessage());
             return url;
         }
+    }
+
+    /**
+     * This method extracts the charset from the html source code.
+     * If the charset is not specified, it is set to UTF-8 by default
+     * @param is
+     * @return
+     */
+    public static String extractCharset(InputStream is) throws java.io.IOException {
+        byte[] buf = new byte[4096];
+        UniversalDetector detector = new UniversalDetector(null);
+        int nread;
+        while ((nread = is.read(buf)) > 0 && !detector.isDone()) {
+            detector.handleData(buf, 0, nread);
+        }
+        detector.dataEnd();
+
+        String encoding = detector.getDetectedCharset();
+        if (encoding != null) {
+            LOGGER.debug("Detected encoding = " + encoding);
+        } else {
+            LOGGER.debug("No encoding detected.");
+        }
+
+        detector.reset();
+        if (encoding != null && isValidCharset(encoding)) {
+            return encoding;
+        } else {
+            return defaultProtocolCharset;
+        }
+    }
+
+    /**
+     * This methods tests if a charset is valid regarding the charset nio API.
+     * @param charset
+     * @return
+     */
+    public static boolean isValidCharset(String charset) {
+        try {
+            Charset.forName(charset);
+        } catch (UnsupportedCharsetException e) {
+            return false;
+        }
+        return true;
     }
 
     /**

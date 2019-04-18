@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.asqatasun.crawler.util.CrawlUtils;
+import org.asqatasun.util.http.HttpRequestHandler;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
@@ -56,7 +56,7 @@ public final class UploadAuditSetUpCommandHelper  {
             tmpMultiFile = fileInputList[i];
             try {
                 if (tmpMultiFile != null && !tmpMultiFile.isEmpty() && tmpMultiFile.getInputStream() != null) {
-                    tmpCharset = CrawlUtils.extractCharset(tmpMultiFile.getInputStream());
+                    tmpCharset = HttpRequestHandler.extractCharset(tmpMultiFile.getInputStream());
                     fileMap.put(
                             getFileName(tmpMultiFile.getOriginalFilename()),
                             tmpMultiFile.getFileItem().getString(tmpCharset));

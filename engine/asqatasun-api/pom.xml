@@ -67,8 +67,12 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.juniversalchardet</groupId>
+            <artifactId>juniversalchardet</artifactId>
+        </dependency>
 
-	<!-- Java Architecture for XML Binding (JAXB), Java 11+ support -->		
+	<!-- Java Architecture for XML Binding (JAXB), Java 11+ support -->
 	<dependency>
 		<groupId>javax.xml.bind</groupId>
 		<artifactId>jaxb-api</artifactId>

@@ -33,10 +33,6 @@
             <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.juniversalchardet</groupId>
-            <artifactId>juniversalchardet</artifactId>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
