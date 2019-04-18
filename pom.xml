@@ -595,25 +595,6 @@
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-crawler</artifactId>
-                <version>${asqatasunVersion}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>poi</groupId>
-                        <artifactId>poi</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>poi</groupId>
-                        <artifactId>poi-ooxlm</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>poi</groupId>
-                        <artifactId>poi-scratchpad</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-persistence</artifactId>
                 <version>${asqatasunVersion}</version>
             </dependency>
