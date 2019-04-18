@@ -51,20 +51,6 @@ public class AuditCommandFactoryImplTest extends TestCase {
     private Audit mockAudit;
     
     private AuditDataService mockAuditDataService;
-    private TestDataService mockTestDataService;
-    private ParameterDataService mockParameterDataService;
-    private WebResourceDataService mockWebResourceDataService;
-    private ProcessResultDataService mockProcessResultDataService;
-    
-    private ContentDataService mockContentDataService;
-    private ContentLoaderService mockContentLoaderService;
-    private ScenarioLoaderService mockScenarioLoaderService;
-    private CrawlerService mockCrawlerService;
-    private ContentAdapterService mockContentAdapterService;
-    private ProcessorService mockProcessorService;
-    private ConsolidatorService mockConsolidatorService;
-    private AnalyserService mockAnalyserService;
-    private AdaptationListener mockAdaptationListener;
     
     public AuditCommandFactoryImplTest(String testName) {
         super(testName);

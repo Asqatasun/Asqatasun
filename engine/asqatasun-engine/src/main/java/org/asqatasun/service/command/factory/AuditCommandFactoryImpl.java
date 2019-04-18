@@ -55,6 +55,9 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
 
     @Autowired
     private AuditDataService auditDataService;
+    public void setAuditDataService(AuditDataService auditDataService) {
+        this.auditDataService = auditDataService;
+    }
     @Autowired
     private WebResourceDataService webResourceDataService;
     @Autowired
