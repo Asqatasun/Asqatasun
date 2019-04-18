@@ -1,20 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--    This file is part of Asqatasun.
-        Copyright (C) 2008-2019   Asqatasun.org
-
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU Affero General Public License as
-        published by the Free Software Foundation, either version 3 of the
-        License, or (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-        See the GNU Affero General Public License for more details.
-
-        You should have received a copy of the GNU Affero General Public License
-        along with this program. If not, see http://www.gnu.org/licenses/           -->
-
+<!DOCTYPE project [
+    <!ELEMENT project (modelVersion|groupId|artifactId|packaging|version|name|url|description|organization|licenses|scm|issueManagement|ciManagement|prerequisites|modules|profiles|properties|repositories|build|reporting|dependencyManagement)*>
+    <!ATTLIST project
+        xmlns CDATA #REQUIRED
+        xmlns:xsi CDATA #REQUIRED
+        xsi:schemaLocation CDATA #REQUIRED>
+    <!ELEMENT modelVersion (#PCDATA)>
+    <!ELEMENT groupId (#PCDATA)>
+    <!ELEMENT artifactId (#PCDATA)>
+    <!ELEMENT packaging (#PCDATA)>
+    <!ELEMENT version (#PCDATA)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT url (#PCDATA)>
+    <!ELEMENT description (#PCDATA)>
+    <!ELEMENT organization (name|url)*>
+    <!ELEMENT licenses (license)*>
+    <!ELEMENT license (name|url|distribution)*>
+    <!ELEMENT distribution (#PCDATA)>
+    <!ELEMENT scm (connection|url|developerConnection|tag)*>
+    <!ELEMENT connection (#PCDATA)>
+    <!ELEMENT developerConnection (#PCDATA)>
+    <!ELEMENT tag (#PCDATA)>
+    <!ELEMENT issueManagement (system|url)*>
+    <!ELEMENT system (#PCDATA)>
+    <!ELEMENT ciManagement (system|url)*>
+    <!ELEMENT prerequisites (maven)*>
+    <!ELEMENT maven (#PCDATA)>
+    <!ELEMENT modules (module)*>
+    <!ELEMENT module (#PCDATA)>
+    <!ELEMENT profiles (profile)*>
+    <!ELEMENT profile (id|modules)*>
+    <!ELEMENT id (#PCDATA)>
+    <!ELEMENT properties (commitUrlPrefix|project.build.sourceEncoding|project.reporting.outputEncoding|maven.compiler.encoding|maven.compiler.source|maven.compiler.target|asqatasunGroupId|asqatasunVersion|springGroupId|springVersion|springSecurityVersion|hibernateGroupId|hibernateVersion|log4jGroupId|log4jVersion|httpcomponentsGroupId|itextpdf.version|jersey.version|jhighlight.version|mysql-connector-java.version|junitGroupId|junitVersion|maven-checkstyle-plugin.version|maven-clean-plugin.version|maven-compiler-plugin.version|maven-surefire-plugin.version|maven-project-info-reports-plugin.version|maven-javadoc-plugin.version|maven-jar-plugin.version|maven-jxr-plugin.version|maven-war-plugin.version|build-helper-maven-plugin.version|buildnumber-maven-plugin.version|dependency-check-maven.version|jacoco-maven-plugin.version|markdown-page-generator-plugin.version|yuicompressor-maven-plugin.version)*>
+    <!ELEMENT commitUrlPrefix (#PCDATA)>
+    <!ELEMENT project.build.sourceEncoding (#PCDATA)>
+    <!ELEMENT project.reporting.outputEncoding (#PCDATA)>
+    <!ELEMENT maven.compiler.encoding (#PCDATA)>
+    <!ELEMENT maven.compiler.source (#PCDATA)>
+    <!ELEMENT maven.compiler.target (#PCDATA)>
+    <!ELEMENT asqatasunGroupId (#PCDATA)>
+    <!ELEMENT asqatasunVersion (#PCDATA)>
+    <!ELEMENT springGroupId (#PCDATA)>
+    <!ELEMENT springVersion (#PCDATA)>
+    <!ELEMENT springSecurityVersion (#PCDATA)>
+    <!ELEMENT hibernateGroupId (#PCDATA)>
+    <!ELEMENT hibernateVersion (#PCDATA)>
+    <!ELEMENT log4jGroupId (#PCDATA)>
+    <!ELEMENT log4jVersion (#PCDATA)>
+    <!ELEMENT httpcomponentsGroupId (#PCDATA)>
+    <!ELEMENT itextpdf.version (#PCDATA)>
+    <!ELEMENT jersey.version (#PCDATA)>
+    <!ELEMENT jhighlight.version (#PCDATA)>
+    <!ELEMENT mysql-connector-java.version (#PCDATA)>
+    <!ELEMENT junitGroupId (#PCDATA)>
+    <!ELEMENT junitVersion (#PCDATA)>
+    <!ELEMENT maven-checkstyle-plugin.version (#PCDATA)>
+    <!ELEMENT maven-clean-plugin.version (#PCDATA)>
+    <!ELEMENT maven-compiler-plugin.version (#PCDATA)>
+    <!ELEMENT maven-surefire-plugin.version (#PCDATA)>
+    <!ELEMENT maven-project-info-reports-plugin.version (#PCDATA)>
+    <!ELEMENT maven-javadoc-plugin.version (#PCDATA)>
+    <!ELEMENT maven-jar-plugin.version (#PCDATA)>
+    <!ELEMENT maven-jxr-plugin.version (#PCDATA)>
+    <!ELEMENT maven-war-plugin.version (#PCDATA)>
+    <!ELEMENT build-helper-maven-plugin.version (#PCDATA)>
+    <!ELEMENT buildnumber-maven-plugin.version (#PCDATA)>
+    <!ELEMENT dependency-check-maven.version (#PCDATA)>
+    <!ELEMENT jacoco-maven-plugin.version (#PCDATA)>
+    <!ELEMENT markdown-page-generator-plugin.version (#PCDATA)>
+    <!ELEMENT yuicompressor-maven-plugin.version (#PCDATA)>
+    <!ELEMENT repositories (repository)*>
+    <!ELEMENT repository (url|id|releases|snapshots)*>
+    <!ELEMENT releases (enabled)*>
+    <!ELEMENT enabled (#PCDATA)>
+    <!ELEMENT snapshots (enabled)*>
+    <!ELEMENT build (plugins)*>
+    <!ELEMENT plugins (plugin)*>
+    <!ELEMENT plugin (groupId|artifactId|version|configuration|executions)*>
+    <!ELEMENT configuration (source|target|encoding|filesets|archive|name|pattern|timeZone|locale|shortRevisionLength|revisionOnScmFailure|show|author|linksource|doctitle|windowtitle|header|footer|bottom|inputDirectory|outputDirectory|inputEncoding|outputEncoding|pegdownExtensions|headerHtmlFile|footerHtmlFile|dependencyLocationsEnabled)*>
+    <!ELEMENT source (#PCDATA)>
+    <!ELEMENT target (#PCDATA)>
+    <!ELEMENT encoding (#PCDATA)>
+    <!ELEMENT filesets (fileset)*>
+    <!ELEMENT fileset (directory|includes|followSymlinks)*>
+    <!ELEMENT directory (#PCDATA)>
+    <!ELEMENT includes (include)*>
+    <!ELEMENT include (#PCDATA)>
+    <!ELEMENT followSymlinks (#PCDATA)>
+    <!ELEMENT archive (manifestEntries|manifestSections)*>
+    <!ELEMENT manifestEntries (Project|Built-By|Build-Release|Build-Timestamp|Build-Date|Build-Id|git-branch|git-url|git-commit|Maven-Version|Java-Version|Os-Name|Os-Arch)*>
+    <!ELEMENT Project (#PCDATA)>
+    <!ELEMENT Built-By (#PCDATA)>
+    <!ELEMENT manifestSections (manifestSection)*>
+    <!ELEMENT manifestSection (name|manifestEntries)*>
+    <!ELEMENT Build-Release (#PCDATA)>
+    <!ELEMENT Build-Timestamp (#PCDATA)>
+    <!ELEMENT Build-Date (#PCDATA)>
+    <!ELEMENT Build-Id (#PCDATA)>
+    <!ELEMENT git-branch (#PCDATA)>
+    <!ELEMENT git-url (#PCDATA)>
+    <!ELEMENT git-commit (#PCDATA)>
+    <!ELEMENT Maven-Version (#PCDATA)>
+    <!ELEMENT Java-Version (#PCDATA)>
+    <!ELEMENT Os-Name (#PCDATA)>
+    <!ELEMENT Os-Arch (#PCDATA)>
+    <!ELEMENT executions (execution)*>
+    <!ELEMENT execution (id|goals|phase|configuration)*>
+    <!ELEMENT goals (goal)*>
+    <!ELEMENT goal (#PCDATA)>
+    <!ELEMENT phase (#PCDATA)>
+    <!ELEMENT pattern (#PCDATA)>
+    <!ELEMENT timeZone (#PCDATA)>
+    <!ELEMENT locale (#PCDATA)>
+    <!ELEMENT shortRevisionLength (#PCDATA)>
+    <!ELEMENT revisionOnScmFailure (#PCDATA)>
+    <!ELEMENT show (#PCDATA)>
+    <!ELEMENT author (#PCDATA)>
+    <!ELEMENT linksource (#PCDATA)>
+    <!ELEMENT doctitle (#PCDATA)>
+    <!ELEMENT windowtitle (#PCDATA)>
+    <!ELEMENT header (#PCDATA)>
+    <!ELEMENT footer (#PCDATA)>
+    <!ELEMENT bottom (#PCDATA)>
+    <!ELEMENT inputDirectory (#PCDATA)>
+    <!ELEMENT outputDirectory (#PCDATA)>
+    <!ELEMENT inputEncoding (#PCDATA)>
+    <!ELEMENT outputEncoding (#PCDATA)>
+    <!ELEMENT pegdownExtensions (#PCDATA)>
+    <!ELEMENT headerHtmlFile (#PCDATA)>
+    <!ELEMENT footerHtmlFile (#PCDATA)>
+    <!ELEMENT reporting (plugins)*>
+    <!ELEMENT dependencyLocationsEnabled (#PCDATA)>
+    <!ELEMENT dependencyManagement (dependencies)*>
+    <!ELEMENT dependencies (dependency)*>
+    <!ELEMENT dependency (groupId|artifactId|version|scope|exclusions)*>
+    <!ELEMENT scope (#PCDATA)>
+    <!ELEMENT exclusions (exclusion)*>
+    <!ELEMENT exclusion (artifactId|groupId)*>
+    ]>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -94,10 +217,11 @@
         <asqatasunVersion>4.1.0-SNAPSHOT</asqatasunVersion>
         
         <springGroupId>org.springframework</springGroupId>
-        <springVersion>3.1.2.RELEASE</springVersion>
+        <springVersion>4.3.21.RELEASE</springVersion>
+        <springSecurityVersion>4.2.10.RELEASE</springSecurityVersion>
 
         <hibernateGroupId>org.hibernate</hibernateGroupId>
-        <hibernateVersion>4.3.5.Final</hibernateVersion>
+        <hibernateVersion>4.3.8.Final</hibernateVersion>
 
         <log4jGroupId>log4j</log4jGroupId>
         <log4jVersion>1.2.15</log4jVersion>
@@ -846,14 +970,9 @@
 
             <!-- commons dependencies -->
             <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.1</version>
+                <version>3.7</version>
             </dependency>
             <dependency>
                 <groupId>commons-collections</groupId>
@@ -863,12 +982,12 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.8</version>
+                <version>1.10</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.4</version>
+                <version>2.5</version>
             </dependency>
             <dependency>
                 <groupId>commons-fileupload</groupId>
@@ -898,7 +1017,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpcore</artifactId>
-                <version>4.3</version>
+                <version>4.4.9</version>
             </dependency>
             <dependency>
                 <groupId>commons-dbcp</groupId>
@@ -915,7 +1034,7 @@
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.3.1</version>
+                <version>1.4.9</version>
             </dependency>
 
             <!-- htmlCleaner dependencies -->
@@ -958,7 +1077,7 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.3.6</version>
+                <version>4.5.5</version>
             </dependency>
 
             <!-- aspectj dependencies -->
@@ -1049,7 +1168,7 @@
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-core</artifactId>
-                <version>${springVersion}</version>
+                <version>${springSecurityVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>${springGroupId}</groupId>
@@ -1108,17 +1227,17 @@
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
-                <version>${springVersion}</version>
+                <version>${springSecurityVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-web</artifactId>
-                <version>${springVersion}</version>
+                <version>${springSecurityVersion}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-taglibs</artifactId>
-                <version>${springVersion}</version>
+                <version>${springSecurityVersion}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>${springGroupId}</groupId>
