@@ -16,8 +16,8 @@
                 <directory>src/main/resources/</directory>
                 <filtering>true</filtering>
                 <includes>
-                    <include>src/main/resources/conf/asqatasun.conf</include>
-                    <include>src/main/resources/conf/persistence.xml</include>
+                    <include>conf/asqatasun.conf</include>
+                    <include>conf/persistence.xml</include>
                 </includes>
             </resource>
         </resources>
