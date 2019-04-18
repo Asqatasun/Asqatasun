@@ -35,13 +35,7 @@ import org.asqatasun.entity.service.audit.ProcessResultDataService;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
-import org.asqatasun.service.AnalyserService;
-import org.asqatasun.service.ConsolidatorService;
-import org.asqatasun.service.ContentAdapterService;
-import org.asqatasun.service.ContentLoaderService;
-import org.asqatasun.service.CrawlerService;
-import org.asqatasun.service.ProcessorService;
-import org.asqatasun.service.ScenarioLoaderService;
+import org.asqatasun.service.*;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.AuditCommandImpl;
 import org.asqatasun.service.command.GroupOfPagesAuditCommandImpl;
@@ -59,95 +53,36 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class AuditCommandFactoryImpl implements AuditCommandFactory {
 
+    @Autowired
     private AuditDataService auditDataService;
     @Autowired
-    public void setAuditDataService(AuditDataService auditDataService) {
-        this.auditDataService = auditDataService;
-    }
-
     private WebResourceDataService webResourceDataService;
     @Autowired
-    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
-
     private TestDataService testDataService;
     @Autowired
-    public void setTestDataService(TestDataService testDataService) {
-        this.testDataService = testDataService;
-    }
-
     private ParameterDataService parameterDataService;
     @Autowired
-    public void setParameterDataService(ParameterDataService parameterDataService) {
-        this.parameterDataService = parameterDataService;
-    }
-
     private ContentDataService contentDataService;
     @Autowired
-    public void setContentDataService(ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
-    }
-
     private ProcessResultDataService processResultDataService;
     @Autowired
-    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
-        this.processResultDataService = processResultDataService;
-    }
-
     private PreProcessResultDataService preProcessResultDataService;
+//    @Autowired
+//    private CrawlerService crawlerService;
     @Autowired
-    public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
-        this.preProcessResultDataService = preProcessResultDataService;
-    }
-
-    private CrawlerService crawlerService;
-    @Autowired
-    public void setCrawlerService(CrawlerService crawlerService) {
-        this.crawlerService = crawlerService;
-    }
-
     private ContentLoaderService contentLoaderService;
     @Autowired
-    public void setContentLoaderService(ContentLoaderService contentLoaderService) {
-        this.contentLoaderService = contentLoaderService;
-    }
-
     private ScenarioLoaderService scenarioLoaderService;
     @Autowired
-    public void setScenarioLoaderService(ScenarioLoaderService scenarioLoaderService) {
-        this.scenarioLoaderService = scenarioLoaderService;
-    }
-
     private ContentAdapterService contentAdapterService;
     @Autowired
-    public void setContentAdapterService(ContentAdapterService contentAdapterService) {
-        this.contentAdapterService = contentAdapterService;
-    }
-
     private ProcessorService processorService;
     @Autowired
-    public void setProcessorService(ProcessorService processorService) {
-        this.processorService = processorService;
-    }
-
     private ConsolidatorService consolidatorService;
     @Autowired
-    public void setConsolidatorService(ConsolidatorService consolidatorService) {
-        this.consolidatorService = consolidatorService;
-    }
-
     private AnalyserService analyserService;
     @Autowired
-    public void setAnalyserService(AnalyserService analyserService) {
-        this.analyserService = analyserService;
-    }
-
     private AdaptationListener adaptationListener;
-    @Autowired
-    public void setAdaptationListener(AdaptationListener adaptationListener) {
-        this.adaptationListener = adaptationListener;
-    }
 
     private boolean auditPageWithCrawler = false;
     public void setAuditPageWithCrawler(boolean auditPageWithCrawler) {
@@ -192,13 +127,13 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
             SiteAuditCommandImpl auditCommand = 
                     new SiteAuditCommandImpl(url, paramSet, auditDataService);
             initCommandServices(auditCommand);
-            auditCommand.setCrawlerService(crawlerService);
+//            auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
         } else if (auditPageWithCrawler) {
             PageAuditCrawlerCommandImpl auditCommand = 
                     new PageAuditCrawlerCommandImpl(url, paramSet, auditDataService);
             initCommandServices(auditCommand);
-            auditCommand.setCrawlerService(crawlerService);
+//            auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
         } else {
             PageAuditCommandImpl auditCommand = 
@@ -229,7 +164,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
                             paramSet,
                             auditDataService);
             initCommandServices(auditCommand);
-            auditCommand.setCrawlerService(crawlerService);
+//            auditCommand.setCrawlerService(crawlerService);
             return auditCommand;
         } else {
             GroupOfPagesAuditCommandImpl auditCommand = 
