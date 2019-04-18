@@ -34,6 +34,8 @@ DATABASE_HOST=localhost
 #
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+SYSTEMCTL=/bin/systemctl
+
 #############################################
 # init
 #############################################
@@ -91,7 +93,7 @@ max_allowed_packet = 64M
 innodb_file_per_table = 1
 EOF
 
-service mysql restart
+"${SYSTEMCTL}" restart mariadb.service
 
 # Create Asqatasun database
 # Note: \` are mandatory to ensure database name is protected (thus allowing names containing hyphens)
