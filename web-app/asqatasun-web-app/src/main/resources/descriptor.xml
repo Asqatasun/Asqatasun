@@ -126,8 +126,13 @@
                 <include>install-SQL.sh</include>
                 <include>uninstall.sh</include>
                 <include>pre-requisites.sh</include>
+                <include>pre-requisites-ubuntu-1404.sh</include>
+                <include>pre-requisites-ubuntu-1804.sh</include>
                 <include>pre-requisites-SQL.sh</include>
+                <include>pre-requisites-SQL-ubuntu-1404.sh</include>
+                <include>pre-requisites-SQL-ubuntu-1804.sh</include>
                 <include>xvfb</include>
+                <include>xvfb@.service</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install</outputDirectory>
