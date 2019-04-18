@@ -57,7 +57,6 @@ import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.security.authentication.AuthenticationDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -73,7 +72,6 @@ public class PageListControllerTest extends TestCase {
     private PageListController instance;
     
     private UserDataService mockUserDataService;
-    private AuthenticationDetails mockAuthenticationDetails;
     private Authentication mockAuthentication;
     private Contract mockContract;
     private User mockUser;
@@ -157,9 +155,6 @@ public class PageListControllerTest extends TestCase {
         }
         if (mockGroupOfPagesScope != null) {
             verify(mockGroupOfPagesScope);
-        }
-        if (mockAuthenticationDetails != null) {
-            verify(mockAuthenticationDetails);
         }
         if (mockAuthentication != null) {
             verify(mockAuthentication);
@@ -380,9 +375,7 @@ public class PageListControllerTest extends TestCase {
     }
  
     /**
-     * 
-     * @param actDataService
-     * @param webResourceDataServiceDecorator 
+     *
      */
     private void setUpAuditStatisticsFactory() {
         AuditStatisticsFactory.getInstance().setActDataService(mockActDataService);
@@ -408,10 +401,7 @@ public class PageListControllerTest extends TestCase {
         expect(mockAuthentication.getPrincipal()).andReturn(tud).anyTimes();
         expect(mockAuthentication.getAuthorities()).andReturn(null).anyTimes();
         replay(mockAuthentication);
-        
-        mockAuthenticationDetails = createMock(AuthenticationDetails.class);
-        expect(mockAuthenticationDetails.getContext()).andReturn("test1@test.com").anyTimes();
-        replay(mockAuthenticationDetails);
+
     }
 
     /**
