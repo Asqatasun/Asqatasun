@@ -197,7 +197,7 @@
                 <module>engine</module>
                 <module>rules</module>
                 <module>web-app</module>
-                <module>runner</module>
+                <!--<module>runner</module>-->
             </modules>
         </profile>
     </profiles>
@@ -1702,16 +1702,16 @@
                 <scope>provided</scope>
             </dependency>
             
-            <!-- jackson dependencies -->		
+            <!-- jackson dependencies -->
             <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-core-asl</artifactId>
-                <version>1.9.13</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.9.6</version>
             </dependency>
             <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>1.9.13</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.9.6</version>
             </dependency>
             
             <!-- glassfish jersey -->
