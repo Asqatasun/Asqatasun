@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.com/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence version="1.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.com/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                                       http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd
+http://www.w3.com/2001/XMLSchema-instance ">
     <persistence-unit name="asqatasunPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <non-jta-data-source>jdbc/asqatasunDS</non-jta-data-source>
@@ -59,19 +64,19 @@
         <properties>
             <property name="hibernate.cache.use_query_cache" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="validate"/>
-            
+
             <!--
             From http://stackoverflow.com/questions/7280855/jboss-7-envers-4-unable-to-load-class-org-hibernate-envers-event-auditeventlis
             Portage from 3.x to 4.x make this useless.
             These event listeners are now registered automatically
             -->
-<!--            <property name="hibernate.ejb.event.post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener,org.hibernate.envers.event.AuditEventListener" />
+            <!--            <property name="hibernate.ejb.event.post-insert" value="org.hibernate.ejb.event.EJB3PostInsertEventListener,org.hibernate.envers.event.AuditEventListener" />
             <property name="hibernate.ejb.event.post-update" value="org.hibernate.ejb.event.EJB3PostUpdateEventListener,org.hibernate.envers.event.AuditEventListener" />
             <property name="hibernate.ejb.event.post-delete" value="org.hibernate.ejb.event.EJB3PostDeleteEventListener,org.hibernate.envers.event.AuditEventListener" />
             <property name="hibernate.ejb.event.pre-collection-update" value="org.hibernate.envers.event.AuditEventListener" />
             <property name="hibernate.ejb.event.pre-collection-remove" value="org.hibernate.envers.event.AuditEventListener" />
             <property name="hibernate.ejb.event.post-collection-recreate" value="org.hibernate.envers.event.AuditEventListener" />-->
-            
+
         </properties>
     </persistence-unit>
 </persistence>
