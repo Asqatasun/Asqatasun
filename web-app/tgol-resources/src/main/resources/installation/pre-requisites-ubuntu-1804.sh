@@ -94,7 +94,7 @@ update-java-alternatives -s java-1.8.0-openjdk-amd64
 # Tomcat config
 #############################################
 
-#ln -s /usr/share/java/mysql-connector-java.jar ${TOMCAT_LIB_DIR}/mysql-connector-java.jar
+ln -s /usr/share/java/mysql-connector-java.jar ${TOMCAT_LIB_DIR}/mysql-connector-java.jar
 
 #############################################
 # XVFB config
