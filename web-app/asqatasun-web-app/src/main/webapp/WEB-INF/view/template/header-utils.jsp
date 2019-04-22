@@ -31,7 +31,7 @@
             <c:choose>
                 <c:when test="${empty notAuthenException}">
                 <a class="brand" 
-                   href="<c:url value="/dispatch.html"/>" 
+                   href="<c:url value="/"/>"
                    title="<fmt:message key="home.home"/>">
                     <img src="${tgLogoUrl}" alt="<fmt:message key="home.home"/>"/>
                 </a>
@@ -99,7 +99,7 @@
             </sec:authorize>
             <c:if test="${empty notAuthenException}">
                 <li>
-                    <a href="<c:url value="/j_spring_security_logout"/>" 
+                    <a href="<c:url value="/logout"/>"
                        id="logout" 
                        title="<fmt:message key="home.logout"/>">
                         <img src="${logoutLogoUrl}" 
