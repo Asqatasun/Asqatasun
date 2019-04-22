@@ -10,6 +10,8 @@
 
     <http auto-config="true" disable-url-rewriting="true" >
         <access-denied-handler error-page="/access-denied.html"/>
+        <csrf disabled="true"/>
+        <intercept-url pattern="/login**" access="permitAll"/>
         <intercept-url pattern="/admin.html" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/admin/add*" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/admin/edit*" access="hasAnyRole('ROLE_ADMIN')"/>
@@ -24,7 +26,10 @@
         <intercept-url pattern="/home/contract/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/home/contract/audit*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/home/contract/page*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
-        <form-login login-page="/login.html" authentication-failure-url="/login.html?error=errorOnLogin" default-target-url="/dispatch.html"/>
+        <form-login login-page="/login.html"
+                    authentication-failure-url="/login.html?error=errorOnLogin"
+                    default-target-url="/home.html"
+                    login-processing-url="/login"/>
         <logout invalidate-session="false"/>
         <session-management invalid-session-url="/login.html"  >
             <concurrency-control max-sessions="100" error-if-maximum-exceeded="true"  />
@@ -42,24 +47,14 @@
             <beans:list>
                 <beans:bean class="org.springframework.security.access.vote.RoleVoter"/>
                 <beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+
+                <!--<beans:bean class="org.springframework.security.web.access.expression.WebExpressionVoter"/>-->
             </beans:list>
         </beans:constructor-arg>
     </beans:bean>
-    
+
     <beans:bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
-   
-    <beans:bean id="tgolAuthenticationProvider" class="org.asqatasun.webapp.security.userdetails.TgolUserDetailsService">
-        <beans:property name="dataSource" ref="dataSource"/>
-        <beans:property name="usersByUsernameQuery">
-            <beans:value>SELECT Email1, Password, Activated as enabled
-                    FROM TGSI_USER
-                    WHERE Email1=?</beans:value>
-        </beans:property>
-        <beans:property name="authoritiesByUsernameQuery">
-            <beans:value>SELECT TGSI_USER.Email1, TGSI_ROLE.Role_Name as authorities
-                    FROM TGSI_USER, TGSI_ROLE
-                    WHERE TGSI_USER.Email1 = ? AND TGSI_USER.ROLE_Id_Role=TGSI_ROLE.Id_Role</beans:value>
-        </beans:property>
-    </beans:bean>
+
+    <beans:bean id="tgolAuthenticationProvider" class="org.asqatasun.webapp.security.userdetails.TgolUserDetailsService"/>
 
 </beans:beans>
