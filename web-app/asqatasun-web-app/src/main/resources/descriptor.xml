@@ -1,8 +1,7 @@
 <assembly
-    xmlns="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0"
+    xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/plugins/maven-resources-plugin/resources/1.1.0
-    http://maven.apache.org/xsd/resources-1.1.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
     <id>asqatasun_webapp</id>
     <formats>
         <format>tar.gz</format>
@@ -127,8 +126,13 @@
                 <include>install-SQL.sh</include>
                 <include>uninstall.sh</include>
                 <include>pre-requisites.sh</include>
+                <include>pre-requisites-ubuntu-1404.sh</include>
+                <include>pre-requisites-ubuntu-1804.sh</include>
                 <include>pre-requisites-SQL.sh</include>
+                <include>pre-requisites-SQL-ubuntu-1404.sh</include>
+                <include>pre-requisites-SQL-ubuntu-1804.sh</include>
                 <include>xvfb</include>
+                <include>xvfb@.service</include>
             </includes>
             <fileMode>755</fileMode>
             <outputDirectory>/install</outputDirectory>
