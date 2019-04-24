@@ -75,6 +75,7 @@ apt-get -y --no-install-recommends install \
     wget \
     bzip2 \
     unzip \
+    libgtk2.0-0 \
     libmysql-java \
     tomcat8 \
     xvfb \
