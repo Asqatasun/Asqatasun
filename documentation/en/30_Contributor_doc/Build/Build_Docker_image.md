@@ -116,7 +116,7 @@ INFO: Server startup in 27268 ms
 
 You can now browse `http://localhost:8080/asqatasun/` and login with the following credentials:
 
-* login: `me@my-email.org`
+* login: `admin@asqatasun.org`
 * password: `myAsqaPassword`
 
 ### 7. Troubleshooting
