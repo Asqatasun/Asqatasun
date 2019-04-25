@@ -55,6 +55,12 @@ declare -a OPTIONS=(
 	display_port
 )
 
+declare DISTRO_RELEASE=$(/usr/bin/lsb_release -rs)
+
+if [[ "${DISTRO_RELEASE}" == "18.04" ]]; then
+    TOMCAT_HOME_DIR="/var/lib"
+fi
+
 warn() {
 	if [[ ! $quiet ]]; then
             echo "WARNING : $*"
