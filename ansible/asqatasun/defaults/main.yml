@@ -42,5 +42,5 @@ asqatasun_parameters:
   db_password: 'asqaP4sswd'
   db_host: 'localhost'
   url: 'http://localhost:8080/asqatasun/'
-  admin_email: 'me@my-email.org'
+  admin_email: 'admin@asqatasun.org'
   admin_passwd: 'myAsqaPassword'

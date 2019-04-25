@@ -28,5 +28,5 @@ Essayer Asqatasun grâce à un unique conteneur Docker.
 
 - Dans votre navigateur web, saisir l'URL http://localhost:8080/asqatasun/ 
 - Pour vous connecter, utiliser l'utilisateur suivant avec ce mot de passe :
-  - `me@my-email.org`
+  - `admin@asqatasun.org`
   - `myAsqaPassword`

@@ -29,7 +29,7 @@ Note: Linux user and willing to test your `localhost` ? See tip [Testing 127.0.0
 
 * In your browser, go to `http://localhost:8080/asqatasun/` 
 * Use this user and this password :
-    * `me@my-email.org`
+    * `admin@asqatasun.org`
     * `myAsqaPassword`
 
 ### MacOSX and Windows users
@@ -37,7 +37,7 @@ Note: Linux user and willing to test your `localhost` ? See tip [Testing 127.0.0
 * Get the IP address with command `docker-machine ip default`
 * In your browser, go to `http://<the_IP_address>:8080/asqatasun/` 
 * Use this user and this password :
-    * `me@my-email.org`
+    * `admin@asqatasun.org`
     * `myAsqaPassword`
 
 ## 3. Use "-SNAPSHOT" Docker image (bleeding edge but unstable)
@@ -134,7 +134,7 @@ Don't forget to wait ~30 seconds for the services to be up, and:
 
 * In your browser, go to `http://localhost:8080/asqatasun/` 
 * Use this user and this password :
-    * `me@my-email.org`
+    * `admin@asqatasun.org`
     * `myAsqaPassword`
 
 Then you just have to type `dockerhost` instead of `localhost` for your local site to be analyzed.

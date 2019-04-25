@@ -378,7 +378,7 @@ function do_functional_testing() {
         check_firefox_binary
         (cd "${SOURCE_DIR}/testing-tools/tgol-test-scenario"; \
             mvn test \
-                -Dadmin.user=me@my-email.org \
+                -Dadmin.user=admin@asqatasun.org \
                 -Dadmin.password=myAsqaPassword \
                 -Dhost.location=${URL_APP}/ \
                 -Dfirefox.path=${FIREFOX_BIN}
@@ -395,7 +395,7 @@ function do_krash_test_campaign() {
         check_firefox_binary
         (cd "${SOURCE_DIR}/testing-tools/tgol-test-krash-offline"; \
             mvn test \
-                -Duser=me@my-email.org \
+                -Duser=admin@asqatasun.org \
                 -Dpassword=myAsqaPassword \
                 -Dhost.location=${URL_APP} \
                 -Dcontract.id=3 \

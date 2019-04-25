@@ -26,7 +26,7 @@ Then do
 ```shell
 cd testing-tools/tgol-test-krash-offline
 mvn test \
-    -Duser=me@my-email.org \
+    -Duser=admin@asqatasun.org \
     -Dpassword=myAsqaPassword \
     -Dhost.location=http://localhost:8085/asqatasun \
     -Dcontract.id=3 \

@@ -36,7 +36,7 @@ ENV  JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"    \
      TOMCAT_WEBAPP_DIR="/var/lib/tomcat7/webapps"      \
      TOMCAT_USER="tomcat7"                             \
      ASQA_URL="http://localhost:8080/asqatasun/"       \
-     ASQA_ADMIN_EMAIL="me@my-email.org"                \
+     ASQA_ADMIN_EMAIL="admin@asqatasun.org"                \
      ASQA_ADMIN_PASSWD="myAsqaPassword"                \
      ASQA_RELEASE="4.1.0-SNAPSHOT"
 

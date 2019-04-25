@@ -15,7 +15,7 @@ Provided you have:
 ```sh
 cd testing-tools/tgol-test-scenario
 mvn test \
-    -Dadmin.user=me@my-email.org \
+    -Dadmin.user=admin@asqatasun.org \
     -Dadmin.password=myAsqaPassword \
     -Dhost.location=http://localhost:8085/asqatasun/ \
     -Dfirefox.path=/opt/firefox/firefox
@@ -31,7 +31,7 @@ cd testing-tools/tgol-test-scenario
 mvn \
     -Dtest=LoginLogoutScenarioTest \
     test \
-    -Dadmin.user=me@my-email.org \
+    -Dadmin.user=admin@asqatasun.org \
     -Dadmin.password=myAsqaPassword \
     -Dhost.location=http://localhost:8085/asqatasun/ \
     -Dfirefox.path=/opt/firefox/firefox
