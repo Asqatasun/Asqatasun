@@ -118,20 +118,31 @@
     <!-- URL rewrite filter for asset files (css, js, png, jpg, ...)
          http://tuckey.org/urlrewrite/
          https://github.com/paultuckey/urlrewritefilter
+         https://cdn.rawgit.com/paultuckey/urlrewritefilter/master/src/doc/manual/4.0/index.html#filterparams
 
-             Allowed file : css|js|png|jpg|jpeg|gif|svg
-                            xml|webmanifest|json
-                            eot|woff|ttf                     -->
+         Allowed file : css|js|png|jpg|jpeg|gif|svg
+                        xml|webmanifest|json
+                        eot|woff|ttf
+         -->
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>
         <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
         <init-param>
             <param-name>modRewriteConfText</param-name>
             <param-value>
-                <!-- used public/css/     insteaf of  public/<version>/css/
-                     used public/js/      insteaf of  public/<version>/js/
-                     used public/images/  insteaf of  public/<version>/images/           -->
-                RewriteRule public/([0-9]{1,2}).([0-9]{1,2}).([0-9]{1,2})(|-SNAPSHOT)/(.+).(css|js|png|jpg|jpeg|gif|svg|xml|webmanifest|json|eot|woff|ttf)$ public/$5.$6 [L]
+                <!-- used public/css/     instead of  public/<version>/css/
+                     used public/js/      instead of  public/<version>/js/
+                     used public/images/  instead of  public/<version>/images/
+                     -->
+                RewriteRule
+                public/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-([1-9]\d*|[\da-z-]*[a-z-][\da-z-]*|SNAPSHOT)(\.([1-9]\d*|[\da-z-]*[a-z-][\da-z-]*))*)?(\+[\da-z-]+(\.[\da-z-]+)*)?/(.+).(css|js|png|jpg|jpeg|gif|svg|xml|webmanifest|json|eot|woff|ttf)$
+                public/$6.$7 [L]
+                <!--
+                    regexp based on semver-regexp https://github.com/sindresorhus/semver-regex/blob/master/index.js
+                    with added "-SNAPSHOT" string
+                    and validated with https://regex101.com/
+                    (Hope I won't have to troubleshoot this horror again :P )
+                    -->
             </param-value>
         </init-param>
     </filter>
