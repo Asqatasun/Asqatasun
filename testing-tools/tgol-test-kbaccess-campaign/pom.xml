@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>testing-tools</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>4.1.0-rc.2</version>
     </parent>
     <artifactId>tgol-test-kbaccess-campaign</artifactId>
     <name>tgol-test-kbaccess-campaign</name>
@@ -15,7 +15,7 @@
             <plugin>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-maven-kbcsv-plugin</artifactId>
-                <version>4.1.0-SNAPSHOT</version>
+                <version>4.1.0-rc.2</version>
                 <executions>
                     <execution>
                         <id>generate-csv</id>
@@ -33,7 +33,7 @@
             <plugin>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-maven-testgenerator-plugin</artifactId>
-                <version>4.1.0-SNAPSHOT</version>
+                <version>4.1.0-rc.2</version>
                 <executions>
                     <execution>
                         <id>generate-tests</id>
