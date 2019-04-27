@@ -19,6 +19,17 @@ WIP:
 ### Fixed
 ### Security
 
+## Asqatasun 4.1.0-rc.2, 2019-04-27
+
+### Added
+
+* Support for Ubuntu 18.04 [#269](https://github.com/Asqatasun/Asqatasun/issues/269), [#281](https://github.com/Asqatasun/Asqatasun/issues/281)
+
+### Changed
+
+* Default email for login is now `admin@asqatasun.org` [#267](https://github.com/Asqatasun/Asqatasun/issues/267)
+* Improved krash emails ergonomy [#276](https://github.com/Asqatasun/Asqatasun/issues/276)
+
 ## Asqatasun 4.1.0-rc.1, 2019-03-29
 
 Thanks:
@@ -107,7 +118,7 @@ For developers and ops:
 
 The recommended upgrade path consists in exporting Asqatasun data, installing v4.1.0 as a new intance (along Java8) and re-importing data.
 
-We are aware that this may be difficult to some installations, but contributions are welcomed and we are always happy to bring in new contibutors :)
+We are aware that this may be difficult to some installations, but contributions are welcomed and we are always happy to bring in new contributors :)
 
 ## Asqatasun 4.0.3, 2016-08-22
 

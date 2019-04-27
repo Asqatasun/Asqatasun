@@ -114,7 +114,7 @@ We would be really glad to have you on board! You can help in many ways:
 
  [AGPL v3](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE) 
 
-## Major changes of this last version (Asqatasun 4.1.0-RC.1, 2019-03-29)
+## Major changes of this last version (Asqatasun 4.1.0-rc.2, 2019-04-27)
 
 (See CHANGELOG.md for detailed info)
 
@@ -124,6 +124,7 @@ Major features:
 * I18N: Add german translation [#172](https://github.com/Asqatasun/Asqatasun/issues/172)
 * JDK upgraded from Java7 to Java8 [#253](https://github.com/Asqatasun/Asqatasun/issues/253)
 * DB character encoding is now `utf8mb4` [#255](https://github.com/Asqatasun/Asqatasun/issues/255)
+* Support for Ubuntu 18.04 [#269](https://github.com/Asqatasun/Asqatasun/issues/269), [#281](https://github.com/Asqatasun/Asqatasun/issues/281)
 
 Major bug fixes:
 
