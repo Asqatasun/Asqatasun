@@ -18,7 +18,7 @@ ENV  DATABASE_PORT="3306"                              \
      DATABASE_HOST="localhost"                         \
      DATABASE_USER="asqatasun"                         \
      DATABASE_PASSWD="asqaP4sswd"                      \
-     ASQA_RELEASE="4.1.0-rc.2"
+     ASQA_RELEASE="4.1.0-SNAPSHOT"
 
 EXPOSE $DATABASE_PORT
 

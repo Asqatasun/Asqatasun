@@ -32,7 +32,7 @@ ENV  WWWPORT="8080"                                    \
      ASQA_URL="http://localhost:8080/asqatasun/"       \
      ASQA_ADMIN_EMAIL="admin@asqatasun.org"                \
      ASQA_ADMIN_PASSWD="myAsqaPassword"                \
-     ASQA_RELEASE="4.1.0-rc.2"
+     ASQA_RELEASE="4.1.0-SNAPSHOT"
 
 EXPOSE $WWWPORT
 
