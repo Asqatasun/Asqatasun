@@ -2,7 +2,7 @@
 
 set -o errexit
 
-TEMP=`getopt -o acpt --long commit,push,tag,automerge,source-dir:,from-version:,to-version: \
+TEMP=`getopt -o acpt --long commit,push,tag,automerge,source-dir:,from-version:,to-version:,back-to-snapshot \
              -n 'javawrap' -- "$@"`
 
 if [[ $? != 0 ]] ; then echo "Terminating..." >&2 ; exit 1 ; fi
@@ -17,6 +17,7 @@ usage () {
     echo '  -c, --commit                 OPTIONAL : Commit automatically modifications.'
     echo '  -p, --push                   OPTIONAL : Push automatically commit on remote.'
     echo '  -t, --tag                    OPTIONAL : Tag automatically version from --to-version arg.'
+    echo '  --back-to-snapshot           OPTIONAL : need when switching back to -SNAPSHOT version'
     echo ''
     echo ''
     exit 2
@@ -25,15 +26,16 @@ usage () {
 # Note the quotes around `$TEMP': they are essential!
 eval set -- "$TEMP"
 
-AUTOMERGE=false
-COMMIT=false
-TAG=false
-PUSH=false
-SOURCE_DIR=
-FROM_VERSION=
-TO_VERSION=
-RULES_FROM_VERSION=
-RULES_TO_VERSION=
+declare AUTOMERGE=false
+declare COMMIT=false
+declare TAG=false
+declare PUSH=false
+declare SOURCE_DIR=
+declare FROM_VERSION=
+declare TO_VERSION=
+declare RULES_FROM_VERSION=
+declare RULES_TO_VERSION=
+declare BACK_TO_SNAPSHOT=
 
 while true; do
   case "$1" in
@@ -44,6 +46,7 @@ while true; do
     --source-dir ) SOURCE_DIR="$2"; shift 2 ;;
     --from-version ) FROM_VERSION="$2"; shift 2 ;;
     --to-version ) TO_VERSION="$2"; shift 2 ;;
+    --back-to-snapshot ) BACK_TO_SNAPSHOT=true; shift ;;
     -- ) shift; break ;;
     * ) break ;;
   esac
@@ -72,10 +75,13 @@ fi
 # change directory to local repos or download it to temporary folder
 ####################################################################
 
-if [[ "$SOURCE_DIR" != "" ]]
-then
-    cd "$SOURCE_DIR"
-    git checkout master
+if [[ "${SOURCE_DIR}" ]]; then
+    # Be on develop branch when switching back to -SNAPSHOT release, either way be on master
+    if [[ "${BACK_TO_SNAPSHOT}" ]]; then
+        git checkout develop
+    else
+        git checkout master
+    fi
 else
     cd /tmp
     git clone git@github.com:Asqatasun/Asqatasun.git
@@ -83,6 +89,7 @@ else
     git checkout origin/develop
     git checkout -b develop
     git checkout master
+    # TODO manage case when BACK_TO_SNAPSHOT is true
 fi
 
 ############
@@ -131,9 +138,14 @@ echo ''                                                     >> contributors.txt
 # Automatic Commit with generated message
 #########################################
 
-if [[ "$COMMIT" = true ]] ; then
+if [[ "${BACK_TO_SNAPSHOT}" ]]; then
+    COMMIT_MESSAGE="Switch back to $TO_VERSION"
+else
     COMMIT_MESSAGE="Release $TO_VERSION"
-    echo 'commiting all files with message : ' $COMMIT_MESSAGE
+fi
+
+if [[ "$COMMIT" = true ]] ; then
+    echo 'committing all files with message : ' ${COMMIT_MESSAGE}
     find . -name "pom.xml" | xargs git add -u
     find . -name "pom.vm"  | xargs git add -u
     find . -name "Dockerfile" | xargs git add -u
@@ -141,8 +153,8 @@ if [[ "$COMMIT" = true ]] ; then
     git add **/asqatasun.conf
     git add ansible/asqatasun/defaults/main.yml
     git add contributors.txt 
-    git commit -m "$COMMIT_MESSAGE"
-    echo 'committed all files with message : ' $COMMIT_MESSAGE
+    git commit -m "${COMMIT_MESSAGE}"
+    echo 'committed all files with message : ' ${COMMIT_MESSAGE}
 fi
 
 ###############
@@ -174,7 +186,7 @@ fi
 ########################
 # Clean up temporary dir
 ########################
-#if [[ "$SOURCE_DIR" = "" ]] ; then
+#if [[ "${SOURCE_DIR}" = "" ]] ; then
 #    cd /tmp
 #    rm -fr Asqatasun
 #fi

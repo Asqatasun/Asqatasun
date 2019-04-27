@@ -1,4 +1,4 @@
-# Release a *Relase Candidate* version of Asqatasun
+# Release a *Release Candidate* version of Asqatasun
 
 This is the documentation for releasing a new version **Release Candidate** for Asqatasun. As an end user, you won't need it, it is just for developers.
 
@@ -16,37 +16,48 @@ This is the documentation for releasing a new version **Release Candidate** for 
 
 ## 3) Upgrade version strings in code with `bump_asqatasun.sh`:
 
-/!\ Be sure to be on the `develop` branch **before** launching the following script.
+/!\ Please be sure to be:
+
+1. on the `develop` branch **before** launching the following script,
+1. inside the top directory of Asqatasun sources (eg /home/johndoe/my-sources/Asqatasun)
 
 ```sh
-cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --source ABSOLUTE_PATH_TO_ASQATASUN_Sources --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z-rc.1 --automerge --commit --tag --push
+./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
+    --source . \
+    --from-version X.Y.Z-SNAPSHOT \
+    --to-version X.Y.Z-rc.1 \
+    --automerge \
+    --commit \
+    --tag \
+    --push
 ```
 
 ## 4) Build local Docker image with locally build Asqatasun
 
-...and check release is the good one + run some manual tests
+When `--source` is specified, get into that source directory and:
+
+```sh
+./docker/build_and_run-with-docker.sh -l -s "${PWD}" -d docker/SNAPSHOT-local --skip-build-test
+```
+
+else when using clone in /tmp:
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
-docker/build_and_run-with-docker.sh --skip-build -s /tmp/Asqatasun -d docker/SNAPSHOT-local
+./docker/build_and_run-with-docker.sh -l -s /tmp/Asqatasun -d docker/SNAPSHOT-local --skip-build-test
 ```
 
 ## 5) For develop branch, switch back release strings to "-SNAPSHOT"
 
+From the top of Asqatasun source directory, do: 
+
 ```sh
-cd /tmp/Asqatasun   # Directory used to clone Github repos
-git checkout develop
-git rebase master
-cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version X.Y.Z-rc.1 --to-version X.Y.Z-SNAPSHOT --source-dir /tmp/Asqatasun
-find . -name "pom.xml" | xargs git add -u :/
-find . -name "pom.vm" | xargs git add -u :/
-find . -name "Dockerfile" | xargs git add -u :/
-git add **/install.sh 
-git add **/asqatasun.conf
-git add ansible/asqatasun/defaults/main.yml
-git commit -m "Switch release to X.Y.Z-SNAPSHOT"
+./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
+    --from-version X.Y.Z-rc.1 \
+    --to-version X.Y.Z-SNAPSHOT \
+    --source-dir . \
+    --back-to-snapshot \
+    --commit
 git push origin develop
 ```
 

@@ -19,9 +19,12 @@ without having to dig into the previous betas and RCs). For this:
 ## 3) Upgrade version strings in code with `bump_asqatasun.sh`
 
 ```sh
-cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag
-./bump_asqatasun.sh --from-version X.Y.Z-SNAPSHOT --to-version X.Y.Z --automerge --commit --tag 
+./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
+    --from-version X.Y.Z-SNAPSHOT \
+    --to-version X.Y.Z \
+    --automerge \
+    --commit \
+    --tag
 ```
 
 do not use the `--push` option 
@@ -31,34 +34,37 @@ do not use the `--push` option
 
 ## 4) Build local Docker image with locally build Asqatasun
 
-...and check release is the good one + run some manual tests
+When `--source` is specified, get into that source directory and:
+
+```sh
+./docker/build_and_run-with-docker.sh -l -s "${PWD}" -d docker/SNAPSHOT-local --skip-build-test
+```
+
+else when using clone in /tmp:
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
-docker/build_and_run-with-docker.sh --skip-build -s /tmp/Asqatasun -d docker/SNAPSHOT-local
+./docker/build_and_run-with-docker.sh -l -s /tmp/Asqatasun -d docker/SNAPSHOT-local --skip-build-test
 ```
 
 ## 5) Push `master` branch and new `X.Y.Z` tag
+
 ```sh
 git push origin master
-git push origin v.X.Y.Z
+git push origin vX.Y.Z
 ```
-
 
 ## 6) For `develop` branch, switch back release strings to "-SNAPSHOT"
 
+From the top of Asqatasun source directory, do: 
+
 ```sh
-cd /tmp/Asqatasun   # Directory used to clone Github repos
-git checkout develop
-git rebase master
-cd engine/asqatasun-resources/src/main/resources/release/
-./bump_asqatasun.sh --from-version X.Y.Z --to-version X.Y.Z+1-SNAPSHOT --source-dir /tmp/Asqatasun
-find . -name "pom.xml" | xargs git add -u :/
-find . -name "Dockerfile" | xargs git add -u :/
-git add **/install.sh 
-git add **/asqatasun.conf
-git add ansible/asqatasun/defaults/main.yml
-git commit -m "Switch release to X.Y.Z+1-SNAPSHOT"
+./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
+    --from-version X.Y.Z \
+    --to-version A.B.C-SNAPSHOT \
+    --source-dir . \
+    --back-to-snapshot \
+    --commit
 git push origin develop
 ```
 
