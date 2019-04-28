@@ -33,7 +33,7 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
 
 * In your browser, go to `http://localhost:8080/asqatasun/` 
 * Use this user and this password :
-    * `me@my-email.org`
+    * `admin@asqatasun.org`
     * `myAsqaPassword`
 
 #### MacOSX and Windows users
@@ -41,7 +41,7 @@ docker run --name asqatasun -d -p 8080:8080  asqatasun/asqatasun
 * Get the IP address with command `docker-machine ip default`
 * In your browser, go to `http://<the_IP_address>:8080/asqatasun/` 
 * Use this user and this password :
-    * `me@my-email.org`
+    * `admin@asqatasun.org`
     * `myAsqaPassword`
 
 ### More links
