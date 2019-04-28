@@ -118,6 +118,7 @@
     <!-- URL rewrite filter for asset files (css, js, png, jpg, ...)
          http://tuckey.org/urlrewrite/
          https://github.com/paultuckey/urlrewritefilter
+         https://cdn.rawgit.com/paultuckey/urlrewritefilter/master/src/doc/manual/4.0/index.html#filterparams
 
              Allowed file : css|js|png|jpg|jpeg|gif|svg
                             xml|webmanifest|json
@@ -131,7 +132,7 @@
                 <!-- used public/css/     insteaf of  public/<version>/css/
                      used public/js/      insteaf of  public/<version>/js/
                      used public/images/  insteaf of  public/<version>/images/           -->
-                RewriteRule public/([0-9]{1,2}).([0-9]{1,2}).([0-9]{1,2})(|-SNAPSHOT)/(.+).(css|js|png|jpg|jpeg|gif|svg|xml|webmanifest|json|eot|woff|ttf)$ public/$5.$6 [L]
+                RewriteRule public/([0-9]{1,2}).([0-9]{1,2}).([0-9]{1,2})(|-(rc|beta|alpha).([0-9]{1,2})|-SNAPSHOT)/(.+).(css|js|png|jpg|jpeg|gif|svg|xml|webmanifest|json|eot|woff|ttf)$ public/$7.$8 [L]
             </param-value>
         </init-param>
     </filter>
