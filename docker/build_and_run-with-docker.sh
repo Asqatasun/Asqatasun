@@ -260,11 +260,11 @@ function build() {
     if ${LOG_BUILD}; then
         MAVEN_LOG=" | tee log_maven.log";
     fi
-
+    BUILD_BEFORE="mvn install:install-file -DgroupId=com.saucelabs -DartifactId=sebuilder-interpreter -Dversion=1.0.2 -Dpackaging=jar -Dfile=engine/asqatasun-resources/src/main/resources/lib/sebuilder-interpreter-1.0.2.jar"
     BUILD_CMD="mvn clean install ${MAVEN_OPTION} ${MAVEN_LOG}"
     BUILD_DIR=$*
     if [[ -d "${BUILD_DIR}" ]] ; then
-        (cd  "${BUILD_DIR}"; eval ${BUILD_CMD}) || fail "Error at build ${BUILD_DIR}"
+        (cd  "${BUILD_DIR}"; eval ${BUILD_BEFORE}; eval ${BUILD_CMD}) || fail "Error at build ${BUILD_DIR}"
     else
         fail "not valid directory ${BUILD_DIR}"
     fi
