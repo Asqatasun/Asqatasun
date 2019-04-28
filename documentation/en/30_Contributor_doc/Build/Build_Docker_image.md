@@ -57,6 +57,11 @@ git clone https://github.com/Asqatasun/Asqatasun.git
 ```shell
 cd Asqatasun
 git checkout develop    # Please always work on develop, see CONTRIBUTING.md
+
+# before first build
+mvn install:install-file -DgroupId=com.saucelabs -DartifactId=sebuilder-interpreter -Dversion=1.0.2 -Dpackaging=jar -Dfile=engine/asqatasun-resources/src/main/resources/lib/sebuilder-interpreter-1.0.2.jar
+
+# build
 mvn clean install
 ```
 (Internet connection needed the very first time to download Maven dependencies).
