@@ -22,7 +22,7 @@
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>4.1.0-rc.3</version>
 
     <name>asqatasun</name>
     <url>https://asqatasun.org/</url>
@@ -91,7 +91,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
-        <asqatasunVersion>4.1.0-SNAPSHOT</asqatasunVersion>
+        <asqatasunVersion>4.1.0-rc.3</asqatasunVersion>
         
         <springGroupId>org.springframework</springGroupId>
         <springVersion>3.1.2.RELEASE</springVersion>
