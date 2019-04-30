@@ -19,6 +19,12 @@ WIP:
 ### Fixed
 ### Security
 
+## Asqatasun 4.1.0-rc.3, 2019-04-30
+
+### Fixed
+
+* CSS and images are not loaded in v4.1.0-rc.2 [#285](https://github.com/Asqatasun/Asqatasun/issues/285)
+
 ## Asqatasun 4.1.0-rc.2, 2019-04-27
 
 ### Added
