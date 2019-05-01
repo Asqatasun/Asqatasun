@@ -18,7 +18,7 @@ This is the documentation for releasing a new version **Release Candidate** for 
 
 /!\ Please be sure to be:
 
-1. on the `develop` branch **before** launching the following script,
+1. on the `develop` branch **before** launching the following script (not in a feature branch)
 1. inside the top directory of Asqatasun sources (eg /home/johndoe/my-sources/Asqatasun)
 
 ```sh

@@ -19,6 +19,12 @@ WIP:
 ### Fixed
 ### Security
 
+## Asqatasun 4.1.0-rc.4, 2019-05-01
+
+### Fixed
+
+* Make release script more reliable [#286](https://github.com/Asqatasun/Asqatasun/issues/286)
+
 ## Asqatasun 4.1.0-rc.3, 2019-04-30
 
 ### Fixed
