@@ -3,7 +3,7 @@ Commits    Contributors
   2600	Jérôme Kowalczyk
    696	Fabrice Gangler
    554	Jerome Kowalczyk
-   534	Matthieu FAURE
+   535	Matthieu FAURE
    176	jkowalczyk
    131	Matthieu Faure
     73	Anthony
@@ -50,5 +50,5 @@ Commits    Contributors
      1	nisan
 
 
----- Release 4.1.0-rc.4 ----------------------
+---- Release 4.1.0-SNAPSHOT ----------------------
 
