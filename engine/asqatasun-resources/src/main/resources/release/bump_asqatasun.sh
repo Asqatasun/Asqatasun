@@ -52,18 +52,15 @@ while true; do
   esac
 done
 
-#############################################
 # check mandatory options
-#############################################
-
-if [[ "$FROM_VERSION" = "" ]]
+if [[ "${FROM_VERSION}" = "" ]]
 then
     echo ''
     echo 'Mandatory option is missing'
     echo ''
     usage
 fi
-if [[ "$TO_VERSION" = "" ]]
+if [[ "${TO_VERSION}" = "" ]]
 then
     echo ''
     echo 'Mandatory option is missing'
@@ -74,123 +71,139 @@ fi
 ####################################################################
 # change directory to local repos or download it to temporary folder
 ####################################################################
-
-if [[ "${SOURCE_DIR}" ]]; then
-    # Be on develop branch when switching back to -SNAPSHOT release, either way be on master
-    if [[ "${BACK_TO_SNAPSHOT}" ]]; then
-        git checkout develop
+function checkout_source_code() {
+    if [[ "${SOURCE_DIR}" ]]; then
+        # Be on develop branch when switching back to -SNAPSHOT release, either way be on master
+        if [[ "${BACK_TO_SNAPSHOT}" ]]; then
+            echo "Back to --SNAPSHOT from ${SOURCE_DIR}"
+            git checkout develop
+            git merge master # Necessary or we'll have merge conflicts for next release ;)
+        else
+            git checkout master
+        fi
     else
-        git checkout master
+        if [[ "${BACK_TO_SNAPSHOT}" ]]; then
+            echo "Case not yet managed. Please proceed manually."
+            echo "Exiting."
+            exit -1
+        else
+            cd /tmp
+            git clone git@github.com:Asqatasun/Asqatasun.git
+            cd Asqatasun
+            git checkout origin/develop
+            git checkout -b develop
+            git checkout master
+        fi
     fi
-else
-    cd /tmp
-    git clone git@github.com:Asqatasun/Asqatasun.git
-    cd Asqatasun
-    git checkout origin/develop
-    git checkout -b develop
-    git checkout master
-    # TODO manage case when BACK_TO_SNAPSHOT is true
-fi
+}
 
 ############
 # Auto merge
 ############
+function automerge() {
+    if [[ "$AUTOMERGE" = true ]] ; then
+        git merge origin/develop
+    fi
+}
 
-if [[ "$AUTOMERGE" = true ]] ; then
-    git merge origin/develop
-fi
+########################################
+# Change version number (effective bump)
+########################################
+function bump_release() {
+    POM_PERL_COMMAND="s!<version>${FROM_VERSION}</version>!<version>${TO_VERSION}</version>!o"
+    POM_PERL_COMMAND2="s!<asqatasunVersion>${FROM_VERSION}</asqatasunVersion>!<asqatasunVersion>${TO_VERSION}</asqatasunVersion>!o"
+    CONF_PERL_COMMAND="s!asqatasunVersion=${FROM_VERSION}!asqatasunVersion=${TO_VERSION}!o"
+    SH_PERL_COMMAND="s!${FROM_VERSION}!${TO_VERSION}!o"
+    DOCKER_PERL_COMMAND="s!ASQA_RELEASE=\"${FROM_VERSION}\"!ASQA_RELEASE=\"${TO_VERSION}\"!o"
+    ANSIBLE_PERL_COMMAND="s!${FROM_VERSION}!${TO_VERSION}!o"
 
-################
-# Effective bump
-################
-
-POM_PERL_COMMAND="s!<version>$FROM_VERSION</version>!<version>$TO_VERSION</version>!o"
-POM_PERL_COMMAND2="s!<asqatasunVersion>$FROM_VERSION</asqatasunVersion>!<asqatasunVersion>$TO_VERSION</asqatasunVersion>!o"
-CONF_PERL_COMMAND="s!asqatasunVersion=$FROM_VERSION!asqatasunVersion=$TO_VERSION!o"
-SH_PERL_COMMAND="s!$FROM_VERSION!$TO_VERSION!o"
-DOCKER_PERL_COMMAND="s!ASQA_RELEASE=\"$FROM_VERSION\"!ASQA_RELEASE=\"$TO_VERSION\"!o"
-ANSIBLE_PERL_COMMAND="s!$FROM_VERSION!$TO_VERSION!o"
-
-echo 'bumping context with version' $TO_VERSION
-find . -name "pom.vm"  -exec perl -pi -e $POM_PERL_COMMAND {} \;
-find . -name "pom.xml" -exec perl -pi -e $POM_PERL_COMMAND {} \;
-find . -name "pom.xml" -exec perl -pi -e $POM_PERL_COMMAND2 {} \;
-find . -name "install.sh" -exec perl -pi -e $SH_PERL_COMMAND {} \;
-find . -name "asqatasun.conf" -exec perl -pi -e $CONF_PERL_COMMAND {} \;
-find . -name "Dockerfile" -exec perl -pi -e $DOCKER_PERL_COMMAND {} \;
-find . -name ".travis.yml" -exec perl -pi -e $DOCKER_PERL_COMMAND {} \;
-find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e $ANSIBLE_PERL_COMMAND {} \;
-echo 'bumped context with version' $TO_VERSION
+    echo 'bumping context with version' ${TO_VERSION}
+    find . -name "pom.vm"  -exec perl -pi -e ${POM_PERL_COMMAND} {} \;
+    find . -name "pom.xml" -exec perl -pi -e ${POM_PERL_COMMAND} {} \;
+    find . -name "pom.xml" -exec perl -pi -e ${POM_PERL_COMMAND2} {} \;
+    find . -name "install.sh" -exec perl -pi -e ${SH_PERL_COMMAND} {} \;
+    find . -name "asqatasun.conf" -exec perl -pi -e ${CONF_PERL_COMMAND} {} \;
+    find . -name "Dockerfile" -exec perl -pi -e ${DOCKER_PERL_COMMAND} {} \;
+    find . -name ".travis.yml" -exec perl -pi -e ${DOCKER_PERL_COMMAND} {} \;
+    find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e ${ANSIBLE_PERL_COMMAND} {} \;
+    echo 'bumped context with version' ${TO_VERSION}
+}
 
 #########################################
-# Update  contributors.txt 
+# Update contributors.txt
 #########################################
-
-echo "Commits    Contributors"                               > contributors.txt 
-echo "--------------------------"                           >> contributors.txt 
-git shortlog -s -n                                          >> contributors.txt 
-echo ''                                                     >> contributors.txt 
-echo ''                                                     >> contributors.txt 
-echo "---- Release $TO_VERSION ----------------------"      >> contributors.txt 
-echo ''                                                     >> contributors.txt 
+function update_contributors() {
+    echo "Commits    Contributors"                               > contributors.txt
+    echo "--------------------------"                           >> contributors.txt
+    git shortlog -s -n                                          >> contributors.txt
+    echo ''                                                     >> contributors.txt
+    echo ''                                                     >> contributors.txt
+    echo "---- Release ${TO_VERSION} ----------------------"    >> contributors.txt
+    echo ''                                                     >> contributors.txt
+}
 
 #########################################
 # Automatic Commit with generated message
 #########################################
+function commit_files() {
+    if [[ "${BACK_TO_SNAPSHOT}" ]]; then
+        COMMIT_MESSAGE="Switch back to ${TO_VERSION}"
+    else
+        COMMIT_MESSAGE="Release ${TO_VERSION}"
+    fi
 
-if [[ "${BACK_TO_SNAPSHOT}" ]]; then
-    COMMIT_MESSAGE="Switch back to $TO_VERSION"
-else
-    COMMIT_MESSAGE="Release $TO_VERSION"
-fi
-
-if [[ "$COMMIT" = true ]] ; then
-    echo 'committing all files with message : ' ${COMMIT_MESSAGE}
-    find . -name "pom.xml" | xargs git add -u
-    find . -name "pom.vm"  | xargs git add -u
-    find . -name "Dockerfile" | xargs git add -u
-    git add **/install.sh 
-    git add **/asqatasun.conf
-    git add ansible/asqatasun/defaults/main.yml
-    git add contributors.txt 
-    git commit -m "${COMMIT_MESSAGE}"
-    echo 'committed all files with message : ' ${COMMIT_MESSAGE}
-fi
+    if [[ "${COMMIT}" = true ]] ; then
+        echo "committing all files with message :  ${COMMIT_MESSAGE}"
+        find . -name "pom.xml" | xargs git add -u
+        find . -name "pom.vm"  | xargs git add -u
+        find . -name "Dockerfile" | xargs git add -u
+        git add **/install.sh
+        git add **/asqatasun.conf
+        git add ansible/asqatasun/defaults/main.yml
+        git add contributors.txt
+        git commit -m "${COMMIT_MESSAGE}"
+        echo "committed all files with message :  ${COMMIT_MESSAGE}"
+    fi
+}
 
 ###############
 # Automatic tag
 ###############
-
-if [[ "$TAG" = true ]] ; then
-    MY_TAG="v$TO_VERSION"
-    echo 'tagging new ' $MY_TAG 'tag.'
-    git tag -a $MY_TAG -m "$MY_TAG"
-    echo 'tagged new ' $MY_TAG 'tag.'
-fi
-
-##########################################
-# Automatic push to $BRANCH_NAME + $MY_TAG
-##########################################
-
-if [[ "$PUSH" = true ]] ; then
-    echo 'pushing to master'
-    git push origin master
-    echo 'pushed to master'
-    if [[ "$TAG" = true ]] ; then
-        echo 'pushing new ' $MY_TAG 'tag.'
-        git push origin $MY_TAG
-        echo 'pushed new ' $MY_TAG 'tag.'
+function add_tag() {
+    if [[ "${TAG}" = true ]] ; then
+        MY_TAG="v${TO_VERSION}"
+        echo 'tagging new ' ${MY_TAG} 'tag.'
+        git tag -a ${MY_TAG} -m "${MY_TAG}"
+        echo 'tagged new ' ${MY_TAG} 'tag.'
     fi
-fi
+}
 
-########################
-# Clean up temporary dir
-########################
-#if [[ "${SOURCE_DIR}" = "" ]] ; then
-#    cd /tmp
-#    rm -fr Asqatasun
-#fi
+##########################################
+# Automatic push to $BRANCH_NAME + ${MY_TAG}
+##########################################
+function push_master_and_tag() {
+    if [[ "${PUSH}" = true ]] ; then
+        echo 'pushing to master'
+        git push origin master
+        echo 'pushed to master'
+        if [[ "${TAG}" = true ]] ; then
+            echo 'pushing new ' ${MY_TAG} 'tag.'
+            git push origin ${MY_TAG}
+            echo 'pushed new ' ${MY_TAG} 'tag.'
+        fi
+    fi
+}
 
-#cd ~
+##########################################
+# Main tasks
+##########################################
+
+checkout_source_code
+automerge
+bump_release
+update_contributors
+commit_files
+add_tag
+push_master_and_tag
 
 exit 0
