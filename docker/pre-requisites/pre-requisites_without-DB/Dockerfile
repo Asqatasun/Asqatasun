@@ -16,7 +16,7 @@ USER root
 ENV  WWWPORT="8080"                                    \
      TOMCAT_WEBAPP_DIR="/var/lib/tomcat7/webapps"      \
      TOMCAT_USER="tomcat7"                             \
-     ASQA_RELEASE="4.1.0-SNAPSHOT"
+     ASQA_RELEASE="4.1.0-rc.4"
 
 EXPOSE $WWWPORT
 
