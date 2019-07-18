@@ -67,5 +67,11 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
+
+	<!-- Java Architecture for XML Binding (JAXB), Java 11+ support -->		
+	<dependency>
+		<groupId>javax.xml.bind</groupId>
+		<artifactId>jaxb-api</artifactId>
+	</dependency>
     </dependencies>
 </project>
