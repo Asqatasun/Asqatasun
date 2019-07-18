@@ -38,7 +38,7 @@ import org.asqatasun.entity.service.audit.ProcessResultDataService;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
-import org.asqatasun.service.AnalyserService;
+import org.asqatasun.analyser.AnalyserService;
 import org.asqatasun.service.ConsolidatorService;
 import org.asqatasun.service.ContentAdapterService;
 import org.asqatasun.service.ProcessorService;
