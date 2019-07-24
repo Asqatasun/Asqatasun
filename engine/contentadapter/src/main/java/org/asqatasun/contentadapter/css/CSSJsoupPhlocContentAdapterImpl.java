@@ -436,7 +436,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * @param stylesheetContent
      * @param resource
      * @param currentLocalResourcePath
-     * @param mediaAttributeValue
+     * @param mediaList
      * 
      */
     private void adaptContent(
@@ -444,6 +444,12 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             Resource resource, 
             String currentLocalResourcePath, 
             @Nullable List<CSSMediaQuery> mediaList) {
+
+        XStream xStream = new XStream();
+        XStream.setupDefaultSecurity(xStream);
+        xStream.allowTypesByWildcard(new String[] {
+            "org.asqatasun.**"
+        });
         if (stylesheetContent.getAdaptedContent() == null
                 && resource.getResource() != null && StringUtils.isNotBlank(resource.getResource())) {
             Charset charset = null;
@@ -481,7 +487,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
                         }
                     }
                     
-                    stylesheetContent.setAdaptedContent(new XStream().toXML(aCSS));
+                    stylesheetContent.setAdaptedContent(xStream.toXML(aCSS));
                     
                     if (aCSS.hasImportRules()) {
                         for (CSSImportRule cssImportRule : aCSS.getAllImportRules()) {

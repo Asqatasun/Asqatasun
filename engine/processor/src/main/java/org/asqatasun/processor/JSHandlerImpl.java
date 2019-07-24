@@ -83,15 +83,18 @@ public class JSHandlerImpl implements JSHandler {
             return;
         }
 
-        XStream xstream = new XStream();
-
+        XStream xStream = new XStream();
+        XStream.setupDefaultSecurity(xStream);
+        xStream.allowTypesByWildcard(new String[] {
+            "org.asqatasun.**"
+        });
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
             if (relatedContent instanceof JavascriptContent) {
                 if (javaScriptSet == null) {
                     javaScriptSet = new HashSet<>();
                 }
                 javaScriptSet.addAll(
-                        (Set<JSResource>) xstream.fromXML(
+                        (Set<JSResource>) xStream.fromXML(
                         ((JavascriptContent) relatedContent).getAdaptedContent()));
             }
         }
