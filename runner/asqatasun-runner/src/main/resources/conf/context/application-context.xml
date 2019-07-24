@@ -6,6 +6,7 @@
                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="org.asqatasun.analyser"/>
+    <context:component-scan base-package="org.asqatasun.consolidator"/>
 
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -17,7 +18,6 @@
     </bean>
 
     <import resource="classpath:conf/context/beans-audit.xml"/>
-    <import resource="classpath:conf/context/beans-consolidator.xml"/>
     <import resource="classpath:conf/context/beans-contentadapter.xml"/>
     <import resource="classpath:conf/context/beans-contentloader.xml"/>
     <!--<import resource="classpath:conf/context/beans-crawler.xml"/>-->

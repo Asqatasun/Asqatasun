@@ -7,6 +7,7 @@
 
 
     <context:component-scan base-package="org.asqatasun.analyser"/>
+    <context:component-scan base-package="org.asqatasun.consolidator"/>
 
     <bean id="exposedPropertiesConfigurer" class="org.asqatasun.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer">
         <property name="locations">
@@ -23,7 +24,6 @@
 
     <!-- asqatasun imports-->
     <import resource="classpath:conf/context/beans-audit.xml"/>
-    <import resource="classpath:conf/context/beans-consolidator.xml"/>
     <import resource="classpath:conf/context/beans-contentloader.xml"/>
     <import resource="classpath:conf/context/beans-contentadapter.xml"/>
     <!--<import resource="classpath:conf/context/beans-crawler.xml"/>-->

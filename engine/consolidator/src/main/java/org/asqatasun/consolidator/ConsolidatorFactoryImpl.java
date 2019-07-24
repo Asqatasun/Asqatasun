@@ -23,32 +23,54 @@ package org.asqatasun.consolidator;
 
 import java.util.Collection;
 import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.service.audit.EvidenceDataService;
+import org.asqatasun.entity.service.audit.EvidenceElementDataService;
+import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
+import org.asqatasun.processing.ProcessRemarkServiceFactory;
 import org.asqatasun.ruleimplementation.RuleImplementation;
 import org.asqatasun.service.ProcessRemarkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Based on the design pattern factory, create instances of ConsolidatorFactory
  * @author enzolalay
  */
+@Component
 public class ConsolidatorFactoryImpl implements ConsolidatorFactory {
+
+    private ProcessRemarkDataService processRemarkDataService;
+    private EvidenceElementDataService evidenceElementDataService;
+    private EvidenceDataService evidenceDataService;
+
+    @Autowired
+    public ConsolidatorFactoryImpl(
+        ProcessRemarkDataService processRemarkDataService,
+        EvidenceElementDataService evidenceElementDataService,
+        EvidenceDataService evidenceDataService) {
+        this.processRemarkDataService = processRemarkDataService;
+        this.evidenceElementDataService = evidenceElementDataService;
+        this.evidenceDataService = evidenceDataService;
+    }
 
     /**
      *
      * @param grossResultList
      * @param ruleImplementation
-     * @param processRemarkService
      * @return
      *      an instance of ConsolidatorFactory
      */
     @Override
     public Consolidator create(
             Collection<ProcessResult> grossResultList,
-            RuleImplementation ruleImplementation,
-            ProcessRemarkService processRemarkService) {
+            RuleImplementation ruleImplementation) {
         return new ConsolidatorImpl(
                 grossResultList,
                 ruleImplementation,
-                processRemarkService);
+            ProcessRemarkServiceFactory.create(
+                processRemarkDataService,
+                evidenceElementDataService,
+                evidenceDataService));
     }
 
 }

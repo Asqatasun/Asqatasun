@@ -56,27 +56,12 @@ public class ConsolidatorImpl implements Consolidator {
         this.processRemarkService = processRemarkService;
     }
 
-    @Override
-    public Collection<ProcessResult> getGrossResultList() {
-        return grossResultList;
-    }
-
-    @Override
-    public Collection<ProcessResult> getResult() {
-        return result;
-    }
-
-    @Override
-    public RuleImplementation getRuleImplementation() {
-        return ruleImplementation;
-    }
-
     private void initialize() {
         if (initialized) {
             return;
         }
 
-        groupedProcessResultMap = new HashMap<WebResource, List<ProcessResult>>();
+        groupedProcessResultMap = new HashMap<>();
         for (ProcessResult processResult : grossResultList) {
             WebResource webResource = processResult.getSubject();
             WebResource parent;
@@ -87,14 +72,14 @@ public class ConsolidatorImpl implements Consolidator {
                 if (parent == null) {
                     processResultList = groupedProcessResultMap.get(webResource);
                     if (processResultList == null) {
-                        processResultList = new ArrayList<ProcessResult>();
+                        processResultList = new ArrayList<>();
                         groupedProcessResultMap.put(webResource,
                                 processResultList);
                     }
                 } else {
                     processResultList = groupedProcessResultMap.get(parent);
                     if (processResultList == null) {
-                        processResultList = new ArrayList<ProcessResult>();
+                        processResultList = new ArrayList<>();
                         groupedProcessResultMap.put(parent, processResultList);
                     }
                     webResource = parent;
@@ -106,27 +91,16 @@ public class ConsolidatorImpl implements Consolidator {
         initialized = true;
     }
 
+
+    @Override
+    public Collection<ProcessResult> getResult() {
+        return result;
+    }
+
     @Override
     public void run() {
         initialize();
-
         result = ruleImplementation.consolidate(groupedProcessResultMap, processRemarkService);
-    }
-
-    @Override
-    public void setGrossResultList(List<ProcessResult> grossResultList) {
-        this.grossResultList = grossResultList;
-        initialized = false;
-    }
-
-    @Override
-    public void setRuleImplementation(RuleImplementation ruleImplementation) {
-        this.ruleImplementation = ruleImplementation;
-    }
-
-    @Override
-    public void setProcessRemarkService(ProcessRemarkService processRemarkService) {
-        this.processRemarkService = processRemarkService;
     }
 
 }

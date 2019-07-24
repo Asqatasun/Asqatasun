@@ -21,11 +21,9 @@
  */
 package org.asqatasun.consolidator;
 
-import java.util.Collection;
-import java.util.List;
+
 import org.asqatasun.entity.audit.ProcessResult;
-import org.asqatasun.ruleimplementation.RuleImplementation;
-import org.asqatasun.service.ProcessRemarkService;
+import java.util.Collection;
 
 /**
  * 
@@ -37,40 +35,12 @@ public interface Consolidator {
      *
      * @return
      */
-    Collection<ProcessResult> getGrossResultList();
+    Collection <ProcessResult> getResult();
 
-    /**
-     *
-     * @return
-     */
-    Collection<ProcessResult> getResult();
-
-    /**
-     *
-     * @return
-     */
-    RuleImplementation getRuleImplementation();
 
     /**
      *
      */
     void run();
 
-    /**
-     *
-     * @param grossResultList
-     */
-    void setGrossResultList(List<ProcessResult> grossResultList);
-
-    /**
-     * 
-     * @param ruleImplementation
-     */
-    void setRuleImplementation(RuleImplementation ruleImplementation);
-
-    /**
-     * 
-     * @param processRemarkService
-     */
-    void setProcessRemarkService(ProcessRemarkService processRemarkService);
 }

@@ -29,6 +29,7 @@ import javax.persistence.PersistenceException;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.asqatasun.analyser.AnalyserService;
+import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.contentadapter.AdaptationListener;
 import org.asqatasun.entity.audit.*;
 import org.asqatasun.entity.parameterization.Parameter;

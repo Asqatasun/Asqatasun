@@ -40,7 +40,7 @@ import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.analyser.AnalyserService;
-import org.asqatasun.service.ConsolidatorService;
+import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.service.ContentAdapterService;
 import org.asqatasun.service.ProcessorService;
 import org.asqatasun.util.MD5Encoder;

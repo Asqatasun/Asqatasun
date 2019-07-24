@@ -19,20 +19,16 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.service;
+package org.asqatasun.consolidator;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.asqatasun.consolidator.Consolidator;
-import org.asqatasun.consolidator.ConsolidatorFactory;
+
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.reference.Test;
-import org.asqatasun.entity.service.audit.EvidenceDataService;
-import org.asqatasun.entity.service.audit.EvidenceElementDataService;
-import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
-import org.asqatasun.processing.ProcessRemarkServiceFactory;
 import org.asqatasun.ruleimplementation.RuleImplementation;
+import org.asqatasun.service.RuleImplementationLoaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -42,13 +38,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ConsolidatorServiceImpl implements ConsolidatorService {
 
     protected RuleImplementationLoaderService ruleImplementationLoaderService;
-    private ProcessRemarkDataService processRemarkDataService;
-    private EvidenceElementDataService evidenceElementDataService;
-    private EvidenceDataService evidenceDataService;
     private ConsolidatorFactory consolidatorFactory;
 
-    public ConsolidatorServiceImpl() {
-        super();
+    @Autowired
+    public ConsolidatorServiceImpl(
+        RuleImplementationLoaderService ruleImplementationLoaderService,
+        ConsolidatorFactory consolidatorFactory) {
+        this.ruleImplementationLoaderService = ruleImplementationLoaderService;
+        this.consolidatorFactory = consolidatorFactory;
     }
 
     @Override
@@ -59,48 +56,12 @@ public class ConsolidatorServiceImpl implements ConsolidatorService {
             // if the rule archive name is empty, the test is not launched
             if (!test.getNoProcess()) {
                 RuleImplementation ruleImplementation = ruleImplementationLoaderService.loadRuleImplementation(test);
-                Consolidator consolidator = consolidatorFactory.create(
-                        grossResultList, 
-                        ruleImplementation, 
-                        ProcessRemarkServiceFactory.create(
-                            processRemarkDataService, 
-                            evidenceElementDataService, 
-                            evidenceDataService));
+                Consolidator consolidator = consolidatorFactory.create(grossResultList,ruleImplementation);
                 consolidator.run();
                 resultList.addAll(consolidator.getResult());
             }
         }
         return resultList;
-    }
-
-    @Override
-    @Autowired
-    public void setRuleImplementationLoaderService(RuleImplementationLoaderService ruleImplementationLoaderService) {
-        this.ruleImplementationLoaderService = ruleImplementationLoaderService;
-    }
-
-    @Override
-    @Autowired
-    public void setEvidenceDataService(EvidenceDataService evidenceDataService) {
-        this.evidenceDataService = evidenceDataService;
-    }
-
-    @Override
-    @Autowired
-    public void setEvidenceElementDataService(EvidenceElementDataService evidenceElementDataService) {
-        this.evidenceElementDataService = evidenceElementDataService;
-    }
-
-    @Override
-    @Autowired
-    public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
-        this.processRemarkDataService = processRemarkDataService;
-    }
-
-    @Override
-    @Autowired
-    public void setConsolidatorFactory(ConsolidatorFactory consolidatorFactory) {
-        this.consolidatorFactory = consolidatorFactory;
     }
 
 }
