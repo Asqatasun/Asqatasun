@@ -21,20 +21,22 @@
  */
 package org.asqatasun.consolidator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.ruleimplementation.RuleImplementation;
 import org.asqatasun.service.RuleImplementationLoaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service(value = "consolidatorService")
 public class ConsolidatorServiceImpl implements ConsolidatorService {
 
     protected RuleImplementationLoaderService ruleImplementationLoaderService;

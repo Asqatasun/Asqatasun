@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service;
  * 
  * @author jkowalczyk
  */
-@Service
+@Service(value = "analyserService")
 public class AnalyserServiceImpl implements AnalyserService {
 
     private AnalyserFactory analyserFactory;

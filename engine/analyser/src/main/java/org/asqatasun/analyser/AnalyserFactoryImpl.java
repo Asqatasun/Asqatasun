@@ -47,7 +47,7 @@ import org.springframework.stereotype.Component;
  *
  * @author enzolalay
  */
-@Component
+@Component(value = "analyserFactory")
 public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javadoc
 
     private final WebResourceStatisticsDataService webResourceStatisticsDataService;

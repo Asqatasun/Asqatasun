@@ -28,7 +28,6 @@ import org.asqatasun.entity.service.audit.EvidenceElementDataService;
 import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
 import org.asqatasun.processing.ProcessRemarkServiceFactory;
 import org.asqatasun.ruleimplementation.RuleImplementation;
-import org.asqatasun.service.ProcessRemarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +35,7 @@ import org.springframework.stereotype.Component;
  * Based on the design pattern factory, create instances of ConsolidatorFactory
  * @author enzolalay
  */
-@Component
+@Component(value = "consolidatorFactory")
 public class ConsolidatorFactoryImpl implements ConsolidatorFactory {
 
     private ProcessRemarkDataService processRemarkDataService;
