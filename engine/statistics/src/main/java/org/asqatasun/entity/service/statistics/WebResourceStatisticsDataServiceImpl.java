@@ -397,7 +397,6 @@ public class WebResourceStatisticsDataServiceImpl extends
      * definition, the criterion result is the result type
      *
      * @param crs
-     * @param criterionTestListSize
      */
     private void computeCriterionResult(CriterionStatistics crs) {
 
@@ -441,7 +440,7 @@ public class WebResourceStatisticsDataServiceImpl extends
     /**
      *
      * @param testSolution
-     * @param criterion
+     * @param theme
      * @param wrs
      */
     private void addResultToThemeCounterMap(

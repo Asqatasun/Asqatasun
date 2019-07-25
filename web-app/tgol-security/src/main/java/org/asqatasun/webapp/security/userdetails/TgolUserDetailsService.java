@@ -30,40 +30,55 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
 
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
 /**
  *
  * @author jkowalczyk
  */
 public class TgolUserDetailsService extends JdbcDaoImpl {
 
+    @Autowired
     private UserDataService userDataService;
     @Autowired
-    public void setUserDataService(UserDataService userDataService) {
-        this.userDataService = userDataService;
-    }
-    
+    private DataSource dataSource;
+
+    private final static String USERS_BY_USERNAME_QUERY =
+        "SELECT Email1, Password, Activated as enabled FROM TGSI_USER WHERE Email1=?";
+    private static String AUTHORITIES_BY_USERNAME_QUERY =
+        "SELECT TGSI_USER.Email1, TGSI_ROLE.Role_Name as authorities FROM TGSI_USER, TGSI_ROLE "
+            + "WHERE TGSI_USER.Email1 = ? AND TGSI_USER.ROLE_Id_Role=TGSI_ROLE.Id_Role";
+
     /**
-     * 
+     *
      */
     public TgolUserDetailsService() {
         super();
     }
 
+    @PostConstruct
+    public void init() {
+        this.setDataSource(dataSource);
+        this.setUsersByUsernameQuery(USERS_BY_USERNAME_QUERY);
+        this.setAuthoritiesByUsernameQuery(AUTHORITIES_BY_USERNAME_QUERY);
+    }
+
     @Override
     protected UserDetails createUserDetails(String username, UserDetails userFromUserQuery,
-            List<GrantedAuthority> combinedAuthorities) {
-        
+                                            List<GrantedAuthority> combinedAuthorities) {
+
         User user = userDataService.getUserFromEmail(username);
 
         return new TgolUserDetails(
-                username, 
-                userFromUserQuery.getPassword(), 
-                userFromUserQuery.isEnabled(),
-                true, 
-                true, 
-                true, 
-                combinedAuthorities,
-                user);
+            username,
+            userFromUserQuery.getPassword(),
+            userFromUserQuery.isEnabled(),
+            true,
+            true,
+            true,
+            combinedAuthorities,
+            user);
     }
     
 }

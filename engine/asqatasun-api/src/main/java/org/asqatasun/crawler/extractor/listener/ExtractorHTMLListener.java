@@ -22,18 +22,12 @@
 
 package org.asqatasun.crawler.extractor.listener;
 
-import org.archive.modules.CrawlURI;
-
 /**
+ * @TODO To be removed
  *
  * @author jkowalczyk
  */
 public interface ExtractorHTMLListener {
 
-    /**
-     *
-     * @param curi
-     */
-    void computeResource(CrawlURI curi);
 
 }

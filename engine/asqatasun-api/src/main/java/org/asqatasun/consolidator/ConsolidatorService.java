@@ -19,23 +19,28 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.analyser;
+package org.asqatasun.consolidator;
+
+import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.reference.Test;
+
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.Collection;
 
 /**
  * 
  * @author jkowalczyk
  */
-public interface Analyser {
+@XmlTransient
+public interface ConsolidatorService {
 
     /**
      *
-     * @return the result
+     * @param grossResultList
+     * @param testList
+     * @return
      */
-    float getResult();
-
-    /**
-     * Starts the processing
-     */
-    void run();
+    Collection<ProcessResult> consolidate(Collection<ProcessResult> grossResultList,
+            Collection<Test> testList);
 
 }

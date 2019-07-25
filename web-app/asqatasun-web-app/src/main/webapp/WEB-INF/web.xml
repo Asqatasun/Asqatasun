@@ -105,13 +105,8 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>tgol-web-app</servlet-name>
-        <url-pattern>/dispatch.html</url-pattern>
-    </servlet-mapping>
-
     <welcome-file-list>
-        <welcome-file>dispatch.html</welcome-file>
+        <welcome-file>login.html</welcome-file>
     </welcome-file-list>
 
 

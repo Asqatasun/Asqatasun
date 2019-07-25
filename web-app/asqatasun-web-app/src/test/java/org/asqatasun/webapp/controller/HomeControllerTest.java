@@ -38,7 +38,6 @@ import org.asqatasun.webapp.presentation.factory.ContractInfoFactory;
 import org.asqatasun.webapp.presentation.factory.DetailedContractInfoFactory;
 import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.springframework.security.authentication.AuthenticationDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,7 +55,6 @@ public class HomeControllerTest extends TestCase {
     private ContractDataService mockContractDataService;
     private ActDataService mockActDataService;
     private ActionHandler mockActionHandler;
-    private AuthenticationDetails mockAuthenticationDetails;
     private Authentication mockAuthentication;
     private Contract mockContract;
     private User mockUser;
@@ -92,9 +90,6 @@ public class HomeControllerTest extends TestCase {
         }
         if (mockActDataService != null) {
             verify(mockActDataService);
-        }
-        if (mockAuthenticationDetails != null) {
-            verify(mockAuthenticationDetails);
         }
         if (mockAuthentication != null) {
             verify(mockAuthentication);
@@ -203,10 +198,7 @@ public class HomeControllerTest extends TestCase {
         expect(mockAuthentication.getPrincipal()).andReturn(tud).anyTimes();
         expect(mockAuthentication.getAuthorities()).andReturn(null).anyTimes();
         replay(mockAuthentication);
-        
-        mockAuthenticationDetails = createMock(AuthenticationDetails.class);
-        expect(mockAuthenticationDetails.getContext()).andReturn("test1@test.com").anyTimes();
-        replay(mockAuthenticationDetails);
+
     }
  
 }

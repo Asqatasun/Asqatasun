@@ -63,13 +63,17 @@ public class CSSHandlerImpl implements CSSHandler {
         }
         initializeStyleSet();
         initializeCssOnErrorSet();
-        XStream xstream = new XStream();
+        XStream xStream = new XStream();
+        XStream.setupDefaultSecurity(xStream);
+        xStream.allowTypesByWildcard(new String[] {
+            "org.asqatasun.**","com.phloc.css.**"
+        });
         for (RelatedContent relatedContent : ssp.getRelatedContentSet()) {
             if (relatedContent instanceof StylesheetContent) {
                 StylesheetContent sc = (StylesheetContent) relatedContent;
                 if (isStylesheetTestable(sc)) {
                     styleMap.put(((Content) relatedContent).getURI(),
-                                    (CascadingStyleSheet) xstream.fromXML(
+                                    (CascadingStyleSheet) xStream.fromXML(
                                         (sc).getAdaptedContent()));
                 } else {
                     addStylesheetOnError(sc);

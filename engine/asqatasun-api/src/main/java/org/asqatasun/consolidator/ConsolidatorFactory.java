@@ -21,10 +21,10 @@
  */
 package org.asqatasun.consolidator;
 
-import java.util.Collection;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.ruleimplementation.RuleImplementation;
-import org.asqatasun.service.ProcessRemarkService;
+
+import java.util.Collection;
 
 /**
  *
@@ -38,9 +38,8 @@ public interface ConsolidatorFactory {
      * 
      * @param grossResultList
      * @param ruleImplementation
-     * @param processRemarkService
      * @return
      */
-    Consolidator create(Collection<ProcessResult> grossResultList, RuleImplementation ruleImplementation, ProcessRemarkService processRemarkService);
+    Consolidator create(Collection<ProcessResult> grossResultList, RuleImplementation ruleImplementation);
 
 }

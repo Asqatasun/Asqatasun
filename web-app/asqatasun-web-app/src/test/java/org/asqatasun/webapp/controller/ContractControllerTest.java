@@ -42,7 +42,6 @@ import org.asqatasun.webapp.presentation.factory.ContractInfoFactory;
 import org.asqatasun.webapp.presentation.factory.DetailedContractInfoFactory;
 import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.springframework.security.authentication.AuthenticationDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -63,7 +62,6 @@ public class ContractControllerTest extends TestCase {
     private ActDataService mockActDataService;
     private LocaleResolver mockLocaleResolver;
     private ActionHandler mockActionHandler;
-    private AuthenticationDetails mockAuthenticationDetails;
     private Authentication mockAuthentication;
     private Contract mockContract;
     private User mockUser;
@@ -102,9 +100,6 @@ public class ContractControllerTest extends TestCase {
         }
         if (mockActionHandler != null) {
             verify(mockActionHandler);
-        }
-        if (mockAuthenticationDetails != null) {
-            verify(mockAuthenticationDetails);
         }
         if (mockAuthentication != null) {
             verify(mockAuthentication);
@@ -279,10 +274,7 @@ public class ContractControllerTest extends TestCase {
         expect(mockAuthentication.getPrincipal()).andReturn(tud).anyTimes();
         expect(mockAuthentication.getAuthorities()).andReturn(null).anyTimes();
         replay(mockAuthentication);
-        
-        mockAuthenticationDetails = createMock(AuthenticationDetails.class);
-        expect(mockAuthenticationDetails.getContext()).andReturn("test1@test.com").anyTimes();
-        replay(mockAuthenticationDetails);
+
     }
  
     private void setUpLocaleResolver() {

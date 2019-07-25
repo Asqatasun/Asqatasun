@@ -100,17 +100,8 @@ public class AnalyserImpl implements Analyser {
     private Collection<Test> testSet;
     private Map<Criterion, CriterionStatistics> csMap;
     private Map<Theme, ThemeStatistics> tsMap;
-    
     private Collection<ProcessResult> netResultList;
-    @Override
-    public List<ProcessResult> getNetResultList() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
-    @Override
-    public void setNetResultList(final List<ProcessResult> netResultList) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     /**
      * This attribute is used to compute the number of not tested tests. In case
      * of Page audit, this value is supposed to be 1 and thus, the not tested
@@ -120,7 +111,7 @@ public class AnalyserImpl implements Analyser {
      * before substracting the qualified results.
      *
      */
-    private int nbOfWr = 0;
+    private int nbOfWr;
     /**
      * the set of audit parameters that handles some overridden values for test
      * weight (needed to compute the raw mark)
@@ -184,8 +175,7 @@ public class AnalyserImpl implements Analyser {
         webResourceStatisticsDataService.saveOrUpdate(wrStats);
     }
 
-    @Override
-    public final void setWebResource(final WebResource webResource) {
+    private final void setWebResource(final WebResource webResource) {
         this.webResource = webResource;
         if (webResource instanceof Site) {
             this.audit = webResource.getAudit();
@@ -196,11 +186,6 @@ public class AnalyserImpl implements Analyser {
                 this.audit = webResource.getParent().getAudit();
             }
         }
-    }
-
-    @Override
-    public WebResource getWebResource() {
-        return webResource;
     }
 
     /**
@@ -344,7 +329,7 @@ public class AnalyserImpl implements Analyser {
     /**
      *
      * @param testSolution
-     * @param criterion
+     * @param theme
      */
     private void addResultToThemeCounterMap(
             TestSolution testSolution,
@@ -719,7 +704,6 @@ public class AnalyserImpl implements Analyser {
      * definition, the criterion result is the result type
      *
      * @param crs
-     * @param criterionTestListSize
      */
     private void computeCriterionResult(CriterionStatistics crs) {
         if (crs.getNbOfFailed() > 0) {  // at least one test is failed, the criterion is failed
@@ -743,7 +727,7 @@ public class AnalyserImpl implements Analyser {
      * ProcessResult with NOT_TESTED as the result.
      *
      * @param testList
-     * @param themeCode
+     * @param testList
      * @param netResultList
      * @return
      */

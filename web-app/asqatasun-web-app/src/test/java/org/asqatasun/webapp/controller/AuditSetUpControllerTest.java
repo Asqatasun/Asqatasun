@@ -45,7 +45,6 @@ import org.asqatasun.webapp.form.builder.*;
 import org.asqatasun.webapp.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
 import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.springframework.security.authentication.AuthenticationDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,7 +61,6 @@ public class AuditSetUpControllerTest extends TestCase {
     private AuditSetUpController instance;
 
     Authentication mockAuthentication;
-    AuthenticationDetails mockAuthenticationDetails;
     ActDataService mockActDataService;
     User mockUser;
     UserDataService mockUserDataService;
@@ -97,10 +95,6 @@ public class AuditSetUpControllerTest extends TestCase {
         if (mockAuthentication != null) {
             verify(mockAuthentication);
             mockAuthentication = null;
-        }
-        if (mockAuthenticationDetails != null) {
-            verify(mockAuthenticationDetails);
-            mockAuthenticationDetails = null;
         }
         verify(mockActDataService);
         mockActDataService=null;
@@ -337,10 +331,7 @@ public class AuditSetUpControllerTest extends TestCase {
         expect(mockAuthentication.getAuthorities()).andReturn(null).anyTimes();
         
         replay(mockAuthentication);
-        
-        mockAuthenticationDetails = createMock(AuthenticationDetails.class);
-        expect(mockAuthenticationDetails.getContext()).andReturn("test1@test.com").anyTimes();
-        replay(mockAuthenticationDetails);
+
     }
     
     private void setUpMockActDataService(){

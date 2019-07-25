@@ -26,7 +26,7 @@
                             <fmt:message key="resultPage.date"/> <fmt:formatDate type="both" value="${auditDate}" dateStyle="long" timeStyle="medium"/>
                         </p>
                         <div class="alert-actions">
-                            <a href="<c:url value="/dispatch.html" />" class="btn small"><fmt:message key="accessDeniedPage.backToHome"/></a>
+                            <a href="<c:url value="/" />" class="btn small"><fmt:message key="accessDeniedPage.backToHome"/></a>
                         </div><!-- class="alert-actions"-->
                     </div><!-- class="alert-message block-message"-->
                 </div><!-- class="span16" -->

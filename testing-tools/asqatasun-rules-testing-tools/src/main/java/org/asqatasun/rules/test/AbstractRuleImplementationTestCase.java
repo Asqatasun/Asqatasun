@@ -42,7 +42,7 @@ import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.service.ConsolidatorService;
+import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.service.ContentAdapterService;
 import org.asqatasun.service.ContentLoaderService;
 import org.asqatasun.service.ProcessorService;

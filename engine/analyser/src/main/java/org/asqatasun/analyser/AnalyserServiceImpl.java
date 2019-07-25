@@ -21,21 +21,30 @@
  */
 package org.asqatasun.analyser;
 
+import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.subject.WebResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 /**
  * 
  * @author jkowalczyk
  */
-public interface Analyser {
+@Service(value = "analyserService")
+public class AnalyserServiceImpl implements AnalyserService {
 
-    /**
-     *
-     * @return the result
-     */
-    float getResult();
+    private AnalyserFactory analyserFactory;
 
-    /**
-     * Starts the processing
-     */
-    void run();
+    @Autowired
+    public AnalyserServiceImpl(AnalyserFactory analyserFactory){
+        this.analyserFactory = analyserFactory;
+    }
+
+    @Override
+    public void analyse(WebResource webResource, Audit audit) {
+        Analyser analyser = analyserFactory.create(webResource, audit);
+        analyser.run();
+    }
+
 
 }

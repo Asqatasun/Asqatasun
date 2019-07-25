@@ -36,10 +36,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
+import org.asqatasun.util.http.HttpRequestHandler;
 import org.json.JSONException;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.asqatasun.contentloader.HarFileContentLoaderFactory;
-import org.asqatasun.crawler.util.CrawlUtils;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.PreProcessResult;
@@ -91,16 +91,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     public void setWebResource(WebResource webResource) {
         this.webResource = webResource;
     }
-    
-//    private SnapshotDataService snapshotDataService;
-//    public void setSnapshotDataService(SnapshotDataService snapshotDataService) {
-//        this.snapshotDataService = snapshotDataService;
-//    }
-//    
-//    private SnapshotFactory snapshotFactory;
-//    public void setSnapshotFactory(SnapshotFactory snapshotFactory) {
-//        this.snapshotFactory = snapshotFactory;
-//    }    
     
     /**
      * 
@@ -241,7 +231,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         }
         String charset = UFT8;
         try {
-            charset = CrawlUtils.extractCharset(IOUtils.toInputStream(sourceCode));
+            charset = HttpRequestHandler.extractCharset(IOUtils.toInputStream(sourceCode));
         } catch (IOException ex) {
             Logger.getLogger(this.getClass()).warn(ex);
         }
@@ -255,13 +245,6 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         ssp.setCharset(charset);
         contentDataService.saveOrUpdate(ssp);
         result.add(ssp);
-        
-//        if (snapshotContent != null) {
-//            Snapshot snapshot = snapshotFactory.create(
-//                    page, 
-//                    snapshotContent);
-//            snapshotDataService.saveOrUpdate(snapshot);
-//        }
         
         Audit audit = null;
         if (page.getAudit() != null) {
@@ -400,5 +383,5 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         }
         return true;
     }
-    
+
 }

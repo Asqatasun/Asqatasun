@@ -41,103 +41,34 @@ import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author enzolalay
  */
+@Component(value = "analyserFactory")
 public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javadoc
 
-    private WebResourceStatisticsDataService webResourceStatisticsDataService;
-    public WebResourceStatisticsDataService getWebResourceStatisticsDataService() {
-        return webResourceStatisticsDataService;
-    }
-
-    public void setWebResourceStatisticsDataService(
-            WebResourceStatisticsDataService webResourceStatisticsDataService) {
-        this.webResourceStatisticsDataService = webResourceStatisticsDataService;
-    }
-    
-    private WebResourceDataService webResourceDataService;
-    public WebResourceDataService getWebResourceDataService() {
-        return webResourceDataService;
-    }
-
-    public void setWebResourceDataService(
-            WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
-    
+    private final WebResourceStatisticsDataService webResourceStatisticsDataService;
+    private final WebResourceDataService webResourceDataService;
     private final ThemeStatisticsDataService themeStatisticsDataService;
-    public ThemeStatisticsDataService getThemeStatisticsDataService() {
-        return themeStatisticsDataService;
-    }
-
-    public void setThemeStatisticsDataService(
-            ThemeStatisticsDataService themeStatisticsDataService) {
-    }
-    
     private final TestStatisticsDataService testStatisticsDataService;
-    public TestStatisticsDataService getTestStatisticsDataService() {
-        return testStatisticsDataService;
-    }
-
-    public void setTestStatisticsDataService(
-            TestStatisticsDataService testStatisticsDataService) {
-    }
-    
     private final CriterionStatisticsDataService criterionStatisticsDataService;
-    public CriterionStatisticsDataService getCriterionStatisticsDataService() {
-        return criterionStatisticsDataService;
-    }
+    private final AuditDataService auditDataService;
+    private final ParameterDataService parameterDataService;
+    private final ParameterFamilyDataService parameterFamilyDataService;
+    private final ProcessResultDataService processResultDataService;
 
-    public void setCriterionStatisticsDataService(
-            CriterionStatisticsDataService criterionStatisticsDataService) {
-    }
-    
-    private AuditDataService auditDataService;
-    public AuditDataService getAuditDataService() {
-        return auditDataService;
-    }
-
-    public void setAuditDataService(AuditDataService auditDataService) {
-        this.auditDataService = auditDataService;
-    }
-    
-    private ParameterDataService parameterDataService;
-    public ParameterDataService getParameterDataService() {
-        return parameterDataService;
-    }
-
-    public void setParameterElementDataService(ParameterDataService parameterDataService) {
-        this.parameterDataService = parameterDataService;
-    }
-    
-    private ParameterFamilyDataService parameterFamilyDataService;
-    public ParameterFamilyDataService getParameterFamilyDataService() {
-        return parameterFamilyDataService;
-    }
-
-    public void setParameterFamilyDataService(ParameterFamilyDataService parameterFamilyDataService) {
-        this.parameterFamilyDataService = parameterFamilyDataService;
-    }
-
+    private Collection<ParameterFamily> testWeightParameterFamilySet ;
     private List<String> testWeightParameterFamilyCodeList = Collections.emptyList();
+
     public void setTestWeightParameterFamilyCodeList(List<String> testWeightParameterFamilyCodeList) {
         this.testWeightParameterFamilyCodeList = testWeightParameterFamilyCodeList;
     }
 
-    private ProcessResultDataService processResultDataService;
-    public ProcessResultDataService getProcessResultDataService() {
-        return processResultDataService;
-    }
 
-    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
-        this.processResultDataService = processResultDataService;
-    }
-    
-    private Collection<ParameterFamily> testWeightParameterFamilySet ;
-    
+
     @Autowired
     public AnalyserFactoryImpl(
             AuditDataService auditDataService,

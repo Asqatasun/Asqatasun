@@ -19,15 +19,12 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.service;
+package org.asqatasun.analyser;
 
-import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
-import org.asqatasun.analyser.Analyser;
-import org.asqatasun.analyser.AnalyserFactory;
 import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.subject.WebResource;
+
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * 
@@ -37,37 +34,11 @@ import org.asqatasun.entity.subject.WebResource;
 public interface AnalyserService {
 
     /**
-     * @deprecated Kept for backward compatibility.
-     * @param netResultList
-     * @return
-     */
-    @Deprecated
-    float analyse(List<ProcessResult> netResultList);
-
-    /**
      * 
      * @param webResource
      * @param audit
      */
     void analyse(WebResource webResource, Audit audit);
 
-    /**
-     * @deprecated Kept for backward compatibility.
-     * @param analyser
-     */
-    @Deprecated
-    void setAnalyser(Analyser analyser);
-
-    /**
-     *
-     * @param analyserFactory
-     */
-    void setAnalyserFactory(AnalyserFactory analyserFactory);
-
-    /**
-     * 
-     * @param analyserFactory
-     */
-    void addAnalyserFactory(AnalyserFactory analyserFactory);
 
 }
