@@ -23,7 +23,7 @@ package org.asqatasun.entity.dao.audit;
 
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.Content;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;

@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.factory.user;
 
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import org.asqatasun.webapp.entity.user.Role;
 import org.asqatasun.webapp.entity.user.User;
 

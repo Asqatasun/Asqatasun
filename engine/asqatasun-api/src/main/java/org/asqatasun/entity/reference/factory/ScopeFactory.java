@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.reference.factory;
 
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import org.asqatasun.entity.reference.Scope;
 
 /**

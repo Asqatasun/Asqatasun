@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.service.parameterization;
 
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.asqatasun.entity.dao.parameterization.ParameterElementDAO;
 import org.asqatasun.entity.parameterization.factory.ParameterElementFactory;
 import org.asqatasun.entity.parameterization.ParameterElement;

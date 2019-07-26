@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.parameterization.factory;
 
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import org.asqatasun.entity.parameterization.ParameterFamily;
 
 /**

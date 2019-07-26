@@ -26,7 +26,7 @@ import java.util.Set;
 
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  *

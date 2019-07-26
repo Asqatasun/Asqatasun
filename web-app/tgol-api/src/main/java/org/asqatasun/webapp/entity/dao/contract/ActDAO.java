@@ -23,7 +23,7 @@ package org.asqatasun.webapp.entity.dao.contract;
 
 import java.util.Collection;
 import java.util.Date;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.webapp.entity.contract.Act;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.contract.ScopeEnum;

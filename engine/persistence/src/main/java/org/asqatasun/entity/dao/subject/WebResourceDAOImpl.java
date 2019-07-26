@@ -26,7 +26,7 @@ import javax.persistence.Query;
 
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.subject.WebResourceImpl;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import java.util.List;
 import javax.persistence.NonUniqueResultException;
 import org.apache.commons.lang3.StringUtils;

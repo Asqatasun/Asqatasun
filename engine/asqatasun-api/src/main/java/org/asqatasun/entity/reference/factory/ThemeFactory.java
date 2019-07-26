@@ -22,7 +22,7 @@
 package org.asqatasun.entity.reference.factory;
 
 import org.asqatasun.entity.reference.Theme;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 
 /**
  * 

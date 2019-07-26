@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.factory.contract;
 
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import org.asqatasun.webapp.entity.contract.Scope;
 import org.asqatasun.webapp.entity.contract.ScopeEnum;
 

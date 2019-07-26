@@ -25,7 +25,7 @@ import javax.persistence.Query;
 
 import org.asqatasun.entity.reference.Nomenclature;
 import org.asqatasun.entity.reference.NomenclatureImpl;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import java.util.Collection;
 
 /**

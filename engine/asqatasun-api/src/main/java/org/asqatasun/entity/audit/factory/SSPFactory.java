@@ -23,7 +23,7 @@ package org.asqatasun.entity.audit.factory;
 
 import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.subject.Page;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import java.util.Date;
 
 /**

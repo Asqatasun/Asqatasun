@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.option;
 
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  *

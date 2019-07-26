@@ -25,8 +25,8 @@ import org.asqatasun.entity.audit.*;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.dao.GenericDAO;
+import org.asqatasun.entity.GenericFactory;
 
 import java.util.*;
 

@@ -25,7 +25,7 @@ import java.util.Collection;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.PreProcessResult;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  * 

@@ -21,8 +21,8 @@
  */
 package org.asqatasun.entity.reference;
 
-import org.asqatasun.sdk.entity.Entity;
-import org.asqatasun.sdk.entity.Reorderable;
+import org.asqatasun.entity.Entity;
+import org.asqatasun.entity.Reorderable;
 
 /**
  * 

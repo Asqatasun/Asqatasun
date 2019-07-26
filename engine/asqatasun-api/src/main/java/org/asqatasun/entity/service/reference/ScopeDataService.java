@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.service.reference;
 
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 import org.asqatasun.entity.reference.Scope;
 
 /**

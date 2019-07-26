@@ -24,7 +24,7 @@ package org.asqatasun.entity.dao.reference;
 import java.util.Collection;
 import javax.persistence.Query;
 import org.asqatasun.entity.reference.*;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 
 /**
  * 

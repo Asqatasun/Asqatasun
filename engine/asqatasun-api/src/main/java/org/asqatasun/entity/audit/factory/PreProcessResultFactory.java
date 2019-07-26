@@ -24,7 +24,7 @@ package org.asqatasun.entity.audit.factory;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.PreProcessResult;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 
 /**
  * 

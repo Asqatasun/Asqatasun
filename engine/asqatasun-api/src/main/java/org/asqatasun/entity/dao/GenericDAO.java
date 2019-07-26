@@ -19,11 +19,11 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.sdk.entity.dao;
+package org.asqatasun.entity.dao;
 
 import java.io.Serializable;
 import java.util.Collection;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

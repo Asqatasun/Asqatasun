@@ -23,7 +23,7 @@ package org.asqatasun.entity.audit;
 
 import java.util.Date;
 
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 import java.util.Collection;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.reference.Test;

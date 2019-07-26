@@ -22,7 +22,7 @@
 package org.asqatasun.entity.dao.reference;
 
 
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.entity.reference.Scope;
 import org.asqatasun.entity.reference.ScopeImpl;
 

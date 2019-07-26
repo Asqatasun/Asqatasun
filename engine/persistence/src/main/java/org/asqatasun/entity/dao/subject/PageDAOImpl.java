@@ -23,7 +23,7 @@ package org.asqatasun.entity.dao.subject;
 
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.PageImpl;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 
 /**
  * 

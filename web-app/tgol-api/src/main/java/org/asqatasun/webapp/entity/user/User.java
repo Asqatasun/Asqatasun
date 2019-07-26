@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.entity.user;
 
 import java.util.Collection;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.option.OptionElement;
 

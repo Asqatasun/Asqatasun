@@ -24,10 +24,6 @@
     </organization>
    
     <modules>
-        <module>commons-entity</module>
-        <module>commons-entity-jpa</module>
-
-
         <module>rule-implementation-loader</module>
         <module>nomenclatureloader</module>
         <module>contentloader</module>

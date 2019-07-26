@@ -30,7 +30,7 @@ import org.asqatasun.entity.audit.factory.ContentFactory;
 import org.asqatasun.entity.dao.audit.ContentDAO;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
 /**

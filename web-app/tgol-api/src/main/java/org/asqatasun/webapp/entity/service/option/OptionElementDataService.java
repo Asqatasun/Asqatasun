@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.entity.service.option;
 
 import java.util.Collection;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 import org.asqatasun.webapp.entity.option.Option;
 import org.asqatasun.webapp.entity.option.OptionElement;
 import org.asqatasun.webapp.entity.user.User;

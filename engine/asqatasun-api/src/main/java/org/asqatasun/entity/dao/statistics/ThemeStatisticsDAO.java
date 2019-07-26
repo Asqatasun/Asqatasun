@@ -26,7 +26,7 @@ import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.statistics.ThemeStatistics;
 import org.asqatasun.entity.statistics.WebResourceStatistics;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  *

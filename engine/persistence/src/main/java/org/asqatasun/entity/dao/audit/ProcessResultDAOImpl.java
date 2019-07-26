@@ -38,7 +38,7 @@ import org.asqatasun.entity.reference.Scope;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 
 /**
  *

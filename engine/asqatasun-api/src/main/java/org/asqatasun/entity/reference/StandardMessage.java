@@ -20,7 +20,7 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */package org.asqatasun.entity.reference;
 
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

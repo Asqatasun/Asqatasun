@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.entity.factory.contract;
 
 import java.util.Date;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import org.asqatasun.webapp.entity.contract.Act;
 import org.asqatasun.webapp.entity.contract.Contract;
 

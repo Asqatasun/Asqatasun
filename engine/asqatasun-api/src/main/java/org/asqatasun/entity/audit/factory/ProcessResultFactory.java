@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.audit.factory;
 
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import org.asqatasun.entity.audit.DefiniteResult;
 import org.asqatasun.entity.audit.IndefiniteResult;
 import org.asqatasun.entity.audit.ProcessResult;

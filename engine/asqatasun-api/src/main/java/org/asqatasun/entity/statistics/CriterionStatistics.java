@@ -23,7 +23,7 @@ package org.asqatasun.entity.statistics;
 
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.reference.Criterion;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  *

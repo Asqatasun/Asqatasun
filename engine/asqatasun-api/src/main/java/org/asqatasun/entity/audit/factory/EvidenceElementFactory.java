@@ -22,7 +22,7 @@
 package org.asqatasun.entity.audit.factory;
 
 import org.asqatasun.entity.audit.Evidence;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 import org.asqatasun.entity.audit.EvidenceElement;
 import org.asqatasun.entity.audit.ProcessRemark;
 

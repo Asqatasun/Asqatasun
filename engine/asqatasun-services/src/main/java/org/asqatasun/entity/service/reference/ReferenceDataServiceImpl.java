@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.asqatasun.entity.dao.reference.ReferenceDAO;
 import org.asqatasun.entity.reference.Reference;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
 /**

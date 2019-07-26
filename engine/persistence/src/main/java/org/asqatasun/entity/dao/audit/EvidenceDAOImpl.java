@@ -24,7 +24,7 @@ package org.asqatasun.entity.dao.audit;
 import javax.persistence.Query;
 
 import org.asqatasun.entity.audit.EvidenceImpl;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import java.util.Collection;
 import org.asqatasun.entity.audit.Evidence;
 

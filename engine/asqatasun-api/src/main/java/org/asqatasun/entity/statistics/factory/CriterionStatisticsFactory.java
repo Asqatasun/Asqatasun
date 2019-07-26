@@ -22,7 +22,7 @@
 package org.asqatasun.entity.statistics.factory;
 
 import org.asqatasun.entity.statistics.CriterionStatistics;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 
 /**
  *

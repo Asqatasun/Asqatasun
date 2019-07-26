@@ -23,7 +23,7 @@ package org.asqatasun.webapp.entity.dao.user;
 
 import java.util.Collection;
 import javax.persistence.Query;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.webapp.entity.user.Role;
 import org.asqatasun.webapp.entity.user.RoleImpl;
 

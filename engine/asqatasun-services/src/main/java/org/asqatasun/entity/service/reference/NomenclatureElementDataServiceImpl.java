@@ -22,7 +22,7 @@
 package org.asqatasun.entity.service.reference;
 
 import org.asqatasun.entity.reference.NomenclatureElement;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
 /**

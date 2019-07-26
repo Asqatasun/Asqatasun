@@ -25,7 +25,7 @@ import javax.persistence.Query;
 
 import org.asqatasun.entity.reference.StandardMessage;
 import org.asqatasun.entity.reference.StandardMessageImpl;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import java.util.Collection;
 
 /**

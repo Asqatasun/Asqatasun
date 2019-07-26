@@ -27,7 +27,7 @@ import org.asqatasun.entity.audit.PreProcessResult;
 import org.asqatasun.entity.audit.factory.PreProcessResultFactory;
 import org.asqatasun.entity.dao.audit.PreProcessResultDAO;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
 /**

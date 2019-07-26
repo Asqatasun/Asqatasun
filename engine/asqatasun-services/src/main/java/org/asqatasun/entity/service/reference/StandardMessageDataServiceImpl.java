@@ -23,7 +23,7 @@ package org.asqatasun.entity.service.reference;
 
 import org.asqatasun.entity.reference.StandardMessage;
 import org.asqatasun.entity.dao.reference.StandardMessageDAO;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
 /**

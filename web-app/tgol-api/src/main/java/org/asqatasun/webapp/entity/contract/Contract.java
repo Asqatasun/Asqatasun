@@ -23,7 +23,7 @@ package org.asqatasun.webapp.entity.contract;
 
 import java.util.Collection;
 import java.util.Date;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 import org.asqatasun.webapp.entity.functionality.Functionality;
 import org.asqatasun.webapp.entity.option.OptionElement;
 import org.asqatasun.webapp.entity.referential.Referential;

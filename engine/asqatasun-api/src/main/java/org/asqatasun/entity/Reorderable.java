@@ -1,7 +1,7 @@
 /*
  * Asqatasun - Automated webpage assessment
  * Copyright (C) 2008-2019  Asqatasun.org
- *
+ * 
  * This file is part of Asqatasun.
  *
  * Asqatasun is free software: you can redistribute it and/or modify
@@ -19,18 +19,24 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.sdk.entity.factory;
+package org.asqatasun.entity;
 
 /**
- * 
- * @param <E>
+ * This interface is used to make an entity reorderable.
  * @author jkowalczyk
  */
-public interface GenericFactory<E> {
+public interface Reorderable {
 
     /**
-     *
-     * @return the entity created
+     * 
+     * @return
+     *      the entity rank
      */
-    E create();
+    int getRank();
+
+    /**
+     * 
+     * @param rank
+     */
+    void setRank(int rank);
 }

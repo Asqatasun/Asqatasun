@@ -29,7 +29,7 @@ import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.audit.factory.ProcessRemarkFactory;
 import org.asqatasun.entity.audit.factory.SourceCodeRemarkFactory;
 import org.asqatasun.entity.dao.audit.ProcessRemarkDAO;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

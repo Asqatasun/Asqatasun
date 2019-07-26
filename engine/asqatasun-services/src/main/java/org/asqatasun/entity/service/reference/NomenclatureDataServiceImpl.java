@@ -24,10 +24,9 @@ package org.asqatasun.entity.service.reference;
 import java.util.HashMap;
 import java.util.Map;
 import org.asqatasun.entity.dao.reference.NomenclatureDAO;
-import org.asqatasun.entity.dao.reference.StandardMessageDAO;
 import org.asqatasun.entity.reference.Nomenclature;
 import org.asqatasun.entity.reference.NomenclatureElement;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
 /**

@@ -23,7 +23,7 @@ package org.asqatasun.entity.dao.reference;
 
 import java.util.Collection;
 import org.asqatasun.entity.reference.Nomenclature;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  * 

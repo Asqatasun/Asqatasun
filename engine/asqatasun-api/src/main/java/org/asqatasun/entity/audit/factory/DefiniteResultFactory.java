@@ -27,7 +27,7 @@ import org.asqatasun.entity.audit.ProcessRemark;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 
 /**
  * 

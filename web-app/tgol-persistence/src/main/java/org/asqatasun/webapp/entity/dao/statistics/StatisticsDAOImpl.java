@@ -31,7 +31,7 @@ import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.statistics.*;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.webapp.presentation.data.FailedPageInfo;
 import org.asqatasun.webapp.presentation.data.FailedTestInfo;
 import org.asqatasun.webapp.presentation.data.FailedThemeInfo;

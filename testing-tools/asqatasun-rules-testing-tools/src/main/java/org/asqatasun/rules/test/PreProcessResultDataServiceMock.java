@@ -28,8 +28,8 @@ import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.PreProcessResult;
 import org.asqatasun.entity.service.audit.PreProcessResultDataService;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.dao.GenericDAO;
+import org.asqatasun.entity.GenericFactory;
 
 import javax.persistence.NoResultException;
 import java.io.File;

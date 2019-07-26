@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.service.parameterization;
 
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 import org.asqatasun.entity.parameterization.ParameterFamily;
 
 /**

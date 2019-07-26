@@ -24,7 +24,7 @@ package org.asqatasun.webapp.entity.service.contract;
 import java.util.Collection;
 import java.util.Date;
 import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.asqatasun.webapp.entity.contract.Act;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.contract.ScopeEnum;

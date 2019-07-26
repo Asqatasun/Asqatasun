@@ -28,7 +28,7 @@ import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.statistics.CriterionStatistics;
 import org.asqatasun.entity.statistics.WebResourceStatistics;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  *

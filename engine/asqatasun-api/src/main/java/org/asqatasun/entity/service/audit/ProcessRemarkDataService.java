@@ -26,7 +26,7 @@ import org.asqatasun.entity.audit.ProcessRemark;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.SourceCodeRemark;
 import org.asqatasun.entity.audit.TestSolution;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  * 

@@ -22,7 +22,7 @@
 package org.asqatasun.entity.dao.subject;
 
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 import java.util.List;
 import org.asqatasun.entity.audit.Audit;
 

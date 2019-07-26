@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.service.contract;
 
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.asqatasun.webapp.entity.contract.Scope;
 
 /**

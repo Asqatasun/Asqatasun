@@ -28,8 +28,8 @@ import org.asqatasun.entity.audit.SourceCodeRemark;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.audit.factory.SourceCodeRemarkFactory;
 import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.dao.GenericDAO;
+import org.asqatasun.entity.GenericFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;

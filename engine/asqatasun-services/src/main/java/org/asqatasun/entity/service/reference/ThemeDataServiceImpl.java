@@ -24,7 +24,7 @@ package org.asqatasun.entity.service.reference;
 import java.util.Collection;
 import org.asqatasun.entity.reference.Criterion;
 import org.asqatasun.entity.reference.Theme;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
 /**

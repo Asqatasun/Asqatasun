@@ -27,7 +27,7 @@ import org.asqatasun.entity.audit.EvidenceElement;
 import org.asqatasun.entity.audit.ProcessRemark;
 import org.asqatasun.entity.audit.factory.EvidenceElementFactory;
 import org.asqatasun.entity.dao.audit.EvidenceElementDAO;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

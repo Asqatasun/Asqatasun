@@ -22,7 +22,7 @@
 package org.asqatasun.entity.service.audit;
 
 import org.asqatasun.entity.audit.Evidence;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  * 

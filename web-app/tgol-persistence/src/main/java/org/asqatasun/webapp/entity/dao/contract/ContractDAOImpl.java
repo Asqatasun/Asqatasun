@@ -24,7 +24,7 @@ package org.asqatasun.webapp.entity.dao.contract;
 import java.util.Collection;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.contract.ContractImpl;
 import org.asqatasun.webapp.entity.user.User;

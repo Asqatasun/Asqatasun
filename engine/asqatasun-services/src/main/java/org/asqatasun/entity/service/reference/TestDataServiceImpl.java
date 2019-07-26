@@ -31,7 +31,7 @@ import org.asqatasun.entity.reference.Criterion;
 import org.asqatasun.entity.reference.Level;
 import org.asqatasun.entity.reference.Reference;
 import org.asqatasun.entity.reference.Test;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

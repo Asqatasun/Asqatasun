@@ -686,11 +686,6 @@
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-commons-entity-jpa</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-api</artifactId>
                 <version>${asqatasunVersion}</version>
                 <exclusions>
