@@ -4,7 +4,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="nomenclatureDAO" class="org.asqatasun.entity.dao.reference.NomenclatureDAOImpl"/>
-    <bean id="nomenclatureFactory" class="org.asqatasun.entity.factory.reference.NomenclatureFactoryImpl"/>
+    <bean id="nomenclatureFactory" class="org.asqatasun.entity.reference.factory.NomenclatureFactoryImpl"/>
     <bean id="nomenclatureDataService" class="org.asqatasun.entity.service.reference.NomenclatureDataServiceImpl">
         <property name="entityDao" ref="nomenclatureDAO"/>
         <property name="entityFactory" ref="nomenclatureFactory"/>

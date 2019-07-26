@@ -4,21 +4,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="evidenceDAO" class="org.asqatasun.entity.dao.audit.EvidenceDAOImpl"/>
-    <bean id="evidenceFactory" class="org.asqatasun.entity.factory.audit.EvidenceFactoryImpl"/>
+    <bean id="evidenceFactory" class="org.asqatasun.entity.audit.factory.EvidenceFactoryImpl"/>
     <bean id="evidenceDataService" class="org.asqatasun.entity.service.audit.EvidenceDataServiceImpl">
         <property name="entityFactory" ref="evidenceFactory"/>
         <property name="entityDao" ref="evidenceDAO"/>
     </bean>
     
     <bean id="evidenceElementDAO" class="org.asqatasun.entity.dao.audit.EvidenceElementDAOImpl"/>
-    <bean id="evidenceElementFactory" class="org.asqatasun.entity.factory.audit.EvidenceElementFactoryImpl"/>
+    <bean id="evidenceElementFactory" class="org.asqatasun.entity.audit.factory.EvidenceElementFactoryImpl"/>
     <bean id="evidenceElementDataService" class="org.asqatasun.entity.service.audit.EvidenceElementDataServiceImpl">
         <property name="entityFactory" ref="evidenceElementFactory"/>
         <property name="entityDao" ref="evidenceElementDAO"/>
     </bean>
     
     <bean id="processResultDAO" class="org.asqatasun.entity.dao.audit.ProcessResultDAOImpl"/>
-    <bean id="processResultFactory" class="org.asqatasun.entity.factory.audit.ProcessResultFactoryImpl"/>
+    <bean id="processResultFactory" class="org.asqatasun.entity.audit.factory.ProcessResultFactoryImpl"/>
     <bean id="processResultDataService" class="org.asqatasun.entity.service.audit.ProcessResultDataServiceImpl">
         <property name="entityFactory" ref="processResultFactory"/>
         <property name="entityDao" ref="processResultDAO"/>
@@ -29,7 +29,7 @@
         <property name="entityDao" ref="processRemarkDAO"/>-->
     <!--</bean>-->
     
-    <bean id="processRemarkFactory" class="org.asqatasun.entity.factory.audit.ProcessRemarkFactoryImpl"/>
+    <bean id="processRemarkFactory" class="org.asqatasun.entity.audit.factory.ProcessRemarkFactoryImpl"/>
     <bean id="processRemarkDataService" class="org.asqatasun.rules.test.ProcessRemarkDataServiceMock">
         <property name="entityFactory" ref="processRemarkFactory"/>
     </bean>
@@ -37,7 +37,7 @@
     <bean id="preProcessResultDataService" class="org.asqatasun.rules.test.PreProcessResultDataServiceMock"/>
 
     <bean id="auditDAO" class="org.asqatasun.entity.dao.audit.AuditDAOImpl"/>
-    <bean id="auditFactory" class="org.asqatasun.entity.factory.audit.AuditFactoryImpl"/>
+    <bean id="auditFactory" class="org.asqatasun.entity.audit.factory.AuditFactoryImpl"/>
     <bean id="auditDataService" class="org.asqatasun.entity.service.audit.AuditDataServiceImpl">
         <property name="entityFactory" ref="auditFactory"/>
         <property name="entityDao" ref="auditDAO"/>

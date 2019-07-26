@@ -5,8 +5,8 @@
 
 
     <context:component-scan base-package="org.asqatasun.consolidator"/>
+    <context:component-scan base-package="org.asqatasun.entity"/>
 
-    <import resource="classpath:context/beans-factories.xml"/>
     <import resource="classpath:context/beans-persistence.xml"/>
 
     <import resource="classpath:context/beans-contentloader.xml"/>
