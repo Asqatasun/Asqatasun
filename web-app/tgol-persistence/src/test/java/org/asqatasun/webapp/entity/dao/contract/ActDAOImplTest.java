@@ -35,7 +35,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.asqatasun.entity.dao.subject.WebResourceDAO;
-import org.asqatasun.entity.factory.subject.WebResourceFactory;
+import org.asqatasun.entity.subject.factory.WebResourceFactory;
 
 /**
  *

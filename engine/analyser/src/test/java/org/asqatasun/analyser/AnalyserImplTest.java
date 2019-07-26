@@ -24,7 +24,7 @@ package org.asqatasun.analyser;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import junit.framework.TestCase;
-import org.asqatasun.entity.factory.statistics.WebResourceStatisticsFactory;
+import org.asqatasun.entity.statistics.factory.WebResourceStatisticsFactory;
 import org.asqatasun.entity.factory.statistics.WebResourceStatisticsFactoryImpl;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataService;

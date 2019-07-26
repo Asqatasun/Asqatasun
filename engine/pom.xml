@@ -26,8 +26,8 @@
     <modules>
         <module>commons-entity</module>
         <module>commons-entity-jpa</module>
-        <module>reference</module>
-        <module>audit</module>
+
+
         <module>rule-implementation-loader</module>
         <module>nomenclatureloader</module>
         <module>contentloader</module>
@@ -38,12 +38,12 @@
         <module>analyser</module>
         <module>persistence</module>
         <module>logging</module>
-        <module>parameterization</module>
-        <module>statistics</module>
         <module>scenarioloader</module>
+
         <module>sebuilder-interpreter-tools</module>
         <module>asqatasun-api</module>
         <module>asqatasun-engine</module>
         <module>asqatasun-resources</module>
+        <module>asqatasun-model</module>
     </modules>
 </project>

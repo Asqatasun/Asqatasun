@@ -26,7 +26,7 @@ import org.asqatasun.entity.audit.ProcessRemark;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.SourceCodeRemark;
 import org.asqatasun.entity.audit.TestSolution;
-import org.asqatasun.entity.factory.audit.SourceCodeRemarkFactory;
+import org.asqatasun.entity.audit.factory.SourceCodeRemarkFactory;
 import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
 import org.asqatasun.sdk.entity.dao.GenericDAO;
 import org.asqatasun.sdk.entity.factory.GenericFactory;

@@ -23,7 +23,7 @@ package org.asqatasun.contentadapter.js;
 
 import org.asqatasun.contentadapter.util.URLIdentifier;
 import org.asqatasun.contentloader.Downloader;
-import org.asqatasun.entity.factory.audit.ContentFactory;
+import org.asqatasun.entity.audit.factory.ContentFactory;
 
 /**
  * Based on the design pattern factory, create an instance of JSContentAdapter.
