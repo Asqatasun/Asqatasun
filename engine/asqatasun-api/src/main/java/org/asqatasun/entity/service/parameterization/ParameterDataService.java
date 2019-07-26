@@ -140,4 +140,22 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
      * @return
      */
     Set<Parameter> updateParameter(Set<Parameter> paramSet, Parameter paramToUpdate);
+
+    /**
+     *
+     * @param ref
+     * @param level
+     * @return the set of parameters for a given couple of ref and level
+     */
+    Set<Parameter> getParameterSetFromAuditLevel(String ref, String level);
+
+    /**
+     * The default parameter set embeds a depth value that corresponds to the
+     * site audit. We need here to replace this parameter by a parameter value
+     * equals to 0.
+     *
+     * @return
+     */
+    Set<Parameter> getAuditPageParameterSet(Set<Parameter> defaultParameterSet);
+
 }

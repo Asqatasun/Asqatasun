@@ -714,7 +714,12 @@
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-audit</artifactId>
+                <artifactId>asqatasun-model</artifactId>
+                <version>${asqatasunVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-services</artifactId>
                 <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
@@ -725,21 +730,6 @@
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-jms</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-statistics</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-reference</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-parameterization</artifactId>
                 <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>

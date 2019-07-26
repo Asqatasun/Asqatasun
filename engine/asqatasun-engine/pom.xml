@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-audit</artifactId>
+            <artifactId>asqatasun-model</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

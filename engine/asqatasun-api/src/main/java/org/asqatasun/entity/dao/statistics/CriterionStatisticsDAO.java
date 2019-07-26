@@ -95,5 +95,4 @@ public interface CriterionStatisticsDAO extends GenericDAO<CriterionStatistics, 
     CriterionStatistics findCriterionStatisticsByWebResource(Criterion criterion ,WebResourceStatistics webResourceStatistics);
 
 
-
 }

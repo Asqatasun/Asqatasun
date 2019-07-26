@@ -28,15 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-audit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-statistics</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-parameterization</artifactId>
+            <artifactId>asqatasun-services</artifactId>
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>

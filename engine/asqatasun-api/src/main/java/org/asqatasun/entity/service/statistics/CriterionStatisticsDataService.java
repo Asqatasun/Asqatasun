@@ -26,6 +26,7 @@ import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.reference.Criterion;
 import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.statistics.CriterionStatistics;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.sdk.entity.service.GenericDataService;
 
@@ -78,5 +79,13 @@ public interface CriterionStatisticsDataService
      * @return 
      */
     Long getCriterionStatisticsCountByWebResource(Long webResourceId);
+
+    /**
+     * Getting the CriterionStatistics by web resources statistics
+     * @param criterion The web resources statistics
+     * @param webResourceStatistics The web resources statistics
+     * @return List of CriterionStatistics by web resources statistics
+     */
+    CriterionStatistics getCriterionStatisticsByWebResource(Criterion criterion ,WebResourceStatistics webResourceStatistics);
     
 }

@@ -31,6 +31,8 @@ import org.asqatasun.entity.parameterization.ParameterFamily;
  */
 public interface ParameterElementDataService extends GenericDataService<ParameterElement, Long> {
 
+    String DEPTH_PARAMETER_ELEMENT_KEY = "DEPTH";
+
     ParameterElement create(ParameterFamily parameterFamily);
 
     /**
@@ -40,5 +42,12 @@ public interface ParameterElementDataService extends GenericDataService<Paramete
      * @return
      */
     ParameterElement getParameterElement(String parameterElementCode);
+
+    /**
+     * Retrieve the depth parameter element
+     *
+     * @return
+     */
+    ParameterElement getDepthParameterElement();
 
 }

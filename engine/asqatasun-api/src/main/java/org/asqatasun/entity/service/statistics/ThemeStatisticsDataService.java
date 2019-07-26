@@ -24,6 +24,7 @@ package org.asqatasun.entity.service.statistics;
 import org.asqatasun.entity.statistics.ThemeStatistics;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.reference.Theme;
+import org.asqatasun.entity.statistics.WebResourceStatistics;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.sdk.entity.service.GenericDataService;
 
@@ -46,4 +47,11 @@ public interface ThemeStatisticsDataService
             TestSolution testSolution,
             Theme theme);
 
+    /**
+     *
+     * @param theme
+     * @param wrStats
+     * @return
+     */
+    ThemeStatistics getThemeStatisticsByWebResource(Theme theme, WebResourceStatistics wrStats);
 }

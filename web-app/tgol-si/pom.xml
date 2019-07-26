@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-audit</artifactId>
+            <artifactId>asqatasun-model</artifactId>
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>

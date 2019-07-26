@@ -110,11 +110,6 @@ public class AnalyserFactoryImpl implements AnalyserFactory {// TODO Write javad
                 nbOfWebResource);
         return analyser;
     }
-
-    @Override
-    public Analyser create(List<ProcessResult> netResultList) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
     /**
      * 

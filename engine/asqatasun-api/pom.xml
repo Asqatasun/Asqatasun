@@ -16,20 +16,20 @@
             <artifactId>asqatasun-commons-entity</artifactId>
         </dependency>
         <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${springGroupId}</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${springGroupId}</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-collections</groupId>
@@ -75,11 +75,5 @@
             <groupId>com.googlecode.juniversalchardet</groupId>
             <artifactId>juniversalchardet</artifactId>
         </dependency>
-
-	<!-- Java Architecture for XML Binding (JAXB), Java 11+ support -->
-	<dependency>
-		<groupId>javax.xml.bind</groupId>
-		<artifactId>jaxb-api</artifactId>
-	</dependency>
     </dependencies>
 </project>

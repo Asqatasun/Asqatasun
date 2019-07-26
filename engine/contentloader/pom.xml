@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>org.asqatasun</groupId>
-            <artifactId>asqatasun-audit</artifactId>
+            <artifactId>asqatasun-model</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

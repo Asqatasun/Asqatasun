@@ -41,9 +41,11 @@
         <module>scenarioloader</module>
 
         <module>sebuilder-interpreter-tools</module>
-        <module>asqatasun-api</module>
         <module>asqatasun-engine</module>
-        <module>asqatasun-resources</module>
+
+        <module>asqatasun-api</module>
         <module>asqatasun-model</module>
+        <module>asqatasun-services</module>
+        <module>asqatasun-resources</module>
     </modules>
 </project>
