@@ -30,6 +30,10 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-contentloader</artifactId>
         </dependency>
         <dependency>

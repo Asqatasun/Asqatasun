@@ -33,33 +33,42 @@
             <artifactId>asqatasun-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.saucelabs</groupId>
+            <artifactId>sebuilder-interpreter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.github.detro.ghostdriver</groupId>
-                    <artifactId>phantomjsdriver</artifactId>
-                </exclusion>
-            </exclusions> 
         </dependency>
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymockclassextension</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-contentloader</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.detro.ghostdriver</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.2.RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

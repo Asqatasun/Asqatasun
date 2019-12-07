@@ -30,34 +30,28 @@ import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.scenarioloader.ScenarioLoader;
 import org.asqatasun.scenarioloader.ScenarioLoaderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
+ *
  */
+
+@Service("scenarioLoaderService")
 public class ScenarioLoaderServiceImpl implements ScenarioLoaderService {
 
     private ScenarioLoaderFactory scenarioLoaderFactory;
-    @Override
-    @Autowired
-    public void setScenarioLoaderFactory(ScenarioLoaderFactory scenarioLoaderFactory) {
-        this.scenarioLoaderFactory = scenarioLoaderFactory;
-    }
-
     private ContentDataService contentDataService;
-    @Autowired
-    public void setContentDataService (ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
-    }
-    
     private WebResourceDataService webResourceDataService;
-    @Autowired
-    public void setWebResourceDataService (WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
 
-    public ScenarioLoaderServiceImpl() {
-        super();
+    @Autowired
+    public ScenarioLoaderServiceImpl(ScenarioLoaderFactory scenarioLoaderFactory,
+                                     ContentDataService contentDataService,
+                                     WebResourceDataService webResourceDataService) {
+        this.scenarioLoaderFactory = scenarioLoaderFactory;
+        this.contentDataService = contentDataService;
+        this.webResourceDataService = webResourceDataService;
     }
 
     @Override

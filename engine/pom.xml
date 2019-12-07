@@ -34,8 +34,6 @@
         <module>analyser</module>
         <module>logging</module>
         <module>scenarioloader</module>
-
-        <module>sebuilder-interpreter-tools</module>
         <module>asqatasun-engine</module>
 
         <module>asqatasun-api</module>
