@@ -93,15 +93,9 @@ public class HttpRequestHandler {
     }
 
     private int connectionTimeout = 3000;
-    public void setConnectionTimeout(int connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
-    }
     
     private int socketTimeout = 3000;
-    public void setSocketTimeout(int socketTimeout) {
-        this.socketTimeout = socketTimeout;
-    }
-    
+
     /**
      * The holder that handles the unique instance of HttpRequestHandler
      */

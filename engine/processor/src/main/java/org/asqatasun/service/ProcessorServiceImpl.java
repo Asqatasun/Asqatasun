@@ -31,35 +31,23 @@ import org.asqatasun.processor.Processor;
 import org.asqatasun.processor.ProcessorFactory;
 import org.asqatasun.ruleimplementation.RuleImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service("processorService")
 public class ProcessorServiceImpl implements ProcessorService {
 
     private ProcessorFactory processorFactory;
-    public ProcessorFactory getProcessorFactory() {
-        return processorFactory;
-    }
-
-    @Autowired
-    public void setProcessorFactory(ProcessorFactory processorFactory) {
-        this.processorFactory = processorFactory;
-    }
-    
     private RuleImplementationLoaderService ruleImplementationLoaderService;
-    public RuleImplementationLoaderService getRuleImplementationLoaderService() {
-        return ruleImplementationLoaderService;
-    }
-    
-    @Autowired
-    public void setRuleImplementationLoaderService(RuleImplementationLoaderService ruleImplementationLoaderService) {
-        this.ruleImplementationLoaderService = ruleImplementationLoaderService;
-    }
 
-    public ProcessorServiceImpl() {
-        super();
+    @Autowired
+    public ProcessorServiceImpl(ProcessorFactory processorFactory,
+                                RuleImplementationLoaderService ruleImplementationLoaderService) {
+        this.processorFactory = processorFactory;
+        this.ruleImplementationLoaderService = ruleImplementationLoaderService;
     }
 
     @Override
