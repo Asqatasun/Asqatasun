@@ -32,7 +32,6 @@
         <module>processor</module>
         <module>consolidator</module>
         <module>analyser</module>
-        <module>persistence</module>
         <module>logging</module>
         <module>scenarioloader</module>
 
@@ -43,5 +42,6 @@
         <module>asqatasun-model</module>
         <module>asqatasun-services</module>
         <module>asqatasun-resources</module>
+        <module>asqatasun-persistence</module>
     </modules>
 </project>
