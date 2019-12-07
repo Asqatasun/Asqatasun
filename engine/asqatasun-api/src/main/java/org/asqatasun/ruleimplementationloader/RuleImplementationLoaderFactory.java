@@ -28,15 +28,13 @@ package org.asqatasun.ruleimplementationloader;
 public interface RuleImplementationLoaderFactory {
 
     /**
-     * 
-     * @param archiveRoot
+     *
      * @param ruleArchiveName
      * @param ruleClassName
      * @return
      *      an instance of RuleImplementationLoader
      */
     RuleImplementationLoader create(
-            String archiveRoot,
             String ruleArchiveName,
             String ruleClassName);
 

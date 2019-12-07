@@ -7,6 +7,7 @@
 
     <context:component-scan base-package="org.asqatasun.analyser"/>
     <context:component-scan base-package="org.asqatasun.consolidator"/>
+    <context:component-scan base-package="org.asqatasun.ruleimplementationloader"/>
     <context:component-scan base-package="org.asqatasun.scenarioloader"/>
     <context:component-scan base-package="org.asqatasun.entity"/>
 
@@ -24,7 +25,6 @@
     <import resource="classpath:conf/context/beans-nomenclatureloader.xml"/>
     <import resource="classpath:conf/context/beans-persistence.xml"/>
     <import resource="classpath:conf/context/beans-processor.xml"/>
-    <import resource="classpath:conf/context/beans-ruleimplementationloader.xml"/>
     <import resource="classpath:conf/context/beans-asqatasun.xml"/>
 
 </beans>

@@ -21,14 +21,18 @@
  */
 package org.asqatasun.ruleimplementationloader;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author enzolalay
  */
+
+@Component("ruleImplementationLoaderFactory")
 public class RuleImplementationLoaderFactoryImpl implements RuleImplementationLoaderFactory {// TODO Write javadoc
 
-    public RuleImplementationLoader create(String archiveRoot, String ruleArchiveName, String ruleClassName) {
-        return new RuleImplementationLoaderImpl(archiveRoot, ruleArchiveName, ruleClassName);
+    public RuleImplementationLoader create(String ruleArchiveName, String ruleClassName) {
+        return new RuleImplementationLoaderImpl(ruleArchiveName, ruleClassName);
     }
 
 }
