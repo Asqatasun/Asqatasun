@@ -22,7 +22,6 @@
 package org.asqatasun.contentadapter.js;
 
 import org.asqatasun.contentadapter.util.URLIdentifier;
-import org.asqatasun.contentloader.Downloader;
 import org.asqatasun.entity.audit.factory.ContentFactory;
 
 /**
@@ -35,13 +34,11 @@ public interface JSContentAdapterFactory extends ContentFactory {
      *
      * @param contentFactory
      * @param urlIdentifier
-     * @param donwloader
      * @return
      *      an instance of JSContentAdapter
      */
     JSContentAdapter create(
             ContentFactory contentFactory,
-            URLIdentifier urlIdentifier,
-            Downloader donwloader);
+            URLIdentifier urlIdentifier);
 
 }

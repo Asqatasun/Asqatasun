@@ -24,24 +24,26 @@ package org.asqatasun.contentloader;
 import java.util.Map;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.util.factory.DateFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Component("fileContentLoaderFactory")
 public class FileContentLoaderFactoryImpl implements ContentLoaderFactory {
 
+    private final ContentDataService contentDataService;
+
+    @Autowired
+    public FileContentLoaderFactoryImpl(ContentDataService contentDataService) {
+        this.contentDataService = contentDataService;
+    }
+
     @Override
-    public ContentLoader create(
-            ContentDataService contentDataService, 
-            Downloader downloader, 
-            DateFactory dateFactory,
-            Map<String, String> fileMap) {
-        
-        return new FileContentLoaderImpl(
-                contentDataService, 
-                fileMap, 
-                dateFactory);
+    public ContentLoader create(Map<String, String> fileMap, DateFactory dateFactory) {
+        return new FileContentLoaderImpl(contentDataService, dateFactory, fileMap);
     }
 
 }

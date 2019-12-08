@@ -55,7 +55,6 @@ import org.asqatasun.contentadapter.util.ExternalRsrc;
 import org.asqatasun.contentadapter.util.InlineRsrc;
 import org.asqatasun.contentadapter.util.LocalRsrc;
 import org.asqatasun.contentadapter.util.URLIdentifier;
-import org.asqatasun.contentloader.Downloader;
 import org.asqatasun.entity.audit.StylesheetContent;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.util.http.HttpRequestHandler;
@@ -101,16 +100,14 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
     /**
      * Constructor
      * @param urlIdentifier
-     * @param downloader
      * @param contentDataService
      * @param externalCSSRetriever
      */
     public CSSJsoupPhlocContentAdapterImpl(
             URLIdentifier urlIdentifier,
-            Downloader downloader,
             ContentDataService contentDataService,
             ExternalCSSRetriever externalCSSRetriever) {
-        super(urlIdentifier, downloader, contentDataService);
+        super(urlIdentifier, contentDataService);
         this.externalCSSRetriever = externalCSSRetriever;
         this.urlIdentifier = urlIdentifier;
     }
@@ -241,7 +238,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
     
     /**
      * Get the list of media from the media attribute content
-     * @param mediaAttribute
+     * @param element
      * @return
      */
     private List<CSSMediaQuery> getListOfMediaFromAttributeValue(Element element) {
@@ -262,7 +259,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * Downloads an external resource and returns a Resource instance or null
      * if the download has failed
      * @param path
-     * @param mediaAttributeValue
+     * @param mediaList
      * @return
      */
     private boolean getExternalResourceAndAdapt(
@@ -383,8 +380,8 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
      * Search and download imported resources from resources found in the html
      * Can be call recursively if an imported stylesheet is defined within an
      * imported stylesheet
-     * @param resource
-     * @param path
+     * @param cssImportRule
+     * @param currentLocalResourcePath
      *          The resource path
      */
     private void getImportedResources(CSSImportRule cssImportRule, String currentLocalResourcePath) {

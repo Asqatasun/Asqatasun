@@ -29,8 +29,6 @@ import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.asqatasun.contentloader.ContentLoader;
 import org.asqatasun.contentloader.ContentLoaderFactory;
-import org.asqatasun.contentloader.Downloader;
-import org.asqatasun.contentloader.DownloaderFactory;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.subject.WebResource;
@@ -65,21 +63,14 @@ public class ContentLoaderServiceImplTest extends TestCase {
         WebResource mockWebResource = EasyMock.createMock(WebResource.class);
         
         ContentDataService mockContentDataService = EasyMock.createMock(ContentDataService.class);
-        
-        Downloader mockDownloader = EasyMock.createMock(Downloader.class);
-        
-        DownloaderFactory mockDownloaderFactory = EasyMock.createMock(DownloaderFactory.class);
-        
+
         ContentLoaderFactory mockContentLoaderFactory = EasyMock.createMock(ContentLoaderFactory.class);
         
         ContentLoader mockContentLoader = EasyMock.createMock(ContentLoader.class);
         
         DateFactory mockDateFactory = EasyMock.createMock(DateFactory.class);
-        
-        EasyMock.expect(mockDownloaderFactory.create())
-                .andReturn(mockDownloader)
-                .once();
-        EasyMock.expect(mockContentLoaderFactory.create(mockContentDataService, mockDownloader, mockDateFactory,null))
+
+        EasyMock.expect(mockContentLoaderFactory.create(null, mockDateFactory))
                 .andReturn(mockContentLoader)
                 .once();
         
@@ -100,25 +91,17 @@ public class ContentLoaderServiceImplTest extends TestCase {
         EasyMock.replay(mockContentDataService);
         EasyMock.replay(mockContentLoader);
         EasyMock.replay(mockContentLoaderFactory);
-        EasyMock.replay(mockDownloader);
-        EasyMock.replay(mockDownloaderFactory);
         EasyMock.replay(mockDateFactory);
         
-        ContentLoaderServiceImpl instance = new ContentLoaderServiceImpl();
+        ContentLoaderServiceImpl instance = new ContentLoaderServiceImpl(mockContentLoaderFactory, mockDateFactory);
 
-        instance.setContentDataService(mockContentDataService);
-        instance.setContentLoaderFactory(mockContentLoaderFactory);
-        instance.setDownloaderFactory(mockDownloaderFactory);
-        instance.setDateFactory(mockDateFactory);
 
-        assertEquals(contentList, instance.loadContent(mockWebResource));
+        assertEquals(contentList, instance.loadContent(mockWebResource, null));
         
         EasyMock.verify(mockContent);
         EasyMock.verify(mockContentDataService);
         EasyMock.verify(mockContentLoader);
         EasyMock.verify(mockContentLoaderFactory);
-        EasyMock.verify(mockDownloader);
-        EasyMock.verify(mockDownloaderFactory);
         EasyMock.verify(mockDateFactory);
     }
 
@@ -140,7 +123,7 @@ public class ContentLoaderServiceImplTest extends TestCase {
         
         Map<String, String> fileMap = new HashMap<>();
         
-        EasyMock.expect(mockContentLoaderFactory.create(mockContentDataService, null, mockDateFactory, fileMap))
+        EasyMock.expect(mockContentLoaderFactory.create(fileMap, mockDateFactory))
                 .andReturn(mockContentLoader)
                 .once();
         
@@ -163,11 +146,7 @@ public class ContentLoaderServiceImplTest extends TestCase {
         EasyMock.replay(mockContentLoaderFactory);
         EasyMock.replay(mockDateFactory);
         
-        ContentLoaderServiceImpl instance = new ContentLoaderServiceImpl();
-
-        instance.setContentDataService(mockContentDataService);
-        instance.setContentLoaderFactory(mockContentLoaderFactory);
-        instance.setDateFactory(mockDateFactory);
+        ContentLoaderServiceImpl instance = new ContentLoaderServiceImpl(mockContentLoaderFactory, mockDateFactory);
         
         assertEquals(contentList, instance.loadContent(mockWebResource, fileMap));
         

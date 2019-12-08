@@ -5,20 +5,19 @@
 
 
     <context:component-scan base-package="org.asqatasun.consolidator"/>
+    <context:component-scan base-package="org.asqatasun.contentloader"/>
     <context:component-scan base-package="org.asqatasun.nomenclatureloader"/>
     <context:component-scan base-package="org.asqatasun.processor"/>
     <context:component-scan base-package="org.asqatasun.ruleimplementationloader"/>
     <context:component-scan base-package="org.asqatasun.entity"/>
     <context:component-scan base-package="org.asqatasun.service"/>
+    <context:component-scan base-package="org.asqatasun.util"/>
 
     <import resource="classpath:context/beans-persistence.xml"/>
 
-    <import resource="classpath:context/beans-contentloader.xml"/>
     <import resource="classpath:context/beans-contentadapter.xml"/>
     <import resource="classpath:context/beans-processor.xml"/>
 
-
-    <bean id="testDAO" class="org.asqatasun.entity.dao.reference.TestDAOImpl"/>
 
 </beans>
 

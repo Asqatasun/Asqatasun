@@ -33,7 +33,6 @@
     <bean id="externalCSSRetriever" class="org.asqatasun.contentadapter.css.ExternalCSSRetrieverImpl"/>
     <alias name="externalCSSRetriever" alias="adaptationListener"/>
 
-    <bean id="downloaderFactory" class="org.asqatasun.contentloader.DownloaderFactoryImpl"/>
 
     <bean id="cssContentAdapterFactory" class="org.asqatasun.contentadapter.css.CSSContentAdapterFactoryImpl">
         <property name="externalCSSRetriever">

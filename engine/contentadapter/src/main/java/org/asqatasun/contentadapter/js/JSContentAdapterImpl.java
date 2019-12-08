@@ -28,8 +28,8 @@ import java.util.Set;
 import org.asqatasun.contentadapter.ContentParser;
 import org.asqatasun.contentadapter.Resource;
 import org.asqatasun.contentadapter.util.*;
-import org.asqatasun.contentloader.Downloader;
 import org.asqatasun.entity.service.audit.ContentDataService;
+import org.asqatasun.util.http.Downloader;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
@@ -63,11 +63,10 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
     /**
      * Default constructor.
      * @param urlIdentifier
-     * @param downloader
      * @param contentDataService
      */
-    public JSContentAdapterImpl(URLIdentifier urlIdentifier, Downloader downloader, ContentDataService contentDataService) {
-        super(urlIdentifier, downloader, contentDataService);
+    public JSContentAdapterImpl(URLIdentifier urlIdentifier, ContentDataService contentDataService) {
+        super(urlIdentifier, contentDataService);
     }
 
     /**
@@ -236,13 +235,10 @@ public class JSContentAdapterImpl extends AbstractContentAdapter implements
 
                 String externalResourceAbsolutePath = getUrlIdentifier().resolve(src).toExternalForm();
 
-                getDownloader().setURL(externalResourceAbsolutePath);
-                getDownloader().run();
-
                 // TODO Enlever ce commentaire qui ajoute ressource script pour l'association à l'audit et ainsi la persister.
 //                contentList.add(contentFactory.createStylesheetContent(new Date(), externalResourceAbsolutePath, ssp, downloader.getResult()));
 
-                resource = new JSResourceImpl(getDownloader().getResult(), locator.getLineNumber(),
+                resource = new JSResourceImpl(Downloader.download(externalResourceAbsolutePath), locator.getLineNumber(),
                         new ExternalRsrc());
                 // localJS
             } else {

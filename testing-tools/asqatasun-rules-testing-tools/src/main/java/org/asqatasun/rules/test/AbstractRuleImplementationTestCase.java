@@ -313,7 +313,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         LOGGER.info("setUpClass()");
         for (WebResource webResource : webResourceMap.values()) {
             LOGGER.info("webResource.getURL() " + webResource.getURL());
-            contentMap.put(webResource, CONTENT_LOADER_SERVICE.loadContent(webResource));
+            contentMap.put(webResource, CONTENT_LOADER_SERVICE.loadContent(webResource, null));
             
             if (relatedContentMap.get(webResource) != null) {
                 for (String contentUrl : relatedContentMap.get(webResource)) {

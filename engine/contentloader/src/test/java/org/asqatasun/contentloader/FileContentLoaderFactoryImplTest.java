@@ -53,17 +53,11 @@ public class FileContentLoaderFactoryImplTest extends TestCase {
         System.out.println("create");
         
         ContentDataService contentDataService = null;
-        Downloader downloader = null;
         Map<String, String> fileMap = null;
-        DateFactory dateFactory = null;
         
-        FileContentLoaderFactoryImpl instance = new FileContentLoaderFactoryImpl();
+        FileContentLoaderFactoryImpl instance = new FileContentLoaderFactoryImpl(contentDataService);
         
-        ContentLoader contentLoader = instance.create(
-                contentDataService, 
-                downloader, 
-                dateFactory,
-                fileMap);
+        ContentLoader contentLoader = instance.create(fileMap, new DateFactory());
         
         assertTrue(contentLoader instanceof FileContentLoaderImpl);
         

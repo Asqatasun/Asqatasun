@@ -29,7 +29,6 @@ import org.asqatasun.contentadapter.ContentsAdapterFactory;
 import org.asqatasun.contentadapter.HTMLCleanerFactory;
 import org.asqatasun.contentadapter.HTMLParserFactory;
 import org.asqatasun.contentadapter.util.URLIdentifierFactory;
-import org.asqatasun.contentloader.DownloaderFactory;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.service.audit.ContentDataService;
 
@@ -88,12 +87,6 @@ public interface ContentAdapterService {// TODO Write javadoc
      * @param urlIdentifierFactory
      */
     void setUrlIdentifierFactory(URLIdentifierFactory urlIdentifierFactory);
-
-    /**
-     *
-     * @param downloaderFactory
-     */
-    void setDownloaderFactory(DownloaderFactory downloaderFactory);
 
     /**
      *

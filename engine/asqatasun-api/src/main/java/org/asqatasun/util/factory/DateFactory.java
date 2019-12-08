@@ -21,18 +21,23 @@
  */
 package org.asqatasun.util.factory;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
  *
  * @author jkowalczyk
  */
-public interface DateFactory {
+@Component("dateFactory")
+public class DateFactory {
     
     /**
      * @return 
      *      a new instance of date
      */
-    Date createDate();
+    public Date createDate() {
+        return new Date();
+    }
     
 }

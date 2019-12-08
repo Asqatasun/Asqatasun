@@ -32,18 +32,11 @@ import org.asqatasun.util.factory.DateFactory;
 public interface ContentLoaderFactory {
 
     /**
-     * 
-     * @param contentDataService
-     * @param downloader
-     * @param dateFactory
+     *
      * @param fileMap
      * @return
      *      an instance of ContentLoader
      */
-    ContentLoader create(
-            ContentDataService contentDataService,
-            Downloader downloader,
-            DateFactory dateFactory,
-            Map<String, String> fileMap);
+    ContentLoader create(Map<String, String> fileMap, DateFactory dateFactory);
 
 }

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.asqatasun.contentadapter.*;
 import org.asqatasun.contentadapter.util.URLIdentifierFactory;
-import org.asqatasun.contentloader.DownloaderFactory;
+import org.asqatasun.util.http.Downloader;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.service.audit.ContentDataService;
 
@@ -22,7 +22,6 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
     private HTMLParserFactory htmlParserFactory;
     private Set<ContentAdapterFactory> contentAdapterFactorySet;
     private URLIdentifierFactory urlIdentifierFactory;
-    private DownloaderFactory downloaderFactory;
     private ContentDataService contentDataService;
 
     public ContentAdapterServiceImpl() {
@@ -41,8 +40,7 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
         
         for (ContentAdapterFactory contentAdapterFactory : contentAdapterFactorySet) {
             contentAdapterSet.add(contentAdapterFactory.create(
-                    urlIdentifierFactory.create(), 
-                    downloaderFactory.create(), 
+                    urlIdentifierFactory.create(),
                     contentDataService));
         }
 
@@ -84,11 +82,6 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
     @Override
     public void setUrlIdentifierFactory(URLIdentifierFactory urlIdentifierFactory) {
         this.urlIdentifierFactory = urlIdentifierFactory;
-    }
-
-    @Override
-    public void setDownloaderFactory(DownloaderFactory downloaderFactory) {
-        this.downloaderFactory = downloaderFactory;
     }
 
     @Override

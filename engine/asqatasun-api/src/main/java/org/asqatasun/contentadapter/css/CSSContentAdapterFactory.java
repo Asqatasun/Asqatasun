@@ -23,7 +23,6 @@ package org.asqatasun.contentadapter.css;
 
 import org.asqatasun.contentadapter.ContentAdapterFactory;
 import org.asqatasun.contentadapter.util.URLIdentifier;
-import org.asqatasun.contentloader.Downloader;
 import org.asqatasun.entity.service.audit.ContentDataService;
 
 /**
@@ -36,15 +35,11 @@ public interface CSSContentAdapterFactory extends ContentAdapterFactory {
     /**
      * 
      * @param urlIdentifier
-     * @param downloader
      * @param contentDataService
      * @return
      */
     @Override
-    CSSContentAdapter create(
-            URLIdentifier urlIdentifier,
-            Downloader downloader,
-            ContentDataService contentDataService);
+    CSSContentAdapter create(URLIdentifier urlIdentifier, ContentDataService contentDataService);
 
     /**
      *

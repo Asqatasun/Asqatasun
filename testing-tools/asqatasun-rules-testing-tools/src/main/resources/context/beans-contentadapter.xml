@@ -28,7 +28,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             </set>
         </property>
         <property name="urlIdentifierFactory" ref="urlIdentifierFactory"/>
-        <property name="downloaderFactory" ref="downloaderFactory"/>
         <property name="contentDataService" ref="contentDataService"/>
     </bean>
 

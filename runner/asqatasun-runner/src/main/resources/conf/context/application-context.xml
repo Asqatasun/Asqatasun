@@ -7,6 +7,7 @@
 
     <context:component-scan base-package="org.asqatasun.analyser"/>
     <context:component-scan base-package="org.asqatasun.consolidator"/>
+    <context:component-scan base-package="org.asqatasun.contentloader"/>
     <context:component-scan base-package="org.asqatasun.nomenclatureloader"/>
     <context:component-scan base-package="org.asqatasun.processor"/>
     <context:component-scan base-package="org.asqatasun.ruleimplementationloader"/>
@@ -25,7 +26,6 @@
     </bean>
 
     <import resource="classpath:conf/context/beans-contentadapter.xml"/>
-    <import resource="classpath:conf/context/beans-contentloader.xml"/>
     <import resource="classpath:conf/context/beans-persistence.xml"/>
     <import resource="classpath:conf/context/beans-asqatasun.xml"/>
 

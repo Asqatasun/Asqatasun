@@ -29,7 +29,6 @@ import org.apache.log4j.Logger;
 import org.asqatasun.contentadapter.ContentAdapter;
 import org.asqatasun.contentadapter.Resource;
 import org.asqatasun.contentadapter.util.URLIdentifier;
-import org.asqatasun.contentloader.Downloader;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.service.audit.ContentDataService;
@@ -40,14 +39,6 @@ import org.asqatasun.entity.service.audit.ContentDataService;
  */
 public abstract class AbstractContentAdapter implements ContentAdapter {
 
-    private Downloader downloader;
-    public Downloader getDownloader() {
-        return downloader;
-    }
-    
-    public void setDownloader(Downloader downloader) {
-        this.downloader = downloader;
-    }
 
     protected Resource resource;
     
@@ -92,16 +83,13 @@ public abstract class AbstractContentAdapter implements ContentAdapter {
     /**
      * 
      * @param urlIdentifier
-     * @param downloader
      * @param contentDataService
      */
     public AbstractContentAdapter(
             URLIdentifier urlIdentifier,
-            Downloader downloader,
             ContentDataService contentDataService) {
         super();
         this.urlIdentifier = urlIdentifier;
-        this.downloader = downloader;
         this.contentDataService = contentDataService;
     }
 

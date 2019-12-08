@@ -76,10 +76,7 @@ public class FileContentLoaderImpl implements ContentLoader {
      * @param fileMap
      * @param contentDataService
      */
-    FileContentLoaderImpl(
-            ContentDataService contentDataService,
-            Map<String, String> fileMap, 
-            DateFactory dateFactory) {
+    FileContentLoaderImpl(ContentDataService contentDataService, DateFactory dateFactory, Map<String, String> fileMap) {
         super();
         this.contentDataService = contentDataService;
         this.fileMap = fileMap;

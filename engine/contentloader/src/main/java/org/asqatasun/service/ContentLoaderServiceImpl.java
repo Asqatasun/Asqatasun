@@ -25,70 +25,31 @@ import java.util.List;
 import java.util.Map;
 import org.asqatasun.contentloader.ContentLoader;
 import org.asqatasun.contentloader.ContentLoaderFactory;
-import org.asqatasun.contentloader.DownloaderFactory;
 import org.asqatasun.entity.audit.Content;
-import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service("contentLoaderService")
 public class ContentLoaderServiceImpl implements ContentLoaderService {
 
-    private ContentDataService contentDataService;
-    @Override
-    @Autowired
-    public void setContentDataService(ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
-    }
-
     private ContentLoaderFactory contentLoaderFactory;
-    @Override
-    @Autowired
-    public void setContentLoaderFactory(ContentLoaderFactory contentLoaderFactory) {
-        this.contentLoaderFactory = contentLoaderFactory;
-    }
-
-    private DownloaderFactory downloaderFactory;
-    @Override
-    @Autowired
-    public void setDownloaderFactory(DownloaderFactory downloaderFactory) {
-        this.downloaderFactory = downloaderFactory;
-    }
-    
     private DateFactory dateFactory;
-    @Override
+
     @Autowired
-    public void setDateFactory(DateFactory dateFactory) {
+    public ContentLoaderServiceImpl(ContentLoaderFactory contentLoaderFactory, DateFactory dateFactory) {
+        this.contentLoaderFactory = contentLoaderFactory;
         this.dateFactory = dateFactory;
-    }
-
-    public ContentLoaderServiceImpl() {
-        super();
-    }
-
-    @Override
-    public List<Content> loadContent(WebResource webResource) {
-        ContentLoader contentLoader = contentLoaderFactory.create(
-                contentDataService, 
-                downloaderFactory.create(), 
-                dateFactory,
-                null);
-        contentLoader.setWebResource(webResource);
-        contentLoader.run();
-        return contentLoader.getResult();
     }
 
     @Override
     public List<Content> loadContent(WebResource webResource, Map<String, String> fileMap) {
-        ContentLoader contentLoader = contentLoaderFactory.create(
-                contentDataService, 
-                null, 
-                dateFactory,
-                fileMap);
+        ContentLoader contentLoader = contentLoaderFactory.create(fileMap, dateFactory);
         contentLoader.setWebResource(webResource);
         contentLoader.run();
         return contentLoader.getResult();

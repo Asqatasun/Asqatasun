@@ -105,6 +105,16 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
     }
 
     @Override
+    public Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
+        return decoratedParameterDataService.getParameterSetFromAuditLevel(ref, level);
+    }
+
+    @Override
+    public Set<Parameter> getAuditPageParameterSet(Set<Parameter> defaultParameterSet) {
+        return decoratedParameterDataService.getAuditPageParameterSet(defaultParameterSet);
+    }
+
+    @Override
     public Set<Parameter> getParameterSet(ParameterFamily parameterFamily, Collection<Parameter> paramSet) {
         return decoratedParameterDataService.getParameterSet(parameterFamily, paramSet);
     }

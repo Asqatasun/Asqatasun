@@ -19,7 +19,7 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.contentloader;
+package org.asqatasun.util.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,21 +41,19 @@ import org.apache.log4j.Logger;
  * 
  * @author jkowalczyk
  */
-public class DownloaderImpl implements Downloader {
+public class Downloader {
     
-    private static final Logger LOGGER = Logger.getLogger(DownloaderImpl.class);
-    
-    protected String result;
-    protected String url;
-    private final String HTTP_PROTOCOL_PREFIX = "http://";
-    private final String HTTPS_PROTOCOL_PREFIX = "https://";
-    private final String FILE_PROTOCOL_PREFIX = "file:/";
+    private static final Logger LOGGER = Logger.getLogger(Downloader.class);
 
-    public DownloaderImpl() {
+    private static final String HTTP_PROTOCOL_PREFIX = "http://";
+    private static final String HTTPS_PROTOCOL_PREFIX = "https://";
+    private static final String FILE_PROTOCOL_PREFIX = "file:/";
+
+    public Downloader() {
         super();
     }
 
-    private String load(String url) {
+    private static String loadLocal(String url) {
         BufferedReader in = null;
         try {
             StringBuilder urlContent = new StringBuilder();
@@ -83,7 +81,7 @@ public class DownloaderImpl implements Downloader {
         }
     }
 
-    private String download(String url) {
+    private static String loadOnline(String url) {
         HttpClient httpclient = new DefaultHttpClient();
 
         HttpGet httpget = new HttpGet(url);
@@ -118,31 +116,17 @@ public class DownloaderImpl implements Downloader {
         return responseBody;
     }
 
-    @Override
-    public String getResult() {
-        return result;
-    }
-
-    @Override
-    public String getURL() {
-        return url;
-    }
-
-    @Override
-    public void run() {
+    public static String download(String url) {
         if (url.startsWith(HTTP_PROTOCOL_PREFIX)
                 || url.startsWith(HTTPS_PROTOCOL_PREFIX)) {
             LOGGER.debug("Download resource "  + url);
-            result = download(url);
+            return loadOnline(url);
         } else if (url.startsWith(FILE_PROTOCOL_PREFIX)) {
             LOGGER.debug("Load resource "  + url);
-            result = load(url);
+            return loadLocal(url);
         }
+        return "";
     }
 
-    @Override
-    public void setURL(String url) {
-        this.url = url;
-        }
 
 }
