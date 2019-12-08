@@ -23,29 +23,27 @@ package org.asqatasun.service;
 
 import org.asqatasun.entity.reference.Nomenclature;
 import org.asqatasun.nomenclatureloader.NomenclatureLoader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service("nomenclatureLoaderService")
 public class NomenclatureLoaderServiceImpl implements NomenclatureLoaderService {
 
     private NomenclatureLoader nomenclatureLoader;
 
-    public NomenclatureLoaderServiceImpl() {
-        super();
+    @Autowired
+    public NomenclatureLoaderServiceImpl(NomenclatureLoader nomenclatureLoader) {
+        this.nomenclatureLoader = nomenclatureLoader;
     }
 
     @Override
     public Nomenclature loadByCode(String code) {
-        nomenclatureLoader.setCode(code);
-        nomenclatureLoader.run();
-        return nomenclatureLoader.getResult();
-    }
-
-    @Override
-    public void setNomenclatureLoader(NomenclatureLoader nomenclatureLoader) {
-        this.nomenclatureLoader = nomenclatureLoader;
+        nomenclatureLoader.run(code);
+        return nomenclatureLoader.getNomenclature();
     }
 
 }

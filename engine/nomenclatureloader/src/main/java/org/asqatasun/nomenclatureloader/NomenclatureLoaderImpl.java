@@ -23,44 +23,34 @@ package org.asqatasun.nomenclatureloader;
 
 import org.asqatasun.entity.reference.Nomenclature;
 import org.asqatasun.entity.service.reference.NomenclatureDataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 
  * @author jkowalczyk
  */
+
+@Component("nomenclatureLoader")
 public class NomenclatureLoaderImpl implements NomenclatureLoader {
 
-    private String code;
     private NomenclatureDataService nomenclatureDataService;
     private Nomenclature result;
 
-    public NomenclatureLoaderImpl() {
-        super();
+    @Autowired
+    public NomenclatureLoaderImpl(NomenclatureDataService nomenclatureDataService) {
+        this.nomenclatureDataService = nomenclatureDataService;
     }
 
     @Override
-    public String getCode() {
-        return code;
-    }
-
-    @Override
-    public Nomenclature getResult() {
+    public Nomenclature getNomenclature() {
         return result;
     }
 
     @Override
-    public void run() {
+    public void run(String code) {
         result = nomenclatureDataService.findByCode(code);
     }
 
-    @Override
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setNomenclatureDataService(
-            NomenclatureDataService nomenclatureDataService) {
-        this.nomenclatureDataService = nomenclatureDataService;
-    }
 
 }

@@ -7,6 +7,7 @@
 
     <context:component-scan base-package="org.asqatasun.analyser"/>
     <context:component-scan base-package="org.asqatasun.consolidator"/>
+    <context:component-scan base-package="org.asqatasun.nomenclatureloader"/>
     <context:component-scan base-package="org.asqatasun.processor"/>
     <context:component-scan base-package="org.asqatasun.ruleimplementationloader"/>
     <context:component-scan base-package="org.asqatasun.scenarioloader"/>
@@ -30,7 +31,6 @@
     <!-- asqatasun imports-->
     <import resource="classpath:conf/context/beans-contentloader.xml"/>
     <import resource="classpath:conf/context/beans-contentadapter.xml"/>
-    <import resource="classpath:conf/context/beans-nomenclatureloader.xml"/>
    
     <!-- conf jms   -->
 <!--     <import resource="classpath:conf/context/spring-jms-example.xml"/>

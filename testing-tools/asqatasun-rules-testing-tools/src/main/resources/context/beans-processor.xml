@@ -43,7 +43,5 @@
         <property name="entityDao" ref="auditDAO"/>
     </bean>
 
-    <bean id="processorFactory" class="org.asqatasun.processor.ProcessorFactoryImpl"/>
-    <bean id="processorService" class="org.asqatasun.service.ProcessorServiceImpl"/>
     
 </beans>
