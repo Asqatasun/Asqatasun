@@ -176,17 +176,21 @@ public abstract class PersistenceCommonConfig {
      * @return
      */
     private static String getDriverClassNameFromUrl(String url) {
+        return getString(url, MYSQL_DRIVER_CLASSNAME, POSTGRES_DRIVER_CLASSNAME, HSQL_DRIVER_CLASSNAME);
+    }
+
+    private static String getString(String url, String mysqlDriverClassname, String postgresDriverClassname, String hsqlDriverClassname) {
         if (StringUtils.isBlank(url)) {
-            return MYSQL_DRIVER_CLASSNAME;
+            return mysqlDriverClassname;
         }
         if (StringUtils.contains(url,MYSQL_KEY)) {
-            return MYSQL_DRIVER_CLASSNAME;
+            return mysqlDriverClassname;
         } else if (StringUtils.contains(url,POSTGRES_KEY)) {
-            return POSTGRES_DRIVER_CLASSNAME;
+            return postgresDriverClassname;
         } else if (StringUtils.contains(url,HSQL_KEY)) {
-            return HSQL_DRIVER_CLASSNAME;
+            return hsqlDriverClassname;
         } else {
-            return MYSQL_DRIVER_CLASSNAME;
+            return mysqlDriverClassname;
         }
     }
 
@@ -200,18 +204,7 @@ public abstract class PersistenceCommonConfig {
      * @return
      */
     private static String getHibernateDialedFromUrl(String url) {
-        if (StringUtils.isBlank(url)) {
-            return MYSQL_HIBERNATE_DIALECT;
-        }
-        if (StringUtils.contains(url,MYSQL_KEY)) {
-            return MYSQL_HIBERNATE_DIALECT;
-        } else if (StringUtils.contains(url,POSTGRES_KEY)) {
-            return POSTGRES_HIBERNATE_DIALECT;
-        } else if (StringUtils.contains(url,HSQL_KEY)) {
-            return HSQL_HIBERNATE_DIALECT;
-        } else {
-            return MYSQL_HIBERNATE_DIALECT;
-        }
+        return getString(url, MYSQL_HIBERNATE_DIALECT, POSTGRES_HIBERNATE_DIALECT, HSQL_HIBERNATE_DIALECT);
     }
 
     /**
@@ -221,17 +214,6 @@ public abstract class PersistenceCommonConfig {
      * @return
      */
     private static String getFlywayMigrationPrefixFromUrl(String url) {
-        if (StringUtils.isBlank(url)) {
-            return MYSQL_MIGRATION_PREFIX;
-        }
-        if (StringUtils.contains(url,MYSQL_KEY)) {
-            return MYSQL_MIGRATION_PREFIX;
-        } else if (StringUtils.contains(url,POSTGRES_KEY)) {
-            return POSTGRES_MIGRATION_PREFIX;
-        } else if (StringUtils.contains(url,HSQL_KEY)) {
-            return HSQL_MIGRATION_PREFIX;
-        } else {
-            return MYSQL_MIGRATION_PREFIX;
-        }
+        return getString(url, MYSQL_MIGRATION_PREFIX, POSTGRES_MIGRATION_PREFIX, HSQL_MIGRATION_PREFIX);
     }
 }

@@ -25,7 +25,6 @@ package org.asqatasun.persistence.config;
  * Created by meskoj on 15/05/16.
  */
 
-//import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,11 +71,11 @@ public class PersistenceConfig extends PersistenceCommonConfig{
         }
         return setUpBasicDataSource(url, username, password);
     }
-//
-//    @Bean(name="flyway", initMethod = "migrate")
-//    public Flyway dbInitialization() {
-//        return setUpFlyway(dataSource(), url);
-//    }
+
+    @Bean(name="flyway", initMethod = "migrate")
+    public Flyway dbInitialization() {
+        return setUpFlyway(dataSource(), url);
+    }
 
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
