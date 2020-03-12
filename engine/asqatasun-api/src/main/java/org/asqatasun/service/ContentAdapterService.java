@@ -37,7 +37,7 @@ import org.asqatasun.entity.service.audit.ContentDataService;
  * @author jkowalczyk
  */
 @XmlTransient
-public interface ContentAdapterService {// TODO Write javadoc
+public interface ContentAdapterService {
 
     /**
      * 
@@ -45,53 +45,5 @@ public interface ContentAdapterService {// TODO Write javadoc
      * @return
      */
     Collection<Content> adaptContent(Collection<Content> contentList);
-
-    /**
-     *
-     * @param writeCleanHtmlInFile
-     */
-    void setWriteCleanHtmlInFile(boolean writeCleanHtmlInFile);
-
-    /**
-     * 
-     * @param tempFolderRootPath
-     */
-    void setTempFolderRootPath(String tempFolderRootPath);
-
-    /**
-     *
-     * @param contentsAdapterFactory
-     */
-    void setContentsAdapterFactory(ContentsAdapterFactory contentsAdapterFactory);
-
-    /**
-     *
-     * @param htmlCleanerFactory
-     */
-    void setHtmlCleanerFactory(HTMLCleanerFactory htmlCleanerFactory);
-
-    /**
-     *
-     * @param htmlParserFactory
-     */
-    void setHtmlParserFactory(HTMLParserFactory htmlParserFactory);
-
-    /**
-     *
-     * @param contentAdapterFactorySet
-     */
-    void setContentAdapterFactorySet(Set<ContentAdapterFactory> contentAdapterFactorySet);
-
-    /**
-     *
-     * @param urlIdentifierFactory
-     */
-    void setUrlIdentifierFactory(URLIdentifierFactory urlIdentifierFactory);
-
-    /**
-     *
-     * @param contentDataService
-     */
-    void setContentDataService(ContentDataService contentDataService);
     
 }

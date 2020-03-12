@@ -8,14 +8,18 @@ import org.asqatasun.contentadapter.util.URLIdentifierFactory;
 import org.asqatasun.util.http.Downloader;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.service.audit.ContentDataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service("contentAdapterService")
 public class ContentAdapterServiceImpl implements ContentAdapterService {
 
-    private boolean writeCleanHtmlInFile;
+    @Value("${tempFolderRootPath:/var/tmp/asqatasun}")
     private String tempFolderRootPath;
     private ContentsAdapterFactory contentsAdapterFactory;
     private HTMLCleanerFactory htmlCleanerFactory;
@@ -24,13 +28,19 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
     private URLIdentifierFactory urlIdentifierFactory;
     private ContentDataService contentDataService;
 
-    public ContentAdapterServiceImpl() {
-        super();
-    }
-
-    @Override
-    public void setTempFolderRootPath(String tempFolderRootPath) {
-        this.tempFolderRootPath = tempFolderRootPath;
+    @Autowired
+    public ContentAdapterServiceImpl(ContentsAdapterFactory contentsAdapterFactory,
+                                     HTMLCleanerFactory htmlCleanerFactory,
+                                     HTMLParserFactory htmlParserFactory,
+                                     Set<ContentAdapterFactory> contentAdapterFactorySet,
+                                     URLIdentifierFactory urlIdentifierFactory,
+                                     ContentDataService contentDataService) {
+        this.contentsAdapterFactory = contentsAdapterFactory;
+        this.htmlCleanerFactory = htmlCleanerFactory;
+        this.htmlParserFactory = htmlParserFactory;
+        this.contentAdapterFactorySet = contentAdapterFactorySet;
+        this.urlIdentifierFactory = urlIdentifierFactory;
+        this.contentDataService = contentDataService;
     }
 
     @Override
@@ -45,48 +55,12 @@ public class ContentAdapterServiceImpl implements ContentAdapterService {
         }
 
         ContentsAdapter adapter = contentsAdapterFactory.create(
-                contentList, 
-                writeCleanHtmlInFile, 
+                contentList,
                 tempFolderRootPath, 
                 htmlCleanerFactory.create(), 
                 htmlParserFactory.create(contentAdapterSet));
         adapter.run();
         return adapter.getResult();
-    }
-
-    @Override
-    public void setWriteCleanHtmlInFile(boolean writeCleanHtmlInFile) {
-        this.writeCleanHtmlInFile = writeCleanHtmlInFile;
-    }
-
-    @Override
-    public void setContentsAdapterFactory(ContentsAdapterFactory contentsAdapterFactory) {
-        this.contentsAdapterFactory = contentsAdapterFactory;
-    }
-
-    @Override
-    public void setHtmlCleanerFactory(HTMLCleanerFactory htmlCleanerFactory) {
-        this.htmlCleanerFactory = htmlCleanerFactory;
-    }
-
-    @Override
-    public void setHtmlParserFactory(HTMLParserFactory htmlParserFactory) {
-        this.htmlParserFactory = htmlParserFactory;
-    }
-
-    @Override
-    public void setContentAdapterFactorySet(Set<ContentAdapterFactory> contentAdapterFactorySet) {
-        this.contentAdapterFactorySet = contentAdapterFactorySet;
-    }
-
-    @Override
-    public void setUrlIdentifierFactory(URLIdentifierFactory urlIdentifierFactory) {
-        this.urlIdentifierFactory = urlIdentifierFactory;
-    }
-
-    @Override
-    public void setContentDataService(ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
     }
     
 }

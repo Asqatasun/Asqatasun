@@ -22,39 +22,53 @@
 package org.asqatasun.contentadapter;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.asqatasun.contentadapter.util.AdaptationActionVoter;
+import org.asqatasun.contentadapter.util.AdaptationActionVoterImpl;
 import org.asqatasun.entity.audit.Content;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  *
  * @author enzolalay
  */
+
+@Component("contentsAdapterFactory")
 public class ContentsAdapterFactoryImpl implements ContentsAdapterFactory {
 
+    @Value("#{'${parseHtmlVoterRef:AW21}'.split(';')}")
+    private List<String> parseHtmlVoterReferetials;
+    @Value("#{'${xmlizeVoterRef:AW21;AW22;RGAA22}'.split(';')}")
+    private List<String> xmlizeVoterReferetials;
     private AdaptationActionVoter xmlizeVoter;
-    public void setXmlizeVoter(AdaptationActionVoter xmlizeVoter) {
-        this.xmlizeVoter = xmlizeVoter;
-    }
-    
     private AdaptationActionVoter parseHtmlVoter;
-    public void setParseHtmlVoter(AdaptationActionVoter parseHtmlVoter) {
-        this.parseHtmlVoter = parseHtmlVoter;
-    }
     
-    public ContentsAdapterFactoryImpl() {
-        super();
+    public ContentsAdapterFactoryImpl() {}
+
+    @PostConstruct
+    public void initVoters() {
+        if (!parseHtmlVoterReferetials.isEmpty()) {
+            parseHtmlVoter = new AdaptationActionVoterImpl();
+            parseHtmlVoter.setAuthorizedValues(parseHtmlVoterReferetials);
+        }
+        if (!xmlizeVoterReferetials.isEmpty()) {
+            xmlizeVoter = new AdaptationActionVoterImpl();
+            xmlizeVoter.setAuthorizedValues(xmlizeVoterReferetials);
+        }
     }
 
     @Override
     public ContentsAdapter create(
             Collection<Content> contentList,
-            boolean writeCleanHtmlInFile,
             String tempFolderRootPath,
             HTMLCleaner htmlCleaner,
             HTMLParser htmlParser) {
         ContentsAdapterImpl contentsAdapter = new ContentsAdapterImpl(
                 contentList,
-                writeCleanHtmlInFile,
                 tempFolderRootPath,
                 htmlCleaner,
                 htmlParser);

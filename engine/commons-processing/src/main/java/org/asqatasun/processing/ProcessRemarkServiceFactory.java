@@ -37,9 +37,9 @@ public class ProcessRemarkServiceFactory {
 
     /**
      *
-     * @param processRemarkFactory
-     * @param sourceCodeRemarkFactory
-     * @param evidenceElementFactory
+     * @param processRemarkDataService
+     * @param evidenceElementDataService
+     * @param evidenceDataService
      * @param evidenceDataService
      * @return
      *      an instance of ProcessRemarkImpl

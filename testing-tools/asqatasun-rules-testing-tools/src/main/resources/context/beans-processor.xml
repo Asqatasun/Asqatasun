@@ -43,5 +43,6 @@
         <property name="entityDao" ref="auditDAO"/>
     </bean>
 
+    <bean id="urlIdentifierFactory" class="org.asqatasun.contentadapter.util.URLIdentifierFactoryImpl"/>
     
 </beans>

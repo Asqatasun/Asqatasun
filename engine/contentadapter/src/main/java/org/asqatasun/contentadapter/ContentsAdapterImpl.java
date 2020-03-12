@@ -40,24 +40,23 @@ import org.asqatasun.entity.audit.SSP;
  */
 public class ContentsAdapterImpl implements ContentsAdapter {
 
+    private static final Logger LOGGER = Logger.getLogger(ContentsAdapterImpl.class);
+
     private Collection<Content> contentList;
     private HTMLCleaner htmlCleaner;
     private HTMLParser htmlParser;
     private Collection<Content> result;
-    private Boolean writeCleanHtmlInFile = false;
-    private String tempFolderRootPath = "C:/tmp_spec";
+    private String tempFolderRootPath;
     private boolean xmlizeContent = false;
     private boolean parseAndRetrievelRelatedContent = true;
 
     ContentsAdapterImpl(
-            Collection<Content> contentList, 
-            boolean writeCleanHtmlInFile, 
+            Collection<Content> contentList,
             String tempFolderRootPath, 
             HTMLCleaner htmlCleaner, 
             HTMLParser htmlParser) {
         super();
         this.contentList = contentList;
-        this.writeCleanHtmlInFile = writeCleanHtmlInFile;
         this.tempFolderRootPath = tempFolderRootPath;
         this.htmlCleaner = htmlCleaner;
         this.htmlParser = htmlParser;
@@ -103,9 +102,8 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 ssp.setAdaptedContent(htmlCleaner.getResult());
 
                 htmlCleaner.setDirtyHTML(null);
-                if (writeCleanHtmlInFile) {
-                    writeCleanDomInFile(ssp);
-                }
+
+                writeCleanDomInFile(ssp);
                 
                 if (parseAndRetrievelRelatedContent) {
                     htmlParser.setSSP(ssp);
@@ -147,7 +145,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
     }
 
     private void writeCleanDomInFile(SSP ssp) {
-        if (writeCleanHtmlInFile) {
+        if (LOGGER.isDebugEnabled()) {
             // @debug
             String fileName;
             int lastIndexOfSlash = ssp.getURI().lastIndexOf("/");
@@ -191,10 +189,6 @@ public class ContentsAdapterImpl implements ContentsAdapter {
         }
         this.xmlizeContent = false;
     }
-    
-    @Override
-    public void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile) {
-        this.writeCleanHtmlInFile = writeCleanHtmlInFile;
-    }
+
 
 }
