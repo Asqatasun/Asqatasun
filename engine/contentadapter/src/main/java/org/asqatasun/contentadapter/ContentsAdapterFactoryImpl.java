@@ -22,12 +22,12 @@
 package org.asqatasun.contentadapter;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.asqatasun.contentadapter.util.AdaptationActionVoter;
-import org.asqatasun.contentadapter.util.AdaptationActionVoterImpl;
 import org.asqatasun.entity.audit.Content;
-import org.springframework.beans.factory.annotation.Value;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -40,24 +40,22 @@ import javax.annotation.PostConstruct;
 @Component("contentsAdapterFactory")
 public class ContentsAdapterFactoryImpl implements ContentsAdapterFactory {
 
-    @Value("#{'${parseHtmlVoterRef:AW21}'.split(';')}")
-    private List<String> parseHtmlVoterReferetials;
-    @Value("#{'${xmlizeVoterRef:AW21;AW22;RGAA22}'.split(';')}")
-    private List<String> xmlizeVoterReferetials;
+    @Autowired(required = false)
+    @Qualifier("xmlizeVoter")
     private AdaptationActionVoter xmlizeVoter;
+    @Autowired(required = false)
+    @Qualifier("parseHtmlVoter")
     private AdaptationActionVoter parseHtmlVoter;
-    
-    public ContentsAdapterFactoryImpl() {}
+    @Autowired(required = false)
+    private ParameterDataService parameterDataService;
 
     @PostConstruct
     public void initVoters() {
-        if (!parseHtmlVoterReferetials.isEmpty()) {
-            parseHtmlVoter = new AdaptationActionVoterImpl();
-            parseHtmlVoter.setAuthorizedValues(parseHtmlVoterReferetials);
+        if (parseHtmlVoter != null) {
+            parseHtmlVoter.setParameterDataService(parameterDataService);
         }
-        if (!xmlizeVoterReferetials.isEmpty()) {
-            xmlizeVoter = new AdaptationActionVoterImpl();
-            xmlizeVoter.setAuthorizedValues(xmlizeVoterReferetials);
+        if (xmlizeVoter != null) {
+            xmlizeVoter.setParameterDataService(parameterDataService);
         }
     }
 

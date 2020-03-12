@@ -34,10 +34,6 @@ import org.springframework.stereotype.Component;
 @Component("htmlParserFactory")
 public class HTMLParserFactoryImpl implements HTMLParserFactory {
 
-    public HTMLParserFactoryImpl() {
-        super();
-    }
-
     @Override
     public HTMLParser create(Set<ContentAdapter> contentAdapterSet) {
         return new HTMLJsoupParserImpl(contentAdapterSet);

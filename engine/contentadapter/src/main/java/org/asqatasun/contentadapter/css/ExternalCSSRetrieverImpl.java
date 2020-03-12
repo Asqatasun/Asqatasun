@@ -32,16 +32,20 @@ import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.StylesheetContent;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jkowalczyk
  */
+@Component("externalCSSRetriever")
+@Profile("!test")
 public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, AdaptationListener {
 
     private static final Logger LOGGER = Logger.getLogger(ExternalCSSRetrieverImpl.class);
     private Map<Long, Collection<StylesheetContent>> externalCssMap =
-            new HashMap<Long, Collection<StylesheetContent>>();
+            new HashMap<>();
 
 //    private static final String CSS_ON_ERROR = "CSS_ON_ERROR";
     private boolean persistOnTheFly = true;

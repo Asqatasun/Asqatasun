@@ -33,10 +33,6 @@ import org.springframework.stereotype.Component;
 @Component("htmlCleanerFactory")
 public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
 
-    public HTMLCleanerFactoryImpl() {
-        super();
-    }
-
     @Override
     public HTMLCleaner create() {
         return new HTMLJsoupCleanerImpl();

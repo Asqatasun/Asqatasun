@@ -5,6 +5,7 @@ import org.asqatasun.contentadapter.util.AdaptationActionVoterImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 
@@ -12,6 +13,7 @@ import java.util.Arrays;
  * Created by meskoj on 14/05/16.
  */
 @Configuration
+@Profile("!test")
 public class ContentAdapterConfig {
 
     @Value("${refToXmlize:AW21}")
