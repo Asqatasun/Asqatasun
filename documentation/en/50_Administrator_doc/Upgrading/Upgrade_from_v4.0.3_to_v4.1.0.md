@@ -97,7 +97,7 @@ NOTE: /!\ do not forget to update the original asqatasun.conf file
 ```shell
 tar cvfz /tmp/SAVE-asqatasun-webapp.tar.gz /var/lib/tomcat7/webapps/asqatasun/
 rm -rf  /var/lib/tomcat7/webapps/asqatasun/
-cp asqatasun-web-app-4.1.0-SNAPSHOT.war /var/lib/tomcat7/webapps/asqatasun.war
+cp asqatasun-web-app-5.0-SNAPSHOT.war /var/lib/tomcat7/webapps/asqatasun.war
 ```
 
 ## X. Reload Mysql

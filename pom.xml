@@ -145,7 +145,7 @@
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>5.0-SNAPSHOT</version>
 
     <name>asqatasun</name>
     <url>https://asqatasun.org/</url>
@@ -214,8 +214,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
-        <asqatasunVersion>4.1.0-SNAPSHOT</asqatasunVersion>
-        
+        <asqatasunVersion>5.0-SNAPSHOT</asqatasunVersion>
+
         <springGroupId>org.springframework</springGroupId>
         <springVersion>4.3.24.RELEASE</springVersion>
         <springSecurityVersion>4.2.13.RELEASE</springSecurityVersion>
@@ -729,11 +729,6 @@
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-commons-processing</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
                 <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>

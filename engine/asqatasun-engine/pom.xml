@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>5.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-engine</artifactId>
     <name>asqatasun-engine</name>
@@ -14,10 +14,6 @@
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

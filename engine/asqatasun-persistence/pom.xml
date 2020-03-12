@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>5.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-persistence</artifactId>
     <name>asqatasun-persistence</name>
@@ -46,12 +46,6 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-c3p0</artifactId>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
