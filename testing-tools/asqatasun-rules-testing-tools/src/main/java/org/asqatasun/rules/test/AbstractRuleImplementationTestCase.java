@@ -53,7 +53,9 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
@@ -67,6 +69,7 @@ import java.util.*;
  *
  * @author lralambomanana
  */
+@ActiveProfiles("test")
 public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
     private static final Logger LOGGER = Logger.getLogger(AbstractRuleImplementationTestCase.class);
@@ -217,6 +220,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         // class attributes are defined as static. Otherwise, the context is 
         // fully loaded, and the test spend at least 200ms for nothing
         if (APPLICATION_CONTEXT == null) {
+            // HUGE trick to load mocks instead of real beans
+            System.setProperty("spring.profiles.active", "test");
             APPLICATION_CONTEXT = new ClassPathXmlApplicationContext(applicationContextFilePath);
             
             WEB_RESOURCE_FACTORY = (WebResourceFactory) APPLICATION_CONTEXT.getBean("webResourceFactory");

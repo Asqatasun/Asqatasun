@@ -30,6 +30,7 @@ import org.asqatasun.entity.service.audit.PreProcessResultDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.entity.GenericFactory;
+import org.springframework.context.annotation.Profile;
 
 import javax.persistence.NoResultException;
 import java.io.File;
@@ -40,6 +41,7 @@ import java.util.Collection;
  *
  * @author jkowalczyk
  */
+@Profile("test")
 public class PreProcessResultDataServiceMock implements PreProcessResultDataService{
 
     private static final Logger LOGGER = Logger.getLogger(PreProcessResultDataServiceMock.class);

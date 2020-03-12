@@ -27,6 +27,8 @@ import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.entity.GenericFactory;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -34,6 +36,8 @@ import java.util.*;
  *
  * @author jkowalczyk
  */
+@Component
+@Profile("test")
 public class ContentDataServiceMock implements ContentDataService{
 
     private int i=0;

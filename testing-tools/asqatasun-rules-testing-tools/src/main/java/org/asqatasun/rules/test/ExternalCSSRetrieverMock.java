@@ -26,6 +26,8 @@ import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.RelatedContent;
 import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.StylesheetContent;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,10 +36,12 @@ import java.util.HashSet;
  *
  * @author jkowalczyk
  */
+@Component
+@Profile("test")
 public class ExternalCSSRetrieverMock implements ExternalCSSRetriever {
 
     private static final String INLINE_CSS_SUFFIX = "#asqatasun-css-";
-    Collection<StylesheetContent> externalCss = new HashSet<StylesheetContent>();
+    Collection<StylesheetContent> externalCss = new HashSet<>();
     
     @Override
     public Collection<StylesheetContent> getExternalCSS(SSP ssp) {

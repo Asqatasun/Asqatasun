@@ -31,6 +31,7 @@ import org.asqatasun.entity.service.audit.ProcessResultDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.service.ProcessRemarkService;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -44,6 +45,7 @@ import static org.easymock.EasyMock.*;
  * 
  * @author alingua
  */
+@ActiveProfiles("test")
 public abstract class AbstractUrlRuleImplementationTestCase extends TestCase {
 
     protected SSPHandler mockSspHandler;
