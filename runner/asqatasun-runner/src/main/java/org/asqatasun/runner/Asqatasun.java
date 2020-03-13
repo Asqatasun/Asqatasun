@@ -95,9 +95,7 @@ public class Asqatasun implements AuditServiceListener {
     private static final Options OPTIONS = createOptions();
     
     private static String AUDIT_TYPE = PAGE_AUDIT;
-    
-    private static String ASQATASUN_HOME;
-    
+
     private AuditService auditService = null;
     private AuditDataService auditDataService = null;
     private WebResourceDataService webResourceDataService = null;
@@ -111,7 +109,7 @@ public class Asqatasun implements AuditServiceListener {
         if (args == null) {
             return;
         }
-        ASQATASUN_HOME = System.getenv("ASQATASUN_PATH");
+        String ASQATASUN_HOME = System.getenv("ASQATASUN_PATH");
         CommandLineParser clp = new BasicParser();
         try {
             CommandLine cl = clp.parse(OPTIONS, args);
@@ -189,19 +187,19 @@ public class Asqatasun implements AuditServiceListener {
                 if (!isValidPageUrl(cl)) {
                     printUsage();
                 } else {
-                    new Asqatasun().runAuditOnline(cl.getArgs(),ASQATASUN_HOME, REF, LEVEL);
+                    new Asqatasun().runAuditOnline(cl.getArgs(), ASQATASUN_HOME, REF, LEVEL);
                 }
             } else if (AUDIT_TYPE.equalsIgnoreCase(SCENARIO_AUDIT)) {
                 if (!isValidScenarioPath(cl)) {
                     printUsage();
                 } else {
-                    new Asqatasun().runAuditScenario(cl.getArgs()[0],ASQATASUN_HOME, REF, LEVEL);
+                    new Asqatasun().runAuditScenario(cl.getArgs()[0], ASQATASUN_HOME, REF, LEVEL);
                 }
             } else if (AUDIT_TYPE.equalsIgnoreCase(FILE_AUDIT)) {
                 if (!isValidFilePath(cl)) {
                     printUsage();
                 } else {
-                    new Asqatasun().runAuditUpload(cl.getArgs(),ASQATASUN_HOME, REF, LEVEL);
+                    new Asqatasun().runAuditUpload(cl.getArgs(), ASQATASUN_HOME, REF, LEVEL);
                 }
             } else if (AUDIT_TYPE.equalsIgnoreCase(SITE_AUDIT)) {
                 if (!isValidSiteUrl(cl)) {
@@ -256,7 +254,7 @@ public class Asqatasun implements AuditServiceListener {
         Set<Parameter> paramSet = getParameterSetFromAuditLevel(ref, level);
 
         Map<String, String> fileMap = new HashMap<>();
-        for (String file : Arrays.asList(uploadFilePath)) {
+        for (String file : uploadFilePath) {
             File uploadFile = new File(file);
             try {
                fileMap.put(uploadFile.getName(), readFile(uploadFile));
@@ -275,7 +273,7 @@ public class Asqatasun implements AuditServiceListener {
 
         System.out.println("Audit terminated with success at " + audit.getDateOfCreation());
         System.out.println("Audit Id : " + audit.getId());
-        System.out.println("");
+        System.out.println( );
         System.out.println("RawMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getRawMark() + "%");
         System.out.println("WeightedMark : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getMark() + "%");
         System.out.println("Nb Passed : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(audit.getSubject()).getNbOfPassed());
@@ -294,12 +292,12 @@ public class Asqatasun implements AuditServiceListener {
         } else {
             displayWebResourceResult(audit.getSubject(), processResultList);
         }
-        System.out.println("");
+        System.out.println( );
         System.exit(0);
     }
 
     private void displayWebResourceResult(WebResource wr, List<ProcessResult> processResultList) {
-        System.out.println("");
+        System.out.println( );
         System.out.println("Subject : " + wr.getURL());
         List<ProcessResult> prList = new ArrayList<>();
         for (ProcessResult netResult : processResultList) {
@@ -315,13 +313,9 @@ public class Asqatasun implements AuditServiceListener {
         System.out.println("Nb Pre-qualified : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNmi());
         System.out.println("Nb Not Applicable : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNa());
         System.out.println("Nb Not Tested : " + webResourceStatisticsDataService.getWebResourceStatisticsByWebResource(wr).getNbOfNotTested());
-        
-        Collections.sort(prList, new Comparator<ProcessResult>() {
-            @Override
-            public int compare(ProcessResult t, ProcessResult t1) {
-                return t.getTest().getId().compareTo(t1.getTest().getId());
-            }
-        }) ;
+
+        prList.sort(Comparator.comparing(t -> t.getTest().getId()));
+
         for (ProcessResult result : prList) {
             System.out.println(result.getTest().getCode() + ": " + result.getValue());
             Set<ProcessRemark> processRemarkList = (Set<ProcessRemark>) processRemarkDataService.findProcessRemarksFromProcessResult(result, -1);
@@ -361,22 +355,29 @@ public class Asqatasun implements AuditServiceListener {
      * @param asqatasunHome
      */
     private void initServices(String asqatasunHome) {
-        ApplicationContext springApplicationContext = new FileSystemXmlApplicationContext(asqatasunHome + "/" + APPLICATION_CONTEXT_FILE_PATH);
-        BeanFactory springBeanFactory = springApplicationContext;
-        auditService = (AuditService) springBeanFactory.getBean("auditService");
-        auditDataService = (AuditDataService) springBeanFactory.getBean("auditDataService");
-        webResourceDataService = (WebResourceDataService) springBeanFactory.getBean("webResourceDataService");
-        webResourceStatisticsDataService = (WebResourceStatisticsDataService) springBeanFactory.getBean("webResourceStatisticsDataService");
-        processResultDataService = (ProcessResultDataService) springBeanFactory.getBean("processResultDataService");
-        processRemarkDataService = (ProcessRemarkDataService) springBeanFactory.getBean("processRemarkDataService");
-        parameterDataService = (ParameterDataService) springBeanFactory.getBean("parameterDataService");
-        parameterElementDataService = (ParameterElementDataService) springBeanFactory.getBean("parameterElementDataService");
+        ApplicationContext springApplicationContext =
+            new FileSystemXmlApplicationContext(asqatasunHome + "/" + APPLICATION_CONTEXT_FILE_PATH);
+        auditService = (AuditService) springApplicationContext.getBean("auditService");
+        auditDataService = (AuditDataService) springApplicationContext.getBean("auditDataService");
+        webResourceDataService =
+            (WebResourceDataService) springApplicationContext.getBean("webResourceDataService");
+        webResourceStatisticsDataService =
+            (WebResourceStatisticsDataService) springApplicationContext.getBean("webResourceStatisticsDataService");
+        processResultDataService =
+            (ProcessResultDataService) springApplicationContext.getBean("processResultDataService");
+        processRemarkDataService =
+            (ProcessRemarkDataService) springApplicationContext.getBean("processRemarkDataService");
+        parameterDataService =
+            (ParameterDataService) springApplicationContext.getBean("parameterDataService");
+        parameterElementDataService =
+            (ParameterElementDataService) springApplicationContext.getBean("parameterElementDataService");
         auditService.add(this);
     }
 
     /**
      * 
-     * @param auditLevel
+     * @param ref
+     * @param level
      * @return 
      */
     private Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
@@ -403,27 +404,15 @@ public class Asqatasun implements AuditServiceListener {
         Set<Parameter> paramSet = parameterDataService.getDefaultParameterSet();
         return parameterDataService.updateParameter(paramSet, levelParameter);
     }
- 
+
     /**
      * 
-     * @param urlTab
+     * @param scenarioFile
      * @return 
      */
-    private List<String> extractUrlListFromParameter(String urlTab) {
-        String[] pageUrlTab = urlTab.split(";");
-        List<String> pageUrlList = new LinkedList<>();
-        pageUrlList.addAll(Arrays.asList(pageUrlTab));
-        return pageUrlList;
-    }
-    
-    /**
-     * 
-     * @param scenarioPath
-     * @return 
-     */
-    private String readFile(File file) throws IOException {
+    private String readFile(File scenarioFile) throws IOException {
       // #57 issue quick fix.......
-        return FileUtils.readFileToString(file).replace("\"formatVersion\": 2", "\"formatVersion\":1")
+        return FileUtils.readFileToString(scenarioFile, "UTF-8").replace("\"formatVersion\": 2", "\"formatVersion\":1")
                                                .replace("\"formatVersion\":2", "\"formatVersion\":1");
     }
 
@@ -544,9 +533,7 @@ public class Asqatasun implements AuditServiceListener {
     
     /**
      * 
-     * @param path
-     * @param argument
-     * @param testWritable
+     * @param ref
      * @return whether the given referential is valid
      */
     private static boolean isValidReferential(String ref) {
@@ -563,9 +550,7 @@ public class Asqatasun implements AuditServiceListener {
     
     /**
      * 
-     * @param path
-     * @param argument
-     * @param testWritable
+     * @param level
      * @return whether the given level is valid
      */
     private static boolean isValidLevel(String level) {
@@ -580,9 +565,7 @@ public class Asqatasun implements AuditServiceListener {
     
     /**
      * 
-     * @param path
-     * @param argument
-     * @param testWritable
+     * @param xmxStr
      * @return whether the given level is valid
      */
     private static boolean isValidXmxValue(String xmxStr) {
@@ -602,9 +585,7 @@ public class Asqatasun implements AuditServiceListener {
     
     /**
      * 
-     * @param path
-     * @param argument
-     * @param testWritable
+     * @param auditType
      * @return whether the given level is valid
      */
     private static boolean isValidAuditType(String auditType) {
@@ -620,19 +601,17 @@ public class Asqatasun implements AuditServiceListener {
     
     /**
      * 
-     * @param path
-     * @param argument
-     * @param testWritable
+     * @param commandLine
      * @return whether the given level is valid
      */
-    private static boolean isValidPageUrl( CommandLine cl) {
-        if (cl.getArgList().isEmpty()) {
+    private static boolean isValidPageUrl(CommandLine commandLine) {
+        if (commandLine.getArgList().isEmpty()) {
             System.out.println("\nPlease specify at least one URL\n");
             return false;
         }
-        for (String arg : cl.getArgs()) {
+        for (String arg : commandLine.getArgs()) {
             try {
-                URL url = new URL(arg);
+                new URL(arg);
             } catch (MalformedURLException ex) {
                 System.out.println("\nThe URL " + arg + " is malformed\n");
                 return false;
