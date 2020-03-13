@@ -21,12 +21,10 @@
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>conf/context/asqatasun.conf</value>
+                <value>conf/context/asqatasun.properties</value>
             </list>
         </property>
     </bean>
-
-    <import resource="classpath:conf/context/beans-asqatasun.xml"/>
 
 </beans>
 

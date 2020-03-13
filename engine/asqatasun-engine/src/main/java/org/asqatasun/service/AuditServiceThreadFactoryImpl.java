@@ -23,11 +23,13 @@ package org.asqatasun.service;
 
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.service.command.AuditCommand;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author enzolalay
  */
+@Component
 public class AuditServiceThreadFactoryImpl implements AuditServiceThreadFactory {
 	
     @Override

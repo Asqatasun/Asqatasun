@@ -31,35 +31,19 @@ import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.factory.AuditCommandFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service
 public class AuditServiceImpl implements AuditService, AuditServiceListener {
 	
     private AuditServiceThreadFactory auditServiceThreadFactory;
-    @Autowired
-    public void setAuditServiceThreadFactory(AuditServiceThreadFactory auditServiceThreadFactory) {
-        this.auditServiceThreadFactory = auditServiceThreadFactory;
-    }
-    
     private AuditServiceThreadQueue auditServiceThreadQueue;
-    @Autowired
-    public void setAuditServiceThreadQueue(AuditServiceThreadQueue auditServiceThreadQueue) {
-        if (this.auditServiceThreadQueue != null) {
-            this.auditServiceThreadQueue.remove(this);
-        }
-        this.auditServiceThreadQueue = auditServiceThreadQueue;
-        this.auditServiceThreadQueue.add(this);
-    }
-
     private AuditCommandFactory auditCommandFactory;
-    @Autowired
-    public void setAuditCommandFactory(AuditCommandFactory auditCommandFactory) {
-        this.auditCommandFactory = auditCommandFactory;
-    }
-    
+
     /**
      * the listeners of AuditService result
      */
@@ -68,8 +52,14 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         return listeners;
     }
 
-    public AuditServiceImpl() {
-        super();
+    @Autowired
+    public AuditServiceImpl(
+        AuditServiceThreadFactory auditServiceThreadFactory,
+        AuditCommandFactory auditCommandFactory,
+        AuditServiceThreadQueue auditServiceThreadQueue) {
+        this.auditServiceThreadFactory = auditServiceThreadFactory;
+        this.auditCommandFactory = auditCommandFactory;
+        this.auditServiceThreadQueue = auditServiceThreadQueue;
     }
 
     @Override
@@ -133,66 +123,6 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
         auditServiceThread.run();
         return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit init(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.init();
-        return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit crawl(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.loadContent();
-        return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit loadContent(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.loadContent();
-        return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit loadScenario(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        return audit;
-    }
-
-    @Override
-    public Audit adaptContent(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.adaptContent();
-        return audit;
-    }
-
-    @Override
-    public Audit process(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.process();
-        return audit;
-    }
-
-    @Override
-    public Audit consolidate(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.consolidate();
-        return audit;
-    }
-
-    @Override
-    public Audit analyse(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.analyse();
-        return audit;
     }
 
     /**
