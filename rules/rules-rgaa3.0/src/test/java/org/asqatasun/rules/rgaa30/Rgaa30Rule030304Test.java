@@ -44,36 +44,20 @@ public class Rgaa30Rule030304Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa30.Test.03.03.04-1Passed-01");
-//        addWebResource("Rgaa30.Test.03.03.04-2Failed-01");
         addWebResource("Rgaa30.Test.03.03.04-3NMI-01");
-//        addWebResource("Rgaa30.Test.03.03.04-4NA-01");
-
     }
 
     @Override
     protected void setProcess() {
-//        assertEquals(TestSolution.PASSED,
-//                processPageTest("Rgaa30.Test.03.03.04-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                processPageTest("Rgaa30.Test.03.03.04-2Failed-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
                 processPageTest("Rgaa30.Test.03.03.04-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("Rgaa30.Test.03.03.04-4NA-01").getValue());
 
     }
 
     @Override
     protected void setConsolidate() {
-//        assertEquals(TestSolution.PASSED,
-//                consolidate("Rgaa30.Test.03.03.04-1Passed-01").getValue());
-//        assertEquals(TestSolution.FAILED,
-//                consolidate("Rgaa30.Test.03.03.04-2Failed-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
                 consolidate("Rgaa30.Test.03.03.04-3NMI-01").getValue());
-//        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("Rgaa30.Test.03.03.04-4NA-01").getValue());
     }
 
 }
