@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"${packages.to.scan}"})
+@ComponentScan({"org.asqatasun.entity.dao","org.asqatasun.entity"})
 @PropertySource(value = {"classpath:datasource-test.properties"})
 public class PersistenceConfigTest extends PersistenceConfig {
 

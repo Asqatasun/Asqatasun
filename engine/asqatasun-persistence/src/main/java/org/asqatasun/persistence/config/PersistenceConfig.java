@@ -27,9 +27,7 @@ package org.asqatasun.persistence.config;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -44,8 +42,10 @@ import java.beans.PropertyVetoException;
  */
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = "classpath:default-hibernate.properties",
+@PropertySource(value = "classpath:hibernate.properties",
                 ignoreResourceNotFound = true)
+@ImportResource({"classpath*:aop.xml"})
+@EnableAspectJAutoProxy
 public class PersistenceConfig extends PersistenceCommonConfig{
 
     @Value("${jdbc.user:asqatasun}")
@@ -56,8 +56,6 @@ public class PersistenceConfig extends PersistenceCommonConfig{
     private String url;
     @Value("${useComboPool}")
     private boolean useComboPool;
-    @Value("${packages.to.scan}")
-    private String packagesToScan;
 
     @Bean(name = "dataSource")
     DataSource dataSource() {
@@ -78,10 +76,13 @@ public class PersistenceConfig extends PersistenceCommonConfig{
 
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        return entityManagerFactory(dataSource(), url, packagesToScan.split(","));
+        return entityManagerFactory(
+            dataSource(),
+            url,
+            "org.asqatasun.entity.dao","org.asqatasun.entity");
     }
 
-    @Bean
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager(entityManagerFactory().getObject());
     }
