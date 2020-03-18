@@ -45,6 +45,7 @@ public class Rgaa32016Rule060203Test extends Rgaa32016RuleImplementationTestCase
 
     @Override
     protected void setUpWebResourceMap() {
+        addWebResource("Rgaa32016.Test.06.02.03-2Failed-01");
         addWebResource("Rgaa32016.Test.06.02.03-2Failed-02");
         addWebResource("Rgaa32016.Test.06.02.03-2Failed-03");
         addWebResource("Rgaa32016.Test.06.02.03-2Failed-04");
@@ -171,9 +172,15 @@ public class Rgaa32016Rule060203Test extends Rgaa32016RuleImplementationTestCase
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
+        //---------------------------2Failed-01---------------------------------
+        //----------------------------------------------------------------------
+        ProcessResult processResult = processPageTest("Rgaa32016.Test.06.02.03-2Failed-01");
+        checkResultIsFailed(processResult,1,1);
+
+        //----------------------------------------------------------------------
         //---------------------------2Failed-02---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa32016.Test.06.02.03-2Failed-02");
+        processResult = processPageTest("Rgaa32016.Test.06.02.03-2Failed-02");
         checkResultIsFailed(processResult,1,1);
 
         //----------------------------------------------------------------------

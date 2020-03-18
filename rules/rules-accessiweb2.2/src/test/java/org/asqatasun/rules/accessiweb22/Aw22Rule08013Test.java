@@ -19,12 +19,9 @@
  */
 package org.asqatasun.rules.accessiweb22;
 
-import java.util.LinkedHashSet;
-import org.asqatasun.entity.audit.ProcessRemark;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
-import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for the implementation of the rule 8.1.3 of the referential Accessiweb 2.2.
@@ -51,12 +48,6 @@ public class Aw22Rule08013Test extends Aw22RuleImplementationTestCase {
         getWebResourceMap().put("AW22.Test.8.1.3-1Passed-01",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "accessiweb22/Aw22Rule08013/AW22.Test.8.1.3-1Passed-01.html"));
-        getWebResourceMap().put("AW22.Test.8.1.3-2Failed-01",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "accessiweb22/Aw22Rule08013/AW22.Test.8.1.3-2Failed-01.html"));
-        getWebResourceMap().put("AW22.Test.8.1.3-2Failed-02",
-              getWebResourceFactory().createPage(
-              getTestcasesFilePath() + "accessiweb22/Aw22Rule08013/AW22.Test.8.1.3-2Failed-02.html"));
         getWebResourceMap().put("AW22.Test.8.1.3-4NA-01",
               getWebResourceFactory().createPage(
               getTestcasesFilePath() + "accessiweb22/Aw22Rule08013/AW22.Test.8.1.3-4NA-01.html"));
@@ -76,42 +67,7 @@ public class Aw22Rule08013Test extends Aw22RuleImplementationTestCase {
         // we test the presence of one tag in the page)
         assertEquals(0, processResult.getElementCounter());
         
-        
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("AW22.Test.8.1.3-2Failed-01");
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        ProcessRemark processRemark = ((ProcessRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.BAD_DOCTYPE_LOCATION_MSG, processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
-        
-        
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-02------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("AW22.Test.8.1.3-2Failed-02");
-        // check number of elements in the page (no counter management here, 
-        // we test the presence of one tag in the page)
-        assertEquals(0, processResult.getElementCounter());
-        // check test result
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        // check number of remarks and their value
-        assertEquals(1, processResult.getRemarkSet().size());
-        processRemark = ((ProcessRemark)((LinkedHashSet)processResult.getRemarkSet()).iterator().next());
-        assertEquals(RemarkMessageStore.BAD_DOCTYPE_LOCATION_MSG, processRemark.getMessageCode());
-        // check number of evidence elements and their value
-        assertNull(processRemark.getElementList());
-        
-        
+
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
@@ -129,10 +85,6 @@ public class Aw22Rule08013Test extends Aw22RuleImplementationTestCase {
     protected void setConsolidate() {
         assertEquals(TestSolution.PASSED,
                 consolidate("AW22.Test.8.1.3-1Passed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("AW22.Test.8.1.3-2Failed-01").getValue());
-        assertEquals(TestSolution.FAILED,
-                consolidate("AW22.Test.8.1.3-2Failed-02").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("AW22.Test.8.1.3-4NA-01").getValue());
     }

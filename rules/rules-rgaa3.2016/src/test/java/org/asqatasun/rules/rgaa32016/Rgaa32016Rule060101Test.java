@@ -61,8 +61,6 @@ public class Rgaa32016Rule060101Test extends Rgaa32016RuleImplementationTestCase
         addWebResource("Rgaa32016.Test.06.01.01-3NMI-02");
         addWebResource("Rgaa32016.Test.06.01.01-3NMI-03");
         addWebResource("Rgaa32016.Test.06.01.01-3NMI-05");
-        addWebResource("Rgaa32016.Test.06.01.01-3NMI-06");
-        addWebResource("Rgaa32016.Test.06.01.01-3NMI-07");
         addWebResource("Rgaa32016.Test.06.01.01-4NA-01");
         addWebResource("Rgaa32016.Test.06.01.01-4NA-02");
         addWebResource("Rgaa32016.Test.06.01.01-4NA-03");
@@ -106,12 +104,6 @@ public class Rgaa32016Rule060101Test extends Rgaa32016RuleImplementationTestCase
         getWebResourceMap().put("Rgaa32016.Test.06.01.03-3NMI-05",
                 getWebResourceFactory().createPage(
                 getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060103/Rgaa32016.Test.06.01.03-3NMI-05.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.01.03-3NMI-06",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060103/Rgaa32016.Test.06.01.03-3NMI-06.html"));
-        getWebResourceMap().put("Rgaa32016.Test.06.01.03-3NMI-07",
-                getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa32016/Rgaa32016Rule060103/Rgaa32016.Test.06.01.03-3NMI-07.html"));
     }
 
     @Override
@@ -430,10 +422,7 @@ public class Rgaa32016Rule060101Test extends Rgaa32016RuleImplementationTestCase
         processResult = processPageTest("Rgaa32016.Test.06.01.03-3NMI-03");
         checkResultIsNotApplicable(processResult);        
         processResult = processPageTest("Rgaa32016.Test.06.01.03-3NMI-05");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa32016.Test.06.01.03-3NMI-06");
-        checkResultIsNotApplicable(processResult);        
-        processResult = processPageTest("Rgaa32016.Test.06.01.03-3NMI-07");
+        checkResultIsNotApplicable(processResult);
 
     }
     
@@ -503,10 +492,6 @@ public class Rgaa32016Rule060101Test extends Rgaa32016RuleImplementationTestCase
                 consolidate("Rgaa32016.Test.06.01.03-3NMI-03").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,
                 consolidate("Rgaa32016.Test.06.01.03-3NMI-05").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.01.03-3NMI-06").getValue());
-        assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa32016.Test.06.01.03-3NMI-07").getValue());
     }
 
 }
