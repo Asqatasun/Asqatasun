@@ -89,4 +89,4 @@ JAVA_BIN="$JAVA_HOME/bin/java "
 # LAUNCH_ASQATASUN
 ##################
 
-$JAVA_BIN $JAVA_OPTS org.asqatasun.runner.Asqatasun ${ASQATASUN_OPTIONS}
+$JAVA_BIN $JAVA_OPTS org.asqatasun.runner.AsqatasunCli ${ASQATASUN_OPTIONS}
