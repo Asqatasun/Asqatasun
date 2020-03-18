@@ -83,6 +83,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         Logger.getLogger(this.getClass()).debug("auditScenario");
         AuditCommand auditCommand = auditCommandFactory.create(scenarioName, scenario, paramSet);
         auditServiceThreadQueue.addScenarioAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
@@ -91,6 +92,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         Logger.getLogger(this.getClass()).debug("auditpage");
         AuditCommand auditCommand = auditCommandFactory.create(pageUrl, paramSet, false);
         auditServiceThreadQueue.addPageAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
     
@@ -106,7 +108,8 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public Audit auditSite(String siteUrl, Set<Parameter> paramSet) {
         Logger.getLogger(this.getClass()).debug("auditSite");
         AuditCommand auditCommand = auditCommandFactory.create(siteUrl, paramSet, true);
-        auditServiceThreadQueue.addSiteAudit(auditCommand); 
+        auditServiceThreadQueue.addSiteAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
