@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author enzolalay
+ * @author koj
  */
 @Component
 public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, AuditServiceThreadListener {
@@ -64,10 +64,10 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     }
 
     public AuditServiceThreadQueueImpl(
-        @Value("${pageAuditConcurrentMaxSize:3}") Integer pageAuditExecutionListMax,
-        @Value("${scenarioAuditConcurrentMaxSize:3}") Integer scenarioAuditExecutionListMax,
-        @Value("${uploadAuditConcurrentMaxSize:3}") Integer uploadAuditExecutionListMax,
-        @Value("${siteAuditConcurrentMaxSize:3}") Integer siteAuditExecutionListMax) {
+        @Value("${app.engine.maxConcurrentSize.page:3}") Integer pageAuditExecutionListMax,
+        @Value("${app.engine.maxConcurrentSize.scenario:3}") Integer scenarioAuditExecutionListMax,
+        @Value("${app.engine.maxConcurrentSize.upload:3}") Integer uploadAuditExecutionListMax,
+        @Value("${app.engine.maxConcurrentSize.site:3}") Integer siteAuditExecutionListMax) {
 
         this.pageAuditExecutionListMax = pageAuditExecutionListMax;
         this.scenarioAuditExecutionListMax = scenarioAuditExecutionListMax;

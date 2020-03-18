@@ -74,7 +74,7 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         return jsScriptMap;
     }
 
-    @Value("${pageLoadTimeout:-1}")
+    @Value("${app.engine.loader.timeout:-1}")
     int pageLoadDriverTimeout;
 
     @Override

@@ -51,13 +51,13 @@ public final class ProfileFactory {
         this.deleteProfileData = deleteProfileData;
     }
 
-    @Value("${proxyPort}")
+    @Value("${app.engine.loader.proxy.port}")
     private String proxyPort;
-    @Value("${proxyHost}")
+    @Value("${app.engine.loader.proxy.host}")
     private String proxyHost;
-    @Value("${pathToPreSetProfile:}")
+    @Value("${app.engine.loader.pathToPreSetProfile:}")
     private String pathToPreSetProfile;
-    @Value("${proxyExclusionUrl}")
+    @Value("${app.engine.loader.proxy.exclusionUrl}")
     private String proxyExclusionUrl;
     
     /**

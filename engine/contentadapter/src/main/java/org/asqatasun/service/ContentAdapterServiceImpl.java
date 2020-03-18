@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service("contentAdapterService")
 public class ContentAdapterServiceImpl implements ContentAdapterService {
 
-    @Value("${tempFolderRootPath:/var/tmp/asqatasun}")
+    @Value("${app.engine.adapter.tempFolderRootPath:/var/tmp/asqatasun}")
     private String tempFolderRootPath;
     private ContentsAdapterFactory contentsAdapterFactory;
     private HTMLCleanerFactory htmlCleanerFactory;

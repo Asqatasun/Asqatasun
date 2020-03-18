@@ -64,18 +64,18 @@ public class HttpRequestHandler {
     private static final String ASQATASUN_USER_AGENT = "asqatasun";
     private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
 
-    @Value("${proxyPort}")
+    @Value("${app.engine.loader.proxy.port:}")
     private String proxyPort;
-    @Value("${proxyHost}")
+    @Value("${app.engine.loader.proxy.host:}")
     private String proxyHost;
-    @Value("${proxyUser}")
+    @Value("${app.engine.loader.proxy.user:}")
     private String proxyUser;
-    @Value("${proxyPassword}")
+    @Value("${app.engine.loader.proxy.password:}")
     private String proxyPassword;
-    //    @Value("${bypassCheck}")
+    @Value("${app.engine.loader.bypassCheck}")
     private boolean bypassCheck = false;
     public void setBypassCheck(String bypassCheck) {
-        this.bypassCheck = Boolean.valueOf(bypassCheck);
+        this.bypassCheck = Boolean.parseBoolean(bypassCheck);
     }
 
     private static final String DEFAULT_CHARSET = "UTF-8";
@@ -83,7 +83,7 @@ public class HttpRequestHandler {
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
-    @Value("${proxyExclusionUrl}")
+    @Value("${app.engine.loader.proxy.exclusionUrl}")
     private String proxyExclusionUrl;
     public List<String> getProxyExclusionUrlList() {
         if (StringUtils.isNotBlank(proxyExclusionUrl)) {
@@ -92,9 +92,10 @@ public class HttpRequestHandler {
         return Collections.emptyList();
     }
 
-    private int connectionTimeout = 3000;
-    
-    private int socketTimeout = 3000;
+    @Value("${app.engine.loader.timeout.connection:3000}")
+    private int connectionTimeout;
+    @Value("${app.engine.loader.timeout.socket:3000}")
+    private int socketTimeout;
 
     /**
      * The holder that handles the unique instance of HttpRequestHandler
