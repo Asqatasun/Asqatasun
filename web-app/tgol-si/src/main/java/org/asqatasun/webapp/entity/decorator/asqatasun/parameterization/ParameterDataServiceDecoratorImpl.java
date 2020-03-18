@@ -30,7 +30,7 @@ import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterFamily;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
-import org.asqatasun.sdk.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.asqatasun.webapp.entity.contract.ScopeEnum;
 import org.asqatasun.webapp.entity.dao.asqatasun.parameterization.TgolParameterDAO;
 import org.asqatasun.webapp.entity.option.OptionElement;
@@ -102,6 +102,16 @@ public class ParameterDataServiceDecoratorImpl extends AbstractGenericDataServic
     @Override
     public Set<Parameter> updateParameter(Set<Parameter> set, Parameter prmtr) {
         return decoratedParameterDataService.updateParameter(set, prmtr);
+    }
+
+    @Override
+    public Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
+        return decoratedParameterDataService.getParameterSetFromAuditLevel(ref, level);
+    }
+
+    @Override
+    public Set<Parameter> getAuditPageParameterSet(Set<Parameter> defaultParameterSet) {
+        return decoratedParameterDataService.getAuditPageParameterSet(defaultParameterSet);
     }
 
     @Override

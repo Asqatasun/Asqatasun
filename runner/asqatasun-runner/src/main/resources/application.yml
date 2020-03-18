@@ -1,0 +1,43 @@
+
+hibernate:
+  dialect: "org.asqatasun.dialect.AsqatasunMySQL5InnoDBDialect"
+jdbc:
+  driverClassName : "com.mysql.jdbc.Driver"
+  url: "jdbc:mysql://localhost:3306/asqatasun"
+  user: "root"
+  password: bou
+
+jpa:
+  showSql: true
+
+app:
+  engine:
+    adapter:
+      tempFolderRootPath: "/tmp/"
+    maxConcurrentSize:
+      page: 1
+      scenario: 1
+      upload: 1
+      site: 1
+    loader:
+      # ProxyConfiguration
+      # CAUTION: these variables *must* be present (empty), even if no proxy is used
+      # bypass initial check of URL before effective launch of audit.
+      # CAUTION : bypassing this control may lead to test error pages.
+      # Only use for debug purpose when setting network properties.
+      # The value MUST be equals to false or true
+      bypassCheck: false
+      # timeout from which a page is seen as fully loaded in seconds
+      timeout: 20
+      proxy:
+        host:
+        port:
+        user:
+        password:
+        # Examples for $proxyExclusionUrl:
+        #  exclusionUrl=127.0.0.1
+        #  exclusionUrl=127.0.0.1;localhost;myhost;
+        #  exclusionUrl=myhost
+        #  exclusionUrl=mydomain.com
+        #  exclusionUrl=internalhost;mydomain.com
+        exclusionUrl:

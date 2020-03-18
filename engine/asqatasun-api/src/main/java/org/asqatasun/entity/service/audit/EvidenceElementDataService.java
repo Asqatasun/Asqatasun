@@ -25,7 +25,7 @@ import java.util.Collection;
 import org.asqatasun.entity.audit.Evidence;
 import org.asqatasun.entity.audit.EvidenceElement;
 import org.asqatasun.entity.audit.ProcessRemark;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  * 

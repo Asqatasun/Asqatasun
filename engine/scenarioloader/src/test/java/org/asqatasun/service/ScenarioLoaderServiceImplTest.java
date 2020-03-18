@@ -102,10 +102,8 @@ public class ScenarioLoaderServiceImplTest extends TestCase {
         replay(mockScenarioLoader);
         replay(mockScenarioLoaderFactory);
         
-        ScenarioLoaderServiceImpl instance = new ScenarioLoaderServiceImpl();
-        instance.setContentDataService(mockContentDataService);
-        instance.setScenarioLoaderFactory(mockScenarioLoaderFactory);
-        instance.setWebResourceDataService(mockWebResourceDataService);
+        ScenarioLoaderServiceImpl instance =
+            new ScenarioLoaderServiceImpl(mockScenarioLoaderFactory, mockContentDataService, mockWebResourceDataService);
         
         instance.loadScenario(mockWebResource, scenarioFile);
         

@@ -31,30 +31,6 @@ public interface AuditServiceThreadQueue {// TODO Write javadoc
 
     /**
      *
-     * @param max
-     */
-    void setPageAuditExecutionListMax(int max);
-
-    /**
-     *
-     * @param max
-     */
-    void setSiteAuditExecutionListMax(int max);
-
-    /**
-     *
-     * @param max
-     */
-    void setScenarioAuditExecutionListMax(int max);
-
-    /**
-     *
-     * @param max
-     */
-    void setUploadAuditExecutionListMax(int max);
-
-    /**
-     *
      * @param auditCommand
      */
     void addPageAudit(AuditCommand auditCommand);
@@ -76,11 +52,6 @@ public interface AuditServiceThreadQueue {// TODO Write javadoc
      * @param auditCommand
      */
     void addSiteAudit(AuditCommand auditCommand);
-
-    /**
-     *
-     */
-    void processWaitQueue();
 
     /**
      *

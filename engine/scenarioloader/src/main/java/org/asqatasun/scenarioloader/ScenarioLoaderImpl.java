@@ -35,7 +35,6 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
-import org.apache.log4j.Logger;
 import org.asqatasun.util.http.HttpRequestHandler;
 import org.json.JSONException;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -60,6 +59,8 @@ import org.asqatasun.sebuilder.interpreter.factory.TgTestRunFactory;
 import org.asqatasun.sebuilder.tools.FirefoxDriverObjectPool;
 import org.asqatasun.sebuilder.tools.ProfileFactory;
 import org.asqatasun.util.factory.DateFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -67,7 +68,7 @@ import org.asqatasun.util.factory.DateFactory;
  */
 public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
 
-    private static final Logger LOGGER = Logger.getLogger(ScenarioLoaderImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ScenarioLoaderImpl.class);
     private static final String UFT8 = "UTF-8";
     private final List<Content> result = new ArrayList<>();
     private int pageRank = 1;
@@ -233,7 +234,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         try {
             charset = HttpRequestHandler.extractCharset(IOUtils.toInputStream(sourceCode));
         } catch (IOException ex) {
-            Logger.getLogger(this.getClass()).warn(ex);
+            LOGGER.warn(ex.getMessage());
         }
         Page page = getWebResource(url);
         SSP ssp = contentDataService.getSSP(

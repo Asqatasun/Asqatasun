@@ -35,7 +35,6 @@ public interface ContentsAdapterFactory {
      * Creates an instance of ContentsAdapter
      *
      * @param contentList
-     * @param writeCleanHtmlInFile
      * @param tempFolderRootPath
      * @param htmlCleaner
      * @param htmlParser
@@ -43,7 +42,6 @@ public interface ContentsAdapterFactory {
      */
     ContentsAdapter create(
             Collection<Content> contentList,
-            boolean writeCleanHtmlInFile,
             String tempFolderRootPath,
             HTMLCleaner htmlCleaner,
             HTMLParser htmlParser);

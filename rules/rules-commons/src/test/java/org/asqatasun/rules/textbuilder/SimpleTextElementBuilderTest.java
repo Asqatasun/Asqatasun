@@ -22,9 +22,10 @@
 package org.asqatasun.rules.textbuilder;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -32,8 +33,8 @@ import org.jsoup.parser.Tag;
  */
 public class SimpleTextElementBuilderTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(SimpleTextElementBuilderTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(SimpleTextElementBuilderTest.class);
     
     public SimpleTextElementBuilderTest(String testName) {
         super(testName);

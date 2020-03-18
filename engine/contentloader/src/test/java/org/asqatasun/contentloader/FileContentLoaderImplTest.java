@@ -97,10 +97,7 @@ public class FileContentLoaderImplTest extends TestCase {
         EasyMock.replay(mockContentDataService);
         EasyMock.replay(mockDateFactory);
         
-        FileContentLoaderImpl instance = new FileContentLoaderImpl(
-                mockContentDataService, 
-                fileMap, 
-                mockDateFactory);
+        FileContentLoaderImpl instance = new FileContentLoaderImpl(mockContentDataService, mockDateFactory, fileMap);
         instance.setWebResource(mockPage);
         instance.run();
         
@@ -162,10 +159,7 @@ public class FileContentLoaderImplTest extends TestCase {
         EasyMock.replay(mockContentDataService);
         EasyMock.replay(mockDateFactory);
         
-        FileContentLoaderImpl instance = new FileContentLoaderImpl(
-                mockContentDataService, 
-                fileMap, 
-                mockDateFactory);
+        FileContentLoaderImpl instance = new FileContentLoaderImpl(mockContentDataService, mockDateFactory, fileMap);
         instance.setWebResource(mockSite);
         instance.run();
         

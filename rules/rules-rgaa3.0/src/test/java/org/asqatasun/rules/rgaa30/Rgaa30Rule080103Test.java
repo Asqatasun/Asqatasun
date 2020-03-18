@@ -47,8 +47,6 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.08.01.03-1Passed-01");
-        addWebResource("Rgaa30.Test.08.01.03-2Failed-01");
-        addWebResource("Rgaa30.Test.08.01.03-2Failed-02");
         addWebResource("Rgaa30.Test.08.01.03-4NA-01");
 
     }
@@ -59,29 +57,7 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
         checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.03-1Passed-01"),0);        
-        
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa30.Test.08.01.03-2Failed-01");
-        checkResultIsFailed(processResult, 0, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.BAD_DOCTYPE_LOCATION_MSG,
-                1);        
-        
-        
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-02------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa30.Test.08.01.03-2Failed-02");
-        checkResultIsFailed(processResult, 0, 1);
-        checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.BAD_DOCTYPE_LOCATION_MSG,
-                1);        
+
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------

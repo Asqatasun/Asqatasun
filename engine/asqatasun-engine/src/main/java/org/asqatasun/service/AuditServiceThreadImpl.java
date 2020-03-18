@@ -31,8 +31,6 @@ import org.asqatasun.service.command.AuditCommand;
  *
  * @author enzolalay
  */
-//@Service
-//@Lazy
 public class AuditServiceThreadImpl implements AuditServiceThread {
 
     private Audit audit;

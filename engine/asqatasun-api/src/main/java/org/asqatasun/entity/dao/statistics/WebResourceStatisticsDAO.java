@@ -27,7 +27,7 @@ import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.statistics.WebResourceStatistics;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  *

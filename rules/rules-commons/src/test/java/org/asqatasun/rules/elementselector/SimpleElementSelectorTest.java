@@ -22,7 +22,6 @@
 package org.asqatasun.rules.elementselector;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -32,6 +31,8 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.ElementHandler;
 import org.asqatasun.ruleimplementation.ElementHandlerImpl;
 import org.asqatasun.rules.keystore.CssLikeQueryStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -39,8 +40,8 @@ import org.asqatasun.rules.keystore.CssLikeQueryStore;
  */
 public class SimpleElementSelectorTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(SimpleElementSelectorTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(SimpleElementSelectorTest.class);
     
     private SSP ssp;
     private SSPHandler sspHandler;

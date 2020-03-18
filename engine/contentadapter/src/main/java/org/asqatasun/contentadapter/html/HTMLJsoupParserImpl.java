@@ -39,8 +39,7 @@ import org.asqatasun.entity.audit.SSP;
  */
 public class HTMLJsoupParserImpl implements HTMLParser {
 
-    protected Set<ContentAdapter> contentAdapterSet = Collections.emptySet();
-    protected boolean initialized = false;
+    protected Set<ContentAdapter> contentAdapterSet;
     protected SSP ssp;
 
     public HTMLJsoupParserImpl(Set<ContentAdapter> contentAdapterSet) {
@@ -65,9 +64,9 @@ public class HTMLJsoupParserImpl implements HTMLParser {
         }
         Document doc = Jsoup.parse(ssp.getDOM(), ssp.getURI());
 
-        Collection<Element> inlineCssElementList = new ArrayList<Element>();
-        Collection<Element> localeCssElementList = new ArrayList<Element>();
-        Collection<Element> externalCssElementList = new ArrayList<Element>();
+        Collection<Element> inlineCssElementList = new ArrayList<>();
+        Collection<Element> localeCssElementList = new ArrayList<>();
+        Collection<Element> externalCssElementList = new ArrayList<>();
         
         for (Element el : doc.select("[style]")) {
             inlineCssElementList.add(el);            

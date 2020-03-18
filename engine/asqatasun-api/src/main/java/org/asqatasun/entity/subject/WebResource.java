@@ -23,7 +23,7 @@
 import java.util.Collection;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.ProcessResult;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

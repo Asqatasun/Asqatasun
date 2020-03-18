@@ -21,8 +21,8 @@
  */
 package org.asqatasun.ruleimplementationloader;
 
-import org.apache.log4j.Logger;
 import org.asqatasun.ruleimplementation.RuleImplementation;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -31,65 +31,32 @@ import org.asqatasun.ruleimplementation.RuleImplementation;
 public class RuleImplementationLoaderImpl implements RuleImplementationLoader {
 
     private String archiveName;
-    private String archiveRoot;
     private String className;
     private RuleImplementation result;
 
-    RuleImplementationLoaderImpl(String archiveRoot, String ruleArchiveName, String ruleClassName) {
+    RuleImplementationLoaderImpl(String ruleArchiveName, String ruleClassName) {
         super();
-        this.archiveRoot = archiveRoot;
         this.archiveName = ruleArchiveName;
         this.className = ruleClassName;
     }
 
     @Override
-    public String getArchiveName() {
-        return archiveName;
-    }
-
-    @Override
-    public String getArchiveRoot() {
-        return archiveRoot;
-    }
-
-    @Override
-    public String getClassName() {
-        return className;
-    }
-
-    @Override
-    public RuleImplementation getResult() {
+    public RuleImplementation getRuleImplementation() {
         return result;
     }
 
     @Override
     public void run() {
-        result = loadClass(className, archiveName, archiveRoot);
+        result = loadClass(className, archiveName);
     }
 
-    @Override
-    public void setArchiveName(String archiveName) {
-        this.archiveName = archiveName;
-    }
-
-    @Override
-    public void setArchiveRoot(String archiveRoot) {
-        this.archiveRoot = archiveRoot;
-    }
-
-    @Override
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    private RuleImplementation loadClass(String className, String archiveName, String archiveRoot) {
+    private RuleImplementation loadClass(String className, String archiveName) {
         try {
-            Logger.getLogger(this.getClass()).debug("Loading " + className + " rule");
+            LoggerFactory.getLogger(this.getClass()).debug("Loading " + className + " rule");
             return (RuleImplementation) Class.forName(className).newInstance();
         } catch (Exception ex) {
-            Logger.getLogger(this.getClass()).error(
-                    "archiveRoot=" + archiveRoot + ", "
-                        + "archiveName=" + archiveName + ", "
+            LoggerFactory.getLogger(this.getClass()).error(
+                    "archiveName=" + archiveName + ", "
                         + "className=" + className, 
                     ex);
             throw new RuntimeException(ex);

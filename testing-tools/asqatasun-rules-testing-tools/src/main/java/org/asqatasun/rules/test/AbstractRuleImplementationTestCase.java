@@ -24,17 +24,16 @@ package org.asqatasun.rules.test;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.log4j.Logger;
 import org.asqatasun.contentadapter.util.URLIdentifier;
 import org.asqatasun.contentadapter.util.URLIdentifierFactory;
 import org.asqatasun.entity.audit.*;
-import org.asqatasun.entity.factory.audit.AuditFactory;
-import org.asqatasun.entity.factory.audit.ContentFactory;
-import org.asqatasun.entity.factory.parameterization.ParameterElementFactory;
-import org.asqatasun.entity.factory.parameterization.ParameterFactory;
-import org.asqatasun.entity.factory.parameterization.ParameterFamilyFactory;
-import org.asqatasun.entity.factory.reference.TestFactory;
-import org.asqatasun.entity.factory.subject.WebResourceFactory;
+import org.asqatasun.entity.audit.factory.AuditFactory;
+import org.asqatasun.entity.audit.factory.ContentFactory;
+import org.asqatasun.entity.parameterization.factory.ParameterElementFactory;
+import org.asqatasun.entity.parameterization.factory.ParameterFactory;
+import org.asqatasun.entity.parameterization.factory.ParameterFamilyFactory;
+import org.asqatasun.entity.reference.factory.TestFactory;
+import org.asqatasun.entity.subject.factory.WebResourceFactory;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterFamily;
@@ -52,8 +51,11 @@ import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
@@ -67,10 +69,10 @@ import java.util.*;
  *
  * @author lralambomanana
  */
+@ActiveProfiles("test")
 public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
 
-    private static final Logger LOGGER = Logger.getLogger(AbstractRuleImplementationTestCase.class);
-    private final String applicationContextFilePath = "context/application-context.xml";
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRuleImplementationTestCase.class);
     
     private static ApplicationContext APPLICATION_CONTEXT;
     private static TestFactory TEST_FACTORY;
@@ -157,14 +159,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
      * The referential of rules
      */
     private boolean upperCaseTags = false;
-    public boolean getUpperCaseTags() {
-        return upperCaseTags;
-    }
 
-    public void setUpperCaseTags(boolean upperCaseTags) {
-        this.upperCaseTags = upperCaseTags;
-    }
-    
     /**
      * 
      * @param testName
@@ -217,7 +212,9 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         // class attributes are defined as static. Otherwise, the context is 
         // fully loaded, and the test spend at least 200ms for nothing
         if (APPLICATION_CONTEXT == null) {
-            APPLICATION_CONTEXT = new ClassPathXmlApplicationContext(applicationContextFilePath);
+            // HUGE trick to load mocks instead of real beans
+            System.setProperty("spring.profiles.active", "test");
+            APPLICATION_CONTEXT = new AnnotationConfigApplicationContext("org.asqatasun");
             
             WEB_RESOURCE_FACTORY = (WebResourceFactory) APPLICATION_CONTEXT.getBean("webResourceFactory");
             CONTENT_FACTORY = (ContentFactory) APPLICATION_CONTEXT.getBean("contentFactory");
@@ -235,7 +232,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             URL_IDENTIFIER = ((URLIdentifierFactory) APPLICATION_CONTEXT.getBean("urlIdentifierFactory")).create();
             if (upperCaseTags) {
                 HTMLCleanerFactoryImpl htmlCleanerFactory = 
-                        (HTMLCleanerFactoryImpl) APPLICATION_CONTEXT.getBean("htmlCleanerFactory");
+                        (HTMLCleanerFactoryImpl) APPLICATION_CONTEXT.getBean("htmlCleanerFactoryMock");
                 htmlCleanerFactory.setRemoveLowerCaseTags(upperCaseTags);
             }
         }
@@ -313,7 +310,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         LOGGER.info("setUpClass()");
         for (WebResource webResource : webResourceMap.values()) {
             LOGGER.info("webResource.getURL() " + webResource.getURL());
-            contentMap.put(webResource, CONTENT_LOADER_SERVICE.loadContent(webResource));
+            contentMap.put(webResource, CONTENT_LOADER_SERVICE.loadContent(webResource, null));
             
             if (relatedContentMap.get(webResource) != null) {
                 for (String contentUrl : relatedContentMap.get(webResource)) {
@@ -323,7 +320,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                             src = new URL(ssp.getURI());
                             URL_IDENTIFIER.setUrl(src);
                         } catch (MalformedURLException ex) {
-                            LOGGER.error(ex);
+                            LOGGER.error("malformed url", ex);
                         }
                         URL_IDENTIFIER.setUrl(src);
                         String relatedContentUrl =
@@ -407,7 +404,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         try {
             url = new URL(imgUrl);
         } catch (MalformedURLException ex) {
-            LOGGER.error(ex);
+            LOGGER.error("malformed url", ex);
         }
         byte[] resultImageAsRawBytes = null;
         try {
@@ -419,7 +416,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             resultImageAsRawBytes = baos.toByteArray();
             baos.close();
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error("error when retrieving binary content", ex);
         }
         return resultImageAsRawBytes;
     }
@@ -453,7 +450,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             }
             return urlContent.toString();
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error("error when retrieving text content", ex);
             return "";
         } finally {
             try {
@@ -461,7 +458,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
                     in.close();
                 }
             } catch (IOException ex) {
-                LOGGER.error(ex);
+                LOGGER.error("error when retrieving text content", ex);
                 throw new RuntimeException(ex);
             }
         }
@@ -676,9 +673,9 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             int position) {
         ProcessRemark processRemark = 
                 ((ProcessRemark)((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
-        Logger.getLogger(this.getClass()).debug(processRemark.getMessageCode());
+        LOGGER.debug(processRemark.getMessageCode());
         assertEquals(remarkMessageCode, processRemark.getMessageCode());
-        Logger.getLogger(this.getClass()).debug(processRemark.getIssue());
+        LOGGER.debug(processRemark.getIssue().name());
         assertEquals(testSolution, processRemark.getIssue());
         assertNull(processRemark.getElementList());
     }
@@ -730,15 +727,15 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         if (((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1] instanceof SourceCodeRemark ) {
             SourceCodeRemark sourceCodeRemark = 
                     ((SourceCodeRemark)((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
-            Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getMessageCode());
+            LOGGER.debug(sourceCodeRemark.getMessageCode());
             assertEquals(remarkMessageCode, sourceCodeRemark.getMessageCode());
             assertEquals(testSolution, sourceCodeRemark.getIssue());
-            Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getIssue());
+            LOGGER.debug(sourceCodeRemark.getIssue().name());
             if (remarkTarget.equals("EMPTY_TARGET") ) {
                 assertEquals(-1, sourceCodeRemark.getLineNumber());
             } else {
                 assertEquals(remarkTarget, sourceCodeRemark.getTarget());
-                Logger.getLogger(this.getClass()).debug(sourceCodeRemark.getTarget());
+                LOGGER.debug(sourceCodeRemark.getTarget());
                 if (!emptySnippet) {
                     assertNotNull("Snippet is empty but shouldn't !!! ",sourceCodeRemark.getSnippet());
                 }
@@ -753,15 +750,15 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             Object[] evEls = sourceCodeRemark.getElementList().toArray();
             for (int i=0 ; i<evEls.length ; i++) {
                 EvidenceElement ee = (EvidenceElement)evEls[i];
-                Logger.getLogger(this.getClass()).debug(ee.getEvidence().getCode());
-                Logger.getLogger(this.getClass()).debug(ee.getValue());
+                LOGGER.debug(ee.getEvidence().getCode());
+                LOGGER.debug(ee.getValue());
                 assertEquals(evidencePairs[i].getLeft(), ee.getEvidence().getCode());
                 assertTrue("Wrong evidence element : expected["+evidencePairs[i].getRight()+"] actual["+ee.getValue()+"]",StringUtils.contains(ee.getValue(), evidencePairs[i].getRight()));
             }
         } else {
             ProcessRemark processRemark = 
                     (ProcessRemark)(((LinkedHashSet)processResult.getRemarkSet()).toArray()[position-1]);
-            Logger.getLogger(this.getClass()).debug(processRemark.getMessageCode());
+            LOGGER.debug(processRemark.getMessageCode());
             assertEquals(remarkMessageCode, processRemark.getMessageCode());
             assertEquals(testSolution, processRemark.getIssue());
             assertNull(processRemark.getElementList());

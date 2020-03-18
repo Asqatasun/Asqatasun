@@ -24,7 +24,7 @@ package org.asqatasun.entity.service.subject;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 import java.util.List;
 
 /**

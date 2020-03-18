@@ -22,10 +22,11 @@
 package org.asqatasun.rules.textbuilder;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.asqatasun.rules.keystore.AttributeStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -33,8 +34,8 @@ import org.asqatasun.rules.keystore.AttributeStore;
  */
 public class TextAttributeOfElementBuilderTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(TextAttributeOfElementBuilderTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TextAttributeOfElementBuilderTest.class);
     
     public TextAttributeOfElementBuilderTest(String testName) {
         super(testName);

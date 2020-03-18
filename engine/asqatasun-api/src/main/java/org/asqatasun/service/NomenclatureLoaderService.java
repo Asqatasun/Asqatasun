@@ -38,10 +38,5 @@ public interface NomenclatureLoaderService {
      */
     Nomenclature loadByCode(String code);
 
-    /**
-     * 
-     * @param nomenclatureLoader
-     */
-    void setNomenclatureLoader(NomenclatureLoader nomenclatureLoader);
 
 }

@@ -31,7 +31,6 @@ import java.net.URL;
 import java.util.*;
 import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.log4j.Logger;
 import org.jsoup.select.Elements;
 import org.asqatasun.contentadapter.util.URLIdentifier;
 import org.asqatasun.entity.audit.*;
@@ -42,6 +41,8 @@ import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.ruleimplementation.RuleHelper;
 import org.asqatasun.service.NomenclatureLoaderService;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 /**
@@ -50,6 +51,7 @@ import org.w3c.dom.Node;
  */
 public class SSPHandlerImpl implements SSPHandler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SSPHandlerImpl.class);
     private static final String BASE64_IMAGE_PREFIX = "data:image";
     private static final char COMMA = ',';
     private CSSHandler cssHandler;
@@ -99,7 +101,7 @@ public class SSPHandlerImpl implements SSPHandler {
         try {
             urlIdentifier.setUrl(new URL(ssp.getURI()));
         } catch (MalformedURLException ex) {
-            Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
+            LOGGER.error(ex.getMessage());
         }
         return this;
     }
@@ -111,7 +113,7 @@ public class SSPHandlerImpl implements SSPHandler {
         try {
             urlIdentifier.setUrl(new URL(ssp.getURI()));
         } catch (MalformedURLException ex) {
-            Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
+            LOGGER.error(ex.getMessage());
         }
         return this;
     }
@@ -370,12 +372,12 @@ public class SSPHandlerImpl implements SSPHandler {
         // after the comma.
         // Bug fix #428 
         if (url.startsWith(BASE64_IMAGE_PREFIX)) {
-            Logger.getLogger(SSPHandlerImpl.class.getName()).info(url);
+            LOGGER.info(url);
             InputStream in = new ByteArrayInputStream(Base64.decodeBase64(url.substring(url.indexOf(COMMA)+1)));
             try {
                 return ImageIO.read(in);
             } catch(Exception e ) {
-                Logger.getLogger(SSPHandlerImpl.class.getName()).warn(
+                LOGGER.warn(
                         "the embedded image " + url +"cannot be read");
                 return null;
             }
@@ -384,7 +386,7 @@ public class SSPHandlerImpl implements SSPHandler {
                 String str = urlIdentifier.resolve(url).toExternalForm();
                 return imageMap.get(str);
             } catch (Exception ex) {
-                Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
+                LOGGER.error(ex.getMessage());
             }
             return null;
         }
@@ -442,7 +444,7 @@ public class SSPHandlerImpl implements SSPHandler {
                                 ((ImageContent) relatedContent).getContent()));
                         imageMap.put(((Content) relatedContent).getURI(), image);
                     } catch (IOException ex) {
-                        Logger.getLogger(SSPHandlerImpl.class.getName()).error(ex);
+                        LOGGER.error(ex.getMessage());
                     }
                 }
             }

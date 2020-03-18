@@ -23,18 +23,22 @@ package org.asqatasun.service;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.service.command.AuditCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
- * @author enzolalay
+ * @author koj
  */
+@Component
 public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, AuditServiceThreadListener {
     
-    private static final Logger LOGGER = Logger.getLogger(AuditServiceThreadQueueImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditServiceThreadQueueImpl.class);
     
     private final Queue<AuditCommand> pageAuditWaitQueue = new ConcurrentLinkedQueue<>();
     private final Queue<AuditCommand> scenarioAuditWaitQueue = new ConcurrentLinkedQueue<>();
@@ -46,58 +50,30 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
     private final List<AuditServiceThread> uploadAuditExecutionList = new ArrayList<>();
     private final List<AuditServiceThread> siteAuditExecutionList = new ArrayList<>();
 
-    private static final int MAX_AUDIT_EXECUTION_LIST_VALUE = 3;
-    
-    private int pageAuditExecutionListMax = MAX_AUDIT_EXECUTION_LIST_VALUE;
-    public int getPageAuditExecutionListMax() {
-        return pageAuditExecutionListMax;
-    }
-    @Override
-    public void setPageAuditExecutionListMax(int max) {
-        this.pageAuditExecutionListMax = max;
-    }
-
-    private int scenarioAuditExecutionListMax = MAX_AUDIT_EXECUTION_LIST_VALUE;
-    public int getScenarioAuditExecutionListMax() {
-        return scenarioAuditExecutionListMax;
-    }
-    @Override
-    public void setScenarioAuditExecutionListMax(int max) {
-        this.scenarioAuditExecutionListMax = max;
-    }
-
-    private int uploadAuditExecutionListMax = MAX_AUDIT_EXECUTION_LIST_VALUE;
-    public int getUploadAuditExecutionListMax() {
-        return uploadAuditExecutionListMax;
-    }
-    @Override
-    public void setUploadAuditExecutionListMax(int max) {
-        this.uploadAuditExecutionListMax = max;
-    }
-    
-    private int siteAuditExecutionListMax = MAX_AUDIT_EXECUTION_LIST_VALUE;
-    public int getSiteAuditExecutionListMax() {
-        return siteAuditExecutionListMax;
-    }
-    @Override
-    public void setSiteAuditExecutionListMax(int max) {
-        this.siteAuditExecutionListMax = max;
-    }
-
-    private Set<AuditServiceListener> listeners;
+    private Integer pageAuditExecutionListMax;
+    private Integer scenarioAuditExecutionListMax;
+    private Integer uploadAuditExecutionListMax;
+    private Integer siteAuditExecutionListMax;
+    private Set<AuditServiceListener> listeners = null;
     public Set<AuditServiceListener> getListeners() {
         return listeners;
     }
-    
-    private AuditServiceThreadFactory auditServiceThreadFactory;
-
     @Autowired
+    private AuditServiceThreadFactory auditServiceThreadFactory;
     public void setAuditServiceThreadFactory(AuditServiceThreadFactory auditServiceThreadFactory) {
         this.auditServiceThreadFactory = auditServiceThreadFactory;
     }
 
-    public AuditServiceThreadQueueImpl() {
-        super();
+    public AuditServiceThreadQueueImpl(
+        @Value("${app.engine.maxConcurrentSize.page:3}") Integer pageAuditExecutionListMax,
+        @Value("${app.engine.maxConcurrentSize.scenario:3}") Integer scenarioAuditExecutionListMax,
+        @Value("${app.engine.maxConcurrentSize.upload:3}") Integer uploadAuditExecutionListMax,
+        @Value("${app.engine.maxConcurrentSize.site:3}") Integer siteAuditExecutionListMax) {
+
+        this.pageAuditExecutionListMax = pageAuditExecutionListMax;
+        this.scenarioAuditExecutionListMax = scenarioAuditExecutionListMax;
+        this.uploadAuditExecutionListMax = uploadAuditExecutionListMax;
+        this.siteAuditExecutionListMax = siteAuditExecutionListMax;
     }
 
     @Override
@@ -224,10 +200,6 @@ public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, Aud
         } else if (siteAuditExecutionList.remove(thread)) {
             processSiteAuditWaitQueue();
         }
-    }
-
-    @Override
-    public void processWaitQueue() {
     }
 
     private void fireAuditCompleted(Audit audit) {

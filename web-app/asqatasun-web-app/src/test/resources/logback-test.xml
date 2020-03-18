@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+<configuration>
+    <appender name="CONSOLE_APP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss:SSS} %-4r %-5p %c %x - %m%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.displaytag.tags.TableTag" level="WARN"/>
+    <logger name="org.asqatasun.service" level="DEBUG"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="com.mchange" level="INFO"/>
+    <logger name="org.displaytag.pagination.SmartListHelper" level="WARN"/>
+    <logger name="org.displaytag.pagination" level="WARN"/>
+    <logger name="org.asqatasun.ruleimplementation" level="DEBUG"/>
+    <logger name="org.asqatasun.emailsender" level="INFO"/>
+    <logger name="org.asqatasun.crawler" level="DEBUG"/>
+    <logger name="org.asqatasun.validator" level="INFO"/>
+    <logger name="org.displaytag.filter" level="WARN"/>
+    <logger name="org.asqatasun.controller" level="INFO"/>
+    <logger name="org.asqatasun.entity.service.reference" level="DEBUG"/>
+    <logger name="org.asqatasun.contentadapter.css" level="DEBUG"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.springframework.web.servlet.tags.MessageTag" level="FATAL"/>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE_APP"/>
+    </root>
+</configuration>

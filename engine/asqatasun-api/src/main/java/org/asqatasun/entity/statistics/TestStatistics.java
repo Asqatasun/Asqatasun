@@ -22,7 +22,7 @@
 package org.asqatasun.entity.statistics;
 
 import org.asqatasun.entity.reference.Test;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  *

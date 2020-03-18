@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.dao.functionality;
 
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.webapp.entity.functionality.Functionality;
 import org.asqatasun.webapp.entity.functionality.FunctionalityImpl;
 

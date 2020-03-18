@@ -22,7 +22,7 @@
 package org.asqatasun.entity.dao.parameterization;
 
 import org.asqatasun.entity.parameterization.ParameterElement;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  * 

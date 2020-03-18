@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="FILE_APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+        <!--for further documentation-->
+        <File>logs/asqatasun.log</File>
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss:SSS} %-4r %-5p %c %x - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/asqatasun.log.%d{'.'yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <logger name="org.apache" level="ERROR"/>
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.asqatasun.contentadapter.html" level="DEBUG"/>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="com.mchange" level="ERROR"/>
+    <logger name="net.sf" level="ERROR"/>
+    <root level="ERROR">
+        <appender-ref ref="FILE_APP"/>
+    </root>
+</configuration>

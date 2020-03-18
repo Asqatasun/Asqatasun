@@ -22,39 +22,51 @@
 package org.asqatasun.contentadapter;
 
 import java.util.Collection;
+
 import org.asqatasun.contentadapter.util.AdaptationActionVoter;
 import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  *
  * @author enzolalay
  */
+
+@Component("contentsAdapterFactory")
 public class ContentsAdapterFactoryImpl implements ContentsAdapterFactory {
 
+    @Autowired(required = false)
+    @Qualifier("xmlizeVoter")
     private AdaptationActionVoter xmlizeVoter;
-    public void setXmlizeVoter(AdaptationActionVoter xmlizeVoter) {
-        this.xmlizeVoter = xmlizeVoter;
-    }
-    
+    @Autowired(required = false)
+    @Qualifier("parseHtmlVoter")
     private AdaptationActionVoter parseHtmlVoter;
-    public void setParseHtmlVoter(AdaptationActionVoter parseHtmlVoter) {
-        this.parseHtmlVoter = parseHtmlVoter;
-    }
-    
-    public ContentsAdapterFactoryImpl() {
-        super();
+    @Autowired(required = false)
+    private ParameterDataService parameterDataService;
+
+    @PostConstruct
+    public void initVoters() {
+        if (parseHtmlVoter != null) {
+            parseHtmlVoter.setParameterDataService(parameterDataService);
+        }
+        if (xmlizeVoter != null) {
+            xmlizeVoter.setParameterDataService(parameterDataService);
+        }
     }
 
     @Override
     public ContentsAdapter create(
             Collection<Content> contentList,
-            boolean writeCleanHtmlInFile,
             String tempFolderRootPath,
             HTMLCleaner htmlCleaner,
             HTMLParser htmlParser) {
         ContentsAdapterImpl contentsAdapter = new ContentsAdapterImpl(
                 contentList,
-                writeCleanHtmlInFile,
                 tempFolderRootPath,
                 htmlCleaner,
                 htmlParser);

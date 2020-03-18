@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.entity.dao.option;
 
 import java.util.Collection;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.webapp.entity.option.Option;
 import org.asqatasun.webapp.entity.option.OptionElement;
 import org.asqatasun.webapp.entity.user.User;

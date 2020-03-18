@@ -22,7 +22,7 @@
 package org.asqatasun.entity.audit;
 
 import java.util.Date;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

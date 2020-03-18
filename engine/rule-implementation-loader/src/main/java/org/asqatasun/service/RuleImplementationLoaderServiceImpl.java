@@ -31,21 +31,29 @@ import org.asqatasun.ruleimplementation.RuleImplementation;
 import org.asqatasun.ruleimplementationloader.RuleImplementationLoader;
 import org.asqatasun.ruleimplementationloader.RuleImplementationLoaderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service("ruleImplementationLoaderService")
 public class RuleImplementationLoaderServiceImpl implements RuleImplementationLoaderService {
 
     private NomenclatureLoaderService nomenclatureLoaderService;
     private ProcessRemarkDataService processRemarkDataService;
     private ProcessResultDataService processResultDataService;
-    private String archiveRoot;
     private RuleImplementationLoaderFactory ruleImplementationLoaderFactory;
 
-    public RuleImplementationLoaderServiceImpl() {
-        super();
+    @Autowired
+    public RuleImplementationLoaderServiceImpl(NomenclatureLoaderService nomenclatureLoaderService,
+                                               ProcessRemarkDataService processRemarkDataService,
+                                               ProcessResultDataService processResultDataService,
+                                               RuleImplementationLoaderFactory ruleImplementationLoaderFactory) {
+        this.nomenclatureLoaderService = nomenclatureLoaderService;
+        this.processRemarkDataService = processRemarkDataService;
+        this.processResultDataService = processResultDataService;
+        this.ruleImplementationLoaderFactory = ruleImplementationLoaderFactory;
     }
 
     @Override
@@ -59,9 +67,9 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
 
     @Override
     public RuleImplementation loadRuleImplementation(Test test) {
-        RuleImplementationLoader ruleImplementationLoader = ruleImplementationLoaderFactory.create(archiveRoot, test.getRuleArchiveName(), test.getRuleClassName());
+        RuleImplementationLoader ruleImplementationLoader = ruleImplementationLoaderFactory.create(test.getRuleArchiveName(), test.getRuleClassName());
         ruleImplementationLoader.run();
-        RuleImplementation ruleImplementation = ruleImplementationLoader.getResult();
+        RuleImplementation ruleImplementation = ruleImplementationLoader.getRuleImplementation();
         ruleImplementation.setTest(test);
         ruleImplementation.setProcessResultDataService(processResultDataService);
         ruleImplementation.setNomenclatureLoaderService(nomenclatureLoaderService);
@@ -76,34 +84,6 @@ public class RuleImplementationLoaderServiceImpl implements RuleImplementationLo
         }
         
         return ruleImplementation;
-    }
-
-    @Override
-    @Autowired
-    public void setNomenclatureLoaderService(NomenclatureLoaderService nomenclatureService) {
-        this.nomenclatureLoaderService = nomenclatureService;
-    }
-    
-    @Autowired
-    public void setProcessRemarkDataService(ProcessRemarkDataService processRemarkDataService) {
-        this.processRemarkDataService = processRemarkDataService;
-    }
-
-    @Override
-    public void setArchiveRoot(String archiveRoot) {
-        this.archiveRoot = archiveRoot;
-    }
-
-    @Override
-    @Autowired
-    public void setRuleImplementationLoaderFactory(RuleImplementationLoaderFactory ruleImplementationLoaderFactory) {
-        this.ruleImplementationLoaderFactory = ruleImplementationLoaderFactory;
-    }
-
-    @Override
-    @Autowired
-    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
-        this.processResultDataService = processResultDataService;
     }
 
 }

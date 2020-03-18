@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.dao.functionality;
 
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.webapp.entity.functionality.Functionality;
 
 /**

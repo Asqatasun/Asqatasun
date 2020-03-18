@@ -1,0 +1,5 @@
+jdbc:
+    driverClassName : "org.hsqldb.jdbcDriver"
+    url: "jdbc:hsqldb:file:src/main/resources/hsql-db"
+    user: "sa"
+    password: ""

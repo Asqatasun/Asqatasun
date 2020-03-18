@@ -22,7 +22,7 @@
 package org.asqatasun.entity.audit;
 
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

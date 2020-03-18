@@ -22,7 +22,7 @@
 package org.asqatasun.entity.dao.subject;
 
 import org.asqatasun.entity.subject.Site;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  * 

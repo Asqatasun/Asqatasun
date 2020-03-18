@@ -24,7 +24,7 @@ package org.asqatasun.entity.dao.audit;
 import java.util.Collection;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  * 

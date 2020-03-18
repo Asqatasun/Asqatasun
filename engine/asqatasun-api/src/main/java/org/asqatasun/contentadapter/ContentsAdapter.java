@@ -67,10 +67,5 @@ public interface ContentsAdapter {
      */
     void setHTMLParser(HTMLParser htmlParser);
 
-    /**
-     *
-     * @param writeCleanHtmlInFile
-     */
-    void setWriteCleanHtmlInFile(Boolean writeCleanHtmlInFile);
     
 }

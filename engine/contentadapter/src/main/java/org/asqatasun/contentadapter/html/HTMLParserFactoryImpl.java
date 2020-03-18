@@ -25,20 +25,17 @@ import java.util.Set;
 import org.asqatasun.contentadapter.ContentAdapter;
 import org.asqatasun.contentadapter.HTMLParser;
 import org.asqatasun.contentadapter.HTMLParserFactory;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author enzolalay
  */
+@Component("htmlParserFactory")
 public class HTMLParserFactoryImpl implements HTMLParserFactory {
-
-    public HTMLParserFactoryImpl() {
-        super();
-    }
 
     @Override
     public HTMLParser create(Set<ContentAdapter> contentAdapterSet) {
-//        return new HTMLParserImpl(contentAdapterSet);
         return new HTMLJsoupParserImpl(contentAdapterSet);
     }
 

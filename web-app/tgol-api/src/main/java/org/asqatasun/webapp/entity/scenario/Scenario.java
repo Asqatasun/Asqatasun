@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.entity.scenario;
 
 import java.util.Date;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 import org.asqatasun.webapp.entity.contract.Contract;
 
 /**

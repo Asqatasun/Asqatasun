@@ -29,7 +29,7 @@ import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.statistics.CriterionStatistics;
 import org.asqatasun.entity.statistics.WebResourceStatistics;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  *
@@ -93,7 +93,6 @@ public interface CriterionStatisticsDAO extends GenericDAO<CriterionStatistics, 
      * @return List of CriterionStatistics by web resources statistics
      */
     CriterionStatistics findCriterionStatisticsByWebResource(Criterion criterion ,WebResourceStatistics webResourceStatistics);
-
 
 
 }

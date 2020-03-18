@@ -33,7 +33,6 @@ import java.util.Collection;
 import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import static org.easymock.EasyMock.*;
 import org.asqatasun.contentadapter.css.CSSParserExceptionHandlerImpl;
@@ -45,6 +44,8 @@ import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.keystore.AttributeStore;
 import org.asqatasun.rules.keystore.EvidenceStore;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -52,8 +53,8 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class CssPropertyPresenceCheckerTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(CssPropertyPresenceCheckerTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(CssPropertyPresenceCheckerTest.class);
     
     private TestSolutionHandler mockTestSolutionHandler;
     private SSPHandler mockSSPHandler;
@@ -204,7 +205,7 @@ public class CssPropertyPresenceCheckerTest extends TestCase {
                     mockTestSolutionHandler);
             
         } catch (IOException ex) {
-            LOGGER.warn(ex);
+            LOGGER.warn(ex.getMessage());
         }
     }
 }

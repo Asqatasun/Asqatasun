@@ -52,63 +52,7 @@ public interface AuditService {
      * @param audit
      * @return
      */
-    Audit init(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit crawl(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit loadContent(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit loadScenario(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit adaptContent(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit analyse(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
     Audit audit(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit consolidate(Audit audit);
-
-    /**
-     *
-     * @param audit
-     * @return
-     */
-    Audit process(Audit audit);
 
     /**
      *

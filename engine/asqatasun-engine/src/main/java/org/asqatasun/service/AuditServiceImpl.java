@@ -25,41 +25,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.factory.AuditCommandFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Service
 public class AuditServiceImpl implements AuditService, AuditServiceListener {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuditServiceImpl.class);
     private AuditServiceThreadFactory auditServiceThreadFactory;
-    @Autowired
-    public void setAuditServiceThreadFactory(AuditServiceThreadFactory auditServiceThreadFactory) {
-        this.auditServiceThreadFactory = auditServiceThreadFactory;
-    }
-    
     private AuditServiceThreadQueue auditServiceThreadQueue;
-    @Autowired
-    public void setAuditServiceThreadQueue(AuditServiceThreadQueue auditServiceThreadQueue) {
-        if (this.auditServiceThreadQueue != null) {
-            this.auditServiceThreadQueue.remove(this);
-        }
-        this.auditServiceThreadQueue = auditServiceThreadQueue;
-        this.auditServiceThreadQueue.add(this);
-    }
-
     private AuditCommandFactory auditCommandFactory;
-    @Autowired
-    public void setAuditCommandFactory(AuditCommandFactory auditCommandFactory) {
-        this.auditCommandFactory = auditCommandFactory;
-    }
-    
+
     /**
      * the listeners of AuditService result
      */
@@ -68,8 +53,14 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         return listeners;
     }
 
-    public AuditServiceImpl() {
-        super();
+    @Autowired
+    public AuditServiceImpl(
+        AuditServiceThreadFactory auditServiceThreadFactory,
+        AuditCommandFactory auditCommandFactory,
+        AuditServiceThreadQueue auditServiceThreadQueue) {
+        this.auditServiceThreadFactory = auditServiceThreadFactory;
+        this.auditCommandFactory = auditCommandFactory;
+        this.auditServiceThreadQueue = auditServiceThreadQueue;
     }
 
     @Override
@@ -90,23 +81,25 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit auditScenario(String scenarioName, String scenario, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditScenario");
+        LOGGER.debug("auditScenario");
         AuditCommand auditCommand = auditCommandFactory.create(scenarioName, scenario, paramSet);
         auditServiceThreadQueue.addScenarioAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
     @Override
     public Audit auditPage(String pageUrl, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditpage");
+        LOGGER.debug("auditpage");
         AuditCommand auditCommand = auditCommandFactory.create(pageUrl, paramSet, false);
         auditServiceThreadQueue.addPageAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
     
     @Override
     public Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditpageupload");
+        LOGGER.debug("auditpageupload");
         AuditCommand auditCommand = auditCommandFactory.create(fileMap, paramSet);
         auditServiceThreadQueue.addPageUploadAudit(auditCommand); 
         return auditCommand.getAudit();
@@ -114,15 +107,16 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit auditSite(String siteUrl, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditSite");
+        LOGGER.debug("auditSite");
         AuditCommand auditCommand = auditCommandFactory.create(siteUrl, paramSet, true);
-        auditServiceThreadQueue.addSiteAudit(auditCommand); 
+        auditServiceThreadQueue.addSiteAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
     @Override
     public Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditGroupOfPages");
+        LOGGER.debug("auditGroupOfPages");
         AuditCommand auditCommand = auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
         auditServiceThreadQueue.addPageAudit(auditCommand); 
         return auditCommand.getAudit();
@@ -133,66 +127,6 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
         AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
         auditServiceThread.run();
         return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit init(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.init();
-        return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit crawl(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.loadContent();
-        return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit loadContent(Audit audit) {
-        AuditServiceThread auditServiceThread = getInitialisedAuditServiceThread(audit);
-        auditServiceThread.loadContent();
-        return auditServiceThread.getAudit();
-    }
-
-    @Override
-    public Audit loadScenario(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        return audit;
-    }
-
-    @Override
-    public Audit adaptContent(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.adaptContent();
-        return audit;
-    }
-
-    @Override
-    public Audit process(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.process();
-        return audit;
-    }
-
-    @Override
-    public Audit consolidate(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.consolidate();
-        return audit;
-    }
-
-    @Override
-    public Audit analyse(Audit audit) {
-        AuditCommand auditCommand = auditCommandFactory.create(null, null, true);
-        auditCommand.setAudit(audit);
-        auditCommand.analyse();
-        return audit;
     }
 
     /**

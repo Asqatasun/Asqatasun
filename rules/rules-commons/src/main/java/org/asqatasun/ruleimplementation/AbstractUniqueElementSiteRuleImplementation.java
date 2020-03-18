@@ -213,8 +213,10 @@ public class AbstractUniqueElementSiteRuleImplementation
     /**
      * This methods creates failed remarks at page scope and site scope when 
      * duplicated are found.
+     * @param processResultList
      * @param netResultList
-     * @param urlOnError 
+     * @param elementValue
+     * @param elementCounter
      */
     private TestSolution computeResultAndCreateRemarks(
             List<ProcessResult> processResultList,
@@ -267,9 +269,9 @@ public class AbstractUniqueElementSiteRuleImplementation
     }
     
     /**
-     * 
+     *
      * @param processResultList
-     * @return 
+     * @return
      */
     private Collection<DefiniteResult> createResultAtPageLevel(
             Collection<WebResource> webResourceList, 

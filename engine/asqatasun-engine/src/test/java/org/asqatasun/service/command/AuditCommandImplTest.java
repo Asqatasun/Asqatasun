@@ -26,7 +26,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.http.HttpStatus;
-import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.asqatasun.contentadapter.AdaptationListener;
 import org.asqatasun.entity.audit.AuditStatus;
@@ -44,6 +43,7 @@ import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.service.ContentAdapterService;
 import org.asqatasun.service.ProcessorService;
 import org.asqatasun.util.MD5Encoder;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -297,7 +297,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
             mockSSP.setSource(MD5Encoder.MD5("Not Empty String"));
             expectLastCall().times(2);
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            Logger.getLogger(this.getClass()).error(ex);
+            LoggerFactory.getLogger(this.getClass()).error(ex.getMessage());
         }
         List<Content> mockAdaptedContentList = new ArrayList<>();
         mockAdaptedContentList.add(mockSSP);

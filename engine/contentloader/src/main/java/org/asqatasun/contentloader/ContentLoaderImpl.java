@@ -29,6 +29,7 @@ import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.util.factory.DateFactory;
+import org.asqatasun.util.http.Downloader;
 
 /**
  * 
@@ -39,7 +40,6 @@ public class ContentLoaderImpl implements ContentLoader {
     private static final int HTTP_CODE_OK = 200;
     private final ContentDataService contentDataService;
     private final DateFactory dateFactory;
-    private final Downloader downloader;
     private List<Content> result;
     private WebResource webResource;
     @Override
@@ -51,16 +51,10 @@ public class ContentLoaderImpl implements ContentLoader {
      * Constructor
      * 
      * @param contentDataService
-     * @param downloader
-     * @param dateFactory 
      */
-    ContentLoaderImpl(
-            ContentDataService contentDataService, 
-            Downloader downloader, 
-            DateFactory dateFactory) {
+    ContentLoaderImpl(ContentDataService contentDataService, DateFactory dateFactory) {
         super();
         this.contentDataService = contentDataService;
-        this.downloader = downloader;
         this.dateFactory = dateFactory;
     }
 
@@ -78,13 +72,10 @@ public class ContentLoaderImpl implements ContentLoader {
         List<Content> localResult = new ArrayList<>();
 
         if (webResource instanceof Page) {
-            downloader.setURL(webResource.getURL());
-            downloader.run();
-            String stringContent = downloader.getResult();
             Content content = contentDataService.getSSP(
                     dateFactory.createDate(),
                     webResource.getURL(),
-                    stringContent,
+                    Downloader.download(webResource.getURL()),
                     (Page) webResource,
                     HTTP_CODE_OK);
             localResult.add(content);

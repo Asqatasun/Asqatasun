@@ -24,9 +24,10 @@ package org.asqatasun.rules.elementchecker.lang.detector;
 import java.io.File;
 import java.io.IOException;
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -34,7 +35,7 @@ import org.jsoup.nodes.Document;
  */
 public class LanguageDetectorTest extends TestCase {
     
-    private static final Logger LOGGER = Logger.getLogger(LanguageDetectorTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LanguageDetectorTest.class);
     private static final String PATH = "src/test/resources/langDetection/";
     private static final String UTF_8 = "UTF-8";
     
@@ -92,7 +93,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("af", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -112,7 +113,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("fr", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -133,7 +134,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("de", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -154,7 +155,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("en", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -176,7 +177,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("es", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -197,7 +198,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("fa", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -218,7 +219,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("he", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -240,7 +241,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("ko", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -261,7 +262,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("mk", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -282,7 +283,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("pl", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -303,7 +304,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("pt", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -324,7 +325,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("th", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -345,7 +346,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("vi", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -366,7 +367,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("zh-tw", instance.detectLanguage(doc.text().toUpperCase()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }
@@ -393,7 +394,7 @@ public class LanguageDetectorTest extends TestCase {
             assertEquals("ru", instance.detectLanguage(doc.text()).getDetectedLanguage());
             LOGGER.debug("detection ended");
         } catch (IOException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         } catch (NullPointerException npe) {
             LOGGER.error("error while fetching page " + npe);
         }

@@ -25,7 +25,7 @@ import java.util.Collection;
 
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

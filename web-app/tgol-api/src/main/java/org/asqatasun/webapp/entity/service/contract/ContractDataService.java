@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.entity.service.contract;
 
 import java.util.Collection;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.user.User;
 

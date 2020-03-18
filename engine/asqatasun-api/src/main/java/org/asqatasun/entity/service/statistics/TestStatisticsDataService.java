@@ -25,7 +25,7 @@ import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.statistics.TestStatistics;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  *

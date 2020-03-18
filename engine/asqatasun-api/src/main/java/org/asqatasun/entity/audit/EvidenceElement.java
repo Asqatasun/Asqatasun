@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

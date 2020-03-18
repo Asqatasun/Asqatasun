@@ -23,7 +23,6 @@ package org.asqatasun.rules.elementchecker.text;
 
 import junit.framework.TestCase;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -33,6 +32,8 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -40,8 +41,8 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class TextEmptinessCheckerTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(TextEmptinessCheckerTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TextEmptinessCheckerTest.class);
     
     private static final String TEXT_EMPTY_MSG = "empty";
     private static final String TEXT_NOT_EMPTY_MSG = "not empty";

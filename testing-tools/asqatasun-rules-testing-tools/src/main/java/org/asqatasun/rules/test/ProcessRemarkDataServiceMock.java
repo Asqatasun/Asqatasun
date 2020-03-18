@@ -26,11 +26,13 @@ import org.asqatasun.entity.audit.ProcessRemark;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.SourceCodeRemark;
 import org.asqatasun.entity.audit.TestSolution;
-import org.asqatasun.entity.factory.audit.SourceCodeRemarkFactory;
+import org.asqatasun.entity.audit.factory.SourceCodeRemarkFactory;
 import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.dao.GenericDAO;
+import org.asqatasun.entity.GenericFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
@@ -38,16 +40,20 @@ import java.util.Collection;
  *
  * @author jkowalczyk
  */
+@Profile("test")
+@Component
 public class ProcessRemarkDataServiceMock implements ProcessRemarkDataService{
 
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    @Autowired
-    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-    
+    private final SourceCodeRemarkFactory sourceCodeRemarkFactory;
     private GenericFactory<ProcessRemark> processRemarkFactory;
-    
+
+    public ProcessRemarkDataServiceMock(
+        SourceCodeRemarkFactory sourceCodeRemarkFactory,
+        GenericFactory <ProcessRemark> processRemarkFactory) {
+        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+        this.processRemarkFactory = processRemarkFactory;
+    }
+
     @Override
     public Collection<ProcessRemark> findProcessRemarksFromProcessResult(ProcessResult processResult, int limit) {
         return processResult.getRemarkSet();

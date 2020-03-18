@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import junit.framework.TestCase;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -40,6 +39,8 @@ import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandlerImpl;
 import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -47,8 +48,8 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class ElementPresenceCheckerTest extends TestCase{
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(ElementPresenceCheckerTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ElementPresenceCheckerTest.class);
     
     private SSPHandler mockSspHandler;
     private ProcessRemarkService mockProcessRemarkService;
@@ -129,8 +130,9 @@ public class ElementPresenceCheckerTest extends TestCase{
     
     /**
      * 
-     * @param selector
-     * @param doc 
+     * @param elements
+     * @param solution
+     * @param message
      */
     private void initMockContext(Elements elements, TestSolution solution, String message) {
         mockProcessRemarkService = EasyMock.createMock(ProcessRemarkService.class);
@@ -150,8 +152,8 @@ public class ElementPresenceCheckerTest extends TestCase{
     
     /**
      * 
-     * @param selector
-     * @param doc 
+     * @param solution
+     * @param message
      */
     private void initMockContext(TestSolution solution, String message) {
         mockProcessRemarkService = EasyMock.createMock(ProcessRemarkService.class);

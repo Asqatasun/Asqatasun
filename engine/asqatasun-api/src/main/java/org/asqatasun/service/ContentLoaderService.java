@@ -24,12 +24,9 @@ package org.asqatasun.service;
 import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlTransient;
-import org.asqatasun.contentloader.ContentLoaderFactory;
-import org.asqatasun.contentloader.DownloaderFactory;
+
 import org.asqatasun.entity.audit.Content;
-import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.util.factory.DateFactory;
 
 /**
  * 
@@ -41,40 +38,10 @@ public interface ContentLoaderService {// TODO Write javadoc
     /**
      *
      * @param webResource
-     * @return
-     */
-    List<Content> loadContent(WebResource webResource);
-
-    /**
-     *
-     * @param webResource
      * @param fileMap
      * @return
      */
     List<Content> loadContent(WebResource webResource, Map<String, String> fileMap);
 
-    /**
-     *
-     * @param contentDataService
-     */
-    void setContentDataService(ContentDataService contentDataService);
-
-    /**
-     *
-     * @param contentLoaderFactory
-     */
-    void setContentLoaderFactory(ContentLoaderFactory contentLoaderFactory);
-
-    /**
-     *
-     * @param downloaderFactory
-     */
-    void setDownloaderFactory(DownloaderFactory downloaderFactory);
-    
-    /**
-     *
-     * @param dateFactory
-     */
-    void setDateFactory(DateFactory dateFactory);
 
 }

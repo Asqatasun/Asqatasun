@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.service.parameterization;
 
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterFamily;
 
@@ -30,6 +30,8 @@ import org.asqatasun.entity.parameterization.ParameterFamily;
  * @author jkowalczyk
  */
 public interface ParameterElementDataService extends GenericDataService<ParameterElement, Long> {
+
+    String DEPTH_PARAMETER_ELEMENT_KEY = "DEPTH";
 
     ParameterElement create(ParameterFamily parameterFamily);
 
@@ -40,5 +42,12 @@ public interface ParameterElementDataService extends GenericDataService<Paramete
      * @return
      */
     ParameterElement getParameterElement(String parameterElementCode);
+
+    /**
+     * Retrieve the depth parameter element
+     *
+     * @return
+     */
+    ParameterElement getDepthParameterElement();
 
 }

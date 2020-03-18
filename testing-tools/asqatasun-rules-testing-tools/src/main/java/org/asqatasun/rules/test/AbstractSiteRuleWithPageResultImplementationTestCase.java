@@ -23,6 +23,9 @@ package org.asqatasun.rules.test;
 
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.subject.WebResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Collection;
 
@@ -30,7 +33,11 @@ import java.util.Collection;
  *
  * @author lralambomanana
  */
+@ActiveProfiles("test")
 public abstract class AbstractSiteRuleWithPageResultImplementationTestCase extends AbstractRuleImplementationTestCase {
+
+    @Autowired
+    Environment env;
 
     public AbstractSiteRuleWithPageResultImplementationTestCase(
             String testName,

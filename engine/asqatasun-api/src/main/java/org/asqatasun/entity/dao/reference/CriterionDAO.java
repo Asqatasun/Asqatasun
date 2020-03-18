@@ -26,7 +26,7 @@ import org.asqatasun.entity.reference.Criterion;
 import org.asqatasun.entity.reference.Level;
 import org.asqatasun.entity.reference.Reference;
 import org.asqatasun.entity.reference.Theme;
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 
 /**
  * 

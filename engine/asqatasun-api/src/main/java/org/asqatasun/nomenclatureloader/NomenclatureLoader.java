@@ -29,27 +29,17 @@ import org.asqatasun.entity.reference.Nomenclature;
  */
 public interface NomenclatureLoader {
 
-    /**
-     *
-     * @return
-     */
-    String getCode();
 
     /**
      *
      * @return
      */
-    Nomenclature getResult();
+    Nomenclature getNomenclature();
 
     /**
      * 
      */
-    void run();
+    void run(String code);
 
-    /**
-     * 
-     * @param code
-     */
-    void setCode(String code);
 
 }

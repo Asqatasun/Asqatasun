@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.reference;
 
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

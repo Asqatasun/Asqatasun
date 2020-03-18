@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -35,6 +34,8 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.ElementHandler;
 import org.asqatasun.ruleimplementation.ElementHandlerImpl;
 import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -42,8 +43,8 @@ import org.asqatasun.rules.keystore.HtmlElementStore;
  */
 public class ImageElementSelectorTest extends TestCase{
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(ImageElementSelectorTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ImageElementSelectorTest.class);
     
     private SSP ssp;
     private SSPHandler sspHandler;

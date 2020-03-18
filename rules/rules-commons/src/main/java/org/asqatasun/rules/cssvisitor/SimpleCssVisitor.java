@@ -29,13 +29,14 @@ import com.phloc.css.decl.visit.DefaultCSSVisitor;
 import com.phloc.css.writer.CSSWriterSettings;
 import java.util.Collection;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.asqatasun.contentadapter.css.CSSContentAdapter;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.keystore.EvidenceStore;
 import org.asqatasun.service.NomenclatureLoaderService;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This abstract class defines basic visitor implementation that needs to 
@@ -44,7 +45,8 @@ import org.asqatasun.service.ProcessRemarkService;
  * @author jkowalczyk
  */
 public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
-    
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleCssVisitor.class);
     private static final String INLINE_CSS_STR = "inline";
     private static final String LOCALE_CSS_STR = "locale";
     
@@ -174,7 +176,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         if (excludeStyleFromMedia) {
             return;
         }
-        Logger.getLogger(this.getClass()).debug("onBeginFontFaceRule ");
+        LOGGER.debug("onBeginFontFaceRule ");
         this.currentSelector = cssffr.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
@@ -189,7 +191,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         if (excludeStyleFromMedia) {
             return;
         }
-        Logger.getLogger(this.getClass()).debug("onStyleRuleSelector ");
+        LOGGER.debug("onStyleRuleSelector ");
         this.currentSelector = aSelector.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
@@ -204,7 +206,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         if (excludeStyleFromMedia) {
             return;
         }
-        Logger.getLogger(this.getClass()).debug("onBeginPageRule " + csspageRule.getPseudoPage());
+        LOGGER.debug("onBeginPageRule " + csspageRule.getPseudoPage());
         this.currentSelector = csspageRule.getAsCSSString(writterSetting, 0);
         // if this style rule is not excluded from the media type, it is 
         // added to the counter
@@ -215,7 +217,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     
     @Override
     public void onDeclaration(final CSSDeclaration aDeclaration) {
-        Logger.getLogger(this.getClass()).debug("onDeclaration ");
+        LOGGER.debug("onDeclaration ");
         if (excludeStyleFromMedia) {
             return;
         }
@@ -276,13 +278,13 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
         } else if (exprMember instanceof CSSExpressionMemberFunction) {
             checkCSSExpressionMemberFunction((CSSExpressionMemberFunction) exprMember);
         } else if (exprMember instanceof CSSExpressionMemberMath) {
-            Logger.getLogger(this.getClass()).debug("expressionMember " + exprMember.getClass());
+            LOGGER.debug("expressionMember " + exprMember.getClass());
         } else if (exprMember instanceof CSSExpressionMemberTermURI) {
-            Logger.getLogger(this.getClass()).debug("expressionMember " + exprMember.getClass());
+            LOGGER.debug("expressionMember " + exprMember.getClass());
         } else if (exprMember instanceof ECSSExpressionOperator) {
-            Logger.getLogger(this.getClass()).debug("expressionMember " + exprMember.getClass());
+            LOGGER.debug("expressionMember " + exprMember.getClass());
         } else {
-            Logger.getLogger(this.getClass()).debug("expressionMember " + exprMember.getClass());
+            LOGGER.debug("expressionMember " + exprMember.getClass());
         }
     }
 
@@ -321,7 +323,7 @@ public abstract class SimpleCssVisitor extends DefaultCSSVisitor {
     /**
      * If the css is inline or locale, the associated name of the css is inline.
      * 
-     * @param css
+     * @param cssFileName
      * @return 
      */
     private String getFileNameFromCssName(String cssFileName) {

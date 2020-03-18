@@ -44,7 +44,7 @@ public interface AdaptationActionVoter {
      * @param parameterDataService 
      */
     void setParameterDataService(ParameterDataService parameterDataService);
-    
+
     /**
      * 
      * @param authorizedValues 

@@ -23,16 +23,15 @@ package org.asqatasun.contentadapter.html;
 
 import org.asqatasun.contentadapter.HTMLCleaner;
 import org.asqatasun.contentadapter.HTMLCleanerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author enzolalay
  */
-public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
 
-    public HTMLCleanerFactoryImpl() {
-        super();
-    }
+@Component("htmlCleanerFactory")
+public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
 
     @Override
     public HTMLCleaner create() {

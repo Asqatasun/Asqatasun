@@ -22,8 +22,8 @@
 package org.asqatasun.entity.reference;
 
 import java.math.BigDecimal;
-import org.asqatasun.sdk.entity.Entity;
-import org.asqatasun.sdk.entity.Reorderable;
+import org.asqatasun.entity.Entity;
+import org.asqatasun.entity.Reorderable;
 
 /**
  * 

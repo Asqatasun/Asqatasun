@@ -25,7 +25,7 @@ import java.util.Collection;
 import java.util.Date;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  * 

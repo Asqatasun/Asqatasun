@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.dao.reference;
 
-import org.asqatasun.sdk.entity.dao.GenericDAO;
+import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.entity.reference.Scope;
 
 /**

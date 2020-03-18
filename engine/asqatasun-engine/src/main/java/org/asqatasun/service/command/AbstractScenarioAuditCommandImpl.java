@@ -23,12 +23,13 @@
 package org.asqatasun.service.command;
 
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.service.ScenarioLoaderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -39,15 +40,12 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
     /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(AbstractScenarioAuditCommandImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractScenarioAuditCommandImpl.class);
     
     /**
      * The scenario loader Service instance
      */
     private ScenarioLoaderService scenarioLoaderService;
-    public ScenarioLoaderService getScenarioLoaderService() {
-        return scenarioLoaderService;
-    }
     public void setScenarioLoaderService(ScenarioLoaderService scenarioLoaderService) {
         this.scenarioLoaderService = scenarioLoaderService;
     }
@@ -100,9 +98,7 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
     
     @Override
     public void loadContent() {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Loading content for " + scenarioName);
-        }
+        LOGGER.info("Loading content for " + scenarioName);
         if (!getAudit().getStatus().equals(AuditStatus.SCENARIO_LOADING) || scenario.isEmpty()) {
             LOGGER.warn(
                     new StringBuilder("Audit Status is ")
@@ -117,9 +113,8 @@ public abstract class AbstractScenarioAuditCommandImpl extends AuditCommandImpl 
         // the current audit
         scenarioLoaderService.loadScenario(createWebResource(), scenario);
         setStatusToAudit(AuditStatus.CONTENT_ADAPTING);
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info(scenarioName +" has been loaded");
-        }
+
+        LOGGER.info(scenarioName +" has been loaded");
     }
     
     /**

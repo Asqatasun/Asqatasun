@@ -4,12 +4,23 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>asqatasun</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>5.0-SNAPSHOT</version>
     </parent>
     <artifactId>rules</artifactId>
     <packaging>pom</packaging>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>5.0-SNAPSHOT</version>
     <name>rules</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>false</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <modules>
         <module>rules-commons</module>
         <module>rules-creation-demo</module>

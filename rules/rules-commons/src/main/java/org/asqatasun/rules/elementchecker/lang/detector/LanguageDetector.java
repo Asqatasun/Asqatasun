@@ -30,7 +30,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -40,7 +41,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
  */
 public class LanguageDetector {
 
-    private static final Logger LOGGER = Logger.getLogger(LanguageDetector.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LanguageDetector.class);
 
     /**
      * The path from where the language profiles can be loaded. By default, 
@@ -95,7 +96,7 @@ public class LanguageDetector {
                     extractLangWithHighestProbability(languages);
             return new LanguageDetectionResult(detectedLanguage, text, languages.size()>1);
         } catch (LangDetectException ex) {
-            LOGGER.warn(ex);
+            LOGGER.warn("error occured when detecting lang", ex);
         }
         return null;
     }
@@ -136,7 +137,7 @@ public class LanguageDetector {
             }
             DetectorFactory.loadProfile(profiles);
         } catch (IOException | LangDetectException ex) {
-            LOGGER.warn(ex);
+            LOGGER.warn("error occured when detecting lang", ex);
         }
     }
     

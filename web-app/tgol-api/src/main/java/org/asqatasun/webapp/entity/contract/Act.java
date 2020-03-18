@@ -23,7 +23,7 @@ package org.asqatasun.webapp.entity.contract;
 
 import java.util.Date;
 import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  *

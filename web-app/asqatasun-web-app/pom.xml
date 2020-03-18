@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>web-app</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>5.0-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-web-app</artifactId>
     <packaging>war</packaging>
@@ -194,11 +194,6 @@
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>

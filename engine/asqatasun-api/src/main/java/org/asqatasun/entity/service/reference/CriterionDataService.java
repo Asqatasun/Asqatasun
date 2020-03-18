@@ -23,7 +23,7 @@ package org.asqatasun.entity.service.reference;
 
 import org.asqatasun.entity.reference.Criterion;
 import org.asqatasun.entity.reference.Level;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  * 

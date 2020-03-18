@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.service.user;
 
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 import org.asqatasun.webapp.entity.user.User;
 
 /**

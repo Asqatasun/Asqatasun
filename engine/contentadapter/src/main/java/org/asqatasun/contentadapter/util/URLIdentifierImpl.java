@@ -21,9 +21,10 @@
  */
 package org.asqatasun.contentadapter.util;
 
+import org.slf4j.LoggerFactory;
+
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -53,7 +54,7 @@ public class URLIdentifierImpl implements URLIdentifier {
         try {
             absolutePath = new URL(url, path);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(this.getClass()).error("Url : " +url + " Path : " + path + " " +ex);
+            LoggerFactory.getLogger(this.getClass()).error("Url : " +url + " Path : " + path + " " +ex);
         }
         return absolutePath;
     }

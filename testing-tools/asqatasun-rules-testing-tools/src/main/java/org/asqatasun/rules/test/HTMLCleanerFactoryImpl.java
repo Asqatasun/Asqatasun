@@ -23,11 +23,13 @@ package org.asqatasun.rules.test;
 
 import org.asqatasun.contentadapter.HTMLCleaner;
 import org.asqatasun.contentadapter.HTMLCleanerFactory;
+import org.springframework.context.annotation.Profile;
 
 /**
  *
  * @author enzolalay
  */
+@Profile("test")
 public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
 
     private boolean removeLowerCaseTags;
@@ -37,7 +39,6 @@ public class HTMLCleanerFactoryImpl implements HTMLCleanerFactory {
     
     @Override
     public HTMLCleaner create() {
-//        return new HTMLJsoupCleanerImpl();
         return new HTMLCorrectorImpl(removeLowerCaseTags);
     }
 

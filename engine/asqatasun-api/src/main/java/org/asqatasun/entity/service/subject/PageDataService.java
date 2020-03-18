@@ -22,7 +22,7 @@
 package org.asqatasun.entity.service.subject;
 
 import org.asqatasun.entity.subject.Page;
-import org.asqatasun.sdk.entity.service.GenericDataService;
+import org.asqatasun.entity.service.GenericDataService;
 
 /**
  * 

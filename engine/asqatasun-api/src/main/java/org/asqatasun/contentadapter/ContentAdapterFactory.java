@@ -22,7 +22,6 @@
 package org.asqatasun.contentadapter;
 
 import org.asqatasun.contentadapter.util.URLIdentifier;
-import org.asqatasun.contentloader.Downloader;
 import org.asqatasun.entity.service.audit.ContentDataService;
 
 /**
@@ -36,13 +35,9 @@ public interface ContentAdapterFactory {
      * Create an instance of ContentAdapter
      * 
      * @param urlIdentifier
-     * @param downloader
      * @param contentDataService
      * @return
      */
-    ContentAdapter create(
-            URLIdentifier urlIdentifier,
-            Downloader downloader,
-            ContentDataService contentDataService);
+    ContentAdapter create(URLIdentifier urlIdentifier, ContentDataService contentDataService);
 
 }

@@ -21,10 +21,13 @@
  */
 package org.asqatasun.contentadapter.util;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author enzolalay
  */
+@Component("urlIdentifierFactory")
 public class URLIdentifierFactoryImpl implements URLIdentifierFactory {
 
     @Override

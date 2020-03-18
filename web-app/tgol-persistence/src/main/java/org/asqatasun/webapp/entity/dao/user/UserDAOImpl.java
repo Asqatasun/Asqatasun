@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.dao.user;
 
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.entity.user.UserImpl;
 import javax.persistence.NoResultException;

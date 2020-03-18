@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.dao.scenario;
 
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.webapp.entity.scenario.Scenario;
 import org.asqatasun.webapp.entity.scenario.ScenarioImpl;
 

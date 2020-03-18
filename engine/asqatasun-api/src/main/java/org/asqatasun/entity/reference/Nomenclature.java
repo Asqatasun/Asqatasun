@@ -23,7 +23,7 @@ package org.asqatasun.entity.reference;
 
 import java.util.Collection;
 
-import org.asqatasun.sdk.entity.Entity;
+import org.asqatasun.entity.Entity;
 
 /**
  * 

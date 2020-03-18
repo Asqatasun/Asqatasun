@@ -21,9 +21,7 @@
  */
 package org.asqatasun.analyser;
 
-import java.util.List;
 import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.subject.WebResource;
 
 /**
@@ -31,13 +29,6 @@ import org.asqatasun.entity.subject.WebResource;
  * @author jkowalczyk
  */
 public interface AnalyserFactory {
-
-    /**
-     *
-     * @param netResultList
-     * @return
-     */
-    Analyser create(List<ProcessResult> netResultList);
 
     /**
      * 

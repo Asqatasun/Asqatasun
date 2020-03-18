@@ -31,7 +31,7 @@
     <!ELEMENT profiles (profile)*>
     <!ELEMENT profile (id|modules)*>
     <!ELEMENT id (#PCDATA)>
-    <!ELEMENT properties (commitUrlPrefix|project.build.sourceEncoding|project.reporting.outputEncoding|maven.compiler.encoding|maven.compiler.source|maven.compiler.target|asqatasunGroupId|asqatasunVersion|springGroupId|springVersion|springSecurityVersion|hibernateGroupId|hibernateVersion|log4jGroupId|log4jVersion|httpcomponentsGroupId|itextpdf.version|jersey.version|jhighlight.version|mysql-connector-java.version|junitGroupId|junitVersion|maven-checkstyle-plugin.version|maven-clean-plugin.version|maven-compiler-plugin.version|maven-surefire-plugin.version|maven-project-info-reports-plugin.version|maven-javadoc-plugin.version|maven-jar-plugin.version|maven-jxr-plugin.version|maven-war-plugin.version|build-helper-maven-plugin.version|buildnumber-maven-plugin.version|dependency-check-maven.version|jacoco-maven-plugin.version|markdown-page-generator-plugin.version|yuicompressor-maven-plugin.version)*>
+    <!ELEMENT properties (commitUrlPrefix|project.build.sourceEncoding|project.reporting.outputEncoding|maven.compiler.encoding|maven.compiler.source|maven.compiler.target|asqatasunGroupId|asqatasunVersion|springGroupId|springVersion|springSecurityVersion|hibernateGroupId|hibernateVersion|httpcomponentsGroupId|itextpdf.version|jersey.version|jhighlight.version|mysql-connector-java.version|junitGroupId|junitVersion|maven-checkstyle-plugin.version|maven-clean-plugin.version|maven-compiler-plugin.version|maven-surefire-plugin.version|maven-project-info-reports-plugin.version|maven-javadoc-plugin.version|maven-jar-plugin.version|maven-jxr-plugin.version|maven-war-plugin.version|build-helper-maven-plugin.version|buildnumber-maven-plugin.version|dependency-check-maven.version|jacoco-maven-plugin.version|markdown-page-generator-plugin.version|yuicompressor-maven-plugin.version)*>
     <!ELEMENT commitUrlPrefix (#PCDATA)>
     <!ELEMENT project.build.sourceEncoding (#PCDATA)>
     <!ELEMENT project.reporting.outputEncoding (#PCDATA)>
@@ -45,8 +45,6 @@
     <!ELEMENT springSecurityVersion (#PCDATA)>
     <!ELEMENT hibernateGroupId (#PCDATA)>
     <!ELEMENT hibernateVersion (#PCDATA)>
-    <!ELEMENT log4jGroupId (#PCDATA)>
-    <!ELEMENT log4jVersion (#PCDATA)>
     <!ELEMENT httpcomponentsGroupId (#PCDATA)>
     <!ELEMENT itextpdf.version (#PCDATA)>
     <!ELEMENT jersey.version (#PCDATA)>
@@ -145,7 +143,7 @@
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
-    <version>4.1.0-SNAPSHOT</version>
+    <version>5.0-SNAPSHOT</version>
 
     <name>asqatasun</name>
     <url>https://asqatasun.org/</url>
@@ -214,17 +212,15 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
-        <asqatasunVersion>4.1.0-SNAPSHOT</asqatasunVersion>
-        
+        <asqatasunVersion>5.0-SNAPSHOT</asqatasunVersion>
+
         <springGroupId>org.springframework</springGroupId>
-        <springVersion>4.3.24.RELEASE</springVersion>
+        <springVersion>4.3.26.RELEASE</springVersion>
+<!--        <springVersion>5.2.3.RELEASE</springVersion>-->
         <springSecurityVersion>4.2.13.RELEASE</springSecurityVersion>
 
         <hibernateGroupId>org.hibernate</hibernateGroupId>
         <hibernateVersion>4.3.11.Final</hibernateVersion>
-
-        <log4jGroupId>log4j</log4jGroupId>
-        <log4jVersion>1.2.15</log4jVersion>
 
         <httpcomponentsGroupId>org.apache.httpcomponents</httpcomponentsGroupId>
 
@@ -234,30 +230,30 @@
         <jhighlight.version>1.0.3</jhighlight.version>
         <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
         <junitGroupId>junit</junitGroupId>
-        <junitVersion>3.8.2</junitVersion>
+        <junitVersion>4.13</junitVersion>
             <!-- <junit.version>4.12</junit.version> -->
 
         <!-- Plugin Versions -->
         <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
         <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
-        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M1</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
-        <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
-        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <maven-jxr-plugin.version>2.5</maven-jxr-plugin.version>
-        <maven-war-plugin.version>3.2.0</maven-war-plugin.version>
+        <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
         <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
         <buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
         <dependency-check-maven.version>3.1.2</dependency-check-maven.version>
-        <jacoco-maven-plugin.version>0.8.4</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
         <markdown-page-generator-plugin.version>2.1.0</markdown-page-generator-plugin.version>
         <yuicompressor-maven-plugin.version>1.5.1</yuicompressor-maven-plugin.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
     </properties>
     <repositories>
         <repository>
-            <url>http://repo1.maven.org/maven2/</url>
+            <url>https://repo1.maven.org/maven2/</url>
             <id>central</id>
             <releases>
                 <enabled>true</enabled>
@@ -266,26 +262,16 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <repository>
-            <id>saucelabs-repository</id>
-            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>fdvsolution.public</id>
-            <url>http://nexus.fdvs.com.ar/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
+<!--        <repository>-->
+<!--            <id>saucelabs-repository</id>-->
+<!--            <url>https://repository-saucelabs.forge.cloudbees.com/release</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
     </repositories>
 
     <build>
@@ -686,18 +672,9 @@
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-commons-entity-jpa</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-api</artifactId>
                 <version>${asqatasunVersion}</version>
                 <exclusions>
-                    <exclusion>
-                        <artifactId>slf4j-api</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
                     <exclusion>
                         <groupId>poi</groupId>
                         <artifactId>poi</artifactId>
@@ -714,7 +691,12 @@
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-audit</artifactId>
+                <artifactId>asqatasun-model</artifactId>
+                <version>${asqatasunVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${asqatasunGroupId}</groupId>
+                <artifactId>asqatasun-services</artifactId>
                 <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
@@ -729,27 +711,7 @@
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-statistics</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-reference</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-parameterization</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-commons-processing</artifactId>
-                <version>${asqatasunVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>${asqatasunGroupId}</groupId>
-                <artifactId>asqatasun-sebuilder-interpreter-tools</artifactId>
                 <version>${asqatasunVersion}</version>
             </dependency>
             <dependency>
@@ -860,10 +822,6 @@
                         <groupId>org.apache.commons</groupId>
                         <artifactId>commons-lang3</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>${log4jGroupId}</groupId>
-                        <artifactId>log4j</artifactId>
-                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
@@ -874,10 +832,6 @@
                     <exclusion>
                         <groupId>org.apache.commons</groupId>
                         <artifactId>commons-lang3</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>${log4jGroupId}</groupId>
-                        <artifactId>log4j</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -937,10 +891,6 @@
                 <exclusions>
                     <exclusion>
                         <artifactId>slf4j-api</artifactId>
-                        <groupId>org.slf4j</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>slf4j-log4j12</artifactId>
                         <groupId>org.slf4j</groupId>
                     </exclusion>
                 </exclusions>
@@ -1023,7 +973,6 @@
                 <groupId>commons-dbcp</groupId>
                 <artifactId>commons-dbcp</artifactId>
                 <version>1.4</version>
-                <scope>test</scope>
             </dependency>
 <!--        <dependency>
                 <groupId>org.milyn</groupId>
@@ -1044,33 +993,21 @@
                 <version>2.6.1</version>
             </dependency>
 
-            <!-- log4j dependencies -->
+            <!-- logback dependencies -->
             <dependency>
-                <groupId>${log4jGroupId}</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4jVersion}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>activation</artifactId>
-                        <groupId>javax.activation</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>jms</artifactId>
-                        <groupId>javax.jms</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>jmxri</artifactId>
-                        <groupId>com.sun.jmx</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>jmxtools</artifactId>
-                        <groupId>com.sun.jdmk</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>mail</artifactId>
-                        <groupId>javax.mail</groupId>
-                    </exclusion>
-                </exclusions>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>1.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.2.3</version>
             </dependency>
 
             <!-- httpcomponents dependencies. -->
@@ -1098,6 +1035,12 @@
                 <groupId>${springGroupId}</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${springVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>${springGroupId}</groupId>
@@ -1163,6 +1106,11 @@
             <dependency>
                 <groupId>${springGroupId}</groupId>
                 <artifactId>spring-instrument-tomcat</artifactId>
+                <version>${springVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>${springGroupId}</groupId>
+                <artifactId>spring-test</artifactId>
                 <version>${springVersion}</version>
             </dependency>
             <dependency>
@@ -1245,23 +1193,16 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>1.26</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.googlecode.juniversalchardet</groupId>
                 <artifactId>juniversalchardet</artifactId>
                 <version>1.0.3</version>
-            </dependency>
-
-            <!-- slf4j dependencies -->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.5.11</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>1.5.11</version>
             </dependency>
 
             <!-- dbunit and hsqldb dependencies -->
@@ -1509,7 +1450,7 @@
             <dependency>
                 <groupId>org.apache.tika</groupId>
                 <artifactId>tika-core</artifactId>
-                <version>1.20</version>
+                <version>1.23</version>
             </dependency>
 
             <!-- EasyMock -->
@@ -1545,6 +1486,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
+<!--                <version>2.53.1</version>-->
                 <version>2.39.0</version>
                 <exclusions>
                     <exclusion>
@@ -1557,7 +1499,7 @@
                     </exclusion>
                     <exclusion>
                         <groupId>org.seleniumhq.selenium</groupId>
-                        <artifactId>selenium-htmlunit-driver</artifactId>
+                        <artifactId>htmlunit-driver</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.seleniumhq.selenium</groupId>
@@ -1565,7 +1507,7 @@
                     </exclusion>
                     <exclusion>
                         <groupId>org.seleniumhq.selenium</groupId>
-                        <artifactId>selenium-iphone-driver</artifactId>
+                        <artifactId>selenium-edge-driver</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>org.seleniumhq.selenium</groupId>
@@ -1573,20 +1515,24 @@
                     </exclusion>
                     <exclusion>
                         <groupId>org.seleniumhq.selenium</groupId>
-                        <artifactId>jetty-repacked</artifactId>
+                        <artifactId>selenium-leg-rc</artifactId>
                     </exclusion>
-                    <exclusion>
-                        <groupId>xalan</groupId>
-                        <artifactId>xalan</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.httpcomponents</groupId>
-                        <artifactId>httpcore</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
+<!--                    <exclusion>-->
+<!--                        <groupId>org.seleniumhq.selenium</groupId>-->
+<!--                        <artifactId>jetty-repacked</artifactId>-->
+<!--                    </exclusion>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>xalan</groupId>-->
+<!--                        <artifactId>xalan</artifactId>-->
+<!--                    </exclusion>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>org.apache.httpcomponents</groupId>-->
+<!--                        <artifactId>httpcore</artifactId>-->
+<!--                    </exclusion>-->
+<!--                    <exclusion>-->
+<!--                        <groupId>com.google.guava</groupId>-->
+<!--                        <artifactId>guava</artifactId>-->
+<!--                    </exclusion>-->
                 </exclusions>
             </dependency>
             <dependency>
@@ -1617,7 +1563,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>10.0.1</version>
+                <version>19.0</version>
             </dependency>
             <!-- html and css parsers -->
             <dependency>

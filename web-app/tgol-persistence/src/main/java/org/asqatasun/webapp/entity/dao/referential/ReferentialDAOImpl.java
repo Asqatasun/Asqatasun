@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.entity.dao.referential;
 
-import org.asqatasun.sdk.entity.dao.jpa.AbstractJPADAO;
+import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.asqatasun.webapp.entity.referential.Referential;
 import org.asqatasun.webapp.entity.referential.ReferentialImpl;
 

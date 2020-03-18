@@ -22,29 +22,30 @@
 package org.asqatasun.service;
 
 import java.util.*;
+import java.util.concurrent.Callable;
+
 import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.parameterization.Parameter;
-import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.entity.service.parameterization.ParameterDataService;
-import org.asqatasun.entity.service.reference.TestDataService;
-import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.factory.AuditCommandFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author jkowalczyk
  */
 public class AuditServiceImplTest extends TestCase {
-    
-    private AuditDataService mockAuditDataService;
-    private WebResourceDataService mockWebResourceDataService;
-    private TestDataService mockTestDataService;
-    private ParameterDataService mockParameterDataService;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditServiceImplTest.class);
+
     private AuditServiceThreadFactory mockAuditServiceThreadFactory;
-    
+    private AuditServiceThreadQueue mockAuditServiceThreadQueue;
+    private Audit mockAuditCreateByAuditCommand;
+    private AuditCommand mockAuditCommand;
+    private AuditCommandFactory mockAuditCommandFactory;
+
     public AuditServiceImplTest(String testName) {
         super(testName);
     }
@@ -52,14 +53,11 @@ public class AuditServiceImplTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        mockAuditDataService = EasyMock.createMock(AuditDataService.class);
-        mockWebResourceDataService = 
-                EasyMock.createMock(WebResourceDataService.class);
-        mockTestDataService = EasyMock.createMock(TestDataService.class);
-        mockParameterDataService = 
-                EasyMock.createMock(ParameterDataService.class);
-        mockAuditServiceThreadFactory = 
-                EasyMock.createMock(AuditServiceThreadFactory.class);
+        mockAuditServiceThreadFactory = EasyMock.createMock(AuditServiceThreadFactory.class);
+        mockAuditServiceThreadQueue = EasyMock.createMock(AuditServiceThreadQueue.class);
+        mockAuditCreateByAuditCommand = EasyMock.createMock(Audit.class);
+        mockAuditCommand = EasyMock.createMock(AuditCommand.class);
+        mockAuditCommandFactory = EasyMock.createMock(AuditCommandFactory.class);
     }
     
     @Override
@@ -71,7 +69,7 @@ public class AuditServiceImplTest extends TestCase {
      * Test of remove method, of class AuditServiceImpl.
      */
     public void testAddAndRemove() {
-        AuditServiceImpl instance = initialiseAuditService();
+        AuditServiceImpl instance = initialiseAuditService(null);
         AuditServiceListener mockAuditServiceListener = 
                 EasyMock.createMock(AuditServiceListener.class);
         // when try to remove a listener not recorded, nothing happened
@@ -82,233 +80,79 @@ public class AuditServiceImplTest extends TestCase {
         instance.remove(mockAuditServiceListener);
         assertTrue(instance.getListeners().isEmpty());
     }
-    
+
     /**
      * Test of auditPage method, of class AuditServiceImpl.
      */
-    public void testAuditPage() {
-        System.out.println("auditPage");
+    public void testAuditPage() throws Exception {
         String pageUrl = "http://My.testUrl.org";
-        Set<Parameter> paramSet = null;
 
-        AuditServiceImpl instance = initialiseAuditService();
-
-        Audit auditCreateByAuditCommand = EasyMock.createMock(Audit.class);
-        
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
-        EasyMock.expect(mockAuditCommand.getAudit()).
-                andReturn(auditCreateByAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommand);
-        
-        AuditCommandFactory mockAuditCommandFactory = EasyMock.createMock(AuditCommandFactory.class);
-        EasyMock.expect(mockAuditCommandFactory.create(pageUrl, paramSet, false)).
-                andReturn(mockAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommandFactory);
-        instance.setAuditCommandFactory(mockAuditCommandFactory);
-        
-        // anyTimes the audit is created and set-up, the auditServiceThreadQueue is 
-        // called to effectively launch the page audit
-        AuditServiceThreadQueue mockAuditServiceThreadQueue = 
-                EasyMock.createMock(AuditServiceThreadQueue.class);
-        mockAuditServiceThreadQueue.add(instance);
-        EasyMock.expectLastCall().anyTimes();
-        mockAuditServiceThreadQueue.addPageAudit(mockAuditCommand);
-        EasyMock.expectLastCall().anyTimes();
-        EasyMock.replay(mockAuditServiceThreadQueue);
-        
-        instance.setAuditServiceThreadQueue(mockAuditServiceThreadQueue);
-
-        Audit result = instance.auditPage(pageUrl, paramSet);
-        assertEquals(auditCreateByAuditCommand, result);
-
-        EasyMock.verify(mockAuditServiceThreadQueue);
-        EasyMock.verify(mockAuditCommand);
-        EasyMock.verify(mockAuditCommandFactory);
+        checkCreatedAuditAndVerifyMockExecution(
+                initCommand(() -> mockAuditCommandFactory.create(pageUrl, null, false),
+                            () -> mockAuditServiceThreadQueue.addPageAudit(mockAuditCommand))
+                    .auditPage(pageUrl, null));
     }
     
     /**
      * Test of auditPage method, of class AuditServiceImpl.
      */
-    public void testAuditSite() {
-        System.out.println("auditSite");
+    public void testAuditSite() throws Exception {
         String siteUrl = "http://My.testUrl.org";
-        Set<Parameter> paramSet = null;
-        AuditServiceImpl instance = initialiseAuditService();
-        
-        Audit auditCreateByAuditCommand = EasyMock.createMock(Audit.class);
-        
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
-        EasyMock.expect(mockAuditCommand.getAudit()).
-                andReturn(auditCreateByAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommand);
-        
-        AuditCommandFactory mockAuditCommandFactory = EasyMock.createMock(AuditCommandFactory.class);
-        EasyMock.expect(mockAuditCommandFactory.create(siteUrl, paramSet, true)).
-                andReturn(mockAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommandFactory);
-        instance.setAuditCommandFactory(mockAuditCommandFactory);
-        
-        // anyTimes the audit is created and set-up, the auditServiceThreadQueue is 
-        // called to effectively launch the site audit
-        AuditServiceThreadQueue mockAuditServiceThreadQueue = 
-                EasyMock.createMock(AuditServiceThreadQueue.class);
-        mockAuditServiceThreadQueue.add(instance);
-        EasyMock.expectLastCall().anyTimes();
-        mockAuditServiceThreadQueue.addSiteAudit(mockAuditCommand);
-        EasyMock.expectLastCall().anyTimes();
-        EasyMock.replay(mockAuditServiceThreadQueue);
-        instance.setAuditServiceThreadQueue(mockAuditServiceThreadQueue);
-        
-        Audit result = instance.auditSite(siteUrl, paramSet);
-        assertEquals(auditCreateByAuditCommand, result);
-        
-        EasyMock.verify(mockAuditServiceThreadQueue);
-        EasyMock.verify(mockAuditCommand);
-        EasyMock.verify(mockAuditCommandFactory);
+
+        checkCreatedAuditAndVerifyMockExecution(
+            initCommand(() ->mockAuditCommandFactory.create(siteUrl, null, true),
+                        () -> mockAuditServiceThreadQueue.addSiteAudit(mockAuditCommand))
+                .auditSite(siteUrl, null));
     }
     
     /**
      * Test of auditPage method, of class AuditServiceImpl.
      */
-    public void testAuditGroupOfPages() {
-        System.out.println("auditGroupOfPages");
+    public void testAuditGroupOfPages() throws Exception {
         String siteUrl = "http://My.testUrl.org";
-        String pageUrl = "http://My.testUrlPage1.org";
-        Set<Parameter> paramSet = null;
-        List<String> urlList = new ArrayList<>();
-        urlList.add(pageUrl);
-        
-        AuditServiceImpl instance = initialiseAuditService();
-        
-        Audit auditCreateByAuditCommand = EasyMock.createMock(Audit.class);
-        
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
-        EasyMock.expect(mockAuditCommand.getAudit()).
-                andReturn(auditCreateByAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommand);
-        
-        AuditCommandFactory mockAuditCommandFactory = EasyMock.createMock(AuditCommandFactory.class);
-        EasyMock.expect(mockAuditCommandFactory.create(siteUrl, urlList, paramSet)).
-                andReturn(mockAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommandFactory);
-        instance.setAuditCommandFactory(mockAuditCommandFactory);
-        
-        // anyTimes the audit is created and set-up, the auditServiceThreadQueue is 
-        // called to effectively launch the site audit
-        AuditServiceThreadQueue mockAuditServiceThreadQueue = 
-                EasyMock.createMock(AuditServiceThreadQueue.class);
-        mockAuditServiceThreadQueue.add(instance);
-        EasyMock.expectLastCall().anyTimes();
-        mockAuditServiceThreadQueue.addPageAudit(mockAuditCommand);
-        EasyMock.expectLastCall().anyTimes();
-        EasyMock.replay(mockAuditServiceThreadQueue);
-        instance.setAuditServiceThreadQueue(mockAuditServiceThreadQueue);
-        
-        Audit result = instance.auditSite(siteUrl, urlList, paramSet);
-        assertEquals(auditCreateByAuditCommand, result);
-        
-        EasyMock.verify(mockAuditServiceThreadQueue);
-        EasyMock.verify(mockAuditCommand);
-        EasyMock.verify(mockAuditCommandFactory);
+        List<String> urlList = Arrays.asList("http://My.testUrlPage1.org");
+
+        checkCreatedAuditAndVerifyMockExecution(
+            initCommand(() -> mockAuditCommandFactory.create(siteUrl, urlList, null),
+                        () -> mockAuditServiceThreadQueue.addPageAudit(mockAuditCommand))
+                .auditSite(siteUrl, urlList, null));
     }
 
     /**
      * Test of auditPageUpload method, of class AuditServiceImpl.
      */
-    public void testAuditPageUploadWithOneFile() {
-        System.out.println("auditPageUploadWithOneFile");
-
-        Set<Parameter> paramSet = null;
-        
+    public void testAuditPageUploadWithOneFile() throws Exception {
         // test we only one file is passed as argument to be tested
-        String file1Name = "file://test1";
-        Map<String, String> fileMap = new HashMap<>();
-        fileMap.put(file1Name, "");
-        
-        AuditServiceImpl instance = initialiseAuditService();
-        
-        Audit auditCreateByAuditCommand = EasyMock.createMock(Audit.class);
-        
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
-        EasyMock.expect(mockAuditCommand.getAudit()).
-                andReturn(auditCreateByAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommand);
-        
-        AuditCommandFactory mockAuditCommandFactory = EasyMock.createMock(AuditCommandFactory.class);
-        EasyMock.expect(mockAuditCommandFactory.create(fileMap, paramSet)).
-                andReturn(mockAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommandFactory);
-        instance.setAuditCommandFactory(mockAuditCommandFactory);
+        Map<String, String> fileMap = new HashMap<String, String>() {{ put("file://test1", ""); }};
 
-        // anyTimes the audit is created and set-up, the auditServiceThreadQueue is 
-        // called to effectively launch the pageUpload audit
-        AuditServiceThreadQueue mockAuditServiceThreadQueue = 
-                EasyMock.createMock(AuditServiceThreadQueue.class);
-        mockAuditServiceThreadQueue.add(instance);
-        EasyMock.expectLastCall().anyTimes();
-        mockAuditServiceThreadQueue.addPageUploadAudit(mockAuditCommand);
-        EasyMock.replay(mockAuditServiceThreadQueue);
-        instance.setAuditServiceThreadQueue(mockAuditServiceThreadQueue);
-        
-        Audit result = instance.auditPageUpload(fileMap, paramSet);
-        assertEquals(auditCreateByAuditCommand, result);
-        
-        EasyMock.verify(mockAuditServiceThreadQueue);
-        EasyMock.verify(mockAuditCommand);
-        EasyMock.verify(mockAuditCommandFactory);
+        checkCreatedAuditAndVerifyMockExecution(
+            initCommand(() -> mockAuditCommandFactory.create(fileMap, null),
+                        () -> mockAuditServiceThreadQueue.addPageUploadAudit(mockAuditCommand))
+                .auditPageUpload(fileMap, null));
     }
     
     /**
      * Test of auditPage method, of class AuditServiceImpl.
      */
-    public void testAuditScenario() {
+    public void testAuditScenario() throws Exception {
         System.out.println("auditScenario");
         String scenarioName = "MyScenario";
         String scenario = "";
-        
-        AuditServiceImpl instance = initialiseAuditService();
-        
-        Audit auditCreateByAuditCommand = EasyMock.createMock(Audit.class);
-        
-        AuditCommand mockAuditCommand = EasyMock.createMock(AuditCommand.class);
-        EasyMock.expect(mockAuditCommand.getAudit()).
-                andReturn(auditCreateByAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommand);
-        
-        AuditCommandFactory mockAuditCommandFactory = EasyMock.createMock(AuditCommandFactory.class);
-        EasyMock.expect(mockAuditCommandFactory.create(scenarioName, scenario, null)).
-                andReturn(mockAuditCommand).anyTimes();
-        EasyMock.replay(mockAuditCommandFactory);
-        instance.setAuditCommandFactory(mockAuditCommandFactory);
-        
-        // anyTimes the audit is created and set-up, the auditServiceThreadQueue is 
-        // called to effectively launch the pageUpload audit
-        AuditServiceThreadQueue mockAuditServiceThreadQueue = 
-                EasyMock.createMock(AuditServiceThreadQueue.class);
-        mockAuditServiceThreadQueue.add(instance);
-        EasyMock.expectLastCall().anyTimes();
-        mockAuditServiceThreadQueue.addScenarioAudit(mockAuditCommand);
-        EasyMock.expectLastCall().anyTimes();
-        EasyMock.replay(mockAuditServiceThreadQueue);
-        instance.setAuditServiceThreadQueue(mockAuditServiceThreadQueue);
-        
-        Audit result = instance.auditScenario(scenarioName, scenario, null);
-        assertEquals(auditCreateByAuditCommand, result);
-        
-        EasyMock.verify(mockAuditServiceThreadQueue);
-        EasyMock.verify(mockAuditCommand);
-        EasyMock.verify(mockAuditCommandFactory);
+
+        checkCreatedAuditAndVerifyMockExecution(
+            initCommand(() -> mockAuditCommandFactory.create(scenarioName, scenario, null),
+                        () -> mockAuditServiceThreadQueue.addScenarioAudit(mockAuditCommand))
+                .auditScenario(scenarioName, scenario, null));
     }
 
     /**
      * Test of audit method, of class AuditServiceImpl.
      */
     public void testAudit() {
-        AuditServiceImpl instance = initialiseAuditService();
+        AuditServiceImpl instance = initialiseAuditService(null);
         
         Audit audit = EasyMock.createMock(Audit.class);
-        Audit auditReturnedByAuditMethodOfAuditServiceThread = 
-                EasyMock.createMock(Audit.class);
+        Audit auditReturnedByAuditMethodOfAuditServiceThread = EasyMock.createMock(Audit.class);
         
         AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
         
@@ -318,254 +162,20 @@ public class AuditServiceImplTest extends TestCase {
                 andReturn(auditReturnedByAuditMethodOfAuditServiceThread).anyTimes();
         EasyMock.replay(mockAuditServiceThread);
         
-        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-                andReturn(mockAuditServiceThread).anyTimes();
+        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).andReturn(mockAuditServiceThread).anyTimes();
         EasyMock.replay(mockAuditServiceThreadFactory);
         
-        assertEquals(auditReturnedByAuditMethodOfAuditServiceThread, 
-                instance.audit(audit));
+        assertEquals(auditReturnedByAuditMethodOfAuditServiceThread, instance.audit(audit));
         
         EasyMock.verify(mockAuditServiceThread);
         EasyMock.verify(mockAuditServiceThreadFactory);
     }
-    
-//    /**
-//     * Test of init method, of class AuditServiceImpl.
-//     */
-//    public void testInit() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByInitMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.init();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByInitMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByInitMethodOfAuditServiceThread, 
-//                instance.init(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
-//    /**
-//     * Test of crawl method, of class AuditServiceImpl.
-//     */
-//    public void testCrawl() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByCrawlMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.loadContent();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByCrawlMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByCrawlMethodOfAuditServiceThread, 
-//                instance.crawl(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
-//    /**
-//     * Test of loadContent method, of class AuditServiceImpl.
-//     */
-//    public void testLoadContent() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByLoadContentMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.loadContent();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByLoadContentMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByLoadContentMethodOfAuditServiceThread, 
-//                instance.loadContent(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
-//    /**
-//     * Test of loadScenario method, of class AuditServiceImpl.
-//     */
-//    public void testLoadScenario() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByLoadScenarioMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.loadContent();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByLoadScenarioMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByLoadScenarioMethodOfAuditServiceThread, 
-//                instance.loadScenario(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
-//    /**
-//     * Test of adaptContent method, of class AuditServiceImpl.
-//     */
-//    public void testAdaptContent() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByAdaptContentMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.adaptContent();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByAdaptContentMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByAdaptContentMethodOfAuditServiceThread, 
-//                instance.adaptContent(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
-//    /**
-//     * Test of process method, of class AuditServiceImpl.
-//     */
-//    public void testProcess() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByProcessMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.process();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByProcessMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByProcessMethodOfAuditServiceThread, 
-//                instance.process(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
-//    /**
-//     * Test of consolidate method, of class AuditServiceImpl.
-//     */
-//    public void testConsolidate() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByConsolidateMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.consolidate();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByConsolidateMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByConsolidateMethodOfAuditServiceThread, 
-//                instance.consolidate(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
-//    /**
-//     * Test of analyse method, of class AuditServiceImpl.
-//     */
-//    public void testAnalyse() {
-//        AuditServiceImpl instance = initialiseAuditService();
-//        
-//        Audit audit = EasyMock.createMock(Audit.class);
-//        Audit auditReturnedByAnalyseMethodOfAuditServiceThread = 
-//                EasyMock.createMock(Audit.class);
-//        
-//        AuditServiceThread mockAuditServiceThread = EasyMock.createMock(AuditServiceThread.class);
-//        
-//        mockAuditServiceThread.analyse();
-//        EasyMock.expectLastCall();
-//        EasyMock.expect(mockAuditServiceThread.getAudit()).
-//                andReturn(auditReturnedByAnalyseMethodOfAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThread);
-//        
-//        EasyMock.expect(mockAuditServiceThreadFactory.create(audit)).
-//                andReturn(mockAuditServiceThread).anyTimes();
-//        EasyMock.replay(mockAuditServiceThreadFactory);
-//        
-//        assertEquals(auditReturnedByAnalyseMethodOfAuditServiceThread, 
-//                instance.analyse(audit));
-//        
-//        EasyMock.verify(mockAuditServiceThread);
-//        EasyMock.verify(mockAuditServiceThreadFactory);
-//    }
-    
+
     /**
      * Test of auditCompleted method, of class AuditServiceImpl.
      */
     public void testAuditCompleted() {
-        AuditServiceImpl instance = initialiseAuditService();
+        AuditServiceImpl instance = initialiseAuditService(null);
         
         Audit mockAudit = EasyMock.createMock(Audit.class);
         AuditServiceListener mockAuditServiceListener = EasyMock.createMock(AuditServiceListener.class);
@@ -587,7 +197,7 @@ public class AuditServiceImplTest extends TestCase {
      * Test of auditCompleted method, of class AuditServiceImpl.
      */
     public void testAuditCrashed() {
-        AuditServiceImpl instance = initialiseAuditService();
+        AuditServiceImpl instance = initialiseAuditService(null);
         
         Audit mockAudit = EasyMock.createMock(Audit.class);
         Exception mockException = EasyMock.createMock(Exception.class);
@@ -608,14 +218,42 @@ public class AuditServiceImplTest extends TestCase {
         EasyMock.verify(mockException);
     }
     
-    /**
-     * 
-     * @return 
-     */
-    private AuditServiceImpl initialiseAuditService() {
-        AuditServiceImpl auditService = new AuditServiceImpl();
-        auditService.setAuditServiceThreadFactory(mockAuditServiceThreadFactory);
-        return auditService;
+    private AuditServiceImpl initialiseAuditService(AuditCommandFactory auditCommandFactory) {
+        return new AuditServiceImpl(
+            mockAuditServiceThreadFactory,
+            auditCommandFactory,
+            mockAuditServiceThreadQueue);
+    }
+
+
+    private AuditService initCommand(
+        Callable<AuditCommand> createMockFunction,
+        Runnable addAuditToQueueFunction) throws Exception {
+        EasyMock.expect(mockAuditCommand.getAudit()).andReturn(mockAuditCreateByAuditCommand).anyTimes();
+        EasyMock.replay(mockAuditCommand);
+
+        EasyMock.expect(createMockFunction.call()).andReturn(mockAuditCommand).anyTimes();
+        EasyMock.replay(mockAuditCommandFactory);
+
+        AuditServiceImpl instance = initialiseAuditService(mockAuditCommandFactory);
+
+        // anyTimes the audit is created and set-up, the auditServiceThreadQueue is
+        // called to effectively launch the page audit
+        mockAuditServiceThreadQueue.add(instance);
+        EasyMock.expectLastCall().anyTimes();
+        addAuditToQueueFunction.run();
+        EasyMock.expectLastCall().anyTimes();
+        EasyMock.replay(mockAuditServiceThreadQueue);
+
+        return instance;
+    }
+
+    private void checkCreatedAuditAndVerifyMockExecution(Audit audit) {
+        assertEquals(mockAuditCreateByAuditCommand, audit);
+
+        EasyMock.verify(mockAuditServiceThreadQueue);
+        EasyMock.verify(mockAuditCommand);
+        EasyMock.verify(mockAuditCommandFactory);
     }
 
 }

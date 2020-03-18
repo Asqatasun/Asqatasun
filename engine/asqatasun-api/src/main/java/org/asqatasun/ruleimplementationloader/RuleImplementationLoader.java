@@ -29,55 +29,17 @@ import org.asqatasun.ruleimplementation.RuleImplementation;
  */
 public interface RuleImplementationLoader {
 
-    /**
-     *
-     * @return
-     *      the archive that embeds the rule implementation
-     */
-    String getArchiveName();
-
-    /**
-     *
-     * @return
-     *      the root path of the archive that embeds the rule implementation
-     */
-    String getArchiveRoot();
-
-    /**
-     *
-     * @return
-     *      the name of the class that realizes the concrete implementation of the
-     *      rule
-     */
-    String getClassName();
 
     /**
      * 
      * @return
      */
-    RuleImplementation getResult();
+    RuleImplementation getRuleImplementation();
 
     /**
      *
      */
     void run();
 
-    /**
-     *
-     * @param archiveName
-     */
-    void setArchiveName(String archiveName);
-
-    /**
-     *
-     * @param ruleImplementationArchveRoot
-     */
-    void setArchiveRoot(String ruleImplementationArchveRoot);
-
-    /**
-     *
-     * @param className
-     */
-    void setClassName(String className);
 
 }

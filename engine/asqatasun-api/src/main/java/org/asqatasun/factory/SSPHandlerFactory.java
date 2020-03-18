@@ -22,7 +22,7 @@
 package org.asqatasun.factory;
 
 import org.asqatasun.processor.SSPHandler;
-import org.asqatasun.sdk.entity.factory.GenericFactory;
+import org.asqatasun.entity.GenericFactory;
 
 /**
  * 
