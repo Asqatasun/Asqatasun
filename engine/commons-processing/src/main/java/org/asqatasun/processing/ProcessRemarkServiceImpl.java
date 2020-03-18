@@ -30,7 +30,6 @@ import javax.xml.xpath.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -39,6 +38,8 @@ import org.asqatasun.entity.service.audit.EvidenceDataService;
 import org.asqatasun.entity.service.audit.EvidenceElementDataService;
 import org.asqatasun.entity.service.audit.ProcessRemarkDataService;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -49,7 +50,7 @@ import org.w3c.dom.NodeList;
  */
 public class ProcessRemarkServiceImpl implements ProcessRemarkService {
 
-    private static final Logger LOGGER = Logger.getLogger(ProcessRemarkServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProcessRemarkServiceImpl.class);
 
     private static final String ESCAPED_OPEN_TAG = "&lt;";
     private static final String ESCAPED_CLOSE_TAG = "&gt;";
@@ -799,8 +800,9 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
     }
     
     /**
-     * 
-     * @param originalElementHtml
+     *
+     * @param elementHtml
+     * @param elementName
      * @return 
      */
     private String closeElement(String elementHtml, String elementName) {
@@ -818,7 +820,6 @@ public class ProcessRemarkServiceImpl implements ProcessRemarkService {
      * 
      * @param originalElementHtml
      * @param truncatedElementHtml
-     * @param indexOfElementToClose
      * @return 
      */
     private String closeInnerElement (

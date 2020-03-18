@@ -23,7 +23,8 @@ package org.asqatasun.rules.elementchecker.contrast.helper;
 
 import java.awt.Color;
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -31,8 +32,8 @@ import org.apache.log4j.Logger;
  */
 public class ContrastHelperTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(ContrastHelperTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ContrastHelperTest.class);
     
     public ContrastHelperTest(String testName) {
         super(testName);

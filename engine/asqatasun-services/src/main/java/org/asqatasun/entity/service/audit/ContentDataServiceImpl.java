@@ -24,13 +24,15 @@ package org.asqatasun.entity.service.audit;
 import java.util.*;
 import org.apache.http.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.*;
 import org.asqatasun.entity.audit.factory.ContentFactory;
 import org.asqatasun.entity.dao.audit.ContentDAO;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.service.AbstractGenericDataService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,10 +40,11 @@ import org.springframework.stereotype.Service;
  * @author jkowalczyk
  */
 @Service("contentDataService")
+@Profile("!test")
 public class ContentDataServiceImpl extends AbstractGenericDataService<Content, Long>
         implements ContentDataService {
 
-    private static final Logger LOGGER = Logger.getLogger(ContentDataServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ContentDataServiceImpl.class);
 
     public ContentDataServiceImpl() {
         super();

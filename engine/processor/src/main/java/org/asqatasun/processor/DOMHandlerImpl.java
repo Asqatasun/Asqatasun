@@ -30,7 +30,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 import org.jsoup.select.Selector.SelectorParseException;
@@ -41,6 +40,8 @@ import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.exception.IncoherentValueDomainsException;
 import org.asqatasun.ruleimplementation.RuleHelper;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -53,7 +54,7 @@ import org.xml.sax.SAXException;
  */
 public class DOMHandlerImpl implements DOMHandler {
 
-    private static Logger LOGGER = Logger.getLogger(DOMHandlerImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DOMHandlerImpl.class);
     private static final String ATTRIBUTE_MISSING_MSG_CODE = "AttributeMissing";
     private static final String CHILD_NODE_MISSING_MSG_CODE ="ChildNodeMissing";
     private Document document;

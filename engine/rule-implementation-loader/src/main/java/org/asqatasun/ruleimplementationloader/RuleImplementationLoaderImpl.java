@@ -21,8 +21,8 @@
  */
 package org.asqatasun.ruleimplementationloader;
 
-import org.apache.log4j.Logger;
 import org.asqatasun.ruleimplementation.RuleImplementation;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -52,10 +52,10 @@ public class RuleImplementationLoaderImpl implements RuleImplementationLoader {
 
     private RuleImplementation loadClass(String className, String archiveName) {
         try {
-            Logger.getLogger(this.getClass()).debug("Loading " + className + " rule");
+            LoggerFactory.getLogger(this.getClass()).debug("Loading " + className + " rule");
             return (RuleImplementation) Class.forName(className).newInstance();
         } catch (Exception ex) {
-            Logger.getLogger(this.getClass()).error(
+            LoggerFactory.getLogger(this.getClass()).error(
                     "archiveName=" + archiveName + ", "
                         + "className=" + className, 
                     ex);

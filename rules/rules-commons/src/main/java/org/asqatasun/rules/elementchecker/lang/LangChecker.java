@@ -27,7 +27,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.GenericValidator;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.EvidenceElement;
@@ -46,6 +45,8 @@ import org.asqatasun.rules.keystore.HtmlElementStore;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 import org.asqatasun.rules.textbuilder.CompleteTextElementBuilder;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -53,7 +54,7 @@ import org.asqatasun.rules.textbuilder.TextElementBuilder;
  */
 public abstract class LangChecker extends NomenclatureBasedElementChecker {
 
-    private static final Logger LOGGER = Logger.getLogger(LangChecker.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LangChecker.class);
 
     private static final String NON_ALPHANUMERIC_PATTERN_STR = "[\\d+\\W+]+?";
     private final Pattern nonAlphanumericPattern = Pattern.compile(NON_ALPHANUMERIC_PATTERN_STR);
@@ -430,7 +431,8 @@ public abstract class LangChecker extends NomenclatureBasedElementChecker {
      * @param message
      * @param defaultLang
      * @param currentLang
-     * @param linkTextValue
+     * @param detectedLang
+     * @param testedText
      */
     private void addSourceCodeRemark(
             TestSolution testSolution,

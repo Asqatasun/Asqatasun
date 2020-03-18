@@ -24,7 +24,6 @@ package org.asqatasun.rules.elementchecker.attribute;
 import java.util.ArrayList;
 import java.util.Collection;
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -36,6 +35,8 @@ import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.keystore.AttributeStore;
 import org.asqatasun.rules.keystore.EvidenceStore;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -43,8 +44,8 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class AttributePresenceCheckerTest extends TestCase{
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(AttributePresenceCheckerTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(AttributePresenceCheckerTest.class);
     
     private static final String ATTR_PRESENT_MSG = "present";
     private static final String ATTR_ABSENT_MSG = "absent";

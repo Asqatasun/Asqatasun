@@ -25,11 +25,12 @@ import java.io.File;
 import java.io.IOException;
 import junit.framework.TestCase;
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -38,7 +39,7 @@ import org.jsoup.select.Elements;
 public class PathElementBuilderTest extends TestCase {
 
     private static final Logger LOGGER =
-            Logger.getLogger(PathElementBuilderTest.class);
+            LoggerFactory.getLogger(PathElementBuilderTest.class);
 
     public PathElementBuilderTest(String testName) {
         super(testName);

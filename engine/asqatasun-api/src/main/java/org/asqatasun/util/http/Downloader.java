@@ -35,7 +35,8 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -43,7 +44,7 @@ import org.apache.log4j.Logger;
  */
 public class Downloader {
     
-    private static final Logger LOGGER = Logger.getLogger(Downloader.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Downloader.class);
 
     private static final String HTTP_PROTOCOL_PREFIX = "http://";
     private static final String HTTPS_PROTOCOL_PREFIX = "https://";
@@ -67,7 +68,7 @@ public class Downloader {
             }
             return urlContent.toString();
         } catch (IOException ex) {
-            LOGGER.warn(ex);
+            LOGGER.warn("error when retrieving context", ex);
             return "";
         } finally {
             try {
@@ -75,7 +76,7 @@ public class Downloader {
                     in.close();
                 }
             } catch (IOException ex) {
-                LOGGER.warn(ex);
+                LOGGER.warn("error when retrieving context", ex);
                 throw new RuntimeException(ex);
             }
         }

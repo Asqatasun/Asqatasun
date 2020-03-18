@@ -24,9 +24,10 @@ package org.asqatasun.sebuilder.tools;
 
 import org.apache.commons.io.FileDeleteStrategy;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +41,8 @@ import java.util.*;
  */
 @Component
 public final class ProfileFactory {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProfileFactory.class);
 
     private String netExportPath = ".";
     public void setNetExportPath(String netExportPath) {
@@ -57,7 +60,7 @@ public final class ProfileFactory {
     private String proxyHost;
     @Value("${app.engine.loader.pathToPreSetProfile:}")
     private String pathToPreSetProfile;
-    @Value("${app.engine.loader.proxy.exclusionUrl}")
+    @Value("${app.engine.loader.proxy.exclusionUrl:}")
     private String proxyExclusionUrl;
     
     /**
@@ -115,18 +118,18 @@ public final class ProfileFactory {
                   && presetProfileDir.canRead() 
                   && presetProfileDir.canExecute()
                   && presetProfileDir.canWrite()) {
-                Logger.getLogger(this.getClass()).debug(
+                LOGGER.debug(
                         "Start firefox profile with path " 
                         + presetProfileDir.getAbsolutePath());
                 return new FirefoxProfile(presetProfileDir);
             } else {
-                Logger.getLogger(this.getClass()).debug(
+                LOGGER.debug(
                         "The profile with path " 
                         + presetProfileDir.getAbsolutePath()
                         + " doesn't exist or don't have permissions");
             }
         }
-        Logger.getLogger(this.getClass()).debug("Start firefox with fresh new profile");
+        LOGGER.debug("Start firefox with fresh new profile");
         FirefoxProfile firefoxProfile = new FirefoxProfile();
         setUpPreferences(firefoxProfile, loadImage);
         setUpProxy(firefoxProfile);
@@ -152,7 +155,7 @@ public final class ProfileFactory {
                 FileDeleteStrategy.FORCE.delete(new File(netExportPathMap.get(firefoxProfile)));
             }
         } catch (IOException ex) {
-            Logger.getLogger(this.getClass()).error(ex);
+            LOGGER.error(ex.getMessage());
         }
         netExportPathMap.remove(firefoxProfile);
     }

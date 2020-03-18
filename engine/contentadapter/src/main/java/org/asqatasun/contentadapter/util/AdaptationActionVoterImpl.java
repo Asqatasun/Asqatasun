@@ -23,9 +23,9 @@
 package org.asqatasun.contentadapter.util;
 
 import java.util.Collection;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
+import org.slf4j.LoggerFactory;
 
 /**
  * This voter decides whether an action is executable regarding the current 
@@ -49,7 +49,7 @@ public class AdaptationActionVoterImpl implements AdaptationActionVoter {
     
     @Override
     public boolean doesExecute(Audit audit) {
-        Logger.getLogger(this.getClass()).debug("doesExecute "+getClass() + " for audit n° " +audit.getId());
+        LoggerFactory.getLogger(this.getClass()).debug("doesExecute "+getClass() + " for audit n° " +audit.getId());
         return authorizedValues.contains(parameterDataService.getReferentialKeyFromAudit(audit));
     }
     

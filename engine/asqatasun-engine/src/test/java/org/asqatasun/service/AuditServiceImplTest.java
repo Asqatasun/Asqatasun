@@ -25,11 +25,12 @@ import java.util.*;
 import java.util.concurrent.Callable;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.easymock.EasyMock;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.factory.AuditCommandFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -37,7 +38,7 @@ import org.asqatasun.service.command.factory.AuditCommandFactory;
  */
 public class AuditServiceImplTest extends TestCase {
 
-    private static final Logger LOGGER = Logger.getLogger(AuditServiceImplTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditServiceImplTest.class);
 
     private AuditServiceThreadFactory mockAuditServiceThreadFactory;
     private AuditServiceThreadQueue mockAuditServiceThreadQueue;

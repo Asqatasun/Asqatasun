@@ -23,10 +23,11 @@
 package org.asqatasun.service.command;
 
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.util.FileNaming;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -37,7 +38,7 @@ public class PageAuditCrawlerCommandImpl extends CrawlAuditCommandImpl {
      /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(PageAuditCrawlerCommandImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PageAuditCrawlerCommandImpl.class);
     
     /**
      * 
@@ -55,9 +56,7 @@ public class PageAuditCrawlerCommandImpl extends CrawlAuditCommandImpl {
     
     @Override
     public void callCrawlerService() {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Launching crawler for page " + getUrl());
-        }
+        LOGGER.info("Launching crawler for page " + getUrl());
         getCrawlerService().crawlPage(getAudit(), getUrl());
     }
 

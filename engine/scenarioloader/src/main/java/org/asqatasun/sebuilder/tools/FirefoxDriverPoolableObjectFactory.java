@@ -21,9 +21,9 @@
  */
 package org.asqatasun.sebuilder.tools;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -62,7 +62,7 @@ public class FirefoxDriverPoolableObjectFactory {
     public FirefoxDriver makeObject() throws Exception {
         FirefoxBinary ffBinary = new FirefoxBinary();
         if (System.getProperty(DISPLAY_PROPERTY_KEY) != null) {
-            Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + System.getProperty(DISPLAY_PROPERTY_KEY));
+            LoggerFactory.getLogger(this.getClass()).info("Setting Xvfb display with value " + System.getProperty(DISPLAY_PROPERTY_KEY));
             ffBinary.setEnvironmentProperty("DISPLAY", System.getProperty(DISPLAY_PROPERTY_KEY));
         }
         FirefoxDriver fd = new FirefoxDriver(ffBinary, ProfileFactory.getInstance().getScenarioProfile());

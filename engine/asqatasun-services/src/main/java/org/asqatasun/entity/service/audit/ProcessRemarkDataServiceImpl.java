@@ -32,6 +32,7 @@ import org.asqatasun.entity.dao.audit.ProcessRemarkDAO;
 import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
@@ -39,17 +40,20 @@ import org.springframework.stereotype.Service;
  * @author jkowalczyk
  */
 @Service("processRemarkDataService")
+@Profile("!test")
 public class ProcessRemarkDataServiceImpl extends AbstractGenericDataService<ProcessRemark, Long> implements
         ProcessRemarkDataService {
 
-    @Autowired
-    @Qualifier("sourceCodeRemarkFactory")
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    private final SourceCodeRemarkFactory sourceCodeRemarkFactory;
+    protected final ProcessRemarkFactory entityFactory;
 
-    @Autowired
-    @Qualifier("processRemarkFactory")
-    protected ProcessRemarkFactory entityFactory;
-    
+    public ProcessRemarkDataServiceImpl(
+        @Qualifier("sourceCodeRemarkFactory") SourceCodeRemarkFactory sourceCodeRemarkFactory,
+        @Qualifier("processRemarkFactory") ProcessRemarkFactory entityFactory) {
+        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+        this.entityFactory = entityFactory;
+    }
+
     @Override
     public Collection<ProcessRemark> findProcessRemarksFromProcessResult(
             ProcessResult processResult, 

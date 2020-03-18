@@ -23,13 +23,13 @@
 package org.asqatasun.service.command;
 
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.service.AuditServiceImpl;
 import org.asqatasun.service.CrawlerService;
 import org.asqatasun.util.http.HttpRequestHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -40,7 +40,7 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
     /**
      * Logger
      */
-    private static final Logger LOGGER = Logger.getLogger(CrawlAuditCommandImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CrawlAuditCommandImpl.class);
     
     /**
      * The crawlerService instance
@@ -102,7 +102,7 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
         if (getContentDataService().hasContent(getAudit())) {
             setStatusToAudit(AuditStatus.CONTENT_ADAPTING);
         } else {
-            Logger.getLogger(AuditServiceImpl.class).warn("Audit has no content");
+            LOGGER.warn("Audit has no content");
             setStatusToAudit(AuditStatus.ERROR);
         }
     }

@@ -25,16 +25,17 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.JoinPoint.StaticPart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
  * @author jkowalczyk
  */
 public class EALoggerImpl {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(EALoggerImpl.class);
     /*
      * This method is used to retrieved the name of the server
      */
@@ -45,14 +46,14 @@ public class EALoggerImpl {
             // Get hostname
             hostname = addr.getHostName();
         } catch (UnknownHostException ex) {
-            Logger.getLogger(EALoggerImpl.class).error(null, ex);
+            LOGGER.error(null, ex);
         }
         return hostname;
     }
     protected Map<String, Long> timeMap = new HashMap<String, Long>();
 
     public void logException(Throwable exception) {
-        Logger.getLogger(EALoggerImpl.class).error(getHostname() + " - " + exception, exception.getCause());
+        LOGGER.error(getHostname() + " - " + exception, exception.getCause());
     }
 
     /*
@@ -76,7 +77,7 @@ public class EALoggerImpl {
         }
         sb.append("]");
 
-        Logger.getLogger(EALoggerImpl.class).info(getHostname() + " - " + sb);
+        LOGGER.info(getHostname() + " - " + sb);
 
         timeMap.put(name, System.currentTimeMillis());
     }
@@ -94,9 +95,9 @@ public class EALoggerImpl {
         float time = ((float) (System.currentTimeMillis() - timeMap.get(name))) / 1000f;
         timeMap.remove(name);
 
-        Logger.getLogger(EALoggerImpl.class).info(getHostname() + " - " + "LEAVING " + name + " returning: [" + result + "]");
+        LOGGER.info(getHostname() + " - " + "LEAVING " + name + " returning: [" + result + "]");
 
-        Logger.getLogger(EALoggerImpl.class).info("Execution Time is : " + time);
+        LOGGER.info("Execution Time is : " + time);
     }
 
 }

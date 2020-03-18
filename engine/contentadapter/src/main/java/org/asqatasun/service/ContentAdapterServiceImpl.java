@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.asqatasun.contentadapter.*;
 import org.asqatasun.contentadapter.util.URLIdentifierFactory;
-import org.asqatasun.util.http.Downloader;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.springframework.beans.factory.annotation.Autowired;

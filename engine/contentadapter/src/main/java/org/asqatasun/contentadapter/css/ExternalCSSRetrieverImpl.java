@@ -25,12 +25,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import org.apache.log4j.Logger;
 import org.asqatasun.contentadapter.AdaptationListener;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.StylesheetContent;
 import org.asqatasun.entity.service.audit.ContentDataService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -43,7 +44,7 @@ import org.springframework.stereotype.Component;
 @Profile("!test")
 public class ExternalCSSRetrieverImpl implements ExternalCSSRetriever, AdaptationListener {
 
-    private static final Logger LOGGER = Logger.getLogger(ExternalCSSRetrieverImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExternalCSSRetrieverImpl.class);
     private Map<Long, Collection<StylesheetContent>> externalCssMap =
             new HashMap<>();
 

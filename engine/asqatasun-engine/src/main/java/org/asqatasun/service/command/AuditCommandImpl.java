@@ -27,7 +27,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import javax.persistence.PersistenceException;
 import org.apache.http.HttpStatus;
-import org.apache.log4j.Logger;
 import org.asqatasun.analyser.AnalyserService;
 import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.contentadapter.AdaptationListener;
@@ -46,6 +45,8 @@ import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.service.*;
 import org.asqatasun.util.MD5Encoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -53,7 +54,7 @@ import org.asqatasun.util.MD5Encoder;
  */
 public abstract class AuditCommandImpl implements AuditCommand {
 
-    private static final Logger LOGGER = Logger.getLogger(AuditCommandImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditCommandImpl.class);
     
     public static final String AUDIT_STATUS_IS_LOGGER_STR = "Audit status is";
     public static final String WHILE_LOGGER_STR = " while";
@@ -322,7 +323,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
         if (hasCorrectDOM) {
             setStatusToAudit(AuditStatus.PROCESSING);
         } else {
-            Logger.getLogger(AuditServiceImpl.class).warn("Audit has no corrected DOM");
+            LOGGER.warn("Audit has no corrected DOM");
             setStatusToAudit(AuditStatus.ERROR);
         }
         
@@ -362,7 +363,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                 try {
                     ((SSP) content).setSource(MD5Encoder.MD5(((SSP) content).getSource()));
                 } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-                    LOGGER.warn(ex);
+                    LOGGER.warn(ex.getMessage());
                 }
             }
             try {
@@ -390,9 +391,7 @@ public abstract class AuditCommandImpl implements AuditCommand {
                     .append(WAS_REQUIRED_LOGGER_STR).toString());
             return;
         }
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Processing " + audit.getSubject().getURL());
-        }
+        LOGGER.info("Processing " + audit.getSubject().getURL());
         // debug tools
         Date beginProcessDate = null;
         Date endProcessDate = null;
@@ -406,16 +405,14 @@ public abstract class AuditCommandImpl implements AuditCommand {
         Set<ProcessResult> processResultSet = new HashSet<>();
         
         while (i.compareTo(nbOfContent) < 0) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(
-                        new StringBuilder("Processing from ")
-                            .append(i)
-                            .append(TO_LOGGER_STR)
-                            .append(i+processingTreatmentWindow)
-                            .append("for ")
-                            .append(audit.getSubject().getURL()).toString());
-                beginProcessDate = Calendar.getInstance().getTime();
-            }
+            LOGGER.debug(
+                    new StringBuilder("Processing from ")
+                        .append(i)
+                        .append(TO_LOGGER_STR)
+                        .append(i+processingTreatmentWindow)
+                        .append("for ")
+                        .append(audit.getSubject().getURL()).toString());
+            beginProcessDate = Calendar.getInstance().getTime();
             Collection<Content> contentList = contentDataService.getSSPWithRelatedContentFromWebResource(
                                             webResourceId, 
                                             i, 

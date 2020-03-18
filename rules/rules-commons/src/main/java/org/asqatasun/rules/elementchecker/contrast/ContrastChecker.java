@@ -28,7 +28,6 @@ import java.util.*;
 import javax.annotation.Nonnull;
 import javax.persistence.NoResultException;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.EvidenceElement;
@@ -44,6 +43,9 @@ import static org.asqatasun.rules.keystore.CssLikeQueryStore.IMG_CSS_LIKE_QUERY;
 import static org.asqatasun.rules.keystore.EvidenceStore.*;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 import org.asqatasun.rules.elementchecker.contrast.helper.ContrastHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static org.asqatasun.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
 
@@ -55,7 +57,7 @@ import static org.asqatasun.service.ProcessRemarkService.DEFAULT_EVIDENCE;
  */
 public class ContrastChecker extends ElementCheckerImpl {
 
-    private static final Logger LOGGER = Logger.getLogger(ContrastChecker.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ContrastChecker.class);
     
     private static final String ALT_CONTRAST_MECHA_PARAM_KEY = 
                     "ALTERNATIVE_CONTRAST_MECHANISM";
@@ -302,8 +304,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     
     /**
      * 
-     * @param fontSize
-     * @param fontWeight
+     * @param element
      * @return 
      */
     private boolean isElementPartOfTheScope (DomElement element) {
@@ -328,7 +329,7 @@ public class ContrastChecker extends ElementCheckerImpl {
     private void resetCollectedDataOnException (
             TestSolutionHandler testSolutionHandler, 
             Exception exception) {
-        LOGGER.info(exception);
+        LOGGER.info(exception.getMessage());
         testSolutionHandler.cleanTestSolutions();
         testSolutionHandler.addTestSolution(TestSolution.NOT_TESTED);
         elementCounter = 0;

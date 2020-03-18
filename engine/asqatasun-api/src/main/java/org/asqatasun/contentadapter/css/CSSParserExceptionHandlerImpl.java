@@ -23,8 +23,9 @@ package org.asqatasun.contentadapter.css;
 
 import com.phloc.css.handler.ICSSParseExceptionHandler;
 import com.phloc.css.parser.ParseException;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.StylesheetContent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -36,7 +37,7 @@ import org.asqatasun.entity.audit.StylesheetContent;
  */
 public class CSSParserExceptionHandlerImpl implements ICSSParseExceptionHandler {
 
-    private static final Logger LOGGER = Logger.getLogger(CSSParserExceptionHandlerImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CSSParserExceptionHandlerImpl.class);
     private StylesheetContent css;
 
     public CSSParserExceptionHandlerImpl(StylesheetContent css) {
@@ -49,7 +50,6 @@ public class CSSParserExceptionHandlerImpl implements ICSSParseExceptionHandler 
         int column = extype.currentToken.next.beginColumn;
         this.css.setAdaptedContent(CSSContentAdapter.CSS_ON_ERROR + 'l' + line + 'c' + column);
         LOGGER.warn("Error on adaptation " + css.getURI() + " " + css.getSource());
-        LOGGER.warn(extype.currentToken.getValue());
         LOGGER.warn(extype.getMessage());
     }
 

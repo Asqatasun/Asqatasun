@@ -25,11 +25,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.factory.AuditCommandFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AuditServiceImpl implements AuditService, AuditServiceListener {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuditServiceImpl.class);
     private AuditServiceThreadFactory auditServiceThreadFactory;
     private AuditServiceThreadQueue auditServiceThreadQueue;
     private AuditCommandFactory auditCommandFactory;
@@ -80,7 +81,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit auditScenario(String scenarioName, String scenario, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditScenario");
+        LOGGER.debug("auditScenario");
         AuditCommand auditCommand = auditCommandFactory.create(scenarioName, scenario, paramSet);
         auditServiceThreadQueue.addScenarioAudit(auditCommand);
         auditServiceThreadQueue.add(this);
@@ -89,7 +90,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit auditPage(String pageUrl, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditpage");
+        LOGGER.debug("auditpage");
         AuditCommand auditCommand = auditCommandFactory.create(pageUrl, paramSet, false);
         auditServiceThreadQueue.addPageAudit(auditCommand);
         auditServiceThreadQueue.add(this);
@@ -98,7 +99,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     
     @Override
     public Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditpageupload");
+        LOGGER.debug("auditpageupload");
         AuditCommand auditCommand = auditCommandFactory.create(fileMap, paramSet);
         auditServiceThreadQueue.addPageUploadAudit(auditCommand); 
         return auditCommand.getAudit();
@@ -106,7 +107,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit auditSite(String siteUrl, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditSite");
+        LOGGER.debug("auditSite");
         AuditCommand auditCommand = auditCommandFactory.create(siteUrl, paramSet, true);
         auditServiceThreadQueue.addSiteAudit(auditCommand);
         auditServiceThreadQueue.add(this);
@@ -115,7 +116,7 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
 
     @Override
     public Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet) {
-        Logger.getLogger(this.getClass()).debug("auditGroupOfPages");
+        LOGGER.debug("auditGroupOfPages");
         AuditCommand auditCommand = auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
         auditServiceThreadQueue.addPageAudit(auditCommand); 
         return auditCommand.getAudit();

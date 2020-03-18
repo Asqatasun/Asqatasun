@@ -28,6 +28,7 @@ import org.asqatasun.entity.audit.factory.PreProcessResultFactory;
 import org.asqatasun.entity.dao.audit.PreProcessResultDAO;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.service.AbstractGenericDataService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 /**
@@ -35,6 +36,7 @@ import org.springframework.stereotype.Service;
  * @author jkowalczyk
  */
 @Service("preProcessResultDataService")
+@Profile("!test")
 public class PreProcessResultDataServiceImpl extends AbstractGenericDataService<PreProcessResult, Long> implements
         PreProcessResultDataService {
 

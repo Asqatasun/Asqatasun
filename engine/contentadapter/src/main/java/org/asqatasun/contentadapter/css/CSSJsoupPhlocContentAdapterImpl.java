@@ -45,7 +45,6 @@ import javax.persistence.PersistenceException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.hibernate.exception.DataException;
 import org.jsoup.nodes.Element;
 import org.asqatasun.contentadapter.ContentParser;
@@ -58,6 +57,8 @@ import org.asqatasun.contentadapter.util.URLIdentifier;
 import org.asqatasun.entity.audit.StylesheetContent;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.util.http.HttpRequestHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * External resources are adapted on the fly, and inline and local css are
@@ -68,7 +69,7 @@ import org.asqatasun.util.http.HttpRequestHandler;
 public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter implements
         CSSContentAdapter {
 
-    private static final Logger LOGGER = Logger.getLogger(CSSJsoupPhlocContentAdapterImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CSSJsoupPhlocContentAdapterImpl.class);
     private static final String HTTP_PREFIX = "http";
     
     private String currentLocalResourcePath;
@@ -522,7 +523,7 @@ public class CSSJsoupPhlocContentAdapterImpl extends AbstractContentAdapter impl
             URI uri = URLUtils.getAsURI(base);
             return uri.getScheme()+"://"+uri.getHost();
         } catch (NullPointerException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         }
         return base;
     }

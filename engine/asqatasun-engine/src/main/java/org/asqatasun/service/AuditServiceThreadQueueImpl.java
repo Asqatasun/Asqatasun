@@ -23,9 +23,10 @@ package org.asqatasun.service;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.service.command.AuditCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -37,7 +38,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuditServiceThreadQueueImpl implements AuditServiceThreadQueue, AuditServiceThreadListener {
     
-    private static final Logger LOGGER = Logger.getLogger(AuditServiceThreadQueueImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditServiceThreadQueueImpl.class);
     
     private final Queue<AuditCommand> pageAuditWaitQueue = new ConcurrentLinkedQueue<>();
     private final Queue<AuditCommand> scenarioAuditWaitQueue = new ConcurrentLinkedQueue<>();

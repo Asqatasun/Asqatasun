@@ -23,10 +23,10 @@
 package org.asqatasun.webapp.test;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.sebuilder.tools.ProfileFactory;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -67,7 +67,7 @@ public class WebDriverFactory {
         if (webDriver == null) {
             FirefoxBinary ffBinary = new FirefoxBinary();
             if (StringUtils.isNotBlank(display)) {
-                Logger.getLogger(this.getClass()).info("Setting Xvfb display with value " + display);
+                LoggerFactory.getLogger(this.getClass()).info("Setting Xvfb display with value " + display);
                 ffBinary.setEnvironmentProperty("DISPLAY", display);
             }
             ProfileFactory pf = ProfileFactory.getInstance();

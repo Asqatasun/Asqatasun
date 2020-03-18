@@ -28,13 +28,14 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 import org.apache.http.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.asqatasun.entity.audit.*;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.dao.AbstractJPADAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -45,7 +46,7 @@ import org.springframework.stereotype.Repository;
 public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
         ContentDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(ContentDAOImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ContentDAOImpl.class);
     private static final int DEFAULT_HTTP_STATUS_VALUE = -1;
     private static final Integer HTTP_STATUS_OK = HttpStatus.SC_OK;
     private static final String INSERT_QUERY =

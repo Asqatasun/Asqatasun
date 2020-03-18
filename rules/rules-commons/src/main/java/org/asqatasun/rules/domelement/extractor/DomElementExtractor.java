@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.persistence.NoResultException;
-import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +32,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.rules.domelement.DomElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility class that extracts the js Parser results (Pre process result with 
@@ -41,7 +42,7 @@ import org.asqatasun.rules.domelement.DomElement;
  */
 public final class DomElementExtractor {
     
-    private static final Logger LOGGER = Logger.getLogger(DomElementExtractor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DomElementExtractor.class);
     private static final String COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY = 
             "colorExtractor";
 
@@ -71,7 +72,7 @@ public final class DomElementExtractor {
                             new JSONObject(json.get(i).toString())));
             }
         } catch (JSONException ex) {
-            LOGGER.warn(ex);
+            LOGGER.warn("error when extracting element", ex);
         }
         return domElements;
     }

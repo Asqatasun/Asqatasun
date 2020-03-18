@@ -29,8 +29,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.TestSolution;
+import org.slf4j.LoggerFactory;
+
 import static org.asqatasun.rules.keystore.RemarkMessageStore.BAD_UNIT_TYPE_MSG;
 
 /**
@@ -101,7 +102,7 @@ public class CheckUnitCSSVisitor extends SimpleCssVisitor {
         try {
             Float.valueOf(value);
         } catch (NumberFormatException nfe) {
-            Logger.getLogger(this.getClass()).debug("not numerical value " + exprValue + " " + unit + " " +value);
+            LoggerFactory.getLogger(this.getClass()).debug("not numerical value " + exprValue + " " + unit + " " +value);
             return null;
         }
         return value;
@@ -110,7 +111,7 @@ public class CheckUnitCSSVisitor extends SimpleCssVisitor {
     private void checkUnitAndValue(ECSSUnit unit, String value) {
         if (value != null && !NON_ZERO_VALUE_PATTERN.matcher(value).matches() && unit != null) {
             if (checkUnitList.contains(unit)) {
-                Logger.getLogger(this.getClass()).debug("wrong unit encountered " + getCurrentSelector() + " " + unit.getName());
+                LoggerFactory.getLogger(this.getClass()).debug("wrong unit encountered " + getCurrentSelector() + " " + unit.getName());
                 addCssCodeRemark(
                         TestSolution.FAILED,
                         BAD_UNIT_TYPE_MSG,

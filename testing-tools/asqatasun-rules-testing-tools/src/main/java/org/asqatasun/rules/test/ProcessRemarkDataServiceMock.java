@@ -32,6 +32,7 @@ import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.entity.GenericFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
@@ -40,16 +41,19 @@ import java.util.Collection;
  * @author jkowalczyk
  */
 @Profile("test")
+@Component
 public class ProcessRemarkDataServiceMock implements ProcessRemarkDataService{
 
-    private SourceCodeRemarkFactory sourceCodeRemarkFactory;
-    @Autowired
-    public void setSourceCodeRemarkFactory(SourceCodeRemarkFactory sourceCodeRemarkFactory) {
-        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
-    }
-    
+    private final SourceCodeRemarkFactory sourceCodeRemarkFactory;
     private GenericFactory<ProcessRemark> processRemarkFactory;
-    
+
+    public ProcessRemarkDataServiceMock(
+        SourceCodeRemarkFactory sourceCodeRemarkFactory,
+        GenericFactory <ProcessRemark> processRemarkFactory) {
+        this.sourceCodeRemarkFactory = sourceCodeRemarkFactory;
+        this.processRemarkFactory = processRemarkFactory;
+    }
+
     @Override
     public Collection<ProcessRemark> findProcessRemarksFromProcessResult(ProcessResult processResult, int limit) {
         return processResult.getRemarkSet();

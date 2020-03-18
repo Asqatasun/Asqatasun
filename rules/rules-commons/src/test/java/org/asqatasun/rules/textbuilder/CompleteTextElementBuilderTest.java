@@ -22,8 +22,9 @@
 package org.asqatasun.rules.textbuilder;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -31,8 +32,8 @@ import org.jsoup.nodes.Element;
  */
 public class CompleteTextElementBuilderTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(CompleteTextElementBuilderTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(CompleteTextElementBuilderTest.class);
     
     public CompleteTextElementBuilderTest(String testName) {
         super(testName);

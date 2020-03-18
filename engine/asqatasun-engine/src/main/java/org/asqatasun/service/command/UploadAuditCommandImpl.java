@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.persistence.PersistenceException;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.parameterization.Parameter;
@@ -35,6 +34,8 @@ import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.service.ContentLoaderService;
 import org.asqatasun.util.FileNaming;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -42,7 +43,7 @@ import org.asqatasun.util.FileNaming;
  */
 public class UploadAuditCommandImpl extends AuditCommandImpl {
 
-    private static final Logger LOGGER = Logger.getLogger(UploadAuditCommandImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UploadAuditCommandImpl.class);
     
     /**
      * The map that contains the files to test identified by 

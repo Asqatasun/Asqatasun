@@ -28,7 +28,6 @@ import java.net.*;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -49,8 +48,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
 import org.mozilla.universalchardet.UniversalDetector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -62,7 +62,7 @@ import org.springframework.stereotype.Component;
 public class HttpRequestHandler {
     
     private static final String ASQATASUN_USER_AGENT = "asqatasun";
-    private static final Logger LOGGER  = Logger.getLogger(HttpRequestHandler.class);
+    private static final Logger LOGGER  = LoggerFactory.getLogger(HttpRequestHandler.class);
 
     @Value("${app.engine.loader.proxy.port:}")
     private String proxyPort;
@@ -72,8 +72,8 @@ public class HttpRequestHandler {
     private String proxyUser;
     @Value("${app.engine.loader.proxy.password:}")
     private String proxyPassword;
-    @Value("${app.engine.loader.bypassCheck}")
-    private boolean bypassCheck = false;
+    @Value("${app.engine.loader.bypassCheck:false}")
+    private Boolean bypassCheck;
     public void setBypassCheck(String bypassCheck) {
         this.bypassCheck = Boolean.parseBoolean(bypassCheck);
     }
@@ -83,7 +83,7 @@ public class HttpRequestHandler {
     /**
      * Multiple Url can be set through a unique String separated by ;
      */
-    @Value("${app.engine.loader.proxy.exclusionUrl}")
+    @Value("${app.engine.loader.proxy.exclusionUrl:}")
     private String proxyExclusionUrl;
     public List<String> getProxyExclusionUrlList() {
         if (StringUtils.isNotBlank(proxyExclusionUrl)) {

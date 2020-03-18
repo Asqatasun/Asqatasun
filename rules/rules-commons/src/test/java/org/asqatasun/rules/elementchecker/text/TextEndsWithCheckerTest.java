@@ -23,7 +23,6 @@ package org.asqatasun.rules.elementchecker.text;
 
 import java.util.Arrays;
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -35,6 +34,8 @@ import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.asqatasun.service.NomenclatureLoaderService;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -43,8 +44,8 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class TextEndsWithCheckerTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(TextEndsWithCheckerTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TextEndsWithCheckerTest.class);
     
     private static final String EXTENSION_NOM_NAME = "extension";
     private static final String DETECTION_MSG = "detected";

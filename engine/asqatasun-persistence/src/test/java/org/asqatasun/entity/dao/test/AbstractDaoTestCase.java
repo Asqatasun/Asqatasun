@@ -21,7 +21,6 @@
  */
 package org.asqatasun.entity.dao.test;
 
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.dao.config.PersistenceConfigTest;
 import org.dbunit.DataSourceBasedDBTestCase;
 import org.dbunit.database.DatabaseConfig;
@@ -30,6 +29,8 @@ import org.dbunit.dataset.ReplacementDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -56,7 +57,7 @@ public abstract class AbstractDaoTestCase extends DataSourceBasedDBTestCase {
     /**
      * Logger.
      */
-    protected static final Logger LOGGER = Logger.getLogger(AbstractDaoTestCase.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractDaoTestCase.class);
 
 
     private final String inputDataFilePath = "src/test/resources/dataSets/";

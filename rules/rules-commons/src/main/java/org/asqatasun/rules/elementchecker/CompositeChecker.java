@@ -27,7 +27,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.TestSolution;
@@ -36,6 +35,7 @@ import org.asqatasun.ruleimplementation.ElementHandler;
 import org.asqatasun.ruleimplementation.ElementHandlerImpl;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandlerImpl;
+import org.slf4j.LoggerFactory;
 
 /**
  * This checker aggregate checkers and call then recursively, element by element
@@ -156,7 +156,7 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
 
             TestSolution checkerSolution = testSolutionHandler.getTestSolution();
             
-            Logger.getLogger(this.getClass()).debug("Checker "+ec.getClass() + 
+            LoggerFactory.getLogger(this.getClass()).debug("Checker "+ec.getClass() +
                     " returned " + checkerSolution);
             
             if (isOrCombinaison && (checkerSolution.equals(ec.getFailureSolution()) || 
@@ -199,7 +199,6 @@ public class CompositeChecker extends NomenclatureBasedElementChecker {
     
     /**
      * Set service to elementChecker depending on their nature.
-     * @param elementChecker 
      */
     private void setServicesToCheckers() {
         for (ElementChecker el : checkers) {

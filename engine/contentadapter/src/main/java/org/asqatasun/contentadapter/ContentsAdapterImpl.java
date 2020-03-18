@@ -26,13 +26,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.contentadapter.html.AbstractHTMLCleaner;
 import org.asqatasun.contentadapter.html.HTMLCleanerImpl;
 import org.asqatasun.contentadapter.util.AdaptationActionVoter;
 import org.asqatasun.contentadapter.util.DocumentCaseInsensitiveAdapter;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.SSP;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -40,7 +41,7 @@ import org.asqatasun.entity.audit.SSP;
  */
 public class ContentsAdapterImpl implements ContentsAdapter {
 
-    private static final Logger LOGGER = Logger.getLogger(ContentsAdapterImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ContentsAdapterImpl.class);
 
     private Collection<Content> contentList;
     private HTMLCleaner htmlCleaner;
@@ -82,7 +83,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
             // Unreachable resources (404 error) are saved in the list for reports
             // We only handle here the fetched content (HttpStatus=200)
             if (content instanceof SSP && content.getHttpStatusCode() == 200) {
-                Logger.getLogger(this.getClass()).debug("Adapting " + content.getURI());
+                LOGGER.debug("Adapting " + content.getURI());
                 SSP ssp = (SSP) content;
                 
                 ssp.setDoctype(DocumentCaseInsensitiveAdapter.extractDoctypeDeclaration(ssp.getSource()));
@@ -109,7 +110,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                     htmlParser.setSSP(ssp);
                     htmlParser.run();
                 } else {
-                    Logger.getLogger(this.getClass()).debug("no Html parse executed for the current audit");
+                    LOGGER.debug("no Html parse executed for the current audit");
                 }
                 
                 if (xmlizeContent){
@@ -160,7 +161,7 @@ public class ContentsAdapterImpl implements ContentsAdapter {
                 fw.write(ssp.getDOM());
                 fw.close();
             } catch (IOException ex) {
-                Logger.getLogger(this.getClass()).warn(ex);
+                LOGGER.warn(ex.getMessage());
             }
         }
     }

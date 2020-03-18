@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.asqatasun.analyser.AnalyserService;
 import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.contentadapter.AdaptationListener;
@@ -91,13 +90,11 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
 
     private boolean auditPageWithCrawler = false;
     public void setAuditPageWithCrawler(boolean auditPageWithCrawler) {
-        Logger.getLogger(this.getClass()).debug("AuditPageWithCrawler " + auditPageWithCrawler);
         this.auditPageWithCrawler = auditPageWithCrawler;
     }
 
     private boolean cleanUpRelatedContent = true;
     public void setCleanUpRelatedContent(boolean cleanUpRelatedContent) {
-        Logger.getLogger(this.getClass()).debug("CleanUpRelatedContent " + cleanUpRelatedContent);
         this.cleanUpRelatedContent = cleanUpRelatedContent;
     }
 

@@ -25,13 +25,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.service.audit.PreProcessResultDataService;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.util.factory.DateFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,8 @@ import org.springframework.stereotype.Component;
  */
 @Component("scenarioLoaderFactory")
 public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(ScenarioLoaderFactoryImpl.class);
 
     private WebResourceDataService webResourceDataService;
     private ParameterDataService parameterDataService;
@@ -69,7 +72,7 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         try {
             jsScriptMap.put("colorExtractor", IOUtils.toString(getClass().getResourceAsStream(colorExtractor)));
         } catch (IOException ex) {
-            Logger.getLogger(this.getClass()).warn(ex);
+            LOGGER.warn(ex.getMessage());
         }
         return jsScriptMap;
     }

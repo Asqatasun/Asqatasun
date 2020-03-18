@@ -12,34 +12,6 @@
     <artifactId>security</artifactId>
     <name>security</name>
     <dependencies>
-    <!-- log4j dependencies -->
-        <dependency>
-            <groupId>${log4jGroupId}</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>activation</artifactId>
-                    <groupId>javax.activation</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jms</artifactId>
-                    <groupId>javax.jms</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jmxri</artifactId>
-                    <groupId>com.sun.jmx</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jmxtools</artifactId>
-                    <groupId>com.sun.jdmk</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>mail</artifactId>
-                    <groupId>javax.mail</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <!-- owasp dependencies -->
         <dependency>
             <groupId>org.owasp.esapi</groupId>

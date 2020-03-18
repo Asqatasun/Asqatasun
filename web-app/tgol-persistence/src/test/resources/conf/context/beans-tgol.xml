@@ -26,7 +26,7 @@
     <bean id="roleDAO" class="org.asqatasun.webapp.entity.dao.user.RoleDAOImpl"/>
     <bean id="roleFactory" class="org.asqatasun.webapp.entity.factory.user.RoleFactoryImpl"/>
 
-    <bean id="webResourceFactory" class="org.asqatasun.entity.factory.subject.WebResourceFactoryImpl"/>
+    <bean id="webResourceFactory" class="org.asqatasun.entity.subject.factory.WebResourceFactoryImpl"/>
     <bean id="webResourceDAO" class="org.asqatasun.entity.dao.subject.WebResourceDAOImpl"/>
 
     <bean id="optionElementDAO" class="org.asqatasun.webapp.entity.dao.option.OptionElementDAOImpl"/>

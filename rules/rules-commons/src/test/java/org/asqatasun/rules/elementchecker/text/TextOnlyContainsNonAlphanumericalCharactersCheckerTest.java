@@ -22,7 +22,6 @@
 package org.asqatasun.rules.elementchecker.text;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import static org.easymock.EasyMock.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
@@ -32,6 +31,8 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.asqatasun.service.ProcessRemarkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -39,8 +40,8 @@ import org.asqatasun.service.ProcessRemarkService;
  */
 public class TextOnlyContainsNonAlphanumericalCharactersCheckerTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(TextOnlyContainsNonAlphanumericalCharactersCheckerTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TextOnlyContainsNonAlphanumericalCharactersCheckerTest.class);
     
     private static final String DETECTION_MSG = "detected";
     

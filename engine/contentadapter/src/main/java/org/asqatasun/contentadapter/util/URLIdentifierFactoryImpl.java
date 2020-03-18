@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
  *
  * @author enzolalay
  */
-@Component
+@Component("urlIdentifierFactory")
 public class URLIdentifierFactoryImpl implements URLIdentifierFactory {
 
     @Override

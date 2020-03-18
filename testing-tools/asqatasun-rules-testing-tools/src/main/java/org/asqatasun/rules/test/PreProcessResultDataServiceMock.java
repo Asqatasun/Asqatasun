@@ -23,14 +23,16 @@ package org.asqatasun.rules.test;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.PreProcessResult;
 import org.asqatasun.entity.service.audit.PreProcessResultDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.entity.GenericFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.NoResultException;
 import java.io.File;
@@ -42,9 +44,10 @@ import java.util.Collection;
  * @author jkowalczyk
  */
 @Profile("test")
+@Component
 public class PreProcessResultDataServiceMock implements PreProcessResultDataService{
 
-    private static final Logger LOGGER = Logger.getLogger(PreProcessResultDataServiceMock.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PreProcessResultDataServiceMock.class);
     
     @Override
     public String getPreProcessResultByKeyAndWebResource(String key, WebResource webresource) {
@@ -55,7 +58,7 @@ public class PreProcessResultDataServiceMock implements PreProcessResultDataServ
             LOGGER.debug(json);
             return json;
         } catch (IOException ex) {
-            LOGGER.warn(ex);
+            LOGGER.warn(ex.getMessage());
             throw new NoResultException();
         }
     }

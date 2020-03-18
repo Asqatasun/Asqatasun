@@ -25,13 +25,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.asqatasun.contentadapter.ContentAdapter;
 import org.asqatasun.contentadapter.Resource;
 import org.asqatasun.contentadapter.util.URLIdentifier;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.service.audit.ContentDataService;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -55,7 +55,7 @@ public abstract class AbstractContentAdapter implements ContentAdapter {
         try {
             urlIdentifier.setUrl(new URL(ssp.getURI()));
         } catch (MalformedURLException ex) {
-            Logger.getLogger(AbstractContentAdapter.class.getName()).warn(ex);
+            LoggerFactory.getLogger(AbstractContentAdapter.class.getName()).warn(ex.getMessage());
         }
     }
 

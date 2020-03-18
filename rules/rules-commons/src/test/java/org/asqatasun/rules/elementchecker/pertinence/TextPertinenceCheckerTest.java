@@ -22,12 +22,13 @@
 package org.asqatasun.rules.elementchecker.pertinence;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.keystore.AttributeStore;
 import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
 import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -35,8 +36,8 @@ import org.asqatasun.rules.textbuilder.TextElementBuilder;
  */
 public class TextPertinenceCheckerTest extends TestCase {
     
-    private static final Logger LOGGER = 
-            Logger.getLogger(TextPertinenceCheckerTest.class);
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(TextPertinenceCheckerTest.class);
      
     public TextPertinenceCheckerTest(String testName) {
         super(testName);

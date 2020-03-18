@@ -22,10 +22,11 @@
 package org.asqatasun.webapp.test;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.webapp.test.data.KrashtestResult;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -79,7 +80,7 @@ public abstract class AbstractAsqatasunOnlineTest extends TestCase {
     private static final String NT_KEY = "Not tested";
     private static final String SUCCESS_STR1 = "tgm-result-page"; // class associated with result page
     private static final String SUCCESS_STR2 = "tgm-page-list-f2xx"; // class associated with page-list-f2xx
-    private final Logger LOGGER = Logger.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractAsqatasunOnlineTest.class);
     // Application urls used to navigate
     protected String loginUrl;
     protected String logoutUrl;
