@@ -90,6 +90,7 @@ init-connect='SET NAMES utf8mb4'
 character-set-server = utf8mb4
 max_allowed_packet = 64M
 innodb_file_per_table = 1
+innodb_log_file_size = 256M
 EOF
 
 # Workaround for bug related to packages of MariaDB/Mysql on Debian/Ubuntu plateforms
