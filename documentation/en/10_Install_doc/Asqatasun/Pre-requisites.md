@@ -48,7 +48,7 @@ Go to [Installation](Installation.md).
 
 ## Check Pre-requisites : manual way
 
-If you don't feel comfortable with running a script as root, here are the
+If you don't feel comfortable running a script as root, here are the
 required steps for completing the pre-requisites.
 
 In a few words : install packages, then configure.
@@ -94,10 +94,22 @@ init-connect='SET NAMES utf8'
 character-set-server = utf8
 max_allowed_packet = 64M
 innodb_file_per_table = 1
+innodb_log_file_size = 256M
 EOF
 ```
 
+**Addition for Ubuntu 18.04**:  
+
+```shell script
+echo '!include /etc/mysql/conf.d/asqatasun.cnf' >>/etc/mysql/my.cnf
+```
+
+(This may seem counterintuitive, but this is a workaround for a bug in MariaDB packaging on Debian/Ubuntu.
+See https://github.com/Asqatasun/Asqatasun/issues/311 for more details.)
+
+
 Restart mysql service
+
 ```sh
 sudo service mysql restart
 ```
@@ -108,14 +120,14 @@ Create an empty schema and a asqatasun user. Grant this asqatasun user permissio
 to create, update and delete objects for this schema. The charset of the database 
 has to be set to "UTF-8".
 
-```sql
-GRANT USAGE ON * . * TO '$AsqatasunUser'@'localhost' IDENTIFIED BY '$AsqatasunPassword';
-CREATE DATABASE IF NOT EXISTS `$AsqatasunDatabase` CHARACTER SET utf8;
-GRANT ALL PRIVILEGES ON `$AsqatasunDatabase` . * TO '$AsqatasunUser'@'localhost';
+```mysql
+GRANT USAGE ON * . * TO 'AsqatasunUser'@'localhost' IDENTIFIED BY 'AsqatasunPassword';
+CREATE DATABASE IF NOT EXISTS `AsqatasunDatabase` CHARACTER SET utf8;
+GRANT ALL PRIVILEGES ON `AsqatasunDatabase` . * TO 'AsqatasunUser'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
-where `$AsqatasunUser` is the asqatasun user, `$AsqatasunPassword` is the asqatasun user password, and `$AsqatasunDatabase` is the asqatasun database.
+where `AsqatasunUser` is the asqatasun user, `AsqatasunPassword` is the asqatasun user password, and `AsqatasunDatabase` is the asqatasun database.
 
 ### Configure Tomcat 
 
@@ -182,6 +194,7 @@ EOF
 ```
 
 Configure Xvfb to run at startup and launch it
+
 ```sh
 sudo chmod +x /etc/init.d/xvfb
 sudo update-rc.d xvfb defaults
