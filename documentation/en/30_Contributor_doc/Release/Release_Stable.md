@@ -5,8 +5,8 @@ This is the documentation for releasing a new **stable** version for Asqatasun. 
 ## 1) Prepare CHANGELOG.md:
 
 * Add an entry for this release
-* In a cumulative way, add all the data of previous betas and RCs 
-(reader should have all details between from previous stable release and this one, 
+* Cumulatively, add all the data from previous betas and RCs
+(reader should have all details between previous stable release and this one,
 without having to dig into the previous betas and RCs). For this:
     * review [closed issues](https://github.com/Asqatasun/Asqatasun/issues?q=is%3Aissue+is%3Aclosed)
     * review [closed Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls?q=is%3Apr+is%3Aclosed)
@@ -22,15 +22,13 @@ without having to dig into the previous betas and RCs). For this:
 ./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
     --from-version X.Y.Z-SNAPSHOT \
     --to-version X.Y.Z \
-    --automerge \
+    --branch MY-RELEASE-BRANCH \
+    --source-dir . \
     --commit \
     --tag
 ```
 
-do not use the `--push` option 
-
 (We don't push yet, do the testing stuff before :) ) 
-
 
 ## 4) Build local Docker image with locally build Asqatasun
 
@@ -40,21 +38,21 @@ When `--source` is specified, get into that source directory and:
 ./docker/build_and_run-with-docker.sh -l -s "${PWD}" -d docker/SNAPSHOT-local --skip-build-test
 ```
 
-else when using clone in /tmp:
+Else when using clone in /tmp:
 
 ```sh
 cd /tmp/Asqatasun   # Directory used to clone Github repos
 ./docker/build_and_run-with-docker.sh -l -s /tmp/Asqatasun -d docker/SNAPSHOT-local --skip-build-test
 ```
 
-## 5) Push `master` branch and new `X.Y.Z` tag
+## 5) Push branch and new `X.Y.Z` tag
 
 ```sh
-git push origin master
+git push origin MY-RELEASE-BRANCH
 git push origin vX.Y.Z
 ```
 
-## 6) For `develop` branch, switch back release strings to "-SNAPSHOT"
+## 6) Switch back release strings to "-SNAPSHOT"
 
 From the top of Asqatasun source directory, do: 
 
@@ -62,10 +60,11 @@ From the top of Asqatasun source directory, do:
 ./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
     --from-version X.Y.Z \
     --to-version A.B.C-SNAPSHOT \
+    --branch MY-RELEASE-BRANCH \
     --source-dir . \
-    --back-to-snapshot \
-    --commit
-git push origin develop
+    --commit \
+    --push \
+    --back-to-snapshot
 ```
 
 ## 7) In Github:

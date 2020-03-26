@@ -18,23 +18,23 @@ This is the documentation for releasing a new version **Release Candidate** for 
 
 /!\ Please be sure to be:
 
-1. on the `develop` branch **before** launching the following script (not in a feature branch)
+1. on the *release* branch **before** launching the following script (not in a feature branch)
 1. inside the top directory of Asqatasun sources (eg /home/johndoe/my-sources/Asqatasun)
 
 ```sh
 ./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
-    --source . \
     --from-version X.Y.Z-SNAPSHOT \
     --to-version X.Y.Z-rc.1 \
-    --automerge \
+    --branch MY-RELEASE-BRANCH \
+    --source-dir . \
     --commit \
-    --tag \
-    --push
+    --push \
+    --tag
 ```
 
 ## 4) Build local Docker image with locally build Asqatasun
 
-When `--source` is specified, get into that source directory and:
+When `--source-dir` is specified, get into that source directory and:
 
 ```sh
 ./docker/build_and_run-with-docker.sh -l -s "${PWD}" -d docker/SNAPSHOT-local --skip-build-test
@@ -47,7 +47,7 @@ cd /tmp/Asqatasun   # Directory used to clone Github repos
 ./docker/build_and_run-with-docker.sh -l -s /tmp/Asqatasun -d docker/SNAPSHOT-local --skip-build-test
 ```
 
-## 5) For develop branch, switch back release strings to "-SNAPSHOT"
+## 5) Switch back release strings to "-SNAPSHOT"
 
 From the top of Asqatasun source directory, do: 
 
@@ -55,10 +55,11 @@ From the top of Asqatasun source directory, do:
 ./engine/asqatasun-resources/src/main/resources/release/bump_asqatasun.sh \
     --from-version X.Y.Z-rc.1 \
     --to-version X.Y.Z-SNAPSHOT \
+    --branch MY-RELEASE-BRANCH \
     --source-dir . \
-    --back-to-snapshot \
-    --commit
-git push origin develop
+    --commit \
+    --push \
+    --back-to-snapshot
 ```
 
 ## 6) In Github:
