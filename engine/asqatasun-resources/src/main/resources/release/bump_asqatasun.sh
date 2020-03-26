@@ -2,7 +2,7 @@
 
 set -o errexit
 
-TEMP=$(getopt -o acpt --long commit,push,tag,automerge,source-dir:,from-version:,to-version:,back-to-snapshot \
+TEMP=$(getopt -o cpt --long branch:,commit,push,tag,source-dir:,from-version:,to-version:,back-to-snapshot \
     -n 'javawrap' -- "$@")
 
 if [[ $? != 0 ]]; then
@@ -13,15 +13,15 @@ fi
 usage() {
     echo 'usage: ./bump_asqatasun.sh [OPTIONS]...'
     echo ''
-    echo '  --from-version <arg>         MANDATORY : The version number to modify.'
-    echo '  --to-version <arg>           MANDATORY : The new version number to apply.'
-    echo '  --source-dir <arg>           OPTIONAL : Path to the source directory (must be absolute). If not provided, Github repos is used.'
-    echo '  -a, --automerge              OPTIONAL : Auto merge from develop to master before bumping.'
-    echo '  -c, --commit                 OPTIONAL : Commit automatically modifications.'
-    echo '  -p, --push                   OPTIONAL : Push automatically commit on remote.'
-    echo '  -t, --tag                    OPTIONAL : Tag automatically version from --to-version arg.'
-    echo '  --back-to-snapshot           OPTIONAL : need when switching back to -SNAPSHOT version'
+    echo '  --from-version <arg>   MANDATORY: Version number to modify.'
+    echo '  --to-version   <arg>   MANDATORY: New version number to apply.'
+    echo '  --branch       <arg>   MANDATORY: Name of the release branch to checkout.'
     echo ''
+    echo '  --source-dir   <arg>   OPTIONAL: Absolute path to the source directory. If not provided, Github repos is used.'
+    echo '  -c, --commit           OPTIONAL: Commit automatically modifications.'
+    echo '  -p, --push             OPTIONAL: Push automatically commit on remote.'
+    echo '  -t, --tag              OPTIONAL: Tag automatically version from --to-version arg.'
+    echo '  --back-to-snapshot     OPTIONAL: Triggers the switch back to "-SNAPSHOT" version'
     echo ''
     exit 2
 }
@@ -29,21 +29,17 @@ usage() {
 # Note the quotes around `$TEMP': they are essential!
 eval set -- "$TEMP"
 
-declare AUTOMERGE=false
 declare COMMIT=false
 declare TAG=false
 declare PUSH=false
 declare SOURCE_DIR=
+declare BRANCH=
 declare FROM_VERSION=
 declare TO_VERSION=
 declare BACK_TO_SNAPSHOT=
 
 while true; do
     case "$1" in
-    -a | --automerge)
-        AUTOMERGE=true
-        shift
-        ;;
     -c | --commit)
         COMMIT=true
         shift
@@ -68,6 +64,10 @@ while true; do
         TO_VERSION="$2"
         shift 2
         ;;
+    --branch)
+        BRANCH="$2"
+        shift 2
+        ;;
     --back-to-snapshot)
         BACK_TO_SNAPSHOT=true
         shift
@@ -80,7 +80,7 @@ while true; do
     esac
 done
 
-# check mandatory options
+# Check mandatory options
 if [[ "${FROM_VERSION}" == "" ]]; then
     echo ''
     echo 'Mandatory option is missing'
@@ -93,42 +93,25 @@ if [[ "${TO_VERSION}" == "" ]]; then
     echo ''
     usage
 fi
+if [[ "${BRANCH}" == "" ]]; then
+    echo ''
+    echo 'Mandatory option is missing'
+    echo ''
+    usage
+fi
 
 ####################################################################
-# change directory to local repos or download it to temporary folder
+# Checkout on correct branch
 ####################################################################
 function checkout_source_code() {
+    # We release so we have to be on a release branch
     if [[ "${SOURCE_DIR}" ]]; then
-        # Be on develop branch when switching back to -SNAPSHOT release, either way be on master
-        if [[ "${BACK_TO_SNAPSHOT}" ]]; then
-            echo "Back to --SNAPSHOT from ${SOURCE_DIR}"
-            git checkout develop
-            git merge master # Necessary or we'll have merge conflicts for next release ;)
-        else
-            git checkout master
-        fi
+        git checkout "${BRANCH}"
     else
-        if [[ "${BACK_TO_SNAPSHOT}" ]]; then
-            echo "Case not yet managed. Please proceed manually."
-            echo "Exiting."
-            exit 1
-        else
-            cd /tmp
-            git clone git@github.com:Asqatasun/Asqatasun.git
-            cd Asqatasun
-            git checkout origin/develop
-            git checkout -b develop
-            git checkout master
-        fi
-    fi
-}
-
-############
-# Auto merge
-############
-function automerge() {
-    if [[ "$AUTOMERGE" == true ]]; then
-        git merge origin/develop
+        cd /tmp
+        git clone git@github.com:Asqatasun/Asqatasun.git
+        cd Asqatasun
+        git checkout "${BRANCH}"
     fi
 }
 
@@ -143,7 +126,7 @@ function bump_release() {
     DOCKER_PERL_COMMAND="s!ASQA_RELEASE=\"${FROM_VERSION}\"!ASQA_RELEASE=\"${TO_VERSION}\"!o"
     ANSIBLE_PERL_COMMAND="s!${FROM_VERSION}!${TO_VERSION}!o"
 
-    echo 'bumping context with version' "${TO_VERSION}"
+    echo "Bumping context with version: ${TO_VERSION}"
     find . -name "pom.vm" -exec perl -pi -e "${POM_PERL_COMMAND}" {} \;
     find . -name "pom.xml" -exec perl -pi -e "${POM_PERL_COMMAND}" {} \;
     find . -name "pom.xml" -exec perl -pi -e "${POM_PERL_COMMAND2}" {} \;
@@ -152,7 +135,8 @@ function bump_release() {
     find . -name "Dockerfile" -exec perl -pi -e "${DOCKER_PERL_COMMAND}" {} \;
     find . -name ".travis.yml" -exec perl -pi -e "${DOCKER_PERL_COMMAND}" {} \;
     find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e "${ANSIBLE_PERL_COMMAND}" {} \;
-    echo 'bumped context with version' "${TO_VERSION}"
+    echo "Bumped context with version: ${TO_VERSION}"
+    echo ''
 }
 
 #########################################
@@ -181,7 +165,7 @@ function commit_files() {
     fi
 
     if [[ "${COMMIT}" == true ]]; then
-        echo "committing all files with message :  ${COMMIT_MESSAGE}"
+        echo "Committing all files with message :  ${COMMIT_MESSAGE}"
         find . -name "pom.xml" -exec git add -u {} +
         find . -name "pom.vm" -exec git add -u {} +
         find . -name "Dockerfile" -exec git add -u {} +
@@ -190,7 +174,8 @@ function commit_files() {
         git add ansible/asqatasun/defaults/main.yml
         git add contributors.txt
         git commit -m "${COMMIT_MESSAGE}"
-        echo "committed all files with message :  ${COMMIT_MESSAGE}"
+        echo "Committed all files with message :  ${COMMIT_MESSAGE}"
+        echo ''
     fi
 }
 
@@ -200,24 +185,21 @@ function commit_files() {
 function add_tag() {
     if [[ "${TAG}" == true ]]; then
         MY_TAG="v${TO_VERSION}"
-        echo 'tagging new ' "${MY_TAG}" 'tag.'
         git tag -a "${MY_TAG}" -m "${MY_TAG}"
-        echo 'tagged new ' "${MY_TAG}" 'tag.'
+        echo "Added new tag: ${MY_TAG}"
     fi
 }
 
 ##########################################
-# Automatic push to $BRANCH_NAME + ${MY_TAG}
+# Push branch and tag
 ##########################################
-function push_master_and_tag() {
+function push_branch_and_tag() {
     if [[ "${PUSH}" == true ]]; then
-        echo 'pushing to master'
-        git push origin master
-        echo 'pushed to master'
+        git push origin "${BRANCH}"
+        echo "Pushed to branch: ${BRANCH}"
         if [[ "${TAG}" == true ]]; then
-            echo 'pushing new ' "${MY_TAG}" 'tag.'
             git push origin "${MY_TAG}"
-            echo 'pushed new ' "${MY_TAG}" 'tag.'
+            echo "Pushed new tag: ${MY_TAG}"
         fi
     fi
 }
@@ -227,11 +209,10 @@ function push_master_and_tag() {
 ##########################################
 
 checkout_source_code
-automerge
 bump_release
 update_contributors
 commit_files
 add_tag
-push_master_and_tag
+push_branch_and_tag
 
 exit 0
