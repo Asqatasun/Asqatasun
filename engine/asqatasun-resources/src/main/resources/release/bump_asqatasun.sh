@@ -2,12 +2,15 @@
 
 set -o errexit
 
-TEMP=`getopt -o acpt --long commit,push,tag,automerge,source-dir:,from-version:,to-version:,back-to-snapshot \
-             -n 'javawrap' -- "$@"`
+TEMP=$(getopt -o acpt --long commit,push,tag,automerge,source-dir:,from-version:,to-version:,back-to-snapshot \
+    -n 'javawrap' -- "$@")
 
-if [[ $? != 0 ]] ; then echo "Terminating..." >&2 ; exit 1 ; fi
+if [[ $? != 0 ]]; then
+    echo "Terminating..." >&2
+    exit 1
+fi
 
-usage () {
+usage() {
     echo 'usage: ./bump_asqatasun.sh [OPTIONS]...'
     echo ''
     echo '  --from-version <arg>         MANDATORY : The version number to modify.'
@@ -33,35 +36,58 @@ declare PUSH=false
 declare SOURCE_DIR=
 declare FROM_VERSION=
 declare TO_VERSION=
-declare RULES_FROM_VERSION=
-declare RULES_TO_VERSION=
 declare BACK_TO_SNAPSHOT=
 
 while true; do
-  case "$1" in
-    -a | --automerge ) AUTOMERGE=true; shift ;;
-    -c | --commit ) COMMIT=true; shift ;;
-    -p | --push ) PUSH=true; shift ;;
-    -t | --tag ) TAG=true; shift ;;
-    --source-dir ) SOURCE_DIR="$2"; shift 2 ;;
-    --from-version ) FROM_VERSION="$2"; shift 2 ;;
-    --to-version ) TO_VERSION="$2"; shift 2 ;;
-    --back-to-snapshot ) BACK_TO_SNAPSHOT=true; shift ;;
-    -- ) shift; break ;;
-    * ) break ;;
-  esac
+    case "$1" in
+    -a | --automerge)
+        AUTOMERGE=true
+        shift
+        ;;
+    -c | --commit)
+        COMMIT=true
+        shift
+        ;;
+    -p | --push)
+        PUSH=true
+        shift
+        ;;
+    -t | --tag)
+        TAG=true
+        shift
+        ;;
+    --source-dir)
+        SOURCE_DIR="$2"
+        shift 2
+        ;;
+    --from-version)
+        FROM_VERSION="$2"
+        shift 2
+        ;;
+    --to-version)
+        TO_VERSION="$2"
+        shift 2
+        ;;
+    --back-to-snapshot)
+        BACK_TO_SNAPSHOT=true
+        shift
+        ;;
+    --)
+        shift
+        break
+        ;;
+    *) break ;;
+    esac
 done
 
 # check mandatory options
-if [[ "${FROM_VERSION}" = "" ]]
-then
+if [[ "${FROM_VERSION}" == "" ]]; then
     echo ''
     echo 'Mandatory option is missing'
     echo ''
     usage
 fi
-if [[ "${TO_VERSION}" = "" ]]
-then
+if [[ "${TO_VERSION}" == "" ]]; then
     echo ''
     echo 'Mandatory option is missing'
     echo ''
@@ -85,7 +111,7 @@ function checkout_source_code() {
         if [[ "${BACK_TO_SNAPSHOT}" ]]; then
             echo "Case not yet managed. Please proceed manually."
             echo "Exiting."
-            exit -1
+            exit 1
         else
             cd /tmp
             git clone git@github.com:Asqatasun/Asqatasun.git
@@ -101,7 +127,7 @@ function checkout_source_code() {
 # Auto merge
 ############
 function automerge() {
-    if [[ "$AUTOMERGE" = true ]] ; then
+    if [[ "$AUTOMERGE" == true ]]; then
         git merge origin/develop
     fi
 }
@@ -117,29 +143,31 @@ function bump_release() {
     DOCKER_PERL_COMMAND="s!ASQA_RELEASE=\"${FROM_VERSION}\"!ASQA_RELEASE=\"${TO_VERSION}\"!o"
     ANSIBLE_PERL_COMMAND="s!${FROM_VERSION}!${TO_VERSION}!o"
 
-    echo 'bumping context with version' ${TO_VERSION}
-    find . -name "pom.vm"  -exec perl -pi -e ${POM_PERL_COMMAND} {} \;
-    find . -name "pom.xml" -exec perl -pi -e ${POM_PERL_COMMAND} {} \;
-    find . -name "pom.xml" -exec perl -pi -e ${POM_PERL_COMMAND2} {} \;
-    find . -name "install.sh" -exec perl -pi -e ${SH_PERL_COMMAND} {} \;
-    find . -name "asqatasun.conf" -exec perl -pi -e ${CONF_PERL_COMMAND} {} \;
-    find . -name "Dockerfile" -exec perl -pi -e ${DOCKER_PERL_COMMAND} {} \;
-    find . -name ".travis.yml" -exec perl -pi -e ${DOCKER_PERL_COMMAND} {} \;
-    find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e ${ANSIBLE_PERL_COMMAND} {} \;
-    echo 'bumped context with version' ${TO_VERSION}
+    echo 'bumping context with version' "${TO_VERSION}"
+    find . -name "pom.vm" -exec perl -pi -e "${POM_PERL_COMMAND}" {} \;
+    find . -name "pom.xml" -exec perl -pi -e "${POM_PERL_COMMAND}" {} \;
+    find . -name "pom.xml" -exec perl -pi -e "${POM_PERL_COMMAND2}" {} \;
+    find . -name "install.sh" -exec perl -pi -e "${SH_PERL_COMMAND}" {} \;
+    find . -name "asqatasun.conf" -exec perl -pi -e "${CONF_PERL_COMMAND}" {} \;
+    find . -name "Dockerfile" -exec perl -pi -e "${DOCKER_PERL_COMMAND}" {} \;
+    find . -name ".travis.yml" -exec perl -pi -e "${DOCKER_PERL_COMMAND}" {} \;
+    find ansible/asqatasun/defaults/ -name "main.yml" -exec perl -pi -e "${ANSIBLE_PERL_COMMAND}" {} \;
+    echo 'bumped context with version' "${TO_VERSION}"
 }
 
 #########################################
 # Update contributors.txt
 #########################################
 function update_contributors() {
-    echo "Commits    Contributors"                               > contributors.txt
-    echo "--------------------------"                           >> contributors.txt
-    git shortlog -s -n                                          >> contributors.txt
-    echo ''                                                     >> contributors.txt
-    echo ''                                                     >> contributors.txt
-    echo "---- Release ${TO_VERSION} ----------------------"    >> contributors.txt
-    echo ''                                                     >> contributors.txt
+    {
+        echo "Commits    Contributors"
+        echo "--------------------------"
+        git shortlog -s -n
+        echo ''
+        echo ''
+        echo "---- Release ${TO_VERSION} ----------------------"
+        echo ''
+    } >contributors.txt
 }
 
 #########################################
@@ -152,13 +180,13 @@ function commit_files() {
         COMMIT_MESSAGE="Release ${TO_VERSION}"
     fi
 
-    if [[ "${COMMIT}" = true ]] ; then
+    if [[ "${COMMIT}" == true ]]; then
         echo "committing all files with message :  ${COMMIT_MESSAGE}"
-        find . -name "pom.xml" | xargs git add -u
-        find . -name "pom.vm"  | xargs git add -u
-        find . -name "Dockerfile" | xargs git add -u
-        git add **/install.sh
-        git add **/asqatasun.conf
+        find . -name "pom.xml" -exec git add -u {} +
+        find . -name "pom.vm" -exec git add -u {} +
+        find . -name "Dockerfile" -exec git add -u {} +
+        git add web-app/tgol-resources/src/main/resources/installation/install.sh
+        git add web-app/tgol-resources/src/main/resources/conf/asqatasun.conf
         git add ansible/asqatasun/defaults/main.yml
         git add contributors.txt
         git commit -m "${COMMIT_MESSAGE}"
@@ -170,11 +198,11 @@ function commit_files() {
 # Automatic tag
 ###############
 function add_tag() {
-    if [[ "${TAG}" = true ]] ; then
+    if [[ "${TAG}" == true ]]; then
         MY_TAG="v${TO_VERSION}"
-        echo 'tagging new ' ${MY_TAG} 'tag.'
-        git tag -a ${MY_TAG} -m "${MY_TAG}"
-        echo 'tagged new ' ${MY_TAG} 'tag.'
+        echo 'tagging new ' "${MY_TAG}" 'tag.'
+        git tag -a "${MY_TAG}" -m "${MY_TAG}"
+        echo 'tagged new ' "${MY_TAG}" 'tag.'
     fi
 }
 
@@ -182,14 +210,14 @@ function add_tag() {
 # Automatic push to $BRANCH_NAME + ${MY_TAG}
 ##########################################
 function push_master_and_tag() {
-    if [[ "${PUSH}" = true ]] ; then
+    if [[ "${PUSH}" == true ]]; then
         echo 'pushing to master'
         git push origin master
         echo 'pushed to master'
-        if [[ "${TAG}" = true ]] ; then
-            echo 'pushing new ' ${MY_TAG} 'tag.'
-            git push origin ${MY_TAG}
-            echo 'pushed new ' ${MY_TAG} 'tag.'
+        if [[ "${TAG}" == true ]]; then
+            echo 'pushing new ' "${MY_TAG}" 'tag.'
+            git push origin "${MY_TAG}"
+            echo 'pushed new ' "${MY_TAG}" 'tag.'
         fi
     fi
 }
