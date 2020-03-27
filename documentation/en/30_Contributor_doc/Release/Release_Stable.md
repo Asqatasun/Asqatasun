@@ -12,9 +12,14 @@ without having to dig into the previous betas and RCs). For this:
     * review [closed Pull Requests](https://github.com/Asqatasun/Asqatasun/pulls?q=is%3Apr+is%3Aclosed)
     * review [last commits](https://github.com/Asqatasun/Asqatasun/commits/develop)
 
-## 2) Update README.md (THE readme from top directory):
+## 2) Update all READMEs
 
-* copy/paste changelog in section "Content of this last version"
+* Adjust top-level README.md: copy/paste changelog in section "Content of this last version"
+* copy top-level README to Docker dirs (TODO define which ones)
+
+## 2b) Update Upgrade instructions
+
+* Adjust upgrade documentation in `documentation/en/50_Administrator_doc/Upgrading/`
 
 ## 3) Upgrade version strings in code with `bump_asqatasun.sh`
 
