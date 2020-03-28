@@ -56,6 +56,7 @@
         * [Release Candidate](30_Contributor_doc/Release/Release_RC.md)
         * [Stable release](30_Contributor_doc/Release/Release_Stable.md)
 * [Administrator doc](50_Administrator_doc/README.md)
+    * [Upgrading](50_Administrator_doc/Upgrading/README.md)
     * [BackOffice](50_Administrator_doc/backoffice.md)
     * [Asqatasun.conf](50_Administrator_doc/asqatasun.conf.md)
     * [Crawler management](50_Administrator_doc/Crawler_management.md)
