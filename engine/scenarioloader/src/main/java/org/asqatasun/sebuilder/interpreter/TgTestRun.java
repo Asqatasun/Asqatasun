@@ -27,6 +27,7 @@ import com.sebuilder.interpreter.Verify;
 import com.sebuilder.interpreter.webdriverfactory.WebDriverFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.asqatasun.sebuilder.interpreter.exception.TestRunException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -104,16 +105,6 @@ public class TgTestRun extends TestRun {
     /**
      * Constructor
      * @param script
-     * @param implicitelyWaitDriverTimeout
-     * @param pageLoadDriverTimeout 
-     */
-    public TgTestRun(Script script, int implicitelyWaitDriverTimeout, int pageLoadDriverTimeout) {
-        super(script, implicitelyWaitDriverTimeout, pageLoadDriverTimeout);
-    }
-
-    /**
-     * Constructor
-     * @param script
      * @param log
      * @param webDriverFactory
      * @param webDriverConfig
@@ -149,8 +140,9 @@ public class TgTestRun extends TestRun {
                 HashMap<String, String> webDriverConfig, 
                 int implicitelyWaitDriverTimeout, 
                 int pageLoadDriverTimeout) {
-        super(script, 
-              webDriverFactory, 
+        super(script,
+              LogFactory.getLog(TgTestRun.class),
+              webDriverFactory,
               webDriverConfig, 
               implicitelyWaitDriverTimeout, 
               pageLoadDriverTimeout);

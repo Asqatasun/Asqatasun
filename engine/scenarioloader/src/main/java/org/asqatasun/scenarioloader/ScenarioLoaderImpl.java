@@ -24,7 +24,6 @@ package org.asqatasun.scenarioloader;
 import com.sebuilder.interpreter.Script;
 import com.sebuilder.interpreter.Step;
 import com.sebuilder.interpreter.factory.ScriptFactory;
-import com.sebuilder.interpreter.factory.ScriptFactory.SuiteException;
 import com.sebuilder.interpreter.factory.TestRunFactory;
 import com.sebuilder.interpreter.steptype.Get;
 import java.io.IOException;
@@ -208,7 +207,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                 throw new ScenarioLoaderException(re);
             }    
             profileFactory.shutdownFirefoxProfile(firefoxProfile);
-        } catch (IOException | JSONException | SuiteException ex) {
+        } catch (IOException | JSONException ex) {
             LOGGER.warn(ex.getMessage());
             throw new ScenarioLoaderException(ex);
         }
@@ -360,10 +359,10 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * @throws IOException
      * @throws JSONException 
      */
-    private Script getScriptFromScenario(String scenario, FirefoxProfile firefoxProfile) throws IOException, JSONException, SuiteException {
+    private Script getScriptFromScenario(String scenario, FirefoxProfile firefoxProfile) throws IOException, JSONException {
         scriptFactory.setTestRunFactory(initTestRunFactory(firefoxProfile));
         scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
-        return scriptFactory.parse(scenario);
+        return scriptFactory.parse(scenario, null).iterator().next();
     }
  
     /**
@@ -375,8 +374,8 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * @throws IOException
      * @throws JSONException 
      */
-    private boolean isScenarioOnlyLoadPage(String scenario)  throws IOException, JSONException, SuiteException{
-        Script script = scriptFactory.parse(scenario);
+    private boolean isScenarioOnlyLoadPage(String scenario)  throws IOException, JSONException{
+        Script script = scriptFactory.parse(scenario, null).iterator().next();
         for (Step step : script.steps) {
             if (!(step.type instanceof Get)) {
                 return false;
