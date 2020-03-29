@@ -2,7 +2,7 @@ package org.asqatasun.webapp.controller;
 
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2019  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
@@ -23,6 +23,7 @@ package org.asqatasun.webapp.controller;
  */
 
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +33,16 @@ import org.asqatasun.webapp.command.CreateContractCommand;
 import org.asqatasun.webapp.command.factory.CreateContractCommandFactory;
 import org.asqatasun.webapp.command.helper.ContractSortCommandHelper;
 import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
-import org.asqatasun.webapp.form.parameterization.ContractOptionFormField;
-import org.asqatasun.webapp.form.parameterization.helper.ContractOptionFormFieldHelper;
+import org.asqatasun.webapp.ui.form.builder.FormFieldBuilder;
+import org.asqatasun.webapp.ui.form.parameterization.ContractOptionFormField;
+import org.asqatasun.webapp.ui.form.parameterization.helper.ContractOptionFormFieldHelper;
 import org.asqatasun.webapp.util.TgolKeyStore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,14 +59,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ContractManagementController extends AbstractUserAndContractsController {
 
-    public ContractManagementController() {
+    private final List<FormFieldBuilder> displayOptionFieldsBuilderList;
+    private final CreateContractCommandFactory createContractCommandFactory;
+    private final ContractSortCommandHelper contractSortCommandHelper;
+    private final ContractDataService contractDataService;
+
+    @Autowired
+    public ContractManagementController(ContractSortCommandHelper contractSortCommandHelper,
+                                        CreateContractCommandFactory createContractCommandFactory,
+                                        ContractDataService contractDataService,
+                                        @Qualifier(value="contractManagementOptionFieldsBuilderList")
+                                                List<FormFieldBuilder> displayOptionFieldsBuilderList){
         super();
+        this.contractSortCommandHelper = contractSortCommandHelper;
+        this.createContractCommandFactory = createContractCommandFactory;
+        this.contractDataService = contractDataService;
+        this.displayOptionFieldsBuilderList = displayOptionFieldsBuilderList;
     }
 
     /**
      * @param userId
      * @param request
-     * @param response
      * @param model
      * @return The pages audit set-up form page
      */
@@ -70,7 +88,6 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     public String displayManageContractsAdminPage(
             @RequestParam(TgolKeyStore.USER_ID_KEY) String userId,
             HttpServletRequest request,
-            HttpServletResponse response,
             Model model) {
 
         Long lUserId;
@@ -99,11 +116,11 @@ public class ContractManagementController extends AbstractUserAndContractsContro
                     request.getSession().getAttribute(TgolKeyStore.ADDED_CONTRACT_NAME_KEY));
             request.getSession().removeAttribute(TgolKeyStore.ADDED_CONTRACT_NAME_KEY);
         }
-        User userToManage = getUserDataService().read(lUserId);
+        User userToManage = userDataService.read(lUserId);
 
         model.addAttribute(
                 TgolKeyStore.CONTRACT_LIST_KEY, 
-                ContractSortCommandHelper.prepareContract(
+                contractSortCommandHelper.prepareContract(
                     userToManage, 
                     null,
                     displayOptionFieldsBuilderList,
@@ -116,8 +133,6 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     /**
      * @param contractDisplayCommand
      * @param userId
-     * @param request
-     * @param response
      * @param model
      * @return The pages audit set-up form page
      */
@@ -126,8 +141,6 @@ public class ContractManagementController extends AbstractUserAndContractsContro
     public String submitManageContractsAdminPage(
             @ModelAttribute(TgolKeyStore.CONTRACT_SORT_COMMAND_KEY) ContractSortCommand contractDisplayCommand,
             @RequestParam(TgolKeyStore.USER_ID_KEY) String userId,
-            HttpServletRequest request,
-            HttpServletResponse response,
             Model model) {
 
         Long lUserId;
@@ -136,11 +149,11 @@ public class ContractManagementController extends AbstractUserAndContractsContro
         } catch (NumberFormatException nfe) {
             throw new ForbiddenUserException();
         }
-        User userToManage = getUserDataService().read(lUserId);
+        User userToManage = userDataService.read(lUserId);
         
         model.addAttribute(
                 TgolKeyStore.CONTRACT_LIST_KEY, 
-                ContractSortCommandHelper.prepareContract(
+                contractSortCommandHelper.prepareContract(
                     userToManage, 
                     contractDisplayCommand,
                     displayOptionFieldsBuilderList,
@@ -171,7 +184,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
             throw new ForbiddenUserException();
         }
 
-        User userToManage = getUserDataService().read(lUserId);
+        User userToManage = userDataService.read(lUserId);
         if (userToManage == null) {
             throw new ForbiddenUserException();
         }
@@ -181,7 +194,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
                 model,
                 userToManage,
                 null,
-                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(getContractOptionFormFieldBuilderMap()),
+                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(contractOptionFormFieldBuilderMap),
                 TgolKeyStore.ADD_CONTRACT_VIEW_NAME);
     }
     
@@ -214,14 +227,14 @@ public class ContractManagementController extends AbstractUserAndContractsContro
             }
         }
         
-        Map<String, List<ContractOptionFormField>> optionFormFieldMap = 
-                    ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(getContractOptionFormFieldBuilderMap());
+        Map<String, List<ContractOptionFormField>> optionFormFieldMap =
+                    ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(contractOptionFormFieldBuilderMap);
 
-        getCreateContractFormValidator().setContractOptionFormFieldMap(optionFormFieldMap);
+        createContractFormValidator.setContractOptionFormFieldMap(optionFormFieldMap);
         // We check whether the form is valid
-        getCreateContractFormValidator().validate(createContractCommand, result);
+        createContractFormValidator.validate(createContractCommand, result);
         // If the form has some errors, we display it again with errors' details
-        User currentModifiedUser=getUserDataService().read(lUserId);
+        User currentModifiedUser=userDataService.read(lUserId);
 
         if (result.hasErrors()) {
             return displayFormWithErrors(
@@ -233,9 +246,9 @@ public class ContractManagementController extends AbstractUserAndContractsContro
                     TgolKeyStore.EDIT_CONTRACT_VIEW_NAME);
         }
         
-        Contract contract = getContractDataService().create();
+        Contract contract = contractDataService.create();
         contract.setUser(currentModifiedUser);
-        contract = CreateContractCommandFactory.getInstance().updateContractFromCommand(
+        contract = createContractCommandFactory.updateContractFromCommand(
                 createContractCommand, 
                 contract);
         
@@ -268,7 +281,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
             throw new ForbiddenUserException();
         }
 
-        Contract contract = getContractDataService().read(lContractId);
+        Contract contract = contractDataService.read(lContractId);
         if (contract == null) {
             throw new ForbiddenPageException();
         }
@@ -278,7 +291,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
                 model,
                 contract.getUser(),
                 contract,
-                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(getContractOptionFormFieldBuilderMap()),
+                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(contractOptionFormFieldBuilderMap),
                 TgolKeyStore.EDIT_CONTRACT_VIEW_NAME);
     }
     
@@ -311,13 +324,13 @@ public class ContractManagementController extends AbstractUserAndContractsContro
             }
         }
 
-        Contract contract = getContractDataService().read(lContractId);
+        Contract contract = contractDataService.read(lContractId);
         Map<String, List<ContractOptionFormField>> optionFormFieldMap = 
-                    ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(getContractOptionFormFieldBuilderMap());
+                    ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(contractOptionFormFieldBuilderMap);
 
-        getCreateContractFormValidator().setContractOptionFormFieldMap(optionFormFieldMap);
+        createContractFormValidator.setContractOptionFormFieldMap(optionFormFieldMap);
         // We check whether the form is valid
-        getCreateContractFormValidator().validate(createContractCommand, result);
+        createContractFormValidator.validate(createContractCommand, result);
         // If the form has some errors, we display it again with errors' details
         if (result.hasErrors()) {
             return displayFormWithErrors(
@@ -329,7 +342,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
                     TgolKeyStore.EDIT_CONTRACT_VIEW_NAME);
         }
         
-        contract = CreateContractCommandFactory.getInstance().updateContractFromCommand(createContractCommand, contract);
+        contract = createContractCommandFactory.updateContractFromCommand(createContractCommand, contract);
         saveOrUpdateContract(contract);
 
         request.getSession().setAttribute(TgolKeyStore.UPDATED_CONTRACT_NAME_KEY,contract.getLabel());
@@ -358,7 +371,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
         } catch (NumberFormatException nfe) {
             throw new ForbiddenUserException();
         }
-        Contract contractToDelete = getContractDataService().read(lContractId);
+        Contract contractToDelete = contractDataService.read(lContractId);
         
         request.getSession().setAttribute(TgolKeyStore.CONTRACT_ID_TO_DELETE_KEY,contractToDelete.getId());
         model.addAttribute(TgolKeyStore.CONTRACT_NAME_TO_DELETE_KEY, contractToDelete.getLabel());
@@ -392,13 +405,13 @@ public class ContractManagementController extends AbstractUserAndContractsContro
                 throw new ForbiddenUserException();
             }
         }
-        Contract contractToDelete = getContractDataService().read(lContractId);
+        Contract contractToDelete = contractDataService.read(lContractId);
         
-        getContractDataService().delete(contractToDelete.getId());
+        contractDataService.delete(contractToDelete.getId());
         // The current user has been updated, its storage in session needs also
         // to be updated
         if (getAuthenticatedUsername().equals(contractToDelete.getUser().getEmail1())) {
-            updateCurrentUser(getUserDataService().read(contractToDelete.getUser().getId()));
+            updateCurrentUser(userDataService.read(contractToDelete.getUser().getId()));
         }
         request.getSession().removeAttribute(TgolKeyStore.CONTRACT_ID_TO_DELETE_KEY);
         request.getSession().setAttribute(TgolKeyStore.DELETED_CONTRACT_NAME_KEY,contractToDelete.getLabel());
@@ -428,7 +441,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
         } catch (NumberFormatException nfe) {
             throw new ForbiddenUserException();
         }
-        Contract contractToDelete = getContractDataService().read(lContractId);
+        Contract contractToDelete = contractDataService.read(lContractId);
         
         model.addAttribute(TgolKeyStore.CONTRACT_NAME_TO_DELETE_KEY, contractToDelete.getLabel());
         model.addAttribute(TgolKeyStore.USER_ID_KEY, contractToDelete.getUser().getId());
@@ -462,7 +475,7 @@ public class ContractManagementController extends AbstractUserAndContractsContro
                 throw new ForbiddenUserException();
             }
         }
-        Contract contractToDelete = getContractDataService().read(lContractId);
+        Contract contractToDelete = contractDataService.read(lContractId);
         deleteAllAuditsFromContract(contractToDelete);
         request.getSession().removeAttribute(TgolKeyStore.CONTRACT_ID_TO_DELETE_KEY);
         request.getSession().setAttribute(TgolKeyStore.DELETED_CONTRACT_AUDITS_NAME_KEY,contractToDelete.getLabel());
@@ -475,9 +488,9 @@ public class ContractManagementController extends AbstractUserAndContractsContro
      * @param contract 
      */
     private void saveOrUpdateContract(Contract contract) {
-       getContractDataService().saveOrUpdate(contract);
+       contractDataService.saveOrUpdate(contract);
        if (getAuthenticatedUsername().equals(contract.getUser().getEmail1())) {
-           updateCurrentUser(getUserDataService().read(contract.getUser().getId()));
+           updateCurrentUser(userDataService.read(contract.getUser().getId()));
        }
     }
     

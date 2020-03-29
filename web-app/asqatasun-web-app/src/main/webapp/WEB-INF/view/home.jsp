@@ -13,50 +13,50 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-    <c:url value="/public/${asqatasunVersion}/external_js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
 </c:set>
 <c:set var="d3JsUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/external_js/d3.v3.min.js"/>
+    <c:url value="/public/external_js/d3.v3.min.js"/>
 </c:set> 
 <c:set var="r2d3JsUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/external_js/r2d3.v2.min.js"/>
+    <c:url value="/public/external_js/r2d3.v2.min.js"/>
 </c:set> 
 
 <!-- internal js -->
 <c:set var="homeScoreJsUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/js/score/score-home-min.js"/>
+    <c:url value="/public/js/score/score-home-min.js"/>
 </c:set> 
 <c:set var="homeScoreIEJsUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/js/ie/score/score-home-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-home-ie-min.js"/>
 </c:set>
 <c:set var="scoreJsUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/js/score/score-min.js"/>
+    <c:url value="/public/js/score/score-min.js"/>
 </c:set> 
 <c:set var="scoreIEJsUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/js/ie/score/score-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-ie-min.js"/>
 </c:set> 
 
 <!-- external images -->
 <c:set var="gearImgUrl">
-    <c:url value="/public/${asqatasunVersion}/images/gear.png"/>
+    <c:url value="/public/images/gear.png"/>
 </c:set>
 <c:set var="increaseLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/increase-narrow.png"/>
+    <c:url value="/public/images/increase-narrow.png"/>
 </c:set>
 <c:set var="decreaseLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/decrease-narrow.png"/>
+    <c:url value="/public/images/decrease-narrow.png"/>
 </c:set>
 <c:set var="stableLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/stable-narrow.png"/>
+    <c:url value="/public/images/stable-narrow.png"/>
 </c:set>
 <c:set var="imgSrcAddContract">
-    <c:url value="/public/${asqatasunVersion}/images/plus_2.png"/>
+    <c:url value="/public/images/plus_2.png"/>
 </c:set>
 <c:set var="imgSrcManageContracts">
-    <c:url value="/public/${asqatasunVersion}/images/folder_open.png"/>
+    <c:url value="/public/images/folder_open.png"/>
 </c:set>
 <c:set var="imgSrcEditContract">
-    <c:url value="/public/${asqatasunVersion}/images/edit.png"/>
+    <c:url value="/public/images/edit.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">
@@ -142,13 +142,13 @@
                                 <c:choose>
                                     <c:when test="${contractAction.actionEnabled}">
                                         <c:set var="contractActionImgUrl">
-                                            <c:url value="/public/${asqatasunVersion}/${contractAction.enabledActionImageUrl}"/>
+                                            <c:url value="/public/${contractAction.enabledActionImageUrl}"/>
                                         </c:set>
                                         <c:set var="disabledComplement" value=""/>
                                     </c:when>
                                     <c:otherwise>
                                         <c:set var="contractActionImgUrl">
-                                            <c:url value="/public/${asqatasunVersion}/${contractAction.disabledActionImageUrl}"/>
+                                            <c:url value="/public/${contractAction.disabledActionImageUrl}"/>
                                         </c:set>
                                         <c:set var="disabledComplement">
                                             <fmt:message key="contract.disabled"/>

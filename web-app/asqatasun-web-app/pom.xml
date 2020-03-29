@@ -4,176 +4,285 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.asqatasun</groupId>
-        <artifactId>web-app</artifactId>
-        <version>5.0-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.3.RELEASE</version>
+        <relativePath/>
     </parent>
+    <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun-web-app</artifactId>
     <packaging>war</packaging>
     <name>asqatasun-web-app</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <kotlin.version>1.3.61</kotlin.version>
+
+        <asqatasun.group.id>org.asqatasun</asqatasun.group.id>
+        <asqatasun.version>5.0-SNAPSHOT</asqatasun.version>
+        <springGroupId>org.springframework</springGroupId>
+        <spring.group.id>org.springframework</spring.group.id>
+
+        <commonsValidator.version>1.6</commonsValidator.version>
+        <commonsFileUpload.version>1.4</commonsFileUpload.version>
+        <jhighlight.version>1.0.3</jhighlight.version>
+        <itextpdf.version>5.5.13</itextpdf.version>
+        <mysqlConnector.version>5.1.48</mysqlConnector.version>
+
+        <yuicompressor-maven-plugin.version>1.5.1</yuicompressor-maven-plugin.version>
+
+    </properties>
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        
-        <!-- tgol dependencies-->
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>tgol-orchestrator</artifactId>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>tgol-persistence</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>tgol-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>tgol-data-presentation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>tgol-voter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>tgol-report</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>tgol-resources</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>security</artifactId>
-        </dependency>
-        
-        <!-- asqatasun dependencies-->
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-resources</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-nomenclatureloader</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rule-implementation-loader</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-contentloader</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-contentadapter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-processor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-consolidator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-analyser</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-logging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-scenarioloader</artifactId>
-        </dependency>
-        
-        <!-- rules dependencies-->
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-rgaa3.0</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-rgaa3.2016</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-rgaa3.2017</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-seo1.0</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        
-        <!-- spring dependencies -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-instrument</artifactId>
-        </dependency>
-        <!--       <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-instrument-tomcat</artifactId>
-        </dependency>-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
+            <version>5.2.2.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>3.1.0.RELEASE</version>
-            <scope>test</scope>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+        <!-- need to override selenium to avoid latest by spring boot-->
+        <!-- webdriver api -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>2.39.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>2.39.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>2.39.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>2.39.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.39.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-android-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-chrome-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-htmlunit-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-iphone-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-ie-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-edge-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-safari-driver</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-leg-rc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- tgol dependencies-->
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>webapp-services</artifactId>
+            <version>${asqatasun.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>email-sender</artifactId>
+            <version>${asqatasun.version}</version>
         </dependency>
 
+        <!-- asqatasun dependencies-->
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-api</artifactId>
+            <version>${asqatasun.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-persistence</artifactId>
+            <version>${asqatasun.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-services</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-engine</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-nomenclatureloader</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-rule-implementation-loader</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-contentloader</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-contentadapter</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-processor</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-consolidator</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-analyser</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-logging</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-scenarioloader</artifactId>
+            <version>${asqatasun.version}</version>
+        </dependency>
+        
+        <!-- rules dependencies-->
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-rules-rgaa3.0</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-rules-rgaa3.2016</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-rules-rgaa3.2017</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasun.group.id}</groupId>
+            <artifactId>asqatasun-rules-seo1.0</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <!-- displaytag dependencies -->
+        <dependency>
+            <groupId>displaytag</groupId>
+            <artifactId>displaytag</artifactId>
+            <version>1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl104-over-slf4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-lang</groupId>
+                    <artifactId>commons-lang</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.itextpdf</groupId>
+                    <artifactId>itextpdf</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!-- hibernate dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <!--            <scope>runtime</scope>-->
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-all</artifactId>
-            <version>5.9.1</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -185,48 +294,190 @@
             <artifactId>hibernate-ehcache</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
-        <!-- other dependencies -->
+        <!-- jasper et dynamicJasper dependencies -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>5.2.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jfreechart</groupId>
+                    <artifactId>jfreechart</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-digester</groupId>
+                    <artifactId>commons-digester</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jfree</groupId>
+                    <artifactId>jcommon</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jfree</groupId>
+                    <artifactId>jfreechart</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>eclipse</groupId>
+                    <artifactId>jdtcore</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bctsp-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.itextpdf</groupId>
+                    <artifactId>itextpdf</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>poi</groupId>
+                    <artifactId>poi-ooxlm</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>poi</groupId>
+                    <artifactId>poi-scratchpad</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ar.com.fdvs</groupId>
+            <artifactId>DynamicJasper</artifactId>
+            <version>4.0.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.sf.jasperreports</groupId>
+                    <artifactId>jasperreports</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-fonts</artifactId>
+            <version>4.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>${itextpdf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bctsp-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>bouncycastle</groupId>
+                    <artifactId>bcmail-jdk14</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>bouncycastle</groupId>
+                    <artifactId>bcprov-jdk14</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
+            <version>${commonsFileUpload.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
+            <version>${commonsValidator.version}</version>
         </dependency>
         <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysqlConnector.version}</version>
+<!--            <scope>runtime</scope>-->
         </dependency>
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
+            <version>1.23</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.htmlcompressor</groupId>
             <artifactId>htmlcompressor</artifactId>
             <version>1.5.2</version>
+            <scope>runtime</scope>
         </dependency>
-
-        <!-- web dependencies -->
+        <!-- highlighter dependency -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jsp-api</artifactId>
-            <scope>provided</scope>
+            <groupId>org.codelibs</groupId>
+            <artifactId>jhighlight</artifactId>
+            <version>${jhighlight.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>taglibs</groupId>
-            <artifactId>standard</artifactId>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.owasp.antisamy</groupId>
+                    <artifactId>antisamy</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-httpclient</groupId>
+                    <artifactId>commons-httpclient</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-digester</groupId>
+                    <artifactId>commons-digester</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-configuration</groupId>
+                    <artifactId>commons-configuration</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xmlParserAPIs</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xom</groupId>
+                    <artifactId>xom</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.beanshell</groupId>
+                    <artifactId>bsh-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- URL rewrite filter
              http://tuckey.org/urlrewrite/
@@ -239,23 +490,60 @@
 
         <!-- test dependencies -->
         <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymockclassextension</artifactId>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>1.3.61</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
@@ -264,16 +552,16 @@
                         <descriptor>src/main/resources/descriptor.xml</descriptor>
                     </descriptors>
                     <outputDirectory>target</outputDirectory>
-                    <finalName>asqatasun-${asqatasunVersion}.i386</finalName>
+                    <finalName>asqatasun-${asqatasun.version}.i386</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>
                         <id>make-assembly</id> <!-- this is used for inheritance merges -->
                         <phase>package</phase> <!-- append to the packaging phase. -->
-                        <goals>
-                            <goal>assembly</goal> <!-- goals == mojos -->
-                        </goals>
+<!--                        <goals>-->
+<!--                            <goal>assembly</goal> &lt;!&ndash; goals == mojos &ndash;&gt;-->
+<!--                        </goals>-->
                     </execution>
                 </executions>
             </plugin>
@@ -304,6 +592,7 @@
              <plugin>
                  <groupId>net.alchim31.maven</groupId>
                  <artifactId>yuicompressor-maven-plugin</artifactId>
+                 <version>${yuicompressor-maven-plugin.version}</version>
                  <executions>
                      <execution>
                          <goals>
@@ -319,8 +608,103 @@
                      <failOnWarning>false</failOnWarning>
                  </configuration>
              </plugin>
+            <plugin>
+                <groupId>org.basepom.maven</groupId>
+                <artifactId>duplicate-finder-maven-plugin</artifactId>
+                <version>1.3.0</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <printEqualFiles>false</printEqualFiles>
+                    <failBuildInCaseOfDifferentContentConflict>false</failBuildInCaseOfDifferentContentConflict>
+                    <failBuildInCaseOfEqualContentConflict>false</failBuildInCaseOfEqualContentConflict>
+                    <failBuildInCaseOfConflict>false</failBuildInCaseOfConflict>
+                    <checkCompileClasspath>true</checkCompileClasspath>
+                    <checkRuntimeClasspath>true</checkRuntimeClasspath>
+                    <checkTestClasspath>true</checkTestClasspath>
+                    <skip>false</skip>
+                    <quiet>false</quiet>
+                    <preferLocal>true</preferLocal>
+                    <useResultFile>true</useResultFile>
+                    <resultFileMinClasspathCount>2</resultFileMinClasspathCount>
+                    <resultFile>${project.build.directory}/duplicate-finder-result.xml</resultFile>
+
+                    <!-- Version 1.1.1+ -->
+                    <includeBootClasspath>false</includeBootClasspath>
+                    <bootClasspathProperty>sun.boot.class.path</bootClasspathProperty>
+                    <useDefaultResourceIgnoreList>true</useDefaultResourceIgnoreList>
+                    <!-- Version 1.1.1+ -->
+
+                    <!-- Version 1.2.0+ -->
+                    <includePomProjects>false</includePomProjects>
+                    <!-- Version 1.2.0+ -->
+
+                    <!-- Version 1.2.1+ -->
+                    <useDefaultResourceIgnoreList>true</useDefaultResourceIgnoreList>
+                    <!-- Version 1.2.1+ -->
+
+                    <exceptions>
+                        <exception>
+                            <currentProject>false</currentProject>
+
+                            <!-- Version 1.1.1+ -->
+                            <bootClasspath>false</bootClasspath>
+                            <!-- Version 1.1.1+ -->
+
+                            <conflictingDependencies>
+                                <dependency>
+                                    <artifactId>...</artifactId>
+                                    <groupId>...</groupId>
+                                    <version>...</version>
+                                    <type>...</type>
+                                    <classifier>...</classifier>
+                                </dependency>
+                                ...
+                            </conflictingDependencies>
+                            <classes>
+                                <class>...</class>
+                            </classes>
+                            <packages>
+                                <package>...</package>
+                            </packages>
+                            <resources>
+                                <resource>...</resource>
+                            </resources>
+                            <resourcePatterns>
+                                <resourcePattern>...</resourcePattern>
+                            </resourcePatterns>
+                        </exception>
+                    </exceptions>
+                    <ignoredResourcePatterns>
+                        <ignoredResourcePattern>...</ignoredResourcePattern>
+                    </ignoredResourcePatterns>
+
+                    <!-- Version 1.2.1+ -->
+                    <ignoredClassPatterns>
+                        <ignoredClassPattern>...</ignoredClassPattern>
+                    </ignoredClassPatterns>
+                    <!-- Version 1.2.1+ -->
+
+                    <ignoredDependencies>
+                        <dependency>
+                            <artifactId>...</artifactId>
+                            <groupId>...</groupId>
+                            <version>...</version>
+                            <type>...</type>
+                            <classifier>...</classifier>
+                        </dependency>
+                    </ignoredDependencies>
+                </configuration>
+            </plugin>
          </plugins>
-         <finalName>asqatasun-web-app-${asqatasunVersion}</finalName>
+         <finalName>asqatasun-web-app-${asqatasun.version}</finalName>
      </build>
      <profiles>
          <profile>
@@ -330,6 +714,7 @@
              </properties>
          </profile>
          <profile>
+             <id>qa</id>
              <activation>
                  <!-- the "activation" command offer the ability to run this profile only if "property" is set
                  See http://maven.apache.org/guides/introduction/introduction-to-profiles.html -->

@@ -29,9 +29,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.webapp.dto.ManualResult;
+import org.asqatasun.webapp.dto.TestResult;
 import org.asqatasun.webapp.entity.user.User;
-import org.asqatasun.webapp.presentation.data.ManualResult;
-import org.asqatasun.webapp.presentation.data.TestResult;
 
 /**
  * 

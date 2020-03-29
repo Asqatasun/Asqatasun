@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
@@ -34,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolv
  *
  * @author jkowalczyk
  */
+@Service
 public class TgolHandlerExceptionResolver extends DefaultHandlerExceptionResolver {
 
    /**
@@ -50,7 +53,7 @@ public class TgolHandlerExceptionResolver extends DefaultHandlerExceptionResolve
     @SuppressWarnings("unchecked")
     public ModelAndView doResolveException(HttpServletRequest hsr, HttpServletResponse hsr1, Object o, Exception excptn) {
         if (excptn instanceof MaxUploadSizeExceededException) {
-            Map<String, String> model = new HashMap<String, String>();
+            Map<String, String> model = new HashMap<>();
             model.put(TgolKeyStore.CONTRACT_ID_KEY, hsr.getParameter(TgolKeyStore.CONTRACT_ID_KEY));
             return new ModelAndView(TgolKeyStore.MAX_FILE_SIZE_ERROR_VIEW_NAME, model);
         }

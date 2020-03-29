@@ -29,7 +29,9 @@ import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.reference.Criterion;
 import org.asqatasun.entity.reference.Test;
+import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.entity.service.reference.CriterionDataService;
+import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
@@ -39,8 +41,8 @@ import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.contract.ScopeEnum;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
-import org.asqatasun.webapp.presentation.factory.TestResultFactory;
-import org.asqatasun.webapp.presentation.highlighter.HtmlHighlighter;
+import org.asqatasun.webapp.dto.factory.TestResultFactory;
+import org.asqatasun.webapp.highlighter.HtmlHighlighter;
 import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,29 +62,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuditResultController extends AbstractAuditResultController {
 
-    private CriterionDataService criterionDataService;
-    public CriterionDataService getCriterionDataService() {
-        return criterionDataService;
-    }
+    private final TestDataService testDataService;
+    private final AuditDataService auditDataService;
+    private final CriterionDataService criterionDataService;
+    private final HtmlHighlighter highlighter;
 
-    @Autowired
-    public void setCriterionDataService(
-            CriterionDataService criterionDataService) {
-        this.criterionDataService = criterionDataService;
-    }
-
-    /**
-     * The Html hightlighter.
-     */
-    private HtmlHighlighter highlighter;
-
-    @Autowired
-    public void setHtmlHighlighter(HtmlHighlighter highlighter) {
-        this.highlighter = highlighter;
-    }
-
-    public AuditResultController() {
+    public AuditResultController(CriterionDataService criterionDataService,
+                                 HtmlHighlighter highlighter,
+                                 AuditDataService auditDataService, TestDataService testDataService) {
         super();
+        this.criterionDataService = criterionDataService;
+        this.highlighter = highlighter;
+        this.auditDataService = auditDataService;
+        this.testDataService = testDataService;
     }
 
     /**
@@ -101,8 +93,8 @@ public class AuditResultController extends AbstractAuditResultController {
             HttpServletRequest request,
             Model model) {
         try {
-            Audit audit = getAuditDataService().read(Long.valueOf(auditId));
-            Act act = getActDataService().getActFromAudit(audit);
+            Audit audit = auditDataService.read(Long.valueOf(auditId));
+            Act act = actDataService.getActFromAudit(audit);
             switch (act.getScope().getCode()) {
                 case FILE:
                 case PAGE:
@@ -160,18 +152,15 @@ public class AuditResultController extends AbstractAuditResultController {
     /**
      *
      * @param auditResultSortCommand
-     * @param webresourceId
-     * @param result
      * @param model
      * @param request
      * @return
      */
-    @RequestMapping(value = {TgolKeyStore.CONTRACT_VIEW_NAME_REDIRECT, TgolKeyStore.PAGE_RESULT_CONTRACT_URL}, method = RequestMethod.POST)
+    @RequestMapping(value = {TgolKeyStore.CONTRACT_VIEW_NAME_REDIRECT, TgolKeyStore.PAGE_RESULT_CONTRACT_URL},
+                    method = RequestMethod.POST)
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     protected String submitPageResultSorter(
             @ModelAttribute(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY) AuditResultSortCommand auditResultSortCommand,
-            @RequestParam(TgolKeyStore.WEBRESOURCE_ID_KEY) String webresourceId,
-            BindingResult result,
             Model model,
             HttpServletRequest request) {
         return dispatchDisplayResultRequest(
@@ -200,7 +189,7 @@ public class AuditResultController extends AbstractAuditResultController {
             Model model) {
         WebResource webResource;
         try {
-            webResource = getWebResourceDataService().ligthRead(
+            webResource = webResourceDataService.ligthRead(
                     Long.valueOf(webresourceId));
         } catch (NumberFormatException nfe) {
             throw new ForbiddenPageException();
@@ -212,11 +201,11 @@ public class AuditResultController extends AbstractAuditResultController {
         if (isUserAllowedToDisplayResult(audit)) {
             Page page = (Page) webResource;
 
-            SSP ssp = getContentDataService().findSSP(page, page.getURL());
+            SSP ssp = contentDataService.findSSP(page, page.getURL());
             model.addAttribute(TgolKeyStore.SOURCE_CODE_KEY,
                     highlightSourceCode(ssp));
 
-            ScopeEnum scope = getActDataService().getActFromAudit(audit)
+            ScopeEnum scope = actDataService.getActFromAudit(audit)
                     .getScope().getCode();
             if (scope.equals(ScopeEnum.GROUPOFPAGES)
                     || scope.equals(ScopeEnum.PAGE)) {
@@ -249,7 +238,7 @@ public class AuditResultController extends AbstractAuditResultController {
             throw new ForbiddenUserException(getCurrentUser());
         }
 
-        WebResource webResource = getWebResourceDataService().ligthRead(wrId);
+        WebResource webResource = webResourceDataService.ligthRead(wrId);
         if (webResource == null || webResource instanceof Site) {
             throw new ForbiddenPageException();
         }
@@ -271,8 +260,7 @@ public class AuditResultController extends AbstractAuditResultController {
                     isAuthorizedScopeForPageList(audit));
 
             model.addAttribute(TgolKeyStore.TEST_RESULT_LIST_KEY,
-                    TestResultFactory.getInstance()
-                    .getTestResultListFromCriterion(webResource, crit));
+                    testResultFactory.getTestResultListFromCriterion(webResource, crit));
             return TgolKeyStore.CRITERION_RESULT_VIEW_NAME;
         } else {
             throw new ForbiddenPageException();
@@ -300,7 +288,7 @@ public class AuditResultController extends AbstractAuditResultController {
             throw new ForbiddenUserException(getCurrentUser());
         }
 
-        WebResource webResource = getWebResourceDataService().ligthRead(wrId);
+        WebResource webResource = webResourceDataService.ligthRead(wrId);
         if (webResource == null) {
             throw new ForbiddenPageException();
         }
@@ -312,12 +300,12 @@ public class AuditResultController extends AbstractAuditResultController {
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY,
                     contract.getLabel());
             model.addAttribute(TgolKeyStore.URL_KEY, webResource.getURL());
-            Test test = getTestDataService().read(tstId);
+            Test test = testDataService.read(tstId);
 
             model.addAttribute(TgolKeyStore.TEST_LABEL_KEY, test.getLabel());
             model.addAttribute(TgolKeyStore.AUDIT_ID_KEY, audit.getId());
 
-            if (!test.getScope().equals(getPageScope())) {
+            if (!test.getScope().equals(pageScope)) {
                 model.addAttribute(TgolKeyStore.SITE_SCOPE_TEST_DETAILS_KEY,
                         true);
             } else {
@@ -328,8 +316,7 @@ public class AuditResultController extends AbstractAuditResultController {
 
             model.addAttribute(
                     TgolKeyStore.TEST_RESULT_LIST_KEY,
-                    TestResultFactory.getInstance().getTestResultListFromTest(
-                            webResource, test));
+                    testResultFactory.getTestResultListFromTest(webResource, test));
             return TgolKeyStore.TEST_RESULT_VIEW_NAME;
         } else {
             throw new ForbiddenPageException();

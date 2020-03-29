@@ -1,0 +1,15 @@
+jpa:
+  showSql: false
+jdbc:
+  url: "jdbc:hsqldb:mem:mytestdb"
+  user: "sa"
+  password:
+
+app:
+  engine:
+    persistence:
+      packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"
+    loader:
+      proxy:
+        port:
+        host:

@@ -21,23 +21,26 @@
  */
 package org.asqatasun.webapp.validator;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MimeTypes;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
  * @author jkowalczyk
  */
+@Component("uploadAuditSetUpFormValidator")
 public class UploadAuditSetUpFormValidator extends AuditSetUpFormValidator {
 
     private static final String NO_FILE_UPLOADED_MSG_BUNDLE_KEY =
@@ -48,24 +51,12 @@ public class UploadAuditSetUpFormValidator extends AuditSetUpFormValidator {
             "required.notHtmlFileFound";
     private static final String ID_INPUT_FILE_PREFIX = "fileInputList";
 
-    // Default = 2MB
-    private long maxFileSize=2097152;
-    public void setMaxFileSize(long maxFileSize) {
-        this.maxFileSize = maxFileSize;
-    }
+    private final long maxFileSize=2097152;
+    private final List<String> authorizedMimeType = Arrays.asList("text/html", "application/xhtml+xml");
 
     @Autowired
     public UploadAuditSetUpFormValidator(ContractDataService contractDataService) {
         super(contractDataService);
-    }
-
-    public List<String> authorizedMimeType = new ArrayList<String>();
-    public List<String> getAuthorizedMimeType() {
-        return authorizedMimeType;
-    }
-
-    public void setAuthorizedMimeType(List<String> authorizedMimeType) {
-        this.authorizedMimeType = authorizedMimeType;
     }
 
     @Override
@@ -105,7 +96,7 @@ public class UploadAuditSetUpFormValidator extends AuditSetUpFormValidator {
                     }
                 }
             } catch (IOException ex) {
-                LOGGER.warn(ex);
+                LOGGER.warn(ex.getMessage());
                 errors.rejectValue(ID_INPUT_FILE_PREFIX + "[" + i + "]", NOT_HTML_MSG_BUNDLE_KEY);
             }
         }

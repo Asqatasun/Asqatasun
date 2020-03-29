@@ -10,10 +10,10 @@
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="loadingErrorImgUrl">
-    <c:url value="/public/${asqatasunVersion}/images/error_loading.jpg"/>
+    <c:url value="/public/images/error_loading.jpg"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/creative_common_logo.png"/>
+    <c:url value="/public/images/creative_common_logo.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

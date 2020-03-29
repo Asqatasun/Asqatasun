@@ -32,6 +32,7 @@ import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterFamily;
 import org.asqatasun.entity.parameterization.ParameterImpl;
 import org.asqatasun.entity.dao.AbstractJPADAO;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 /**

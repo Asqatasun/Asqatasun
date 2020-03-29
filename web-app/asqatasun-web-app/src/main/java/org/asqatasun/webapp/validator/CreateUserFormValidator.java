@@ -21,7 +21,6 @@
  */
 package org.asqatasun.webapp.validator;
 
-//import org.asqatasun.command.UserSignUpCommand;
 import java.util.regex.Pattern;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.asqatasun.webapp.command.CreateUserCommand;
@@ -29,6 +28,7 @@ import org.asqatasun.webapp.command.UserSignUpCommand;
 import org.asqatasun.webapp.entity.service.user.UserDataService;
 import org.asqatasun.webapp.util.TgolPasswordChecker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -36,6 +36,7 @@ import org.springframework.validation.Validator;
  *
  * @author jkowalczyk
  */
+@Component("createUserFormValidator")
 public class CreateUserFormValidator implements Validator {
     
     private static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";
@@ -72,7 +73,7 @@ public class CreateUserFormValidator implements Validator {
         return userDataService;
     }
 
-    private boolean checkSiteUrl = true;
+    private boolean checkSiteUrl = false;
     public void setCheckSiteUrl(boolean checkSiteUrl) {
         this.checkSiteUrl = checkSiteUrl;
     }

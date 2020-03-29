@@ -26,12 +26,9 @@ import com.sebuilder.interpreter.IO;
 import com.sebuilder.interpreter.factory.ScriptFactory.SuiteException;
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MimeTypes;
@@ -41,7 +38,10 @@ import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.scenario.Scenario;
 import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -50,9 +50,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
  *
  * @author jkowalczyk
  */
+@Component("addScenarioFormValidator")
 public class AddScenarioFormValidator implements Validator {
 
-    protected static final Logger LOGGER = Logger.getLogger(AddScenarioFormValidator.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(AddScenarioFormValidator.class);
     protected static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";
     protected static final String MANDATORY_FIELD_MSG_BUNDLE_KEY =
             "scenarioManagement.mandatoryFieldOnError";
@@ -70,26 +71,11 @@ public class AddScenarioFormValidator implements Validator {
             "scenarioManagement.scenarioLabelExists";
     private static final String INVALID_SCENARIO_MSG_BUNDLE_KEY = 
             "scenarioManagement.invalidScenario";
-            
-    public List<String> authorizedMimeType = new ArrayList();
-    public List<String> getAuthorizedMimeType() {
-        return authorizedMimeType;
-    }
 
-    public void setAuthorizedMimeType(List<String> authorizedMimeType) {
-        this.authorizedMimeType = authorizedMimeType;
-    }
-    
-    // Default = 2MB
-    private long maxFileSize=2097152;
-    public void setMaxFileSize(long maxFileSize) {
-        this.maxFileSize = maxFileSize;
-    }
-    
     private final ContractDataService contractDataService;
-    public ContractDataService getContractDataService() {
-        return contractDataService;
-    }
+    private final  List<String> authorizedMimeType = Arrays.asList("text/plain");
+    // Default = 2MB
+    private final  long maxFileSize=2097152;
 
     @Autowired
     public AddScenarioFormValidator(ContractDataService contractDataService) {
@@ -211,7 +197,7 @@ public class AddScenarioFormValidator implements Validator {
                 return false;
             }
         } catch (IOException ex) {
-            LOGGER.warn(ex);
+            LOGGER.warn(ex.getMessage());
             errors.rejectValue(SCENARIO_FILE_KEY, NOT_SCENARIO_MSG_BUNDLE_KEY);
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);

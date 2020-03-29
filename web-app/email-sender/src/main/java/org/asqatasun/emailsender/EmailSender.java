@@ -30,39 +30,30 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author jkowalczyk
  */
+@Service("emailSender")
 public class EmailSender {
 
-    private static final Logger LOGGER = Logger.getLogger(EmailSender.class);
-    private static final String SMTP_HOST = "localhost";
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailSender.class);
     private static final String CONTENT_TYPE_KEY = "Content-Type";
     private static final String FULL_CHARSET_KEY = "text/html; charset=UTF-8";
     private static final String CHARSET_KEY = "UTF-8";
-    private String smtpHost = SMTP_HOST;
-
-    public void setSmtpHost(String smptHost) {
-        this.smtpHost = smptHost;
-    }
-    private String userName = "";
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-    private String from = "";
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-    private String password = "";
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    @Value("${app.emailSender.smtp.host:localhost}")
+    private String smtpHost;
+    @Value("${app.emailSender.smtp.user:}")
+    private String userName;
+    @Value("${app.emailSender.smtp.from:}")
+    private String from;
+    @Value("${app.emailSender.smtp.password:}")
+    private String password;
 
     /**
      *

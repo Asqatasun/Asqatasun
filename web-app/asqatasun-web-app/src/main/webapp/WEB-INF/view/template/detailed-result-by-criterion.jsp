@@ -88,7 +88,7 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <img src="<c:url value="/public/${asqatasunVersion}/images/ico-passed-m-gray.png"/>" title="${passedTitle}" alt="${passedTitle}"/>
+                    <img src="<c:url value="/public/images/ico-passed-m-gray.png"/>" title="${passedTitle}" alt="${passedTitle}"/>
                     <span class="theme-result" title="${passedTitle}">
                         ${counterByThemeMap[entry.key].passedCount}
                     </span>
@@ -100,7 +100,7 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <img src="<c:url value="/public/${asqatasunVersion}/images/ico-failed-m-gray.png"/>" title="${failedTitle}" alt="${failedTitle}"/>
+                    <img src="<c:url value="/public/images/ico-failed-m-gray.png"/>" title="${failedTitle}" alt="${failedTitle}"/>
                     <span class="theme-result" title="${failedTitle}">
                         ${counterByThemeMap[entry.key].failedCount}
                     </span>
@@ -112,7 +112,7 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <img src="<c:url value="/public/${asqatasunVersion}/images/ico-nmi-m-gray.png"/>" title="${nmiTitle}" alt="${nmiTitle}"/>
+                    <img src="<c:url value="/public/images/ico-nmi-m-gray.png"/>" title="${nmiTitle}" alt="${nmiTitle}"/>
                     <span class="theme-result" title="${nmiTitle}">
                         ${counterByThemeMap[entry.key].nmiCount}
                     </span>
@@ -124,7 +124,7 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <img src="<c:url value="/public/${asqatasunVersion}/images/ico-na-m-gray.png"/>" title="${naTitle}" alt="${naTitle}"/>
+                    <img src="<c:url value="/public/images/ico-na-m-gray.png"/>" title="${naTitle}" alt="${naTitle}"/>
                     <span class="theme-result" title="${naTitle}">
                         ${counterByThemeMap[entry.key].naCount}
                     </span>
@@ -136,7 +136,7 @@
                         <fmt:message key="resultPage.forTheTheme"/>
                         <fmt:message key="${entry.key.code}"/>
                     </c:set>
-                    <img src="<c:url value="/public/${asqatasunVersion}/images/ico-nt-m-gray.png"/>" title="${ntTitle}" alt="${ntTitle}"/>
+                    <img src="<c:url value="/public/images/ico-nt-m-gray.png"/>" title="${ntTitle}" alt="${ntTitle}"/>
                     <span class="theme-result" title="${ntTitle}">
                         ${counterByThemeMap[entry.key].ntCount}
                     </span>
@@ -175,7 +175,7 @@
                         <fmt:message key="${criterionResult.criterion.code}"/>
                     </div><!-- class="span9 rule-label" -->
                     <div class="span1 criterion-result offset2">
-                        <img src="<c:url value="/public/${asqatasunVersion}/images/ico-${criterionResult.resultCode}-m.png"/>"
+                        <img src="<c:url value="/public/images/ico-${criterionResult.resultCode}-m.png"/>"
                              alt="<fmt:message key="resultPage.criterion"/>
                                       ${criterionResult.criterion.label}
                                       <fmt:message key="${criterionResult.resultCode}"/>
@@ -187,7 +187,7 @@
                            title="<fmt:message key="resultPage.displayCriterionInfosOn">
                                     <fmt:param>${criterionResult.criterion.label}</fmt:param>
                                   </fmt:message>">
-                            <img src="<c:url value="/public/${asqatasunVersion}/images/criterion-detail.png"/>"
+                            <img src="<c:url value="/public/images/criterion-detail.png"/>"
                                  alt="<fmt:message key="resultPage.displayCriterionInfosOn">
                                     <fmt:param>${criterionResult.criterion.label}</fmt:param>
                                   </fmt:message>" />

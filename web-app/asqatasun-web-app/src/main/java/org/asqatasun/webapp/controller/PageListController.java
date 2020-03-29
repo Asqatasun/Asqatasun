@@ -23,17 +23,18 @@ package org.asqatasun.webapp.controller;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.exception.AuditParameterMissingException;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenScopeException;
 import org.asqatasun.webapp.report.pagination.factory.TgolPaginatedListFactory;
+import org.asqatasun.webapp.statistics.service.StatisticsDataService;
 import org.asqatasun.webapp.util.HttpStatusCodeFamily;
-import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +43,8 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import static org.asqatasun.webapp.util.TgolKeyStore.*;
+
 /**
  *
  * @author jkowalczyk
@@ -49,41 +52,46 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PageListController extends AbstractAuditDataHandlerController {
 
-    public PageListController() {
+    private final TestDataService testDataService;
+    private final StatisticsDataService statisticsDataService;
+    private final TgolPaginatedListFactory tgolPaginatedListFactory;
+
+    public PageListController(TestDataService testDataService,
+                              StatisticsDataService statisticsDataService,
+                              TgolPaginatedListFactory tgolPaginatedListFactory) {
         super();
+        this.testDataService = testDataService;
+        this.statisticsDataService = statisticsDataService;
+        this.tgolPaginatedListFactory = tgolPaginatedListFactory;
     }
 
     /**
      *
      * @param request
-     * @param response
      * @param model
      * @return
      * @throws java.lang.Exception
      */
-    @RequestMapping(value = TgolKeyStore.PAGE_LIST_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    public String displayPageList(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Model model) throws Exception {
-        String auditId = ServletRequestUtils.getStringParameter(request, TgolKeyStore.AUDIT_ID_KEY);
+    @RequestMapping(value = PAGE_LIST_CONTRACT_URL, method = RequestMethod.GET)
+    @Secured({ROLE_USER_KEY, ROLE_ADMIN_KEY})
+    public String displayPageList(HttpServletRequest request, Model model) throws Exception {
+
+        String auditId = ServletRequestUtils.getStringParameter(request, AUDIT_ID_KEY);
         if (auditId == null) {
             throw new AuditParameterMissingException();
         }
         Audit audit;
         try {
-            audit = getAuditDataService().read(Long.valueOf(auditId));
+            audit = auditDataService.read(Long.valueOf(auditId));
         } catch (NumberFormatException e) {
             throw new ForbiddenPageException(e);
         }
-
         if (isUserAllowedToDisplayResult(audit)) {
             return pageLinkDispatcher(request, audit, model);
         } else {
             // this block can never be reached. the "isUserAllowedToDisplayResult"
             // method returns true or throws an exception
-            return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
+            return ACCESS_DENIED_VIEW_NAME;
         }
     }
 
@@ -92,20 +100,16 @@ public class PageListController extends AbstractAuditDataHandlerController {
      * the request. Only multi-pages audit are considered here.
      *
      * @param request
-     * @param webResource
      * @param model
      * @return
      * @throws Exception
      */
-    private String pageLinkDispatcher(
-            HttpServletRequest request,
-            Audit audit,
-            Model model) throws Exception {
+    private String pageLinkDispatcher(HttpServletRequest request, Audit audit, Model model) throws Exception {
 
         if (audit.getSubject() instanceof Page) {
             throw new ForbiddenPageException();
         }
-        String status = ServletRequestUtils.getStringParameter(request, TgolKeyStore.STATUS_KEY);
+        String status = ServletRequestUtils.getStringParameter(request, STATUS_KEY);
         HttpStatusCodeFamily httpStatusCode = getHttpStatusCodeFamily(status);
         // If the status parameter is absent, we want to display the page with
         // the repartion of the pages regarding the httpStatusCode
@@ -115,31 +119,31 @@ public class PageListController extends AbstractAuditDataHandlerController {
             }
             try {
                 Contract currentContract = retrieveContractFromAudit(audit);
-                model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, currentContract.getLabel());
-                model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, currentContract.getId());
-                String testLabel = ServletRequestUtils.getStringParameter(request, TgolKeyStore.TEST_KEY);
+                model.addAttribute(CONTRACT_NAME_KEY, currentContract.getLabel());
+                model.addAttribute(CONTRACT_ID_KEY, currentContract.getId());
+                String testLabel = ServletRequestUtils.getStringParameter(request, TEST_KEY);
                 if (StringUtils.isNotBlank(testLabel)) {
-                    model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel));
+                    model.addAttribute(TEST_CODE_KEY, testDataService.getTestFromAuditAndLabel(audit, testLabel));
                 }
                 return this.preparePageListData(audit, model);
             } catch (ServletRequestBindingException e) {
-                return TgolKeyStore.OUPS_VIEW_REDIRECT_NAME;
+                return OUPS_VIEW_REDIRECT_NAME;
             }
         } else {
             boolean isAuthorizedScopeForPageList = isAuthorizedScopeForPageList(audit);
             Contract currentContract = retrieveContractFromAudit(audit);
-            model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, currentContract.getLabel());
-            model.addAttribute(TgolKeyStore.CONTRACT_ID_KEY, currentContract.getId());
+            model.addAttribute(CONTRACT_NAME_KEY, currentContract.getLabel());
+            model.addAttribute(CONTRACT_ID_KEY, currentContract.getId());
             // when this page is displayed from a group of pages audit, it has
             // to indicate the audit number. So we add an attribute that can be
             // used in the jsp
             if (!isAuthorizedScopeForPageList) {
                 model.addAttribute(
-                        TgolKeyStore.AUDIT_NUMBER_KEY, true);
+                        AUDIT_NUMBER_KEY, true);
             }
-            String testLabel = ServletRequestUtils.getStringParameter(request, TgolKeyStore.TEST_KEY);
+            String testLabel = ServletRequestUtils.getStringParameter(request, TEST_KEY);
             if (StringUtils.isNotBlank(testLabel)) {
-                model.addAttribute(TgolKeyStore.TEST_CODE_KEY, getTestDataService().getTestFromAuditAndLabel(audit, testLabel));
+                model.addAttribute(TEST_CODE_KEY, testDataService.getTestFromAuditAndLabel(audit, testLabel));
             }
             return this.preparePageListStatsByHttpStatusCode(
                     audit,
@@ -160,19 +164,19 @@ public class PageListController extends AbstractAuditDataHandlerController {
      */
     private String preparePageListData(Audit audit, Model model) {
         model.addAttribute(
-                TgolKeyStore.AUDITED_PAGES_COUNT_KEY,
+                AUDITED_PAGES_COUNT_KEY,
                 getWebResourceCount(audit.getId(), HttpStatusCodeFamily.f2xx));
         model.addAttribute(
-                TgolKeyStore.REDIRECTED_PAGES_COUNT_KEY,
+                REDIRECTED_PAGES_COUNT_KEY,
                 getWebResourceCount(audit.getId(), HttpStatusCodeFamily.f3xx));
         model.addAttribute(
-                TgolKeyStore.ERROR_PAGES_COUNT_KEY,
+                ERROR_PAGES_COUNT_KEY,
                 getWebResourceCount(audit.getId(), HttpStatusCodeFamily.f4xx));
         model.addAttribute(
-                TgolKeyStore.REL_CANONICAL_PAGES_COUNT_KEY,
+                REL_CANONICAL_PAGES_COUNT_KEY,
                 getWebResourceCount(audit.getId(), HttpStatusCodeFamily.f9xx));
-        addAuditStatisticsToModel(audit.getSubject(), model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
-        return TgolKeyStore.PAGE_LIST_VIEW_NAME;
+        addAuditStatisticsToModel(audit.getSubject(), model, TEST_DISPLAY_SCOPE_VALUE);
+        return PAGE_LIST_VIEW_NAME;
     }
 
     /**
@@ -184,21 +188,21 @@ public class PageListController extends AbstractAuditDataHandlerController {
         if (status == null) {
             return null;
         }
-        getAuthorizedSortCriterion().clear();
-        getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getUrlSortCriterion());
+        authorizedSortCriterion.clear();
+        authorizedSortCriterion.add(tgolPaginatedListFactory.getUrlSortCriterion());
         if (status.equalsIgnoreCase(HttpStatusCodeFamily.f2xx.name())) {
-            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault2xxSortCriterion());
-            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getUrlSortCriterion());
-            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getRankCriterion());
+            authorizedSortCriterion.add(tgolPaginatedListFactory.getDefault2xxSortCriterion());
+            authorizedSortCriterion.add(tgolPaginatedListFactory.getUrlSortCriterion());
+            authorizedSortCriterion.add(tgolPaginatedListFactory.getRankCriterion());
             return HttpStatusCodeFamily.f2xx;
         } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f3xx.name())) {
-            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault3xxSortCriterion());
+            authorizedSortCriterion.add(tgolPaginatedListFactory.getDefault3xxSortCriterion());
             return HttpStatusCodeFamily.f3xx;
         } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f4xx.name())) {
-            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault3xxSortCriterion());
+            authorizedSortCriterion.add(tgolPaginatedListFactory.getDefault3xxSortCriterion());
             return HttpStatusCodeFamily.f4xx;
         } else if (status.equalsIgnoreCase(HttpStatusCodeFamily.f9xx.name())) {
-            getAuthorizedSortCriterion().add(TgolPaginatedListFactory.getInstance().getDefault3xxSortCriterion());
+            authorizedSortCriterion.add(tgolPaginatedListFactory.getDefault3xxSortCriterion());
             return HttpStatusCodeFamily.f9xx;
         } else {
             return null;
@@ -214,7 +218,7 @@ public class PageListController extends AbstractAuditDataHandlerController {
     private int getWebResourceCount(
             Long idAudit,
             HttpStatusCodeFamily hpcf) {
-        return getStatisticsDataService().getWebResourceCountByAuditAndHttpStatusCode(
+        return statisticsDataService.getWebResourceCountByAuditAndHttpStatusCode(
                 idAudit,
                 hpcf,
                 null,

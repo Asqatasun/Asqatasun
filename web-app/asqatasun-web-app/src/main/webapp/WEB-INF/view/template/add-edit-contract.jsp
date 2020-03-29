@@ -233,7 +233,7 @@
                         <br/>
                         <span class="help-block">
                         <c:choose>
-                            <c:when test="${tg:instanceOf(option.formField, 'org.asqatasun.webapp.form.NumericalFormField')}">
+                            <c:when test="${tg:instanceOf(option.formField, 'org.asqatasun.webapp.ui.form.NumericalFormField')}">
                                 <fmt:message key="${i18nKey}-rule">
                                     <fmt:param>${option.formField.maxValue}</fmt:param>
                                 </fmt:message>

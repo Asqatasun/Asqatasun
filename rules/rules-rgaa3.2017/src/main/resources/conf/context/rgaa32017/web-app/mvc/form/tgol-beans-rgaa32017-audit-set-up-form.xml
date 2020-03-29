@@ -10,7 +10,7 @@
 
 
     <!-- Rgaa32017 select elements -->
-    <bean id="rgaa32017BronzeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa32017BronzeSelectElementBuilder" class="SelectElementBuilderImpl">
         <property name="value" value="Rgaa32017;LEVEL_1"/>
         <property name="i18nKey" value="Rgaa32017-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="rgaa32017SilverSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa32017SilverSelectElementBuilder" class="SelectElementBuilderImpl">
         <property name="value" value="Rgaa32017;LEVEL_2"/>
         <property name="i18nKey" value="Rgaa32017-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <bean id="rgaa32017GoldSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="rgaa32017GoldSelectElementBuilder" class="SelectElementBuilderImpl">
         <property name="value" value="Rgaa32017;LEVEL_3"/>
         <property name="i18nKey" value="Rgaa32017-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>

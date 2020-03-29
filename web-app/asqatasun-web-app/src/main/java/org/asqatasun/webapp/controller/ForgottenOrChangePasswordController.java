@@ -27,21 +27,21 @@ import java.text.MessageFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.emailsender.EmailSender;
-import org.asqatasun.security.tokenmanagement.TokenManager;
+import org.asqatasun.webapp.security.tokenmanagement.TokenManager;
 import org.asqatasun.util.MD5Encoder;
 import org.asqatasun.webapp.command.ChangePasswordCommand;
 import org.asqatasun.webapp.command.ForgottenPasswordCommand;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
-import org.asqatasun.webapp.presentation.menu.SecondaryLevelMenuDisplayer;
+import org.asqatasun.webapp.ui.form.menu.SecondaryLevelMenuDisplayer;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.asqatasun.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
 import org.asqatasun.webapp.validator.ChangePasswordFormValidator;
 import org.asqatasun.webapp.validator.ForgottenPasswordFormValidator;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,55 +59,33 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class ForgottenOrChangePasswordController extends AbstractController {
 
-    private ChangePasswordFormValidator changePasswordFormValidator;
-    @Autowired
-    public final void setChangePasswordFormValidator(ChangePasswordFormValidator changePasswordFormValidator) {
-        this.changePasswordFormValidator = changePasswordFormValidator;
-    }
+    @Value("${app.webapp.config.forgottenPassword.excludeUserList:guest}")
+    List<String> forbiddenUserList;
+    @Value("${app.webapp.config.forgottenPassword.changePasswordUrl:/change-password.html}")
+    String changePasswordUrl;
+    @Value("${app.webapp.config.forgottenPassword.webAppUrl:http://localhost:8080/}")
+    String webAppUrl;
+    private final ChangePasswordFormValidator changePasswordFormValidator;
+    private final ForgottenPasswordFormValidator forgottenPasswordFormValidator;
+    private final EmailSender emailSender;
+    private final LocaleResolver localeResolver;
+    private final SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
+    private final TokenManager tokenManager;
 
-    private ForgottenPasswordFormValidator forgottenPasswordFormValidator;
     @Autowired
-    public final void setForgottenPasswordFormValidator(ForgottenPasswordFormValidator forgottenPasswordFormValidator) {
-        this.forgottenPasswordFormValidator = forgottenPasswordFormValidator;
-    }
-
-    private ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer;
-    @Autowired
-    public final void setExposablePropertyPlaceholderConfigurer(ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer) {
-        this.exposablePropertyPlaceholderConfigurer = exposablePropertyPlaceholderConfigurer;
-    }
-
-    private EmailSender emailSender;
-    @Autowired
-    public final void setEmailSender(EmailSender emailSender) {
-        this.emailSender = emailSender;
-    }
-
-    private LocaleResolver localeResolver;
-    @Autowired
-    public final void setLocaleResolver(LocaleResolver localeResolver) {
-        this.localeResolver = localeResolver;
-    }
-
-    List<String> forbiddenUserList = new ArrayList();
-    public void setForbiddenUserList(List<String> forbiddenUserList) {
-        this.forbiddenUserList = forbiddenUserList;
-    }
-    
-    private SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
-    @Autowired
-    public void setSecondaryLevelMenuDisplayer(SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer) {
-        this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
-    }
-    
-    private TokenManager tokenManager;
-    @Autowired
-    public void setTokenManager(TokenManager tokenManager) {
-        this.tokenManager = tokenManager;
-    }
-    
-    public ForgottenOrChangePasswordController() {
+    public ForgottenOrChangePasswordController(
+        ChangePasswordFormValidator changePasswordFormValidator,
+        ForgottenPasswordFormValidator forgottenPasswordFormValidator,
+        EmailSender emailSender, LocaleResolver localeResolver,
+        SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer,
+        TokenManager tokenManager) {
         super();
+        this.changePasswordFormValidator = changePasswordFormValidator;
+        this.forgottenPasswordFormValidator = forgottenPasswordFormValidator;
+        this.emailSender = emailSender;
+        this.localeResolver = localeResolver;
+        this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
+        this.tokenManager = tokenManager;
     }
 
     /**
@@ -150,7 +128,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     
     /**
      * 
-     * @param email
+     * @param id
      * @param token
      * @param model
      * @param request
@@ -182,7 +160,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
                 return TgolKeyStore.ACCESS_DENIED_VIEW_REDIRECT_NAME;
             } else {
                 if (!currentUser.getId().equals(userId)){
-                    user = getUserDataService().read(userId);
+                    user = userDataService.read(userId);
                 } else {
                     user = currentUser;
                 }
@@ -190,7 +168,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         // the request is submitted through an unauthentified user and the token
         // has to be checked.
         } else {
-            user = getUserDataService().read(userId);
+            user = userDataService.read(userId);
             try {
                 // if the token is invalid
                 if (!tokenManager.checkUserToken(user.getEmail1(), token)) {
@@ -263,7 +241,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
                     forgottenPasswordCommand);
         }
         Locale locale = localeResolver.resolveLocale(request);
-        sendResetEmail(getUserDataService().getUserFromEmail(forgottenPasswordCommand.getEmail()), locale);
+        sendResetEmail(userDataService.getUserFromEmail(forgottenPasswordCommand.getEmail()), locale);
         request.getSession().setAttribute(TgolKeyStore.URL_KEY, forgottenPasswordCommand.getEmail());
         return TgolKeyStore.FORGOTTEN_PASSWORD_CONFIRMATION_VIEW_REDIRECT_NAME;
     }
@@ -334,7 +312,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
             HttpServletRequest request,
             boolean isrequestFromAdmin)
             throws Exception {
-        User user = getUserDataService().read((Long)request.getSession().getAttribute(TgolKeyStore.USER_ID_KEY));
+        User user = userDataService.read((Long)request.getSession().getAttribute(TgolKeyStore.USER_ID_KEY));
         if (forbiddenUserList.contains(user.getEmail1())) {
             throw new ForbiddenPageException();
         }
@@ -376,7 +354,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     /**
      * 
      * @param model
-     * @param launchAuditFromContractCommand
+     * @param forgottenPasswordCommand
      * @return
      */
     private String displayFormWithErrors(
@@ -390,8 +368,8 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     /**
      *
      * @param model
-     * @param contract
-     * @param launchAuditFromContractCommand
+     * @param changePasswordCommand
+     * @param isrequestFromAdmin
      * @return
      */
     private String displayChangePasswordFormWithErrors(
@@ -439,29 +417,30 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      */
     private String computeReturnedUrl(User user) {
         StringBuilder sb = new StringBuilder();
-        sb.append(exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.FORGOTTEN_PASSWD_CHANGE_PASSWORD_URL_KEY));
+        sb.append(webAppUrl+changePasswordUrl);
         sb.append("?user=");
         sb.append(user.getId());
         sb.append("&token=");
         try {
             sb.append(URLEncoder.encode(tokenManager.getTokenUser(user.getEmail1()), "UTF-8"));
         } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(this.getClass()).warn(ex);
+            LoggerFactory.getLogger(this.getClass()).warn(ex.getMessage());
         }
         return sb.toString();
     }
 
     /**
      *
-     * @param userSignUpCommand
-     * @return
+     * @param user
+     * @param changePasswordCommand
+     * @return an User
      * @throws Exception
      */
     private User updateUserPassword(
             User user,
             ChangePasswordCommand changePasswordCommand) throws Exception {
         user.setPassword(MD5Encoder.MD5(changePasswordCommand.getNewPassword()));
-        getUserDataService().saveOrUpdate(user);
+        userDataService.saveOrUpdate(user);
         return user;
     }
 

@@ -23,34 +23,20 @@ package org.asqatasun.webapp.command.factory;
 
 import org.asqatasun.webapp.command.AddScenarioCommand;
 import org.asqatasun.webapp.entity.contract.Contract;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author jkowalczyk
  */
-public final class AddScenarioCommandFactory {
+@Component
+public class AddScenarioCommandFactory {
 
-    /**
-     * The holder that handles the unique instance of AddScenarioCommandFactory
-     */
-    private static class AddScenarioCommandFactoryHolder {
-        private static final AddScenarioCommandFactory INSTANCE = new AddScenarioCommandFactory();
-    }
-    
     /**
      * Private constructor
      */
     private AddScenarioCommandFactory() {}
-    
-    /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     * @return the unique instance of AddScenarioCommandFactory
-     */
-    public static AddScenarioCommandFactory getInstance() {
-        return AddScenarioCommandFactoryHolder.INSTANCE;
-    }
     
     /**
      * Return a initialised auditCommand object for the given contract. This object
@@ -59,7 +45,7 @@ public final class AddScenarioCommandFactory {
      * @param contract
      * @return
      */
-    public static AddScenarioCommand getAddScenarioCommand (Contract contract) {
+    public AddScenarioCommand getAddScenarioCommand (Contract contract) {
         AddScenarioCommand addScenarioCommand = new AddScenarioCommand();
         addScenarioCommand.setContractId(contract.getId());
         return addScenarioCommand;

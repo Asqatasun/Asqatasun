@@ -1,0 +1,31 @@
+jdbc:
+  driverClassName : "com.mysql.cj.jdbc.Driver"
+  url: "jdbc:mysql://localhost:3306/asqatasun?useSSL=false"
+  user: "root"
+  password: bou
+
+hibernate:
+  cache:
+    use_second_level_cache: true
+    use_query_cache: true
+    ehcache:
+        missing_cache_strategy:spring: create
+
+webdriver:
+  firefox:
+    bin: "/opt/firefox/firefox"
+
+spring:
+  profiles:
+    active: "webapp"
+
+app:
+  version: "5.0-SNAPSHOT"
+  engine:
+    persistence:
+      packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"
+      useComboPool: true
+    loader:
+      proxy:
+        port:
+        host:

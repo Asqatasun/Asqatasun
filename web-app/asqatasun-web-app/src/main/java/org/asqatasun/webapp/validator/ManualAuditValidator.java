@@ -2,11 +2,13 @@ package org.asqatasun.webapp.validator;
 
 import java.util.List;
 
-import org.asqatasun.entity.audit.DefiniteResultImpl;
+import org.asqatasun.entity.audit.DefiniteResult;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.webapp.command.ManualAuditCommand;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
+@Component("manualAuditValidator")
 public class ManualAuditValidator implements org.springframework.validation.Validator {
 
     private static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";
@@ -33,7 +35,7 @@ public class ManualAuditValidator implements org.springframework.validation.Vali
         int i = 0;
         boolean isExitStatut = true;
         for (ProcessResult testResultImpl : allProcessResultList) {
-            DefiniteResultImpl definiteResult = (DefiniteResultImpl) testResultImpl;
+            DefiniteResult definiteResult = (DefiniteResult) testResultImpl;
             if (definiteResult.getManualDefiniteValue() == null) {
                 isExitStatut = false;
                 if (i < 11) {

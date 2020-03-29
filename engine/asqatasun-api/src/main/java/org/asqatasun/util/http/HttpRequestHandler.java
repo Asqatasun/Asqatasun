@@ -73,9 +73,9 @@ public class HttpRequestHandler {
     @Value("${app.engine.loader.proxy.password:}")
     private String proxyPassword;
     @Value("${app.engine.loader.bypassCheck:false}")
-    private Boolean bypassCheck;
-    public void setBypassCheck(String bypassCheck) {
-        this.bypassCheck = Boolean.parseBoolean(bypassCheck);
+    private boolean bypassCheck;
+    public void setBypassCheck(boolean bypassCheck) {
+        this.bypassCheck = bypassCheck;
     }
 
     private static final String DEFAULT_CHARSET = "UTF-8";

@@ -4,16 +4,9 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" %>                                 
 
-<c:choose>
-    <c:when test="${inline == 'true'}">
-        <c:set var="formClass" value="inline" scope="page"/>
-        <c:set var="inputSize" value="input-medium" scope="page"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="formClass" value="form-stacked" scope="page"/>
-        <c:set var="inputSize" value="input-xlarge" scope="page"/>
-    </c:otherwise>
-</c:choose>
+<c:set var="formClass" value="form-stacked" scope="page"/>
+<c:set var="inputSize" value="input-xlarge" scope="page"/>
+
 <div id="login-form" class="row">
     <form method="post" 
           action="<c:url value="/login"/>"
@@ -77,7 +70,6 @@
                id="password"
                class="${inputSize}" 
                autocomplete="off" />
-        <c:if test="${configProperties['enable-account-settings'] == 'true'}">
         <span class="help-block">
             <a href="<c:url value="/forgotten-password.html"/>">
                 <fmt:message key="login.passwordForgotten"/>
@@ -87,7 +79,6 @@
                type="submit" 
                name="Login" 
                value="<fmt:message key="login.submit"/>"/>
-        </c:if>
     </c:otherwise>
 </c:choose>
     </form>

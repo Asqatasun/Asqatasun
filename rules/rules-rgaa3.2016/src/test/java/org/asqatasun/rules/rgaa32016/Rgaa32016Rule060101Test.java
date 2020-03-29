@@ -61,6 +61,8 @@ public class Rgaa32016Rule060101Test extends Rgaa32016RuleImplementationTestCase
         addWebResource("Rgaa32016.Test.06.01.01-3NMI-02");
         addWebResource("Rgaa32016.Test.06.01.01-3NMI-03");
         addWebResource("Rgaa32016.Test.06.01.01-3NMI-05");
+        addWebResource("Rgaa32016.Test.06.01.01-3NMI-06");
+        addWebResource("Rgaa32016.Test.06.01.01-3NMI-07");
         addWebResource("Rgaa32016.Test.06.01.01-4NA-01");
         addWebResource("Rgaa32016.Test.06.01.01-4NA-02");
         addWebResource("Rgaa32016.Test.06.01.01-4NA-03");

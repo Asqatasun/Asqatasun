@@ -1,0 +1,8 @@
+jpa:
+  showSql: false
+jdbc:
+  url: "jdbc:hsqldb:mem:mytestdb"
+  user: "sa"
+  password:
+
+useComboPool: false

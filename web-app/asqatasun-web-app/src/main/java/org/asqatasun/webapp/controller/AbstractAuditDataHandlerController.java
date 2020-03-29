@@ -1,6 +1,6 @@
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2019  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
@@ -21,11 +21,6 @@
  */
 package org.asqatasun.webapp.controller;
 
-import java.util.*;
-import java.util.regex.Pattern;
-import javax.persistence.NoResultException;
-import javax.servlet.http.HttpServletRequest;
-import org.displaytag.pagination.PaginatedList;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.parameterization.Parameter;
@@ -34,220 +29,112 @@ import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.reference.ScopeDataService;
-import org.asqatasun.entity.service.reference.TestDataService;
-import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.dto.AuditStatistics;
+import org.asqatasun.webapp.dto.factory.AuditStatisticsFactory;
 import org.asqatasun.webapp.entity.contract.Act;
 import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.decorator.asqatasun.parameterization.ParameterDataServiceDecorator;
 import org.asqatasun.webapp.entity.service.contract.ActDataService;
-import org.asqatasun.webapp.entity.service.statistics.StatisticsDataService;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.exception.OrphanWebResourceException;
-import org.asqatasun.webapp.presentation.data.AuditStatistics;
-import org.asqatasun.webapp.presentation.factory.AuditStatisticsFactory;
 import org.asqatasun.webapp.report.pagination.factory.TgolPaginatedListFactory;
 import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 import org.asqatasun.webapp.util.TgolKeyStore;
+import org.displaytag.pagination.PaginatedList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.web.servlet.LocaleResolver;
+
+import javax.annotation.PostConstruct;
+import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 /**
  * This abstract controller handles methods to retrieve and format audit data
  * @author jkowalczyk
  */
-@Controller
 public abstract class AbstractAuditDataHandlerController extends AbstractController {
 
-    private int pageScopeId = 1;
-    public void setPageScopeId(int pageScopeId) {
-        this.pageScopeId = pageScopeId;
-    }
-
-    private int siteScopeId = 2;
-    public void setSiteScopeId(int siteScopeId) {
-        this.siteScopeId = siteScopeId;
-    }
-
-    private Scope siteScope;
-    /**
-     *
-     * @return the scope instance
-     */
-    public Scope getSiteScope() {
-        return siteScope;
-    }
-
-    private Scope pageScope;
-    public Scope getPageScope() {
-        return pageScope;
-    }
-
-    /*
-     * Displaying bounds
-     */
+    private static final int pageScopeId = 1;
+    private static final int siteScopeId = 2;
     protected static final String FROM_VALUE = "fromValue";
     protected static final String TO_VALUE = "toValue";
 
-    /*
-     * Authorized elements depending on the context.
-     */
-    private final Set<Integer> authorizedPageSize = new LinkedHashSet<>();
-    public Set<Integer> getAuthorizedPageSize() {
-        return authorizedPageSize;
-    }
-    
-    public final void setAuthorizedPageSizeList(Set<String> authorizedPageSizeList) {
-        for (String size : authorizedPageSizeList) {
-            this.authorizedPageSize.add(Integer.valueOf(size));
-        }
-    }
+    protected Scope siteScope;
+    protected Scope pageScope;
 
-    private final Set<String> authorizedSortCriterion = new LinkedHashSet<>();
-    public Set<String> getAuthorizedSortCriterion() {
-        return authorizedSortCriterion;
-    }
-
-    /**
-     * This method initializes the siteScope and the pageScope instances through
-     * their persistence Id.
-     * @param scopeDataService
-     */
-    @Autowired
-    public final void setScopeDataService(ScopeDataService scopeDataService) {
-        siteScope = scopeDataService.read(Long.valueOf(siteScopeId));
-        pageScope = scopeDataService.read(Long.valueOf(pageScopeId));
-    }
-
-    private WebResourceDataService webResourceDataService;
-    public WebResourceDataService getWebResourceDataService() {
-        return webResourceDataService;
-    }
-
-    @Autowired
-    public final void setWebResourceDataService(WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
-    
-    private StatisticsDataService statisticsDataService;
-    public StatisticsDataService getStatisticsDataService() {
-        return statisticsDataService;
-    }
-
-    @Autowired
-    public final void setStatisticsDataService(StatisticsDataService statisticsDataService) {
-        this.statisticsDataService = statisticsDataService;
-    }
-
-    /**
-     * The AuditDataService
-     */
-    private AuditDataService auditDataService;
-    public AuditDataService getAuditDataService() {
-        return auditDataService;
-    }
-    
-    @Autowired
-    public void setAuditDataService(AuditDataService auditDataService) {
-        this.auditDataService = auditDataService;
-    }
-    
-    private ActDataService actDataService;
-    public ActDataService getActDataService() {
-        return actDataService;
-    }
-
-    @Autowired
-    public final void setActDataService(ActDataService actDataService) {
-        this.actDataService = actDataService;
-    }
-
-    private ContentDataService contentDataService;
-    public ContentDataService getContentDataService() {
-        return contentDataService;
-    }
-
-    @Autowired
-    public final void setContentDataService(ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
-    }
-
-    private TestDataService testDataService;
-    public TestDataService getTestDataService() {
-        return testDataService;
-    }
-
-    @Autowired
-    public final void setTestDataService(TestDataService testDataService) {
-        this.testDataService = testDataService;
-    }
-
-    private ParameterDataServiceDecorator parameterDataService;
-    public ParameterDataServiceDecorator getParameterDataService() {
-        return parameterDataService;
-    }
-
-    @Autowired
-    public final void setParameterDataService(ParameterDataServiceDecorator parameterDataService) {
-        this.parameterDataService = parameterDataService;
-        // the audit Set up factory needs to be initialised with the unique instance
-        // of ParameterDataServiceDecorator
-        setDefaultParamSet(parameterDataService);
-    }
+    private List<Integer> authorizedPageSize = new ArrayList<>();
+    @Value("${app.webapp.config.authorizedPageSize:10,25,50,100,250,1000,-1}")
+    private List<String> authorizedPageSizeStr;
+    @Value("${app.webapp.config.authorizedScopeForCriterionList:SCENARIO,DOMAIN}")
+    protected List<String> authorizedSortCriterion;
+    @Value("${app.webapp.config.authorizedScopeForPageList:SCENARIO,DOMAIN}")
+    private List<String> authorizedScopeForPageList;
 
     private Set<Parameter> defaultParamSet;
     public Set<Parameter> getDefaultParamSet() {
         return ((Set) ((HashSet) defaultParamSet).clone());
     }
 
-    public final void setDefaultParamSet(ParameterDataService parameterDataService) {
-        this.defaultParamSet = parameterDataService.getDefaultParameterSet();
+    @Autowired
+    protected ScopeDataService scopeDataService;
+    @Autowired
+    protected ActDataService actDataService;
+    @Autowired
+    protected ContentDataService contentDataService;
+    @Autowired
+    protected AuditStatisticsFactory auditStatisticsFactory;
+    @Autowired
+    protected ParameterDataService parameterDataService;
+    @Autowired
+    protected AuditDataService auditDataService;
+    @Autowired
+    protected TgolPaginatedListFactory tgolPaginatedListFactory;
+
+    private static final String INVALID_TEST_VALUE_CHECKER_REGEXP = "\\d\\d?\\.\\d\\d?\\.?\\d?\\d?";
+
+    private static final Pattern invalidTestValueCheckerPattern =
+        Pattern.compile(INVALID_TEST_VALUE_CHECKER_REGEXP);
+
+    /**
+     * This method initializes the siteScope and the pageScope instances through
+     * their persistence Id.
+     */
+    @PostConstruct
+    protected void init() {
+        siteScope = scopeDataService.read((long) siteScopeId);
+        pageScope = scopeDataService.read((long) pageScopeId);
+        defaultParamSet = parameterDataService.getDefaultParameterSet();
+        authorizedPageSizeStr.forEach(size -> authorizedPageSize.add(Integer.valueOf(size)));
     }
 
-    private final Map<String, String> parametersToDisplay = new LinkedHashMap<>();
-    public Map<String, String> getParametersToDisplay() {
-        return parametersToDisplay;
-    }
-
-    public void setParametersToDisplay(Map<String, String> parametersToDisplay) {
-        this.parametersToDisplay.putAll(parametersToDisplay);
-    }
-
-    private LocaleResolver localeResolver;
-    public LocaleResolver getLocaleResolver() {
-        return localeResolver;
-    }
-
-    private final List<String> authorizedScopeForPageList = new ArrayList<>();
-    public void setAuthorizedScopeForPageList(List<String> authorizedScopeForPageList) {
-        this.authorizedScopeForPageList.addAll(authorizedScopeForPageList);
-    }
-
-    public List<String> getAuthorizedScopeForPageList() {
-        return authorizedScopeForPageList;
+    public Map<String,String> getParametersToDisplay() {
+        return Stream.of(new String[][] {
+            { "LEVEL", "level" },
+            { "SCREEN_HEIGHT", "screen-height" },
+            { "SCREEN_WIDTH", "screen-width" },
+            { "ALTERNATIVE_CONTRAST_MECHANISM", "contrast-alternative" },
+            { "INFORMATIVE_IMAGE_MARKER", "informative-image" },
+            { "DECORATIVE_IMAGE_MARKER", "decorative-image" },
+            { "PRESENTATION_TABLE_MARKER", "presentation-table" },
+            { "COMPLEX_TABLE_MARKER", "complex-table" },
+            { "DATA_TABLE_MARKER", "data-table" },
+        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
     }
 
     protected boolean isAuthorizedScopeForPageList(Audit audit) {
-        String scope = getActDataService().getActFromAudit(audit).getScope().getCode().name();
+        String scope = actDataService.getActFromAudit(audit).getScope().getCode().name();
         return authorizedScopeForPageList.contains(scope);
     }
-
-    @Autowired
-    public final void setLocaleResolver(LocaleResolver localeResolver) {
-        this.localeResolver = localeResolver;
-    }
-
-    private static final String INVALID_TEST_VALUE_CHECKER_REGEXP = "\\d\\d?\\.\\d\\d?\\.?\\d?\\d?";
-    private final Pattern invalidTestValueCheckerPattern = Pattern.compile(INVALID_TEST_VALUE_CHECKER_REGEXP);
-    
-    public AbstractAuditDataHandlerController() {}
 
     /**
      * Add a populated auditStatistics instance to the model
@@ -259,20 +146,19 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
     protected void addAuditStatisticsToModel(WebResource webResource, Model model, String displayScope) {
         model.addAttribute(
                 TgolKeyStore.STATISTICS_KEY,
-                getAuditStatistics(webResource, model, displayScope, false)); // default is false for manual audit
+                getAuditStatistics(webResource, displayScope, false)); // default is false for manual audit
     }
 
     /**
      * 
      * @param webResource
-     * @param model
      * @param displayScope
      * @param isAuditManual 
      * @return
      */
-    protected AuditStatistics getAuditStatistics(WebResource webResource, Model model, String displayScope, boolean isAuditManual){
-        return AuditStatisticsFactory.getInstance().getAuditStatistics(
-                webResource, 
+    protected AuditStatistics getAuditStatistics(WebResource webResource, String displayScope, boolean isAuditManual){
+        return auditStatisticsFactory.getAuditStatistics(
+                webResource,
                 getParametersToDisplay(),
                 displayScope,
                 isAuditManual);
@@ -293,7 +179,7 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
             throw new ForbiddenPageException();
         }
         User user = getCurrentUser();
-        Contract contract = getActDataService().getActFromAudit(audit).getContract();
+        Contract contract = actDataService.getActFromAudit(audit).getContract();
         if (isAdminUser() || (!isContractExpired(contract) && user.getId().compareTo(
                 contract.getUser().getId()) == 0)) {
             return true;
@@ -324,7 +210,7 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
     protected Contract retrieveContractFromAudit(Audit audit) {
         Act act = null;
         try {
-            act = getActDataService().getActFromAudit(audit);
+            act = actDataService.getActFromAudit(audit);
         } catch (NoResultException e) {}
         if (act!= null && act.getContract() != null) {
             return act.getContract();
@@ -388,13 +274,14 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
             HttpServletRequest request,
             boolean returnRedirectView) throws ServletRequestBindingException {
         
-        String invalidTest = ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.INVALID_TEST_PARAM);
+        String invalidTest =
+            ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.INVALID_TEST_PARAM);
         
         if (invalidTest != null && !this.invalidTestValueCheckerPattern.matcher(invalidTest).matches()) {
             throw new ForbiddenPageException();
         }
 
-        PaginatedList paginatedList = TgolPaginatedListFactory.getInstance().getPaginatedList(
+        PaginatedList paginatedList = tgolPaginatedListFactory.getPaginatedList(
                 httpStatusCode,
                 ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.PAGE_SIZE_PARAM),
                 ServletRequestUtils.getStringParameter(request, TgolPaginatedListFactory.SORT_DIRECTION_PARAM),

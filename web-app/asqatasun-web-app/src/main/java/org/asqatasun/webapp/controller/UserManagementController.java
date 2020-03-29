@@ -26,16 +26,18 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import org.asqatasun.util.MD5Encoder;
 import org.asqatasun.webapp.command.CreateContractCommand;
 import org.asqatasun.webapp.command.CreateUserCommand;
-import org.asqatasun.webapp.command.factory.CreateContractCommandFactory;
+import org.asqatasun.webapp.command.factory.CreateUserCommandFactory;
 import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
-import org.asqatasun.webapp.form.parameterization.ContractOptionFormField;
-import org.asqatasun.webapp.form.parameterization.helper.ContractOptionFormFieldHelper;
+import org.asqatasun.webapp.ui.form.parameterization.ContractOptionFormField;
+import org.asqatasun.webapp.ui.form.parameterization.helper.ContractOptionFormFieldHelper;
 import org.asqatasun.webapp.util.TgolKeyStore;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -51,8 +53,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserManagementController extends AbstractUserAndContractsController {
 
-    public UserManagementController() {
+    private final ContractDataService contractDataService;
+    private final CreateUserCommandFactory createUserCommandFactory;
+
+    public UserManagementController(ContractDataService contractDataService,
+                                    CreateUserCommandFactory createUserCommandFactory) {
         super();
+        this.contractDataService = contractDataService;
+        this.createUserCommandFactory = createUserCommandFactory;
     }
 
     @InitBinder
@@ -70,14 +78,14 @@ public class UserManagementController extends AbstractUserAndContractsController
                     try {
                         id = Long.parseLong((String) element);
                     } catch (NumberFormatException e) {
-                        Logger.getLogger(this.getClass()).warn("Element was " + ((String) element));
+                        LoggerFactory.getLogger(this.getClass()).warn("Element was " + element);
                     }
                 } else if (element instanceof Long) {
                     //From the database 'element' will be a Long
                     id = (Long) element;
                 }
 
-                return id != null ? getUserDataService().read(id) : null;
+                return id != null ? userDataService.read(id) : null;
             }
         });
     }
@@ -94,7 +102,7 @@ public class UserManagementController extends AbstractUserAndContractsController
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        model.addAttribute(TgolKeyStore.USER_LIST_KEY, getUserDataService().findAll());
+        model.addAttribute(TgolKeyStore.USER_LIST_KEY, userDataService.findAll());
         // Due to different redirection that can lead to this page, we need
         // to test the different session attribute to display an appropriate
         // message and thus clean up the session with uneeded attributes
@@ -150,7 +158,7 @@ public class UserManagementController extends AbstractUserAndContractsController
         } catch (NumberFormatException nfe) {
             throw new ForbiddenUserException();
         }
-        User userToModify = getUserDataService().read(lUserId);
+        User userToModify = userDataService.read(lUserId);
         model.addAttribute(TgolKeyStore.USER_NAME_KEY, userToModify.getEmail1());
         request.getSession().setAttribute(TgolKeyStore.USER_ID_KEY, lUserId);
         return prepateDataAndReturnCreateUserView(
@@ -186,6 +194,8 @@ public class UserManagementController extends AbstractUserAndContractsController
             throw new ForbiddenUserException();
         }
         boolean updateAllData = true;
+        System.out.println(userId);
+        System.out.println(getCurrentUser().getId());
         if (getCurrentUser().getId().equals(userId)) {
             updateAllData = false;
         }
@@ -194,7 +204,7 @@ public class UserManagementController extends AbstractUserAndContractsController
                 result,
                 request,
                 model,
-                getUserDataService().read(userId),
+                userDataService.read(userId),
                 TgolKeyStore.ADMIN_VIEW_NAME,
                 TgolKeyStore.EDIT_USER_VIEW_NAME,
                 updateAllData,
@@ -243,7 +253,6 @@ public class UserManagementController extends AbstractUserAndContractsController
                 model,
                 TgolKeyStore.ADMIN_VIEW_NAME,
                 TgolKeyStore.ADD_USER_VIEW_NAME,
-                true,
                 TgolKeyStore.ADDED_USER_NAME_KEY);
     }
 
@@ -267,7 +276,7 @@ public class UserManagementController extends AbstractUserAndContractsController
         } catch (NumberFormatException nfe) {
             throw new ForbiddenUserException();
         }
-        User userToDelete = getUserDataService().read(lUserId);
+        User userToDelete = userDataService.read(lUserId);
         if (userToDelete == null || getCurrentUser().getId().equals(userToDelete.getId())) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         }
@@ -300,14 +309,14 @@ public class UserManagementController extends AbstractUserAndContractsController
             }
         }
         User user = getCurrentUser();
-        User userToDelete = getUserDataService().read(lUserId);
+        User userToDelete = userDataService.read(lUserId);
         if (userToDelete == null || user.getId().equals(userToDelete.getId())) {
             return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
         }
         for (Contract contract : userToDelete.getContractSet()) {
             deleteAllAuditsFromContract(contract);
         }
-        getUserDataService().delete(userToDelete.getId());
+        userDataService.delete(userToDelete.getId());
         request.getSession().removeAttribute(TgolKeyStore.USER_ID_TO_DELETE_KEY);
         request.getSession().setAttribute(TgolKeyStore.DELETED_USER_NAME_KEY, userToDelete.getEmail1());
         return TgolKeyStore.ADMIN_VIEW_REDIRECT_NAME;
@@ -334,7 +343,7 @@ public class UserManagementController extends AbstractUserAndContractsController
             throw new ForbiddenUserException();
         }
         
-        User userToDelete = getUserDataService().read(lUserId);
+        User userToDelete = userDataService.read(lUserId);
         model.addAttribute(TgolKeyStore.USER_NAME_TO_DELETE_KEY, userToDelete.getEmail1());
         request.getSession().setAttribute(TgolKeyStore.USER_ID_TO_DELETE_KEY, userToDelete.getId());
         return TgolKeyStore.DELETE_AUDITS_VIEW_NAME;
@@ -365,7 +374,7 @@ public class UserManagementController extends AbstractUserAndContractsController
             }
         }
 
-        User userToDelete = getUserDataService().read(lUserId);
+        User userToDelete = userDataService.read(lUserId);
         for (Contract contract : userToDelete.getContractSet()) {
             deleteAllAuditsFromContract(contract);
         }
@@ -391,7 +400,7 @@ public class UserManagementController extends AbstractUserAndContractsController
                 model,
                 null,
                 null,
-                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(getContractOptionFormFieldBuilderMap()),
+                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(contractOptionFormFieldBuilderMap),
                 TgolKeyStore.ADD_CONTRACT_VIEW_NAME);
     }
 
@@ -413,11 +422,11 @@ public class UserManagementController extends AbstractUserAndContractsController
             Model model) {
 
         Map<String, List<ContractOptionFormField>> optionFormFieldMap =
-                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(getContractOptionFormFieldBuilderMap());
+                ContractOptionFormFieldHelper.getFreshContractOptionFormFieldMap(contractOptionFormFieldBuilderMap);
 
-        getCreateContractFormValidator().setContractOptionFormFieldMap(optionFormFieldMap);
+        createContractFormValidator.setContractOptionFormFieldMap(optionFormFieldMap);
         // We check whether the form is valid
-        getCreateContractFormValidator().validateMultipleUsers(ccc, result);
+        createContractFormValidator.validateMultipleUsers(ccc, result);
         if (result.hasErrors()) {
             return displayFormWithErrors(
                     model,
@@ -431,12 +440,10 @@ public class UserManagementController extends AbstractUserAndContractsController
         StringBuilder strb = new StringBuilder();
         for (User user : userList) {
             if (user != null) {
-                Contract contract = getContractDataService().create();  
+                Contract contract = contractDataService.create();
                 contract.setUser(user);
-                contract = CreateContractCommandFactory.getInstance().updateContractFromCommand(
-                                ccc, 
-                                contract);
-                getContractDataService().saveOrUpdate(contract);
+                contract = createContractCommandFactory.updateContractFromCommand(ccc, contract);
+                contractDataService.saveOrUpdate(contract);
                 strb.append(user.getEmail1());
                 strb.append(", ");
             }
@@ -445,6 +452,78 @@ public class UserManagementController extends AbstractUserAndContractsController
         request.getSession().setAttribute(TgolKeyStore.ADDED_CONTRACT_NAME_KEY,ccc.getLabel());
         request.getSession().setAttribute(TgolKeyStore.ADDED_CONTRACT_USERS_NAME_KEY,strb.toString());
         return TgolKeyStore.ADMIN_VIEW_REDIRECT_NAME;
+    }
+
+    /**
+     * A new user can be created from the main form that can be accessed without
+     * being authentified. In this case, we check the validity of the filled-in
+     * url and we prevent the new users to be activated and created with admin
+     * privileges.
+     * On the other side, if the user is created from the admin interface, it can
+     * be set with activation and admin privileges info but the check of the url
+     * is useless cause the field has been removed from the form.
+     *
+     * @param createUserCommand
+     * @param result
+     * @param model
+     * @param successViewName
+     * @param errorViewName
+     * @param successMessageKey
+     * @return
+     * @throws Exception
+     */
+    private String submitCreateUserForm (
+        CreateUserCommand createUserCommand,
+        BindingResult result,
+        Model model,
+        String successViewName,
+        String errorViewName,
+        String successMessageKey) throws Exception {
+
+        // We check whether the form is valid
+        createUserFormValidator.validate(createUserCommand, result);
+        // If the form has some errors, we display it again with errors' details
+        if (result.hasErrors()) {
+            return displayFormWithErrors(
+                model,
+                createUserCommand,
+                errorViewName);
+        }
+        User user= createUser(createUserCommand,true,true);
+        model.addAttribute(TgolKeyStore.USER_LIST_KEY, userDataService.findAll());
+        model.addAttribute(successMessageKey,user.getEmail1());
+        return successViewName;
+    }
+
+    /**
+     * Create a user entit
+     * @param createUserCommand
+     * @return
+     * @throws Exception
+     */
+    private User createUser(
+        CreateUserCommand createUserCommand,
+        boolean allowActivation,
+        boolean allowAdmin) throws Exception {
+        User user = userDataService.create();
+        user.setEmail1(createUserCommand.getEmail());
+        user.setFirstName(createUserCommand.getFirstName());
+        user.setName(createUserCommand.getLastName());
+        user.setPhoneNumber(createUserCommand.getPhoneNumber());
+        user.setPassword(MD5Encoder.MD5(createUserCommand.getPassword()));
+        user.setWebUrl1(createUserCommand.getSiteUrl());
+        if (allowActivation) {
+            user.setAccountActivation(createUserCommand.getActivated());
+        } else {
+            user.setAccountActivation(false);
+        }
+        if (allowAdmin && createUserCommand.getAdmin()) {
+            user.setRole(createUserCommandFactory.getAdminRole());
+        } else {
+            user.setRole(createUserCommandFactory.getUserRole());
+        }
+        userDataService.saveOrUpdate(user);
+        return user;
     }
 
 }

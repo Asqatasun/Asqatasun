@@ -22,7 +22,6 @@
 package org.asqatasun.runner
 
 import org.apache.commons.io.FileUtils
-import org.apache.log4j.Logger
 import org.asqatasun.entity.audit.Audit
 import org.asqatasun.entity.audit.ProcessRemark
 import org.asqatasun.entity.audit.ProcessResult
@@ -36,6 +35,7 @@ import org.asqatasun.entity.subject.Site
 import org.asqatasun.entity.subject.WebResource
 import org.asqatasun.service.AuditService
 import org.asqatasun.service.AuditServiceListener
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import java.io.File
 import java.io.IOException
@@ -63,7 +63,7 @@ class AsqatasunRunner : AuditServiceListener {
     private val parameterDataService: ParameterDataService? = null
 
     fun runAuditOnline(urlTab: Array<String?>, ref: String?, level: String?) {
-        Logger.getLogger(this.javaClass).info("runAuditOnline")
+        LoggerFactory.getLogger(this.javaClass).info("runAuditOnline")
         initServices()
         val paramSet = parameterDataService!!.getParameterSetFromAuditLevel(ref, level)
         val pageUrlList = urlTab.asList()

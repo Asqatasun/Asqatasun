@@ -11,6 +11,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -38,41 +39,41 @@ public abstract class PersistenceCommonConfig {
 
     public static String MYSQL_MIGRATION_PREFIX = "MSDB";
     public static String POSTGRES_MIGRATION_PREFIX = "PSDB";
-    public static String HSQL_MIGRATION_PREFIX = "MSDB";
+    public static String HSQL_MIGRATION_PREFIX = "HSQLDB";
 
     public static String MYSQL_HIBERNATE_DIALECT = "org.asqatasun.dialect.AsqatasunMySQL5InnoDBDialect";
     public static String POSTGRES_HIBERNATE_DIALECT = "org.hibernate.dialect.PostgreSQL82Dialect";
     public static String HSQL_HIBERNATE_DIALECT = "org.hibernate.dialect.HSQLDialect";
 
-    @Value("${jpa.showSql}")
-    private boolean hibernateShowSql;
+    @Value("${jpa.showSql:false}")
+    private Boolean hibernateShowSql;
     @Value("${hibernate.max_fetch_depth:3}")
     private int hibernateMaxFetchDepth;
     @Value("${hibernate.jdbc.batch_size:1000}")
     private int hibernateJdbcBatchSize;
     @Value("${hibernate.default_batch_fetch_size:500}")
     private int hibernateDefaultBatchFetchSize;
-    @Value("${hibernate.use_outer_join}")
-    private boolean hibernateUseOuterJoin;
-    @Value("${hibernate.cache.use_second_level_cache}")
-    private boolean hibernateUse2ndLevelQueryCache;
-    @Value("${hibernate.cache.use_query_cache}")
-    private boolean hibernateUseQueryCache;
-    @Value("${hibernate.cache.region.factory_class}")
+    @Value("${hibernate.use_outer_join:false}")
+    private Boolean hibernateUseOuterJoin;
+    @Value("${hibernate.cache.use_second_level_cache:true}")
+    private Boolean hibernateUse2ndLevelQueryCache;
+    @Value("${hibernate.cache.use_query_cache:true}")
+    private Boolean hibernateUseQueryCache;
+    @Value("${hibernate.cache.region.factory_class:org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory}")
     private String hibernateRegionFactory;
-    @Value("${idleConnectionTestPeriod:3600}")
+    @Value("${app.engine.persistence.connection.idleConnectionTestPeriod:3600}")
     private int idleConnectionTestPeriod;
-    @Value("${initialPoolSize:5}")
+    @Value("${app.engine.persistence.connection.initialPoolSize:5}")
     private int initialPoolSize;
-    @Value("${maxPoolSize:1000}")
+    @Value("${app.engine.persistence.connection.maxPoolSize:1000}")
     private int maxPoolSize;
-    @Value("${minPoolSize:1000}")
+    @Value("${app.engine.persistence.connection.minPoolSize:5}")
     private int minPoolSize;
-    @Value("${acquireIncrement:10}")
+    @Value("${app.engine.persistence.connection.acquirePoolIncrement:5}")
     private int acquireIncrement;
-    @Value("${locationAutomatedCommon:sql/automated/common}")
+    @Value("${app.engine.persistence.locationAutomatedCommon:sql/automated/common}")
     private String locationAutomatedCommon;
-    @Value("${locationAutomatedTestOnly:sql/automated/testOnly}")
+    @Value("${app.engine.persistence.locationAutomatedTestOnly:sql/automated/testOnly}")
     private String locationAutomatedTestOnly;
 
     /**
