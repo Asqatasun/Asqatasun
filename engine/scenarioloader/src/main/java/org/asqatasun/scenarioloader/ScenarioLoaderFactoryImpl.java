@@ -70,7 +70,7 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
     public Map<String, String> getJsScriptMap() {
         Map<String, String> jsScriptMap = new HashMap<>();
         try {
-            jsScriptMap.put("colorExtractor", IOUtils.toString(getClass().getResourceAsStream(colorExtractor)));
+            jsScriptMap.put("colorExtractor", IOUtils.toString(getClass().getResourceAsStream(colorExtractor), "UTF-8"));
         } catch (IOException ex) {
             LOGGER.warn(ex.getMessage());
         }
@@ -92,7 +92,6 @@ public class ScenarioLoaderFactoryImpl implements ScenarioLoaderFactory {
         scenarioLoader.setJsScriptMap(getJsScriptMap());
         scenarioLoader.setPageLoadDriverTimeout(pageLoadDriverTimeout);
         scenarioLoader.setParameterDataService(parameterDataService);
-//        scenarioLoader.setFirefoxDriverObjectPool(firefoxDriverObjectPool);
         return scenarioLoader;
     }
 

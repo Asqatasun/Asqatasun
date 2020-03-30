@@ -34,10 +34,10 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
+import org.asqatasun.sebuilder.interpreter.factory.TgScriptFactory;
 import org.asqatasun.util.http.HttpRequestHandler;
 import org.json.JSONException;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.asqatasun.contentloader.HarFileContentLoaderFactory;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.PreProcessResult;
@@ -55,11 +55,13 @@ import org.asqatasun.sebuilder.interpreter.NewPageListener;
 import org.asqatasun.sebuilder.interpreter.exception.TestRunException;
 import org.asqatasun.sebuilder.interpreter.factory.TgStepTypeFactory;
 import org.asqatasun.sebuilder.interpreter.factory.TgTestRunFactory;
-import org.asqatasun.sebuilder.tools.FirefoxDriverObjectPool;
 import org.asqatasun.sebuilder.tools.ProfileFactory;
 import org.asqatasun.util.factory.DateFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.asqatasun.entity.parameterization.ParameterElement.SCREEN_HEIGHT_KEY;
+import static org.asqatasun.entity.parameterization.ParameterElement.SCREEN_WIDTH_KEY;
 
 /**
  *
@@ -74,15 +76,24 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
 
     private static final int SCENARIO_IMPLICITELY_WAIT_TIMEOUT = 60;
 
+    private WebResourceDataService webResourceDataService;
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
+        this.webResourceDataService = webResourceDataService;
+    }
+
+    private ParameterDataService parameterDataService;
+    public void setParameterDataService(ParameterDataService parameterDataService) {
+        this.parameterDataService = parameterDataService;
+    }
     /** The script factory instance */
-    private final ScriptFactory scriptFactory = new ScriptFactory();
-    
+    private final TgScriptFactory scriptFactory = new TgScriptFactory();
+
     @Override
     public List<Content> getResult() {
         return result;
     }
-    
     private WebResource webResource;
+
     public WebResource getWebResource() {
         return webResource;
     }
@@ -91,22 +102,8 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     public void setWebResource(WebResource webResource) {
         this.webResource = webResource;
     }
-    
-    /**
-     * 
-     */
     private final ProfileFactory profileFactory;
-    
-    private WebResourceDataService webResourceDataService;
-    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
-    
-    private ParameterDataService parameterDataService;
-    public void setParameterDataService(ParameterDataService parameterDataService) {
-        this.parameterDataService = parameterDataService;
-    }
-    
+
     private ContentDataService contentDataService;
     public void setContentDataService(ContentDataService contentDataService) {
         this.contentDataService = contentDataService;
@@ -121,31 +118,13 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
     public void setDateFactory(DateFactory dateFactory) {
         this.dateFactory = dateFactory;
     }
-    
-    List<SSPInfo> sspInfoList = new LinkedList<>();
-    
     private Map<String, String> jsScriptMap;
-    public Map<String, String> getJsScriptMap() {
-        return jsScriptMap;
-    }
 
     public void setJsScriptMap(Map<String, String> jsScriptMap) {
         this.jsScriptMap = jsScriptMap;
     }
-    
-    private FirefoxDriverObjectPool firefoxDriverObjectPool;
-    public FirefoxDriverObjectPool getFirefoxDriverObjectPool() {
-        return firefoxDriverObjectPool;
-    }
 
-    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool firefoxDriverObjectPool) {
-        this.firefoxDriverObjectPool = firefoxDriverObjectPool;
-    }
-    
     int implicitelyWaitDriverTimeout = -1;
-    public void setImplicitelyWaitDriverTimeout(int implicitelyWaitDriverTimeout) {
-        this.implicitelyWaitDriverTimeout = implicitelyWaitDriverTimeout;
-    }
 
     int pageLoadDriverTimeout = -1;
     public void setPageLoadDriverTimeout(int pageLoadDriverTimeout) {
@@ -156,20 +135,11 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * The scenario
      */
     private final String scenario;
+    private TgTestRunFactory testRunFactory;
 
     ScenarioLoaderImpl(
             WebResource webResource, 
             String scenario) {
-        super();
-        this.scenario = scenario;
-        this.profileFactory = ProfileFactory.getInstance();
-        this.webResource = webResource;
-    }
-    
-    ScenarioLoaderImpl(
-            WebResource webResource, 
-            String scenario,
-            HarFileContentLoaderFactory harFileContentLoaderFactory) {
         super();
         this.scenario = scenario;
         this.profileFactory = ProfileFactory.getInstance();
@@ -185,11 +155,11 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                 LOGGER.debug("Audit page script");
                 firefoxProfile = profileFactory.getOnlineProfile();
             } else {
-                LOGGER.debug("Scenario script, images are loaded and implicitly "
-                        + "wait timeout set");
+                LOGGER.debug("Scenario script, images are loaded and implicitly wait timeout set");
                 implicitelyWaitDriverTimeout = SCENARIO_IMPLICITELY_WAIT_TIMEOUT;
                 firefoxProfile = profileFactory.getScenarioProfile();
             }
+            initTestRunFactory(firefoxProfile);
 
             Script script = getScriptFromScenario(scenario, firefoxProfile);
             try {
@@ -207,6 +177,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
                 throw new ScenarioLoaderException(re);
             }    
             profileFactory.shutdownFirefoxProfile(firefoxProfile);
+            testRunFactory.removeNewPageListener(this);
         } catch (IOException | JSONException ex) {
             LOGGER.warn(ex.getMessage());
             throw new ScenarioLoaderException(ex);
@@ -220,8 +191,8 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      */
     private void fireNewSSP(
             String url, 
-            String sourceCode, 
-            byte[] snapshotContent, 
+            String sourceCode,
+            byte[] snapshotContent,
             Map<String, String> jsScriptMap) {
 
         LOGGER.debug("fire New SSP " + url);
@@ -329,7 +300,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * @return an initialised instance of TestRunFactory
      */
     private TestRunFactory initTestRunFactory (FirefoxProfile firefoxProfile){
-        TgTestRunFactory testRunFactory = new TgTestRunFactory();
+        testRunFactory = new TgTestRunFactory();
         testRunFactory.addNewPageListener(this);
         testRunFactory.setFirefoxProfile(firefoxProfile);
         testRunFactory.setJsScriptMap(jsScriptMap);
@@ -339,14 +310,9 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
         testRunFactory.setPageLoadDriverTimeout(pageLoadDriverTimeout);
         
         testRunFactory.setScreenHeight(
-                Integer.valueOf(
-                        parameterDataService.getParameter(
-                                webResource.getAudit(), ParameterElement.SCREEN_HEIGHT_KEY).getValue()));
+                Integer.parseInt(parameterDataService.getParameter(webResource.getAudit(), SCREEN_HEIGHT_KEY).getValue()));
         testRunFactory.setScreenWidth(
-                Integer.valueOf(
-                        parameterDataService.getParameter(
-                                webResource.getAudit(), ParameterElement.SCREEN_WIDTH_KEY).getValue()));
-//      ((TgTestRunFactory)testRunFactory).setFirefoxDriverObjectPool(firefoxDriverObjectPool);
+                Integer.parseInt(parameterDataService.getParameter(webResource.getAudit(), SCREEN_WIDTH_KEY).getValue()));
         return testRunFactory;
     }
 
@@ -360,9 +326,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * @throws JSONException 
      */
     private Script getScriptFromScenario(String scenario, FirefoxProfile firefoxProfile) throws IOException, JSONException {
-        scriptFactory.setTestRunFactory(initTestRunFactory(firefoxProfile));
-        scriptFactory.setStepTypeFactory(new TgStepTypeFactory());
-        return scriptFactory.parse(scenario, null).iterator().next();
+        return scriptFactory.parseScript(scenario, testRunFactory);
     }
  
     /**
@@ -375,7 +339,7 @@ public class ScenarioLoaderImpl implements ScenarioLoader, NewPageListener {
      * @throws JSONException 
      */
     private boolean isScenarioOnlyLoadPage(String scenario)  throws IOException, JSONException{
-        Script script = scriptFactory.parse(scenario, null).iterator().next();
+        Script script = scriptFactory.parseScript(scenario, new TgTestRunFactory());
         for (Step step : script.steps) {
             if (!(step.type instanceof Get)) {
                 return false;
