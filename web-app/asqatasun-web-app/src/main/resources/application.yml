@@ -1,0 +1,66 @@
+jdbc:
+  driverClassName : "com.mysql.cj.jdbc.Driver"
+  url: "jdbc:mysql://localhost:3306/asqatasun?useSSL=false"
+  user: "root"
+  password: "bou"
+
+jpa:
+  showSql: false
+
+hibernate:
+  cache:
+    use_second_level_cache: true
+    use_query_cache: true
+    ehcache:
+      missing_cache_strategy:spring: create
+
+webdriver:
+  firefox:
+    bin: "/opt/firefox/firefox"
+
+spring:
+  profiles:
+    active: "webapp"
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+
+app:
+  version: "5.0-SNAPSHOT"
+  engine:
+    persistence:
+      packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"
+      useComboPool: true
+    loader:
+      proxy:
+        port:
+        host:
+  webapp:
+    security:
+      owasp:
+        esapiPropertyValue: "/etc/asqatasun"
+        tokenDurationValidity: 3600
+    ui:
+      config:
+        authorizedPageSize: "10,25,50,100,250,1000,-1"
+        authorizedRefForCriterionViewList: "Aw22,Rgaa30"
+        authorizedScopeForCriterionList: "DOMAIN,SCENARIO"
+        authorizedScopeForPageList: "DOMAIN,SCENARIO"
+        authorizedScopeForSynthesis: "DOMAIN,SCENARIO"
+        authorizedScopeForTrend: "DOMAIN,SCENARIO"
+        defaultReferential: "Rgaa30"
+        forbiddenUserListForSettings: "guest"
+        nbOfFailedPages: 10
+        nbOfFailedTest: 5
+        referentialWithModifiableTestWeight: "SEO,Aw22"
+        userExclusionListForEmail: "guest"
+        webAppUrl: "http://localhost:8080/"
+        forgottenPassword:
+          excludeUserList: "guest"
+        orchestrator:
+          ayncDelay: 30000
+          emailSentToUserExclusionList: "guest"
+          krashReportMailList: "support@asqatasun.org"
+          enableKrashReport: true

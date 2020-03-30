@@ -22,17 +22,17 @@
 package org.asqatasun.webapp.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.statistics.CriterionStatisticsDataService;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
@@ -41,86 +41,71 @@ import org.asqatasun.webapp.command.AuditResultSortCommand;
 import org.asqatasun.webapp.command.ManualAuditCommand;
 import org.asqatasun.webapp.command.factory.AuditResultSortCommandFactory;
 import org.asqatasun.webapp.command.factory.AuditSetUpCommandFactory;
+import org.asqatasun.webapp.dto.AuditStatistics;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.exception.LostInSpaceException;
-import org.asqatasun.webapp.form.CheckboxElement;
-import org.asqatasun.webapp.form.CheckboxFormFieldImpl;
-import org.asqatasun.webapp.form.FormField;
-import org.asqatasun.webapp.form.builder.FormFieldBuilder;
-import org.asqatasun.webapp.presentation.data.AuditStatistics;
-import org.asqatasun.webapp.presentation.factory.CriterionResultFactory;
-import org.asqatasun.webapp.presentation.factory.TestResultFactory;
+import org.asqatasun.webapp.ui.form.CheckboxElement;
+import org.asqatasun.webapp.ui.form.CheckboxFormField;
+import org.asqatasun.webapp.ui.form.FormField;
+import org.asqatasun.webapp.ui.form.builder.FormFieldBuilder;
+import org.asqatasun.webapp.dto.factory.CriterionResultFactory;
+import org.asqatasun.webapp.dto.factory.TestResultFactory;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.LocaleResolver;
 
 /**
  *
  * @author jkowalczyk
  */
-@Controller
 public class AbstractAuditResultController extends AbstractAuditDataHandlerController {
 
-    private final List<FormFieldBuilder> sortFormFieldBuilderList = new ArrayList();
-    public final void setFormFieldBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
-        this.sortFormFieldBuilderList.addAll(formFieldBuilderList);
-    }
-
-    /**
-     *
-     * @param formFieldBuilder
-     */
-    public final void addFormFieldBuilder(final FormFieldBuilder formFieldBuilder) {
-        this.sortFormFieldBuilderList.add(formFieldBuilder);
-    }
-
-    private ActionHandler actionHandler;
-    public ActionHandler getActionHandler() {
-        return actionHandler;
-    }
-
-    public void setActionHandler(ActionHandler contractActionHandler) {
-        this.actionHandler = contractActionHandler;
-    }
-
-    private String themeSortKey;
-    public String getThemeSortKey() {
-        return themeSortKey;
-    }
-
-    public void setThemeSortKey(String themeSortKey) {
-        this.themeSortKey = themeSortKey;
-    }
-
-    private String testResultSortKey;
-    public String getTestResultSortKey() {
-        return testResultSortKey;
-    }
-
-    public void setTestResultSortKey(String testResultSortKey) {
-        this.testResultSortKey = testResultSortKey;
-    }
-
+    private static final String THEME_SORT_KEY = "theme";
+    private static final String TEST_RESULT_SORT_KEY = "test-result";
+    @Value("${app.webapp.ui.config.authorizedRefForCriterionViewList}")
     private List<String> authorizedRefForCriterionViewList;
-    public List<String> getAuthorizedRefForCriterionViewList() {
-        return authorizedRefForCriterionViewList;
-    }
-
-    public void setAuthorizedRefForCriterionViewList(List<String> authorizedRefForCriterionViewList) {
-        this.authorizedRefForCriterionViewList = authorizedRefForCriterionViewList;
-    }
-
-    private CriterionStatisticsDataService criterionStatisticsDataService;
-    public CriterionStatisticsDataService getCriterionStatisticsDataService() {
-        return criterionStatisticsDataService;
-    }
-
     @Autowired
-    public void setCriterionStatisticsDataService(CriterionStatisticsDataService criterionStatisticsDataService) {
-        this.criterionStatisticsDataService = criterionStatisticsDataService;
+    @Qualifier("auditResultFormFieldBuilderList")
+    private List<FormFieldBuilder> sortFormFieldBuilderList;
+    @Autowired
+    @Qualifier("resultActionHandler")
+    private ActionHandler actionHandler;
+    @Autowired
+    protected WebResourceDataService webResourceDataService;
+    @Autowired
+    protected ParameterDataService parameterDataService;
+    @Autowired
+    protected LocaleResolver localeResolver;
+    @Autowired
+    protected CriterionStatisticsDataService criterionStatisticsDataService;
+    @Autowired
+    protected CriterionResultFactory criterionResultFactory;
+    @Autowired
+    protected TestResultFactory testResultFactory;
+    @Autowired
+    protected AuditSetUpCommandFactory auditSetUpCommandFactory;
+    @Autowired
+    protected AuditResultSortCommandFactory auditResultSortCommandFactory;
+
+    public AbstractAuditResultController() {super();}
+
+    public Map <String,String> getParametersToDisplay() {
+        return Stream.of(new String[][] {
+            { "LEVEL", "level" },
+            { "SCREEN_HEIGHT", "screen-height" },
+            { "SCREEN_WIDTH", "screen-width" },
+            { "ALTERNATIVE_CONTRAST_MECHANISM", "contrast-alternative" },
+            { "INFORMATIVE_IMAGE_MARKER", "informative-image" },
+            { "DECORATIVE_IMAGE_MARKER", "decorative-image" },
+            { "PRESENTATION_TABLE_MARKER", "presentation-table" },
+            { "COMPLEX_TABLE_MARKER", "complex-table" },
+            { "DATA_TABLE_MARKER", "data-table" },
+        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
     }
 
     /**
@@ -145,8 +130,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
         // We first check that the current user is allowed to display the result
         // of this audit
 
-        WebResource webResource = getWebResourceDataService().ligthRead(
-                webResourceId);
+        WebResource webResource = webResourceDataService.ligthRead(webResourceId);
         if (webResource == null) {
             throw new ForbiddenPageException();
         }
@@ -179,7 +163,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                     audit,
                     model,
                     displayScope,
-                    getLocaleResolver().resolveLocale(request),
+                    localeResolver.resolveLocale(request),
                     isManualAudit,
                     manualAuditCommand);
         } else {
@@ -210,11 +194,11 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
         AuditResultSortCommand asuc;
         List<FormField> formFieldList;
         if (auditResultSortCommand == null) {
-            formFieldList = AuditResultSortCommandFactory.getInstance()
+            formFieldList = auditResultSortCommandFactory
                     .getFormFieldBuilderCopy(referentialParameter,
                             sortFormFieldBuilderList);
             if (isManualAudit) {
-                CheckboxFormFieldImpl ObjectList = (CheckboxFormFieldImpl) formFieldList
+                CheckboxFormField ObjectList = (CheckboxFormField) formFieldList
                         .get(1);
                 List<CheckboxElement> checkboxElementList = ObjectList
                         .getCheckboxElementList();
@@ -224,15 +208,15 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                     }
                 }
             }
-            asuc = AuditResultSortCommandFactory.getInstance()
+            asuc = auditResultSortCommandFactory
                     .getInitialisedAuditResultSortCommand(
                             webResourceId,
                             displayScope,
                             isCriterionViewAccessible(webResourceId,
                                     referentialParameter), formFieldList);
         } else {
-            formFieldList = AuditResultSortCommandFactory.getInstance().
-                    getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList, auditResultSortCommand);
+            formFieldList = auditResultSortCommandFactory
+                    .getFormFieldBuilderCopy(referentialParameter, sortFormFieldBuilderList, auditResultSortCommand);
             asuc = auditResultSortCommand;
         }
         model.addAttribute(TgolKeyStore.AUDIT_RESULT_SORT_FIELD_LIST_KEY, formFieldList);
@@ -302,10 +286,11 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                 .get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
         model.addAttribute(
                 TgolKeyStore.TEST_RESULT_LIST_KEY,
-                TestResultFactory.getInstance().getTestResultSortedByThemeMap(
-                        site, getSiteScope(),
-                        asuc.getSortOptionMap().get(themeSortKey).toString(),
-                        getTestResultSortSelection(asuc)));
+                testResultFactory.getTestResultSortedByThemeMap(
+                    site,
+                    siteScope,
+                    asuc.getSortOptionMap().get(THEME_SORT_KEY).toString(),
+                    getTestResultSortSelection(asuc)));
 
         // Attributes for breadcrumb
         Contract contract = retrieveContractFromAudit(audit);
@@ -343,7 +328,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                         AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
                 && !audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)
                 && !audit.getStatus().equals(AuditStatus.MANUAL_INITIALIZING)) {
-            return prepareFailedAuditData(audit, model);
+            return prepareFailedAuditData(audit.getId(), model);
         }
 
         model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(audit));
@@ -361,12 +346,11 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
         // Add a command to relaunch the audit from the result page
         model.addAttribute(
                 TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY,
-                AuditSetUpCommandFactory.getInstance()
-                .getPageAuditSetUpCommand(
+                auditSetUpCommandFactory
+                    .getPageAuditSetUpCommand(
                         contract,
                         page.getURL(),
-                        getParameterDataService()
-                        .getParameterSetFromAudit(audit)));
+                        parameterDataService.getParameterSetFromAudit(audit)));
 
         if (StringUtils.equalsIgnoreCase(displayScope,
                 TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE)) {
@@ -375,23 +359,21 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
 
             model.addAttribute(
                     TgolKeyStore.TEST_RESULT_LIST_KEY,
-                    TestResultFactory.getInstance()
-                    .getTestResultSortedByThemeMap(
+                    testResultFactory.getTestResultSortedByThemeMap(
                             page,
-                            getPageScope(),
-                            asuc.getSortOptionMap().get(themeSortKey)
+                            pageScope,
+                            asuc.getSortOptionMap().get(THEME_SORT_KEY)
                             .toString(),
                             getTestResultSortSelection(asuc)));
             if (isManualAudit) {
                 if (manualAuditCommand == null) {
                     manualAuditCommand = new ManualAuditCommand();
                 }
-                manualAuditCommand.setModifedManualResultMap(TestResultFactory
-                        .getInstance().getTestResultMap(
+                manualAuditCommand.setModifedManualResultMap(
+                    testResultFactory.getTestResultMap(
                                 page,
-                                getPageScope(),
-                                asuc.getSortOptionMap().get(themeSortKey)
-                                .toString(),
+                                pageScope,
+                                asuc.getSortOptionMap().get(THEME_SORT_KEY).toString(),
                                 getTestResultSortSelection(asuc)));
                 model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY,
                         manualAuditCommand);
@@ -403,10 +385,9 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                     .asMap().get(TgolKeyStore.AUDIT_RESULT_SORT_COMMAND_KEY));
             model.addAttribute(
                     TgolKeyStore.CRITERION_RESULT_LIST_KEY,
-                    CriterionResultFactory.getInstance()
-                    .getCriterionResultSortedByThemeMap(
+                    criterionResultFactory.getCriterionResultSortedByThemeMap(
                             page,
-                            asuc.getSortOptionMap().get(themeSortKey)
+                            asuc.getSortOptionMap().get(THEME_SORT_KEY)
                             .toString(),
                             getTestResultSortSelection(asuc)));
             return TgolKeyStore.RESULT_PAGE_BY_CRITERION_VIEW_NAME;
@@ -416,12 +397,12 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
     private Collection<String> getTestResultSortSelection(
             AuditResultSortCommand asuc) {
         Collection<String> selectedValues = new HashSet<>();
-        if ((asuc.getSortOptionMap().get(testResultSortKey)) instanceof Object[]) {
+        if ((asuc.getSortOptionMap().get(TEST_RESULT_SORT_KEY)) instanceof Object[]) {
             CollectionUtils.addAll(selectedValues, ((Object[]) asuc
-                    .getSortOptionMap().get(testResultSortKey)));
-        } else if ((asuc.getSortOptionMap().get(testResultSortKey)) instanceof String) {
+                    .getSortOptionMap().get(TEST_RESULT_SORT_KEY)));
+        } else if ((asuc.getSortOptionMap().get(TEST_RESULT_SORT_KEY)) instanceof String) {
             selectedValues.add((String) asuc.getSortOptionMap().get(
-                    testResultSortKey));
+                TEST_RESULT_SORT_KEY));
         }
         return selectedValues;
     }

@@ -26,47 +26,26 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.asqatasun.webapp.command.AuditResultSortCommand;
-import org.asqatasun.webapp.form.*;
-import org.asqatasun.webapp.form.builder.FormFieldBuilder;
-import org.asqatasun.webapp.form.parameterization.helper.FormFieldHelper;
+import org.asqatasun.webapp.ui.form.*;
+import org.asqatasun.webapp.ui.form.builder.FormFieldBuilder;
+import org.asqatasun.webapp.ui.form.parameterization.helper.FormFieldHelper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jkowalczyk
  */
-public final class AuditResultSortCommandFactory {
+@Component
+public class AuditResultSortCommandFactory {
 
-    private String themeKey;
-    public String getThemeKey() {
-        return themeKey;
-    }
+    private static final String THEME_KEY = "result.theme";
 
-    public void setThemeKey(String themeKey) {
-        this.themeKey = themeKey;
-    }
-
-    /**
-     * The holder that handles the unique instance of AuditResultSortCommandFactory
-     */
-    private static class AuditResultSortCommandFactoryHolder {
-        private static final AuditResultSortCommandFactory INSTANCE = 
-                new AuditResultSortCommandFactory();
-    }
-    
     /**
      * Private constructor
      */
     private AuditResultSortCommandFactory() {}
-    
-    /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     * @return the unique instance of AuditResultSortCommandFactory
-     */
-    public static AuditResultSortCommandFactory getInstance() {
-        return AuditResultSortCommandFactoryHolder.INSTANCE;
-    }
-    
+
     /**
      * 
      * @param webResourceId
@@ -97,7 +76,7 @@ public final class AuditResultSortCommandFactory {
             } else if (ff instanceof CheckboxFormField) {
                 CheckboxFormField cff = ((CheckboxFormField)ff);
                 String code = cff.getCode();
-                List<String> selectedElements = new ArrayList<String>();
+                List<String> selectedElements = new ArrayList<>();
                 for (CheckboxElement ce : cff.getCheckboxElementList()) {
                     if (ce.getEnabled() && ce.getSelected()) {
                         selectedElements.add(ce.getValue());
@@ -123,10 +102,10 @@ public final class AuditResultSortCommandFactory {
         // is possible. We need to retrieve the appropriate theme list regarding
         // the referential
         // Copy the audit setup form field map from the builders
-        List<FormField> initialisedFormFielList = new LinkedList<FormField>();
+        List<FormField> initialisedFormFielList = new LinkedList<>();
         boolean hasTheme = false;
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
-            if (!formFieldBuilder.getI18nKey().equals(themeKey)) {
+            if (!formFieldBuilder.getI18nKey().equals(THEME_KEY)) {
                 initialisedFormFielList.add(formFieldBuilder.build());
             } else if (!hasTheme && referential.equals(formFieldBuilder.getValue())){
                 initialisedFormFielList.add(formFieldBuilder.build());
@@ -153,7 +132,7 @@ public final class AuditResultSortCommandFactory {
         List<FormField> initialisedFormFieldList = new LinkedList<FormField>();
         boolean hasTheme = false;
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
-            if (!formFieldBuilder.getI18nKey().equals(themeKey)) {
+            if (!formFieldBuilder.getI18nKey().equals(THEME_KEY)) {
                 initialisedFormFieldList.add(formFieldBuilder.build());
             } else if (!hasTheme && referential.equals(formFieldBuilder.getValue())){
                 initialisedFormFieldList.add(formFieldBuilder.build());

@@ -22,19 +22,23 @@
 package org.asqatasun.webapp.controller;
 
 import java.util.GregorianCalendar;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
-import org.asqatasun.webapp.util.TgolKeyStore;
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import static org.asqatasun.webapp.util.TgolKeyStore.*;
 
 /** 
  *
  * @author jkowalczyk
  */
 @Controller
-public class ErrorPageController {
+public class ErrorPageController implements ErrorController {
 
     private static final String CONTRACT_PATH = "home/contract";
 
@@ -42,75 +46,101 @@ public class ErrorPageController {
         super();
     }
 
-    @RequestMapping(value = TgolKeyStore.ERROR_LOADING_URL, method=RequestMethod.GET)
+    @RequestMapping(value = ERROR_LOADING_URL, method=RequestMethod.GET)
     public String returnLoadingErrorPage(HttpServletRequest request, Model model){
         prepareModel(request, model);
-        return TgolKeyStore.LOADING_ERROR_VIEW_NAME;
+        return LOADING_ERROR_VIEW_NAME;
     }
 
-    @RequestMapping(value = CONTRACT_PATH+TgolKeyStore.ERROR_LOADING_URL, method=RequestMethod.GET)
+    @RequestMapping(value = CONTRACT_PATH+ERROR_LOADING_URL, method=RequestMethod.GET)
     public String returnLoadingErrorPageFromContract(HttpServletRequest request, Model model){
         prepareModel(request, model);
-        return TgolKeyStore.LOADING_ERROR_VIEW_NAME;
+        return LOADING_ERROR_VIEW_NAME;
     }
 
-    @RequestMapping(value = TgolKeyStore.ERROR_ADAPTING_URL, method=RequestMethod.GET)
+    @RequestMapping(value = ERROR_ADAPTING_URL, method=RequestMethod.GET)
     public String returnAdaptingErrorPage(HttpServletRequest request,
             Model model){
         prepareModel(request, model);
-        return TgolKeyStore.ADAPTING_ERROR_VIEW_NAME;
+        return ADAPTING_ERROR_VIEW_NAME;
     }
 
-    @RequestMapping(value = CONTRACT_PATH+TgolKeyStore.ERROR_ADAPTING_URL, method=RequestMethod.GET)
+    @RequestMapping(value = CONTRACT_PATH+ERROR_ADAPTING_URL, method=RequestMethod.GET)
     public String returnAdaptingErrorPageFromContrat(HttpServletRequest request,
             Model model){
         prepareModel(request, model);
-        return TgolKeyStore.ADAPTING_ERROR_VIEW_NAME;
+        return ADAPTING_ERROR_VIEW_NAME;
     }
 
-    @RequestMapping(value = TgolKeyStore.OUPS_URL, method=RequestMethod.GET)
+    @RequestMapping(value = OUPS_URL, method=RequestMethod.GET)
     public String returnOupsErrorPage(HttpServletRequest request,
             Model model){
         prepareModel(request, model);
-        return TgolKeyStore.OUPS_VIEW_NAME;
+        return OUPS_VIEW_NAME;
     }
 
-    @RequestMapping(value = CONTRACT_PATH+TgolKeyStore.OUPS_URL, method=RequestMethod.GET)
+    @RequestMapping(value = CONTRACT_PATH+OUPS_URL, method=RequestMethod.GET)
     public String returnOupsErrorPageFromContrat(HttpServletRequest request,
             Model model){
         prepareModel(request, model);
-        return TgolKeyStore.OUPS_VIEW_NAME;
+        return OUPS_VIEW_NAME;
     }
     
-    @RequestMapping(value = CONTRACT_PATH+TgolKeyStore.QUOTA_EXCEEDED_URL, method=RequestMethod.GET)
+    @RequestMapping(value = CONTRACT_PATH+QUOTA_EXCEEDED_URL, method=RequestMethod.GET)
     public String returnQuotaExceededPageFromContrat(HttpServletRequest request,
             Model model){
         prepareModel(request, model);
-        return TgolKeyStore.QUOTA_EXCEEDED_VIEW_NAME;
+        return QUOTA_EXCEEDED_VIEW_NAME;
     }
 
-    @RequestMapping(value = CONTRACT_PATH+TgolKeyStore.QUOTA_BY_IP_EXCEEDED_URL, method=RequestMethod.GET)
+    @RequestMapping(value = CONTRACT_PATH+QUOTA_BY_IP_EXCEEDED_URL, method=RequestMethod.GET)
     public String returnQuotaExceededByIpPageFromContrat(HttpServletRequest request,
             Model model){
         prepareModel(request, model);
-        return TgolKeyStore.QUOTA_BY_IP_EXCEEDED_VIEW_NAME;
+        return QUOTA_BY_IP_EXCEEDED_VIEW_NAME;
     }
     
-    @RequestMapping(value = CONTRACT_PATH+TgolKeyStore.EXPORT_AUDIT_FORMAT_ERROR_URL, method=RequestMethod.GET)
+    @RequestMapping(value = CONTRACT_PATH+EXPORT_AUDIT_FORMAT_ERROR_URL, method=RequestMethod.GET)
     public String returnExportAuditFormatErrorPage(HttpServletRequest request,
             Model model){
         prepareModel(request, model);
-        return TgolKeyStore.EXPORT_AUDIT_FORMAT_ERROR_VIEW_NAME;
+        return EXPORT_AUDIT_FORMAT_ERROR_VIEW_NAME;
     }
 
     private void prepareModel(HttpServletRequest request, Model model) {
-        model.addAttribute(TgolKeyStore.DATE_KEY, GregorianCalendar.getInstance().getTime());
-        if (request.getSession().getAttribute(TgolKeyStore.AUDIT_URL_KEY) != null) {
+        model.addAttribute(DATE_KEY, GregorianCalendar.getInstance().getTime());
+        if (request.getSession().getAttribute(AUDIT_URL_KEY) != null) {
             model.addAttribute(
-                    TgolKeyStore.URL_KEY,
-                    request.getSession().getAttribute(TgolKeyStore.AUDIT_URL_KEY));
-            request.getSession().removeAttribute(TgolKeyStore.AUDIT_URL_KEY);
+                    URL_KEY,
+                    request.getSession().getAttribute(AUDIT_URL_KEY));
+            request.getSession().removeAttribute(AUDIT_URL_KEY);
         }
     }
 
+    @Override
+    public String getErrorPath() {
+        return "/error";
+    }
+    @RequestMapping("/error")
+    public String handleError(HttpServletRequest request) {
+        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+
+        if (status != null) {
+            Integer statusCode = Integer.valueOf(status.toString());
+
+            if(statusCode == HttpStatus.FORBIDDEN.value()) {
+                return ACCESS_DENIED_VIEW_NAME;
+            }
+            if(statusCode == HttpStatus.UNAUTHORIZED.value()) {
+                return ACCESS_DENIED_VIEW_NAME;
+            }
+            if(statusCode == HttpStatus.NOT_FOUND.value()) {
+                return ACCESS_DENIED_VIEW_NAME;
+            }
+            else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+                return OUPS_VIEW_NAME;
+            }
+        }
+        return "error";
+    }
 }

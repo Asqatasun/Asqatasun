@@ -1,6 +1,6 @@
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2019  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
@@ -24,6 +24,7 @@ package org.asqatasun.webapp.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.util.JRStyledTextParser;
@@ -39,12 +40,12 @@ import org.asqatasun.webapp.entity.contract.ScopeEnum;
 import org.asqatasun.webapp.entity.scenario.Scenario;
 import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
-import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
-import org.asqatasun.webapp.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
+import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.ui.form.parameterization.builder.AuditSetUpFormFieldBuilder;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.asqatasun.webapp.validator.AddScenarioFormValidator;
 import org.asqatasun.webapp.validator.AuditSetUpFormValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,38 +63,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuditScenarioController extends AbstractAuditSetUpController {
 
     private JRStyledTextParser j;
-    private AddScenarioFormValidator addScenarioFormValidator;
-    public AddScenarioFormValidator getAddScenarioFormValidator() {
-        return addScenarioFormValidator;
-    }
+    private final AddScenarioFormValidator addScenarioFormValidator;
+    private final AuditSetUpFormValidator auditSiteSetUpFormValidator;
+    private final ScenarioDataService scenarioDataService;
+    private final Map<String, List<AuditSetUpFormFieldBuilder>> scenarioOptionFormFieldBuilderMap;
+    private final AddScenarioCommandFactory addScenarioCommandFactory;
 
-    @Autowired
-    public void setAddScenarioFormValidator(AddScenarioFormValidator addScenarioFormValidator) {
-        this.addScenarioFormValidator = addScenarioFormValidator;
-    }
-    
-    private ScenarioDataService scenarioDataService;
-    public ScenarioDataService getScenarioDataService() {
-        return scenarioDataService;
-    }
-
-    @Autowired
-    public void setScenarioDataService(ScenarioDataService scenarioDataService) {
-        this.scenarioDataService = scenarioDataService;
-    }
-    
-    private Map<String, List<AuditSetUpFormFieldBuilderImpl>> scenarioOptionFormFieldBuilderMap;
-    public Map<String, List<AuditSetUpFormFieldBuilderImpl>> getScenarioOptionFormFieldBuilderMap() {
-        return scenarioOptionFormFieldBuilderMap;
-    }
-
-    public final void setScenarioOptionFormFieldBuilderMap(final Map<String, List<AuditSetUpFormFieldBuilderImpl>> formFieldBuilderMap) {
-        this.scenarioOptionFormFieldBuilderMap = formFieldBuilderMap;
-    }
-
-    public AuditScenarioController() {
+    public AuditScenarioController(AddScenarioFormValidator addScenarioFormValidator,
+                                   ScenarioDataService scenarioDataService,
+                                   @Qualifier(value = "auditSetUpFormValidator")
+                                       AuditSetUpFormValidator auditSiteSetUpFormValidator,
+                                   @Qualifier(value="scenarioOptionFormFieldBuilderMap")
+                                       Map <String, List <AuditSetUpFormFieldBuilder>> scenarioOptionFormFieldBuilderMap,
+                                   AddScenarioCommandFactory addScenarioCommandFactory) {
         super();
+        this.addScenarioFormValidator = addScenarioFormValidator;
+        this.scenarioDataService = scenarioDataService;
+        this.auditSiteSetUpFormValidator = auditSiteSetUpFormValidator;
+        this.scenarioOptionFormFieldBuilderMap = scenarioOptionFormFieldBuilderMap;
+        this.addScenarioCommandFactory = addScenarioCommandFactory;
     }
+
+    @PostConstruct
+    protected void init() {
+        super.init();
+        viewFunctionalityBindingMap = Collections.singletonMap("audit-scenario-set-up", "SCENARIO");
+    }
+
 
     /**
      * @param contractId
@@ -121,7 +117,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
             Model model,
             HttpServletRequest request) {
 
-        Contract contract = getContractDataService().read(addScenarioCommand.getContractId());
+        Contract contract = contractDataService.read(addScenarioCommand.getContractId());
 
         addScenarioFormValidator.validate(addScenarioCommand, result);
         
@@ -147,7 +143,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             @RequestParam(TgolKeyStore.SCENARIO_ID_KEY) String scenarioId,
             HttpServletResponse response) {
-        Contract contract = getContractDataService().read(Long.valueOf(contractId));
+        Contract contract = contractDataService.read(Long.valueOf(contractId));
         if (contract.getUser().getId().equals(getCurrentUser().getId())) {
             try {
                 for (Scenario scenario : contract.getScenarioSet()) {
@@ -180,7 +176,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
             HttpServletRequest request,
             HttpServletResponse response,
             Model model) {
-        Contract contract = getContractDataService().read(Long.valueOf(contractId));
+        Contract contract = contractDataService.read(Long.valueOf(contractId));
         if (contract.getUser().getId().equals(getCurrentUser().getId())) {
             for (Scenario scenario : contract.getScenarioSet()) {
                 if (scenario.getId().equals(Long.valueOf(scenarioId))) {
@@ -220,7 +216,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
                 TgolKeyStore.AUDIT_SCENARIO_SET_UP_VIEW_NAME,
                 contractId,
                 scenarioId,
-                getScenarioOptionFormFieldBuilderMap(),
+                scenarioOptionFormFieldBuilderMap,
                 ScopeEnum.SCENARIO,
                 model);
     }
@@ -232,16 +228,15 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
             BindingResult result,
             Model model,
             HttpServletRequest request) {
-        Contract contract = getContractDataService().read(auditSetUpCommand.getContractId());   
+        Contract contract = contractDataService.read(auditSetUpCommand.getContractId());   
         Map<String, List<AuditSetUpFormField>> formFielMap = getFreshAuditSetUpFormFieldMap(
                     contract, 
-                    getScenarioOptionFormFieldBuilderMap());
-        AuditSetUpFormValidator auditSetUpFormValidator = getAuditSiteSetUpFormValidator();
+                    scenarioOptionFormFieldBuilderMap);
         return submitForm(
                 contract, 
                 auditSetUpCommand, 
                 formFielMap, 
-                auditSetUpFormValidator, 
+                auditSiteSetUpFormValidator,
                 model, 
                 result, 
                 request);
@@ -260,11 +255,11 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
         } catch (NumberFormatException nfe) {
             throw new ForbiddenPageException(getCurrentUser());
         }
-        Contract contract = getContractDataService().read(contractIdValue);
+        Contract contract = contractDataService.read(contractIdValue);
         if (isUserAllowedToDisplaySetUpPage(contract, TgolKeyStore.AUDIT_SCENARIO_SET_UP_VIEW_NAME)) {
             // add the AddScenarioCommand instance to the model
             model.addAttribute(TgolKeyStore.ADD_SCENARIO_COMMAND_KEY,
-                    AddScenarioCommandFactory.getAddScenarioCommand(contract));
+                    addScenarioCommandFactory.getAddScenarioCommand(contract));
             // add the contract label to the model
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
             // add the list of scenario to the model
@@ -289,16 +284,17 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
 
     /**
      * Delete a scenario and the associated audits.
-     * @param scenarioId 
+     * @param scenario
+     * @param contract
      */
     private void deleteScenario(Scenario scenario, Contract contract) {
         scenarioDataService.delete(scenario.getId());
         Collection<Act> actCollection = retrieveActCollection(scenario, contract);
         for (Act act : actCollection) {
-            getAuditDataService().delete(act.getAudit().getId());
+            auditDataService.delete(act.getAudit().getId());
             act.setStatus(ActStatus.DELETED);
             act.setAudit(null);
-            getActDataService().saveOrUpdate(act);
+            actDataService.saveOrUpdate(act);
         }
     }
     
@@ -335,7 +331,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
      */
     private Collection<Act> retrieveActCollection(Scenario scenario, Contract contract) {
         Collection<Act> actCollectionFromScenarioAndContract = new HashSet();
-        for (Act act : getActDataService().getActsByContract(contract, -1, 2, ScopeEnum.SCENARIO, true)) {
+        for (Act act : actDataService.getActsByContract(contract, -1, 2, ScopeEnum.SCENARIO, true)) {
             if (StringUtils.equals(scenario.getLabel(), act.getAudit().getSubject().getURL())) {
                 actCollectionFromScenarioAndContract.add(act);
             }

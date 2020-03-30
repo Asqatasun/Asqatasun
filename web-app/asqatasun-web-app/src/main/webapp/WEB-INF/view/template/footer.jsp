@@ -2,12 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<c:set var="appVersion">
+    <spring:eval expression="@environment.getProperty('app.version')" />
+</c:set>
+
         <footer>
             <jsp:useBean id="now" class="java.util.Date" scope="page" />
             <div id="footer-down">                
                 
                 <fmt:message key="footer.poweredBy"/> 
-                <a href="https://github.com/Asqatasun/Asqatasun/releases">Asqatasun v${asqatasunVersion}</a>
+                <a href="https://github.com/Asqatasun/Asqatasun/releases">Asqatasun v${appVersion}</a>
                 - 
                 <fmt:message key="footer.availableUnder"/> 
                 <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>

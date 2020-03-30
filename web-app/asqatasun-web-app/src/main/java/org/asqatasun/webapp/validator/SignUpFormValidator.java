@@ -28,6 +28,7 @@ import org.asqatasun.webapp.command.UserSignUpCommand;
 import org.asqatasun.webapp.entity.service.user.UserDataService;
 import org.asqatasun.webapp.util.TgolPasswordChecker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -35,6 +36,7 @@ import org.springframework.validation.Validator;
  *
  * @author jkowalczyk
  */
+@Component("signUpFormValidator")
 public class SignUpFormValidator implements Validator {
     
     private static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";

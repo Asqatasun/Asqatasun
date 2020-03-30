@@ -21,11 +21,11 @@
  */
 package org.asqatasun.webapp.util;
 
+import javax.servlet.jsp.PageContext;
 import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-import javax.servlet.jsp.PageContext;
 
 /**
  *

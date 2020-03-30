@@ -34,66 +34,55 @@ import org.asqatasun.webapp.entity.service.functionality.FunctionalityDataServic
 import org.asqatasun.webapp.entity.service.option.OptionDataService;
 import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
 import org.asqatasun.webapp.entity.service.referential.ReferentialDataService;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  *
  * @author jkowalczyk
  */
+@Component
 public class CreateContractCommandFactory implements Serializable {
 
     private static final String DOMAIN_OPTION_CODE = "DOMAIN";
     
     private Collection<Referential> referentialList;
     private Collection<Functionality> functionalityList;
-    private Collection<Option> optionList = new HashSet<Option>();
-    
-    public void setReferentialDataService (ReferentialDataService referentialDataService) {
-        referentialList = referentialDataService.findAll();
-    }
-    
-    public void setFunctionalityDataService (FunctionalityDataService funcitonalityDataService) {
-        functionalityList = funcitonalityDataService.findAll();
+    private Collection<Option> optionList = new HashSet<>();
+    private Option contractUrlOption;
+
+    private final ReferentialDataService referentialDataService;
+    private final FunctionalityDataService functionalityDataService;
+    private final OptionDataService optionDataService;
+    private final OptionElementDataService optionElementDataService;
+
+    private CreateContractCommandFactory(ReferentialDataService referentialDataService,
+                                         FunctionalityDataService funcitonalityDataService,
+                                         OptionDataService optionDataService,
+                                         OptionElementDataService optionElementDataService) {
+        this.referentialDataService = referentialDataService;
+        this.functionalityDataService = funcitonalityDataService;
+        this.optionDataService = optionDataService;
+        this.optionElementDataService = optionElementDataService;
     }
 
-    private Option contractUrlOption;
-    
-    public void setOptionDataService (OptionDataService optionDataService) {
+    @PostConstruct
+    private void init() {
+        referentialList = referentialDataService.findAll();
+        LoggerFactory.getLogger(this.getClass()).debug("All referentials" +referentialList.size());
+        referentialList.forEach((referential) -> LoggerFactory.getLogger(this.getClass()).debug(referential.getCode()));
+        functionalityList = functionalityDataService.findAll();
         for (Option option : optionDataService.findAll()) {
             if (option.getCode().equals(DOMAIN_OPTION_CODE)){
                 contractUrlOption = option;
             } else {
-                optionList.add(option);    
+                optionList.add(option);
             }
         }
     }
 
-    private OptionElementDataService optionElementDataService;
-    public void setOptionElementDataService (OptionElementDataService optionElementDataService) {
-        this.optionElementDataService = optionElementDataService;
-    }
-
-    /**
-     * The holder that handles the unique instance of CreateContractCommandFactory
-     */
-    private static class CreateContractCommandFactoryHolder {
-        private static final CreateContractCommandFactory INSTANCE = 
-                new CreateContractCommandFactory();
-    }
-    
-    /**
-     * Private constructor
-     */
-    private CreateContractCommandFactory() {}
-    
-    /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     * @return the unique instance of CreateContractCommandFactory
-     */
-    public static CreateContractCommandFactory getInstance() {
-        return CreateContractCommandFactoryHolder.INSTANCE;
-    }
-    
     /**
      * 
      * @param contract
@@ -204,7 +193,7 @@ public class CreateContractCommandFactory implements Serializable {
      * @param contract 
      */
     private void addReferentialToCommand(CreateContractCommand ccc, Contract contract) {
-        Map<String,Boolean> refMap = new LinkedHashMap<String,Boolean>();
+        Map<String,Boolean> refMap = new LinkedHashMap<>();
         
         for (Referential ref : referentialList){
             if (contract.getReferentialSet().contains(ref)) {
@@ -219,10 +208,9 @@ public class CreateContractCommandFactory implements Serializable {
     /**
      * 
      * @param ccc
-     * @param contract 
      */
     private void addReferentialToExistingCommand(CreateContractCommand ccc) {
-        Map<String,Boolean> refMap = new LinkedHashMap<String,Boolean>();
+        Map<String,Boolean> refMap = new LinkedHashMap<>();
         
         for (Map.Entry<String,Boolean> entry : ccc.getReferentialMap().entrySet()){
             if (entry.getValue() == null) {
@@ -239,7 +227,7 @@ public class CreateContractCommandFactory implements Serializable {
      * @param ccc 
      */
     private void addNewReferentialToCommand(CreateContractCommand ccc) {
-        Map<String,Boolean> refMap = new LinkedHashMap<String,Boolean>();
+        Map<String,Boolean> refMap = new LinkedHashMap<>();
         
         for (Referential ref : referentialList){
             refMap.put(ref.getCode(),Boolean.FALSE);
@@ -253,7 +241,7 @@ public class CreateContractCommandFactory implements Serializable {
      * @param contract 
      */
     private void addOptionToCommand(CreateContractCommand ccc, Contract contract) {
-        Map<String,String> optionMap = new LinkedHashMap<String, String>();
+        Map<String,String> optionMap = new LinkedHashMap<>();
         
         for (Option option : optionList){
             optionMap.put(
@@ -279,7 +267,6 @@ public class CreateContractCommandFactory implements Serializable {
     /**
      * 
      * @param ccc
-     * @param contract 
      */
     private void addNewOptionsToCommand(CreateContractCommand ccc) {
         Map<String,String> optionMap = new LinkedHashMap<String,String>();
@@ -319,10 +306,10 @@ public class CreateContractCommandFactory implements Serializable {
             CreateContractCommand ccc, 
             Contract contract) {
         
-        Set<Functionality> functSet = new HashSet<Functionality>();
-        Set<Referential> refSet = new HashSet<Referential>();
-        Set<OptionElement> optionElementSet = new HashSet<OptionElement>();
-        
+        Set<Functionality> functSet = new HashSet<>();
+        Set<Referential> refSet = new HashSet<>();
+        Set<OptionElement> optionElementSet = new HashSet<>();
+
         for (Map.Entry<String,Boolean> entry : ccc.getFunctionalityMap().entrySet()) {
             if (entry.getValue() != null && entry.getValue()) {
                 functSet.add(getFunctionalityFromCode(entry.getKey()));

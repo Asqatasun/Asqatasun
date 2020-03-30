@@ -24,11 +24,12 @@ package org.asqatasun.webapp.validator;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.util.MD5Encoder;
 import org.asqatasun.webapp.command.ChangePasswordCommand;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.util.TgolPasswordChecker;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -36,6 +37,7 @@ import org.springframework.validation.Validator;
  *
  * @author jkowalczyk
  */
+@Component("changePasswordFormValidator")
 public class ChangePasswordFormValidator implements Validator {
 
     private static final String MISSING_PASSWORD_KEY =
@@ -60,12 +62,6 @@ public class ChangePasswordFormValidator implements Validator {
         checkPassword(changePasswordCommand, currentUser, errors);
     }
 
-    /**
-     *
-     * @param userSubscriptionCommand
-     * @param errors
-     * @return
-     */
     private boolean checkPassword(
             ChangePasswordCommand changePasswordCommand,
             User user,
@@ -83,7 +79,7 @@ public class ChangePasswordFormValidator implements Validator {
                         return false;
                     }
                 } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-                    Logger.getLogger(this.getClass()).warn(ex);
+                    LoggerFactory.getLogger(this.getClass()).warn(ex.getMessage());
                 }
             }
         }

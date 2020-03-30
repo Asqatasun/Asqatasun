@@ -183,7 +183,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                 + " JOIN s.audit as a"
                 + " WHERE a = :audit"
                 + " AND s.source != null "
-                + " AND s.source != '' )");
+                + " AND s.source != '' ");
         query = query.setParameter(AUDIT_KEY, audit);
         return (Long) query.getSingleResult() > 0;
     }
@@ -245,7 +245,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             query.setFirstResult(start);
             query.setMaxResults(chunkSize);
             List<Content> contentList = (List<Content>) query.getResultList();
-            flushAndCloseEntityManager();
+//            flushAndCloseEntityManager();
             return contentList;
         }
         return Collections.emptyList();
@@ -312,7 +312,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             query.setFirstResult(start);
             query.setMaxResults(chunkSize);
             List<Content> contentList = (List<Content>) query.getResultList();
-            flushAndCloseEntityManager();
+//            flushAndCloseEntityManager();
             return contentList;
         }
         return Collections.emptyList();
@@ -426,11 +426,11 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     queryValuesBuilder.toString());
             try {
                 query.executeUpdate();
-                flushAndCloseEntityManager();
+//                flushAndCloseEntityManager();
             } catch (ConstraintViolationException micve) {
                 LOGGER.warn(micve.getMessage());
             } finally {
-                flushAndCloseEntityManager();
+//                flushAndCloseEntityManager();
             }
         }
     }
@@ -462,7 +462,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             query.setParameter("idContent", idContent);
             query.setParameter("idAudit", idAudit);
             query.executeUpdate();
-            flushAndCloseEntityManager();
+//            flushAndCloseEntityManager();
         }
     }
 
@@ -498,7 +498,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             for (BigInteger value : (List<BigInteger>)query.getResultList()) {
                 idList.add(Long.valueOf(value.intValue()));
             }
-            flushAndCloseEntityManager();
+//            flushAndCloseEntityManager();
             return idList;
         }
         return null;
@@ -518,7 +518,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
             for (BigInteger value : (List<BigInteger>)query.getResultList()) {
                 idList.add(Long.valueOf(value.intValue()));
             }
-            flushAndCloseEntityManager();
+//            flushAndCloseEntityManager();
             return idList;
         }
         return null;
@@ -547,7 +547,7 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
                     audit.getParameterSet().size();
                 }
             }
-            flushAndCloseEntityManager();
+//            flushAndCloseEntityManager();
             return content;
         } catch (NoResultException nre) {
             return null;
@@ -598,9 +598,9 @@ public class ContentDAOImpl extends AbstractJPADAO<Content, Long> implements
      * a reference to the entity manager and can never be garbaged.
      * By flushing and closing the entity manager, these objects can be free.
      */
-    private void flushAndCloseEntityManager(){
-        entityManager.flush();
-        entityManager.close();
-    }
+//    private void flushAndCloseEntityManager(){
+//        entityManager.flush();
+//        entityManager.close();
+//    }
 
 }

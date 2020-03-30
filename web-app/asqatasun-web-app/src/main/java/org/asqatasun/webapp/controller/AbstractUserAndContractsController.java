@@ -25,10 +25,8 @@ package org.asqatasun.webapp.controller;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.StringUtils;
-import org.asqatasun.emailsender.EmailSender;
+
 import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.util.MD5Encoder;
 import org.asqatasun.webapp.command.CreateContractCommand;
 import org.asqatasun.webapp.command.CreateUserCommand;
 import org.asqatasun.webapp.command.factory.CreateContractCommandFactory;
@@ -37,16 +35,13 @@ import org.asqatasun.webapp.entity.contract.Act;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.service.contract.ActDataService;
 import org.asqatasun.webapp.entity.user.User;
-import org.asqatasun.webapp.form.builder.FormFieldBuilder;
-import org.asqatasun.webapp.form.parameterization.ContractOptionFormField;
-import org.asqatasun.webapp.form.parameterization.builder.ContractOptionFormFieldBuilder;
+import org.asqatasun.webapp.ui.form.parameterization.ContractOptionFormField;
+import org.asqatasun.webapp.ui.form.parameterization.builder.ContractOptionFormFieldBuilder;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.asqatasun.webapp.util.webapp.ExposablePropertyPlaceholderConfigurer;
 import org.asqatasun.webapp.validator.CreateContractFormValidator;
 import org.asqatasun.webapp.validator.CreateUserFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -56,34 +51,11 @@ import org.springframework.web.bind.annotation.InitBinder;
  *
  * @author jkowalczyk
  */
-@Controller
 public class AbstractUserAndContractsController extends AbstractController{
 
-//    public static final String EMAIL_FROM_KEY="emailFrom";
-//    public static final String EMAIL_TO_KEY="emailTo";
-//    public static final String EMAIL_SUBJECT_KEY="emailSubject";
-//    public static final String EMAIL_CONTENT_KEY="emailContent";
-//    private static final String URL_KEY="#urlToTest";
-//    private static final String EMAIL_KEY="#email";
-//    private static final String FIRST_NAME_KEY="#firstName";
-//    private static final String LAST_NAME_KEY="#lastName";
-//    private static final String PHONE_NUMBER_KEY="#phoneNumber";
+    @Autowired
+    protected Map<String, List<ContractOptionFormFieldBuilder>> contractOptionFormFieldBuilderMap;
 
-    List<FormFieldBuilder> displayOptionFieldsBuilderList;
-    public final void setDisplayOptionFieldsBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
-        this.displayOptionFieldsBuilderList = formFieldBuilderList;
-    }
-    
-    private Map<String, List<ContractOptionFormFieldBuilder>> contractOptionFormFieldBuilderMap;
-    public Map<String, List<ContractOptionFormFieldBuilder>> getContractOptionFormFieldBuilderMap() {
-        return contractOptionFormFieldBuilderMap;
-    }
-
-    public final void setContractOptionFormFieldBuilderMap(
-            final Map<String, List<ContractOptionFormFieldBuilder>> formFieldBuilderMap) {
-        this.contractOptionFormFieldBuilderMap = formFieldBuilderMap;
-    }
-    
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -91,55 +63,20 @@ public class AbstractUserAndContractsController extends AbstractController{
                 dateFormat, false));
     }
     
-    private ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer;
     @Autowired
-    public final void setExposablePropertyPlaceholderConfigurer(ExposablePropertyPlaceholderConfigurer exposablePropertyPlaceholderConfigurer) {
-        this.exposablePropertyPlaceholderConfigurer = exposablePropertyPlaceholderConfigurer;
-    }
-
-    private EmailSender emailSender;
+    protected CreateUserFormValidator createUserFormValidator;
     @Autowired
-    public final void setEmailSender(EmailSender emailSender) {
-        this.emailSender = emailSender;
-    }
-    
-    private CreateUserFormValidator createUserFormValidator;
-    public CreateUserFormValidator getCreateUserFormValidator() {
-        return createUserFormValidator;
-    }
-
-    public final void setCreateUserFormValidator(CreateUserFormValidator createUserFormValidator) {
-        this.createUserFormValidator = createUserFormValidator;
-    }
-    
-    private CreateContractFormValidator createContractFormValidator;
-    public CreateContractFormValidator getCreateContractFormValidator() {
-        return createContractFormValidator;
-    }
-
-    public final void setCreateContractFormValidator(CreateContractFormValidator createContractFormValidator) {
-        this.createContractFormValidator = createContractFormValidator;
-    }
-    
-    private ActDataService actDataService;
-    public ActDataService getActDataService() {
-        return actDataService;
-    }
-
+    protected CreateContractFormValidator createContractFormValidator;
     @Autowired
-    public void setActDataService(ActDataService actDataService) {
-        this.actDataService = actDataService;
-    }
-    
-    private AuditDataService auditDataService;
-    public AuditDataService getAuditDataService() {
-        return auditDataService;
-    }
-
+    protected ActDataService actDataService;
     @Autowired
-    public void setAuditDataService(AuditDataService auditDataService) {
-        this.auditDataService = auditDataService;
-    }
+    protected AuditDataService auditDataService;
+    @Autowired
+    protected CreateUserCommandFactory createUserCommandFactory;
+    @Autowired
+    protected CreateContractCommandFactory createContractCommandFactory;
+
+    public AbstractUserAndContractsController() {}
 
     /**
      * 
@@ -154,10 +91,10 @@ public class AbstractUserAndContractsController extends AbstractController{
             String successViewName) {
         CreateUserCommand createUserCommand;
         if (user != null) {
-            createUserCommand = CreateUserCommandFactory.getInstance().getInitialisedCreateUserCommand(user);
+            createUserCommand = createUserCommandFactory.getInitialisedCreateUserCommand(user);
             model.addAttribute(TgolKeyStore.USER_NAME_KEY,createUserCommand.getEmail());
         } else {
-            createUserCommand = CreateUserCommandFactory.getInstance().getNewCreateUserCommand();
+            createUserCommand = createUserCommandFactory.getNewCreateUserCommand();
         }
         model.addAttribute(TgolKeyStore.CREATE_USER_COMMAND_KEY,createUserCommand);
         return successViewName;
@@ -176,21 +113,21 @@ public class AbstractUserAndContractsController extends AbstractController{
             Model model,
             User user,
             Contract contract,
-            Map<String, List<ContractOptionFormField>> optionFormFieldMap, 
+            Map<String, List<ContractOptionFormField>> optionFormFieldMap,
             String successViewName) {
         CreateContractCommand createContractCommand;
 
         if (contract != null) {
-            createContractCommand = CreateContractCommandFactory.getInstance().getInitialisedCreateContractCommand(contract);
+            createContractCommand = createContractCommandFactory.getInitialisedCreateContractCommand(contract);
             model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY,createContractCommand.getLabel());
         } else {
-            createContractCommand = CreateContractCommandFactory.getInstance().getNewCreateContractCommand();
+            createContractCommand = createContractCommandFactory.getNewCreateContractCommand();
         }
         if (user != null) {
             model.addAttribute(TgolKeyStore.USER_NAME_KEY,user.getEmail1());
             model.addAttribute(TgolKeyStore.USER_ID_KEY,user.getId());
         } else {
-            model.addAttribute(TgolKeyStore.USER_LIST_KEY,getUserDataService().findAll());
+            model.addAttribute(TgolKeyStore.USER_LIST_KEY,userDataService.findAll());
         }
         model.addAttribute(TgolKeyStore.CREATE_CONTRACT_COMMAND_KEY,createContractCommand);
         model.addAttribute(TgolKeyStore.OPTIONS_MAP_KEY, optionFormFieldMap);
@@ -198,56 +135,6 @@ public class AbstractUserAndContractsController extends AbstractController{
         return successViewName;
     }
 
-    /**
-     * A new user can be created from the main form that can be accessed without 
-     * being authentified. In this case, we check the validity of the filled-in 
-     * url and we prevent the new users to be activated and created with admin 
-     * privileges.
-     * On the other side, if the user is created from the admin interface, it can
-     * be set with activation and admin privileges info but the check of the url
-     * is useless cause the field has been removed from the form.
-     * 
-     * @param createUserCommand
-     * @param result
-     * @param model
-     * @param successViewName
-     * @param errorViewName
-     * @param newUserFromAdmin
-     * @param successMessageKey
-     * @return
-     * @throws Exception
-     */
-    protected String submitCreateUserForm (
-            CreateUserCommand createUserCommand,
-            BindingResult result,
-            Model model,
-            String successViewName,
-            String errorViewName,
-            boolean newUserFromAdmin,
-            String successMessageKey) throws Exception {
-
-        createUserFormValidator.setCheckSiteUrl(!newUserFromAdmin);
-        // We check whether the form is valid
-        createUserFormValidator.validate(createUserCommand, result);
-        // If the form has some errors, we display it again with errors' details
-        if (result.hasErrors()) {
-            return displayFormWithErrors(
-                    model,
-                    createUserCommand,
-                    errorViewName);
-        }
-        User user;
-        if (!newUserFromAdmin) {
-            user = createUser(createUserCommand,false,false);
-            sendEmailInscription(user);
-        } else {
-            user = createUser(createUserCommand,true,true);
-            model.addAttribute(TgolKeyStore.USER_LIST_KEY,getUserDataService().findAll());
-            model.addAttribute(successMessageKey,user.getEmail1());
-        }
-        return successViewName;
-    }
-    
     /**
      * This methods controls the validity of the form and updated the user 
      * 
@@ -295,7 +182,7 @@ public class AbstractUserAndContractsController extends AbstractController{
         // when updated from admin page, the id of the user to modify is passed
         // through the session and needs to be cleaned up once updated.
         if (updateUserFromAdmin) {
-            model.addAttribute(TgolKeyStore.USER_LIST_KEY,getUserDataService().findAll());
+            model.addAttribute(TgolKeyStore.USER_LIST_KEY, userDataService.findAll());
             request.getSession().removeAttribute(TgolKeyStore.USER_ID_KEY);
         }
         if (successMessageKey != null) {
@@ -304,37 +191,6 @@ public class AbstractUserAndContractsController extends AbstractController{
         return successViewName;
     }
     
-    /**
-     * Create a user entit
-     * @param createUserCommand
-     * @return
-     * @throws Exception
-     */
-    private User createUser(
-            CreateUserCommand createUserCommand,
-            boolean allowActivation,
-            boolean allowAdmin) throws Exception {
-        User user = getUserDataService().create();
-        user.setEmail1(createUserCommand.getEmail());
-        user.setFirstName(createUserCommand.getFirstName());
-        user.setName(createUserCommand.getLastName());
-        user.setPhoneNumber(createUserCommand.getPhoneNumber());
-        user.setPassword(MD5Encoder.MD5(createUserCommand.getPassword()));
-        user.setWebUrl1(createUserCommand.getSiteUrl());
-        if (allowActivation) {
-            user.setAccountActivation(createUserCommand.getActivated());
-        } else {
-            user.setAccountActivation(false);
-        }
-        if (allowAdmin && createUserCommand.getAdmin()) {
-            user.setRole(CreateUserCommandFactory.getInstance().getAdminRole());
-        } else {
-            user.setRole(CreateUserCommandFactory.getInstance().getUserRole());
-        }
-        getUserDataService().saveOrUpdate(user);
-        return user;
-    }
-
     /**
      * Update a user entity
      * 
@@ -363,12 +219,12 @@ public class AbstractUserAndContractsController extends AbstractController{
         if (updateAllUserData) {
             user.setAccountActivation(createUserCommand.getActivated());
             if (createUserCommand.getAdmin()) {
-                user.setRole(CreateUserCommandFactory.getInstance().getAdminRole());
+                user.setRole(createUserCommandFactory.getAdminRole());
             } else {
-                user.setRole(CreateUserCommandFactory.getInstance().getUserRole());
+                user.setRole(createUserCommandFactory.getUserRole());
             }
         }
-        getUserDataService().saveOrUpdate(user);
+        userDataService.saveOrUpdate(user);
         // the current user accessible from the session needs also to be updated
         if (hasSessionToBeUpdated) {
             updateCurrentUser(user);
@@ -379,11 +235,11 @@ public class AbstractUserAndContractsController extends AbstractController{
     /**
      * 
      * @param model
-     * @param CreateUserCommand
+     * @param createUserCommand
      * @param errorViewName
      * @return
      */
-    private String displayFormWithErrors(
+    protected String displayFormWithErrors(
             Model model,
             CreateUserCommand createUserCommand,
             String errorViewName) {
@@ -410,57 +266,15 @@ public class AbstractUserAndContractsController extends AbstractController{
             Map<String, List<ContractOptionFormField>> optionFormFieldMap, 
             String errorViewName) {
         model.addAttribute(TgolKeyStore.CREATE_CONTRACT_COMMAND_KEY,
-                CreateContractCommandFactory.getInstance().getInitialisedCreateContractCommand(createContractCommand));
+                createContractCommandFactory.getInitialisedCreateContractCommand(createContractCommand));
         model.addAttribute(TgolKeyStore.USER_NAME_KEY,userName);
         model.addAttribute(TgolKeyStore.USER_ID_KEY,userId);
         model.addAttribute(TgolKeyStore.OPTIONS_MAP_KEY, optionFormFieldMap);
         // case : create contract for multiple users
         if (userName == null && userId == null) {
-            model.addAttribute(TgolKeyStore.USER_LIST_KEY, getUserDataService().findAll());
+            model.addAttribute(TgolKeyStore.USER_LIST_KEY, userDataService.findAll());
         }
         return errorViewName;
-    }
-    
-        /**
-     * This method gets data from a property file to fill-in the inscription
-     * e-mail
-     * @param user
-     */
-    private void sendEmailInscription(User user) {
-        String emailFrom =
-            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_FROM_KEY);
-        String[] emailTo =
-                exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_TO_KEY).split(",");
-        Set<String> emailToSet = new HashSet();
-        emailToSet.addAll(Arrays.asList(emailTo));
-        String emailSubject =
-            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_SUBJECT_KEY);
-        String emailContent =
-            exposablePropertyPlaceholderConfigurer.getResolvedProps().get(TgolKeyStore.EMAIL_CONTENT_KEY);
-        emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_EMAIL_KEY, user.getEmail1());
-        emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_URL_KEY, user.getWebUrl1());
-        if (user.getName() != null) {
-            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_LAST_NAME_KEY, user.getName());
-        } else {
-            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_LAST_NAME_KEY, "");
-        }
-        if (user.getFirstName() != null) {
-            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_FIRST_NAME_KEY, user.getFirstName());
-        } else {
-            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_FIRST_NAME_KEY, "");
-        }
-        if (user.getPhoneNumber() != null) {
-            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_PHONE_NUMBER_KEY, user.getPhoneNumber());
-        } else {
-            emailContent = emailContent.replace(TgolKeyStore.EMAIL_CONTENT_PHONE_NUMBER_KEY, "");
-        }
-        emailSender.sendEmail(
-                emailFrom, 
-                emailToSet, 
-                Collections.<String>emptySet(), 
-                StringUtils.EMPTY,
-                emailSubject, 
-                emailContent);
     }
 
     /**
@@ -469,7 +283,7 @@ public class AbstractUserAndContractsController extends AbstractController{
      */
     protected boolean isUserAdmin(User user) {
         return user.getRole().getId().equals(
-                CreateUserCommandFactory.getInstance().getAdminRole().getId());
+                createUserCommandFactory.getAdminRole().getId());
     }
 
     /**
@@ -484,12 +298,12 @@ public class AbstractUserAndContractsController extends AbstractController{
     * @param contract 
     */
     protected void deleteAllAuditsFromContract(Contract contract) {
-        Collection<Act> actsByContract = getActDataService().getAllActsByContract(contract);
+        Collection<Act> actsByContract = actDataService.getAllActsByContract(contract);
         for (Act act : actsByContract) {
             if (act.getAudit() != null) {
-                getAuditDataService().delete(act.getAudit().getId());
+                auditDataService.delete(act.getAudit().getId());
             }
-            getActDataService().delete(act.getId());
+            actDataService.delete(act.getId());
         }
     }
 

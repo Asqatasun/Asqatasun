@@ -25,92 +25,98 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import junit.framework.TestCase;
+
+import org.asqatasun.webapp.config.TestConfiguration;
+import org.asqatasun.webapp.dto.ActInfo;
+import org.asqatasun.webapp.dto.ContractInfo;
+import org.asqatasun.webapp.dto.factory.ContractInfoFactory;
 import org.displaytag.properties.SortOrderEnum;
 import org.asqatasun.webapp.command.ContractSortCommand;
-import org.asqatasun.webapp.presentation.data.ActInfo;
-import org.asqatasun.webapp.presentation.data.ActInfoImpl;
-import org.asqatasun.webapp.presentation.data.ContractInfo;
-import org.asqatasun.webapp.presentation.data.ContractInfoImpl;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
  * @author jkowalczyk
  */
-public class ContractSortCommandHelperTest extends TestCase {
-    
-    public ContractSortCommandHelperTest(String testName) {
-        super(testName);
-    }
-    
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-    }
-    
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
+@SpringBootTest
+@ContextConfiguration(classes = TestConfiguration.class)
+@ActiveProfiles({"integration"})
+public class ContractSortCommandHelperTest  {
+
+
+    @MockBean(name = "contractInfoFactory")
+    ContractInfoFactory contractInfoFactory;
+
+    @Autowired
+    private ContractSortCommandHelper contractSortCommandHelper;
 
     /**
      * Test of getLastAuditMarkSortValue method, of class ContractSortCommandHelper.
      */
+    @Test
     public void testGetLastAuditMarkSortValue() {
-        System.out.println("getLastAuditMarkSortValue");
-
-        List<ContractInfo> contractInfoSet = new ArrayList<>(); 
+        List<ContractInfo> contractInfoSet = new ArrayList<>();
         ContractSortCommand csc = new ContractSortCommand();
         
-        ContractInfo c1 = new ContractInfoImpl();
-        ActInfo lastActInfo1 = new ActInfoImpl(); 
+        ContractInfo c1 = new ContractInfo();
+        ActInfo lastActInfo1 = new ActInfo();
         lastActInfo1.setRawMark(15);
         c1.setLastActInfo(lastActInfo1);
         c1.setLabel(("A1"));
         contractInfoSet.add(c1);
         
-        ContractInfo c2 = new ContractInfoImpl();
-        ActInfo lastActInfo2 = new ActInfoImpl(); 
+        ContractInfo c2 = new ContractInfo();
+        ActInfo lastActInfo2 = new ActInfo();
         lastActInfo2.setRawMark(95);
         c2.setLastActInfo(lastActInfo2);
         c2.setLabel(("B2"));
         contractInfoSet.add(c2);
         
-        ContractInfo c3 = new ContractInfoImpl();
-        ActInfo lastActInfo3 = new ActInfoImpl(); 
+        ContractInfo c3 = new ContractInfo();
+        ActInfo lastActInfo3 = new ActInfo();
         lastActInfo3.setRawMark(53);
         c3.setLastActInfo(lastActInfo3);
         c3.setLabel(("C3"));
         contractInfoSet.add(c3);
         
-        ContractInfo c4 = new ContractInfoImpl();
+        ContractInfo c4 = new ContractInfo();
         c4.setLastActInfo(null);
         c4.setLabel(("D4"));
         contractInfoSet.add(c4);
         
-        ContractInfo c5 = new ContractInfoImpl();
+        ContractInfo c5 = new ContractInfo();
         c5.setLastActInfo(null);
         c5.setLabel(("A4"));
         contractInfoSet.add(c5);
-        
-        ContractSortCommandHelper.setSortByKey("SORTBY");
-        ContractSortCommandHelper.setLastAuditMarkSortValue("MARK");
-        ContractSortCommandHelper.setSortOrderKey("SORTORDER");
+
         Map<String, Object> map = new HashMap<>();
-        map.put("SORTORDER", SortOrderEnum.ASCENDING.getCode());
-        map.put("SORTBY", "MARK");
+        map.put("order-choice", SortOrderEnum.ASCENDING.getCode());
+        map.put("sort-by-choice", "MARK");
 
         csc.setSortOptionMap(map);
-        ContractSortCommandHelper.sortContractInfoSetRegardingCommand(contractInfoSet, csc);
-        
+        contractSortCommandHelper.sortContractInfoSetRegardingCommand(contractInfoSet, csc);
+
+        assertTrue(contractInfoSet.get(0).equals(c1));
+        assertTrue(contractInfoSet.get(1).equals(c3));
+        assertTrue(contractInfoSet.get(2).equals(c2));
+
         map = new HashMap<>();
-        map.put("SORTORDER", SortOrderEnum.DESCENDING.getCode());
-        map.put("SORTBY", "MARK");
+        map.put("order-choice", SortOrderEnum.DESCENDING.getCode());
+        map.put("sort-by-choice", "MARK");
 
         csc.setSortOptionMap(map);
-        ContractSortCommandHelper.sortContractInfoSetRegardingCommand(contractInfoSet, csc);
-        
-//        assertEquals(expResult, result);
+        contractSortCommandHelper.sortContractInfoSetRegardingCommand(contractInfoSet, csc);
+
+        assertTrue(contractInfoSet.get(0).equals(c2));
+        assertTrue(contractInfoSet.get(1).equals(c3));
+        assertTrue(contractInfoSet.get(2).equals(c1));
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }

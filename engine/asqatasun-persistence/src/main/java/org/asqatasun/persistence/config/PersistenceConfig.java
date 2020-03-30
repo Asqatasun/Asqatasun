@@ -42,8 +42,6 @@ import java.beans.PropertyVetoException;
  */
 @Configuration
 @EnableTransactionManagement
-@PropertySource(value = "classpath:hibernate.properties",
-                ignoreResourceNotFound = true)
 @ImportResource({"classpath*:aop.xml"})
 @EnableAspectJAutoProxy
 public class PersistenceConfig extends PersistenceCommonConfig{
@@ -54,8 +52,10 @@ public class PersistenceConfig extends PersistenceCommonConfig{
     private String password;
     @Value("${jdbc.url:jdbc:mysql://localhost:3306/asqatasun}")
     private String url;
-    @Value("${useComboPool}")
-    private boolean useComboPool;
+    @Value("${app.engine.persistence.useComboPool:false}")
+    private Boolean useComboPool;
+    @Value("#{'${app.engine.persistence.packagesToScan:org.asqatasun.entity}'.split(',')}")
+    private String[] packagesToScan;
 
     @Bean(name = "dataSource")
     DataSource dataSource() {
@@ -79,7 +79,7 @@ public class PersistenceConfig extends PersistenceCommonConfig{
         return entityManagerFactory(
             dataSource(),
             url,
-            "org.asqatasun.entity.dao","org.asqatasun.entity");
+            packagesToScan);
     }
 
     @Bean(name = "transactionManager")

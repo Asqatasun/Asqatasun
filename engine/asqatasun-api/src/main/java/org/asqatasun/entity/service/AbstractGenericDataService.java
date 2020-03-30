@@ -28,6 +28,8 @@ import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.entity.GenericFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
+
 /**
  * 
  * @param <E>
@@ -61,6 +63,7 @@ public abstract class AbstractGenericDataService<E extends Entity, K extends Ser
      *            the entity to create
      */
     @Override
+    @Transactional
     public void create(E entity) {
         entityDao.create(entity);
     }
@@ -107,6 +110,7 @@ public abstract class AbstractGenericDataService<E extends Entity, K extends Ser
      * @return
      */
     @Override
+    @Transactional
     public E saveOrUpdate(E entity) {
         return entityDao.saveOrUpdate(entity);
     }
@@ -117,6 +121,7 @@ public abstract class AbstractGenericDataService<E extends Entity, K extends Ser
      * @return
      */
     @Override
+    @Transactional
     public Collection<E> saveOrUpdate(Collection<E> entitySet) {
         return entityDao.saveOrUpdate(entitySet);
     }
@@ -148,6 +153,7 @@ public abstract class AbstractGenericDataService<E extends Entity, K extends Ser
      * @return the entity updated
      */
     @Override
+    @Transactional
     public E update(E entity) {
         return entityDao.update(entity);
     }

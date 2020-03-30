@@ -28,6 +28,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+
 import org.asqatasun.entity.Entity;
 
 /**
@@ -49,7 +51,6 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
     @Override
     public void create(E entity) {
         entityManager.persist(entity);
-        flushAndCloseEntityManager();
     }
 
     /**
@@ -58,11 +59,11 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
      * @param entity
      */
     @Override
+    @Transactional
     public void delete(E entity) {
         if (entity.getId() == null) {
             return;
         }
-        flushAndCloseEntityManager();
     }
 
     /**
@@ -71,6 +72,8 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
      * @param key
      */
     @Override
+
+    @Transactional
     public void delete(K key) {
         if (key == null) {
             return;
@@ -82,6 +85,7 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
     }
 
     @Override
+    @Transactional
     public void delete(Collection<E> entitySet) {
         for (E entity : entitySet) {
             delete(entity);
@@ -131,20 +135,10 @@ public abstract class AbstractJPADAO<E extends Entity, K extends Serializable>
     }
 
     @Override
+    @Transactional
     public E update(E entity) {
         E result = entityManager.merge(entity);
-        flushAndCloseEntityManager();
         return result;
     }
 
-    /**
-     * Due to memory leaks, the entity manager has to be flushed and closed after
-     * each db operation. All the elements retrieved while the db access keep
-     * a reference to the entity manager and can never be garbaged.
-     * By flushing and closing the entity manager, these objects can be free.
-     */
-    private void flushAndCloseEntityManager(){
-        entityManager.flush();
-        entityManager.close();
-    }
 }

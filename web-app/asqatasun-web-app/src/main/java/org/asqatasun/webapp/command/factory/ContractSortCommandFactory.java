@@ -24,40 +24,25 @@ package org.asqatasun.webapp.command.factory;
 import java.util.List;
 import java.util.Map;
 import org.asqatasun.webapp.command.ContractSortCommand;
-import org.asqatasun.webapp.form.FormField;
-import org.asqatasun.webapp.form.SelectElement;
-import org.asqatasun.webapp.form.SelectFormField;
-import org.asqatasun.webapp.form.TextualFormField;
+import org.asqatasun.webapp.ui.form.FormField;
+import org.asqatasun.webapp.ui.form.SelectElement;
+import org.asqatasun.webapp.ui.form.SelectFormField;
+import org.asqatasun.webapp.ui.form.TextualFormField;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author jkowalczyk
  */
+@Component
 public final class ContractSortCommandFactory {
 
-    /**
-     * The holder that handles the unique instance of ContractSortCommandFactory
-     */
-    private static class ContractSortCommandFactoryHolder {
-        private static final ContractSortCommandFactory INSTANCE = 
-                new ContractSortCommandFactory();
-    }
-    
     /**
      * Private constructor
      */
     private ContractSortCommandFactory() {}
-    
-    /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     * @return the unique instance of ContractSortCommandFactory
-     */
-    public static ContractSortCommandFactory getInstance() {
-        return ContractSortCommandFactoryHolder.INSTANCE;
-    }
-    
+
     /**
      * 
      * @param userId
@@ -80,9 +65,7 @@ public final class ContractSortCommandFactory {
                     }
                 }
             } else if (ff instanceof TextualFormField) {
-                contractDisplayCommand.getSortOptionMap().put(
-                        ((TextualFormField)ff).getI18nKey(),
-                        ((TextualFormField)ff).getValue());
+                contractDisplayCommand.getSortOptionMap().put(ff.getI18nKey(), ff.getValue());
             }
         }
         contractDisplayCommand.setUserId(userId);

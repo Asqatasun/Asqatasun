@@ -29,6 +29,7 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.rules.domelement.DomElement;
 import org.asqatasun.rules.domelement.extractor.DomElementExtractor;
 import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 /**
  * <p>
@@ -76,7 +77,7 @@ public abstract class AbstractPageRuleFromPreProcessImplementation
     protected void select(SSPHandler sspHandler) {
         try {
             domElements = DomElementExtractor.extractDomElements(sspHandler);
-        } catch (NoResultException nre) {
+        } catch (NoResultException | EmptyResultDataAccessException nre) {
             return;
         }
         doSelect(domElements, sspHandler);

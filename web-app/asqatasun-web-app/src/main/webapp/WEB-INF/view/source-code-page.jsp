@@ -11,12 +11,12 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-    <c:url value="/public/${asqatasunVersion}/external_js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
 </c:set>
 
 <!-- internal js -->
 <c:set var="highlightSelectedLineJsUrl">
-    <c:url value="/public/${asqatasunVersion}/js/highlighter/highlight-selected-line-min.js"/>
+    <c:url value="/public/js/highlighter/highlight-selected-line-min.js"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

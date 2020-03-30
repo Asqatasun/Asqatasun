@@ -179,7 +179,7 @@ h1, h2, h3, h4 {
     text-decoration: underline;
 }
 .breadcrumb {
-    display: inline-block;
+    display: table;
     background-color: transparent;
     background-image: none;
     border: none;

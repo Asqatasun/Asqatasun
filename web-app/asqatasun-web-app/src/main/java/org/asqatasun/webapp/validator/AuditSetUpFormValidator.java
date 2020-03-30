@@ -22,11 +22,13 @@
 package org.asqatasun.webapp.validator;
 
 import java.util.*;
-import org.apache.log4j.Logger;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -34,19 +36,18 @@ import org.springframework.validation.Validator;
  *
  * @author jkowalczyk
  */
+@Component("auditSetUpFormValidator")
 public class AuditSetUpFormValidator implements Validator {
 
-    protected static final Logger LOGGER = Logger.getLogger(AuditSetUpFormValidator.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(AuditSetUpFormValidator.class);
     protected static final String GENERAL_ERROR_MSG_KEY = "generalErrorMsg";
     protected static final String MANDATORY_FIELD_MSG_BUNDLE_KEY =
             "required.mandatoryField";
-
     private final ContractDataService contractDataService;
     public ContractDataService getContractDataService() {
         return contractDataService;
     }
 
-    @Autowired
     public AuditSetUpFormValidator(ContractDataService contractDataService) {
         this.contractDataService = contractDataService;
     }

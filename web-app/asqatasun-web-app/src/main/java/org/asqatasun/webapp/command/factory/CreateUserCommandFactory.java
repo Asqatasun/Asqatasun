@@ -26,61 +26,43 @@ import org.asqatasun.webapp.command.CreateUserCommand;
 import org.asqatasun.webapp.entity.service.user.RoleDataService;
 import org.asqatasun.webapp.entity.user.Role;
 import org.asqatasun.webapp.entity.user.User;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  *
  * @author jkowalczyk
  */
+@Component
 public class CreateUserCommandFactory  implements Serializable {
 
-    private Long userRoleId = Long.valueOf("2");
-    public void setUserRole(Role userRole) {
-        this.userRole = userRole;
-    }
-    
-    private Long adminRoleId = Long.valueOf("3");
-    public void setAdminRoleId(Long adminRoleId) {
-        this.adminRoleId = adminRoleId;
-    }
-    
+    private static final Long USER_ROLE_ID = 2L;
+    private static final Long ADMIN_ROLE_ID = 3L;
     private Role userRole;
-    public Role getUserRole() {
-        return userRole;
-    }
-    
+    public Role getUserRole() {return userRole;}
     private Role adminRole;
-    public Role getAdminRole() {
-        return adminRole;
-    }
-    
-    public final void setRoleDataService (RoleDataService roleDataService){
-        userRole = roleDataService.read(userRoleId);
-        adminRole = roleDataService.read(adminRoleId);
-    }
-    
-    /**
-     * The holder that handles the unique instance of CreateUserCommandFactory
-     */
-    private static class CreateUserCommandFactoryHolder {
-        private static final CreateUserCommandFactory INSTANCE = 
-                new CreateUserCommandFactory();
-    }
-    
+    public Role getAdminRole() {return adminRole;}
+
+    private final RoleDataService roleDataService;
+
     /**
      * Private constructor
      */
-    private CreateUserCommandFactory() {}
-    
-    /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     * @return the unique instance of CreateUserCommandFactory
-     */
-    public static CreateUserCommandFactory getInstance() {
-        return CreateUserCommandFactoryHolder.INSTANCE;
+    private CreateUserCommandFactory(RoleDataService roleDataService) {
+        this.roleDataService = roleDataService;
     }
-    
+
+    @PostConstruct
+    private void init () {
+        userRole = roleDataService.read(USER_ROLE_ID);
+        adminRole = roleDataService.read(ADMIN_ROLE_ID);
+    }
+
     public CreateUserCommand getInitialisedCreateUserCommand(User user) {
+        if (userRole == null || adminRole == null) {
+            init();
+        }
         CreateUserCommand createUserCommand = new CreateUserCommand();
         createUserCommand.setEmail(user.getEmail1());
         createUserCommand.setSiteUrl(user.getWebUrl1());
@@ -88,7 +70,6 @@ public class CreateUserCommandFactory  implements Serializable {
         createUserCommand.setLastName(user.getName());
         createUserCommand.setPhoneNumber(user.getPhoneNumber());
         createUserCommand.setActivated(user.isAccountActivated());
-
         if (user.getRole().getId().equals(adminRole.getId())) {
             createUserCommand.setAdmin(true);
         } else {

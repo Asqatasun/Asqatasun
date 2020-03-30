@@ -21,16 +21,20 @@
  */
 package org.asqatasun.webapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
-import org.asqatasun.webapp.util.TgolKeyStore;
+import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.ui.form.parameterization.builder.AuditSetUpFormFieldBuilder;
+import static org.asqatasun.webapp.util.TgolKeyStore.*;
 import org.asqatasun.webapp.validator.AuditSetUpFormValidator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,78 +51,94 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuditSetUpController extends AbstractAuditSetUpController{
 
-    public AuditSetUpController() {
+    private final Map<String, List<AuditSetUpFormFieldBuilder>> siteOptionFormFieldBuilderMap;
+    private final AuditSetUpFormValidator auditSiteSetUpFormValidator;
+    private final Map<String, List<AuditSetUpFormFieldBuilder>> pageOptionFormFieldBuilderMap;
+    private final AuditSetUpFormValidator auditPageSetUpFormValidator;
+    private final Map<String, List<AuditSetUpFormFieldBuilder>> uploadOptionFormFieldBuilderMap;
+    private final AuditSetUpFormValidator auditUploadSetUpFormValidator;
+
+    public AuditSetUpController(
+        @Qualifier(value = "siteOptionFormFieldBuilderMap")
+            Map <String, List <AuditSetUpFormFieldBuilder>> siteOptionFormFieldBuilderMap,
+        @Qualifier(value = "auditSetUpFormValidator") AuditSetUpFormValidator auditSiteSetUpFormValidator,
+        @Qualifier(value = "pageOptionFormFieldBuilderMap")
+            Map <String, List <AuditSetUpFormFieldBuilder>> pageOptionFormFieldBuilderMap,
+        @Qualifier(value = "pageAuditSetUpFormValidator") AuditSetUpFormValidator auditPageSetUpFormValidator,
+        @Qualifier(value = "uploadOptionFormFieldBuilderMap")
+            Map <String, List <AuditSetUpFormFieldBuilder>> uploadOptionFormFieldBuilderMap,
+        @Qualifier(value = "uploadAuditSetUpFormValidator") AuditSetUpFormValidator auditUploadSetUpFormValidator) {
         super();
+        this.siteOptionFormFieldBuilderMap = siteOptionFormFieldBuilderMap;
+        this.auditSiteSetUpFormValidator = auditSiteSetUpFormValidator;
+        this.pageOptionFormFieldBuilderMap = pageOptionFormFieldBuilderMap;
+        this.auditPageSetUpFormValidator = auditPageSetUpFormValidator;
+        this.uploadOptionFormFieldBuilderMap = uploadOptionFormFieldBuilderMap;
+        this.auditUploadSetUpFormValidator = auditUploadSetUpFormValidator;
+    }
+
+    @PostConstruct
+    protected void init() {
+        super.init();
+        if (viewFunctionalityBindingMap == null) {
+            viewFunctionalityBindingMap = new HashMap <String, String>() {{
+                put("audit-page-set-up", "PAGES");
+                put("audit-site-set-up", "DOMAIN");
+                put("audit-upload-set-up", "UPLOAD");
+            }};
+        }
     }
 
     /**
      * @param contractId
-     * @param request
-     * @param response
      * @param model
      * @return
      *      The pages audit set-up form page
      */
-    @RequestMapping(value = TgolKeyStore.AUDIT_PAGE_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    public String displayPageAuditSetUp(
-            @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Model model) {
+    @RequestMapping(value = AUDIT_PAGE_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
+    @Secured({ROLE_USER_KEY, ROLE_ADMIN_KEY})
+    public String displayPageAuditSetUp(@RequestParam(CONTRACT_ID_KEY) String contractId, Model model) {
         return displayAuditSetUpView(
-                TgolKeyStore.AUDIT_PAGE_SET_UP_VIEW_NAME, 
+                AUDIT_PAGE_SET_UP_VIEW_NAME, 
                 contractId, 
                 "",
-                getPageOptionFormFieldBuilderMap(), 
+                pageOptionFormFieldBuilderMap,
                 ScopeEnum.PAGE,
                 model);
     }
 
     /**
      * @param contractId
-     * @param request
-     * @param response
      * @param model
      * @return
      *      The pages audit set-up form page
      */
-    @RequestMapping(value = TgolKeyStore.AUDIT_UPLOAD_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    public String displayUploadAuditSetUp(
-            @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Model model) {
+    @RequestMapping(value = AUDIT_UPLOAD_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
+    @Secured({ROLE_USER_KEY, ROLE_ADMIN_KEY})
+    public String displayUploadAuditSetUp(@RequestParam(CONTRACT_ID_KEY) String contractId, Model model) {
         return displayAuditSetUpView(
-                TgolKeyStore.AUDIT_UPLOAD_SET_UP_VIEW_NAME, 
+                AUDIT_UPLOAD_SET_UP_VIEW_NAME,
                 contractId, 
                 "",
-                getUploadOptionFormFieldBuilderMap(), 
+                uploadOptionFormFieldBuilderMap,
                 ScopeEnum.FILE,
                 model);
     }
 
     /**
      * @param contractId
-     * @param request
-     * @param response
      * @param model
      * @return
      *      The site audit set-up form page
      */
-    @RequestMapping(value = TgolKeyStore.AUDIT_SITE_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
-    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    public String displaySiteAuditSetUp(
-            @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Model model) {
+    @RequestMapping(value = AUDIT_SITE_SET_UP_CONTRACT_URL, method = RequestMethod.GET)
+    @Secured({ROLE_USER_KEY, ROLE_ADMIN_KEY})
+    public String displaySiteAuditSetUp(@RequestParam(CONTRACT_ID_KEY) String contractId, Model model) {
         return displayAuditSetUpView(
-                TgolKeyStore.AUDIT_SITE_SET_UP_VIEW_NAME, 
+                AUDIT_SITE_SET_UP_VIEW_NAME, 
                 contractId, 
                 "",
-                getSiteOptionFormFieldBuilderMap(), 
+                siteOptionFormFieldBuilderMap,
                 ScopeEnum.DOMAIN,
                 model);
     }
@@ -131,14 +151,17 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
      * @param request
      * @return 
      */
-    @RequestMapping(method = RequestMethod.POST)
-    @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
-    protected String submitAuditSetUpForm(
-            @ModelAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY) AuditSetUpCommand auditSetUpCommand,
+    @RequestMapping(value = {AUDIT_PAGE_SET_UP_CONTRACT_URL,
+                             AUDIT_SITE_SET_UP_CONTRACT_URL,
+                             AUDIT_UPLOAD_SET_UP_CONTRACT_URL},
+                    method = RequestMethod.POST)
+    @Secured({ROLE_USER_KEY, ROLE_ADMIN_KEY})
+    public String submitAuditSetUpForm(
+            @ModelAttribute(AUDIT_SET_UP_COMMAND_KEY) AuditSetUpCommand auditSetUpCommand,
             BindingResult result,
             Model model,
             HttpServletRequest request) {
-        Contract contract = getContractDataService().read(auditSetUpCommand.getContractId());   
+        Contract contract = contractDataService.read(auditSetUpCommand.getContractId());
         Map<String, List<AuditSetUpFormField>> formFielMap = null;
         AuditSetUpFormValidator auditSetUpFormValidator = null;
         if (auditSetUpCommand.getRelaunch()) {
@@ -148,20 +171,20 @@ public class AuditSetUpController extends AbstractAuditSetUpController{
             case DOMAIN:
                 formFielMap = getFreshAuditSetUpFormFieldMap(
                     contract, 
-                    getSiteOptionFormFieldBuilderMap());
-                auditSetUpFormValidator = getAuditSiteSetUpFormValidator();
+                    siteOptionFormFieldBuilderMap);
+                auditSetUpFormValidator = auditSiteSetUpFormValidator;
                 break;
             case PAGE:
                 formFielMap = getFreshAuditSetUpFormFieldMap(
                     contract, 
-                    getPageOptionFormFieldBuilderMap());
-                auditSetUpFormValidator = getAuditPageSetUpFormValidator();
+                    pageOptionFormFieldBuilderMap);
+                auditSetUpFormValidator = auditPageSetUpFormValidator;
                 break;
             case FILE:
                 formFielMap = getFreshAuditSetUpFormFieldMap(
                     contract, 
-                    getUploadOptionFormFieldBuilderMap());
-                auditSetUpFormValidator = getAuditUploadSetUpFormValidator();
+                    uploadOptionFormFieldBuilderMap);
+                auditSetUpFormValidator = auditUploadSetUpFormValidator;
                 break;
         }
         return submitForm(

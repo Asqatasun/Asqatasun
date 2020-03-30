@@ -84,7 +84,7 @@ public abstract class AuditCommandTestCase extends TestCase{
         mockConsolidatorService = EasyMock.createMock(ConsolidatorService.class);
         mockAnalyserService = EasyMock.createMock(AnalyserService.class);
         mockAdaptationListener = EasyMock.createMock(AdaptationListener.class);
-        HttpRequestHandler.getInstance().setBypassCheck(Boolean.TRUE.toString());
+        HttpRequestHandler.getInstance().setBypassCheck(true);
     }
     
     /**

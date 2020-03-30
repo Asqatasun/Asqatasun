@@ -44,6 +44,7 @@ public class TgStepTypeFactory extends StepTypeFactory{
     @Override
     public StepType getStepTypeOfName(String name) {
         StepType stepType = super.getStepTypeOfName(name);
+        System.out.println(stepType.getClass() );
         if (StringUtils.equals(name, "storeCurrentUrl") && stepType instanceof com.sebuilder.interpreter.Store) {
             return new TgStore(((com.sebuilder.interpreter.Store)stepType).getter);
         }

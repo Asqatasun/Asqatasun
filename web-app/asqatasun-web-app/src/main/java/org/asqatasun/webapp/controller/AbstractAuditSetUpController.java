@@ -21,9 +21,6 @@
  */
 package org.asqatasun.webapp.controller;
 
-import java.util.*;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.log4j.Logger;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.command.factory.AuditSetUpCommandFactory;
 import org.asqatasun.webapp.entity.contract.Contract;
@@ -31,145 +28,70 @@ import org.asqatasun.webapp.entity.contract.ScopeEnum;
 import org.asqatasun.webapp.entity.functionality.Functionality;
 import org.asqatasun.webapp.entity.option.OptionElement;
 import org.asqatasun.webapp.entity.referential.Referential;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
-import org.asqatasun.webapp.form.SelectFormField;
-import org.asqatasun.webapp.form.builder.SelectFormFieldBuilderImpl;
-import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
-import org.asqatasun.webapp.form.parameterization.builder.AuditSetUpFormFieldBuilderImpl;
-import org.asqatasun.webapp.form.parameterization.helper.AuditSetUpFormFieldHelper;
+import org.asqatasun.webapp.ui.form.SelectFormField;
+import org.asqatasun.webapp.ui.form.builder.SelectFormFieldBuilderImpl;
+import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.ui.form.parameterization.builder.AuditSetUpFormFieldBuilder;
+import org.asqatasun.webapp.ui.form.parameterization.helper.AuditSetUpFormFieldHelper;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.asqatasun.webapp.validator.AuditSetUpFormValidator;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.LocaleResolver;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /** 
  *
  * @author jkowalczyk
  */
-@Controller
 public abstract class AbstractAuditSetUpController extends AbstractAuditDataHandlerController{
 
-    private String defaultReferential = "Aw22";
-    public String getDefaultReferential() {
-        return defaultReferential;
-    }
-
-    public void setDefaultReferential(String defaultReferential) {
-        this.defaultReferential = defaultReferential;
-    }
-    
+    @Value("${app.webapp.ui.config.defaultReferential}")
+    private String defaultReferential;
     /**
-     * The list of FormField builders that handles the audit site options
+     * This map binds the audit set-up view with the functionality code that
+     * allows to access. It is used to ensure the displayed set-up view
+     * is authorised regarding the contract functionalities.
      */
-    private Map<String, List<AuditSetUpFormFieldBuilderImpl>> siteOptionFormFieldBuilderMap;
-    public Map<String, List<AuditSetUpFormFieldBuilderImpl>> getSiteOptionFormFieldBuilderMap() {
-        return siteOptionFormFieldBuilderMap;
-    }
-    
-    public final void setSiteOptionFormFieldBuilderMap(final Map<String, List<AuditSetUpFormFieldBuilderImpl>> formFieldBuilderMap) {
-        this.siteOptionFormFieldBuilderMap = formFieldBuilderMap;
-    }
-    
-    /**
-     * The audit Site set-up validator
-     */
-    private AuditSetUpFormValidator auditSiteSetUpFormValidator;
-    public AuditSetUpFormValidator getAuditSiteSetUpFormValidator() {
-        return auditSiteSetUpFormValidator;
-    }
-    
-    public final void setAuditSiteSetUpValidator(AuditSetUpFormValidator auditSiteSetUpValidator) {
-        this.auditSiteSetUpFormValidator = auditSiteSetUpValidator;
-    }
-
-    /**
-     * The list of FormField builders that handles the audit page options
-     */
-    private Map<String, List<AuditSetUpFormFieldBuilderImpl>> pageOptionFormFieldBuilderMap;
-    public Map<String, List<AuditSetUpFormFieldBuilderImpl>> getPageOptionFormFieldBuilderMap() {
-        return pageOptionFormFieldBuilderMap;
-    }
-    
-    public final void setPageOptionFormFieldBuilderMap(final Map<String, List<AuditSetUpFormFieldBuilderImpl>> formFieldBuilderMap) {
-        this.pageOptionFormFieldBuilderMap = formFieldBuilderMap;
-    }
-    
-    /**
-     * The audit Page set-up validator
-     */
-    private AuditSetUpFormValidator auditPageSetUpFormValidator;
-    public AuditSetUpFormValidator getAuditPageSetUpFormValidator() {
-        return auditPageSetUpFormValidator;
-    }
-    
-    public final void setAuditPageSetUpValidator(AuditSetUpFormValidator auditPageSetUpValidator) {
-        this.auditPageSetUpFormValidator = auditPageSetUpValidator;
-    }
-    
-    /**
-     * The list of FormField builders that handles the audit upload options
-     */
-    private Map<String, List<AuditSetUpFormFieldBuilderImpl>> uploadOptionFormFieldBuilderMap;
-    public Map<String, List<AuditSetUpFormFieldBuilderImpl>> getUploadOptionFormFieldBuilderMap() {
-        return uploadOptionFormFieldBuilderMap;
-    }
-    
-    public final void setUploadOptionFormFieldBuilderMap(final Map<String, List<AuditSetUpFormFieldBuilderImpl>> formFieldBuilderMap) {
-        this.uploadOptionFormFieldBuilderMap = formFieldBuilderMap;
-    }
-    
-    /**
-     * The audit Upload set-up validator
-     */
-    private AuditSetUpFormValidator auditUploadSetUpFormValidator;
-    public AuditSetUpFormValidator getAuditUploadSetUpFormValidator() {
-        return auditUploadSetUpFormValidator;
-    }
-    
-    public final void setAuditUploadSetUpValidator(AuditSetUpFormValidator auditUploadSetUpValidator) {
-        this.auditUploadSetUpFormValidator = auditUploadSetUpValidator;
-    }
+    protected Map<String, String> viewFunctionalityBindingMap;
 
     /**
      * The list of FormField builders that handles the choice of the referential
      * and its level
      */
-    List<SelectFormFieldBuilderImpl> referentialAndLevelFormFieldBuilderList;
-    public final void setReferentialAndLevelFormFieldBuilderList(List<SelectFormFieldBuilderImpl> selectFormFieldBuilderList) {
-        this.referentialAndLevelFormFieldBuilderList = selectFormFieldBuilderList;
-    }
+    @Autowired
+    @Qualifier(value="levelSelectFormFieldBuilder")
+    private List<SelectFormFieldBuilderImpl> referentialAndLevelFormFieldBuilderList;
+    @Autowired
+    protected AuditLauncherController auditLauncherController;
+    @Autowired
+    protected ContractDataService contractDataService;
+    @Autowired
+    protected LocaleResolver localeResolver;
+    @Autowired
+    AuditSetUpCommandFactory auditSetUpCommandFactory;
+    @Autowired
+    AuditSetUpFormFieldHelper auditSetUpFormFieldHelper;
 
-    /**
-     * This map binds the audit set-up view with the functionality code that 
-     * allows to access. It is used to ensure the displayed set-up view
-     * is authorised regarding the contract functionalities.
-     */
-    Map<String, String> viewFunctionalityBindingMap;
-    public Map<String, String> getViewFunctionalityBindingMap() {
+    protected Map<String, String> getViewFunctionalityBindingMap () {
+        if (viewFunctionalityBindingMap == null) {
+            viewFunctionalityBindingMap = new HashMap <String, String>() {{
+                put("audit-page-set-up", "PAGES");
+                put("audit-site-set-up", "DOMAIN");
+                put("audit-upload-set-up", "UPLOAD");
+            }};
+        }
         return viewFunctionalityBindingMap;
     }
-
-    public void setViewFunctionalityBindingMap(Map<String, String> viewFunctionalityBindingMap) {
-        this.viewFunctionalityBindingMap = viewFunctionalityBindingMap;
-    }
-    
-    private AuditLauncherController auditLauncherController;
-    public AuditLauncherController getAuditLauncherController() {
-        return auditLauncherController;
-    }
-    
-    @Autowired
-    public void setAuditLauncherController(AuditLauncherController auditLauncherController) {
-        this.auditLauncherController = auditLauncherController;
-    }
-    
-    public AbstractAuditSetUpController() {
-        super();
-    }
-
     /**
      * 
      * @param viewName
@@ -184,7 +106,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
             String viewName, 
             String contractId, 
             String scenarioId,
-            Map<String, List<AuditSetUpFormFieldBuilderImpl>> optionFormFieldBuilderMap, 
+            Map<String, List<AuditSetUpFormFieldBuilder>> optionFormFieldBuilderMap,
             ScopeEnum scope,
             Model model) {
         Long contractIdValue;
@@ -193,7 +115,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
         } catch (NumberFormatException nfe) {
             throw new ForbiddenPageException(getCurrentUser());
         }
-        Contract contract  = getContractDataService().read(contractIdValue);
+        Contract contract  = contractDataService.read(contractIdValue);
         if (isUserAllowedToDisplaySetUpPage(contract, viewName)) {
             
             Collection<String> authorisedReferentialList = getAuthorisedReferentialCodeFromContract(contract);
@@ -206,7 +128,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
                         referentialAndLevelFormFieldBuilderList);
             
             String defaultRef = getDefaultReferential(authorisedReferentialList);
-            AuditSetUpFormFieldHelper.selectDefaultLevelFromRefValue(
+            auditSetUpFormFieldHelper.selectDefaultLevelFromRefValue(
                     refAndLevelFormFieldList, 
                     defaultRef);
             
@@ -220,22 +142,22 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
             // instance of AuditSetUpCommand
             switch (scope) {
                 case DOMAIN:
-                    asuc = AuditSetUpCommandFactory.getInstance().
+                    asuc = auditSetUpCommandFactory.
                         getSiteAuditSetUpCommand(contract,refAndLevelFormFieldList, optionFormFieldMap);
                     break;
                 case FILE:
                 case GROUPOFFILES:
-                    asuc = AuditSetUpCommandFactory.getInstance().
+                    asuc = auditSetUpCommandFactory.
                         getUploadAuditSetUpCommand(contract,refAndLevelFormFieldList, optionFormFieldMap);
                     break;
                 case SCENARIO:
-                    asuc = AuditSetUpCommandFactory.getInstance().
+                    asuc = auditSetUpCommandFactory.
                         getScenarioAuditSetUpCommand(contract, scenarioId,refAndLevelFormFieldList, optionFormFieldMap);
                     break;
                 case PAGE:
                 case GROUPOFPAGES:
                 default:
-                    asuc = AuditSetUpCommandFactory.getInstance().
+                    asuc = auditSetUpCommandFactory.
                         getPageAuditSetUpCommand(contract,refAndLevelFormFieldList, optionFormFieldMap);
             }
             model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY, asuc);
@@ -266,14 +188,14 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
     protected String submitForm(
             Contract contract, 
             AuditSetUpCommand auditSetUpCommand,
-            Map<String, List<AuditSetUpFormField>> formFielMap, 
+            Map<String, List<AuditSetUpFormField>> formFielMap,
             AuditSetUpFormValidator auditSetUpFormValidator, 
             Model model, 
             BindingResult result, 
             HttpServletRequest request) {
 
         if (formFielMap == null || auditSetUpFormValidator == null) {
-            Logger.getLogger(this.getClass()).info("oups" );
+            LoggerFactory.getLogger(this.getClass()).info("oups" );
             return TgolKeyStore.OUPS_VIEW_NAME;
         }
 
@@ -289,8 +211,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
         // If the form has some errors, we display it again with errors' details
         if (result.hasErrors()) {
 
-            Contract currentContract  = 
-                    getContractDataService().read(auditSetUpCommand.getContractId());
+            Contract currentContract = contractDataService.read(auditSetUpCommand.getContractId());
 
             return displayFormWithErrors(
                     model,
@@ -331,10 +252,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
 
         model.addAttribute(TgolKeyStore.AUDIT_SET_UP_COMMAND_KEY, auditSetUpCommand);
 
-        return getAuditLauncherController().launchAudit(
-                auditSetUpCommand, 
-                getLocaleResolver().resolveLocale(request), 
-                model);
+        return auditLauncherController.launchAudit(auditSetUpCommand, localeResolver.resolveLocale(request), model);
     }
     
     /**
@@ -370,7 +288,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
         // When the form is on error, the default level value corresponds to the 
         // one the user has chosen. 
         
-        AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(
+        auditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(
                     refAndLevelFormFieldList, 
                     auditSetUpCommand.getLevel());
         
@@ -410,11 +328,12 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
             throw new ForbiddenPageException(getCurrentUser());
         }
         User user = getCurrentUser();
+
         if (!contract.getUser().getId().equals(user.getId())) {
             throw new ForbiddenPageException(user);
         }
         Collection<String> functionalitySet = getAuthorisedFunctionalityCodeFromContract(contract);
-        if (!functionalitySet.contains(viewFunctionalityBindingMap.get(viewName))) {
+        if (!functionalitySet.contains(getViewFunctionalityBindingMap().get(viewName))) {
             throw new ForbiddenPageException(user);
         }
         return true;
@@ -424,9 +343,9 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
      * This method prepares the data to display in the set-up form.
      *
      * @param model
-     * @param contractId
-     * @param parametersMap
-     * @param auditSite
+     * @param contract
+     * @param refAndLevelFormFieldList
+     * @param optionFormFieldMap
      */
     private void prepareFormModel(
             Model model,
@@ -434,8 +353,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
             List<SelectFormField> refAndLevelFormFieldList,
             Map<String, List<AuditSetUpFormField>> optionFormFieldMap) {
         model.addAttribute(TgolKeyStore.CONTRACT_NAME_KEY, contract.getLabel());
-        model.addAttribute(TgolKeyStore.URL_KEY, 
-                getContractDataService().getUrlFromContractOption(contract));
+        model.addAttribute(TgolKeyStore.URL_KEY,contractDataService.getUrlFromContractOption(contract));
         model.addAttribute(TgolKeyStore.PARAMETERS_MAP_KEY, optionFormFieldMap);
         model.addAttribute(TgolKeyStore.LEVEL_LIST_KEY, refAndLevelFormFieldList);
     }
@@ -450,11 +368,11 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
      */
     protected Map<String, List<AuditSetUpFormField>> getFreshAuditSetUpFormFieldMap (
             Contract contract,
-            Map<String, List<AuditSetUpFormFieldBuilderImpl>> auditSetUpFormFieldBuilderMap) {
+            Map<String, List<AuditSetUpFormFieldBuilder>> auditSetUpFormFieldBuilderMap) {
 
         // Copy the audit setup form field map from the builders
-        Map<String, List<AuditSetUpFormField>> initialisedSetUpFormFielMap = new LinkedHashMap();
-        for (Map.Entry<String, List<AuditSetUpFormFieldBuilderImpl>> entry : auditSetUpFormFieldBuilderMap.entrySet()) {
+        LinkedHashMap initialisedSetUpFormFielMap = new LinkedHashMap();
+        for (Map.Entry<String, List<AuditSetUpFormFieldBuilder>> entry : auditSetUpFormFieldBuilderMap.entrySet()) {
             initialisedSetUpFormFielMap.put(
                     entry.getKey(), 
                     getFreshAuditSetUpFormFieldList(entry.getValue()));
@@ -475,9 +393,9 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
      * @return 
      */
     protected List<AuditSetUpFormField> getFreshAuditSetUpFormFieldList(
-            List<AuditSetUpFormFieldBuilderImpl> auditSetUpFormFieldBuilderList) {
+            List<AuditSetUpFormFieldBuilder> auditSetUpFormFieldBuilderList) {
         List<AuditSetUpFormField> setUpFormFieldList = new LinkedList();
-        for (AuditSetUpFormFieldBuilderImpl seb : auditSetUpFormFieldBuilderList) {
+        for (AuditSetUpFormFieldBuilder seb : auditSetUpFormFieldBuilderList) {
             setUpFormFieldList.add(seb.build());
         }
         return setUpFormFieldList;
@@ -499,19 +417,17 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
             List<SelectFormFieldBuilderImpl> auditSetUpFormFieldBuilderList) {
         
         List<SelectFormField> selectFormFieldList = new LinkedList();
-        for (SelectFormFieldBuilderImpl seb : auditSetUpFormFieldBuilderList) {
-            
+
+        auditSetUpFormFieldBuilderList.forEach(seb -> {
             // Create the SelectElement from the builder
-            SelectFormField selectFormField = seb.build();
-            
+            SelectFormField selectFormField = seb.build( );
+
             // enable-disable elements from the authorised referentials
-            AuditSetUpFormFieldHelper.activateAllowedReferentialField(
-                    selectFormField, 
-                    authorisedReferentialList);
-            
+            auditSetUpFormFieldHelper.activateAllowedReferentialField(selectFormField, authorisedReferentialList);
+
             // add the fresh instance to the returned list
             selectFormFieldList.add(selectFormField);
-        }
+        });
         return selectFormFieldList;
     }
     
@@ -526,13 +442,8 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
         if (optionElementSet.isEmpty()) {
             return;
         }
-        for (List<AuditSetUpFormField> apl : setUpFormFielList) {
-            for (AuditSetUpFormField ap : apl) {
-                AuditSetUpFormFieldHelper.applyRestrictionToAuditSetUpFormField(
-                        ap, 
-                        optionElementSet);
-            }
-        }
+        setUpFormFielList.forEach(apl -> apl.forEach(
+            ap -> auditSetUpFormFieldHelper.applyRestrictionToAuditSetUpFormField(ap, optionElementSet)));
     }
 
     /**

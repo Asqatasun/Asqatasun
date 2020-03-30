@@ -13,7 +13,8 @@
             <pattern>%d{dd-MM-yyyy HH:mm:ss:SSS} %-4r %-5p %c - %m%n</pattern>
         </encoder>
     </appender>
-    <root level="ERROR">
+    <logger name="org.dbunit" level="ERROR"/>
+    <root level="INFO">
         <appender-ref ref="CONSOLE_APP"/>
     </root>
 </configuration>

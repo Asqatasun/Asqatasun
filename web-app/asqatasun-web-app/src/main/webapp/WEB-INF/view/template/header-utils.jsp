@@ -5,13 +5,13 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 
 <c:set var="tgLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>
+    <c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>
 </c:set>
 <c:set var="logoutLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/icon-logout.png"/>
+    <c:url value="/public/images/icon-logout.png"/>
 </c:set>
 <c:set var="adminLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/icon-admin.png"/>
+    <c:url value="/public/images/icon-admin.png"/>
 </c:set>
 
 <c:set var="currentUserName" scope="page">
@@ -47,9 +47,7 @@
             <ul class="nav secondary-nav">
 
             <sec:authorize access="isAuthenticated()">
-            <c:choose>
-                <c:when test="${configProperties['enable-account-settings'] == 'true'}">
-                <li ${accountSettingsActive}>
+                <li>
                     <c:choose>
                     <c:when test="${! fn:startsWith(currentUserName, 'guest')}">
                     <div id="account-settings">
@@ -67,25 +65,6 @@
                     </c:otherwise>
                     </c:choose>
                 </li>
-                </c:when>
-                <c:otherwise>
-                <li ${accountSettingsActive}>
-                    <c:choose>
-                        <c:when test="${currentUserName != 'guest'}">
-                    <div id="account-settings">
-                        <a href="#">${currentUserName}</a>
-                    </div>
-                    <%@include file="lang-box.jsp" %>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="lang-switcher-offset">
-                                <%@include file="lang-box.jsp" %>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
-                </li>
-                </c:otherwise>
-            </c:choose>
             </sec:authorize>
             <c:set var="isInTopBar" scope="page" value="true"/>
             <sec:authorize access="hasRole('ROLE_ADMIN')">

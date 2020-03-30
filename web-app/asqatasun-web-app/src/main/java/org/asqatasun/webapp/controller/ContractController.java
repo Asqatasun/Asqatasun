@@ -2,7 +2,7 @@ package org.asqatasun.webapp.controller;
 
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2019  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
@@ -22,17 +22,21 @@ package org.asqatasun.webapp.controller;
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.asqatasun.webapp.dto.factory.DetailedContractInfoFactory;
 import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,38 +45,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.LocaleResolver;
 
-
-/** 
+/**
  *
  * @author jkowalczyk
  */
 @Controller
-public class ContractController extends AbstractController {
+public final class ContractController extends AbstractController {
 
-    private LocaleResolver localeResolver;
+    @Value("${app.webapp.ui.config.authorizedScopeForTrend}")
+    private List<String> authorizedFunctionalityForTrend;
+    private final ContractDataService contractDataService;
+    private final DetailedContractInfoFactory detailedContractInfoFactory;
+    private final LocaleResolver localeResolver;
+
     @Autowired
-    public final void setLocaleResolver(LocaleResolver localeResolver) {
+    public ContractController(ContractDataService contractDataService,
+                              DetailedContractInfoFactory detailedContractInfoFactory,
+                              LocaleResolver localeResolver) {
+        this.contractDataService = contractDataService;
+        this.detailedContractInfoFactory = detailedContractInfoFactory;
         this.localeResolver = localeResolver;
-    }
-
-    private List<String> authorizedFunctionalityForTrend = new ArrayList();
-    public List<String> getAuthorizedFunctionalityForTrend() {
-        return authorizedFunctionalityForTrend;
-    }
-
-    public void setAuthorizedFunctionalityForTrend(List<String> authorizedFunctionalityForTrend) {
-        this.authorizedFunctionalityForTrend = authorizedFunctionalityForTrend;
-    }
-
-    public ContractController() {
-        super();
     }
 
     /**
      * 
      * @param contractId
      * @param request
-     * @param response
      * @param model
      * @return 
      */
@@ -81,7 +79,6 @@ public class ContractController extends AbstractController {
     public String displayContractPage (
             @RequestParam(TgolKeyStore.CONTRACT_ID_KEY) String contractId,
             HttpServletRequest request,
-            HttpServletResponse response,
             Model model) {
         Long contractIdValue;
         try {
@@ -105,14 +102,12 @@ public class ContractController extends AbstractController {
     private String displayContractPage(
             HttpServletRequest request,
             Model model,
-            Long contractId) {            
+            Long contractId) {
                 model.addAttribute(TgolKeyStore.LOCALE_KEY,localeResolver.resolveLocale(request));
-                Contract contract = getContractDataService().read(contractId);
+                Contract contract = contractDataService.read(contractId);
                 if (isContractExpired(contract)) {
                     throw new ForbiddenUserException(getCurrentUser());
                 }
-                // add the action list to the view
-//                model.addAttribute(TgolKeyStore.CONTRACT_ACTION_LIST_KEY, actionHandler.getActionList(contract));
                 if (isContractHasFunctionalityAllowingTrend(contract)) {
                     model.addAttribute(TgolKeyStore.DISPLAY_RESULT_TREND_KEY, true);
                 }
@@ -129,6 +124,7 @@ public class ContractController extends AbstractController {
      * @return 
      */
     private boolean isContractHasFunctionalityAllowingManualAudit(Contract contract) {
+
         for (Functionality functionality : contract.getFunctionalitySet()) {
             if (functionality.getId() == 5) {
                 return true;
@@ -145,7 +141,7 @@ public class ContractController extends AbstractController {
      */
     private boolean isContractHasFunctionalityAllowingTrend(Contract contract) {
         for (Functionality functionality : contract.getFunctionalitySet()) {
-            if (authorizedFunctionalityForTrend.contains(functionality.getCode())) {
+            if (Arrays.asList(authorizedFunctionalityForTrend).contains(functionality.getCode())) {
                 return true;
             }
         }
@@ -159,7 +155,7 @@ public class ContractController extends AbstractController {
      * @return
      */
     private boolean isUserOwnedContract(Long contractId){
-        for (Contract contract : getCurrentUser().getContractSet()) {
+        for (Contract contract : contractDataService.getAllContractsByUser(getCurrentUser())) {
             if (contract.getId().equals(contractId)) {
                 return true;
             }
@@ -167,4 +163,21 @@ public class ContractController extends AbstractController {
         return false;
     }
 
+    /**
+     * To deal with contract expiration this method is defined here and accessible
+     * from extended classes when needed.
+     * The related jsp uses the IS_CONTRACT_EXPIRED_KEY to enable or not the launch
+     * actions.
+     * @param contract
+     * @param model
+     * @return
+     */
+    private String displayContractView(Contract contract, Model model) {
+        model.addAttribute(TgolKeyStore.CONTRACT_ID_VALUE, contract.getId());
+        model.addAttribute(TgolKeyStore.DETAILED_CONTRACT_INFO,
+            detailedContractInfoFactory.getDetailedContractInfo(contract));
+        model.addAttribute(TgolKeyStore.IS_CONTRACT_EXPIRED_KEY,
+            isContractExpired(contract));
+        return TgolKeyStore.CONTRACT_VIEW_NAME;
+    }
 }

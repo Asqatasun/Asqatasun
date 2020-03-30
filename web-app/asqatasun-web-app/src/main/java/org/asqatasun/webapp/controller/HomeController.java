@@ -22,14 +22,17 @@
 package org.asqatasun.webapp.controller;
 
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.asqatasun.webapp.action.voter.ActionHandler;
 import org.asqatasun.webapp.command.ContractSortCommand;
 import org.asqatasun.webapp.command.helper.ContractSortCommandHelper;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
-import org.asqatasun.webapp.form.builder.FormFieldBuilder;
+import org.asqatasun.webapp.ui.form.builder.FormFieldBuilder;
 import org.asqatasun.webapp.util.TgolKeyStore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,22 +49,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController extends AbstractController {
 
-    private ActionHandler actionHandler;
-    public ActionHandler getActionHandler() {
-        return actionHandler;
-    }
+    private final ContractSortCommandHelper contractSortCommandHelper;
+    private final List<FormFieldBuilder> displayOptionFieldsBuilderList;
 
-    public void setActionHandler(ActionHandler contractActionHandler) {
-        this.actionHandler = contractActionHandler;
-    }
-
-    List<FormFieldBuilder> displayOptionFieldsBuilderList;
-    public final void setDisplayOptionFieldsBuilderList(final List<FormFieldBuilder> formFieldBuilderList) {
-        this.displayOptionFieldsBuilderList = formFieldBuilderList;
-    }
-    
-    public HomeController() {
+    @Autowired
+    public HomeController(ContractSortCommandHelper contractSortCommandHelper,
+                          @Qualifier(value = "displayOptionFieldsBuilderList")
+                            List<FormFieldBuilder> displayOptionFieldsBuilderList) {
         super();
+        this.contractSortCommandHelper = contractSortCommandHelper;
+        this.displayOptionFieldsBuilderList = displayOptionFieldsBuilderList;
     }
 
     @RequestMapping(value=TgolKeyStore.HOME_URL, method=RequestMethod.GET)
@@ -70,7 +67,7 @@ public class HomeController extends AbstractController {
         User user = getCurrentUser();
         model.addAttribute(
                 TgolKeyStore.CONTRACT_LIST_KEY, 
-                ContractSortCommandHelper.prepareContractInfo(
+                contractSortCommandHelper.prepareContractInfo(
                     user, 
                     null,
                     displayOptionFieldsBuilderList,
@@ -82,9 +79,7 @@ public class HomeController extends AbstractController {
     @Secured({TgolKeyStore.ROLE_USER_KEY, TgolKeyStore.ROLE_ADMIN_KEY})
     protected String submitForm(
             @ModelAttribute(TgolKeyStore.CONTRACT_SORT_COMMAND_KEY) ContractSortCommand contractDisplayCommand,
-            BindingResult result,
-            Model model,
-            HttpServletRequest request) {
+            Model model) {
         User user = getCurrentUser();
         if (!user.getId().equals(contractDisplayCommand.getUserId())) {
             throw new ForbiddenUserException();
@@ -92,7 +87,7 @@ public class HomeController extends AbstractController {
         // The page is displayed with sort option. Form needs to be set up
         model.addAttribute(
                 TgolKeyStore.CONTRACT_LIST_KEY, 
-                ContractSortCommandHelper.prepareContractInfo(
+                contractSortCommandHelper.prepareContractInfo(
                     user, 
                     contractDisplayCommand,
                     displayOptionFieldsBuilderList,

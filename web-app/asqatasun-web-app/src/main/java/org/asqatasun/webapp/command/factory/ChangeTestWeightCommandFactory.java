@@ -33,67 +33,31 @@ import org.asqatasun.webapp.entity.service.option.OptionDataService;
 import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
 import org.asqatasun.webapp.entity.service.user.UserDataService;
 import org.asqatasun.webapp.entity.user.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jkowalczyk
  */
+@Component
 public class ChangeTestWeightCommandFactory  implements Serializable {
 
     private String optionFamilyCodeStr = "TEST_WEIGHT_MANAGEMENT";
-    public void setOptionFamilyCodeStr(String optionFamilyCodeStr) {
-        this.optionFamilyCodeStr = optionFamilyCodeStr;
-    }
-    
-    private OptionElementDataService optionElementDataService;
-    public OptionElementDataService getOptionElementDataService() {
-        return optionElementDataService;
-    }
 
-    public void setOptionElementDataService(OptionElementDataService optionElementDataService) {
-        this.optionElementDataService = optionElementDataService;
-    }
-    
-    private OptionDataService optionDataService;
-    public OptionDataService getOptionDataService() {
-        return optionDataService;
-    }
+    private final OptionElementDataService optionElementDataService;
+    private final OptionDataService optionDataService;
+    private final UserDataService userDataService;
 
-    public void setOptionDataService(OptionDataService optionDataService) {
-        this.optionDataService = optionDataService;
-    }
-    
-    private UserDataService userDataService;
-    public UserDataService getUserDataService() {
-        return userDataService;
-    }
-
-    public void setUserDataService(UserDataService userDataService) {
-        this.userDataService = userDataService;
-    }
-    
-    /**
-     * The holder that handles the unique instance of ChangeTestWeightCommandFactory
-     */
-    private static class ChangeTestWeightCommandFactoryHolder {
-        private static final ChangeTestWeightCommandFactory INSTANCE = 
-                new ChangeTestWeightCommandFactory();
-    }
-    
     /**
      * Private constructor
      */
-    private ChangeTestWeightCommandFactory() {}
-    
-    /**
-     * Singleton pattern based on the "Initialization-on-demand 
-     * holder idiom". See @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     * @return the unique instance of ChangeTestWeightCommandFactory
-     */
-    public static ChangeTestWeightCommandFactory getInstance() {
-        return ChangeTestWeightCommandFactoryHolder.INSTANCE;
+    private ChangeTestWeightCommandFactory(OptionElementDataService optionElementDataService, OptionDataService optionDataService, UserDataService userDataService) {
+        this.optionElementDataService = optionElementDataService;
+        this.optionDataService = optionDataService;
+        this.userDataService = userDataService;
     }
-
+    
     /**
      * 
      * @param user

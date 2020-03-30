@@ -21,9 +21,6 @@
  */
 package org.asqatasun.entity.dao.reference;
 
-import java.util.HashMap;
-import java.util.Map;
-import static junit.framework.Assert.assertEquals;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditImpl;
 import org.asqatasun.entity.audit.AuditStatus;

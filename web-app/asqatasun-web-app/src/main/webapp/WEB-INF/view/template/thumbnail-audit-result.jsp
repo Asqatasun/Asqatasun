@@ -6,7 +6,7 @@
 <c:set var="height" value="170"/>
 <c:set var="width" value="270"/>
 <c:set var="tgLogoUrl">
-    <c:url value="/public/${asqatasunVersion}/images/Logo/Logo-Asqatasun-G-w${width}-h${height}-75dpi-bgWhite.png"/>
+    <c:url value="/public/images/Logo/Logo-Asqatasun-G-w${width}-h${height}-75dpi-bgWhite.png"/>
 </c:set>
 <div class="${proportion} ${offset}">
     <div class="thumbnail" >
@@ -23,7 +23,7 @@
                 ${tgLogoUrl}
             </div>
         <img id="snapshot" 
-             src="<c:url value="/public/${asqatasunVersion}/images/processing.gif"/>"
+             src="<c:url value="/public/images/processing.gif"/>"
              alt="${url}" 
              style="height: ${height};width: ${width};"/><br/>
             </c:when>

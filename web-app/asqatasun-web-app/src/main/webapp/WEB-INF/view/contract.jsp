@@ -17,50 +17,50 @@
 
 <!-- external js --> 
 <c:set var="jqueryUrl">
-    <c:url value="/public/${asqatasunVersion}/external_js/jquery-1.9.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
 </c:set>        
 <c:set var="raphaelJsUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/external_js/r2d3.v2.min.js"/>
+    <c:url value="/public/external_js/r2d3.v2.min.js"/>
 </c:set> 
 <c:set var="d3JsUrl">
-    <c:url value="/public/${asqatasunVersion}/external_js/d3.v3.min.js"/>
+    <c:url value="/public/external_js/d3.v3.min.js"/>
 </c:set>
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/public/${asqatasunVersion}/external_js/jquery.tablesorter.min.js"/>
+    <c:url value="/public/external_js/jquery.tablesorter.min.js"/>
 </c:set> 
 
 <!-- internal js --> 
 <c:set var="trendChartJsUrl">
-    <c:url value="/public/${asqatasunVersion}/js/trend/trend-chart-min.js"/>
+    <c:url value="/public/js/trend/trend-chart-min.js"/>
 </c:set>
 <c:set var="trendChartIEJsUrl">
-    <c:url value="/public/${asqatasunVersion}/js/ie/trend/trend-chart-ie-min.js"/>
+    <c:url value="/public/js/ie/trend/trend-chart-ie-min.js"/>
 </c:set>
 <c:set var="contractScoreJsUrl">
-    <c:url value="/public/${asqatasunVersion}/js/score/score-contract-min.js"/>
+    <c:url value="/public/js/score/score-contract-min.js"/>
 </c:set>
 <c:set var="scoreJsUrl">
-    <c:url value="/public/${asqatasunVersion}/js/score/score-min.js"/>
+    <c:url value="/public/js/score/score-min.js"/>
 </c:set>
 <c:set var="contractScoreIEJsUrl">
-    <c:url value="/public/${asqatasunVersion}/js/ie/score/score-contract-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-contract-ie-min.js"/>
 </c:set>
 <c:set var="scoreIEJsUrl">
-    <c:url value="/public/${asqatasunVersion}/js/ie/score/score-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-ie-min.js"/>
 </c:set>
 <c:set var="accessibleTableSorterJsUrl" scope="page">
-    <c:url value="/public/${asqatasunVersion}/js/table-sorter/accessible-table-sorter-min.js"/>
+    <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js"/>
 </c:set>
 
 <!-- images --> 
 <c:set var="gearImgUrl">
-    <c:url value="/public/${asqatasunVersion}/images/gear.png"/>
+    <c:url value="/public/images/gear.png"/>
 </c:set>
 <c:set var="historicSampleImgUrl">
-    <c:url value="/public/${asqatasunVersion}/images/${imgName}"/>
+    <c:url value="/public/images/${imgName}"/>
 </c:set>
 <c:set var="goToImgUrl">
-    <c:url value="/public/${asqatasunVersion}/images/window-duplicate.png"/>
+    <c:url value="/public/images/window-duplicate.png"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">
@@ -101,14 +101,14 @@
                                     <c:choose>
                                         <c:when test="${contractAction.actionEnabled == 'false' || isContractExpired == 'true'}">
                                             <c:set var="contractActionImgUrl">
-                                                <c:url value="/public/${asqatasunVersion}/${contractAction.disabledActionImageUrl}"/>
+                                                <c:url value="/public/${contractAction.disabledActionImageUrl}"/>
                                             </c:set>
                                             <img src="${contractActionImgUrl}" alt="" />
                                             <span class="action-label"><fmt:message key="${contractAction.actionI81NCode}"/> <br/><span class="desactivated"><fmt:message key="contract.disabled"/></span></span>
                                             </c:when>
                                             <c:otherwise>
                                                 <c:set var="contractActionImgUrl">
-                                                    <c:url value="/public/${asqatasunVersion}/${contractAction.enabledActionImageUrl}"/>
+                                                    <c:url value="/public/${contractAction.enabledActionImageUrl}"/>
                                                 </c:set>
                                             <a href="<c:url value="${contractAction.actionUrl}?cr=${contractIdValue}"/>">
                                                 <img src="${contractActionImgUrl}" alt="" />

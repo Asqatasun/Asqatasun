@@ -1,6 +1,6 @@
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2019  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
@@ -22,6 +22,7 @@
 package org.asqatasun.webapp.controller;
 
 import java.util.*;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.asqatasun.entity.reference.Reference;
 import org.asqatasun.entity.reference.Test;
@@ -32,10 +33,10 @@ import org.asqatasun.webapp.command.CreateUserCommand;
 import org.asqatasun.webapp.command.factory.ChangeTestWeightCommandFactory;
 import org.asqatasun.webapp.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
-import org.asqatasun.webapp.presentation.menu.SecondaryLevelMenuDisplayer;
+import org.asqatasun.webapp.ui.form.menu.SecondaryLevelMenuDisplayer;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.asqatasun.webapp.validator.ChangeTestWeightFormValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,54 +54,43 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class AccountSettingsController extends AbstractUserAndContractsController {
 
-    List<String> forbiddenUserList = new ArrayList();
-    public void setForbiddenUserList(List<String> forbiddenUserList) {
-        this.forbiddenUserList = forbiddenUserList;
-    }
-    
-    private TestDataService testDataService;
-    @Autowired
-    public void setTestDataService(TestDataService testDataService) {
+    @Value("${app.webapp.ui.config.forbiddenUserListForSettings}")
+    private List<String> forbiddenUserList;
+    private Map<String, Reference> refMap;
+    private final TestDataService testDataService;
+    private final ReferenceDataService referenceDataService;
+    private final LocaleResolver localeResolver;
+    private final ChangeTestWeightFormValidator changeTestWeightFormValidator;
+    private final SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
+    final
+    ChangeTestWeightCommandFactory changeTestWeightCommandFactory;
+
+    /**
+     * Constructor
+     */
+    public AccountSettingsController(TestDataService testDataService,
+                                     ReferenceDataService referenceDataService,
+                                     LocaleResolver localeResolver,
+                                     ChangeTestWeightFormValidator changeTestWeightFormValidator,
+                                     SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer,
+                                     ChangeTestWeightCommandFactory changeTestWeightCommandFactory) {
+        super();
         this.testDataService = testDataService;
+        this.referenceDataService = referenceDataService;
+        this.localeResolver = localeResolver;
+        this.changeTestWeightFormValidator = changeTestWeightFormValidator;
+        this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
+        this.changeTestWeightCommandFactory = changeTestWeightCommandFactory;
     }
-    
-    private final Map<String, Reference> refMap = new HashMap();
-    @Autowired
-    public void setReferenceDataService(ReferenceDataService referenceDataService) {
+
+    @PostConstruct
+    private void init() {
+        refMap = new HashMap <>();
         for (Reference ref : referenceDataService.findAll()) {
             refMap.put(ref.getCode(), ref);
         }
     }
 
-    private LocaleResolver localeResolver;
-    public LocaleResolver getLocaleResolver() {
-        return localeResolver;
-    }
-    
-    @Autowired
-    public final void setLocaleResolver(LocaleResolver localeResolver) {
-        this.localeResolver = localeResolver;
-    }
-    
-    private ChangeTestWeightFormValidator changeTestWeightFormValidator;
-
-    public final void setChangeTestWeightFormValidator(ChangeTestWeightFormValidator changeTestWeightFormValidator) {
-        this.changeTestWeightFormValidator = changeTestWeightFormValidator;
-    }
-    
-    private SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
-    @Autowired
-    public void setSecondaryLevelMenuDisplayer(SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer) {
-        this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
-    }
-    
-    /**
-     * Constructor
-     */
-    public AccountSettingsController() {
-        super();
-    }
-    
     /**
      * This method displays the form for an authenticated user
      * 
@@ -188,9 +178,9 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
         List<Test> testList = addTestListAndModifiableRefToModel(referential, model);
 
         model.addAttribute(TgolKeyStore.CHANGE_TEST_WEIGHT_COMMAND_KEY, 
-                ChangeTestWeightCommandFactory.getInstance().getChangeTestWeightCommand(
+                changeTestWeightCommandFactory.getChangeTestWeightCommand(
                     getCurrentUser(), 
-                    getLocaleResolver().resolveLocale(request),
+                    localeResolver.resolveLocale(request),
                     testList, 
                     refCode));
         return TgolKeyStore.TEST_WEIGHT_VIEW_NAME;
@@ -202,7 +192,6 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
      * @param changeTestWeightCommand
      * @param result
      * @param model
-     * @param request
      * @return
      * @throws Exception 
      */
@@ -212,9 +201,7 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
             @RequestParam(TgolKeyStore.REFERENTIAL_CD_KEY) String refCode,
             @ModelAttribute(TgolKeyStore.CHANGE_TEST_WEIGHT_COMMAND_KEY) ChangeTestWeightCommand changeTestWeightCommand,
             BindingResult result,
-            Model model,
-            HttpServletRequest request)
-            throws Exception {
+            Model model)  {
 
         Reference referential = refMap.get(refCode);
         if (referential == null || 
@@ -230,7 +217,7 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
         model.addAttribute(TgolKeyStore.CHANGE_TEST_WEIGHT_COMMAND_KEY, changeTestWeightCommand);
 
         if (!result.hasErrors()) {
-            ChangeTestWeightCommandFactory.getInstance().updateUserTestWeight(
+            changeTestWeightCommandFactory.updateUserTestWeight(
                 getCurrentUser(),
                 changeTestWeightCommand);
             model.addAttribute(TgolKeyStore.TEST_WEIGHT_SUCCESSFULLY_UPDATED_KEY, true);
@@ -260,17 +247,12 @@ public class AccountSettingsController extends AbstractUserAndContractsControlle
     /**
      * This method sorts the test list elements regarding their code
      * 
-     * @param processResultList
+     * @param testList
      */
     private void sortTestListByCode(List<Test> testList) {
-        Collections.sort(testList, new Comparator<Test>() {
-            @Override
-            public int compare(Test t1, Test t2) {
-                return String.CASE_INSENSITIVE_ORDER.compare(
-                        t1.getCode(),
-                        t2.getCode());
-            }
-        });
+        testList.sort((t1, t2) -> String.CASE_INSENSITIVE_ORDER.compare(
+            t1.getCode(),
+            t2.getCode()));
     }
     
 }

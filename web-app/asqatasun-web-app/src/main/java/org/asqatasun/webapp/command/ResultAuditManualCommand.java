@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.asqatasun.entity.reference.Theme;
-import org.asqatasun.webapp.presentation.data.TestResult;
+import org.asqatasun.webapp.dto.TestResult;
 
 /**
  * 

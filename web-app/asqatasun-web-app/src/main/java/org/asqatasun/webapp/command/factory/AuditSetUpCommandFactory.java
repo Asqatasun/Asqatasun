@@ -23,7 +23,6 @@ package org.asqatasun.webapp.command.factory;
 
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
@@ -35,20 +34,24 @@ import org.asqatasun.webapp.entity.scenario.Scenario;
 import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
 import org.asqatasun.webapp.entity.user.User;
-import org.asqatasun.webapp.form.NumericalFormField;
-import org.asqatasun.webapp.form.SelectFormField;
-import org.asqatasun.webapp.form.parameterization.AuditSetUpFormField;
-import org.asqatasun.webapp.form.parameterization.helper.AuditSetUpFormFieldHelper;
+import org.asqatasun.webapp.ui.form.NumericalFormField;
+import org.asqatasun.webapp.ui.form.SelectFormField;
+import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
+import org.asqatasun.webapp.ui.form.parameterization.helper.AuditSetUpFormFieldHelper;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
  *
  * @author jkowalczyk
  */
+@Component
 public final class AuditSetUpCommandFactory {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditSetUpCommandFactory.class);
     /**
      *
      * @return the Level Parameter Element
@@ -56,83 +59,25 @@ public final class AuditSetUpCommandFactory {
     public ParameterElement getLevelParameterElement() {
         return parameterElementDataService.getParameterElement(TgolKeyStore.LEVEL_PARAM_KEY);
     }
-    /**
-     *
-     */
-    private ParameterDataServiceDecorator parameterDataService;
-
-    public ParameterDataServiceDecorator getParameterDataService() {
-        return parameterDataService;
-    }
-
-    @Autowired
-    public void setParameterDataService(ParameterDataServiceDecorator parameterDataService) {
-        this.parameterDataService = parameterDataService;
-    }
-    /**
-     *
-     */
-    private ParameterElementDataService parameterElementDataService;
-
-    public ParameterElementDataService getParameterElementDataService() {
-        return parameterElementDataService;
-    }
-
-    @Autowired
-    public void setParameterElementDataService(ParameterElementDataService parameterElementDataService) {
-        this.parameterElementDataService = parameterElementDataService;
-    }
-    /**
-     *
-     */
-    private ContractDataService contractDataService;
-
-    public ContractDataService getContractDataService() {
-        return contractDataService;
-    }
-
-    @Autowired
-    public void setContractDataService(ContractDataService contractDataService) {
-        this.contractDataService = contractDataService;
-    }
-    /**
-     *
-     */
-    private ScenarioDataService scenarioDataService;
-
-    public ScenarioDataService getScenarioDataService() {
-        return scenarioDataService;
-    }
-
-    @Autowired
-    public void setScenarioDataService(ScenarioDataService scenarioDataService) {
-        this.scenarioDataService = scenarioDataService;
-    }
-
-    /**
-     * The holder that handles the unique instance of AuditSetUpCommandFactory
-     */
-    private static class AuditSetUpCommandFactoryHolder {
-
-        private static final AuditSetUpCommandFactory INSTANCE =
-                new AuditSetUpCommandFactory();
-    }
+    private final ParameterDataServiceDecorator parameterDataService;
+    private final ParameterElementDataService parameterElementDataService;
+    private final ContractDataService contractDataService;
+    private final ScenarioDataService scenarioDataService;
+    AuditSetUpFormFieldHelper auditSetUpFormFieldHelper;
 
     /**
      * Private constructor
      */
-    private AuditSetUpCommandFactory() {
-    }
-
-    /**
-     * Singleton pattern based on the "Initialization-on-demand holder idiom".
-     * See
-     *
-     * @http://en.wikipedia.org/wiki/Initialization_on_demand_holder_idiom
-     * @return the unique instance of AuditSetUpCommandFactory
-     */
-    public static AuditSetUpCommandFactory getInstance() {
-        return AuditSetUpCommandFactoryHolder.INSTANCE;
+    private AuditSetUpCommandFactory(ParameterDataServiceDecorator parameterDataService,
+                                     ParameterElementDataService parameterElementDataService,
+                                     ContractDataService contractDataService,
+                                     ScenarioDataService scenarioDataService,
+                                     AuditSetUpFormFieldHelper auditSetUpFormFieldHelper) {
+        this.parameterDataService = parameterDataService;
+        this.parameterElementDataService = parameterElementDataService;
+        this.contractDataService = contractDataService;
+        this.scenarioDataService = scenarioDataService;
+        this.auditSetUpFormFieldHelper = auditSetUpFormFieldHelper;
     }
 
     /**
@@ -265,9 +210,11 @@ public final class AuditSetUpCommandFactory {
      * object contains a map that associates a Parameter and a value (handled by
      * the AuditSetUpFormField). Each value is preset regarding the
      *
+     * @param auditSetUpCommand
      * @param contract
-     * @param auditSetUpFormFieldList
-     * @param auditSite
+     * @param levelFormFieldList
+     * @param optionalFormFieldMap
+     * @param scope
      * @return
      */
     private synchronized void setUpAuditSetUpCommand(
@@ -307,7 +254,7 @@ public final class AuditSetUpCommandFactory {
                         defaultValue,
                         ap,
                         auditSetUpCommand);
-                Logger.getLogger(this.getClass()).debug("paramValue  " + paramValue);
+                LOGGER.debug("paramValue  " + paramValue);
                 // The auditSetUpCommand instance handles a map to bind each field
                 // This map has to be set-up with the value of the Parameter and 
                 // each parameter is identified throug the key with the 
@@ -319,7 +266,7 @@ public final class AuditSetUpCommandFactory {
                 // if from the set of options, one is different from the default
                 // a flag is set. 
                 isDefaultSet = isDefaultSet && StringUtils.equals(defaultValue, paramValue);
-                Logger.getLogger(this.getClass()).debug("isDefaultSet  " + isDefaultSet);
+                LOGGER.debug("isDefaultSet  " + isDefaultSet);
             }
         }
         auditSetUpCommand.setDefaultParamSet(isDefaultSet);
@@ -339,9 +286,6 @@ public final class AuditSetUpCommandFactory {
      * This methods prepares the String table passed to the jsp that handles the
      * URL filled-in by the user. Depending the status of the user
      * (authenticated or guest), the table is pre-populated.
-     *
-     * @param contractId
-     * @return
      */
     private List<String> getGroupOfPagesUrl(Contract contract, boolean isSiteAudit) {
         User user = contract.getUser();
@@ -357,7 +301,7 @@ public final class AuditSetUpCommandFactory {
             nbOfPages = 1;
         }
         for (int i = 0; i < nbOfPages; i++) {
-            groupOfPagesUrl.add(new String());
+            groupOfPagesUrl.add("");
         }
         // When the form is displayed for an authenticated user, it is
         // pre-populated with the Url recorded with the contract.
@@ -381,21 +325,21 @@ public final class AuditSetUpCommandFactory {
 
         // We retrieve the default value of the Parameter associated 
         // with the level ParameterElement
-        String defaultValue = getParameterDataService().getDefaultLevelParameter().getValue();
+        String defaultValue = parameterDataService.getDefaultLevelParameter().getValue();
         
-        Logger.getLogger(this.getClass()).debug("default level value " + defaultValue);
+        LOGGER.debug("default level value " + defaultValue);
         ScopeEnum scope = auditSetUpCommand.getScope();
         boolean isDefaultValue = true;
         if (scope == ScopeEnum.DOMAIN || scope == ScopeEnum.SCENARIO) {
             String lastUserValue = retrieveParameterValueFromLastAudit(contract, getLevelParameterElement(), auditSetUpCommand);
-            Logger.getLogger(this.getClass()).debug("lastUserValue " + lastUserValue);
+            LOGGER.debug("lastUserValue " + lastUserValue);
             if (lastUserValue != null && !StringUtils.equals(lastUserValue, defaultValue)) {
                 // we override the auditParameter with the last user value
                 defaultValue = lastUserValue;
                 // If the level is overidden from the parameters of the last audit, 
                 // we need to update the UI elements regarding this value (set this 
                 // element as default)
-                AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
+                auditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
                 isDefaultValue = false;
             }
         }
@@ -442,9 +386,9 @@ public final class AuditSetUpCommandFactory {
      */
     private String getDefaultParameterValue(AuditSetUpFormField ap) {
 
-        String defaultValue = getParameterDataService().
+        String defaultValue = parameterDataService.
                 getDefaultParameter(ap.getParameterElement()).getValue();
-        Logger.getLogger(this.getClass()).debug(
+        LOGGER.debug(
                 "defaultValue  " + defaultValue + "for param " + ap.getParameterElement().getParameterElementCode());
         // override default value in case of NumericalFormField if the
         // its default max value is inferior to the default value of the parameter. 
@@ -463,7 +407,7 @@ public final class AuditSetUpCommandFactory {
      *
      * @param contract
      * @param parameterElement
-     * @param scope
+     * @param auditSetUpCommand
      * @return
      */
     private String retrieveParameterValueFromLastAudit(

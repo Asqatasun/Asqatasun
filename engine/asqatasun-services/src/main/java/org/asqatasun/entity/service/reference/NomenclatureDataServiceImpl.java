@@ -29,6 +29,8 @@ import org.asqatasun.entity.reference.NomenclatureElement;
 import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * 
  * @author jkowalczyk
@@ -55,6 +57,7 @@ public class NomenclatureDataServiceImpl extends AbstractGenericDataService<Nome
     }
 
     @Override
+    @Transactional
     public Nomenclature read(Long key) {
         Nomenclature entity = super.read(key);
         for (NomenclatureElement element : entity.getElementList()) {

@@ -43,6 +43,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * 
  * @author jkowalczyk
@@ -102,6 +104,7 @@ public class ProcessResultDataServiceImpl extends AbstractGenericDataService<Pro
     }
     
     @Override
+    @Transactional
     public void cleanUpIndefiniteResultFromAudit(Audit audit) {
         ((ProcessResultDAO) entityDao).deleteIndefiniteResultFromAudit(audit);
     }

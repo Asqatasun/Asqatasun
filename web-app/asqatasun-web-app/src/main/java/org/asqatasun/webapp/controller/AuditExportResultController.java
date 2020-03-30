@@ -1,6 +1,6 @@
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2019  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
@@ -23,22 +23,23 @@ package org.asqatasun.webapp.controller;
 
 import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
-import org.apache.log4j.Logger;
 import org.asqatasun.entity.reference.Scope;
+import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.webapp.dto.AuditStatistics;
+import org.asqatasun.webapp.dto.TestResult;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
-import org.asqatasun.webapp.presentation.data.AuditStatistics;
-import org.asqatasun.webapp.presentation.data.TestResult;
-import org.asqatasun.webapp.presentation.factory.TestResultFactory;
+import org.asqatasun.webapp.dto.factory.TestResultFactory;
 import org.asqatasun.webapp.report.service.ExportService;
 import org.asqatasun.webapp.report.service.exception.NotSupportedExportFormatException;
 import org.asqatasun.webapp.util.TgolKeyStore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
 
 /** 
@@ -55,19 +57,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuditExportResultController extends AbstractAuditDataHandlerController {
 
-    private static final Logger LOGGER = Logger.getLogger(AuditExportResultController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditExportResultController.class);
 
-    private ExportService exportService;
-    public ExportService getExportService() {
-        return exportService;
-    }
+    private final ExportService exportService;
+    private final TestResultFactory testResultFactory;
+    private final LocaleResolver localeResolver;
+    private final WebResourceDataService webResourceDataService;
+
     @Autowired
-    public void setExportService(ExportService exportService) {
+    public AuditExportResultController(LocaleResolver localeResolver,
+                                       WebResourceDataService webResourceDataService,
+                                       ExportService exportService,
+                                       TestResultFactory testResultFactory) {
+        super();
+        this.localeResolver = localeResolver;
+        this.webResourceDataService = webResourceDataService;
         this.exportService = exportService;
+        this.testResultFactory = testResultFactory;
     }
 
-    public AuditExportResultController() {
-        super();
+    @Override
+    public Map<String,String> getParametersToDisplay() {
+        return Collections.singletonMap("LEVEL", "level");
     }
 
     /**
@@ -101,7 +112,7 @@ public class AuditExportResultController extends AbstractAuditDataHandlerControl
             throw new ForbiddenPageException();
         }
 
-        WebResource webResource = getWebResourceDataService().ligthRead(webResourceIdValue);
+        WebResource webResource = webResourceDataService.ligthRead(webResourceIdValue);
         // if the id of the webresource corresponds to a Site webResource
         if (isUserAllowedToDisplayResult(getAuditFromWebResource(webResource))) {
             // If the Id given in argument correspond to a webResource,
@@ -110,7 +121,7 @@ public class AuditExportResultController extends AbstractAuditDataHandlerControl
                 prepareSuccessfullAuditDataToExport(
                         webResource,
                         model,
-                        getLocaleResolver().resolveLocale(request),
+                        localeResolver.resolveLocale(request),
                         format,
                         request,
                         response);
@@ -118,7 +129,7 @@ public class AuditExportResultController extends AbstractAuditDataHandlerControl
             } catch (NotSupportedExportFormatException exc) {
                 model.addAttribute(TgolKeyStore.WEBRESOURCE_ID_KEY, webresourceId);
                 model.addAttribute(TgolKeyStore.EXPORT_FORMAT_KEY, format);
-                LOGGER.warn(exc);
+                LOGGER.warn(exc.getMessage());
                 return TgolKeyStore.EXPORT_AUDIT_FORMAT_ERROR_VIEW_REDIRECT_NAME;
             }
         }
@@ -127,7 +138,7 @@ public class AuditExportResultController extends AbstractAuditDataHandlerControl
 
     /**
      * 
-     * @param page
+     * @param webResource
      * @param model
      * @param locale
      * @param exportFormat
@@ -145,19 +156,19 @@ public class AuditExportResultController extends AbstractAuditDataHandlerControl
             HttpServletResponse response) throws NotSupportedExportFormatException {
 
         model.addAttribute(TgolKeyStore.LOCALE_KEY,locale);
-        Scope scope = getSiteScope();
+        Scope scope = siteScope;
         if (webResource instanceof Page) {
-            scope = getPageScope();
+            scope = pageScope;
         }
-        List<TestResult> testResultList = TestResultFactory.getInstance().getTestResultList(
+        List<TestResult> testResultList = testResultFactory.getTestResultList(
                     webResource,
                     scope,
-                    getLocaleResolver().resolveLocale(request));
+                    localeResolver.resolveLocale(request));
         
         AuditStatistics auditStatistics = getAuditStatistics(
-                    webResource, 
-                    model, 
-                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE, false);//TODO a revoir dans le cas manuel 
+                    webResource,
+                    TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE,
+            false);//TODO a revoir dans le cas manuel
         model.addAttribute(TgolKeyStore.STATISTICS_KEY, auditStatistics);
 
         try {
@@ -169,7 +180,7 @@ public class AuditExportResultController extends AbstractAuditDataHandlerControl
                     locale,
                     exportFormat);
         } catch (ColumnBuilderException | ClassNotFoundException | JRException ex) {
-            LOGGER.error(ex);
+            LOGGER.error(ex.getMessage());
         }
     }
 

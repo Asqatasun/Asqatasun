@@ -28,12 +28,14 @@ import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 /**
  *
  * @author jkowalczyk
  */
+@Component("pageAuditSetUpFormValidator")
 public class PageAuditSetUpFormValidator extends AuditSetUpFormValidator {
 
     private static final String URL_ON_DIFFERENT_DOMAIN_MSG_BUNDLE_KEY =

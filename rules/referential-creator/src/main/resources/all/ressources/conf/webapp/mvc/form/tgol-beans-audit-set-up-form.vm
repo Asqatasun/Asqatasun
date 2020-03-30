@@ -10,7 +10,7 @@
 
 
     <!-- ${referential} select elements -->
-    <bean id="${referential.toLowerCase()}BronzeSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="${referential.toLowerCase()}BronzeSelectElementBuilder" class="SelectElementBuilderImpl">
         <property name="value" value="${referential};LEVEL_1"/>
         <property name="i18nKey" value="${referential}-LEVEL_1"/>
         <property name="errorI18nKey" value="Bz-error"/>
@@ -20,7 +20,7 @@
         <property name="enabled" value="false"/>-->
     </bean>
 
-    <bean id="${referential.toLowerCase()}SilverSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="${referential.toLowerCase()}SilverSelectElementBuilder" class="SelectElementBuilderImpl">
         <property name="value" value="${referential};LEVEL_2"/>
         <property name="i18nKey" value="${referential}-LEVEL_2"/>
         <property name="errorI18nKey" value="Ar-error"/>
@@ -30,7 +30,7 @@
         <property name="enabled" value="false"/>
     </bean>
 
-    <bean id="${referential.toLowerCase()}GoldSelectElementBuilder" class="org.asqatasun.webapp.form.builder.SelectElementBuilderImpl">
+    <bean id="${referential.toLowerCase()}GoldSelectElementBuilder" class="SelectElementBuilderImpl">
         <property name="value" value="${referential};LEVEL_3"/>
         <property name="i18nKey" value="${referential}-LEVEL_3"/>
         <property name="errorI18nKey" value="Or-error"/>

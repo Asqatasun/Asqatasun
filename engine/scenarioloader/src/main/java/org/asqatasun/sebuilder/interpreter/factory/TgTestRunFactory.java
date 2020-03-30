@@ -31,6 +31,7 @@ import org.asqatasun.sebuilder.interpreter.NewPageListener;
 import org.asqatasun.sebuilder.interpreter.TgTestRun;
 import org.asqatasun.sebuilder.interpreter.webdriverfactory.FirefoxDriverFactory;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,7 +48,6 @@ public class TgTestRunFactory extends TestRunFactory {
      * The firefox profile used when the browser is loaded
      */
     WebDriverFactory webDriverFactory = new FirefoxDriverFactory();
-//    WebDriverFactory webDriverFactory = new PhantomJsFactory();
 
     /**
      * The firefox profile used when the browser is loaded
@@ -71,9 +71,6 @@ public class TgTestRunFactory extends TestRunFactory {
      * the map that handles js scripts executed when page is loaded
      */
     private Map<String, String> jsScriptMap;
-    public Map<String, String> getJsScriptMap() {
-        return jsScriptMap;
-    }
     public void setJsScriptMap(Map<String, String> jsScriptMap) {
         this.jsScriptMap = jsScriptMap;
     }
@@ -89,54 +86,27 @@ public class TgTestRunFactory extends TestRunFactory {
         this.newPageListeners.add(newPageListener);
     }
 
-    public void addNewPageListeners(Collection<NewPageListener> newPageListeners) {
-        if (this.newPageListeners == null) {
-            this.newPageListeners = new ArrayList<>();
-        }
-        this.newPageListeners.addAll(newPageListeners);
-    }
-
     public void removeNewPageListener(NewPageListener newPageListener) {
         if (newPageListeners != null) {
             this.newPageListeners.remove(newPageListener);
         }
     }
-
-    public void removeNewPageListeners(Collection<NewPageListener> newPageListeners) {
-        if (newPageListeners != null) {
-            this.newPageListeners.removeAll(newPageListeners);
-        }
-    }
-
-//    private FirefoxDriverObjectPool fdop;
-//    public void setFirefoxDriverObjectPool(FirefoxDriverObjectPool fdop) {
-//        this.fdop = fdop;
-//    }
     
     @Override
     public TestRun createTestRun(Script script) {
         initialiseWebDriverFactory();
-        TgTestRun testRun = new TgTestRun(
-                script, 
-                webDriverFactory, 
-                new HashMap<String, String>(), 
-                getImplicitlyWaitDriverTimeout(), 
-                getPageLoadDriverTimeout());
+        TgTestRun testRun = new TgTestRun(script, webDriverFactory, new HashMap<>(),getImplicitlyWaitDriverTimeout(),
+            getPageLoadDriverTimeout());
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);
         return testRun;
     }
     
     @Override
-    public TestRun createTestRun(Script script, Log log, WebDriverFactory webDriverFactory, HashMap<String, String> webDriverConfig) {
+    public TestRun createTestRun(Script script, Log log, WebDriverFactory webDriverFactory,
+                                 HashMap<String, String> webDriverConfig) {
         initialiseWebDriverFactory();
-        TgTestRun testRun = 
-                new TgTestRun(
-                    script, 
-                    log, 
-                    webDriverFactory, 
-                    webDriverConfig, 
-                    getImplicitlyWaitDriverTimeout(), 
+        TgTestRun testRun = new TgTestRun(script, log, webDriverFactory, webDriverConfig, getImplicitlyWaitDriverTimeout(),
                     getPageLoadDriverTimeout());
         testRun.addNewPageListeners(newPageListeners);
         testRun.setJsScriptMap(jsScriptMap);

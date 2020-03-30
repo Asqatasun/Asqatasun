@@ -34,6 +34,7 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.rules.domelement.DomElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 /**
  * Utility class that extracts the js Parser results (Pre process result with 
@@ -57,10 +58,9 @@ public final class DomElementExtractor {
      * @return a collection of instanciated DomElement
      * @throws NoResultException 
      */
-    public static Collection<DomElement> extractDomElements(SSPHandler sspHandler) throws NoResultException {
-        String ppr = sspHandler.getPreProcessResult(
-                COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY,
-                sspHandler.getPage());
+    public static Collection<DomElement> extractDomElements(SSPHandler sspHandler)
+        throws NoResultException, EmptyResultDataAccessException {
+        String ppr = sspHandler.getPreProcessResult(COLOR_EXTRACTOR_PRE_PROCESS_RESULT_KEY, sspHandler.getPage( ));
         Collection<DomElement> domElements = new ArrayList<>();
         
         JSONArray json;

@@ -21,7 +21,7 @@
  */
 package org.asqatasun.entity.dao.test;
 
-import org.asqatasun.entity.dao.config.PersistenceConfigTest;
+import org.asqatasun.persistence.config.PersistenceConfigTest;
 import org.dbunit.DataSourceBasedDBTestCase;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.dataset.IDataSet;
@@ -50,7 +50,9 @@ import java.io.FileInputStream;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-@TestExecutionListeners({ TransactionalTestExecutionListener.class, DependencyInjectionTestExecutionListener.class })
+@TestExecutionListeners({
+    TransactionalTestExecutionListener.class,
+    DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration(classes = {PersistenceConfigTest.class})
 public abstract class AbstractDaoTestCase extends DataSourceBasedDBTestCase {
 
@@ -59,9 +61,8 @@ public abstract class AbstractDaoTestCase extends DataSourceBasedDBTestCase {
      */
     protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractDaoTestCase.class);
 
-
-    private final String inputDataFilePath = "src/test/resources/dataSets/";
     public String getInputDataFilePath() {
+        String inputDataFilePath = "src/test/resources/dataSets/";
         return inputDataFilePath;
     }
 
@@ -104,7 +105,7 @@ public abstract class AbstractDaoTestCase extends DataSourceBasedDBTestCase {
     @Override
     protected void setUpDatabaseConfig(DatabaseConfig config) {
         super.setUpDatabaseConfig(config);
-        config.setProperty(DatabaseConfig.PROPERTY_BATCH_SIZE, new Integer(97));
+        config.setProperty(DatabaseConfig.PROPERTY_BATCH_SIZE, 97);
     }
 
     /**
