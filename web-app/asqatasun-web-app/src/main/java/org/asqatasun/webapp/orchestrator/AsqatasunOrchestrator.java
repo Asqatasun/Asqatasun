@@ -253,11 +253,10 @@ public class AsqatasunOrchestrator {
                     LOGGER.error("", ex);
                 }
                 if (auditTimeoutThread.isDurationExceedsDelay()) {
-                    LOGGER.debug("Audit Duration ExceedsDelay. The audit result "
-                            + "is now managed in an asynchronous way.");
-                    break;
+                    LOGGER.debug("Audit Duration ExceedsDelay. The audit result is now managed in an asynchronous way.");
+                    // null as a return is seen by the controller as an audit in progress
+                    return null;
                 }
-                LOGGER.info("submitedThread.isDone() " + submitedThread.isDone());
             }
             if (null != auditTimeoutThread.exception) {
                 LOGGER.error("new KrashAuditException()");
@@ -507,6 +506,8 @@ public class AsqatasunOrchestrator {
         public void run() {
             auditService.add(this);
             audit = launchAudit();
+            currentAct.setAudit(audit);
+            currentAct = actDataService.saveOrUpdate(currentAct);
             this.waitForAuditToComplete(audit);
             auditService.remove(this);
             onActTerminated(currentAct);
@@ -562,13 +563,13 @@ public class AsqatasunOrchestrator {
         
         protected void onActTerminated(Act act) {
             Date endDate = new Date();
-            act.setAudit(audit);
             act.setEndDate(endDate);
             if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
                 act.setStatus(ActStatus.COMPLETED);
             } else {
                 act.setStatus(ActStatus.ERROR);
             }
+            actDataService.saveOrUpdate(act);
             // saveOrUpdate is not necessary, the entity will be saved at the end of the session
             if (exception != null) {
                 sendKrashAuditEmail(act, locale, exception);
@@ -608,7 +609,6 @@ public class AsqatasunOrchestrator {
             if (exception == null) {
                 sendAuditResultEmail(act, locale);
             }
-            actDataService.saveOrUpdate(act);
             LOGGER.info("Audit site terminated on " + this.siteUrl);
         }
 
@@ -647,7 +647,6 @@ public class AsqatasunOrchestrator {
             if (exception == null) {
                 sendAuditResultEmail(act, locale);
             }
-            actDataService.saveOrUpdate(act);
             LOGGER.info("Audit scenario terminated on " + this.scenarioName);
         }
 

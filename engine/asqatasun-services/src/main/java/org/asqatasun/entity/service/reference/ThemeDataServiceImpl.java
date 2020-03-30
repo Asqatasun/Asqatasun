@@ -27,6 +27,8 @@ import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.service.AbstractGenericDataService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * 
  * @author jkowalczyk
@@ -45,6 +47,7 @@ public class ThemeDataServiceImpl extends AbstractGenericDataService<Theme, Long
     }
 
     @Override
+    @Transactional
     public Collection<Theme> findAll() {
         Collection<Theme> themeList = super.findAll() ;
         for (Theme theme : themeList) {

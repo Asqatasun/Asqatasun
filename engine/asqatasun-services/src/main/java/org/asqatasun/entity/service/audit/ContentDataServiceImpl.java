@@ -35,6 +35,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * 
  * @author jkowalczyk
@@ -121,11 +123,13 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
+    @Transactional
     public void saveContentRelationShip(SSP ssp, Set<Long> relatedContentIdSet) {
         ((ContentDAO) entityDao).saveContentRelationShip(ssp, relatedContentIdSet);
     }
 
     @Override
+    @Transactional
     public void saveAuditToContent(Long idContent, Long idAudit ) {
         ((ContentDAO) entityDao).saveAuditToContent(idContent, idAudit);
     }
@@ -170,16 +174,19 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
 
     @Override
+    @Transactional
     public void deleteContentRelationShip(Long relatedContentId) {
         ((ContentDAO) entityDao).deleteContentRelationShip(relatedContentId);
     }
     
     @Override
+    @Transactional
     public void deleteRelatedContentFromContent(Content content) {
         ((ContentDAO) entityDao).deleteRelatedContentFromContent(content);
     }
 
     @Override
+    @Transactional
     public Collection<Content> getSSPFromWebResource(
             Long webResourceId, 
             Long startValue, 
@@ -189,6 +196,7 @@ public class ContentDataServiceImpl extends AbstractGenericDataService<Content, 
     }
     
     @Override
+    @Transactional
     public Collection<Content> getSSPWithRelatedContentFromWebResource(
             Long webResourceId, 
             Long startValue, 

@@ -209,7 +209,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
         }
 
         if (audit.getStatus() != AuditStatus.COMPLETED) {
-            return prepareFailedAuditData(audit, model);
+            return prepareFailedAuditData(audit.getId(), model);
         }
         if (audit.getSubject() instanceof Site) {
             // in case of group of page, we display the list of audited pages

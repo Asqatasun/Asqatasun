@@ -37,6 +37,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 /**
  * 
  * @author jkowalczyk
@@ -94,6 +96,7 @@ public class TestDataServiceImpl extends AbstractGenericDataService<Test, Long>
      * @return
      */
     @Override
+    @Transactional
     public List<Test> getTestListFromParamSet(Set<Parameter> paramSet) {
         Reference reference = null;
         Level level = null;

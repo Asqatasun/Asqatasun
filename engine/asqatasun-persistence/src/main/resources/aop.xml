@@ -12,25 +12,26 @@
         as beans in this context (such as the UsageLogAspect below).
         -->
     <!-- aop:aspectj-autoproxy/ -->
-    <aop:config>
-        <aop:pointcut id="transactionalMethods" expression="bean(*DAO) || bean(*Service)"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="transactionalMethods"/>
-    </aop:config>
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="transactionalMethods" expression="bean(*DAO) || bean(*Service) || bean (*Orchestrator)"/>-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="transactionalMethods"/>-->
+<!--    </aop:config>-->
 
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-	        <tx:method name="create*" propagation="REQUIRED"/>
-            <tx:method name="retrieve*" propagation="REQUIRED"/>
-            <tx:method name="find*" propagation="REQUIRED"/>
-            <tx:method name="get*" propagation="REQUIRED"/>
-            <tx:method name="has*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="test*" propagation="REQUIRED"/>
-            <tx:method name="read*" propagation="REQUIRED"/>
-            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>
-        </tx:attributes>
-    </tx:advice>
+<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+<!--        <tx:attributes>-->
+<!--            <tx:method name="create*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="retrieve*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="find*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="get*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="has*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="update*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="delete*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="save*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="test*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="read*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="check*" propagation="REQUIRED"/>-->
+<!--            <tx:method name="*" propagation="SUPPORTS" read-only="true"/>-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
 
 </beans>

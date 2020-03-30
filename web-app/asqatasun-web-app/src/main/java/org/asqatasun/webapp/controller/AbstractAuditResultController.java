@@ -328,7 +328,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                         AuditStatus.MANUAL_ANALYSE_IN_PROGRESS)
                 && !audit.getStatus().equals(AuditStatus.MANUAL_COMPLETED)
                 && !audit.getStatus().equals(AuditStatus.MANUAL_INITIALIZING)) {
-            return prepareFailedAuditData(audit, model);
+            return prepareFailedAuditData(audit.getId(), model);
         }
 
         model.addAttribute(TgolKeyStore.STATUS_KEY, computeAuditStatus(audit));

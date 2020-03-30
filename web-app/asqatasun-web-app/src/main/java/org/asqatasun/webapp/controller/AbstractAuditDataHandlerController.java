@@ -57,6 +57,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.asqatasun.webapp.util.TgolKeyStore.*;
+
 /**
  * This abstract controller handles methods to retrieve and format audit data
  * @author jkowalczyk
@@ -144,7 +146,7 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
      */
     protected void addAuditStatisticsToModel(WebResource webResource, Model model, String displayScope) {
         model.addAttribute(
-                TgolKeyStore.STATISTICS_KEY,
+                STATISTICS_KEY,
                 getAuditStatistics(webResource, displayScope, false)); // default is false for manual audit
     }
 
@@ -224,32 +226,33 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
      */
     protected String computeAuditStatus(Audit audit) {
         if (audit.getStatus().equals(AuditStatus.COMPLETED)) {
-            return TgolKeyStore.COMPLETED_KEY;
+            return COMPLETED_KEY;
         } else if (!contentDataService.hasContent(audit)) {
-            return TgolKeyStore.ERROR_LOADING_KEY;
+            return ERROR_LOADING_KEY;
         } else if (!contentDataService.hasAdaptedSSP(audit)) {
-            return TgolKeyStore.ERROR_ADAPTING_KEY;
+            return ERROR_ADAPTING_KEY;
         } else {
-            return TgolKeyStore.ERROR_UNKNOWN_KEY;
+            return ERROR_UNKNOWN_KEY;
         }
     }
 
     /**
      * This method determines which page to display when an error occured
      * while processing
-     * @param audit
+     * @param auditId
      * @param model
      * @return
      */
-    protected String prepareFailedAuditData(Audit audit, Model model) {
-        String returnViewName = TgolKeyStore.OUPS_VIEW_NAME;
-        model.addAttribute(TgolKeyStore.AUDIT_URL_KEY, audit.getSubject().getURL());
-        model.addAttribute(TgolKeyStore.AUDIT_DATE_KEY, audit.getDateOfCreation());
+    protected String prepareFailedAuditData(long auditId, Model model) {
+        String returnViewName = OUPS_VIEW_NAME;
+        Audit audit = auditDataService.read(auditId);
+        model.addAttribute(AUDIT_URL_KEY, audit.getSubject().getURL());
+        model.addAttribute(AUDIT_DATE_KEY, audit.getDateOfCreation());
         String status = this.computeAuditStatus(audit);
-        if (status.equalsIgnoreCase(TgolKeyStore.ERROR_LOADING_KEY)) {
-            returnViewName = TgolKeyStore.LOADING_ERROR_VIEW_NAME;
-        } else if (status.equalsIgnoreCase(TgolKeyStore.ERROR_ADAPTING_KEY)) {
-            returnViewName = TgolKeyStore.ADAPTING_ERROR_VIEW_NAME;
+        if (status.equalsIgnoreCase(ERROR_LOADING_KEY)) {
+            returnViewName = LOADING_ERROR_VIEW_NAME;
+        } else if (status.equalsIgnoreCase(ERROR_ADAPTING_KEY)) {
+            returnViewName = ADAPTING_ERROR_VIEW_NAME;
         }
         return returnViewName;
     }
@@ -290,14 +293,14 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
                 authorizedSortCriterion,
                 audit.getId());
 
-        model.addAttribute(TgolKeyStore.PAGE_LIST_KEY, paginatedList);
-        model.addAttribute(TgolKeyStore.AUTHORIZED_PAGE_SIZE_KEY, authorizedPageSize);
-        model.addAttribute(TgolKeyStore.AUTHORIZED_SORT_CRITERION_KEY, authorizedSortCriterion);
+        model.addAttribute(PAGE_LIST_KEY, paginatedList);
+        model.addAttribute(AUTHORIZED_PAGE_SIZE_KEY, authorizedPageSize);
+        model.addAttribute(AUTHORIZED_SORT_CRITERION_KEY, authorizedSortCriterion);
         setFromToValues(paginatedList, model);
         
         // don't forge to add audit statistics to model
-//        addAuditStatisticsToModel(audit, model, TgolKeyStore.TEST_DISPLAY_SCOPE_VALUE);
-        return (returnRedirectView) ? TgolKeyStore.PAGE_LIST_XXX_VIEW_REDIRECT_NAME : TgolKeyStore.PAGE_LIST_XXX_VIEW_NAME;
+//        addAuditStatisticsToModel(audit, model, TEST_DISPLAY_SCOPE_VALUE);
+        return (returnRedirectView) ? PAGE_LIST_XXX_VIEW_REDIRECT_NAME : PAGE_LIST_XXX_VIEW_NAME;
     }
 
     /**

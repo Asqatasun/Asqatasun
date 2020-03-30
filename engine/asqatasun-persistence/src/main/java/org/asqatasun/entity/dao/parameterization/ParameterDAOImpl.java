@@ -25,6 +25,8 @@ import java.util.*;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditImpl;
 import org.asqatasun.entity.parameterization.Parameter;
@@ -133,6 +135,7 @@ public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
     }
     
     @Override
+    @Transactional
     public Parameter findParameter(Audit audit, String parameterElementCode) {
         for (Parameter param : findParameterSetFromAudit(audit)) {
             if (param.getParameterElement().getParameterElementCode().equals(parameterElementCode)) {

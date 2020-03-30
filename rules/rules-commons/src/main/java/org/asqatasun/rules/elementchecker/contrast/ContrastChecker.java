@@ -45,6 +45,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 import org.asqatasun.rules.elementchecker.contrast.helper.ContrastHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import static org.asqatasun.service.ProcessRemarkService.DEFAULT_EVIDENCE;
 
@@ -124,7 +125,7 @@ public class ContrastChecker extends ElementCheckerImpl {
             if (CollectionUtils.isEmpty(domElements)) {
                 return;
             }
-        } catch (NoResultException nre) {
+        } catch (NoResultException | EmptyResultDataAccessException nre) {
             // if the getPreProcessResult returns a noResultException, that 
             // means a problem occured when executing js. Nothing cannot be done.
             // the testResult is NOT_TESTED
