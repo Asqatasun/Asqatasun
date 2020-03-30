@@ -22,12 +22,11 @@
 package org.asqatasun.webapp.validator;
 
 
-import com.sebuilder.interpreter.IO;
-import com.sebuilder.interpreter.factory.ScriptFactory.SuiteException;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.*;
 
+import com.sebuilder.interpreter.factory.ScriptFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
@@ -141,8 +140,8 @@ public class AddScenarioFormValidator implements Validator {
             AddScenarioCommand addScenarioCommand, 
             Errors errors) {
         try {
-            IO.read(addScenarioCommand.getScenarioContent());
-        } catch (JSONException | IOException | SuiteException je) {
+            new ScriptFactory().parse(addScenarioCommand.getScenarioContent(), null);
+        } catch (JSONException | IOException e) {
             errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
             errors.rejectValue(GENERAL_ERROR_MSG_KEY,
                     MANDATORY_FIELD_MSG_BUNDLE_KEY);

@@ -63,15 +63,21 @@ public final class AuditSetUpCommandFactory {
     private final ParameterElementDataService parameterElementDataService;
     private final ContractDataService contractDataService;
     private final ScenarioDataService scenarioDataService;
+    AuditSetUpFormFieldHelper auditSetUpFormFieldHelper;
 
     /**
      * Private constructor
      */
-    private AuditSetUpCommandFactory(ParameterDataServiceDecorator parameterDataService, ParameterElementDataService parameterElementDataService, ContractDataService contractDataService, ScenarioDataService scenarioDataService) {
+    private AuditSetUpCommandFactory(ParameterDataServiceDecorator parameterDataService,
+                                     ParameterElementDataService parameterElementDataService,
+                                     ContractDataService contractDataService,
+                                     ScenarioDataService scenarioDataService,
+                                     AuditSetUpFormFieldHelper auditSetUpFormFieldHelper) {
         this.parameterDataService = parameterDataService;
         this.parameterElementDataService = parameterElementDataService;
         this.contractDataService = contractDataService;
         this.scenarioDataService = scenarioDataService;
+        this.auditSetUpFormFieldHelper = auditSetUpFormFieldHelper;
     }
 
     /**
@@ -333,7 +339,7 @@ public final class AuditSetUpCommandFactory {
                 // If the level is overidden from the parameters of the last audit, 
                 // we need to update the UI elements regarding this value (set this 
                 // element as default)
-                AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
+                auditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(levelFormFieldList, defaultValue);
                 isDefaultValue = false;
             }
         }

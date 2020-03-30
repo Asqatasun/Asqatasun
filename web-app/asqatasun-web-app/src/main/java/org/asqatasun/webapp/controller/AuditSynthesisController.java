@@ -62,11 +62,11 @@ import java.util.stream.Stream;
 @Controller
 public class AuditSynthesisController extends AbstractAuditDataHandlerController {
 
-    @Value("${app.webapp.display.config.nbOfFailedTest:5}")
+    @Value("${app.webapp.ui.config.nbOfFailedTest}")
     private int nbOfDisplayedFailedTest;
-    @Value("${app.webapp.display.config.nbOfFailedPages:10}")
-    private int nbOfDisplayedFailedPages = 10;
-    @Value("${app.webapp.display.config.authorizedScopeForSynthesis:DOMAIN,SCENARIO}")
+    @Value("${app.webapp.ui.config.nbOfFailedPages}")
+    private int nbOfDisplayedFailedPages;
+    @Value("${app.webapp.ui.config.authorizedScopeForSynthesis}")
     private List<String> authorizedScopeForSynthesis;
 
     private final ProcessResultDataService processResultDataService;

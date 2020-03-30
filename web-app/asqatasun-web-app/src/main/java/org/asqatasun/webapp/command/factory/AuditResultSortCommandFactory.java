@@ -39,8 +39,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuditResultSortCommandFactory {
 
-    @Value("${app.webapp.ui.themeKey:result.theme}")
-    private String themeKey;
+    private static final String THEME_KEY = "result.theme";
 
     /**
      * Private constructor
@@ -106,7 +105,7 @@ public class AuditResultSortCommandFactory {
         List<FormField> initialisedFormFielList = new LinkedList<>();
         boolean hasTheme = false;
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
-            if (!formFieldBuilder.getI18nKey().equals(themeKey)) {
+            if (!formFieldBuilder.getI18nKey().equals(THEME_KEY)) {
                 initialisedFormFielList.add(formFieldBuilder.build());
             } else if (!hasTheme && referential.equals(formFieldBuilder.getValue())){
                 initialisedFormFielList.add(formFieldBuilder.build());
@@ -133,7 +132,7 @@ public class AuditResultSortCommandFactory {
         List<FormField> initialisedFormFieldList = new LinkedList<FormField>();
         boolean hasTheme = false;
         for (FormFieldBuilder formFieldBuilder : formFieldBuilderList) {
-            if (!formFieldBuilder.getI18nKey().equals(themeKey)) {
+            if (!formFieldBuilder.getI18nKey().equals(THEME_KEY)) {
                 initialisedFormFieldList.add(formFieldBuilder.build());
             } else if (!hasTheme && referential.equals(formFieldBuilder.getValue())){
                 initialisedFormFieldList.add(formFieldBuilder.build());

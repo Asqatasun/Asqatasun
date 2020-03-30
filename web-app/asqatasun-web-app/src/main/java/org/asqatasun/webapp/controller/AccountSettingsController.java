@@ -54,8 +54,8 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class AccountSettingsController extends AbstractUserAndContractsController {
 
-    @Value("${app.webapp.config.forbiddenUserList:guest}")
-    List<String> forbiddenUserList;
+    @Value("${app.webapp.ui.config.forbiddenUserListForSettings}")
+    private List<String> forbiddenUserList;
     private Map<String, Reference> refMap;
     private final TestDataService testDataService;
     private final ReferenceDataService referenceDataService;

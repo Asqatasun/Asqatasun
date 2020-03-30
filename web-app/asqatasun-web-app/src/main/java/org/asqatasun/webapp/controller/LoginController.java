@@ -24,8 +24,9 @@ package org.asqatasun.webapp.controller;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import static org.asqatasun.webapp.util.TgolKeyStore.*;
 
 /** 
  *
@@ -35,14 +36,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController extends AbstractUserAndContractsController{
 
 
-    @RequestMapping(value = TgolKeyStore.LOGIN_URL, method=RequestMethod.GET)
+    @GetMapping(value = {LOGIN_URL, "/"})
     public String displayLoginPage () {
-        return (isAuthenticated())? TgolKeyStore.HOME_VIEW_REDIRECT_NAME: TgolKeyStore.LOGIN_VIEW_NAME;
+        return (isAuthenticated())? HOME_VIEW_REDIRECT_NAME: LOGIN_VIEW_NAME;
     }
 
-    @RequestMapping(value = TgolKeyStore.ACCESS_DENIED_URL, method=RequestMethod.GET)
-    public String displayAccessDeniedPage(Model model) {
-        return TgolKeyStore.ACCESS_DENIED_VIEW_NAME;
+    @GetMapping(value = ACCESS_DENIED_URL)
+    public String displayAccessDeniedPage() {
+        return ACCESS_DENIED_VIEW_NAME;
     }
 
 

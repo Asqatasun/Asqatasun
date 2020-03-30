@@ -24,6 +24,7 @@ package org.asqatasun.webapp.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,8 +52,8 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public final class ContractController extends AbstractController {
 
-    @Value("app.webapp.config.page.contract.authorizedFunctionalityForTrend:DOMAIN,SCENARIO}")
-    private List <String> authorizedFunctionalityForTrend;
+    @Value("${app.webapp.ui.config.authorizedScopeForTrend}")
+    private List<String> authorizedFunctionalityForTrend;
     private final ContractDataService contractDataService;
     private final DetailedContractInfoFactory detailedContractInfoFactory;
     private final LocaleResolver localeResolver;

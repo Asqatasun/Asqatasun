@@ -36,9 +36,10 @@
     <logger name="org.asqatasun.contentadapter" level="INFO"/>
     <logger name="org.asqatasun.contentadapter.css" level="ERROR"/>
     <logger name="org.springframework.web.servlet.tags.MessageTag" level="FATAL"/>
-    <logger name="org.asqatasun.scenarioloader" level="INFO"/>
+    <logger name="org.asqatasun.scenarioloader" level="DEBUG"/>
+    <logger name="org.asqatasun.sebuilder" level="DEBUG"/>
     <logger name="org.asqatasun.webapp.dto.factory.TestResultFactory" level="ERROR"/>
-    <logger name="com.sebuilder" level="INFO"/>
+    <logger name="com.sebuilder" level="DEBUG"/>
     <logger name="org.asqatasun.webapp.orchestrator" level="INFO"/>
     <logger name="org.tuckey.web.filters" level="DEBUG"/>
     <root level="INFO">

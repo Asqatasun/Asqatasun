@@ -85,7 +85,7 @@ public class ActionHandlerConfiguration {
     public ActionBuilder exportOdsActionBuilder(){
         return build("EXPORT_ODS",
             "resultPage.odsExport",
-            "#",
+            "/home/contract/export-audit-result.html?format=ods",
             "images/ods_export.png",
             "images/ods_export.png",
             "resultPage.odsExportAlt");

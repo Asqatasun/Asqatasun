@@ -59,12 +59,11 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class ForgottenOrChangePasswordController extends AbstractController {
 
-    @Value("${app.webapp.config.forgottenPassword.excludeUserList:guest}")
-    List<String> forbiddenUserList;
-    @Value("${app.webapp.config.forgottenPassword.changePasswordUrl:/change-password.html}")
-    String changePasswordUrl;
-    @Value("${app.webapp.config.forgottenPassword.webAppUrl:http://localhost:8080/}")
-    String webAppUrl;
+    private static final String CHANGE_PASSWORD_URL = "/change-password.html";
+    @Value("${app.webapp.ui.config.forgottenPassword.excludeUserList}")
+    private List<String> forbiddenUserList;
+    @Value("${app.webapp.ui.config.webAppUrl}")
+    private String webAppUrl;
     private final ChangePasswordFormValidator changePasswordFormValidator;
     private final ForgottenPasswordFormValidator forgottenPasswordFormValidator;
     private final EmailSender emailSender;
@@ -417,7 +416,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      */
     private String computeReturnedUrl(User user) {
         StringBuilder sb = new StringBuilder();
-        sb.append(webAppUrl+changePasswordUrl);
+        sb.append(webAppUrl+ CHANGE_PASSWORD_URL);
         sb.append("?user=");
         sb.append(user.getId());
         sb.append("&token=");

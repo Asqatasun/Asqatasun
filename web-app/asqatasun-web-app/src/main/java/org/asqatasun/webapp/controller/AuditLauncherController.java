@@ -62,25 +62,23 @@ import javax.annotation.PostConstruct;
 public class AuditLauncherController extends AbstractAuditDataHandlerController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuditLauncherController.class);
+    private static final List<String> USER_OPTION_DEPENDING_ON_REFERENTIAL = Arrays.asList("TEST_WEIGHT_MANAGEMENT");
 
     private final HashMap <String, ParameterElement> parameterElementMap = new HashMap <>();
+
     private void setParameterElementMap(ParameterElementDataService peds) {
         for (ParameterElement pe : peds.findAll()) {
             parameterElementMap.put(pe.getParameterElementCode(), pe);
         }
     }
-
     /**
      *
      */
-    @Value("${app.email.config.userExclusionList:guest}")
+    @Value("${app.webapp.ui.config.userExclusionListForEmail}")
     private List<String> emailSentToUserExclusionList;
 
-    @Value("${app.webapp.config.launcher.userOption:}")
+    @Value("${app.webapp.ui.config.launcher.userOption:}")
     private List<String> userOption;
-
-    @Value("${app.webapp.config.launcher.userOptionDependingOnReferential:TEST_WEIGHT_MANAGEMENT}")
-    private List<String> userOptionDependingOnReferential;
 
     private final DetailedContractInfoFactory detailedContractInfoFactory;
     private final OptionElementDataService optionElementDataService;
@@ -209,6 +207,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
             }
             return TgolKeyStore.GREEDY_AUDIT_VIEW_NAME;
         }
+
         if (audit.getStatus() != AuditStatus.COMPLETED) {
             return prepareFailedAuditData(audit, model);
         }
@@ -442,7 +441,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
     private Set<Parameter> setUserParameters(Set<Parameter> paramSet, String referentialKey) {
         User user = getCurrentUser();
         Collection<OptionElement> optionElementSet = new HashSet <>();
-        for (String optionFamily : userOptionDependingOnReferential) {
+        for (String optionFamily : USER_OPTION_DEPENDING_ON_REFERENTIAL) {
             optionElementSet.addAll(optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey + "_" + optionFamily));
         }
         for (String optionFamily : userOption) {

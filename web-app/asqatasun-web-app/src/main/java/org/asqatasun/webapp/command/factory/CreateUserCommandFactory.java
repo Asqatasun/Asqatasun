@@ -70,8 +70,6 @@ public class CreateUserCommandFactory  implements Serializable {
         createUserCommand.setLastName(user.getName());
         createUserCommand.setPhoneNumber(user.getPhoneNumber());
         createUserCommand.setActivated(user.isAccountActivated());
-        System.out.println(user.getRole().getId());
-        System.out.println(adminRole.getId());
         if (user.getRole().getId().equals(adminRole.getId())) {
             createUserCommand.setAdmin(true);
         } else {

@@ -145,8 +145,6 @@ public class PageListControllerTest  {
      */
     @Test
     public void testDisplayPageListWithPageAudit() {
-        System.out.println("testDisplayPageListWithPageAudit");
-
         // The audit with Id 1 is associated with a Page instance
         setUpMockAuditDataService(PAGE_AUDIT_ID);
         setUpMockUserDataService();
@@ -193,9 +191,7 @@ public class PageListControllerTest  {
      * @throws Exception
      */
     @Test
-    public void testDisplayPageListWithUnauthorizedActScope() throws Exception {
-        System.out.println("testDisplayPageListWithUnauthorizedActScope");
-
+    public void testDisplayPageListWithUnauthorizedActScope() {
         setUpMockAuditDataService(UNAUTHORIZED_SCOPE_AUDIT_ID);
         setUpMockUserDataService();
         setUpActDataService(false);

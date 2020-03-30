@@ -55,7 +55,6 @@ public class ActDAOTest extends AbstractDaoTestCase {
      */
     @Test
     public void testFindLastActsByContract() {
-        System.out.println("findLastActsByContract");
         Contract contract  = contractDAO.read((1L));
         assertEquals(1, actDAO.findActsByContract(contract, 1, 2, null, false).size());
         assertEquals(Long.valueOf(7), actDAO.findActsByContract(contract, 1, 2, null, false).iterator().next().getId());
@@ -78,7 +77,6 @@ public class ActDAOTest extends AbstractDaoTestCase {
      */
     @Test
     public void testFindAllActsByContract() {
-        System.out.println("findAllActsByContract");
         Contract contract  = contractDAO.read((1L));
         assertEquals(4, actDAO.findAllActsByContract(contract).size());
         contract  = contractDAO.read((2L));
@@ -90,7 +88,6 @@ public class ActDAOTest extends AbstractDaoTestCase {
      */
     @Test
     public void testFindRunningActsByContract() {
-        System.out.println("findRunningActsByContract");
         Contract contract  = contractDAO.read((1L));
         assertEquals(1, actDAO.findRunningActsByContract(contract).size());
         assertEquals(Long.valueOf(3), actDAO.findRunningActsByContract(contract).iterator().next().getId());

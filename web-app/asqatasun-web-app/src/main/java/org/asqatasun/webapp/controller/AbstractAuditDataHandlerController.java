@@ -57,7 +57,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
 /**
  * This abstract controller handles methods to retrieve and format audit data
  * @author jkowalczyk
@@ -73,11 +72,11 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
     protected Scope pageScope;
 
     private List<Integer> authorizedPageSize = new ArrayList<>();
-    @Value("${app.webapp.config.authorizedPageSize:10,25,50,100,250,1000,-1}")
+    @Value("${app.webapp.ui.config.authorizedPageSize}")
     private List<String> authorizedPageSizeStr;
-    @Value("${app.webapp.config.authorizedScopeForCriterionList:SCENARIO,DOMAIN}")
+    @Value("${app.webapp.ui.config.authorizedScopeForCriterionList}")
     protected List<String> authorizedSortCriterion;
-    @Value("${app.webapp.config.authorizedScopeForPageList:SCENARIO,DOMAIN}")
+    @Value("${app.webapp.ui.config.authorizedScopeForPageList}")
     private List<String> authorizedScopeForPageList;
 
     private Set<Parameter> defaultParamSet;
@@ -244,10 +243,8 @@ public abstract class AbstractAuditDataHandlerController extends AbstractControl
      */
     protected String prepareFailedAuditData(Audit audit, Model model) {
         String returnViewName = TgolKeyStore.OUPS_VIEW_NAME;
-        model.addAttribute(TgolKeyStore.AUDIT_URL_KEY,
-                audit.getSubject().getURL());
-        model.addAttribute(TgolKeyStore.AUDIT_DATE_KEY,
-                audit.getDateOfCreation());
+        model.addAttribute(TgolKeyStore.AUDIT_URL_KEY, audit.getSubject().getURL());
+        model.addAttribute(TgolKeyStore.AUDIT_DATE_KEY, audit.getDateOfCreation());
         String status = this.computeAuditStatus(audit);
         if (status.equalsIgnoreCase(TgolKeyStore.ERROR_LOADING_KEY)) {
             returnViewName = TgolKeyStore.LOADING_ERROR_VIEW_NAME;

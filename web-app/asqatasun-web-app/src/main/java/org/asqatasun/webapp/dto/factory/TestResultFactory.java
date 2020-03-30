@@ -40,7 +40,6 @@ import org.asqatasun.webapp.dto.TestResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -52,12 +51,11 @@ public class TestResultFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestResultFactory.class);
     private static final String NOT_TESTED_STR = "NOT_TESTED";
+    private static final String SELECT_ALL_THEME_KEY = "all-theme";
 
     private final ResourceBundle representationBundle =
             ResourceBundle.getBundle(TestResult.REPRESENTATION_BUNDLE_NAME);
 
-    @Value("${app.webapp.selectAllThemeKey:all-theme}")
-    private String selectAllThemeKey;
     private final ProcessRemarkDataService processRemarkDataService;
     private final AuditDataService auditDataService;
     private final ProcessResultDataService processResultDataService;
@@ -120,7 +118,7 @@ public class TestResultFactory {
             } 
         }
         try {
-            testResult.setTestRepresentation(Integer.valueOf(representationBundle.
+            testResult.setTestRepresentation(Integer.parseInt(representationBundle.
                     getString(testResult.getTestCode() + TestResult.REPRESENTATION_SUFFIX_KEY)));
         } catch (MissingResourceException mre) {
             LOGGER.warn(mre.getMessage());
@@ -235,7 +233,7 @@ public class TestResultFactory {
         netResultList.addAll(
                 addNotTestedProcessResult(
                         getTestListFromWebResource(webresource),
-                        selectAllThemeKey,
+                    SELECT_ALL_THEME_KEY,
                         netResultList));
 
         sortCollection(netResultList);
@@ -757,7 +755,7 @@ public class TestResultFactory {
             // selection, a NOT_TESTED result ProcessRemark is created
             if (!testedTestList.contains(test) && (StringUtils.equalsIgnoreCase(test.getCriterion().getTheme().getCode(), themeCode)
                     || themeCode == null
-                    || StringUtils.equalsIgnoreCase(selectAllThemeKey, themeCode))) {
+                    || StringUtils.equalsIgnoreCase(SELECT_ALL_THEME_KEY, themeCode))) {
                 ProcessResult pr = 
                         processResultDataService.getDefiniteResult(
                                 test, 

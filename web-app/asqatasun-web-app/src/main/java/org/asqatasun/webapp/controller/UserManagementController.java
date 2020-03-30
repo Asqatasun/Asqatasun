@@ -194,8 +194,6 @@ public class UserManagementController extends AbstractUserAndContractsController
             throw new ForbiddenUserException();
         }
         boolean updateAllData = true;
-        System.out.println(userId);
-        System.out.println(getCurrentUser().getId());
         if (getCurrentUser().getId().equals(userId)) {
             updateAllData = false;
         }

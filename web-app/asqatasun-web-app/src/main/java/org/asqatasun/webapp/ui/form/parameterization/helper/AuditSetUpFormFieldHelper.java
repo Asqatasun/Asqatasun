@@ -31,6 +31,7 @@ import org.asqatasun.webapp.ui.form.SelectElement;
 import org.asqatasun.webapp.ui.form.SelectFormField;
 import org.asqatasun.webapp.ui.form.TextualFormField;
 import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
+import org.springframework.stereotype.Component;
 
 /**
  * That class handles utility methods (activation/desactivation, restriction application)
@@ -39,21 +40,20 @@ import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
  * 
  * @author jkowalczyk
  */
+@Component
 public final class AuditSetUpFormFieldHelper {
 
-    private static Map<String, String> DEFAULT_LEVEL_BY_REF_MAP = Collections.emptyMap();
-    public static void setDefaultLevelByRefMap(Map<String, String> defaultLevelByRef) {
-        DEFAULT_LEVEL_BY_REF_MAP = defaultLevelByRef;
-    }
+    private Map<String, String> defaultLevelByRefMap = Collections.emptyMap();
      
-    public static void setReferenceDataService(ReferenceDataService referenceDataService) {
-        DEFAULT_LEVEL_BY_REF_MAP = new HashMap();
+    public void setReferenceDataService(ReferenceDataService referenceDataService) {
+        defaultLevelByRefMap = new HashMap();
         for (Reference reference : referenceDataService.findAll()) {
-            DEFAULT_LEVEL_BY_REF_MAP.put(reference.getCode(), reference.getDefaultLevel().getCode());
+            defaultLevelByRefMap.put(reference.getCode(), reference.getDefaultLevel().getCode());
         }
     }
     
-    private AuditSetUpFormFieldHelper() {
+    private AuditSetUpFormFieldHelper(ReferenceDataService referenceDataService) {
+        setReferenceDataService(referenceDataService);
     }
 
     /**
@@ -64,7 +64,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param ap
      * @param optionElementSet
      */
-    public static void applyRestrictionToAuditSetUpFormField(
+    public void applyRestrictionToAuditSetUpFormField(
             AuditSetUpFormField ap,
             Collection<OptionElement> optionElementSet) {
         if (ap.getFormField() instanceof NumericalFormField) {
@@ -93,7 +93,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param optionCode
      * @return
      */
-    private static OptionElement getOptionFromOptionSet(
+    private OptionElement getOptionFromOptionSet(
             Collection<OptionElement> optionElementSet,
             String optionCode) {
         
@@ -115,7 +115,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param selectFormField
      * @param optionElementSet
      */
-    private static void activateSelectFormField(
+    private void activateSelectFormField(
             SelectFormField selectFormField,
             Collection<OptionElement> optionElementSet) {
         boolean enableElements = true;
@@ -159,7 +159,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param optionElementSet
      * @return
      */
-    private static boolean setSelectElementAsDefault(
+    private boolean setSelectElementAsDefault(
             SelectElement selectElement,
             Collection<OptionElement> optionElementSet) {
         OptionElement optionElement = getOptionFromOptionSet(
@@ -182,7 +182,7 @@ public final class AuditSetUpFormFieldHelper {
      *
      * @param selElementMap
      */
-    private static void setFirstSelectElementAsDefault(Map<String, List<SelectElement>> selElementMap) {
+    private void setFirstSelectElementAsDefault(Map<String, List<SelectElement>> selElementMap) {
         boolean firstEnabledElementEncountered = false;
         for (List<SelectElement> seList : selElementMap.values()) {
             for (SelectElement se : seList) {
@@ -203,7 +203,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param refAndLevelSelectFormField
      * @param allowedReferentialCodeSet
      */
-    public static void activateAllowedReferentialField(
+    public void activateAllowedReferentialField(
             SelectFormField refAndLevelSelectFormField,
             Collection<String> allowedReferentialCodeSet) {
         for (Map.Entry<String, List<SelectElement>> refKey : refAndLevelSelectFormField.getSelectElementMap().entrySet()) {
@@ -222,7 +222,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param enableElement
      * @param sel 
      */
-    private static void enableSelectElement(boolean enableElement, List<SelectElement> sel) {
+    private void enableSelectElement(boolean enableElement, List<SelectElement> sel) {
         for (SelectElement se : sel) {
             se.setEnabled(enableElement);
         }
@@ -233,14 +233,14 @@ public final class AuditSetUpFormFieldHelper {
      * @param selectFormFieldList
      * @param ref 
      */
-    public static void selectDefaultLevelFromRefValue(
+    public void selectDefaultLevelFromRefValue(
                     List<SelectFormField> selectFormFieldList, 
                     String ref) {
         StringBuilder strb = new StringBuilder();
         strb.append(ref);
         strb.append(";");
-        if (DEFAULT_LEVEL_BY_REF_MAP.containsKey(ref)) {
-            strb.append(DEFAULT_LEVEL_BY_REF_MAP.get(ref));
+        if (defaultLevelByRefMap.containsKey(ref)) {
+            strb.append(defaultLevelByRefMap.get(ref));
         }
         selectDefaultLevelFromLevelValue(selectFormFieldList, strb.toString());
     }
@@ -250,7 +250,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param selectFormFieldList
      * @param defaultLevel 
      */
-    public static void selectDefaultLevelFromLevelValue (
+    public void selectDefaultLevelFromLevelValue (
              List<SelectFormField> selectFormFieldList, 
              String defaultLevel) {
         for (SelectFormField sff : selectFormFieldList) {
@@ -268,7 +268,7 @@ public final class AuditSetUpFormFieldHelper {
      * @param defaultLevel
      * @return
      */
-    private static void setLevelElementAsDefault (
+    private void setLevelElementAsDefault (
             List<SelectElement> selectElementList,
             String defaultLevel) {
         for (SelectElement se : selectElementList) {

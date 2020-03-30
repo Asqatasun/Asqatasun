@@ -29,7 +29,6 @@ import org.asqatasun.webapp.entity.contract.Contract;
 import org.asqatasun.webapp.entity.contract.ScopeEnum;
 import org.asqatasun.webapp.entity.option.OptionElement;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,8 +39,7 @@ import org.springframework.stereotype.Component;
 public class DetailedContractInfoFactory extends ContractInfoFactory {
 
     private static final int NB_MAX_DISPLAYED_ACT = 100;
-    @Value("${app.webapp.ui.nbMaxActRestrictionCode:100}")
-    private String nbMaxActRestrictionCode;
+    private static final String NB_MAX_ACT_RESTRICTION_CODE = "NB_OF_AUDIT_TO_DISPLAY";
 
     public DetailedContractInfoFactory() {}
 
@@ -93,8 +91,8 @@ public class DetailedContractInfoFactory extends ContractInfoFactory {
      */
     private int getMaxAuthorizedNumberOfActByContract (Contract contract) {
         for (OptionElement optionElement : contract.getOptionElementSet())  {
-            if (optionElement.getOption().getCode().equals(nbMaxActRestrictionCode)) {
-                return Integer.valueOf(optionElement.getValue());
+            if (optionElement.getOption().getCode().equals(NB_MAX_ACT_RESTRICTION_CODE)) {
+                return Integer.parseInt(optionElement.getValue());
             }
         }
         return NB_MAX_DISPLAYED_ACT;

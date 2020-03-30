@@ -55,7 +55,6 @@ public class ContractDAOTest extends AbstractDaoTestCase {
      */
     @Test
     public void testFindAllContractsByUser() {
-        System.out.println("findAllContractsByUser");
         User user = userDAO.read(1L);
         assertEquals(2, contractDAO.findAllContractsByUser(user).size());
         user = userDAO.read(2L);
@@ -67,8 +66,6 @@ public class ContractDAOTest extends AbstractDaoTestCase {
      */
     @Test
     public void testRead() {
-        System.out.println("read");
-        
         Contract contract = contractDAO.read(1L);
         assertNotNull(contract);
         assertEquals("http://www.contract1.com/", getUrlFromContractOption(contract));
@@ -104,7 +101,6 @@ public class ContractDAOTest extends AbstractDaoTestCase {
      */
     @Test
     public void testSaveOrUpdate() {
-        System.out.println("saveOrUpdate");
         Date beginDate = new Date();
         Date endDate = new Date();
         Date renewalDate = new Date();
@@ -126,7 +122,6 @@ public class ContractDAOTest extends AbstractDaoTestCase {
      */
     @Test
     public void testUpdate() {
-        System.out.println("update");
         Contract contract  = contractDAO.read((1L));
         Float contractPrice = contract.getPrice();
         contract.setPrice(contractPrice + 200);

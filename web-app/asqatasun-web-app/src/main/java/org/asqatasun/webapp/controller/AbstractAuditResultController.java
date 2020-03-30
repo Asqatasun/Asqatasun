@@ -65,11 +65,9 @@ import org.springframework.web.servlet.LocaleResolver;
  */
 public class AbstractAuditResultController extends AbstractAuditDataHandlerController {
 
-    @Value("${app.webapp.config.result.themeSortKey:theme}")
-    private String themeSortKey;
-    @Value("${app.webapp.config.result.testResultSortKey:test-result}")
-    private String testResultSortKey;
-    @Value("${app.webapp.config.authorizedRefForCriterionViewList:Aw22,Rgaa30,Rgaa32016,Rgaa32017}")
+    private static final String THEME_SORT_KEY = "theme";
+    private static final String TEST_RESULT_SORT_KEY = "test-result";
+    @Value("${app.webapp.ui.config.authorizedRefForCriterionViewList}")
     private List<String> authorizedRefForCriterionViewList;
     @Autowired
     @Qualifier("auditResultFormFieldBuilderList")
@@ -291,7 +289,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                 testResultFactory.getTestResultSortedByThemeMap(
                     site,
                     siteScope,
-                    asuc.getSortOptionMap().get(themeSortKey).toString(),
+                    asuc.getSortOptionMap().get(THEME_SORT_KEY).toString(),
                     getTestResultSortSelection(asuc)));
 
         // Attributes for breadcrumb
@@ -364,7 +362,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                     testResultFactory.getTestResultSortedByThemeMap(
                             page,
                             pageScope,
-                            asuc.getSortOptionMap().get(themeSortKey)
+                            asuc.getSortOptionMap().get(THEME_SORT_KEY)
                             .toString(),
                             getTestResultSortSelection(asuc)));
             if (isManualAudit) {
@@ -375,7 +373,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                     testResultFactory.getTestResultMap(
                                 page,
                                 pageScope,
-                                asuc.getSortOptionMap().get(themeSortKey).toString(),
+                                asuc.getSortOptionMap().get(THEME_SORT_KEY).toString(),
                                 getTestResultSortSelection(asuc)));
                 model.addAttribute(TgolKeyStore.MANUAL_AUDIT_COMMAND_KEY,
                         manualAuditCommand);
@@ -389,7 +387,7 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
                     TgolKeyStore.CRITERION_RESULT_LIST_KEY,
                     criterionResultFactory.getCriterionResultSortedByThemeMap(
                             page,
-                            asuc.getSortOptionMap().get(themeSortKey)
+                            asuc.getSortOptionMap().get(THEME_SORT_KEY)
                             .toString(),
                             getTestResultSortSelection(asuc)));
             return TgolKeyStore.RESULT_PAGE_BY_CRITERION_VIEW_NAME;
@@ -399,12 +397,12 @@ public class AbstractAuditResultController extends AbstractAuditDataHandlerContr
     private Collection<String> getTestResultSortSelection(
             AuditResultSortCommand asuc) {
         Collection<String> selectedValues = new HashSet<>();
-        if ((asuc.getSortOptionMap().get(testResultSortKey)) instanceof Object[]) {
+        if ((asuc.getSortOptionMap().get(TEST_RESULT_SORT_KEY)) instanceof Object[]) {
             CollectionUtils.addAll(selectedValues, ((Object[]) asuc
-                    .getSortOptionMap().get(testResultSortKey)));
-        } else if ((asuc.getSortOptionMap().get(testResultSortKey)) instanceof String) {
+                    .getSortOptionMap().get(TEST_RESULT_SORT_KEY)));
+        } else if ((asuc.getSortOptionMap().get(TEST_RESULT_SORT_KEY)) instanceof String) {
             selectedValues.add((String) asuc.getSortOptionMap().get(
-                    testResultSortKey));
+                TEST_RESULT_SORT_KEY));
         }
         return selectedValues;
     }

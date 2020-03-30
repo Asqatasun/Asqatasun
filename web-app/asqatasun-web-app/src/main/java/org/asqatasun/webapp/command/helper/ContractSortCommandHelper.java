@@ -35,7 +35,6 @@ import org.asqatasun.webapp.ui.form.builder.FormFieldBuilder;
 import org.asqatasun.webapp.ui.form.parameterization.helper.FormFieldHelper;
 import org.asqatasun.webapp.dto.ContractInfo;
 import org.asqatasun.webapp.util.TgolKeyStore;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
@@ -46,18 +45,12 @@ import org.springframework.ui.Model;
 @Component("contractSortCommandHelper")
 public final class ContractSortCommandHelper  {
 
-    @Value("${app.webapp.lastAuditMarkSortValue:mark}")
-    private String lastAuditMarkSortValue;
-    @Value("${app.webapp.lastAuditDateSortValue:date}")
-    private String lastAuditDateSortValue;
-    @Value("${app.webapp.sortByKey:sort-by-choice}")
-    private String sortByKey;
-    @Value("${app.webapp.sortOrderKey:order-choice}")
-    private String sortOrderKey;
-    @Value("${app.webapp.exclusionContractSortKey:label-exclusion-choice}")
-    private String exclusionContractSortKey;
-    @Value("${app.webapp.inclusionContractSortKey:label-inclusion-choice}")
-    private String inclusionContractSortKey;
+    private static final String LAST_AUDIT_MARK_SORT_VALUE = "mark";
+    private static final String LAST_AUDIT_DATE_SORT_VALUE = "date";
+    private static final String SORT_BY_KEY = "sort-by-choice";
+    private static final String SORT_ORDER_KEY = "order-choice";
+    private static final String EXCLUSION_CONTRACT_SORT_KEY = "label-exclusion-choice";
+    private static final String INCLUSION_CONTRACT_SORT_KEY = "label-inclusion-choice";
     private final ContractDataService contractDataService;
     private final ContractSortCommandFactory contractSortCommandFactory;
     private final DetailedContractInfoFactory contractInfoFactory;
@@ -89,14 +82,14 @@ public final class ContractSortCommandHelper  {
 
         List<ContractInfo> contractInfoSet = new LinkedList();
         List<String> inclusionSortOccurence;
-        if (csc.getSortOptionMap().containsKey(inclusionContractSortKey))  {
-            inclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).toString().split(";"));
+        if (csc.getSortOptionMap().containsKey(INCLUSION_CONTRACT_SORT_KEY))  {
+            inclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(INCLUSION_CONTRACT_SORT_KEY).toString().split(";"));
         } else {
             inclusionSortOccurence = new ArrayList();
         }
         List<String> exclusionSortOccurence;
-        if (csc.getSortOptionMap().containsKey(exclusionContractSortKey))  {
-            exclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(exclusionContractSortKey).toString().split(";"));
+        if (csc.getSortOptionMap().containsKey(EXCLUSION_CONTRACT_SORT_KEY))  {
+            exclusionSortOccurence = Arrays.asList(csc.getSortOptionMap().get(EXCLUSION_CONTRACT_SORT_KEY).toString().split(";"));
         } else {
             exclusionSortOccurence = new ArrayList();
         }
@@ -106,7 +99,7 @@ public final class ContractSortCommandHelper  {
                 contractInfoSet.add(contractInfoFactory.getContractInfo(contract));
             }
         }
-        if (csc.getSortOptionMap().containsKey(sortOrderKey)) {
+        if (csc.getSortOptionMap().containsKey(SORT_ORDER_KEY)) {
             sortContractInfoSetRegardingCommand(contractInfoSet, csc);
         }    
         return contractInfoSet;
@@ -134,9 +127,9 @@ public final class ContractSortCommandHelper  {
                 model);
         List<Contract> contractSet = new LinkedList();
         List<String> inclusionSortOccurence = 
-                Arrays.asList(csc.getSortOptionMap().get(inclusionContractSortKey).toString().split(";"));
+                Arrays.asList(csc.getSortOptionMap().get(INCLUSION_CONTRACT_SORT_KEY).toString().split(";"));
         List<String> exclusionSortOccurence = 
-                Arrays.asList(csc.getSortOptionMap().get(exclusionContractSortKey).toString().split(";"));
+                Arrays.asList(csc.getSortOptionMap().get(EXCLUSION_CONTRACT_SORT_KEY).toString().split(";"));
         for (Contract contract : user.getContractSet()) {
             if (isContractLabelIncluded(inclusionSortOccurence, contract.getLabel()) &&
                     !isContractLabelExcluded(exclusionSortOccurence, contract.getLabel())) {
@@ -297,17 +290,17 @@ public final class ContractSortCommandHelper  {
     public void sortContractInfoSetRegardingCommand(
             List<ContractInfo> contractInfoSet, 
             ContractSortCommand csc) {
-        String sortByValue = csc.getSortOptionMap().get(sortByKey).toString();
+        String sortByValue = csc.getSortOptionMap().get(SORT_BY_KEY).toString();
 
-        if (StringUtils.equalsIgnoreCase(sortByValue, lastAuditMarkSortValue)) {
+        if (StringUtils.equalsIgnoreCase(sortByValue, LAST_AUDIT_MARK_SORT_VALUE)) {
             contractInfoSet.sort(new ContractInfoMarkSorter(
-                Integer.parseInt(csc.getSortOptionMap().get(sortOrderKey).toString( ))));
-        } else if (StringUtils.equalsIgnoreCase(sortByValue, lastAuditDateSortValue)) {
+                Integer.parseInt(csc.getSortOptionMap().get(SORT_ORDER_KEY).toString( ))));
+        } else if (StringUtils.equalsIgnoreCase(sortByValue, LAST_AUDIT_DATE_SORT_VALUE)) {
             contractInfoSet.sort(new ContractInfoDateSorter(
-                Integer.parseInt(csc.getSortOptionMap().get(sortOrderKey).toString( ))));
+                Integer.parseInt(csc.getSortOptionMap().get(SORT_ORDER_KEY).toString( ))));
         } else {
             contractInfoSet.sort(new ContractInfoLabelSorter(
-                Integer.parseInt(csc.getSortOptionMap().get(sortOrderKey).toString( ))));
+                Integer.parseInt(csc.getSortOptionMap().get(SORT_ORDER_KEY).toString( ))));
         }
     }
     
@@ -322,7 +315,7 @@ public final class ContractSortCommandHelper  {
         // By default if the choice is not alphabetical, the contracts will be
         // sorted by alphabetical order in the second time. If the choice is 
         // alphabetical, this value will be overidden with the user value.
-        int alphabeticalSortDirection = Integer.parseInt(csc.getSortOptionMap().get(sortOrderKey).toString());
+        int alphabeticalSortDirection = Integer.parseInt(csc.getSortOptionMap().get(SORT_ORDER_KEY).toString());
         contractSet.sort(new ContractLabelSorter(alphabeticalSortDirection));
     }
     

@@ -44,12 +44,11 @@ import javax.annotation.PostConstruct;
 public final class TokenManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenManager.class);
+    private static final String ESAPI_PROPERTY_NAME = "org.owasp.esapi.resources";
 
-    @Value("${app.security.owasp.esapiPropertyName:org.owasp.esapi.resources}")
-    private String esapiPropertyName;
-    @Value("${app.security.owasp.esapiPropertyValue:/etc/asqatasun}")
+    @Value("${app.webapp.security.owasp.esapiPropertyValue}")
     private String esapiPropertyValue;
-    @Value("${app.security.owasp.tokenDurationValidity:3600}")
+    @Value("${app.webapp.security.owasp.tokenDurationValidity}")
     private int tokenDurationValidity;
 
     private Map<String, Boolean> tokenUsage = new HashMap<>();
@@ -65,8 +64,8 @@ public final class TokenManager {
      */
     @PostConstruct
     private void setSystemProperty() {
-        if (esapiPropertyName != null && esapiPropertyValue != null) {
-            System.setProperty(esapiPropertyName, esapiPropertyValue);
+        if (esapiPropertyValue != null) {
+            System.setProperty(ESAPI_PROPERTY_NAME, esapiPropertyValue);
         }
     }
 
@@ -85,10 +84,7 @@ public final class TokenManager {
             String token = cryptoToken.getToken();
             tokenUsage.put(token, Boolean.FALSE);
             return token;
-        } catch (EncryptionException ex) {
-            LOGGER.warn(ex.getMessage());
-            return "";
-        } catch (ValidationException ex) {
+        } catch (EncryptionException | ValidationException ex) {
             LOGGER.warn(ex.getMessage());
             return "";
         }
@@ -130,11 +126,8 @@ public final class TokenManager {
                         + cryptoToken.getExpirationDate());
                 return false;
             }
-            if (!tokenUsage.containsKey(token)
-                    || tokenUsage.get(token).booleanValue()) {
-                LOGGER.info(
-                        "!tokenUsage.containsKey(token) || "
-                        + " tokenUsage.get(token).booleanValue() ");
+            if (!tokenUsage.containsKey(token) || tokenUsage.get(token)) {
+                LOGGER.info("!tokenUsage.containsKey(token) || " + " tokenUsage.get(token).booleanValue() ");
                 return false;
             }
             return true;

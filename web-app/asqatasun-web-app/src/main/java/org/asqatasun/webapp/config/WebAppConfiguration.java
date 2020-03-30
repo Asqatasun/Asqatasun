@@ -43,15 +43,15 @@ import java.util.*;
 @EnableWebMvc
 public class WebAppConfiguration implements WebMvcConfigurer {
 
-    /**
-     * Redirect '/' to login page
-     * @param registry
-     */
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("login");
-        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-    }
+//    /**
+//     * Redirect '/' to login page
+//     * @param registry
+//     */
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("").setViewName("login");
+//        registry.addViewController("/").setViewName("login");
+//    }
 
     /**
      * Load all i18n file from the classpath

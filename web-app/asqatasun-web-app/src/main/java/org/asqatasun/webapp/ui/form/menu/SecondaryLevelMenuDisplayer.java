@@ -44,7 +44,7 @@ import org.springframework.ui.Model;
 @Component("secondaryLevelMenuDisplayer")
 public class SecondaryLevelMenuDisplayer {
 
-    @Value("${app.webapp.referentialWithModifiableTestWeight:SEO,Aw22}")
+    @Value("${app.webapp.ui.config.referentialWithModifiableTestWeight}")
     List<String> referentialWithModifiableTestWeight;
     private ContractDataService contractDataService;
 

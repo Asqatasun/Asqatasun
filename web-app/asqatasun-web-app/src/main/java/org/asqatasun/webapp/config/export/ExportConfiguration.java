@@ -57,7 +57,7 @@ public class ExportConfiguration {
         builder.setMargin("0:0:0:0");
         builder.setPageOrientation(Page.Page_A4_Landscape());
         builder.setFieldMap(new HashMap <String, String>() {{
-            put("resultCounter", "org.asqatasun.webapp.presentation.org.asqatasun.webapp.dto.ResultCounter");
+            put("resultCounter", "org.asqatasun.webapp.dto.ResultCounter");
             put("test", "org.asqatasun.entity.reference.Test");
             put("levelCode", "java.lang.String");
             put("resultCode", "java.lang.String");

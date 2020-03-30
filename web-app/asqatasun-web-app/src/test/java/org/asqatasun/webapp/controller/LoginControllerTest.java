@@ -69,7 +69,7 @@ public class LoginControllerTest  {
      */
     @Test
     public void testDisplayAccessDeniedPage() {
-        assertEquals(ACCESS_DENIED_VIEW_NAME, instance.displayAccessDeniedPage(new ExtendedModelMap()));
+        assertEquals(ACCESS_DENIED_VIEW_NAME, instance.displayAccessDeniedPage());
     }
 
     private void setUpMockAuthenticationContext(boolean isAuthenticated){

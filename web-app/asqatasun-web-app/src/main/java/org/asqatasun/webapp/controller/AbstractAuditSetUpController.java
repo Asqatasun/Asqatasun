@@ -55,7 +55,7 @@ import java.util.*;
  */
 public abstract class AbstractAuditSetUpController extends AbstractAuditDataHandlerController{
 
-    @Value("${app.webapp.config.defaultReferential:Rgaa30}")
+    @Value("${app.webapp.ui.config.defaultReferential}")
     private String defaultReferential;
     /**
      * This map binds the audit set-up view with the functionality code that
@@ -79,10 +79,8 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
     protected LocaleResolver localeResolver;
     @Autowired
     AuditSetUpCommandFactory auditSetUpCommandFactory;
-
-    public AbstractAuditSetUpController() {
-        super();
-    }
+    @Autowired
+    AuditSetUpFormFieldHelper auditSetUpFormFieldHelper;
 
     protected Map<String, String> getViewFunctionalityBindingMap () {
         if (viewFunctionalityBindingMap == null) {
@@ -130,7 +128,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
                         referentialAndLevelFormFieldBuilderList);
             
             String defaultRef = getDefaultReferential(authorisedReferentialList);
-            AuditSetUpFormFieldHelper.selectDefaultLevelFromRefValue(
+            auditSetUpFormFieldHelper.selectDefaultLevelFromRefValue(
                     refAndLevelFormFieldList, 
                     defaultRef);
             
@@ -290,7 +288,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
         // When the form is on error, the default level value corresponds to the 
         // one the user has chosen. 
         
-        AuditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(
+        auditSetUpFormFieldHelper.selectDefaultLevelFromLevelValue(
                     refAndLevelFormFieldList, 
                     auditSetUpCommand.getLevel());
         
@@ -419,19 +417,17 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
             List<SelectFormFieldBuilderImpl> auditSetUpFormFieldBuilderList) {
         
         List<SelectFormField> selectFormFieldList = new LinkedList();
-        for (SelectFormFieldBuilderImpl seb : auditSetUpFormFieldBuilderList) {
-            
+
+        auditSetUpFormFieldBuilderList.forEach(seb -> {
             // Create the SelectElement from the builder
-            SelectFormField selectFormField = seb.build();
-            
+            SelectFormField selectFormField = seb.build( );
+
             // enable-disable elements from the authorised referentials
-            AuditSetUpFormFieldHelper.activateAllowedReferentialField(
-                    selectFormField, 
-                    authorisedReferentialList);
-            
+            auditSetUpFormFieldHelper.activateAllowedReferentialField(selectFormField, authorisedReferentialList);
+
             // add the fresh instance to the returned list
             selectFormFieldList.add(selectFormField);
-        }
+        });
         return selectFormFieldList;
     }
     
@@ -446,13 +442,8 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
         if (optionElementSet.isEmpty()) {
             return;
         }
-        for (List<AuditSetUpFormField> apl : setUpFormFielList) {
-            for (AuditSetUpFormField ap : apl) {
-                AuditSetUpFormFieldHelper.applyRestrictionToAuditSetUpFormField(
-                        ap, 
-                        optionElementSet);
-            }
-        }
+        setUpFormFielList.forEach(apl -> apl.forEach(
+            ap -> auditSetUpFormFieldHelper.applyRestrictionToAuditSetUpFormField(ap, optionElementSet)));
     }
 
     /**
@@ -481,7 +472,6 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
      */
     protected Collection<String> getAuthorisedFunctionalityCodeFromContract (Contract contract) {
         Set<String> authorisedFunctionalitySet = new HashSet();
-        System.out.println("getAuthorisedFunctionalityCodeFromContract");
         for (Functionality funct : contract.getFunctionalitySet()) {
             authorisedFunctionalitySet.add(funct.getCode());
         }

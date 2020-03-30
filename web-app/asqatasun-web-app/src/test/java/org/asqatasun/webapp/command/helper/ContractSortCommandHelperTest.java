@@ -62,8 +62,6 @@ public class ContractSortCommandHelperTest  {
      */
     @Test
     public void testGetLastAuditMarkSortValue() {
-        System.out.println("getLastAuditMarkSortValue");
-
         List<ContractInfo> contractInfoSet = new ArrayList<>();
         ContractSortCommand csc = new ContractSortCommand();
         

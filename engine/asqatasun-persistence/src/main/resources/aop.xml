@@ -19,7 +19,7 @@
 
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-	    <tx:method name="create*" propagation="REQUIRED"/>
+	        <tx:method name="create*" propagation="REQUIRED"/>
             <tx:method name="retrieve*" propagation="REQUIRED"/>
             <tx:method name="find*" propagation="REQUIRED"/>
             <tx:method name="get*" propagation="REQUIRED"/>
