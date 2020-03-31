@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+<configuration>
+    <appender name="CONSOLE_APP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss:SSS} %-4r %-5p %c - %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE_APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+        <!--for further documentation-->
+        <File>${logDir}/asqatasun.log</File>
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss:SSS} %-4r %-5p %c - %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${app.logDir}/asqatasun.log.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <logger name="org.asqatasun.service" level="INFO"/>
+    <logger name="com.mchange" level="INFO"/>
+    <logger name="com.phloc.css.parser" level="FATAL"/>
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>
+    <logger name="org.jsoup" level="INFO"/>
+    <logger name="org.asqatasun.crawler" level="INFO"/>
+    <logger name="org.asqatasun.webapp.validator" level="INFO"/>
+    <logger name="org.asqatasun.contentadapter" level="INFO"/>
+    <logger name="org.asqatasun.contentadapter.css" level="ERROR"/>
+    <logger name="org.springframework.web.servlet.tags.MessageTag" level="FATAL"/>
+    <logger name="org.asqatasun.scenarioloader" level="DEBUG"/>
+    <logger name="org.asqatasun.sebuilder" level="DEBUG"/>
+    <logger name="org.asqatasun.webapp.dto.factory.TestResultFactory" level="ERROR"/>
+    <logger name="com.sebuilder" level="DEBUG"/>
+    <logger name="org.asqatasun.webapp.orchestrator" level="INFO"/>
+    <logger name="org.tuckey.web.filters" level="DEBUG"/>
+    <root level="INFO">
+        <!--        <appender-ref ref="FILE_APP"/>-->
+        <appender-ref ref="CONSOLE_APP"/>
+    </root>
+</configuration>
