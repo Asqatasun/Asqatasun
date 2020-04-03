@@ -1,7 +1,7 @@
 Commits    Contributors
 --------------------------
   3385	Jérôme Kowalczyk
-   711	Matthieu FAURE
+   715	Matthieu FAURE
    696	Fabrice Gangler
    137	Anthony Lingua
     52	neyo2010
@@ -36,5 +36,5 @@ Commits    Contributors
      1	nisan
 
 
----- Release 4.1.0-SNAPSHOT ----------------------
+---- Release 4.1.0 ----------------------
 
