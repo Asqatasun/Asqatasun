@@ -51,6 +51,7 @@ Four ways to read the doc:
 
 And also: 
 
+* [Asqatasun with Vagrant](https://gitlab.com/asqatasun/asqatasun-vagrant/-/tree/master/Ubuntu-18.04-local)
 * [Asqatasun Docker images](https://hub.docker.com/r/asqatasun/asqatasun/)
 (but do read the [associated doc](http://doc.asqatasun.org/en/10_Install_doc/Docker/index.html) or your data will be lost !)
 * **Ansible** roles are available in the `/Ansible` directory of the `.tar.gz`.
@@ -112,7 +113,7 @@ We would be glad to have you on board! You can help in many ways:
 
  [AGPL v3](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE) 
 
-## Major changes of this last version (Asqatasun 4.1.0-rc.5, 2020-03-27)
+## Major changes of this last version (Asqatasun 4.1.0, 2020-04-03)
 
 Thanks:
 
@@ -136,6 +137,7 @@ For users:
 
 For developers and ops:
 
+* Add Vagrant installation
 * Support for Ubuntu 18.04 [#269](https://github.com/Asqatasun/Asqatasun/issues/269), [#281](https://github.com/Asqatasun/Asqatasun/issues/281)
 * SQL procedure: Add option to choose the contract duration [#213](https://github.com/Asqatasun/Asqatasun/issues/213)
 * Enhanced pre-requisites to allow database name containing hyphen "-"
