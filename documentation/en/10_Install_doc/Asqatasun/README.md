@@ -2,7 +2,7 @@
 
 This page describes the steps to follow to install Asqatasun since Version 3.0.0 
 (and further) from the binary files or from the sources. The software has been 
-tested on Linux Ubuntu 14.04 LTS (Trusty Tahr).
+tested on Linux Ubuntu 18.04 LTS (Bionic Beaver).
 
 ## Steps to install (recommanded)
 
@@ -13,16 +13,3 @@ tested on Linux Ubuntu 14.04 LTS (Trusty Tahr).
 5. [Set up an Apache frontend with HTTPS](Apache_frontend.md) (optional)
 
 Ever need help ? Go to [Asqatasun Forum](http://forum.asqatasun.org).
-
-## Alternate ways of installing
-
-### Docker
-
-If you want to quickly test Asqatasun, you may use the [Asqatasun Docker Image](../Docker/README.md), 
-or you can follow the following full instructions.
-
-### Ansible
-
-Ansible roles are available in the `/ansible` directory of the [lastest version of Asqatasun](http://download.asqatasun.org/asqatasun-latest.tar.gz).
-
-
