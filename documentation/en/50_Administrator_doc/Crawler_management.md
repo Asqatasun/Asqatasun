@@ -8,7 +8,7 @@ To increase this value, you should do the following steps.
 
 ### 1. Edit file tgol-beans-audit-set-up-form.xml
 
-From the webapp directory (typically `/var/lib/tomcat7/webapps/asqatasun`),
+From the webapp directory (typically `/var/lib/tomcat8/webapps/asqatasun`),
 edit file `WEB-INF/conf/mvc/form/tgol-beans-audit-set-up-form.xml`.
 
 In section `<bean id="maxDocumentsFormFieldBuilder"`, set the desired value:
@@ -31,7 +31,7 @@ In section `<bean id="maxDocumentsOptionFormFieldBuilder"`, set the
 ### 3. Restart Tomcat
 
 ```sh
-service tomcat7 restart
+service tomcat8 restart
 ```
 
 
@@ -42,7 +42,7 @@ By default, Asqatasun obeys to the [rules from the robots.txt](http://www.robots
 You may need to bypass these rules. This is not a good practice and is **not recommanded**. 
 But if you absolutely need it, you will have to do the following.
 
-1. From your webapp directory (typically `/var/lib/tomcat7/webapps/asqatasun` on Ubuntu 14.04), 
+1. From your webapp directory (typically `/var/lib/tomcat8/webapps/asqatasun`), 
    modify the file `WEB-INF/conf/crawler/asqatasun-crawler-beans-site.xml`
 2. Locate the entry `<bean id="metadata" class="org.archive.modules.CrawlMetadata" autowire="byName">`
 3. Add underneath the property `<property name="robotsPolicyName" value="ignore"/>`

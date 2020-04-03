@@ -4,6 +4,11 @@
 - Don't use it for production as all data are wiped out at reboot / rebuild
 - BUT for quick testing, that does the job :)
 
+## /!\ Note for Asqatasun 4.1.0 (2020-04-03)
+
+* Docker images have not been updated (as of 2020-04-03). This will be done shortly.
+* For a quick install, you may see [Asqatasun with Vagrant](../Vagrant/README.md) 
+
 ## 0. Know nothing about Docker ?
 
 ... begin here !
@@ -79,7 +84,7 @@ Once your container is launched:
 docker logs -tf asqatasun 
 ```
 
-(equivalent of a `tail -f /var/log/asqatasun.log /var/log/tomcat7/catalina.out`)
+(equivalent of a `tail -f /var/log/asqatasun.log /var/log/tomcat8/catalina.out`)
 
 ### Container available only on localhost (Linux users)
 

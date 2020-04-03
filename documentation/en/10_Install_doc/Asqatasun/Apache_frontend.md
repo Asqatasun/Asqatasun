@@ -11,18 +11,18 @@ You should have already done these steps:
 
 ## Configure Apache Virtual Host
 
-Let says the installed Asqatasun will be reachable through `asqatasun.company.com`. 
+Let says the installed Asqatasun will be reachable through `asqatasun.example.org`. 
 
-Create the file `/etc/apache2/sites-available/asqatasun.company.com.conf` and add the following content:
+Create the file `/etc/apache2/sites-available/asqatasun.example.org.conf` and add the following content:
 
 ```
 <VirtualHost *:80>
-	ServerName asqatasun.company.com
-	ServerAdmin webmaster@company.com
-	DocumentRoot /var/www-vhosts/asqatasun.company.com
+	ServerName asqatasun.example.org
+	ServerAdmin webmaster@example.org
+	DocumentRoot /var/www-vhosts/asqatasun.example.org
 
-	ErrorLog ${APACHE_LOG_DIR}/asqatasun.company.com_error.log
-	CustomLog ${APACHE_LOG_DIR}/asqatasun.company.com_access.log combined
+	ErrorLog ${APACHE_LOG_DIR}/asqatasun.example.org_error.log
+	CustomLog ${APACHE_LOG_DIR}/asqatasun.example.org_access.log combined
     LogLevel warn
 	ServerSignature Off
 
@@ -35,7 +35,7 @@ Create the file `/etc/apache2/sites-available/asqatasun.company.com.conf` and ad
 Activate virtual host and reload Apache
 
 ```
-sudo a2ensite asqatasun.company.com
+sudo a2ensite asqatasun.example.org
 sudo service apache2 restart
 ```
 
@@ -53,7 +53,7 @@ Install the following apache's modules
 sudo a2enmod proxy proxy_ajp proxy_html proxy_http xml2enc
 ```
 
-Certbot created a file `/etc/apache2/sites-available/asqatasun.company.com-le-ssl.conf`.
+Certbot created a file `/etc/apache2/sites-available/asqatasun.example.org-le-ssl.conf`.
 Edit this file, and just **before** the closing tag `</VirtualHost>`, add the following content:
  
 ```
@@ -66,13 +66,13 @@ SSLProxyEngine on
 ProxyPassMatch                  ^/External-Images/http://(.*)$  http://$1
 ProxyPassMatch                  ^/External-Images/https://(.*)$ https://$1
 ProxyPass                       /                               ajp://localhost:8009/
-ProxyPassReverse                /                               https://asqatasun.company.com/
+ProxyPassReverse                /                               https://asqatasun.example.org/
 ProxyPassReverseCookiePath      /                               /
 ```
 
 ## Configure Tomcat
 
-Make a backup copy of `/etc/tomcat7/server.xml` and modify it this way.
+Make a backup copy of `/etc/tomcat8/server.xml` and modify it this way.
 
 ### AJP Connector
 
@@ -80,7 +80,7 @@ Make a backup copy of `/etc/tomcat7/server.xml` and modify it this way.
 
 ```
 <Connector port="8009"
-    proxyName="asqatasun.company.com"
+    proxyName="asqatasun.example.org"
     proxyPort="443"
     URIEncoding="UTF-8"
     enableLookups="false"
@@ -92,7 +92,7 @@ After the tag `</Host>` and before the tag `</Engine>`, add the following:
 
 ```
 <!-- asqatasun host -->
-<Host name="asqatasun.company.com" 
+<Host name="asqatasun.example.org" 
     appBase="webapps"
     unpackWARs="true"
     autoDeploy="true">
@@ -113,8 +113,8 @@ After the tag `</Host>` and before the tag `</Engine>`, add the following:
 ## Test it all
 
 ```shell
-sudo service tomcat7 restart
+sudo service tomcat8 restart
 sudo service apache2 restart
 ```
 
-then browse https://asqatasun.company.com/
+then browse https://asqatasun.example.org/

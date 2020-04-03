@@ -24,8 +24,8 @@ Idea: to actually see the headless Firefox (no more headless thus).
 
 1. `service xvfb stop`
 1. `xhost +`
-1. Modify `/etc/default/tomcat7` to remplace `-Ddisplay=:99` by `-Ddisplay=:0.0`
-1. `service tomcat7 restart`
+1. Modify `/etc/default/tomcat8` to remplace `-Ddisplay=:99` by `-Ddisplay=:0.0`
+1. `service tomcat8 restart`
 
 When firing up an audit, you will see a Firefox window appearing and the page being loaded
 (page-audit) or the scenario executed (scenario-audit).
