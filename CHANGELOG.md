@@ -62,13 +62,10 @@ Thanks:
 - @Tyraelium       for [PR #226](https://github.com/Asqatasun/Asqatasun/issues/226)
 - @Mickaeldicurzio for [PR #224](https://github.com/Asqatasun/Asqatasun/issues/224)
 - @Haradwaith      for [PR #236](https://github.com/Asqatasun/Asqatasun/issues/236)
-- @allrib          for [PR #223](https://github.com/Asqatasun/Asqatasun/issues/223)
-                 and [PR #231](https://github.com/Asqatasun/Asqatasun/issues/231)
+- @allrib          for [PR #223](https://github.com/Asqatasun/Asqatasun/issues/223) and [PR #231](https://github.com/Asqatasun/Asqatasun/issues/231)
 - @selfthinker - Feature request [#202](https://github.com/Asqatasun/Asqatasun/issues/202)
 - @jeremychauvet - Bug report: [#239](https://github.com/Asqatasun/Asqatasun/issues/239)
-- @mgifford    - User feedback: [#205](https://github.com/Asqatasun/Asqatasun/issues/205),
-                              [#206](https://github.com/Asqatasun/Asqatasun/issues/206)
-                          and [#208](https://github.com/Asqatasun/Asqatasun/issues/208)
+- @mgifford    - User feedback: [#205](https://github.com/Asqatasun/Asqatasun/issues/205), [#206](https://github.com/Asqatasun/Asqatasun/issues/206) and [#208](https://github.com/Asqatasun/Asqatasun/issues/208)
 - Asqatasun team: @dzc34, @jkowalczyk, @mfaure
 
 ### Added
