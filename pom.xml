@@ -135,7 +135,7 @@
     </properties>
     <repositories>
         <repository>
-            <url>http://repo1.maven.org/maven2/</url>
+            <url>https://repo1.maven.org/maven2/</url>
             <id>central</id>
             <releases>
                 <enabled>true</enabled>
