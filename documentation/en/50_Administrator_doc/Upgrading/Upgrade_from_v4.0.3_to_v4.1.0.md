@@ -18,7 +18,7 @@
 mysqldump \
   --user=asqatasun \
   -p \
-  --databases asqatasun 
+  --databases asqatasun \
   --result-file=SAVE_DB_asqatasun.sql
 ```
 
@@ -30,6 +30,7 @@ mysqldump \
 ## 3. Import data from v4.0.3
 
 ```shell script
+systemctl stop tomcat8.service
 mysql --user=asqatasun -p -e "drop database asqatasun;"
 mysql --user=asqatasun -p <SAVE_DB_asqatasun.sql
 ``` 
@@ -38,16 +39,34 @@ mysql --user=asqatasun -p <SAVE_DB_asqatasun.sql
 
 Grab the two following file:
 
-* [asqatasun-40-update-from-4.0.3-to-4.1.0.sql](https://github.com/Asqatasun/Asqatasun/blob/release-4.1/engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql)
-* [tgol-40-update-from-4.0.3-to-4.1.0.sql](https://github.com/Asqatasun/Asqatasun/blob/release-4.1/web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql)
+* [asqatasun-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/release-4.1/engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql)
+* [tgol-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/release-4.1/web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql)
 
 And apply the following (order in important):
 
 ```shell script
 mysql --user=asqatasun -p asqatasun <asqatasun-40-update-from-4.0.3-to-4.1.0.sql
 mysql --user=asqatasun -p asqatasun <tgol-40-update-from-4.0.3-to-4.1.0.sql
+systemctl start tomcat8.service
 ```
 
 ## 5. Use Asqatasun 4.1.0
 
 * Accounts, credentials and projects have been imported, so you can use your usual login / password
+
+## Other information
+
+One may have to update a few field definitions:
+
+```mariadb
+ALTER TABLE EVIDENCE_ELEMENT
+    MODIFY `Element_Value` mediumtext NOT NULL;
+ALTER TABLE PRE_PROCESS_RESULT
+    MODIFY `Pre_Process_Value` mediumtext DEFAULT NULL;
+ALTER TABLE PROCESS_REMARK
+    MODIFY `Snippet` mediumtext DEFAULT NULL;
+ALTER TABLE PROCESS_RESULT
+    MODIFY `Indefinite_Value` mediumtext DEFAULT NULL;
+ALTER TABLE TGSI_SCENARIO
+    MODIFY `Content` mediumtext NOT NULL;
+```
