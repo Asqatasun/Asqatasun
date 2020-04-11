@@ -68,6 +68,17 @@ ProxyPassMatch                  ^/External-Images/https://(.*)$ https://$1
 ProxyPass                       /                               ajp://localhost:8009/
 ProxyPassReverse                /                               https://asqatasun.example.org/
 ProxyPassReverseCookiePath      /                               /
+
+# Enhancements from https://www.ssllabs.com
+SSLCertificateChainFile /etc/letsencrypt/live/asqatasun.example.org/chain.pem
+SSLProtocol TLSv1.2
+
+# Enhancements from https://observatory.mozilla.org/
+Header set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
+Header set Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://stats.example.asqatasun.org ; img-src * ; font-src 'self'; "
+Header always set X-Frame-Options DENY
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set X-Content-Type-Options "nosniff"
 ```
 
 ## Configure Tomcat

@@ -7,6 +7,7 @@
         * [Pre-requisites](10_Install_doc/Asqatasun/Pre-requisites.md)
         * [Installation](10_Install_doc/Asqatasun/Installation.md)
         * [Set up an Apache frontend with HTTPS](10_Install_doc/Asqatasun/Apache_frontend.md)
+        * [Adding web analytics](10_Install_doc/Asqatasun/Web_analytics.md)
     * [Vagrant](10_Install_doc/Vagrant/README.md)
     * [Puppet](10_Install_doc/Puppet/README.md)
     * [Ansible](10_Install_doc/Ansible/README.md)

@@ -11,5 +11,6 @@ tested on Linux Ubuntu 18.04 LTS (Bionic Beaver).
 3. [Check pre-requisites](Pre-requisites.md)
 4. [Install](Installation.md)
 5. [Set up an Apache frontend with HTTPS](Apache_frontend.md) (optional)
+6. [Add web analytics (Piwik, Matomo...)](Web_analytics.md)
 
 Ever need help ? Go to [Asqatasun Forum](http://forum.asqatasun.org).
