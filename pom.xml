@@ -132,6 +132,7 @@
         <jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
         <markdown-page-generator-plugin.version>2.1.0</markdown-page-generator-plugin.version>
         <yuicompressor-maven-plugin.version>1.5.1</yuicompressor-maven-plugin.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
     </properties>
     <repositories>
         <repository>
@@ -1788,6 +1789,13 @@
                 <groupId>com.ruleoftech</groupId>
                 <artifactId>markdown-page-generator-plugin</artifactId>
                 <version>${markdown-page-generator-plugin.version}</version>
+            </dependency>
+
+            <!-- Java Architecture for XML Binding (JAXB), Java 11+ support -->		
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
