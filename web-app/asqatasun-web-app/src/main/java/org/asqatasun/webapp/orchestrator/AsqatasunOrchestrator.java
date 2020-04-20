@@ -1,6 +1,6 @@
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2019  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
@@ -24,7 +24,6 @@ package org.asqatasun.webapp.orchestrator;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -46,11 +45,11 @@ import org.asqatasun.webapp.exception.KrashAuditException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author jkowalczyk
  */
 @Service("asqatasunOrchestrator")
@@ -95,6 +94,7 @@ public class AsqatasunOrchestrator {
     private final ScenarioDataService scenarioDataService;
     private final ActFactory actFactory;
     private final ThreadPoolTaskExecutor threadPoolTaskExecutor;
+    private final ReloadableResourceBundleMessageSource messageSource;
     private final Map<ScopeEnum, Scope> scopeMap = new EnumMap<>(ScopeEnum.class);
     private final EmailSender emailSender;
     private void initializeScopeMap(ScopeDataService ScopeDataService) {
@@ -109,8 +109,9 @@ public class AsqatasunOrchestrator {
             ActDataService actDataService,
             ActFactory actFactory,
             ScopeDataService scopeDataService,
-            ScenarioDataService scenarioDataService, 
+            ScenarioDataService scenarioDataService,
             ThreadPoolTaskExecutor threadPoolTaskExecutor,
+            ReloadableResourceBundleMessageSource messageSource,
             EmailSender emailSender) {
         this.auditService = auditService;
         this.actDataService = actDataService;
@@ -120,19 +121,20 @@ public class AsqatasunOrchestrator {
         initializeScopeMap(scopeDataService);
         this.threadPoolTaskExecutor = threadPoolTaskExecutor;
         this.emailSender = emailSender;
+        this.messageSource = messageSource;
     }
 
     public Audit auditPage(
-            Contract contract,
-            String pageUrl,
-            String clientIp,
-            Set<Parameter> parameterSet, 
-            Locale locale) {
+        Contract contract,
+        String pageUrl,
+        String clientIp,
+        Set<Parameter> parameterSet,
+        Locale locale) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Page audit on " + pageUrl);
             for (Parameter param : parameterSet) {
-                LOGGER.debug("param " + param.getValue() + " "+
-                        param.getParameterElement().getParameterElementCode());
+                LOGGER.debug("param " + param.getValue() + " " +
+                    param.getParameterElement().getParameterElementCode());
             }
         }
         Act act = createAct(contract, ScopeEnum.PAGE, clientIp);
@@ -142,20 +144,20 @@ public class AsqatasunOrchestrator {
     }
 
     public Audit auditPageUpload(
-            Contract contract,
-            Map<String, String> fileMap,
-            String clientIp,
-            Set<Parameter> parameterSet, 
-            Locale locale) {
+        Contract contract,
+        Map<String, String> fileMap,
+        String clientIp,
+        Set<Parameter> parameterSet,
+        Locale locale) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("auditPage Upload on " + fileMap.size() + " files");
             for (Parameter param : parameterSet) {
-                LOGGER.debug("param " + param.getValue() + " "+
-                        param.getParameterElement().getParameterElementCode());
+                LOGGER.debug("param " + param.getValue() + " " +
+                    param.getParameterElement().getParameterElementCode());
             }
         }
         Act act;
-        if (fileMap.size()>1) {
+        if (fileMap.size() > 1) {
             act = createAct(contract, ScopeEnum.GROUPOFFILES, clientIp);
         } else {
             act = createAct(contract, ScopeEnum.FILE, clientIp);
@@ -166,70 +168,70 @@ public class AsqatasunOrchestrator {
     }
 
     public void auditSite(
-            Contract contract,
-            String siteUrl,
-            String clientIp,
-            Set<Parameter> parameterSet, 
-            Locale locale) {
+        Contract contract,
+        String siteUrl,
+        String clientIp,
+        Set<Parameter> parameterSet,
+        Locale locale) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Site audit on " + siteUrl);
             for (Parameter param : parameterSet) {
-                LOGGER.debug("param " + param.getValue() + " "+
-                        param.getParameterElement().getParameterElementCode());
+                LOGGER.debug("param " + param.getValue() + " " +
+                    param.getParameterElement().getParameterElementCode());
             }
         }
         Act act = createAct(contract, ScopeEnum.DOMAIN, clientIp);
         AuditThread auditSiteThread =
-                new AuditSiteThread(
-                    siteUrl,
-                    auditService,
-                    act,
-                    parameterSet, 
-                    locale);
+            new AuditSiteThread(
+                siteUrl,
+                auditService,
+                act,
+                parameterSet,
+                locale);
         threadPoolTaskExecutor.submit(auditSiteThread);
     }
 
     public void auditScenario(
-            Contract contract,
-            Long idScenario,
-            String clientIp,
-            Set<Parameter> parameterSet, 
-            Locale locale) {
+        Contract contract,
+        Long idScenario,
+        String clientIp,
+        Set<Parameter> parameterSet,
+        Locale locale) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Scenarion audit on scenario with id" + idScenario);
             for (Parameter param : parameterSet) {
-                LOGGER.debug("param " + param.getValue() + " "+
-                        param.getParameterElement().getParameterElementCode());
+                LOGGER.debug("param " + param.getValue() + " " +
+                    param.getParameterElement().getParameterElementCode());
             }
         }
         Act act = createAct(contract, ScopeEnum.SCENARIO, clientIp);
         Scenario scenario = scenarioDataService.read(idScenario);
         AuditThread auditScenarioThread =
-                new AuditScenarioThread(
-                    scenario.getLabel(),
-                    scenario.getContent(),
-                    auditService,
-                    act,
-                    parameterSet, 
-                    locale);
+            new AuditScenarioThread(
+                scenario.getLabel(),
+                scenario.getContent(),
+                auditService,
+                act,
+                parameterSet,
+                locale);
         threadPoolTaskExecutor.submit(auditScenarioThread);
     }
 
     public Audit auditSite(
-            Contract contract,
-            String siteUrl,
-            final List<String> pageUrlList,
-            String clientIp,
-            Set<Parameter> parameterSet, 
-            Locale locale) {
+        Contract contract,
+        String siteUrl,
+        final List<String> pageUrlList,
+        String clientIp,
+        Set<Parameter> parameterSet,
+        Locale locale) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Group of pages audit");
-            for (String str :pageUrlList) {
+            for (String str : pageUrlList) {
                 LOGGER.debug("pageUrl " + str);
             }
             for (Parameter param : parameterSet) {
-                LOGGER.debug("param " + param.getValue() + " "+
-                        param.getParameterElement().getParameterElementCode());
+                LOGGER.debug("param " + param.getValue() + " " +
+                    param.getParameterElement().getParameterElementCode());
             }
         }
         Act act = createAct(contract, ScopeEnum.GROUPOFPAGES, clientIp);
@@ -239,9 +241,8 @@ public class AsqatasunOrchestrator {
     }
 
     /**
-     * 
      * @param auditTimeoutThread
-     * @return 
+     * @return
      */
     private Audit submitAuditAndLaunch(AuditTimeoutThread auditTimeoutThread) {
         synchronized (auditTimeoutThread) {
@@ -268,7 +269,7 @@ public class AsqatasunOrchestrator {
 
     /**
      * Send an email when an audit terminates
-     * 
+     *
      * @param act
      * @param locale
      */
@@ -276,44 +277,40 @@ public class AsqatasunOrchestrator {
         String emailTo = act.getContract().getUser().getEmail1();
         if (this.emailSentToUserExclusionList.contains(emailTo)) {
             LOGGER.info("Email not set cause user " + emailTo + " belongs to "
-                    + "exlusion list");
+                + "exlusion list");
             return;
         }
-        ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
-        String emailFrom = bundle.getString(RECIPIENT_KEY);
+        String emailFrom = messageSource.getMessage(RECIPIENT_KEY, null, locale);
+
         Set<String> emailToSet = new HashSet<>();
         emailToSet.add(emailTo);
         if (act.getStatus().equals(ActStatus.COMPLETED)) {
-            sendSuccessfulMessageOnActTerminated(act, bundle, emailFrom, emailToSet, getProjectNameFromAct(act));
+            sendSuccessfulMessageOnActTerminated(act, locale, emailFrom, emailToSet, getProjectNameFromAct(act));
         } else if (act.getStatus().equals(ActStatus.ERROR)) {
-            sendFailureMessageOnActTerminated(act, bundle, emailFrom, emailToSet, getProjectNameFromAct(act));
+            sendFailureMessageOnActTerminated(act, locale, emailFrom, emailToSet, getProjectNameFromAct(act));
         }
-     }
+    }
 
     /**
-     * 
      * @param act
      * @param locale
-     * @param exception 
+     * @param exception
      */
     private void sendKrashAuditEmail(Act act, Locale locale, Exception exception) {
-        ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
-        String emailFrom = bundle.getString(RECIPIENT_KEY);
+
+        String emailFrom = messageSource.getMessage(RECIPIENT_KEY, null, locale);
         String projectName = getProjectNameFromAct(act);
-        
+        String host = getLocalhostname();
+
         if (isAllowedToSendKrashReport && CollectionUtils.isNotEmpty(krashReportMailList)) {
             Set<String> emailToSet = new HashSet<>();
             emailToSet.addAll(krashReportMailList);
-            String host ="";
-            try { 
-                host = InetAddress.getLocalHost().getHostName();
-            } catch (UnknownHostException uhe) {}
 
-            String msgSubject = bundle.getString(KRASH_ADMIN_SUBJECT_KEY);
+            String msgSubject = messageSource.getMessage(KRASH_ADMIN_SUBJECT_KEY, null, locale);
             msgSubject = StringUtils.replace(msgSubject, PROJECT_NAME_TO_REPLACE, projectName);
             msgSubject = StringUtils.replace(msgSubject, HOST_TO_REPLACE, host);
-            
-            String msgContent = bundle.getString(KRASH_ADMIN_MSG_CONTENT_KEY);
+
+            String msgContent = messageSource.getMessage(KRASH_ADMIN_MSG_CONTENT_KEY, null, locale);
             msgContent = StringUtils.replace(msgContent, PROJECT_NAME_TO_REPLACE, projectName);
             msgContent = StringUtils.replace(msgContent, USER_EMAIL_TO_REPLACE, act.getContract().getUser().getEmail1());
             msgContent = StringUtils.replace(msgContent, HOST_TO_REPLACE, host);
@@ -321,71 +318,82 @@ public class AsqatasunOrchestrator {
             if (act.getAudit().getSubject() != null) {
                 msgContent = StringUtils.replace(msgContent, AUDIT_URL_TO_REPLACE, act.getAudit().getSubject().getURL());
             }
-            LOGGER.info("krash email sent to "+krashReportMailList + " on audit n° " + act.getAudit().getId());
+            LOGGER.info("krash email sent to " + krashReportMailList + " on audit n° " + act.getAudit().getId());
             sendEmail(emailFrom, emailToSet, msgSubject, msgContent);
         }
 
         String emailTo = act.getContract().getUser().getEmail1();
         if (this.emailSentToUserExclusionList.contains(emailTo)) {
             LOGGER.info("Email not set cause user " + emailTo + " belongs to "
-                    + "exlusion list");
+                + "exlusion list");
             return;
         }
         Set<String> emailToSet = new HashSet<>();
         emailToSet.add(emailTo);
-        String msgSubject = bundle.getString(KRASH_SUBJECT_KEY);
+
+        String msgSubject = messageSource.getMessage(KRASH_SUBJECT_KEY, null, locale);
         msgSubject = StringUtils.replace(msgSubject, PROJECT_NAME_TO_REPLACE, projectName);
-        String msgContent = bundle.getString(KRASH_MSG_CONTENT_KEY);
+        msgSubject = StringUtils.replace(msgSubject, HOST_TO_REPLACE, host);
+
+        String msgContent = messageSource.getMessage(KRASH_MSG_CONTENT_KEY, null, locale);
         msgContent = StringUtils.replace(msgContent, PROJECT_NAME_TO_REPLACE, projectName);
         msgContent = StringUtils.replace(msgContent, PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
-        LOGGER.info("krash email sent to [" + emailTo+"]" + " on audit n° " + act.getAudit().getId());
+
+        LOGGER.info("krash email sent to [" + emailTo + "]" + " on audit n° " + act.getAudit().getId());
         sendEmail(emailFrom, emailToSet, msgSubject, msgContent);
     }
-    
+
     /**
-     * 
      * @param act
-     * @param bundle
+     * @param locale
      * @param emailFrom
      * @param emailTo
-     * @param projectName 
+     * @param projectName
      */
     private void sendSuccessfulMessageOnActTerminated(
-            Act act,
-            ResourceBundle bundle, 
-            String emailFrom, 
-            Set<String> emailTo, 
-            String projectName) {
-        
-        String emailSubject = bundle.getString(SUCCESS_SUBJECT_KEY).
-                replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
-        
-        String messageContent = bundle.getString(SUCCESS_MSG_CONTENT_KEY);
+        Act act,
+        Locale locale,
+        String emailFrom,
+        Set<String> emailTo,
+        String projectName) {
+
+        String host = getLocalhostname();
+        LOGGER.debug("Hostname " + host);
+        LOGGER.debug("SUCCESS_SUBJECT_KEY " + messageSource.getMessage(SUCCESS_SUBJECT_KEY, null, locale));
+        String emailSubject = messageSource.getMessage(SUCCESS_SUBJECT_KEY, null, locale).
+            replaceAll(PROJECT_NAME_TO_REPLACE, projectName).
+            replaceAll(HOST_TO_REPLACE, host);
+        LOGGER.debug("emailSubject " + emailSubject);
+
+        String messageContent = messageSource.getMessage(SUCCESS_MSG_CONTENT_KEY, null, locale);
         messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
         messageContent = messageContent.replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
-        
-        LOGGER.info("success email sent to " + emailTo+ " on audit n° " + act.getAudit().getId());
+
+        LOGGER.info("success email sent to " + emailTo + " on audit n° " + act.getAudit().getId());
         sendEmail(emailFrom, emailTo, emailSubject, messageContent);
     }
 
     /**
-     * 
      * @param act
-     * @param bundle
+     * @param locale locale
      * @return
      */
     private void sendFailureMessageOnActTerminated(
-            Act act, 
-            ResourceBundle bundle, 
-            String emailFrom, 
-            Set<String> emailTo,
-            String projectName) {
-        String emailSubject = bundle.getString(ERROR_SUBJECT_KEY).replaceAll(PROJECT_NAME_TO_REPLACE, projectName);
+        Act act,
+        Locale locale,
+        String emailFrom,
+        Set<String> emailTo,
+        String projectName) {
+
+        String host = getLocalhostname();
+        String emailSubject = messageSource.getMessage(ERROR_SUBJECT_KEY, null, locale).
+            replaceAll(PROJECT_NAME_TO_REPLACE, projectName).
+            replaceAll(HOST_TO_REPLACE, host);
         String messageContent;
         if (act.getScope().getCode().equals(ScopeEnum.DOMAIN)) {
-            messageContent = bundle.getString(SITE_ERROR_MSG_CONTENT_KEY);
+            messageContent = messageSource.getMessage(SITE_ERROR_MSG_CONTENT_KEY, null, locale);
         } else {
-            messageContent = bundle.getString(PAGE_ERROR_MSG_CONTENT_KEY);
+            messageContent = messageSource.getMessage(PAGE_ERROR_MSG_CONTENT_KEY, null, locale);
         }
         messageContent = messageContent.replaceAll(PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
         messageContent = messageContent.replaceAll(URL_TO_REPLACE, buildResultUrl(act));
@@ -393,56 +401,69 @@ public class AsqatasunOrchestrator {
         LOGGER.info("failure email sent to " + emailTo + " on audit n° " + act.getAudit().getId());
         sendEmail(emailFrom, emailTo, emailSubject, messageContent);
     }
-    
+
     /**
-     * 
      * @param emailFrom
      * @param emailToSet
      * @param emailSubject
-     * @param emailMessage 
+     * @param emailMessage
      */
     private void sendEmail(
-            String emailFrom, 
-            Set<String> emailToSet, 
-            String emailSubject, 
-            String emailMessage) {
+        String emailFrom,
+        Set<String> emailToSet,
+        String emailSubject,
+        String emailMessage) {
         emailSender.sendEmail(
-                emailFrom, 
-                emailToSet, 
-                Collections.<String>emptySet(), 
-                StringUtils.EMPTY,
-                emailSubject, 
-                emailMessage);
+            emailFrom,
+            emailToSet,
+            Collections.emptySet(),
+            StringUtils.EMPTY,
+            emailSubject,
+            emailMessage);
     }
-    
+
     /**
-     * 
-     * @param act
-     * @return 
+     * getLocalhostname Grab hostname of host running Asqatasun
+     * (used in emails to identify from which server the email comes from)
      */
-    private String buildResultUrl (Act act) {
+    private String getLocalhostname() {
+        String host = "";
+        try {
+            host = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException uhe) {
+        }
+        return host;
+    }
+
+
+    /**
+     * @param act
+     * @return
+     */
+    private String buildResultUrl(Act act) {
         StringBuilder strb = new StringBuilder();
         strb.append(webappUrl);
         strb.append(PAGE_RESULT_URL_SUFFIX);
         strb.append(act.getAudit().getId());
         return strb.toString();
     }
-    
+
     /**
      * 
      * @param contract
      * @return 
      */
-    private String buildContractUrl (Contract contract) {
+    private String buildContractUrl(Contract contract) {
         StringBuilder strb = new StringBuilder();
         strb.append(webappUrl);
         strb.append(CONTRACT_URL_SUFFIX);
         strb.append(contract.getId());
         return strb.toString();
     }
-    
+
     /**
      * This method initializes an act instance and persists it.
+     *
      * @param contract
      * @param scope
      * @return
@@ -456,11 +477,10 @@ public class AsqatasunOrchestrator {
         act = actDataService.saveOrUpdate(act);
         return act;
     }
-    
+
     /**
-     * 
      * @param act
-     * @return 
+     * @return
      */
     private String getProjectNameFromAct(Act act) {
         StringBuilder projectName = new StringBuilder();
@@ -473,9 +493,9 @@ public class AsqatasunOrchestrator {
         }
         return projectName.toString();
     }
-    
+
     /**
-     * 
+     *
      */
     private abstract class AuditThread implements Runnable, AuditServiceListener {
 
@@ -512,13 +532,12 @@ public class AsqatasunOrchestrator {
             auditService.remove(this);
             onActTerminated(currentAct);
         }
-        
+
         /**
-         * 
-         * @return 
+         * @return
          */
         public abstract Audit launchAudit();
-        
+
         @Override
         public void auditCompleted(Audit audit) {
 
@@ -578,21 +597,21 @@ public class AsqatasunOrchestrator {
             }
         }
     }
-    
+
     /**
-     * Inner class in charge of launching a site audit in a thread. At the end 
+     * Inner class in charge of launching a site audit in a thread. At the end
      * the audit, an email has to be sent to the user with the audit info.
      */
     private class AuditSiteThread extends AuditThread {
 
         private final String siteUrl;
-        
+
         public AuditSiteThread(
-                String siteUrl,
-                AuditService auditService,
-                Act act,
-                Set<Parameter> parameterSet, 
-                Locale locale) {
+            String siteUrl,
+            AuditService auditService,
+            Act act,
+            Set<Parameter> parameterSet,
+            Locale locale) {
             super(auditService, act, parameterSet, locale);
             this.siteUrl = siteUrl;
             LOGGER.info("Launching audit site on " + this.siteUrl);
@@ -602,7 +621,7 @@ public class AsqatasunOrchestrator {
         public Audit launchAudit() {
             return auditService.auditSite(this.siteUrl, parameterSet);
         }
-        
+
         @Override
         protected void onActTerminated(Act act) {
             super.onActTerminated(act);
@@ -613,23 +632,23 @@ public class AsqatasunOrchestrator {
         }
 
     }
-    
+
     /**
-     * Inner class in charge of launching a site audit in a thread. At the end 
+     * Inner class in charge of launching a site audit in a thread. At the end
      * the audit, an email has to be sent to the user with the audit info.
      */
     private class AuditScenarioThread extends AuditThread {
 
         private final String scenarioName;
         private final String scenario;
-        
+
         public AuditScenarioThread(
-                String scenarioName,
-                String scenario,
-                AuditService auditService,
-                Act act,
-                Set<Parameter> parameterSet, 
-                Locale locale) {
+            String scenarioName,
+            String scenario,
+            AuditService auditService,
+            Act act,
+            Set<Parameter> parameterSet,
+            Locale locale) {
             super(auditService, act, parameterSet, locale);
             this.scenario = scenario;
             this.scenarioName = scenarioName;
@@ -640,7 +659,7 @@ public class AsqatasunOrchestrator {
         public Audit launchAudit() {
             return auditService.auditScenario(scenarioName, scenario, parameterSet);
         }
-        
+
         @Override
         protected void onActTerminated(Act act) {
             super.onActTerminated(act);
@@ -653,7 +672,7 @@ public class AsqatasunOrchestrator {
     }
 
     /**
-     * Abstract Inner class in charge of launching an audit in a thread. This 
+     * Abstract Inner class in charge of launching an audit in a thread. This
      * thread has to expose the current audit as an attribute. If the
      * audit is not terminated in a given delay, this attribute returns null and
      * an email has to be sent to inform the user.
@@ -671,6 +690,14 @@ public class AsqatasunOrchestrator {
                 int delay) {
             super(auditService, act, parameterSet, locale);
             this.delay = delay;
+        }
+
+        public boolean isAuditTerminatedAfterTimeout() {
+            return isAuditTerminatedAfterTimeout;
+        }
+
+        public void setAuditTerminatedAfterTimeout(boolean isAuditTerminatedBeforeTimeout) {
+            this.isAuditTerminatedAfterTimeout = isAuditTerminatedBeforeTimeout;
         }
 
         @Override
@@ -692,23 +719,23 @@ public class AsqatasunOrchestrator {
         }
 
     }
-    
+
     /**
-     * 
+     *
      */
     private class AuditGroupOfPagesThread extends AuditTimeoutThread {
 
         private final String siteUrl;
         private final List<String> pageUrlList = new ArrayList<>();
-        
+
         public AuditGroupOfPagesThread(
-                String siteUrl,
-                List<String> pageUrlList,
-                AuditService auditService,
-                Act act,
-                Set<Parameter> parameterSet, 
-                Locale locale,
-                int delay) {
+            String siteUrl,
+            List<String> pageUrlList,
+            AuditService auditService,
+            Act act,
+            Set<Parameter> parameterSet,
+            Locale locale,
+            int delay) {
             super(auditService, act, parameterSet, locale, delay);
             this.siteUrl = siteUrl;
             if (pageUrlList != null) {
@@ -725,29 +752,29 @@ public class AsqatasunOrchestrator {
             }
             return audit;
         }
-        
+
         @Override
         protected void onActTerminated(Act act) {
             super.onActTerminated(act);
             LOGGER.info("Audit group of page terminated on " + this.pageUrlList);
         }
-        
+
     }
-    
+
     /**
      * Inner class in charge of launching a page audit in a thread.
      */
     private class AuditPageThread extends AuditTimeoutThread {
 
         private final String pageUrl;
-        
+
         public AuditPageThread(
-                String pageUrl,
-                AuditService auditService,
-                Act act,
-                Set<Parameter> parameterSet,
-                Locale locale,
-                int delay) {
+            String pageUrl,
+            AuditService auditService,
+            Act act,
+            Set<Parameter> parameterSet,
+            Locale locale,
+            int delay) {
             super(auditService, act, parameterSet, locale, delay);
             this.pageUrl = pageUrl;
             LOGGER.info("Launching audit Page on " + pageUrl);
@@ -761,29 +788,29 @@ public class AsqatasunOrchestrator {
             }
             return audit;
         }
-        
+
         @Override
         protected void onActTerminated(Act act) {
             super.onActTerminated(act);
             LOGGER.info("Audit page terminated on " + this.pageUrl);
         }
-        
+
     }
-    
+
     /**
      * Inner class in charge of launching a upload pages audit in a thread.
      */
     private class AuditPageUploadThread extends AuditTimeoutThread {
 
         private final Map<String, String> pageMap = new HashMap<>();
-        
+
         public AuditPageUploadThread(
-                Map<String, String> pageMap,
-                AuditService auditService,
-                Act act,
-                Set<Parameter> parameterSet, 
-                Locale locale,
-                int delay) {
+            Map<String, String> pageMap,
+            AuditService auditService,
+            Act act,
+            Set<Parameter> parameterSet,
+            Locale locale,
+            int delay) {
             super(auditService, act, parameterSet, locale, delay);
             if (pageMap != null) {
                 this.pageMap.putAll(pageMap);
@@ -799,13 +826,13 @@ public class AsqatasunOrchestrator {
             }
             return audit;
         }
-        
+
         @Override
         protected void onActTerminated(Act act) {
             super.onActTerminated(act);
             LOGGER.info("Audit files terminated on " + this.pageMap.keySet());
         }
-        
+
     }
 
 }
