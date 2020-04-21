@@ -15,7 +15,7 @@ Let says the installed Asqatasun will be reachable through `asqatasun.example.or
 
 Create the file `/etc/apache2/sites-available/asqatasun.example.org.conf` and add the following content:
 
-```
+```apacheconfig
 <VirtualHost *:80>
 	ServerName asqatasun.example.org
 	ServerAdmin webmaster@example.org
@@ -34,7 +34,7 @@ Create the file `/etc/apache2/sites-available/asqatasun.example.org.conf` and ad
 
 Activate virtual host and reload Apache
 
-```
+```shell script
 sudo a2ensite asqatasun.example.org
 sudo service apache2 restart
 ```
@@ -49,14 +49,14 @@ Follow all explanations from https://certbot.eff.org/
 
 Install the following apache's modules
 
-```shell
-sudo a2enmod proxy proxy_ajp proxy_html proxy_http xml2enc
+```shell script
+sudo a2enmod headers proxy proxy_ajp proxy_html proxy_http xml2enc
 ```
 
 Certbot created a file `/etc/apache2/sites-available/asqatasun.example.org-le-ssl.conf`.
 Edit this file, and just **before** the closing tag `</VirtualHost>`, add the following content:
- 
-```
+
+```apacheconfig
 SSLProxyEngine on
 <Proxy *>
     Order deny,allow
@@ -81,15 +81,13 @@ Header always set Referrer-Policy "strict-origin-when-cross-origin"
 Header always set X-Content-Type-Options "nosniff"
 ```
 
-## Configure Tomcat
+## Configure Tomcat AJP Connector
 
-Make a backup copy of `/etc/tomcat8/server.xml` and modify it this way.
-
-### AJP Connector
+Make a backup copy of `/etc/tomcat8/server.xml`, you'll be glad to have it :)
 
 **Before** the tag `<Engine ...`, add the following:
 
-```
+```xml
 <Connector port="8009"
     proxyName="asqatasun.example.org"
     proxyPort="443"
@@ -101,7 +99,7 @@ Make a backup copy of `/etc/tomcat8/server.xml` and modify it this way.
 
 After the tag `</Host>` and before the tag `</Engine>`, add the following:
 
-```
+```xml
 <!-- asqatasun host -->
 <Host name="asqatasun.example.org" 
     appBase="webapps"
@@ -123,9 +121,9 @@ After the tag `</Host>` and before the tag `</Engine>`, add the following:
 
 ## Test it all
 
-```shell
-sudo service tomcat8 restart
-sudo service apache2 restart
+```shell script
+systemctl restart tomcat8
+systemctl restart apache2
 ```
 
 then browse https://asqatasun.example.org/
