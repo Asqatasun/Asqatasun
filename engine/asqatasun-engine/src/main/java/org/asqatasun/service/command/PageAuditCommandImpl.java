@@ -23,12 +23,16 @@
 package org.asqatasun.service.command;
 
 import java.util.Set;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.sebuilder.tools.ScenarioBuilder;
+import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
 import org.asqatasun.util.FileNaming;
 import org.asqatasun.util.http.HttpRequestHandler;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -55,7 +59,11 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
     @Override
     public void init() {
         if (HttpRequestHandler.getInstance().isUrlAccessible(pageUrl)) {
-            setScenario(ScenarioBuilder.buildScenario(pageUrl));
+            try {
+                setScenario(new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(pageUrl)));
+            } catch (JsonProcessingException e) {
+                LoggerFactory.getLogger(this.getClass()).error("Could not parse scenario " + e.getMessage());
+            }
             setScenarioName(pageUrl);
             setIsPage(true);
             super.init();

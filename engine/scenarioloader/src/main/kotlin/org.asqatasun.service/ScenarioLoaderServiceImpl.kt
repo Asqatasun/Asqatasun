@@ -19,26 +19,21 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.scenarioloader;
+package org.asqatasun.service
 
-import java.util.List;
-import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.Content
+import org.asqatasun.entity.subject.WebResource
+import org.asqatasun.scenarioloader.ScenarioLoaderFactory
+import org.springframework.stereotype.Service
 
 /**
- * 
+ *
  * @author jkowalczyk
  */
-public interface ScenarioLoader {
+@Service
+class ScenarioLoaderServiceImpl(private val scenarioLoaderFactory: ScenarioLoaderFactory): ScenarioLoaderService{
 
-    /**
-     *
-     * @return
-     */
-    List<Content> getResult();
-
-    /**
-     *
-     */
-    void run();
+    override fun loadScenario(webResource: WebResource, scenarioFile: String?): List<Content> =
+        scenarioLoaderFactory.create(webResource, scenarioFile).run { run(); result}
 
 }

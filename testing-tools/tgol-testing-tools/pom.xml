@@ -13,12 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            
+            <artifactId>asqatasun-scenarioloader</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-configuration</groupId>
@@ -28,10 +23,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.asqatasun</groupId>
-            <artifactId>asqatasun-scenarioloader</artifactId>
         </dependency>
     </dependencies>
 </project>

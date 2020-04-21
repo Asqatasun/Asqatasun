@@ -28,20 +28,15 @@
     </appender>
     <logger name="org.asqatasun.service" level="INFO"/>
     <logger name="com.mchange" level="INFO"/>
-    <logger name="com.phloc.css.parser" level="FATAL"/>
+    <logger name="com.phloc.css.parser" level="INFO"/>
     <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>
     <logger name="org.jsoup" level="INFO"/>
-    <logger name="org.asqatasun.crawler" level="INFO"/>
     <logger name="org.asqatasun.webapp.validator" level="INFO"/>
     <logger name="org.asqatasun.contentadapter" level="INFO"/>
     <logger name="org.asqatasun.contentadapter.css" level="ERROR"/>
-    <logger name="org.springframework.web.servlet.tags.MessageTag" level="FATAL"/>
     <logger name="org.asqatasun.scenarioloader" level="DEBUG"/>
     <logger name="org.asqatasun.sebuilder" level="DEBUG"/>
-    <logger name="org.asqatasun.webapp.dto.factory.TestResultFactory" level="ERROR"/>
-    <logger name="com.sebuilder" level="DEBUG"/>
-    <logger name="org.asqatasun.webapp.orchestrator" level="INFO"/>
-    <logger name="org.tuckey.web.filters" level="DEBUG"/>
+    <logger name="org.openqa.selenium" level="INFO"/>
     <root level="INFO">
         <!--        <appender-ref ref="FILE_APP"/>-->
         <appender-ref ref="CONSOLE_APP"/>

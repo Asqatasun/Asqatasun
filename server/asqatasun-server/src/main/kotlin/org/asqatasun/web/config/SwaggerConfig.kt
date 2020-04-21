@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
-import springfox.documentation.builders.PathSelectors
-import springfox.documentation.builders.RequestHandlerSelectors
 import springfox.documentation.service.ApiInfo
 import springfox.documentation.service.Contact
 import springfox.documentation.spi.DocumentationType
@@ -18,13 +16,17 @@ import java.util.*
 @EnableSwagger2
 class SwaggerConfig {
 
+    /**
+     * ##### Warning ####
+     * Don't use paths and apis methods as they use Predicate guava interface.
+     * Swagger uses guava in version 19 as selenium uses 25-jre version. To avoid runtime exception,
+     * we avoid to use guava objects through swagger.
+     */
     @Bean
     fun api(): Docket {
         return Docket(DocumentationType.SWAGGER_2)
             .ignoredParameterTypes(AuthenticationPrincipal::class.java)
             .select()
-            .apis(RequestHandlerSelectors.basePackage("org.asqatasun.web"))
-            .paths(PathSelectors.any())
             .build()
             .apiInfo(getApiInfo())
     }
