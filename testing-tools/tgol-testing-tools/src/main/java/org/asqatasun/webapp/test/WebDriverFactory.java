@@ -22,11 +22,7 @@
 
 package org.asqatasun.webapp.test;
 
-import org.apache.commons.lang3.StringUtils;
-import org.asqatasun.sebuilder.tools.ProfileFactory;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -65,13 +61,7 @@ public class WebDriverFactory {
      */
     public FirefoxDriver getFirefoxDriver(String display) {
         if (webDriver == null) {
-            FirefoxBinary ffBinary = new FirefoxBinary();
-            if (StringUtils.isNotBlank(display)) {
-                LoggerFactory.getLogger(this.getClass()).info("Setting Xvfb display with value " + display);
-                ffBinary.setEnvironmentProperty("DISPLAY", display);
-            }
-            ProfileFactory pf = ProfileFactory.getInstance();
-            webDriver = new FirefoxDriver(ffBinary, pf.getOnlineProfile());
+            webDriver = new FirefoxDriver();
             webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
             webDriver.manage().timeouts().pageLoadTimeout(310, TimeUnit.SECONDS);
         }

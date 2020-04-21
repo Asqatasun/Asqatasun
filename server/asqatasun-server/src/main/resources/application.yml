@@ -5,53 +5,55 @@ jdbc:
     password: "bou"
 
 jpa:
-    showSql: false
+  showSql: false
 
 hibernate:
-    cache:
-        use_second_level_cache: true
-        use_query_cache: true
-        ehcache:
-            missing_cache_strategy:spring: create
+  cache:
+    use_second_level_cache: true
+    use_query_cache: true
+    ehcache:
+      missing_cache_strategy:spring: create
 
 webdriver:
-    firefox:
-        bin: "/opt/firefox/firefox"
+  firefox:
+    bin: "/opt/firefox/firefox"
 
 spring:
-    profiles:
-        active: "webapp"
+  profiles:
+    active: "webapp"
 
 management:
-    server:
-        port: 8090
-    health:
-        db:
-            enabled: true
-    endpoints:
-        web:
-            exposure:
-                include: '*'
-    metrics:
-        enable:
-            jvm: true
-            process: true
-            system: true
-            jdbc: true
-            logback: true
+  server:
+    port: 8090
+  health:
+    db:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    enable:
+      jvm: true
+      process: true
+      system: true
+      jdbc: true
+      logback: true
 
 app:
-    version: "5.0-SNAPSHOT"
-    logDir: "/tmp"
-    users:
-        auth:
-            -   name: asqatasun
-                password: bou
-    engine:
-        persistence:
-            packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"
-            useComboPool: true
-        loader:
-            proxy:
-                port:
-                host:
+  version: "5.0-SNAPSHOT"
+  logDir: "/tmp"
+  users:
+    auth:
+      -  name: asqatasun
+         password: bou
+  engine:
+    persistence:
+      packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"
+      useComboPool: true
+    loader:
+      proxy:
+        port:
+        host:
+      selenium:
+        headless: false

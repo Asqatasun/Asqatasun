@@ -26,12 +26,10 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.*;
 
-import com.sebuilder.interpreter.factory.ScriptFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MimeTypes;
-import org.json.JSONException;
 import org.asqatasun.webapp.command.AddScenarioCommand;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.entity.contract.Contract;
@@ -136,16 +134,15 @@ public class AddScenarioFormValidator implements Validator {
      * @param addScenarioCommand
      * @param errors 
      */
-    public void checkScenarioFileValidity(
-            AddScenarioCommand addScenarioCommand, 
-            Errors errors) {
-        try {
-            new ScriptFactory().parse(addScenarioCommand.getScenarioContent(), null);
-        } catch (JSONException | IOException e) {
-            errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
-            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
-                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
-        }
+    public void checkScenarioFileValidity(AddScenarioCommand addScenarioCommand,Errors errors) {
+        // @TODO checkScenario when uploading it
+//        try {
+//            new ScriptFactory().parse(addScenarioCommand.getScenarioContent(), null);
+//        } catch (JSONException | IOException e) {
+//            errors.rejectValue(SCENARIO_FILE_KEY, INVALID_SCENARIO_MSG_BUNDLE_KEY);
+//            errors.rejectValue(GENERAL_ERROR_MSG_KEY,
+//                    MANDATORY_FIELD_MSG_BUNDLE_KEY);
+//        }
     }
     
     /**
