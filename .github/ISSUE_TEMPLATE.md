@@ -10,4 +10,4 @@
 ## Your configuration
 
 * Asqatasun version (in the footer of any webpage) -->
-* Using Docker image ? -->
+* Context (Docker image / Vagrant VM / plain install) ? -->
