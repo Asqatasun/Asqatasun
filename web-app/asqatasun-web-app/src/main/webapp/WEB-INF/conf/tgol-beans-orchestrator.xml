@@ -2,15 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="
-           http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.0.xsd
-           http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-           http://www.springframework.org/schema/util
-           http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="asqatasunOrchestrator" class="org.asqatasun.webapp.orchestrator.AsqatasunOrchestratorImpl">
         <property name="webappUrl" value="${web-app-url}"/>
@@ -22,11 +15,20 @@
         <property name="krashReportMailList" value="${krashReportMailList}"/>
     </bean>
 
+    <bean id="emailMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="basenames">
+            <list>
+                <value>classpath:i18n/email-content-I18N</value>
+            </list>
+        </property>
+    </bean>
+
     <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
-        p:corePoolSize="10"
-        p:daemon="false"
-        p:waitForTasksToCompleteOnShutdown="false"
-        p:maxPoolSize="50"
-        p:allowCoreThreadTimeOut="false" />
+          p:corePoolSize="10"
+          p:daemon="false"
+          p:waitForTasksToCompleteOnShutdown="false"
+          p:maxPoolSize="50"
+          p:allowCoreThreadTimeOut="false"/>
 
 </beans>

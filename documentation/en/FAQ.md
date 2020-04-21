@@ -4,7 +4,7 @@
 
 ### If you ever have
 
-...Asqatasun not responding, and your Tomcat logfile (typically `/var/log/tomcat7/catalina.out`)
+...Asqatasun not responding, and your Tomcat logfile (typically `/var/log/tomcat8/catalina.out`)
 containing the following error:
 
 ```log
@@ -15,7 +15,7 @@ INFO: Creation of SecureRandom instance for session ID generation using [SHA1PRN
 Jan 11, 2016 10:11:42 AM org.apache.catalina.core.StandardContext startInternal
 SEVERE: Context [/tanaguru] startup failed due to previous errors
 Jan 11, 2016 10:11:42 AM org.apache.catalina.startup.HostConfig deployDirectory
-INFO: Deploying web application directory /var/lib/tomcat7/webapps/ROOT
+INFO: Deploying web application directory /var/lib/tomcat8/webapps/ROOT
 Jan 11, 2016 10:11:42 AM org.apache.coyote.AbstractProtocol start
 INFO: Starting ProtocolHandler ["http-bio-8080"]
 Jan 11, 2016 10:11:42 AM org.apache.catalina.startup.Catalina start

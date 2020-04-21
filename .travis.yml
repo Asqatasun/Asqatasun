@@ -26,5 +26,4 @@ deploy:
     script: rsync -rv --delete-after --quiet $TRAVIS_BUILD_DIR/web-app/asqatasun-web-app/target/asqatasun-$ASQA_RELEASE.i386.tar.gz
         deploy-downloads@download.asqatasun.org:/var/www-vhosts_static-websites/download.asqatasun.org/asqatasun-$ASQA_RELEASE.i386.tar.gz
     on:
-        all_branches: true
-        condition: $TRAVIS_BRANCH =~ ^master|develop$
+        tags: true

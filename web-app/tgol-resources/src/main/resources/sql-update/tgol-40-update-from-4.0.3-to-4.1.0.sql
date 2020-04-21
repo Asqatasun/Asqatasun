@@ -17,47 +17,28 @@ ALTER DATABASE `asqatasun`
 -- 2. Change the character set, collation properties
 --    and maximum length of each VARCHAR or TEXT column **which is an index**
 -- ----------------------------------------------------------------
-ALTER TABLE `TGSI_USER`
-    CHANGE `Email1` `Email1` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_SCOPE`
-    CHANGE `Code` `Code` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION_ELEMENT`
-    CHANGE `Value` `Value` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_USER`           CHANGE `Email1` `Email1` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_SCOPE`          CHANGE `Code` `Code` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION_ELEMENT` CHANGE `Value` `Value` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 3. Change the character set and collation properties of each tables
 -- ----------------------------------------------------------------
-ALTER TABLE `TGSI_ROLE`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_USER`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_SCOPE`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_FUNCTIONALITY`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_ACT`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_ACT_AUDIT`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION_FAMILY`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_OPTION_ELEMENT`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_OPTION_ELEMENT`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_USER_OPTION_ELEMENT`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_FUNCTIONALITY`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_REFERENTIAL`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_CONTRACT_REFERENTIAL`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-ALTER TABLE `TGSI_SCENARIO`
-    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_ROLE`                     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_USER`                     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_SCOPE`                    CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_FUNCTIONALITY`            CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT`                 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_ACT`                      CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_ACT_AUDIT`                CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION_FAMILY`            CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION`                   CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_OPTION_ELEMENT`           CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT_OPTION_ELEMENT`  CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_USER_OPTION_ELEMENT`      CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT_FUNCTIONALITY`   CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_REFERENTIAL`              CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_CONTRACT_REFERENTIAL`     CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+ALTER TABLE `TGSI_SCENARIO`                 CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 -- 4. Repair and optimize all tables
 -- ----------------------------------------------------------------

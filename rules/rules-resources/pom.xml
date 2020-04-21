@@ -4,7 +4,7 @@
      <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>4.1.0-rc.4</version>
+        <version>4.1.1-SNAPSHOT</version>
     </parent>
     <artifactId>tanaguru-rules-resources</artifactId>
     <name>rules-resources</name>

@@ -1,6 +1,6 @@
 # Asqatasun-Runner Installation
 
-This page describes the steps to follow to install Asqatasun since Version 3.0.0 (and further) from the binary files or from the sources. The sofware has been tested on 12.04 LTS (Precise Pangolin) and 14.04 LTS (Trusty Tahr).
+This page describes the steps to follow to install Asqatasun since Version 3.0.0 (and further) from the binary files or from the sources.
 
 PLEASE ensure you meet all [prerequisites for Asqatasun-Runner 4.x on Ubuntu](prerequisites-runner.md).
 

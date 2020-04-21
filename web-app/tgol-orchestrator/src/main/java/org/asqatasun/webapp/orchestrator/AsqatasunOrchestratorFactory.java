@@ -28,10 +28,10 @@ import org.asqatasun.webapp.entity.factory.contract.ActFactory;
 import org.asqatasun.webapp.entity.service.contract.ActDataService;
 import org.asqatasun.webapp.entity.service.contract.ScopeDataService;
 import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
- *
  * @author enzolalay
  */
 public final class AsqatasunOrchestratorFactory {
@@ -39,25 +39,30 @@ public final class AsqatasunOrchestratorFactory {
     /**
      * Factory has private constructor
      */
-    private AsqatasunOrchestratorFactory(){}
+    private AsqatasunOrchestratorFactory() {
+    }
 
     public static AsqatasunOrchestrator create(
-            AuditService auditService,
-            ActDataService actDataService,
-            AuditDataService auditDataService,
-            ActFactory actFactory,
-            ScenarioDataService scenarioDataService,
-            ScopeDataService scopeDataService,
-            ThreadPoolTaskExecutor threadPoolTaskExecutor,
-            EmailSender emailSender) {
+        AuditService auditService,
+        ActDataService actDataService,
+        AuditDataService auditDataService,
+        ActFactory actFactory,
+        ScenarioDataService scenarioDataService,
+        ScopeDataService scopeDataService,
+        ThreadPoolTaskExecutor threadPoolTaskExecutor,
+        EmailSender emailSender,
+        ReloadableResourceBundleMessageSource messageSource
+    ) {
         return new AsqatasunOrchestratorImpl(
-                auditService,
-                auditDataService,
-                actDataService,
-                actFactory,
-                scopeDataService,
-                scenarioDataService,
-                threadPoolTaskExecutor,
-                emailSender);
+            auditService,
+            auditDataService,
+            actDataService,
+            actFactory,
+            scopeDataService,
+            scenarioDataService,
+            threadPoolTaskExecutor,
+            emailSender,
+            messageSource
+        );
     }
 }

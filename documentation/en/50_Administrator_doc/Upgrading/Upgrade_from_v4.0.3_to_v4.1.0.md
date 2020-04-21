@@ -1,117 +1,72 @@
 # Upgrade from Asqatasun v4.0.3 to v4.1.0
 
-## WARNING
+## TL;DR
 
-This documentation is **not supported**. Use it at your own risk, or help us and contribute :)
+1. Export data from host with v4.0.3
+2. Install on another host a fresh v4.1.0
+3. Import data from v4.0.3
+4. Update SQL schema
+5. Enjoy
 
-## Intro
+## 1. Export data from v4.0.3
 
-Here is all the information you need to upgrade your Asqatasun instance. All information is given to be done manually.
-You may use the provided script to automate it.
+1. Stop Apache
+1. Stop Tomcat
+1. Then export DB with
 
-## Scripted upgrade
-
-TBD
-
-## Steps
-
-The following steps detail what has to be done.
-
-## 1. Stop Tomcat
-
-```
-service tomcat7 stop
-```
-
-## 2. Change mysql-client parameters for utf8mb4
-
-It is **important to change this first** and foremost, or the mysql-client could not be able to have a
-correct communication with the storage engine.
-
-In your `/etc/mysql/conf.d/asqatasun.cnf`, as user **root**, adjust the following values
-
-```
-[client]
-default-character-set=utf8mb4
-
-[mysql]
-default-character-set=utf8mb4
-
-[mysqld]
-collation-server = utf8mb4_general_ci
-init-connect='SET NAMES utf8mb4'
-character-set-server = utf8mb4
+```shell script
+mysqldump \
+  --user=asqatasun \
+  -p \
+  --databases asqatasun \
+  --result-file=SAVE_DB_asqatasun.sql
 ```
 
-## 3. Backup database
+## 2. Install Asqatasun v4.1.0
 
-Yes do it, because you know you should :)
+* Pre-requisites: Ubuntu 18.04, OpenJDK8
+* Follow [Asqatasun Installation](https://doc.asqatasun.org/en/10_Install_doc/Asqatasun/index.html)
 
-```shell
-mysqldump -u asqatasun -p asqatasun >/tmp/BACKUP_asqatasun_$(date +%Y-%m-%d).sql
+## 3. Import data from v4.0.3
+
+```shell script
+systemctl stop tomcat8.service
+mysql --user=asqatasun -p -e "drop database asqatasun;"
+mysql --user=asqatasun -p <SAVE_DB_asqatasun.sql
+``` 
+
+## 4. Update SQL schema
+
+Grab the two following file:
+
+* [asqatasun-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/release-4.1/engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql)
+* [tgol-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/release-4.1/web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql)
+
+And apply the following (order in important):
+
+```shell script
+mysql --user=asqatasun -p asqatasun <asqatasun-40-update-from-4.0.3-to-4.1.0.sql
+mysql --user=asqatasun -p asqatasun <tgol-40-update-from-4.0.3-to-4.1.0.sql
+systemctl start tomcat8.service
 ```
 
-## 4. Apply new character set + collation + reduction of size on index columns
+## 5. Use Asqatasun 4.1.0
 
-Apply to the `asqatasun` database the following two scripts:
+* Accounts, credentials and projects have been imported, so you can use your usual login / password
 
-```shell
-cd engine/asqatasun-resources/src/main/resources/sql-update/
-/usr/bin/mysql -u asqatasun -p asqatasun <asqatasun-40-update-from-4.0.3-to-4.1.0.sql
-cd web-app/tgol-resources/src/main/resources/sql-update/
-/usr/bin/mysql -u asqatasun -p asqatasun <tgol-40-update-from-4.0.3-to-4.1.0.sql
+## Other information
+
+One may have to update a few field definitions:
+
+```mariadb
+ALTER TABLE EVIDENCE_ELEMENT
+    MODIFY `Element_Value` mediumtext NOT NULL;
+ALTER TABLE PRE_PROCESS_RESULT
+    MODIFY `Pre_Process_Value` mediumtext DEFAULT NULL;
+ALTER TABLE PROCESS_REMARK
+    MODIFY `Snippet` mediumtext DEFAULT NULL;
+ALTER TABLE PROCESS_RESULT
+    MODIFY `Indefinite_Value` mediumtext DEFAULT NULL;
+ALTER TABLE TGSI_SCENARIO
+    MODIFY `Content` mediumtext NOT NULL;
 ```
-
-## X. Delete + recreate SQL procedures
-
-```shell
-cd web-app/tgol-resources/src/main/resources/sql-management/
-cat /dev/null >all-procedures.sql
-for i in \
-    PROCEDURE_AUDIT_delete_from_user_email.sql \
-    PROCEDURE_CONTRACT_delete_from_label.sql \
-    PROCEDURE_CONTRACT_functionality_add_from_contract_label.sql \
-    PROCEDURE_CONTRACT_functionality_add_from_user_email.sql \
-    PROCEDURE_CONTRACT_functionality_remove_from_contract_label.sql \
-    PROCEDURE_CONTRACT_functionality_remove_from_user_email.sql \
-    PROCEDURE_CONTRACT_referential_add_from_contract_label.sql \
-    PROCEDURE_CONTRACT_referential_add_from_user_email.sql \
-    PROCEDURE_CONTRACT_referential_remove_from_contract_label.sql \
-    PROCEDURE_CONTRACT_referential_remove_from_user_email.sql \
-    ; do
-    cat "${i}" >>all-procedures.sql
-done
-/usr/bin/mysql -u asqatasun -p asqatasun <all-procedures.sql
-```
-
-## X. Adjust `asqatasun.conf`
-
-* change jdbc.url=
-* Switch correct Contrast-Finder URL: `contrastfinderServiceUrl=http://contrast-finder.tanaguru.com`
-* change release: `asqatasunVersion=4.0.3`
-
-NOTE: /!\ do not forget to update the original asqatasun.conf file
-
-## X. Copy new WAR file
-
-```shell
-tar cvfz /tmp/SAVE-asqatasun-webapp.tar.gz /var/lib/tomcat7/webapps/asqatasun/
-rm -rf  /var/lib/tomcat7/webapps/asqatasun/
-cp asqatasun-web-app-4.1.0-SNAPSHOT.war /var/lib/tomcat7/webapps/asqatasun.war
-```
-
-## X. Reload Mysql
-
-```shell
-service mysql restart
-```
-
-## X. Restart Tomcat
-
-```shell
-service tomcat7 start
-```
-
-## X. Verify
-
-`tail -f /var/log/tomcat7/catalina.out /var/log/asqatasun/asqatasun.log`

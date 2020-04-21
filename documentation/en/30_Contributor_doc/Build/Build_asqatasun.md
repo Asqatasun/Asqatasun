@@ -1,6 +1,6 @@
 # Build Asqatasun
 
-On a Linux Ubuntu 14.04
+On a Linux Ubuntu 18.04
 
 ## Prerequisites
 

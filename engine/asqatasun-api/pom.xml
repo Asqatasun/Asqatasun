@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>4.1.0-rc.4</version>
+        <version>4.1.1-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-api</artifactId>
     <name>asqatasun-api</name>
@@ -67,5 +67,11 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
+
+	<!-- Java Architecture for XML Binding (JAXB), Java 11+ support -->		
+	<dependency>
+		<groupId>javax.xml.bind</groupId>
+		<artifactId>jaxb-api</artifactId>
+	</dependency>
     </dependencies>
 </project>

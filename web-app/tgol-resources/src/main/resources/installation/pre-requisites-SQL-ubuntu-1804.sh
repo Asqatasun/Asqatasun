@@ -18,7 +18,6 @@ fi
 
 # Mysql
 MYSQL_ROOT_PASSWD=mysqlRootPassword
-MYSQL_CONF_FILE=/etc/mysql/my.cnf
 MYSQL_CONF_DIR=/etc/mysql/conf.d
 MYSQL_CONF_FILE_FOR_ASQATASUN=asqatasun.cnf
 
@@ -44,7 +43,7 @@ fail() {
     echo ""
 	echo "FAILURE : $*"
     echo ""
-	exit -1
+	exit 1
 }
 
 #############################################
@@ -91,7 +90,12 @@ init-connect='SET NAMES utf8mb4'
 character-set-server = utf8mb4
 max_allowed_packet = 64M
 innodb_file_per_table = 1
+innodb_log_file_size = 256M
 EOF
+
+# Workaround for bug related to packages of MariaDB/Mysql on Debian/Ubuntu plateforms
+# See https://github.com/Asqatasun/Asqatasun/issues/311
+echo '!include /etc/mysql/conf.d/asqatasun.cnf' >>/etc/mysql/my.cnf
 
 "${SYSTEMCTL}" restart mariadb.service
 
