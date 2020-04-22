@@ -39,8 +39,8 @@ mysql --user=asqatasun -p <SAVE_DB_asqatasun.sql
 
 Grab the two following file:
 
-* [asqatasun-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/release-4.1/engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql)
-* [tgol-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/release-4.1/web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql)
+* [asqatasun-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/v4.1.0/engine/asqatasun-resources/src/main/resources/sql-update/asqatasun-40-update-from-4.0.3-to-4.1.0.sql)
+* [tgol-40-update-from-4.0.3-to-4.1.0.sql](https://raw.githubusercontent.com/Asqatasun/Asqatasun/v4.1.0/web-app/tgol-resources/src/main/resources/sql-update/tgol-40-update-from-4.0.3-to-4.1.0.sql)
 
 And apply the following (order in important):
 
