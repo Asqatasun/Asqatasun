@@ -111,7 +111,7 @@
         <itextpdf.version>5.5.13</itextpdf.version>
         <jersey.version>2.13</jersey.version>
         <jhighlight.version>1.0.3</jhighlight.version>
-        <mysql-connector-java.version>5.1.46</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
         <junitGroupId>junit</junitGroupId>
         <junitVersion>3.8.2</junitVersion>
             <!-- <junit.version>4.12</junit.version> -->
