@@ -6,8 +6,8 @@
         <artifactId>rules</artifactId>
         <version>5.0-SNAPSHOT</version>
     </parent>
-    <artifactId>asqatasun-rgaa4.0</artifactId>
-    <name>rgaa4.0</name>
+    <artifactId>asqatasun-rules-rgaa4.0</artifactId>
+    <name>rules-rgaa4.0</name>
     <build>
         <plugins>
             <plugin>
