@@ -13,7 +13,6 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 * [Build Asqatasun](Build/Build_asqatasun.md)
 * [Build Docker Image](Build/Build_Docker_image.md)
 
-
 ## Create your own referential
 
 * [How to create your own referential](Referential-Creator/10--How-to-create-your-own-referential.md)
@@ -42,6 +41,10 @@ If you ever lack some information, feel free to ask on [Asqatasun Forum](http://
 ## System of Information
 
 * [System of Information](System_of_information/SI_data_model.md)
+
+## Rules
+
+* [Implementing rules](Rules/README.md)
 
 ## Our release process
 
