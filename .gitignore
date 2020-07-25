@@ -54,10 +54,6 @@ docker/**/asqatasun-*gz
 
 #### Documentation / Translation tool
 
-# Gitbook
-_book/
-node_modules/
-
 # Mkdocs
 /docs/Site
 
