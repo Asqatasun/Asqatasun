@@ -1,2 +1,0 @@
-
-* [English](documentation/en/)
