@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `TGSI_ACT`
     `Status`               varchar(255) NOT NULL,
     `CONTRACT_Id_Contract` bigint(20)   NOT NULL,
     `SCOPE_Id_Scope`       bigint(20)   NOT NULL,
-    `Client_Ip`            VARCHAR(16)  NOT NULL DEFAULT '0.0.0.0',
+    `Client_Ip`            VARCHAR(46)  NOT NULL DEFAULT '0.0.0.0',
     PRIMARY KEY (`Id_Act`),
     INDEX `INDEX_TGSI_ACT_SCOPE_Id_Scope` (`SCOPE_Id_Scope` ASC),
     INDEX `INDEX_TGSI_ACT_CONTRACT_Id_Contract` (`CONTRACT_Id_Contract` ASC),
