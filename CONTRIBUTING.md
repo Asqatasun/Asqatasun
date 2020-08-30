@@ -6,7 +6,7 @@ We are really glad to have you on board !
 
 ## Fill in bug reports
 
-[Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues).
+[Fill in bug report](https://gitlab.com/asqatasun/Asqatasun/-/issues).
 
 * Please do not assign issue to anyone.
 * You may assign an issue to yourself, meaning to others "I'm actually working on this issue".
@@ -27,24 +27,24 @@ We are really glad to have you on board !
 
 ### Choose or create an issue
 
-Either choose an existing issue on which you'd like to work or create a new one. Identify its id. For example, the id of https://github.com/Asqatasun/Asqatasun/issues/115  is `115`, we'll use it later.
+Either choose an existing issue on which you'd like to work or create a new one. Identify its id. For example, the id of https://gitlab.com/asqatasun/Asqatasun/-/issues/115  is `115`, we'll use it later.
 
 ### Fork the project
 
-From Github, fork the project. You've got your own personal Asqatasun under your Github user environment (`https://github.com/<user>/Asqatasun`).
+From GitLab, fork the project. You've got your own personal Asqatasun under your GitLab user environment (`https://gitlab.com/<user>/Asqatasun`).
 
 ### Work locally
 
 ```
-git clone https://github.com/<user>/Asqatasun.git
-     # instead of:   git clone https://github.com/Asqatasun/Asqatasun.git
+git clone https://gitlab.com/<user>/Asqatasun.git
+     # instead of:   git clone https://gitlab.com/asqatasun/Asqatasun.git
 cd Asqatasun
 git checkout develop
 git checkout -b <id-of-issue>-fix
      # git checkout -b 115-fix
 ```
 
-(Note: create a branch based on the `develop` branch. `Master` is meant to be directly usable in production, thus only contains tagged releases).
+Note: create a branch based on the `master` branch.
 
 ### Code
 
@@ -70,7 +70,7 @@ git push origin <id-of-issue>-fix
 Create it:
 
 * **from** your personal repos / your branch
-* **to** the Asqatasun repos / `develop` branch
+* **to** the Asqatasun repos / `master` branch
 
 Validate, a maintainer will review and hopefully merge your pull request.
 
@@ -82,7 +82,7 @@ Thank you for contributing to Asqatasun !
 Those resources are meant to help:
 
 * [Asqatasun Contributor doc](http://doc.asqatasun.org/en/30_Contributor_doc/),
-* and especially [Asqatasun, Git, Github: getting started](http://doc.asqatasun.org/en/30_Contributor_doc/Contribute_to_Asqatasun.html)
+* and especially [Asqatasun, Git, GitLab: getting started](http://doc.asqatasun.org/en/30_Contributor_doc/Contribute_to_Asqatasun.html)
 * and anyway the [Forum](http://forum.asqatasun.org)
 
 ## Sources of inspiration for CONTRIBUTING.md
