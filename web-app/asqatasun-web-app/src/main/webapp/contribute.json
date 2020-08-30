@@ -4,13 +4,13 @@
     "repository": {
         "license":  "AGPL v3",
         "type":     "git",
-        "url":      "https://github.com/Asqatasun/Asqatasun",
-        "clone":    "https://github.com/Asqatasun/Asqatasun.git",
+        "url":      "https://gitlab.com/asqatasun/Asqatasun",
+        "clone":    "https://gitlab.com/asqatasun/Asqatasun.git",
         "tests":    "https://travis-ci.org/Asqatasun/Asqatasun"
     },
     "bugs": {
-        "list":      "https://github.com/Asqatasun/Asqatasun/issues",
-        "report":    "https://github.com/Asqatasun/Asqatasun/issues/new"
+        "list":      "https://gitlab.com/asqatasun/Asqatasun/-/issues",
+        "report":    "https://gitlab.com/asqatasun/Asqatasun/-/issues/new"
     },
     "participate": {
         "docs":     "https://doc.asqatasun.org/en/",

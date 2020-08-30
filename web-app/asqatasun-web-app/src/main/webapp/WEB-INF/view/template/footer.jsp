@@ -11,7 +11,7 @@
             <div id="footer-down">                
                 
                 <fmt:message key="footer.poweredBy"/> 
-                <a href="https://github.com/Asqatasun/Asqatasun/releases">Asqatasun v${appVersion}</a>
+                <a href="https://gitlab.com/asqatasun/Asqatasun/-/releases">Asqatasun v${appVersion}</a>
                 - 
                 <fmt:message key="footer.availableUnder"/> 
                 <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
@@ -52,7 +52,7 @@
                         </svg>
                     </a>
                     <a  class="asqatasun-link-svg"
-                        href="https://github.com/Asqatasun/Asqatasun/"
+                        href="https://gitlab.com/asqatasun/Asqatasun"
                         title="<fmt:message key="footer.link-git"/>"
                         aria-label="<fmt:message key="footer.link-git"/>">
                         <svg    class="icon_git"

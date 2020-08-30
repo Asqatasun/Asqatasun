@@ -1,8 +1,8 @@
 #######################################################
 # If you would like to report a security issue
-# you may report it to us on Github.
+# you may report it to us on Gitlab.
 #######################################################
-Contact: https://github.com/Asqatasun/Asqatasun/issues/
+Contact: https://gitlab.com/asqatasun/Asqatasun/-/issues
 Contact: https://twitter.com/Asqatasun
 
 
