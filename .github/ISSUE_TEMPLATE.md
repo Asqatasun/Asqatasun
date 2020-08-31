@@ -1,13 +1,7 @@
-## Observed behaviour
+We’ve moved the source code plus all issues, comments, 
+pull requests and so on to Gitlab.com. 
+
+Here is our new home:
+https://gitlab.com/asqatasun/Asqatasun
 
 
-## Expected behaviour
-
-
-## Steps to reproduce the behaviour
-
-
-## Your configuration
-
-* Asqatasun version (in the footer of any webpage) -->
-* Context (Docker image / Vagrant VM / plain install) ? -->

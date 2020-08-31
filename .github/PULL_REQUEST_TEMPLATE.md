@@ -1,14 +1,7 @@
-Thank you **very** much for contributing to Asqatasun!
+We’ve moved the source code plus all issues, comments, 
+pull requests and so on to Gitlab.com. 
 
-## Purpose of this Pull Request?
-
-
-## How the PR could be tested?
-
-
-## Any background context you want to provide?
-
-
-## Screenshots (if appropriate)
+Here is our new home:
+https://gitlab.com/asqatasun/Asqatasun
 
 
