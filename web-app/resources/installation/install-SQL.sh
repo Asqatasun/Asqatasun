@@ -194,8 +194,6 @@ create_tables() {
     my_sql_insert accessiweb2.2-insert.sql
     my_sql_insert rgaa3.0-insert.sql
     my_sql_insert seo1.0-insert.sql
-    my_sql_insert rgaa3.2016-insert.sql
-    my_sql_insert rgaa3.2017-insert.sql
 }
 
 #############################################

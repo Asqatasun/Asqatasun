@@ -226,18 +226,6 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-rgaa3.2016</artifactId>
-            <version>${asqatasun.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-rgaa3.2017</artifactId>
-            <version>${asqatasun.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-seo1.0</artifactId>
             <version>${asqatasun.version}</version>
             <scope>runtime</scope>

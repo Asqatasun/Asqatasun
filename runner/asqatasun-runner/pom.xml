@@ -163,16 +163,6 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-rgaa3.2016</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-rules-rgaa3.2017</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-seo1.0</artifactId>
             <scope>runtime</scope>
         </dependency>
