@@ -1,0 +1,22 @@
+image: maven:3.6-openjdk-8
+
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+
+build:
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS install:install-file -DgroupId=com.saucelabs -DartifactId=sebuilder-interpreter -Dversion=1.0.2 -Dpackaging=jar -Dfile=engine/asqatasun-resources/src/main/resources/lib/sebuilder-interpreter-1.0.2.jar
+    - mvn $MAVEN_CLI_OPTS clean
+    - mvn $MAVEN_CLI_OPTS install  -Dmaven.test.skip=true
+
+test:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS clean
+    - mvn $MAVEN_CLI_OPTS test
