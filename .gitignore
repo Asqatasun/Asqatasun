@@ -47,6 +47,7 @@ nbactions.xml
 
 # Dockers: binaries
 docker/**/asqatasun-*gz
+docker/**/asqatasun-*war
 
 # vagrant
 .vagrant/

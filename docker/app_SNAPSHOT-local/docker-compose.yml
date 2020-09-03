@@ -1,0 +1,15 @@
+asqatasun-db_dev:
+    image: mariadb:10.2
+    environment:
+        MYSQL_ROOT_PASSWORD: bou
+        MYSQL_DATABASE: asqatasun
+#       MYSQL_USER: root
+#       MYSQL_PASSWORD: bou
+    ports:
+    - "3306:3306"
+asqatasun_dev:
+    build: .
+    links :
+    - asqatasun-db_dev
+    ports:
+    - "8989:8080"

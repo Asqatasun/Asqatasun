@@ -81,7 +81,7 @@ usage () {
        --use-sudo-docker            Use "sudo docker" instead of "docker"
        --skip-build-test            Skip unit tests on Maven build
        --skip-build                 Skip Maven build (relies on previous build, that must exists)
-       --skip-copy                  Skip copying .tar.gz (relies on previous .tar.gz, that must exist)
+       --skip-copy                  Skip copying .war (relies on previous .war, that must exist)
        --skip-docker-build          Skip docker build
        --skip-docker-run            Skip docker run
        --log-build                  Log maven build (see: target/*.log)
@@ -163,8 +163,8 @@ fail() {
 # Variables
 #############################################
 
-TGZ_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
-TGZ_EXT=".tar.gz"
+WAR_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
+WAR_EXT=".war"
 ADD_IP=''
 URL_TOMCAT="http://localhost:${CONTAINER_EXPOSED_PORT}"
 if ${ONLY_LOCALHOST} ; then  
@@ -200,19 +200,14 @@ function check_URL() {
 
 # Remove the previous container (stop + rm)
 function kill_previous_container() {
-    display_step_msg "Remove the previous ${BOLD}${GREEN}Docker${NORM} container"
+    display_step_msg "Remove the previous ${BOLD}${GREEN}Docker${NORM} containers"
+    cd "${SOURCE_DIR}/${DOCKER_DIR}"
     set +e
-    local RUNNING=$(${SUDO} docker inspect --format="{{ .State.Status }}" ${CONTAINER_NAME} 2>/dev/null)
+    ${SUDO} docker-compose rm -vsf
     set -e
-    if [[ "${RUNNING}" == "running" ]]; then
-        ${SUDO} docker stop ${CONTAINER_NAME}
-        ${SUDO} docker rm ${CONTAINER_NAME}
-    elif [[ "${RUNNING}" == "exited" ]]; then
-        ${SUDO} docker rm ${CONTAINER_NAME}
-    fi
 }
 
-# test if URL_TOMCAT responds with an HTTP 200 code
+# test if URL_TOMCAT responds with an HTTP 200 code
 function check_Tomcat_loading() {
     local  time=0
     local  RESULT=$(check_URL ${URL_TOMCAT})
@@ -229,7 +224,7 @@ function check_Tomcat_loading() {
     done
 }
 
-# test if URL_APP responds with an HTTP 200 code
+# test if URL_APP responds with an HTTP 200 code
 function check_App_loading() {
     local  time=0
     local  RESULT=$(check_URL ${URL_APP}/)
@@ -285,18 +280,18 @@ function do_build() {
     fi
 }
 
-# copy TAR.GZ to docker dir
-function do_copy_targz() {
-    display_step_msg "Copy ${BOLD}${GREEN}tar.gz${NORM} to the docker directory"
-    cp "${SOURCE_DIR}/${TGZ_BASENAME}"*"${TGZ_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
-        fail "Error copying ${SOURCE_DIR}/${TGZ_BASENAME}"
+# copy WAR file to docker dir
+function do_copy_warFile() {
+    display_step_msg "Copy ${BOLD}${GREEN}.war${NORM} to the docker directory"
+    cp "${SOURCE_DIR}/${WAR_BASENAME}"*"${WAR_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
+        fail "Error copying ${SOURCE_DIR}/${WAR_BASENAME}"
 }
 
 # build Docker image
 function do_docker_build() {
     display_step_msg "Build ${BOLD}${GREEN}Docker${NORM} image"
     (cd "${SOURCE_DIR}/${DOCKER_DIR}" ; \
-        ${SUDO} docker build -t ${IMAGE_NAME}:${TAG_NAME} "${SOURCE_DIR}/${DOCKER_DIR}" ) ||
+        ${SUDO} docker-compose build ) ||
         fail "Error building container"
 }
 
@@ -305,7 +300,9 @@ function do_docker_run() {
     RESULT=$(check_URL ${URL_TOMCAT})
     if [ "${RESULT}" == "000" ]; then
         display_step_msg "Loading ${BOLD}${GREEN}Docker${NORM} container"
-        DOCKER_RUN="${SUDO}docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}"
+#       DOCKER_RUN="${SUDO}docker run -p ${ADD_IP}${CONTAINER_EXPOSED_PORT}:8080 --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${TAG_NAME}"
+        cd "${SOURCE_DIR}/${DOCKER_DIR}"
+        DOCKER_RUN="${SUDO} docker-compose up"
         eval ${DOCKER_RUN}
     else 
         fail  "${CONTAINER_EXPOSED_PORT} port is already allocated"
@@ -411,7 +408,7 @@ function do_krash_test_campaign() {
 #############################################
 
 if ! ${SKIP_BUILD} ;        then  do_build;                 fi
-if ! ${SKIP_COPY} ;         then  do_copy_targz;            fi
+if ! ${SKIP_COPY} ;         then  do_copy_warFile;          fi
 if ! ${SKIP_DOCKER_BUILD} ; then  do_docker_build;          fi
 if ! ${SKIP_DOCKER_RUN} ;   then  do_docker_run;            fi
 if   ${LOG_BUILD};          then  do_maven_log_processing;  fi

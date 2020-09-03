@@ -3,6 +3,56 @@
 
 work in progress
 
+## Build and launch Asqatasun 
+
+### Prerequisites
+* git
+* maven 
+* Docker
+* Docker-Compose
+
+### Build Asqatasun, build docker image and launch Asqatasun
+```bash
+git clone https://gitlab.com/asqatasun/Asqatasun.git
+cd Asqatasun
+
+# Build Asqatasun
+#################
+
+# Option 1: build Asqatasun with running tests 
+docker/build_and_run-with-docker.sh  \
+     --skip-docker-build             \
+     --skip-docker-run               \
+     --log-build                     \
+     -s ${PWD}                       \
+     -d docker/app_SNAPSHOT-local 
+
+# Option 2: build Asqatasun without running tests (faster)
+docker/build_and_run-with-docker.sh  \
+     --skip-docker-build             \
+     --skip-docker-run               \
+     --skip-build-test               \
+     -s ${PWD}                       \
+     -d docker/app_SNAPSHOT-local 
+
+# Build docker image + launch Asqatasun and database
+####################################################
+
+# Option 1: build docker image + launch Asqatasun and database (uses same database, if it already exists)
+cd docker/SNAPSHOT-local 
+docker-compose up --build
+
+# Option 2: build docker image + launch Asqatasun and a new database
+cd docker/SNAPSHOT-local 
+docker-compose rm -fsv
+docker-compose up --build
+```
+
+* In your browser, go to `http://127.0.0.1:8989/` 
+* Use this user and this password :
+    * `admin@asqatasun.org`
+    * `myAsqaPassword`
+
 ## Archive
 
 ### Asqatasun 4.1.0
