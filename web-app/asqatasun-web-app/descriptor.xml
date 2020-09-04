@@ -80,6 +80,15 @@
             <fileMode>664</fileMode>
             <outputDirectory>/install/rules/sql</outputDirectory>
         </fileSet>
+        <!-- SQL Rules RGAA 4.0 -->
+        <fileSet>
+            <directory>${basedir}/../../rules/rules-rgaa4.0/src/main/resources/sql</directory>
+            <includes>
+                <include>rgaa4.0-insert.sql</include>
+            </includes>
+            <fileMode>664</fileMode>
+            <outputDirectory>/install/rules/sql</outputDirectory>
+        </fileSet>
         <!-- SQL Rules SEO 1.0 -->
         <fileSet>
             <directory>${basedir}/../../rules/rules-seo1.0/src/main/resources/sql</directory>
