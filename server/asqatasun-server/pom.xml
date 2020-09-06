@@ -170,6 +170,12 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-rules-rgaa4.0</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-rules-seo1.0</artifactId>
             <version>${asqatasun.version}</version>
             <scope>runtime</scope>
