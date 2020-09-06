@@ -53,6 +53,7 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
     private static final String AW22_REF = "Aw22";
     private static final String RGAA22_REF = "Rgaa22";
     private static final String RGAA30_REF = "Rgaa30";
+    private static final String RGAA40_REF = "Rgaa40";
     private static String REF = AW22_REF;
 
     private static final String BRONZE_LEVEL = "Bz";
@@ -215,7 +216,10 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
 
     @Override
     public Set<Parameter> getParameterSetFromAuditLevel(String ref, String level) {
-        if (ref.equalsIgnoreCase(RGAA22_REF) || ref.equalsIgnoreCase(RGAA30_REF)) {
+        if (ref.equalsIgnoreCase(RGAA22_REF)
+            || ref.equalsIgnoreCase(RGAA30_REF)
+            || ref.equalsIgnoreCase(RGAA40_REF)
+        ) {
             if (level.equalsIgnoreCase(BRONZE_LEVEL)) {
                 level=A_LEVEL;
             } else if (level.equalsIgnoreCase(SILVER_LEVEL)) {
