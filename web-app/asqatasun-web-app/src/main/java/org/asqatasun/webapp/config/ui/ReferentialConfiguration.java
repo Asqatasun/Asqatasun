@@ -50,8 +50,201 @@ public class ReferentialConfiguration {
                     rgaa30AASelectElementBuilder(),
                     rgaa30AAASelectElementBuilder()
                 ));
+                put("Rgaa40", Arrays.asList(
+                    rgaa40ASelectElementBuilder(),
+                    rgaa40AASelectElementBuilder(),
+                    rgaa40AAASelectElementBuilder()
+                ));
             }}
         );
+    }
+
+
+
+    // Rgaa 40 select element builder
+    @Bean
+    public SelectElementBuilderImpl rgaa40ASelectElementBuilder(){
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40;LEVEL_1",
+            "Rgaa40-LEVEL_1",
+            "A-error",
+            "DEFAULT_LEVEL",
+            false,
+            false
+        );
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa40AASelectElementBuilder(){
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40;LEVEL_2",
+            "Rgaa40-LEVEL_2",
+            "LEVEL_2-error",
+            "DEFAULT_LEVEL",
+            false,
+            false
+        );
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa40AAASelectElementBuilder(){
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40;LEVEL_3",
+            "Rgaa40-LEVEL_3",
+            "LEVEL_3-error",
+            "DEFAULT_LEVEL",
+            false,
+            false
+        );
+    }
+    @Bean
+    public SelectFormFieldBuilderImpl rgaa40ThemeSelectFormFieldBuilder() {
+        return ContractFormElementConfiguration.buildSelectFormFieldBuilder(
+            "result.theme",
+            "result.theme-error",
+            new HashMap <String, List<SelectElementBuilder>>() {{
+                put("theme", Arrays.asList(
+                    rgaa40AllThemeSelectElementBuilder(),
+                    rgaa401ThemeSelectElementBuilder(),
+                    rgaa402ThemeSelectElementBuilder(),
+                    rgaa403ThemeSelectElementBuilder(),
+                    rgaa404ThemeSelectElementBuilder(),
+                    rgaa405ThemeSelectElementBuilder(),
+                    rgaa406ThemeSelectElementBuilder(),
+                    rgaa407ThemeSelectElementBuilder(),
+                    rgaa408ThemeSelectElementBuilder(),
+                    rgaa409ThemeSelectElementBuilder(),
+                    rgaa4010ThemeSelectElementBuilder(),
+                    rgaa4011ThemeSelectElementBuilder(),
+                    rgaa4012ThemeSelectElementBuilder(),
+                    rgaa4013ThemeSelectElementBuilder()
+                ));
+            }},
+            "Rgaa40");
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa40AllThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "all-theme",
+            "result.all-theme",
+            "result.all-theme-error",
+            true,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa401ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-1",
+            "Rgaa40-1",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa402ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-2",
+            "Rgaa40-2",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa403ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-3",
+            "Rgaa40-3",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa404ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-4",
+            "Rgaa40-4",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa405ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-5",
+            "Rgaa40-5",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa406ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-6",
+            "Rgaa40-6",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa407ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-7",
+            "Rgaa40-7",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa408ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-8",
+            "Rgaa40-8",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa409ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-9",
+            "Rgaa40-9",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa4010ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-10",
+            "Rgaa40-10",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa4011ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-11",
+            "Rgaa40-11",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa4012ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-12",
+            "Rgaa40-12",
+            "",
+            false,
+            true);
+    }
+    @Bean
+    public SelectElementBuilderImpl rgaa4013ThemeSelectElementBuilder() {
+        return ContractFormElementConfiguration.buildSelectElementBuilder(
+            "Rgaa40-13",
+            "Rgaa40-13",
+            "",
+            false,
+            true);
     }
     // AW 22 select element builder
     @Bean
@@ -423,5 +616,4 @@ public class ReferentialConfiguration {
             false,
             true);
     }
-
 }
