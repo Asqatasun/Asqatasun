@@ -150,7 +150,7 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-scenarioloader-selenese</artifactId>
+            <artifactId>asqatasun-scenarioloader</artifactId>
             <version>${asqatasun.version}</version>
             <scope>runtime</scope>
         </dependency>
