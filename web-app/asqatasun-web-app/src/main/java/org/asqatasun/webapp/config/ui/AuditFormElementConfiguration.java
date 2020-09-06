@@ -318,11 +318,15 @@ public class AuditFormElementConfiguration {
     @Autowired
     @Qualifier(value="rgaa30ThemeSelectFormFieldBuilder")
     FormFieldBuilder rgaa30ThemeSelectFormFieldBuilder;
+    @Autowired
+    @Qualifier(value="rgaa40ThemeSelectFormFieldBuilder")
+    FormFieldBuilder rgaa40ThemeSelectFormFieldBuilder;
     @Bean
     public List <FormFieldBuilder> auditResultFormFieldBuilderList() {
         return Arrays.asList(
             aw22ThemeSelectFormFieldBuilder,
             rgaa30ThemeSelectFormFieldBuilder,
+            rgaa40ThemeSelectFormFieldBuilder,
             testResultCheckboxFormFieldBuilder());
     }
 
