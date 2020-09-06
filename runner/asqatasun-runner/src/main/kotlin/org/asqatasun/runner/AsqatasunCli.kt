@@ -206,6 +206,7 @@ class AsqatasunCli {
                     .desc("""Referential : 
                           - "Aw22" for Accessiweb 2.2
                           - "Rgaa30" for Rgaa 3.0 (default)
+                          - "Rgaa40" for Rgaa 4.0
                           - "Seo" for SEO 1.0""")
                     .hasArg(true)
                     .required(false)
