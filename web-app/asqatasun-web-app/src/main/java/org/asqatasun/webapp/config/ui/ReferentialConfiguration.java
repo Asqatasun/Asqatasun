@@ -52,8 +52,7 @@ public class ReferentialConfiguration {
                 ));
                 put("Rgaa40", Arrays.asList(
                     rgaa40ASelectElementBuilder(),
-                    rgaa40AASelectElementBuilder(),
-                    rgaa40AAASelectElementBuilder()
+                    rgaa40AASelectElementBuilder()
                 ));
             }}
         );
@@ -79,17 +78,6 @@ public class ReferentialConfiguration {
             "Rgaa40;LEVEL_2",
             "Rgaa40-LEVEL_2",
             "LEVEL_2-error",
-            "DEFAULT_LEVEL",
-            false,
-            false
-        );
-    }
-    @Bean
-    public SelectElementBuilderImpl rgaa40AAASelectElementBuilder(){
-        return ContractFormElementConfiguration.buildSelectElementBuilder(
-            "Rgaa40;LEVEL_3",
-            "Rgaa40-LEVEL_3",
-            "LEVEL_3-error",
             "DEFAULT_LEVEL",
             false,
             false
