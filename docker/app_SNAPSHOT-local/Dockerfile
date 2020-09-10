@@ -13,7 +13,8 @@ ENV    WWWPORT="8080"                        \
        FIREFOX_VERSION="68.9.0esr"           \
        GECKODRIVER_VERSION="v0.26.0"         \
        FIREFOX_URL_PREFIX="https://download-installer.cdn.mozilla.net/pub/firefox/releases/"  \
-       GECKODRIVER_URL_PREFIX="https://github.com/mozilla/geckodriver/releases/download/"
+       GECKODRIVER_URL_PREFIX="https://github.com/mozilla/geckodriver/releases/download/" \
+       LOG_DIR="/var/log/asqatasun/"
 ENV    ASQA_URL="http://localhost:${WWWPORT}/"
 EXPOSE ${WWWPORT}
 
@@ -45,9 +46,8 @@ RUN cd /opt                                                     && \
 RUN adduser asqatasun
 #RUN addgroup --system asqatasun && adduser --system asqatasun --group
 
-# Temporary fix (time to identify how to define the log folder)
-RUN mkdir "/logDir_IS_UNDEFINED/"                               && \
-    chown asqatasun:asqatasun "/logDir_IS_UNDEFINED/"
+RUN mkdir "${LOG_DIR}"                               && \
+    chown asqatasun:asqatasun "${LOG_DIR}"
 
 # Add WAR file
 USER asqatasun:asqatasun
@@ -69,7 +69,7 @@ HEALTHCHECK --timeout=3s    \
 CMD /usr/bin/java                                                            \
     -Dwebdriver.firefox.bin=/opt/firefox/firefox                             \
     -Dwebdriver.gecko.driver=/opt/geckodriver                                \
+    -Dapp.logging.path=${LOG_DIR}                                            \
     -Djdbc.url="jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false"  \
-#   -Dlogging.path="/home/asqatasun/"                                        \
     -jar /home/asqatasun/app.war                                             \
     --server.port=${WWWPORT}

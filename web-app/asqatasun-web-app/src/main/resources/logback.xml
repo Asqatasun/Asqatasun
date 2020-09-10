@@ -17,12 +17,12 @@
         <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
         <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
         <!--for further documentation-->
-        <File>${logDir}/asqatasun.log</File>
+        <File>${app.logging.path}/asqatasun.log</File>
         <encoder>
             <pattern>%d{dd-MM-yyyy HH:mm:ss:SSS} %-4r %-5p %c - %m%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${logDir}/asqatasun.log.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
+            <fileNamePattern>${app.logging.path}/asqatasun.log.%d{yyyy-MM-dd-HH-mm}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>

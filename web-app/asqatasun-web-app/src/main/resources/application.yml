@@ -28,6 +28,8 @@ server:
       enabled: false
 
 app:
+  logging:
+    path: "tmp"
   version: "5.0-SNAPSHOT"
   engine:
     persistence:

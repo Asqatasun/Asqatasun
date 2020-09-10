@@ -41,8 +41,9 @@ management:
       logback: true
 
 app:
+  logging:
+    path: "tmp"
   version: "5.0-SNAPSHOT"
-  logDir: "/tmp"
   users:
     auth:
       -  name: asqatasun
