@@ -50,10 +50,6 @@
             <exclusions>
                 <exclusion>
                     <groupId>org.seleniumhq.selenium</groupId>
-                    <artifactId>selenium-edge-driver</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.seleniumhq.selenium</groupId>
                     <artifactId>selenium-edgehtml-driver</artifactId>
                 </exclusion>
                 <exclusion>

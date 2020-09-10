@@ -110,10 +110,6 @@
                 </exclusion>
                 <exclusion>
                     <groupId>org.seleniumhq.selenium</groupId>
-                    <artifactId>selenium-edge-driver</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.seleniumhq.selenium</groupId>
                     <artifactId>selenium-safari-driver</artifactId>
                 </exclusion>
                 <exclusion>
