@@ -19,7 +19,9 @@
  */
 package org.asqatasun.rules.seo;
 
+import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.rules.seo.test.SeoRuleImplementationTestCase;
 
 /**
@@ -86,30 +88,63 @@ public class SeoRule06052Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
+        WebResource webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-01");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" " +
+            "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-01").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-02");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE HTML PUBLIC " +
+            "\"-//W3C//DTD HTML 4.01 Transitional//EN\" " +
+            "\"http://www.w3.org/TR/html4/loose.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-02").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-03");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-03").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-04");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-04").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-05");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-05").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-06");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-06").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-07");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-07").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-08");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE " +
+            "html " +
+            "PUBLIC " +
+            "\"-//W3C//DTD XHTML Basic 1.1//EN\" " +
+            "\"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-08").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-09");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE math PUBLIC \"-//W3C//DTD MathML 2.0//EN\" \"http://www.w3.org/TR/MathML2/dtd/mathml2.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-09").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-10");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE math SYSTEM \"http://www.w3.org/Math/DTD/mathml1/mathml.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-10").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-11");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN\" \"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-11").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-1Passed-12");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE svg:svg PUBLIC \"-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN\" \"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.2-1Passed-12").getValue());
+        webResource = webResourceMap.get("Seo.Test.6.5.2-2Failed-01");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/sxhtml1/DTD/xhtml1-strict.dtd\">");
         assertEquals(TestSolution.FAILED,
                 processPageTest("Seo.Test.6.5.2-2Failed-01").getValue());
         assertEquals(TestSolution.NOT_APPLICABLE,

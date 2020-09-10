@@ -19,10 +19,14 @@
  */
 package org.asqatasun.rules.rgaa30;
 
+import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
+
+import java.util.stream.Stream;
 
 /**
  * Unit test class for the implementation of the rule 1.10.1 of the referential Rgaa 3.0.
@@ -54,6 +58,9 @@ public class Rgaa30Rule011001Test extends Rgaa30RuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
+        WebResource webResource = webResourceMap.get("Rgaa30.Test.1.10.1-3NMI-01");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html>");
+
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
@@ -80,6 +87,8 @@ public class Rgaa30Rule011001Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
+        webResource = webResourceMap.get("Rgaa30.Test.1.10.1-4NA-01");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\" xml:lang=\"en\">");
         checkResultIsNotApplicable(processPageTest("Rgaa30.Test.1.10.1-4NA-01"));
     }
 

@@ -20,7 +20,9 @@
 package org.asqatasun.rules.rgaa30;
 
 import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.rules.rgaa30.test.Rgaa30RuleImplementationTestCase;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 
@@ -56,6 +58,8 @@ public class Rgaa30Rule080103Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
+        WebResource webResource = webResourceMap.get("Rgaa30.Test.08.01.03-1Passed-01");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html>");
         checkResultIsPassed(processPageTest("Rgaa30.Test.08.01.03-1Passed-01"),0);        
 
         

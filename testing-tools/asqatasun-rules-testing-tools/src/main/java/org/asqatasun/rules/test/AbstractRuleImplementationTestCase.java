@@ -87,7 +87,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     
     private static AuditFactory AUDIT_FACTORY;
     private static URLIdentifier URL_IDENTIFIER;
-    private final Map<WebResource, List<Content>> contentMap = new HashMap<>();
+    protected final Map<WebResource, List<Content>> contentMap = new HashMap<>();
     private final Map<WebResource, List<String>> relatedContentMap = new HashMap<>();
     public Map<WebResource, List<String>> getRelatedContentMap() {
         return relatedContentMap;
@@ -115,7 +115,7 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
     public void setRuleImplementationClassName(String ruleImplementationClassName) {
         this.ruleImplementationClassName = ruleImplementationClassName;
     }
-    private final Map<String, WebResource> webResourceMap = new LinkedHashMap<>();
+    protected final Map<String, WebResource> webResourceMap = new LinkedHashMap<>();
     public Map<String, WebResource> getWebResourceMap() {
         return webResourceMap;
     }

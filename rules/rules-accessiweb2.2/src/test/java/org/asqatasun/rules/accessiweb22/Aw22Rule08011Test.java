@@ -24,7 +24,9 @@ package org.asqatasun.rules.accessiweb22;
 import java.util.LinkedHashSet;
 import org.asqatasun.entity.audit.ProcessRemark;
 import org.asqatasun.entity.audit.ProcessResult;
+import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.rules.accessiweb22.test.Aw22RuleImplementationTestCase;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 
@@ -59,6 +61,8 @@ public class Aw22Rule08011Test extends Aw22RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
+        WebResource webResource = webResourceMap.get("AW22.Test.8.1.1-1Passed-01");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html>");
         ProcessResult processResult = processPageTest("AW22.Test.8.1.1-1Passed-01");
         // check test result
         assertEquals(TestSolution.PASSED, processResult.getValue());

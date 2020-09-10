@@ -19,7 +19,9 @@
  */
 package org.asqatasun.rules.seo;
 
+import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.rules.seo.test.SeoRuleImplementationTestCase;
 
 /**
@@ -50,6 +52,8 @@ public class SeoRule06051Test extends SeoRuleImplementationTestCase {
 
     @Override
     protected void setProcess() {
+        WebResource webResource = webResourceMap.get("Seo.Test.6.5.1-1Passed-01");
+        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
         assertEquals(TestSolution.PASSED,
                 processPageTest("Seo.Test.6.5.1-1Passed-01").getValue());
         assertEquals(TestSolution.FAILED,
