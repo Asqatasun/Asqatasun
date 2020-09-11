@@ -39,11 +39,11 @@ docker/build_and_run-with-docker.sh  \
 ####################################################
 
 # Option 1: build docker image + launch Asqatasun and database (uses same database, if it already exists)
-cd docker/SNAPSHOT-local 
+cd docker/app_SNAPSHOT-local
 docker-compose up --build
 
 # Option 2: build docker image + launch Asqatasun and a new database
-cd docker/SNAPSHOT-local 
+cd docker/app_SNAPSHOT-local
 docker-compose rm -fsv
 docker-compose up --build
 ```

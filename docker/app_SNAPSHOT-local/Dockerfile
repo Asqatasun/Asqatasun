@@ -10,11 +10,11 @@ ENV    WWWPORT="8080"                        \
        DB_HOST="asqatasun-db_dev"            \
        DB_NAME="asqatasun"                   \
        ASQA_RELEASE="5.0-SNAPSHOT"           \
+       LOG_DIR="/var/log/asqatasun/"         \
        FIREFOX_VERSION="68.9.0esr"           \
-       GECKODRIVER_VERSION="v0.26.0"         \
+       GECKODRIVER_VERSION="v0.26.0"         \    
        FIREFOX_URL_PREFIX="https://download-installer.cdn.mozilla.net/pub/firefox/releases/"  \
-       GECKODRIVER_URL_PREFIX="https://github.com/mozilla/geckodriver/releases/download/" \
-       LOG_DIR="/var/log/asqatasun/"
+       GECKODRIVER_URL_PREFIX="https://github.com/mozilla/geckodriver/releases/download/" 
 ENV    ASQA_URL="http://localhost:${WWWPORT}/"
 EXPOSE ${WWWPORT}
 
@@ -46,7 +46,8 @@ RUN cd /opt                                                     && \
 RUN adduser asqatasun
 #RUN addgroup --system asqatasun && adduser --system asqatasun --group
 
-RUN mkdir "${LOG_DIR}"                               && \
+# Create log folder
+RUN mkdir "${LOG_DIR}"                     && \
     chown asqatasun:asqatasun "${LOG_DIR}"
 
 # Add WAR file
@@ -69,7 +70,8 @@ HEALTHCHECK --timeout=3s    \
 CMD /usr/bin/java                                                            \
     -Dwebdriver.firefox.bin=/opt/firefox/firefox                             \
     -Dwebdriver.gecko.driver=/opt/geckodriver                                \
-    -Dapp.logging.path=${LOG_DIR}                                            \
+    -Dapp.logging.path="${LOG_DIR}"                                          \
     -Djdbc.url="jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false"  \
     -jar /home/asqatasun/app.war                                             \
-    --server.port=${WWWPORT}
+    --server.port="${WWWPORT}"
+
