@@ -23,10 +23,12 @@
 package org.asqatasun.scenarioloader.model
 
 import com.google.gson.annotations.SerializedName
+import java.net.URL
 import java.util.*
 
 class SeleniumIdeScenarioBuilder {
-    fun build(url: String) = SeleniumIdeScenario(url = url, urls = listOf(url))
+    fun build(url: String) = SeleniumIdeScenario.build(url)
+    fun build(domain: String, urls: List<URL>) = SeleniumIdeScenario.build(url = domain, urls = urls)
 }
 
 data class SeleniumIdeScenario(
@@ -39,15 +41,24 @@ data class SeleniumIdeScenario(
     @SerializedName("suites")
     val suites: List<Suite> = listOf(Suite()),
     @SerializedName("tests")
-    val tests: List<Test> = listOf(Test()),
+    var tests: List<Test>,
     @SerializedName("url")
     val url: String,
     @SerializedName("urls")
-    val urls: List<String>,
+    val urls: List<URL>,
     @SerializedName("version")
     val version: String = "2.0"
 ) {
-    companion object
+    companion object {
+        fun build(url: String): SeleniumIdeScenario {
+            val url = URL(url)
+            val domain = url.protocol+"://"+url.host
+            val urls = listOf(url)
+            return SeleniumIdeScenario(url = domain, urls = urls, tests = listOf(Test.build(urls = urls)))
+        }
+        fun build(url: String, urls: List<URL>) =
+             SeleniumIdeScenario(url = url, urls = urls, tests = listOf(Test.build(urls = urls)))
+    }
 }
 
 data class Suite(
@@ -67,12 +78,16 @@ data class Suite(
 
 data class Test(
     @SerializedName("commands")
-    val commands: List<Command> = listOf(Command()),
+    var commands: List<Command>,
     @SerializedName("id")
     val id: String = "038fb62e-034a-4f58-97df-cc55f07cd2ad",
     @SerializedName("name")
     val name: String = "navigate"
-)
+) {
+    companion object {
+        fun build(urls: List<URL>) = Test(commands = Command.build(urls = urls))
+    }
+}
 
 data class Command(
     @SerializedName("command")
@@ -87,4 +102,11 @@ data class Command(
     val targets: List<List<String>> = emptyList(),
     @SerializedName("value")
     val value: String = ""
-)
+) {
+    companion object {
+        fun build(urls: List<URL>): List<Command> =
+             urls.map {
+                Command(target=it.path)
+            }
+    }
+}
