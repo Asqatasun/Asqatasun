@@ -27,8 +27,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.webapp.action.Action;
 import org.asqatasun.webapp.action.builder.ActionBuilder;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.functionality.Functionality;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.functionality.Functionality;
 
 /**
  *

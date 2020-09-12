@@ -38,7 +38,7 @@ import org.springframework.core.io.ClassPathResource;
 public class PersistenceConfigTest {
 
     @Bean
-    public PropertySourcesPlaceholderConfigurer  propertySourcesPlaceholderConfigurer() {
+    public static PropertySourcesPlaceholderConfigurer  propertySourcesPlaceholderConfigurer() {
         PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer =
             new PropertySourcesPlaceholderConfigurer();
         YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();

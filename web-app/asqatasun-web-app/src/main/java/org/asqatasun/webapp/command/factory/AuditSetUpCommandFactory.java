@@ -25,15 +25,15 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.decorator.asqatasun.parameterization.ParameterDataServiceDecorator;
-import org.asqatasun.webapp.entity.scenario.Scenario;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.scenario.Scenario;
+import org.asqatasun.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.service.scenario.ScenarioDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.ui.form.NumericalFormField;
 import org.asqatasun.webapp.ui.form.SelectFormField;
 import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
@@ -59,7 +59,7 @@ public final class AuditSetUpCommandFactory {
     public ParameterElement getLevelParameterElement() {
         return parameterElementDataService.getParameterElement(TgolKeyStore.LEVEL_PARAM_KEY);
     }
-    private final ParameterDataServiceDecorator parameterDataService;
+    private final ParameterDataService parameterDataService;
     private final ParameterElementDataService parameterElementDataService;
     private final ContractDataService contractDataService;
     private final ScenarioDataService scenarioDataService;
@@ -68,7 +68,7 @@ public final class AuditSetUpCommandFactory {
     /**
      * Private constructor
      */
-    private AuditSetUpCommandFactory(ParameterDataServiceDecorator parameterDataService,
+    private AuditSetUpCommandFactory(ParameterDataService parameterDataService,
                                      ParameterElementDataService parameterElementDataService,
                                      ContractDataService contractDataService,
                                      ScenarioDataService scenarioDataService,

@@ -32,7 +32,7 @@ import org.asqatasun.webapp.security.tokenmanagement.TokenManager;
 import org.asqatasun.util.MD5Encoder;
 import org.asqatasun.webapp.command.ChangePasswordCommand;
 import org.asqatasun.webapp.command.ForgottenPasswordCommand;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.ui.form.menu.SecondaryLevelMenuDisplayer;

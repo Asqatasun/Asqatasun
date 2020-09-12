@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.subject.Page;
-import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.entity.contract.Contract;
 import org.asqatasun.webapp.exception.AuditParameterMissingException;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenScopeException;

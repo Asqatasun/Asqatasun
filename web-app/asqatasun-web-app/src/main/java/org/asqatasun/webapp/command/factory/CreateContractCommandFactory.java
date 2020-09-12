@@ -25,15 +25,15 @@ import java.io.Serializable;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.webapp.command.CreateContractCommand;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.functionality.Functionality;
-import org.asqatasun.webapp.entity.option.Option;
-import org.asqatasun.webapp.entity.option.OptionElement;
-import org.asqatasun.webapp.entity.referential.Referential;
-import org.asqatasun.webapp.entity.service.functionality.FunctionalityDataService;
-import org.asqatasun.webapp.entity.service.option.OptionDataService;
-import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
-import org.asqatasun.webapp.entity.service.referential.ReferentialDataService;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.functionality.Functionality;
+import org.asqatasun.entity.option.Option;
+import org.asqatasun.entity.option.OptionElementImpl;
+import org.asqatasun.entity.referential.Referential;
+import org.asqatasun.entity.service.functionality.FunctionalityDataService;
+import org.asqatasun.entity.service.option.OptionDataService;
+import org.asqatasun.entity.service.option.OptionElementDataService;
+import org.asqatasun.entity.service.referential.ReferentialDataService;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
@@ -257,7 +257,7 @@ public class CreateContractCommandFactory implements Serializable {
      * @param contract 
      */
     private void addContractUrlToCommand(CreateContractCommand ccc, Contract contract) {
-        for (OptionElement optionElement : contract.getOptionElementSet()){
+        for (OptionElementImpl optionElement : contract.getOptionElementSet()){
             if (optionElement.getOption().equals(contractUrlOption)) {
                 ccc.setContractUrl(optionElement.getValue());
             }
@@ -286,9 +286,9 @@ public class CreateContractCommandFactory implements Serializable {
      * @return 
      */
     private String getValueFromOptionElementCollection(
-            Collection<OptionElement> optionElementCollection, 
+            Collection<OptionElementImpl> optionElementCollection,
             Option option) {
-        for (OptionElement optionElement : optionElementCollection) {
+        for (OptionElementImpl optionElement : optionElementCollection) {
             if (optionElement.getOption().getCode().equals(option.getCode())) {
                 return optionElement.getValue();
             }
@@ -308,7 +308,7 @@ public class CreateContractCommandFactory implements Serializable {
         
         Set<Functionality> functSet = new HashSet<>();
         Set<Referential> refSet = new HashSet<>();
-        Set<OptionElement> optionElementSet = new HashSet<>();
+        Set<OptionElementImpl> optionElementSet = new HashSet<>();
 
         for (Map.Entry<String,Boolean> entry : ccc.getFunctionalityMap().entrySet()) {
             if (entry.getValue() != null && entry.getValue()) {
@@ -353,7 +353,7 @@ public class CreateContractCommandFactory implements Serializable {
     * @param url
     * @return 
     */
-    private OptionElement addUrlToContract(String url) {
+    private OptionElementImpl addUrlToContract(String url) {
         return createOptionElement(contractUrlOption, url);
     }
     
@@ -362,7 +362,7 @@ public class CreateContractCommandFactory implements Serializable {
      * @param optionCode
      * @return 
      */
-    private OptionElement getOptionElementFromOptionAndValue(String optionCode, String value) {
+    private OptionElementImpl getOptionElementFromOptionAndValue(String optionCode, String value) {
         Option option = getOptionFromCode(optionCode);
         return createOptionElement(option, value);
     }
@@ -373,8 +373,8 @@ public class CreateContractCommandFactory implements Serializable {
      * @param option
      * @return 
      */
-    private OptionElement createOptionElement(Option option, String value) {
-        OptionElement optionElement = optionElementDataService.getOptionElementFromValueAndOption(value, option);
+    private OptionElementImpl createOptionElement(Option option, String value) {
+        OptionElementImpl optionElement = optionElementDataService.getOptionElementFromValueAndOption(value, option);
         if (optionElement != null) {
             return optionElement;
         }

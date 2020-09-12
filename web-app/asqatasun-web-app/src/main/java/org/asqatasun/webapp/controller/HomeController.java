@@ -22,12 +22,10 @@
 package org.asqatasun.webapp.controller;
 
 import java.util.List;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import org.asqatasun.webapp.action.voter.ActionHandler;
+
 import org.asqatasun.webapp.command.ContractSortCommand;
 import org.asqatasun.webapp.command.helper.ContractSortCommandHelper;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.ui.form.builder.FormFieldBuilder;
 import org.asqatasun.webapp.util.TgolKeyStore;
@@ -36,7 +34,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

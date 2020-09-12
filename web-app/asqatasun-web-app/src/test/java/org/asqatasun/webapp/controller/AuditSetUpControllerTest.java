@@ -21,24 +21,25 @@
  */
 package org.asqatasun.webapp.controller;
 
+import org.asqatasun.entity.option.OptionImpl;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterElementImpl;
 import org.asqatasun.entity.parameterization.ParameterImpl;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
 import org.asqatasun.webapp.config.TestConfiguration;
 import org.asqatasun.webapp.dto.factory.DetailedContractInfoFactory;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.decorator.asqatasun.parameterization.ParameterDataServiceDecorator;
-import org.asqatasun.webapp.entity.functionality.Functionality;
-import org.asqatasun.webapp.entity.option.Option;
-import org.asqatasun.webapp.entity.option.OptionElement;
-import org.asqatasun.webapp.entity.referential.Referential;
-import org.asqatasun.webapp.entity.service.contract.ActDataService;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.entity.service.user.UserDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.functionality.Functionality;
+import org.asqatasun.entity.option.Option;
+import org.asqatasun.entity.option.OptionElementImpl;
+import org.asqatasun.entity.referential.Referential;
+import org.asqatasun.entity.service.contract.ActDataService;
+import org.asqatasun.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.service.user.UserDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
 import org.asqatasun.webapp.ui.form.parameterization.builder.AuditSetUpFormFieldBuilder;
@@ -92,7 +93,7 @@ public class AuditSetUpControllerTest  {
     @MockBean
     ParameterElementDataService mockParameterElementDataService;
     @MockBean
-    ParameterDataServiceDecorator mockParameterDataService;
+    ParameterDataService mockParameterDataService;
     @MockBean
     @Qualifier(value = "pageOptionFormFieldBuilderMap")
     Map <String, List <AuditSetUpFormFieldBuilder>> pageOptionFormFieldBuilderMap;
@@ -283,9 +284,9 @@ public class AuditSetUpControllerTest  {
         return Collections.singleton(ref);
     }
 
-    private Set<OptionElement> getOptionElementSet() {
-        OptionElement oe = new OptionElement();
-        Option option = new Option();
+    private Set<OptionElementImpl> getOptionElementSet() {
+        OptionElementImpl oe = new OptionElementImpl();
+        OptionImpl option = new OptionImpl();
         option.setCode("");
         oe.setOption(option);
         return Collections.singleton(oe);

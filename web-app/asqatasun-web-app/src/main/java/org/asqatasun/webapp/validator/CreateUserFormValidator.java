@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.asqatasun.webapp.command.CreateUserCommand;
 import org.asqatasun.webapp.command.UserSignUpCommand;
-import org.asqatasun.webapp.entity.service.user.UserDataService;
+import org.asqatasun.entity.service.user.UserDataService;
 import org.asqatasun.webapp.util.TgolPasswordChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

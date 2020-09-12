@@ -25,7 +25,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 
 /**
  *

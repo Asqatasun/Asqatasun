@@ -25,13 +25,18 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.entity.dao.parameterization.ParameterDAO;
+import org.asqatasun.entity.dao.parameterization.ParameterDAOImpl;
+import org.asqatasun.entity.option.OptionElement;
+import org.asqatasun.entity.option.OptionElementImpl;
 import org.asqatasun.entity.parameterization.factory.ParameterFactory;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterFamily;
 import org.asqatasun.entity.dao.GenericDAO;
 import org.asqatasun.entity.service.AbstractGenericDataService;
+import org.asqatasun.entity.service.option.OptionElementDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -73,6 +78,8 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
 
     @Autowired
     ParameterElementDataService parameterElementDataService;
+    @Autowired
+    OptionElementDataService optionElementDataService;
 
     /**
      *
@@ -230,4 +237,24 @@ public class ParameterDataServiceImpl extends AbstractGenericDataService<Paramet
         return updateParameter(paramSet, levelParameter);
     }
 
+    public Collection<Parameter> getParameterSetFromOptionElementSet(Collection<OptionElement> optionElementSet) {
+        Set<Parameter> paramSet = new HashSet<>();
+        for (OptionElement optionElement : optionElementSet) {
+            ParameterElement pe = parameterElementDataService.getParameterElement(optionElement.getOption().getCode());
+            if (pe != null) {
+                Parameter p = getParameter(pe, optionElement.getValue());
+                p = saveOrUpdate(p);
+                paramSet.add(p);
+            }
+        }
+        return paramSet;
+    }
+
+    public String getLastParameterValueFromUser(Long idContract, ParameterElement parameterElement, ScopeEnum scope) {
+        return ((ParameterDAOImpl) entityDao).findLastParameterValueFromUser(idContract, parameterElement, scope);
+    }
+
+    public String getLastParameterValueFromContractAndScenario(Long idContract, ParameterElement parameterElement, String scenarioName) {
+        return ((ParameterDAOImpl) entityDao).findLastParameterValueFromContractAndScenario(idContract, parameterElement, scenarioName);
+    }
 }

@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.asqatasun.entity.reference.Theme;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.webapp.util.TgolEscapeUrl;
 
 /**

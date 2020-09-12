@@ -12,16 +12,16 @@
     <name>asqatasun-services</name>
     <dependencies>
         <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-model</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-persistence</artifactId>
         </dependency>
     </dependencies>
 </project>

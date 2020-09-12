@@ -24,7 +24,7 @@ package org.asqatasun.webapp.command;
 import java.io.IOException;
 import java.io.Serializable;
 import org.asqatasun.util.http.HttpRequestHandler;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**

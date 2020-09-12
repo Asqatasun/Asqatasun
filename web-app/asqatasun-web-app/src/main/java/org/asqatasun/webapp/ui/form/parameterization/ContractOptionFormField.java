@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.ui.form.parameterization;
 
-import org.asqatasun.webapp.entity.option.Option;
+import org.asqatasun.entity.option.Option;
 import org.asqatasun.webapp.ui.form.FormField;
 import org.asqatasun.webapp.ui.form.parameterization.builder.ContractOptionFormFieldBuilder;
 

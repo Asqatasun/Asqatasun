@@ -23,8 +23,8 @@ package org.asqatasun.webapp.validator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.webapp.command.ForgottenPasswordCommand;
-import org.asqatasun.webapp.entity.service.user.UserDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.service.user.UserDataService;
+import org.asqatasun.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

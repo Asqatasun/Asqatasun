@@ -23,7 +23,7 @@ package org.asqatasun.webapp.security.userdetails;
 
 import java.util.Collection;
 import org.apache.commons.lang3.StringUtils;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 
 /**

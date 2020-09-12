@@ -23,11 +23,10 @@ package org.asqatasun.webapp.validator;
 
 import java.util.*;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

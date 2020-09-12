@@ -29,12 +29,14 @@ import javax.transaction.Transactional;
 
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditImpl;
+import org.asqatasun.entity.contract.Act;
+import org.asqatasun.entity.contract.ActStatus;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterFamily;
 import org.asqatasun.entity.parameterization.ParameterImpl;
 import org.asqatasun.entity.dao.AbstractJPADAO;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -44,6 +46,8 @@ import org.springframework.stereotype.Repository;
 @Repository("parameterDAO")
 public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
         ParameterDAO {
+
+    private static final String CACHEABLE_OPTION="org.hibernate.cacheable";
 
     @Override
     protected Class<? extends Parameter> getEntityClass() {
@@ -173,6 +177,106 @@ public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
             }
         }
         return paramSet;
+    }
+
+    public String findLastParameterValueFromUser(
+        Long contract,
+        ParameterElement parameterElement,
+        ScopeEnum scope) {
+        Act act = findLastActByContract(contract, scope);
+        if (act == null) {
+            return null;
+        }
+        return retrieveParameterValueFromParameterElementAndAct(parameterElement, act);
+    }
+
+    public String findLastParameterValueFromContractAndScenario(
+        Long contract,
+        ParameterElement parameterElement,
+        String scenarioName) {
+        Act act = findLastActByContractAndScenario(contract, scenarioName);
+        if (act == null) {
+            return null;
+        }
+        return retrieveParameterValueFromParameterElementAndAct(parameterElement, act);
+    }
+
+    /**
+     *
+     * @param parameterElement
+     * @param act
+     * @return
+     */
+    private String retrieveParameterValueFromParameterElementAndAct(
+        ParameterElement parameterElement,
+        Act act) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append("SELECT distinct(p.Parameter_Value) FROM");
+        queryString.append(" TGSI_ACT as a,");
+        queryString.append(" TGSI_ACT_AUDIT as taa,");
+        queryString.append(" AUDIT_PARAMETER as ap, ");
+        queryString.append(" PARAMETER as p, ");
+        queryString.append(" PARAMETER_ELEMENT as pe ");
+        queryString.append(" WHERE a.Id_Act=:idAct");
+        queryString.append(" AND a.Id_Act=taa.ACT_Id_Act");
+        queryString.append(" AND taa.AUDIT_Id_Audit=ap.Id_Audit");
+        queryString.append(" AND ap.Id_Parameter=p.Id_Parameter");
+        queryString.append(" AND p.Id_Parameter_Element=:idParameterElement");
+        Query query = entityManager.createNativeQuery(queryString.toString());
+        query.setParameter("idParameterElement", parameterElement.getId());
+        query.setParameter("idAct", act.getId());
+        try {
+            return (query.getSingleResult()).toString();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    private Act findLastActByContractAndScenario(Long idContract, String scenarioName) {
+        StringBuilder queryString = new StringBuilder();
+        queryString.append("SELECT a FROM ");
+        queryString.append(Act.class.getName());
+        queryString.append(" a");
+        queryString.append(" left join a.audit.subject w");
+        queryString.append(" WHERE a.contract.id = :idContract");
+        queryString.append(" AND (a.status = :completedStatus OR a.status = :errorStatus)");
+        queryString.append(" AND a.scope.code =:scope ");
+        queryString.append(" AND w.url=:scenarioName");
+        queryString.append(" ORDER BY a.id DESC");
+
+        Query query = entityManager.createQuery(queryString.toString());
+        query.setParameter("idContract", idContract);
+        query.setParameter("completedStatus", ActStatus.COMPLETED);
+        query.setParameter("errorStatus", ActStatus.ERROR);
+        query.setParameter("scope", ScopeEnum.SCENARIO);
+        query.setParameter("scenarioName", scenarioName);
+        query.setMaxResults(1);
+        query.setHint(CACHEABLE_OPTION, "true");
+        try {
+            return (Act)query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+     private Act findLastActByContract(Long idContract, ScopeEnum scope) {
+        Query query = entityManager.createQuery("SELECT a FROM "
+            + Act.class.getName() + " a"
+            + " WHERE a.contract.id = :idContract"
+            + " AND (a.status = :completedStatus OR a.status = :errorStatus)"
+            + " AND a.scope.code =:scope "
+            + " ORDER BY a.id DESC");
+        query.setParameter("idContract", idContract);
+        query.setParameter("completedStatus", ActStatus.COMPLETED);
+        query.setParameter("errorStatus", ActStatus.ERROR);
+        query.setParameter("scope", scope);
+        query.setMaxResults(1);
+        query.setHint(CACHEABLE_OPTION, "true");
+        try {
+            return (Act)query.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
 }

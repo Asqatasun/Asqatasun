@@ -23,9 +23,9 @@ package org.asqatasun.webapp.restriction;
 
 import java.util.Map;
 import java.util.Set;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.option.OptionElementImpl;
 import org.asqatasun.webapp.util.TgolKeyStore;
 
 /**
@@ -42,11 +42,11 @@ public class RestrictionHandler {
 
     public synchronized String checkRestriction(Contract contract, String clientIp, ScopeEnum scope) {
         String decision = TgolKeyStore.ACT_ALLOWED;
-        Set<OptionElement> optionElementSet = (Set<OptionElement>) contract.getOptionElementSet();
+        Set<OptionElementImpl> optionElementSet = (Set<OptionElementImpl>) contract.getOptionElementSet();
         if (optionElementSet.isEmpty()) {
             return decision;
         }
-        for (OptionElement optionElement : optionElementSet) {
+        for (OptionElementImpl optionElement : optionElementSet) {
             RestrictionVoter restrictionVoter = chooseRestrictionVoter(optionElement);
             if (restrictionVoter != null) {
                 decision = restrictionVoter.checkRestriction(contract, optionElement, clientIp, scope);
@@ -63,7 +63,7 @@ public class RestrictionHandler {
      * @param optionElement
      * @return 
      */
-    private RestrictionVoter chooseRestrictionVoter(OptionElement optionElement) {
+    private RestrictionVoter chooseRestrictionVoter(OptionElementImpl optionElement) {
         String restrictionElementCode = optionElement.getOption().getCode();
         if (optionElement.getOption().isRestriction() && 
                 restrictionVoterMap.containsKey(restrictionElementCode)) {

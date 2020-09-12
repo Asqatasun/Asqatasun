@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import org.asqatasun.webapp.command.AuditSetUpCommand;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
 import org.asqatasun.webapp.ui.form.parameterization.builder.AuditSetUpFormFieldBuilder;
 import static org.asqatasun.webapp.util.TgolKeyStore.*;

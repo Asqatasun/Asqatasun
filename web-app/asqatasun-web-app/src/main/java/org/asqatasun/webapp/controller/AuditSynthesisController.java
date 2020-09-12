@@ -30,7 +30,7 @@ import org.asqatasun.entity.subject.Site;
 import org.asqatasun.webapp.dto.FailedThemeInfo;
 import org.asqatasun.webapp.dto.ResultCounter;
 import org.asqatasun.webapp.dto.factory.ResultCounterFactory;
-import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.entity.contract.Contract;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.statistics.service.StatisticsDataService;

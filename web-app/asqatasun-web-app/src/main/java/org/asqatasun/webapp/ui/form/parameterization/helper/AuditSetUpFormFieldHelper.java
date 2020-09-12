@@ -25,7 +25,7 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.entity.reference.Reference;
 import org.asqatasun.entity.service.reference.ReferenceDataService;
-import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.entity.option.OptionElementImpl;
 import org.asqatasun.webapp.ui.form.NumericalFormField;
 import org.asqatasun.webapp.ui.form.SelectElement;
 import org.asqatasun.webapp.ui.form.SelectFormField;
@@ -66,9 +66,9 @@ public final class AuditSetUpFormFieldHelper {
      */
     public void applyRestrictionToAuditSetUpFormField(
             AuditSetUpFormField ap,
-            Collection<OptionElement> optionElementSet) {
+            Collection<OptionElementImpl> optionElementSet) {
         if (ap.getFormField() instanceof NumericalFormField) {
-            OptionElement optionElement = getOptionFromOptionSet(
+            OptionElementImpl optionElement = getOptionFromOptionSet(
                     optionElementSet,
                     ap.getParameterElement().getParameterElementCode());
             if (optionElement != null) {
@@ -78,7 +78,7 @@ public final class AuditSetUpFormFieldHelper {
         } else if (ap.getFormField() instanceof SelectFormField) {
             activateSelectFormField((SelectFormField) ap.getFormField(), optionElementSet);
         } else if (ap.getFormField() instanceof TextualFormField) {
-            OptionElement optionElement = getOptionFromOptionSet(
+            OptionElementImpl optionElement = getOptionFromOptionSet(
                     optionElementSet,
                     ap.getParameterElement().getParameterElementCode());
             if (optionElement != null) {
@@ -93,11 +93,11 @@ public final class AuditSetUpFormFieldHelper {
      * @param optionCode
      * @return
      */
-    private OptionElement getOptionFromOptionSet(
-            Collection<OptionElement> optionElementSet,
+    private OptionElementImpl getOptionFromOptionSet(
+            Collection<OptionElementImpl> optionElementSet,
             String optionCode) {
         
-        for (OptionElement optionElement : optionElementSet) {
+        for (OptionElementImpl optionElement : optionElementSet) {
             if (StringUtils.equals(optionCode, optionElement.getOption().getCode())) {
                 return optionElement;
             }
@@ -117,9 +117,9 @@ public final class AuditSetUpFormFieldHelper {
      */
     private void activateSelectFormField(
             SelectFormField selectFormField,
-            Collection<OptionElement> optionElementSet) {
+            Collection<OptionElementImpl> optionElementSet) {
         boolean enableElements = true;
-        OptionElement optionElement = null;
+        OptionElementImpl optionElement = null;
         if (StringUtils.isNotEmpty(selectFormField.getRestrictionCode())) {
             optionElement = getOptionFromOptionSet(
                     optionElementSet,
@@ -161,8 +161,8 @@ public final class AuditSetUpFormFieldHelper {
      */
     private boolean setSelectElementAsDefault(
             SelectElement selectElement,
-            Collection<OptionElement> optionElementSet) {
-        OptionElement optionElement = getOptionFromOptionSet(
+            Collection<OptionElementImpl> optionElementSet) {
+        OptionElementImpl optionElement = getOptionFromOptionSet(
                 optionElementSet,
                 selectElement.getDefaultCode());
         if (optionElement == null) {

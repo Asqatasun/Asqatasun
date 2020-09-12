@@ -33,12 +33,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.webapp.command.AddScenarioCommand;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.command.factory.AddScenarioCommandFactory;
-import org.asqatasun.webapp.entity.contract.Act;
-import org.asqatasun.webapp.entity.contract.ActStatus;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.scenario.Scenario;
-import org.asqatasun.webapp.entity.service.scenario.ScenarioDataService;
+import org.asqatasun.entity.contract.Act;
+import org.asqatasun.entity.contract.ActStatus;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.scenario.Scenario;
+import org.asqatasun.entity.service.scenario.ScenarioDataService;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.ui.form.parameterization.AuditSetUpFormField;
 import org.asqatasun.webapp.ui.form.parameterization.builder.AuditSetUpFormFieldBuilder;
@@ -186,10 +186,8 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
                     return TgolKeyStore.SCENARIO_MANAGEMENT_VIEW_NAME;
                 }
             }
-            throw new ForbiddenPageException(getCurrentUser());
-        } else {
-            throw new ForbiddenPageException(getCurrentUser());
         }
+        throw new ForbiddenPageException(getCurrentUser());
     }
     
     @RequestMapping(value = TgolKeyStore.DELETE_SCENARIO_URL_CONTRACT_URL, method = RequestMethod.POST)

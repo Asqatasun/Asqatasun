@@ -43,7 +43,7 @@ import java.beans.PropertyVetoException;
 @Configuration
 @EnableTransactionManagement
 @ImportResource({"classpath*:aop.xml"})
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class PersistenceConfig extends PersistenceCommonConfig{
 
     @Value("${jdbc.user:asqatasun}")

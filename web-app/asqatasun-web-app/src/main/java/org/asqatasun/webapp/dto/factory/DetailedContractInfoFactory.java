@@ -24,10 +24,10 @@ package org.asqatasun.webapp.dto.factory;
 import java.util.Collection;
 
 import org.asqatasun.webapp.dto.DetailedContractInfo;
-import org.asqatasun.webapp.entity.contract.Act;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.entity.contract.Act;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.option.OptionElementImpl;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.stereotype.Component;
 
@@ -90,7 +90,7 @@ public class DetailedContractInfoFactory extends ContractInfoFactory {
      * @return 
      */
     private int getMaxAuthorizedNumberOfActByContract (Contract contract) {
-        for (OptionElement optionElement : contract.getOptionElementSet())  {
+        for (OptionElementImpl optionElement : contract.getOptionElementSet())  {
             if (optionElement.getOption().getCode().equals(NB_MAX_ACT_RESTRICTION_CODE)) {
                 return Integer.parseInt(optionElement.getValue());
             }

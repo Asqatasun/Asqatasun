@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.config.ui;
 
-import org.asqatasun.webapp.entity.service.option.OptionDataService;
+import org.asqatasun.entity.service.option.OptionDataService;
 import org.asqatasun.webapp.ui.form.builder.*;
 import org.asqatasun.webapp.ui.form.parameterization.builder.ContractOptionFormFieldBuilder;
 import org.springframework.context.annotation.Bean;

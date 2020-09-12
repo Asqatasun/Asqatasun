@@ -23,9 +23,9 @@ package org.asqatasun.webapp.controller;
 
 import java.util.Calendar;
 import java.util.Collection;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.service.user.UserDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.service.user.UserDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
 import org.asqatasun.webapp.util.TgolKeyStore;

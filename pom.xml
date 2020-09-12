@@ -183,7 +183,7 @@
         <module>rules</module>
         <module>web-app</module>
         <module>server</module>
-        <module>runner</module>
+<!--        <module>runner</module>-->
         <module>documentation</module>
     </modules>
     <profiles>

@@ -24,14 +24,12 @@ package org.asqatasun.webapp.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.asqatasun.webapp.dto.factory.DetailedContractInfoFactory;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.functionality.Functionality;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.functionality.Functionality;
+import org.asqatasun.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.util.TgolKeyStore;

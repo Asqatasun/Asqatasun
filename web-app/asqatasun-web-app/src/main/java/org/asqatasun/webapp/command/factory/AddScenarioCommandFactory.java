@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.command.factory;
 
 import org.asqatasun.webapp.command.AddScenarioCommand;
-import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.entity.contract.Contract;
 import org.springframework.stereotype.Component;
 
 

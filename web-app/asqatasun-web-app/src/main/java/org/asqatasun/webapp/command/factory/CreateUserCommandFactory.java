@@ -23,9 +23,9 @@ package org.asqatasun.webapp.command.factory;
 
 import java.io.Serializable;
 import org.asqatasun.webapp.command.CreateUserCommand;
-import org.asqatasun.webapp.entity.service.user.RoleDataService;
-import org.asqatasun.webapp.entity.user.Role;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.service.user.RoleDataService;
+import org.asqatasun.entity.user.Role;
+import org.asqatasun.entity.user.User;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

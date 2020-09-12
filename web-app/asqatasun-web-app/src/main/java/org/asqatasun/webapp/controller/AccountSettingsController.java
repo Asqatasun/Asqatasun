@@ -31,7 +31,7 @@ import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.webapp.command.ChangeTestWeightCommand;
 import org.asqatasun.webapp.command.CreateUserCommand;
 import org.asqatasun.webapp.command.factory.ChangeTestWeightCommandFactory;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.ui.form.menu.SecondaryLevelMenuDisplayer;
 import org.asqatasun.webapp.util.TgolKeyStore;

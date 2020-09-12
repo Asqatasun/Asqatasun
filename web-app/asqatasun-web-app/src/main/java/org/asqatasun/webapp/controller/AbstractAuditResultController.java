@@ -42,7 +42,7 @@ import org.asqatasun.webapp.command.ManualAuditCommand;
 import org.asqatasun.webapp.command.factory.AuditResultSortCommandFactory;
 import org.asqatasun.webapp.command.factory.AuditSetUpCommandFactory;
 import org.asqatasun.webapp.dto.AuditStatistics;
-import org.asqatasun.webapp.entity.contract.Contract;
+import org.asqatasun.entity.contract.Contract;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.exception.LostInSpaceException;

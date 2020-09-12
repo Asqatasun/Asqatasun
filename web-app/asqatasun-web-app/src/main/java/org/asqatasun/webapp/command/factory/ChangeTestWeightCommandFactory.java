@@ -27,13 +27,12 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.webapp.command.ChangeTestWeightCommand;
-import org.asqatasun.webapp.entity.option.Option;
-import org.asqatasun.webapp.entity.option.OptionElement;
-import org.asqatasun.webapp.entity.service.option.OptionDataService;
-import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
-import org.asqatasun.webapp.entity.service.user.UserDataService;
-import org.asqatasun.webapp.entity.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.asqatasun.entity.option.Option;
+import org.asqatasun.entity.option.OptionElementImpl;
+import org.asqatasun.entity.service.option.OptionDataService;
+import org.asqatasun.entity.service.option.OptionElementDataService;
+import org.asqatasun.entity.service.user.UserDataService;
+import org.asqatasun.entity.user.User;
 import org.springframework.stereotype.Component;
 
 /**
@@ -78,7 +77,7 @@ public class ChangeTestWeightCommandFactory  implements Serializable {
         nf.setMaximumFractionDigits(1);
         nf.setMaximumIntegerDigits(1);
         nf.setMinimumIntegerDigits(1);
-        for (OptionElement oe : optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey+"_"+optionFamilyCodeStr)) {
+        for (OptionElementImpl oe : optionElementDataService.getOptionElementFromUserAndFamilyCode(user, referentialKey+"_"+optionFamilyCodeStr)) {
             userTestWeight.put(
                     oe.getOption().getCode(), 
                     nf.format(Double.valueOf(oe.getValue())));
@@ -104,16 +103,16 @@ public class ChangeTestWeightCommandFactory  implements Serializable {
             User user,
             ChangeTestWeightCommand changeTestWeightCommand) {
 
-        Collection<OptionElement> userOptionElementSet = 
+        Collection<OptionElementImpl> userOptionElementSet =
                 optionElementDataService.getOptionElementFromUser(user);
         // first we need to remove the option elements associated with the user
         // that are going to be updated
-        Iterator<OptionElement> iter = userOptionElementSet.iterator();
+        Iterator<OptionElementImpl> iter = userOptionElementSet.iterator();
         // To preserve the unmodified options, we only remove from the current
         // option element set the one that are overridden by changeTestWeightCommand
         // testWeightMap.
         while (iter.hasNext()) {
-            OptionElement oe = iter.next();
+            OptionElementImpl oe = iter.next();
             if (changeTestWeightCommand.getTestWeightMap().containsKey(oe.getOption().getCode()) && 
                    !StringUtils.isEmpty(changeTestWeightCommand.getTestWeightMap().get(oe.getOption().getCode()))) {
                 iter.remove();
@@ -123,7 +122,7 @@ public class ChangeTestWeightCommandFactory  implements Serializable {
             if (!StringUtils.isEmpty(entry.getValue())) {
                 String value = entry.getValue().replaceAll(",", ".");
                 Option option = optionDataService.getOption(entry.getKey());
-                OptionElement oe = optionElementDataService.getOptionElementFromValueAndOption(
+                OptionElementImpl oe = optionElementDataService.getOptionElementFromValueAndOption(
                         value, 
                         option);
                 if (oe == null) {

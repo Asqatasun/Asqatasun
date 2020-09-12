@@ -30,6 +30,7 @@ import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.reference.Theme;
 import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.reference.ThemeDataService;
 import org.asqatasun.entity.service.statistics.CriterionStatisticsDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
@@ -38,8 +39,7 @@ import org.asqatasun.entity.subject.Site;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.webapp.dto.AuditStatistics;
 import org.asqatasun.webapp.dto.ResultCounter;
-import org.asqatasun.webapp.entity.decorator.asqatasun.parameterization.ParameterDataServiceDecorator;
-import org.asqatasun.webapp.entity.service.contract.ActDataService;
+import org.asqatasun.entity.service.contract.ActDataService;
 import org.asqatasun.webapp.statistics.service.StatisticsDataService;
 import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 import org.asqatasun.webapp.util.TgolKeyStore;
@@ -58,7 +58,7 @@ public class AuditStatisticsFactory {
     private final ActDataService actDataService;
     private final WebResourceDataService webResourceDataService;
     private final AuditDataService auditDataService;
-    private final ParameterDataServiceDecorator parameterDataService;
+    private final ParameterDataService parameterDataService;
     private final CriterionStatisticsDataService criterionStatisticsDataService;
     private final StatisticsDataService statisticsDataService;
     private final ThemeDataService themeDataService;
@@ -72,7 +72,7 @@ public class AuditStatisticsFactory {
     public AuditStatisticsFactory(ActDataService actDataService,
                                   WebResourceDataService webResourceDataService,
                                   AuditDataService auditDataService,
-                                  ParameterDataServiceDecorator parameterDataService,
+                                  ParameterDataService parameterDataService,
                                   CriterionStatisticsDataService criterionStatisticsDataService,
                                   StatisticsDataService statisticsDataService,
                                   ThemeDataService themeDataService,

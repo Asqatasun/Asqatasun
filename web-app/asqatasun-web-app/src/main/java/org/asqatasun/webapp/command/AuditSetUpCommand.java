@@ -27,7 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.asqatasun.webapp.command.helper.UploadAuditSetUpCommandHelper;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**

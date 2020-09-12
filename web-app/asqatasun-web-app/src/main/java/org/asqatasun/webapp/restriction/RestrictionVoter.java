@@ -21,9 +21,9 @@
  */
 package org.asqatasun.webapp.restriction;
 
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.option.OptionElement;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.option.OptionElementImpl;
 
 /**
  *
@@ -42,7 +42,7 @@ public interface RestrictionVoter {
      */
     String checkRestriction(
             Contract contract, 
-            OptionElement optionElement, 
+            OptionElementImpl optionElement,
             String clientIp, 
             ScopeEnum scope);
 

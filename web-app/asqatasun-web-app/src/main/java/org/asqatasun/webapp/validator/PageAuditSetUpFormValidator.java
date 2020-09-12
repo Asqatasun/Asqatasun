@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.service.contract.ContractDataService;
 import org.asqatasun.webapp.util.TgolKeyStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -22,7 +22,7 @@
 package org.asqatasun.webapp.exception;
 
 import java.util.Date;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 
 /**
  *

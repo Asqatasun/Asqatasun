@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.orchestrator;
 
-import org.asqatasun.webapp.entity.contract.Act;
+import org.asqatasun.entity.contract.Act;
 import org.asqatasun.entity.audit.Audit;
 
 /**

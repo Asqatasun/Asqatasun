@@ -23,13 +23,13 @@ package org.asqatasun.webapp.controller;
 
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.command.factory.AuditSetUpCommandFactory;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.functionality.Functionality;
-import org.asqatasun.webapp.entity.option.OptionElement;
-import org.asqatasun.webapp.entity.referential.Referential;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.functionality.Functionality;
+import org.asqatasun.entity.option.OptionElementImpl;
+import org.asqatasun.entity.referential.Referential;
+import org.asqatasun.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.ui.form.SelectFormField;
 import org.asqatasun.webapp.ui.form.builder.SelectFormFieldBuilderImpl;
@@ -437,7 +437,7 @@ public abstract class AbstractAuditSetUpController extends AbstractAuditDataHand
      * @param setUpFormFielList 
      */
     protected void applyRestrictionRegardingOption(
-            Collection<OptionElement> optionElementSet, 
+            Collection<OptionElementImpl> optionElementSet,
             Collection<List<AuditSetUpFormField>> setUpFormFielList) {
         if (optionElementSet.isEmpty()) {
             return;

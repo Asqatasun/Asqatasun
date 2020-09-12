@@ -43,7 +43,7 @@ public class AuditDAOImplTest extends AbstractDaoTestCase {
     private AuditDAO auditDAO;
 
     @Override
-    protected String getDataSetFilename() throws Exception {
+    protected String getDataSetFilename() {
         return getInputDataFilePath()+INPUT_DATA_SET_FILENAME;
     }
 

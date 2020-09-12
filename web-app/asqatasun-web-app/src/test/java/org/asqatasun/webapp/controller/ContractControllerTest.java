@@ -22,10 +22,10 @@
 package org.asqatasun.webapp.controller;
 
 import org.asqatasun.webapp.config.TestConfiguration;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.service.contract.ActDataService;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.service.contract.ActDataService;
+import org.asqatasun.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.security.userdetails.TgolUserDetails;

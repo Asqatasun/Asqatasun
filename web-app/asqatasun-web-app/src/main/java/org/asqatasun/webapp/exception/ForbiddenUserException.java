@@ -21,7 +21,7 @@
  */
 package org.asqatasun.webapp.exception;
 
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 
 /**
  *

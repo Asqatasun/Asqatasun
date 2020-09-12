@@ -23,7 +23,6 @@ package org.asqatasun.webapp.controller;
  */
 
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -32,9 +31,9 @@ import org.asqatasun.webapp.command.ContractSortCommand;
 import org.asqatasun.webapp.command.CreateContractCommand;
 import org.asqatasun.webapp.command.factory.CreateContractCommandFactory;
 import org.asqatasun.webapp.command.helper.ContractSortCommandHelper;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.ForbiddenPageException;
 import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.ui.form.builder.FormFieldBuilder;

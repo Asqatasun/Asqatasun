@@ -23,8 +23,8 @@
 package org.asqatasun.webapp.security.userdetails;
 
 import java.util.List;
-import org.asqatasun.webapp.entity.service.user.UserDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.service.user.UserDataService;
+import org.asqatasun.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -24,6 +24,8 @@ package org.asqatasun.entity.service.parameterization;
 import java.util.Collection;
 import java.util.Set;
 import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.option.OptionElement;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
 import org.asqatasun.entity.parameterization.ParameterFamily;
@@ -157,5 +159,10 @@ public interface ParameterDataService extends GenericDataService<Parameter, Long
      * @return
      */
     Set<Parameter> getAuditPageParameterSet(Set<Parameter> defaultParameterSet);
+
+    Collection<Parameter> getParameterSetFromOptionElementSet(Collection<OptionElement> optionElementSet);
+
+    String getLastParameterValueFromUser(Long idContract, ParameterElement parameterElement, ScopeEnum scope);
+    String getLastParameterValueFromContractAndScenario(Long idContract, ParameterElement parameterElement, String scenarioName);
 
 }

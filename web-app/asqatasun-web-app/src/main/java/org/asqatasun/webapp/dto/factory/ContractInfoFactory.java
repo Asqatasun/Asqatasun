@@ -26,11 +26,11 @@ import java.util.Collection;
 import org.asqatasun.webapp.action.voter.ActionHandler;
 import org.asqatasun.webapp.dto.AuditProgressionEnum;
 import org.asqatasun.webapp.dto.ContractInfo;
-import org.asqatasun.webapp.entity.contract.Act;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.service.contract.ActDataService;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.contract.Act;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.service.contract.ActDataService;
+import org.asqatasun.entity.service.contract.ContractDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

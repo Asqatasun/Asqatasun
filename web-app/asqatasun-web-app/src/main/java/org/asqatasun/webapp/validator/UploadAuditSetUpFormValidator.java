@@ -25,7 +25,7 @@ import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MimeTypes;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.service.contract.ContractDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

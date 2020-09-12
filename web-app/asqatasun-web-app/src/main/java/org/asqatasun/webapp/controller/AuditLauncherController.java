@@ -25,20 +25,21 @@ import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.option.OptionElement;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterElement;
+import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.parameterization.ParameterElementDataService;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.webapp.command.AuditSetUpCommand;
 import org.asqatasun.webapp.dto.factory.DetailedContractInfoFactory;
-import org.asqatasun.webapp.entity.contract.Contract;
-import org.asqatasun.webapp.entity.contract.ScopeEnum;
-import org.asqatasun.webapp.entity.decorator.asqatasun.parameterization.ParameterDataServiceDecorator;
-import org.asqatasun.webapp.entity.option.OptionElement;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.entity.service.option.OptionElementDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.contract.Contract;
+import org.asqatasun.entity.contract.ScopeEnum;
+import org.asqatasun.entity.option.OptionElementImpl;
+import org.asqatasun.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.service.option.OptionElementDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.exception.KrashAuditException;
 import org.asqatasun.webapp.exception.LostInSpaceException;
 import org.asqatasun.webapp.orchestrator.AsqatasunOrchestrator;
@@ -83,7 +84,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
     private final DetailedContractInfoFactory detailedContractInfoFactory;
     private final OptionElementDataService optionElementDataService;
     private final ContractDataService contractDataService;
-    private final ParameterDataServiceDecorator parameterDataService;
+    private final ParameterDataService parameterDataService;
     private final ParameterElementDataService parameterElementDataService;
     private final AsqatasunOrchestrator asqatasunOrchestrator;
     private final RestrictionHandler restrictionHandler;
@@ -92,7 +93,7 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
     public AuditLauncherController(DetailedContractInfoFactory detailedContractInfoFactory,
                                    OptionElementDataService optionElementDataService,
                                    ContractDataService contractDataService,
-                                   ParameterDataServiceDecorator parameterDataService,
+                                   ParameterDataService parameterDataService,
                                    ParameterElementDataService parameterElementDataService,
                                    AsqatasunOrchestrator asqatasunOrchestrator,
                                    RestrictionHandler restrictionHandler) {
@@ -351,10 +352,10 @@ public class AuditLauncherController extends AbstractAuditDataHandlerController 
             paramSet = setLevelParameter(paramSet, auditSetUpCommand.getLevel());
         } else {
             paramSet = getDefaultParamSet();
-            Collection<OptionElement> optionElementSet =
+            Collection<OptionElementImpl> optionElementSet =
                     contractDataService.read(contractId).getOptionElementSet();
             for (Parameter param : paramSet) {
-                for (OptionElement optionElement : optionElementSet) {
+                for (OptionElementImpl optionElement : optionElementSet) {
                     if (optionElement.getOption().getCode().
                             equalsIgnoreCase(param.getParameterElement().getParameterElementCode())) {
                         param = parameterDataService.getParameter(param.getParameterElement(), optionElement.getValue());

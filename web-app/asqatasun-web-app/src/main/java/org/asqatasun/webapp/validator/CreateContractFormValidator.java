@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.RegexValidator;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.asqatasun.webapp.command.CreateContractCommand;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.ui.form.parameterization.ContractOptionFormField;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

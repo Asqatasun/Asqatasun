@@ -22,8 +22,8 @@
 package org.asqatasun.webapp.controller;
 
 import org.asqatasun.webapp.config.TestConfiguration;
-import org.asqatasun.webapp.entity.service.contract.ContractDataService;
-import org.asqatasun.webapp.entity.user.User;
+import org.asqatasun.entity.service.contract.ContractDataService;
+import org.asqatasun.entity.user.User;
 import org.asqatasun.webapp.security.userdetails.TgolUserDetails;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
