@@ -1,8 +1,8 @@
 INSERT IGNORE INTO `REFERENCE` (`Cd_Reference`, `Description`, `Label`, `Url`, `Rank`, `Id_Default_Level`) VALUES
 ('Rgaa40', NULL, 'Rgaa 4.0', '', 2000, 2);
 
-INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
-('Rgaa40', 'Rgaa 4.0');
+-- INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
+-- ('Rgaa40', 'Rgaa 4.0');
 
 INSERT IGNORE INTO `THEME` (`Cd_Theme`, `Description`, `Label`, `Rank`) VALUES
 ('Rgaa40-1', NULL, 'Images', 1),
