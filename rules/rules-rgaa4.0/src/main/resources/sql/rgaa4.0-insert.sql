@@ -513,6 +513,23 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (5, 'Rgaa40;LEVEL_2', b'0'),
 (5, 'Rgaa40;LEVEL_3', b'0');
 
+-- Set Rule_Design_Url
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('01.Images/Rule-',                       SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-1-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('02.Frames/Rule-',                       SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-2-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('03.Colours/Rule-',                      SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-3-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('04.Multimedia/Rule-',                   SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-4-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('05.Tables/Rule-',                       SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-5-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('06.Links/Rule-',                        SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-6-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('07.Scripts/Rule-',                      SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-7-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('08.Mandatory_elements/Rule-',           SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-8-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('09.Structure_of_information/Rule-',     SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-9-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('10.Presentation_of_information/Rule-',  SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-10-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('11.Forms/Rule-',                        SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-11-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('12.Navigation/Rule-',                   SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-12-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('13.Consultation/Rule-',                 SUBSTRING(`Cd_Test`,11), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-13-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/', `Rule_Design_Url`)     WHERE `Cd_Test` LIKE 'Rgaa40-%';
+-- UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('https://doc.asqatasun.org/en/90_Rules/rgaa4.0/', `Rule_Design_Url`)     WHERE `Cd_Test` LIKE 'Rgaa40-%';
+
 -- Disable all rgaa4 tests
 UPDATE TEST SET `No_Process`=b'1' WHERE Cd_Test LIKE ('Rgaa40-%');
 
