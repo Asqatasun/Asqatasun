@@ -513,3 +513,8 @@ INSERT IGNORE INTO `PARAMETER` (`Id_Parameter_Element`, `Parameter_Value`, `Is_D
 (5, 'Rgaa40;LEVEL_2', b'0'),
 (5, 'Rgaa40;LEVEL_3', b'0');
 
+-- Disable all rgaa4 tests
+UPDATE TEST SET `No_Process`=b'1' WHERE Cd_Test LIKE ('Rgaa40-%');
+
+-- Enable only implemented tests
+-- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-1-1-1'
