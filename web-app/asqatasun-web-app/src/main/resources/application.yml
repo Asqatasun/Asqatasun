@@ -52,7 +52,7 @@ app:
         authorizedScopeForPageList: "DOMAIN,SCENARIO"
         authorizedScopeForSynthesis: "DOMAIN,SCENARIO"
         authorizedScopeForTrend: "DOMAIN,SCENARIO"
-        defaultReferential: "Rgaa30"
+        defaultReferential: "Rgaa40"
         forbiddenUserListForSettings: "guest"
         nbOfFailedPages: 10
         nbOfFailedTest: 5
