@@ -1,0 +1,58 @@
+# RGAA 4.0 - Rule 7.5.3
+
+## Summary
+No-check rule
+
+
+## Business description
+
+### Criterion
+[7.5](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#crit-7-5)
+
+### Test
+[7.5.3](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-7-5-3)
+
+### Description
+> Chaque [message de statut](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#message-de-statut) qui indique la progression d’un processus utilise-t-il l’un des attributs WAI-ARIA `role="log"`, `role="progressbar"` ou `role="status"` ?
+
+#### Technical notes (criterion 7.5)
+> Les rôles WAI-ARIA `log`, `status` et `alert` ont implicitement une valeur d’attribut WAI-ARIA `aria-live` et `aria-atomic`. On pourra donc considérer (conformément à la spécification WAI-ARIA 1.1) que :
+> 
+> * Un attribut WAI-ARIA `aria-live="polite"` associé à un message de statut peut valoir pour un rôle WAI-ARIA `log`.
+> * Un attribut WAI-ARIA `aria-live="polite"` et un attribut `aria-atomic="true"` associés à un message de statut peuvent valoir pour un rôle WAI-ARIA `status`.
+> * Un attribut `aria-live="assertive"` et un attribut `aria-atomic="true"` associés à un message de statut peuvent valoir pour un rôle WAI-ARIA `alert`.
+> 
+> C’est sous réserve que la nature du message de statut satisfasse bien à la correspondance implicitement établie. Dans le cas d’un message de statut indiquant la progression d’un processus et matérialisé graphiquement par une barre de progression, un rôle WAI-ARIA `progressbar` explicite est nécessaire.
+
+### Level
+**A**
+
+
+## Technical description
+
+### Scope
+**Page**
+
+### Decision level
+@@@TODO
+
+
+## Algorithm
+
+### Selection
+None
+
+### Process
+None
+
+### Analysis
+
+#### No Tested
+In all cases
+
+
+##  TestCases
+
+[TestCases files for rule 7.5.3](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40//Rgaa40Rule070503/)
+
+
