@@ -28,7 +28,7 @@ import org.asqatasun.rules.test.AbstractRuleImplementationTestCase;
 public abstract class Rgaa40RuleImplementationTestCase extends AbstractRuleImplementationTestCase {
 
     private static final String TESTCASE_FILE_PATH = "src/test/resources/testcases/";
-    private static final String INPUT_FILE_DATA_NAME = "src/test/resources/dataSets/emptyFlatXmlDataSet.xml";
+    private static final String INPUT_FILE_DATA_NAME = "src/test/resources/dataSets/nomenclatureFlatXmlDataSet.xml";
 
     public Rgaa40RuleImplementationTestCase(String testName) {
         super(testName, INPUT_FILE_DATA_NAME, TESTCASE_FILE_PATH);

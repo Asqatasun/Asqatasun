@@ -22,8 +22,9 @@
 package org.asqatasun.model
 
 enum class Referential(val code: String) {
-    ACCESSIWEB_2_2("Aw22"),
+    RGAA_4_0("Rgaa40"),
     RGAA_3_0("Rgaa30"),
+    ACCESSIWEB_2_2("Aw22"),
     SEO("Seo");
 
     companion object {

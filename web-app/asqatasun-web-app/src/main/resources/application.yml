@@ -47,12 +47,12 @@ app:
     ui:
       config:
         authorizedPageSize: "10,25,50,100,250,1000,-1"
-        authorizedRefForCriterionViewList: "Aw22,Rgaa30"
+        authorizedRefForCriterionViewList: "Aw22,Rgaa30,Rgaa40"
         authorizedScopeForCriterionList: "DOMAIN,SCENARIO"
         authorizedScopeForPageList: "DOMAIN,SCENARIO"
         authorizedScopeForSynthesis: "DOMAIN,SCENARIO"
         authorizedScopeForTrend: "DOMAIN,SCENARIO"
-        defaultReferential: "Rgaa30"
+        defaultReferential: "Rgaa40"
         forbiddenUserListForSettings: "guest"
         nbOfFailedPages: 10
         nbOfFailedTest: 5

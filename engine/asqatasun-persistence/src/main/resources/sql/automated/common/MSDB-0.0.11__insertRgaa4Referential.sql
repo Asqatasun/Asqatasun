@@ -1,8 +1,8 @@
 INSERT IGNORE INTO `REFERENCE` (`Cd_Reference`, `Description`, `Label`, `Url`, `Rank`, `Id_Default_Level`) VALUES
 ('Rgaa40', NULL, 'Rgaa 4.0', '', 2000, 2);
 
-INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
-('Rgaa40', 'Rgaa 4.0');
+-- INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES
+-- ('Rgaa40', 'Rgaa 4.0');
 
 INSERT IGNORE INTO `THEME` (`Cd_Theme`, `Description`, `Label`, `Rank`) VALUES
 ('Rgaa40-1', NULL, 'Images', 1),
@@ -546,7 +546,7 @@ UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('https://gitlab.com/asqatasun/Asqat
     -- UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('https://doc.asqatasun.org/en/90_Rules/rgaa4.0/', `Rule_Design_Url`)     WHERE `Cd_Test` LIKE 'Rgaa40-%';
 
 -- Disable all rgaa4 tests
-UPDATE TEST SET `No_Process`=b'1' WHERE Cd_Test LIKE ('Rgaa40-%');
+-- UPDATE TEST SET `No_Process`=b'1' WHERE Cd_Test LIKE ('Rgaa40-%');
 
 -- Enable only implemented tests
 -- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-1-1-1'

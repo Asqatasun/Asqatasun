@@ -161,6 +161,7 @@
                                 --%>
                                 <%-- (1) Dirty alternative ----> it work ----> @@@TODO fixme  (START) --%>
                                     <c:choose>
+                                        <%-- @@@TODO Rgaa 4 --%>
                                         <c:when test="${testCode == 'Rgaa30-3-3-3'     ||
                                                         testCode == 'Rgaa30-3-3-4'     ||
                                                         testCode == 'Rgaa32016-3-3-3'  ||
