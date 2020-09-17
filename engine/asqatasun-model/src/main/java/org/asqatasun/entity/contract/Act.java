@@ -33,7 +33,7 @@ import org.asqatasun.entity.audit.AuditImpl;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_ACT")
+@Table(name = "ACT")
 @XmlRootElement
 public class Act implements org.asqatasun.entity.Entity, Serializable {
 
@@ -61,7 +61,7 @@ public class Act implements org.asqatasun.entity.Entity, Serializable {
     private Contract contract;
 
     @OneToOne
-        @JoinTable(name = "TGSI_ACT_AUDIT", joinColumns =
+        @JoinTable(name = "ACT_AUDIT", joinColumns =
         @JoinColumn(name = "ACT_Id_Act"), inverseJoinColumns =
         @JoinColumn(name = "AUDIT_Id_Audit"))
     private AuditImpl audit;

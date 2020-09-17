@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_SCOPE")
+@Table(name = "AUDIT_SCOPE")
 @XmlRootElement
 public class Scope implements org.asqatasun.entity.Entity, Serializable {
 

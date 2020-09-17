@@ -38,7 +38,7 @@ import org.asqatasun.entity.option.OptionElementImpl;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_USER")
+@Table(name = "USER")
 @XmlRootElement
 public class User implements org.asqatasun.entity.Entity, Serializable {
 
@@ -90,7 +90,7 @@ public class User implements org.asqatasun.entity.Entity, Serializable {
     private Collection<Contract> contractSet = new LinkedHashSet<>();
 
     @ManyToMany
-        @JoinTable(name = "TGSI_USER_OPTION_ELEMENT", joinColumns =
+        @JoinTable(name = "USER_OPTION_ELEMENT", joinColumns =
         @JoinColumn(name = "USER_Id_User"), inverseJoinColumns =
         @JoinColumn(name = "OPTION_ELEMENT_Id_Option_Element"))
     Set<OptionElementImpl> optionElementSet = new HashSet<>();

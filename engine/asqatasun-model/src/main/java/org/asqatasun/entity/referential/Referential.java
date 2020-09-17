@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_REFERENTIAL")
+@Table(name = "REFERENTIAL")
 @XmlRootElement
 public class Referential implements org.asqatasun.entity.Entity, Serializable {
 

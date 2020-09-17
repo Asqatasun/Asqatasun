@@ -228,7 +228,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         Connection conn = null;
         try {
             StringBuilder requestBuilder = new StringBuilder();
-            requestBuilder.append("insert into TGSI_USER(`Email1`,`Password`,`ROLE_Id_Role`, `Activated`) values(");
+            requestBuilder.append("insert into USER(`Email1`,`Password`,`ROLE_Id_Role`, `Activated`) values(");
             requestBuilder.append("'");
             requestBuilder.append(user);
             requestBuilder.append("'");
@@ -264,7 +264,7 @@ public class AbstractWebDriverTestClass extends TestCase {
         Connection conn = null;
         try {
             StringBuilder requestBuilder = new StringBuilder();
-            requestBuilder.append("delete from TGSI_USER WHERE Email1 like \"");
+            requestBuilder.append("delete from USER WHERE Email1 like \"");
             requestBuilder.append(user);
             requestBuilder.append("\";");
             conn = dataSource.getConnection();

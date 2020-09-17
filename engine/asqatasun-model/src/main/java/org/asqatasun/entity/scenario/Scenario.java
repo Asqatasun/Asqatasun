@@ -32,7 +32,7 @@ import org.asqatasun.entity.contract.Contract;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_SCENARIO")
+@Table(name = "SCENARIO")
 @XmlRootElement
 public class Scenario implements org.asqatasun.entity.Entity, Serializable {
 

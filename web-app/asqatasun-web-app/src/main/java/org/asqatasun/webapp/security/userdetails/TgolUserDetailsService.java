@@ -47,10 +47,10 @@ public class TgolUserDetailsService extends JdbcDaoImpl {
     private DataSource dataSource;
 
     private final static String USERS_BY_USERNAME_QUERY =
-        "SELECT Email1, Password, Activated as enabled FROM TGSI_USER WHERE Email1=?";
+        "SELECT Email1, Password, Activated as enabled FROM USER WHERE Email1=?";
     private static String AUTHORITIES_BY_USERNAME_QUERY =
-        "SELECT TGSI_USER.Email1, TGSI_ROLE.Role_Name as authorities FROM TGSI_USER, TGSI_ROLE "
-            + "WHERE TGSI_USER.Email1 = ? AND TGSI_USER.ROLE_Id_Role=TGSI_ROLE.Id_Role";
+        "SELECT USER.Email1, ROLE.Role_Name as authorities FROM USER, ROLE "
+            + "WHERE USER.Email1 = ? AND USER.ROLE_Id_Role=ROLE.Id_Role";
 
     /**
      *

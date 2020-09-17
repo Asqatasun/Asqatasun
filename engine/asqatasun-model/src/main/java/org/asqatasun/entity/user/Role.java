@@ -31,7 +31,7 @@ import javax.persistence.*;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_ROLE")
+@Table(name = "ROLE")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Role implements org.asqatasun.entity.Entity, Serializable {
 

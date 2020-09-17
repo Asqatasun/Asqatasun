@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_OPTION")
+@Table(name = "OPTION_VALUE")
 @XmlRootElement
 public class OptionImpl implements Option, Serializable {
 

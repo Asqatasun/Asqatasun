@@ -346,7 +346,7 @@ public class FileGenerator {
         StringBuilder strb = new StringBuilder();
         strb.append("INSERT IGNORE INTO `REFERENCE` (`Cd_Reference`, `Description`, `Label`, `Url`, `Rank`, `Id_Default_Level`) VALUES\n");
         strb.append("(\'").append(vpc.getReferential().replace(".", "")).append("\', NULL, \'").append(vpc.getReferentialLabel()).append("\', \'\', 2000, 1);\n\n");
-        strb.append("INSERT IGNORE INTO `TGSI_REFERENTIAL` (`Code`, `Label`) VALUES\n");
+        strb.append("INSERT IGNORE INTO `REFERENTIAL` (`Code`, `Label`) VALUES\n");
         strb.append("(\'").append(vpc.getReferential().replace(".", "")).append("\', \'").append(vpc.getReferentialLabel()).append("\');\n\n");
         FileUtils.writeStringToFile(FileUtils.getFile(getSqlFile()), strb.toString(), true);
     }

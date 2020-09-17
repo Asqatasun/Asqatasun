@@ -38,7 +38,7 @@ import org.asqatasun.entity.user.User;
  * @author jkowalczyk
  */
 @Entity
-@Table(name = "TGSI_CONTRACT")
+@Table(name = "CONTRACT")
 @XmlRootElement
 public class Contract implements org.asqatasun.entity.Entity, Serializable {
 
@@ -78,19 +78,19 @@ public class Contract implements org.asqatasun.entity.Entity, Serializable {
     private Set<Scenario> scenarioSet = new LinkedHashSet<>();
     
     @ManyToMany(fetch = FetchType.EAGER)
-        @JoinTable(name = "TGSI_CONTRACT_FUNCTIONALITY", joinColumns =
+        @JoinTable(name = "CONTRACT_FUNCTIONALITY", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
         @JoinColumn(name = "FUNCTIONALITY_Id_Functionality"))
     private Set<Functionality> functionalitySet = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-        @JoinTable(name = "TGSI_CONTRACT_OPTION_ELEMENT", joinColumns =
+        @JoinTable(name = "CONTRACT_OPTION_ELEMENT", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
         @JoinColumn(name = "OPTION_ELEMENT_Id_Option_Element"))
     Set<OptionElementImpl> optionElementSet = new HashSet<>();
     
     @ManyToMany(fetch = FetchType.EAGER)
-        @JoinTable(name = "TGSI_CONTRACT_REFERENTIAL", joinColumns =
+        @JoinTable(name = "CONTRACT_REFERENTIAL", joinColumns =
         @JoinColumn(name = "CONTRACT_Id_Contract"), inverseJoinColumns =
         @JoinColumn(name = "REFERENTIAL_Id_Referential"))
     Set<Referential> referentialSet = new HashSet<>();

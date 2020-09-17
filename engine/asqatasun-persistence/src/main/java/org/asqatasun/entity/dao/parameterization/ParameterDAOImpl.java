@@ -212,8 +212,8 @@ public class ParameterDAOImpl extends AbstractJPADAO<Parameter, Long> implements
         Act act) {
         StringBuilder queryString = new StringBuilder();
         queryString.append("SELECT distinct(p.Parameter_Value) FROM");
-        queryString.append(" TGSI_ACT as a,");
-        queryString.append(" TGSI_ACT_AUDIT as taa,");
+        queryString.append(" ACT as a,");
+        queryString.append(" ACT_AUDIT as taa,");
         queryString.append(" AUDIT_PARAMETER as ap, ");
         queryString.append(" PARAMETER as p, ");
         queryString.append(" PARAMETER_ELEMENT as pe ");
