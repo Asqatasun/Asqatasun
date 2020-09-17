@@ -32,7 +32,7 @@ public class Rgaa40Rule060103 extends AbstractNotTestedRuleImplementation {
     /**
      * Default constructor
      */
-    public Rgaa40Rule060103 () {
+    public Rgaa40Rule060103() {
         super();
     }
 
