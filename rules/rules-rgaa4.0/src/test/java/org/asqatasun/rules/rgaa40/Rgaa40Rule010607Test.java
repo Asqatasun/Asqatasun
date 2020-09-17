@@ -35,14 +35,14 @@ public class Rgaa40Rule010607Test extends Rgaa40RuleImplementationTestCase {
      * Default constructor
      * @param testName
      */
-    public Rgaa40Rule010607Test (String testName){
+    public Rgaa40Rule010607Test(String testName) {
         super(testName);
     }
 
     @Override
     protected void setUpRuleImplementationClassName() {
         setRuleImplementationClassName(
-                "org.asqatasun.rules.rgaa40.Rgaa40Rule010607");
+            "org.asqatasun.rules.rgaa40.Rgaa40Rule010607");
     }
 
     @Override
@@ -101,7 +101,7 @@ public class Rgaa40Rule010607Test extends Rgaa40RuleImplementationTestCase {
         // The assertions are automatically tested regarding the file names by
         // the abstract parent class
         assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa40.Test.1.6.7-3NMI-01").getValue());
+            consolidate("Rgaa40.Test.1.6.7-3NMI-01").getValue());
     }
 
 }
