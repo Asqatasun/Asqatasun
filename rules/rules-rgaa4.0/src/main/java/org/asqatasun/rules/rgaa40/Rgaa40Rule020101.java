@@ -19,7 +19,15 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.IFRAME_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING_MSG;
 
 /**
  * Implementation of rule 2.1.1 (referential RGAA 4.0)
@@ -27,13 +35,24 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/02.Frames/Rule-2-1-1.md">rule 2.1.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-2-1-1">2.1.1 rule specification</a>
  */
-public class Rgaa40Rule020101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule020101 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa40Rule020101() {
-        super();
+    public Rgaa40Rule020101 () {
+        super(
+            new SimpleElementSelector(IFRAME_ELEMENT),
+
+            new AttributePresenceChecker(
+                TITLE_ATTR,
+                // passed when attribute is found, empty message
+                new ImmutablePair(TestSolution.PASSED, ""),
+                // failed when attribute is not found, titleAttrMissing Message
+                new ImmutablePair(TestSolution.FAILED, TITLE_ATTR_MISSING_MSG),
+                // evidence elements
+                SRC_ATTR)
+        );
     }
 
 }

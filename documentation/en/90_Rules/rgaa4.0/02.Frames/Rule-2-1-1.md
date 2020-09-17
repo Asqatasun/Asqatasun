@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in checking the presence of the `"title"` attribute 
+for all the `<iframe>` elements of the page.
 
 ## Business description
 
@@ -31,24 +32,45 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<iframe>` tags of the page (css selector : `iframe`)
 
 ### Process
 
-None
+#### Test1 :
+
+For each element of **Set1**, test the presence of the `"title"` attribute.
+
+For each occurrence of false-result of **Test1**, raise a MessageA
+
+##### MessageA: Title attribute is missing
+
+-   code : TitleAttributeMissing
+-   status: Failed
+-   parameter : `"src"` attribute, tag name, snippet
+-   present in source : yes
 
 ### Analysis
 
-#### Not Tested
+#### Passed
 
-In all cases
+All the `<iframe>` tags have an `"title"` attribute (**Test1** returns true for all the elements of **Set1**)
+
+#### Failed
+
+At least one `<frame>` tag has no `"title"` attribute (**Test1** returns false for at least one element of **Set1**)
+
+#### Not Applicable
+
+The page has no `<iframe>` tag (**Set1** is empty)
 
 
 ## Files
@@ -56,5 +78,3 @@ In all cases
 - [TestCases files for rule 2.1.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule020101/)
 - [Unit test file for rule 2.1.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule020101Test.java)
 - [Class file for rule 2.1.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule020101.java)
-
-
