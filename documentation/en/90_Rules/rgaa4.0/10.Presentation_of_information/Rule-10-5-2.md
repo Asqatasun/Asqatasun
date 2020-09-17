@@ -20,7 +20,7 @@ No-check rule
 
 ### Level
 
-**A**
+**AA**
 
 
 ## Technical description
