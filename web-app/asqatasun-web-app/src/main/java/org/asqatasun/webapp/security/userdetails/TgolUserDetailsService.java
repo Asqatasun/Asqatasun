@@ -25,7 +25,6 @@ package org.asqatasun.webapp.security.userdetails;
 import java.util.List;
 import org.asqatasun.entity.service.user.UserDataService;
 import org.asqatasun.entity.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
@@ -41,10 +40,8 @@ import javax.sql.DataSource;
 @Service
 public class TgolUserDetailsService extends JdbcDaoImpl {
 
-    @Autowired
-    private UserDataService userDataService;
-    @Autowired
-    private DataSource dataSource;
+    private final UserDataService userDataService;
+    private final DataSource dataSource;
 
     private final static String USERS_BY_USERNAME_QUERY =
         "SELECT Email1, Password, Activated as enabled FROM USER WHERE Email1=?";
@@ -55,8 +52,10 @@ public class TgolUserDetailsService extends JdbcDaoImpl {
     /**
      *
      */
-    public TgolUserDetailsService() {
+    public TgolUserDetailsService(UserDataService userDataService, DataSource dataSource) {
         super();
+        this.userDataService = userDataService;
+        this.dataSource = dataSource;
     }
 
     @PostConstruct

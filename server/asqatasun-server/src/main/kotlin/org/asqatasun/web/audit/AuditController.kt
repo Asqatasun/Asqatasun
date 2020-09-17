@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 import java.io.IOException
 import java.util.*
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("api/v1/audit")
@@ -54,25 +55,29 @@ class AuditController(private val auditDataService: AuditDataService,
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun auditPage(@RequestBody auditRequest: PageAuditRequest) = auditService.runPageAudit(auditRequest)
+    fun auditPage(@RequestBody auditRequest: PageAuditRequest, request: HttpServletRequest)
+        = auditService.runPageAudit(auditRequest, request.remoteAddr)
 
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/runS"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     @Throws(IOException::class)
-    fun auditScenario(@RequestBody auditRequest: ScenarioAuditRequest) = auditService.runScenarioAudit(auditRequest)
+    fun auditScenario(@RequestBody auditRequest: ScenarioAuditRequest, request: HttpServletRequest)
+        = auditService.runScenarioAudit(auditRequest, request.remoteAddr)
 
 }
 
 data class PageAuditRequest(
     val urls: List<String>,
     val referential: Referential,
-    val level: Level
+    val level: Level,
+    val contractId: Long?
 )
 
 data class ScenarioAuditRequest(
     var name: String,
     var scenario: String,
     var referential: Referential,
-    var level: Level
+    var level: Level,
+    val contractId: Long?
 )

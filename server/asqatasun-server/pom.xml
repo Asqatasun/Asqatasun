@@ -11,6 +11,7 @@
     </parent>
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun-server</artifactId>
+    <version>5.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>asqatasun-server</name>
     <properties>
@@ -85,14 +86,9 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-persistence</artifactId>
-            <version>${asqatasun.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-services</artifactId>
             <version>${asqatasun.version}</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
@@ -145,12 +141,6 @@
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-logging</artifactId>
-            <version>${asqatasun.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-scenarioloader</artifactId>
             <version>${asqatasun.version}</version>
             <scope>runtime</scope>
         </dependency>

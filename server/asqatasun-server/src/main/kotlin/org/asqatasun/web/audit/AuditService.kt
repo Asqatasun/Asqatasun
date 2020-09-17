@@ -22,35 +22,135 @@
 
 package org.asqatasun.web.audit
 
+import org.asqatasun.entity.audit.Audit
+import org.asqatasun.entity.contract.*
+import org.asqatasun.entity.contract.ScopeEnum.*
 import org.asqatasun.entity.parameterization.Parameter
+import org.asqatasun.entity.service.contract.ActDataService
+import org.asqatasun.entity.service.contract.ContractDataService
+import org.asqatasun.entity.service.contract.ScopeDataService
 import org.asqatasun.entity.service.parameterization.ParameterDataService
+import org.asqatasun.service.AuditServiceListener
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.io.IOException
+import java.time.Instant
+import java.util.*
+import javax.annotation.PostConstruct
 import org.asqatasun.service.AuditService as EngineAuditService
 
 @Service
-class AuditService(private val parameterDataService: ParameterDataService,
-                   private val auditService: EngineAuditService) {
+class AuditService(private val auditService: EngineAuditService,
+                   private val contractDataService: ContractDataService,
+                   private val actDataService: ActDataService,
+                   private val scopeDataService: ScopeDataService,
+                   private val parameterDataService: ParameterDataService) {
 
-    fun runPageAudit(par: PageAuditRequest): Long {
+    private val scopeMap: MutableMap<ScopeEnum, Scope> = EnumMap(ScopeEnum::class.java)
+
+    @PostConstruct
+    private fun initializeScopeMap() {
+        for (scope in scopeDataService.findAll()) {
+            scopeMap[scope.code] = scope
+        }
+    }
+
+    fun runPageAudit(par: PageAuditRequest, ipAddress: String): Long {
+        val contract = getContract(par.contractId)
+
         val paramSet: Set<Parameter> =
             parameterDataService.getParameterSetFromAuditLevel(par.referential.code, par.level.code)
-        return if (par.urls.size > 1)
-            auditService.auditSite("site:" + par.urls[0], par.urls, paramSet).id
-        else
-            auditService.auditPage(par.urls[0], parameterDataService.getAuditPageParameterSet(paramSet)).id
+
+        return if (par.urls.size > 1) {
+            getAuditId(
+                auditService.auditSite("site:" + par.urls[0], par.urls, paramSet),
+                ipAddress,
+                GROUPOFPAGES,
+                contract)
+        } else {
+            getAuditId(
+                auditService.auditPage(par.urls[0], parameterDataService.getAuditPageParameterSet(paramSet)),
+                ipAddress,
+                PAGE,
+                contract)
+        }
     }
 
-    fun runScenarioAudit(sar: ScenarioAuditRequest): Long {
-        val paramSet: Set<Parameter> =
-            parameterDataService.getParameterSetFromAuditLevel(sar.referential.code, sar.level.code)
-        return auditService.auditScenario(sar.name, readFile(sar.scenario), paramSet).id
+    fun runScenarioAudit(sar: ScenarioAuditRequest, ipAddress: String): Long {
+        val contract = getContract(sar.contractId)
+
+        return auditService.auditScenario(sar.name,
+                                          readFile(sar.scenario),
+                                          initialiseParamSet(sar.referential.code, sar.level.code)).let {
+            getAuditId(it, ipAddress, SCENARIO, contract)
+        }
     }
+
+    private fun getAuditId(audit: Audit, ipAddress: String, scope: ScopeEnum, contract: Contract?): Long {
+        val act = initialiseAct(ipAddress, scope, audit, contract)
+        auditService.add(RestAuditServiceListener(act?.id, actDataService, auditService))
+        return audit.id
+    }
+
+    private fun initialiseAct(ipAddress: String, scope: ScopeEnum, audit: Audit, contract: Contract?): Act? {
+        return contract?.let {
+                val a = actDataService.create()
+                a.status = ActStatus.RUNNING
+                a.beginDate = Date.from(Instant.now())
+                a.clientIp = ipAddress
+                a.scope = scopeMap[scope]
+                a.contract = it
+                a.audit = audit
+                actDataService.saveOrUpdate(a)
+        }
+    }
+
+    private fun getContract(contractId: Long?) = contractId?.let { id ->
+        contractDataService.read(id) ?: throw ContractNotFoundException()
+    }
+
+    private fun initialiseParamSet(referentialCode: String, levelCode: String) =
+        parameterDataService.getParameterSetFromAuditLevel(referentialCode, levelCode)
 
     @Throws(IOException::class)
     // #57 issue quick fix.......
     private fun readFile(scenario: String) =
         scenario.replace("\"formatVersion\": 2", "\"formatVersion\":1")
             .replace("\"formatVersion\":2", "\"formatVersion\":1")
+
+}
+
+class ContractNotFoundException : Throwable() {}
+
+class RestAuditServiceListener(private val actId: Long?,
+                               private val actDataService: ActDataService,
+                               private val auditService: EngineAuditService) : AuditServiceListener {
+
+    companion object {
+        private val LOGGER = LoggerFactory.getLogger(RestAuditServiceListener::class.java)
+    }
+
+    override fun auditCompleted(audit: Audit?) {
+        LOGGER.info("Rest audit ${audit!!.id} terminated successfully")
+        actId?.let {
+            val act = actDataService.read(it)
+            act.endDate = Date.from(Instant.now())
+            act.status = ActStatus.COMPLETED
+            actDataService.saveOrUpdate(act)
+        }
+        auditService.remove(this)
+    }
+
+    override fun auditCrashed(audit: Audit?, exception: Exception?) {
+        LOGGER.info("Rest audit ${audit!!.id} crashed")
+        LOGGER.info(exception!!.message)
+        actId?.let {
+            val act = actDataService.read(it)
+            act.endDate = Date.from(Instant.now())
+            act.status = ActStatus.ERROR
+            actDataService.saveOrUpdate(act)
+        }
+        auditService.remove(this)
+    }
 
 }
