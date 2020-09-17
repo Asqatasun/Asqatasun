@@ -1,24 +1,28 @@
 # RGAA 4.0 - Rule 3.3.1
 
 ## Summary
-No-check rule
 
+No-check rule
 
 ## Business description
 
 ### Criterion
+
 [3.3](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#crit-3-3)
 
 ### Test
+
 [3.3.1](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-3-3-1)
 
 ### Description
+
 > Dans chaque page web, le rapport de [contraste](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#contraste) entre les couleurs d’un [composant d’interface](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#composant-d-interface) dans ses différents états et la [couleur d’arrière-plan contiguë](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#couleur-d-arriere-plan-contigue-et-couleur-contigue) vérifie-t-il une de ces conditions (hors cas particuliers) ?
 > 
 > * Le rapport de [contraste](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#contraste) est de 3:1, au moins.
 > * Un [mécanisme](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#mecanisme-qui-permet-d-afficher-un-rapport-de-contraste-conforme) permet un rapport de [contraste](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#contraste) de 3:1, au moins.
 
 #### Particular cases (criterion 3.3)
+
 > Les cas suivants sont non applicables pour ce critère :
 > 
 > * Composant d’interface inactif (exemple un bouton avec un attribut `disabled`) sur lequel aucune action n’est possible.
@@ -30,34 +34,42 @@ No-check rule
 > * Élément graphique ou parties d’élément graphique dynamiques dont le contraste au survol / focus est suffisant.
 
 ### Level
+
 **A**
 
 
 ## Technical description
 
 ### Scope
+
 **Page**
 
 ### Decision level
+
 @@@TODO
 
 
 ## Algorithm
 
 ### Selection
+
 None
 
 ### Process
+
 None
 
 ### Analysis
 
-#### No Tested
+#### Not Tested
+
 In all cases
 
 
-##  TestCases
+## Files
 
-[TestCases files for rule 3.3.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40//Rgaa40Rule030301/)
+- [TestCases files for rule 3.3.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule030301/)
+- [Unit test file for rule 3.3.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule030301Test.java)
+- [Class file for rule 3.3.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule030301.java)
 
 

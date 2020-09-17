@@ -1,24 +1,28 @@
 # RGAA 4.0 - Rule 8.7.1
 
 ## Summary
-No-check rule
 
+No-check rule
 
 ## Business description
 
 ### Criterion
+
 [8.7](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#crit-8-7)
 
 ### Test
+
 [8.7.1](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-8-7-1)
 
 ### Description
+
 > Dans chaque page web, chaque texte écrit dans une langue différente de la [langue par défaut](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#langue-par-defaut) vérifie-t-il une de ces conditions (hors cas particuliers) ?
 > 
 > * L’indication de langue est donnée sur l’élément contenant le texte (attribut `lang` et/ou `xml:lang`).
 > * L’indication de langue est donnée sur un des éléments parents (attribut `lang` et/ou `xml:lang`).
 
 #### Particular cases (criterion 8.7)
+
 > Il y a une gestion de cas particuliers sur le changement de langue pour les cas suivants :
 > 
 > * Nom propre, le critère est non applicable ;
@@ -32,34 +36,42 @@ No-check rule
 > Note 2 : pour les noms communs de langue étrangère, absents dans le dictionnaire officiel de la langue par défaut de la page web, et qui sont passés dans le langage commun (exemple : newsletter) : le critère est applicable, uniquement lorsque l’absence d’indication de langue peut provoquer une incompréhension pour la restitution.
 
 ### Level
+
 **A**
 
 
 ## Technical description
 
 ### Scope
+
 **Page**
 
 ### Decision level
+
 @@@TODO
 
 
 ## Algorithm
 
 ### Selection
+
 None
 
 ### Process
+
 None
 
 ### Analysis
 
-#### No Tested
+#### Not Tested
+
 In all cases
 
 
-##  TestCases
+## Files
 
-[TestCases files for rule 8.7.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40//Rgaa40Rule080701/)
+- [TestCases files for rule 8.7.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080701/)
+- [Unit test file for rule 8.7.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080701Test.java)
+- [Class file for rule 8.7.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080701.java)
 
 

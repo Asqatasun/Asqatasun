@@ -1,24 +1,28 @@
 # RGAA 4.0 - Rule 4.1.1
 
 ## Summary
-No-check rule
 
+No-check rule
 
 ## Business description
 
 ### Criterion
+
 [4.1](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#crit-4-1)
 
 ### Test
+
 [4.1.1](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-4-1-1)
 
 ### Description
+
 > Chaque [média temporel](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise) pré-enregistré seulement audio, vérifie-t-il, si nécessaire, l’une de ces conditions (hors cas particuliers) ?
 > 
 > * Il existe une [transcription textuelle](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel) accessible via un [lien ou bouton adjacent](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent).
 > * Il existe une [transcription textuelle](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel) adjacente clairement identifiable.
 
 #### Particular cases (criterion 4.1)
+
 > Il existe une gestion de cas particulier lorsque :
 > 
 > * Le [média temporel](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise) est utilisé à des fins décoratives (c’est-à-dire qu’il n’apporte aucune information);
@@ -34,34 +38,42 @@ No-check rule
 > Ce cas particulier s’applique également aux critères 4.2, 4.3, 4.5.
 
 ### Level
+
 **A**
 
 
 ## Technical description
 
 ### Scope
+
 **Page**
 
 ### Decision level
+
 @@@TODO
 
 
 ## Algorithm
 
 ### Selection
+
 None
 
 ### Process
+
 None
 
 ### Analysis
 
-#### No Tested
+#### Not Tested
+
 In all cases
 
 
-##  TestCases
+## Files
 
-[TestCases files for rule 4.1.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40//Rgaa40Rule040101/)
+- [TestCases files for rule 4.1.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule040101/)
+- [Unit test file for rule 4.1.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule040101Test.java)
+- [Class file for rule 4.1.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule040101.java)
 
 

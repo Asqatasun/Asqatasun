@@ -1,21 +1,25 @@
 # RGAA 4.0 - Rule 7.5.1
 
 ## Summary
-No-check rule
 
+No-check rule
 
 ## Business description
 
 ### Criterion
+
 [7.5](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#crit-7-5)
 
 ### Test
+
 [7.5.1](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-7-5-1)
 
 ### Description
+
 > Chaque [message de statut](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#message-de-statut) qui informe de la réussite, du résultat d’une action ou bien de l’état d’une application utilise-t-il l’attribut WAI-ARIA `role="status"` ?
 
 #### Technical notes (criterion 7.5)
+
 > Les rôles WAI-ARIA `log`, `status` et `alert` ont implicitement une valeur d’attribut WAI-ARIA `aria-live` et `aria-atomic`. On pourra donc considérer (conformément à la spécification WAI-ARIA 1.1) que :
 > 
 > * Un attribut WAI-ARIA `aria-live="polite"` associé à un message de statut peut valoir pour un rôle WAI-ARIA `log`.
@@ -25,34 +29,42 @@ No-check rule
 > C’est sous réserve que la nature du message de statut satisfasse bien à la correspondance implicitement établie. Dans le cas d’un message de statut indiquant la progression d’un processus et matérialisé graphiquement par une barre de progression, un rôle WAI-ARIA `progressbar` explicite est nécessaire.
 
 ### Level
+
 **A**
 
 
 ## Technical description
 
 ### Scope
+
 **Page**
 
 ### Decision level
+
 @@@TODO
 
 
 ## Algorithm
 
 ### Selection
+
 None
 
 ### Process
+
 None
 
 ### Analysis
 
-#### No Tested
+#### Not Tested
+
 In all cases
 
 
-##  TestCases
+## Files
 
-[TestCases files for rule 7.5.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40//Rgaa40Rule070501/)
+- [TestCases files for rule 7.5.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule070501/)
+- [Unit test file for rule 7.5.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule070501Test.java)
+- [Class file for rule 7.5.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule070501.java)
 
 

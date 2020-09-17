@@ -1,24 +1,28 @@
 # RGAA 4.0 - Rule 6.1.2
 
 ## Summary
-No-check rule
 
+No-check rule
 
 ## Business description
 
 ### Criterion
+
 [6.1](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#crit-6-1)
 
 ### Test
+
 [6.1.2](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-6-1-2)
 
 ### Description
+
 > Chaque [lien image](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-image) vérifie-t-il une de ces conditions (hors cas particuliers) ?
 > 
 > * L’[intitulé de lien](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#intitule-ou-nom-accessible-de-lien) seul permet d’en comprendre la fonction et la destination.
 > * L’[intitulé de lien](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#intitule-ou-nom-accessible-de-lien) additionné au [contexte du lien](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#contexte-du-lien) permet d’en comprendre la fonction et la destination.
 
 #### Particular cases (criterion 6.1)
+
 > Il existe une gestion de cas particulier pour les tests 6.1.1, 6.1.2, 6.1.3 et 6.1.4 lorsque le lien est ambigu pour tout le monde. Dans cette situation, où il n’est pas possible de rendre le lien explicite dans son contexte, le critère est non applicable.
 > 
 > Il existe une gestion de cas particulier pour le test 6.1.5 lorsque :
@@ -29,34 +33,42 @@ No-check rule
 > Note : si l’étiquette visible représente une expression mathématique, les symboles mathématiques peuvent être repris littéralement pour servir d’étiquette au nom accessible (ex. : "A>B"). Il est laissé à l’utilisateur le soin d’opérer la correspondance entre l’expression et ce qu’il doit épeler compte tenu de la connaissance qu’il a du fonctionnement de son logiciel de saisie vocale ("A plus grand que B" ou "A supérieur à B").
 
 ### Level
+
 **A**
 
 
 ## Technical description
 
 ### Scope
+
 **Page**
 
 ### Decision level
+
 @@@TODO
 
 
 ## Algorithm
 
 ### Selection
+
 None
 
 ### Process
+
 None
 
 ### Analysis
 
-#### No Tested
+#### Not Tested
+
 In all cases
 
 
-##  TestCases
+## Files
 
-[TestCases files for rule 6.1.2](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40//Rgaa40Rule060102/)
+- [TestCases files for rule 6.1.2](https://gitlab.com/asqatasun/Asqatasun/-/tree/v5/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule060102/)
+- [Unit test file for rule 6.1.2](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule060102Test.java)
+- [Class file for rule 6.1.2](https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule060102.java)
 
 
