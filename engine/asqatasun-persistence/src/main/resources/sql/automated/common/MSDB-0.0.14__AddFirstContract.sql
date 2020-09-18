@@ -1,4 +1,6 @@
-INSERT INTO `CONTRACT`(`Label`, `Begin_Date`, `USER_Id_User`) VALUES ('OPEN BAR', now(), 1);
+INSERT INTO `CONTRACT`(`Label`, `Begin_Date`, `End_Date`, `USER_Id_User`)
+VALUES ('OPEN BAR', now(), now() + interval 3 YEAR, 1);
+
 INSERT INTO `CONTRACT_REFERENTIAL` VALUES
 (1, 1),
 (1, 2),
