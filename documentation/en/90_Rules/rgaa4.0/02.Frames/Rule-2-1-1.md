@@ -3,7 +3,7 @@
 ## Summary
 
 This test consists in checking the presence of the `"title"` attribute 
-for all the `<iframe>` elements of the page.
+for all the `<iframe>` and the `<frame>` elements of the page.
 
 ## Business description
 
@@ -41,7 +41,7 @@ for all the `<iframe>` elements of the page.
 
 #### Set1
 
-All the `<iframe>` tags of the page (css selector : `iframe`)
+All the `<iframe>`  and the `<frame>` tags of the page (css selector : `iframe,frame`)
 
 ### Process
 
@@ -62,15 +62,15 @@ For each occurrence of false-result of **Test1**, raise a MessageA
 
 #### Passed
 
-All the `<iframe>` tags have an `"title"` attribute (**Test1** returns true for all the elements of **Set1**)
+All the `<iframe>` and the `<frame>` tags have an `"title"` attribute (**Test1** returns true for all the elements of **Set1**)
 
 #### Failed
 
-At least one `<frame>` tag has no `"title"` attribute (**Test1** returns false for at least one element of **Set1**)
+At least one `<iframe>` or `<frame>` tag has no `"title"` attribute (**Test1** returns false for at least one element of **Set1**)
 
 #### Not Applicable
 
-The page has no `<iframe>` tag (**Set1** is empty)
+The page has no `<iframe>` or `<frame>` tag (**Set1** is empty)
 
 
 ## Files

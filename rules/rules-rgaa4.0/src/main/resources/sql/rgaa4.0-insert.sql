@@ -549,4 +549,4 @@ UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('https://gitlab.com/asqatasun/Asqat
 UPDATE TEST SET `No_Process`=b'1' WHERE Cd_Test LIKE ('Rgaa40-%');
 
 -- Enable only implemented tests
--- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-1-1-1'
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-2-1-1'

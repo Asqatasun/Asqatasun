@@ -23,9 +23,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.asqatasun.rules.elementchecker.attribute.AttributePresenceChecker;
-import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.elementselector.MultipleElementSelector;
+
 import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
 import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.FRAME_ELEMENT;
 import static org.asqatasun.rules.keystore.HtmlElementStore.IFRAME_ELEMENT;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.TITLE_ATTR_MISSING_MSG;
 
@@ -40,9 +42,9 @@ public class Rgaa40Rule020101 extends AbstractPageRuleWithSelectorAndCheckerImpl
     /**
      * Default constructor
      */
-    public Rgaa40Rule020101 () {
+    public Rgaa40Rule020101() {
         super(
-            new SimpleElementSelector(IFRAME_ELEMENT),
+            new MultipleElementSelector(IFRAME_ELEMENT, FRAME_ELEMENT),
 
             new AttributePresenceChecker(
                 TITLE_ATTR,

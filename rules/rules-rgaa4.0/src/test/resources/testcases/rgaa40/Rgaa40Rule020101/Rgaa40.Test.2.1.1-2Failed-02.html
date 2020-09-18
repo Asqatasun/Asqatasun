@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Rgaa 4.0 Test.2.1.1 Failed 02</title>
+</head>
+<!-- START [testcase] -->
+<frameset class="testcase" cols="10%, 20%, 30%, 20%, 20%">
+    <frame src="mock-frame_1.html" title="Mock Frame 1" />
+    <frame src="mock-frame_2.html" /> <!-- missing title attribute -->
+    <frame src="mock-frame_3.html" title="Mock Frame 3" />
+    <frame src="mock-frame_4.html" /> <!-- missing title attribute -->
+    <frame src="mock-frame_5.html" title="Mock Frame 5" />
+    <noframes>
+        <body class="Failed">
+
+        <div>
+            <h1>Rgaa 4.0 Test.2.1.1 Failed 02</h1>
+
+            <!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                <p>Chaque cadre (balise <code>&lt;iframe&gt;</code> ou <code>&lt;frame&gt;</code>) a-t-il un attribut <code>title</code> ?</p>
+            </div>
+            <!-- END [test-detail] -->
+
+            <!-- START [test-explanation] -->
+            <div class="test-explanation">
+                Failed : two frame tags have no title attribute
+            </div>
+            <!-- END [test-explanation] -->
+        </div>
+        </body>
+    </noframes>
+</frameset>
+<!-- END [testcase] -->
+</html>
