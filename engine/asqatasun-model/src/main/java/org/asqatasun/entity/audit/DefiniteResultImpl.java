@@ -21,10 +21,8 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.DefiniteResult;
-import org.asqatasun.entity.audit.TestSolution;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -38,7 +36,6 @@ import java.util.List;
  */
 @Entity
 @XmlRootElement
-@Audited
 public class DefiniteResultImpl extends ProcessResultImpl implements
         DefiniteResult, Serializable {
 

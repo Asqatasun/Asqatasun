@@ -21,20 +21,15 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.audit.AuditStatus;
-import org.asqatasun.entity.audit.Content;
-import org.asqatasun.entity.audit.ProcessResult;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.parameterization.ParameterImpl;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.reference.TestImpl;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.subject.WebResourceImpl;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.codehaus.jackson.annotate.JsonTypeInfo.As;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;
@@ -224,7 +219,7 @@ public class AuditImpl implements Audit, Serializable {
     @XmlElementRefs({
         @XmlElementRef(type = org.asqatasun.entity.subject.PageImpl.class),
         @XmlElementRef(type = org.asqatasun.entity.subject.SiteImpl.class)})
-    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=As.WRAPPER_OBJECT)
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
         @JsonSubTypes.Type(value=org.asqatasun.entity.subject.PageImpl.class, name="Page"),
         @JsonSubTypes.Type(value=org.asqatasun.entity.subject.SiteImpl.class, name="Site")})
@@ -326,7 +321,7 @@ public class AuditImpl implements Audit, Serializable {
     }
 
     @Override
-    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=As.WRAPPER_OBJECT)
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include= JsonTypeInfo.As.WRAPPER_OBJECT)
     @JsonSubTypes({
         @JsonSubTypes.Type(value=org.asqatasun.entity.parameterization.ParameterImpl.class, name="Parameter")})
     public Collection<Parameter> getParameterSet() {

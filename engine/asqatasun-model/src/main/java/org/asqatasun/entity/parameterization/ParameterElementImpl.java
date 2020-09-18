@@ -21,8 +21,8 @@
  */
 package org.asqatasun.entity.parameterization;
 
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;

@@ -22,15 +22,13 @@
 
 package org.asqatasun.entity.subject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditImpl;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.ProcessResultImpl;
-import org.asqatasun.entity.subject.Site;
-import org.asqatasun.entity.subject.WebResource;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;

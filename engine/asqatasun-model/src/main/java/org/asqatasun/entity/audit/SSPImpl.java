@@ -21,8 +21,6 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.RelatedContent;
-import org.asqatasun.entity.audit.SSP;
 import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.PageImpl;
 

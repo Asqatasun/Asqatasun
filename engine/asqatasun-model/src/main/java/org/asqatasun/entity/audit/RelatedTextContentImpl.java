@@ -21,10 +21,6 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.RelatedContent;
-import org.asqatasun.entity.audit.SSP;
-import org.asqatasun.entity.audit.TextContent;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.io.Serializable;

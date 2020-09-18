@@ -21,9 +21,7 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.Evidence;
-import org.asqatasun.entity.audit.EvidenceElement;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElementRef;

@@ -21,13 +21,13 @@
  */
 package org.asqatasun.entity.audit;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.reference.TestImpl;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.entity.subject.WebResourceImpl;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 

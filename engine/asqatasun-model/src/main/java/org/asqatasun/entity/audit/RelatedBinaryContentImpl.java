@@ -22,9 +22,6 @@
 package org.asqatasun.entity.audit;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.asqatasun.entity.audit.BinaryContent;
-import org.asqatasun.entity.audit.RelatedContent;
-import org.asqatasun.entity.audit.SSP;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

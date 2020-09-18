@@ -21,9 +21,6 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.JavascriptContent;
-import org.asqatasun.entity.audit.SSP;
-
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;

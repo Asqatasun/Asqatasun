@@ -34,6 +34,7 @@ import org.asqatasun.service.AuditServiceListener
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.io.IOException
+import java.net.URL
 import java.time.Instant
 import java.util.*
 import javax.annotation.PostConstruct
@@ -63,7 +64,7 @@ class AuditService(private val auditService: EngineAuditService,
 
         return if (par.urls.size > 1) {
             getAuditId(
-                auditService.auditSite("site:" + par.urls[0], par.urls, paramSet),
+                auditService.auditSite(par.urls[0], par.urls, paramSet),
                 ipAddress,
                 GROUPOFPAGES,
                 contract)

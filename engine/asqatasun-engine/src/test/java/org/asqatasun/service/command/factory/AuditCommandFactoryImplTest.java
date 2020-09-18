@@ -21,10 +21,8 @@
  */
 package org.asqatasun.service.command.factory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 import junit.framework.TestCase;
 import org.easymock.EasyMock;
 import org.asqatasun.contentadapter.AdaptationListener;
@@ -163,12 +161,10 @@ public class AuditCommandFactoryImplTest extends TestCase {
      */
     public void testCreate_3args_3_2() {
         System.out.println("create GroupOfPagesAuditCommand without crawler");
-        String siteUrl = "";
-        List<String> pageUrlList = new ArrayList<String>();
-        Set<Parameter> paramSet = null;
-        
+        String siteUrl = "https://asqatasun.org";
+
         auditCommandFactory.setAuditPageWithCrawler(false);
-        AuditCommand result = this.auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
+        AuditCommand result = this.auditCommandFactory.create(siteUrl, Arrays.asList(siteUrl), null);
         assertTrue(result instanceof GroupOfPagesAuditCommandImpl);
         EasyMock.verify(mockAuditDataService);
         EasyMock.verify(mockAudit);

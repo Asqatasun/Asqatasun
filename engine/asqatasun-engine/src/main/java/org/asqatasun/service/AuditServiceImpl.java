@@ -101,7 +101,8 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet) {
         LOGGER.debug("auditpageupload");
         AuditCommand auditCommand = auditCommandFactory.create(fileMap, paramSet);
-        auditServiceThreadQueue.addPageUploadAudit(auditCommand); 
+        auditServiceThreadQueue.addPageUploadAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
@@ -118,7 +119,8 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     public Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet) {
         LOGGER.debug("auditGroupOfPages");
         AuditCommand auditCommand = auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
-        auditServiceThreadQueue.addPageAudit(auditCommand); 
+        auditServiceThreadQueue.addPageAudit(auditCommand);
+        auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 

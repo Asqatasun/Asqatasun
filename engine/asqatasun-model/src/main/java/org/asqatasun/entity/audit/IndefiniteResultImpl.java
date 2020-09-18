@@ -21,8 +21,6 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.IndefiniteResult;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;

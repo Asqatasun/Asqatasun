@@ -21,9 +21,6 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.audit.Content;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;

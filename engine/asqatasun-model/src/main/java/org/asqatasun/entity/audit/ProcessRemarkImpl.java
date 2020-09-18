@@ -21,13 +21,9 @@
  */
 package org.asqatasun.entity.audit;
 
-import org.asqatasun.entity.audit.EvidenceElement;
-import org.asqatasun.entity.audit.ProcessRemark;
-import org.asqatasun.entity.audit.ProcessResult;
-import org.asqatasun.entity.audit.TestSolution;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;

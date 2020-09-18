@@ -22,20 +22,29 @@
 
 package org.asqatasun.service.command;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.sebuilder.tools.ScenarioBuilder;
+import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
 import org.asqatasun.util.FileNaming;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author jkowalczyk
  */
 public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
-    
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GroupOfPagesAuditCommandImpl.class);
+
     /**
      * 
      * @param siteUrl
@@ -50,15 +59,22 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
                 AuditDataService auditDataService) {
         
         super(paramSet,auditDataService);
-
-        List<String> localUrlList = new ArrayList<String>();
-        for (String url : pageUrlList) {
-            localUrlList.add(FileNaming.addProtocolToUrl(url));
+        try {
+            List<URL> localUrlList = new ArrayList<>();
+            for (String url : pageUrlList) {
+                localUrlList.add(new URL(FileNaming.addProtocolToUrl(url)));
+            }
+            try {
+                setScenario(new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(siteUrl, localUrlList)));
+            } catch (JsonProcessingException e) {
+                LoggerFactory.getLogger(this.getClass()).error("Could not parse scenario " + e.getMessage());
+            }
+            URL baseURL = new URL(FileNaming.addProtocolToUrl(siteUrl));
+            setScenarioName(baseURL.getProtocol()+"://"+baseURL.getHost());
+            setIsPage(false);
+        } catch (MalformedURLException e) {
+            LOGGER.warn("Malformed URL encountered : " + e.getMessage());
         }
-
-        setScenario(ScenarioBuilder.buildScenario(localUrlList));
-        setScenarioName(siteUrl);
-        setIsPage(false);
     }
     
 }
