@@ -133,14 +133,12 @@
     <!ELEMENT exclusions (exclusion)*>
     <!ELEMENT exclusion (artifactId|groupId)*>
     ]>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
-    <version>5.0-SNAPSHOT</version>
+    <version>5.0-alpha-1</version>
 
     <name>asqatasun</name>
     <url>https://asqatasun.org/</url>
@@ -162,7 +160,7 @@
         <connection>scm:git:https://gitlab.com/Asqatasun/Asqatasun.git</connection>
         <url>https://gitlab.com/Asqatasun/Asqatasun</url>
         <developerConnection>scm:git:git@gitlab.com:Asqatasun/Asqatasun.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>5.0-alpha-1</tag>
     </scm>
     <issueManagement>
         <system>gitlab</system>
@@ -183,7 +181,6 @@
         <module>rules</module>
         <module>web-app</module>
         <module>server</module>
-<!--        <module>runner</module>-->
         <module>documentation</module>
     </modules>
     <profiles>
@@ -214,7 +211,7 @@
         <jackson-module-kotlin.version>2.10.3</jackson-module-kotlin.version>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
-        <asqatasunVersion>5.0-SNAPSHOT</asqatasunVersion>
+        <asqatasunVersion>5.0-alpha-1</asqatasunVersion>
 
         <springGroupId>org.springframework</springGroupId>
         <springVersion>5.2.4.RELEASE</springVersion>

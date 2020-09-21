@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.3.RELEASE</version>
-        <relativePath/>
+        <relativePath />
     </parent>
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun-web-app</artifactId>
-    <version>5.0-SNAPSHOT</version>
+    <version>5.0-alpha-1</version>
     <packaging>war</packaging>
     <name>asqatasun-web-app</name>
     <properties>
@@ -22,7 +20,7 @@
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
         <springGroupId>org.springframework</springGroupId>
 
-        <asqatasun.version>5.0-SNAPSHOT</asqatasun.version>
+        <asqatasun.version>5.0-alpha-1</asqatasun.version>
         <selenium.version>4.0.0-alpha-5</selenium.version>
         <commonsValidator.version>1.6</commonsValidator.version>
         <commonsFileUpload.version>1.4</commonsFileUpload.version>
@@ -658,4 +656,8 @@
             </activation>
         </profile>
     </profiles>
+
+  <scm>
+    <tag>5.0-alpha-1</tag>
+  </scm>
 </project>

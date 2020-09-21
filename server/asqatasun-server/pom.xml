@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.3.RELEASE</version>
-        <relativePath/>
+        <relativePath />
     </parent>
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun-server</artifactId>
-    <version>5.0-SNAPSHOT</version>
+    <version>5.0-alpha-1</version>
     <packaging>jar</packaging>
     <name>asqatasun-server</name>
     <properties>
@@ -23,7 +21,7 @@
         <springGroupId>org.springframework</springGroupId>
 
         <jacksonModuleKotlin.version>2.10.3</jacksonModuleKotlin.version>
-        <asqatasun.version>5.0-SNAPSHOT</asqatasun.version>
+        <asqatasun.version>5.0-alpha-1</asqatasun.version>
         <mysqlConnector.version>5.1.48</mysqlConnector.version>
         <selenium.version>4.0.0-alpha-5</selenium.version>
         <swagger.version>2.9.2</swagger.version>
@@ -264,4 +262,8 @@
         </plugins>
         <finalName>asqatasun-server-${asqatasun.version}</finalName>
     </build>
+
+  <scm>
+    <tag>5.0-alpha-1</tag>
+  </scm>
 </project>
