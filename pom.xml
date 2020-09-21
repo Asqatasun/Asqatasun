@@ -159,14 +159,14 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:git:https://github.com/Asqatasun/Asqatasun.git</connection>
-        <url>https://github.com/Asqatasun/Asqatasun</url>
-        <developerConnection>scm:git:git@github.com:Asqatasun/Asqatasun.git</developerConnection>
+        <connection>scm:git:https://gitlab.com/Asqatasun/Asqatasun.git</connection>
+        <url>https://gitlab.com/Asqatasun/Asqatasun</url>
+        <developerConnection>scm:git:git@gitlab.com:Asqatasun/Asqatasun.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <issueManagement>
-        <system>github</system>
-        <url>https://github.com/Asqatasun/Asqatasun/issues</url>
+        <system>gitlab</system>
+        <url>https://gitlab.com/Asqatasun/Asqatasun/issues</url>
     </issueManagement>
     <ciManagement>
         <system>travis-ci</system>
@@ -198,7 +198,7 @@
         </profile>
     </profiles>
     <properties>
-        <commitUrlPrefix>https://github.com/Asqatasun/Asqatasun/commit/</commitUrlPrefix>
+        <commitUrlPrefix>https://gitlab.com/Asqatasun/Asqatasun/commit/</commitUrlPrefix>
 
         <!-- File Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
