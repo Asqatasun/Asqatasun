@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun-web-app</artifactId>
-    <version>5.0-alpha-1</version>
+    <version>5.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>asqatasun-web-app</name>
     <properties>
@@ -20,7 +20,7 @@
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
         <springGroupId>org.springframework</springGroupId>
 
-        <asqatasun.version>5.0-alpha-1</asqatasun.version>
+        <asqatasun.version>5.0-SNAPSHOT</asqatasun.version>
         <selenium.version>4.0.0-alpha-5</selenium.version>
         <commonsValidator.version>1.6</commonsValidator.version>
         <commonsFileUpload.version>1.4</commonsFileUpload.version>
@@ -656,8 +656,4 @@
             </activation>
         </profile>
     </profiles>
-
-  <scm>
-    <tag>5.0-alpha-1</tag>
-  </scm>
 </project>
