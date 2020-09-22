@@ -22,10 +22,11 @@ package org.asqatasun.rules.rgaa40;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
-import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
-import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
 import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
+import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
+
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
 
 /**
  * Unit test class for implementation of rule 2.2.1 (referential RGAA 4.0)
@@ -70,54 +71,54 @@ public class Rgaa40Rule020201Test extends Rgaa40RuleImplementationTestCase {
         ProcessResult processResult = processPageTest("Rgaa40.Test.2.2.1-2Failed-01");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
-                HtmlElementStore.IFRAME_ELEMENT,
-                1,
-                new ImmutablePair(TITLE_ATTR, ""));
-        
-        
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
+            HtmlElementStore.IFRAME_ELEMENT,
+            1,
+            new ImmutablePair(TITLE_ATTR, ""));
+
+
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa40.Test.2.2.1-2Failed-02");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
-                HtmlElementStore.IFRAME_ELEMENT,
-                1,
-                new ImmutablePair(TITLE_ATTR, ""));
-        
-        
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
+            HtmlElementStore.IFRAME_ELEMENT,
+            1,
+            new ImmutablePair(TITLE_ATTR, ""));
+
+
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa40.Test.2.2.1-2Failed-03");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
-                HtmlElementStore.IFRAME_ELEMENT,
-                1,
-                new ImmutablePair(TITLE_ATTR, "!§:;.,?%*\\~/@()[]^_°=+-"));
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
+            HtmlElementStore.IFRAME_ELEMENT,
+            1,
+            new ImmutablePair(TITLE_ATTR, "!§:;.,?%*\\~/@()[]^_°=+-"));
 
-        
+
         //----------------------------------------------------------------------
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa40.Test.2.2.1-2Failed-04");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
-                processResult,
-                TestSolution.FAILED,
-                RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
-                HtmlElementStore.IFRAME_ELEMENT,
-                1,
-                new ImmutablePair(TITLE_ATTR, "mock-iframe.html"));
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
+            HtmlElementStore.IFRAME_ELEMENT,
+            1,
+            new ImmutablePair(TITLE_ATTR, "mock-iframe.html"));
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-05------------------------------
@@ -167,12 +168,12 @@ public class Rgaa40Rule020201Test extends Rgaa40RuleImplementationTestCase {
         processResult = processPageTest("Rgaa40.Test.2.2.1-3NMI-01");
         checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
-                processResult,
-                TestSolution.NEED_MORE_INFO,
-                RemarkMessageStore.CHECK_TITLE_OF_FRAME_OR_IFRAME_PERTINENCE_MSG,
-                HtmlElementStore.IFRAME_ELEMENT,
-                1,
-                new ImmutablePair(TITLE_ATTR, "title of iframe"));
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.CHECK_TITLE_OF_FRAME_OR_IFRAME_PERTINENCE_MSG,
+            HtmlElementStore.IFRAME_ELEMENT,
+            1,
+            new ImmutablePair(TITLE_ATTR, "title of iframe"));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-02---------------------------------
@@ -198,8 +199,7 @@ public class Rgaa40Rule020201Test extends Rgaa40RuleImplementationTestCase {
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa40.Test.2.2.1-4NA-01"));
-        
-        
+
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------        
@@ -210,5 +210,5 @@ public class Rgaa40Rule020201Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa40.Test.2.2.1-4NA-03"));
     }
-    
+
 }
