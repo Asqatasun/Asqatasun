@@ -146,10 +146,14 @@ public final class RemarkMessageStore {
             "NotPertinentTitleOfFrame";
     public static final String NOT_PERTINENT_TITLE_OF_IFRAME_MSG = 
             "NotPertinentTitleOfIframe";
+    public static final String NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG =
+            "NotPertinentTitleOfFrameOrIframe";
     public static final String CHECK_TITLE_OF_FRAME_PERTINENCE_MSG = 
             "CheckTitleOfFramePertinence";
     public static final String CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG = 
             "CheckTitleOfIframePertinence";
+    public static final String CHECK_TITLE_OF_FRAME_OR_IFRAME_PERTINENCE_MSG =
+        "CheckTitleOfFrameOrIframePertinence";
     public static final String EMPTY_TITLE_OF_FRAME_MSG = "EmtpyTitleOfFrame";
 
     

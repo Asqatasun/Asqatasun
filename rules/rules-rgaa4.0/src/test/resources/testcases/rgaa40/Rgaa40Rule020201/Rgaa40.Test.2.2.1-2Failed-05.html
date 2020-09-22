@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Rgaa 4.0 Test.2.2.1 Failed 05</title>
+</head>
+<!-- START [testcase] -->
+<frameset class="testcase" cols="30%, 20%, 10%, 20%, 10%, 10%">
+    <frame src="mock-frame_1.html" />
+    <frame src="mock-frame_2.html" title="" />
+    <frame src="mock-frame_3.html" title="                  " />  <!-- several spaces -->
+    <frame src="mock-frame_4.html" title="					" />  <!-- several tabulations -->
+    <frame src="mock-frame_5.html" title="!§:;.,?%*\~/@()[]^_°=+" />
+    <frame src="mock-frame_6.html" title="mock-frame_6.html" />
+    <noframes>
+        <body class="Failed">
+        <div>
+            <h1>Rgaa 4.0 Test.2.2.1 Failed 05</h1>
+
+            <!-- START [test-detail] -->
+            <div class="test-detail" lang="fr">
+                <p>Pour chaque cadre (balise <code>&lt;iframe&gt;</code> ou <code>&lt;frame&gt;</code>) ayant un attribut <code>title</code>, le contenu de cet attribut est-il pertinent ?</p>
+            </div>
+            <!-- END [test-detail] -->
+
+            <!-- START [test-explanation] -->
+            <div class="test-explanation">
+                Failed :
+                <ul>
+                    <li>the page contains one frame with an empty title</li>
+                    <li>the page contains one frame with an empty title (only several spaces)</li>
+                    <li>the page contains one frame with an empty title (only several tabulations)</li>
+                    <li>the page contains one frame with a title identical to the src attribute</li>
+                    <li>the page contains one frame with a title that only contains not-alphanumerical characters</li>
+                </ul>
+            </div>
+            <!-- END [test-explanation] -->
+        </div>
+        </body>
+    </noframes>
+</frameset>
+<!-- END [testcase] -->
+</html>

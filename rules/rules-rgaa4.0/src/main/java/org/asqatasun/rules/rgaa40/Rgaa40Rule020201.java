@@ -22,11 +22,13 @@ package org.asqatasun.rules.rgaa40;
 import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.asqatasun.rules.elementchecker.pertinence.AttributePertinenceChecker;
 import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.elementselector.MultipleElementSelector;
 import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
 import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY;
-import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG;
-import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_IFRAME_MSG;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FRAME_WITH_TITLE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_FRAME_OR_IFRAME_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG;
 import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
@@ -42,7 +44,7 @@ public class Rgaa40Rule020201 extends AbstractPageRuleWithSelectorAndCheckerImpl
      */
     public Rgaa40Rule020201() {
         super(
-                new SimpleElementSelector(IFRAME_WITH_TITLE_CSS_LIKE_QUERY), 
+                new MultipleElementSelector(IFRAME_WITH_TITLE_CSS_LIKE_QUERY, FRAME_WITH_TITLE_CSS_LIKE_QUERY),
                 
                 new AttributePertinenceChecker(
                     TITLE_ATTR, 
@@ -53,9 +55,9 @@ public class Rgaa40Rule020201 extends AbstractPageRuleWithSelectorAndCheckerImpl
                     // no comparison by extension
                     null, 
                     //  message associated with element when title is not pertinent
-                    NOT_PERTINENT_TITLE_OF_IFRAME_MSG, 
+                    NOT_PERTINENT_TITLE_OF_FRAME_OR_IFRAME_MSG,
                     // message associated with element when pertinence cannot be determined
-                    CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG, 
+                    CHECK_TITLE_OF_FRAME_OR_IFRAME_PERTINENCE_MSG,
                     //evidence elements
                     TITLE_ATTR)
             );

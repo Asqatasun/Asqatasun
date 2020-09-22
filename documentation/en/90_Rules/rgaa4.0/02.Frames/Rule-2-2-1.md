@@ -2,7 +2,8 @@
 
 ## Summary
 
-This test consists in checking the relevancy of the `"title"` attribute for each `<iframe>` tag.
+This test consists in checking the relevancy of the `"title"` attribute 
+for each `<iframe>` tag and  `<frame>` tag.
 
 ## Business description
 
@@ -39,7 +40,8 @@ This test consists in checking the relevancy of the `"title"` attribute for each
 
 #### Set1
 
-All the `<iframe>` tags of the page with a title `"attribute"` (css selector : `iframe[title]`)
+All the `<iframe>`  and the `<frame>` tags of the page with 
+a title `"attribute"` (css selector : `iframe[title],frame[title]`)
 
 ### Process
 
@@ -69,15 +71,15 @@ For each occurrence of false-result of **Test1**, raise a MessageB
 
 #### Failed
 
-At least one `<iframe>` has an irrelevant `"title"` attribute (**Test1** returns true for at least one element)
+At least one `<iframe>` or `<frame>` tag has an irrelevant `"title"` attribute (**Test1** returns true for at least one element)
 
 #### Pre-qualified
 
-The content of the `"title"` attribute of all the `<iframe>` tags needs to be manually checked (**Test1** returns false for all the elements of **Set1**) 
+The content of the `"title"` attribute of all the `<iframe>`  and the `<frame>` tags needs to be manually checked (**Test1** returns false for all the elements of **Set1**) 
 
 #### Not Applicable
 
-The page has no `<iframe>` tag with a `"title"` attribute (**Set1** is empty)
+The page has no `<iframe>` or `<frame>` tag with a `"title"` attribute (**Set1** is empty)
 
 ## Notes
 
