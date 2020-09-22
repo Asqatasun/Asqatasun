@@ -19,7 +19,15 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.pertinence.AttributePertinenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.IFRAME_WITH_TITLE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_OF_IFRAME_MSG;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of rule 2.2.1 (referential RGAA 4.0)
@@ -27,13 +35,30 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/02.Frames/Rule-2-2-1.md">rule 2.2.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-2-2-1">2.2.1 rule specification</a>
  */
-public class Rgaa40Rule020201 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule020201 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule020201() {
-        super();
+        super(
+                new SimpleElementSelector(IFRAME_WITH_TITLE_CSS_LIKE_QUERY), 
+                
+                new AttributePertinenceChecker(
+                    TITLE_ATTR, 
+                    // tests the emptiness of the attribute
+                    true, 
+                    // compare title with src attribute
+                    new TextAttributeOfElementBuilder(SRC_ATTR), 
+                    // no comparison by extension
+                    null, 
+                    //  message associated with element when title is not pertinent
+                    NOT_PERTINENT_TITLE_OF_IFRAME_MSG, 
+                    // message associated with element when pertinence cannot be determined
+                    CHECK_TITLE_OF_IFRAME_PERTINENCE_MSG, 
+                    //evidence elements
+                    TITLE_ATTR)
+            );
     }
 
 }
