@@ -1,9 +1,9 @@
-# RGAA 4.0 - Rule 2.2.1
+# RGAA 4.0 — Rule 2.2.1
 
 ## Summary
 
-This test consists in checking the relevancy of the `"title"` attribute 
-for each `<iframe>` tag and  `<frame>` tag.
+This test consists in checking the relevancy of the `title` attribute 
+for each `<iframe>` and `<frame>` tag.
 
 ## Business description
 
@@ -40,57 +40,54 @@ for each `<iframe>` tag and  `<frame>` tag.
 
 #### Set1
 
-All the `<iframe>`  and the `<frame>` tags of the page with 
-a title `"attribute"` (css selector : `iframe[title],frame[title]`)
+All the `<iframe>` and the `<frame>` tags of the page with 
+a `title` attribute (css selector : `iframe[title],frame[title]`)
 
 ### Process
 
 #### Test1
 
-For all elements of **Set1**, check whether the content of the "`title`" attribute is not relevant (see Notes for details about relevancy test). 
+For all elements of **Set1**, check whether the content of the `title` attribute is not relevant (see Notes for details about relevancy test). 
 
 For each occurrence of true-result of **Test1**, raise a MessageA.
 
 For each occurrence of false-result of **Test1**, raise a MessageB
 
-##### MessageA
+#### MessageA
 
--   code : NotPertinentTitleOfIframe
+-   code: NotPertinentTitleOfIframe
 -   status: Failed
--   parameter : `"title"` attribute, tag name, snippet
--   present in source : yes
+-   parameter: `title` attribute, tag name, snippet
+-   present in source: yes
 
-##### MessageB
+#### MessageB
 
--   code : CheckTitleOfFramePertinence
+-   code: CheckTitleOfFramePertinence
 -   status: Pre-Qualified
--   parameter : `"title"` attribute, tag name, snippet
--   present in source : yes
+-   parameter: `title` attribute, tag name, snippet
+-   present in source: yes
 
 ### Analysis
 
 #### Failed
 
-At least one `<iframe>` or `<frame>` tag has an irrelevant `"title"` attribute (**Test1** returns true for at least one element)
+At least one `<iframe>` or `<frame>` tag has an irrelevant `title` attribute (**Test1** returns true for at least one element)
 
 #### Pre-qualified
 
-The content of the `"title"` attribute of all the `<iframe>`  and the `<frame>` tags needs to be manually checked (**Test1** returns false for all the elements of **Set1**) 
+The content of the `title` attribute of all the `<iframe>` and `<frame>` tags needs to be manually checked (**Test1** returns false for all the elements of **Set1**) 
 
 #### Not Applicable
 
-The page has no `<iframe>` or `<frame>` tag with a `"title"` attribute (**Set1** is empty)
+The page has no `<iframe>` or `<frame>` tag with a `title` attribute (**Set1** is empty)
 
 ## Notes
 
-The content of the "`title`" attribute is seen as not relevant if :
+The content of the `title` attribute is considered as not relevant if it is:
 
-- empty
-- only composed of non-alphanumerical characters
-- identical to the `"src"` attribute
-
-
-
+- empty,
+- or only composed of non-alphanumerical characters,
+- or identical to the `src` attribute.
 
 ## Files
 
