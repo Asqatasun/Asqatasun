@@ -62,10 +62,25 @@ public class ContrastChecker extends ElementCheckerImpl {
     
     private static final String ALT_CONTRAST_MECHA_PARAM_KEY = 
                     "ALTERNATIVE_CONTRAST_MECHANISM";
-    
-    private static final int NORMAL_FONT_SIZE_THRESHOLD = 18;
-    private static final int BOLD_FONT_SIZE_THRESHOLD = 14;
-    
+
+    /** Default normal font size threshold in point (CSS unit: pt)   */
+    private static final float DEFAULT_NORMAL_FONT_SIZE_THRESHOLD = 18;
+
+    /** Default bold font size threshold in point (CSS unit: pt)   */
+    private static final float DEFAULT_BOLD_FONT_SIZE_THRESHOLD = 14;
+
+    /** Allowed font size unit  */
+    private enum FONT_SIZE_UNITS {POINT, PIXEL};
+
+    /** The font size unit  */
+    private final String fontSizeUnit;
+
+    /** The normal font size threshold */
+    private final Float normalFontSizeThreshold;
+
+    /** The bold font size threshold */
+    private final Float boldFontSizeThreshold;
+
     /** The contrast ratio */
     private final Float contrastRatio;
     
@@ -95,7 +110,9 @@ public class ContrastChecker extends ElementCheckerImpl {
     
     /**
      * Constructor 
-     * 
+     * use default font size unit (pt)
+     * and the defaults  font size thresholds
+     *
      * @param contrastRatio
      * @param checkNormalText
      * @param checkBoldText
@@ -111,6 +128,38 @@ public class ContrastChecker extends ElementCheckerImpl {
         this.checkNormalText = checkNormalText;
         this.checkBoldText = checkBoldText;
         this.isLowerTest = isLowerTest;
+        this.normalFontSizeThreshold = DEFAULT_NORMAL_FONT_SIZE_THRESHOLD;
+        this.boldFontSizeThreshold = DEFAULT_BOLD_FONT_SIZE_THRESHOLD;
+        this.fontSizeUnit = FONT_SIZE_UNITS.POINT.name();
+    }
+
+
+    /**
+     * Constructor
+     * with ability to specify font sizes thresholds in pixels
+     *
+     * @param contrastRatio
+     * @param checkNormalText
+     * @param checkBoldText
+     * @param isLowerTest
+     * @param normalFontSizeThresholdInPixel
+     * @param boldFontSizeThresholdInPixel
+     */
+    public ContrastChecker(
+        @Nonnull Float contrastRatio,
+        @Nonnull boolean checkNormalText,
+        @Nonnull boolean checkBoldText,
+        @Nonnull boolean isLowerTest,
+        @Nonnull Float normalFontSizeThresholdInPixel,
+        @Nonnull Float boldFontSizeThresholdInPixel) {
+        super();
+        this.contrastRatio = contrastRatio;
+        this.checkNormalText = checkNormalText;
+        this.checkBoldText = checkBoldText;
+        this.isLowerTest = isLowerTest;
+        this.normalFontSizeThreshold = normalFontSizeThresholdInPixel;
+        this.boldFontSizeThreshold = boldFontSizeThresholdInPixel;
+        this.fontSizeUnit = FONT_SIZE_UNITS.PIXEL.name();
     }
     
     @Override
@@ -312,14 +361,20 @@ public class ContrastChecker extends ElementCheckerImpl {
         if (!element.isTextNode()) {
             return false;
         }
+        float fontSize;
+        if (fontSizeUnit.equals(FONT_SIZE_UNITS.PIXEL.name())) {
+            fontSize = element.getFontSizeInPx();
+        }
+        else { // FONT_SIZE_UNITS.POINT.name()
+            fontSize = element.getFontSizeInPt();
+        }
         boolean isBold = element.isBold();
-        float fontSize = element.getFontSizeInPt();
         if (isLowerTest) {
-            return (checkBoldText && element.isBold() && fontSize < BOLD_FONT_SIZE_THRESHOLD) || 
-                    (checkNormalText && !isBold && fontSize < NORMAL_FONT_SIZE_THRESHOLD);
+            return (checkBoldText && element.isBold() && fontSize < boldFontSizeThreshold) ||
+                    (checkNormalText && !isBold && fontSize < normalFontSizeThreshold);
         } else {
-            return (checkBoldText && isBold && fontSize >= BOLD_FONT_SIZE_THRESHOLD) || 
-                    (checkNormalText && !isBold && fontSize >= NORMAL_FONT_SIZE_THRESHOLD);
+            return (checkBoldText && isBold && fontSize >= boldFontSizeThreshold) ||
+                    (checkNormalText && !isBold && fontSize >= normalFontSizeThreshold);
         }
     }
 
