@@ -218,30 +218,30 @@ public final class CssLikeQueryStore {
                     + "input[type=time][title] , "
                     + "input[type=radio][title]";
     public static final String FORM_ELEMENT_WITH_ARIA_LABEL_CSS_LIKE_QUERY =
-        "textarea[aria-label] , "
-            + "select[aria-label] , "
-            + "datalist[aria-label] , "
-            + "optgroup[aria-label] , "
-            + "option[aria-label] , "
-            + "keygen[aria-label] , "            // Obsolete ---> remove it?
-            + "input[aria-label]:not([type]) , " // input tag without type attribut (implicit type="text")
-            + "input[type=password][aria-label] , "
-            + "input[type=checkbox][aria-label] , "
-            + "input[type=file][aria-label] , "
-            + "input[type=text][aria-label] , "
-            + "input[type=search][aria-label] , "
-            + "input[type=tel][aria-label] , "
-            + "input[type=email][aria-label] , "
-            + "input[type=number][aria-label] , "
-            + "input[type=url][aria-label] , "
-            + "input[type=date][aria-label] , "
-            + "input[type=range][aria-label] , "
-            + "input[type=color][aria-label] , "
-            + "input[type=time][aria-label] , "
+        "textarea[aria-label] ,"
+            + "select[aria-label] ,"
+            + "datalist[aria-label] ,"
+            + "optgroup[aria-label] ,"
+            + "option[aria-label] ,"
+            + "keygen[aria-label] ,"            // Obsolete ---> remove it?
+            + "input[aria-label]:not([type]) ," // input tag without type attribut (implicit type="text")
+            + "input[type=checkbox][aria-label] ,"
+            + "input[type=date][aria-label] ,"
             + "input[type=datetime-local][aria-label] ,"
-            + "input[type=week][aria-label] , "
-            + "input[type=month][aria-label] , "
-            + "input[type=radio][aria-label]";
+            + "input[type=file][aria-label] ,"
+            + "input[type=email][aria-label] ,"
+            + "input[type=month][aria-label] ,"
+            + "input[type=number][aria-label] ,"
+            + "input[type=password][aria-label] ,"
+            + "input[type=radio][aria-label] ,"
+            + "input[type=range][aria-label] ,"
+            + "input[type=search][aria-label] ,"
+            + "input[type=tel][aria-label] ,"
+            + "input[type=text][aria-label] ,"
+            + "input[type=time][aria-label] ,"
+            + "input[type=url][aria-label] ,"
+            + "input[type=color][aria-label] ,"
+            + "input[type=week][aria-label]";
     public static final String FORM_TEXT_INPUT_CSS_LIKE_QUERY = 
                     "form:has(textarea) , "
                     + "form:has(input[type=password]) , "
