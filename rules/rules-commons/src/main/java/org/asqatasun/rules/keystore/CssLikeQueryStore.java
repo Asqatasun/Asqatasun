@@ -223,7 +223,6 @@ public final class CssLikeQueryStore {
             + "datalist[aria-label] ,"
             + "optgroup[aria-label] ,"
             + "option[aria-label] ,"
-            + "keygen[aria-label] ,"            // Obsolete ---> remove it?
             + "input[aria-label]:not([type]) ," // input tag without type attribut (implicit type="text")
             + "input[type=checkbox][aria-label] ,"
             + "input[type=date][aria-label] ,"
