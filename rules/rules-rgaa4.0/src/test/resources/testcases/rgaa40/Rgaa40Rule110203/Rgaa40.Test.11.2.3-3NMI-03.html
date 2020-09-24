@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.3 NMI 01</title>
+    <title>Rgaa 4.0 Test.11.2.3 NMI 03</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.3 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.11.2.3 NMI 03</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -20,18 +20,15 @@
     <!-- START [testcase] -->
     <div class="testcase">
         <form action="http://action.html" method="post">
-            <p>
-                <input aria-label="aria-label for input without type atttribut (implicit text)" id="text-1"/>
-                <input aria-label="aria-label for input with type equal to text" id="text-2" type="text"/>
-                <input type="submit" value="Send"/>
-            </p>
+            <p><textarea aria-label="aria-label value for TEXTAREA" cols="1" id="textarea" rows="20"></textarea>
+                <input type="submit" value="Send"/></p>
         </form>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : The page contains two form field with a aria-label attribute
+        NMI : The page contains a textarea tag with a aria-label attribute
     </div>
     <!-- END [test-explanation] -->
 </div>
