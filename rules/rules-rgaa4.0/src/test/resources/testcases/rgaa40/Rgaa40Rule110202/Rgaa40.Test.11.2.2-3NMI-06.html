@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.2.2 NMI 06</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.11.2.2 NMI 06</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque attribut <code>title</code> permet-il de connaître la fonction exacte du <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+            de formulaire</a> auquel il est associé ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+
+        <!-- PROGRESS tag with title attribute -->
+        <progress title="title value for PROGRESS" max="100" value="70"> 70%</progress>
+
+        <!-- OUTPUT tag with title attribute -->
+        <form id="form1" oninput="result.value=parseInt(a.value)+parseInt(b.value); return false;">
+            <input name="b" type="range" value="50"/> +
+            <input name="a" type="number" value="10"/> =
+            <output title="title value for OUTPUT" name="result">60</output>
+            <input type="submit" value="Calculer">
+        </form>
+
+        <!-- METER tag with title attribute -->
+        <meter title="title value for METER"
+               form="form1"
+               high="66" low="33"
+               max="100" min="0" optimum="80"
+               value="50">at 50/100
+        </meter>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI : The page contains 3 form output tags (progress, output and meter) with a title attribute
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.2 NMI 01</title>
+    <title>Rgaa 4.0 Test.11.2.2 NA 01</title>
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.2 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.11.2.2 NA 01</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -18,19 +18,22 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <!-- In Rgaa4, the following form objects and WAI-ARIA roles are not considered as form fields: -->
         <form action="http://action.html" method="post">
-            <p>
-                <input title="title for input without type attribute (implicit text)" id="text-1"/>
-                <input title="title for input with type equal to text" id="text-2" type="text"/>
-                <input type="submit" value="Send"/>
-            </p>
+            <input title="title for hidden input" type="hidden">
+            <input title="title for button input" type="button">
+            <input title="title for image input" type="image">
+            <input title="title for submit input" type="submit" value="Send"/>
+            <input title="title for reset input" type="reset" value="Reset"/>
+            <button title="title for button tag">Click on me</button>
+            <div title="title for tag with button role" role="button"></div>
         </form>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : The page contains two form field with a title attribute
+        NA : This page contains no form field with title attribute
     </div>
     <!-- END [test-explanation] -->
 </div>

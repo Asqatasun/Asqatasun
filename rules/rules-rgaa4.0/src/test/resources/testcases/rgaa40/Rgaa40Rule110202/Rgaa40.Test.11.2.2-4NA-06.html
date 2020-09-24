@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.2.2 NA 06</title>
+</head>
+<body class="NA">
+<div>
+    <h1>Rgaa 4.0 Test.11.2.2 NA 06</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque attribut <code>title</code> permet-il de connaître la fonction exacte du <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+            de formulaire</a> auquel il est associé ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <!-- PROGRESS tag without title attribute -->
+        <progress max="100" value="70"> 70%</progress>
+
+        <!-- OUTPUT tag without title attribute -->
+        <form id="form1" oninput="result.value=parseInt(a.value)+parseInt(b.value); return false;">
+            <input name="b" type="range" value="50"/> +
+            <input name="a" type="number" value="10"/> =
+            <output name="result">60</output>
+            <input type="submit" value="Calculer">
+        </form>
+
+        <!-- METER tag without title attribute -->
+        <meter form="form1"
+               high="66" low="33"
+               max="100" min="0" optimum="80"
+               value="50">at 50/100
+        </meter>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NA : This page contains no form output tags (progress, output and meter)
+             and no form fields  with title attribute
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

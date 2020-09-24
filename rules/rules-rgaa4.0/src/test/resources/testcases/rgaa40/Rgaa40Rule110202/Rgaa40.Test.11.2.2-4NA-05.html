@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.2 NMI 01</title>
+    <title>Rgaa 4.0 Test.11.2.2 NA 05</title>
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.2 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.11.2.2 NA 05</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -19,18 +19,20 @@
     <!-- START [testcase] -->
     <div class="testcase">
         <form action="http://action.html" method="post">
-            <p>
-                <input title="title for input without type attribute (implicit text)" id="text-1"/>
-                <input title="title for input with type equal to text" id="text-2" type="text"/>
-                <input type="submit" value="Send"/>
-            </p>
+            <label for="ice-cream-choice">Choose a flavor:</label>
+            <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+            <datalist id="ice-cream-flavors">
+                <option value="Chocolate">
+                <option value="Coconut">
+                <option value="Vanilla">
+            </datalist>
         </form>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : The page contains two form field with a title attribute
+        NA : This page contains no form field with title attribute
     </div>
     <!-- END [test-explanation] -->
 </div>
