@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 8: Mandatory elements
+# RGAA 4.0 — Theme 8: Mandatory elements
 
 ## Criterion 8.1
 

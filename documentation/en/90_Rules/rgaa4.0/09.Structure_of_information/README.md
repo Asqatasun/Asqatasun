@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 9: Structure of information
+# RGAA 4.0 — Theme 9: Structure of information
 
 ## Criterion 9.1
 

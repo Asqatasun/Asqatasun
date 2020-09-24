@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 1: Images
+# RGAA 4.0 — Theme 1: Images
 
 ## Criterion 1.1
 

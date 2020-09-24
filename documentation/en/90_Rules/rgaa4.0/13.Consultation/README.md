@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 13: Consultation
+# RGAA 4.0 — Theme 13: Consultation
 
 ## Criterion 13.1
 

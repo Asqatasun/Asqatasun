@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 2: Frames
+# RGAA 4.0 — Theme 2: Frames
 
 ## Criterion 2.1
 

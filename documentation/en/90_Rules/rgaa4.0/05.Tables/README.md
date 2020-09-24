@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 5: Tables
+# RGAA 4.0 — Theme 5: Tables
 
 ## Criterion 5.1
 

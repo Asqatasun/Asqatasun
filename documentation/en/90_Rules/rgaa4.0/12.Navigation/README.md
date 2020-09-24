@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 12: Navigation
+# RGAA 4.0 — Theme 12: Navigation
 
 ## Criterion 12.1
 

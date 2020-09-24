@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 6: Links
+# RGAA 4.0 — Theme 6: Links
 
 ## Criterion 6.1
 

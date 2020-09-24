@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 4: Multimedia
+# RGAA 4.0 — Theme 4: Multimedia
 
 ## Criterion 4.1
 

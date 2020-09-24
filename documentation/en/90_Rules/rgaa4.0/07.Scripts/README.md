@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 7: Scripts
+# RGAA 4.0 — Theme 7: Scripts
 
 ## Criterion 7.1
 

@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 3: Colours
+# RGAA 4.0 — Theme 3: Colours
 
 ## Criterion 3.1
 

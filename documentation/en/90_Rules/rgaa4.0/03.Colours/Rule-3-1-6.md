@@ -1,4 +1,4 @@
-# RGAA 4.0 - Rule 3.1.6
+# RGAA 4.0 — Rule 3.1.6
 
 ## Summary
 

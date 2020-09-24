@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 11: Forms
+# RGAA 4.0 — Theme 11: Forms
 
 ## Criterion 11.1
 

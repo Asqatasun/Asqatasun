@@ -1,4 +1,4 @@
-# RGAA 4.0 - Rule 1.9.3
+# RGAA 4.0 — Rule 1.9.3
 
 ## Summary
 

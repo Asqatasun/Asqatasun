@@ -1,4 +1,4 @@
-# RGAA 4.0 - Theme 10: Presentation of information
+# RGAA 4.0 — Theme 10: Presentation of information
 
 ## Criterion 10.1
 

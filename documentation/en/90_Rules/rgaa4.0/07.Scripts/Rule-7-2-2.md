@@ -1,4 +1,4 @@
-# RGAA 4.0 - Rule 7.2.2
+# RGAA 4.0 — Rule 7.2.2
 
 ## Summary
 
