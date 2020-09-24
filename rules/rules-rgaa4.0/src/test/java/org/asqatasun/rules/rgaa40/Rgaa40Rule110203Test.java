@@ -80,7 +80,7 @@ public class Rgaa40Rule110203Test extends Rgaa40RuleImplementationTestCase {
             RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
             HtmlElementStore.INPUT_ELEMENT,
             1,
-            new ImmutablePair(ARIA_LABEL_ATTR, "aria-label for input without type atttribut (implicit text)"));
+            new ImmutablePair(ARIA_LABEL_ATTR, "aria-label for input without type attribute (implicit text)"));
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
@@ -94,25 +94,25 @@ public class Rgaa40Rule110203Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa40.Test.11.2.3-3NMI-02");
         checkResultIsPreQualified(processResult, 17, 17);
-        HashMap<Integer, String> mapTypeAttribut = new HashMap<Integer, String>();
-        mapTypeAttribut.put(1, "checkbox");
-        mapTypeAttribut.put(2, "color");
-        mapTypeAttribut.put(3, "date");
-        mapTypeAttribut.put(4, "datetime-local");
-        mapTypeAttribut.put(5, "email");
-        mapTypeAttribut.put(6, "file");
-        mapTypeAttribut.put(7, "month");
-        mapTypeAttribut.put(8, "number");
-        mapTypeAttribut.put(9, "password");
-        mapTypeAttribut.put(10, "radio");
-        mapTypeAttribut.put(11, "range");
-        mapTypeAttribut.put(12, "search");
-        mapTypeAttribut.put(13, "tel");
-        mapTypeAttribut.put(14, "text");
-        mapTypeAttribut.put(15, "time");
-        mapTypeAttribut.put(16, "url");
-        mapTypeAttribut.put(17, "week");
-        for (Map.Entry item : mapTypeAttribut.entrySet()) {
+        HashMap<Integer, String> mapTypeAttribute = new HashMap<Integer, String>();
+        mapTypeAttribute.put(1, "checkbox");
+        mapTypeAttribute.put(2, "color");
+        mapTypeAttribute.put(3, "date");
+        mapTypeAttribute.put(4, "datetime-local");
+        mapTypeAttribute.put(5, "email");
+        mapTypeAttribute.put(6, "file");
+        mapTypeAttribute.put(7, "month");
+        mapTypeAttribute.put(8, "number");
+        mapTypeAttribute.put(9, "password");
+        mapTypeAttribute.put(10, "radio");
+        mapTypeAttribute.put(11, "range");
+        mapTypeAttribute.put(12, "search");
+        mapTypeAttribute.put(13, "tel");
+        mapTypeAttribute.put(14, "text");
+        mapTypeAttribute.put(15, "time");
+        mapTypeAttribute.put(16, "url");
+        mapTypeAttribute.put(17, "week");
+        for (Map.Entry item : mapTypeAttribute.entrySet()) {
             int position = ((int) item.getKey());
             checkRemarkIsPresent(
                 processResult,
