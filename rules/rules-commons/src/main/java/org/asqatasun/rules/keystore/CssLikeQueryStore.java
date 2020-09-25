@@ -218,13 +218,17 @@ public final class CssLikeQueryStore {
                     + "input[type=time][title] , "
                     + "input[type=radio][title]";
     public static final String FORM_ELEMENT_WITH_ARIA_LABEL_CSS_LIKE_QUERY =
-        "textarea[aria-label] ,"
-            + "select[aria-label] ,"
-            + "datalist[aria-label] ,"
+        "datalist[aria-label] ,"
+            + "meter[aria-label] ,"
             + "optgroup[aria-label] ,"
             + "option[aria-label] ,"
+            + "output[aria-label] ,"
+            + "progress[aria-label] ,"
+            + "select[aria-label] ,"
+            + "textarea[aria-label] ,"
             + "input[aria-label]:not([type]) ," // input tag without type attribut (implicit type="text")
             + "input[type=checkbox][aria-label] ,"
+            + "input[type=color][aria-label] ,"
             + "input[type=date][aria-label] ,"
             + "input[type=datetime-local][aria-label] ,"
             + "input[type=file][aria-label] ,"
@@ -239,8 +243,18 @@ public final class CssLikeQueryStore {
             + "input[type=text][aria-label] ,"
             + "input[type=time][aria-label] ,"
             + "input[type=url][aria-label] ,"
-            + "input[type=color][aria-label] ,"
-            + "input[type=week][aria-label]";
+            + "input[type=week][aria-label] ,"
+            + "[role=checkbox][aria-label] ,"
+            + "[role=combobox][aria-label] ,"
+            + "[role=listbox][aria-label] ,"
+            + "[role=progressbar][aria-label] ,"
+            + "[role=option][aria-label] ,"
+            + "[role=radio][aria-label] ,"
+            + "[role=searchbox][aria-label] ,"
+            + "[role=slider][aria-label] ,"
+            + "[role=spinbutton][aria-label] ,"
+            + "[role=switch][aria-label] ,"
+            + "[role=textbox][aria-label]";
     public static final String FORM_TEXT_INPUT_CSS_LIKE_QUERY = 
                     "form:has(textarea) , "
                     + "form:has(input[type=password]) , "

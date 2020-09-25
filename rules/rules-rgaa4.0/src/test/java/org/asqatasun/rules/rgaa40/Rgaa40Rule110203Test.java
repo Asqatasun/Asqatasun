@@ -59,12 +59,18 @@ public class Rgaa40Rule110203Test extends Rgaa40RuleImplementationTestCase {
         addWebResource("Rgaa40.Test.11.2.3-3NMI-03");
         addWebResource("Rgaa40.Test.11.2.3-3NMI-04");
         addWebResource("Rgaa40.Test.11.2.3-3NMI-05");
+        addWebResource("Rgaa40.Test.11.2.3-3NMI-06");
+        addWebResource("Rgaa40.Test.11.2.3-3NMI-07");
+        addWebResource("Rgaa40.Test.11.2.3-3NMI-08");
 
         addWebResource("Rgaa40.Test.11.2.3-4NA-01");
         addWebResource("Rgaa40.Test.11.2.3-4NA-02");
         addWebResource("Rgaa40.Test.11.2.3-4NA-03");
         addWebResource("Rgaa40.Test.11.2.3-4NA-04");
         addWebResource("Rgaa40.Test.11.2.3-4NA-05");
+        addWebResource("Rgaa40.Test.11.2.3-4NA-06");
+        addWebResource("Rgaa40.Test.11.2.3-4NA-07");
+        addWebResource("Rgaa40.Test.11.2.3-4NA-08");
     }
 
     @Override
@@ -176,6 +182,73 @@ public class Rgaa40Rule110203Test extends Rgaa40RuleImplementationTestCase {
             1,
             new ImmutablePair(ARIA_LABEL_ATTR, "aria-label value for DATALIST"));
 
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-06---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.11.2.3-3NMI-06");
+        checkResultIsPreQualified(processResult, 3, 3);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+            HtmlElementStore.PROGRESS_ELEMENT,
+            1,
+            new ImmutablePair(ARIA_LABEL_ATTR, "aria-label value for PROGRESS"));
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+            HtmlElementStore.OUTPUT_ELEMENT,
+            2,
+            new ImmutablePair(ARIA_LABEL_ATTR, "aria-label value for OUTPUT"));
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+            HtmlElementStore.METER_ELEMENT,
+            3,
+            new ImmutablePair(ARIA_LABEL_ATTR, "aria-label value for METER"));
+
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-07---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.11.2.3-3NMI-07");
+        checkResultIsPreQualified(processResult, 11, 11);
+        HashMap<Integer, String> mapRoleAttribute = new HashMap<Integer, String>();
+        mapRoleAttribute.put(1, "checkbox");
+        mapRoleAttribute.put(2, "combobox");
+        mapRoleAttribute.put(3, "listbox");
+        mapRoleAttribute.put(4, "progressbar");
+        mapRoleAttribute.put(5, "option");
+        mapRoleAttribute.put(6, "radio");
+        mapRoleAttribute.put(7, "searchbox");
+        mapRoleAttribute.put(8, "slider");
+        mapRoleAttribute.put(9, "spinbutton");
+        mapRoleAttribute.put(10, "switch");
+        mapRoleAttribute.put(11, "textbox");
+        for (Map.Entry item : mapRoleAttribute.entrySet()) {
+            int position = ((int) item.getKey());
+            checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+                HtmlElementStore.DIV_ELEMENT,
+                position,
+                new ImmutablePair(ARIA_LABEL_ATTR, "aria-label value for ROLE " + item.getValue()));
+        }
+
+        //----------------------------------------------------------------------
+        //------------------------------3NMI-08---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.11.2.3-3NMI-08");
+        checkResultIsPreQualified(processResult, 1, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+            HtmlElementStore.INPUT_ELEMENT,
+            1,
+            new ImmutablePair(ARIA_LABEL_ATTR, "aria-label for input without parent form tag"));
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
@@ -205,5 +278,20 @@ public class Rgaa40Rule110203Test extends Rgaa40RuleImplementationTestCase {
         //------------------------------4NA-05----------------------------------
         //----------------------------------------------------------------------
         checkResultIsNotApplicable(processPageTest("Rgaa40.Test.11.2.3-4NA-05"));
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-06----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.11.2.3-4NA-06"));
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-07----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.11.2.3-4NA-07"));
+
+        //----------------------------------------------------------------------
+        //------------------------------4NA-08----------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.11.2.3-4NA-08"));
     }
 }

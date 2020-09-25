@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.3 NMI 03</title>
+    <title>Rgaa 4.0 Test.11.2.3 NMI 08</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.3 NMI 03</h1>
+    <h1>Rgaa 4.0 Test.11.2.3 NMI 08</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -19,16 +19,13 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <form action="http://action.html" method="post">
-            <p><textarea aria-label="aria-label value for TEXTAREA" cols="1" id="textarea" rows="20"></textarea>
-                <input type="submit" value="Send"/></p>
-        </form>
+        <input aria-label="aria-label for input without parent form tag" id="text-2" type="text"/>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : The page contains a textarea tag with an aria-label attribute
+        NMI : The page contains a form field with an aria-label attribute, but without parent form tag
     </div>
     <!-- END [test-explanation] -->
 </div>

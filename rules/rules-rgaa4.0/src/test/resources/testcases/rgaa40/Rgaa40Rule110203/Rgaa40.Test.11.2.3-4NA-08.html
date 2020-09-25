@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.3 NMI 03</title>
+    <title>Rgaa 4.0 Test.11.2.3 NA 01</title>
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.3 NMI 03</h1>
+    <h1>Rgaa 4.0 Test.11.2.3 NA 01</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -19,16 +19,22 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <!-- In Rgaa4, the following form objects and WAI-ARIA roles are not considered as form fields: -->
         <form action="http://action.html" method="post">
-            <p><textarea aria-label="aria-label value for TEXTAREA" cols="1" id="textarea" rows="20"></textarea>
-                <input type="submit" value="Send"/></p>
+            <input aria-label="aria-label for hidden input" type="hidden">
+            <input aria-label="aria-label for button input" type="button">
+            <input aria-label="aria-label for image input" type="image">
+            <input aria-label="aria-label for submit input" type="submit" value="Send"/>
+            <input aria-label="aria-label for reset input" type="reset" value="Reset"/>
+            <button aria-label="aria-label for button tag">Click on me</button>
+            <div aria-label="aria-label for tag with button role" role="button"></div>
         </form>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : The page contains a textarea tag with an aria-label attribute
+        NA : This page contains no form field with aria-label attribute
     </div>
     <!-- END [test-explanation] -->
 </div>

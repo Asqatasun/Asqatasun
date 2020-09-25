@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.2.3 NMI 06</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.11.2.3 NMI 06</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque étiquette implémentée via l’attribut WAI-ARIA <code>aria-label</code> permet-elle de connaître la
+            fonction exacte du <a
+                href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+                de formulaire</a> auquel elle est associée ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+
+        <!-- PROGRESS tag with aria-label attribute -->
+        <progress aria-label="aria-label value for PROGRESS" max="100" value="70"> 70%</progress>
+
+        <!-- OUTPUT tag with aria-label attribute -->
+        <form id="form1" oninput="result.value=parseInt(a.value)+parseInt(b.value); return false;">
+            <input name="b" type="range" value="50"/> +
+            <input name="a" type="number" value="10"/> =
+            <output aria-label="aria-label value for OUTPUT" name="result">60</output>
+            <input type="submit" value="Calculer">
+        </form>
+
+        <!-- METER tag with aria-label attribute -->
+        <meter aria-label="aria-label value for METER"
+               form="form1"
+               high="66" low="33"
+               max="100" min="0" optimum="80"
+               value="50">at 50/100
+        </meter>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI : The page contains 3 form output tags (progress, output and meter) with an aria-label attribute
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
