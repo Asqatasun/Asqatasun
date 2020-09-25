@@ -19,8 +19,11 @@
  */
 package org.asqatasun.rules.rgaa40;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.EvidenceStore;
+import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
 
 /**
@@ -41,16 +44,27 @@ public class Rgaa40Rule100102Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-            "org.asqatasun.rules.rgaa40.Rgaa40Rule100102");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa40.Rgaa40Rule100102");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.10.1.2-1Passed-01");
-//        addWebResource("Rgaa40.Test.10.1.2-2Failed-01");
-        addWebResource("Rgaa40.Test.10.1.2-3NMI-01");
-//        addWebResource("Rgaa40.Test.10.1.2-4NA-01");
+        addWebResource("Rgaa40.Test.10.01.02-1Passed-01");
+        addWebResource("Rgaa40.Test.10.01.02-1Passed-02");
+        addWebResource("Rgaa40.Test.10.01.02-1Passed-03");
+        addWebResource("Rgaa40.Test.10.01.02-1Passed-04");
+        addWebResource("Rgaa40.Test.10.01.02-1Passed-05");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-01");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-02");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-03");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-04");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-05");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-06");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-07");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-08");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-09");
+        addWebResource("Rgaa40.Test.10.01.02-2Failed-10");
+
     }
 
     @Override
@@ -58,50 +72,171 @@ public class Rgaa40Rule100102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.10.1.2-1Passed-01"), 1);
-
+        checkResultIsPassed(processPageTest("Rgaa40.Test.10.01.02-1Passed-01"),12);
+       
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-02------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa40.Test.10.01.02-1Passed-02"),13);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-03------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa40.Test.10.01.02-1Passed-03"),13);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-04------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa40.Test.10.01.02-1Passed-04"),18);
+        
+        //----------------------------------------------------------------------
+        //------------------------------1Passed-05------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsPassed(processPageTest("Rgaa40.Test.10.01.02-1Passed-05"),15);
+        
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.10.1.2-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        ProcessResult processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-01");
+        checkResultIsFailed(processResult, 12, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.H1_ELEMENT,
+                1, 
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "align"));
+        
         //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
+        //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.10.1.2-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-02");
+        checkResultIsFailed(processResult, 12, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "background"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.DIV_ELEMENT,
+                2,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "background"));
+        
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.10.1.2-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.10.1.2-3NMI-01").getValue());
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-03");
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "bgcolor"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-04");
+        checkResultIsFailed(processResult, 12, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.IMG_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "border"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-05");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                "font",
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "color"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-06");
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "link"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-07");
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore. BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "alink"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-08------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-08");
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "vlink"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-09------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-09");
+        checkResultIsFailed(processResult, 11, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                HtmlElementStore.BODY_ELEMENT,
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "text"));
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-10------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.02-2Failed-10");
+        checkResultIsFailed(processResult, 14, 2);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                "hr",
+                1,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "width"));
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                "PresentationAttrFound",
+                "hr",
+                2,
+                new ImmutablePair(EvidenceStore.ELEMENT_NAME_EE, "height"));
     }
 
 }
