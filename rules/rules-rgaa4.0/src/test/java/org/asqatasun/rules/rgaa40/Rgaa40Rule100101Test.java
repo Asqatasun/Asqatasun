@@ -22,6 +22,7 @@ package org.asqatasun.rules.rgaa40;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 
 /**
  * Unit test class for implementation of rule 10.1.1 (referential RGAA 4.0)
@@ -41,16 +42,22 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-            "org.asqatasun.rules.rgaa40.Rgaa40Rule100101");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa40.Rgaa40Rule100101");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.10.1.1-1Passed-01");
-//        addWebResource("Rgaa40.Test.10.1.1-2Failed-01");
-        addWebResource("Rgaa40.Test.10.1.1-3NMI-01");
-//        addWebResource("Rgaa40.Test.10.1.1-4NA-01");
+        addWebResource("Rgaa40.Test.10.01.01-1Passed-01");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-01");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-02");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-03");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-04");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-05");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-06");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-07");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-08");
+        addWebResource("Rgaa40.Test.10.01.01-2Failed-09");
+
     }
 
     @Override
@@ -58,50 +65,116 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.10.1.1-1Passed-01"), 1);
-
+        checkResultIsPassed(processPageTest("Rgaa40.Test.10.01.01-1Passed-01"),12);        
+        
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        ProcessResult processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-01");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "basefont",
+                1);        
+        
         //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
+        //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.10.1.1-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-02");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "center",
+                1);        
+        
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.10.1.1-4NA-01"));
-    }
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-03");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "blink",
+                1);        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-04------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-04");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "font",
+                1);        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-05------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-05");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "tt",
+                1);        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-06------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-06");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "marquee",
+                1);        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-07------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-07");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "s",
+                1);        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-08------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-08");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "strike",
+                1);        
+        
+        //----------------------------------------------------------------------
+        //------------------------------2Failed-09------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-09");
+        checkResultIsFailed(processResult, 13, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
+                "u",
+                1);
 
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.10.1.1-3NMI-01").getValue());
     }
 
 }
