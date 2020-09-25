@@ -43,19 +43,19 @@ This test consists in checking whether each change of language is valid and rele
 
 ### Set1
 
-All the tags different from `<html>` that have a `"lang"` or a `"xml:lang"` attribute
+All the tags different from `<html>` that have a `lang` or a `xml:lang` attribute
 
 ### Process
 
 #### Test1
 
-We extract the language code from the `"lang"` or the "xml:lang"
-attributes from elements of **Set2**. If these attributes are both set and
-different, we keep the `"xml:lang"` attribute if the doctype of the page
+We extract the language code from the `lang` or the `xml:lang`
+attributes from elements of **Set1**. If these attributes are both set and
+different, we keep the `xml:lang` attribute if the doctype of the page
 is found within the "XhtmlDoctypeDeclarations" whitelist, and we keep
-the `"lang"` attribute instead.
+the `lang` attribute instead.
 
-For each extracted lang attribute, we check its validity regarding the following regexp : "\\w{2,3}(\\-\\w{2,})?$"
+For each extracted lang attribute, we check its validity regarding the following regexp : `\\w{2,3}(\\-\\w{2,})?$`
 
 For each invalid element, raise a messageA.
 
@@ -68,11 +68,11 @@ For each invalid element, raise a messageA.
 
 #### Test2
 
-We extract the language code from the `"lang"` or the "xml:lang"
-attributes from elements of **Set2**. If these attributes are both set and
-different, we keep the `"xml:lang"` attribute if the doctype of the page
+We extract the language code from the `lang` or the "xml:lang"
+attributes from elements of **Set1**. If these attributes are both set and
+different, we keep the `xml:lang` attribute if the doctype of the page
 is found within the "XhtmlDoctypeDeclarations" whitelist, and we keep
-the `"lang"` attribute instead.
+the `lang` attribute instead.
 
 For each extracted lang attribute, we check its validity regarding the
 "ValidLanguageCode" whitelist
@@ -94,11 +94,11 @@ For each invalid element, raise a messageA.
 
 #### Test3
 
-We extract the language code from the `"lang"` or the `"xml:lang"`
-attributes from elements of **Set2**. If these attributes are both set and
-different, we keep the `"xml:lang"` attribute if the doctype of the page
+We extract the language code from the `lang` or the `xml:lang`
+attributes from elements of **Set1**. If these attributes are both set and
+different, we keep the `xml:lang` attribute if the doctype of the page
 is found within the "XhtmlDoctypeDeclarations" whitelist, and we keep
-the `"lang"` attribute instead.
+the `lang` attribute instead.
 
 For each extracted text, we detect the language and compare with the declaration of the lang attribute.
 
@@ -131,7 +131,7 @@ If the detected language and the declared language are identical, but the size o
 
 #### Not Applicable
 
-The page has no tag different from `<html>` with the `"lang"` or `"xml:lang"` attribute (**Set1** is empty)
+The page has no tag different from `<html>` with the `lang` or `xml:lang` attribute (**Set1** is empty)
 
 #### Passed
 
