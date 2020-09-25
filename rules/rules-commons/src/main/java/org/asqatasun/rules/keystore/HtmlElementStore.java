@@ -41,6 +41,7 @@ public final class HtmlElementStore {
     public static final String CAPTION_ELEMENT = HTML.Tag.CAPTION.toString();
     public static final String CODE_ELEMENT = HTML.Tag.CODE.toString();
     public static final String COMMENT_ELEMENT = HTML.Tag.COMMENT.toString();
+    public static final String DATALIST_ELEMENT = "datalist";
     public static final String DESC_ELEMENT = "desc";
     public static final String DIV_ELEMENT = HTML.Tag.DIV.toString();
     public static final String DL_ELEMENT = "dl";
@@ -65,6 +66,7 @@ public final class HtmlElementStore {
     public static final String LEGEND_ELEMENT = "legend";
     public static final String LI_ELEMENT = HTML.Tag.LI.toString();
     public static final String META_ELEMENT = HTML.Tag.META.toString();
+    public static final String METER_ELEMENT = "meter";
     public static final String MARQUEE_ELEMENT = "marquee";
     public static final String NO_FRAMES_ELEMENT = HTML.Tag.NOFRAMES.toString();
     public static final String NO_SCRIPT_ELEMENT = "noscript";
@@ -72,7 +74,9 @@ public final class HtmlElementStore {
     public static final String OL_ELEMENT = HTML.Tag.OL.toString();
     public static final String OPTION_ELEMENT = HTML.Tag.OPTION.toString();
     public static final String OPTGROUP_ELEMENT = "optgroup";
+    public static final String OUTPUT_ELEMENT = "output";
     public static final String P_ELEMENT = HTML.Tag.P.toString();
+    public static final String PROGRESS_ELEMENT = "progress";
     public static final String SAMP_ELEMENT = HTML.Tag.SAMP.toString();
     public static final String SELECT_ELEMENT = HTML.Tag.SELECT.toString();
     public static final String SCRIPT_ELEMENT = HTML.Tag.SCRIPT.toString();
