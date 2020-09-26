@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.9.1.1 Failed 02</title>
+</head>
+<body class="Failed">
+<div>
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Dans chaque page web, la hiérarchie entre les <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#titre">titres</a> (balise <code>&lt;hx&gt;</code> ou balise possédant un attribut WAI-ARIA <code>role="heading"</code> associé à un attribut WAI-ARIA <code>aria-level</code>) est-elle pertinente ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <div class="testcase">
+        <h2> Title 2_1 </h2>
+        <h3> Title 3_1_1 </h3>
+        <h1>Title 1</h1>
+        <h2> Title 2_2 </h2>
+        <h3> Title 3_2_1 </h3>
+    </div>
+    <p class="test-explanation"> Failed : The hierarchy is respected but the &lt;H1&gt; tag appears after a &lt;H2&gt; tag </p>
+</div>
+</body>
+</html>

@@ -19,7 +19,18 @@
  */
 package org.asqatasun.rules.rgaa40;
 
+import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.headings.HeadingsHierarchyChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.jsoup.nodes.Element;
+
+import java.util.Iterator;
+import java.util.regex.Pattern;
+
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.ARIA_HEADINGS_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.HEADINGS_CSS_LIKE_QUERY;
 
 /**
  * Implementation of rule 9.1.1 (referential RGAA 4.0)
@@ -27,13 +38,32 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/09.Structure_of_information/Rule-9-1-1.md">rule 9.1.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-9-1-1">9.1.1 rule specification</a>
  */
-public class Rgaa40Rule090101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule090101 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
+
+    private static final Pattern PATTERN = Pattern.compile("[1-9][0-9]?");
 
     /**
      * Default constructor
      */
     public Rgaa40Rule090101() {
-        super();
+        super(
+            new SimpleElementSelector(
+                HEADINGS_CSS_LIKE_QUERY + ", " + ARIA_HEADINGS_CSS_LIKE_QUERY),
+            new HeadingsHierarchyChecker());
+    }
+
+    @Override
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        Iterator<Element> elementsIterator = getElements().get().iterator();
+        while (elementsIterator.hasNext()) {
+            Element element = elementsIterator.next();
+            if (element.hasAttr("aria-level")) {
+                if (!PATTERN.matcher(element.attr("aria-level")).matches()) {
+                    elementsIterator.remove();
+                }
+            }
+        }
     }
 
 }
