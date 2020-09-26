@@ -33,10 +33,7 @@ import org.asqatasun.contentadapter.AdaptationListener;
 import org.asqatasun.entity.audit.*;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.reference.Test;
-import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.entity.service.audit.ContentDataService;
-import org.asqatasun.entity.service.audit.PreProcessResultDataService;
-import org.asqatasun.entity.service.audit.ProcessResultDataService;
+import org.asqatasun.entity.service.audit.*;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
@@ -149,6 +146,11 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
         this.processResultDataService = processResultDataService;
     }
+
+    private TagDataService tagDataService;
+    public void setTagDataService(TagDataService tagDataService) {
+        this.tagDataService = tagDataService;
+    }
     
     private PreProcessResultDataService preProcessResultDataService;
     public PreProcessResultDataService getPreProcessResultDataService() {
@@ -210,6 +212,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * The audit parameters
      */
     private final Set<Parameter> paramSet;
+    /**
+     * The audit tags
+     */
+    private List tagList;
 
     /**
      * @param paramSet 
@@ -217,8 +223,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
      */
     public AuditCommandImpl(
             Set<Parameter> paramSet,
+            List<Tag> tagList,
             AuditDataService auditDataService) {
         this.paramSet = paramSet;
+        this.tagList = tagList;
         this.auditDataService = auditDataService;
         audit = auditDataService.create();
         setStatusToAudit(AuditStatus.PENDING);
@@ -228,6 +236,10 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public void init() {
         // the paramSet has to be persisted
         parameterDataService.saveOrUpdate(paramSet);
+        if (!tagList.isEmpty()) {
+            tagList = new ArrayList(tagDataService.saveOrUpdate(tagList));
+            audit.setTagList(tagList);
+        }
         audit.setTestList(testDataService.getTestListFromParamSet(paramSet));
         audit.setParameterSet(paramSet);
         setStatusToAudit(AuditStatus.INITIALISATION);

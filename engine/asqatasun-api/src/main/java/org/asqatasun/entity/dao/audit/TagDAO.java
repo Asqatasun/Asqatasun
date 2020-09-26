@@ -21,40 +21,26 @@
  */
 package org.asqatasun.entity.dao.audit;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.dao.GenericDAO;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 
  * @author jkowalczyk
  */
-public interface AuditDAO extends GenericDAO<Audit, Long> {
+public interface TagDAO extends GenericDAO<Tag, Long> {
+
+    List<Tag> retrieveAllByValues(List<String> values);
 
     /**
      *
-     * @param status
-     *            the status to find
-     * @return the collection of the audits that have the status
+     * @param value
+     *            the code of the tag to find
+     * @return the tag found
      */
-    Collection<Audit> findAll(AuditStatus status);
+    Tag retrieveByValue(String value);
 
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    Audit findAuditWithTest(Long id);
-
-    /**
-     *
-     * @param tag
-     * @return
-     */
-    List<Audit> findAllByTag(String tag);
-    
 }

@@ -26,6 +26,7 @@ import org.asqatasun.entity.audit.Audit
 import org.asqatasun.entity.contract.*
 import org.asqatasun.entity.contract.ScopeEnum.*
 import org.asqatasun.entity.parameterization.Parameter
+import org.asqatasun.entity.service.audit.TagDataService
 import org.asqatasun.entity.service.contract.ActDataService
 import org.asqatasun.entity.service.contract.ContractDataService
 import org.asqatasun.entity.service.contract.ScopeDataService
@@ -45,7 +46,8 @@ class AuditService(private val auditService: EngineAuditService,
                    private val contractDataService: ContractDataService,
                    private val actDataService: ActDataService,
                    private val scopeDataService: ScopeDataService,
-                   private val parameterDataService: ParameterDataService) {
+                   private val parameterDataService: ParameterDataService,
+                   private val tagDataService: TagDataService) {
 
     private val scopeMap: MutableMap<ScopeEnum, Scope> = EnumMap(ScopeEnum::class.java)
 
@@ -59,18 +61,22 @@ class AuditService(private val auditService: EngineAuditService,
     fun runPageAudit(par: PageAuditRequest, ipAddress: String): Long {
         val contract = getContract(par.contractId)
 
-        val paramSet: Set<Parameter> =
-            parameterDataService.getParameterSetFromAuditLevel(par.referential.code, par.level.code)
-
         return if (par.urls.size > 1) {
             getAuditId(
-                auditService.auditSite(par.urls[0], par.urls, paramSet),
+                auditService.auditSite(
+                    par.urls[0],
+                    par.urls,
+                    initialiseParamSet(par.referential.code, par.level.code),
+                    tagDataService.getTagListFromValues(par.tags)),
                 ipAddress,
                 GROUPOFPAGES,
                 contract)
         } else {
             getAuditId(
-                auditService.auditPage(par.urls[0], parameterDataService.getAuditPageParameterSet(paramSet)),
+                auditService.auditPage(
+                    par.urls[0],
+                    initialiseParamSet(par.referential.code, par.level.code),
+                    tagDataService.getTagListFromValues(par.tags)),
                 ipAddress,
                 PAGE,
                 contract)
@@ -82,7 +88,8 @@ class AuditService(private val auditService: EngineAuditService,
 
         return auditService.auditScenario(sar.name,
                                           readFile(sar.scenario),
-                                          initialiseParamSet(sar.referential.code, sar.level.code)).let {
+                                          initialiseParamSet(sar.referential.code, sar.level.code),
+                                          tagDataService.getTagListFromValues(sar.tags)).let {
             getAuditId(it, ipAddress, SCENARIO, contract)
         }
     }

@@ -42,13 +42,31 @@ class AuditController(private val auditDataService: AuditDataService,
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     fun getAll() = auditDataService.findAll()
-        .map { it.toAuditDto(it.subject.toWebResourceDto(webResourceStatisticsDataService)) }
+        .map { it.toAuditDto(
+            it.subject.toWebResourceDto(webResourceStatisticsDataService),
+            it.tagList.map { tag -> tag.value })
+        }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     fun get(@PathVariable id: Long) =
         Optional.ofNullable(auditDataService.read(id)).map {
-            it.toAuditDto(it.subject.toWebResourceDto(webResourceStatisticsDataService))
+            it.toAuditDto(
+                it.subject.toWebResourceDto(webResourceStatisticsDataService),
+                it.tagList.map { tag -> tag.value })
+        }.orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
+        }!!
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/tags/{tags}")
+    fun getByTags(@PathVariable tags: List<String>) =
+        Optional.ofNullable(auditDataService.findAllByTags(tags)).map {
+            it.map {audit ->
+                audit.toAuditDto(
+                    audit.subject.toWebResourceDto(webResourceStatisticsDataService),
+                    audit.tagList.map { tag -> tag.value })
+            }
         }.orElseThrow {
             ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
         }!!
@@ -71,7 +89,8 @@ data class PageAuditRequest(
     val urls: List<String>,
     val referential: Referential,
     val level: Level,
-    val contractId: Long?
+    val contractId: Long?,
+    val tags: List<String>? = emptyList()
 )
 
 data class ScenarioAuditRequest(
@@ -79,5 +98,6 @@ data class ScenarioAuditRequest(
     var scenario: String,
     var referential: Referential,
     var level: Level,
-    val contractId: Long?
+    val contractId: Long?,
+    val tags: List<String>? = emptyList()
 )

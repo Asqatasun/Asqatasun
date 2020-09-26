@@ -30,7 +30,8 @@ data class AuditDto(
     val subject: WebResourceDto,
     val status: AuditStatus,
     val date: Date,
-    val comment: String = ""
+    val tags: List<String>
 )
 
-fun Audit.toAuditDto(webResource: WebResourceDto) = AuditDto(id, webResource, status, dateOfCreation)
+fun Audit.toAuditDto(webResource: WebResourceDto, tags: List<String>)
+    = AuditDto(id, webResource, status, dateOfCreation, tags)

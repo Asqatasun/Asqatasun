@@ -80,7 +80,7 @@ public class PreProcessResultDAOImpl extends AbstractJPADAO<PreProcessResult, Lo
                 + " WHERE "
                 + " ppr.audit = :audit");
         query.setParameter("audit", audit);
-        Set<PreProcessResult> pprToDelete = new HashSet<PreProcessResult>();
+        Set<PreProcessResult> pprToDelete = new HashSet<>();
         pprToDelete.addAll(query.getResultList());
         for (PreProcessResult ppr : pprToDelete) {
             this.delete(ppr.getId());

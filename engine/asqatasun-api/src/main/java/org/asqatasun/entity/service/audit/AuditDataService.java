@@ -23,8 +23,11 @@ package org.asqatasun.entity.service.audit;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.service.GenericDataService;
 
 /**
@@ -47,6 +50,14 @@ public interface AuditDataService extends GenericDataService<Audit, Long> {
      * @return the collection of the audits that have the status
      */
     Collection<Audit> findAll(AuditStatus status);
+
+    /**
+     *
+     * @param tags
+     *            the status to find
+     * @return the collection of the audits that matches the given tags
+     */
+    List<Audit> findAllByTags(List<String> tags);
 
     /**
      * 

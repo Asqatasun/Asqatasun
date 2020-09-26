@@ -25,6 +25,8 @@ import org.easymock.EasyMock;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.service.CrawlerService;
 
+import java.util.Collections;
+
 /**
  *
  * @author jkowalczyk
@@ -133,12 +135,13 @@ public class CrawlAuditCommandImplTest extends AuditCommandTestCase {
     public class TestCrawlAuditCommandImpl extends CrawlAuditCommandImpl {
 
         public TestCrawlAuditCommandImpl() {
-            super(null, mockAuditDataService);
+            super(null, Collections.EMPTY_LIST, mockAuditDataService);
             setTestDataService(mockTestDataService);
             setParameterDataService(mockParameterDataService);
             setWebResourceDataService(mockWebResourceDataService);
             setContentDataService(mockContentDataService);
             setProcessResultDataService(mockProcessResultDataService);
+            setTagDataService(mockTagDataService);
             setPreProcessResultDataService(mockPreProcessResultDataService);
             setContentAdapterService(mockContentAdapterService);
             setProcessorService(mockProcessorService);

@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.xml.bind.annotation.XmlTransient;
 import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 
 /**
@@ -60,7 +61,7 @@ public interface AuditService {
      * @param paramSet
      * @return
      */
-    Audit auditPage(String pageUrl, Set<Parameter> paramSet);
+    Audit auditPage(String pageUrl, Set<Parameter> paramSet, List<Tag> tagList);
 
     /**
      * 
@@ -69,7 +70,7 @@ public interface AuditService {
      * @param paramSet
      * @return 
      */
-    Audit auditScenario(String scenarioName, String scenarionFile, Set<Parameter> paramSet);
+    Audit auditScenario(String scenarioName, String scenarionFile, Set<Parameter> paramSet, List<Tag> tagList);
 
     /**
      * 
@@ -77,7 +78,7 @@ public interface AuditService {
      * @param paramSet
      * @return
      */
-    Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet);
+    Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet, List<Tag> tagList);
 
     /**
      *
@@ -85,7 +86,7 @@ public interface AuditService {
      * @param paramSet
      * @return
      */
-    Audit auditSite(String siteUrl, Set<Parameter> paramSet);
+    Audit auditSite(String siteUrl, Set<Parameter> paramSet, List<Tag> tagList);
 
     /**
      *
@@ -94,6 +95,6 @@ public interface AuditService {
      * @param paramSet
      * @return
      */
-    Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet);
+    Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet, List<Tag> tagList);
 
 }

@@ -26,6 +26,8 @@ import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.service.CrawlerService;
 
+import java.util.Collections;
+
 /**
  *
  * @author jkowalczyk
@@ -79,6 +81,7 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
          SiteAuditCommandImpl siteAuditCommand = new SiteAuditCommandImpl(
                 siteUrl, 
                 null,
+                Collections.EMPTY_LIST,
                 mockAuditDataService);
 
         siteAuditCommand.setTestDataService(mockTestDataService);
@@ -86,6 +89,7 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
         siteAuditCommand.setWebResourceDataService(mockWebResourceDataService);
         siteAuditCommand.setContentDataService(mockContentDataService);
         siteAuditCommand.setProcessResultDataService(mockProcessResultDataService);
+        siteAuditCommand.setTagDataService(mockTagDataService);
         siteAuditCommand.setPreProcessResultDataService(mockPreProcessResultDataService);
         siteAuditCommand.setContentAdapterService(mockContentAdapterService);
         siteAuditCommand.setProcessorService(mockProcessorService);

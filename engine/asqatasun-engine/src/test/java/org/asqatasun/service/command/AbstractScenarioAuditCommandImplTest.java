@@ -27,6 +27,8 @@ import org.asqatasun.entity.subject.Page;
 import org.asqatasun.entity.subject.Site;
 import org.asqatasun.service.ScenarioLoaderService;
 
+import java.util.Collections;
+
 /**
  *
  * @author jkowalczyk
@@ -177,12 +179,13 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
     public class TestAbstractScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
 
         public TestAbstractScenarioAuditCommandImpl() {
-            super(null, mockAuditDataService);
+            super(null, Collections.EMPTY_LIST, mockAuditDataService);
             setTestDataService(mockTestDataService);
             setParameterDataService(mockParameterDataService);
             setWebResourceDataService(mockWebResourceDataService);
             setContentDataService(mockContentDataService);
             setProcessResultDataService(mockProcessResultDataService);
+            setTagDataService(mockTagDataService);
             setPreProcessResultDataService(mockPreProcessResultDataService);
             setScenarioLoaderService(mockScenarioLoaderService);
             setContentAdapterService(mockContentAdapterService);

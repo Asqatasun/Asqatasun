@@ -88,9 +88,9 @@ public class AuditServiceImplTest extends TestCase {
         String pageUrl = "http://My.testUrl.org";
 
         checkCreatedAuditAndVerifyMockExecution(
-                initCommand(() -> mockAuditCommandFactory.create(pageUrl, null, false),
+                initCommand(() -> mockAuditCommandFactory.create(pageUrl, null, null,false),
                             () -> mockAuditServiceThreadQueue.addPageAudit(mockAuditCommand))
-                    .auditPage(pageUrl, null));
+                    .auditPage(pageUrl, null, null));
     }
     
     /**
@@ -100,9 +100,9 @@ public class AuditServiceImplTest extends TestCase {
         String siteUrl = "http://My.testUrl.org";
 
         checkCreatedAuditAndVerifyMockExecution(
-            initCommand(() ->mockAuditCommandFactory.create(siteUrl, null, true),
+            initCommand(() ->mockAuditCommandFactory.create(siteUrl, null, null, true),
                         () -> mockAuditServiceThreadQueue.addSiteAudit(mockAuditCommand))
-                .auditSite(siteUrl, null));
+                .auditSite(siteUrl, null, null));
     }
     
     /**
@@ -113,9 +113,9 @@ public class AuditServiceImplTest extends TestCase {
         List<String> urlList = Arrays.asList("http://My.testUrlPage1.org");
 
         checkCreatedAuditAndVerifyMockExecution(
-            initCommand(() -> mockAuditCommandFactory.create(siteUrl, urlList, null),
+            initCommand(() -> mockAuditCommandFactory.create(siteUrl, urlList, null, null),
                         () -> mockAuditServiceThreadQueue.addPageAudit(mockAuditCommand))
-                .auditSite(siteUrl, urlList, null));
+                .auditSite(siteUrl, urlList, null, null));
     }
 
     /**
@@ -126,9 +126,9 @@ public class AuditServiceImplTest extends TestCase {
         Map<String, String> fileMap = new HashMap<String, String>() {{ put("file://test1", ""); }};
 
         checkCreatedAuditAndVerifyMockExecution(
-            initCommand(() -> mockAuditCommandFactory.create(fileMap, null),
+            initCommand(() -> mockAuditCommandFactory.create(fileMap, null, null),
                         () -> mockAuditServiceThreadQueue.addPageUploadAudit(mockAuditCommand))
-                .auditPageUpload(fileMap, null));
+                .auditPageUpload(fileMap, null, null));
     }
     
     /**
@@ -140,9 +140,9 @@ public class AuditServiceImplTest extends TestCase {
         String scenario = "";
 
         checkCreatedAuditAndVerifyMockExecution(
-            initCommand(() -> mockAuditCommandFactory.create(scenarioName, scenario, null),
+            initCommand(() -> mockAuditCommandFactory.create(scenarioName, scenario,null,  null),
                         () -> mockAuditServiceThreadQueue.addScenarioAudit(mockAuditCommand))
-                .auditScenario(scenarioName, scenario, null));
+                .auditScenario(scenarioName, scenario, null, null));
     }
 
     /**

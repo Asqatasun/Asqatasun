@@ -21,7 +21,12 @@
  */
 package org.asqatasun.entity.dao.audit;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+
+import org.asqatasun.entity.audit.Tag;
+import org.asqatasun.entity.audit.TagImpl;
 import org.dbunit.operation.DatabaseOperation;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
@@ -61,22 +66,32 @@ public class AuditDAOImplTest extends AbstractDaoTestCase {
 
     @Test
     public void testRead() {
-        Audit audit = auditDAO.read(Long.valueOf(1));
+        Audit audit = auditDAO.read(1L);
         assertEquals(Long.valueOf(1), audit.getId());
         assertTrue(audit.getSubject() instanceof Site);
         assertEquals(Long.valueOf(1), audit.getSubject().getId());
-        audit = auditDAO.read(Long.valueOf(2));
+        audit = auditDAO.read(2L);
         assertEquals(Long.valueOf(2), audit.getId());
         assertEquals(Long.valueOf(2), audit.getSubject().getId());
         assertTrue(audit.getSubject() instanceof Page);
     }
 
     @Test
+    public void testFindAllByTags() {
+        Collection<Audit> auditList = auditDAO.findAllByTag("tagA");
+        assertEquals(1, auditList.size());
+        assertEquals(Long.valueOf(1), auditList.stream().findFirst().get().getId());
+
+        auditList = auditDAO.findAllByTag("tagB");
+        assertEquals(2, auditList.size());
+    }
+
+    @Test
     public void testFindAuditWithTest() {
-        Audit audit = auditDAO.findAuditWithTest(Long.valueOf(1));
+        Audit audit = auditDAO.findAuditWithTest(1L);
         assertEquals(Long.valueOf(1), audit.getId());
         assertEquals(10, audit.getTestList().size());
-        audit = auditDAO.findAuditWithTest(Long.valueOf(2));
+        audit = auditDAO.findAuditWithTest(2L);
         assertEquals(Long.valueOf(2), audit.getId());
         assertEquals(10, audit.getTestList().size());
     }

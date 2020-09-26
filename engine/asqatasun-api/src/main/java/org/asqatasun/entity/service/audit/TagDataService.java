@@ -19,42 +19,20 @@
  *
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
-package org.asqatasun.entity.dao.audit;
+package org.asqatasun.entity.service.audit;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Tag;
-import org.asqatasun.entity.dao.GenericDAO;
+import org.asqatasun.entity.service.GenericDataService;
+
+import java.util.List;
 
 /**
  * 
  * @author jkowalczyk
  */
-public interface AuditDAO extends GenericDAO<Audit, Long> {
+public interface TagDataService extends GenericDataService<Tag, Long> {
 
-    /**
-     *
-     * @param status
-     *            the status to find
-     * @return the collection of the audits that have the status
-     */
-    Collection<Audit> findAll(AuditStatus status);
+    Tag findByValue(String value);
 
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    Audit findAuditWithTest(Long id);
-
-    /**
-     *
-     * @param tag
-     * @return
-     */
-    List<Audit> findAllByTag(String tag);
-    
+    List<Tag> getTagListFromValues(List<String> value);
 }

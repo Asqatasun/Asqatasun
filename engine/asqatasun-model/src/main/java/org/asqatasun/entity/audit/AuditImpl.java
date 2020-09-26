@@ -37,10 +37,7 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 
@@ -89,6 +86,11 @@ public class AuditImpl implements Audit, Serializable {
     @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
     @JoinColumn(name = "Id_Parameter"))
     private Set<ParameterImpl> parameterSet;
+    @ManyToMany
+    @JoinTable(name = "AUDIT_TAG", joinColumns =
+    @JoinColumn(name = "Id_Audit"), inverseJoinColumns =
+    @JoinColumn(name = "Id_Tag"))
+    private Set<TagImpl> tagList;
     
     public AuditImpl() {
         super();
@@ -318,6 +320,33 @@ public class AuditImpl implements Audit, Serializable {
             this.parameterSet = new HashSet<>();
         }
         this.parameterSet.add((ParameterImpl)parameter);
+    }
+
+    @Override
+    public void setTagList(List<Tag> tagList) {
+        if (this.tagList == null) {
+            this.tagList = new HashSet<>();
+        }
+        for(Tag tag: tagList) {
+            this.tagList.add((TagImpl)tag);
+        }
+    }
+
+    @Override
+    public List<Tag> getTagList() {
+        if (this.tagList == null) {
+            return Collections.emptyList();
+        } else {
+            return new ArrayList<>(tagList);
+        }
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        if (this.tagList == null) {
+            this.tagList = new HashSet<>();
+        }
+        this.tagList.add((TagImpl)tag);
     }
 
     @Override

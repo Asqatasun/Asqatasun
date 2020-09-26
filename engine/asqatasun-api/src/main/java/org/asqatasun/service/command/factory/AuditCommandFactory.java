@@ -24,6 +24,8 @@ package org.asqatasun.service.command.factory;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.service.command.AuditCommand;
 
@@ -43,7 +45,7 @@ public interface AuditCommandFactory {
      * @param isSite
      * @return 
      */
-    AuditCommand create(String url, Set<Parameter> paramSet, boolean isSite);
+    AuditCommand create(String url, Set<Parameter> paramSet, List<Tag> tagList, boolean isSite);
     
     /**
      * 
@@ -51,7 +53,7 @@ public interface AuditCommandFactory {
      * @param paramSet
      * @return 
      */
-    AuditCommand create(Map<String, String> fileMap, Set<Parameter> paramSet);
+    AuditCommand create(Map<String, String> fileMap, Set<Parameter> paramSet, List<Tag> tagList);
     
     /**
      * 
@@ -60,7 +62,7 @@ public interface AuditCommandFactory {
      * @param paramSet
      * @return 
      */
-    AuditCommand create(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet);
+    AuditCommand create(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet, List<Tag> tagList);
     
     /**
      * 
@@ -69,5 +71,5 @@ public interface AuditCommandFactory {
      * @param paramSet
      * @return 
      */
-    AuditCommand create(String scenarioName, String scenario, Set<Parameter> paramSet);
+    AuditCommand create(String scenarioName, String scenario, Set<Parameter> paramSet, List<Tag> tagList);
 }

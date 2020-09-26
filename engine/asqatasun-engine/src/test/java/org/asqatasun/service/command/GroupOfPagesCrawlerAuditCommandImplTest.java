@@ -22,6 +22,7 @@
 package org.asqatasun.service.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.easymock.EasyMock;
 import org.asqatasun.entity.audit.AuditStatus;
@@ -67,8 +68,7 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
 
         setReplayMode();
 
-        GroupOfPagesCrawlerAuditCommandImpl groupOfPagesAuditCommand =
-                getInstance();
+        GroupOfPagesCrawlerAuditCommandImpl groupOfPagesAuditCommand = getInstance();
         
         groupOfPagesAuditCommand.callCrawlerService();
 
@@ -86,6 +86,7 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
                     siteUrl,
                     urlList,
                     null,
+                    Collections.EMPTY_LIST,
                     mockAuditDataService);
         
         groupOfPagesAuditCommand.setTestDataService(mockTestDataService);
@@ -93,6 +94,7 @@ public class GroupOfPagesCrawlerAuditCommandImplTest extends AuditCommandTestCas
         groupOfPagesAuditCommand.setWebResourceDataService(mockWebResourceDataService);
         groupOfPagesAuditCommand.setContentDataService(mockContentDataService);
         groupOfPagesAuditCommand.setProcessResultDataService(mockProcessResultDataService);
+        groupOfPagesAuditCommand.setTagDataService(mockTagDataService);
         groupOfPagesAuditCommand.setPreProcessResultDataService(mockPreProcessResultDataService);
         groupOfPagesAuditCommand.setContentAdapterService(mockContentAdapterService);
         groupOfPagesAuditCommand.setProcessorService(mockProcessorService);

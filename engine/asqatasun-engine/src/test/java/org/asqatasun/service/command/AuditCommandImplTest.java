@@ -24,6 +24,7 @@ package org.asqatasun.service.command;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.apache.http.HttpStatus;
 import static org.easymock.EasyMock.*;
@@ -389,11 +390,12 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public class TestAuditCommandImpl extends AuditCommandImpl {
 
         public TestAuditCommandImpl() {
-            super(null, mockAuditDataService);
+            super(null, Collections.EMPTY_LIST, mockAuditDataService);
             setTestDataService(mockTestDataService);
             setParameterDataService(mockParameterDataService);
             setWebResourceDataService(mockWebResourceDataService);
             setContentDataService(mockContentDataService);
+            setTagDataService(mockTagDataService);
             setProcessResultDataService(mockProcessResultDataService);
             setPreProcessResultDataService(mockPreProcessResultDataService);
             setContentAdapterService(mockContentAdapterService);

@@ -21,12 +21,19 @@
  */
 package org.asqatasun.entity.dao.audit;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditImpl;
 import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.audit.Tag;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.entity.dao.AbstractJPADAO;
 import org.springframework.stereotype.Repository;
 
@@ -35,8 +42,7 @@ import org.springframework.stereotype.Repository;
  * @author jkowalczyk
  */
 @Repository("auditDAO")
-public class AuditDAOImpl extends AbstractJPADAO<Audit, Long> implements
-        AuditDAO {
+public class AuditDAOImpl extends AbstractJPADAO<Audit, Long> implements AuditDAO {
 
     public AuditDAOImpl() {
         super();
@@ -75,6 +81,15 @@ public class AuditDAOImpl extends AbstractJPADAO<Audit, Long> implements
         } catch (NoResultException nre) {
             return null;
         }
+    }
+
+    @Override
+    public List<Audit> findAllByTag(String tag) {
+        Query query = entityManager.createQuery("SELECT a FROM "
+            + getEntityClass().getName() + " a "
+            + " JOIN a.tagList t WHERE t.value = :tag");
+        query.setParameter("tag", tag);
+        return query.getResultList();
     }
 
 }

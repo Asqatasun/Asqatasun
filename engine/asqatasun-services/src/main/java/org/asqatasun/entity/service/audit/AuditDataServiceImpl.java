@@ -21,8 +21,12 @@
  */
 package org.asqatasun.entity.service.audit;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.factory.AuditFactory;
@@ -49,6 +53,19 @@ public class AuditDataServiceImpl extends AbstractGenericDataService<Audit, Long
     @Override
     public Collection<Audit> findAll(AuditStatus status) {
         return ((AuditDAO) entityDao).findAll(status);
+    }
+
+    @Override
+    public List<Audit> findAllByTags(List<String> tags) {
+        List<Audit> audits = new ArrayList<>();
+        for (String tag: tags) {
+            if (audits.isEmpty()) {
+                audits = ((AuditDAO) entityDao).findAllByTag(tag);
+            } else {
+                audits = (List<Audit>) CollectionUtils.intersection(audits, ((AuditDAO) entityDao).findAllByTag(tag));
+            }
+        }
+        return audits;
     }
 
     @Override

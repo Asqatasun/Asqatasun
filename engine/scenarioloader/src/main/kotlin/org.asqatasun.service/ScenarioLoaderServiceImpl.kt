@@ -30,7 +30,7 @@ import org.springframework.stereotype.Service
  *
  * @author jkowalczyk
  */
-@Service
+@Service("scenarioLoaderService")
 class ScenarioLoaderServiceImpl(private val scenarioLoaderFactory: ScenarioLoaderFactory): ScenarioLoaderService{
 
     override fun loadScenario(webResource: WebResource, scenarioFile: String?): List<Content> =

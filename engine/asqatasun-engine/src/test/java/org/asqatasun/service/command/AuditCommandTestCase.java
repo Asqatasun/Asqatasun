@@ -25,16 +25,13 @@ package org.asqatasun.service.command;
 import java.util.List;
 import java.util.Set;
 import junit.framework.TestCase;
+import org.asqatasun.entity.service.audit.*;
 import org.easymock.EasyMock;
 import org.asqatasun.contentadapter.AdaptationListener;
 import org.asqatasun.entity.audit.Audit;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.reference.Test;
-import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.entity.service.audit.ContentDataService;
-import org.asqatasun.entity.service.audit.PreProcessResultDataService;
-import org.asqatasun.entity.service.audit.ProcessResultDataService;
 import org.asqatasun.entity.service.parameterization.ParameterDataService;
 import org.asqatasun.entity.service.reference.TestDataService;
 import org.asqatasun.entity.service.subject.WebResourceDataService;
@@ -56,6 +53,7 @@ public abstract class AuditCommandTestCase extends TestCase{
     public ParameterDataService mockParameterDataService;
     public WebResourceDataService mockWebResourceDataService;
     public ContentDataService mockContentDataService;
+    public TagDataService mockTagDataService;
     public ProcessResultDataService mockProcessResultDataService;
     public PreProcessResultDataService mockPreProcessResultDataService;
     public ContentAdapterService mockContentAdapterService;
@@ -80,6 +78,7 @@ public abstract class AuditCommandTestCase extends TestCase{
         mockProcessResultDataService = EasyMock.createMock(ProcessResultDataService.class);
         mockPreProcessResultDataService = EasyMock.createMock(PreProcessResultDataService.class);
         mockContentAdapterService = EasyMock.createMock(ContentAdapterService.class);
+        mockTagDataService = EasyMock.createMock(TagDataService.class);
         mockProcessorService = EasyMock.createMock(ProcessorService.class);
         mockConsolidatorService = EasyMock.createMock(ConsolidatorService.class);
         mockAnalyserService = EasyMock.createMock(AnalyserService.class);
@@ -97,15 +96,14 @@ public abstract class AuditCommandTestCase extends TestCase{
             AuditStatus expectedAuditStatus) {
         
         Set<Parameter> nullParameterSet = null ;
-        EasyMock.expect(mockParameterDataService.saveOrUpdate(nullParameterSet)).andReturn(nullParameterSet).once();
+        EasyMock.expect(mockParameterDataService.saveOrUpdate(nullParameterSet)).andReturn(null).once();
         
-        List<Test> testList = null;
-        EasyMock.expect(mockTestDataService.getTestListFromParamSet(nullParameterSet)).andReturn(testList).once();
+        EasyMock.expect(mockTestDataService.getTestListFromParamSet(null)).andReturn(null).once();
 
-        mockAudit.setTestList(testList);
+        mockAudit.setTestList(null);
         EasyMock.expectLastCall().once();
         
-        mockAudit.setParameterSet(nullParameterSet);
+        mockAudit.setParameterSet(null);
         EasyMock.expectLastCall().once();
 
         mockAudit.setStatus(AuditStatus.INITIALISATION);

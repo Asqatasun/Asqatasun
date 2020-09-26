@@ -27,6 +27,7 @@ import java.util.Set;
 import javax.persistence.PersistenceException;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Content;
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.entity.subject.Page;
@@ -71,8 +72,9 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
     public UploadAuditCommandImpl(
             Map<String, String> fileMap, 
             Set<Parameter> paramSet,
+            List<Tag> tagList,
             AuditDataService auditDataService) {
-        super(paramSet, auditDataService);
+        super(paramSet, tagList, auditDataService);
         
         this.fileMap = fileMap;
     }

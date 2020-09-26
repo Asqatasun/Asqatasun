@@ -30,6 +30,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
@@ -56,9 +57,10 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
                 String siteUrl, 
                 List<String> pageUrlList,
                 Set<Parameter> paramSet,
+                List<Tag> tagList,
                 AuditDataService auditDataService) {
         
-        super(paramSet,auditDataService);
+        super(paramSet, tagList, auditDataService);
         try {
             List<URL> localUrlList = new ArrayList<>();
             for (String url : pageUrlList) {

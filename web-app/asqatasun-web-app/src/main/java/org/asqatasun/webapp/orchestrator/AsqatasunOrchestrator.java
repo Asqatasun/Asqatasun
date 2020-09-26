@@ -620,7 +620,7 @@ public class AsqatasunOrchestrator {
 
         @Override
         public Audit launchAudit() {
-            return auditService.auditSite(this.siteUrl, parameterSet);
+            return auditService.auditSite(this.siteUrl, parameterSet, Collections.EMPTY_LIST);
         }
 
         @Override
@@ -658,7 +658,7 @@ public class AsqatasunOrchestrator {
 
         @Override
         public Audit launchAudit() {
-            return auditService.auditScenario(scenarioName, scenario, parameterSet);
+            return auditService.auditScenario(scenarioName, scenario, parameterSet, Collections.EMPTY_LIST);
         }
 
         @Override
@@ -749,7 +749,7 @@ public class AsqatasunOrchestrator {
         public Audit launchAudit() {
             Audit audit = null;
             if (!this.pageUrlList.isEmpty()) {
-                audit = auditService.auditSite(siteUrl, pageUrlList, parameterSet);
+                audit = auditService.auditSite(siteUrl, pageUrlList, parameterSet, Collections.EMPTY_LIST);
             }
             return audit;
         }
@@ -785,7 +785,7 @@ public class AsqatasunOrchestrator {
         public Audit launchAudit() {
             Audit audit = null;
             if (this.pageUrl != null) {
-                audit = auditService.auditPage(pageUrl, parameterSet);
+                audit = auditService.auditPage(pageUrl, parameterSet, Collections.EMPTY_LIST);
             }
             return audit;
         }
@@ -823,7 +823,7 @@ public class AsqatasunOrchestrator {
         public Audit launchAudit() {
             Audit audit = null;
             if (!pageMap.isEmpty()) {
-                audit = auditService.auditPageUpload(pageMap, parameterSet);
+                audit = auditService.auditPageUpload(pageMap, parameterSet, Collections.EMPTY_LIST);
             }
             return audit;
         }

@@ -22,6 +22,7 @@
 package org.asqatasun.service.command;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.easymock.EasyMock;
@@ -195,16 +196,11 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         setVerifyMode();
     }
  
-    /**
-     * 
-     * @param fileMap
-     * @param paramSet
-     * @return 
-     */
     private UploadAuditCommandImpl getInstance() {
         UploadAuditCommandImpl instance = new UploadAuditCommandImpl(
                 fileMap, 
                 null,
+                Collections.EMPTY_LIST,
                 mockAuditDataService);
 
         instance.setTestDataService(mockTestDataService);
@@ -212,6 +208,7 @@ public class UploadAuditCommandImplTest extends AuditCommandTestCase {
         instance.setWebResourceDataService(mockWebResourceDataService);
         instance.setContentDataService(mockContentDataService);
         instance.setProcessResultDataService(mockProcessResultDataService);
+        instance.setTagDataService(mockTagDataService);
         instance.setPreProcessResultDataService(mockPreProcessResultDataService);
         instance.setContentAdapterService(mockContentAdapterService);
         instance.setProcessorService(mockProcessorService);

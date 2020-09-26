@@ -22,11 +22,13 @@
 
 package org.asqatasun.service.command;
 
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
@@ -51,8 +53,9 @@ public class PageAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
     public PageAuditCommandImpl(
             String pageUrl,
             Set<Parameter> paramSet,
+            List<Tag> tagList,
             AuditDataService auditDataService) {
-        super(paramSet, auditDataService);
+        super(paramSet, tagList, auditDataService);
         this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
     }
 

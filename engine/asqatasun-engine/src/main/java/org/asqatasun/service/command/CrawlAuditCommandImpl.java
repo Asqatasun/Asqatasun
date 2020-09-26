@@ -22,8 +22,10 @@
 
 package org.asqatasun.service.command;
 
+import java.util.List;
 import java.util.Set;
 import org.asqatasun.entity.audit.AuditStatus;
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.service.CrawlerService;
@@ -69,8 +71,9 @@ public abstract class CrawlAuditCommandImpl extends AuditCommandImpl {
      */
     public CrawlAuditCommandImpl(
             Set<Parameter> paramSet,
+            List<Tag> tagList,
             AuditDataService auditDataService) {
-        super(paramSet, auditDataService);
+        super(paramSet, tagList, auditDataService);
     }
     
     @Override

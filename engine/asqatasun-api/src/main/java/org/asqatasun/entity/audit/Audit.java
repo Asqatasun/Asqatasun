@@ -25,6 +25,8 @@ import java.util.Date;
 
 import org.asqatasun.entity.Entity;
 import java.util.Collection;
+import java.util.List;
+
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.subject.WebResource;
@@ -225,4 +227,22 @@ public interface Audit extends Entity {
      * @param parameter
      */
     void addParameter(Parameter parameter);
+
+    /**
+     *
+     * @param tagList
+     */
+    void setTagList(List<Tag> tagList);
+
+    /**
+     *
+     * @return
+     */
+    List<Tag> getTagList();
+
+    /**
+     *
+     * @param tag
+     */
+    void addTag(Tag tag);
 }

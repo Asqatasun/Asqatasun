@@ -22,7 +22,10 @@
 
 package org.asqatasun.service.command;
 
+import java.util.List;
 import java.util.Set;
+
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 
@@ -42,9 +45,10 @@ public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
     public ScenarioAuditCommandImpl(
             String scenarioName,
             String scenario,
-            Set<Parameter> paramSet, 
+            Set<Parameter> paramSet,
+            List<Tag> tagList,
             AuditDataService auditDataService) {
-        super(paramSet, auditDataService);
+        super(paramSet, tagList, auditDataService);
         setScenario(scenario);
         setScenarioName(scenarioName);
         setIsPage(false);

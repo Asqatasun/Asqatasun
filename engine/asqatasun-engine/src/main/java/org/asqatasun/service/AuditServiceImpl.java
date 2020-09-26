@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.asqatasun.entity.audit.Audit;
+import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.factory.AuditCommandFactory;
@@ -80,45 +81,45 @@ public class AuditServiceImpl implements AuditService, AuditServiceListener {
     }
 
     @Override
-    public Audit auditScenario(String scenarioName, String scenario, Set<Parameter> paramSet) {
+    public Audit auditScenario(String scenarioName, String scenario, Set<Parameter> paramSet, List<Tag> tagList) {
         LOGGER.debug("auditScenario");
-        AuditCommand auditCommand = auditCommandFactory.create(scenarioName, scenario, paramSet);
+        AuditCommand auditCommand = auditCommandFactory.create(scenarioName, scenario, paramSet, tagList);
         auditServiceThreadQueue.addScenarioAudit(auditCommand);
         auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
     @Override
-    public Audit auditPage(String pageUrl, Set<Parameter> paramSet) {
+    public Audit auditPage(String pageUrl, Set<Parameter> paramSet, List<Tag> tagList) {
         LOGGER.debug("auditpage");
-        AuditCommand auditCommand = auditCommandFactory.create(pageUrl, paramSet, false);
+        AuditCommand auditCommand = auditCommandFactory.create(pageUrl, paramSet, tagList, false);
         auditServiceThreadQueue.addPageAudit(auditCommand);
         auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
     
     @Override
-    public Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet) {
+    public Audit auditPageUpload(Map<String, String> fileMap, Set<Parameter> paramSet, List<Tag> tagList) {
         LOGGER.debug("auditpageupload");
-        AuditCommand auditCommand = auditCommandFactory.create(fileMap, paramSet);
+        AuditCommand auditCommand = auditCommandFactory.create(fileMap, paramSet, tagList);
         auditServiceThreadQueue.addPageUploadAudit(auditCommand);
         auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
     @Override
-    public Audit auditSite(String siteUrl, Set<Parameter> paramSet) {
+    public Audit auditSite(String siteUrl, Set<Parameter> paramSet, List<Tag> tagList) {
         LOGGER.debug("auditSite");
-        AuditCommand auditCommand = auditCommandFactory.create(siteUrl, paramSet, true);
+        AuditCommand auditCommand = auditCommandFactory.create(siteUrl, paramSet, tagList, true);
         auditServiceThreadQueue.addSiteAudit(auditCommand);
         auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
     }
 
     @Override
-    public Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet) {
+    public Audit auditSite(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet, List<Tag> tagList) {
         LOGGER.debug("auditGroupOfPages");
-        AuditCommand auditCommand = auditCommandFactory.create(siteUrl, pageUrlList, paramSet);
+        AuditCommand auditCommand = auditCommandFactory.create(siteUrl, pageUrlList, paramSet, tagList);
         auditServiceThreadQueue.addPageAudit(auditCommand);
         auditServiceThreadQueue.add(this);
         return auditCommand.getAudit();
