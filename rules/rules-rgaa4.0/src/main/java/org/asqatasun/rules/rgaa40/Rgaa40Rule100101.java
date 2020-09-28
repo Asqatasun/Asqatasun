@@ -34,7 +34,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.PRESENTATION_TAG_D
  */
 public class Rgaa40Rule100101 extends AbstractDetectionPageRuleImplementation {
 
-    private static final String DEPREC_TAG_NOM = "DeprecatedRepresentationTagsV2";
+    private static final String DEPREC_TAG_NOM = "DeprecatedRepresentationTagsV3";
     /* the total number of elements */
     int totalNumberOfElements = 0;
     

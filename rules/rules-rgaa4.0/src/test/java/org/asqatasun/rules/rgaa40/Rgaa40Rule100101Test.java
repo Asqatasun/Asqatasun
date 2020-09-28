@@ -47,16 +47,16 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.10.01.01-1Passed-01");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-01");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-02");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-03");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-04");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-05");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-06");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-07");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-08");
-        addWebResource("Rgaa40.Test.10.01.01-2Failed-09");
+        addWebResource("Rgaa40.Test.10.1.1-1Passed-01");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-01");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-02");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-03");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-04");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-05");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-06");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-07");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-08");
+        addWebResource("Rgaa40.Test.10.1.1-2Failed-09");
 
     }
 
@@ -65,13 +65,13 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        checkResultIsPassed(processPageTest("Rgaa40.Test.10.01.01-1Passed-01"),12);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.10.1.1-1Passed-01"),13);
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-01");
-        checkResultIsFailed(processResult, 13, 1);
+        ProcessResult processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-01");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -82,8 +82,8 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-02");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-02");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -94,8 +94,8 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-03");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-03");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -106,8 +106,8 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-04------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-04");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-04");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -118,8 +118,8 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-05------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-05");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-05");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -130,8 +130,8 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-06------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-06");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-06");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -142,8 +142,8 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-07------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-07");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-07");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -154,8 +154,8 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-08------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-08");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-08");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
@@ -166,13 +166,13 @@ public class Rgaa40Rule100101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-09------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.10.01.01-2Failed-09");
-        checkResultIsFailed(processResult, 13, 1);
+        processResult = processPageTest("Rgaa40.Test.10.1.1-2Failed-09");
+        checkResultIsFailed(processResult, 14, 1);
         checkRemarkIsPresent(
                 processResult,
                 TestSolution.FAILED,
                 RemarkMessageStore.PRESENTATION_TAG_DETECTED_MSG,
-                "u",
+                "big",
                 1);
 
     }
