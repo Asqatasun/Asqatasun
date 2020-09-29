@@ -52,12 +52,12 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.PRESENTATION_ATTR_
 public class Rgaa40Rule100102 extends AbstractPageRuleMarkupImplementation {
 
     private static final String PRESENTATION_ATTR_NOM = 
-                "DeprecatedRepresentationAttributes";
+                "DeprecatedRepresentationAttributesV3";
     
     private final Map<String, ElementHandler> attrElementHandlerMap = new HashMap<>();
     /* the total number of elements */
     int totalNumberOfElements = 0;
-    
+
     /**
      * Default constructor
      */

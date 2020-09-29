@@ -24,6 +24,7 @@
     <NOMENCLATURE Id_Nomenclature="21" Cd_Nomenclature="BrowserReadableExtensions" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="22" Cd_Nomenclature="DownloadableDocumentExtensions" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
     <NOMENCLATURE Id_Nomenclature="23" Cd_Nomenclature="DeprecatedRepresentationTagsV3" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
+    <NOMENCLATURE Id_Nomenclature="24" Cd_Nomenclature="DeprecatedRepresentationAttributesV3" Description="NULL"  Long_Label="NULL" Short_Label="NULL" />
 
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="1" Label="reset"  Id_Nomenclature="1"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2" Label="submit"  Id_Nomenclature="1"/>
@@ -545,6 +546,28 @@
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2001" Label="strike"  Id_Nomenclature="23"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2002" Label="tt"  Id_Nomenclature="23"/>
     <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2003" Label="big"  Id_Nomenclature="23"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2004" Label="align"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2005" Label="alink"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2006" Label="background"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2007" Label="bgcolor"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2008" Label="border"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2009" Label="cellpadding"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2010" Label="cellspacing"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2011" Label="char"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2012" Label="charoff"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2013" Label="clear"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2014" Label="compact"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2015" Label="color"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2016" Label="frameborder"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2017" Label="hspace"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2018" Label="link"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2019" Label="marginheight"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2020" Label="marginwidth"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2021" Label="text"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2022" Label="valign"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2023" Label="vlink"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2024" Label="vspace"  Id_Nomenclature="24"/>
+    <NOMENCLATURE_ELEMENT DTYPE="NomenclatureElementImpl" Id_Nomenclature_Element="2025" Label="size"  Id_Nomenclature="24"/>
 
     <EVIDENCE Id_Evidence="1" Cd_Evidence="Element-Name" Description="NULL" Long_Label="NULL" />
     <EVIDENCE Id_Evidence="2" Cd_Evidence="src" Description="NULL" Long_Label="NULL" />
