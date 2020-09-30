@@ -689,7 +689,7 @@ UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-2-2-1';
 -- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-5-1';
 -- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-6-1';
 -- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-7-1';
--- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-8-1';
+UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-8-1';
 -- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-9-1';
 -- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-10-1';
 -- UPDATE TEST SET `No_Process`=b'0' WHERE Cd_Test='Rgaa40-8-10-2';
