@@ -49,41 +49,41 @@ public class Rgaa40Rule120401Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        getWebResourceMap().put("Rgaa40.Test.12.04.01-4NA-01",
+        getWebResourceMap().put("Rgaa40.Test.12.4.1-4NA-01",
                 getWebResourceFactory().createPage(
-                getTestcasesFilePath() + "rgaa40/Rgaa40Rule120401/Rgaa40.Test.12.04.01-3NMI-01.html"));
+                getTestcasesFilePath() + "rgaa40/Rgaa40Rule120401/Rgaa40.Test.12.4.1-3NMI-01.html"));
 
         Site site = getWebResourceFactory().createSite("file:Site-NotTested");
-        getWebResourceMap().put("Rgaa40.Test.12.04.01-5NT-01", site);
+        getWebResourceMap().put("Rgaa40.Test.12.4.1-5NT-01", site);
 
         Page page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "rgaa40/Rgaa40Rule120401/Rgaa40.Test.12.04.01-3NMI-01.html");
+                "rgaa40/Rgaa40Rule120401/Rgaa40.Test.12.4.1-3NMI-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Rgaa40.Test.12.04.01-5NT-01-page1",page);
+        getWebResourceMap().put("Rgaa40.Test.12.4.1-5NT-01-page1",page);
 
         page = getWebResourceFactory().createPage(getTestcasesFilePath() +
-                "rgaa40/Rgaa40Rule120401/Rgaa40.Test.12.04.01-3NMI-01.html");
+                "rgaa40/Rgaa40Rule120401/Rgaa40.Test.12.4.1-3NMI-01.html");
         site.addChild(page);
-        getWebResourceMap().put("Rgaa40.Test.12.04.01-5NT-01-page1",page);
+        getWebResourceMap().put("Rgaa40.Test.12.4.1-5NT-01-page1",page);
     }
 
     @Override
     protected void setProcess() {
-        ProcessResult pr = processPageTest("Rgaa40.Test.12.04.01-4NA-01");
+        ProcessResult pr = processPageTest("Rgaa40.Test.12.4.1-4NA-01");
         assertTrue(pr instanceof IndefiniteResult);
-        assertEquals(getWebResourceMap().get("Rgaa40.Test.12.04.01-4NA-01"),pr.getSubject());
+        assertEquals(getWebResourceMap().get("Rgaa40.Test.12.4.1-4NA-01"),pr.getSubject());
         assertEquals("mock-result", pr.getValue());
         
-        process("Rgaa40.Test.12.04.01-5NT-01");
+        process("Rgaa40.Test.12.4.1-5NT-01");
 
     }
 
     @Override
     protected void setConsolidate() {
         assertEquals(TestSolution.NOT_APPLICABLE,
-                consolidate("Rgaa40.Test.12.04.01-4NA-01").getValue());
+                consolidate("Rgaa40.Test.12.4.1-4NA-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa40.Test.12.04.01-5NT-01").getValue());
+                consolidate("Rgaa40.Test.12.4.1-5NT-01").getValue());
     }
 
 }
