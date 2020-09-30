@@ -140,7 +140,45 @@ public final class CssLikeQueryStore {
                    +"input[type=range] , "
                    +"input[type=color] , "
                    +"input[type=time] , "
-                   +"input[type=radio]"; 
+                   +"input[type=radio]";
+    public static final String FORM_ELEMENT_CSS_LIKE_QUERY_RGAA4=
+        "datalist ,"
+            + "meter ,"
+            + "optgroup ,"
+            + "option ,"
+            + "output ,"
+            + "progress ,"
+            + "select ,"
+            + "textarea ,"
+            + "input:not([type]) ," // input tag without type attribut (implicit type="text")
+            + "input[type=checkbox] ,"
+            + "input[type=color] ,"
+            + "input[type=date] ,"
+            + "input[type=datetime-local] ,"
+            + "input[type=file] ,"
+            + "input[type=email] ,"
+            + "input[type=month] ,"
+            + "input[type=number] ,"
+            + "input[type=password] ,"
+            + "input[type=radio] ,"
+            + "input[type=range] ,"
+            + "input[type=search] ,"
+            + "input[type=tel] ,"
+            + "input[type=text] ,"
+            + "input[type=time] ,"
+            + "input[type=url] ,"
+            + "input[type=week] ,"
+            + "[role=checkbox] ,"
+            + "[role=combobox] ,"
+            + "[role=listbox] ,"
+            + "[role=progressbar] ,"
+            + "[role=option] ,"
+            + "[role=radio] ,"
+            + "[role=searchbox] ,"
+            + "[role=slider] ,"
+            + "[role=spinbutton] ,"
+            + "[role=switch] ,"
+            + "[role=textbox]";
     public static final String INPUT_ELEMENT_INSIDE_FORM_CSS_LIKE_QUERY=
                     "form textarea:not([title]):not([aria-label]):not([aria-labelledby]) , "
                    +"form select:not([title]):not([aria-label]):not([aria-labelledby]) , "
@@ -298,7 +336,9 @@ public final class CssLikeQueryStore {
                     + "form:has(input[type=password]) , "
                     + "form:has(input[type=text])";
     public static final String LABEL_WITHIN_FORM_CSS_LIKE_QUERY=
-                    "form:has("+ FORM_ELEMENT_CSS_LIKE_QUERY +") label"; 
+                    "form:has("+ FORM_ELEMENT_CSS_LIKE_QUERY +") label";
+    public static final String LABEL_WITHIN_FORM_CSS_LIKE_QUERY_RGAA4=
+                    "form:has("+ FORM_ELEMENT_CSS_LIKE_QUERY_RGAA4 +") label";
     public static final String FORM_LABEL_WITH_INNER_FORM_ELEMENT_CSS_LIKE_QUERY=
                     "form label:has(input[type=text]) , "
                     + "form label:has(input[type=password]) , "

@@ -22,7 +22,7 @@ package org.asqatasun.rules.rgaa40;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.asqatasun.rules.elementselector.SimpleElementSelector;
-import static org.asqatasun.rules.keystore.CssLikeQueryStore.LABEL_WITHIN_FORM_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.LABEL_WITHIN_FORM_CSS_LIKE_QUERY_RGAA4;
 import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
@@ -39,7 +39,7 @@ public class Rgaa40Rule110201 extends AbstractDetectionPageRuleImplementation {
      */
     public Rgaa40Rule110201() {
         super(
-                new SimpleElementSelector(LABEL_WITHIN_FORM_CSS_LIKE_QUERY),
+                new SimpleElementSelector(LABEL_WITHIN_FORM_CSS_LIKE_QUERY_RGAA4),
                 // solution when at least one element is found
                 TestSolution.NEED_MORE_INFO,
                 // solution when no element is found

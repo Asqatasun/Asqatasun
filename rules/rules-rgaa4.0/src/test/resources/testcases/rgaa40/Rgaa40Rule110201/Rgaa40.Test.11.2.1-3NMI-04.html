@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.2.1 NMI 04</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.11.2.1 NMI 04</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque balise <code>&lt;label&gt;</code> permet-elle de connaître la fonction exacte du <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+            de formulaire</a> auquel elle est associée ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <!-- Tags with role (dedicated to form) and associated label tags -->
+        <form action="#">
+            <label for="field1">Label value for ROLE checkbox</label>
+            <div id="field1" role="checkbox" title="title value for "></div>
+        </form>
+        <form action="#">
+            <label for="field2">Label value for ROLE combobox</label>
+            <div id="field2" role="combobox"></div>
+        </form>
+        <form action="#">
+            <label for="field3">Label value for ROLE listbox</label>
+            <div id="field3" role="listbox" title="listbox"></div>
+        </form>
+        <form action="#">
+            <label for="field4">Label value for ROLE progressbar</label>
+            <div id="field4" role="progressbar" title="progressbar"></div>
+        </form>
+        <form action="#">
+            <label for="field5">Label value for ROLE option</label>
+            <div id="field5" role="option" title="option"></div>
+        </form>
+        <form action="#">
+            <label for="field6">Label value for ROLE radio</label>
+            <div id="field6" role="radio" title="radio"></div>
+        </form>
+        <form action="#">
+            <label for="field7">Label value for ROLE searchbox</label>
+            <div id="field7" role="searchbox" title="searchbox"></div>
+        </form>
+        <form action="#">
+            <label for="field8">Label value for ROLE slider</label>
+            <div id="field8" role="slider" title="slider"></div>
+        </form>
+        <form action="#">
+            <label for="field9">Label value for ROLE spinbutton</label>
+            <div id="field9" role="spinbutton" title="spinbutton"></div>
+        </form>
+        <form action="#">
+            <label for="field10">Label value for ROLE switch</label>
+            <div id="field10" role="switch" title="switch"></div>
+        </form>
+        <form action="#">
+            <label for="field11">Label value for ROLE textbox</label>
+            <div id="field11" role="textbox" title="textbox"></div>
+        </form>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI : The page contains at least one form with label tags
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
