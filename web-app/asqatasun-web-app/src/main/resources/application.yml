@@ -1,6 +1,6 @@
 jdbc:
   driverClassName : "com.mysql.cj.jdbc.Driver"
-  url: "jdbc:mysql://localhost:3306/asqatasun?useSSL=false"
+  url: "jdbc:mysql://localhost:3306/asqatasun"
   user: "root"
   password: "bou"
 

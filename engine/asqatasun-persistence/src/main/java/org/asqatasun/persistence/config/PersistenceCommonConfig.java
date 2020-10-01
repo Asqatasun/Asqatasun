@@ -29,7 +29,7 @@ public abstract class PersistenceCommonConfig {
     public static final String HIBERNATE_USE_OUTER_JOIN = "hibernate.use_outer_join";
     public static final String HIBERNATE_DIALECT = "hibernate.dialect";
 
-    public static String MYSQL_DRIVER_CLASSNAME = "com.mysql.jdbc.Driver";
+    public static String MYSQL_DRIVER_CLASSNAME = "com.mysql.cj.jdbc.Driver";
     public static String POSTGRES_DRIVER_CLASSNAME = "org.postgresql.Driver";
     public static String HSQL_DRIVER_CLASSNAME = "org.hsqldb.jdbcDriver";
 

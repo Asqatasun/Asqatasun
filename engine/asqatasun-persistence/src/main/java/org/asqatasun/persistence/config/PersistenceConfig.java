@@ -25,6 +25,7 @@ package org.asqatasun.persistence.config;
  * Created by koj on 15/05/16.
  */
 
+import org.apache.commons.lang3.StringUtils;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
@@ -33,6 +34,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
@@ -46,6 +48,7 @@ import java.beans.PropertyVetoException;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class PersistenceConfig extends PersistenceCommonConfig{
 
+    private static final String URL_ENCODING_OPTION_SUFFIX = "?useSSL=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8";
     @Value("${jdbc.user:asqatasun}")
     private String username;
     @Value("${jdbc.password:asqatasun}")
@@ -56,6 +59,11 @@ public class PersistenceConfig extends PersistenceCommonConfig{
     private Boolean useComboPool;
     @Value("#{'${app.engine.persistence.packagesToScan:org.asqatasun.entity}'.split(',')}")
     private String[] packagesToScan;
+
+    @PostConstruct
+    private void init() {
+        if (StringUtils.contains(url,MYSQL_KEY)) url = url+URL_ENCODING_OPTION_SUFFIX;
+    }
 
     @Bean(name = "dataSource")
     DataSource dataSource() {
