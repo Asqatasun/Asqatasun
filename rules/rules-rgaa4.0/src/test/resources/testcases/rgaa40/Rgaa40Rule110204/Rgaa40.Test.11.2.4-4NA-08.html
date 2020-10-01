@@ -21,12 +21,22 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <!-- In Rgaa4, the following form objects and WAI-ARIA roles are not considered as form fields: -->
+        <form action="http://action.html" method="post">
+            <input aria-labelledby="aria-labelledby for hidden input" type="hidden">
+            <input aria-labelledby="aria-labelledby for button input" type="button">
+            <input aria-labelledby="aria-labelledby for image input" type="image">
+            <input aria-labelledby="aria-labelledby for submit input" type="submit" value="Send"/>
+            <input aria-labelledby="aria-labelledby for reset input" type="reset" value="Reset"/>
+            <button aria-labelledby="aria-labelledby for button tag">Click on me</button>
+            <div aria-labelledby="aria-labelledby for tag with button role" role="button"></div>
+        </form>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NA.
+        NA : This page contains no form field with aria-labelledby attribute
     </div>
     <!-- END [test-explanation] -->
 </div>

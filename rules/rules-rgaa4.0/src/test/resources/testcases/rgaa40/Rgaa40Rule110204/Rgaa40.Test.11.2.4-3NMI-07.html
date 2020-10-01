@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.2.4 NMI 07</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.11.2.4 NMI 07</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#passage-de-texte-lie-par-aria-labelledby-ou-aria-describedby">passage
+            de texte</a> associé via l’attribut WAI-ARIA <code>aria-labelledby</code> permet-il de connaître la fonction
+            exacte du <a
+                href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+                de formulaire</a> auquel il est associée ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+
+        <!-- Tags with role (dedicated to form) and aria-labelledby
+             /!\ missing: <p id="aria-labelledby-id-for-ROLE-*"></p>  -->
+        <div role="checkbox" aria-labelledby="aria-labelledby-id-for-ROLE-checkbox"></div>
+        <div role="combobox" aria-labelledby="aria-labelledby-id-for-ROLE-combobox"></div>
+        <div role="listbox" aria-labelledby="aria-labelledby-id-for-ROLE-listbox"></div>
+        <div role="progressbar" aria-labelledby="aria-labelledby-id-for-ROLE-progressbar"></div>
+        <div role="option" aria-labelledby="aria-labelledby-id-for-ROLE-option"></div>
+        <div role="radio" aria-labelledby="aria-labelledby-id-for-ROLE-radio"></div>
+        <div role="searchbox" aria-labelledby="aria-labelledby-id-for-ROLE-searchbox"></div>
+        <div role="slider" aria-labelledby="aria-labelledby-id-for-ROLE-slider"></div>
+        <div role="spinbutton" aria-labelledby="aria-labelledby-id-for-ROLE-spinbutton"></div>
+        <div role="switch" aria-labelledby="aria-labelledby-id-for-ROLE-switch"></div>
+        <div role="textbox" aria-labelledby="aria-labelledby-id-for-ROLE-textbox"></div>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI :
+        The page contains multiple tags with aria-labelledby attribute
+        and role attribute (dedicated to form)
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

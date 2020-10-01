@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.4 NMI 01</title>
+    <title>Rgaa 4.0 Test.11.2.4 NMI 03</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.4 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.11.2.4 NMI 03</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -21,12 +21,20 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <form action="http://action.html" method="post">
+            <p id="aria-labelledby-id-for-OPTION">
+                aria-labelledby-id-for-TEXTAREA
+                value
+            </p>
+            <textarea aria-labelledby="aria-labelledby-id-for-TEXTAREA" cols="1" id="textarea" rows="20"></textarea>
+            <input type="submit" value="Send"/>
+        </form>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI : The page contains a textarea tag with an aria-labelledby attribute
     </div>
     <!-- END [test-explanation] -->
 </div>

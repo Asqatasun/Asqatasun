@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.4 NMI 01</title>
+    <title>Rgaa 4.0 Test.11.2.4 NMI 04</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.4 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.11.2.4 NMI 04</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -22,17 +22,29 @@
     <!-- START [testcase] -->
     <div class="testcase">
         <form action="http://action.html" method="post">
-            <p id="aria-labelledby-for-input-without-type-attribute">
-                aria-labelledby-for-input-without-type-attribute
-                value
-            </p>
-            <input aria-labelledby="aria-labelledby-for-input-without-type-attribute" id="text-1"/>
 
-            <p id="aria-labelledby-for-input-with-type-equal-to-text">
-                aria-labelledby-for-input-with-type-equal-to-text
+            <p id="aria-labelledby-id-for-SELECT">
+                aria-labelledby-id-for-SELECT
                 value
             </p>
-            <input aria-labelledby="aria-labelledby-for-input-with-type-equal-to-text" id="text-2" type="text"/>
+            <p id="aria-labelledby-id-for-OPTGROUP">
+                aria-labelledby-id-for-OPTGROUP
+                value
+            </p>
+            <p id="aria-labelledby-id-for-OPTION">
+                aria-labelledby-id-for-OPTION
+                value
+            </p>
+            <select id="dino-select" aria-labelledby="aria-labelledby-id-for-SELECT">
+                <optgroup label="Theropods" aria-labelledby="aria-labelledby-id-for-OPTGROUP">
+                    <option>Tyrannosaurus</option>
+                    <option>Velociraptor</option>
+                </optgroup>
+                <optgroup label="Sauropods">
+                    <option aria-labelledby="aria-labelledby-id-for-OPTION">Diplodocus</option>
+                    <option>Saltasaurus</option>
+                </optgroup>
+            </select>
             <input type="submit" value="Send"/>
         </form>
     </div>
@@ -40,7 +52,7 @@
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : The page contains two form field with an aria-labelledby attribute
+        NMI : The page contains 3 tags (select, option and optgroup) with an aria-labelledby attribute
     </div>
     <!-- END [test-explanation] -->
 </div>
