@@ -105,6 +105,6 @@ At least one lang declaration is valid or badly-formed (**Test1** OR **Test2** r
 
 ##  TestCases 
 
-[TestCases files for rule 8.8.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080801/) 
+[TestCases files for rule 8.8.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080801/) 
 
 

@@ -122,6 +122,6 @@ The content of the `<caption>` tag is seen as not relevant if :
 
 ##  TestCases 
 
-[TestCases files for rule 5.2.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule050201/) 
+[TestCases files for rule 5.2.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule050201/) 
 
 

@@ -103,6 +103,6 @@ We assume here that the svg links have only one child of type `<svg>`
 
 ##  TestCases 
 
-[TestCases files for rule 6.3.5](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060305/) 
+[TestCases files for rule 6.3.5](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060305/) 
 
 

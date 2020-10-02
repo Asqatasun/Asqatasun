@@ -105,6 +105,6 @@ Test whether **Set1** is empty and **Set2** and **Set3** are not. If yes, raise 
 
 ##  TestCases 
 
-[TestCases files for rule 8.3.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080301/) 
+[TestCases files for rule 8.3.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080301/) 
 
 

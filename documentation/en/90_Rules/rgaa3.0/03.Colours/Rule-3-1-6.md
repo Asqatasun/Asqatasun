@@ -56,6 +56,6 @@ In all cases
 
 ##  TestCases 
 
-[TestCases files for rule 3.1.6](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule030106/) 
+[TestCases files for rule 3.1.6](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule030106/) 
 
 

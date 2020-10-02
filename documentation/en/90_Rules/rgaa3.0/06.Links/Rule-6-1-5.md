@@ -136,6 +136,6 @@ A link title is seen as not-pertinent in the following cases :
 
 ##  TestCases 
 
-[TestCases files for rule 6.1.5](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060105/) 
+[TestCases files for rule 6.1.5](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060105/) 
 
 

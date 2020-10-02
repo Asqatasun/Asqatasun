@@ -101,6 +101,6 @@ Complex tables are seen as a subset of data tables. That's tables identified as 
 
 ##  TestCases 
 
-[TestCases files for rule 5.7.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule050702/) 
+[TestCases files for rule 5.7.2](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule050702/) 
 
 

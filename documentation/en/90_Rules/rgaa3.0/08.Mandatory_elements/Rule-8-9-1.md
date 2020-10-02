@@ -107,6 +107,6 @@ on 1.25% of the pages.
 
 ##  TestCases 
 
-[TestCases files for rule 8.9.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080901/) 
+[TestCases files for rule 8.9.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080901/) 
 
 

@@ -174,6 +174,6 @@ The content of the `"alt"` attribute is seen as not relevant if :
 
 ##  TestCases 
 
-[TestCases files for rule 1.3.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010301/) 
+[TestCases files for rule 1.3.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010301/) 
 
 

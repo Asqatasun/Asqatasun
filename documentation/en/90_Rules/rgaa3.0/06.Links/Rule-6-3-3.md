@@ -95,6 +95,6 @@ In all other cases
 
 ##  TestCases 
 
-[TestCases files for rule 6.3.3](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060303/) 
+[TestCases files for rule 6.3.3](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060303/) 
 
 

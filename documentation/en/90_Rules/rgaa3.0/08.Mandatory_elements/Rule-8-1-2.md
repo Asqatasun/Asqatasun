@@ -100,6 +100,6 @@ insensitive despite the W3c recommandations.
 
 ##  TestCases 
 
-[TestCases files for rule 8.1.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080102/) 
+[TestCases files for rule 8.1.2](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080102/) 
 
 

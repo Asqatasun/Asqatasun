@@ -75,6 +75,6 @@ The page has no `<input>` tag with a `"type"` attribute equals to "image" tag (*
 
 ##  TestCases 
 
-[TestCases files for rule 1.1.3](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010103/) 
+[TestCases files for rule 1.1.3](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010103/) 
 
 

@@ -74,6 +74,6 @@ The page has no `<iframe>` tag (**Set1** is empty)
 
 ##  TestCases 
 
-[TestCases files for rule 2.1.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule020101/) 
+[TestCases files for rule 2.1.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule020101/) 
 
 

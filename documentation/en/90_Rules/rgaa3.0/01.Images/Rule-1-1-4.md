@@ -76,6 +76,6 @@ We only detect the elements of the **Set1** to determine whether the test is app
 
 ##  TestCases 
 
-[TestCases files for rule 1.1.4](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010104/) 
+[TestCases files for rule 1.1.4](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010104/) 
 
 

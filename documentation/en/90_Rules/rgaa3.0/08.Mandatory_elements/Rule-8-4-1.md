@@ -210,6 +210,6 @@ Test3 OR test4 returns Pre-Qualified
 
 ##  TestCases 
 
-[TestCases files for rule 8.4.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080401/) 
+[TestCases files for rule 8.4.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule080401/) 
 
 

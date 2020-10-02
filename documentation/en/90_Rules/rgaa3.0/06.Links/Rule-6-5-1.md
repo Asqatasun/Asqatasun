@@ -84,6 +84,6 @@ an "id" attribute (assuming [the definition of an anchor in Rgaa3.0](http://refe
 
 ##  TestCases 
 
-[TestCases files for rule 6.5.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060501/) 
+[TestCases files for rule 6.5.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060501/) 
 
 

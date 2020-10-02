@@ -102,6 +102,6 @@ We assume here that the links are only composed of a text. (`<a href="https://as
 
 ##  TestCases 
 
-[TestCases files for rule 6.3.1](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060301/) 
+[TestCases files for rule 6.3.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060301/) 
 
 

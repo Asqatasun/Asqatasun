@@ -103,6 +103,6 @@ We assume here that the image links with only one child of type `<img>`, `<canva
 
 ##  TestCases 
 
-[TestCases files for rule 6.3.2](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060302/) 
+[TestCases files for rule 6.3.2](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060302/) 
 
 

@@ -123,6 +123,6 @@ An element is identified as a CAPTCHA when the "captcha" occurrence is found :
 
 ##  TestCases 
 
-[TestCases files for rule 1.6.4](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010604/) 
+[TestCases files for rule 1.6.4](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule010604/) 
 
 

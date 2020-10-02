@@ -163,6 +163,6 @@ A link `"title"` attribute is regarded as not-pertinent in the following cases :
 
 ##  TestCases 
 
-[TestCases files for rule 6.2.4](https://github.com/Asqatasun/Asqatasun/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060204/) 
+[TestCases files for rule 6.2.4](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa3.0/src/test/resources/testcases/rgaa30/Rgaa30Rule060204/) 
 
 
