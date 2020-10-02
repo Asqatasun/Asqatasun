@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.2.4 NMI 06</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.11.2.4 NMI 06</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#passage-de-texte-lie-par-aria-labelledby-ou-aria-describedby">passage
+            de texte</a> associé via l’attribut WAI-ARIA <code>aria-labelledby</code> permet-il de connaître la fonction
+            exacte du <a
+                href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+                de formulaire</a> auquel il est associée ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+
+        <!-- PROGRESS tag with aria-labelledby attribute -->
+        <p id="aria-labelledby-id-for-PROGRESS">
+            aria-labelledby-id-for-PROGRESS
+            value
+        </p>
+        <progress aria-labelledby="aria-labelledby-id-for-PROGRESS" max="100" value="70"> 70%</progress>
+
+        <!-- OUTPUT tag with aria-labelledby attribute -->
+        <p id="aria-labelledby-id-for-OUTPUT">
+            aria-labelledby-id-for-OUTPUT
+            value
+        </p>
+        <form id="form1" oninput="result.value=parseInt(a.value)+parseInt(b.value); return false;">
+            <input name="b" type="range" value="50"/> +
+            <input name="a" type="number" value="10"/> =
+            <output aria-labelledby="aria-labelledby-id-for-OUTPUT" name="result">60</output>
+            <input type="submit" value="Calculer">
+        </form>
+
+        <!-- METER tag with aria-labelledby attribute -->
+        <p id="aria-labelledby-id-for-METER">
+            aria-labelledby-id-for-METER
+            value
+        </p>
+        <meter aria-labelledby="aria-labelledby-id-for-METER"
+               form="form1"
+               high="66" low="33"
+               max="100" min="0" optimum="80"
+               value="50">at 50/100
+        </meter>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI : The page contains 3 form output tags (progress, output and meter) with an aria-labelledby attribute
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
