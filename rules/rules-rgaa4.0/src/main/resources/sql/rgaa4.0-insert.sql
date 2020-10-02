@@ -527,7 +527,7 @@ UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('10.Presentation_of_information/Rul
 UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('11.Forms/Rule-',                        SUBSTRING(`Cd_Test`,8), '.md') WHERE `Cd_Test` LIKE 'Rgaa40-11-%';
 UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('12.Navigation/Rule-',                   SUBSTRING(`Cd_Test`,8), '.md') WHERE `Cd_Test` LIKE 'Rgaa40-12-%';
 UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('13.Consultation/Rule-',                 SUBSTRING(`Cd_Test`,8), '.md') WHERE `Cd_Test` LIKE 'Rgaa40-13-%';
-UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/', `Rule_Design_Url`)     WHERE `Cd_Test` LIKE 'Rgaa40-%';
+UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/', `Rule_Design_Url`)     WHERE `Cd_Test` LIKE 'Rgaa40-%';
 
 -- Set Rule_Design_Url (html format, documentation website)
     -- UPDATE `TEST` SET `Rule_Design_Url` = CONCAT('01.Images/Rule-',                       SUBSTRING(`Cd_Test`,8), '.html') WHERE `Cd_Test` LIKE 'Rgaa40-1-%';
