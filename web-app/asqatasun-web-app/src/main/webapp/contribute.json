@@ -6,7 +6,7 @@
         "type":     "git",
         "url":      "https://gitlab.com/asqatasun/Asqatasun",
         "clone":    "https://gitlab.com/asqatasun/Asqatasun.git",
-        "tests":    "https://travis-ci.org/Asqatasun/Asqatasun"
+        "tests":    "https://gitlab.com/asqatasun/Asqatasun/-/pipelines"
     },
     "bugs": {
         "list":      "https://gitlab.com/asqatasun/Asqatasun/-/issues",

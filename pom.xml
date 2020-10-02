@@ -167,8 +167,8 @@
         <url>https://gitlab.com/asqatasun/Asqatasun/-/issues</url>
     </issueManagement>
     <ciManagement>
-        <system>travis-ci</system>
-        <url>https://travis-ci.org/Asqatasun/Asqatasun</url>
+        <system>gitlab-ci</system>
+        <url>https://gitlab.com/asqatasun/Asqatasun/-/pipelines</url>
     </ciManagement>
     <prerequisites>         <!--    Maven 3.1 is required to use the following plugin:   -->
         <maven>3.1</maven>  <!--    ............  org.owasp:dependency-check-maven       -->
