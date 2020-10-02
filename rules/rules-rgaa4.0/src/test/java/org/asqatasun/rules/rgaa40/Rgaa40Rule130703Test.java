@@ -26,7 +26,7 @@ import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
 /**
  * Unit test class for implementation of rule 13.7.3 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/13.Consultation/Rule-13-7-3.md">rule 13.7.3 design page</a>.
+ * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/13.Consultation/Rule-13-7-3.md">rule 13.7.3 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-13-7-3">13.7.3 rule specification</a>
  */
 public class Rgaa40Rule130703Test extends Rgaa40RuleImplementationTestCase {

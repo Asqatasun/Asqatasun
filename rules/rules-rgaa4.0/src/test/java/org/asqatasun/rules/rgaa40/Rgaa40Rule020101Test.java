@@ -31,7 +31,7 @@ import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
 /**
  * Unit test class for implementation of rule 2.1.1 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/02.Frames/Rule-2-1-1.md">rule 2.1.1 design page</a>.
+ * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/02.Frames/Rule-2-1-1.md">rule 2.1.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-2-1-1">2.1.1 rule specification</a>
  */
 public class Rgaa40Rule020101Test extends Rgaa40RuleImplementationTestCase {

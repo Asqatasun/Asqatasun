@@ -34,7 +34,7 @@ import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
 /**
  * Unit test class for implementation of rule 11.2.3 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/v5/documentation/en/90_Rules/rgaa4.0/11.Forms/Rule-11-2-3.md">rule 11.2.3 design page</a>.
+ * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/11.Forms/Rule-11-2-3.md">rule 11.2.3 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-11-2-3">11.2.3 rule specification</a>
  */
 public class Rgaa40Rule110203Test extends Rgaa40RuleImplementationTestCase {
