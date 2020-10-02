@@ -71,7 +71,7 @@ CMD /usr/bin/java                                                            \
     -Dwebdriver.firefox.bin=/opt/firefox/firefox                             \
     -Dwebdriver.gecko.driver=/opt/geckodriver                                \
     -Dapp.logging.path="${LOG_DIR}"                                          \
-    -Djdbc.url="jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false"  \
+    -Djdbc.url="jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}"               \
     -jar /home/asqatasun/app.war                                             \
     --server.port="${WWWPORT}"
 
