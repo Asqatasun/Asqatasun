@@ -1,10 +1,10 @@
 
-[![License : AGPL v3](https://img.shields.io/badge/license-AGPL3-blue.svg)](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE)
-[![Build Status](https://api.travis-ci.org/Asqatasun/Asqatasun.svg?branch=master)](https://travis-ci.org/Asqatasun/Asqatasun/branches)
-[![Release](https://img.shields.io/github/release/asqatasun/asqatasun.svg)](https://github.com/Asqatasun/Asqatasun/releases/latest)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Asqatasun/Asqatasun/blob/develop/CONTRIBUTING.md)
-[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://github.com/Asqatasun/Asqatasun/blob/develop/CODE_OF_CONDUCT.md)
-
+[![License : AGPL v3](https://img.shields.io/badge/license-AGPL3-blue.svg)](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/LICENSE)
+[![Build Status](https://gitlab.com/asqatasun/Asqatasun/badges/master/pipeline.svg)](https://gitlab.com/asqatasun/Asqatasun/pipelines?scope=branches)
+[![Release](https://img.shields.io/github/release/asqatasun/asqatasun.svg)](https://gitlab.com/asqatasun/Asqatasun/-/releases)
+[![Contributing welcome](https://img.shields.io/badge/contributing-welcome-brightgreen.svg?style=flat-square)](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square)](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/CODE_OF_CONDUCT.md)
+ 
 # Asqatasun
 
 ![Asqatasun Logo](http://forum.asqatasun.org/uploads/default/original/1X/e16a2b9b7f5a4dc756f03630923290c695c762c9.png)
@@ -104,14 +104,14 @@ We would be glad to have you on board! You can help in many ways:
 
 1. Use Asqatasun on your sites !
 1. Give us [feedback on the forum](http://forum.asqatasun.org)
-1. [Fill in bug report](https://github.com/Asqatasun/Asqatasun/issues)
+1. [Fill in bug report](https://gitlab.com/asqatasun/Asqatasun/-/issues)
 1. [Contribute](CONTRIBUTING.md) code
 
 ---
 
 ## License
 
- [AGPL v3](https://github.com/Asqatasun/Asqatasun/blob/master/LICENSE) 
+ [AGPL v3](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/LICENSE) 
 
 ## Major changes of this last version (Asqatasun 4.1.0, 2020-04-03)
 
@@ -215,7 +215,7 @@ For developers and ops:
     * webapp / i18n files: removing unnecessary escaped characters [#174](https://github.com/Asqatasun/Asqatasun/issues/174)
 
 
-See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELOG.md) for details.
+See full [Changelog](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/CHANGELOG.md) for details.
 
 ## Upgrade-o-meter: 
 
@@ -227,6 +227,6 @@ See full [Changelog](https://github.com/Asqatasun/Asqatasun/blob/master/CHANGELO
 
 Happy testing !
 
-[Asqatasun Team](https://github.com/Asqatasun/Asqatasun/blob/master/documentation/en/asqatasun-team.md)
+[Asqatasun Team](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/asqatasun-team.md)
 
 
