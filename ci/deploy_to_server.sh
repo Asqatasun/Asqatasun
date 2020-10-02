@@ -1,4 +1,6 @@
-#!/bin/sh -ev
+#!/usr/bin/env bash
+
+set -ve
 
 SSH_KEY=${SSH_KEY?SSH_KEY must be set}
 
