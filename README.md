@@ -27,7 +27,7 @@ Asqatasun is an opensource web site analyzer, used for web accessibility (a11y) 
 
 https://app.asqatasun.org
 
-[![https://app.asqatasun.org](https://raw.githubusercontent.com/Asqatasun/Asqatasun/master/documentation/en/Images/app.asqatasun.org_FR_690x340.png)](https://app.asqatasun.org)
+[![https://app.asqatasun.org](https://gitlab.com/asqatasun/Asqatasun/-/raw/master/documentation/en/Images/app.asqatasun.org_FR_690x340.png)](https://app.asqatasun.org)
 
  
 ## Vision
@@ -42,8 +42,6 @@ Four ways to read the doc:
 
 * Online: [doc.asqatasun.org](http://doc.asqatasun.org/en/) 
 * In the `documentation/` directory if you cloned the repos or downloaded the .tar.gz
-* Download [Asqatasun doc in PDF format, 9Mb](https://www.gitbook.com/download/pdf/book/asqatasun/asqatasun?lang=en)
-* Download [Asqatasun doc in EPUB format, 3Mb](https://www.gitbook.com/download/epub/book/asqatasun/asqatasun?lang=en)
 
 ## Download
 
@@ -105,7 +103,7 @@ We would be glad to have you on board! You can help in many ways:
 1. Use Asqatasun on your sites !
 1. Give us [feedback on the forum](http://forum.asqatasun.org)
 1. [Fill in bug report](https://gitlab.com/asqatasun/Asqatasun/-/issues)
-1. [Contribute](CONTRIBUTING.md) code
+1. [Contribute](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/CONTRIBUTING.md) code
 
 ---
 

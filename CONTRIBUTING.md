@@ -39,7 +39,6 @@ From GitLab, fork the project. You've got your own personal Asqatasun under your
 git clone https://gitlab.com/<user>/Asqatasun.git
      # instead of:   git clone https://gitlab.com/asqatasun/Asqatasun.git
 cd Asqatasun
-git checkout develop
 git checkout -b <id-of-issue>-fix
      # git checkout -b 115-fix
 ```
