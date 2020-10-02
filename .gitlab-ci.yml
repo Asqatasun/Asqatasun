@@ -30,8 +30,8 @@ build:
   artifacts:
     expire_in: 2 days
     paths:
-      - ${WEBAPP_ARTIFACT_DIR}/${WEBAPP_ARTIFACT_FILE}
-      - ${REST_SERVER_ARTIFACT_DIR}/${REST_SERVER_ARTIFACT_FILE}
+      - ${WEBAPP_ARTIFACT_DIR}/*.war
+      - ${REST_SERVER_ARTIFACT_DIR}/*.jar
   
 test:
   stage: test

@@ -22,7 +22,7 @@ echo "move jar"
 cp "${HOME_DIR}/webapp/deploy/asqatasun-webapp.war" "${HOME_DIR}/webapp/previous"
 mv "${WEBAPP_ARTIFACT_FILE}" "${HOME_DIR}/webapp/deploy/asqatasun-webapp.war"
 
-cp "${HOME_DIR}/rest-server/deploy/asqatasun-server.war" "${HOME_DIR}/rest-server/previous"
+cp "${HOME_DIR}/rest-server/deploy/asqatasun-rest-server.jar" "${HOME_DIR}/rest-server/previous"
 mv "${REST_SERVER_ARTIFACT_FILE}" "${HOME_DIR}/rest-server/deploy/asqatasun-rest-server.jar"
 
 # start service
