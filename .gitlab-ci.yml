@@ -1,8 +1,22 @@
 image: maven:3.6-openjdk-8
 
+stages:
+  - build
+  - test
+  - deploy
+
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  WEBAPP_ARTIFACT_DIR: web-app/asqatasun-web-app/target/
+  REST_SERVER_ARTIFACT_DIR: server/asqatasun-server/target
+
+before_script:
+  - export APP_VERSION=$(cat pom.xml |grep "<asqatasunVersion>" |sed 's/.*<asqatasunVersion>\(.*\)<\/asqatasunVersion>/\1/')
+  - export WEBAPP_ARTIFACT_FILE=asqatasun-web-app-$APP_VERSION.war
+  - export REST_SERVER_ARTIFACT_FILE=asqatasun-server-$APP_VERSION.jar
+  - echo "$CI_PROJECT_NAME version $APP_VERSION - build $CI_BUILD_ID"
+  - eval $(ssh-agent -s) #start SSH-agent before everything else
 
 cache:
   paths:
@@ -13,9 +27,29 @@ build:
   script:
     - mvn $MAVEN_CLI_OPTS clean
     - mvn $MAVEN_CLI_OPTS install  -Dmaven.test.skip=true
-
+  artifacts:
+    expire_in: 2 days
+    paths:
+      - ${WEBAPP_ARTIFACT_DIR}/${WEBAPP_ARTIFACT_FILE}
+      - ${REST_SERVER_ARTIFACT_DIR}/${REST_SERVER_ARTIFACT_FILE}
+  
 test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS clean
     - mvn $MAVEN_CLI_OPTS test
+
+.deploy-server-from-build: &tpl-deploy-server-from-build
+  stage: deploy
+  dependencies:
+    - build
+  script:
+    - ./ci/install_ssh_key.sh
+    - ./ci/deploy_to_server.sh
+
+deploy:dev:
+  <<: *tpl-deploy-server-from-build
+  variables:
+    HOST: $HOST_DEV
+  environment: dev
+  only: [master]
