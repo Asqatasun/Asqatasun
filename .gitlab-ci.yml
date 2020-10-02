@@ -38,6 +38,7 @@ test:
   script:
     - mvn $MAVEN_CLI_OPTS clean
     - mvn $MAVEN_CLI_OPTS test
+  only: [merge_requests]
 
 .deploy-server-from-build: &tpl-deploy-server-from-build
   stage: deploy
