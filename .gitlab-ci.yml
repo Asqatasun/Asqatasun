@@ -44,7 +44,6 @@ test:
   dependencies:
     - build
   script:
-    - ./ci/install_ssh_key.sh
     - ./ci/deploy_to_server.sh
 
 deploy:dev:
