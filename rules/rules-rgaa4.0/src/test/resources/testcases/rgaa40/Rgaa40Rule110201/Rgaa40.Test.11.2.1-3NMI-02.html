@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.2.1 NMI 02</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.11.2.1 NMI 02</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque balise <code>&lt;label&gt;</code> permet-elle de connaître la fonction exacte du <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+            de formulaire</a> auquel elle est associée ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <!-- no form = no matching -->
+        <label for="field0">no form, label 0 for input with type equal to checkbox</label>
+        <input id="field0" name="field0" type="checkbox"/>
+
+        <!-- form > label + input = matching -->
+        <form action="#">
+            <label for="field-checkbox">Label for input with type equal to checkbox</label>
+            <input id="field-checkbox" name="field-checkbox" type="checkbox"/>
+        </form>
+        <form action="#">
+            <label for="field-color">Label for input with type equal to color</label>
+            <input id="field-color" name="field-color" type="color"/>
+        </form>
+        <form action="#">
+            <label for="field-date">Label for input with type equal to date</label>
+            <input id="field-date" name="field-date" type="date"/>
+        </form>
+        <form action="#">
+            <label for="field-datetime-local">Label for input with type equal to datetime-local</label>
+            <input id="field-datetime-local" name="field-datetime-local" type="datetime-local"/>
+        </form>
+        <form action="#">
+            <label for="field-email">Label for input with type equal to email</label>
+            <input id="field-email" name="field-email" type="email"/>
+        </form>
+        <form action="#">
+            <label for="field-file">Label for input with type equal to file</label>
+            <input id="field-file" name="field-file" type="file"/>
+        </form>
+        <form action="#">
+            <label for="field-month">Label for input with type equal to month</label>
+            <input id="field-month" name="field-month" type="month"/>
+        </form>
+        <form action="#">
+            <label for="field-number">Label for input with type equal to number</label>
+            <input id="field-number" name="field-number" type="number"/>
+        </form>        
+        <form action="#">
+            <label for="field-password">Label for input with type equal to password</label>
+            <input id="field-password" name="field-password" type="password"/>
+        </form>
+        <form action="#">
+            <label for="field-radio">Label for input with type equal to radio</label>
+            <input id="field-radio" name="field-radio" type="radio"/>
+        </form>
+        <form action="#">
+            <label for="field-range">Label for input with type equal to range</label>
+            <input id="field-range" name="field-range" type="range"/>
+        </form>
+        <form action="#">
+            <label for="field-search">Label for input with type equal to search</label>
+            <input id="field-search" name="field-search" type="search"/>
+        </form>        
+        <form action="#">
+            <label for="field-tel">Label for input with type equal to tel</label>
+            <input id="field-tel" name="field-tel" type="tel"/>
+        </form>
+        <form action="#">
+            <label for="field-text">Label for input with type equal to text</label>
+            <input id="field-text" name="field-text" type="text"/>
+        </form>        
+        <form action="#">
+            <label for="field-time">Label for input with type equal to time</label>
+            <input id="field-time" name="field-time" type="time"/>
+        </form>
+        <form action="#">
+            <label for="field-url">Label for input with type equal to url</label>
+            <input id="field-url" name="field-url" type="url"/>
+        </form>
+        <form action="#">
+            <label for="field-week">Label for input with type equal to week</label>
+            <input id="field-week" name="field-week" type="week"/>
+        </form>  
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI : The page contains at least one form with label tags
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

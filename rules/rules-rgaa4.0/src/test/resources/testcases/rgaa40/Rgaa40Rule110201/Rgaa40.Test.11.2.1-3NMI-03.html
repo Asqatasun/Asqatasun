@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.11.2.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.11.2.1 NMI 03</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.11.2.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.11.2.1 NMI 03</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -18,24 +18,22 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-
-        <!-- no form = no matching -->
-        <label for="field0">no form, label 0 for input without type attribute</label>
-        <input id="field0" name="field0"/>
-
-        <!-- form > label + input = matching -->
-        <form action="#form-1">
-            <label for="field1">Form 1, label 1 for input without type attribute</label>
-            <input id="field1" name="field1"/>
+        <form id="form1" action="#">
+            <label for="dino-select">Form 1, label for select</label>
+            <select id="dino-select">
+                <option>Tyrannosaurus</option>
+                <option>Velociraptor</option>
+                <option>Diplodocus</option>
+            </select>
         </form>
-        <form action="#form-2">
-            <fieldset>
-                <label for="field2">Form 2, label 2 for input without type attribute</label>
-                <input id="field2" name="field2"/>
-
-                <label for="field3">Form 2, label 3 for textarea</label>
-                <textarea name="field3" id="field3" rows="10" cols="10"></textarea>
-            </fieldset>
+        <form id="form2" action="#">
+            <input title="Choose a flavor" list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" />
+            <label for="ice-cream-choice">Form 2, label for datalist</label>
+            <datalist id="ice-cream-flavors">
+                <option value="Chocolate">
+                <option value="Coconut">
+                <option value="Vanilla">
+            </datalist>
         </form>
     </div>
     <!-- END [testcase] -->
