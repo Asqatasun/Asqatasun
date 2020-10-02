@@ -33,9 +33,9 @@ sleep 60
 sudo /bin/systemctl start asqatasun-rest-server.service
 
 # echo "sleep 40s then check version"
-sleep 40
-status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://localhost:8091/rest/actuator/health)
-if [[ "${status_code}" -ne 200 ]] ; then
-  echo "Status code of http://localhost:8091/rest/actuator/health is ${status_code} : health check failed"
-  exit 1
-fi
+#sleep 40
+#status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://localhost:8091/rest/actuator/health)
+#if [[ "${status_code}" -ne 200 ]] ; then
+#  echo "Status code of http://localhost:8091/rest/actuator/health is ${status_code} : health check failed"
+#  exit 1
+#fi
