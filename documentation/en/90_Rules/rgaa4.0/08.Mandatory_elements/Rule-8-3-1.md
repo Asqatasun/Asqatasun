@@ -74,7 +74,7 @@ Test whether **Set1** is empty and **Set2** and **Set3** are not. If yes, raise 
 
 - code : LangAttributeMissingOnWholePage
 - status: Failed
-- parameter : none
+- parameter: none
 - present in source : no
 
 ##### MessageB : Lang Attribute Missing On Html
