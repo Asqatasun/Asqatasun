@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.11.12.1 NMI 01</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.11.12.1 NMI 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Pour chaque formulaire qui modifie ou supprime des données, ou qui transmet des réponses à un test ou un examen, ou dont la validation a des conséquences financières ou juridiques, la saisie des données vérifie-t-elle une de ces conditions ?</p>
+            <ul>
+            <li>L’utilisateur peut modifier ou annuler les données et les actions effectuées sur ces données après la validation du formulaire.</li>
+            <li>L’utilisateur peut vérifier et corriger les données avant la validation d’un formulaire en plusieurs étapes.</li>
+            <li>Un mécanisme de confirmation explicite, via une case à cocher (balise <code>&lt;input&gt;</code> de type checkbox ou balise ayant un attribut WAI-ARIA role="checkbox") ou une étape supplémentaire, est présent.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <form action="mock_action"> 
+            <p> <label for="field1">Field1</label> <input type="radio" name="field1" id="field1" /> <br /> <label for="field2">Female</label> <input type="radio" name="field2" id="field2" /> </p> 
+        </form> 
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI : The page contains a form tag
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
