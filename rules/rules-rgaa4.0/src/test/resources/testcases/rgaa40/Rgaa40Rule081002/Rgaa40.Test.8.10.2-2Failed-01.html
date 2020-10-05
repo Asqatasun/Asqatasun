@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.8.10.2 NMI 01</title>
+    <title>Rgaa 4.0 Test.8.10.2 Failed 01</title>
 </head>
-<body class="NMI">
+<body class="Failed">
 <div>
-    <h1>Rgaa 4.0 Test.8.10.2 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.8.10.2 Failed 01</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -20,18 +20,15 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <div lang="ar" dir="rtl">بعض الكلمات
-            <p lang="fr" dir="ltr">quelques mots</p>
-        </div>
-        <blockquote lang="he" dir="rtl">כמה מילים
-            <span lang="fr" dir="ltr">quelques mots</span>
-        </blockquote>
+        <p lang="ar" dir="rightToLeft">بعض الكلمات</p>
+        <p lang="fr" dir="leftToRight">quelques mots</p>
+        <p lang="he" dir="">כמה מילים</p>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI: the page contains several dir attributes with rtl or ltr values.
+        Failed: the page contains several dir attributes with bad values.
     </div>
     <!-- END [test-explanation] -->
 </div>

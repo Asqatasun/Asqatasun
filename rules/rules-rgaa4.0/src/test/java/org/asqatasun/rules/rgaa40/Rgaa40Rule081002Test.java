@@ -21,6 +21,8 @@ package org.asqatasun.rules.rgaa40;
 
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
 
 /**
@@ -47,61 +49,79 @@ public class Rgaa40Rule081002Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.8.10.2-1Passed-01");
-//        addWebResource("Rgaa40.Test.8.10.2-2Failed-01");
+        addWebResource("Rgaa40.Test.8.10.2-2Failed-01");
         addWebResource("Rgaa40.Test.8.10.2-3NMI-01");
-//        addWebResource("Rgaa40.Test.8.10.2-4NA-01");
+        addWebResource("Rgaa40.Test.8.10.2-4NA-01");
     }
 
     @Override
     protected void setProcess() {
-        //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.8.10.2-1Passed-01"), 1);
 
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.8.10.2-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
+        ProcessResult processResult = processPageTest("Rgaa40.Test.8.10.2-2Failed-01");
+        checkResultIsFailed(processResult, 24, 3);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
+            HtmlElementStore.P_ELEMENT,
+            1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
+            HtmlElementStore.P_ELEMENT,
+            2);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
+            HtmlElementStore.P_ELEMENT,
+            3);
 //        checkRemarkIsPresent(
 //                processResult,
 //                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
+//                RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
+//                HtmlElementStore.P_ELEMENT,
+//                3,
 //                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.8.10.2-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        processResult = processPageTest("Rgaa40.Test.8.10.2-3NMI-01");
+        checkResultIsPreQualified(processResult, 25, 4);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
+            HtmlElementStore.DIV_ELEMENT,
+            1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
+            HtmlElementStore.P_ELEMENT,
+            2);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
+            HtmlElementStore.BLOCKQUOTE_ELEMENT,
+            3);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
+            HtmlElementStore.SPAN_ELEMENT,
+            4);
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.8.10.2-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.8.10.2-3NMI-01").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.8.10.2-4NA-01"));
     }
 
 }
