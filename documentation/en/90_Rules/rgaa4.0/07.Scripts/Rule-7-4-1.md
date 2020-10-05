@@ -2,7 +2,10 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting patterns that are known to change context automatically : 
+
+- A `<select>` element with an `"onchange"` attribute
+- A `<form>` element without submit button
 
 ## Business description
 
@@ -35,24 +38,51 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<select>` tags with an "onchange" attribute (select[onchange])
+
+#### Set2
+
+All the `<form>` tags with a `<select>` child but without child of type
+`<button>`, `<input type='submit'>`, `<input type='button'>` or `<input
+type='reset'> (form:has(select):not(:has(button)):not(:has(input[type=submit])):not(:has(input[type=button])):not(:has(input[type=reset])))
 
 ### Process
 
-None
+#### Test1
+
+For each occurence of **Set1** and **Set2**, raise a MessageA
+
+#### Test2
+
+If **Set1** AND **Set2** are empty, raise a MessageB
+
+##### MessageA : Context changed by script detected
+
+-   code :ContextChangedScriptDetected
+-   status: Pre-Qualified
+-   parameter : snippet
+-   present in source : yes
+
+##### MessageB : No Pattern detected
+
+-   code : NoPatternDetected_Rgaa30-07041
+-   status: Pre-Qualified
+-   present in source : no
 
 ### Analysis
 
-#### Not Tested
+#### Pre-qualified
 
 In all cases
+
 
 
 ## Files
