@@ -2,7 +2,7 @@
 
 ## Summary
 
-No-check rule
+We check whether a language is specified for each textual element of the page
 
 ## Business description
 
@@ -40,30 +40,66 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Decidable**
 
 ## Algorithm
 
 ### Selection
 
-None
+##### Set1
+
+The `<html>` tag with a `lang` or `xml:lang` attribute.
+
+##### Set2
+
+The tags with a `lang` or `xml:lang` attribute.
+
+##### Set3
+
+The textual tags without `lang` or `xml:lang` attribute considering that
+these attributes can be set to the current tag or to one of its
+ascendants.
 
 ### Process
 
-None
+#### Test1
+
+Test whether **Set2** is empty. If yes, raise a MessageA
+
+#### Test2
+
+Test whether **Set1** is empty and **Set2** and **Set3** are not. If yes, raise a MessageB
+
+##### MessageA : Lang Attribute Missing On Whole Page
+
+- code : LangAttributeMissingOnWholePage
+- status: Failed
+- parameter : none
+- present in source : no
+
+##### MessageB : Lang Attribute Missing On Html
+
+- code : LangAttributeMissingOnHtml
+- status: Failed
+- parameter: none
+- present in source: no
 
 ### Analysis
 
-#### Not Tested
+#### Passed
 
-In all cases
+- The `<html>` tag has a `lang` or a `xml:lang` attribute (**Set1** is not empty)
+- The language is provided for each textual element by the tag or by
+  one of its parents (**Set1** is empty AND **Set2** is not empty AND **Set3** is empty)
 
+#### Failed
+
+- The page has no language specification (**Set2** is empty).
+- Some textual tags are missing the language attribute (**Set1** is empty
+  AND **Set2** is not empty AND **Set3** is not empty)
 
 ## Files
 
 - [TestCases files for rule 8.3.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080301/)
 - [Unit test file for rule 8.3.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080301Test.java)
 - [Class file for rule 8.3.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080301.java)
-
-
