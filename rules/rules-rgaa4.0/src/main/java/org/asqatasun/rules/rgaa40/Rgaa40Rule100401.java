@@ -19,7 +19,8 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleCssImplementation;
+import org.asqatasun.rules.csschecker.ForbiddenUnitChecker;
 
 /**
  * Implementation of rule 10.4.1 (referential RGAA 4.0)
@@ -27,13 +28,10 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/10.Presentation_of_information/Rule-10-4-1.md">rule 10.4.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-10-4-1">10.4.1 rule specification</a>
  */
-public class Rgaa40Rule100401 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule100401 extends AbstractPageRuleCssImplementation {
 
-    /**
-     * Default constructor
-     */
     public Rgaa40Rule100401() {
-        super();
+        super(new ForbiddenUnitChecker(),"MediaListNotAcceptingRelativeUnits");
     }
 
 }
