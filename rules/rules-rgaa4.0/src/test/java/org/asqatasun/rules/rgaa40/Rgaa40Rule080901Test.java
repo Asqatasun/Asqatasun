@@ -21,6 +21,8 @@ package org.asqatasun.rules.rgaa40;
 
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
 
 /**
@@ -33,6 +35,7 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
 
     /**
      * Default constructor
+     *
      * @param testName
      */
     public Rgaa40Rule080901Test(String testName) {
@@ -41,67 +44,167 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-            "org.asqatasun.rules.rgaa40.Rgaa40Rule080901");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa40.Rgaa40Rule080901");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.8.9.1-1Passed-01");
-//        addWebResource("Rgaa40.Test.8.9.1-2Failed-01");
-        addWebResource("Rgaa40.Test.8.9.1-3NMI-01");
-//        addWebResource("Rgaa40.Test.8.9.1-4NA-01");
+        addWebResource("Rgaa40.Test.08.09.01-2Failed-01");
+        addWebResource("Rgaa40.Test.08.09.01-2Failed-02");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-01");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-02");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-03");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-04");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-05");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-06");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-07");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-08");
+        addWebResource("Rgaa40.Test.08.09.01-3NMI-09");
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
+        //---------------------------2Failed-01---------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.8.9.1-1Passed-01"), 1);
+        ProcessResult processResult = processPageTest("Rgaa40.Test.08.09.01-2Failed-01");
+        checkResultIsFailed(processResult, 16, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.LINK_WITHOUT_TARGET_MSG,
+            HtmlElementStore.A_ELEMENT,
+            1);
 
         //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
+        //---------------------------2Failed-02---------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.8.9.1-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        processResult = processPageTest("Rgaa40.Test.08.09.01-2Failed-02");
+        checkResultIsFailed(processResult, 16, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.FAILED,
+            RemarkMessageStore.LINK_WITHOUT_TARGET_MSG,
+            HtmlElementStore.A_ELEMENT,
+            1);
 
         //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
+        //---------------------------3NMI-03---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-01");
+        checkResultIsPreQualified(processResult, 15, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
 
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //---------------------------3NMI-02------------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.8.9.1-4NA-01"));
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-02");
+        checkResultIsPreQualified(processResult, 16, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-03------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-03");
+        checkResultIsPreQualified(processResult, 16, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-04------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-04");
+        checkResultIsPreQualified(processResult, 16, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-05------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-05");
+        checkResultIsPreQualified(processResult, 16, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-06------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-06");
+        checkResultIsPreQualified(processResult, 17, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-07------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-07");
+        checkResultIsPreQualified(processResult, 17, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-08------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-08");
+        checkResultIsPreQualified(processResult, 17, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-09------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-09");
+        checkResultIsPreQualified(processResult, 17, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
     }
 
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.8.9.1-3NMI-01").getValue());
+    /**
+     * @param msg
+     * @return the message suffixed with the test key identifier
+     */
+    private String getMessageKey(String msg) {
+        StringBuilder strb = new StringBuilder(msg);
+        strb.append("_");
+        strb.append(getName());
+        return strb.toString();
     }
-
 }
