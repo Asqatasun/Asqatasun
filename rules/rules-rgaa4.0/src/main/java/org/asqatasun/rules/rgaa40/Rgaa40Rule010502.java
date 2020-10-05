@@ -19,7 +19,12 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.CaptchaElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FORM_BUTTON_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG;
 
 /**
  * Implementation of rule 1.5.2 (referential RGAA 4.0)
@@ -27,13 +32,23 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-5-2.md">rule 1.5.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-5-2">1.5.2 rule specification</a>
  */
-public class Rgaa40Rule010502 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010502 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule010502() {
-        super();
+        super(
+                new CaptchaElementSelector(
+                    new SimpleElementSelector(FORM_BUTTON_CSS_LIKE_QUERY)),
+                // solution when at least one element is found
+                TestSolution.NEED_MORE_INFO,
+                // solution when no element is found
+                TestSolution.NOT_APPLICABLE,
+                // manual check message
+                CHECK_CAPTCHA_ALTERNATIVE_ACCES_MSG,
+                null
+            );
     }
 
 }

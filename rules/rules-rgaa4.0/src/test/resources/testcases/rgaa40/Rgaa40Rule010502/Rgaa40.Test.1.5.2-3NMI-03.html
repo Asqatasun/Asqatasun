@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.1.5.2 NMI 01</title>
+    <title>Rgaa 4.0 Test.1.5.2 NMI 03</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.1.5.2 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.1.5.2 NMI 03</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -20,16 +20,17 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <div>
-            <input class="captcha" type="image" alt="" />  
+        <div> 
+            Captcha
+            <input type="image" />  
         </div> 
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : An &lt;input&gt; is seen as captcha. 
-        The captcha occurrence is found on an attribute of the input
+        NMI : An &lt;input&gt;, withtout alt attribute is seen as captcha. 
+        The captcha occurrence is found on the text of a parent of the input
     </div>
     <!-- END [test-explanation] -->
 </div>
