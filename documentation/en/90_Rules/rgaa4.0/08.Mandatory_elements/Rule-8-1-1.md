@@ -2,7 +2,7 @@
 
 ## Summary
 
-No-check rule
+This tests checks whether a document type is available on the page.
 
 ## Business description
 
@@ -31,24 +31,29 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Decidable**
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+The `<!doctype>` tag on the page
 
 ### Process
 
-None
+The selection handles the process
 
 ### Analysis
 
-#### Not Tested
+#### Failed
 
-In all cases
+The page has no doctype (**Set1** is empty)
+
+#### Passed
+
+A doctype is available on the page (**Set1** is empty)
 
 
 ## Files
@@ -56,5 +61,3 @@ In all cases
 - [TestCases files for rule 8.1.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080101/)
 - [Unit test file for rule 8.1.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080101Test.java)
 - [Class file for rule 8.1.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080101.java)
-
-
