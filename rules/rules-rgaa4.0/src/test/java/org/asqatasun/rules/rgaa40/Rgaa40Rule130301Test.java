@@ -49,15 +49,16 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.13.03.01-3NMI-01");
-        addWebResource("Rgaa40.Test.13.03.01-3NMI-02");
-        addWebResource("Rgaa40.Test.13.03.01-3NMI-03");
-        addWebResource("Rgaa40.Test.13.03.01-3NMI-04");
-        addWebResource("Rgaa40.Test.13.03.01-3NMI-05");
-        addWebResource("Rgaa40.Test.13.03.01-3NMI-06");
-        addWebResource("Rgaa40.Test.13.03.01-4NA-01");
-        addWebResource("Rgaa40.Test.13.03.01-4NA-02");
-        addWebResource("Rgaa40.Test.13.03.01-4NA-03");
+        addWebResource("Rgaa40.Test.13.3.1-3NMI-01");
+        addWebResource("Rgaa40.Test.13.3.1-3NMI-02");
+        addWebResource("Rgaa40.Test.13.3.1-3NMI-03");
+        addWebResource("Rgaa40.Test.13.3.1-3NMI-04");
+        addWebResource("Rgaa40.Test.13.3.1-3NMI-05");
+        addWebResource("Rgaa40.Test.13.3.1-3NMI-06");
+
+        addWebResource("Rgaa40.Test.13.3.1-4NA-01");
+        addWebResource("Rgaa40.Test.13.3.1-4NA-02");
+        addWebResource("Rgaa40.Test.13.3.1-4NA-03");
     }
 
     @Override
@@ -65,7 +66,7 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.13.03.01-3NMI-01");
+        ProcessResult processResult = processPageTest("Rgaa40.Test.13.3.1-3NMI-01");
         checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -79,7 +80,7 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-02---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.13.03.01-3NMI-02");
+        processResult = processPageTest("Rgaa40.Test.13.3.1-3NMI-02");
         checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -92,7 +93,7 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-03---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.13.03.01-3NMI-03");
+        processResult = processPageTest("Rgaa40.Test.13.3.1-3NMI-03");
         checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -105,7 +106,7 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-04---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.13.03.01-3NMI-04");
+        processResult = processPageTest("Rgaa40.Test.13.3.1-3NMI-04");
         checkResultIsPreQualified(processResult, 2, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -118,7 +119,7 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-05---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.13.03.01-3NMI-05");
+        processResult = processPageTest("Rgaa40.Test.13.3.1-3NMI-05");
         checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -131,7 +132,7 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-06---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.13.03.01-3NMI-06");
+        processResult = processPageTest("Rgaa40.Test.13.3.1-3NMI-06");
         checkResultIsPreQualified(processResult, 48, 48);
         checkRemarkIsPresent(
                 processResult,
@@ -568,17 +569,17 @@ public class Rgaa40Rule130301Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA--01---------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.03.01-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.3.1-4NA-01"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.03.01-4NA-02"), 1);
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.3.1-4NA-02"), 1);
         
         //----------------------------------------------------------------------
         //------------------------------4NA-03----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.03.01-4NA-03"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.3.1-4NA-03"));
     }
 
     /**
