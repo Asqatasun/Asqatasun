@@ -117,7 +117,7 @@ public final class CssLikeQueryStore {
     public static final String IFRAME_WITH_NOT_EMPTY_TITLE_CSS_LIKE_QUERY=
                     "iframe[title]:not([title~=^\\s*$])"; 
     public static final String FRAME_WITH_NOT_EMPTY_TITLE_CSS_LIKE_QUERY=
-                    "frame[title]:not([title~=^\\s*$])"; 
+                    "frame[title]:not([title~=^\\s*$])";
 
     // Form theme css-like queries
     public static final String FORM_WITHOUT_FIELDSET_CSS_LIKE_QUERY = 
@@ -504,8 +504,48 @@ public final class CssLikeQueryStore {
     public static final String IMG_CSS_LIKE_QUERY=
                     IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY
                    + "embed[type^=image]" 
-                   + "input[type^=image]"; 
-    
+                   + "input[type^=image]";
+
+
+    // Temporal Media (only Video)
+    public static final String VIDEO_FILE_EXTENSION
+        = "mp4|avi|wmv|mov|Xvid|mkv|mka|mks|FLV|rmvb|MPA|WMA|MP2|M2P|DIF|DV|VOB|VRO|rmvb|vivo|bik|ASF|ifo|mts|mxf|nds|rv|web|wlmp|wmp|ogv";
+    public static final String LINK_MEDIA_VIDEO_CSS_LIKE_QUERY
+        = "a[href~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")] ";
+    public static final String MEDIA_VIDEO_CSS_LIKE_QUERY
+        = "video[src] ,"
+        + "video:has(source) ,"
+        + "svg ,"
+        + "canvas ,"
+        + "object[data] ,"
+        + "embed[src] ";
+//    =   "video:not([src~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")]) ,"
+//      + "video:has(source[src]:not([src~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")])) ,"
+//    =   "video[src~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")] ,"
+//      + "video:has(source[src~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")]) ,"
+//      + "object[data~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")] ,"
+//      + "embed[src~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")] ";
+
+    // Temporal Media (only Audio)
+    public static final String AUDIO_FILE_EXTENSION
+        = "WAV|CDA|MID|MP2|MP3|mp3PRO|MOD|RM|RAM|WMA|Ogg|oga|AIF|AIFF|AA|AAC|M4A|VQF|AU|M3U|RIFF|BWF|CAF|PCM|RAW|FLAC|ALAC|AC3|ACC";
+    public static final String LINK_MEDIA_AUDIO_CSS_LIKE_QUERY
+        = "a[href~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")] ";
+    public static final String MEDIA_AUDIO_CSS_LIKE_QUERY
+        = "audio[src] ,"
+        + "audio:has(source),"
+        + "bgsound ,"
+        + "video[src~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")] ,"
+        + "video:has(source[src~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")]) ,"
+        + "object[data] ,"
+        + "embed[src] ";
+
+    // Temporal Media
+    public static final String MEDIA_TMP_CSS_LIKE_QUERY
+        = MEDIA_AUDIO_CSS_LIKE_QUERY + "," + MEDIA_VIDEO_CSS_LIKE_QUERY;
+    public static final String LINK_MEDIA_TMP_CSS_LIKE_QUERY
+        = "a[href~=(?i)\\.(" + AUDIO_FILE_EXTENSION + VIDEO_FILE_EXTENSION +")] ";
+
     // scripts
     public static final String ONCLICK_CSS_LIKE_QUERY=
                     "*[onclick]"
