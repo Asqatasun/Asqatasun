@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting all the links allowing to download a audio file 
+and all the tags allowing to play a audio file.
 
 ## Business description
 
@@ -35,24 +36,57 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Semi-Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+- All links to download a audio file
+- AND all the following tags:
+  - `<audio>`
+  - `<bgsound>`
+  - `<video>` with audio file
+  - `<object>`
+  - `<embed>`
+  
+css selector :
+```css
+audio[src], 
+audio:has(source), 
+bgsound, 
+audio[src~=(?i)\.(WAV|CDA|MID|MP2|MP3|mp3PRO|MOD|RM|RAM|WMA|Ogg|oga|AIF|AIFF|AA|AAC|M4A|VQF|AU|M3U|RIFF|BWF|CAF|PCM|RAW|FLAC|ALAC|AC3|ACC)] , 
+audio:has(source[src~=(?i)\.(WAV|CDA|MID|MP2|MP3|mp3PRO|MOD|RM|RAM|WMA|Ogg|oga|AIF|AIFF|AA|AAC|M4A|VQF|AU|M3U|RIFF|BWF|CAF|PCM|RAW|FLAC|ALAC|AC3|ACC)]) , 
+object[data],
+embed[src],
+a[href~=(?i)\.(WAV|CDA|MID|MP2|MP3|mp3PRO|MOD|RM|RAM|WMA|Ogg|oga|AIF|AIFF|AA|AAC|M4A|VQF|AU|M3U|RIFF|BWF|CAF|PCM|RAW|FLAC|ALAC|AC3|ACC)] 
+```
 
 ### Process
 
-None
+#### Test1
+
+Test whether **Set1** is not empty. If yes, raise a MessageA.
+
+##### MessageA : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+- The page has no `<audio>`, `<bgsound>`,  `<video>` (with audio file), `<object>` or `<embed>` tag.
+- The page has no link to download a audio file.
+
+#### Pre-qualified
+
+In all other cases
 
 
 ## Files
