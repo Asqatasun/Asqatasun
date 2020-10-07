@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting all the links allowing to download a video file 
+and all the tags allowing to display a video or an animated cartoon.
 
 ## Business description
 
@@ -38,24 +39,56 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Semi-Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+- All links to download a video file
+- AND all the following tags:
+  - `<video>`
+  - `<object>`
+  - `<embed>`
+  - `<svg>`
+  - `<canvas>`
+    
+css selector :
+```css
+video[src], 
+video:has(source), 
+object[data],
+embed[src],
+svg,
+canvas,
+a[href~=(?i)\.(mp4|MP4|avi|wmv|mov|Xvid|mkv|mka|mks|FLV|rmvb|MPA|WMA|MP2|M2P|DIF|DV|VOB|VRO|rmvb|vivo|bik|ASF|ifo|mts|mxf|nds|rv|web|wlmp|wmp|ogv)] 
+```
 
 ### Process
 
-None
+#### Test1
+
+Test whether **Set1** is not empty. If yes, raise a MessageA.
+
+##### MessageA : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+- The page has no `<video>`, `<object>`, `<embed>`, `<svg>` or `<canvas>` tag.
+- The page has no link to download a video file.
+
+#### Pre-qualified
+
+In all other cases
 
 
 ## Files

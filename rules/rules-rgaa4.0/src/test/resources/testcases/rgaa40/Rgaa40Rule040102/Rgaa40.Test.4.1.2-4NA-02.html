@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.4.1.2 NMI 01</title>
+    <title>Rgaa 4.0 Test.4.1.2 NA 01</title>
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.4.1.2 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.4.1.2 NA 01</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -24,15 +24,21 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <video src="sample.mp4" controls>
-            Your browser does not support the video element.
-        </video>
+        <a href="sample.mp3">download sample.mp3 file</a>
+        <a href="sample.wav">download sample.wav file</a>
+        <audio controls src="sample.ogg">
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls="controls">
+            <source src="toto.wav" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI: one video tag with src attribute
+        NA: no temporal media (video type)
     </div>
     <!-- END [test-explanation] -->
 </div>

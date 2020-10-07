@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting all the links allowing to download a video file 
+and all the tags allowing to display a video or an animated cartoon.
 
 ## Business description
 
@@ -54,24 +55,56 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Semi-Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+- All links to download a video file
+- AND all the following tags:
+  - `<video>`
+  - `<object>`
+  - `<embed>`
+  - `<svg>`
+  - `<canvas>`
+    
+css selector :
+```css
+video[src], 
+video:has(source), 
+object[data],
+embed[src],
+svg,
+canvas,
+a[href~=(?i)\.(mp4|MP4|avi|wmv|mov|Xvid|mkv|mka|mks|FLV|rmvb|MPA|WMA|MP2|M2P|DIF|DV|VOB|VRO|rmvb|vivo|bik|ASF|ifo|mts|mxf|nds|rv|web|wlmp|wmp|ogv)] 
+```
 
 ### Process
 
-None
+#### Test1
+
+Test whether **Set1** is not empty. If yes, raise a MessageA.
+
+##### MessageA : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+- The page has no `<video>`, `<object>`, `<embed>`, `<svg>` or `<canvas>` tag.
+- The page has no link to download a video file.
+
+#### Pre-qualified
+
+In all other cases
 
 
 ## Files
@@ -79,5 +112,4 @@ In all cases
 - [TestCases files for rule 4.1.2](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule040102/)
 - [Unit test file for rule 4.1.2](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule040102Test.java)
 - [Class file for rule 4.1.2](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule040102.java)
-
 
