@@ -507,14 +507,14 @@ public final class CssLikeQueryStore {
                    + "input[type^=image]";
 
 
-    // Temporal Media (only Video)
+    // Time-based Media (only Video)
     public static final String VIDEO_FILE_EXTENSION
         = "mp4|avi|wmv|mov|Xvid|mkv|mka|mks|FLV|rmvb|MPA|WMA|MP2|M2P|DIF|DV|VOB|VRO|rmvb|vivo|bik|ASF|ifo|mts|mxf|nds|rv|web|wlmp|wmp|ogv";
     public static final String LINK_MEDIA_VIDEO_CSS_LIKE_QUERY
         = "a[href~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")] ";
     public static final String MEDIA_VIDEO_CSS_LIKE_QUERY
         = "video[src] ,"
-        + "video:has(source) ,"
+        + "video:has(source[src]) ,"
         + "svg ,"
         + "canvas ,"
         + "object[data] ,"
@@ -526,25 +526,33 @@ public final class CssLikeQueryStore {
 //      + "object[data~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")] ,"
 //      + "embed[src~=(?i)\\.(" + VIDEO_FILE_EXTENSION + ")] ";
 
-    // Temporal Media (only Audio)
+    // Time-based Media (only Audio)
     public static final String AUDIO_FILE_EXTENSION
         = "WAV|CDA|MID|MP2|MP3|mp3PRO|MOD|RM|RAM|WMA|Ogg|oga|AIF|AIFF|AA|AAC|M4A|VQF|AU|M3U|RIFF|BWF|CAF|PCM|RAW|FLAC|ALAC|AC3|ACC";
     public static final String LINK_MEDIA_AUDIO_CSS_LIKE_QUERY
         = "a[href~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")] ";
     public static final String MEDIA_AUDIO_CSS_LIKE_QUERY
         = "audio[src] ,"
-        + "audio:has(source),"
+        + "audio:has(source[src]),"
         + "bgsound ,"
         + "video[src~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")] ,"
         + "video:has(source[src~=(?i)\\.(" + AUDIO_FILE_EXTENSION + ")]) ,"
         + "object[data] ,"
         + "embed[src] ";
 
-    // Temporal Media
+    // Time-based Media
     public static final String MEDIA_TMP_CSS_LIKE_QUERY
-        = MEDIA_AUDIO_CSS_LIKE_QUERY + "," + MEDIA_VIDEO_CSS_LIKE_QUERY;
+        = "audio[src] ,"
+        + "audio:has(source[src]),"
+        + "bgsound ,"
+        + "video[src] ,"
+        + "video:has(source[src]) ,"
+        + "svg ,"
+        + "canvas ,"
+        + "object[data] ,"
+        + "embed[src] ";
     public static final String LINK_MEDIA_TMP_CSS_LIKE_QUERY
-        = "a[href~=(?i)\\.(" + AUDIO_FILE_EXTENSION + VIDEO_FILE_EXTENSION +")] ";
+        = "a[href~=(?i)\\.(" + AUDIO_FILE_EXTENSION + "|" + VIDEO_FILE_EXTENSION +")] ";
 
     // scripts
     public static final String ONCLICK_CSS_LIKE_QUERY=
