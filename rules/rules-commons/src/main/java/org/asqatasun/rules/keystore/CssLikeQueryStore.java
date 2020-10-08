@@ -541,7 +541,7 @@ public final class CssLikeQueryStore {
         + "embed[src] ";
 
     // Time-based Media
-    public static final String MEDIA_TMP_CSS_LIKE_QUERY
+    public static final String TIME_BASED_MEDIA_CSS_LIKE_QUERY
         = "audio[src] ,"
         + "audio:has(source[src]),"
         + "bgsound ,"
@@ -551,7 +551,7 @@ public final class CssLikeQueryStore {
         + "canvas ,"
         + "object[data] ,"
         + "embed[src] ";
-    public static final String LINK_MEDIA_TMP_CSS_LIKE_QUERY
+    public static final String LINK_TIME_BASED_MEDIA_CSS_LIKE_QUERY
         = "a[href~=(?i)\\.(" + AUDIO_FILE_EXTENSION + "|" + VIDEO_FILE_EXTENSION +")] ";
 
     // scripts

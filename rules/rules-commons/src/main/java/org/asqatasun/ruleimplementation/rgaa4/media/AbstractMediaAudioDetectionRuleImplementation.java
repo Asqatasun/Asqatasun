@@ -45,7 +45,6 @@ public abstract class AbstractMediaAudioDetectionRuleImplementation extends Abst
             MANUAL_CHECK_ON_ELEMENTS_MSG, // manual check message
             null
         );
-        // System.out.println(MEDIA_VIDEO_CSS_LIKE_QUERY + ", " + LINK_MEDIA_VIDEO_CSS_LIKE_QUERY);
     }
 
 }

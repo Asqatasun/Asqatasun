@@ -25,27 +25,26 @@ import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
 import org.asqatasun.rules.elementselector.SimpleElementSelector;
 
-import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_MEDIA_TMP_CSS_LIKE_QUERY;
-import static org.asqatasun.rules.keystore.CssLikeQueryStore.MEDIA_TMP_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_TIME_BASED_MEDIA_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TIME_BASED_MEDIA_CSS_LIKE_QUERY;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
  * This class deals with the tests related with
  */
-public abstract class AbstractMediaDetectionRuleImplementation extends AbstractDetectionPageRuleImplementation {
+public abstract class AbstractTimeBasedMediaDetectionRuleImplementation extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public AbstractMediaDetectionRuleImplementation() {
+    public AbstractTimeBasedMediaDetectionRuleImplementation() {
         super(
-            new SimpleElementSelector(LINK_MEDIA_TMP_CSS_LIKE_QUERY + ", " + MEDIA_TMP_CSS_LIKE_QUERY),
+            new SimpleElementSelector(LINK_TIME_BASED_MEDIA_CSS_LIKE_QUERY + ", " + TIME_BASED_MEDIA_CSS_LIKE_QUERY),
             TestSolution.NEED_MORE_INFO,  // solution when at least one element is found
             TestSolution.NOT_APPLICABLE,  // solution when no element is found
             MANUAL_CHECK_ON_ELEMENTS_MSG, // manual check message
             null
         );
-        // System.out.println(MEDIA_VIDEO_CSS_LIKE_QUERY + ", " + LINK_MEDIA_VIDEO_CSS_LIKE_QUERY);
     }
 
 }
