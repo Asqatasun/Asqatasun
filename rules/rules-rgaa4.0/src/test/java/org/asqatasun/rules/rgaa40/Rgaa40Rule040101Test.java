@@ -95,7 +95,7 @@ public class Rgaa40Rule040101Test extends Rgaa40RuleImplementationTestCase {
         mapTag.put(13, HtmlElementStore.A_ELEMENT); // Audio file link
         mapTag.put(14, HtmlElementStore.A_ELEMENT); // Audio file link
         mapTag.put(15, HtmlElementStore.A_ELEMENT); // Audio file link
-        mapTag.put(15, HtmlElementStore.A_ELEMENT); // Audio file link
+        mapTag.put(16, HtmlElementStore.A_ELEMENT); // Audio file link
         for (Map.Entry item : mapTag.entrySet()) {
             int position = ((int) item.getKey());
             String htmlElement = item.getValue().toString();

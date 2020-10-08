@@ -58,12 +58,12 @@ and all the tags allowing to display a video or an animated cartoon.
 css selector :
 ```css
 video[src], 
-video:has(source), 
+video:has(source[src]), 
 object[data],
 embed[src],
 svg,
 canvas,
-a[href~=(?i)\.(mp4|MP4|avi|wmv|mov|Xvid|mkv|mka|mks|FLV|rmvb|MPA|WMA|MP2|M2P|DIF|DV|VOB|VRO|rmvb|vivo|bik|ASF|ifo|mts|mxf|nds|rv|web|wlmp|wmp|ogv)] 
+a[href~=(?i)\.(mp4|avi|wmv|mov|Xvid|mkv|mka|mks|FLV|rmvb|MPA|WMA|MP2|M2P|DIF|DV|VOB|VRO|rmvb|vivo|bik|ASF|ifo|mts|mxf|nds|rv|web|wlmp|wmp|ogv)] 
 ```
 
 ### Process
