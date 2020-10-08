@@ -540,6 +540,13 @@ public final class CssLikeQueryStore {
         + "object[data] ,"
         + "embed[src] ";
 
+    // No time-based Media
+    public static final String NO_TIME_BASED_MEDIA_CSS_LIKE_QUERY
+        = "svg ,"
+        + "canvas ,"
+        + "object[data] ,"
+        + "embed[src] ";
+
     // Time-based Media
     public static final String TIME_BASED_MEDIA_CSS_LIKE_QUERY
         = "audio[src] ,"
