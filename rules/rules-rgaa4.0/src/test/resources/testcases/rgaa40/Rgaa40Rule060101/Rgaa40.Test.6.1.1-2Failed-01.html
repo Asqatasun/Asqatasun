@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.6.1.1 Failed 01</title>
+</head>
+<body class="Failed">
+<div>
+    <p>Rgaa 4.0 Test.6.1.1 Failed 01</p>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-texte">lien texte</a> vérifie-t-il une de ces conditions (hors cas particuliers) ?</p>
+            <ul>
+            <li>L’<a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#intitule-ou-nom-accessible-de-lien">intitulé de lien</a> seul permet d’en comprendre la fonction et la destination.</li>
+            <li>L’<a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#intitule-ou-nom-accessible-de-lien">intitulé de lien</a> additionné au <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#contexte-du-lien">contexte du lien</a> permet d’en comprendre la fonction et la destination.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div id="linkAriaDescription1"> --&gt;;* </div>
+
+    <div id="linkAriaDescription2">
+        <span>--&gt;;* </span>
+    </div>
+    <div class="testcase1">
+        <!-- all these links are failed cause the link text belongs to blacklist or only contains alphanumerical characters
+        the test link is computed for not empty a elements and any tag with role=link attribute-->
+        <a href="my-link.html" title="cliquez ici"> cliquez ici </a>
+        <a href="my-link.html" title="cliquez ici">cliquez ici</a>
+        <a href="my-link.html">cliquez ici</a>
+        <a href="my-link.html"> cliquez ici </a>
+        <a href="my-link.html" title="--&gt;;*">--&gt;;*</a>
+        <a href="my-link.html">--&gt;;*</a>
+        <a href="my-link.html"> --&gt;;* </a>
+        <a href="my-link.html" title="cliquez ici"> cliquez ici </a>
+        <a href="my-link.html" aria-label="--&gt;;*"></a>
+        <a href="my-link.html" aria-labelledby="linkAriaDescription1 linkAriaDescription2"></a>
+        <div role="link" aria-label="cliquez ici"></div>
+        <div role="link" aria-labelledby="linkAriaDescription3"></div>
+        <div role="link"> cliquez ici</div>
+        <div role="link" title="cliquez ici"></div>
+    </div>
+    <div class="testcase2">
+        <!-- all these links are nmi cause the link text belongs to blacklist or only contains alphanumerical characters
+        the test link is computed for not empty a elements and any tag with role=link attribute but the h1 as previous
+        siblings is considered as context and so needs manual check-->
+        <h1>Rgaa30 Test.6.1.1 Failed 06</h1>
+        <a href="my-link.html" title="cliquez ici">cliquez ici</a>
+        <a href="my-link.html"> cliquez ici </a>
+        <a href="my-link.html" title="--&gt;;*">--&gt;;*</a>
+        <a href="my-link.html">--&gt;;*</a>
+        <a href="my-link.html" aria-label="--&gt;;*"></a>
+        <a href="my-link.html" aria-labelledby="linkAriaDescription1 linkAriaDescription2"></a>
+        <div role="link" aria-label="cliquez ici"></div>
+        <div role="link" aria-labelledby="linkAriaDescription3"></div>
+        <div role="link"> cliquez ici</div>
+        <div role="link" title="cliquez ici"></div>
+    </div>
+    <span id="linkAriaDescription3">cliquez ici
+    </span>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        Failed : The text link belongs to the text link blacklist and is identical to the title attribute (in this case, this attribute defines the context). We can deduce it is not pertinent
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

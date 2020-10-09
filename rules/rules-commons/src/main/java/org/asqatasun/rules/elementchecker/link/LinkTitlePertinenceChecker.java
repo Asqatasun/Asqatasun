@@ -30,7 +30,13 @@ import org.asqatasun.rules.elementchecker.text.TextBelongsToBlackListChecker;
 import org.asqatasun.rules.elementchecker.text.TextEmptinessChecker;
 import org.asqatasun.rules.elementchecker.text.TextNotIdenticalToAttributeChecker;
 import org.asqatasun.rules.elementchecker.text.TextOnlyContainsNonAlphanumericalCharactersChecker;
+
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.entity.audit.TestSolution.PASSED;
 import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
+
 import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
@@ -67,7 +73,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
      * @param isEqualContentAuthorized 
      */
     public LinkTitlePertinenceChecker(boolean isEqualContentAuthorized) {
-        super(HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
+        super(TEXT_ELEMENT2, TITLE_ATTR);
         this.isEqualContentAuthorized = isEqualContentAuthorized;
         addCheckers();
     }
@@ -76,7 +82,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
      * Constructor.
      */
     public LinkTitlePertinenceChecker() {
-        super(HtmlElementStore.TEXT_ELEMENT2, TITLE_ATTR);
+        super(TEXT_ELEMENT2, TITLE_ATTR);
         addCheckers();
     }
  
@@ -86,7 +92,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
     private void addCheckers() {
         ElementChecker ec = new TextEmptinessChecker(
                         titleAttrElementBuilder,
-                        RemarkMessageStore.EMPTY_LINK_TITLE_MSG, 
+                        EMPTY_LINK_TITLE_MSG,
                         null,
                         getEeAttributeNames());
         ec.setTextElementBuilder(linkTextElementBuilder);
@@ -95,7 +101,7 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
         ec = new TextOnlyContainsNonAlphanumericalCharactersChecker(
                         titleAttrElementBuilder,
                         getFailureSolution(),
-                        RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG, 
+                        NOT_PERTINENT_LINK_TITLE_MSG,
                         getEeAttributeNames());
         ec.setTextElementBuilder(linkTextElementBuilder);
         addChecker(ec);
@@ -104,33 +110,34 @@ public class LinkTitlePertinenceChecker extends CompositeChecker {
                             titleAttrElementBuilder,
                             LINK_TEXT_BL_NOM_NAME,
                             getFailureSolution(),
-                            RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG, 
+                            NOT_PERTINENT_LINK_TITLE_MSG,
                             getEeAttributeNames());
+        // this set is used extract linkText
         ec.setTextElementBuilder(linkTextElementBuilder);
         addChecker(ec);
         
         TestSolution strictCheckerSolution = TestSolution.FAILED;
-        String strictCheckerMsg = RemarkMessageStore.NOT_PERTINENT_LINK_TITLE_MSG;
+        String strictCheckerMsg = NOT_PERTINENT_LINK_TITLE_MSG;
         if(isEqualContentAuthorized) {
-            strictCheckerSolution = TestSolution.NEED_MORE_INFO;
-            strictCheckerMsg = RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG;
+            strictCheckerSolution = NEED_MORE_INFO;
+            strictCheckerMsg = SUSPECTED_PERTINENT_LINK_TITLE_MSG;
         }
         
-        ElementChecker strictChecker = new TextNotIdenticalToAttributeChecker(
+        TextNotIdenticalToAttributeChecker strictChecker = new TextNotIdenticalToAttributeChecker(
                         getTextElementBuilder(),
                         titleAttrElementBuilder,
-                        new ImmutablePair(strictCheckerSolution,strictCheckerMsg),
-                        new ImmutablePair(TestSolution.PASSED,""),
+                        new ImmutablePair<>(strictCheckerSolution,strictCheckerMsg),
+                        new ImmutablePair<>(PASSED,""),
                         getEeAttributeNames());
-        ((TextNotIdenticalToAttributeChecker)strictChecker).setStrictEquality(true);
+        strictChecker.setStrictEquality(true);
         strictChecker.setTextElementBuilder(linkTextElementBuilder);
         addChecker(strictChecker);
         
         ElementChecker containChecker = new TextNotIdenticalToAttributeChecker(
                         getTextElementBuilder(),
                         titleAttrElementBuilder,
-                        new ImmutablePair(TestSolution.NEED_MORE_INFO,RemarkMessageStore.SUSPECTED_PERTINENT_LINK_TITLE_MSG),
-                        new ImmutablePair(TestSolution.NEED_MORE_INFO,RemarkMessageStore.SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG),
+                        new ImmutablePair<>(NEED_MORE_INFO,SUSPECTED_PERTINENT_LINK_TITLE_MSG),
+                        new ImmutablePair<>(NEED_MORE_INFO,SUSPECTED_NOT_PERTINENT_LINK_TITLE_MSG),
                         getEeAttributeNames());
         containChecker.setTextElementBuilder(linkTextElementBuilder);
         addChecker(containChecker);

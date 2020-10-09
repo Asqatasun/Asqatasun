@@ -43,7 +43,7 @@ public class Rgaa30Rule110601 extends AbstractPageRuleWithSelectorAndCheckerImpl
     public Rgaa30Rule110601() {
         super(
                 new SimpleElementSelector(FIELDSET_ELEMENT), 
-                
+
                 new ChildElementPresenceChecker(
                     LEGEND_ELEMENT, 
                         1,

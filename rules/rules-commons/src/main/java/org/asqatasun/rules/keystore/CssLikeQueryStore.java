@@ -441,6 +441,9 @@ public final class CssLikeQueryStore {
                     "a:not([name]):not([id])";
     public static final String TEXT_LINK_CSS_LIKE_QUERY = 
                     "a[href]:not(:has(*))";
+    public static final String TEXT_LINK_RGAAv4_CSS_LIKE_QUERY =
+        "[role=link]:not(:has(img)):not(:has(svg)):not(:has(object)):not(:has(canvas)), " +
+            "a[href]:not(:has(img)):not(:has(svg)):not(:has(object)):not(:has(canvas))";
     public static final String LINK_WITH_CHILDREN_CSS_LIKE_QUERY = 
                     "a[href]:has(*)";
     public static final String LINK_WITH_HREF_CSS_LIKE_QUERY = 

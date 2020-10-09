@@ -23,6 +23,8 @@
 package org.asqatasun.rules.elementchecker.text;
 
 import java.util.regex.Pattern;
+
+import org.asqatasun.rules.textbuilder.LinkTextRgaa4ElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.TestSolution;
@@ -44,16 +46,14 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
     private static final String NON_ALPHANUMERIC_PATTERN_STR ="[^\\p{L}]*";
     private static final Pattern NON_ALPHANUMERIC_PATTERN =
               Pattern.compile(NON_ALPHANUMERIC_PATTERN_STR);
-    
+
+    private TextElementBuilder testableTextBuilder;
     /*
      * The message thrown when an element only contains non alphanumerical 
      * characters.
      */
     private String textOnlyContainsNacMsgCode;
 
-    /* The text element builder. By default, it is a simple Text builder */
-    private TextElementBuilder testableTextBuilder;
-    
     /**
      * Constructor
      * 
@@ -64,6 +64,7 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
             TextElementBuilder testableTextBuilder,
             String textOnlyContainsNacMsgCode) {
         super();
+        this.setTextElementBuilder(testableTextBuilder);
         this.testableTextBuilder = testableTextBuilder;
         this.textOnlyContainsNacMsgCode = textOnlyContainsNacMsgCode;
     }
@@ -118,11 +119,18 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
              SSPHandler sspHandler, 
              Elements elements, 
              TestSolutionHandler testSolutionHandler) {
+        // if the testableTextBuilder has not been set by constructor, use the parent one
+        if (testableTextBuilder == null) {
+            testableTextBuilder = getTextElementBuilder();
+        }
+        if (testableTextBuilder instanceof LinkTextRgaa4ElementBuilder) {
+            ((LinkTextRgaa4ElementBuilder)testableTextBuilder).setSspHandler(sspHandler);
+        }
          for (Element element : elements) {
              testSolutionHandler.addTestSolution(
                      checkTextElementOnlyContainsNonAlphanumericCharacters(
-                        element, 
-                        this.testableTextBuilder.buildTextFromElement(element)));
+                        element,
+                         testableTextBuilder.buildTextFromElement(element)));
          }
     }
     

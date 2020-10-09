@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Pattern;
 import org.apache.commons.collections.CollectionUtils;
+import org.asqatasun.rules.textbuilder.LinkTextRgaa4ElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.TestSolution;
@@ -75,10 +76,9 @@ public class TextBelongsToBlackListChecker
      * The message thrown when an element belongs to the black list.
      */
     private String textBelongsToBlackListMessageCode;
-    
     /** The text element builder. By default, it is a simple Text builder*/
     private TextElementBuilder testableTextBuilder;
-    
+
     /**
      * Constructor
      * @param testableTextBuilder
@@ -123,12 +123,17 @@ public class TextBelongsToBlackListChecker
              SSPHandler sspHandler, 
              Elements elements, 
              TestSolutionHandler testSolutionHandler) {
-         for (Element element : elements) {
-             testSolutionHandler.addTestSolution(
-                     checkTextElementBelongsToBlacklist(
-                        element, 
-                        testableTextBuilder.buildTextFromElement(element)));
-         }
+        // if the testableTextBuilder has not been set by constructor, use the parent one
+        if (testableTextBuilder == null) {
+            testableTextBuilder = getTextElementBuilder();
+        }
+        if (testableTextBuilder instanceof LinkTextRgaa4ElementBuilder) {
+            ((LinkTextRgaa4ElementBuilder)testableTextBuilder).setSspHandler(sspHandler);
+        }
+        for (Element element : elements) {
+            testSolutionHandler.addTestSolution(
+                    checkTextElementBelongsToBlacklist(element,testableTextBuilder.buildTextFromElement(element)));
+        }
     }
     
     /**

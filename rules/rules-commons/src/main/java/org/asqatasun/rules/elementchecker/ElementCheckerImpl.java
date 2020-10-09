@@ -29,6 +29,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.asqatasun.rules.textbuilder.LinkTextRgaa4ElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.EvidenceElement;
@@ -37,7 +38,12 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.ElementHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.keystore.AttributeStore;
+
+import static org.asqatasun.entity.audit.TestSolution.*;
 import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+
 import org.asqatasun.rules.keystore.EvidenceStore;
 import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
@@ -73,9 +79,11 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     public void setTextElementBuilder(TextElementBuilder textElementBuilder) {
         this.textElementBuilder = textElementBuilder;
     }
-    
+
+    private SSPHandler sspHandler;
+
     /* Success solution pair when checker returns success. Default solution is PASSED */
-    private final MutablePair<TestSolution,String> successSolutionPair = new MutablePair(TestSolution.PASSED, "");
+    private final MutablePair<TestSolution,String> successSolutionPair = new MutablePair(PASSED, "");
     @Override
     public Pair<TestSolution,String> getSuccessSolutionPair(){
         return successSolutionPair;
@@ -100,7 +108,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     }
     
     /* Success solution pair when checker returns success. Default solution is PASSED */
-    private final MutablePair<TestSolution,String> failureSolutionPair = new MutablePair(TestSolution.FAILED, "");
+    private final MutablePair<TestSolution,String> failureSolutionPair = new MutablePair(FAILED, "");
     @Override
     public Pair<TestSolution,String> getFailureSolutionPair(){
         return failureSolutionPair;
@@ -180,6 +188,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             ElementHandler elementHandler, 
             TestSolutionHandler testSolutionHandler) {
         this.processRemarkService = sspHandler.getProcessRemarkService();
+        this.sspHandler = sspHandler;
         doCheck(sspHandler, (Elements)elementHandler.get(), testSolutionHandler);
     }
     
@@ -372,6 +381,12 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             extraEe = processRemarkService.getEvidenceElement(
                     attrEE, 
                     buildAttributeContent(element, attr, true));
+        } else if (isComputedLinkElementTextRequested(attr)) {
+            LinkTextRgaa4ElementBuilder linkTextRgaa4ElementBuilder = new LinkTextRgaa4ElementBuilder();
+            linkTextRgaa4ElementBuilder.setSspHandler(sspHandler);
+            extraEe = processRemarkService.getEvidenceElement(
+                attrEE,
+                linkTextRgaa4ElementBuilder.buildTextFromElement(element));
         } else {
             extraEe = processRemarkService.getEvidenceElement(
                     attrEE, 
@@ -410,8 +425,12 @@ public abstract class ElementCheckerImpl implements ElementChecker {
      * @return whether a requested attribute is of text type
      */
     private boolean isElementTextRequested(String attributeName) {
-        return StringUtils.equalsIgnoreCase(attributeName, HtmlElementStore.TEXT_ELEMENT2); 
-    }  
+        return StringUtils.equalsIgnoreCase(attributeName, TEXT_ELEMENT2);
+    }
+
+    private boolean isComputedLinkElementTextRequested(String attributeName) {
+        return StringUtils.equalsIgnoreCase(attributeName, COMPUTED_LINK_TITLE);
+    }
 
     /**
      * 
@@ -450,14 +469,14 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     protected TestSolution setTestSolution(
                 TestSolution currentTestSolution, 
                 TestSolution requestedTestSolution) {
-        if (requestedTestSolution.equals(TestSolution.PASSED) && 
-                currentTestSolution.equals(TestSolution.NOT_APPLICABLE)) {
+        if (requestedTestSolution.equals(PASSED) &&
+                currentTestSolution.equals(NOT_APPLICABLE)) {
             return requestedTestSolution;
         } else 
-            if (requestedTestSolution.equals(TestSolution.PASSED)) {
+            if (requestedTestSolution.equals(PASSED)) {
             return currentTestSolution;
-        } else if (requestedTestSolution.equals(TestSolution.NEED_MORE_INFO) && 
-                currentTestSolution.equals(TestSolution.FAILED)) {
+        } else if (requestedTestSolution.equals(NEED_MORE_INFO) &&
+                currentTestSolution.equals(FAILED)) {
             return currentTestSolution;
         } else {
             return requestedTestSolution;

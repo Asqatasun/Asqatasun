@@ -100,7 +100,7 @@ public class Aw22Rule06031 extends AbstractLinkRuleImplementation {
     protected void check(
             SSPHandler sspHandler, 
             TestSolutionHandler testSolutionHandler) {
-        if (getLinkElementSelector().isEmpty()) {
+        if (decidableElementSelector.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
@@ -108,9 +108,9 @@ public class Aw22Rule06031 extends AbstractLinkRuleImplementation {
         prs = sspHandler.getProcessRemarkService();
         setServicesToChecker(titlePertinenceElementChecker);
         
-        if (! getLinkElementSelector().getDecidableElements().isEmpty()) {
-            setServicesToChecker(getDecidableElementsChecker());
-            for (Element el : getLinkElementSelector().getDecidableElements().get()) {
+        if (! decidableElementSelector.getDecidableElements().isEmpty()) {
+            setServicesToChecker(decidableElementsChecker);
+            for (Element el : decidableElementSelector.getDecidableElements().get()) {
                 testSolutionHandler.addTestSolution(testLink(sspHandler, el));
             }
         }
@@ -135,10 +135,7 @@ public class Aw22Rule06031 extends AbstractLinkRuleImplementation {
         prs.resetService();
         
         // check the pertinence of the link
-        getDecidableElementsChecker().check(
-                    sspHandler, 
-                    elHandler, 
-                    tsHandler);
+        decidableElementsChecker.check(sspHandler, elHandler, tsHandler);
         
         // get the processRemark for eventually override it with the result
         // returned by the title pertinence checker
@@ -150,10 +147,8 @@ public class Aw22Rule06031 extends AbstractLinkRuleImplementation {
         if (tsHandler.getTestSolution().equals(TestSolution.FAILED)) {
             
             // check the pertinence of the title of the link
-            String linkText = getDecidableElementsChecker().
-                                  getTextElementBuilder().
-                                      buildTextFromElement(el);
-            
+            String linkText = decidableElementsChecker.getTextElementBuilder().buildTextFromElement(el);
+
             if (testTitleAttributeLink(sspHandler, el, linkText).
                         equals(TestSolution.NEED_MORE_INFO)) {
                 //override result (evidence element have already been collected

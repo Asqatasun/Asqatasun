@@ -43,6 +43,7 @@ public final class EvidenceStore {
     public static final String FG_COLOR_EE = "Foreground-Color";
     public static final String BG_COLOR_EE = "Background-Color";
     public static final String CONTRAST_EE = "Contrast";
+    public static final String COMPUTED_LINK_TITLE = "Computed-Link-Title";
     
     /**
      * private constructor. This class handles keys and must not be instanciated

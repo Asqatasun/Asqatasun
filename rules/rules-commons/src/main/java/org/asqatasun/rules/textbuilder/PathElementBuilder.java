@@ -22,7 +22,9 @@
 package org.asqatasun.rules.textbuilder;
 
 import org.jsoup.nodes.Element;
-import org.asqatasun.rules.keystore.HtmlElementStore;
+
+import static org.asqatasun.rules.keystore.HtmlElementStore.BODY_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.HTML_ELEMENT;
 
 /**
  * This implementation of the {@link TextualElementBuilder} simply extract the element
@@ -53,10 +55,10 @@ public class PathElementBuilder implements TextElementBuilder {
     }
 
     private String getAbsolutePathFromElement(Element element) {
-        if (element.tagName().equalsIgnoreCase(HtmlElementStore.HTML_ELEMENT)) {
+        if (element.tagName().equalsIgnoreCase(HTML_ELEMENT)) {
             return "";
         }
-        if (!element.tagName().equalsIgnoreCase(HtmlElementStore.BODY_ELEMENT)) {
+        if (!element.tagName().equalsIgnoreCase(BODY_ELEMENT)) {
             int i = 0;
             Element currentElement = element;
             while (currentElement.previousElementSibling() != null) {
@@ -65,7 +67,7 @@ public class PathElementBuilder implements TextElementBuilder {
             }
             return getAbsolutePathFromElement(element.parent()) + " > " + element.tagName() + ":eq(" + i + ")";
         } else {
-            return HtmlElementStore.BODY_ELEMENT; 
+            return BODY_ELEMENT;
         }
     }
 

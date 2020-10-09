@@ -2,7 +2,7 @@
 
 ## Summary
 
-No-check rule
+This test consists in checking whether each text link is explicit enough to understand the purpose and the target.
 
 ## Business description
 
@@ -36,7 +36,6 @@ No-check rule
 
 **A**
 
-
 ## Technical description
 
 ### Scope
@@ -45,24 +44,105 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<a>` tags with a `"href"` attribute, without children (`a[href]:not(:has(img)):not(:has(svg)):not(:has(object)):not(:has(canvas))`) 
+and all the tags with a `role` attribute equals to `link`, without children (`[role=link]:not(:has(img)):not(:has(svg)):not(:has(object)):not(:has(canvas))`)
+
+#### Set2
+
+All the elements of **Set1** with a not empty text or accessible name and without context (assuming [the definition of a link context in Rgaa4.0](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#contexte-du-lien))
+
+#### Set3
+
+All the elements of **Set1** with a not empty text or accessible name and with a context (assuming [the definition of a link context in Rgaa4.0](https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#contexte-du-lien))
+
+in other words :
+
+size(**Set1**) = size(**Set2**) + size(**Set3**)
 
 ### Process
 
-None
+##### Test1
+
+For each element of **Set2**, we check whether the computed accessible name is not pertinent (see Notes about relevancy detection)
+
+For each element returning true in **Test1**, raise a MessageA, raise a MessageB instead
+
+##### Test2
+
+For each element of **Set3**, we check whether the computed accessible name is not pertinent (see Notes about relevancy detection)
+
+For each element returning true in **Test2**, raise a MessageC, raise a MessageD instead
+
+##### MessageA : Unexplicit Link
+
+-   code : UnexplicitLink
+-   status: Failed
+-   parameter : link text, `"title"` attribute, `"aria-label"` attribute, computed accessible name, snippet
+-   present in source : yes
+
+##### MessageB : Check link without context pertinence
+
+-   code : CheckLinkWithoutContextPertinence
+-   status: Need More Info
+-   parameter : link text, `"title"` attribute, `"aria-label"` attribute, computed accessible name, snippet
+-   present in source : yes
+
+##### MessageC : Unexplicit Link With context
+
+-   code : UnexplicitLinkWithContext
+-   status: Need More Info
+-   parameter : link text, `"title"` attribute, `"aria-label"` attribute, computed accessible name, snippet
+-   present in source : yes
+
+##### MessageD : Check link with context pertinence
+
+-   code : CheckLinkWithContextPertinence
+-   status: Need More Info
+-   parameter : link text, `"title"` attribute, `"aria-label"` attribute, computed link title, snippet
+-   present in source : yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+The page has no textual link (**Set1** is empty)
+
+#### Failed
+
+At least one textual link without context has a text content which is blacklisted or only composed of non-alphanumerical characters (**Test1** returns false for at least one element)
+
+#### Pre-qualified
+
+In all other cases
+
+## Notes
+
+We assume here that the links are only composed with a text. (`<a href="https://asqatasun.org/target.html">`my link`</a>`)
+
+The accessible name is computed regarding the following rules :
+
+ * Text associated through the usage of the WAI-ARIA `aria-labelledby` attribute
+ * Otherwise, content of the WAI-ARIA `aria-label` attribute
+ * Otherwise, content of the `a` tag
+ * Otherwise, content de `title` attribute
+ 
+
+All the links that have children different from `<img>`, `<canvas>`, `<object>` or `<svg>` are considered as combined links.
+
+**Definition of not-pertinent link title :**
+
+A link title is seen as not-pertinent in the following cases :
+
+-   the link title is blacklisted (regarding the LinkTextBlacklist nomenclature)
+-   the link only contains not alphanumerics characters
 
 
 ## Files

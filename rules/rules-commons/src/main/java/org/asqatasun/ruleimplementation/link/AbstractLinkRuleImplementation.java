@@ -26,7 +26,8 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.elementchecker.ElementChecker;
-import org.asqatasun.rules.elementselector.LinkElementSelector;
+import org.asqatasun.rules.elementselector.DecidableElementSelector;
+import org.asqatasun.rules.elementselector.ElementSelector;
 
 /**
  * This class deals with the tests related with links. Two kinds of links are 
@@ -37,21 +38,26 @@ import org.asqatasun.rules.elementselector.LinkElementSelector;
 public abstract class AbstractLinkRuleImplementation 
             extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    public LinkElementSelector getLinkElementSelector() {
-        return (LinkElementSelector)this.getElementSelector();
+    protected DecidableElementSelector decidableElementSelector;
+    public void setLinkElementSelector(DecidableElementSelector decidableElementSelector) {
+        setElementSelector(decidableElementSelector);
+        this.decidableElementSelector = decidableElementSelector;
     }
 
     /* the checked used for decidable elements */
-    ElementChecker decidableElementsChecker;
-    public ElementChecker getDecidableElementsChecker() {
-        return decidableElementsChecker;
+    protected ElementChecker decidableElementsChecker;
+    public void setDecidableElementsChecker(ElementChecker decidableElementsChecker) {
+        this.decidableElementsChecker = decidableElementsChecker;
     }
+
     
     /* the checked used for not decidable elements */
-    ElementChecker notDecidableElementsChecker;
-    public ElementChecker getNotDecidableElementsChecker() {
-        return notDecidableElementsChecker;
+    protected ElementChecker notDecidableElementsChecker;
+    public void setNotDecidableElementsChecker(ElementChecker notDecidableElementsChecker) {
+        this.notDecidableElementsChecker = notDecidableElementsChecker;
     }
+
+    public AbstractLinkRuleImplementation () { super();}
 
     /**
      * Constructor
@@ -61,11 +67,11 @@ public abstract class AbstractLinkRuleImplementation
      * @param notDecidableElementsChecker
      */
     public AbstractLinkRuleImplementation (
-            LinkElementSelector linkElementSelector, 
+            DecidableElementSelector linkElementSelector,
             ElementChecker decidableElementsChecker,
             ElementChecker notDecidableElementsChecker) {
         super();
-        setElementSelector(linkElementSelector);
+        setLinkElementSelector(linkElementSelector);
         this.decidableElementsChecker = decidableElementsChecker;
         this.notDecidableElementsChecker = notDecidableElementsChecker;
     }
@@ -75,32 +81,31 @@ public abstract class AbstractLinkRuleImplementation
             SSPHandler sspHandler, 
             TestSolutionHandler testSolutionHandler) {
 
-        LinkElementSelector linkElementSelector = getLinkElementSelector();
         
-        if (linkElementSelector.isEmpty()) {
+        if (decidableElementSelector.isEmpty()) {
             testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
             return;
         }
-        if (! linkElementSelector.getDecidableElements().isEmpty()) {
+        if (! decidableElementSelector.getDecidableElements().isEmpty()) {
             setServicesToChecker(decidableElementsChecker);
             decidableElementsChecker.check(
-                    sspHandler, 
-                    linkElementSelector.getDecidableElements(), 
+                    sspHandler,
+                    decidableElementSelector.getDecidableElements(),
                     testSolutionHandler);
         }
-        if (! linkElementSelector.getNotDecidableElements().isEmpty()) {
+        if (! decidableElementSelector.getNotDecidableElements().isEmpty()) {
             setServicesToChecker(notDecidableElementsChecker);
             notDecidableElementsChecker.check(
-                    sspHandler, 
-                    linkElementSelector.getNotDecidableElements(), 
+                    sspHandler,
+                    decidableElementSelector.getNotDecidableElements(),
                     testSolutionHandler);
         }
     }
 
     @Override
     public int getSelectionSize() {
-        return getLinkElementSelector().getDecidableElements().get().size()+
-                getLinkElementSelector().getNotDecidableElements().get().size();
+        return decidableElementSelector.getDecidableElements().get().size()+
+                decidableElementSelector.getNotDecidableElements().get().size();
     }
     
 }

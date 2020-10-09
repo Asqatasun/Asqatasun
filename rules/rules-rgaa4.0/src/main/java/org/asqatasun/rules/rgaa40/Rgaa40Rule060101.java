@@ -19,7 +19,11 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.link.AbstractLinkRuleRgaav4Implementation;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
+
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TEXT_LINK_RGAAv4_CSS_LIKE_QUERY;
+
 
 /**
  * Implementation of rule 6.1.1 (referential RGAA 4.0)
@@ -27,13 +31,11 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/06.Links/Rule-6-1-1.md">rule 6.1.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-6-1-1">6.1.1 rule specification</a>
  */
-public class Rgaa40Rule060101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule060101 extends AbstractLinkRuleRgaav4Implementation {
 
     /**
      * Default constructor
      */
-    public Rgaa40Rule060101() {
-        super();
-    }
+    public Rgaa40Rule060101() { super(TEXT_LINK_RGAAv4_CSS_LIKE_QUERY);}
 
 }
