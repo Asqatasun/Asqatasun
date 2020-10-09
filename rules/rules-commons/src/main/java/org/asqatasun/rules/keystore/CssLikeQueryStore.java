@@ -561,6 +561,13 @@ public final class CssLikeQueryStore {
     public static final String LINK_TIME_BASED_MEDIA_CSS_LIKE_QUERY
         = "a[href~=(?i)\\.(" + AUDIO_FILE_EXTENSION + "|" + VIDEO_FILE_EXTENSION +")] ";
 
+    // Time-based Media
+    public static final String MEDIA_CSS_LIKE_QUERY
+        = LINK_TIME_BASED_MEDIA_CSS_LIKE_QUERY
+        + ", " + TIME_BASED_MEDIA_CSS_LIKE_QUERY
+        + ", " + NO_TIME_BASED_MEDIA_CSS_LIKE_QUERY ;
+
+
     // scripts
     public static final String ONCLICK_CSS_LIKE_QUERY=
                     "*[onclick]"

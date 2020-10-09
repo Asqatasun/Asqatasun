@@ -20,30 +20,6 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <!-- video tags -->
-        <video src="sample.mp4" controls>
-            Your browser does not support the video element.
-        </video>
-        <video controls>
-            <source src="sample.ogg" type="video/ogg">
-            <source src="sample.mp4">
-            Your browser does not support the video element.
-        </video>
-
-        <!-- embed tags -->
-        <embed type="video/webm" src="sample.mp4" width="320" height="255">
-        <embed type="video/quicktime" src="sample.mov" width="320" height="255">
-
-        <!-- object tags -->
-        <object data="sample.avi" type="video/x-msvideo" width="320" height="255">
-            <param name="src" value="sample.avi">
-            <param name="autoStart" value="0">
-            alt : <a href="sample.avi">download sample.avi file</a>
-        </object>
-        <object data="player_flv.swf" type="application/x-shockwave-flash"  width="320" height="240">
-            <param name="movie" value="player_flv.swf" />
-            <param name="FlashVars" value="flv=sample.flv" />
-        </object>
 
         <!-- canvas and svg tags -->
         <canvas id="canvas" width="300" height="300"></canvas>
@@ -53,20 +29,19 @@
             </rect>
         </svg>
 
-        <!-- links to download video files -->
-        <a href="http://example.com/sample.MP4">download sample.mp4 file</a>
-        <a href="sample.avi">download sample.avi file</a>
-        <a href="sample.AVI">download sample.avi file</a>
-        <a href="sample.aVi">download sample.avi file</a>
-        <a href="sample.flv">download sample.flv file</a>
+        <!-- object and embed tags -->
+        <embed src="sample.swf" type="application/x-shockwave-flash" width="300" height="200"/>
+        <object type="application/x-shockwave-flash" data="sample.swf" width="300" height="200">
+            <param name="movie" value="sample.swf">
+            <param name="loop" value="false">
+        </object>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
         NMI:
-        multiple tags (object, embed, video, svg, canvas) that can display a time-based media
-        and multiple links to download a time-based media file
+        multiple tags (object, embed, svg, canvas) for no time-based media
     </div>
     <!-- END [test-explanation] -->
 </div>

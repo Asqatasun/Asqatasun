@@ -20,53 +20,63 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <!-- video tags -->
-        <video src="sample.mp4" controls>
+
+        <!-- Obsolete bgsound tag -->
+        <bgsound src="son1.mid"></bgsound>>
+
+        <!-- audio tags -->
+        <audio src="sample.mp3" controls>
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source src="sample.mp3" type="audio/mpeg">
+            <source src="sample.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+            Here is a link to <a href="sample.mp3">download the sample.mp3 file</a>
+        </audio>
+
+        <!-- video tags with audio file -->
+        <video src="sample.mp3" controls>
             Your browser does not support the video element.
         </video>
         <video controls>
-            <source src="sample.ogg" type="video/ogg">
-            <source src="sample.mp4">
+            <source src="sample.ogg" type="audio/ogg">
+            <source src="sample.mp3">
             Your browser does not support the video element.
         </video>
 
         <!-- embed tags -->
-        <embed type="video/webm" src="sample.mp4" width="320" height="255">
-        <embed type="video/quicktime" src="sample.mov" width="320" height="255">
+        <embed type="audio/x-wav" src="sample.wav" width="320" height="255">
+        <embed type="audio/mpeg" src="sample.mp3" width="320" height="255">
 
         <!-- object tags -->
-        <object data="sample.avi" type="video/x-msvideo" width="320" height="255">
-            <param name="src" value="sample.avi">
+        <object data="sample.wav" object type="audio/x-wav"  width="320" height="255">
+            <param name="src" value="sample.wav">
             <param name="autoStart" value="0">
-            alt : <a href="sample.avi">download sample.avi file</a>
+        </object>
+        <object data="sample.mp3" object type="audio/mpeg"  width="320" height="255">
+            <param name="src" value="sample.mp3">
+            <param name="autoStart" value="0">
         </object>
         <object data="player_flv.swf" type="application/x-shockwave-flash"  width="320" height="240">
             <param name="movie" value="player_flv.swf" />
             <param name="FlashVars" value="flv=sample.flv" />
         </object>
 
-        <!-- canvas and svg tags -->
-        <canvas id="canvas" width="300" height="300"></canvas>
-        <svg width="120" height="120" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="10" width="100" height="100">
-                <animate attributeType="XML" attributeName="x" from="-100" to="120" dur="10s" repeatCount="indefinite"/>
-            </rect>
-        </svg>
-
-        <!-- links to download video files -->
-        <a href="http://example.com/sample.MP4">download sample.mp4 file</a>
-        <a href="sample.avi">download sample.avi file</a>
-        <a href="sample.AVI">download sample.avi file</a>
-        <a href="sample.aVi">download sample.avi file</a>
-        <a href="sample.flv">download sample.flv file</a>
+        <!-- links to download audio files -->
+        <a href="http://example.com/sample.MP3">download sample.mp3 file</a>
+        <a href="sample.ogg">download sample.ogg file</a>
+        <a href="sample.OGG">download sample.ogg file</a>
+        <a href="sample.wav">download sample.wav file</a>
+        <a href="sample.wAv">download sample.wav file</a>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
         NMI:
-        multiple tags (object, embed, video, svg, canvas) that can display a time-based media
-        and multiple links to download a time-based media file
+        multiple tags (object, embed, audio and video) that can play a time-based media
+        and multiple links to download a time-based media
     </div>
     <!-- END [test-explanation] -->
 </div>
