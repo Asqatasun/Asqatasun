@@ -20,12 +20,79 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <ol>
+            <li class="current">Page 1</li>
+            <li><a href="https://example.org/page-2.html">Page 2</a></li>
+            <li><a href="https://example.org/page-3.html">Page 3</a></li>
+        </ol>
+        <style>
+            .page-next::after {
+                content: "\00bb"; /* This is character » */
+                display: inline-block;
+            }
+        </style>
+        <a href="https://example.org/page-2.html">
+            <span class="page-next" title="Jump to next page">
+            </span>
+        </a>
+    </div>
+    <div id="wcag-testcase1" class="testcase">
+        <ul>
+            <li>
+                <a href="tomb_raider.htm">Tomb Raider: Legend</a>
+                <a href="tomb_raider_images.htm">See Images</a>
+                <a href="tomb_raider.mpeg">(Download Demo)</a>
+            </li>
+            <li>
+                <a href="fear_extraction.htm">F.E.A.R. Extraction Point</a>
+                <a href="fear_extraction_images.htm">See Images</a>
+                <a href="fear_extraction.mpeg">(Download Demo)</a>
+            </li>
+        </ul>
+    </div>
+    <div id="wcag-testcase2" class="testcase">
+        <h3>Folk artists get awards</h3>
+        <p>Performers from the upcoming National Folk Festival receive
+            National Heritage Fellowships.
+            <a href="nheritage.html">[Read more...]</a>
+        </p>
+    </div>
+    <div id="wcag-testcase3" class="testcase">
+        <table>
+            <tr>
+                <th></th>
+                <th scope="col">Alamo</th>
+                <th scope="col">Budget</th>
+                <th scope="col">National</th>
+                <th scope="col">Avis</th>
+                <th scope="col">Hertz</th>
+            </tr>
+            <tr>
+                <th scope="row">Economy cars</th>
+                <td><a href="econ_ala.htm">$67/day</a></td>
+                <td><a href="econ_bud.htm">$68/day</a></td>
+                <td><a href="econ_nat.htm">$72/day</a></td>
+                <td><a href="econ_av.htm">$74/day</a></td>
+                <td><a href="econ_hz.htm">$74/day</a></td>
+            </tr>
+            <tr>
+                <th scope="row">Compact cars</th>
+                <td><a href="comp_ala.htm">$68/day</a></td>
+                <td><a href="comp_bud.htm">$69/day</a></td>
+                <td><a href="comp_nat.htm">$74/day</a></td>
+                <td><a href="comp_av.htm">$76/day</a></td>
+                <td><a href="comp_hz.htm">$76/day</a></td>
+            </tr>
+        </table>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
         NMI.
+
+        This is an implementation of the last and final case "I" from the algorithm
+        <a href="https://www.w3.org/TR/accname-1.1/#mapping_additional_nd_te">Accessible Name and Description Computation (from W3C)</a>
     </div>
     <!-- END [test-explanation] -->
 </div>

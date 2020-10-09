@@ -22,8 +22,10 @@
 
 package org.asqatasun.rules.elementselector;
 
-import java.util.Collection;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.processor.SSPHandler;
@@ -44,7 +46,7 @@ import org.springframework.util.CollectionUtils;
  * and results that have not. Each selection is then exposed
  * @author jkowalczyk
  */
-public class LinkElementSelector implements ElementSelector {
+public class LinkElementSelector implements DecidableElementSelector {
 
     /** 
      * The list of elements that are considered as context of the link. 
@@ -74,21 +76,21 @@ public class LinkElementSelector implements ElementSelector {
                 };
 
     /** */
-    private static Collection PARENT_CONTEXT_ELEMENTS = 
-            CollectionUtils.arrayToList(PARENT_CONTEXT_ELEMENTS_TAB);
+    private static final List PARENT_CONTEXT_ELEMENTS = CollectionUtils.arrayToList(PARENT_CONTEXT_ELEMENTS_TAB);
     
     /** */
-    private static Collection PREV_SIBLING_CONTEXT_ELEMENTS = 
-            CollectionUtils.arrayToList(PREV_SIBLING_CONTEXT_ELEMENTS_TAB);
+    private static final List PREV_SIBLING_CONTEXT_ELEMENTS = CollectionUtils.arrayToList(PREV_SIBLING_CONTEXT_ELEMENTS_TAB);
     
     /** */
     private final ElementHandler<Element> decidableElements = new ElementHandlerImpl();
+    @Override
     public ElementHandler<Element> getDecidableElements() {
         return decidableElements;
     }
 
     /** */
     private final ElementHandler<Element> notDecidableElements = new ElementHandlerImpl();
+    @Override
     public ElementHandler<Element> getNotDecidableElements() {
         return notDecidableElements;
     }
@@ -106,22 +108,31 @@ public class LinkElementSelector implements ElementSelector {
      and the one that have not
      */
     private boolean considerTitleAsContext = true;
-    public boolean considerTitleAsContext() {
-        return considerTitleAsContext;
-    }
+
+    private boolean considerAriaTagsAsContext = true;
     
     /* The element builder needed to build the link text */
-    private final LinkTextElementBuilder linkTextElementBuilder = 
-            new LinkTextElementBuilder();
-    
+    private TextElementBuilder linkTextElementBuilder = new LinkTextElementBuilder();
+
+    /* The element builder needed to build the link text */
+    private String cssLikeQuery = TEXT_LINK_CSS_LIKE_QUERY;
+    protected String getCssLikeQuery() {
+        return cssLikeQuery;
+    }
     /**
-     * 
-     * @param considerContext 
+     *
+     * Default constructor
+     */
+    public LinkElementSelector() {}
+
+    /**
+     *
+     * @param considerContext
      */
     public LinkElementSelector(boolean considerContext) {
         this.considerContext = considerContext;
     }
-    
+
     /**
      * Constructor
      * @param considerTitleAsContext
@@ -132,14 +143,18 @@ public class LinkElementSelector implements ElementSelector {
         this.considerTitleAsContext = considerTitleAsContext;
     }
 
-    /**
-     * 
-     * @return 
-     */
-    protected String getCssLikeQuery() {
-        return TEXT_LINK_CSS_LIKE_QUERY;
+    public LinkElementSelector(boolean considerContext,
+                               boolean considerTitleAsContext,
+                               boolean considerAriaTagsAsContext,
+                               String cssLikeQuery,
+                               TextElementBuilder linkTextElementBuilder) {
+        this.considerContext = considerContext;
+        this.considerTitleAsContext = considerTitleAsContext;
+        this.considerAriaTagsAsContext = considerAriaTagsAsContext;
+        this.linkTextElementBuilder = linkTextElementBuilder;
+        this.cssLikeQuery = cssLikeQuery;
     }
-    
+
     @Override
     public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
         // the elementHandler is ignored, the selection is handled by two 
@@ -163,6 +178,7 @@ public class LinkElementSelector implements ElementSelector {
         this.selectElements(sspHandler, null);
     }
 
+    @Override
     public boolean isEmpty() {
         return notDecidableElements.isEmpty() && decidableElements.isEmpty();
     }
@@ -230,13 +246,15 @@ public class LinkElementSelector implements ElementSelector {
                 !StringUtils.equalsIgnoreCase(linkElement.attr(TITLE_ATTR), linkText)) {
             return true;
         }
-        if (linkElement.hasAttr(ARIA_LABEL_ATTR) && 
+        if (considerAriaTagsAsContext) {
+            if (linkElement.hasAttr(ARIA_LABEL_ATTR) &&
                 StringUtils.isNotBlank(linkElement.attr(ARIA_LABEL_ATTR))) {
-            return true;
-        }
-        if (linkElement.hasAttr(ARIA_LABELLEDBY_ATTR) && 
+                return true;
+            }
+            if (linkElement.hasAttr(ARIA_LABELLEDBY_ATTR) &&
                 StringUtils.isNotBlank(linkElement.attr(ARIA_LABELLEDBY_ATTR))) {
-            return true;
+                return true;
+            }
         }
         // does the parent of the current link have some text?
         if (StringUtils.isNotBlank(linkElement.parent().ownText())) {

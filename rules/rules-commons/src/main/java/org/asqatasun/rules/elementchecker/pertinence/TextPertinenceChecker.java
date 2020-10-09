@@ -48,19 +48,15 @@ import org.asqatasun.rules.textbuilder.TextElementBuilder;
 public class TextPertinenceChecker extends CompositeChecker {
 
     /* The element builder needed to retrieve the text to check */
-    private TextElementBuilder textElementBuilder;
-    @Override
+    private TextElementBuilder textElementBuilder = new SimpleTextElementBuilder();
     public TextElementBuilder getTextElementBuilder() {
-        if (textElementBuilder == null) {
-            textElementBuilder = new SimpleTextElementBuilder();
-        }
         return textElementBuilder;
     }
 
     /* check emptiness */
-    private boolean checkEmptiness;
+    private final boolean checkEmptiness;
     /* attribute name to compare with*/
-    private TextElementBuilder textElementBuilderToCompareWith;
+    private final TextElementBuilder textElementBuilderToCompareWith;
     /* blacklist name to compare with*/
     private String blacklistNameToCompareWith = null;
     /* not pertinent message code */
@@ -204,8 +200,8 @@ public class TextPertinenceChecker extends CompositeChecker {
         if (checkEmptiness) {
             addChecker(new TextEmptinessChecker(
                             getTextElementBuilder(),
-                            new ImmutablePair(getFailureSolution(), notPertinentMessageCode),
-                            new ImmutablePair(TestSolution.PASSED,""), 
+                            new ImmutablePair<>(getFailureSolution(), notPertinentMessageCode),
+                            new ImmutablePair<>(TestSolution.PASSED,""),
                             getEeAttributeNames()));
         }
     }
@@ -250,8 +246,8 @@ public class TextPertinenceChecker extends CompositeChecker {
             addChecker(new TextNotIdenticalToAttributeChecker(
                             getTextElementBuilder(),
                             textElementBuilderToCompareWith, 
-                            new ImmutablePair(getFailureSolution(),notPertinentMessageCode),
-                            new ImmutablePair(TestSolution.PASSED,""),
+                            new ImmutablePair<>(getFailureSolution(),notPertinentMessageCode),
+                            new ImmutablePair<>(TestSolution.PASSED,""),
                             getEeAttributeNames()));
         }
     }

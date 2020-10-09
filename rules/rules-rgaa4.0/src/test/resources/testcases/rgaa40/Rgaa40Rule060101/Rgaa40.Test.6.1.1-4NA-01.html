@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.6.1.1 NA 01</title>
+</head>
+<body class="NA">
+<div>
+    <h1>Rgaa 4.0 Test.6.1.1 NA 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque lien texte vérifie-t-il une de ces conditions (hors cas particuliers) ?</p>
+            <ul>
+            <li>L’intitulé de lien seul permet d’en comprendre la fonction et la destination.</li>
+            <li>L’intitulé de lien additionné au contexte du lien permet d’en comprendre la fonction et la destination.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <!-- empty links are out of scope -->
+        <a href="mock-link.html"></a>
+        <a href="mock-link2.html" title=""></a>
+        <a href="mock-link3.html" aria-label=""></a>
+        <span id="description1"></span>
+        <span id="description2"></span>
+        <a href="mock-link4.html" aria-describedby="description1 description2"></a>
+    </div>
+    <div class="testcase">
+        <!-- image links, composite link, or svg links are out of scope -->
+        <a href="mock-link.html">
+            <img src="mock-image.jpg" alt="my image"/>
+        </a>
+        <a href="mock-link.html">
+            <img src="mock-image.jpg"/>
+            My image
+        </a>
+        <a href="mock-link.html">
+            <svg src="mock-image.jpg"/>
+            My image
+        </a>
+        <a href="my-link.html" title="cliquez ici">
+            <svg>
+                Cliquez ici
+            </svg>
+        </a>
+    </div>
+    <!-- END [testcase] -->
+
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NA.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
