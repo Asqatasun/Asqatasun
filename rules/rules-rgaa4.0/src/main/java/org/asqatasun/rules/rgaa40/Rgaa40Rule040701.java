@@ -19,7 +19,7 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.rgaa4.media.AbstractTimeBasedMediaDetectionRuleImplementation;
 
 /**
  * Implementation of rule 4.7.1 (referential RGAA 4.0)
@@ -27,7 +27,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/04.Multimedia/Rule-4-7-1.md">rule 4.7.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-4-7-1">4.7.1 rule specification</a>
  */
-public class Rgaa40Rule040701 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule040701 extends AbstractTimeBasedMediaDetectionRuleImplementation {
 
     /**
      * Default constructor

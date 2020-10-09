@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.4.1.2 NMI 01</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.4.1.2 NMI 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise">média temporel</a> pré-enregistré seulement vidéo vérifie-t-il, si nécessaire, l’une de ces conditions (hors cas particuliers) ?</p>
+            <ul>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#version-alternative-audio-seulement">version alternative « audio seulement »</a> accessible via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent">lien ou bouton adjacent</a>.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#version-alternative-audio-seulement">version alternative « audio seulement »</a> adjacente clairement identifiable.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel">transcription textuelle</a> accessible via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent">lien ou bouton adjacent</a>.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel">transcription textuelle</a> adjacente clairement identifiable.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#audiodescription-synchronisee-media-temporel">audiodescription</a> synchronisée.</li>
+            <li>Il existe une version alternative avec une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#audiodescription-synchronisee-media-temporel">audiodescription</a> synchronisée accessible via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent">lien ou bouton adjacent</a>.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <!-- source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations -->
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <script>
+            var sun = new Image();
+            var moon = new Image();
+            var earth = new Image();
+            function init(){
+                sun.src = 'https://mdn.mozillademos.org/files/1456/Canvas_sun.png';
+                moon.src = 'https://mdn.mozillademos.org/files/1443/Canvas_moon.png';
+                earth.src = 'https://mdn.mozillademos.org/files/1429/Canvas_earth.png';
+                window.requestAnimationFrame(draw);
+            }
+            function draw() {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                ctx.globalCompositeOperation = 'destination-over';
+                ctx.clearRect(0,0,300,300); // clear canvas
+                ctx.fillStyle = 'rgba(0,0,0,0.4)';
+                ctx.strokeStyle = 'rgba(0,153,255,0.4)';
+                ctx.save();
+                ctx.translate(150,150);
+                // Earth
+                var time = new Date();
+                ctx.rotate( ((2*Math.PI)/60)*time.getSeconds() + ((2*Math.PI)/60000)*time.getMilliseconds() );
+                ctx.translate(105,0);
+                ctx.fillRect(0,-12,50,24); // Shadow
+                ctx.drawImage(earth,-12,-12);
+                // Moon
+                ctx.save();
+                ctx.rotate( ((2*Math.PI)/6)*time.getSeconds() + ((2*Math.PI)/6000)*time.getMilliseconds() );
+                ctx.translate(0,28.5);
+                ctx.drawImage(moon,-3.5,-3.5);
+                ctx.restore();
+                ctx.restore();
+                ctx.beginPath();
+                ctx.arc(150,150,105,0,Math.PI*2,false); // Earth orbit
+                ctx.stroke();
+                ctx.drawImage(sun,0,0,300,300);
+                window.requestAnimationFrame(draw);
+            }
+            init();
+        </script>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI:
+        a canvas tag animated via javascript with use of bitmap images
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

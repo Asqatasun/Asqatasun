@@ -31,6 +31,7 @@ public final class HtmlElementStore {
     public static final String A_ELEMENT = HTML.Tag.A.toString();
     public static final String ABBR_ELEMENT = "abbr";
     public static final String ACRONYM_ELEMENT = "acronym";
+    public static final String AUDIO_ELEMENT = "audio";
     public static final String APPLET_ELEMENT = HTML.Tag.APPLET.toString();
     public static final String AREA_ELEMENT = HTML.Tag.AREA.toString();
     public static final String BGSOUND_ELEMENT = "bgsound";
@@ -93,7 +94,8 @@ public final class HtmlElementStore {
     public static final String TT_ELEMENT = HTML.Tag.TT.toString();
     public static final String UL_ELEMENT = HTML.Tag.UL.toString();
     public static final String VAR_ELEMENT = HTML.Tag.VAR.toString();
-    
+    public static final String VIDEO_ELEMENT = "video";
+
     /**
      * Private constructor. This class handles keys and must not be instanciated
      */

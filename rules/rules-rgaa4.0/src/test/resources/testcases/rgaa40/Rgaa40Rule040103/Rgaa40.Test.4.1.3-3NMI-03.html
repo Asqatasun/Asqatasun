@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.4.1.3 NMI 01</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.4.1.3 NMI 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise">média temporel</a> synchronisé pré-enregistré vérifie-t-il, si nécessaire, une de ces conditions (hors cas particuliers) ?</p>
+            <ul>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel">transcription textuelle</a> accessible via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent">lien ou bouton adjacent</a>.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel">transcription textuelle</a> adjacente clairement identifiable.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#audiodescription-synchronisee-media-temporel">audiodescription</a> synchronisée.</li>
+            <li>Il existe une version alternative avec une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#audiodescription-synchronisee-media-temporel">audiodescription</a> synchronisée accessible via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent">lien ou bouton adjacent</a>.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+
+        <!-- Obsolete bgsound tag -->
+        <bgsound src="son1.mid"></bgsound>>
+
+        <!-- audio tags -->
+        <audio src="sample.mp3" controls>
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source src="sample.mp3" type="audio/mpeg">
+            <source src="sample.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+            Here is a link to <a href="sample.mp3">download the sample.mp3 file</a>
+        </audio>
+
+        <!-- video tags with audio file -->
+        <video src="sample.mp3" controls>
+            Your browser does not support the video element.
+        </video>
+        <video controls>
+            <source src="sample.ogg" type="audio/ogg">
+            <source src="sample.mp3">
+            Your browser does not support the video element.
+        </video>
+
+        <!-- embed tags -->
+        <embed type="audio/x-wav" src="sample.wav" width="320" height="255">
+        <embed type="audio/mpeg" src="sample.mp3" width="320" height="255">
+
+        <!-- object tags -->
+        <object data="sample.wav" object type="audio/x-wav"  width="320" height="255">
+            <param name="src" value="sample.wav">
+            <param name="autoStart" value="0">
+        </object>
+        <object data="sample.mp3" object type="audio/mpeg"  width="320" height="255">
+            <param name="src" value="sample.mp3">
+            <param name="autoStart" value="0">
+        </object>
+        <object data="player_flv.swf" type="application/x-shockwave-flash"  width="320" height="240">
+            <param name="movie" value="player_flv.swf" />
+            <param name="FlashVars" value="flv=sample.flv" />
+        </object>
+
+        <!-- links to download audio files -->
+        <a href="http://example.com/sample.MP3">download sample.mp3 file</a>
+        <a href="sample.ogg">download sample.ogg file</a>
+        <a href="sample.OGG">download sample.ogg file</a>
+        <a href="sample.wav">download sample.wav file</a>
+        <a href="sample.wAv">download sample.wav file</a>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI:
+        multiple tags (object, embed, audio and video) that can play a time-based media
+        and multiple links to download a time-based media
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

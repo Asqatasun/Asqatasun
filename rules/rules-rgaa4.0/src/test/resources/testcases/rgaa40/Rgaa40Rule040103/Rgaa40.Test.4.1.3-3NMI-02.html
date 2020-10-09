@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.4.1.3 NMI 01</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.4.1.3 NMI 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise">média temporel</a> synchronisé pré-enregistré vérifie-t-il, si nécessaire, une de ces conditions (hors cas particuliers) ?</p>
+            <ul>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel">transcription textuelle</a> accessible via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent">lien ou bouton adjacent</a>.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#transcription-textuelle-media-temporel">transcription textuelle</a> adjacente clairement identifiable.</li>
+            <li>Il existe une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#audiodescription-synchronisee-media-temporel">audiodescription</a> synchronisée.</li>
+            <li>Il existe une version alternative avec une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#audiodescription-synchronisee-media-temporel">audiodescription</a> synchronisée accessible via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#lien-ou-bouton-adjacent">lien ou bouton adjacent</a>.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <!-- video tags -->
+        <video src="sample.mp4" controls>
+            Your browser does not support the video element.
+        </video>
+        <video controls>
+            <source src="sample.ogg" type="video/ogg">
+            <source src="sample.mp4">
+            Your browser does not support the video element.
+        </video>
+
+        <!-- embed tags -->
+        <embed type="video/webm" src="sample.mp4" width="320" height="255">
+        <embed type="video/quicktime" src="sample.mov" width="320" height="255">
+
+        <!-- object tags -->
+        <object data="sample.avi" type="video/x-msvideo" width="320" height="255">
+            <param name="src" value="sample.avi">
+            <param name="autoStart" value="0">
+            alt : <a href="sample.avi">download sample.avi file</a>
+        </object>
+        <object data="player_flv.swf" type="application/x-shockwave-flash"  width="320" height="240">
+            <param name="movie" value="player_flv.swf" />
+            <param name="FlashVars" value="flv=sample.flv" />
+        </object>
+
+        <!-- canvas and svg tags -->
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <svg width="120" height="120" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="100" height="100">
+                <animate attributeType="XML" attributeName="x" from="-100" to="120" dur="10s" repeatCount="indefinite"/>
+            </rect>
+        </svg>
+
+        <!-- links to download video files -->
+        <a href="http://example.com/sample.MP4">download sample.mp4 file</a>
+        <a href="sample.avi">download sample.avi file</a>
+        <a href="sample.AVI">download sample.avi file</a>
+        <a href="sample.aVi">download sample.avi file</a>
+        <a href="sample.flv">download sample.flv file</a>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI:
+        multiple tags (object, embed, video, svg, canvas) that can display a time-based media
+        and multiple links to download a time-based media file
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

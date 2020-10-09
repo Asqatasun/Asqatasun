@@ -26,6 +26,8 @@ import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
 /**
  * Unit test class for implementation of rule 4.12.1 (referential RGAA 4.0)
  *
+ * @todo Copy unit tests from rule 4.8.1 (when it is finalized) as it is similar
+ *
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/04.Multimedia/Rule-4-12-1.md">rule 4.12.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-4-12-1">4.12.1 rule specification</a>
  */
@@ -49,8 +51,8 @@ public class Rgaa40Rule041201Test extends Rgaa40RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
 //        addWebResource("Rgaa40.Test.4.12.1-1Passed-01");
 //        addWebResource("Rgaa40.Test.4.12.1-2Failed-01");
-        addWebResource("Rgaa40.Test.4.12.1-3NMI-01");
-//        addWebResource("Rgaa40.Test.4.12.1-4NA-01");
+//        addWebResource("Rgaa40.Test.4.12.1-3NMI-01");
+        addWebResource("Rgaa40.Test.4.12.1-4NA-01");
     }
 
     @Override
@@ -76,8 +78,8 @@ public class Rgaa40Rule041201Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.4.12.1-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
+//        ProcessResult processResult = processPageTest("Rgaa40.Test.4.12.1-3NMI-01");
+//        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
 //        checkResultIsPreQualified(processResult, 2, 1);
 //        checkRemarkIsPresent(
 //                processResult,
@@ -91,17 +93,7 @@ public class Rgaa40Rule041201Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.4.12.1-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.4.12.1-3NMI-01").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.4.12.1-4NA-01"));
     }
 
 }
