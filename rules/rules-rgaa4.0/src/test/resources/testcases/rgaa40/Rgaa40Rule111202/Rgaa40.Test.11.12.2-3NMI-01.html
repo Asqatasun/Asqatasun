@@ -10,22 +10,33 @@
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
-        <p>Chaque formulaire dont la validation modifie ou supprime des données à caractère financier, juridique ou personnel vérifie-t-il une de ces conditions ?</p>
-            <ul>
+        <p>Chaque formulaire dont la validation modifie ou supprime des données à caractère financier, juridique ou
+            personnel vérifie-t-il une de ces conditions ?</p>
+        <ul>
             <li>Un mécanisme permet de récupérer les données supprimées ou modifiées par l’utilisateur.</li>
-            <li>Un mécanisme de demande de confirmation explicite de la suppression ou de la modification, via un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ de formulaire</a> ou une étape supplémentaire, est proposé.</li>
-            </ul>
+            <li>Un mécanisme de demande de confirmation explicite de la suppression ou de la modification, via un <a
+                href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#champ-de-saisie-de-formulaire">champ
+                de formulaire</a> ou une étape supplémentaire, est proposé.
+            </li>
+        </ul>
     </div>
     <!-- END [test-detail] -->
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <form action="mock_action">
+            <label for="field1">Field1</label>
+            <input type="radio" name="field1" id="field1"/>
+
+            <label for="field2">Female</label>
+            <input type="radio" name="field2" id="field2"/>
+        </form>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI : The page contains a form tag
     </div>
     <!-- END [test-explanation] -->
 </div>
