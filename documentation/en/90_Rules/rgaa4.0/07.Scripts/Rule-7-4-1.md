@@ -2,10 +2,10 @@
 
 ## Summary
 
-This test consists in detecting patterns that are known to change context automatically : 
+This test consists in detecting patterns that are known to change context automatically: 
 
-- A `<select>` element with an `"onchange"` attribute
-- A `<form>` element without submit button
+- a `<select>` element with an `onchange` attribute
+- a `<form>` element without submit button
 
 ## Business description
 
@@ -40,19 +40,29 @@ This test consists in detecting patterns that are known to change context automa
 
 **Semi-Decidable**
 
+
 ## Algorithm
 
 ### Selection
 
 #### Set1
 
-All the `<select>` tags with an "onchange" attribute (select[onchange])
+All the `<select>` tags with an `onchange` attribute (select[onchange])
 
 #### Set2
 
 All the `<form>` tags with a `<select>` child but without child of type
-`<button>`, `<input type='submit'>`, `<input type='button'>` or `<input
-type='reset'> (form:has(select):not(:has(button)):not(:has(input[type=submit])):not(:has(input[type=button])):not(:has(input[type=reset])))
+`<button>`, `<input type="submit">`, `<input type="button">` or `<input type="reset">`.
+ 
+ CSS selector:
+ ```jquery-css
+select[onchange],
+form:has(select)
+    :not(:has(button))
+    :not(:has(input[type=submit]))
+    :not(:has(input[type=button]))
+    :not(:has(input[type=reset]))
+```
 
 ### Process
 
@@ -60,22 +70,22 @@ type='reset'> (form:has(select):not(:has(button)):not(:has(input[type=submit])):
 
 For each occurence of **Set1** and **Set2**, raise a MessageA
 
-#### Test2
+#### Test2
 
 If **Set1** AND **Set2** are empty, raise a MessageB
 
 ##### MessageA : Context changed by script detected
 
--   code :ContextChangedScriptDetected
--   status: Pre-Qualified
--   parameter : snippet
--   present in source : yes
+- code: ContextChangedScriptDetected
+- status: Pre-Qualified
+- parameter: snippet
+- present in source: yes
 
 ##### MessageB : No Pattern detected
 
--   code : NoPatternDetected_Rgaa30-07041
--   status: Pre-Qualified
--   present in source : no
+- code: NoPatternDetected_Rgaa40-07041
+- status: Pre-Qualified
+- present in source: no
 
 ### Analysis
 
@@ -84,11 +94,8 @@ If **Set1** AND **Set2** are empty, raise a MessageB
 In all cases
 
 
-
 ## Files
 
 - [TestCases files for rule 7.4.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule070401/)
 - [Unit test file for rule 7.4.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule070401Test.java)
 - [Class file for rule 7.4.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule070401.java)
-
-
