@@ -22,13 +22,22 @@
     <!-- START [testcase] -->
     <div class="testcase">
         <form action="http://somesite.com/prog/component-select" method="post"> 
-            <p> <select multiple="multiple" size="4" name="component-select" onchange="doSomething()"> <option selected="selected" value="Component_1_a">Component_1</option> <option selected="selected" value="Component_1_b">Component_2</option> <option>Component_3</option> <option>Component_4</option> <option>Component_5</option> <option>Component_6</option> <option>Component_7</option> </select> <input type="submit" value="Send" /> <input type="reset" /> </p> 
+            <select multiple="multiple" size="4" name="component-select" onchange="doSomething()">
+                <option selected="selected" value="Component_1_a">Component_1</option>
+                <option selected="selected" value="Component_1_b">Component_2</option>
+                <option>Component_3</option> <option>Component_4</option>
+                <option>Component_5</option> <option>Component_6</option>
+                <option>Component_7</option>
+            </select>
+            <input type="submit" value="Send" />
+            <input type="reset" />
         </form> 
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
+        NMI: a script that potentially changes the context is detected
     </div>
     <!-- END [test-explanation] -->
 </div>
