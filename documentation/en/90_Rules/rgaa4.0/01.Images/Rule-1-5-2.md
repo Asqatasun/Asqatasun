@@ -42,7 +42,7 @@ This test consists in detecting buttons associated with an image used as a CAPTC
 
 #### Set1
 
-All the `<input>` tags with a `"type"` attribute equals to "image" (css selector : `input[type=image]`) 
+All the `<input>` tags with a `type` attribute equals to "image" (css selector : `input[type=image]`) 
 
 #### Set2
 
@@ -56,20 +56,20 @@ For each element of **Set2**, raise a MessageA
 
 ##### MessageA 
 
--    code : **CheckCaptchaAlternativeAccess** 
+-    code: **CheckCaptchaAlternativeAccess** 
 -    status: Pre-Qualified
--    parameter : tag name, snippet
--    present in source : yes
+-    parameter: tag name, snippet
+-    present in source: yes
 
 ### Analysis
 
 #### Pre-qualified
 
-At least one `<input>` tags with a `"type"` attribute equals to "image" identified as a CAPTCHA has been found on the page (**Set2** is not empty)
+At least one `<input>` tags with a `type` attribute equals to "image" identified as a CAPTCHA has been found on the page (**Set2** is not empty)
 
 #### Not Applicable
 
-No `<input>` tag with a `"type"` attribute equals to "image" identified as a CAPTCHA has been found on the page (**Set2** is empty)
+No `<input>` tag with a `type` attribute equals to "image" identified as a CAPTCHA has been found on the page (**Set2** is empty)
 
 ## Notes
 
