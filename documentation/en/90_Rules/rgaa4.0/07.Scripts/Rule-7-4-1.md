@@ -2,7 +2,10 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting patterns that are known to change context automatically: 
+
+- a `<select>` element with an `onchange` attribute
+- a `<form>` element without submit button
 
 ## Business description
 
@@ -35,22 +38,58 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Semi-Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<select>` tags with an `onchange` attribute (select[onchange])
+
+#### Set2
+
+All the `<form>` tags with a `<select>` child but without child of type
+`<button>`, `<input type="submit">`, `<input type="button">` or `<input type="reset">`.
+ 
+ CSS selector:
+ ```jquery-css
+select[onchange],
+form:has(select)
+    :not(:has(button))
+    :not(:has(input[type=submit]))
+    :not(:has(input[type=button]))
+    :not(:has(input[type=reset]))
+```
 
 ### Process
 
-None
+#### Test1
+
+For each occurence of **Set1** and **Set2**, raise a MessageA
+
+#### Test2
+
+If **Set1** AND **Set2** are empty, raise a MessageB
+
+##### MessageA : Context changed by script detected
+
+- code: ContextChangedScriptDetected
+- status: Pre-Qualified
+- parameter: snippet
+- present in source: yes
+
+##### MessageB : No Pattern detected
+
+- code: NoPatternDetected_Rgaa40-07041
+- status: Pre-Qualified
+- present in source: no
 
 ### Analysis
 
-#### Not Tested
+#### Pre-qualified
 
 In all cases
 
@@ -60,5 +99,3 @@ In all cases
 - [TestCases files for rule 7.4.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule070401/)
 - [Unit test file for rule 7.4.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule070401Test.java)
 - [Class file for rule 7.4.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule070401.java)
-
-

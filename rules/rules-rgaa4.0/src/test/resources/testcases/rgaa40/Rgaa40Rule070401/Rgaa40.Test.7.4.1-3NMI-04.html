@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.7.4.1 NMI 04</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.7.4.1 NMI 04</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#script">script</a> qui initie un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#changement-de-contexte">changement de contexte</a> vérifie-t-il une de ces conditions ?</p>
+            <ul>
+            <li>L’utilisateur est averti par un texte de l’action du script et du type de changement avant son déclenchement.</li>
+            <li>Le changement de contexte est initié par un bouton (input de type <code>submit</code>, <code>button</code> ou <code>image</code> ou balise <code>&lt;button&gt;</code>) explicite.</li>
+            <li>Le changement de contexte est initié par un lien explicite.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <form action="http://somesite.com/prog/component-select" method="post"> 
+            <select multiple="multiple" size="4" name="component-select" onchange="doSomething()">
+                <option selected="selected" value="Component_1_a">Component_1</option>
+                <option selected="selected" value="Component_1_b">Component_2</option>
+                <option>Component_3</option> <option>Component_4</option>
+                <option>Component_5</option> <option>Component_6</option>
+                <option>Component_7</option>
+            </select>
+            <input type="submit" value="Send" />
+            <input type="reset" />
+        </form> 
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI: a script that potentially changes the context is detected
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.7.4.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.7.4.1 NMI 02</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.7.4.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.7.4.1 NMI 02</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -28,12 +28,21 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <select multiple="multiple" name="component-select" onchange="doSomething()" size="4">
+            <option selected="selected" value="Component_1_a">Component_1</option>
+            <option selected="selected" value="Component_1_b">Component_2</option>
+            <option>Component_3</option>
+            <option>Component_4</option>
+            <option>Component_5</option>
+            <option>Component_6</option>
+            <option>Component_7</option>
+        </select>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI: no script that changes the context is detected
+        NMI: a script that potentially changes the context is detected
     </div>
     <!-- END [test-explanation] -->
 </div>
