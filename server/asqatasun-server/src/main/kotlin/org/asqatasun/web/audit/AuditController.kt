@@ -42,18 +42,21 @@ class AuditController(private val auditDataService: AuditDataService,
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     fun getAll() = auditDataService.findAll()
-        .map { it.toAuditDto(
-            it.subject.toWebResourceDto(webResourceStatisticsDataService),
-            it.tagList.map { tag -> tag.value })
+        .map { audit ->
+            audit.toAuditDto(
+                audit.subject.toWebResourceDto(webResourceStatisticsDataService),
+                audit.tagList.map { tag -> tag.value },
+                audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value)
         }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     fun get(@PathVariable id: Long) =
-        Optional.ofNullable(auditDataService.read(id)).map {
-            it.toAuditDto(
-                it.subject.toWebResourceDto(webResourceStatisticsDataService),
-                it.tagList.map { tag -> tag.value })
+        Optional.ofNullable(auditDataService.read(id)).map {audit ->
+            audit.toAuditDto(
+                audit.subject.toWebResourceDto(webResourceStatisticsDataService),
+                audit.tagList.map { tag -> tag.value },
+                audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value)
         }.orElseThrow {
             ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
         }!!
@@ -65,7 +68,8 @@ class AuditController(private val auditDataService: AuditDataService,
             it.map {audit ->
                 audit.toAuditDto(
                     audit.subject.toWebResourceDto(webResourceStatisticsDataService),
-                    audit.tagList.map { tag -> tag.value })
+                    audit.tagList.map { tag -> tag.value },
+                    audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value)
             }
         }.orElseThrow {
             ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
