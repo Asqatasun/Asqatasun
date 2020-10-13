@@ -20,6 +20,8 @@
 package org.asqatasun.rules.rgaa40;
 
 import org.asqatasun.ruleimplementation.link.AbstractLinkRuleRgaav4Implementation;
+import org.asqatasun.rules.elementselector.LinkElementSelector;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.TEXT_LINK_RGAAv4_CSS_LIKE_QUERY;
@@ -36,6 +38,14 @@ public class Rgaa40Rule060101 extends AbstractLinkRuleRgaav4Implementation {
     /**
      * Default constructor
      */
-    public Rgaa40Rule060101() { super(TEXT_LINK_RGAAv4_CSS_LIKE_QUERY);}
+    public Rgaa40Rule060101() {
+        super(new LinkElementSelector(
+            true,
+            false,
+            false,
+            TEXT_LINK_RGAAv4_CSS_LIKE_QUERY,
+            new AccessibleNameElementBuilder())
+        );
+    }
 
 }

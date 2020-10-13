@@ -19,7 +19,9 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.link.AbstractLinkRuleRgaav4Implementation;
+import org.asqatasun.rules.elementselector.CompositeLinkElementSelector;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 
 /**
  * Implementation of rule 6.1.2 (referential RGAA 4.0)
@@ -27,13 +29,14 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/06.Links/Rule-6-1-2.md">rule 6.1.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-6-1-2">6.1.2 rule specification</a>
  */
-public class Rgaa40Rule060102 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule060102 extends AbstractLinkRuleRgaav4Implementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule060102() {
-        super();
+        super(new CompositeLinkElementSelector(true, true, new AccessibleNameElementBuilder()));
     }
+
 
 }

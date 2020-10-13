@@ -25,8 +25,9 @@ import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.elementchecker.link.LinkPertinenceRgaa4Checker;
+import org.asqatasun.rules.elementselector.ElementSelector;
 import org.asqatasun.rules.elementselector.LinkElementSelector;
-import org.asqatasun.rules.textbuilder.LinkTextRgaa4ElementBuilder;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 
 import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
 import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
@@ -42,37 +43,16 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
  */
 public abstract class AbstractLinkRuleRgaav4Implementation extends AbstractLinkRuleImplementation {
 
-    private final String cssLikeQuery;
-    private LinkTextRgaa4ElementBuilder textElementBuilder;
-
-    /**
-     * Constructor
-     *
-     * @param cssLikeQuery
-     */
-    public AbstractLinkRuleRgaav4Implementation(String cssLikeQuery) {
+    public AbstractLinkRuleRgaav4Implementation(LinkElementSelector elementSelector) {
         super();
-        this.cssLikeQuery = cssLikeQuery;
-    }
-
-    @Override
-    protected void select(SSPHandler sspHandler) {
-        // THe LinkTextRgaa4ElementBuilder needs to be instantiated with the sspHandler because some extra selection
-        // is done during selection process. That explains why the selector and the checkers can't be set with
-        // the constructor as the sspHandler is not ready yet.
-        this.textElementBuilder = new LinkTextRgaa4ElementBuilder();
-        this.textElementBuilder.setSspHandler(sspHandler);
-        this.setLinkElementSelector(
-            new LinkElementSelector(true, false, false, cssLikeQuery, textElementBuilder));
-
-        super.select(sspHandler);
+        this.setLinkElementSelector(elementSelector);
     }
 
     @Override
     protected void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
         this.setDecidableElementsChecker(
             new LinkPertinenceRgaa4Checker(
-                textElementBuilder,
+                new AccessibleNameElementBuilder(),
                 // not pertinent solution
                 TestSolution.FAILED,
                 // not pertinent message
@@ -86,7 +66,7 @@ public abstract class AbstractLinkRuleRgaav4Implementation extends AbstractLinkR
                 COMPUTED_LINK_TITLE));
         this.setNotDecidableElementsChecker(
             new LinkPertinenceRgaa4Checker(
-                textElementBuilder,
+                new AccessibleNameElementBuilder(),
                 // not pertinent solution
                 TestSolution.NEED_MORE_INFO,
                 // not pertinent message

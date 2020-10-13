@@ -24,7 +24,7 @@ package org.asqatasun.rules.elementchecker.text;
 
 import java.util.regex.Pattern;
 
-import org.asqatasun.rules.textbuilder.LinkTextRgaa4ElementBuilder;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.TestSolution;
@@ -123,8 +123,8 @@ public class TextOnlyContainsNonAlphanumericalCharactersChecker
         if (testableTextBuilder == null) {
             testableTextBuilder = getTextElementBuilder();
         }
-        if (testableTextBuilder instanceof LinkTextRgaa4ElementBuilder) {
-            ((LinkTextRgaa4ElementBuilder)testableTextBuilder).setSspHandler(sspHandler);
+        if (testableTextBuilder instanceof AccessibleNameElementBuilder) {
+            ((AccessibleNameElementBuilder)testableTextBuilder).setSspHandler(sspHandler);
         }
          for (Element element : elements) {
              testSolutionHandler.addTestSolution(

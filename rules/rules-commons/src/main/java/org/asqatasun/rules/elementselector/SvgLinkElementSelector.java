@@ -23,6 +23,7 @@
 package org.asqatasun.rules.elementselector;
 
 import org.apache.commons.lang3.StringUtils;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.jsoup.nodes.Element;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITH_CHILDREN_CSS_LIKE_QUERY;
 import org.asqatasun.rules.keystore.HtmlElementStore;
@@ -42,7 +43,11 @@ public class SvgLinkElementSelector extends LinkElementSelector {
     public SvgLinkElementSelector(boolean considerContext) {
         super(considerContext);
     }
-    
+
+    public SvgLinkElementSelector(boolean considerContext, TextElementBuilder linkTextElementBuilder) {
+        super(considerContext, linkTextElementBuilder);
+    }
+
     /**
      * Constructor
      * @param considerTitleAsContext

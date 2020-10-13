@@ -22,6 +22,8 @@
 package org.asqatasun.ruleimplementation;
 
 import javax.annotation.Nonnull;
+
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 import org.jsoup.nodes.Element;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.rules.elementchecker.ElementChecker;
