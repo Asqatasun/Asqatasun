@@ -2,7 +2,7 @@
 
 ## Summary
 
-No-check rule
+This test consists in checking the relevancy of the title tag in the page.
 
 ## Business description
 
@@ -31,24 +31,51 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Semi-Decidable**
 
 ## Algorithm
 
-### Selection
+### Set1
 
-None
+The content of the `<title>` tag within the `<head>` (head title)
 
 ### Process
 
-None
+#### Test1
+
+We check whether the title is found amoung the blacklisted titles loaded by the nomenclature "UnexplicitPageTitle". 
+
+For each element returning false in Test1, raise a MessageA. Raise a MessageB instead.
+
+###### MessageA : Irrelevant title
+
+-   code : NotPertinentTitle
+-   status: Failed
+-   parameter : the textual content, snippet
+-   present in source : yes
+
+###### MessageB : Check title pertinence
+
+-   code : CheckTitlePertinence
+-   status: Pre-Qualified
+-   parameter : the textual content, snippet
+-   present in source : yes
 
 ### Analysis
 
-#### Not Tested
+####  Not Applicable
 
-In all cases
+The page has no `<title>` tag (**Set1** is empty)
+
+#### Failed
+
+The title of the page has been found in the blacklist (**Test1** returns true)
+
+#### Pre-Qualified
+
+The title of the page has not been found in the blacklist (**Test1** returns false)
+
+
 
 
 ## Files

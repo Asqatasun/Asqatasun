@@ -19,7 +19,13 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TITLE_WITHIN_HEAD_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_PERTINENT_TITLE_MSG;
 
 /**
  * Implementation of rule 8.6.1 (referential RGAA 4.0)
@@ -27,13 +33,32 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/08.Mandatory_elements/Rule-8-6-1.md">rule 8.6.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-8-6-1">8.6.1 rule specification</a>
  */
-public class Rgaa40Rule080601 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule080601 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
+    /* Title blacklisted nomenclature */
+    private static final String TITLE_BLACKLIST_NOM = "UnexplicitPageTitle";
+    
     /**
      * Default constructor
      */
     public Rgaa40Rule080601() {
-        super();
+        super(
+                new SimpleElementSelector(TITLE_WITHIN_HEAD_CSS_LIKE_QUERY),
+                new TextPertinenceChecker(
+                    // check emptiness
+                    true, 
+                    // no comparison with other attribute
+                    null, 
+                    // blacklist nomenclature name
+                    TITLE_BLACKLIST_NOM, 
+                    // not pertinent message
+                    NOT_PERTINENT_TITLE_MSG, 
+                    // manual check message
+                    CHECK_TITLE_PERTINENCE_MSG,
+                    // evidence elements
+                    TEXT_ELEMENT2
+                )
+            );
     }
 
 }
