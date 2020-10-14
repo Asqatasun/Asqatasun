@@ -21,6 +21,7 @@ package org.asqatasun.rules.rgaa40;
 
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
 
 /**
@@ -41,67 +42,60 @@ public class Rgaa40Rule080501Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-            "org.asqatasun.rules.rgaa40.Rgaa40Rule080501");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa40.Rgaa40Rule080501");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.8.5.1-1Passed-01");
-//        addWebResource("Rgaa40.Test.8.5.1-2Failed-01");
-        addWebResource("Rgaa40.Test.8.5.1-3NMI-01");
-//        addWebResource("Rgaa40.Test.8.5.1-4NA-01");
+        addWebResource("Rgaa40.Test.8.5.1-1Passed-01");
+        addWebResource("Rgaa40.Test.8.5.1-2Failed-01");
+        addWebResource("Rgaa40.Test.8.5.1-2Failed-02");
+        addWebResource("Rgaa40.Test.8.5.1-2Failed-03");
+
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
+        //------------------------------1Passed-01---------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.8.5.1-1Passed-01"), 1);
-
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.5.1-1Passed-01"),1);
+        
         //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
+        //----------------------------2Failed-01--------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.8.5.1-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        ProcessResult processResult = processPageTest("Rgaa40.Test.8.5.1-2Failed-01");
+        checkResultIsFailed(processResult, 0, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.TITLE_TAG_MISSING_MSG,
+                "",
+                1);
+        
         //----------------------------------------------------------------------
-        //------------------------------3NMI-01---------------------------------
+        //----------------------------2Failed-02--------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.8.5.1-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-
+        processResult = processPageTest("Rgaa40.Test.8.5.1-2Failed-02");
+        checkResultIsFailed(processResult, 0, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.TITLE_TAG_MISSING_MSG,
+                "",
+                1);
+        
         //----------------------------------------------------------------------
-        //------------------------------4NA-01------------------------------
+        //----------------------------2Failed-03--------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.8.5.1-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.8.5.1-3NMI-01").getValue());
+        processResult = processPageTest("Rgaa40.Test.8.5.1-2Failed-03");
+        checkResultIsFailed(processResult, 2, 1);
+        checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.TITLE_TAG_MISSING_MSG,
+                "",
+                1);
     }
 
 }

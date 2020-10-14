@@ -2,7 +2,7 @@
 
 ## Summary
 
-No-check rule
+This test consists in checking the relevancy of the `title` tag in the page.
 
 ## Business description
 
@@ -31,24 +31,55 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Semi-Decidable**
 
 ## Algorithm
 
-### Selection
+### Set1
 
-None
+The content of the `<title>` tag within the `<head>` 
+
+CSS selector:
+```jquery-css
+head title
+```
 
 ### Process
 
-None
+#### Test1
+
+We check whether the title is found amoung the blacklisted titles loaded by the nomenclature "UnexplicitPageTitle". 
+
+For each element returning false in Test1, raise a MessageA. 
+Raise a MessageB instead.
+
+###### MessageA : Irrelevant title
+
+- code: NotPertinentTitle
+- status: Failed
+- parameter: the textual content, snippet
+- present in source: yes
+
+###### MessageB : Check title pertinence
+
+- code: CheckTitlePertinence
+- status: Pre-Qualified
+- parameter: the textual content, snippet
+- present in source: yes
 
 ### Analysis
 
-#### Not Tested
+####  Not Applicable
 
-In all cases
+The page has no `<title>` tag (**Set1** is empty)
+
+#### Failed
+
+The title of the page has been found in the blacklist (**Test1** returns true)
+
+#### Pre-Qualified
+
+The title of the page has not been found in the blacklist (**Test1** returns false)
 
 
 ## Files
@@ -56,5 +87,3 @@ In all cases
 - [TestCases files for rule 8.6.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080601/)
 - [Unit test file for rule 8.6.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080601Test.java)
 - [Class file for rule 8.6.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080601.java)
-
-

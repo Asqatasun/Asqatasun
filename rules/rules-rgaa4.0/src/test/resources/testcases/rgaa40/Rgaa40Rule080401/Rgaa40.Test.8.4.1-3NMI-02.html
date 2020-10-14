@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <!-- START [testcase] -->
-<html lang="de">
-<!-- END [testcase] -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- START [testcase] -->
-    <title>Rgaa 4.0 Test.8.4.1 NMI 01 (testcase warning one)</title>
-    <!-- END [testcase] -->
+    <title lang="en">Rgaa 4.0 Test.8.4.1 NMI 02</title>
 </head>
 <body class="NMI">
 <div>
-    <!-- START [testcase] -->
-    <h1>Rgaa 4.0 Test.8.4.1 NMI 01 (testcase warning one)</h1>
-    <!-- END [testcase] -->
+    <h1 lang="en">Rgaa 4.0 Test.8.4.1 NMI 02</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -24,14 +19,22 @@
     </div>
     <!-- END [test-detail] -->
 
+    <!-- START [testcase] -->
+    <div class="testcase">
+        Some short text in english
+    </div>
+    <!-- END [testcase] -->
+
     <!-- START [test-explanation] -->
     <div class="test-explanation" lang="en">
         NMI:
-        the default language is defined on the html tag
-        but the tested text is too short (less than 20 words)
-        to provide a decidable result.
+        the default language is defined on the html tag but its value doesn&apos;t match the language definition pattern.
+
+        The tested text is too short (less than 20 words) to provide a decidable result.
+        The tags defined with a lang attribute are ignored.
     </div>
     <!-- END [test-explanation] -->
 </div>
 </body>
 </html>
+<!-- END [testcase] -->

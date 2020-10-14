@@ -19,7 +19,20 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.jsoup.nodes.Element;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.AttributeStore.CONTENT_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.META_WITH_REFRESH_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NOT_IMMEDIATE_REDIRECT_VIA_META_MSG;
 
 /**
  * Implementation of rule 13.1.2 (referential RGAA 4.0)
@@ -27,13 +40,63 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/13.Consultation/Rule-13-1-2.md">rule 13.1.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-13-1-2">13.1.2 rule specification</a>
  */
-public class Rgaa40Rule130102 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule130102 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
+    private static final String URL_STR = "url";
+    private static final String SEMI_COLON_CHAR = ";";
+    
+    ElementHandler<Element> notImmediateRedirectMeta = new ElementHandlerImpl();
+    
     /**
      * Default constructor
      */
     public Rgaa40Rule130102() {
-        super();
+        super(
+                new SimpleElementSelector(META_WITH_REFRESH_CSS_LIKE_QUERY),
+                new ElementPresenceChecker(
+                        new ImmutablePair(TestSolution.FAILED, NOT_IMMEDIATE_REDIRECT_VIA_META_MSG),
+                        new ImmutablePair(TestSolution.PASSED,""))
+        );
+    }
+
+    @Override
+    protected void select(SSPHandler sspHandler) {
+        super.select(sspHandler);
+        
+        for (Element el : getElements().get()) {
+            if (!isImmediateRedirection(el)) {
+                notImmediateRedirectMeta.add(el);
+            }
+        }
+    }
+    
+    @Override
+    protected void check(
+            SSPHandler sspHandler, 
+            TestSolutionHandler testSolutionHandler) {
+
+        if (getElements().isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+            return;
+        }
+        if (notImmediateRedirectMeta.isEmpty()) {
+            testSolutionHandler.addTestSolution(TestSolution.PASSED);
+            return;
+        }
+        super.check(sspHandler, testSolutionHandler);
+    }
+    
+    /**
+     * @param element
+     * @return whether the given element is an immediate redirection
+     */
+    private boolean isImmediateRedirection(Element element) {
+        String contentAttributeContent = element.attr(CONTENT_ATTR);
+        String[] contentAttributeValues = contentAttributeContent.split(SEMI_COLON_CHAR);
+        return !(contentAttributeValues != null && 
+                contentAttributeValues.length == 2 &&
+                Integer.valueOf(StringUtils.trim(contentAttributeValues[0]))>0 &&
+                contentAttributeValues[1].toLowerCase().startsWith(URL_STR));
     }
 
 }

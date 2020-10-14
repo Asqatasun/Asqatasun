@@ -19,7 +19,10 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithSelectorAndCheckerImplementation;
+import org.asqatasun.rules.elementchecker.lang.LangDeclarationValidityChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.HTML_WITH_LANG_CSS_LIKE_QUERY;
 
 /**
  * Implementation of rule 8.4.1 (referential RGAA 4.0)
@@ -27,13 +30,16 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/08.Mandatory_elements/Rule-8-4-1.md">rule 8.4.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-8-4-1">8.4.1 rule specification</a>
  */
-public class Rgaa40Rule080401 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule080401 extends AbstractPageRuleWithSelectorAndCheckerImplementation {
 
-    /**
+     /**
      * Default constructor
      */
     public Rgaa40Rule080401() {
-        super();
+        super(
+                new SimpleElementSelector(HTML_WITH_LANG_CSS_LIKE_QUERY),
+                new LangDeclarationValidityChecker(true, true)
+            );
     }
 
 }

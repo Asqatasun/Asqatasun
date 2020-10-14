@@ -2,7 +2,7 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting the presence of the `<title>` tag
 
 ## Business description
 
@@ -31,24 +31,37 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Decidable**
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+The `<title>` tag of the page within the `<head>` tag (head title)
 
 ### Process
 
-None
+#### Test1
+
+Test whether **Set1** is not empty. If false, raise a MessageA.
+
+###### MessageA : Title tag missing
+
+- code: TitleTagMissing
+- status: Pre-Qualified
+- present in source: no
 
 ### Analysis
 
-#### Not Tested
+#### Passed
 
-In all cases
+The `<title>` tag is present on the page (**Test1** returns true)
+
+#### Failed
+
+The `<title>` tag is not present on the page (**Test1** returns false)
 
 
 ## Files
@@ -56,5 +69,3 @@ In all cases
 - [TestCases files for rule 8.5.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080501/)
 - [Unit test file for rule 8.5.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080501Test.java)
 - [Class file for rule 8.5.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080501.java)
-
-
