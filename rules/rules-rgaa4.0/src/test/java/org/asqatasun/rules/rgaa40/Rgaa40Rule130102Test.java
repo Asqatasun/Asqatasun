@@ -48,10 +48,10 @@ public class Rgaa40Rule130102Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.13.01.02-1Passed-01");
-        addWebResource("Rgaa40.Test.13.01.02-2Failed-01");
-        addWebResource("Rgaa40.Test.13.01.02-4NA-01");
-        addWebResource("Rgaa40.Test.13.01.02-4NA-02");
+        addWebResource("Rgaa40.Test.13.1.2-1Passed-01");
+        addWebResource("Rgaa40.Test.13.1.2-2Failed-01");
+        addWebResource("Rgaa40.Test.13.1.2-4NA-01");
+        addWebResource("Rgaa40.Test.13.1.2-4NA-02");
 
     }
 
@@ -60,13 +60,12 @@ public class Rgaa40Rule130102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        checkResultIsPassed(processPageTest("Rgaa40.Test.13.01.02-1Passed-01"), 1);
-        
-        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.13.1.2-1Passed-01"), 1);
+
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.13.01.02-2Failed-01");
+        ProcessResult processResult = processPageTest("Rgaa40.Test.13.1.2-2Failed-01");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -78,12 +77,12 @@ public class Rgaa40Rule130102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.01.02-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.1.2-4NA-01"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-02----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.01.02-4NA-02"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.13.1.2-4NA-02"));
     }
 
 }
