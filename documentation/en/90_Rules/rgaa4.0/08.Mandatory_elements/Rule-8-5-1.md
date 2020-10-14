@@ -49,9 +49,9 @@ Test whether **Set1** is not empty. If false, raise a MessageA.
 
 ###### MessageA : Title tag missing
 
--   code : TitleTagMissing
--   status: Pre-Qualified
--   present in source : no
+- code: TitleTagMissing
+- status: Pre-Qualified
+- present in source: no
 
 ### Analysis
 
@@ -64,11 +64,8 @@ The `<title>` tag is present on the page (**Test1** returns true)
 The `<title>` tag is not present on the page (**Test1** returns false)
 
 
-
 ## Files
 
 - [TestCases files for rule 8.5.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080501/)
 - [Unit test file for rule 8.5.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080501Test.java)
 - [Class file for rule 8.5.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080501.java)
-
-
