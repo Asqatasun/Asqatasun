@@ -49,11 +49,11 @@ public class Rgaa40Rule080601Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.08.06.01-2Failed-01");
-        addWebResource("Rgaa40.Test.08.06.01-2Failed-02");
-        addWebResource("Rgaa40.Test.08.06.01-2Failed-03");
-        addWebResource("Rgaa40.Test.08.06.01-3NMI-01");
-        addWebResource("Rgaa40.Test.08.06.01-4NA-01");
+        addWebResource("Rgaa40.Test.8.6.1-2Failed-01");
+        addWebResource("Rgaa40.Test.8.6.1-2Failed-02");
+        addWebResource("Rgaa40.Test.8.6.1-2Failed-03");
+        addWebResource("Rgaa40.Test.8.6.1-3NMI-01");
+        addWebResource("Rgaa40.Test.8.6.1-4NA-01");
 
     }
 
@@ -62,7 +62,7 @@ public class Rgaa40Rule080601Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.08.06.01-2Failed-01");
+        ProcessResult processResult = processPageTest("Rgaa40.Test.8.6.1-2Failed-01");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -75,7 +75,7 @@ public class Rgaa40Rule080601Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.06.01-2Failed-02");
+        processResult = processPageTest("Rgaa40.Test.8.6.1-2Failed-02");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -88,7 +88,7 @@ public class Rgaa40Rule080601Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-03------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.06.01-2Failed-03");
+        processResult = processPageTest("Rgaa40.Test.8.6.1-2Failed-03");
         checkResultIsFailed(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -101,7 +101,7 @@ public class Rgaa40Rule080601Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.06.01-3NMI-01");
+        processResult = processPageTest("Rgaa40.Test.8.6.1-3NMI-01");
         checkResultIsPreQualified(processResult, 1,  1);
         checkRemarkIsPresent(
                 processResult,
@@ -109,12 +109,12 @@ public class Rgaa40Rule080601Test extends Rgaa40RuleImplementationTestCase {
                 RemarkMessageStore.CHECK_TITLE_PERTINENCE_MSG,
                 HtmlElementStore.TITLE_ELEMENT,
                 1,
-                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Rgaa40 Test.8.6.1 NMI 01"));
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2, "Rgaa 4.0 Test.8.6.1 NMI 01"));
         
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.08.06.01-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.8.6.1-4NA-01"));
     }
 
 }
