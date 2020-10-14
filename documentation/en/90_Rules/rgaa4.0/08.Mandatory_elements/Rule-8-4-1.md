@@ -45,73 +45,73 @@ and relevant.
 
 ##### Set1
 
-The `<html>` tag with a "lang" or "xml:lang" attribute.
+The `<html>` tag with a `lang` or `xml:lang` attribute.
 
 ##### Set2
 
-The textual tags (tags with a "title" attribute, an "alt" attribute or
-some content) without "lang" or "xml:lang" attribute. These attributes
+The textual tags (tags with a `title` attribute, an `alt` attribute or
+some content) without `lang` or `xml:lang` attribute. These attributes
 can be set to the current tag or to one of its ascendants.
 
 ##### Set3
 
-All the textual elements of the page which are not overidden by a lang
+All the textual elements of the page which are not overidden by a `lang`
 attribute.
 
 ##### Set4
 
-All the textual elements of the page which are overidden by a lang
+All the textual elements of the page which are overidden by a `lang`
 attribute.
 
 ### Process
 
 ##### Test 1:
 
-We extract the language code from the "lang" or the "xml:lang"
+We extract the language code from the `lang` or the `xml:lang`
 attributes from elements of **Set2**. If these attributes are both set and
-different, we keep the "xml:lang" attribute if the doctype of the page
+different, we keep the `xml:lang` attribute if the doctype of the page
 is found within the "XhtmlDoctypeDeclarations" whitelist, and we keep
-the "lang" attribute instead.
+the `lang` attribute instead.
 
 For each extracted lang attribute, we check its validity regarding the
 "ValidLanguageCode" whitelist
 
--   Used nomenclature : "ValidLanguageCode", "XhtmlDoctypeDeclarations"
--   Reference : All the valid language codes recommanded in
-    [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php "http://www.loc.gov/standards/iso639-2/php/code_list.php")
-    and all the xhtml doctypes declarations recommanded in
-    [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html "http://www.w3.org/TR/html4/index/elements.html")
+- Used nomenclature: "ValidLanguageCode", "XhtmlDoctypeDeclarations"
+- Reference: All the valid language codes recommanded in
+  [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php)
+  and all the xhtml doctypes declarations recommanded in
+  [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html)
 
 ###### MessageA : Wrong Language Declaration
 
--   code : WrongLanguageDeclaration
--   status: Failed
--   parameter : none
--   present in source : yes
+- code: WrongLanguageDeclaration
+- status: Failed
+- parameter: none
+- present in source: yes
 
 ##### Test 2:
 
-We extract the language code from the "lang" or the "xml:lang"
+We extract the language code from the `lang` or the `xml:lang`
 attributes from elements of **Set2**. If these attributes are both set and
-different, we keep the "xml:lang" attribute if the doctype of the page
+different, we keep the `xml:lang` attribute if the doctype of the page
 is found within the "XhtmlDoctypeDeclarations" whitelist, and we keep
-the "lang" attribute instead
+the `lang` attribute instead
 
 For each extracted lang attribute, we check its validity regarding the
 "ValidLanguageCode" whitelist
 
--   Used nomenclature : "ValidLanguageCode", "XhtmlDoctypeDeclarations"
--   Reference : All the valid language codes recommanded in
-    [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php "http://www.loc.gov/standards/iso639-2/php/code_list.php ")
-     and all the xhtml doctypes declarations recommanded in
-    [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html "http://www.w3.org/TR/html4/index/elements.html")
+- Used nomenclature : "ValidLanguageCode", "XhtmlDoctypeDeclarations"
+- Reference : All the valid language codes recommanded in
+  [http://www.loc.gov/standards/iso639-2/php/code_list.php](http://www.loc.gov/standards/iso639-2/php/code_list.php)
+  and all the xhtml doctypes declarations recommanded in
+  [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html)
 
 ###### MessageA : Wrong Language Declaration
 
--   code : WrongLanguageDeclaration
--   status: Failed
--   parameter : none
--   present in source : yes
+- code: WrongLanguageDeclaration
+- status: Failed
+- parameter: none
+- present in source: yes
 
 ##### Test3
 
@@ -159,30 +159,30 @@ ELSE return PASSED
 
 ###### MessageA : Suspected Relevant Language Declaration
 
--   code : SuspectedRelevantLanguageDeclaration
--   status: Pre-Qualified
--   parameter : the extracted language, the detected language, and an
-    extraction of the text (limited to 200 charachters) from which the
-    detection has been applied
--   present in source : yes
+- code: SuspectedRelevantLanguageDeclaration
+- status: Pre-Qualified
+- parameter: the extracted language, the detected language, and an
+  extraction of the text (limited to 200 charachters) from which the
+  detection has been applied
+- present in source: yes
 
 ###### MessageB : Unrelevant Language Declaration
 
--   code : UnrelevantLanguageDeclaration
--   status: Failed
--   parameter : the extracted language, the detected language, and an
-    extraction of the text (limited to 200 charachters) from which the
-    detection has been applied
--   present in source : yes
+- code: UnrelevantLanguageDeclaration
+- status: Failed
+- parameter: the extracted language, the detected language, and an
+  extraction of the text (limited to 200 charachters) from which the
+  detection has been applied
+- present in source: yes
 
 ###### MessageC : Suspected Unrelevant Language Declaration
 
--   code : SuspectedUnrelevantLanguageDeclaration
--   status: Pre-Qualified
--   parameter : the extracted language, the detected language, and an
-    extraction of the text (limited to 200 charachters) from which the
-    detection has been applied
--   present in source : yes
+- code: SuspectedUnrelevantLanguageDeclaration
+- status: Pre-Qualified
+- parameter: the extracted language, the detected language, and an
+  extraction of the text (limited to 200 charachters) from which the
+  detection has been applied
+- present in source: yes
 
 ### Analysis
 
@@ -203,11 +203,8 @@ Test1 AND Test2 return true AND Test3 AND Test4 return PASSED
 Test3 OR test4 returns Pre-Qualified
 
 
-
 ## Files
 
 - [TestCases files for rule 8.4.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080401/)
 - [Unit test file for rule 8.4.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080401Test.java)
 - [Class file for rule 8.4.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080401.java)
-
-
