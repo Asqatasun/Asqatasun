@@ -19,7 +19,7 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractNotTestedSiteRuleImplementation;
 
 /**
  * Implementation of rule 11.3.2 (referential RGAA 4.0)
@@ -27,7 +27,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/11.Forms/Rule-11-3-2.md">rule 11.3.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-11-3-2">11.3.2 rule specification</a>
  */
-public class Rgaa40Rule110302 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule110302 extends AbstractNotTestedSiteRuleImplementation {
 
     /**
      * Default constructor
