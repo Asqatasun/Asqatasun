@@ -49,24 +49,26 @@ public class Rgaa40Rule080102Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-01");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-02");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-03");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-04");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-05");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-06");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-07");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-08");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-09");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-10");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-11");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-12");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-13");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-14");
-        addWebResource("Rgaa40.Test.08.01.02-1Passed-15");
-        addWebResource("Rgaa40.Test.08.01.02-2Failed-01");
-        addWebResource("Rgaa40.Test.08.01.02-2Failed-02");
-        addWebResource("Rgaa40.Test.08.01.02-4NA-01");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-01");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-02");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-03");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-04");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-05");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-06");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-07");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-08");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-09");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-10");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-11");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-12");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-13");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-14");
+        addWebResource("Rgaa40.Test.8.1.2-1Passed-15");
+
+        addWebResource("Rgaa40.Test.8.1.2-2Failed-01");
+        addWebResource("Rgaa40.Test.8.1.2-2Failed-02");
+
+        addWebResource("Rgaa40.Test.8.1.2-4NA-01");
     }
 
     @Override
@@ -74,120 +76,124 @@ public class Rgaa40Rule080102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-        WebResource webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-01");
+        WebResource webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-01");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-01"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-01"),0);
+            // see: https://gitlab.com/asqatasun/Asqatasun/-/issues/457#note_430153843
+            //      The doctype is extracted when the page is loaded through selenium.
+            //      But selenium is not used for the test.
+            //      The doctype has to be set "manually" in the sspHandler to make the test work.
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-02------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-02");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-02");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE HTML PUBLIC " +
             "\"-//W3C//DTD HTML 4.01 Transitional//EN\" " +
             "\"http://www.w3.org/TR/html4/loose.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-02"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-02"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-03------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-03");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-03");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-03"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-03"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-04------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-04");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-04");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-04"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-04"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-05------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-05");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-05");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-05"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-05"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-06------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-06");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-06");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-06"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-06"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-07------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-07");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-07");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-07"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-07"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-08------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-08");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-08");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE " +
             "html " +
             "PUBLIC " +
             "\"-//W3C//DTD XHTML Basic 1.1//EN\" " +
             "\"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-08"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-08"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-09------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-09");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-09");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE math PUBLIC \"-//W3C//DTD MathML 2.0//EN\" \"http://www.w3.org/TR/MathML2/dtd/mathml2.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-09"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-09"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-10------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-10");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-10");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE math SYSTEM \"http://www.w3.org/Math/DTD/mathml1/mathml.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-10"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-10"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-11------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-11");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-11");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN\" \"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-11"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-11"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-12------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-12");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-12");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE svg:svg PUBLIC \"-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN\" \"http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd\">");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-12"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-12"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-13------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-13");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-13");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html>");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-13"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-13"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-14------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-14");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-14");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!doctype html>");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-14"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-14"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-15------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-1Passed-15");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-1Passed-15");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE HTML>");
-        checkResultIsPassed(processPageTest("Rgaa40.Test.08.01.02-1Passed-15"),0);        
+        checkResultIsPassed(processPageTest("Rgaa40.Test.8.1.2-1Passed-15"),0);        
         
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-2Failed-01");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-2Failed-01");
         ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/sxhtml1/DTD/xhtml1-strict.dtd\">");
-        ProcessResult processResult = processPageTest("Rgaa40.Test.08.01.02-2Failed-01");
+        ProcessResult processResult = processPageTest("Rgaa40.Test.8.1.2-2Failed-01");
         checkResultIsFailed(processResult, 0, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -198,9 +204,9 @@ public class Rgaa40Rule080102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        webResource = webResourceMap.get("Rgaa40.Test.08.01.02-2Failed-02");
+        webResource = webResourceMap.get("Rgaa40.Test.8.1.2-2Failed-02");
        ((SSP)contentMap.get(webResource).get(0)).setDoctype("<!doctype html public \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-        processResult = processPageTest("Rgaa40.Test.08.01.02-2Failed-02");
+        processResult = processPageTest("Rgaa40.Test.8.1.2-2Failed-02");
         checkResultIsFailed(processResult, 0, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -211,7 +217,7 @@ public class Rgaa40Rule080102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.08.01.02-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.8.1.2-4NA-01"));
     }
 
 }

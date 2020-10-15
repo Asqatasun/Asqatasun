@@ -2,9 +2,8 @@
 
 ## Summary
 
-We check the doctype validity regarding the W3C recommandations ([W3C
-Recommended list of Doctype
-declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
+We check the doctype validity regarding the W3C recommandations: 
+([W3C Recommended list of Doctype declarations](http://www.w3.org/QA/2002/04/valid-dtd-list.html))
 
 ## Business description
 
@@ -51,17 +50,17 @@ We check the validity of the doctype of the page regarding the
 "RecommendedDoctypeDeclarations" and
 "RecommendedCaseInsensitiveDoctypeDeclarations" whitelists
 
--   Used nomenclatures : "RecommendedDoctypeDeclarations",
-    "RecommendedCaseInsensitiveDoctypeDeclarations"
--   Reference : All the doctypes declarations recommanded in
-    [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html "http://www.w3.org/TR/html4/index/elements.html")
+- Used nomenclatures : "RecommendedDoctypeDeclarations",
+  "RecommendedCaseInsensitiveDoctypeDeclarations"
+- Reference : All the doctypes declarations recommanded in
+  [http://www.w3.org/QA/2002/04/valid-dtd-list.html](http://www.w3.org/QA/2002/04/valid-dtd-list.html "http://www.w3.org/TR/html4/index/elements.html")
 
 ###### MessageA : Wrong Doctype Declaration
 
--   code : WrongDoctypeDeclaration
--   status: Failed
--   parameter : none
--   present in source : no
+- code: WrongDoctypeDeclaration
+- status: Failed
+- parameter: none
+- present in source: no
 
 ### Analysis
 
@@ -96,12 +95,8 @@ This behaviour is the same with chromium and opera.
 Regarding this fact, we decided to consider all the doctypes as case
 insensitive despite the W3c recommandations.
 
-
-
 ## Files
 
 - [TestCases files for rule 8.1.2](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080102/)
 - [Unit test file for rule 8.1.2](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080102Test.java)
 - [Class file for rule 8.1.2](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080102.java)
-
-
