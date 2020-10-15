@@ -10,18 +10,28 @@
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
-        <p>Dans chaque page web, pour chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise">média temporel</a>, l’information ne doit pas être donnée uniquement <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#indication-donnee-par-la-forme-la-taille-ou-la-position">par la forme, taille ou position</a>. Cette règle est-elle respectée ?</p>
+        <p>Dans chaque page web, pour chaque <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise">média
+            temporel</a>, l’information ne doit pas être donnée uniquement <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#indication-donnee-par-la-forme-la-taille-ou-la-position">par
+            la forme, taille ou position</a>. Cette règle est-elle respectée ?</p>
     </div>
     <!-- END [test-detail] -->
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <video src="sample.mp4" controls>
+            Your browser does not support the video element.
+        </video>
+        <audio src="sample.mp3" controls>
+            Your browser does not support the audio element.
+        </audio>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI: a audio and a video tags with src attribute
     </div>
     <!-- END [test-explanation] -->
 </div>

@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.10.10.3 NMI 01</title>
+    <title>Rgaa 4.0 Test.10.10.3 NA 01</title>
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.10.10.3 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.10.10.3 NA 01</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -21,18 +21,35 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <video src="sample.mp4" controls>
+        <!-- video tags without source file (src attribute or source tag) -->
+        <video controls>
             Your browser does not support the video element.
         </video>
-        <audio src="sample.mp3" controls>
+        <video controls>
+            <source>
+            Your browser does not support the video element.
+        </video>
+
+        <!-- audio tags without source file (src attribute or source tag) -->
+        <audio controls>
             Your browser does not support the audio element.
         </audio>
+        <audio controls>
+            <source type="audio/mpeg">
+            <source type="audio/ogg">
+            Your browser does not support the audio element.
+            Here is a link to <a href="sample.html">download the sample file</a>
+        </audio>
+
+        <!-- links to download files that are not audio or video files -->
+        <a href="http://example.com/example.zip">download example.zip file</a>
+        <a href="sample.tar.gz">download the sample.tar.gz file</a>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI: a audio and a video tags with src attribute
+        NA: no time-based media
     </div>
     <!-- END [test-explanation] -->
 </div>

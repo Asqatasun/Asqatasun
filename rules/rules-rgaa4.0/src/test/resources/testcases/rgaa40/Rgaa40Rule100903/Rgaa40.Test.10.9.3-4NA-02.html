@@ -20,12 +20,35 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <!-- video tags without source file (src attribute or source tag) -->
+        <video controls>
+            Your browser does not support the video element.
+        </video>
+        <video controls>
+            <source>
+            Your browser does not support the video element.
+        </video>
+
+        <!-- audio tags without source file (src attribute or source tag) -->
+        <audio controls>
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source type="audio/mpeg">
+            <source type="audio/ogg">
+            Your browser does not support the audio element.
+            Here is a link to <a href="sample.html">download the sample file</a>
+        </audio>
+
+        <!-- links to download files that are not audio or video files -->
+        <a href="http://example.com/example.zip">download example.zip file</a>
+        <a href="sample.tar.gz">download the sample.tar.gz file</a>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NA.
+        NA: no time-based media
     </div>
     <!-- END [test-explanation] -->
 </div>
