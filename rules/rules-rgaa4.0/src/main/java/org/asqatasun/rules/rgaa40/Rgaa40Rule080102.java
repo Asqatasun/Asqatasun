@@ -19,7 +19,8 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.doctype.DoctypeValidityChecker;
 
 /**
  * Implementation of rule 8.1.2 (referential RGAA 4.0)
@@ -27,13 +28,13 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/08.Mandatory_elements/Rule-8-1-2.md">rule 8.1.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-8-1-2">8.1.2 rule specification</a>
  */
-public class Rgaa40Rule080102 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule080102 extends AbstractPageRuleWithCheckerImplementation {
 
     /**
-     * Default constructor
+     *
      */
     public Rgaa40Rule080102() {
-        super();
+        super(new DoctypeValidityChecker());
     }
 
 }
