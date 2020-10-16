@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.1.1.1 NMI 06</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.1.1.1 NMI 06</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque image (balise <code>&lt;img&gt;</code> ou balise possédant l’attribut WAI-ARIA <code>role="img"</code>) <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-porteuse-d-information">porteuse d’information</a> a-t-elle une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#alternative-textuelle-image">alternative textuelle</a> ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <!--
+        * SVG image:
+        * with combinations of:
+            * a <text> child
+            * and one of aria-label or aria-labelledby 
+    -->
+
+    <!--
+        EXPECTED accessible name is: Meaning of the image from aria-labelledby
+    -->    
+    <div class="testcase1">
+        <div id="image-description">Meaning of the image from aria-labelledby</div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"
+             aria-labelledby="image-description">
+            <circle cx="50" cy="50" r="40" />
+            <text>Meaning of the image from text tag</text>
+        </svg>
+        <!--
+            aria-* attributes are allowed for <svg> element since SVG 2.0
+            See https://svgwg.org/svg2-draft/struct.html#NewDocument
+        -->
+    </div>
+    
+    <!--
+        EXPECTED accessible name is: Meaning of the image from aria-label
+    -->    
+    <div class="testcase2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"
+             aria-label="Meaning of the image from aria-label">
+            <circle cx="50" cy="50" r="40" />
+            <text>Meaning of the image from text tag</text>
+        </svg>
+        <!--
+            aria-* attributes are allowed for <svg> element since SVG 2.0
+            See https://svgwg.org/svg2-draft/struct.html#NewDocument
+        -->
+    </div>
+    
+    <!--
+        EXPECTED accessible name is: Meaning of the image from text tag
+    -->    
+    <div class="testcase3">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+            <circle cx="50" cy="50" r="40" />
+            <text>Meaning of the image from text tag</text>
+        </svg>
+    </div>
+
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

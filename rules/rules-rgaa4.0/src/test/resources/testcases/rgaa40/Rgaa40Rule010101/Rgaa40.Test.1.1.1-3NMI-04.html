@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.1.1.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.1.1.1 NMI 04</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.1.1.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.1.1.1 NMI 04</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -16,43 +16,26 @@
 
     <!-- START [testcase] -->
     <!--
-        * All kind of images:
+        * Images:
             * <img>
             * <input type="image">
-            * <svg>
-            * <object type="image/…">
-            * <embed type="image/…">
-            * <canvas>
-            * tag with WAI-ARIA role="img"
-        * with: aria-label
+            * <object type="image">
+            * <embed type="image">
+        * with: title
     -->
     <div class="testcase">
-        <img src="dummy.png"
-             aria-label="meaning of the image" />
+        <img src="dummy.png" 
+             title="Meaning of image" />
 
         <input type="image" src="dummy.png"
-               aria-label="meaning of the image" />
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"
-             aria-label="meaning of the image">
-            <circle cx="50" cy="50" r="40" />
-        </svg>
+               title="Meaning of image" />
 
         <object type="image" data="dummy.png"
-                aria-label="meaning of the image">
+                title="Meaning of image">
         </object>
 
         <embed type="image" src="dummy.png"
-               aria-label="meaning of the image">
-
-        <canvas id="canvas" width="300" height="300"
-                aria-label="meaning of the image">
-            Sorry, your browser does not support &lt;canvas&gt;
-        </canvas>
-
-        <div role="img"
-             aria-label="meaning of the image">
-        </div>
+               title="Meaning of image">
     </div>
 
     <!-- END [testcase] -->

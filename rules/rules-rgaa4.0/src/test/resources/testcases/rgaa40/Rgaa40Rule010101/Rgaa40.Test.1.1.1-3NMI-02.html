@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.1.1.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.1.1.1 NMI 02</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.1.1.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.1.1.1 NMI 02</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -24,34 +24,35 @@
             * <embed type="image/…">
             * <canvas>
             * tag with WAI-ARIA role="img"
-        * with: aria-label
+        * with: aria-labelledby
     -->
+    <div id="image-description">Image description</div>
     <div class="testcase">
         <img src="dummy.png"
-             aria-label="meaning of the image" />
+             aria-labelledby="image-description" />
 
         <input type="image" src="dummy.png"
-               aria-label="meaning of the image" />
+               aria-labelledby="image-description" />
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"
-             aria-label="meaning of the image">
+             aria-labelledby="image-description">
             <circle cx="50" cy="50" r="40" />
         </svg>
 
         <object type="image" data="dummy.png"
-                aria-label="meaning of the image">
+                aria-labelledby="image-description">
         </object>
 
         <embed type="image" src="dummy.png"
-               aria-label="meaning of the image">
+               aria-labelledby="image-description">
 
         <canvas id="canvas" width="300" height="300"
-                aria-label="meaning of the image">
+                aria-labelledby="image-description">
             Sorry, your browser does not support &lt;canvas&gt;
         </canvas>
 
         <div role="img"
-             aria-label="meaning of the image">
+             aria-labelledby="image-description">
         </div>
     </div>
 
