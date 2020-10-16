@@ -41,16 +41,15 @@ public class Rgaa40Rule060102Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-            "org.asqatasun.rules.rgaa40.Rgaa40Rule060102");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa40.Rgaa40Rule060102");
     }
 
     @Override
     protected void setUpWebResourceMap() {
 //        addWebResource("Rgaa40.Test.6.1.2-1Passed-01");
 //        addWebResource("Rgaa40.Test.6.1.2-2Failed-01");
-        addWebResource("Rgaa40.Test.6.1.2-3NMI-01");
-//        addWebResource("Rgaa40.Test.6.1.2-4NA-01");
+//        addWebResource("Rgaa40.Test.6.1.2-3NMI-01");
+        addWebResource("Rgaa40.Test.6.1.2-4NA-01");
     }
 
     @Override
@@ -76,8 +75,8 @@ public class Rgaa40Rule060102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.6.1.2-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
+//        ProcessResult processResult = processPageTest("Rgaa40.Test.6.1.2-3NMI-01");
+//        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
 //        checkResultIsPreQualified(processResult, 2, 1);
 //        checkRemarkIsPresent(
 //                processResult,
@@ -91,17 +90,7 @@ public class Rgaa40Rule060102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.6.1.2-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.6.1.2-3NMI-01").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.6.1.2-4NA-01"));
     }
 
 }

@@ -23,6 +23,7 @@
 package org.asqatasun.rules.elementselector;
 
 import org.apache.commons.lang3.StringUtils;
+import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.jsoup.nodes.Element;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.IMAGE_LINK_CHILDREN_CSS_LIKE_QUERY;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITH_CHILDREN_CSS_LIKE_QUERY;
@@ -48,6 +49,17 @@ public class CompositeLinkElementSelector extends LinkElementSelector {
             boolean considerContext, 
             boolean searchImageLink) {
         super(considerContext);
+        this.searchImageLink = searchImageLink;
+    }
+
+    /**
+     * Constructor
+     * @param considerContext
+     * @param searchImageLink
+     */
+    public CompositeLinkElementSelector(boolean considerContext,boolean searchImageLink,
+                                        TextElementBuilder linkTextElementBuilder) {
+        super(considerContext, linkTextElementBuilder);
         this.searchImageLink = searchImageLink;
     }
     

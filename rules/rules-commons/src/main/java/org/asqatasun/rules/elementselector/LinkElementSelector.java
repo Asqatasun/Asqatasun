@@ -25,6 +25,7 @@ package org.asqatasun.rules.elementselector;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -134,6 +135,15 @@ public class LinkElementSelector implements DecidableElementSelector {
     }
 
     /**
+     *
+     * @param considerContext
+     */
+    public LinkElementSelector(boolean considerContext, TextElementBuilder linkTextElementBuilder) {
+        this.considerContext = considerContext;
+        this.linkTextElementBuilder = linkTextElementBuilder;
+    }
+
+    /**
      * Constructor
      * @param considerTitleAsContext
      * @param considerContext 
@@ -157,8 +167,11 @@ public class LinkElementSelector implements DecidableElementSelector {
 
     @Override
     public void selectElements(SSPHandler sspHandler, ElementHandler<Element> elementHandler) {
-        // the elementHandler is ignored, the selection is handled by two 
-        // local collections 
+        // the elementHandler is ignored, the selection is handled by two
+        // local collections
+        if (linkTextElementBuilder instanceof AccessibleNameElementBuilder) {
+            ((AccessibleNameElementBuilder)linkTextElementBuilder).setSspHandler(sspHandler);
+        }
         Elements elements = sspHandler.beginCssLikeSelection().
                                domCssLikeSelectNodeSet(getCssLikeQuery()).
                                getSelectedElements();

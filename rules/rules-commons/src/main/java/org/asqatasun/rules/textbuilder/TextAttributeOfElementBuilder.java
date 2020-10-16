@@ -35,11 +35,12 @@ import org.jsoup.nodes.Element;
 public class TextAttributeOfElementBuilder implements TextElementBuilder {
 
     /* the attribute name*/
-    private Collection<String> attributeNames = new HashSet<String>();
+    private Collection<String> attributeNames = new HashSet<>();
     public final void setAttributeName(String attributeName) {
         this.attributeNames.add(attributeName);
     }
-    
+    public boolean isExclusive = false;
+
     /**
      * Constructor
      */
@@ -54,12 +55,23 @@ public class TextAttributeOfElementBuilder implements TextElementBuilder {
     public TextAttributeOfElementBuilder(String attributeName) {
         attributeNames.add(attributeName);
     }
-    
+
+
     /**
      * Constructor
      * @param attributeNames
      */
     public TextAttributeOfElementBuilder(String... attributeNames) {
+        this.attributeNames.addAll(Arrays.asList(attributeNames));
+    }
+
+    /**
+     * Constructor
+     * @param isExclusive
+     * @param attributeNames
+     */
+    public TextAttributeOfElementBuilder(boolean isExclusive, String... attributeNames) {
+        this.isExclusive = isExclusive;
         this.attributeNames.addAll(Arrays.asList(attributeNames));
     }
 
@@ -80,6 +92,9 @@ public class TextAttributeOfElementBuilder implements TextElementBuilder {
                 elementHasAttr = true;
                 strb.append(element.attr(attributeName));
                 strb.append(SPACER);
+                if (isExclusive) {
+                    break;
+                }
             }
         }
         if (!elementHasAttr) {

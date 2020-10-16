@@ -29,7 +29,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.asqatasun.rules.textbuilder.LinkTextRgaa4ElementBuilder;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.EvidenceElement;
@@ -45,7 +45,6 @@ import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
 import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 
 import org.asqatasun.rules.keystore.EvidenceStore;
-import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.textbuilder.SimpleTextElementBuilder;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
 import org.asqatasun.service.ProcessRemarkService;
@@ -382,7 +381,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
                     attrEE, 
                     buildAttributeContent(element, attr, true));
         } else if (isComputedLinkElementTextRequested(attr)) {
-            LinkTextRgaa4ElementBuilder linkTextRgaa4ElementBuilder = new LinkTextRgaa4ElementBuilder();
+            AccessibleNameElementBuilder linkTextRgaa4ElementBuilder = new AccessibleNameElementBuilder();
             linkTextRgaa4ElementBuilder.setSspHandler(sspHandler);
             extraEe = processRemarkService.getEvidenceElement(
                 attrEE,

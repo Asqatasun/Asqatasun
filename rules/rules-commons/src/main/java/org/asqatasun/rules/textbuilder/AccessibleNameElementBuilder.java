@@ -26,21 +26,21 @@ import org.asqatasun.processor.SSPHandler;
 import org.jsoup.nodes.Element;
 
 import static org.asqatasun.rules.keystore.AttributeStore.*;
-import static org.asqatasun.rules.keystore.HtmlElementStore.A_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.*;
 
 /**
  * This implementation of the {@link TextualElementBuilder} extracts the 
  * text of a link element by calling recursively the tag children and by adding
  * the content of the alt attribute of tags when they exists.
  */
-public class LinkTextRgaa4ElementBuilder extends DeepTextElementBuilder{
+public class AccessibleNameElementBuilder extends DeepTextElementBuilder{
 
     private SSPHandler sspHandler;
     public void setSspHandler(SSPHandler sspHandler) {
         this.sspHandler = sspHandler;
     }
 
-    public LinkTextRgaa4ElementBuilder() {
+    public AccessibleNameElementBuilder() {
         super();
     }
 
@@ -74,11 +74,38 @@ public class LinkTextRgaa4ElementBuilder extends DeepTextElementBuilder{
     }
 
     private TextElementBuilder getElementBuilderFromElementType(Element element) {
-        if (element.tagName().equalsIgnoreCase(A_ELEMENT)) {
-            return new DeepTextWithoutAltElementBuilder();
-        } else {
-            return new DeepTextWithoutAltElementBuilder();
+        switch (element.tagName()) {
+            case "a":
+                return new DeepTextWithoutAltElementBuilder();
+            case "img":
+                return new TextAttributeOfElementBuilder(true, ALT_ATTR, TITLE_ATTR);
+            case "area":
+                return new TextAttributeOfElementBuilder(ALT_ATTR);
+            case "input":
+                if (hasTypeImageAttribute(element)) {
+                    return new TextAttributeOfElementBuilder(true, ALT_ATTR, TITLE_ATTR);
+                }
+            case "object":
+            case "embed":
+                if (hasTypeImageAttribute(element)) {
+                    return new TextAttributeOfElementBuilder(TITLE_ATTR);
+                }
+            case "svg":
+            case "canvas":
+                return new EmptyStringElementBuilder();
+            default:
+                if (hasRoleAttrWithValue(element, "link")) {
+                    return new DeepTextWithoutAltElementBuilder();
+                }
+                return new EmptyStringElementBuilder();
         }
     }
 
+    private boolean hasTypeImageAttribute(Element element) {
+        return element.hasAttr(TYPE_ATTR) && element.attr(TYPE_ATTR).equals("image");
+    }
+
+    private boolean hasRoleAttrWithValue(Element element, String roleValue) {
+        return element.hasAttr(ROLE_ATTR) && element.attr(ROLE_ATTR).equals(roleValue);
+    }
 }

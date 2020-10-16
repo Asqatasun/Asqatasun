@@ -25,8 +25,6 @@ package org.asqatasun.rules.elementchecker.link;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.elementchecker.ElementChecker;
 import org.asqatasun.rules.elementchecker.pertinence.TextPertinenceChecker;
-import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
-import org.asqatasun.rules.textbuilder.LinkTextRgaa4ElementBuilder;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
 
 /**
