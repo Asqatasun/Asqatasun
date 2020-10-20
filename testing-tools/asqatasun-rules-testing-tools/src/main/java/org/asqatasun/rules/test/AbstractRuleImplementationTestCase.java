@@ -45,6 +45,7 @@ import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.service.ContentAdapterService;
 import org.asqatasun.service.ContentLoaderService;
 import org.asqatasun.service.ProcessorService;
+import org.asqatasun.util.http.Downloader;
 import org.dbunit.DBTestCase;
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
@@ -64,6 +65,8 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -310,7 +313,8 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
         LOGGER.info("setUpClass()");
         for (WebResource webResource : webResourceMap.values()) {
             LOGGER.info("webResource.getURL() " + webResource.getURL());
-            contentMap.put(webResource, CONTENT_LOADER_SERVICE.loadContent(webResource, null));
+            List<Content> contentList = CONTENT_LOADER_SERVICE.loadContent(webResource, null);
+            contentMap.put(webResource, replaceTestcaseTagWithRealTestcase(webResource.getURL(), contentList));
             
             if (relatedContentMap.get(webResource) != null) {
                 for (String contentUrl : relatedContentMap.get(webResource)) {
@@ -347,6 +351,30 @@ public abstract class AbstractRuleImplementationTestCase extends DBTestCase {
             }
             contentMap.put(webResource, (List<Content>)CONTENT_ADAPTER_SERVICE.adaptContent((contentMap.get(webResource))));
         }
+    }
+
+    private List<Content> replaceTestcaseTagWithRealTestcase(String webResourceName, List<Content> contentList) {
+        return contentList.stream().map(c -> {
+            if (c instanceof SSP && ((SSP)c).getSource().contains("<!-- #testcase -->")) {
+                ((SSP)c).setSource(((SSP)c).getSource().replace("<!-- #testcase -->", getTestcaseFromWebResourceName(webResourceName)));
+            }
+            return c;
+        }).collect(Collectors.toList());
+
+    }
+
+    private String getTestcaseFromWebResourceName(String webResourceName) {
+        String prefix = webResourceName.substring(0, webResourceName.lastIndexOf("/") - 2 );
+        if (webResourceName.contains("1Passed")) {
+            return Downloader.download(prefix+"/"+"passed.html");
+        } else if (webResourceName.contains("2Failed")) {
+            return Downloader.download(prefix+"/"+"failed.html");
+        } else if (webResourceName.contains("3NMI")) {
+            return Downloader.download(prefix+"/"+"nmi.html");
+        } else if (webResourceName.contains("4NA")) {
+            return Downloader.download(prefix+"/"+"na.html");
+        }
+        return "";
     }
 
     protected Collection<ProcessResult> process(String webResourceKey) {

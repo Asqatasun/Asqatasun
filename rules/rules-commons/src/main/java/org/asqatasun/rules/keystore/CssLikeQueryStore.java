@@ -27,8 +27,10 @@ package org.asqatasun.rules.keystore;
 public final class CssLikeQueryStore {
     
     // Image theme css-like queries
-    public static final String IMG_WITHOUT_ALT_CSS_LIKE_QUERY="img:not([alt])"; 
-    public static final String IMG_WITH_ALT_CSS_LIKE_QUERY="img[alt]"; 
+    public static final String IMG_WITHOUT_ALT_CSS_LIKE_QUERY="img:not([alt])";
+    public static final String IMG_WITH_ALT_CSS_LIKE_QUERY="img[alt]";
+    public static final String BASIC_IMG_CSS_LIKE_QUERY="img:not([usemap]), " +
+        "[role=img]:not(svg):not(area):not(canvas):not(input[type=image]):not(embed):not(object[type=image])";
     public static final String IMG_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "img[alt]:not(a img)"; 
     public static final String IMG_WITH_ALT_NOT_IN_LINK_WITHOUT_LONGDESC_CSS_LIKE_QUERY=

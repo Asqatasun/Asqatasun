@@ -26,12 +26,20 @@ import org.asqatasun.processor.SSPHandler;
 import org.jsoup.nodes.Element;
 
 import static org.asqatasun.rules.keystore.AttributeStore.*;
-import static org.asqatasun.rules.keystore.HtmlElementStore.*;
 
 /**
- * This implementation of the {@link TextualElementBuilder} extracts the 
- * text of a link element by calling recursively the tag children and by adding
- * the content of the alt attribute of tags when they exists.
+ * This implementation of the {@link TextualElementBuilder} interface extracts the
+ * accessible name regarding the following definition respecting the order, for all the elements :
+ *   - text associated via the `aria-labelledby` WAI-ARIA attribute
+ *   - presence of an `aria-label` WAI-ARIA attribute
+ *
+ * If these both elements are missing, the accessible name then is extracted as follows (depending on the type of the tag):
+ *   - for the "a", "svg", "canvas" tags and tags with "role=img", extract the text of the element and its children
+ *   - for the "img" and the "input tag=img" tags, extract the content of the alt attribute,
+ *     then the content of the title attribute if the alt attribute is missing
+ *   - for the "area" tags, extract the content of the alt attribute
+ *   - for the "object" and "embed" tags, extract the content of the title attribute
+ *
  */
 public class AccessibleNameElementBuilder extends DeepTextElementBuilder{
 
@@ -44,6 +52,12 @@ public class AccessibleNameElementBuilder extends DeepTextElementBuilder{
         super();
     }
 
+    /**
+     * Most of the logical of the extraction of an accessible name is handled by this method
+     * (cf https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#intitule-ou-nom-accessible-de-lien)
+     * @param element
+     * @return
+     */
     @Override
     public String buildTextFromElement(Element element) {
         if (StringUtils.isNotBlank(element.attr(ARIA_LABELLEDBY_ATTR))) {
@@ -60,7 +74,8 @@ public class AccessibleNameElementBuilder extends DeepTextElementBuilder{
         if (StringUtils.isNotBlank(element.attr(ARIA_LABEL_ATTR))) {
             return element.attr(ARIA_LABEL_ATTR);
         }
-        return getElementBuilderFromElementType(element).buildTextFromElement(element);
+        String text = getElementBuilderFromElementType(element).buildTextFromElement(element);
+        return StringUtils.isNotBlank(text)? text : ABSENT_ATTRIBUTE_VALUE;
     }
 
     private String buildCssQueryFromAriaLabelledByAttr(String ariaLabelledByAttr) {
@@ -76,6 +91,8 @@ public class AccessibleNameElementBuilder extends DeepTextElementBuilder{
     private TextElementBuilder getElementBuilderFromElementType(Element element) {
         switch (element.tagName()) {
             case "a":
+            case "svg":
+            case "canvas":
                 return new DeepTextWithoutAltElementBuilder();
             case "img":
                 return new TextAttributeOfElementBuilder(true, ALT_ATTR, TITLE_ATTR);
@@ -90,9 +107,6 @@ public class AccessibleNameElementBuilder extends DeepTextElementBuilder{
                 if (hasTypeImageAttribute(element)) {
                     return new TextAttributeOfElementBuilder(TITLE_ATTR);
                 }
-            case "svg":
-            case "canvas":
-                return new EmptyStringElementBuilder();
             default:
                 if (hasRoleAttrWithValue(element, "link")) {
                     return new DeepTextWithoutAltElementBuilder();

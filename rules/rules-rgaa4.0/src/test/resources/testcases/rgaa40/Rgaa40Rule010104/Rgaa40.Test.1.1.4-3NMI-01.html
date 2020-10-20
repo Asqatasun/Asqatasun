@@ -15,13 +15,22 @@
     <!-- END [test-detail] -->
 
     <!-- START [testcase] -->
-    <div class="testcase">
+    <div id="testcase1" class="testcase">
+        <a href="http://www.iupui.edu/cgi- bin/imagemap/~userid/mapfile.map">
+            <img src="mock-image-ismap-presence.jpg" alt="Map" ismap="ismap"/>
+        </a>
+    </div>
+
+    <div id="testcase2" class="testcase">
+        <a href="http://www.iupui.edu/cgi- bin/imagemap/~userid/mapfile.map">
+            <input type="image" src="mock-image-ismap-presence.jpg" alt="Map" ismap="ismap"/>
+        </a>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI : a input type image element with an ismap attribute is present on the page
     </div>
     <!-- END [test-explanation] -->
 </div>

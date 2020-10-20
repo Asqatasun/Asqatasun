@@ -19,7 +19,12 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.BASIC_IMG_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+
 
 /**
  * Implementation of rule 1.1.1 (referential RGAA 4.0)
@@ -27,13 +32,17 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-1-1.md">rule 1.1.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-1-1">1.1.1 rule specification</a>
  */
-public class Rgaa40Rule010101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010101 extends AbstractInformativeImagePresenceAlternativePageRuleImplementation {
 
-    /**
-     * Default constructor
-     */
     public Rgaa40Rule010101() {
-        super();
+        super(
+            new ImageElementSelector(BASIC_IMG_CSS_LIKE_QUERY, true, true),
+            true,
+            ALT_ATTR,
+            TITLE_ATTR,
+            ARIA_LABEL_ATTR,
+            COMPUTED_LINK_TITLE,
+            SRC_ATTR);
     }
 
 }

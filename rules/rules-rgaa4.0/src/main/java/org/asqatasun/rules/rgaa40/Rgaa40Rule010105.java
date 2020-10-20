@@ -19,7 +19,20 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.element.AccessibleNamePresenceChecker;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+
+import static org.asqatasun.entity.audit.TestSolution.*;
+import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.ROLE_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.SVG_NOT_IN_LINK_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Implementation of rule 1.1.5 (referential RGAA 4.0)
@@ -27,13 +40,29 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-1-5.md">rule 1.1.5 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-1-5">1.1.5 rule specification</a>
  */
-public class Rgaa40Rule010105 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010105 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule010105() {
-        super();
+            super(new ImageElementSelector(new SimpleElementSelector(SVG_NOT_IN_LINK_CSS_LIKE_QUERY), true, true),
+                // the informative images are part of the scope
+                INFORMATIVE_IMAGE_MARKER,
+                // the decorative images are not part of the scope
+                DECORATIVE_IMAGE_MARKER,
+                new AccessibleNamePresenceChecker(
+                    new ImmutablePair<>(PASSED, null),
+                    new ImmutablePair<>(FAILED, ALT_MISSING_MSG),
+                    INFORMATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE,
+                    new String[]{ROLE_ATTR, ARIA_LABEL_ATTR, COMPUTED_LINK_TITLE}),
+                new AccessibleNamePresenceChecker(
+                    new ImmutablePair<>(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG),
+                    new ImmutablePair<>(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_WITHOUT_TEXTUAL_ALTERNATIVE_MSG),
+                    CHECK_NATURE_OF_IMAGE_WITHOUT_ROLE_IMG_ATTRIBUTE,
+                    new String[]{ROLE_ATTR, ARIA_LABEL_ATTR, COMPUTED_LINK_TITLE})
+            );
+
     }
 
 }

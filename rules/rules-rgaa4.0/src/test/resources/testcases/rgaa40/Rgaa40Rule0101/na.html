@@ -1,0 +1,108 @@
+<!-- START [testcase] -->
+<!-- links within a link -->
+<div class="testcase">
+    <a href="https://example.org/"> <img src="dummy.png" alt="dummy alt"/></a>
+
+    <a href="mock-link.html">
+        <div role="img" aria-label="meaning of the image"></div>
+    </a>
+
+    <a href="https://example.org/"><input type="image" src="dummy.png" alt="alternative for dummy"/></a>
+
+    <img alt="" src="mock-image.jpg" usemap="#mock-map1"/>
+
+    <a href="mock-link.html">
+        <map id="mock-map1" name="mock-map1">
+            <area href="mock-area.html" alt="area within link"/>
+        </map>
+    </a>
+
+    <a href="mock-link.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" aria-label="meaning of the image">
+            <circle cx="50" cy="50" r="40"/>
+        </svg>
+    </a>
+
+    <a href="mock-link.html">
+        <object type="image" data="dummy.png" aria-label="meaning of the image">
+        </object>
+    </a>
+
+    <a href="mock-link.html">
+        <embed type="image" src="dummy.png" aria-label="meaning of the image">
+    </a>
+
+    <a href="mock-link.html">
+        <canvas id="canvas1" width="300" height="300" aria-label="meaning of the image">
+            Sorry, your browser does not support &lt;canvas&gt;
+        </canvas>
+    </a>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- captcha detection -->
+<div class="testcase">
+    <div role="img" aria-label="meaning of the captcha image"></div>
+
+    <img alt="" src="mock-image.jpg" usemap="#mock-map3"/>
+
+    <map id="mock-map3" name="mock-map3">
+        <area href="mock-area.html" alt="captcha"/>
+    </map>
+
+    <input type="image" src="dummy.png" alt="captcha alternative"/>
+
+    <img src="dummy.png" alt="CAPTCHA"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" aria-label="CAPTCHA meaning of the image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png" aria-label="captcha">
+    </object>
+
+    <embed type="image" src="dummy.png" aria-label="captcha">
+
+    <canvas id="canvas2" width="300" height="300" aria-label="meaning of the captcHA image">
+        Sorry, your browser does not support &lt;canvas&gt;
+    </canvas>
+</div><!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- identified as decorative by marker -->
+<div class="testcase">
+    <img src="dummy.png" alt="dummy alt" class="decorative-image"/>
+
+    <div role="img" class="decorative-image"></div>
+
+    <input type="image" src="dummy.png" class="decorative-image"/>
+
+    <img alt="" src="mock-image.jpg" usemap="#mock-map4"/>
+
+    <map id="mock-map4" name="mock-map4" class="decorative-image">
+        <area href="mock-area.html" alt=""/>
+    </map>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="decorative-image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png" class="decorative-image"></object>
+
+    <embed type="image" src="dummy.png" class="decorative-image">
+
+    <canvas id="canvas3" width="300" height="300" class="decorative-image">
+        Sorry, your browser does not support &lt;canvas&gt;
+    </canvas>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- map not associated with img through name/usemap association -->
+<div class="testcase">
+    <map id="mock-map2" name="mock-map2">
+        <area href="mock-area.html" alt="area within link"/>
+    </map>
+</div>
+<!-- END [testcase] -->
