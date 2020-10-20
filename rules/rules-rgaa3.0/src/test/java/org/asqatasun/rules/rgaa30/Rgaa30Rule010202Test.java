@@ -53,13 +53,13 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
     @Override
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa30.Test.01.02.02-1Passed-01",
-                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-area"));
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "mock-map"));
         addWebResource("Rgaa30.Test.01.02.02-1Passed-02",
                     createParameter("Rules", DECORATIVE_IMAGE_MARKER, "class-decorative-area"));
         addWebResource("Rgaa30.Test.01.02.02-1Passed-03",
                     createParameter("Rules", DECORATIVE_IMAGE_MARKER, "role-decorative-area"));
         addWebResource("Rgaa30.Test.01.02.02-1Passed-04",
-                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-area;class-decorative-area;role-decorative-area"));
+                    createParameter("Rules", DECORATIVE_IMAGE_MARKER, "mock-map1;class-decorative-area;role-decorative-area"));
         addWebResource("Rgaa30.Test.01.02.02-1Passed-05",
                     createParameter("Rules", DECORATIVE_IMAGE_MARKER, "id-decorative-area"),
                     createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "class-informative-area"));
@@ -129,7 +129,7 @@ public class Rgaa30Rule010202Test extends Rgaa30RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-04------------------------------
         //----------------------------------------------------------------------
-        checkResultIsPassed(processPageTest("Rgaa30.Test.01.02.02-1Passed-04"),3);
+        checkResultIsPassed(processPageTest("Rgaa30.Test.01.02.02-1Passed-04"),9);
         
         //----------------------------------------------------------------------
         //------------------------------1Passed-05------------------------------
