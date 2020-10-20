@@ -27,6 +27,9 @@ import org.jsoup.nodes.Element;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.ElementHandler;
 import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+
+import java.util.Optional;
+
 import static org.asqatasun.rules.keystore.HtmlElementStore.A_ELEMENT;
 
 /**
@@ -116,10 +119,10 @@ public class ImageElementSelector extends SimpleElementSelector {
         }
         ElementHandler<Element> linkHandler = new ElementHandlerImpl();
         for (Element el: elementHandler.get()) {
-            Element link = el.parents().select(A_ELEMENT).first();
-            if (excludeImageLink && isImageLink(link, el)){
+            Optional<Element> link = el.parents().stream().filter(e -> e.tagName().equals(A_ELEMENT)).findFirst();
+            if (excludeImageLink && link.isPresent() && isImageLink(link.get(), el)){
                 linkHandler.add(el);
-            } else if (excludeCompositeLink && isCompositeLink(link, el)) {
+            } else if (excludeCompositeLink && link.isPresent() && isCompositeLink(link.get(), el)) {
                 linkHandler.add(el);
             }
         }
@@ -138,10 +141,7 @@ public class ImageElementSelector extends SimpleElementSelector {
         }
         if (imageParent.children().size() == 1) {
             return isImageLink(imageParent.child(0), image);
-        } else if (imageParent.children().isEmpty() && imageParent.equals(image)) {
-            return true;
-        }
-        return false;
+        } else return imageParent.children().isEmpty() && imageParent.equals(image);
     }
 
     /**
@@ -162,10 +162,7 @@ public class ImageElementSelector extends SimpleElementSelector {
         }
         if (imageParent.children().size() == 1) {
             return isCompositeLink(imageParent.child(0), image);
-        } else if (imageParent.children().size() > 1) {
-            return true;
-        }
-        return false;
+        } else return imageParent.children().size() > 1;
     }
 
 }

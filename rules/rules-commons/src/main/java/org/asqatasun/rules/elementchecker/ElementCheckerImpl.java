@@ -134,7 +134,7 @@ public abstract class ElementCheckerImpl implements ElementChecker {
     /**
      * the collection of attributes name used to collect evidenceElement
      */
-    private String[] eeAttributeNames = {};
+    private String[] eeAttributeNames;
     public String[] getEeAttributeNames() {
         return eeAttributeNames;
     }
@@ -213,6 +213,9 @@ public abstract class ElementCheckerImpl implements ElementChecker {
             TestSolution testSolution, 
             Element element, 
             String messageCode) {
+        if (testSolution.equals(PASSED)) {
+            return;
+        }
         if (StringUtils.isBlank(messageCode)) {
             return;
         }

@@ -32,10 +32,9 @@ import org.jsoup.select.Elements;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.ElementHandler;
 import org.asqatasun.ruleimplementation.ElementHandlerImpl;
-import static org.asqatasun.rules.keystore.AttributeStore.TITLE_ATTR;
-import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
-import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABELLEDBY_ATTR;
 import org.asqatasun.rules.keystore.CssLikeQueryStore;
+
+import static org.asqatasun.rules.keystore.AttributeStore.*;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.TEXT_LINK_CSS_LIKE_QUERY;
 import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.textbuilder.LinkTextElementBuilder;
@@ -77,10 +76,10 @@ public class LinkElementSelector implements DecidableElementSelector {
                 };
 
     /** */
-    private static final List PARENT_CONTEXT_ELEMENTS = CollectionUtils.arrayToList(PARENT_CONTEXT_ELEMENTS_TAB);
+    private static final List<String> PARENT_CONTEXT_ELEMENTS = CollectionUtils.arrayToList(PARENT_CONTEXT_ELEMENTS_TAB);
     
     /** */
-    private static final List PREV_SIBLING_CONTEXT_ELEMENTS = CollectionUtils.arrayToList(PREV_SIBLING_CONTEXT_ELEMENTS_TAB);
+    private static final List<String> PREV_SIBLING_CONTEXT_ELEMENTS = CollectionUtils.arrayToList(PREV_SIBLING_CONTEXT_ELEMENTS_TAB);
     
     /** */
     private final ElementHandler<Element> decidableElements = new ElementHandlerImpl();
@@ -226,7 +225,7 @@ public class LinkElementSelector implements DecidableElementSelector {
         }
     }
 
-        /**
+    /**
      * 
      * @param linkElement
      * @return the link text
@@ -243,7 +242,7 @@ public class LinkElementSelector implements DecidableElementSelector {
      * empty
      */
     protected boolean isLinkPartOfTheScope(Element linkElement, String linkText) {
-        return StringUtils.isNotBlank(linkText);
+        return StringUtils.isNotBlank(linkText) && !linkText.equals(ABSENT_ATTRIBUTE_VALUE);
     }
     
     /**

@@ -19,10 +19,7 @@
  */
 package org.asqatasun.ruleimplementation;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 import javax.annotation.Nonnull;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,6 +29,8 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.rules.elementchecker.ElementChecker;
 import org.asqatasun.rules.elementselector.ElementSelector;
 import static org.asqatasun.rules.keystore.AttributeStore.ROLE_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.AREA_ELEMENT;
+import static org.springframework.beans.factory.xml.BeanDefinitionParserDelegate.MAP_ELEMENT;
 
 /**
  * This class should be overridden by concrete {@link RuleImplementation}
@@ -263,7 +262,6 @@ public abstract class AbstractMarkerPageRuleImplementation
      * value list set by the user, we consider that the element is characterised
      * and we add it to the "elementMarkerList".
      *
-     * @param nodeList
      */
     private void sortMarkerElements() {
         if ((CollectionUtils.isEmpty(markerList) && CollectionUtils.isEmpty(inverseMarkerList))
@@ -274,22 +272,30 @@ public abstract class AbstractMarkerPageRuleImplementation
         Element el;
         while (iter.hasNext()) {
             el = iter.next();
-            String id = el.id();
+            Collection<String> ids = new ArrayList<>(Collections.singletonList(el.id()));
             Collection<String> classNames = el.classNames();
-            String role = el.attr(ROLE_ATTR);
+            Collection<String> roles = new ArrayList<>(Collections.singletonList(el.attr(ROLE_ATTR)));
+            if (el.tagName().equals(AREA_ELEMENT)) {
+                Optional<Element> mapElement = el.parents().stream().filter(e -> e.tagName().equals(MAP_ELEMENT)).findFirst();
+                if (mapElement.isPresent()) {
+                    classNames.addAll(mapElement.get().classNames());
+                    ids.add(mapElement.get().id());
+                    roles.add(mapElement.get().attr(ROLE_ATTR));
+                }
+            }
             // if the element does contain an "id" OR a "class" attribute OR
             // a "role" attribute AND one the values belongs to the marker list, 
             // it is removed from the global selection and added to the 
             // marker element selection.
-            if (StringUtils.isNotBlank(id) || CollectionUtils.isNotEmpty(classNames)
-                    || StringUtils.isNotBlank(role)) {
-                if (checkAttributeBelongsToMarkerList(id, classNames, role, markerList)) {
+            if (CollectionUtils.isNotEmpty(ids) || CollectionUtils.isNotEmpty(classNames)
+                    || CollectionUtils.isNotEmpty(roles)) {
+                if (checkAttributeBelongsToMarkerList(ids, classNames, roles, markerList)) {
                     selectionWithMarkerHandler.add(el);
                     iter.remove();
                 }
                 // if the element belongs to the inverse marker list, it is
                 // removed from the global collection
-                if (checkAttributeBelongsToMarkerList(id, classNames, role, inverseMarkerList)) {
+                if (checkAttributeBelongsToMarkerList(ids, classNames, roles, inverseMarkerList)) {
                     iter.remove();
                 }
             }
@@ -297,24 +303,24 @@ public abstract class AbstractMarkerPageRuleImplementation
     }
 
     /**
-     * @param id
+     * @param ids
      * @param classNames
-     * @param role
+     * @param roles
      * @return whether one of the string given as argument belongs to a marker
      * list
      */
     private boolean checkAttributeBelongsToMarkerList(
-            String id,
+            Collection<String> ids,
             Collection<String> classNames,
-            String role,
+            Collection<String> roles,
             Collection<String> markerList) {
         if (CollectionUtils.isEmpty(markerList)) {
             return false;
         }
         Collection<String> elAttr = new ArrayList<>();
-        elAttr.add(id);
+        elAttr.addAll(ids);
         elAttr.addAll(classNames);
-        elAttr.add(role);
+        elAttr.addAll(roles);
         return CollectionUtils.containsAny(markerList, elAttr);
     }
 
@@ -323,7 +329,7 @@ public abstract class AbstractMarkerPageRuleImplementation
      * Utility method to extract marker values, and apply a trim on values set
      * by the user
      *
-     * @param parameterValue
+     * @param parameters
      * @param markers
      */
     private void addMarkersToList(String parameters, Collection<String> markers) {

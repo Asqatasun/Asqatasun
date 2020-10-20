@@ -78,8 +78,12 @@ public final class RemarkMessageStore {
             "CheckNatureOfImageWithNotPertinentAlt";
     public static final String CHECK_NATURE_OF_IMAGE_WITH_EMPTY_ALT_MSG = 
             "CheckNatureOfElementWithEmptyAltAttribute";
+    public static final String CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG =
+            "CheckNatureOfElementWithTextualAlternative";
     public static final String CHECK_NATURE_OF_IMAGE_WITH_NOT_EMPTY_ALT_MSG = 
             "CheckNatureOfElementWithNotEmptyAltAttribute";
+    public static final String CHECK_NATURE_OF_IMAGE_WITHOUT_TEXTUAL_ALTERNATIVE_MSG =
+            "CheckNatureOfElementWithoutTextualAlternative";
     public static final String CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG = 
             "CheckNatureOfImageAndAltPertinence";
     public static final String CHECK_CAPTCHA_ALTERNATIVE_MSG =
@@ -112,6 +116,10 @@ public final class RemarkMessageStore {
     public static final String ALT_SVG_DETECTED_MSG = "AltSvgDetect";
     public static final String DECORATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE=
             "DecorativeSvgWithoutRoleImgAttribute";
+    public static final String INFORMATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE=
+            "InformativeSvgWithoutRoleImgAttribute";
+    public static final String CHECK_NATURE_OF_IMAGE_WITHOUT_ROLE_IMG_ATTRIBUTE=
+            "CheckNatureOfImageWithoutRoleImgAttribute";
     public static final String DECORATIVE_SVG_OR_CHILDREN_WITH_ARWIA_ATTRIBUTE=
             "DecorativeSvgOrChildrenWithAriaAttribute";
     public static final String DECORATIVE_SVG_WITH_NOT_EMPTY_TITLE_OR_DESC_TAGS=
