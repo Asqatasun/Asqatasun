@@ -60,18 +60,12 @@ public class DoctypeHtml5Checker extends ElementCheckerImpl {
         String doctype = sspHandler.getSSP().getDoctype();
          // if the page doesn't have any doctype declaration, the test is 
         // not applicable
-        if (StringUtils.isBlank(doctype)) {
-            addProcessRemark(TestSolution.NEED_MORE_INFO, RemarkMessageStore.DOCTYPE_ABSENT_CHECK_HTML5);
-            testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
+        if (StringUtils.isBlank(doctype) || isDoctypeValideHtml5(doctype)) {
+            testSolutionHandler.addTestSolution(TestSolution.PASSED);
             return;
         }
 
-        if (isDoctypeValideHtml5(doctype)) {
-            addProcessRemark(TestSolution.NEED_MORE_INFO, RemarkMessageStore.HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY);
-            testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
-            return;
-        } 
-        testSolutionHandler.addTestSolution(TestSolution.NOT_APPLICABLE);
+        testSolutionHandler.addTestSolution(TestSolution.FAILED);
     }
       
     /*

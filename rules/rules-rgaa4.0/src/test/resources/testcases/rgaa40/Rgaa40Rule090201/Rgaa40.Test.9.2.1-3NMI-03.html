@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.9.2.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.9.2.1 NMI 03</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.9.2.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.9.2.1 NMI 03</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -26,14 +26,32 @@
     <div class="testcase">
         <header>page header mock</header>
         <nav>page navigation mock</nav>
-        <main>page main mock</main>
+        <main>
+            <header>header mock of main tag</header>
+            <nav>navigation mock of main tag</nav>
+            content mock of main tag
+            <article>
+                <header>header mock of article tag </header>
+                content mock of article tag
+                <footer>footer mock of article tag</footer>
+            </article>
+            <section>
+                <header>header mock of section tag </header>
+                content mock of section tag
+                <footer>footer mock of section tag</footer>
+            </section>
+            <footer>footer mock of main tag</footer>
+        </main>
         <footer>page footer mock</footer>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI: this page contains one hearder tag, one nav tag, one main tag and one footer tag.
+        NMI:
+        this page contains two hearder tags, two nav tags, one main tag and two footer tags.
+
+        Direct child header and footer tags of article and section tags are not taken into account.
     </div>
     <!-- END [test-explanation] -->
 </div>

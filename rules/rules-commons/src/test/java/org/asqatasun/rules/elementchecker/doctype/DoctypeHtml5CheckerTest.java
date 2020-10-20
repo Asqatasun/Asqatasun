@@ -42,12 +42,11 @@ public class DoctypeHtml5CheckerTest extends TestCase {
      */
     public void testDoCheckWithHtml5Doctype() {
         System.out.println("doCheck with Html5 doctype");
-        
-        testChecker("<!doctype html>", TestSolution.NEED_MORE_INFO, RemarkMessageStore.HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY);
-        testChecker("<!DOCTYPE HTML>", TestSolution.NEED_MORE_INFO, RemarkMessageStore.HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY);
-        testChecker("<!DOCTYPE html>", TestSolution.NEED_MORE_INFO, RemarkMessageStore.HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY);
-        testChecker("<!doctype HTML>", TestSolution.NEED_MORE_INFO, RemarkMessageStore.HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY);
-        testChecker("<!DoCtYpE HtMl>", TestSolution.NEED_MORE_INFO, RemarkMessageStore.HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY);
+        testChecker("<!doctype html>", TestSolution.PASSED, "");
+        testChecker("<!DOCTYPE HTML>", TestSolution.PASSED, "");
+        testChecker("<!DOCTYPE html>", TestSolution.PASSED, "");
+        testChecker("<!doctype HTML>", TestSolution.PASSED, "");
+        testChecker("<!DoCtYpE HtMl>", TestSolution.PASSED, "");
     }
     
     /**
@@ -55,11 +54,9 @@ public class DoctypeHtml5CheckerTest extends TestCase {
      */
     public void testDoCheckWithoutDoctype() {
         System.out.println("doCheck withoutDoctype");
-    
-        testChecker("", TestSolution.NEED_MORE_INFO, RemarkMessageStore.DOCTYPE_ABSENT_CHECK_HTML5);
-        testChecker("         ", TestSolution.NEED_MORE_INFO, RemarkMessageStore.DOCTYPE_ABSENT_CHECK_HTML5);
-        testChecker(null, TestSolution.NEED_MORE_INFO, RemarkMessageStore.DOCTYPE_ABSENT_CHECK_HTML5);
-        
+        testChecker("", TestSolution.PASSED, "");
+        testChecker("         ", TestSolution.PASSED,"");;
+        testChecker(null, TestSolution.PASSED, "");
     }
     
     /**
@@ -67,16 +64,14 @@ public class DoctypeHtml5CheckerTest extends TestCase {
      */
     public void testDoCheckWithHtml4Doctype() {
         System.out.println("doCheck with html4 doctype");
-        
         testChecker("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">", 
-                    TestSolution.NOT_APPLICABLE, 
+                    TestSolution.FAILED,
                     "");
-
         // TO DO : tokenize the doctype to deal with this kind of HTML5 doctype
         // definition
-        testChecker("<!DOCTYPE   html>", 
-                    TestSolution.NOT_APPLICABLE, 
-                    "");
+        testChecker("<!DOCTYPE   html>",
+            TestSolution.FAILED,
+            "");
    }
     
     /**

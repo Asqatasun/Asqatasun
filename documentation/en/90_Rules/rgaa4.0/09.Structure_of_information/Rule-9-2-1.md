@@ -2,7 +2,14 @@
 
 ## Summary
 
-No-check rule
+Check for HTML5 pages, if the page contains:
+- one and only one `<main>` tag without `hidden` attribute. 
+- at least one `<header>` tag except direct child `<header>` tags of `<article>` and `<section>` tags.
+- at least one `<footer>` tag except direct child `<footer>` tags of `<article>` and `<section>` tags.
+- at least one `<nav>` tag.
+
+A manual check is necessary to control the use of the different 
+tags (`<main>`, `<nav>`, `<footer>` and `<header>`) according to this rule.
 
 ## Business description
 
@@ -46,24 +53,169 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Semi-Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<nav>` tags. 
+
+CSS selector : 
+```jquery-css
+nav
+```
+
+#### Set2
+
+All the `<main>` tags without `hidden` attribute. 
+
+CSS selector : 
+```jquery-css
+main:not([hidden])
+```
+
+#### Set3
+
+All the `<header>` tags except direct child `<header>` tags of `<article>` and `<section>` tags. 
+
+CSS selector : 
+```jquery-css
+*:not(article):not(section) > header
+```
+
+#### Set4
+
+All the `<footer>` tags except direct child `<footer>` tags of `<article>` and `<section>` tags. 
+
+CSS selector : 
+```jquery-css
+*:not(article):not(section) > footer
+```
 
 ### Process
 
-None
+#### Test0
+
+Test whether the page has a `doctype` that is not an HTML5 `doctype` :
+- If yes, raise a MessageA.
+- If no, launch Test1, Test2, Test3 and Test4.
+
+##### MessageA : Not Applicable
+
+- status: Not Applicable
+
+
+#### Test1
+
+Test whether **Set1** is not empty. 
+- If empty, raise a MessageA.
+- If not empty, raise a MessageB.
+
+##### MessageA : `<nav>` tag is missing
+
+- code : **NavElementMissing**
+- status: Failed
+- present in source: no
+
+##### MessageB : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
+
+
+#### Test2
+
+Test whether **Set2** is not empty and contains only one element. 
+- If empty, raise a MessageA.
+- If not empty but contains multiple element, raise a MessageB.
+- Else raise a MessageC.
+
+##### MessageA : `<main>` tag is missing
+
+- code : **NavElementMissing**
+- status: Failed
+- present in source: no
+
+##### MessageB : multiple `<main>` tags
+
+- code : **MainElementNotUnique**
+- status: Failed
+- parameter: snippet
+- present in source: yes
+
+##### MessageC : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
+
+
+#### Test3
+
+Test whether **Set3** is not empty. 
+- If empty, raise a MessageA.
+- If not empty, raise a MessageB.
+
+##### MessageA : `<header>` tag is missing
+
+- code : **HeaderElementMissing**
+- status: Failed
+- present in source: no
+
+##### MessageB : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
+
+
+#### Test4
+
+Test whether **Set4** is not empty. 
+- If empty, raise a MessageA.
+- If not empty, raise a MessageB.
+
+##### MessageA : `<footer>` tag is missing
+
+- code : **FooterElementMissing**
+- status: Failed
+- present in source: no
+
+##### MessageB : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
+
 
 ### Analysis
 
-#### Not Tested
+### Analysis
 
-In all cases
+#### Not Applicable
+
+The page has a `doctype` that is not an HTML5 `doctype`.
+
+#### Failed
+
+- multiple `<main>` tags without `hidden` attribute
+- missing `<main>` tag
+- missing `<header>` tag
+- missing `<footer>` tag
+- missing `<nav>` tag
+
+#### Pre-qualified
+
+In all other cases
 
 
 ## Files
@@ -71,5 +223,3 @@ In all cases
 - [TestCases files for rule 9.2.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule090201/)
 - [Unit test file for rule 9.2.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule090201Test.java)
 - [Class file for rule 9.2.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule090201.java)
-
-
