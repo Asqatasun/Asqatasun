@@ -1,0 +1,123 @@
+<!--
+
+/!\ WARNING /!\
+All the following images are marked as informative thanks to the class informative-image
+
+-->
+
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * <object type="image/…">
+        * <embed type="image/…">
+        * <canvas>
+        * tag with WAI-ARIA role="img"
+    * without any alternative
+-->
+<div class="testcase">
+    <img src="dummy.png" class="informative-image"/>
+
+    <div role="img" class="informative-image"></div>
+
+    <input type="image" src="dummy.png" class="informative-image"/>
+
+    <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+    <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+         alt="MDN infographic" class="informative-image"/>
+    <map name="infographic" class="informative-image">
+        <area shape="rect" coords="184,6,253,27"
+              href="https://mozilla.org"
+              target="_blank"/>
+        <area shape="circle" coords="130,136,60"
+              href="https://developer.mozilla.org/"
+              target="_blank"/>
+        <area shape="poly" coords="130,6,253,96,223,106,130,39"
+              href="https://developer.mozilla.org/docs/Web/Guide/Graphics"
+              target="_blank"/>
+        <area shape="poly" coords="253,96,207,241,189,217,223,103"
+              href="https://developer.mozilla.org/docs/Web/HTML"
+              target="_blank"/>
+        <area shape="poly" coords="207,241,54,241,72,217,189,217"
+              href="https://developer.mozilla.org/docs/Web/JavaScript"
+              target="_blank"/>
+        <area shape="poly" coords="54,241,6,97,36,107,72,217"
+              href="https://developer.mozilla.org/docs/Web/API"
+              target="_blank"/>
+        <area shape="poly" coords="6,97,130,6,130,39,36,107"
+              href="https://developer.mozilla.org/docs/Web/CSS"
+              target="_blank"/>
+    </map>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image" role="img">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+* All kind of images:
+    * <img>
+    * <input type="image">
+    * <svg>
+    * tag with WAI-ARIA role="img"
+* with a wrong association using labelledby
+-->
+<div id="image-description">Image description</div>
+<div class="testcase">
+    <img src="dummy.png" aria-labelledby="image-description2" class="informative-image"/>
+
+    <input type="image" src="dummy.png" aria-labelledby="image-description2" class="informative-image"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description2" class="informative-image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <div role="img" aria-labelledby="image-description2" class="informative-image"></div>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * SVG image has to have a role="img" attribute. If not, a failure is thrown as the following images are set as
+    * informative by marker usage
+    * Even if the tag has an alternative, the presence of the attribute is checked with an higher priority and all
+    * these examples lead to the same result.
+-->
+<div class="testcase">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <div id="image-description5">Meaning of the image from aria-labelledby</div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image"
+         aria-labelledby="image-description5"
+         aria-label="Meaning of the image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image"
+         aria-label="Meaning of the image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+    <!--
+        aria-* attributes are allowed for <svg> element since SVG 2.0
+        See https://svgwg.org/svg2-draft/struct.html#NewDocument
+    -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image" role="image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<!-- END [testcase] -->

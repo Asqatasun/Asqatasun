@@ -1,0 +1,160 @@
+    <!--
+
+    /!\ WARNING /!\
+    All the following images are marked as informative thanks to the class informative-image
+
+    -->
+
+    <!-- START [testcase] -->
+    <!--
+        * All kind of images:
+            * <img>
+            * <input type="image">
+            * <svg>
+            * <object type="image/…">
+            * <embed type="image/…">
+            * <canvas>
+            * tag with WAI-ARIA role="img"
+        * with: aria-label
+    -->
+    <div class="testcase">
+        <img src="dummy.png" aria-label="meaning of the image" class="informative-image"/>
+
+        <input type="image" src="dummy.png" aria-label="meaning of the image" class="informative-image"/>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" aria-label="meaning of the image" role="img"
+             class="informative-image">
+            <circle cx="50" cy="50" r="40" />
+        </svg>
+
+        <object type="image" data="dummy.png" aria-label="meaning of the image" class="informative-image"/>
+
+        <embed type="image" src="dummy.png" aria-label="meaning of the image" class="informative-image"/>
+
+        <canvas id="canvas1" width="300" height="300" aria-label="meaning of the image" class="informative-image">
+            Sorry, your browser does not support &lt;canvas&gt;
+        </canvas>
+
+        <div role="img" aria-label="meaning of the image" class="informative-image">
+        </div>
+    </div>
+    <!-- END [testcase] -->
+    
+    <!-- START [testcase] -->
+    <!--
+        * All kind of images:
+            * <img>
+            * <input type="image">
+            * <svg>
+            * <object type="image/…">
+            * <embed type="image/…">
+            * <canvas>
+            * tag with WAI-ARIA role="img"
+        * with: aria-labelledby
+    -->
+    <div id="image-description">Image description</div>
+    <div class="testcase">
+        <img src="dummy.png" aria-labelledby="image-description" class="informative-image"/>
+
+        <input type="image" src="dummy.png" aria-labelledby="image-description" class="informative-image"/>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+             aria-labelledby="image-description" class="informative-image">
+            <circle cx="50" cy="50" r="40" />
+        </svg>
+
+        <object type="image" data="dummy.png" aria-labelledby="image-description" class="informative-image"/>
+
+        <embed type="image" src="dummy.png" aria-labelledby="image-description" class="informative-image"/>
+
+        <canvas id="canvas2" width="300" height="300" aria-labelledby="image-description" class="informative-image">
+            Sorry, your browser does not support &lt;canvas&gt;
+        </canvas>
+
+        <div role="img" aria-labelledby="image-description" class="informative-image">
+        </div>
+    </div>
+    <!-- END [testcase] -->
+    
+    <!-- START [testcase] -->
+    <!--
+        * Images:
+            * <img>        
+            * <area>
+	    * <input type="image"
+        * with: an alt attribute
+    -->
+    <div class="testcase">
+        <img src="dummy.png" alt="Meaning of image" class="informative-image"/>
+
+        <map name="infographic" class="informative-image">
+            <area shape="rect" coords="184,6,253,27" href="https://mozilla.org" target="_blank" alt="Mozilla" />
+            <area shape="circle" coords="130,136,60" href="https://developer.mozilla.org/" target="_blank" alt="MDN" />
+            <area shape="poly" coords="130,6,253,96,223,106,130,39"
+                  href="https://developer.mozilla.org/docs/Web/Guide/Graphics" target="_blank" alt="Graphics" />
+            <area shape="poly" coords="253,96,207,241,189,217,223,103"
+                  href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" alt="HTML" />
+            <area shape="poly" coords="207,241,54,241,72,217,189,217"
+                  href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" alt="JavaScript"/>
+            <area shape="poly" coords="54,241,6,97,36,107,72,217"
+                  href="https://developer.mozilla.org/docs/Web/API" target="_blank" alt="Web APIs"/>
+            <area shape="poly" coords="6,97,130,6,130,39,36,107"
+                  href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" alt="CSS"/>
+        </map>
+        <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png" alt="MDN infographic" class="informative-image"/>
+        <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+
+        <input type="image" src="dummy.png" alt="Meaning of image" class="informative-image"/>
+    </div>
+
+    <!-- END [testcase] -->
+
+    <!-- START [testcase] -->
+    <!--
+        * Images:
+            * <img>
+            * <input type="image">
+            * <object type="image">
+            * <embed type="image">
+        * with: title
+    -->
+    <div class="testcase">
+        <img src="dummy.png" title="Meaning of image" class="informative-image"/>
+        <input type="image" src="dummy.png" title="Meaning of image" class="informative-image"/>
+        <object type="image" data="dummy.png" title="Meaning of image" class="informative-image"></object>
+        <embed type="image" src="dummy.png" title="Meaning of image" class="informative-image">
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [testcase] -->
+    <!--
+        * Images:
+            * <canvas/>
+        * with: text as child
+    -->
+    <div class="testcase">
+        <canvas id="canvas3" width="300" height="300" class="informative-image">
+            This is the canvas alternative
+        </canvas>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [testcase] -->
+    <!--
+        * Images:
+            * <object type="image">
+            * <embed type="image">
+            * <canvas/>
+        * with: followed or preceded by a link or a button
+    -->
+    <div class="testcase">
+	    <a href="https://example.org/">Adjacent link of object handling the meaning of image</a>
+        <object type="image" data="dummy.png" class="informative-image"></object>
+
+        <embed type="image" src="dummy.png" class="informative-image">
+    	<button class="button button2">Adjacent button of embed handling the meaning of image</button>
+	
+	    <input type="button" value="Adjacent button of canvas handling the meaning of image">
+        <canvas id="canvas4" width="300" height="300" class="informative-image"></canvas>
+    </div>
+    <!-- END [testcase] -->
