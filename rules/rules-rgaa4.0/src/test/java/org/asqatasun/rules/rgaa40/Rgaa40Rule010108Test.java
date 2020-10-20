@@ -19,9 +19,18 @@
  */
 package org.asqatasun.rules.rgaa40;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.ProcessResult;
-import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
+
+import static org.asqatasun.entity.audit.TestSolution.*;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.HtmlElementStore.CANVAS_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
  * Unit test class for implementation of rule 1.1.8 (referential RGAA 4.0)
@@ -47,10 +56,12 @@ public class Rgaa40Rule010108Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.1.1.8-1Passed-01");
-//        addWebResource("Rgaa40.Test.1.1.8-2Failed-01");
-        addWebResource("Rgaa40.Test.1.1.8-3NMI-01");
-//        addWebResource("Rgaa40.Test.1.1.8-4NA-01");
+        addWebResource("Rgaa40.Test.1.1.8-1Passed-01",
+            createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
+        addWebResource("Rgaa40.Test.1.1.8-3NMI-01",
+            createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
+        addWebResource("Rgaa40.Test.1.1.8-4NA-01",
+            createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
     }
 
     @Override
@@ -58,50 +69,82 @@ public class Rgaa40Rule010108Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------1Passed-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.1.1.8-1Passed-01"), 1);
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.1.1.8-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        checkResultIsPassed(processPageTest("Rgaa40.Test.1.1.8-1Passed-01"), 4);
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa40.Test.1.1.8-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        checkResultIsPreQualified(processResult, 7, 7);
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG,
+            CANVAS_ELEMENT,
+            1,
+            new ImmutablePair<>(TEXT_ELEMENT2, ""),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_PRESENCE_OF_ALTERNATIVE_MECHANISM_FOR_INFORMATIVE_IMG_MSG,
+            CANVAS_ELEMENT,
+            2,
+            new ImmutablePair<>(TEXT_ELEMENT2, ""),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG,
+            CANVAS_ELEMENT,
+            3,
+            new ImmutablePair<>(TEXT_ELEMENT2, ""),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "meaning of the image"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "meaning of the image"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG,
+            CANVAS_ELEMENT,
+            4,
+            new ImmutablePair<>(TEXT_ELEMENT2, ""),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Image description"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG,
+            CANVAS_ELEMENT,
+            5,
+            new ImmutablePair<>(TEXT_ELEMENT2, ""),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "Meaning of image from aria-label"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Image description from aria-labelledby"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG,
+            CANVAS_ELEMENT,
+            6,
+            new ImmutablePair<>(TEXT_ELEMENT2, ""),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG,
+            CANVAS_ELEMENT,
+            7,
+            new ImmutablePair<>(TEXT_ELEMENT2, "This is the canvas alternative"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "This is the canvas alternative"));
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.1.1.8-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.1.1.8-3NMI-01").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.1.1.8-4NA-01"));
     }
 
 }
+

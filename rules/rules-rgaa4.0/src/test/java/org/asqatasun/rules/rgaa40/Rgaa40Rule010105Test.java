@@ -248,7 +248,7 @@ public class Rgaa40Rule010105Test extends Rgaa40RuleImplementationTestCase {
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "Meaning of the image from text tag"));
         checkRemarkIsPresent(
             processResult,
-            FAILED,
+            NEED_MORE_INFO,
             CHECK_NATURE_OF_IMAGE_WITHOUT_ROLE_IMG_ATTRIBUTE,
             SVG_ELEMENT,
             12,
