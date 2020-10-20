@@ -14,48 +14,7 @@
     </div>
     <!-- END [test-detail] -->
 
-    <!-- START [testcase] -->
-    <!--
-        * All kind of images:
-            * <img>
-            * <input type="image">
-            * <svg>
-            * <object type="image/…">
-            * <embed type="image/…">
-            * <canvas>
-            * tag with WAI-ARIA role="img"
-        * with: aria-label
-    -->
-    <div class="testcase">
-        <img src="dummy.png"
-             aria-label="meaning of the image" />
-
-        <input type="image" src="dummy.png"
-               aria-label="meaning of the image" />
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"
-             aria-label="meaning of the image">
-            <circle cx="50" cy="50" r="40" />
-        </svg>
-
-        <object type="image" data="dummy.png"
-                aria-label="meaning of the image">
-        </object>
-
-        <embed type="image" src="dummy.png"
-               aria-label="meaning of the image">
-
-        <canvas id="canvas" width="300" height="300"
-                aria-label="meaning of the image">
-            Sorry, your browser does not support &lt;canvas&gt;
-        </canvas>
-
-        <div role="img"
-             aria-label="meaning of the image">
-        </div>
-    </div>
-
-    <!-- END [testcase] -->
+    <!-- #testcase -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
