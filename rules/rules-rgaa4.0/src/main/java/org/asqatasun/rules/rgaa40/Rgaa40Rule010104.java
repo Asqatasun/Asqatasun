@@ -19,7 +19,15 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+
+import static org.asqatasun.rules.keystore.AttributeStore.ALT_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.IMG_WITH_ISMAP_ATTR_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_LINK_ASSO_WITH_SERVER_SIDED_IMG_MAP;
 
 /**
  * Implementation of rule 1.1.4 (referential RGAA 4.0)
@@ -27,13 +35,19 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-1-4.md">rule 1.1.4 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-1-4">1.1.4 rule specification</a>
  */
-public class Rgaa40Rule010104 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010104 extends AbstractDetectionPageRuleImplementation {
 
-    /**
-     * Default constructor
-     */
-    public Rgaa40Rule010104() {
-        super();
+    public Rgaa40Rule010104 () {
+        super(
+            new SimpleElementSelector(IMG_WITH_ISMAP_ATTR_CSS_LIKE_QUERY),
+            // solution when at least one element is found
+            new ImmutablePair(TestSolution.NEED_MORE_INFO,CHECK_LINK_ASSO_WITH_SERVER_SIDED_IMG_MAP),
+            // solution when no element is found
+            new ImmutablePair(TestSolution.NOT_APPLICABLE,""),
+            // evidence elements
+            ALT_ATTR,
+            SRC_ATTR
+        );
     }
 
 }
