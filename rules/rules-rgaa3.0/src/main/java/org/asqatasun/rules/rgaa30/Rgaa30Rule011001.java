@@ -19,7 +19,7 @@
  */
 package org.asqatasun.rules.rgaa30;
 
-import org.asqatasun.ruleimplementation.AbstractPageRuleWithDoctypeHtml5CheckerImplementation;
+import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 
 /**
  * Implementation of the rule 1.10.1 of the referential Rgaa 3.0.
@@ -28,7 +28,7 @@ import org.asqatasun.ruleimplementation.AbstractPageRuleWithDoctypeHtml5CheckerI
  * @see <a href="http://references.modernisation.gouv.fr/referentiel-technique-0#test-1-10-1"> 1.10.1 rule specification</a>
  */
 
-public class Rgaa30Rule011001 extends AbstractPageRuleWithDoctypeHtml5CheckerImplementation {
+public class Rgaa30Rule011001 extends AbstractNotTestedRuleImplementation {
 
     /**
      * Default constructor
