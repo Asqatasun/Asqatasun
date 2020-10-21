@@ -580,6 +580,13 @@ public final class CssLikeQueryStore {
         + "object ,"
         + "embed ";
 
+    // potential page refresh
+    public static final String POTENTIAL_PAGE_REFRESH_CSS_LIKE_QUERY
+        = "svg ,"
+        + "canvas ,"
+        + "object ,"
+        + "embed ,"
+        + "meta[http-equiv=refresh][content]:not([content*=url])";
 
     // scripts
     public static final String ONCLICK_CSS_LIKE_QUERY=
