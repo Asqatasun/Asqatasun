@@ -50,11 +50,11 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.09.01.02-2Failed-01");
-        addWebResource("Rgaa40.Test.09.01.02-2Failed-02");
-        addWebResource("Rgaa40.Test.09.01.02-3NMI-01");
-        addWebResource("Rgaa40.Test.09.01.02-3NMI-02");
-        addWebResource("Rgaa40.Test.09.01.02-4NA-01");
+        addWebResource("Rgaa40.Test.9.1.2-2Failed-01");
+        addWebResource("Rgaa40.Test.9.1.2-2Failed-02");
+        addWebResource("Rgaa40.Test.9.1.2-3NMI-01");
+        addWebResource("Rgaa40.Test.9.1.2-3NMI-02");
+        addWebResource("Rgaa40.Test.9.1.2-4NA-01");
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.09.01.02-2Failed-01");
+        ProcessResult processResult = processPageTest("Rgaa40.Test.9.1.2-2Failed-01");
         checkResultIsFailed(processResult, 19, 19);
         checkRemarkIsPresent(
                 processResult, 
@@ -70,7 +70,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
                 RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, 
                 HtmlElementStore.H1_ELEMENT, 
                 1, 
-                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa40 Test.9.1.2 Failed 01"),
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa 4.0 Test.9.1.2 Failed 01"),
                 new ImmutablePair(ProcessRemarkService.DEFAULT_EVIDENCE,"headings"));
         checkRemarkIsPresent(
                 processResult, 
@@ -221,7 +221,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------2Failed-02------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.09.01.02-2Failed-02");
+        processResult = processPageTest("Rgaa40.Test.9.1.2-2Failed-02");
         checkResultIsFailed(processResult, 22, 22);
         checkRemarkIsPresent(
                 processResult, 
@@ -229,7 +229,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
                 RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, 
                 HtmlElementStore.H1_ELEMENT, 
                 1, 
-                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa40 Test.9.1.2 Failed 02"),
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa 4.0 Test.9.1.2 Failed 02"),
                 new ImmutablePair(ProcessRemarkService.DEFAULT_EVIDENCE,"headings"));
         checkRemarkIsPresent(
                 processResult, 
@@ -404,7 +404,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.09.01.02-3NMI-01");
+        processResult = processPageTest("Rgaa40.Test.9.1.2-3NMI-01");
         checkResultIsPreQualified(processResult, 13, 13);
         checkRemarkIsPresent(
                 processResult, 
@@ -412,7 +412,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
                 RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, 
                 HtmlElementStore.H1_ELEMENT, 
                 1, 
-                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa40 Test.9.1.2 NMI 01"),
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa 4.0 Test.9.1.2 NMI 01"),
                 new ImmutablePair(ProcessRemarkService.DEFAULT_EVIDENCE,"headings"));
         checkRemarkIsPresent(
                 processResult, 
@@ -515,7 +515,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-02---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.09.01.02-3NMI-02");
+        processResult = processPageTest("Rgaa40.Test.9.1.2-3NMI-02");
         checkResultIsPreQualified(processResult, 15, 15);
         checkRemarkIsPresent(
                 processResult, 
@@ -523,7 +523,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
                 RemarkMessageStore.CHECK_HEADING_PERTINENCE_MSG, 
                 HtmlElementStore.H1_ELEMENT, 
                 1, 
-                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa40 Test.9.1.2 NMI 02"),
+                new ImmutablePair(HtmlElementStore.TEXT_ELEMENT2,"Rgaa 4.0 Test.9.1.2 NMI 02"),
                 new ImmutablePair(ProcessRemarkService.DEFAULT_EVIDENCE,"headings"));
         checkRemarkIsPresent(
                 processResult, 
@@ -641,7 +641,7 @@ public class Rgaa40Rule090102Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.09.01.02-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.9.1.2-4NA-01"));
     }
 
 }
