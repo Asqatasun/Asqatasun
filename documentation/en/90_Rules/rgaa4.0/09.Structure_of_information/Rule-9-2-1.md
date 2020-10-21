@@ -4,8 +4,8 @@
 
 Check for HTML5 pages, if the page contains:
 - one and only one `<main>` tag without `hidden` attribute. 
-- at least one `<header>` tag except direct child `<header>` tags of `<article>` and `<section>` tags.
-- at least one `<footer>` tag except direct child `<footer>` tags of `<article>` and `<section>` tags.
+- at least one `<header>` tag, except `<header>` that is direct child of `<article>` and `<section>` tags.
+- at least one `<footer>` tag, except `<footer>` that is direct child of `<article>` and `<section>` tags.
 - at least one `<nav>` tag.
 
 A manual check is necessary to control the use of the different 
@@ -80,7 +80,7 @@ main:not([hidden])
 
 #### Set3
 
-All the `<header>` tags except direct child `<header>` tags of `<article>` and `<section>` tags. 
+All the `<header>` tags, except `<header>` that is direct child of `<article>` and `<section>` tags. 
 
 CSS selector : 
 ```jquery-css
@@ -89,7 +89,7 @@ CSS selector :
 
 #### Set4
 
-All the `<footer>` tags except direct child `<footer>` tags of `<article>` and `<section>` tags. 
+All the `<footer>` tags, except `<footer>` that is direct child of `<article>` and `<section>` tags. 
 
 CSS selector : 
 ```jquery-css
@@ -98,120 +98,99 @@ CSS selector :
 
 ### Process
 
-#### Test0
+#### Tests
 
-Test whether the page has a `doctype` that is not an HTML5 `doctype` :
+##### Test0
+
+Test whether the page has a `doctype` that is not an HTML5 `doctype`:
+
 - If yes, raise a MessageA.
 - If no, launch Test1, Test2, Test3 and Test4.
+
+##### Test1
+
+Test emptiness of **Set1**. 
+- If empty, raise a MessageB.
+- If not empty, raise a MessageC.
+
+##### Test2
+
+Test whether **Set2** is not empty and contains only one element. 
+- If empty, raise a MessageD.
+- If not empty but contains multiple element, raise a MessageE.
+- Else raise a MessageC.
+
+##### Test3
+
+Test emptiness of **Set3**. 
+- If empty, raise a MessageF.
+- If not empty, raise a MessageC.
+
+##### Test4
+
+Test emptiness of **Set4**. 
+- If empty, raise a MessageG.
+- If not empty, raise a MessageC.
+
+#### Messages 
 
 ##### MessageA : Not Applicable
 
 - status: Not Applicable
 
-
-#### Test1
-
-Test whether **Set1** is not empty. 
-- If empty, raise a MessageA.
-- If not empty, raise a MessageB.
-
-##### MessageA : `<nav>` tag is missing
+##### MessageB : `<nav>` tag is missing
 
 - code : **NavElementMissing**
 - status: Failed
 - present in source: no
 
-##### MessageB : Check manually the elements of the scope
+##### MessageC : Check manually the elements of the scope
 
-- code: ManualCheckOnElements
+- code: **ManualCheckOnElements**
 - status: Pre-qualified
 - parameter: snippet
 - present in source: yes
 
-
-#### Test2
-
-Test whether **Set2** is not empty and contains only one element. 
-- If empty, raise a MessageA.
-- If not empty but contains multiple element, raise a MessageB.
-- Else raise a MessageC.
-
-##### MessageA : `<main>` tag is missing
+##### MessageD : `<main>` tag is missing
 
 - code : **NavElementMissing**
 - status: Failed
 - present in source: no
 
-##### MessageB : multiple `<main>` tags
+##### MessageE : multiple `<main>` tags
 
 - code : **MainElementNotUnique**
 - status: Failed
 - parameter: snippet
 - present in source: yes
 
-##### MessageC : Check manually the elements of the scope
-
-- code: ManualCheckOnElements
-- status: Pre-qualified
-- parameter: snippet
-- present in source: yes
-
-
-#### Test3
-
-Test whether **Set3** is not empty. 
-- If empty, raise a MessageA.
-- If not empty, raise a MessageB.
-
-##### MessageA : `<header>` tag is missing
+##### MessageF : `<header>` tag is missing
 
 - code : **HeaderElementMissing**
 - status: Failed
 - present in source: no
 
-##### MessageB : Check manually the elements of the scope
 
-- code: ManualCheckOnElements
-- status: Pre-qualified
-- parameter: snippet
-- present in source: yes
-
-
-#### Test4
-
-Test whether **Set4** is not empty. 
-- If empty, raise a MessageA.
-- If not empty, raise a MessageB.
-
-##### MessageA : `<footer>` tag is missing
+##### MessageG : `<footer>` tag is missing
 
 - code : **FooterElementMissing**
 - status: Failed
 - present in source: no
 
-##### MessageB : Check manually the elements of the scope
-
-- code: ManualCheckOnElements
-- status: Pre-qualified
-- parameter: snippet
-- present in source: yes
-
-
-### Analysis
 
 ### Analysis
 
 #### Not Applicable
 
-The page has a `doctype` that is not an HTML5 `doctype`.
+* The page has a `doctype` that is not an HTML5 `doctype`.
 
 #### Failed
 
-- multiple `<main>` tags without `hidden` attribute
-- missing `<main>` tag
-- missing `<header>` tag
-- missing `<footer>` tag
-- missing `<nav>` tag
+- multiple `<main>` tags without `hidden` attribute are found
+- OR missing `<main>` tag
+- OR missing `<header>` tag
+- OR missing `<footer>` tag
+- OR missing `<nav>` tag
 
 #### Pre-qualified
 
