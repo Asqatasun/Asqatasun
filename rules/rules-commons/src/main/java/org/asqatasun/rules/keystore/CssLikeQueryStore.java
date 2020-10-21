@@ -572,6 +572,14 @@ public final class CssLikeQueryStore {
         + ", " + TIME_BASED_MEDIA_CSS_LIKE_QUERY
         + ", " + NO_TIME_BASED_MEDIA_CSS_LIKE_QUERY ;
 
+    // images with potential quick change of brightness
+    public static final String IMAGES_WITH_POTENTIAL_QUICK_CHANGE_OF_BRIGHTNESS_CSS_LIKE_QUERY
+        = "img ,"
+        + "svg ,"
+        + "canvas ,"
+        + "object ,"
+        + "embed ";
+
 
     // scripts
     public static final String ONCLICK_CSS_LIKE_QUERY=

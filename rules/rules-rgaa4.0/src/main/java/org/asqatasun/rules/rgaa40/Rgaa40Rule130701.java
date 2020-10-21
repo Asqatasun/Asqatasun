@@ -19,7 +19,12 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.IMAGES_WITH_POTENTIAL_QUICK_CHANGE_OF_BRIGHTNESS_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG;
 
 /**
  * Implementation of rule 13.7.1 (referential RGAA 4.0)
@@ -27,13 +32,19 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/13.Consultation/Rule-13-7-1.md">rule 13.7.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-13-7-1">13.7.1 rule specification</a>
  */
-public class Rgaa40Rule130701 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule130701 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule130701() {
-        super();
+        super(
+            new SimpleElementSelector(IMAGES_WITH_POTENTIAL_QUICK_CHANGE_OF_BRIGHTNESS_CSS_LIKE_QUERY),
+            TestSolution.NEED_MORE_INFO,  // solution when at least one element is found
+            TestSolution.NOT_APPLICABLE,  // solution when no element is found
+            MANUAL_CHECK_ON_ELEMENTS_MSG, // manual check message
+            null
+        );
     }
 
 }
