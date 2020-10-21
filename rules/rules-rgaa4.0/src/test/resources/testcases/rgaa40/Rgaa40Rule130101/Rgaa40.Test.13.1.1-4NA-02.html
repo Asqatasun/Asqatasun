@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.13.1.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.13.1.1 NA 02</title>
     <!-- START [testcase] -->
-    <meta http-equiv="refresh" content="30">
+    <meta http-equiv="refresh" content="10;url=/newPage.html">
+    <meta http-equiv="refresh" content="20;url=http://example.com/">
+    <meta http-equiv="refresh" content="30;URL=http://example.com/">
+    <meta http-equiv="refresh" content="40;   URL=http://example.com/">
     <!-- END [testcase] -->
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.13.1.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.13.1.1 NA 02</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -31,30 +34,17 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-
-        <!-- canvas and svg tags -->
-        <canvas height="300" id="canvas" width="300"></canvas>
-        <svg height="120" version="1.1" viewBox="0 0 120 120" width="120" xmlns="http://www.w3.org/2000/svg">
-            <rect height="100" width="100" x="10" y="10">
-                <animate attributeName="x" attributeType="XML" dur="10s" from="-100" repeatCount="indefinite" to="120"/>
-            </rect>
-        </svg>
-
-        <!-- object and embed tags -->
-        <embed height="200" src="sample.swf" type="application/x-shockwave-flash" width="300"/>
-        <object data="sample.swf" height="200" type="application/x-shockwave-flash" width="300">
-            <param name="movie" value="sample.swf">
-            <param name="loop" value="false">
-        </object>
-
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI:
-        - a meta tag with an http-equiv="refresh" attribute and content attribute without URL
-        - multiple tags (svg, canvas, object or embed) with potential page refresh
+        NA:
+        - no meta tag with an http-equiv="refresh" attribute and content attribute without URL
+        - no tags (img, svg, canvas, object or embed) with potential page refresh
+
+        The page contains several meta-tags with an http-equiv="refresh" attribute
+        and the content attribute with a URL, but they are not eligible for this rule.
     </div>
     <!-- END [test-explanation] -->
 </div>
