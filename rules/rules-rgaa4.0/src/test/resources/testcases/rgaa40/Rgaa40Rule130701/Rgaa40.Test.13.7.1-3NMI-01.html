@@ -10,22 +10,43 @@
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
-        <p>Dans chaque page web, chaque image (balise <code>&lt;img&gt;</code>, balise <code>&lt;svg&gt;</code>, balise <code>&lt;canvas&gt;</code>, balise <code>&lt;embed&gt;</code> ou balise <code>&lt;object&gt;</code>) qui provoque un changement brusque de luminosité ou un effet de flash vérifie-t-elle une de ces conditions ?</p>
-            <ul>
+        <p>Dans chaque page web, chaque image (balise <code>&lt;img&gt;</code>, balise <code>&lt;svg&gt;</code>, balise
+            <code>&lt;canvas&gt;</code>, balise <code>&lt;embed&gt;</code> ou balise <code>&lt;object&gt;</code>) qui
+            provoque un changement brusque de luminosité ou un effet de flash vérifie-t-elle une de ces conditions ?</p>
+        <ul>
             <li>La fréquence de l’effet est inférieure à 3 par seconde.</li>
             <li>La surface totale cumulée des effets est inférieure ou égale à 21824 pixels.</li>
-            </ul>
+        </ul>
     </div>
     <!-- END [test-detail] -->
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <!-- img tags -->
+        <img src="mock-quickChangeOfBrightness.gif">
+
+        <!-- canvas and svg tags -->
+        <canvas id="canvas" width="300" height="300"></canvas>
+        <svg width="120" height="120" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="100" height="100">
+                <animate attributeType="XML" attributeName="x" from="-100" to="120" dur="10s" repeatCount="indefinite"/>
+            </rect>
+        </svg>
+
+        <!-- object and embed tags -->
+        <embed src="sample.swf" type="application/x-shockwave-flash" width="300" height="200"/>
+        <object type="application/x-shockwave-flash" data="sample.swf" width="300" height="200">
+            <param name="movie" value="sample.swf">
+            <param name="loop" value="false">
+        </object>
+
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI:
+        multiple tags (img, svg, canvas, object or embed) with potential quick change of brightness
     </div>
     <!-- END [test-explanation] -->
 </div>
