@@ -10,18 +10,42 @@
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
-        <p>Dans chaque page web, le contenu de chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#titre">titre</a> (balise <code>&lt;hx&gt;</code> ou balise possédant un attribut WAI-ARIA <code>role="heading"</code> associé à un attribut WAI-ARIA <code>aria-level</code>) est-il pertinent ?</p>
+        <p>Dans chaque page web, le contenu de chaque <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#titre">titre</a>
+            (balise <code>&lt;hx&gt;</code> ou balise possédant un attribut WAI-ARIA <code>role="heading"</code>
+            associé à un attribut WAI-ARIA <code>aria-level</code>) est-il pertinent ?</p>
     </div>
     <!-- END [test-detail] -->
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <h1> Title level 1-1</h1> 
+        <h1> <img src="my-image.jpg" alt="Title level 1-2" /></h1> 
+        <h2> Title level 2-1</h2> 
+        <h2> <img src="my-image.jpg" alt="Title level 2-2" /></h2> 
+        <h3> Title level 3-1</h3> 
+        <h3> <img src="my-image.jpg" alt="Title level 3-2" /></h3> 
+        <h4> Title level 4-1</h4> 
+        <h4> <img src="my-image.jpg" alt="Title level 4-2" /></h4> 
+        <h5> Title level 5-1</h5> 
+        <h5> <img src="my-image.jpg" alt="Title level 5-2" /></h5> 
+        <h6> Title level 6-1</h6> 
+        <h6> <img src="my-image.jpg" alt="Title level 6-2" /></h6> 
+        <h7>
+            Title level 7-1 
+        </h7> 
+        <h7> 
+            <img src="my-image.jpg" alt="Title level 7-2" />
+        </h7> 
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI:
+        The relevancy of each heading needs to be humanly checked.
+
+        The h7 tags are ignored.
     </div>
     <!-- END [test-explanation] -->
 </div>
