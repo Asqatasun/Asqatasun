@@ -19,7 +19,12 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.link.AbstractDownloadableLinkRuleImplementation;
+import org.asqatasun.rules.elementchecker.text.TextEndsWithChecker;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.OFFICE_DOCUMENT_DETECTED_MSG2;
+import org.asqatasun.rules.textbuilder.TextAttributeOfElementBuilder;
 
 /**
  * Implementation of rule 13.4.1 (referential RGAA 4.0)
@@ -27,13 +32,28 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/13.Consultation/Rule-13-4-1.md">rule 13.4.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-13-4-1">13.4.1 rule specification</a>
  */
-public class Rgaa40Rule130401 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule130401 extends AbstractDownloadableLinkRuleImplementation {
+
+    /* the office document extensions nomenclature */
+    private static final String OFFICE_DOC_EXT_NOM = "OfficeDocumentExtensions";
 
     /**
      * Default constructor
      */
-    public Rgaa40Rule130401() {
-        super();
+    public Rgaa40Rule130401()  {
+        super(
+            new TextEndsWithChecker(
+                // the href attribute is tested
+                new TextAttributeOfElementBuilder(HREF_ATTR),
+                // the nomenclature listing the extensions to test
+                OFFICE_DOC_EXT_NOM,
+                // the result when detected
+                TestSolution.NEED_MORE_INFO,
+                // the message when detected
+                OFFICE_DOCUMENT_DETECTED_MSG2,
+                // the evidence elements
+                HREF_ATTR)
+        );
     }
 
 }

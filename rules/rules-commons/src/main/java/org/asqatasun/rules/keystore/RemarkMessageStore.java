@@ -329,6 +329,8 @@ public final class RemarkMessageStore {
             "NotImmediateRedirectionViaMeta";
     public static final String OFFICE_DOCUMENT_DETECTED_MSG = 
             "OfficeDocumentDetected";
+    public static final String OFFICE_DOCUMENT_DETECTED_MSG2 =
+            "OfficeDocumentDetected2";
     public static final String DOWNLOADABLE_FILE_DETECTED_CHECK_FORMAT_MSG = 
             "FileToDownloadDetectedCheckFormat";
     public static final String DOWNLOADABLE_FILE_DETECTED_CHECK_WEIGHT_MSG = 
