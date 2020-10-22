@@ -33,8 +33,10 @@ import org.asqatasun.rules.elementselector.ElementSelector;
 import org.asqatasun.rules.elementselector.SimpleElementSelector;
 import org.jsoup.nodes.Element;
 
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_CSS_LIKE_QUERY;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITHOUT_TARGET_CSS_LIKE_QUERY;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.LINK_WITHOUT_TARGET_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_MSG;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
 
 /**
@@ -45,10 +47,13 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTE
  */
 public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
 
-    /* the links without target */
+    // Links without target
     private ElementHandler<Element> linkWithoutTarget = new ElementHandlerImpl();
 
-    /* the total number of elements */
+    // Tags (p, li, ...) without content
+    private ElementHandler<Element> tagWithoutContent = new ElementHandlerImpl();
+
+   // Total number of elements
     private int totalNumberOfElements = 0;
 
     /**
@@ -60,10 +65,16 @@ public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
 
     @Override
     protected void select(SSPHandler sspHandler) {
+
         // Selection of all links without target
         ElementSelector linkWithoutTargetSelector =
             new SimpleElementSelector(LINK_WITHOUT_TARGET_CSS_LIKE_QUERY);
         linkWithoutTargetSelector.selectElements(sspHandler, linkWithoutTarget);
+
+        // Selection of all tags (p, li, ...) without content
+        ElementSelector tagWithoutContentSelector =
+            new SimpleElementSelector(TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_CSS_LIKE_QUERY);
+        tagWithoutContentSelector.selectElements(sspHandler, tagWithoutContent);
 
         totalNumberOfElements = sspHandler.getTotalNumberOfElements();
     }
@@ -73,7 +84,7 @@ public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
         SSPHandler sspHandler,
         TestSolutionHandler testSolutionHandler) {
 
-        if (linkWithoutTarget.isEmpty()) {
+        if (linkWithoutTarget.isEmpty() && tagWithoutContent.isEmpty()) {
             sspHandler.getProcessRemarkService().addProcessRemark(
                 TestSolution.NEED_MORE_INFO,
                 RuleCheckHelper.specifyMessageToRule(
@@ -84,13 +95,22 @@ public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
             return;
         }
 
+        // Links without target
         ElementChecker linkWithoutTargetChecker = new ElementPresenceChecker(
             new ImmutablePair(TestSolution.FAILED, LINK_WITHOUT_TARGET_MSG),
             new ImmutablePair(TestSolution.PASSED, ""));
-
         linkWithoutTargetChecker.check(
             sspHandler,
             linkWithoutTarget,
+            testSolutionHandler);
+
+        // Tags (p, li, ...) without content
+        ElementChecker tagWithoutContentChecker = new ElementPresenceChecker(
+            new ImmutablePair(TestSolution.FAILED, TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_MSG),
+            new ImmutablePair(TestSolution.PASSED, ""));
+        tagWithoutContentChecker.check(
+            sspHandler,
+            tagWithoutContent,
             testSolutionHandler);
     }
 

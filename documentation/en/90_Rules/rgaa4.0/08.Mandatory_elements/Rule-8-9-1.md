@@ -47,6 +47,18 @@ CSS selector:
 a:not([href]):not([name]):not([id])
 ```
 
+#### Set2
+
+All the following tags without content (text or tag child) :
+- `<p>`
+- `<li>`
+
+CSS selector: 
+```jquery-css
+p:matchesOwn(^$):not(:has(*)):not([hidden]), 
+li:matchesOwn(^$):not(:has(*)):not([hidden])
+```
+
 ### Process
 
 #### Tests
@@ -56,6 +68,12 @@ a:not([href]):not([name]):not([id])
 Test emptiness of **Set1**.
 - If empty, raise a MessageA
 - If not empty, for each occurence of the **Set1** raise a MessageB
+
+##### Test2
+
+Test emptiness of **Set2**.
+- If empty, raise a MessageA
+- If not empty, for each occurence of the **Set2** raise a MessageC
 
 #### Messages 
 
@@ -72,12 +90,20 @@ Test emptiness of **Set1**.
 - parameter: snippet
 - present in source: yes
 
+##### MessageC : Tags without content that are used for layout purpose
+
+- code: TagsWithoutContentUsedForLayoutPurpose
+- status: Failed
+- parameter: snippet
+- present in source: yes
+
 
 ### Analysis
 
 #### Failed
 
-The page contains a link without `href`, `name` or `id` attribute. 
+The page contains either a link (without `href`, `name` or `id` attribute)
+or a tag (`<p>` or  `<li>`) without content (text or tag child)
 
 #### Pre-qualified
 

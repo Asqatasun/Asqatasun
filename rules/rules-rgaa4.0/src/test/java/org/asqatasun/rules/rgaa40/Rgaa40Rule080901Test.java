@@ -25,6 +25,9 @@ import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Unit test class for implementation of rule 8.9.1 (referential RGAA 4.0)
  *
@@ -51,11 +54,14 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
     protected void setUpWebResourceMap() {
         addWebResource("Rgaa40.Test.8.9.1-2Failed-01");
         addWebResource("Rgaa40.Test.8.9.1-2Failed-02");
+        addWebResource("Rgaa40.Test.8.9.1-2Failed-03");
 
         addWebResource("Rgaa40.Test.8.9.1-3NMI-01");
         addWebResource("Rgaa40.Test.8.9.1-3NMI-02");
         addWebResource("Rgaa40.Test.8.9.1-3NMI-03");
         addWebResource("Rgaa40.Test.8.9.1-3NMI-04");
+        addWebResource("Rgaa40.Test.8.9.1-3NMI-05");
+        addWebResource("Rgaa40.Test.8.9.1-3NMI-06");
     }
 
     @Override
@@ -83,6 +89,31 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
             RemarkMessageStore.LINK_WITHOUT_TARGET_MSG,
             HtmlElementStore.A_ELEMENT,
             1);
+
+        //----------------------------------------------------------------------
+        //---------------------------2Failed-03---------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.8.9.1-2Failed-03");
+        checkResultIsFailed(processResult, 25, 8);
+        HashMap<Integer, String> mapTag = new HashMap<Integer, String>();
+        mapTag.put(1, HtmlElementStore.P_ELEMENT);
+        mapTag.put(2, HtmlElementStore.P_ELEMENT);
+        mapTag.put(3, HtmlElementStore.P_ELEMENT);
+        mapTag.put(4, HtmlElementStore.P_ELEMENT);
+        mapTag.put(5, HtmlElementStore.LI_ELEMENT);
+        mapTag.put(6, HtmlElementStore.LI_ELEMENT);
+        mapTag.put(7, HtmlElementStore.LI_ELEMENT);
+        mapTag.put(8, HtmlElementStore.LI_ELEMENT);
+        for (Map.Entry item : mapTag.entrySet()) {
+            int position = ((int) item.getKey());
+            String htmlElement = item.getValue().toString();
+            checkRemarkIsPresent(
+                processResult,
+                TestSolution.FAILED,
+                RemarkMessageStore.TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_MSG,
+                htmlElement,
+                position);
+        }
 
         //----------------------------------------------------------------------
         //---------------------------3NMI-01---------------------------------
@@ -125,6 +156,30 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-04");
         checkResultIsPreQualified(processResult, 17, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-05------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-05");
+        checkResultIsPreQualified(processResult, 38, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-06------------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-06");
+        checkResultIsPreQualified(processResult, 25, 1);
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
