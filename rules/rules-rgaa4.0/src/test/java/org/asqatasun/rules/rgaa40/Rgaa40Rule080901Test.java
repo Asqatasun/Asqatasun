@@ -49,17 +49,13 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.08.09.01-2Failed-01");
-        addWebResource("Rgaa40.Test.08.09.01-2Failed-02");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-01");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-02");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-03");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-04");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-05");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-06");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-07");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-08");
-        addWebResource("Rgaa40.Test.08.09.01-3NMI-09");
+        addWebResource("Rgaa40.Test.8.9.1-2Failed-01");
+        addWebResource("Rgaa40.Test.8.9.1-2Failed-02");
+
+        addWebResource("Rgaa40.Test.8.9.1-3NMI-01");
+        addWebResource("Rgaa40.Test.8.9.1-3NMI-02");
+        addWebResource("Rgaa40.Test.8.9.1-3NMI-03");
+        addWebResource("Rgaa40.Test.8.9.1-3NMI-04");
     }
 
     @Override
@@ -67,8 +63,8 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //---------------------------2Failed-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.08.09.01-2Failed-01");
-        checkResultIsFailed(processResult, 16, 1);
+        ProcessResult processResult = processPageTest("Rgaa40.Test.8.9.1-2Failed-01");
+        checkResultIsFailed(processResult, 17, 1);
         checkRemarkIsPresent(
             processResult,
             TestSolution.FAILED,
@@ -79,8 +75,8 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //---------------------------2Failed-02---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-2Failed-02");
-        checkResultIsFailed(processResult, 16, 1);
+        processResult = processPageTest("Rgaa40.Test.8.9.1-2Failed-02");
+        checkResultIsFailed(processResult, 17, 1);
         checkRemarkIsPresent(
             processResult,
             TestSolution.FAILED,
@@ -89,10 +85,10 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
             1);
 
         //----------------------------------------------------------------------
-        //---------------------------3NMI-03---------------------------------
+        //---------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-01");
-        checkResultIsPreQualified(processResult, 15, 1);
+        processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-01");
+        checkResultIsPreQualified(processResult, 16, 1);
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
@@ -103,8 +99,8 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //---------------------------3NMI-02------------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-02");
-        checkResultIsPreQualified(processResult, 16, 1);
+        processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-02");
+        checkResultIsPreQualified(processResult, 17, 1);
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
@@ -115,8 +111,8 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //---------------------------3NMI-03------------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-03");
-        checkResultIsPreQualified(processResult, 16, 1);
+        processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-03");
+        checkResultIsPreQualified(processResult, 17, 1);
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
@@ -127,67 +123,7 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //---------------------------3NMI-04------------------------------------
         //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-04");
-        checkResultIsPreQualified(processResult, 16, 1);
-        checkRemarkIsPresent(
-            processResult,
-            TestSolution.NEED_MORE_INFO,
-            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
-            "",
-            1);
-
-        //----------------------------------------------------------------------
-        //---------------------------3NMI-05------------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-05");
-        checkResultIsPreQualified(processResult, 16, 1);
-        checkRemarkIsPresent(
-            processResult,
-            TestSolution.NEED_MORE_INFO,
-            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
-            "",
-            1);
-
-        //----------------------------------------------------------------------
-        //---------------------------3NMI-06------------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-06");
-        checkResultIsPreQualified(processResult, 17, 1);
-        checkRemarkIsPresent(
-            processResult,
-            TestSolution.NEED_MORE_INFO,
-            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
-            "",
-            1);
-
-        //----------------------------------------------------------------------
-        //---------------------------3NMI-07------------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-07");
-        checkResultIsPreQualified(processResult, 17, 1);
-        checkRemarkIsPresent(
-            processResult,
-            TestSolution.NEED_MORE_INFO,
-            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
-            "",
-            1);
-
-        //----------------------------------------------------------------------
-        //---------------------------3NMI-08------------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-08");
-        checkResultIsPreQualified(processResult, 17, 1);
-        checkRemarkIsPresent(
-            processResult,
-            TestSolution.NEED_MORE_INFO,
-            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
-            "",
-            1);
-
-        //----------------------------------------------------------------------
-        //---------------------------3NMI-09------------------------------------
-        //----------------------------------------------------------------------
-        processResult = processPageTest("Rgaa40.Test.08.09.01-3NMI-09");
+        processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-04");
         checkResultIsPreQualified(processResult, 17, 1);
         checkRemarkIsPresent(
             processResult,

@@ -3,7 +3,7 @@
 ## Summary
 
 This test consists in searching patterns indicating that forbidden tags
-(not div, span or table) are used for layout purpose.
+(not `div`, `span` or `table`) are used for layout purpose.
 
 ## Business description
 
@@ -40,56 +40,48 @@ This test consists in searching patterns indicating that forbidden tags
 
 #### Set1
 
-All the `<a>` tags without "href", "name" or "id" attribute
-(a:not([href]):not([name]):not([id]))
+All the `<a>` tags without `href`, `name` or `id` attribute.
 
-#### Set2
-
-All the fieldset not within a form (fieldset:not(form
-fieldset):not(*[role=search] fieldset):not(*[role=form] fieldset))
+CSS selector: 
+```jquery-css
+a:not([href]):not([name]):not([id])
+```
 
 ### Process
 
-#### Test1
+#### Tests
 
-We check whether **Set1** AND **Set2** are empty. If true, raise a
-MessageA
+##### Test1
 
-###### MessageA : No suspect pattern detected
+Test emptiness of **Set1**.
+- If empty, raise a MessageA
+- If not empty, for each occurence of the **Set1** raise a MessageB
 
--   code :NoPatternDetected
--   status: Pre-Qualified
--   present in source : no
+#### Messages 
 
-For each occurence of the **Set1** raise a MessageB
+##### MessageA : No suspect pattern detected
 
-###### MessageB : Link without target
+- code: NoPatternDetected
+- status: Pre-Qualified
+- present in source: no
 
--   code :LinkWithoutTarget
--   status: Failed
--   parameter : snippet
--   present in source : yes
+##### MessageB : Link without target
 
-For each occurence of the **Set2** raise a MessageC
+- code: LinkWithoutTarget
+- status: Failed
+- parameter: snippet
+- present in source: yes
 
-###### MessageC : Fieldset not within a form
-
--   code :FieldsetNotWithinForm
--   status: Failed
--   parameter : snippet
--   present in source : yes
-
-Test1 :
 
 ### Analysis
 
-#### Failed :
+#### Failed
 
-The page contains a link without target or a fieldset not within a form (**Test1** returns false)
+The page contains a link without `href`, `name` or `id` attribute. 
 
-#### Pre-qualified :
+#### Pre-qualified
 
-**Test1** returns true
+In all other cases
 
 ## Notes
 
@@ -97,17 +89,9 @@ On latest webdev data set (2013-10-30, 78,000 pages), links without
 target (a:not([href]):not([name]):not([id])) have been found on 18256
 pages, i.e on 23% of the pages.
 
-On latest webdev data set (2013-10-30, 78,000 pages), fieldsets not
-within form (fieldset:not(form fieldset):not(*[role=search]
-fieldset):not(*[role=form] fieldset)) have been found on 982 pages, i.e
-on 1.25% of the pages.
-
-
 
 ## Files
 
 - [TestCases files for rule 8.9.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080901/)
 - [Unit test file for rule 8.9.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080901Test.java)
 - [Class file for rule 8.9.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080901.java)
-
-
