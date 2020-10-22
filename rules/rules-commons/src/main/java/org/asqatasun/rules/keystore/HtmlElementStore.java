@@ -95,6 +95,10 @@ public final class HtmlElementStore {
     public static final String UL_ELEMENT = HTML.Tag.UL.toString();
     public static final String VAR_ELEMENT = HTML.Tag.VAR.toString();
     public static final String VIDEO_ELEMENT = "video";
+    public static final String MAIN_ELEMENT = "main";
+    public static final String HEADER_ELEMENT = "header";
+    public static final String FOOTER_ELEMENT = "footer";
+    public static final String NAV_ELEMENT = "nav";
 
     /**
      * Private constructor. This class handles keys and must not be instanciated

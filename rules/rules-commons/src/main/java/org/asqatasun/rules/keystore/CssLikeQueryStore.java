@@ -46,7 +46,7 @@ public final class CssLikeQueryStore {
     public static final String APPLET_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "applet[alt]:not(a applet)"; 
     public static final String APPLET_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "applet:not(a applet)"; 
+                    "applet:not(a applet)";
     public static final String OBJECT_TYPE_IMG_CSS_LIKE_QUERY=
                     "object[type^=image]"; 
     public static final String OBJECT_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY=
@@ -587,6 +587,13 @@ public final class CssLikeQueryStore {
         + "object ,"
         + "embed ,"
         + "meta[http-equiv=refresh][content]:not([content*=url])";
+    // HTML 5
+    public static final String HTML5_PAGE_MAIN_CSS_LIKE_QUERY
+        = "main:not([hidden])" ;
+    public static final String HTML5_PAGE_HEADER_CSS_LIKE_QUERY
+       = "*:not(article):not(section) > header" ;
+    public static final String HTML5_PAGE_FOOTER_CSS_LIKE_QUERY
+        = "*:not(article):not(section) > footer" ;
 
     // scripts
     public static final String ONCLICK_CSS_LIKE_QUERY=

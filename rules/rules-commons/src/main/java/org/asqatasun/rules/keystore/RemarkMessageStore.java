@@ -47,7 +47,21 @@ public final class RemarkMessageStore {
             "DoctypeAbsentCheckHtml5AndCheckManually";
     public static final String HTML5_DOCTYPE_DETECTED_CHECK_MANUALLY = 
             "Html5DoctypeDetectedCheckManually";
-    
+
+    // HTML 5
+    public static final String HTML5_DOCUMENT_STRUCTURE_CHECK_MANUALLY =
+        "Html5DocumentStructureCheckManually";
+    public static final String MAIN_ELEMENT_NOT_UNIQUE =
+        "MainElementNotUnique";
+    public static final String MAIN_ELEMENT_MISSING =
+        "MainElementMissing";
+    public static final String HEADER_ELEMENT_MISSING =
+        "HeaderElementMissing";
+    public static final String FOOTER_ELEMENT_MISSING =
+        "FooterElementMissing";
+    public static final String NAV_ELEMENT_MISSING =
+        "NavElementMissing";
+
     // images
     public static final String ALT_MISSING_MSG = "AltMissing";
     public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
