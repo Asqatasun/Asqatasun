@@ -87,7 +87,7 @@ For each occurrence of false-result of **Test4**, raise a MessageF.
 
 -    code : **NotPertinentAlt** 
 -    status: Failed
--    parameter : `"role"` attribute, `"aria-label"` attribute, `"computed accessible name"`, tag name
+-    parameter : `"role"` attribute, `"aria-label"` attribute, `"computed accessible name"`
 -    present in source : yes
 
 ##### MessageB 
