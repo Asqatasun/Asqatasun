@@ -19,7 +19,17 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractDetectionPageRuleImplementation;
+import org.asqatasun.rules.elementselector.CaptchaElementSelector;
+import org.asqatasun.rules.elementselector.ElementWithAccessibleNameSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.EMBED_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
 
 /**
  * Implementation of rule 1.4.5 (referential RGAA 4.0)
@@ -27,13 +37,24 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-4-5.md">rule 1.4.5 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-4-5">1.4.5 rule specification</a>
  */
-public class Rgaa40Rule010405 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010405 extends AbstractDetectionPageRuleImplementation {
 
     /**
      * Default constructor
      */
-    public Rgaa40Rule010405() {
-        super();
+    public Rgaa40Rule010405 () {
+        super(
+            new ElementWithAccessibleNameSelector(new CaptchaElementSelector(new SimpleElementSelector(EMBED_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY))),
+            // solution when at least one element is found
+            new ImmutablePair<>(TestSolution.NEED_MORE_INFO, CHECK_CAPTCHA_ALTERNATIVE_MSG),
+            // solution when no element is found
+            new ImmutablePair<>(TestSolution.NOT_APPLICABLE,""),
+            // evidence elements
+            TITLE_ATTR,
+            ARIA_LABEL_ATTR,
+            COMPUTED_LINK_TITLE,
+            SRC_ATTR
+        );
     }
 
 }
