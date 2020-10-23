@@ -46,27 +46,6 @@ public abstract class AbstractDetectionPageRuleImplementation
         return epc;
     }
 
-//    /**
-//     * Constructor
-//     * 
-//     * @param elementSelector
-//     * @param messageCodeOnElementDetected
-//     * @param messageCodeOnElementNotDetected
-//     * @param eeAttributeNameList 
-//     */
-//    public AbstractDetectionPageRuleImplementation(
-//            @Nonnull ElementSelector elementSelector, 
-//            @Nullable String messageCodeOnElementDetected, 
-//            @Nullable String messageCodeOnElementNotDetected,
-//            String... eeAttributeNameList) {
-//        this(elementSelector, 
-//             ElementPresenceChecker.DEFAULT_DETECTED_SOLUTION,
-//             ElementPresenceChecker.DEFAULT_NOT_DETECTED_SOLUTION,
-//             messageCodeOnElementDetected, 
-//             messageCodeOnElementNotDetected, 
-//             eeAttributeNameList);
-//    }
-    
     /**
      * Constructor
      * 

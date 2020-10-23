@@ -1,0 +1,264 @@
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * <object type="image/…">
+        * <embed type="image/…">
+        * <canvas>
+        * tag with WAI-ARIA role="img"
+    * with: aria-label
+-->
+<div class="testcase">
+    <img src="dummy.png" aria-label="meaning of the captcha image"/>
+</div>
+<div class="testcase">
+    <input type="image" src="dummy.png" aria-label="meaning of the captcha image"/>
+</div>
+<div class="testcase">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-label="meaning of the captcha image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<div class="testcase">
+    <object type="image" data="dummy.png" aria-label="meaning of the captcha image"></object>
+</div>
+<div class="testcase">
+<div class="testcase">
+    <embed type="image" src="dummy.png"
+           aria-label="meaning of the captcha image">
+</div>
+<div class="testcase">
+    <canvas id="canvas3" width="300" height="300"
+            aria-label="meaning of the captcha image">
+    </canvas>
+</div>
+<div class="testcase">
+    <div role="img"
+         aria-label="meaning of the captcha image">
+    </div>
+</div>
+
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * <object type="image/…">
+        * <embed type="image/…">
+        * <canvas>
+        * tag with WAI-ARIA role="img"
+    * with: aria-labelledby
+-->
+<div>
+    <div id="image-description">Captcha Image description</div>
+    <img src="dummy.png"
+         aria-labelledby="image-description"/>
+    <input type="image" src="dummy.png"
+           aria-labelledby="image-description"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png"
+            aria-labelledby="image-description">
+    </object>
+
+    <embed type="image" src="dummy.png"
+           aria-labelledby="image-description">
+
+    <canvas id="canvas4" width="300" height="300"
+            aria-labelledby="image-description">
+    </canvas>
+
+    <div role="img" aria-labelledby="image-description">
+    </div>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * Images:
+        * <img>
+        * <area>
+        * <input type="image">
+    * with: alt
+-->
+<div class="testcase">
+    <img src="dummy.png" alt="Meaning of the captcha image"/>
+</div>
+<div class="testcase">
+    <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+    <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+         alt="MDN infographic"/>
+    <map name="infographic" aria-label="captcha (available for all the area children tags">
+        <area shape="rect" coords="184,6,253,27"
+              href="https://mozilla.org"
+              target="_blank" alt="Mozilla captcha"/>
+        <area shape="circle" coords="130,136,60"
+              href="https://developer.mozilla.org/"
+              target="_blank" alt="MDN"/>
+        <area shape="poly" coords="130,6,253,96,223,106,130,39"
+              href="https://developer.mozilla.org/docs/Web/Guide/Graphics"
+              target="_blank" alt="Graphics"/>
+        <area shape="poly" coords="253,96,207,241,189,217,223,103"
+              href="https://developer.mozilla.org/docs/Web/HTML"
+              target="_blank" alt="HTML"/>
+        <area shape="poly" coords="207,241,54,241,72,217,189,217"
+              href="https://developer.mozilla.org/docs/Web/JavaScript"
+              target="_blank" alt="JavaScript"/>
+        <area shape="poly" coords="54,241,6,97,36,107,72,217"
+              href="https://developer.mozilla.org/docs/Web/API"
+              target="_blank" alt="Web APIs"/>
+        <area shape="poly" coords="6,97,130,6,130,39,36,107"
+              href="https://developer.mozilla.org/docs/Web/CSS"
+              target="_blank" alt="CSS"/>
+    </map>
+</div>
+<div class="testcase">
+    <input type="image" src="dummy.png"
+           alt="Meaning of the captcha image"/>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * Images:
+        * <img>
+        * <input type="image">
+        * <object type="image">
+        * <embed type="image">
+    * with: title
+-->
+<div class="testcase">
+    <img src="dummy.png" title="Meaning of the captcha image"/>
+</div>
+<div class="testcase">
+    <input type="image" src="dummy.png" title="Meaning of the captcha image"/>
+</div>
+<div class="testcase">
+    <object type="image" data="dummy.png" title="Meaning of the captcha image"></object>
+</div>
+<div class="testcase">
+    <embed type="image" src="dummy.png" title="Meaning of the captcha image"/>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * Image:
+        * <img>
+    * with various combinations of attributes:
+        * aria-labelledby
+        * aria-label
+        * alt
+        * title
+-->
+
+<!-- START [testcase] -->
+<!--
+    * Image:
+        * canvas
+    * with own text as altenative
+-->
+<canvas id="canvas8" width="300" height="300">
+    This is the canvas captcha alternative
+</canvas>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * SVG image:
+    * with combinations of:
+        * a <text> child
+        * and one of aria-label or aria-labelledby
+-->
+<!--
+    EXPECTED accessible name is: Meaning of the image from aria-labelledby
+-->
+<div class="testcase">
+    <div id="image-description2">Meaning of the captcha image from aria-labelledby</div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description2"
+         aria-label="Meaning of the image from aria-label">>
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+    <!--
+        aria-* attributes are allowed for <svg> element since SVG 2.0
+        See https://svgwg.org/svg2-draft/struct.html#NewDocument
+    -->
+</div>
+
+<!--
+    EXPECTED accessible name is: Meaning of the image from aria-label
+-->
+<div class="testcase">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-label="Meaning of the captcha image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+    <!--
+        aria-* attributes are allowed for <svg> element since SVG 2.0
+        See https://svgwg.org/svg2-draft/struct.html#NewDocument
+    -->
+</div>
+
+<!--
+    EXPECTED accessible name is: Meaning of the image from text tag
+-->
+<div class="testcase">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the captcha image from text tag</text>
+    </svg>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * SVG image has to have a role="img" attribute. If not, a nmi is thrown to check the nature of this image.
+    * In case of informative image, it leads to a failure.
+    * Even if the tag has an alternative, the presence of the attribute is checked with an higher priority and all
+    * these examples lead to the same result.
+-->
+<div class="testcase">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <div id="image-description5">Meaning of the captcha image from aria-labelledby</div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"
+         aria-labelledby="image-description5"
+         aria-label="Meaning of the image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100"
+         aria-label="Meaning of the captcha image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+    <!--
+        aria-* attributes are allowed for <svg> element since SVG 2.0
+        See https://svgwg.org/svg2-draft/struct.html#NewDocument
+    -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the captcha image from text tag</text>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<!-- END [testcase] -->
+</div>
