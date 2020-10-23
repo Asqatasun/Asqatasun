@@ -21,16 +21,14 @@
  */
 package org.asqatasun.rules.elementchecker.element;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.elementchecker.ElementCheckerImpl;
+import org.asqatasun.rules.elementselector.ElementWithAccessibleNameSelector;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.util.stream.Collectors;
 
 import static org.asqatasun.rules.keystore.AttributeStore.*;
 import static org.asqatasun.rules.keystore.HtmlElementStore.*;
@@ -112,116 +110,18 @@ public class AccessibleNamePresenceChecker extends ElementCheckerImpl {
             return getFailureSolution();
         }
 
-        if (StringUtils.isNotBlank(element.attr(ARIA_LABELLEDBY_ATTR)) &&
-            !retrieveElementsAssociatedWithAriaLabelledBy(sspHandler, element).isEmpty()) {
+        if (ElementWithAccessibleNameSelector.isAccessibleNamePresent(sspHandler, element)) {
             addSourceCodeRemark(getSuccessSolution(), element, getSuccessMsgCode());
             return getSuccessSolution();
-        }
-        if (element.hasAttr(ARIA_LABEL_ATTR)) {
-            addSourceCodeRemark(getSuccessSolution(), element, getSuccessMsgCode());
-            return getSuccessSolution();
+        } else {
+            addSourceCodeRemark(getFailureSolution(), element, getFailureMsgCode());
+            return getFailureSolution();
         }
 
-        if (isElementExpectsAlt(element) && element.hasAttr(ALT_ATTR)) {
-            addSourceCodeRemark(getSuccessSolution(), element, getSuccessMsgCode());
-            return getSuccessSolution();
-        }
-
-        if (isElementExpectsTitle(element) && element.hasAttr(TITLE_ATTR)) {
-            addSourceCodeRemark(getSuccessSolution(), element, getSuccessMsgCode());
-            return getSuccessSolution();
-        }
-
-        if (isElementExpectsOwnText(element) && StringUtils.isNotBlank(element.ownText())) {
-            addSourceCodeRemark(getSuccessSolution(), element, getSuccessMsgCode());
-            return getSuccessSolution();
-        }
-
-        if (isElementExpectsTextTagChild(element) && StringUtils.isNotBlank(getTextTagChildText(element))) {
-            addSourceCodeRemark(getSuccessSolution(), element, getSuccessMsgCode());
-            return getSuccessSolution();
-        }
-
-        if (isElementExpectsAdjacentLinkOrButton(element) && hasAdjacentElementOfLinkOrButtonType(element)) {
-            addSourceCodeRemark(getSuccessSolution(), element, getSuccessMsgCode());
-            return getSuccessSolution();
-        }
-        addSourceCodeRemark(getFailureSolution(), element, getFailureMsgCode());
-        return getFailureSolution();
     }
 
-    protected void createSourceCodeRemark(TestSolution testSolution, Element element, String message) {
-        addSourceCodeRemark(testSolution, element, message);
-    }
-
-    private String buildCssQueryFromAriaLabelledByAttr(String ariaLabelledByAttr) {
-        StringBuilder query = new StringBuilder();
-        for (String id : ariaLabelledByAttr.split(" ")) {
-            query.append("#");
-            query.append(id);
-            query.append(",");
-        }
-        return StringUtils.chop(query.toString());
-    }
-
-    private Elements retrieveElementsAssociatedWithAriaLabelledBy(SSPHandler sspHandler, Element element) {
-        return sspHandler.beginCssLikeSelection().domCssLikeSelectNodeSet(
-            buildCssQueryFromAriaLabelledByAttr(element.attr(ARIA_LABELLEDBY_ATTR))).getSelectedElements();
-    }
-
-    private boolean isElementExpectsAdjacentLinkOrButton(Element element) {
-        return element.tagName().equals(CANVAS_ELEMENT) ||
-            (element.tagName().equals(OBJECT_ELEMENT) && hasTypeImageAttribute(element)) ||
-            (element.tagName().equals(EMBED_ELEMENT) && hasTypeImageAttribute(element));
-    }
-
-    private boolean isElementExpectsAriaRoleImg(Element element) {
+    private static boolean isElementExpectsAriaRoleImg(Element element) {
         return element.tagName().equals(SVG_ELEMENT);
-    }
-
-    private boolean isElementExpectsOwnText(Element element) {
-        return element.tagName().equals(CANVAS_ELEMENT);
-    }
-
-    private boolean isElementExpectsTextTagChild(Element element) {
-        return element.tagName().equals(SVG_ELEMENT);
-    }
-
-    private boolean isElementExpectsAlt(Element element) {
-        return element.tagName().equals(IMG_ELEMENT) ||
-                element.tagName().equals(AREA_ELEMENT) ||
-                (element.tagName().equals(INPUT_ELEMENT) && hasTypeImageAttribute(element));
-    }
-
-    private boolean isElementExpectsTitle(Element element) {
-        return element.tagName().equals(IMG_ELEMENT) ||
-            ( element.tagName().equals(INPUT_ELEMENT) && hasTypeImageAttribute(element) ) ||
-            ( element.tagName().equals(OBJECT_ELEMENT) && hasTypeImageAttribute(element) ) ||
-            ( element.tagName().equals(EMBED_ELEMENT) && hasTypeImageAttribute(element) );
-    }
-
-    private boolean hasAdjacentElementOfLinkOrButtonType(Element element) {
-        Element previous = element.previousElementSibling();
-        Element next = element.nextElementSibling();
-        return isElementOfLinkOrButtonType(previous) || isElementOfLinkOrButtonType(next);
-    }
-
-    private boolean isElementOfLinkOrButtonType(Element element) {
-        return element != null &&
-            (element.tagName().equals(A_ELEMENT) ||
-            element.tagName().equals(BUTTON_ELEMENT) ||
-            element.tagName().equals(INPUT_ELEMENT) && element.attr(TYPE_ATTR).contains("button") ||
-            element.attr(ROLE_ATTR).contains("button"));
-
-    }
-
-    private boolean hasTypeImageAttribute(Element element) {
-        return element.attr(TYPE_ATTR).contains("image");
-    }
-
-    private String getTextTagChildText(Element element) {
-        return element.children().stream().filter(e -> e.tagName().equals("text")).map(e -> e.ownText())
-            .collect( Collectors.joining( " " ));
     }
 
 }
