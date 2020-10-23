@@ -19,7 +19,25 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.processor.SSPHandler;
+import org.asqatasun.ruleimplementation.AbstractPageRuleMarkupImplementation;
+import org.asqatasun.ruleimplementation.ElementHandler;
+import org.asqatasun.ruleimplementation.ElementHandlerImpl;
+import org.asqatasun.ruleimplementation.TestSolutionHandler;
+import org.asqatasun.rules.elementchecker.ElementChecker;
+import org.asqatasun.rules.elementchecker.element.ElementPresenceChecker;
+import org.asqatasun.rules.elementchecker.helper.RuleCheckHelper;
+import org.asqatasun.rules.elementselector.ElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.jsoup.nodes.Element;
+
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITHOUT_TARGET_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.LINK_WITHOUT_TARGET_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
 
 /**
  * Implementation of rule 8.9.1 (referential RGAA 4.0)
@@ -27,13 +45,78 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/08.Mandatory_elements/Rule-8-9-1.md">rule 8.9.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-8-9-1">8.9.1 rule specification</a>
  */
-public class Rgaa40Rule080901 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
+
+    // Links without target
+    private ElementHandler<Element> linkWithoutTarget = new ElementHandlerImpl();
+
+    // Tags (p, li, ...) without content
+    private ElementHandler<Element> tagWithoutContent = new ElementHandlerImpl();
+
+   // Total number of elements
+    private int totalNumberOfElements = 0;
 
     /**
      * Default constructor
      */
     public Rgaa40Rule080901() {
         super();
+    }
+
+    @Override
+    protected void select(SSPHandler sspHandler) {
+
+        // Selection of all links without target
+        ElementSelector linkWithoutTargetSelector =
+            new SimpleElementSelector(LINK_WITHOUT_TARGET_CSS_LIKE_QUERY);
+        linkWithoutTargetSelector.selectElements(sspHandler, linkWithoutTarget);
+
+        // Selection of all tags (p, li, ...) without content
+        ElementSelector tagWithoutContentSelector =
+            new SimpleElementSelector(TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_CSS_LIKE_QUERY);
+        tagWithoutContentSelector.selectElements(sspHandler, tagWithoutContent);
+
+        totalNumberOfElements = sspHandler.getTotalNumberOfElements();
+    }
+
+    @Override
+    protected void check(
+        SSPHandler sspHandler,
+        TestSolutionHandler testSolutionHandler) {
+
+        if (linkWithoutTarget.isEmpty() && tagWithoutContent.isEmpty()) {
+            sspHandler.getProcessRemarkService().addProcessRemark(
+                TestSolution.NEED_MORE_INFO,
+                RuleCheckHelper.specifyMessageToRule(
+                    NO_PATTERN_DETECTED_MSG,
+                    this.getTest().getCode())
+            );
+            testSolutionHandler.addTestSolution(TestSolution.NEED_MORE_INFO);
+            return;
+        }
+
+        // Links without target
+        ElementChecker linkWithoutTargetChecker = new ElementPresenceChecker(
+            new ImmutablePair(TestSolution.FAILED, LINK_WITHOUT_TARGET_MSG),
+            new ImmutablePair(TestSolution.PASSED, ""));
+        linkWithoutTargetChecker.check(
+            sspHandler,
+            linkWithoutTarget,
+            testSolutionHandler);
+
+        // Tags (p, li, ...) without content
+        ElementChecker tagWithoutContentChecker = new ElementPresenceChecker(
+            new ImmutablePair(TestSolution.FAILED, TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_MSG),
+            new ImmutablePair(TestSolution.PASSED, ""));
+        tagWithoutContentChecker.check(
+            sspHandler,
+            tagWithoutContent,
+            testSolutionHandler);
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return totalNumberOfElements;
     }
 
 }

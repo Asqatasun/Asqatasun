@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.8.9.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.8.9.1 NMI 06</title>
 </head>
 <body class="NMI">
 <div>
-    <h1>Rgaa 4.0 Test.8.9.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.8.9.1 NMI 06</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -19,15 +19,29 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <p>sample text</p>
+        <p> sample text </p>
+        <p> sample    text    </p>
+        <p> sample text and <strong>sample bold text</strong> </p>
+        <p> <strong>some sample bold text</strong> </p>
+        <p><strong>some sample bold text</strong></p>
+        <p><strong></strong></p>
+        <ul>
+            <li> some sample text </li>
+            <li> some      sample    text </li>
+            <li> sample text and <strong>sample bold text</strong> </li>
+            <li> <strong>sample bold text</strong> and sample text </li>
+            <li> <strong>some sample bold text</strong></li>
+            <li><strong></strong></li>
+        </ul>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
         NMI:
-        The page contains :
-        - no links.
-        - no tags (p, li) without content that are used for layout purpose.
+        The page contains multiple tags (p, li) with content.
+        Nothing can be deduced, manual check is needed on the page.
     </div>
     <!-- END [test-explanation] -->
 </div>

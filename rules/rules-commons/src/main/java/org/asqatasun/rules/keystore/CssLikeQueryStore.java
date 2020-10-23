@@ -456,7 +456,7 @@ public final class CssLikeQueryStore {
                   + "object[data$=bmp], object[data$=gif], canvas" ;
     public static final String CLICKABLE_AREA_CSS_LIKE_QUERY = "area[href][alt]";
     public static final String LINK_WITHOUT_TARGET_CSS_LIKE_QUERY = 
-                    "a:not([href]):not([name]):not([id])";
+                    "a:not([href]):not([name]):not([id]):not([role=button])";
     public static final String FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY = 
                     "fieldset:not(form fieldset):not(*[role=search] fieldset):not(*[role=form] fieldset)";
     public static final String LINK_WITH_TARGET_ATTR_CSS_LIKE_QUERY = 
@@ -587,6 +587,7 @@ public final class CssLikeQueryStore {
         + "object ,"
         + "embed ,"
         + "meta[http-equiv=refresh][content]:not([content*=url])";
+
     // HTML 5
     public static final String HTML5_PAGE_MAIN_CSS_LIKE_QUERY
         = "main:not([hidden])" ;
@@ -594,6 +595,11 @@ public final class CssLikeQueryStore {
        = "*:not(article):not(section) > header" ;
     public static final String HTML5_PAGE_FOOTER_CSS_LIKE_QUERY
         = "*:not(article):not(section) > footer" ;
+
+    // forbidden tags (p, li) without content that are used for layout purpose
+    public static final String TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_CSS_LIKE_QUERY
+        = "p:matchesOwn(^$):not(:has(*)):not([hidden]) , " +
+          "li:matchesOwn(^$):not(:has(*)):not([hidden])" ;
 
     // scripts
     public static final String ONCLICK_CSS_LIKE_QUERY=

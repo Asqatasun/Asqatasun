@@ -399,7 +399,11 @@ public final class RemarkMessageStore {
             "NotTreatedBackgroundColor";
     public static final String CHECK_CONTRAST_OF_IMAGE_MSG =
             "CheckTheContrastOfImagesWithText";
-    
+
+    // forbidden tags without content that are used for layout purpose
+    public static final String TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_MSG =
+            "tagsWithoutContentUsedForLayoutPurpose";
+
     // scripts
     public static final String ONKEYPRESS_MISSING_MSG = "OnKeyPressMissing";
     public static final String CHECK_ONCLICK_DEFINTION_IN_JS_MSG = 

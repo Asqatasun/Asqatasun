@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in searching patterns indicating that forbidden tags
+(not `div`, `span` or `table`) are used for layout purpose.
 
 ## Business description
 
@@ -31,24 +32,92 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Semi-Decidable**
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<a>` tags without `href`, `name` or `id` attribute
+and without `role` attribute whose value is `button`.
+
+CSS selector: 
+```jquery-css
+a:not([href])
+ :not([name])
+ :not([id])
+ :not([role=button])
+```
+
+#### Set2
+
+All the following tags without content (text or tag child) :
+- `<p>`
+- `<li>`
+
+CSS selector: 
+```jquery-css
+p:matchesOwn(^$):not(:has(*)):not([hidden]), 
+li:matchesOwn(^$):not(:has(*)):not([hidden])
+```
 
 ### Process
 
-None
+#### Tests
+
+##### Test1
+
+Test emptiness of **Set1**.
+- If empty, raise a MessageA
+- If not empty, for each occurence of the **Set1** raise a MessageB
+
+##### Test2
+
+Test emptiness of **Set2**.
+- If empty, raise a MessageA
+- If not empty, for each occurence of the **Set2** raise a MessageC
+
+#### Messages 
+
+##### MessageA : No suspect pattern detected
+
+- code: NoPatternDetected_Rgaa40-8-9-1
+- status: Pre-Qualified
+- present in source: no
+
+##### MessageB : Link without target
+
+- code: LinkWithoutTarget
+- status: Failed
+- parameter: snippet
+- present in source: yes
+
+##### MessageC : Tags without content that are used for layout purpose
+
+- code: TagsWithoutContentUsedForLayoutPurpose
+- status: Failed
+- parameter: snippet
+- present in source: yes
+
 
 ### Analysis
 
-#### Not Tested
+#### Failed
 
-In all cases
+The page contains either a tag (`<p>` or  `<li>`) without content (text or tag child),
+or a link (without `href`, `name` or `id` attribute and without `role` attribute whose value is `button`).
+
+#### Pre-qualified
+
+In all other cases
+
+## Notes
+
+On latest webdev data set (2013-10-30, 78,000 pages), links without
+target (a:not([href]):not([name]):not([id])) have been found on 18256
+pages, i.e on 23% of the pages.
 
 
 ## Files
@@ -56,5 +125,3 @@ In all cases
 - [TestCases files for rule 8.9.1](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule080901/)
 - [Unit test file for rule 8.9.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080901Test.java)
 - [Class file for rule 8.9.1](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule080901.java)
-
-
