@@ -79,7 +79,7 @@ Test emptiness of **Set2**.
 
 ##### MessageA : No suspect pattern detected
 
-- code: NoPatternDetected
+- code: NoPatternDetected_Rgaa40-8-9-1
 - status: Pre-Qualified
 - present in source: no
 
