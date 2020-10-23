@@ -19,19 +19,20 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <p hidden></p>
-        <p hidden>         </p>
-        <p hidden> <!-- comment -->   </p>
-        <p hidden>
-
-        </p>
+        <p>sample text</p>
+        <p> sample text </p>
+        <p> sample    text    </p>
+        <p> sample text and <strong>sample bold text</strong> </p>
+        <p> <strong>some sample bold text</strong> </p>
+        <p><strong>some sample bold text</strong></p>
+        <p><strong></strong></p>
         <ul>
-            <li hidden></li>
-            <li hidden>        </li>
-            <li hidden> <!-- comment --> </li>
-            <li hidden>
-
-            </li>
+            <li> some sample text </li>
+            <li> some      sample    text </li>
+            <li> sample text and <strong>sample bold text</strong> </li>
+            <li> <strong>sample bold text</strong> and sample text </li>
+            <li> <strong>some sample bold text</strong></li>
+            <li><strong></strong></li>
         </ul>
     </div>
     <!-- END [testcase] -->
@@ -39,7 +40,7 @@
     <!-- START [test-explanation] -->
     <div class="test-explanation">
         NMI:
-        The page contains multiple tags (p, li) without content, but with "hidden" attribute.
+        The page contains multiple tags (p, li) with content.
         Nothing can be deduced, manual check is needed on the page.
     </div>
     <!-- END [test-explanation] -->

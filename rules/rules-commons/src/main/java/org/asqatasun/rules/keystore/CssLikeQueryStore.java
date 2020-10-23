@@ -456,7 +456,7 @@ public final class CssLikeQueryStore {
                   + "object[data$=bmp], object[data$=gif], canvas" ;
     public static final String CLICKABLE_AREA_CSS_LIKE_QUERY = "area[href][alt]";
     public static final String LINK_WITHOUT_TARGET_CSS_LIKE_QUERY = 
-                    "a:not([href]):not([name]):not([id])";
+                    "a:not([href]):not([name]):not([id]):not([role=button])";
     public static final String FIELDSET_NOT_WITHIN_FORM_CSS_LIKE_QUERY = 
                     "fieldset:not(form fieldset):not(*[role=search] fieldset):not(*[role=form] fieldset)";
     public static final String LINK_WITH_TARGET_ATTR_CSS_LIKE_QUERY = 

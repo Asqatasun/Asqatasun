@@ -62,6 +62,7 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         addWebResource("Rgaa40.Test.8.9.1-3NMI-04");
         addWebResource("Rgaa40.Test.8.9.1-3NMI-05");
         addWebResource("Rgaa40.Test.8.9.1-3NMI-06");
+        addWebResource("Rgaa40.Test.8.9.1-3NMI-07");
     }
 
     @Override
@@ -167,7 +168,7 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //---------------------------3NMI-05------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-05");
-        checkResultIsPreQualified(processResult, 38, 1);
+        checkResultIsPreQualified(processResult, 17, 1);
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
@@ -179,6 +180,18 @@ public class Rgaa40Rule080901Test extends Rgaa40RuleImplementationTestCase {
         //---------------------------3NMI-06------------------------------------
         //----------------------------------------------------------------------
         processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-06");
+        checkResultIsPreQualified(processResult, 38, 1);
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            getMessageKey(RemarkMessageStore.NO_PATTERN_DETECTED_MSG),
+            "",
+            1);
+
+        //----------------------------------------------------------------------
+        //---------------------------3NMI-07-----------------------------------
+        //----------------------------------------------------------------------
+        processResult = processPageTest("Rgaa40.Test.8.9.1-3NMI-07");
         checkResultIsPreQualified(processResult, 25, 1);
         checkRemarkIsPresent(
             processResult,

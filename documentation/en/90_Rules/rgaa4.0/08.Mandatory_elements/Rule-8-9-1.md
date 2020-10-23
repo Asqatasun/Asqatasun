@@ -40,11 +40,15 @@ This test consists in searching patterns indicating that forbidden tags
 
 #### Set1
 
-All the `<a>` tags without `href`, `name` or `id` attribute.
+All the `<a>` tags without `href`, `name` or `id` attribute
+and without `role` attribute whose value is `button`.
 
 CSS selector: 
 ```jquery-css
-a:not([href]):not([name]):not([id])
+a:not([href])
+ :not([name])
+ :not([id])
+ :not([role=button])
 ```
 
 #### Set2
@@ -102,8 +106,8 @@ Test emptiness of **Set2**.
 
 #### Failed
 
-The page contains either a link (without `href`, `name` or `id` attribute)
-or a tag (`<p>` or  `<li>`) without content (text or tag child)
+The page contains either a tag (`<p>` or  `<li>`) without content (text or tag child),
+or a link (without `href`, `name` or `id` attribute and without `role` attribute whose value is `button`).
 
 #### Pre-qualified
 
