@@ -48,8 +48,8 @@ public class Rgaa40Rule111101Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.11.11.01-3NMI-01");
-        addWebResource("Rgaa40.Test.11.11.01-4NA-01");
+        addWebResource("Rgaa40.Test.11.11.1-3NMI-01");
+        addWebResource("Rgaa40.Test.11.11.1-4NA-01");
 
     }
 
@@ -58,7 +58,7 @@ public class Rgaa40Rule111101Test extends Rgaa40RuleImplementationTestCase {
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.11.11.01-3NMI-01");
+        ProcessResult processResult = processPageTest("Rgaa40.Test.11.11.1-3NMI-01");
         checkResultIsPreQualified(processResult, 1, 1);
         checkRemarkIsPresent(
                 processResult,
@@ -66,12 +66,11 @@ public class Rgaa40Rule111101Test extends Rgaa40RuleImplementationTestCase {
                 RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
                 HtmlElementStore.FORM_ELEMENT,
                 1);
-               
-        
+
         //----------------------------------------------------------------------
         //------------------------------4NA-01----------------------------------
         //----------------------------------------------------------------------
-        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.11.11.01-4NA-01"));
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.11.11.1-4NA-01"));
 
     }
 
