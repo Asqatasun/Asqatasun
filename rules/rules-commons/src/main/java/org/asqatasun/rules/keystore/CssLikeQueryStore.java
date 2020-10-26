@@ -29,8 +29,8 @@ public final class CssLikeQueryStore {
     // Image theme css-like queries
     public static final String IMG_WITHOUT_ALT_CSS_LIKE_QUERY="img:not([alt])";
     public static final String IMG_WITH_ALT_CSS_LIKE_QUERY="img[alt]";
-    public static final String BASIC_IMG_CSS_LIKE_QUERY="img:not([usemap]), " +
-        "[role=img]:not(svg):not(area):not(canvas):not(input[type=image]):not(embed):not(object[type=image])";
+    public static final String BASIC_IMG_CSS_LIKE_QUERY="img:not([usemap]):not(a img), " +
+        "[role=img]:not(a [role=img]):not(svg):not(area):not(canvas):not(input[type=image]):not(embed):not(object[type=image])";
     public static final String IMG_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "img[alt]:not(a img)"; 
     public static final String IMG_WITH_ALT_NOT_IN_LINK_WITHOUT_LONGDESC_CSS_LIKE_QUERY=
@@ -63,7 +63,8 @@ public final class CssLikeQueryStore {
                     "area:not(a area)"; 
     public static final String AREA_WITH_ALT_WITHOUT_HREF_ATTR_CSS_LIKE_QUERY=
                     "area[alt]:not([href])"; 
-    public static final String FORM_BUTTON_CSS_LIKE_QUERY="input[type=image]"; 
+    public static final String FORM_BUTTON_CSS_LIKE_QUERY="input[type=image]";
+    public static final String FORM_BUTTON_NOT_IN_LINK_CSS_LIKE_QUERY="input[type=image]:not(a input[type=image])";
     public static final String FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY=
                     "input[type=image][alt]";
     public static final String MAP_WITH_AREA_CHILD_AND_NAME_ATTR_CSS_LIKE_QUERY = 

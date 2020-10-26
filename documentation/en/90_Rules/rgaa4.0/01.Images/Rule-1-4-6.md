@@ -2,7 +2,9 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting captcha svg and thus defining the applicability of the test.
+
+Human check will be then needed to determine whether the alternative is pertinent.
 
 ## Business description
 
@@ -26,7 +28,6 @@ No-check rule
 
 **A**
 
-
 ## Technical description
 
 ### Scope
@@ -35,25 +36,69 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Semi-Decidable**
 
 ## Algorithm
 
+#### Set1 
+
+All the `<svg>` tags, not within a link 
+
 ### Selection
 
-None
+#### Set2
+
+All the elements of **Set1** identified as a CAPTCHA (see Notes for details about CAPTCHA characterisation).
+
+#### Set3
+
+All the elements of **Set2** with a textual alternative (see Notes for details about textual alternative detection).
 
 ### Process
 
-None
+For each element of **Set3**, raise a MessageA
+
+##### MessageA : Check captcha alternative
+
+-    code : **CheckCaptchaAlternative** 
+-    status: Pre-Qualified
+-    parameter : `"role"` attribute, `"aria-label"` attribute, `"computed accessible name"`
+-    present in source : yes
 
 ### Analysis
 
 #### Not Tested
 
-In all cases
+The page has no `<svg>` tag with a textual alternative, identified as a captcha (**Set3** is empty)
 
+#### Pre-qualified
+
+In all other cases
+
+## Notes
+
+### Textual alternative detection
+
+The textual alternative can be set by the presence of any the following elements : 
+
+* Text associated via the `aria-labelledby` WAI-ARIA attribute 
+* Presence of an `aria-label` WAI-ARIA attribute
+
+That order has to be respected to compute the textual alternative.
+
+For instance, if some text associated via the `aria-labelledby` WAI-ARIA attribute and an `aria-label` WAI-ARIA attribute 
+are both present, the content of the text associated via the `aria-labelledby` WAI-ARIA attribute is considered as the textual alternative.
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element
 
 ## Files
 

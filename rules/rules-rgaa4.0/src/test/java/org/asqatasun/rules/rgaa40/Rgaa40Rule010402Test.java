@@ -19,9 +19,16 @@
  */
 package org.asqatasun.rules.rgaa40;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.ProcessResult;
-import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
+
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.AttributeStore.HREF_ATTR;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.HtmlElementStore.AREA_ELEMENT;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTERNATIVE_MSG;
 
 /**
  * Unit test class for implementation of rule 1.4.2 (referential RGAA 4.0)
@@ -41,67 +48,105 @@ public class Rgaa40Rule010402Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpRuleImplementationClassName() {
-        setRuleImplementationClassName(
-            "org.asqatasun.rules.rgaa40.Rgaa40Rule010402");
+        setRuleImplementationClassName("org.asqatasun.rules.rgaa40.Rgaa40Rule010402");
     }
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.1.4.2-1Passed-01");
-//        addWebResource("Rgaa40.Test.1.4.2-2Failed-01");
         addWebResource("Rgaa40.Test.1.4.2-3NMI-01");
-//        addWebResource("Rgaa40.Test.1.4.2-4NA-01");
+        addWebResource("Rgaa40.Test.1.4.2-4NA-01");
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.1.4.2-1Passed-01"), 1);
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.1.4.2-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
-        //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa40.Test.1.4.2-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        checkResultIsPreQualified(processResult, 7, 7);
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_CAPTCHA_ALTERNATIVE_MSG,
+            AREA_ELEMENT,
+            1,
+            new ImmutablePair<>(ALT_ATTR, "Mozilla"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Mozilla"),
+            new ImmutablePair<>(HREF_ATTR, "https://mozilla.org"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_CAPTCHA_ALTERNATIVE_MSG,
+            AREA_ELEMENT,
+            2,
+            new ImmutablePair<>(ALT_ATTR, "MDN"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "MDN"),
+            new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_CAPTCHA_ALTERNATIVE_MSG,
+            AREA_ELEMENT,
+            3,
+            new ImmutablePair<>(ALT_ATTR, "Graphics"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Graphics"),
+            new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/Guide/Graphics"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_CAPTCHA_ALTERNATIVE_MSG,
+            AREA_ELEMENT,
+            4,
+            new ImmutablePair<>(ALT_ATTR, "HTML"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "HTML"),
+            new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/HTML"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_CAPTCHA_ALTERNATIVE_MSG,
+            AREA_ELEMENT,
+            5,
+            new ImmutablePair<>(ALT_ATTR, "JavaScript"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "JavaScript"),
+            new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/JavaScript"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_CAPTCHA_ALTERNATIVE_MSG,
+            AREA_ELEMENT,
+            6,
+            new ImmutablePair<>(ALT_ATTR, "Web APIs"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Web APIs"),
+            new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/API"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_CAPTCHA_ALTERNATIVE_MSG,
+            AREA_ELEMENT,
+            7,
+            new ImmutablePair<>(ALT_ATTR, "CSS"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "CSS"),
+            new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/CSS"));
 
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.1.4.2-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.1.4.2-3NMI-01").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.1.4.2-4NA-01"));
     }
 
 }

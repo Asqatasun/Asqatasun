@@ -111,6 +111,8 @@ In all other cases
 
 ## Notes
 
+### Textual alternative detection
+
 The textual alternative can be set by the presence of any the following elements : 
 
 * Text associated via the `aria-labelledby` WAI-ARIA attribute 

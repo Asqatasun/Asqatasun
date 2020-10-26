@@ -22,6 +22,7 @@
 package org.asqatasun.rules.elementselector;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Attribute;
@@ -29,8 +30,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.ElementHandler;
-import static org.asqatasun.rules.keystore.HtmlElementStore.BODY_ELEMENT;
-import static org.asqatasun.rules.keystore.HtmlElementStore.HTML_ELEMENT;
+
+import static org.asqatasun.rules.keystore.HtmlElementStore.*;
 
 /**
  * Element selector implementation that searches the "captcha" occurence 
@@ -86,14 +87,18 @@ public class CaptchaElementSelector implements ElementSelector {
         if (selectionHandler.isEmpty()) {
             return;
         }
-        Set<Element> captchaElements = new HashSet<>();
+        Set<Element> captchaElements = new LinkedHashSet<>();
         for (Element el : selectionHandler.get()) {
             if (parseAttributeToExtractCaptcha(el)) {
                 captchaElements.add(el);
             } else {
                 for (Element sel : getSiblingsAndParents(el)){
-                    if (!el.nodeName().equalsIgnoreCase(sel.nodeName()) && 
-                        parseAttributeToExtractCaptcha(sel)) {
+                    // check that the sibling is not of same type of the current tag, to avoid to use context of another
+                    // element of same type as context of the current type. There is one exception with the div element
+                    // as it handles most of the time the role=img wai-aria attribute : in this case, we cannot exclude
+                    // the other div when parsing context
+                    if ( (!el.nodeName().equalsIgnoreCase(sel.nodeName()) || el.nodeName().equalsIgnoreCase(DIV_ELEMENT) )
+                        && parseAttributeToExtractCaptcha(sel)) {
                         captchaElements.add(el);
                         break;
                     }

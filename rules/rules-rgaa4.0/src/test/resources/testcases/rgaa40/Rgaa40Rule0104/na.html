@@ -1,0 +1,90 @@
+<!-- START [testcase] -->
+<!-- images within a link even with a captcha keyword-->
+<div class="testcase">
+    <a href="https://example.org/"> <img src="dummy.png" alt="captcha meaning of the image"/></a>
+
+    <a href="mock-link.html">
+        <div role="img" aria-label="captcha meaning of the image"></div>
+    </a>
+
+    <a href="https://example.org/"><input type="image" src="dummy.png" alt="captcha meaning of the image"/></a>
+
+    <img alt="" src="mock-image.jpg" usemap="#mock-map1"/>
+
+    <map id="mock-map1" name="mock-map1">
+        <a href="mock-link.html">
+            <area href="mock-area.html" alt="captcha area within link"/>
+        </a>
+    </map>
+
+
+    <a href="mock-link.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" aria-label="captcha meaning of the image">
+            <circle cx="50" cy="50" r="40"/>
+        </svg>
+    </a>
+
+    <a href="mock-link.html">
+        <object type="image" data="dummy.png" aria-label="captcha meaning of the image">
+        </object>
+    </a>
+
+    <a href="mock-link.html">
+        <embed type="image" src="dummy.png" aria-label="captcha meaning of the image">
+    </a>
+
+    <a href="mock-link.html">
+        <canvas id="canvas1" width="300" height="300" aria-label="captcha meaning of the image">
+            Sorry, your browser does not support &lt;canvas&gt;
+        </canvas>
+    </a>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- images within a link -->
+<!--
+    EXPECTED accessible name is empty but the nature of the image cannot be determined
+-->
+<div class="testcase captcha">
+    <img src="dummy.png"/>
+    <div role="img"></div>
+    <embed type="image" src="dummy.png">
+    <object type="image" data="dummy.png"></object>
+    <input type="image" src="dummy.png"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+    <map name="infographic">
+        <area shape="rect" coords="184,6,253,27"
+              href="https://mozilla.org"
+              target="_blank"/>
+        <area shape="circle" coords="130,136,60"
+              href="https://developer.mozilla.org/"
+              target="_blank"/>
+        <area shape="poly" coords="130,6,253,96,223,106,130,39"
+              href="https://developer.mozilla.org/docs/Web/Guide/Graphics"
+              target="_blank"/>
+        <area shape="poly" coords="253,96,207,241,189,217,223,103"
+              href="https://developer.mozilla.org/docs/Web/HTML"
+              target="_blank"/>
+        <area shape="poly" coords="207,241,54,241,72,217,189,217"
+              href="https://developer.mozilla.org/docs/Web/JavaScript"
+              target="_blank"/>
+        <area shape="poly" coords="54,241,6,97,36,107,72,217"
+              href="https://developer.mozilla.org/docs/Web/API"
+              target="_blank"/>
+        <area shape="poly" coords="6,97,130,6,130,39,36,107"
+              href="https://developer.mozilla.org/docs/Web/CSS"
+              target="_blank"/>
+    </map>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- images no textual alternative even if captcha occurence is found around in context -->
+<div class="testcase">
+    <span> Any captcha text in sibling but empty alternative</span>
+    <img src="dummy.png"/>
+</div>
+<!-- END [testcase] -->
