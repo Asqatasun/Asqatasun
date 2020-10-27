@@ -19,9 +19,21 @@
  */
 package org.asqatasun.rules.rgaa40;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.ProcessResult;
-import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
+
+import static org.asqatasun.entity.audit.TestSolution.FAILED;
+import static org.asqatasun.entity.audit.TestSolution.NEED_MORE_INFO;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.HtmlElementStore.DIV_ELEMENT;
+import static org.asqatasun.rules.keystore.HtmlElementStore.IMG_ELEMENT;
+import static org.asqatasun.rules.keystore.MarkerStore.DECORATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.INFORMATIVE_IMAGE_MARKER;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_NATURE_OF_IMAGE_WITHOUT_TEXTUAL_ALTERNATIVE_MSG;
 
 /**
  * Unit test class for implementation of rule 1.3.1 (referential RGAA 4.0)
@@ -47,61 +59,274 @@ public class Rgaa40Rule010301Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.1.3.1-1Passed-01");
-//        addWebResource("Rgaa40.Test.1.3.1-2Failed-01");
-        addWebResource("Rgaa40.Test.1.3.1-3NMI-01");
-//        addWebResource("Rgaa40.Test.1.3.1-4NA-01");
+        addWebResource("Rgaa40.Test.1.3.1-2Failed-01",
+            createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
+        addWebResource("Rgaa40.Test.1.3.1-3NMI-01",
+            createParameter("Rules", INFORMATIVE_IMAGE_MARKER, "informative-image"));
+        addWebResource("Rgaa40.Test.1.3.1-4NA-01",
+            createParameter("Rules", DECORATIVE_IMAGE_MARKER, "decorative-image"));
     }
 
     @Override
     protected void setProcess() {
         //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.1.3.1-1Passed-01"), 1);
-
-        //----------------------------------------------------------------------
         //------------------------------2Failed-01------------------------------
         //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.1.3.1-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        ProcessResult processResult = processPageTest("Rgaa40.Test.1.3.1-2Failed-01");
+        checkResultIsFailed(processResult, 6, 6);
+        checkRemarkIsPresent(
+            processResult,
+            FAILED,
+            NOT_PERTINENT_ALT_MSG,
+            IMG_ELEMENT,
+            1,
+            new ImmutablePair<>(ALT_ATTR, ""),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            FAILED,
+            NOT_PERTINENT_ALT_MSG,
+            DIV_ELEMENT,
+            2,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ""),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(SRC_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        checkRemarkIsPresent(
+            processResult,
+            FAILED,
+            NOT_PERTINENT_ALT_MSG,
+            IMG_ELEMENT,
+            3,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "!<<<---&*"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            FAILED,
+            NOT_PERTINENT_ALT_MSG,
+            DIV_ELEMENT,
+            4,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "!<<<---&*"),
+            new ImmutablePair<>(SRC_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        checkRemarkIsPresent(
+            processResult,
+            FAILED,
+            NOT_PERTINENT_ALT_MSG,
+            IMG_ELEMENT,
+            5,
+            new ImmutablePair<>(ALT_ATTR, "dummy.png"),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "dummy.png"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            FAILED,
+            NOT_PERTINENT_ALT_MSG,
+            DIV_ELEMENT,
+            6,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "dummy.jpg"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "dummy.jpg"),
+            new ImmutablePair<>(SRC_ATTR, ABSENT_ATTRIBUTE_VALUE));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
-        ProcessResult processResult = processPageTest("Rgaa40.Test.1.3.1-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
-
+        processResult = processPageTest("Rgaa40.Test.1.3.1-3NMI-01");
+        checkResultIsPreQualified(processResult, 16, 16);
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            1,
+            new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "meaning of the image"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "meaning of the image"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            DIV_ELEMENT,
+            2,
+            new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "meaning of the image"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "meaning of the image"),
+            new ImmutablePair<>(SRC_ATTR, "attribute-absent"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            3,
+            new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Image description"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            DIV_ELEMENT,
+            4,
+            new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Image description"),
+            new ImmutablePair<>(SRC_ATTR, "attribute-absent"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            5,
+            new ImmutablePair<>(ALT_ATTR, "Meaning of image"),
+            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Meaning of image"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            6,
+            new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
+            new ImmutablePair<>(TITLE_ATTR, "Meaning of image"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Meaning of image"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            7,
+            new ImmutablePair<>(ALT_ATTR, "Meaning of image from alt"),
+            new ImmutablePair<>(TITLE_ATTR, "Meaning of image from title"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "Meaning of image from aria-label"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Image description from aria-labelledby"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            8,
+            new ImmutablePair<>(ALT_ATTR, "Meaning of image from alt"),
+            new ImmutablePair<>(TITLE_ATTR, "Meaning of image from title"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "Meaning of image from aria-label"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Meaning of image from aria-label"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            9,
+            new ImmutablePair<>(ALT_ATTR, "Meaning of image from alt"),
+            new ImmutablePair<>(TITLE_ATTR, "Meaning of image from title"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Meaning of image from alt"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG,
+            IMG_ELEMENT,
+            10,
+            new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
+            new ImmutablePair<>(TITLE_ATTR, "Meaning of image from title"),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "Meaning of image from title"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
+            IMG_ELEMENT,
+            11,
+            new ImmutablePair<>(ALT_ATTR, ""),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
+            DIV_ELEMENT,
+            12,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ""),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(SRC_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
+            IMG_ELEMENT,
+            13,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "!<<<---&*"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
+            DIV_ELEMENT,
+            14,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "!<<<---&*"),
+            new ImmutablePair<>(SRC_ATTR, ABSENT_ATTRIBUTE_VALUE));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
+            IMG_ELEMENT,
+            15,
+            new ImmutablePair<>(ALT_ATTR, "dummy.png"),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "dummy.png"),
+            new ImmutablePair<>(SRC_ATTR, "dummy.png"));
+        checkRemarkIsPresent(
+            processResult,
+            NEED_MORE_INFO,
+            CHECK_NATURE_OF_IMAGE_WITH_NOT_PERTINENT_ALT_MSG,
+            DIV_ELEMENT,
+            16,
+            new ImmutablePair<>(ALT_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(TITLE_ATTR, ABSENT_ATTRIBUTE_VALUE),
+            new ImmutablePair<>(ARIA_LABEL_ATTR, "dummy.jpg"),
+            new ImmutablePair<>(COMPUTED_LINK_TITLE, "dummy.jpg"),
+            new ImmutablePair<>(SRC_ATTR, ABSENT_ATTRIBUTE_VALUE));
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.1.3.1-4NA-01"));
-    }
-
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.1.3.1-3NMI-01").getValue());
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.1.3.1-4NA-01"));
     }
 
 }
