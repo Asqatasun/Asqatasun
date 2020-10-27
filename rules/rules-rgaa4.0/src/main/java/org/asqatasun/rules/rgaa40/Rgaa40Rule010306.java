@@ -19,7 +19,15 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.rules.elementselector.ElementWithAccessibleNameSelector;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+
+import static org.asqatasun.rules.keystore.AttributeStore.ARIA_LABEL_ATTR;
+import static org.asqatasun.rules.keystore.AttributeStore.ROLE_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.SVG_NOT_IN_LINK_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 
 /**
  * Implementation of rule 1.3.6 (referential RGAA 4.0)
@@ -27,13 +35,16 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-3-6.md">rule 1.3.6 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-3-6">1.3.6 rule specification</a>
  */
-public class Rgaa40Rule010306 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010306 extends AbstractInformativeImagePertinenceAlternativePageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule010306() {
-        super();
+        super(
+            new ElementWithAccessibleNameSelector(new ImageElementSelector(new SimpleElementSelector(SVG_NOT_IN_LINK_CSS_LIKE_QUERY), true, true)),
+            true,
+            ROLE_ATTR, ARIA_LABEL_ATTR, COMPUTED_LINK_TITLE);
     }
 
 }
