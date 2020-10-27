@@ -30,8 +30,11 @@ data class AuditDto(
     val subject: WebResourceDto,
     val status: AuditStatus,
     val date: Date,
-    val tags: List<String>
+    val tags: List<String>,
+    val referential: Referential,
+    val referentialLevel: String
 )
 
-fun Audit.toAuditDto(webResource: WebResourceDto, tags: List<String>)
-    = AuditDto(id, webResource, status, dateOfCreation, tags)
+fun Audit.toAuditDto(webResource: WebResourceDto, tags: List<String>, rawParameterValue: String)
+    = AuditDto(id, webResource, status, dateOfCreation, tags, Referential.fromCode(rawParameterValue.split(';')[0])!!, rawParameterValue.split(';')[1])
+
