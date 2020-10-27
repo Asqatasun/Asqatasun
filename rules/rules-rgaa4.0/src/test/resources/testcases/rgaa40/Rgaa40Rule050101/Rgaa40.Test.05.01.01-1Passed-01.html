@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.5.1.1 Passed 01</title>
+</head>
+<body class="Passed">
+<div>
+    <h1>Rgaa 4.0 Test.5.1.1 Passed 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Pour chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#tableau-de-donnees-complexe">tableau de données complexe</a> un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#resume">résumé</a> est-il disponible ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <table class="class-complex-table"> 
+          <caption>complex table summary</caption>
+            <tbody>
+                <tr> 
+                    <th>head</th> 
+                    <td>data</td> 
+                </tr> 
+            </tbody>
+        </table> 
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        Passed : the complex table is identified by a marker (class attribute) and contains a caption child tag
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

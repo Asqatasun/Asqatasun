@@ -18,8 +18,19 @@
  * Contact us by mail: asqatasun AT asqatasun DOT org
  */
 package org.asqatasun.rules.rgaa40;
-
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.ruleimplementation.AbstractMarkerPageRuleImplementation;
+import org.asqatasun.rules.elementchecker.element.ChildElementPresenceChecker;
+import org.asqatasun.rules.elementselector.SimpleElementSelector;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TABLE_ELEMENT;
+import static org.asqatasun.rules.keystore.MarkerStore.COMPLEX_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.DATA_TABLE_MARKER;
+import static org.asqatasun.rules.keystore.MarkerStore.PRESENTATION_TABLE_MARKER;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG;
 
 /**
  * Implementation of rule 5.1.1 (referential RGAA 4.0)
@@ -27,13 +38,42 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/05.Tables/Rule-5-1-1.md">rule 5.1.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-5-1-1">5.1.1 rule specification</a>
  */
-public class Rgaa40Rule050101 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule050101() {
-        super();
+        super(
+                new SimpleElementSelector(TABLE_ELEMENT), 
+
+                // the complex tables are part of the scope
+                new String[]{COMPLEX_TABLE_MARKER},
+
+                // the data and presentation tables are not part of the scope
+                new String[]{PRESENTATION_TABLE_MARKER, DATA_TABLE_MARKER},
+
+                // checker for elements identified by marker
+                new ChildElementPresenceChecker(
+                    HtmlElementStore.CAPTION_ELEMENT, 
+                    1,
+                    // passed when child element is found
+                    new ImmutablePair(TestSolution.PASSED, ""),
+                    // failed when child element is not found
+                    new ImmutablePair(TestSolution.FAILED, RemarkMessageStore.CAPTION_MISSING_ON_COMPLEX_TABLE_MSG)
+                ),
+                
+                // checker for elements not identified by marker
+                new ChildElementPresenceChecker(
+                    HtmlElementStore.CAPTION_ELEMENT, 
+                    // the child element is supposed to appear at least once
+                    1,
+                    // nmi when attribute is found
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG ),
+                    // nmi when attribute is not found
+                    new ImmutablePair(TestSolution.NEED_MORE_INFO, CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG)
+                    )
+            );
     }
 
 }
