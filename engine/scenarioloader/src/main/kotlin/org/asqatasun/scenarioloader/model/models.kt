@@ -106,7 +106,7 @@ data class Command(
     companion object {
         fun build(urls: List<URL>): List<Command> =
              urls.map {
-                Command(target=it.path)
+                Command(target=it.file)
             }
     }
 }
