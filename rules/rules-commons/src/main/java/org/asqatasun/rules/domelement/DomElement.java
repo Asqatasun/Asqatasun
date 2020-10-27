@@ -147,9 +147,19 @@ public class DomElement {
         return getProperty(TEXT_ALIGN_KEY);
     }
 
+    /**
+     * @return font size in Points (pt) of current element
+     */
     public float getFontSizeInPt() {
         return Float.valueOf(getFontSize().substring(0,getFontSize().indexOf(PIXEL_KEY))) 
                * PIXEL_TO_POINT_MULTIPLIER;
+    }
+
+    /**
+     * @return font size in Pixels (px) of current element
+     */
+    public float getFontSizeInPx() {
+        return Float.valueOf(getFontSize().substring(0,getFontSize().indexOf(PIXEL_KEY)));
     }
 
     /**
