@@ -2,7 +2,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": true,
         "isHidden": false,
@@ -16,7 +16,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -38,7 +38,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -49,7 +49,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 700,
         "isFocusable": false,
         "isHidden": false,
@@ -60,7 +60,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -71,7 +71,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -82,7 +82,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -93,7 +93,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -104,7 +104,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -115,7 +115,7 @@
     {
         "bgColor": "rgb(255; 0; 0)",
         "color": "rgb(4; 4; 4)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,

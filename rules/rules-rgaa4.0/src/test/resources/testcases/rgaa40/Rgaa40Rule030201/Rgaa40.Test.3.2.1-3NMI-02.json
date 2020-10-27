@@ -2,7 +2,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -13,7 +13,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -35,7 +35,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -46,7 +46,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 238)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": true,
         "isHidden": false,
@@ -60,7 +60,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 238)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 700,
         "isFocusable": false,
         "isHidden": false,
@@ -71,7 +71,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 238)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": true,
         "isHidden": false,
@@ -85,7 +85,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -96,7 +96,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -107,7 +107,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -118,7 +118,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -129,7 +129,7 @@
     {
         "bgColor": "rgb(4; 4; 4)",
         "color": "rgb(255; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -140,7 +140,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,
@@ -151,7 +151,7 @@
     {
         "bgColor": "rgb(255; 255; 255)",
         "color": "rgb(0; 0; 0)",
-        "fontSize": "16px",
+        "fontSize": "23px",
         "fontWeight": 400,
         "isFocusable": false,
         "isHidden": false,

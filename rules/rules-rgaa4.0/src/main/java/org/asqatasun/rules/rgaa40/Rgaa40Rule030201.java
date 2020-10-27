@@ -30,9 +30,16 @@ import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
  */
 public class Rgaa40Rule030201 extends AbstractPageRuleWithCheckerImplementation {
 
-    /** The contrast checker with a value of ratio set to 4.5*/
-    private final ContrastChecker contrastChecker = 
-            new ContrastChecker(4.5f, true, false, true);
+    /** The contrast checker with a value of ratio set to 4.5 */
+    private final ContrastChecker contrastChecker =
+        new ContrastChecker(
+            4.5f,
+            true,
+            false,
+            true,
+            24.0f,
+            18.5f
+        );
 
     /**
      * Default constructor
