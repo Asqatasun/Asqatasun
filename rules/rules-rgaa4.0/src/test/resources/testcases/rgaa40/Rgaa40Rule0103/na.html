@@ -1,0 +1,231 @@
+<!-- START [testcase] -->
+<!-- images within a link -->
+<div class="testcase">
+    <a href="https://example.org/"> <img src="dummy.png" alt="dummy alt"/></a>
+
+    <a href="mock-link.html">
+        <div role="img" aria-label="meaning of the image"></div>
+    </a>
+
+    <a href="https://example.org/"><input type="image" src="dummy.png" alt="alternative for dummy"/></a>
+
+    <img alt="" src="mock-image.jpg" usemap="#mock-map1"/>
+
+    <a href="mock-link.html">
+        <map id="mock-map1" name="mock-map1">
+            <area href="mock-area.html" alt="area within link"/>
+        </map>
+    </a>
+
+    <a href="mock-link.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" aria-label="meaning of the image">
+            <circle cx="50" cy="50" r="40"/>
+        </svg>
+    </a>
+
+    <a href="mock-link.html">
+        <object type="image" data="dummy.png" aria-label="meaning of the image">
+        </object>
+    </a>
+
+    <a href="mock-link.html">
+        <embed type="image" src="dummy.png" aria-label="meaning of the image">
+    </a>
+
+    <a href="mock-link.html">
+        <canvas id="canvas2" width="300" height="300" aria-label="meaning of the image">
+            Sorry, your browser does not support &lt;canvas&gt;
+        </canvas>
+    </a>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- captcha detection -->
+<div class="testcase">
+    <div role="img" aria-label="meaning of the captcha image"></div>
+
+    <img alt="" src="mock-image.jpg" usemap="#mock-map3"/>
+
+    <map id="mock-map3" name="mock-map3">
+        <area href="mock-area.html" alt="captcha"/>
+    </map>
+
+    <input type="image" src="dummy.png" alt="captcha alternative"/>
+
+    <img src="dummy.png" alt="CAPTCHA"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" aria-label="CAPTCHA meaning of the image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png" aria-label="captcha">
+    </object>
+
+    <embed type="image" src="dummy.png" aria-label="captcha">
+
+    <canvas id="canvas3" width="300" height="300" aria-label="meaning of the captcHA image">
+        Sorry, your browser does not support &lt;canvas&gt;
+    </canvas>
+</div><!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- identified as decorative by marker -->
+<div class="testcase">
+    <img src="dummy.png" alt="dummy alt" class="decorative-image"/>
+
+    <div role="img" class="decorative-image"></div>
+
+    <input type="image" src="dummy.png" class="decorative-image"/>
+
+    <img alt="" src="mock-image.jpg" usemap="#mock-map4"/>
+
+    <map id="mock-map4" name="mock-map4" class="decorative-image">
+        <area href="mock-area.html" alt=""/>
+    </map>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="decorative-image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png" class="decorative-image"></object>
+
+    <embed type="image" src="dummy.png" class="decorative-image">
+
+    <canvas id="canvas4" width="300" height="300" class="decorative-image">
+        Sorry, your browser does not support &lt;canvas&gt;
+    </canvas>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!-- map not associated with img through name/usemap association -->
+<div class="testcase">
+    <map id="mock-map2" name="mock-map2">
+        <area href="mock-area.html" alt="area within link"/>
+    </map>
+</div>
+<!-- END [testcase] -->
+<!--
+
+/!\ WARNING /!\
+All the following images are marked as informative thanks to the class informative-image
+
+-->
+
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * <object type="image/…">
+        * <embed type="image/…">
+        * <canvas>
+        * tag with WAI-ARIA role="img"
+    * without any alternative
+
+    It is out of scope as a failure has been thrown on the 1.1 criterion
+-->
+<div class="testcase">
+    <img src="dummy.png" class="informative-image"/>
+
+    <div role="img" class="informative-image"></div>
+
+    <input type="image" src="dummy.png" class="informative-image"/>
+
+    <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+    <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+         alt="MDN infographic" class="informative-image"/>
+    <map name="infographic" class="informative-image">
+        <area shape="rect" coords="184,6,253,27"
+              href="https://mozilla.org"
+              target="_blank"/>
+        <area shape="circle" coords="130,136,60"
+              href="https://developer.mozilla.org/"
+              target="_blank"/>
+        <area shape="poly" coords="130,6,253,96,223,106,130,39"
+              href="https://developer.mozilla.org/docs/Web/Guide/Graphics"
+              target="_blank"/>
+        <area shape="poly" coords="253,96,207,241,189,217,223,103"
+              href="https://developer.mozilla.org/docs/Web/HTML"
+              target="_blank"/>
+        <area shape="poly" coords="207,241,54,241,72,217,189,217"
+              href="https://developer.mozilla.org/docs/Web/JavaScript"
+              target="_blank"/>
+        <area shape="poly" coords="54,241,6,97,36,107,72,217"
+              href="https://developer.mozilla.org/docs/Web/API"
+              target="_blank"/>
+        <area shape="poly" coords="6,97,130,6,130,39,36,107"
+              href="https://developer.mozilla.org/docs/Web/CSS"
+              target="_blank"/>
+    </map>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image" role="img">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+* All kind of images:
+    * <img>
+    * <input type="image">
+    * <svg>
+    * tag with WAI-ARIA role="img"
+* with a wrong association using labelledby
+It is out of scope as a failure has been thrown on the 1.1 criterion
+-->
+<div id="image-description">Image description</div>
+<div class="testcase">
+    <img src="dummy.png" aria-labelledby="image-description2" class="informative-image"/>
+
+    <input type="image" src="dummy.png" aria-labelledby="image-description2" class="informative-image"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description2" class="informative-image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <div role="img" aria-labelledby="image-description2" class="informative-image"></div>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * SVG image has to have a role="img" attribute. It is out of scope as a failure has been thrown on the 1.1 criterion
+-->
+<div class="testcase">
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <div id="image-description5">Meaning of the image from aria-labelledby</div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image"
+         aria-labelledby="image-description5"
+         aria-label="Meaning of the image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image"
+         aria-label="Meaning of the image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+    <!--
+        aria-* attributes are allowed for <svg> element since SVG 2.0
+        See https://svgwg.org/svg2-draft/struct.html#NewDocument
+    -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image" role="image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<!-- END [testcase] -->

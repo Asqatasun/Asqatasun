@@ -25,6 +25,7 @@ package org.asqatasun.rules.elementchecker.text;
 import java.util.Collection;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.TestSolution;
@@ -172,6 +173,9 @@ public class TextEndsWithChecker extends NomenclatureBasedElementChecker {
              SSPHandler sspHandler, 
              Elements elements, 
              TestSolutionHandler testSolutionHandler) {
+        if (testableTextBuilder instanceof AccessibleNameElementBuilder) {
+            ((AccessibleNameElementBuilder)testableTextBuilder).setSspHandler(sspHandler);
+        }
          for (Element element : elements) {
              testSolutionHandler.addTestSolution(
                      checkTextElementEndsWithExtension(

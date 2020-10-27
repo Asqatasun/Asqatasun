@@ -25,6 +25,7 @@ package org.asqatasun.rules.elementchecker.text;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.asqatasun.entity.audit.TestSolution;
@@ -32,6 +33,8 @@ import org.asqatasun.processor.SSPHandler;
 import org.asqatasun.ruleimplementation.TestSolutionHandler;
 import org.asqatasun.rules.elementchecker.ElementCheckerImpl;
 import org.asqatasun.rules.textbuilder.TextElementBuilder;
+
+import static org.asqatasun.rules.keystore.AttributeStore.ABSENT_ATTRIBUTE_VALUE;
 
 /**
  * This class checks whether the content of a text is empty.
@@ -109,6 +112,9 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
             SSPHandler sspHandler, 
             Elements elements, 
             TestSolutionHandler testSolutionHandler) {
+        if (testableTextBuilder instanceof AccessibleNameElementBuilder) {
+            ((AccessibleNameElementBuilder)testableTextBuilder).setSspHandler(sspHandler);
+        }
         checkEmptiness(
                 elements, 
                 testSolutionHandler);
@@ -150,11 +156,11 @@ public class TextEmptinessChecker extends ElementCheckerImpl {
 
     /**
      * 
-     * @param element
+     * @param textElement
      * @return whether an element is seen as empty
      */
     private boolean isElementEmpty(String textElement) {
-        return StringUtils.isBlank(textElement);
+        return StringUtils.isBlank(textElement) || textElement.equalsIgnoreCase(ABSENT_ATTRIBUTE_VALUE);
     }
 
 }

@@ -1,0 +1,471 @@
+<!-- START [testcase] -->
+<!--
+    * Images:
+        * <object type="image">
+        * <embed type="image">
+        * <canvas/>
+    * without alternative: need to check whether an alternative content can be thrown with a specific mechanism
+    even if they are marked as informative with the informative-image class
+-->
+<object type="image" data="dummy.png" class="informative-image"></object>
+
+<embed type="image" src="dummy.png" class="informative-image">
+
+<canvas id="canvas1" width="300" height="300" class="informative-image"></canvas>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+* All kind of images:
+    * <object type="image/…">
+    * <embed type="image/…">
+    * <canvas>
+    * tag with WAI-ARIA role="img"
+* with a wrong association using labelledby
+* need to check whether an alternative content can be thrown with a specific mechanism
+    even if they are marked as informative with the informative-image class
+-->
+<div id="image-description4">Image description</div>
+<div class="testcase">
+
+    <object type="image" data="dummy.png" aria-labelledby="image-description59" class="informative-image"></object>
+
+    <embed type="image" src="dummy.png" aria-labelledby="image-description59" class="informative-image">
+
+    <canvas id="canvas2" width="300" height="300" aria-labelledby="image-description59" class="informative-image">
+    </canvas>
+
+</div>
+
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * <object type="image/…">
+        * <embed type="image/…">
+        * <canvas>
+        * tag with WAI-ARIA role="img"
+    * with: aria-label
+-->
+<div class="testcase">
+    <img src="dummy.png"
+         aria-label="meaning of the image"/>
+
+    <input type="image" src="dummy.png"
+           aria-label="meaning of the image"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-label="meaning of the image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png"
+            aria-label="meaning of the image">
+    </object>
+
+    <embed type="image" src="dummy.png"
+           aria-label="meaning of the image">
+
+    <canvas id="canvas3" width="300" height="300"
+            aria-label="meaning of the image">
+    </canvas>
+
+    <div role="img"
+         aria-label="meaning of the image">
+    </div>
+</div>
+
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * <object type="image/…">
+        * <embed type="image/…">
+        * <canvas>
+        * tag with WAI-ARIA role="img"
+    * with: aria-labelledby
+-->
+<div id="image-description">Image description</div>
+<div class="testcase">
+    <img src="dummy.png"
+         aria-labelledby="image-description"/>
+
+    <input type="image" src="dummy.png"
+           aria-labelledby="image-description"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png"
+            aria-labelledby="image-description">
+    </object>
+
+    <embed type="image" src="dummy.png"
+           aria-labelledby="image-description">
+
+    <canvas id="canvas4" width="300" height="300"
+            aria-labelledby="image-description">
+    </canvas>
+
+    <div role="img"
+         aria-labelledby="image-description">
+    </div>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * Images:
+        * <img>
+        * <area>
+        * <input type="image">
+    * with: alt
+-->
+<div class="testcase">
+    <img src="dummy.png"
+         alt="Meaning of image"/>
+
+    <map name="infographic">
+        <area shape="rect" coords="184,6,253,27"
+              href="https://mozilla.org"
+              target="_blank" alt="Mozilla"/>
+        <area shape="circle" coords="130,136,60"
+              href="https://developer.mozilla.org/"
+              target="_blank" alt="MDN"/>
+        <area shape="poly" coords="130,6,253,96,223,106,130,39"
+              href="https://developer.mozilla.org/docs/Web/Guide/Graphics"
+              target="_blank" alt="Graphics"/>
+        <area shape="poly" coords="253,96,207,241,189,217,223,103"
+              href="https://developer.mozilla.org/docs/Web/HTML"
+              target="_blank" alt="HTML"/>
+        <area shape="poly" coords="207,241,54,241,72,217,189,217"
+              href="https://developer.mozilla.org/docs/Web/JavaScript"
+              target="_blank" alt="JavaScript"/>
+        <area shape="poly" coords="54,241,6,97,36,107,72,217"
+              href="https://developer.mozilla.org/docs/Web/API"
+              target="_blank" alt="Web APIs"/>
+        <area shape="poly" coords="6,97,130,6,130,39,36,107"
+              href="https://developer.mozilla.org/docs/Web/CSS"
+              target="_blank" alt="CSS"/>
+    </map>
+    <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+         alt="MDN infographic"/>
+    <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+
+    <input type="image" src="dummy.png"
+           alt="Meaning of image"/>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * Images:
+        * <img>
+        * <input type="image">
+        * <object type="image">
+        * <embed type="image">
+    * with: title
+-->
+<div class="testcase">
+    <img src="dummy.png"
+         title="Meaning of image"/>
+
+    <input type="image" src="dummy.png"
+           title="Meaning of image"/>
+
+    <object type="image" data="dummy.png"
+            title="Meaning of image">
+    </object>
+
+    <embed type="image" src="dummy.png"
+           title="Meaning of image"/>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * Image:
+        * <img>
+    * with various combinations of attributes:
+        * aria-labelledby
+        * aria-label
+        * alt
+        * title
+-->
+
+<!--
+    EXPECTED accessible name is: Image description from aria-labelledby
+-->
+<div class="testcase">
+    <div id="image-description3">Image description from aria-labelledby</div>
+    <img src="dummy.png"
+         aria-labelledby="image-description3"
+         aria-label="Meaning of image from aria-label"
+         title="Meaning of image from title"
+         alt="Meaning of image from alt"/>
+    <input type="image" src="dummy.png"
+           aria-labelledby="image-description3"
+           aria-label="Meaning of image from aria-label"
+           title="Meaning of image from title"
+           alt="Meaning of image from alt"/>
+    <object type="image" data="dummy.png"
+            aria-labelledby="image-description3"
+            aria-label="Meaning of image from aria-label"
+            title="Meaning of image from title"></object>
+    <embed type="image" src="dummy.png"
+           aria-labelledby="image-description3"
+           aria-label="Meaning of image from aria-label"
+           title="Meaning of image from title"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description3"
+         aria-label="Meaning of image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <object type="image" data="dummy.png"
+            aria-labelledby="image-description3"
+            aria-label="Meaning of image from aria-label">
+    </object>
+
+    <embed type="image" src="dummy.png"
+           aria-labelledby="image-description3"
+           aria-label="Meaning of image from aria-label">
+
+    <canvas id="canvas6" width="300" height="300"
+            aria-labelledby="image-description3"
+            aria-label="Meaning of image from aria-label">
+        Sorry, your browser does not support &lt;canvas&gt;
+    </canvas>
+    <!--
+        EXPECTED accessible name is: Meaning of image from aria-label
+    -->
+    <img src="dummy.png"
+         aria-label="Meaning of image from aria-label"
+         title="Meaning of image from title"
+         alt="Meaning of image from alt"/>
+    <input type="image" src="dummy.png"
+           aria-label="Meaning of image from aria-label"
+           title="Meaning of image from title"
+           alt="Meaning of image from alt"/>
+    <object type="image" data="dummy.png"
+            title="Meaning of image from title"
+            aria-label="Meaning of image from aria-label"></object>
+    <embed type="image" src="dummy.png"
+           aria-label="Meaning of image from aria-label"
+           title="Meaning of image from title"/>
+    <!--
+        EXPECTED accessible name is: Meaning of image from alt
+    -->
+    <img src="dummy.png"
+         title="Meaning of image from title"
+         alt="Meaning of image from alt"/>
+    <input type="image" src="dummy.png"
+           title="Meaning of image from title"
+           alt="Meaning of image from alt"/>
+    <!--
+        EXPECTED accessible name is: Meaning of image from title
+    -->
+    <img src="dummy.png" title="Meaning of image from title"/>
+    <input type="image" src="dummy.png" title="Meaning of image from title"/>
+    <object type="image" data="dummy.png" title="Meaning of image from title"></object>
+    <embed type="image" src="dummy.png" title="Meaning of image from title"/>
+</div>
+
+<!-- START [testcase] -->
+<!--
+    * Images:
+        * <object type="image">
+        * <embed type="image">
+        * <canvas/>
+    * with: followed or preceded by a link or a button
+-->
+<div class="testcase">
+    <a href="https://example.org/">Adjacent link of object</a>
+    <object type="image" data="dummy.png"/>
+
+    <embed type="image" src="dummy.png">
+    <button class="button button2">Adjacent button of embed</button>
+
+    <input type="button" value="Adjacent button of canvas">
+    <canvas id="canvas7" width="300" height="300"></canvas>
+</div>
+
+<!-- START [testcase] -->
+<!--
+    * Image:
+        * canvas
+    * with own text as altenative
+-->
+<canvas id="canvas8" width="300" height="300">
+    This is the canvas alternative
+</canvas>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+    * SVG image:
+    * with combinations of:
+        * a <text> child
+        * and one of aria-label or aria-labelledby
+-->
+<!--
+    EXPECTED accessible name is: Meaning of the image from aria-labelledby
+-->
+<div class="testcase">
+    <div id="image-description2">Meaning of the image from aria-labelledby</div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description2"
+         aria-label="Meaning of the image from aria-label">>
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+    <!--
+        aria-* attributes are allowed for <svg> element since SVG 2.0
+        See https://svgwg.org/svg2-draft/struct.html#NewDocument
+    -->
+</div>
+
+<!--
+    EXPECTED accessible name is: Meaning of the image from aria-label
+-->
+<div class="testcase">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-label="Meaning of the image from aria-label">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+    <!--
+        aria-* attributes are allowed for <svg> element since SVG 2.0
+        See https://svgwg.org/svg2-draft/struct.html#NewDocument
+    -->
+</div>
+
+<!--
+    EXPECTED accessible name is: Meaning of the image from text tag
+-->
+<div class="testcase">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img">
+        <circle cx="50" cy="50" r="40"/>
+        <text>Meaning of the image from text tag</text>
+    </svg>
+</div>
+<!-- END [testcase] -->
+
+<!--
+
+/!\ WARNING /!\
+All the following images are not marked as informative but have an not pertinent alternative
+
+-->
+
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * <canvas>
+        * tag with WAI-ARIA role="img"
+    * with an empty alternative
+-->
+<div class="testcase">
+    <img src="dummy.png" alt=""/>
+
+    <div role="img" aria-label=""></div>
+
+    <input type="image" src="dummy.png" alt="" title="" aria-label=""/>
+
+    <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+    <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+         alt="MDN infographic" />
+    <map name="infographic" >
+        <area shape="rect" coords="184,6,253,27"
+              href="https://mozilla.org"
+              target="_blank" alt=""/>
+        <area shape="circle" coords="130,136,60"
+              href="https://developer.mozilla.org/"
+              target="_blank" aria-label=""/>
+        <area shape="poly" coords="130,6,253,96,223,106,130,39"
+              href="https://developer.mozilla.org/docs/Web/Guide/Graphics"
+              target="_blank" alt=""/>
+        <area shape="poly" coords="253,96,207,241,189,217,223,103"
+              href="https://developer.mozilla.org/docs/Web/HTML"
+              target="_blank" aria-label=""/>
+        <area shape="poly" coords="207,241,54,241,72,217,189,217"
+              href="https://developer.mozilla.org/docs/Web/JavaScript"
+              target="_blank" alt=""/>
+        <area shape="poly" coords="54,241,6,97,36,107,72,217"
+              href="https://developer.mozilla.org/docs/Web/API"
+              target="_blank" aria-label=""/>
+        <area shape="poly" coords="6,97,130,6,130,39,36,107"
+              href="https://developer.mozilla.org/docs/Web/CSS"
+              target="_blank" alt=""/>
+    </map>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" title="" aria-label="">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+* All kind of images:
+    * <img>
+    * <input type="image">
+    * <svg>
+    * tag with WAI-ARIA role="img"
+* with an alternative set using the aria-labelledby attribute and only composed of non alphanumerical characters
+-->
+<div id="image-description6">!<<<---&*</div>
+<div class="testcase">
+    <img src="dummy.png" aria-labelledby="image-description6" />
+
+    <input type="image" src="dummy.png" aria-labelledby="image-description6" />
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description6">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <div role="img" aria-labelledby="image-description6"></div>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+* All kind of images:
+    * <img>
+    * <input type="image">
+    * <svg>
+    * tag with WAI-ARIA role="img"
+with an alternative that ends with an image file format extension
+-->
+<img src="dummy.png" alt="dummy.png"/>
+
+<div role="img"  aria-label="dummy.jpg"></div>
+
+<input type="image" src="dummy.png" alt="dummy.png"/>
+
+<!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+<img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+     alt="MDN infographic" />
+<map name="infographic" >
+    <area shape="rect" coords="184,6,253,27"
+          href="https://mozilla.org"
+          target="_blank" alt="dummy.png"/>
+    <area shape="circle" coords="130,136,60"
+          href="https://developer.mozilla.org/"
+          target="_blank" aria-label="dummy.png"/>
+</map>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="dummy.png">
+    <circle cx="50" cy="50" r="40"/>
+</svg>
+<!-- END [testcase] -->
