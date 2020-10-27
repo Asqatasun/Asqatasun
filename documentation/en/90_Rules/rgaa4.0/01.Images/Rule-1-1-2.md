@@ -36,8 +36,6 @@ This test consists in checking whether each `<area>` of an image map, carrying i
 
 ### Selection
 
-### Selection
-
 #### Set1
 
 All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute 
