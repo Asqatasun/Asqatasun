@@ -85,7 +85,7 @@ For each occurrence of false-result of **Test4**, raise a MessageF.
 
 ##### MessageA 
 
--    code : **NotPertinentAlt** 
+-    code : **AltMissing** 
 -    status: Failed
 -    parameter : `"role"` attribute, `"aria-label"` attribute, `"computed accessible name"`
 -    present in source : yes

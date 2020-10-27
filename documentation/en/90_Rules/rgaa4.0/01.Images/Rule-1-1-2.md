@@ -73,7 +73,7 @@ For each occurrence of false-result of **Test2**, raise a MessageC.
 
 ##### MessageA 
 
--    code : **NotPertinentAlt** 
+-    code : **AltMissing** 
 -    status: Failed
 -    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
 -    present in source : yes
