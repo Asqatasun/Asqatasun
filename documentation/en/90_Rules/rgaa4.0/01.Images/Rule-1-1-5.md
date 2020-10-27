@@ -106,7 +106,7 @@ For each occurrence of false-result of **Test4**, raise a MessageF.
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
 The page has no `<svg>` tag (**Set1** is empty)
 
