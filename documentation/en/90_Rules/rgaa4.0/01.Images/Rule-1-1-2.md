@@ -75,21 +75,21 @@ For each occurrence of false-result of **Test2**, raise a MessageC.
 
 -    code : **AltMissing** 
 -    status: Failed
--    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
 -    present in source : yes
 
 ##### MessageB 
 
 -    code : **CheckNatureOfElementWithTextualAlternative** 
 -    status: Pre-Qualified
--    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
 -    present in source : yes
 
 ##### MessageC
 
 -    code : **CheckNatureOfElementWithoutTextualAlternative** 
 -    status: Pre-Qualified
--    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
 -    present in source : yes
 
 ### Analysis
