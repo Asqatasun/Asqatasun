@@ -91,18 +91,7 @@ For each occurrence of false-result of **Test2**, raise a MessageC.
 
 ### Analysis
 
-#### Not Tested
-
-The page has no `<input>` tag with a `type="image"` attribute (**Set1** is empty)
-
-#### Failed
-
-At least one `<input>` tag with a `type="image"` attribute, identified as informative, 
-has no textual alternative (**Test1** returns false for at least one element)
-
-#### Pre-qualified
-
-In all other cases
+#### Not Applicable
 
 ## Notes
 
