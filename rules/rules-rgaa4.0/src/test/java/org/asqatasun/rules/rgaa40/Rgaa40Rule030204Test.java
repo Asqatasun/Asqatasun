@@ -45,20 +45,20 @@ public class Rgaa40Rule030204Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-        addWebResource("Rgaa40.Test.03.02.04-3NMI-01");
+        addWebResource("Rgaa40.Test.3.2.4-3NMI-01");
     }
 
     @Override
     protected void setProcess() {
         assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("Rgaa40.Test.03.02.04-3NMI-01").getValue());
+                processPageTest("Rgaa40.Test.3.2.4-3NMI-01").getValue());
 
     }
 
     @Override
     protected void setConsolidate() {
         assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa40.Test.03.02.04-3NMI-01").getValue());
+                consolidate("Rgaa40.Test.3.2.4-3NMI-01").getValue());
     }
 
 }
