@@ -49,7 +49,7 @@
                                     <c:set value="false" var="color" scope="page"/>
                                 </c:if>
                             </c:forEach>
-                            <c:if test="${not empty configProperties['contrastfinderServiceUrl']}">
+                            <c:if test="${not empty contrastfinderServiceUrl}">
                             <th class="r${testCode}-col-cf" scope="col"><fmt:message key="resultPageEvidenceElement.cfKey"/></th>
                             </c:if>
                     </tr>
@@ -148,7 +148,7 @@
                                 </c:choose>
                             </c:forEach>
 
-                            <c:if test="${not empty configProperties['contrastfinderServiceUrl']}">
+                            <c:if test="${not empty contrastfinderServiceUrl}">
                                 <c:set var="cfLogoDescription">
                                     <fmt:message key="resultPageEvidenceElement.cfLogoDescription">
                                         <fmt:param value="${fgColorHexa}"></fmt:param>
@@ -184,7 +184,7 @@
                                     </c:choose>
                                 <%-- (1) Dirty alternative  (END) --%>
                                 
-                                    <c:set var="cfURL" value="${configProperties['contrastfinderServiceUrl']}/result.html"/>
+                                    <c:set var="cfURL" value="${contrastfinderServiceUrl}/result.html"/>
                                     <a title="${cfLogoDescription}"
                                        href="${cfURL}?foreground=${fn:replace(fgColorHexa, "#", "%23")}&background=${fn:replace(bgColorHexa, "#", "%23")}&isBackgroundTested=false&ratio=${cfRatio}&algo=Rgb"
                                        rel="noreferrer noopener"

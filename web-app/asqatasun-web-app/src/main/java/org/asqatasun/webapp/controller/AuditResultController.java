@@ -44,6 +44,7 @@ import org.asqatasun.webapp.exception.ForbiddenUserException;
 import org.asqatasun.webapp.highlighter.HtmlHighlighter;
 import org.asqatasun.webapp.util.HttpStatusCodeFamily;
 import org.asqatasun.webapp.util.TgolKeyStore;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +60,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AuditResultController extends AbstractAuditResultController {
 
+    @Value("${app.webapp.ui.config.contrastfinderServiceUrl}")
+    private String contrastfinderServiceUrl;
     private final TestDataService testDataService;
     private final AuditDataService auditDataService;
     private final CriterionDataService criterionDataService;
@@ -136,7 +139,7 @@ public class AuditResultController extends AbstractAuditResultController {
         } catch (NumberFormatException nfe) {
             throw new ForbiddenPageException();
         }
-
+        model.addAttribute("contrastfinderServiceUrl", contrastfinderServiceUrl);
         return dispatchDisplayResultRequest(
                 webResourceIdValue,
                 null,
