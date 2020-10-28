@@ -45,36 +45,36 @@ public class Rgaa40Rule030202Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.03.02.02-1Passed-01");
-//        addWebResource("Rgaa40.Test.03.02.02-2Failed-01");
-        addWebResource("Rgaa40.Test.03.02.02-3NMI-01");
-//        addWebResource("Rgaa40.Test.03.02.02-4NA-01");
+//        addWebResource("Rgaa40.Test.3.2.2-1Passed-01");
+//        addWebResource("Rgaa40.Test.3.2.2-2Failed-01");
+        addWebResource("Rgaa40.Test.3.2.2-3NMI-01");
+//        addWebResource("Rgaa40.Test.3.2.2-4NA-01");
 
     }
 
     @Override
     protected void setProcess() {
 //        assertEquals(TestSolution.PASSED,
-//                processPageTest("Rgaa40.Test.03.02.02-1Passed-01").getValue());
+//                processPageTest("Rgaa40.Test.3.2.2-1Passed-01").getValue());
 //        assertEquals(TestSolution.FAILED,
-//                processPageTest("Rgaa40.Test.03.02.02-2Failed-01").getValue());
+//                processPageTest("Rgaa40.Test.3.2.2-2Failed-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
-                processPageTest("Rgaa40.Test.03.02.02-3NMI-01").getValue());
+                processPageTest("Rgaa40.Test.3.2.2-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
-//                processPageTest("Rgaa40.Test.03.02.02-4NA-01").getValue());
+//                processPageTest("Rgaa40.Test.3.2.2-4NA-01").getValue());
 
     }
 
     @Override
     protected void setConsolidate() {
 //        assertEquals(TestSolution.PASSED,
-//                consolidate("Rgaa40.Test.03.02.02-1Passed-01").getValue());
+//                consolidate("Rgaa40.Test.3.2.2-1Passed-01").getValue());
 //        assertEquals(TestSolution.FAILED,
-//                consolidate("Rgaa40.Test.03.02.02-2Failed-01").getValue());
+//                consolidate("Rgaa40.Test.3.2.2-2Failed-01").getValue());
         assertEquals(TestSolution.NOT_TESTED,
-                consolidate("Rgaa40.Test.03.02.02-3NMI-01").getValue());
+                consolidate("Rgaa40.Test.3.2.2-3NMI-01").getValue());
 //        assertEquals(TestSolution.NOT_APPLICABLE,
-//                consolidate("Rgaa40.Test.03.02.02-4NA-01").getValue());
+//                consolidate("Rgaa40.Test.3.2.2-4NA-01").getValue());
     }
 
 }
