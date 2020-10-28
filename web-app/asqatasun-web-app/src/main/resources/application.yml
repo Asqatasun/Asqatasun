@@ -58,6 +58,7 @@ app:
         referentialWithModifiableTestWeight: "SEO,Aw22"
         userExclusionListForEmail: "guest"
         webAppUrl: "http://localhost:8080/"
+        contrastfinderServiceUrl: "https://app.contrast-finder.org"
         forgottenPassword:
           excludeUserList: "guest"
         orchestrator:
