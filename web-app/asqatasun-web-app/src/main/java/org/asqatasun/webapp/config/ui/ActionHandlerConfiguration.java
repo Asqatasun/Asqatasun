@@ -39,7 +39,7 @@ public class ActionHandlerConfiguration {
         contractActionHandlerImpl.setActionBuilderList(
             Arrays.asList(
                 auditPageActionBuilder(),
-                auditSiteActionBuilder(),
+//                auditSiteActionBuilder(),
                 auditScenarioActionBuilder(),
                 auditUploadActionBuilder()));
         return contractActionHandlerImpl;
