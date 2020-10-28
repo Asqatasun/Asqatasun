@@ -164,6 +164,7 @@
                                         <%-- @@@TODO Rgaa 4 --%>
                                         <c:when test="${testCode == 'Rgaa30-3-3-3'     ||
                                                         testCode == 'Rgaa30-3-3-4'     ||
+                                                        testCode == 'Rgaa40-3-2-3'     ||
                                                         testCode == 'Rgaa32016-3-3-3'  ||
                                                         testCode == 'Rgaa32016-3-3-4'  ||
                                                         testCode == 'Aw22-03033'       ||
