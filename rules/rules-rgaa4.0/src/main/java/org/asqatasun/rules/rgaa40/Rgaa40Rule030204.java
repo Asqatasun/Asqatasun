@@ -19,7 +19,8 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.ruleimplementation.AbstractPageRuleWithCheckerImplementation;
+import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
 
 /**
  * Implementation of rule 3.2.4 (referential RGAA 4.0)
@@ -27,13 +28,36 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/03.Colours/Rule-3-2-4.md">rule 3.2.4 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-3-2-4">3.2.4 rule specification</a>
  */
-public class Rgaa40Rule030204 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule030204 extends AbstractPageRuleWithCheckerImplementation {
+
+    /**
+     * The contrast checker with:
+     * - a value of ratio set to 4.5
+     * - a value of normal font size threshold in pixel to 24
+     * - a value of bold font size threshold in pixel to 18.5
+     */
+    private final ContrastChecker contrastChecker =
+        new ContrastChecker(
+            3f,
+            false,
+            true,
+            false,
+            24.0f,
+            18.5f
+        );
+
 
     /**
      * Default constructor
      */
     public Rgaa40Rule030204() {
         super();
+        setElementChecker(contrastChecker);
+    }
+
+    @Override
+    public int getSelectionSize() {
+        return contrastChecker.getElementCounter();
     }
 
 }

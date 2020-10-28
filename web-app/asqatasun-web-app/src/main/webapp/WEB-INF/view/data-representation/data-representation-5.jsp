@@ -164,16 +164,14 @@
                                         <%-- @@@TODO Rgaa 4 --%>
                                         <c:when test="${testCode == 'Rgaa30-3-3-3'     ||
                                                         testCode == 'Rgaa30-3-3-4'     ||
-                                                        testCode == 'Rgaa32016-3-3-3'  ||
-                                                        testCode == 'Rgaa32016-3-3-4'  ||
+                                                        testCode == 'Rgaa40-3-2-3'     ||
+                                                        testCode == 'Rgaa40-3-2-4'     ||
                                                         testCode == 'Aw22-03033'       ||
                                                         testCode == 'Aw22-03034'          }" >
                                             <c:set var="cfRatio" value="3"/>
                                         </c:when>
                                         <c:when test="${testCode == 'Rgaa30-3-4-1'     ||
                                                         testCode == 'Rgaa30-3-4-2'     ||
-                                                        testCode == 'Rgaa32016-3-4-1'  ||
-                                                        testCode == 'Rgaa32016-3-4-2'  ||
                                                         testCode == 'Aw22-03041'       ||
                                                         testCode == 'Aw22-03042'          }" >
                                             <c:set var="cfRatio" value="7"/>
