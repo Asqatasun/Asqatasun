@@ -30,7 +30,12 @@ import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
  */
 public class Rgaa40Rule030201 extends AbstractPageRuleWithCheckerImplementation {
 
-    /** The contrast checker with a value of ratio set to 4.5 */
+    /**
+     * The contrast checker with:
+     * - a value of ratio set to 4.5
+     * - a value of normal font size threshold in pixel to 24
+     * - a value of bold font size threshold in pixel to 18.5
+     */
     private final ContrastChecker contrastChecker =
         new ContrastChecker(
             4.5f,

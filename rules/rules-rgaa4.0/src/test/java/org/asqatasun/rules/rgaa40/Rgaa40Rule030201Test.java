@@ -57,11 +57,13 @@ public class Rgaa40Rule030201Test extends Rgaa40RuleImplementationTestCase {
         addWebResource("Rgaa40.Test.3.2.1-1Passed-04");
         addWebResource("Rgaa40.Test.3.2.1-1Passed-05");
         addWebResource("Rgaa40.Test.3.2.1-1Passed-06");
+
         addWebResource("Rgaa40.Test.3.2.1-2Failed-01");
         addWebResource("Rgaa40.Test.3.2.1-2Failed-02");
         addWebResource("Rgaa40.Test.3.2.1-2Failed-03");
         addWebResource("Rgaa40.Test.3.2.1-2Failed-04");
         addWebResource("Rgaa40.Test.3.2.1-2Failed-05");
+
         addWebResource("Rgaa40.Test.3.2.1-3NMI-01");
         addWebResource("Rgaa40.Test.3.2.1-3NMI-02");
         addWebResource("Rgaa40.Test.3.2.1-3NMI-03");
@@ -69,6 +71,7 @@ public class Rgaa40Rule030201Test extends Rgaa40RuleImplementationTestCase {
         addWebResource("Rgaa40.Test.3.2.1-3NMI-05");
         addWebResource("Rgaa40.Test.3.2.1-3NMI-06");
         addWebResource("Rgaa40.Test.3.2.1-3NMI-07");
+
         addWebResource("Rgaa40.Test.3.2.1-4NA-01");
     }
 
