@@ -1,0 +1,111 @@
+<!--
+
+/!\ WARNING /!\
+All the following images are marked as informative thanks to the class informative-image
+
+-->
+
+<!-- START [testcase] -->
+<!--
+    * All kind of images:
+        * <img>
+        * <input type="image">
+        * <svg>
+        * tag with WAI-ARIA role="img"
+    * with an empty alternative
+-->
+<div class="testcase">
+    <img src="dummy.png" class="informative-image" alt=""/>
+
+    <div role="img" class="informative-image" aria-label=""></div>
+
+    <input type="image" src="dummy.png" class="informative-image" alt="" title="" aria-label=""/>
+
+    <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+    <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+         alt="MDN infographic" class="informative-image"/>
+    <map name="infographic" class="informative-image">
+        <area shape="rect" coords="184,6,253,27"
+              href="https://mozilla.org"
+              target="_blank" alt=""/>
+        <area shape="circle" coords="130,136,60"
+              href="https://developer.mozilla.org/"
+              target="_blank" aria-label=""/>
+        <area shape="poly" coords="130,6,253,96,223,106,130,39"
+              href="https://developer.mozilla.org/docs/Web/Guide/Graphics"
+              target="_blank" alt=""/>
+        <area shape="poly" coords="253,96,207,241,189,217,223,103"
+              href="https://developer.mozilla.org/docs/Web/HTML"
+              target="_blank" aria-label=""/>
+        <area shape="poly" coords="207,241,54,241,72,217,189,217"
+              href="https://developer.mozilla.org/docs/Web/JavaScript"
+              target="_blank" alt=""/>
+        <area shape="poly" coords="54,241,6,97,36,107,72,217"
+              href="https://developer.mozilla.org/docs/Web/API"
+              target="_blank" aria-label=""/>
+        <area shape="poly" coords="6,97,130,6,130,39,36,107"
+              href="https://developer.mozilla.org/docs/Web/CSS"
+              target="_blank" alt=""/>
+    </map>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image" role="img" title="" aria-label="">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+* All kind of images:
+    * <img>
+    * <input type="image">
+    * <svg>
+    * tag with WAI-ARIA role="img"
+* with an alternative set using the aria-labelledby attribute and only composed of non alphanumerical characters
+-->
+<div id="image-description">!<<<---&*</div>
+<div class="testcase">
+    <img src="dummy.png" aria-labelledby="image-description" class="informative-image"/>
+
+    <input type="image" src="dummy.png" aria-labelledby="image-description" class="informative-image"/>
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img"
+         aria-labelledby="image-description" class="informative-image">
+        <circle cx="50" cy="50" r="40"/>
+    </svg>
+
+    <div role="img" aria-labelledby="image-description" class="informative-image"></div>
+</div>
+<!-- END [testcase] -->
+
+<!-- START [testcase] -->
+<!--
+* All kind of images:
+    * <img>
+    * <input type="image">
+    * <svg>
+    * tag with WAI-ARIA role="img"
+with an alternative that ends with an image file format extension
+-->
+<img src="dummy.png" class="informative-image" alt="dummy.png"/>
+
+<div role="img" class="informative-image" aria-label="dummy.jpg"></div>
+
+<input type="image" src="dummy.png" class="informative-image" alt="dummy.png"/>
+
+<!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+<img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png"
+     alt="MDN infographic" class="informative-image"/>
+<map name="infographic" class="informative-image">
+    <area shape="rect" coords="184,6,253,27"
+          href="https://mozilla.org"
+          target="_blank" alt="dummy.png"/>
+    <area shape="circle" coords="130,136,60"
+          href="https://developer.mozilla.org/"
+          target="_blank" aria-label="dummy.png"/>
+</map>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" class="informative-image" role="img" aria-label="dummy.png">
+    <circle cx="50" cy="50" r="40"/>
+</svg>
+<!-- END [testcase] -->

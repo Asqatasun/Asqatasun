@@ -70,7 +70,7 @@ For each occurrence of false-result of **Test2**, raise a MessageC.
 
 ##### MessageA 
 
--    code : **NotPertinentAlt** 
+-    code : **AltMissing** 
 -    status: Failed
 -    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"src"` attribute 
 -    present in source : yes
@@ -91,7 +91,7 @@ For each occurrence of false-result of **Test2**, raise a MessageC.
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
 The page has no `<input>` tag with a `type="image"` attribute (**Set1** is empty)
 

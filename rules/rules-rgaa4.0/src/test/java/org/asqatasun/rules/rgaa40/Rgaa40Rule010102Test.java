@@ -84,7 +84,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             1,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://mozilla.org"));
@@ -95,7 +94,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             2,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/"));
@@ -106,7 +104,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             3,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/Guide/Graphics"));
@@ -117,7 +114,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             4,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/HTML"));
@@ -128,7 +124,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             5,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/JavaScript"));
@@ -139,7 +134,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             6,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/API"));
@@ -150,7 +144,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             7,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/CSS"));
@@ -167,7 +160,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             1,
             new ImmutablePair<>(ALT_ATTR, "Mozilla"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "Mozilla"),
             new ImmutablePair<>(HREF_ATTR, "https://mozilla.org"));
@@ -178,7 +170,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             2,
             new ImmutablePair<>(ALT_ATTR, "MDN"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "MDN"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/"));
@@ -189,7 +180,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             3,
             new ImmutablePair<>(ALT_ATTR, "Graphics"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "Graphics"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/Guide/Graphics"));
@@ -200,7 +190,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             4,
             new ImmutablePair<>(ALT_ATTR, "HTML"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "HTML"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/HTML"));
@@ -211,7 +200,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             5,
             new ImmutablePair<>(ALT_ATTR, "JavaScript"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "JavaScript"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/JavaScript"));
@@ -222,7 +210,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             6,
             new ImmutablePair<>(ALT_ATTR, "Web APIs"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "Web APIs"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/API"));
@@ -233,7 +220,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             7,
             new ImmutablePair<>(ALT_ATTR, "CSS"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "CSS"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/CSS"));
@@ -244,7 +230,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             8,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://mozilla.org"));
@@ -255,7 +240,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             9,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/"));
@@ -266,7 +250,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             10,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/Guide/Graphics"));
@@ -277,7 +260,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             11,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/HTML"));
@@ -288,7 +270,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             12,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/JavaScript"));
@@ -299,7 +280,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             13,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/API"));
@@ -310,7 +290,6 @@ public class Rgaa40Rule010102Test extends Rgaa40RuleImplementationTestCase {
             AREA_ELEMENT,
             14,
             new ImmutablePair<>(ALT_ATTR, "attribute-absent"),
-            new ImmutablePair<>(TITLE_ATTR, "attribute-absent"),
             new ImmutablePair<>(ARIA_LABEL_ATTR, "attribute-absent"),
             new ImmutablePair<>(COMPUTED_LINK_TITLE, "attribute-absent"),
             new ImmutablePair<>(HREF_ATTR, "https://developer.mozilla.org/docs/Web/CSS"));

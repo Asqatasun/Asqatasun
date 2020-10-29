@@ -36,8 +36,6 @@ This test consists in checking whether each `<area>` of an image map, carrying i
 
 ### Selection
 
-### Selection
-
 #### Set1
 
 All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute 
@@ -73,23 +71,23 @@ For each occurrence of false-result of **Test2**, raise a MessageC.
 
 ##### MessageA 
 
--    code : **NotPertinentAlt** 
+-    code : **AltMissing** 
 -    status: Failed
--    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
 -    present in source : yes
 
 ##### MessageB 
 
 -    code : **CheckNatureOfElementWithTextualAlternative** 
 -    status: Pre-Qualified
--    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
 -    present in source : yes
 
 ##### MessageC
 
 -    code : **CheckNatureOfElementWithoutTextualAlternative** 
 -    status: Pre-Qualified
--    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"href"` attribute 
 -    present in source : yes
 
 ### Analysis

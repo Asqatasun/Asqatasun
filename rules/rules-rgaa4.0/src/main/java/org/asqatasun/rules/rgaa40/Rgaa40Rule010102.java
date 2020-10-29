@@ -38,7 +38,6 @@ public class Rgaa40Rule010102 extends AbstractInformativeImagePresenceAlternativ
             new ImageElementSelector(new AreaElementSelector(), true, true),
             true,
             ALT_ATTR,
-            TITLE_ATTR,
             ARIA_LABEL_ATTR,
             COMPUTED_LINK_TITLE,
             HREF_ATTR);

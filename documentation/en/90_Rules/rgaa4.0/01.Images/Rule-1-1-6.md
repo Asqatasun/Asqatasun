@@ -94,7 +94,7 @@ For each occurrence of false-result of **Test2**, raise a MessageC.
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
 The page has no `<object>` tag with a `type="image"` attribute (**Set1** is empty)
 

@@ -20,6 +20,13 @@
 package org.asqatasun.rules.rgaa40;
 
 import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import org.asqatasun.rules.elementselector.ElementWithAccessibleNameSelector;
+import org.asqatasun.rules.elementselector.ImageElementSelector;
+
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.AttributeStore.SRC_ATTR;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.FORM_BUTTON_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
 
 /**
  * Implementation of rule 1.3.3 (referential RGAA 4.0)
@@ -27,13 +34,20 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-3-3.md">rule 1.3.3 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-3-3">1.3.3 rule specification</a>
  */
-public class Rgaa40Rule010303 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010303 extends AbstractInformativeImagePertinenceAlternativePageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule010303() {
-        super();
+        super(
+            new ElementWithAccessibleNameSelector(new ImageElementSelector(FORM_BUTTON_CSS_LIKE_QUERY, true, true)),
+            true,
+            ALT_ATTR,
+            TITLE_ATTR,
+            ARIA_LABEL_ATTR,
+            COMPUTED_LINK_TITLE,
+            SRC_ATTR);
     }
 
 }
