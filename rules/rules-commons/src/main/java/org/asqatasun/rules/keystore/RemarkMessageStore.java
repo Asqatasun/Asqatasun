@@ -62,6 +62,13 @@ public final class RemarkMessageStore {
     public static final String NAV_ELEMENT_MISSING =
         "NavElementMissing";
 
+    // dir attribute
+    public static final String DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG =
+        "dirAttributeWithAllowedValue";
+    public static final String DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG =
+        "dirAttributeWithNotAllowedValue";
+
+
     // images
     public static final String ALT_MISSING_MSG = "AltMissing";
     public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
