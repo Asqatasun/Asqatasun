@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.3.1.5 NMI 03</title>
+</head>
+<body class="NMI">
+<div>
+    <h1>Rgaa 4.0 Test.3.1.5 NMI 03</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Pour chaque <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise">média
+            temporel</a> <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-vehiculant-une-information-donnee-par-la-couleur">véhiculant
+            une information</a>, l’<a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#information-donnee-par-la-couleur">information</a>
+            ne doit pas être donnée uniquement par la couleur. Cette règle est-elle respectée ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+
+        <!-- Obsolete bgsound tag -->
+        <bgsound src="son1.mid"></bgsound>
+
+        <!-- audio tags -->
+        <audio controls src="sample.mp3">
+            Your browser does not support the audio element.
+        </audio>
+        <audio controls>
+            <source src="sample.mp3" type="audio/mpeg">
+            <source src="sample.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+            Here is a link to <a href="sample.mp3">download the sample.mp3 file</a>
+        </audio>
+
+        <!-- video tags with audio file -->
+        <video controls src="sample.mp3">
+            Your browser does not support the video element.
+        </video>
+        <video controls>
+            <source src="sample.ogg" type="audio/ogg">
+            <source src="sample.mp3">
+            Your browser does not support the video element.
+        </video>
+
+        <!-- embed tags -->
+        <embed height="255" src="sample.wav" type="audio/x-wav" width="320">
+        <embed height="255" src="sample.mp3" type="audio/mpeg" width="320">
+
+        <!-- object tags -->
+        <object data="sample.wav" height="255" object type="audio/x-wav" width="320">
+            <param name="src" value="sample.wav">
+            <param name="autoStart" value="0">
+        </object>
+        <object data="sample.mp3" height="255" object type="audio/mpeg" width="320">
+            <param name="src" value="sample.mp3">
+            <param name="autoStart" value="0">
+        </object>
+        <object data="player_flv.swf" height="240" type="application/x-shockwave-flash" width="320">
+            <param name="movie" value="player_flv.swf"/>
+            <param name="FlashVars" value="flv=sample.flv"/>
+        </object>
+
+        <!-- links to download audio files -->
+        <a href="http://example.com/sample.MP3">download sample.mp3 file</a>
+        <a href="sample.ogg">download sample.ogg file</a>
+        <a href="sample.OGG">download sample.ogg file</a>
+        <a href="sample.wav">download sample.wav file</a>
+        <a href="sample.wAv">download sample.wav file</a>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NMI:
+        multiple tags (object, embed, audio and video) that can play a time-based media
+        and multiple links to download a time-based media
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
