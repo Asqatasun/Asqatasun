@@ -2,7 +2,7 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting all the tags for no time-based media.
 
 ## Business description
 
@@ -31,24 +31,50 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Semi-Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+- All the following tags:
+  - `<svg>`
+  - `<canvas>`
+  - `<object>`
+  - `<embed>`
+  
+css selector :
+```css
+svg, 
+canvas,
+object[data],
+embed[src]
+```
 
 ### Process
 
-None
+#### Test1
+
+Test whether **Set1** is not empty. If yes, raise a MessageA.
+
+##### MessageA : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+The page has no `<svg>`, `<canvas>`, `<object>` or `<embed>` tag.
+
+#### Pre-qualified
+
+In all other cases
 
 
 ## Files
@@ -56,5 +82,3 @@ In all cases
 - [TestCases files for rule 3.1.6](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule030106/)
 - [Unit test file for rule 3.1.6](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule030106Test.java)
 - [Class file for rule 3.1.6](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule030106.java)
-
-
