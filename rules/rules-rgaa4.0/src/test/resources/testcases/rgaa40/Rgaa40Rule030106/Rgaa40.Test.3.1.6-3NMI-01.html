@@ -10,18 +10,40 @@
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
-        <p>Pour chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-non-temporel">média non temporel</a> <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-vehiculant-une-information-donnee-par-la-couleur">véhiculant une information</a>, l’<a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#information-donnee-par-la-couleur">information</a> ne doit pas être donnée uniquement par la couleur. Cette règle est-elle respectée ?</p>
+        <p>Pour chaque <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-non-temporel">média
+            non temporel</a> <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-vehiculant-une-information-donnee-par-la-couleur">véhiculant
+            une information</a>, l’<a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#information-donnee-par-la-couleur">information</a>
+            ne doit pas être donnée uniquement par la couleur. Cette règle est-elle respectée ?</p>
     </div>
     <!-- END [test-detail] -->
 
     <!-- START [testcase] -->
     <div class="testcase">
+
+        <!-- canvas and svg tags -->
+        <canvas height="300" id="canvas" width="300"></canvas>
+        <svg height="120" version="1.1" viewBox="0 0 120 120" width="120" xmlns="http://www.w3.org/2000/svg">
+            <rect height="100" width="100" x="10" y="10">
+                <animate attributeName="x" attributeType="XML" dur="10s" from="-100" repeatCount="indefinite" to="120"/>
+            </rect>
+        </svg>
+
+        <!-- object and embed tags -->
+        <embed height="200" src="sample.swf" type="application/x-shockwave-flash" width="300"/>
+        <object data="sample.swf" height="200" type="application/x-shockwave-flash" width="300">
+            <param name="movie" value="sample.swf">
+            <param name="loop" value="false">
+        </object>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI:
+        multiple tags (object, embed, svg, canvas) for no time-based media
     </div>
     <!-- END [test-explanation] -->
 </div>

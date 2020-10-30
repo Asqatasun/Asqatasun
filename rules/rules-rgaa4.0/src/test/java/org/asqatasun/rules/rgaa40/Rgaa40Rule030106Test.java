@@ -21,7 +21,12 @@ package org.asqatasun.rules.rgaa40;
 
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
+import org.asqatasun.rules.keystore.HtmlElementStore;
+import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Unit test class for implementation of rule 3.1.6 (referential RGAA 4.0)
@@ -47,61 +52,45 @@ public class Rgaa40Rule030106Test extends Rgaa40RuleImplementationTestCase {
 
     @Override
     protected void setUpWebResourceMap() {
-//        addWebResource("Rgaa40.Test.3.1.6-1Passed-01");
-//        addWebResource("Rgaa40.Test.3.1.6-2Failed-01");
         addWebResource("Rgaa40.Test.3.1.6-3NMI-01");
-//        addWebResource("Rgaa40.Test.3.1.6-4NA-01");
+        addWebResource("Rgaa40.Test.3.1.6-4NA-01");
+        addWebResource("Rgaa40.Test.3.1.6-4NA-02");
     }
 
     @Override
     protected void setProcess() {
-        //----------------------------------------------------------------------
-        //------------------------------1Passed-01------------------------------
-        //----------------------------------------------------------------------
-//        checkResultIsPassed(processPageTest("Rgaa40.Test.3.1.6-1Passed-01"), 1);
-
-        //----------------------------------------------------------------------
-        //------------------------------2Failed-01------------------------------
-        //----------------------------------------------------------------------
-//        ProcessResult processResult = processPageTest("Rgaa40.Test.3.1.6-2Failed-01");
-//        checkResultIsFailed(processResult, 1, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
         //----------------------------------------------------------------------
         ProcessResult processResult = processPageTest("Rgaa40.Test.3.1.6-3NMI-01");
-        checkResultIsNotTested(processResult); // temporary result to make the result buildable before implementation
-//        checkResultIsPreQualified(processResult, 2, 1);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.NEED_MORE_INFO,
-//                "#MessageHere",
-//                "#CurrentElementHere",
-//                1,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+        checkResultIsPreQualified(processResult, 4, 4);
+        HashMap<Integer, String> mapTag = new HashMap<Integer, String>();
+        mapTag.put(1, HtmlElementStore.CANVAS_ELEMENT);
+        mapTag.put(2, HtmlElementStore.SVG_ELEMENT);
+        mapTag.put(3, HtmlElementStore.EMBED_ELEMENT);
+        mapTag.put(4, HtmlElementStore.OBJECT_ELEMENT);
+        for (Map.Entry item : mapTag.entrySet()) {
+            int position = ((int) item.getKey());
+            String htmlElement = item.getValue().toString();
+            checkRemarkIsPresent(
+                processResult,
+                TestSolution.NEED_MORE_INFO,
+                RemarkMessageStore.MANUAL_CHECK_ON_ELEMENTS_MSG,
+                htmlElement,
+                position);
+        }
 
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
         //----------------------------------------------------------------------
-//        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.3.1.6-4NA-01"));
-    }
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.3.1.6-4NA-01"));
 
-    @Override
-    protected void setConsolidate() {
-
-        // The consolidate method can be removed when real implementation is done.
-        // The assertions are automatically tested regarding the file names by
-        // the abstract parent class
-        assertEquals(TestSolution.NOT_TESTED,
-            consolidate("Rgaa40.Test.3.1.6-3NMI-01").getValue());
+        //----------------------------------------------------------------------
+        //------------------------------4NA-02------------------------------
+        //----------------------------------------------------------------------
+        checkResultIsNotApplicable(processPageTest("Rgaa40.Test.3.1.6-4NA-02"));
     }
 
 }

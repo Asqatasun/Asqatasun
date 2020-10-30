@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.3.1.5 NMI 01</title>
+    <title>Rgaa 4.0 Test.3.1.6 NA 02</title>
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.3.1.5 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.3.1.6 NA 02</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
         <p>Pour chaque <a
-            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-temporel-type-son-video-et-synchronise">média
-            temporel</a> <a
+            href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#media-non-temporel">média
+            non temporel</a> <a
             href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-vehiculant-une-information-donnee-par-la-couleur">véhiculant
             une information</a>, l’<a
             href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#information-donnee-par-la-couleur">information</a>
@@ -22,18 +22,18 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <audio controls src="sample.ogg">
+            Your browser does not support the audio element.
+        </audio>
         <video controls src="sample.mp4">
             Your browser does not support the video element.
         </video>
-        <audio controls src="sample.mp3">
-            Your browser does not support the audio element.
-        </audio>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI: a audio and a video tags with src attribute
+        NA: no tags (svg, canvas, object or embed) for no time-based media
     </div>
     <!-- END [test-explanation] -->
 </div>

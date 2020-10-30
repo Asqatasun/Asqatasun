@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in detecting all the links allowing to download a time-based media file 
+and all the tags allowing to display a time-based media.
 
 ## Business description
 
@@ -31,24 +32,62 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
+**Semi-Decidable**
 
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+- All links to download a time-based media file
+- AND all the following tags:
+  - `<audio>`
+  - `<bgsound>`
+  - `<video>`
+  - `<object>`
+  - `<embed>`
+  - `<svg>`
+  - `<canvas>`
+    
+css selector :
+```css
+audio[src],
+audio:has(source[src]),
+bgsound, 
+video[src], 
+video:has(source[src]), 
+object[data],
+embed[src],
+svg,
+canvas,
+a[href~=(?i)\.(mp4|avi|wmv|mov|Xvid|mkv|mka|mks|FLV|rmvb|MPA|WMA|MP2|M2P|DIF|DV|VOB|VRO|rmvb|vivo|bik|ASF|ifo|mts|mxf|nds|rv|web|wlmp|wmp|ogv)] 
+a[href~=(?i)\.(WAV|CDA|MID|MP2|MP3|mp3PRO|MOD|RM|RAM|WMA|Ogg|oga|AIF|AIFF|AA|AAC|M4A|VQF|AU|M3U|RIFF|BWF|CAF|PCM|RAW|FLAC|ALAC|AC3|ACC)] 
+```
 
 ### Process
 
-None
+#### Test1
+
+Test whether **Set1** is not empty. If yes, raise a MessageA.
+
+##### MessageA : Check manually the elements of the scope
+
+- code: ManualCheckOnElements
+- status: Pre-qualified
+- parameter: snippet
+- present in source: yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+- The page has no tags allowing to display a time-based media
+- The page has no link to download a time-based media file.
+
+#### Pre-qualified
+
+In all other cases
 
 
 ## Files
@@ -56,5 +95,3 @@ In all cases
 - [TestCases files for rule 3.1.5](https://gitlab.com/asqatasun/Asqatasun/-/tree/master/rules/rules-rgaa4.0/src/test/resources/testcases/rgaa40/Rgaa40Rule030105/)
 - [Unit test file for rule 3.1.5](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/test/java/org/asqatasun/rules/rgaa40/Rgaa40Rule030105Test.java)
 - [Class file for rule 3.1.5](https://gitlab.com/asqatasun/Asqatasun/-/blob/master/rules/rules-rgaa4.0/src/main/java/org/asqatasun/rules/rgaa40/Rgaa40Rule030105.java)
-
-
