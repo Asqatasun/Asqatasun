@@ -3,6 +3,7 @@ image: maven:3.6-openjdk-8
 stages:
   - build
   - test
+  - release
   - deploy
 
 variables:
@@ -39,6 +40,19 @@ test:
     - mvn $MAVEN_CLI_OPTS clean
     - mvn $MAVEN_CLI_OPTS test
   only: [merge_requests]
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG   # Run this job when a tag is created manually
+  script:
+    - echo 'running release_job'
+  release:
+    name: 'Asqatasun $CI_COMMIT_TAG'
+    description: 'Asqatasun $CI_COMMIT_TAG description'
+    tag_name: '$CI_COMMIT_TAG'
+    ref: '$CI_COMMIT_TAG'
 
 .deploy-server-from-build: &tpl-deploy-server-from-build
   stage: deploy
