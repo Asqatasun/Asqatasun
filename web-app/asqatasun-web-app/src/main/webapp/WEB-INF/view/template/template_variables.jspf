@@ -1,11 +1,8 @@
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page pageEncoding="UTF-8" %>
 
 <%-- APP version --%>
-<c:if test="${not empty configProperties['asqatasunVersion']}">
-    <c:set var="asqatasunVersion">
-        ${configProperties['asqatasunVersion']}
-    </c:set>
-</c:if>
-<%--<c:set var="asqatasunVersion"    value="x.x.x-SNAPSHOT"/> --%>
-
+<c:set var="asqatasunVersion">
+    <spring:eval expression="@environment.getProperty('app.version')"/>
+</c:set>
