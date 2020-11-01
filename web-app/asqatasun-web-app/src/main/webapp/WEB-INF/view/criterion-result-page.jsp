@@ -9,21 +9,21 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js?v${asqatasunVersion}"/>
 </c:set>        
 <c:set var="codePrettifierJsUrl" scope="request">
-    <c:url value="/public/external_js/prettify.min.js"/>
+    <c:url value="/public/external_js/prettify.min.js?v${asqatasunVersion}"/>
 </c:set> 
 
 <!-- internal js -->
 <c:set var="displayExternalImgJsUrl" scope="request">
-    <c:url value="/public/js/result-page/add-img-snapshot-min.js"/>
+    <c:url value="/public/js/result-page/add-img-snapshot-min.js?v${asqatasunVersion}"/>
 </c:set>        
 <c:set var="prettyPrintJsUrl" scope="request">
-    <c:url value="/public/js/result-page/pretty-print-min.js"/>
+    <c:url value="/public/js/result-page/pretty-print-min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="testDetailsJsUrl" scope="page">
-    <c:url value="/public/js/expand-collapse/test-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/test-details-min.js?v${asqatasunVersion}"/>
 </c:set>
 
 <!-- external images -->

@@ -11,18 +11,18 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-<c:url value="/public/external_js/jquery-1.11.1.min.js"/>
+<c:url value="/public/external_js/jquery-1.11.1.min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="jqueryUIUrl">
-<c:url value="/public/external_js/jquery-ui-1.10.1.custom.min.js"/>
+<c:url value="/public/external_js/jquery-ui-1.10.1.custom.min.js?v${asqatasunVersion}"/>
 </c:set>
 
 <!-- internal js -->
 <c:set var="auditSetUpDetailsJsUrl">
-<c:url value="/public/js/expand-collapse/audit-set-up-details-min.js"/>
+<c:url value="/public/js/expand-collapse/audit-set-up-details-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="progressBarJsUrl">
-<c:url value="/public/js/progress-bar/progress-bar-min.js"/>
+<c:url value="/public/js/progress-bar/progress-bar-min.js?v${asqatasunVersion}"/>
 </c:set>
 
 <!-- external images -->

@@ -11,10 +11,10 @@
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="jqueryUrl">
-    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="auditSetUpDetailsJsUrl">
-    <c:url value="/public/js/expand-collapse/audit-set-up-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/audit-set-up-details-min.js?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

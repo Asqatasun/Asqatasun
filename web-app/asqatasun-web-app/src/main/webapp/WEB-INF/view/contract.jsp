@@ -17,39 +17,39 @@
 
 <!-- external js --> 
 <c:set var="jqueryUrl">
-    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js?v${asqatasunVersion}"/>
 </c:set>        
 <c:set var="raphaelJsUrl" scope="request">
-    <c:url value="/public/external_js/r2d3.v2.min.js"/>
+    <c:url value="/public/external_js/r2d3.v2.min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="d3JsUrl">
-    <c:url value="/public/external_js/d3.v3.min.js"/>
+    <c:url value="/public/external_js/d3.v3.min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="jqueryTableSorterUrl" scope="request">
-    <c:url value="/public/external_js/jquery.tablesorter.min.js"/>
+    <c:url value="/public/external_js/jquery.tablesorter.min.js?v${asqatasunVersion}"/>
 </c:set> 
 
 <!-- internal js --> 
 <c:set var="trendChartJsUrl">
-    <c:url value="/public/js/trend/trend-chart-min.js"/>
+    <c:url value="/public/js/trend/trend-chart-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="trendChartIEJsUrl">
-    <c:url value="/public/js/ie/trend/trend-chart-ie-min.js"/>
+    <c:url value="/public/js/ie/trend/trend-chart-ie-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="contractScoreJsUrl">
-    <c:url value="/public/js/score/score-contract-min.js"/>
+    <c:url value="/public/js/score/score-contract-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="scoreJsUrl">
-    <c:url value="/public/js/score/score-min.js"/>
+    <c:url value="/public/js/score/score-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="contractScoreIEJsUrl">
-    <c:url value="/public/js/ie/score/score-contract-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-contract-ie-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="scoreIEJsUrl">
-    <c:url value="/public/js/ie/score/score-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-ie-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="accessibleTableSorterJsUrl" scope="page">
-    <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js"/>
+    <c:url value="/public/js/table-sorter/accessible-table-sorter-min.js?v${asqatasunVersion}"/>
 </c:set>
 
 <!-- images --> 

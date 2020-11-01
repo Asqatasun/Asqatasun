@@ -13,27 +13,27 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="d3JsUrl" scope="request">
-    <c:url value="/public/external_js/d3.v3.min.js"/>
+    <c:url value="/public/external_js/d3.v3.min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="r2d3JsUrl" scope="request">
-    <c:url value="/public/external_js/r2d3.v2.min.js"/>
+    <c:url value="/public/external_js/r2d3.v2.min.js?v${asqatasunVersion}"/>
 </c:set> 
 
 <!-- internal js -->
 <c:set var="homeScoreJsUrl" scope="request">
-    <c:url value="/public/js/score/score-home-min.js"/>
+    <c:url value="/public/js/score/score-home-min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="homeScoreIEJsUrl" scope="request">
-    <c:url value="/public/js/ie/score/score-home-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-home-ie-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="scoreJsUrl" scope="request">
-    <c:url value="/public/js/score/score-min.js"/>
+    <c:url value="/public/js/score/score-min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="scoreIEJsUrl" scope="request">
-    <c:url value="/public/js/ie/score/score-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-ie-min.js?v${asqatasunVersion}"/>
 </c:set> 
 
 <!-- external images -->

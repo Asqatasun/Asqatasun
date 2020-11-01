@@ -55,7 +55,7 @@
                  https://html.spec.whatwg.org/multipage/semantics.html#meta-referrer    -->
 
     <c:set var="modernizrJsUrl" scope="request">
-        <c:url value="/public/external_js/modernizr.min.js"/>
+        <c:url value="/public/external_js/modernizr.min.js?v${asqatasunVersion}"/>
     </c:set>
 
     <!--[if lte IE 8]>
