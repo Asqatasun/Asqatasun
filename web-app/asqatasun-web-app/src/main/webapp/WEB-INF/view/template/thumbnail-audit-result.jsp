@@ -23,7 +23,7 @@
                 ${tgLogoUrl}
             </div>
         <img id="snapshot" 
-             src="<c:url value="/public/images/processing.gif"/>"
+             src="<c:url value="/public/images/processing.gif?v${asqatasunVersion}"/>"
              alt="${url}" 
              style="height: ${height};width: ${width};"/><br/>
             </c:when>

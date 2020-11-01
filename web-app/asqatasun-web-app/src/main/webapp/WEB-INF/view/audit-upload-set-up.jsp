@@ -28,7 +28,7 @@
 
 <!-- external images -->
 <c:set var="processingImgUrl" scope="request">
-    <c:url value="/public/images/processing.gif"/>
+    <c:url value="/public/images/processing.gif?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

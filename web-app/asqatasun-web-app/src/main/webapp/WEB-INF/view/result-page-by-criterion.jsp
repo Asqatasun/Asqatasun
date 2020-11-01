@@ -57,7 +57,7 @@
     <c:url value="/public/images/html-source-icon.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="processingImgUrl" scope="request">
-    <c:url value="/public/images/processing.gif"/>
+    <c:url value="/public/images/processing.gif?v${asqatasunVersion}"/>
 </c:set>
 
 <c:if test="${statistics.auditScope == 'DOMAIN' || statistics.auditScope == 'PAGE'}">
