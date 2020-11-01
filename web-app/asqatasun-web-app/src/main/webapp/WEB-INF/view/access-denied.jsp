@@ -9,10 +9,10 @@
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="accessDenied1ImgUrl">
-    <c:url value="/public/images/access_denied1.jpg"/>
+    <c:url value="/public/images/access_denied1.jpg?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="accessDenied2ImgUrl">
-    <c:url value="/public/images/access_denied2.JPG"/>
+    <c:url value="/public/images/access_denied2.JPG?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
     <c:url value="/public/images/creative_common_logo.png?v${asqatasunVersion}"/>

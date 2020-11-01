@@ -9,7 +9,7 @@
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="greedyAuditImgUrl">
-    <c:url value="/public/images/work-in-progress.jpg"/>
+    <c:url value="/public/images/work-in-progress.jpg?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
     <c:url value="/public/images/creative_common_logo.png?v${asqatasunVersion}"/>

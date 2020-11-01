@@ -12,7 +12,7 @@
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="warningImgUrl">
-    <c:url value="/public/images/warning.jpg"/>
+    <c:url value="/public/images/warning.jpg?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
     <c:url value="/public/images/creative_common_logo.png?v${asqatasunVersion}"/>
