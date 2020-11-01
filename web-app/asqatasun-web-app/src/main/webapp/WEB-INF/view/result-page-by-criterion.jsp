@@ -48,13 +48,13 @@
 
 <!-- external img -->
 <c:set var="expandedImg" scope="request">
-    <c:url value="/public/images/expanded.png"/>
+    <c:url value="/public/images/expanded.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="collapsedImg" scope="request">
-    <c:url value="/public/images/collapsed.png"/>
+    <c:url value="/public/images/collapsed.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="sourceCodeImg" scope="request">
-    <c:url value="/public/images/html-source-icon.png"/>
+    <c:url value="/public/images/html-source-icon.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="processingImgUrl" scope="request">
     <c:url value="/public/images/processing.gif"/>

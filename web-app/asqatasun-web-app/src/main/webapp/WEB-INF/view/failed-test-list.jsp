@@ -24,7 +24,7 @@
 
     <!-- images -->
     <c:set var="goToImgUrl">
-        <c:url value="/public/images/window-duplicate.png"/>
+        <c:url value="/public/images/window-duplicate.png?v${asqatasunVersion}"/>
     </c:set>
 
     <html lang="${tg:lang(pageContext)}">

@@ -18,7 +18,7 @@
     <c:url value="/public/images/oups3.jpg"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/public/images/creative_common_logo.png"/>
+    <c:url value="/public/images/creative_common_logo.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

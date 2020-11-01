@@ -26,16 +26,16 @@
 
     <!-- images -->
     <c:set var="editContract">
-        <c:url value="/public/images/edit.png"/>
+        <c:url value="/public/images/edit.png?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="deleteContract">
-        <c:url value="/public/images/remove.png"/>
+        <c:url value="/public/images/remove.png?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="deleteAudits">
-        <c:url value="/public/images/bin.png"/>
+        <c:url value="/public/images/bin.png?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="addContract">
-        <c:url value="/public/images/plus_2.png"/>
+        <c:url value="/public/images/plus_2.png?v${asqatasunVersion}"/>
     </c:set>
 
     <html lang="${tg:lang(pageContext)}">

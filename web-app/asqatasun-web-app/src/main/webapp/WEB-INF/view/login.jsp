@@ -19,10 +19,10 @@
 <!DOCTYPE html>
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 <c:set var="tgLogoUrl">
-    <c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>
+    <c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="tgLogo1Url">
-    <c:url value="/public/images/machine.png"/>
+    <c:url value="/public/images/machine.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html  class="app-page-login" lang="${tg:lang(pageContext)}">

@@ -40,7 +40,7 @@
 
 <!--images -->
 <c:set var="externalLinkImgUrl">
-    <c:url value="/public/images/window-duplicate.png"/>
+    <c:url value="/public/images/window-duplicate.png?v${asqatasunVersion}"/>
 </c:set>
 
 <c:set var="invalidTestCriterion" value="false"/>

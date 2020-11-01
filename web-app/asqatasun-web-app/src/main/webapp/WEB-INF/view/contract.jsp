@@ -54,13 +54,13 @@
 
 <!-- images --> 
 <c:set var="gearImgUrl">
-    <c:url value="/public/images/gear.png"/>
+    <c:url value="/public/images/gear.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="historicSampleImgUrl">
     <c:url value="/public/images/${imgName}"/>
 </c:set>
 <c:set var="goToImgUrl">
-    <c:url value="/public/images/window-duplicate.png"/>
+    <c:url value="/public/images/window-duplicate.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

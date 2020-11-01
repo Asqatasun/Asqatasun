@@ -28,19 +28,19 @@
 
 <!-- external images -->
 <c:set var="testInfoLinkImg" scope="request">
-    <c:url value="/public/images/test-info-link.png"/>
+    <c:url value="/public/images/test-info-link.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="algoLinkImg" scope="request">
-    <c:url value="/public/images/algo-link.png"/>
+    <c:url value="/public/images/algo-link.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="expandedSmallImg" scope="request">
-    <c:url value="/public/images/expanded-s.png"/>
+    <c:url value="/public/images/expanded-s.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="collapsedSmallImg" scope="request">
-    <c:url value="/public/images/collapsed-s.png"/>
+    <c:url value="/public/images/collapsed-s.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="sourceCodeImg" scope="request">
-    <c:url value="/public/images/html-source-icon.png"/>
+    <c:url value="/public/images/html-source-icon.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

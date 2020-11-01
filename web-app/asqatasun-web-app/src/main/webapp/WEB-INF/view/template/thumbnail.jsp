@@ -19,7 +19,7 @@
             </c:when>
             <c:otherwise>
                 <c:set var="tgLogoUrl">
-                    <c:url value="/public/images/Logo/Logo-Asqatasun-G-w${width}-h${height}-75dpi-bgWhite.png"/>
+                    <c:url value="/public/images/Logo/Logo-Asqatasun-G-w${width}-h${height}-75dpi-bgWhite.png?v${asqatasunVersion}"/>
                 </c:set>
         <img src="${tgLogoUrl}" 
              alt="" 

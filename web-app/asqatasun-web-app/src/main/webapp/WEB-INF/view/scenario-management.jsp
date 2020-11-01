@@ -25,7 +25,7 @@
 
 <!-- images --> 
 <c:set var="deleteScenario">
-    <c:url value="/public/images/remove.png"/>
+    <c:url value="/public/images/remove.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

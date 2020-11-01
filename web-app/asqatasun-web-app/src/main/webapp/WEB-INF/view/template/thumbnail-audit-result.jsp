@@ -6,7 +6,7 @@
 <c:set var="height" value="170"/>
 <c:set var="width" value="270"/>
 <c:set var="tgLogoUrl">
-    <c:url value="/public/images/Logo/Logo-Asqatasun-G-w${width}-h${height}-75dpi-bgWhite.png"/>
+    <c:url value="/public/images/Logo/Logo-Asqatasun-G-w${width}-h${height}-75dpi-bgWhite.png?v${asqatasunVersion}"/>
 </c:set>
 <div class="${proportion} ${offset}">
     <div class="thumbnail" >

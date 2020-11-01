@@ -38,25 +38,25 @@
 
 <!-- external images -->
 <c:set var="gearImgUrl">
-    <c:url value="/public/images/gear.png"/>
+    <c:url value="/public/images/gear.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="increaseLogoUrl">
-    <c:url value="/public/images/increase-narrow.png"/>
+    <c:url value="/public/images/increase-narrow.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="decreaseLogoUrl">
-    <c:url value="/public/images/decrease-narrow.png"/>
+    <c:url value="/public/images/decrease-narrow.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="stableLogoUrl">
-    <c:url value="/public/images/stable-narrow.png"/>
+    <c:url value="/public/images/stable-narrow.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="imgSrcAddContract">
-    <c:url value="/public/images/plus_2.png"/>
+    <c:url value="/public/images/plus_2.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="imgSrcManageContracts">
-    <c:url value="/public/images/folder_open.png"/>
+    <c:url value="/public/images/folder_open.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="imgSrcEditContract">
-    <c:url value="/public/images/edit.png"/>
+    <c:url value="/public/images/edit.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">
