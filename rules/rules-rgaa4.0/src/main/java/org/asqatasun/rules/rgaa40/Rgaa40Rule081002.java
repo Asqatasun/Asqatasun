@@ -32,8 +32,10 @@ import org.asqatasun.rules.elementselector.ElementSelector;
 import org.asqatasun.rules.elementselector.SimpleElementSelector;
 import org.jsoup.nodes.Element;
 
+import static org.asqatasun.rules.keystore.AttributeStore.DIR_ATTR;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_DIR_ATTR_AND_NOT_ALLOWED_VALUE_CSS_LIKE_QUERY;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.ELEMENT_WITH_DIR_ATTR_AND_ALLOWED_VALUE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 
 /**
@@ -91,7 +93,9 @@ public class Rgaa40Rule081002 extends AbstractPageRuleMarkupImplementation {
         // Tags with dir attribute (with not allowed value)
         ElementChecker dirAttributeWithNotAllowedValueChecker = new ElementPresenceChecker(
             new ImmutablePair(TestSolution.FAILED, DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG),
-            new ImmutablePair(TestSolution.PASSED, ""));
+            new ImmutablePair(TestSolution.PASSED, ""),
+            DIR_ATTR,
+            TEXT_ELEMENT2);
         dirAttributeWithNotAllowedValueChecker.check(
             sspHandler,
             dirAttributeWithNotAllowedValue,
@@ -100,7 +104,9 @@ public class Rgaa40Rule081002 extends AbstractPageRuleMarkupImplementation {
         // Tags with dir attribute (with allowed value)
         ElementChecker dirAttributeWithAllowedValueChecker = new ElementPresenceChecker(
             new ImmutablePair(TestSolution.NEED_MORE_INFO, DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG),
-            new ImmutablePair(TestSolution.PASSED, ""));
+            new ImmutablePair(TestSolution.PASSED, ""),
+            DIR_ATTR,
+            TEXT_ELEMENT2);
         dirAttributeWithAllowedValueChecker.check(
             sspHandler,
             dirAttributeWithAllowedValue,
