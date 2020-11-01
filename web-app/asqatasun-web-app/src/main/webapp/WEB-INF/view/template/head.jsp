@@ -33,7 +33,7 @@
     <link rel="icon" type="image/png" href="<c:url value="/public/images/Logo/favicon/android-chrome-192x192.png?v${asqatasunVersion}"/>" sizes="192x192" />
     <link rel="icon" type="image/png" href="<c:url value="/public/images/Logo/favicon/favicon-16x16.png?v${asqatasunVersion}"/>" sizes="16x16" />
     <link rel="manifest" href="<c:url value="/public/images/Logo/favicon/manifest.json"/>" />
-    <!-- <link rel="mask-icon" href="<c:url value="/public/images/Logo/favicon/safari-pinned-tab.svg"/>" color="#5bbad5" /> -->
+    <!-- <link rel="mask-icon" href="<c:url value="/public/images/Logo/favicon/safari-pinned-tab.svg?v${asqatasunVersion}"/>" color="#5bbad5" /> -->
     <link rel="shortcut icon" href="<c:url value="/public/images/Logo/favicon/favicon.ico"/>" />
     <meta name="msapplication-TileColor" content="#4e348e" />
     <meta name="msapplication-TileImage" content="<c:url value="/public/images/Logo/favicon/mstile-144x144.png?v${asqatasunVersion}"/>" />
