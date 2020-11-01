@@ -9,12 +9,12 @@
     <meta name="author" content="Asqatasun.org"/>
     <!-- Le styles -->
 <c:if test="${addJqueryUI}">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/public/external_css/jquery-ui.min.css"/>"/>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/public/external_css/prettify.min.css"/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/public/external_css/jquery-ui.min.css?v${asqatasunVersion}"/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/public/external_css/prettify.min.css?v${asqatasunVersion}"/>"/>
 </c:if>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/public/external_css/bootstrap.min.css"/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/public/css/app.asqatasun.css"/>" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/public/css/font-open.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/public/external_css/bootstrap.min.css?v${asqatasunVersion}"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/public/css/app.asqatasun.css?v${asqatasunVersion}"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/public/css/font-open.css?v${asqatasunVersion}"/>" />
     <style type="text/css"> .asqatasun-link-svg  svg { width:1em; height:1em; } </style>
 
    <!-- Favicon -->
