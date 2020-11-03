@@ -38,6 +38,7 @@ public final class AttributeStore {
     public static final String CODE_ATTR = HTML.Attribute.CODE.toString();
     public static final String CONTENT_ATTR = HTML.Attribute.CONTENT.toString();
     public static final String DATA_ATTR = HTML.Attribute.DATA.toString();
+    public static final String DIR_ATTR = HTML.Attribute.DIR.toString();;
     public static final String DISABLED_ATTR = "disabled";
     public static final String FOR_ATTR = "for";
     public static final String HREF_ATTR = HTML.Attribute.HREF.toString();

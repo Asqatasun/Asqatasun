@@ -19,11 +19,15 @@
  */
 package org.asqatasun.rules.rgaa40;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.ProcessResult;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.rules.keystore.HtmlElementStore;
 import org.asqatasun.rules.keystore.RemarkMessageStore;
 import org.asqatasun.rules.rgaa40.test.Rgaa40RuleImplementationTestCase;
+
+import static org.asqatasun.rules.keystore.AttributeStore.DIR_ATTR;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 
 /**
  * Unit test class for implementation of rule 8.10.2 (referential RGAA 4.0)
@@ -67,26 +71,26 @@ public class Rgaa40Rule081002Test extends Rgaa40RuleImplementationTestCase {
             TestSolution.FAILED,
             RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
             HtmlElementStore.P_ELEMENT,
-            1);
+            1,
+            new ImmutablePair(DIR_ATTR, "rightToLeft"),
+            new ImmutablePair(TEXT_ELEMENT2, "بعض الكلمات"));
+
         checkRemarkIsPresent(
             processResult,
             TestSolution.FAILED,
             RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
             HtmlElementStore.P_ELEMENT,
-            2);
+            2,
+            new ImmutablePair(DIR_ATTR, "leftToRight"),
+            new ImmutablePair(TEXT_ELEMENT2, "quelques mots"));
         checkRemarkIsPresent(
             processResult,
             TestSolution.FAILED,
             RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
             HtmlElementStore.P_ELEMENT,
-            3);
-//        checkRemarkIsPresent(
-//                processResult,
-//                TestSolution.FAILED,
-//                RemarkMessageStore.DIR_ATTRIBUTE_WITH_NOT_ALLOWED_VALUE_MSG,
-//                HtmlElementStore.P_ELEMENT,
-//                3,
-//                new ImmutablePair("#ExtractedAttributeAsEvidence", "#ExtractedAttributeValue"));
+            3,
+            new ImmutablePair(DIR_ATTR, ""),
+            new ImmutablePair(TEXT_ELEMENT2, "כמה מילים"));
 
         //----------------------------------------------------------------------
         //------------------------------3NMI-01---------------------------------
@@ -98,25 +102,33 @@ public class Rgaa40Rule081002Test extends Rgaa40RuleImplementationTestCase {
             TestSolution.NEED_MORE_INFO,
             RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
             HtmlElementStore.DIV_ELEMENT,
-            1);
+            1,
+            new ImmutablePair(DIR_ATTR, "rtl"),
+            new ImmutablePair(TEXT_ELEMENT2, "بعض الكلمات"));
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
             RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
             HtmlElementStore.P_ELEMENT,
-            2);
-        checkRemarkIsPresent(
-            processResult,
-            TestSolution.NEED_MORE_INFO,
-            RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
-            HtmlElementStore.BLOCKQUOTE_ELEMENT,
-            3);
+            2,
+            new ImmutablePair(DIR_ATTR, "ltr"),
+            new ImmutablePair(TEXT_ELEMENT2, "quelques mots"));
         checkRemarkIsPresent(
             processResult,
             TestSolution.NEED_MORE_INFO,
             RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
             HtmlElementStore.SPAN_ELEMENT,
-            4);
+            3,
+            new ImmutablePair(DIR_ATTR, "ltr"),
+            new ImmutablePair(TEXT_ELEMENT2, "quelques mots en français"));
+        checkRemarkIsPresent(
+            processResult,
+            TestSolution.NEED_MORE_INFO,
+            RemarkMessageStore.DIR_ATTRIBUTE_WITH_ALLOWED_VALUE_MSG,
+            HtmlElementStore.BLOCKQUOTE_ELEMENT,
+            4,
+            new ImmutablePair(DIR_ATTR, "rtl"),
+            new ImmutablePair(TEXT_ELEMENT2, "כמה מילים"));
 
         //----------------------------------------------------------------------
         //------------------------------4NA-01------------------------------
