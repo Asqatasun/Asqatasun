@@ -9,16 +9,16 @@
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="oupsImg1Url">
-    <c:url value="/public/images/oups1.jpg"/>
+    <c:url value="/public/images/oups1.jpg?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="oupsImg2Url">
-    <c:url value="/public/images/oups2.jpg"/>
+    <c:url value="/public/images/oups2.jpg?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="oupsImg3Url">
-    <c:url value="/public/images/oups3.jpg"/>
+    <c:url value="/public/images/oups3.jpg?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="creativeCommonLogoUrl">
-    <c:url value="/public/images/creative_common_logo.png"/>
+    <c:url value="/public/images/creative_common_logo.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

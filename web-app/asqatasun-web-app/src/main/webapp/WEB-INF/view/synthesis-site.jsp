@@ -11,43 +11,43 @@
 
     <!-- external js-->
     <c:set var="jqueryUrl">
-        <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
+        <c:url value="/public/external_js/jquery-1.11.1.min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="d3JsUrl" scope="request">
-        <c:url value="/public/external_js/d3.v3.min.js"/>
+        <c:url value="/public/external_js/d3.v3.min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="r2d3JsUrl" scope="request">
-        <c:url value="/public/external_js/r2d3.v2.min.js"/>
+        <c:url value="/public/external_js/r2d3.v2.min.js?v${asqatasunVersion}"/>
     </c:set>
 
     <!-- internal js-->
     <c:set var="top5FailedThemeGraphJsUrl" scope="request">
-        <c:url value="/public/js/synthesis/repartition-by-failed-theme-min.js"/>
+        <c:url value="/public/js/synthesis/repartition-by-failed-theme-min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="top5FailedThemeGraphIEJsUrl" scope="request">
-        <c:url value="/public/js/ie/synthesis/repartition-by-failed-theme-ie-min.js"/>
+        <c:url value="/public/js/ie/synthesis/repartition-by-failed-theme-ie-min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="resultPageChartsIEJsUrl" scope="request">
-        <c:url value="/public/js/ie/result-page/result-page-charts-ie-min.js"/>
+        <c:url value="/public/js/ie/result-page/result-page-charts-ie-min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="resultPageChartsJsUrl" scope="request">
-        <c:url value="/public/js/result-page/result-page-charts-min.js"/>
+        <c:url value="/public/js/result-page/result-page-charts-min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="auditParametersDetailsJsUrl">
-        <c:url value="/public/js/expand-collapse/audit-parameters-details-min.js"/>
+        <c:url value="/public/js/expand-collapse/audit-parameters-details-min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="scoreJsUrl" scope="request">
-        <c:url value="/public/js/score/score-min.js"/>
+        <c:url value="/public/js/score/score-min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="scoreIEJsUrl" scope="request">
-        <c:url value="/public/js/ie/score/score-ie-min.js"/>
+        <c:url value="/public/js/ie/score/score-ie-min.js?v${asqatasunVersion}"/>
     </c:set>
     <c:set var="displaySnapshotJsUrl" scope="page">
-        <c:url value="/public/js/snapshot/snapshot-min.js"/>
+        <c:url value="/public/js/snapshot/snapshot-min.js?v${asqatasunVersion}"/>
     </c:set>
     <!-- images -->
     <c:set var="goToImgUrl">
-        <c:url value="/public/images/window-duplicate.png"/>
+        <c:url value="/public/images/window-duplicate.png?v${asqatasunVersion}"/>
     </c:set>
 
     <html lang="${tg:lang(pageContext)}">

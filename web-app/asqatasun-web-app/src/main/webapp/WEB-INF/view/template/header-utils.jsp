@@ -5,13 +5,13 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"  %>
 
 <c:set var="tgLogoUrl">
-    <c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png"/>
+    <c:url value="/public/images/Logo/Logo-asqatasun-light-w193px-h48px-bgTransp.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="logoutLogoUrl">
-    <c:url value="/public/images/icon-logout.png"/>
+    <c:url value="/public/images/icon-logout.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="adminLogoUrl">
-    <c:url value="/public/images/icon-admin.png"/>
+    <c:url value="/public/images/icon-admin.png?v${asqatasunVersion}"/>
 </c:set>
 
 <c:set var="currentUserName" scope="page">

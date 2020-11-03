@@ -11,7 +11,7 @@
 <%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <c:set var="warningImgUrl">
-    <c:url value="/public/images/warning.png"/>
+    <c:url value="/public/images/warning.png?v${asqatasunVersion}"/>
 </c:set>
 
 <html lang="${tg:lang(pageContext)}">

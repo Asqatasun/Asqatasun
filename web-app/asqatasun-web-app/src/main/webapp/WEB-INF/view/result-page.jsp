@@ -11,86 +11,86 @@
 
 <!-- external js -->
 <c:set var="jqueryUrl">
-    <c:url value="/public/external_js/jquery-1.11.1.min.js"/>
+    <c:url value="/public/external_js/jquery-1.11.1.min.js?v${asqatasunVersion}"/>
 </c:set>        
 <c:set var="jqueryUIUrl">
-    <c:url value="/public/external_js/jquery-ui-1.10.1.custom.min.js"/>
+    <c:url value="/public/external_js/jquery-ui-1.10.1.custom.min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="d3JsUrl" scope="request">
-    <c:url value="/public/external_js/d3.v3.min.js"/>
+    <c:url value="/public/external_js/d3.v3.min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="codePrettifierJsUrl" scope="request">
-    <c:url value="/public/external_js/prettify.min.js"/>
+    <c:url value="/public/external_js/prettify.min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="r2d3JsUrl" scope="request">
-    <c:url value="/public/external_js/r2d3.v2.min.js"/>
+    <c:url value="/public/external_js/r2d3.v2.min.js?v${asqatasunVersion}"/>
 </c:set> 
 
 <!-- internal js -->
 <c:set var="resultPageChartsIEJsUrl" scope="request">
-    <c:url value="/public/js/ie/result-page/result-page-charts-ie-min.js"/>
+    <c:url value="/public/js/ie/result-page/result-page-charts-ie-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="resultPageChartsJsUrl" scope="request">
-    <c:url value="/public/js/result-page/result-page-charts-min.js"/>
+    <c:url value="/public/js/result-page/result-page-charts-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="displayExternalImgJsUrl" scope="request">
-    <c:url value="/public/js/result-page/add-img-snapshot-min.js"/>
+    <c:url value="/public/js/result-page/add-img-snapshot-min.js?v${asqatasunVersion}"/>
 </c:set>        
 <c:set var="prettyPrintJsUrl" scope="request">
-    <c:url value="/public/js/result-page/pretty-print-min.js"/>
+    <c:url value="/public/js/result-page/pretty-print-min.js?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="scoreJsUrl" scope="request">
-    <c:url value="/public/js/score/score-min.js"/>
+    <c:url value="/public/js/score/score-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="scoreIEJsUrl" scope="request">
-    <c:url value="/public/js/ie/score/score-ie-min.js"/>
+    <c:url value="/public/js/ie/score/score-ie-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="testDetailsJsUrl" scope="page">
-    <c:url value="/public/js/expand-collapse/test-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/test-details-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="themeDetailsJsUrl" scope="page">
-    <c:url value="/public/js/expand-collapse/theme-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/theme-details-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="auditParametersDetailsJsUrl" scope="page">
-    <c:url value="/public/js/expand-collapse/audit-parameters-details-min.js"/>
+    <c:url value="/public/js/expand-collapse/audit-parameters-details-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="progressBarJsUrl" scope="page">
-    <c:url value="/public/js/progress-bar/progress-bar-min.js"/>
+    <c:url value="/public/js/progress-bar/progress-bar-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="displaySnapshotJsUrl" scope="page">
-    <c:url value="/public/js/snapshot/snapshot-min.js"/>
+    <c:url value="/public/js/snapshot/snapshot-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="detailResultManualJsUrl">
-    <c:url value="/public/js/result-page/detail-result-manual-min.js"/>
+    <c:url value="/public/js/result-page/detail-result-manual-min.js?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="applyAutoResultsJsUrl">
-    <c:url value="/public/js/result-page/apply-auto-results-min.js"/>
+    <c:url value="/public/js/result-page/apply-auto-results-min.js?v${asqatasunVersion}"/>
 </c:set>
 
 <!-- external images -->
 <c:set var="testInfoLinkImg" scope="request">
-    <c:url value="/public/images/test-info-link.png"/>
+    <c:url value="/public/images/test-info-link.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="algoLinkImg" scope="request">
-    <c:url value="/public/images/algo-link.png"/>
+    <c:url value="/public/images/algo-link.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="expandedImg" scope="request">
-    <c:url value="/public/images/expanded.png"/>
+    <c:url value="/public/images/expanded.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="expandedSmallImg" scope="request">
-    <c:url value="/public/images/expanded-s.png"/>
+    <c:url value="/public/images/expanded-s.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="collapsedImg" scope="request">
-    <c:url value="/public/images/collapsed.png"/>
+    <c:url value="/public/images/collapsed.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="collapsedSmallImg" scope="request">
-    <c:url value="/public/images/collapsed-s.png"/>
+    <c:url value="/public/images/collapsed-s.png?v${asqatasunVersion}"/>
 </c:set> 
 <c:set var="sourceCodeImg" scope="request">
-    <c:url value="/public/images/html-source-icon.png"/>
+    <c:url value="/public/images/html-source-icon.png?v${asqatasunVersion}"/>
 </c:set>
 <c:set var="processingImgUrl" scope="request">
-    <c:url value="/public/images/processing.gif"/>
+    <c:url value="/public/images/processing.gif?v${asqatasunVersion}"/>
 </c:set>
 
 <c:set var="addRelaunchAction" scope="page" value="true"/>

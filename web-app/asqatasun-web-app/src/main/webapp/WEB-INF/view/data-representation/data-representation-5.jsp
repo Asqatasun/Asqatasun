@@ -3,6 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://tagutils" prefix="tg" %>
+<%-- ----------------------------------
+     .jsp file used with <c:import> tag
+     ----------------------------------  --%>
+
+<%-- Allowed the use of ${asqatasunVersion} --%>
+<%@include file="/WEB-INF/view/template/template_variables.jspf" %>
 
 <div class="row">
     <div class="span15">
@@ -186,7 +192,10 @@
                                     <a title="${cfLogoDescription}"
                                        href="${cfURL}?foreground=${fn:replace(fgColorHexa, "#", "%23")}&background=${fn:replace(bgColorHexa, "#", "%23")}&isBackgroundTested=false&ratio=${cfRatio}&algo=Rgb"
                                        rel="noreferrer noopener"
-                                       target="_blank"><img alt="${cfLogoDescription}" style="margin-left: 15px;" src="<c:url value="/public/images/contrast-finder.png"/>"/></a>
+                                       target="_blank"><img loading="lazy"
+                                                            alt="${cfLogoDescription}"
+                                                            style="margin-left: 15px;"
+                                                            src="<c:url value="/public/images/contrast-finder.png?v${asqatasunVersion}"/>"/></a>
                                 </td>
                             </c:if>
                         </tr>
