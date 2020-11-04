@@ -16,6 +16,31 @@ services:
     ports:
       - "${DB_HOST_IP:-0.0.0.0}:${DB_HOST_PORT:-9924}:${DB_PORT:-3306}"
 
+  # Asqatasun API
+  ###############################################################################################################
+  # - port: 8984
+  # - URL:  http://localhost:8986     By default
+  #         http://<host_ip>:8986     By default
+  #         http://<host_ip>:<port>   If you use the .env configuration file
+  ##############################################################################################################
+  asqatasun-api_dev:
+    build:
+      context: ./
+      dockerfile: Dockerfile_api
+    links:
+      - asqatasun-db_dev
+    depends_on:
+      - asqatasun-db_dev
+    environment:
+      DB_DRIVER:   "${DB_DRIVER:-mysql}"
+      DB_PORT:     "${DB_PORT:-3306}"
+      DB_HOST:     "${DB_HOST:-asqatasun-db_dev}"
+      DB_USER:     "${DB_USER:-asqatasunDatabaseUserLogin}"
+      DB_PASSWORD: "${DB_PASSWORD:-asqatasunDatabaseUserP4ssword}"
+      DB_DATABASE: "${DB_DATABASE:-asqatasun}"
+    ports:
+      - "${API_HOST_IP:-0.0.0.0}:${API_HOST_PORT:-8986}:8080"
+
   # Asqatasun webapp
   ###############################################################################################################
   # - port: 8982
@@ -24,7 +49,9 @@ services:
   #         http://<host_ip>:<port>   If you use the .env configuration file
   ##############################################################################################################
   asqatasun-webapp_dev:
-    build: .
+    build:
+      context: ./
+      dockerfile: Dockerfile_webapp
     links:
       - asqatasun-db_dev
     depends_on:

@@ -7,11 +7,27 @@ work in progress
 
 ### Prerequisites
 * git
-* maven 
-* Docker
-* Docker-Compose
+* JDK-8 is required
+* maven `3.1` (at least) is required
+* Docker `19.03.0` (at least) is required
+* Docker-Compose `1.27.0` (at least) is required
 
-### Build Asqatasun, build docker image and launch Asqatasun
+### Ports, URL and credentials (user/password)
+
+| Service  | Port | URL                                     | User                         | Password                        |
+|----------|------|-----------------------------------------|------------------------------|---------------------------------|
+| Database | 9924 | `jdbc:mysql://localhost:9924/asqatasun` | `asqatasunDatabaseUserLogin` | `asqatasunDatabaseUserP4ssword` |
+| API      | 8986 | `http://localhost:8986`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
+| Webapp   | 8982 | `http://localhost:8982`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
+
+Tip: if you copy `.env.dist` file to `.env` file, you can change port numbers, IP adresses and database credentials.
+
+### Launch Asqatasun webapp
+
+- Build Asqatasun
+- Build docker images
+- Launch Asqatasun webapp
+
 ```bash
 git clone https://gitlab.com/asqatasun/Asqatasun.git
 cd Asqatasun
@@ -21,16 +37,12 @@ cd Asqatasun
 
 # Option 1: build Asqatasun with running tests 
 docker/build_and_run-with-docker.sh  \
-     --skip-docker-build             \
-     --skip-docker-run               \
      --log-build                     \
      -s ${PWD}                       \
      -d docker/app_SNAPSHOT-local 
 
 # Option 2: build Asqatasun without running tests (faster)
 docker/build_and_run-with-docker.sh  \
-     --skip-docker-build             \
-     --skip-docker-run               \
      --skip-build-test               \
      -s ${PWD}                       \
      -d docker/app_SNAPSHOT-local 
@@ -48,10 +60,72 @@ docker-compose rm -fsv
 docker-compose up --build
 ```
 
-* In your browser, go to `http://127.0.0.1:8989/` 
+* In your browser, go to `http://127.0.0.1:8982/` 
 * Use this user and this password :
     * `admin@asqatasun.org`
     * `myAsqaPassword`
+    
+    
+### Launch Asqatasun webapp + API
+
+- Build Asqatasun
+- Build docker images
+- Launch Asqatasun webapp + API
+
+```bash
+git clone https://gitlab.com/asqatasun/Asqatasun.git
+cd Asqatasun
+
+# Build Asqatasun
+#################
+
+# build Asqatasun without running tests (faster)
+docker/build_and_run-with-docker.sh  \
+     --skip-build-test               \
+     -s ${PWD}                       \
+     -d docker/global_SNAPSHOT-local
+
+# Build docker image + launch Asqatasun (webapp + API) and database
+###################################################################
+
+# Option 1: build docker image + launch Asqatasun (webapp + API) and database (uses same database, if it already exists)
+cd docker/global_SNAPSHOT-local
+docker-compose up --build
+
+# Option 2: build docker image + launch Asqatasun (webapp + API) and a new database
+cd docker/global_SNAPSHOT-local
+docker-compose rm -fsv
+docker-compose up --build
+```
+
+* In your browser:
+  - Webapp: go to `http://127.0.0.1:8982/` 
+  - API documentation: go to `http://127.0.0.1:8986/` 
+* Use this user and this password :
+    * `admin@asqatasun.org`
+    * `myAsqaPassword`
+
+#### Launch an audit via API
+```bash
+ASQA_USER="admin%40asqatasun.org" 
+ASQA_PASSWORD="myAsqaPassword"
+API_PREFIX_URL="http://${ASQA_USER}:${ASQA_PASSWORD}@localhost:8986"
+API_URL="${API_PREFIX_URL}/api/v1/audit/run"
+
+URL_TO_AUDIT=https://www.wikidata.org
+curl -X POST \
+     "${API_URL}"                                                             \
+     -H  "accept: */*"                                                        \
+     -H  "Content-Type: application/json"                                     \
+     -d "{                                                                    \
+            \"urls\": [    \"${URL_TO_AUDIT}\"  ],                            \
+                           \"referential\": \"RGAA_4_0\",                     \
+                           \"level\": \"AA\",                                 \
+                           \"contractId\": 1,                                 \
+                           \"tags\": [    \"tag_1\"  ]                        \
+         }"
+```
+
 
 ## Archive
 

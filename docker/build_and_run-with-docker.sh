@@ -42,7 +42,7 @@ declare BUILD_ONLY_WEBAPP=false
 declare BUILD_ONLY_DIR=false
 declare LOG_BUILD=false
 declare WEBAPP_DIR="web-app/asqatasun-web-app"
-declare CONTAINER_EXPOSED_PORT="8085"
+declare CONTAINER_EXPOSED_PORT="8982"
 declare CONTAINER_NAME="asqa"
 declare IMAGE_NAME="asqatasun/asqatasun"
 declare TAG_NAME=${TIMESTAMP}
@@ -54,6 +54,34 @@ declare FIREFOX_BIN="/opt/firefox/firefox"
 # Usage
 #############################################
 usage () {
+    cat <<EOF
+
+  Help documentation for ${BOLD}${SCRIPT}${NORM}
+  --------------------------------------------------------------
+  This script launches a sequence that:
+    - builds ${BOLD}${APP_NAME}${NORM} from sources
+    - copy .war and .jar file to docker directory
+  --------------------------------------------------------------
+  ${BOLD}${SCRIPT}${NORM} ${BOLD}${GREEN}-s${NORM} <directory> ${BOLD}${GREEN}-d${NORM} <directory> [OPTIONS]
+  --------------------------------------------------------------
+  ${BOLD}${GREEN}-s${NORM} | --source-dir     <directory> MANDATORY Absolute path to ${APP_NAME} sources directory
+  ${BOLD}${GREEN}-d${NORM} | --docker-dir     <directory> MANDATORY Path to directory containing the Dockerfile.
+                                    Path must be relative to SOURCE_DIR
+
+  ${BOLD}-b${NORM} | --build-only-dir <directory> Build only webapp and <directory> (relative to SOURCE_DIR)
+  ${BOLD}-w${NORM} | --build-only-webapp          Build only webapp (relies on previous build)
+       --skip-build-test            Skip unit tests on Maven build
+       --skip-build                 Skip Maven build (relies on previous build, that must exists)
+       --log-build                  Log maven build (see: target/*.log)
+
+  ${BOLD}-h${NORM} | --help                      ${REV} Show this help ${NORM}
+
+EOF
+    exit 2
+}
+
+
+usage_archive () {
     cat <<EOF
 
   Help documentation for ${BOLD}${SCRIPT}${NORM}
@@ -163,8 +191,10 @@ fail() {
 # Variables
 #############################################
 
-WAR_BASENAME="web-app/asqatasun-web-app/target/asqatasun-"
-WAR_EXT=".war"
+API_FILE_BASENAME="server/asqatasun-server/target/asqatasun-server-"
+APP_FILE_BASENAME="web-app/asqatasun-web-app/target/asqatasun-web-app-"
+API_FILE_EXT=".jar"
+APP_FILE_EXT=".war"
 ADD_IP=''
 URL_TOMCAT="http://localhost:${CONTAINER_EXPOSED_PORT}"
 if ${ONLY_LOCALHOST} ; then  
@@ -280,11 +310,18 @@ function do_build() {
     fi
 }
 
-# copy WAR file to docker dir
-function do_copy_warFile() {
-    display_step_msg "Copy ${BOLD}${GREEN}.war${NORM} to the docker directory"
-    cp "${SOURCE_DIR}/${WAR_BASENAME}"*"${WAR_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
-        fail "Error copying ${SOURCE_DIR}/${WAR_BASENAME}"
+# copy webapp file (.war) to docker dir
+function do_copy_webappFile() {
+    display_step_msg "Copy webapp ${BOLD}${GREEN}.war${NORM} to the docker directory"
+    cp "${SOURCE_DIR}/${APP_FILE_BASENAME}"*"${APP_FILE_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
+        fail "Error copying ${SOURCE_DIR}/${APP_FILE_BASENAME}"
+}
+
+# copy API file (.jar) to docker dir
+function do_copy_apiFile() {
+    display_step_msg "Copy API ${BOLD}${GREEN}.jar${NORM} to the docker directory"
+    cp "${SOURCE_DIR}/${API_FILE_BASENAME}"*"${API_FILE_EXT}" "${SOURCE_DIR}/${DOCKER_DIR}/" ||
+        fail "Error copying ${SOURCE_DIR}/${API_FILE_BASENAME}"
 }
 
 # build Docker image
@@ -408,20 +445,21 @@ function do_krash_test_campaign() {
 #############################################
 
 if ! ${SKIP_BUILD} ;        then  do_build;                 fi
-if ! ${SKIP_COPY} ;         then  do_copy_warFile;          fi
-if ! ${SKIP_DOCKER_BUILD} ; then  do_docker_build;          fi
-if ! ${SKIP_DOCKER_RUN} ;   then  do_docker_run;            fi
+if ! ${SKIP_COPY} ;         then  do_copy_webappFile;       fi
+if ! ${SKIP_COPY} ;         then  do_copy_apiFile;          fi
+#if ! ${SKIP_DOCKER_BUILD} ; then  do_docker_build;          fi
+#if ! ${SKIP_DOCKER_RUN} ;   then  do_docker_run;            fi
 if   ${LOG_BUILD};          then  do_maven_log_processing;  fi
 if   ${FTESTS} ;            then  do_functional_testing;    fi
 if   ${KTESTS} ;            then  do_krash_test_campaign;   fi
 
 echo " -------------------------------------------------------"
-echo " Container ... ${CONTAINER_NAME}"
-echo " Dockerfile .. ${DOCKER_DIR}"
-echo " Image ....... ${IMAGE_NAME}:${TAG_NAME}"
-echo " CMD ......... ${DOCKER_RUN}"
-echo " -------------------------------------------------------"
-echo " Shell ....... ${SUDO}docker exec -ti ${CONTAINER_NAME} /bin/bash"
-echo " Log ......... ${SUDO}docker logs -f  ${CONTAINER_NAME}"
-echo " URL ......... ${BOLD}${GREEN}${URL_APP}${NORM}"
+#echo " Container ... ${CONTAINER_NAME}"
+#echo " Dockerfile .. ${DOCKER_DIR}"
+#echo " Image ....... ${IMAGE_NAME}:${TAG_NAME}"
+#echo " CMD ......... ${DOCKER_RUN}"
+#echo " -------------------------------------------------------"
+#echo " Shell ....... ${SUDO}docker exec -ti ${CONTAINER_NAME} /bin/bash"
+#echo " Log ......... ${SUDO}docker logs -f  ${CONTAINER_NAME}"
+#echo " URL ......... ${BOLD}${GREEN}${URL_APP}${NORM}"
 
