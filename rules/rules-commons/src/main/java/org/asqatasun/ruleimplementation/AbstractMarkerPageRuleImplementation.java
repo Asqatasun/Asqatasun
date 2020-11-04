@@ -60,8 +60,7 @@ public abstract class AbstractMarkerPageRuleImplementation
     /**
      * The elements identified with the markers
      */
-    private final ElementHandler<Element> selectionWithMarkerHandler
-            = new ElementHandlerImpl();
+    private final ElementHandler<Element> selectionWithMarkerHandler = new ElementHandlerImpl();
 
     public ElementHandler<Element> getSelectionWithMarkerHandler() {
         return selectionWithMarkerHandler;
@@ -70,8 +69,7 @@ public abstract class AbstractMarkerPageRuleImplementation
     /**
      * The elements not identified by the markers
      */
-    private final ElementHandler<Element> selectionWithoutMarkerHandler
-            = new ElementHandlerImpl();
+    private final ElementHandler<Element> selectionWithoutMarkerHandler = new ElementHandlerImpl();
     public ElementHandler<Element> getSelectionWithoutMarkerHandler() {
         return selectionWithoutMarkerHandler;
     }
@@ -197,7 +195,7 @@ public abstract class AbstractMarkerPageRuleImplementation
     protected void select(SSPHandler sspHandler) {
         getElementSelector().selectElements(sspHandler, selectionWithoutMarkerHandler);
         extractMarkerListFromAuditParameter(sspHandler);
-        sortMarkerElements();
+        sortMarkerElements(selectionWithMarkerHandler, selectionWithoutMarkerHandler);
     }
         
     @Override
@@ -263,7 +261,8 @@ public abstract class AbstractMarkerPageRuleImplementation
      * and we add it to the "elementMarkerList".
      *
      */
-    private void sortMarkerElements() {
+    protected void sortMarkerElements(ElementHandler<Element> selectionWithMarkerHandler,
+                                      ElementHandler<Element> selectionWithoutMarkerHandler) {
         if ((CollectionUtils.isEmpty(markerList) && CollectionUtils.isEmpty(inverseMarkerList))
                 || selectionWithoutMarkerHandler.isEmpty()) {
             return;
@@ -309,7 +308,7 @@ public abstract class AbstractMarkerPageRuleImplementation
      * @return whether one of the string given as argument belongs to a marker
      * list
      */
-    private boolean checkAttributeBelongsToMarkerList(
+    private static boolean checkAttributeBelongsToMarkerList(
             Collection<String> ids,
             Collection<String> classNames,
             Collection<String> roles,

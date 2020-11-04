@@ -20,6 +20,45 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+
+        <!-- all failed with markers are NMI without marker -->
+
+        <img src="mock-decorative-image.jpg" alt="meaning of the image from alt" />
+
+        <img src="mock-decorative-image.jpg" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-decorative-image.jpg" title="meaning of the image from title"/>
+
+        <div id="image-description">meaning of the image from aria-labelledby</div>
+
+        <img src="mock-decorative-image.jpg" aria-labelledby="image-description"/>
+
+        <img src="mock-decorative-image.jpg" alt="" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-decorative-image.jpg" alt="" title="meaning of the image from title"/>
+
+        <img src="mock-decorative-image.jpg" alt="" aria-labelledby="image-description"/>
+
+        <img src="mock-decorative-image.jpg" role="presentation" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-decorative-image.jpg" role="presentation" title="meaning of the image from title"/>
+
+        <img src="mock-decorative-image.jpg" role="presentation" aria-labelledby="image-description"/>
+
+        <img src="mock-decorative-image.jpg" aria-hidden="true" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-decorative-image.jpg" aria-hidden="true" title="meaning of the image from title"/>
+
+        <img src="mock-decorative-image.jpg" aria-hidden="true" aria-labelledby="image-description"/>
+
+        <!-- all passed with markers are NMI without marker -->
+        <img src="mock-decorative-image.jpg" aria-hidden="true" />
+
+        <img src="mock-decorative-image.jpg" role="presentation" />
+
+        <img src="mock-decorative-image.jpg" role="presentation" aria-hidden="true" alt=""/>
+
+        <img src="mock-decorative-image.jpg" alt="" />
     </div>
     <!-- END [testcase] -->
 

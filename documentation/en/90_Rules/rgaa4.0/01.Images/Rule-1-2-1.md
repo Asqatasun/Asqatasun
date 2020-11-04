@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in checking whether the textual alternative of each decorative image is empty or whether aria 
+attributes are well-used to make them ignored by assistive technologies
 
 ## Business description
 
@@ -33,7 +34,6 @@ No-check rule
 
 **A**
 
-
 ## Technical description
 
 ### Scope
@@ -42,25 +42,169 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Decidable with marker**
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<img>` tags not within a link and not identified as captcha (see Notes about captcha detection) with an empty 
+textual alternative and without aria mechanism to make them ignored by assistive technologies 
+
+css-selector : `img[alt~=^$]:not([usemap]):not(a img):not([title]):not([aria-label]):not([aria-labelledby]):not([aria-hidden=true]):not([role=presentation])`
+
+#### Set2
+
+All the elements of **Set1** identified as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set3
+
+All the elements of **Set1** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set4
+
+All the `<img>` tags not within a link and not identified as captcha (see Notes about captcha detection) with a not empty 
+textual alternative and without aria mechanism to make them ignored by assistive technologies 
+
+css-selector : 
+`img[title]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]), 
+img[aria-label]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]),
+img[aria-labelledby]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]),
+img[alt]:not([usemap]):not(a img):not([alt~=^\\s*$]):not([aria-hidden=true]):not([role=presentation])`
+
+#### Set5
+
+All the elements of **Set4** identified as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set6
+
+All the elements of **Set4** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set7
+
+All the `<img>` tags not within a link and not identified as captcha (see Notes about captcha detection) with an
+ aria mechanism to make them ignored by assistive technologies 
+
+css-selector : `img[role=presentation]:not([usemap]):not(a img), img[aria-hidden=true]:not([usemap]):not(a img)`
+
+#### Set8
+
+All the elements of **Set7** identified as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set9
+
+All the elements of **Set7** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
 
 ### Process
 
-None
+#### Tests 
+
+##### Test1
+
+For each element of **Set5**, raise a MessageA. 
+
+##### Test2
+
+For each element of **Set3**, raise a MessageB.
+
+##### Test3
+
+For each element of **Set6**, raise a MessageC.
+
+##### Test4
+
+For each element of **Set9**, raise a MessageD.  
+
+#### Messages
+
+##### MessageA 
+
+-    code : **DecorativeElementWithNotEmptyTextualAlternative** 
+-    status: Failed
+-    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
+-    present in source : yes
+
+##### MessageB
+
+-    code : **CheckNatureOfElementWithoutTextualAlternative** 
+-    status: Pre-Qualified
+-    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
+-    present in source : yes
+
+##### MessageC
+
+-    code : **CheckNatureOfElementWithTextualAlternative** 
+-    status: Pre-Qualified
+-    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
+-    present in source : yes
+
+##### MessageD
+
+-    code : **CheckNatureOfElementHiddenWithAria** 
+-    status: Pre-Qualified
+-    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
+-    present in source : yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+The page has no `<img>` tag (**Set1**, **Set4** and **Set7** are empty) or all the images are marked as informatives
 
+#### Passed 
+
+The page only contains images marked as decorative, with an empty textual alternative or with an aria mechanism to make 
+them ignored by assistive technologies :  (**Set2** or **Set8** are not empty AND **Set3**, **Set5**, **Set6**, **Set9** are empty)
+
+
+#### Failed
+
+At least one `<img>` tag identified as decorative, has a not empty textual alternative (**Set5** is not empty)
+
+#### Pre-qualified
+
+In all other cases
+
+## Notes
+
+### Textual alternative detection
+
+The textual alternative can be set by the presence of any the following elements : 
+
+* Text associated via the `aria-labelledby` WAI-ARIA attribute 
+* Presence of an `aria-label` WAI-ARIA attribute
+* Presence of an `alt` attribute
+* Presence of a `title` attribute
+
+That order has to be respected to compute the textual alternative.
+
+For instance, if an `aria-label` WAI-ARIA attribute and an `alt` attribute are both present, 
+the content of the `aria-label` WAI-ARIA attribute is considered as the textual alternative.
+
+### Markers 
+
+**Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
+
+**Decorative images** markers are set through the **DECORATIVE_IMAGE_MARKER** parameter.
+
+The value(s) passed as marker(s) will be checked against the following attributes:
+
+- `class`
+- `id`
+- `role`
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element
 
 ## Files
 

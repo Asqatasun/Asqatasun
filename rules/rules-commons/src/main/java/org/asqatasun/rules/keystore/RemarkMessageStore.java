@@ -73,6 +73,8 @@ public final class RemarkMessageStore {
     public static final String ALT_MISSING_MSG = "AltMissing";
     public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_ALT_MSG =
             "DecorativeElementWithNotEmptyAltAttribute";
+    public static final String DECORATIVE_ELEMENT_WITH_NOT_EMPTY_TEXTUAL_ALTERNATIVE_MSG =
+            "DecorativeElementWithNotEmptyTextualAlternative";
     public static final String DECORATIVE_ELEMENT_WITH_TITLE_ATTR_MSG =
             "DecorativeElementWithTitleAttribute";
     public static final String CHECK_ALTERNATIVE_OF_DECORATIVE_ELEMENT_MSG =
@@ -105,6 +107,8 @@ public final class RemarkMessageStore {
             "CheckNatureOfElementWithNotEmptyAltAttribute";
     public static final String CHECK_NATURE_OF_IMAGE_WITHOUT_TEXTUAL_ALTERNATIVE_MSG =
             "CheckNatureOfElementWithoutTextualAlternative";
+    public static final String CHECK_NATURE_OF_IMAGE_HIDDEN_WITH_ARIA_MSG =
+            "CheckNatureOfElementHiddenWithAria";
     public static final String CHECK_NATURE_OF_IMAGE_AND_ALT_PERTINENCE_MSG = 
             "CheckNatureOfImageAndAltPertinence";
     public static final String CHECK_CAPTCHA_ALTERNATIVE_MSG =

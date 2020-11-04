@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.1.2.1 Failed 01</title>
+</head>
+<body class="Failed">
+<div>
+    <h1>Rgaa 4.0 Test.1.2.1 Failed 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque image (balise <code>&lt;img&gt;</code>) <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-de-decoration">de décoration</a>, sans <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#legende">légende</a>, vérifie-t-elle une de ces conditions ?</p>
+            <ul>
+            <li>La balise <code>&lt;img&gt;</code> possède un attribut alt vide (<code>alt=""</code>) et est dépourvue de tout autre attribut permettant de fournir une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#alternative-textuelle-image">alternative textuelle</a>.</li>
+            <li>La balise <code>&lt;img&gt;</code> possède un attribut WAI-ARIA <code>aria-hidden="true"</code> ou <code>role="presentation"</code>.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <img class="decorative-image" src="mock-decorative-image.jpg" alt="meaning of the image from alt" />
+    </div>
+    <div class="testcase">
+        <img class="decorative-image" src="mock-decorative-image.jpg" aria-label="meaning of the image from aria-label" />
+    </div>
+    <div class="testcase">
+        <img class="decorative-image" src="mock-decorative-image.jpg" title="meaning of the image from title"/>
+    </div>
+    <div id="image-description">meaning of the image from aria-labelledby</div>
+    <div class="testcase">
+        <img class="decorative-image" src="mock-decorative-image.jpg" aria-labelledby="image-description"/>
+    </div>
+    <div class="testcase">
+        <img class="decorative-image" src="mock-decorative-image.jpg" alt="" aria-label="meaning of the image from aria-label" />
+    </div>
+    <div class="testcase">
+        <img class="decorative-image" src="mock-decorative-image.jpg" alt="" title="meaning of the image from title"/>
+    </div>
+    <div class="testcase">
+        <img class="decorative-image" src="mock-decorative-image.jpg" alt="" aria-labelledby="image-description"/>
+    </div>
+    <!-- END [testcase] -->
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <!-- all failed with markers are NMI without marker -->
+
+        <img src="mock-image.jpg" alt="meaning of the image from alt" />
+
+        <img src="mock-image.jpg" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-image.jpg" title="meaning of the image from title"/>
+
+        <img src="mock-image.jpg" aria-labelledby="image-description"/>
+
+        <img src="mock-image.jpg" alt="" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-image.jpg" alt="" title="meaning of the image from title"/>
+
+        <img src="mock-image.jpg" alt="" aria-labelledby="image-description"/>
+
+        <img src="mock-image.jpg" role="presentation" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-image.jpg" role="presentation" title="meaning of the image from title"/>
+
+        <img src="mock-image.jpg" role="presentation" aria-labelledby="image-description"/>
+
+        <img src="mock-image.jpg" aria-hidden="true" aria-label="meaning of the image from aria-label" />
+
+        <img src="mock-image.jpg" aria-hidden="true" title="meaning of the image from title"/>
+
+        <img src="mock-image.jpg" aria-hidden="true" aria-labelledby="image-description"/>
+
+        <!-- all passed with markers are NMI without marker -->
+        <img src="mock-image.jpg" aria-hidden="true" />
+
+        <img src="mock-image.jpg" role="presentation" />
+
+        <img src="mock-image.jpg" role="presentation" aria-hidden="true" alt=""/>
+
+        <img src="mock-image.jpg" alt="" />
+    </div>
+    <!-- END [testcase] -->
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        Failed.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
