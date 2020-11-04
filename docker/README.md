@@ -1,4 +1,3 @@
-
 # Use Asqatasun with Docker
 
 work in progress
@@ -6,11 +5,17 @@ work in progress
 ## Build and launch Asqatasun 
 
 ### Prerequisites
+
 * git
 * JDK-8 is required
 * maven `3.1` (at least) is required
 * Docker `19.03.0` (at least) is required
 * Docker-Compose `1.27.0` (at least) is required
+
+Do have a look at:
+
+* https://docs.docker.com/compose/install/#uninstallation
+* https://docs.docker.com/compose/install/#install-compose-on-linux-systems
 
 ### Ports, URL and credentials (user/password)
 
