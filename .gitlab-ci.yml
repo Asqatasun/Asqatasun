@@ -123,6 +123,7 @@ release:
 .deploy-server-from-build: &tpl-deploy-server-from-build
   stage: deploy
   dependencies:
+    - prepare_env
     - build
   script:
     - ./ci/deploy_to_server.sh
