@@ -1,6 +1,7 @@
 image: maven:3.6-openjdk-8
 
 stages:
+  - prepare
   - build
   - test
   - release
@@ -9,37 +10,102 @@ stages:
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-  WEBAPP_ARTIFACT_DIR: web-app/asqatasun-web-app/target/
+  WEBAPP_ARTIFACT_DIR: web-app/asqatasun-web-app/target
   REST_SERVER_ARTIFACT_DIR: server/asqatasun-server/target
-
-before_script:
-  - export APP_VERSION=$(cat pom.xml |grep "<asqatasunVersion>" |sed 's/.*<asqatasunVersion>\(.*\)<\/asqatasunVersion>/\1/')
-  - export WEBAPP_ARTIFACT_FILE=asqatasun-web-app-$APP_VERSION.war
-  - export REST_SERVER_ARTIFACT_FILE=asqatasun-server-$APP_VERSION.jar
-  - echo "$CI_PROJECT_NAME version $APP_VERSION - build $CI_BUILD_ID"
-  - eval $(ssh-agent -s) #start SSH-agent before everything else
 
 cache:
   paths:
     - .m2/repository/
 
+prepare_env:
+  stage: prepare
+  script:
+    - export APP_VERSION=$(cat pom.xml |grep "<asqatasunVersion>" |sed 's/.*<asqatasunVersion>\(.*\)<\/asqatasunVersion>/\1/')
+    - export WEBAPP_ARTIFACT_FILE="asqatasun-web-app-${APP_VERSION}.war"
+    - export REST_SERVER_ARTIFACT_FILE="asqatasun-server-${APP_VERSION}.jar"
+    - echo "APP_VERSION=${APP_VERSION}" | tee -a build.env
+    - echo "WEBAPP_ARTIFACT_FILE=${WEBAPP_ARTIFACT_FILE}" | tee -a build.env
+    - echo "REST_SERVER_ARTIFACT_FILE=${REST_SERVER_ARTIFACT_FILE}" | tee -a build.env
+    - echo "$CI_PROJECT_NAME version $APP_VERSION - build $CI_BUILD_ID"
+  artifacts:
+    reports:
+      dotenv: build.env
+
 build:
   stage: build
+  dependencies:
+    - prepare_env
   script:
     - mvn $MAVEN_CLI_OPTS clean
     - mvn $MAVEN_CLI_OPTS install  -Dmaven.test.skip=true
   artifacts:
     expire_in: 2 days
     paths:
-      - ${WEBAPP_ARTIFACT_DIR}/*.war
-      - ${REST_SERVER_ARTIFACT_DIR}/*.jar
-  
+      - ${WEBAPP_ARTIFACT_DIR}/${WEBAPP_ARTIFACT_FILE}
+      - ${REST_SERVER_ARTIFACT_DIR}/${REST_SERVER_ARTIFACT_FILE}
+
 test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS clean
     - mvn $MAVEN_CLI_OPTS test
   only: [merge_requests]
+
+.archive_artefact_common:
+  image: debian:buster
+  stage: deploy
+  dependencies:
+    - prepare_env
+    - build
+  before_script:
+    ##
+    ## Install ssh-agent if not already installed, it is required by Docker.
+    ## (change apt-get to yum if you use an RPM-based image)
+    ##
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    ##
+    ## Run ssh-agent (inside the build environment)
+    ##
+    - eval $(ssh-agent -s)
+
+    ##
+    ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    ## We're using tr to fix line endings which makes ed25519 keys work
+    ## without extra base64 encoding.
+    ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+    ##
+    - echo "$ARCHIVE_ARTEFACT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+
+    ##
+    ## Create the SSH directory and give it the right permissions
+    ##
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+    ##
+    ## Alternatively, use ssh-keyscan to scan the keys of your private server.
+    ## Replace example.com with your private server's domain name. Repeat that
+    ## command if you have more than one server to connect to.
+    ##
+    - ssh-keyscan $ARCHIVE_ARTEFACT_DEPLOY_HOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+    ## Packages install
+    - apt-get update -y && apt-get install rsync bzip2 -y
+
+  script:
+    - ./ci/archive_build_artefacts.sh
+
+archive_artefact:
+  extends: .archive_artefact_common
+  only:
+    refs:
+      - master
+
+archive_artefact_manual:
+  extends: .archive_artefact_common
+  when: manual
 
 release:
   stage: release
