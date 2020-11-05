@@ -33,6 +33,7 @@ public final class AttributeStore {
      */
     public static final String ABSENT_ATTRIBUTE_VALUE = "attribute-absent";
 
+    public static final String ARIA_HIDDEN_ATTR = "aria-hidden";
     public static final String ALT_ATTR = HTML.Attribute.ALT.toString();
     public static final String CLASS_ATTR = HTML.Attribute.CLASS.toString();
     public static final String CODE_ATTR = HTML.Attribute.CODE.toString();

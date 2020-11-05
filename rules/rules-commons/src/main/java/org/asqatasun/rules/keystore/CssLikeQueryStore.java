@@ -31,6 +31,15 @@ public final class CssLikeQueryStore {
     public static final String IMG_WITH_ALT_CSS_LIKE_QUERY="img[alt]";
     public static final String BASIC_IMG_CSS_LIKE_QUERY="img:not([usemap]):not(a img), " +
         "[role=img]:not(a [role=img]):not(svg):not(area):not(canvas):not(input[type=image]):not(embed):not(object[type=image])";
+    public static final String IMG_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
+        "img[alt~=^$]:not([usemap]):not(a img):not([title]):not([aria-label]):not([aria-labelledby]):not([aria-hidden=true]):not([role=presentation])";
+    public static final String IMG_WITH_NOT_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
+        "img[title]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation])," +
+        "img[aria-label]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation])," +
+        "img[aria-labelledby]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation])," +
+        "img[alt]:not([usemap]):not(a img):not([alt~=^\\s*$]):not([aria-hidden=true]):not([role=presentation])";
+    public static final String IMG_ARIA_HIDDEN_CSS_LIKE_QUERY =
+        "img[role=presentation]:not([usemap]):not(a img), img[aria-hidden=true]:not([usemap]):not(a img)";
     public static final String IMG_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "img[alt]:not(a img)"; 
     public static final String IMG_WITH_ALT_NOT_IN_LINK_WITHOUT_LONGDESC_CSS_LIKE_QUERY=
