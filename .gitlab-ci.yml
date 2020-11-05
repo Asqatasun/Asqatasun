@@ -105,6 +105,9 @@ archive_artefact:
 
 archive_artefact_manual:
   extends: .archive_artefact_common
+  except:
+    refs:
+      - master
   when: manual
 
 release:
