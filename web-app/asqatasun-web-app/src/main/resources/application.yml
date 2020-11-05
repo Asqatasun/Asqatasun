@@ -29,7 +29,7 @@ server:
 app:
   logging:
     path: "tmp"
-  version: "5.0-SNAPSHOT"
+  version: "@project.version@"
   engine:
     persistence:
       packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"

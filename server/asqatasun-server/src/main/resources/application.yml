@@ -42,7 +42,7 @@ management:
 app:
   logging:
     path: "tmp"
-  version: "5.0-SNAPSHOT"
+  version: "@project.version@"
   users:
     auth:
       -  name: asqatasun
