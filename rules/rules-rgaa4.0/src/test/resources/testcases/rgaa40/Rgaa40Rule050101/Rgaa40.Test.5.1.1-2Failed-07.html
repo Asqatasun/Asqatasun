@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Rgaa 4.0 Test.5.1.1 Failed 07</title>
+</head>
+<body class="Failed">
+<div>
+    <h1>Rgaa 4.0 Test.5.1.1 Failed 07</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Pour chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#tableau-de-donnees-complexe">tableau de données complexe</a> un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#resume">résumé</a> est-il disponible ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+
+        <!-- source: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Table_Role -->
+        <div role="table"
+             class="id-complex-role-table"
+             aria-label="Semantic Elements"> <!--   missing  aria-describedby attribute -->
+
+            <div id="semantic_elements_table_desc">Semantic Elements to use instead of ARIA's roles</div>
+            <div role="rowgroup">
+                <div role="row">
+                    <span role="columnheader" aria-sort="none">ARIA Role</span>
+                    <span role="columnheader" aria-sort="none">Semantic Element</span>
+                </div>
+            </div>
+            <div role="rowgroup">
+                <div role="row" aria-rowindex=1">
+                    <span role="cell">header</span>
+                    <span role="cell">h1</span>
+                </div>
+                <div role="row" aria-rowindex="2">
+                    <span role="cell">header</span>
+                    <span role="cell">h6</span>
+                </div>
+                <div role="row" aria-rowindex="3">
+                    <span role="cell">rowgroup</span>
+                    <span role="cell">thead</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        Failed:
+        - not a HTML5 page (XHTML1 or HTML4)
+        - a data table (div tag with role="table")
+          is identified by a marker (id attribute),
+          but doesn't have an aria-describedby attribute.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

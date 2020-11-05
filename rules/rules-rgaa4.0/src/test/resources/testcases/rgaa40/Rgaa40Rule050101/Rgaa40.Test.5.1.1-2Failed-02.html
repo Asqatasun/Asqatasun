@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.5.1.1 NMI 03</title>
+    <title>Rgaa 4.0 Test.5.1.1 Failed 02</title>
 </head>
-<body class="NMI">
+<body class="Failed">
 <div>
-    <h1>Rgaa 4.0 Test.5.1.1 NMI 03</h1>
+    <h1>Rgaa 4.0 Test.5.1.1 Failed 02</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -16,17 +16,7 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <table class="class-complex-table"> 
-            <caption>class complex table caption</caption>
-            <tbody>
-                <tr> 
-                    <th>head</th> 
-                    <td>data</td> 
-                </tr> 
-            </tbody>
-        </table> 
-        <table> 
-            <caption>my unidentified data table</caption>
+        <table id="id-complex-table"> 
             <tbody>
                 <tr> 
                     <th>head</th> 
@@ -39,8 +29,9 @@
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : One table is identified by a marker (class attribute) and contains a caption child tag. This table is valid
-        <br /> Another table is not identified by a marker but contains a caption child tag.
+        Failed:
+        - HTML5 page
+        - the complex table is identified by a marker (id attribute) but doesn&apos;t contain a caption child tag
     </div>
     <!-- END [test-explanation] -->
 </div>

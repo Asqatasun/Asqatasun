@@ -52,22 +52,30 @@ public class DoctypeHtml5Checker extends ElementCheckerImpl {
         super();
     }
 
+    /**
+     * Is HTML5 page? (blank doctype or valid HTML5 doctype)
+     */
+    public boolean isHtml5(SSPHandler sspHandler) {
+        String doctype = sspHandler.getSSP().getDoctype();
+        if (StringUtils.isBlank(doctype) || isDoctypeValideHtml5(doctype)) {
+            return true;
+        }
+        return false;
+    }
+
+
      @Override
     protected void doCheck(
             SSPHandler sspHandler,
             Elements elements,
             TestSolutionHandler testSolutionHandler) {
-        String doctype = sspHandler.getSSP().getDoctype();
-         // if the page doesn't have any doctype declaration, the test is 
-        // not applicable
-        if (StringUtils.isBlank(doctype) || isDoctypeValideHtml5(doctype)) {
+        if (isHtml5(sspHandler)) {
             testSolutionHandler.addTestSolution(TestSolution.PASSED);
             return;
         }
-
         testSolutionHandler.addTestSolution(TestSolution.FAILED);
     }
-      
+
     /*
     *Chek if doctype is valid html5 delaration from local list of known Html5 doctypes.
     */

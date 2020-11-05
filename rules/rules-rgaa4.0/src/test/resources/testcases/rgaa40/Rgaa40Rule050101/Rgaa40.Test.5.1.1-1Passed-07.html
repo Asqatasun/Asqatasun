@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Rgaa 4.0 Test.5.1.1 Passed 07</title>
+</head>
+<body class="Passed">
+<div>
+    <h1>Rgaa 4.0 Test.5.1.1 Passed 07</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Pour chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#tableau-de-donnees-complexe">tableau de données complexe</a> un <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#resume">résumé</a> est-il disponible ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <table id="id-complex-table"
+               summary="id complex table summary">
+            <tbody>
+            <tr>
+                <th>head</th>
+                <td>data</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="class-complex-table"
+               summary="class complex table summary">
+            <tbody>
+                <tr> 
+                    <th>head</th> 
+                    <td>data</td> 
+                </tr> 
+            </tbody>
+        </table>
+        <table class="class-complex-table"
+               summary="class complex table summary">
+            <caption>class complex table caption</caption>
+            <tbody>
+            <tr>
+                <th>head</th>
+                <td>data</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        Passed:
+        not a HTML5 page (XHTML1 or HTML4)
+
+        Three complex tables are identified by a marker (id and class attribute)
+        and all three have have a summary attribute.
+
+        One of three tables also has a child caption tag, but only presence
+        of summary attribute is taken into account when the page is not HTML5.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

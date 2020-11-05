@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.5.1.1 Failed 05</title>
+    <title>Rgaa 4.0 Test.5.1.1 Failed 04</title>
 </head>
 <body class="Failed">
 <div>
-    <h1>Rgaa 4.0 Test.5.1.1 Failed 05</h1>
+    <h1>Rgaa 4.0 Test.5.1.1 Failed 04</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -16,29 +16,32 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <table class="class-complex-table"> 
+        <table class="class-complex-table">
+            <table>
+                <caption>my unidentified complex table</caption>
+                <tbody>
+                <tr>
+                    <th>head</th>
+                    <td>data</td>
+                </tr>
+                </tbody>
+            </table>
             <tbody>
                 <tr> 
                     <th>head</th> 
                     <td>data</td> 
                 </tr> 
             </tbody>
-        </table> 
-        <table> 
-            <tbody>
-                <tr> 
-                    <th>head</th> 
-                    <td>data</td> 
-                </tr> 
-            </tbody>
-        </table> 
+        </table>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        Failed : The first complex table is identified by a marker (class attribute) and it doesn&apos;t contain a caption child tag
-        <br /> The second table is not identified as a complex table and doesn&apos;t contain a caption child tag
+        Failed:
+        - HTML5 page
+        - The first complex table is identified by a marker (class attribute) and it doesn&apos;t contain a caption child tag
+        - The second table is not identified as a complex table but contains a caption child tag
     </div>
     <!-- END [test-explanation] -->
 </div>

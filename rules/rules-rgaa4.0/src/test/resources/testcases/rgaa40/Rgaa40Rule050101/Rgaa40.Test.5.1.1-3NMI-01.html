@@ -16,12 +16,23 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+        <!-- table is not identified by any marker and it doesn't contain a caption child tag -->
+        <table>
+            <tbody>
+                <tr>
+                    <th>head</th>
+                    <td>data</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NMI:
+        - HTML5 page
+        - a table tag is not identified by any marker and it doesn't contain a caption child tag
     </div>
     <!-- END [test-explanation] -->
 </div>

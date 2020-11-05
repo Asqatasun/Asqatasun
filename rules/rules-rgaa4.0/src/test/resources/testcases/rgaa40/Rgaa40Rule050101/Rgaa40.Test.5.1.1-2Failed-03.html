@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.5.1.1 NA 02</title>
+    <title>Rgaa 4.0 Test.5.1.1 Failed 03</title>
 </head>
-<body class="NA">
+<body class="Failed">
 <div>
-    <h1>Rgaa 4.0 Test.5.1.1 NA 02</h1>
+    <h1>Rgaa 4.0 Test.5.1.1 Failed 03</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -16,16 +16,18 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <table id="id-presentation-table"> 
+        <table class="class-complex-table"> 
             <tbody>
                 <tr> 
+                    <th>head</th> 
                     <td>data</td> 
                 </tr> 
             </tbody>
         </table> 
-        <table id="id-data-table"> 
+        <table id="id-complex-table"> 
             <tbody>
                 <tr> 
+                    <th>head</th> 
                     <td>data</td> 
                 </tr> 
             </tbody>
@@ -35,7 +37,9 @@
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NA : The page contains &lt;table&gt; tags marked as presentation or data table.
+        Failed:
+        - HTML5 page
+        - the complex tables are identified by a marker (id and class attribute) and they both don&apos;t contain a caption child tag
     </div>
     <!-- END [test-explanation] -->
 </div>

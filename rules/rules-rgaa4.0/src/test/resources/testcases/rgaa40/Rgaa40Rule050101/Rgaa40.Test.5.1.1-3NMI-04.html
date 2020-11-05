@@ -16,6 +16,8 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
+
+        <!-- Passed: table is identified by a marker -->
         <table id="id-complex-table"> 
             <caption>id complex table caption</caption>
             <tbody>
@@ -24,7 +26,19 @@
                     <td>data</td> 
                 </tr> 
             </tbody>
-        </table> 
+        </table>
+
+        <!-- NA: table  is identified as presentation table (out of scope) -->
+        <table class="class-presentation-table">
+            <tbody>
+            <tr>
+                <th>head</th>
+                <td>data</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- NMI: table without caption child and not identified by a marker -->
         <table> 
             <tbody>
                 <tr> 
@@ -32,23 +46,18 @@
                     <td>data</td> 
                 </tr> 
             </tbody>
-        </table> 
-        <table class="class-presentation-table"> 
-            <tbody>
-                <tr> 
-                    <th>head</th> 
-                    <td>data</td> 
-                </tr> 
-            </tbody>
-        </table> 
+        </table>
+
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI : One table is identified by a marker (id attribute) and contains a caption child tag. This table is valid
-        <br /> Another table is not identified by a marker and doesn&quot;t contains a caption child tag. 
-        The second table without caption is identified as presentation table. It is out of scope 
+        NMI:
+        - HTML5 page
+        - One table is identified by a marker (id attribute) and contains a caption child tag. This table is valid
+        - The second table without caption is identified as presentation table. It is out of scope.
+        - Another table is not identified by a marker and doesn&quot;t contains a caption child tag.
     </div>
     <!-- END [test-explanation] -->
 </div>
