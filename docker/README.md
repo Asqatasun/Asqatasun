@@ -44,23 +44,23 @@ cd Asqatasun
 docker/build_and_run-with-docker.sh  \
      --log-build                     \
      -s ${PWD}                       \
-     -d docker/app_SNAPSHOT-local 
+     -d docker/webapp_SNAPSHOT-local 
 
 # Option 2: build Asqatasun without running tests (faster)
 docker/build_and_run-with-docker.sh  \
      --skip-build-test               \
      -s ${PWD}                       \
-     -d docker/app_SNAPSHOT-local 
+     -d docker/webapp_SNAPSHOT-local 
 
 # Build docker image + launch Asqatasun and database
 ####################################################
 
 # Option 1: build docker image + launch Asqatasun and database (uses same database, if it already exists)
-cd docker/app_SNAPSHOT-local
+cd docker/webapp_SNAPSHOT-local
 docker-compose up --build
 
 # Option 2: build docker image + launch Asqatasun and a new database
-cd docker/app_SNAPSHOT-local
+cd docker/webapp_SNAPSHOT-local
 docker-compose rm -fsv
 docker-compose up --build
 ```
@@ -88,17 +88,17 @@ cd Asqatasun
 docker/build_and_run-with-docker.sh  \
      --skip-build-test               \
      -s ${PWD}                       \
-     -d docker/global_SNAPSHOT-local
+     -d docker/all_SNAPSHOT-local
 
 # Build docker image + launch Asqatasun (webapp + API) and database
 ###################################################################
 
 # Option 1: build docker image + launch Asqatasun (webapp + API) and database (uses same database, if it already exists)
-cd docker/global_SNAPSHOT-local
+cd docker/all_SNAPSHOT-local
 docker-compose up --build
 
 # Option 2: build docker image + launch Asqatasun (webapp + API) and a new database
-cd docker/global_SNAPSHOT-local
+cd docker/all_SNAPSHOT-local
 docker-compose rm -fsv
 docker-compose up --build
 ```
