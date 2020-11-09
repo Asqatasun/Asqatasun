@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  # Asqatasun database
+  ###############################################################################################################
+  # - port: 9924
+  # - URL:  jdbc:mysql://localhost:9924/asqatasun     By default
+  #         jdbc:mysql://<host_ip>:9924/asqatasun     By default
+  #         jdbc:mysql://<host_ip>:<port>/asqatasun   If you use the .env configuration file
+  ###############################################################################################################
+  asqatasun-db_dev:
+    image: "${DB_IMAGE:-mysql:5.7}"
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER:     "${DB_USER:-asqatasunDatabaseUserLogin}"
+      MYSQL_PASSWORD: "${DB_PASSWORD:-asqatasunDatabaseUserP4ssword}"
+      MYSQL_DATABASE: "${DB_DATABASE:-asqatasun}"
+    ports:
+      - "${DB_HOST_IP:-0.0.0.0}:${DB_HOST_PORT:-9924}:${DB_PORT:-3306}"
+
+  # Asqatasun API
+  ###############################################################################################################
+  # - port: 8986
+  # - URL:  http://localhost:8986     By default
+  #         http://<host_ip>:8986     By default
+  #         http://<host_ip>:<port>   If you use the .env configuration file
+  ##############################################################################################################
+  asqatasun-api_dev:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    links:
+      - asqatasun-db_dev
+    depends_on:
+      - asqatasun-db_dev
+    environment:
+      DB_DRIVER:   "${DB_DRIVER:-mysql}"
+      DB_PORT:     "${DB_PORT:-3306}"
+      DB_HOST:     "${DB_HOST:-asqatasun-db_dev}"
+      DB_USER:     "${DB_USER:-asqatasunDatabaseUserLogin}"
+      DB_PASSWORD: "${DB_PASSWORD:-asqatasunDatabaseUserP4ssword}"
+      DB_DATABASE: "${DB_DATABASE:-asqatasun}"
+    ports:
+      - "${API_HOST_IP:-0.0.0.0}:${API_HOST_PORT:-8986}:8080"
