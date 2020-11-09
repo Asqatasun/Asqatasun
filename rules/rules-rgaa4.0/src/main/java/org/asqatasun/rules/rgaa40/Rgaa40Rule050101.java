@@ -164,16 +164,16 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
         extractMarkerListFromAuditParameter(sspHandler);
 
-        // Elements with role="table" and aria-describedby attributes
-        // ---> SET-1 (identified with the markers)
-        // ---> SET-2 (not identified by the markers)
+        // SET-1 - Elements with role="table" and aria-describedby attributes
+        // ---> SET-2 (identified with the markers)
+        // ---> SET-3 (not identified by the markers)
         new SimpleElementSelector(TABLE_ROLE_WITH_ARIA_DESCRIBEDBY_CSS_LIKE_QUERY)
             .selectElements(sspHandler, tableRoleWithAriaDescribedbyWithoutMarkerHandler);
         sortMarkerElements(tableRoleWithAriaDescribedbyWithMarkerHandler, tableRoleWithAriaDescribedbyWithoutMarkerHandler);
 
-        // Elements with role="table" attribute, but without aria-describedby attribute
-        // ---> SET-3 (identified with the markers)
-        // ---> SET-4 (not identified by the markers)
+        // SET-4 - Elements with role="table" attribute, but without aria-describedby attribute
+        // ---> SET-5 (identified with the markers)
+        // ---> SET-6 (not identified by the markers)
         new SimpleElementSelector(TABLE_ROLE_WITHOUT_ARIA_DESCRIBEDBY_CSS_LIKE_QUERY)
             .selectElements(sspHandler, tableRoleWithoutAriaDescribedbyWithoutMarkerHandler);
         sortMarkerElements(tableRoleWithoutAriaDescribedbyWithMarkerHandler, tableRoleWithoutAriaDescribedbyWithoutMarkerHandler);
@@ -181,32 +181,33 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
         DoctypeHtml5Checker doctypeHtml5Checker = new DoctypeHtml5Checker();
         isHtml5Page = doctypeHtml5Checker.isHtml5(sspHandler);
         if(isHtml5Page) { // HTML 5 page
-            // For HTML5 page, table elements with a caption child element
-            // ---> SET-5 (identified with the markers)
-            // ---> SET-6 (not identified by the markers)
+
+            // SET-7 - For HTML5 page, table elements with a caption child element
+            // ---> SET-8 (identified with the markers)
+            // ---> SET-9 (not identified by the markers)
             new SimpleElementSelector(TABLE_WITH_CAPTION_CSS_LIKE_QUERY)
                 .selectElements(sspHandler, tableForHtml5PageWithCaptionWithoutMarkerHandler);
             sortMarkerElements(tableForHtml5PageWithCaptionWithMarkerHandler, tableForHtml5PageWithCaptionWithoutMarkerHandler);
 
-            // For HTML5 page, table elements without a caption child element
-            // ---> SET-7 (identified with the markers)
-            // ---> SET-8 (not identified by the markers)
+            // SET-10 - For HTML5 page, table elements without a caption child element
+            // ---> SET-11 (identified with the markers)
+            // ---> SET-12 (not identified by the markers)
             new SimpleElementSelector(TABLE_WITHOUT_CAPTION_CSS_LIKE_QUERY)
                 .selectElements(sspHandler, tableForHtml5PageWithoutCaptionWithoutMarkerHandler);
             sortMarkerElements(tableForHtml5PageWithoutCaptionWithMarkerHandler, tableForHtml5PageWithoutCaptionWithoutMarkerHandler);
         }
         else { // HTML4 page (a non-HTML5 page: HTML4, XHTML1, ...)
 
-            // For HTML4 page, table elements with a summary attribute
-            // ---> SET-9 (identified with the markers)
-            // ---> SET-10 (not identified by the markers)
+            // SET-13 - For HTML4 page, table elements with a summary attribute
+            // ---> SET-14 (identified with the markers)
+            // ---> SET-15 (not identified by the markers)
             new SimpleElementSelector(TABLE_WITH_SUMMARY_CSS_LIKE_QUERY)
                 .selectElements(sspHandler, tableForHtml4PageWithSummaryWithoutMarkerHandler);
             sortMarkerElements(tableForHtml4PageWithSummaryWithMarkerHandler, tableForHtml4PageWithSummaryWithoutMarkerHandler);
 
-            // For HTML4 page, table elements without a summary attribute
-            // ---> SET-11 (identified with the markers)
-            // ---> SET-12 (not identified by the markers)
+            // SET-16 - For HTML4 page, table elements without a summary attribute
+            // ---> SET-17 (identified with the markers)
+            // ---> SET-18 (not identified by the markers)
             new SimpleElementSelector(TABLE_WITHOUT_SUMMARY_CSS_LIKE_QUERY)
                 .selectElements(sspHandler, tableForHtml4PageWithoutSummaryWithoutMarkerHandler);
             sortMarkerElements(tableForHtml4PageWithoutSummaryWithMarkerHandler, tableForHtml4PageWithoutSummaryWithoutMarkerHandler);
@@ -220,8 +221,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
         // TEST-1   Elements identified with the markers
         //          with role="table" and aria-describedby attributes
-        // - PASSED: SET-1 is not empty
-        // - NA:     SET-1 is empty
+        // - PASSED: SET-2 is not empty
+        // - NA:     SET-2 is empty
         ElementChecker tableRoleWithAriaDescribedbyWithMarkerChecker = new ElementPresenceChecker(
             new ImmutablePair<>(PASSED, ""),
             new ImmutablePair<>(NOT_APPLICABLE, ""));
@@ -232,8 +233,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
         // TEST-2   Elements not identified by the markers
         //          with role="table" and aria-describedby attributes
-        // - NMI: SET-2 is not empty  ---> msg "CheckTableRoleWithAriaDescribedbyIsComplex"
-        // - NA:  SET-2 is empty
+        // - NMI: SET-3 is not empty  ---> msg "CheckTableRoleWithAriaDescribedbyIsComplex"
+        // - NA:  SET-3 is empty
         ElementChecker tableRoleWithAriaDescribedbyWithoutMarkerChecker = new ElementPresenceChecker(
             new ImmutablePair<>(NEED_MORE_INFO, CHECK_TABLE_ROLE_WITH_ARIA_DESCRIBEDBY_IS_COMPLEX_MSG),
             new ImmutablePair<>(NOT_APPLICABLE, ""),
@@ -245,8 +246,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
         // TEST-3   Elements identified with the markers
         //          with role="table" attribute, but without aria-describedby attribute
-        // - FAILED: SET-3 is not empty  ---> msg "AriaDescribedbyMissingOnComplexTableRole"
-        // - NA:     SET-3 is empty
+        // - FAILED: SET-5 is not empty  ---> msg "AriaDescribedbyMissingOnComplexTableRole"
+        // - NA:     SET-5 is empty
         ElementChecker tableRoleWithoutAriaDescribedbyWithMarkerChecker = new ElementPresenceChecker(
             new ImmutablePair<>(FAILED, ARIA_DESCRIBEDBY_MISSING_ON_COMPLEX_TABLE_ROLE_MSG),
             new ImmutablePair<>(NOT_APPLICABLE, ""));
@@ -257,8 +258,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
         // TEST-4   Elements not identified by the markers
         //          with role="table" attribute, but without aria-describedby attribute
-        // - NMI: SET-4 is not empty  ---> msg "CheckTableRoleWithoutAriaDescribedbyIsNotComplex"
-        // - NA:  SET-4 is empty
+        // - NMI: SET-6 is not empty  ---> msg "CheckTableRoleWithoutAriaDescribedbyIsNotComplex"
+        // - NA:  SET-6 is empty
         ElementChecker tableRoleWithoutAriaDescribedbyWithoutMarkerChecker = new ElementPresenceChecker(
             new ImmutablePair<>(NEED_MORE_INFO, CHECK_TABLE_ROLE_WITHOUT_ARIA_DESCRIBEDBY_IS_NOT_COMPLEX_MSG),
             new ImmutablePair<>(NOT_APPLICABLE, ""));
@@ -271,8 +272,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-5   For HTML5 page, table elements identified with the markers
             //          with a caption child element
-            // - PASSED: SET-5 is not empty
-            // - NA:     SET-5 is empty
+            // - PASSED: SET-8 is not empty
+            // - NA:     SET-8 is empty
             ElementChecker tableForHtml5PageWithCaptionWithMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(PASSED, ""),
                 new ImmutablePair<>(NOT_APPLICABLE, ""));
@@ -283,8 +284,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-6   For HTML5 page, table elements not identified by the markers
             //          with a caption child element
-            // - NMI: SET-6 is not empty  ---> msg "CheckTableWithCaptionChildElementIsComplex"
-            // - NA:  SET-6 is empty
+            // - NMI: SET-9 is not empty  ---> msg "CheckTableWithCaptionChildElementIsComplex"
+            // - NA:  SET-9 is empty
             ElementChecker tableForHtml5PageWithCaptionWithoutMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(NEED_MORE_INFO, CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG),
                 new ImmutablePair<>(NOT_APPLICABLE, "")); // @@@TODO add evidence
@@ -295,8 +296,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-7   For HTML5 page, table elements identified with the markers
             //          without a caption child element
-            // - FAILED: SET-7 is not empty  ---> msg "CaptionMissingOnComplexTable"
-            // - NA:     SET-7 is empty
+            // - FAILED: SET-11 is not empty  ---> msg "CaptionMissingOnComplexTable"
+            // - NA:     SET-11 is empty
             ElementChecker tableForHtml5PageWithoutCaptionWithMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(FAILED, CAPTION_MISSING_ON_COMPLEX_TABLE_MSG),
                 new ImmutablePair<>(NOT_APPLICABLE, ""));
@@ -307,8 +308,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-8   For HTML5 page, table elements not identified by the markers
             //          without a caption child element
-            // - NMI: SET-8 is not empty  ---> msg "CheckTableWithoutCaptionChildElementIsNotComplex"
-            // - NA:  SET-8 is empty
+            // - NMI: SET-12 is not empty  ---> msg "CheckTableWithoutCaptionChildElementIsNotComplex"
+            // - NA:  SET-12 is empty
             ElementChecker tableForHtml5PageWithoutCaptionWithoutMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(NEED_MORE_INFO, CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG),
                 new ImmutablePair<>(NOT_APPLICABLE, ""));
@@ -321,8 +322,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-9   For HTML4 page, table elements identified with the markers
             //           with a summary attribute
-            // - PASSED: SET-9 is not empty
-            // - NA:     SET-9 is empty
+            // - PASSED: SET-14 is not empty
+            // - NA:     SET-14 is empty
             ElementChecker tableForHtml4PageWithSummaryWithMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(PASSED, ""),
                 new ImmutablePair<>(NOT_APPLICABLE, "")); // @@@TODO add evidence
@@ -333,8 +334,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-10   For HTML4 page, table elements not identified by the markers
             //           with a summary attribute
-            // - NMI: SET-10 is not empty  ---> msg "CheckTableWithSummaryIsComplex"
-            // - NA:  SET-10 is empty
+            // - NMI: SET-15 is not empty  ---> msg "CheckTableWithSummaryIsComplex"
+            // - NA:  SET-15 is empty
             ElementChecker tableForHtml4PageWithSummaryWithoutMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(NEED_MORE_INFO, CHECK_TABLE_WITH_SUMMARY_IS_COMPLEX_MSG),
                 new ImmutablePair<>(NOT_APPLICABLE, ""),
@@ -346,8 +347,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-11   For HTML4 page, table elements identified with the markers
             //           without a summary attribute
-            // - FAILED: SET-11 is not empty  ---> msg "SummaryMissingOnComplexTable"
-            // - NA:     SET-11 is empty
+            // - FAILED: SET-17 is not empty  ---> msg "SummaryMissingOnComplexTable"
+            // - NA:     SET-17 is empty
             ElementChecker tableForHtml4PageWithoutSummaryWithMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(FAILED, SUMMARY_MISSING_ON_COMPLEX_TABLE_MSG),
                 new ImmutablePair<>(NOT_APPLICABLE, ""));
@@ -358,8 +359,8 @@ public class Rgaa40Rule050101 extends AbstractMarkerPageRuleImplementation {
 
             // TEST-12   For HTML4 page, table elements not identified by the markers
             //           without a summary attribute
-            // - NMI: SET-12 is not empty  ---> msg "CheckTableWithoutSummaryIsNotComplex"
-            // - NA:  SET-12 is empty
+            // - NMI: SET-18 is not empty  ---> msg "CheckTableWithoutSummaryIsNotComplex"
+            // - NA:  SET-18 is empty
             ElementChecker tableForHtml4PageWithoutSummaryWithoutMarkerChecker = new ElementPresenceChecker(
                 new ImmutablePair<>(NEED_MORE_INFO, CHECK_TABLE_WITHOUT_SUMMARY_IS_NOT_COMPLEX_MSG),
                 new ImmutablePair<>(NOT_APPLICABLE, ""));
