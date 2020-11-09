@@ -4,6 +4,7 @@ services:
   ###############################################################################################################
   # - port: 9924
   # - URL:  jdbc:mysql://localhost:9924/asqatasun     By default
+  #         jdbc:mysql://<host_ip>:9924/asqatasun     By default
   #         jdbc:mysql://<host_ip>:<port>/asqatasun   If you use the .env configuration file
   ###############################################################################################################
   asqatasun-db_dev:
@@ -18,7 +19,7 @@ services:
 
   # Asqatasun API
   ###############################################################################################################
-  # - port: 8984
+  # - port: 8986
   # - URL:  http://localhost:8986     By default
   #         http://<host_ip>:8986     By default
   #         http://<host_ip>:<port>   If you use the .env configuration file
