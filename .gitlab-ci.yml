@@ -102,6 +102,7 @@ archive_artefact:
   only:
     refs:
       - master
+      - tags
 
 archive_artefact_manual:
   extends: .archive_artefact_common
