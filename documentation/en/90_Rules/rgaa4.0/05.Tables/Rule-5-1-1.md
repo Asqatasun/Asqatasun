@@ -2,7 +2,14 @@
 
 ## Summary
 
-This tests consists in checking the presence of a caption child node on the complex `<table>` tags. Complex `<table>` tags are characterized by HTML markers. When tables cannot be characterized, the test  is applied but the result is semi-decidable.
+This tests consists in checking all "complex table" (`<table>` tags and elements with `role=table` attribute): 
+
+- All element with `role=table` attribute have `aria-describedby` attribute.
+- For a HTML5 page, all `<table>` have `<caption>` child tag.
+- For a non-HTML5 page (HTML4, XHTML1, ...), all `<table>` have `summary` attribute.
+
+"Complex table" are characterized by HTML markers. (see Notes for details about detection through marker).
+When tables cannot be characterized, the test is applied but the result is semi-decidable.
 
 ## Business description
 
@@ -31,79 +38,328 @@ This tests consists in checking the presence of a caption child node on the comp
 
 ### Decision level
 
-**Semi-Decidable**
+**Decidable with marker**
 
 ## Algorithm
 
 ### Selection
 
-#### Set1 (table tags identified as complex table from html markers)
+#### Set1
 
-All the `<table>` tags with an "id" attribute or a "class" attribute or a
-"role" attribute that matches one of the values set by the user through
-the "COMPLEX_TABLE_MARKER" parameter.
+All elements:
+- with `role="table"`  attribute
+- with `aria-describedby` attribute
 
-#### Set2 (table tags not identified as complex table from html markers)
+```jquery-css
+[role=table][aria-describedby]
+```
 
-All the `<table>` tags that don't have an "id" attribute or a "class" attribute or a "role" attribute that matches one the values set by the user through the "PRESENTATION_TABLE_MARKER" parameter or the "DATA_TABLE_MARKER" parameter or the "COMPLEX_TABLE_MARKER" parameter. 
-That means select all the `<table>` tags of the page when these parameters are empty.
+#### Set2
+
+All the elements of **Set1** identified as complex table by marker usage 
+(see Notes for details about detection through marker).
+
+#### Set3
+
+All the elements of **Set1** identified neither as complex table,
+nor as data table, nor as presentation table by marker usage (see Notes for details about detection through marker).
+
+-------------------
+
+#### Set4
+
+All elements:
+- with `role="table"`  attribute
+- without `aria-describedby` attribute
+
+```jquery-css
+[role=table]:not([aria-describedby])
+```
+
+#### Set5
+
+All the elements of **Set4** identified as complex table by marker usage 
+(see Notes for details about detection through marker).
+
+#### Set6
+
+All the elements of **Set4** identified neither as complex table,
+nor as data table, nor as presentation table by marker usage (see Notes for details about detection through marker).
+
+-------------------
+
+#### Set7
+
+For HTML5 page, all `table` elements with a `<caption>`  child element
+
+```jquery-css
+table:has(caption)
+```
+
+#### Set8
+
+All the elements of **Set7** identified as complex table by marker usage 
+(see Notes for details about detection through marker).
+
+#### Set9
+
+All the elements of **Set7** identified neither as complex table,
+nor as data table, nor as presentation table by marker usage (see Notes for details about detection through marker).
+
+-------------------
+
+
+#### Set10
+
+For HTML5 page, all `table` elements without a `<caption>`  child element
+
+```jquery-css
+table:not(:has(caption))
+```
+
+#### Set11
+
+All the elements of **Set10** identified as complex table by marker usage 
+(see Notes for details about detection through marker).
+
+#### Set12
+
+All the elements of **Set10** identified neither as complex table,
+nor as data table, nor as presentation table by marker usage (see Notes for details about detection through marker).
+
+-------------------
+
+#### Set13
+
+For HTML4 page (a non-HTML5 page: HTML4, XHTML1, ...),
+all `table` elements with a `summary` attribute.
+
+```jquery-css
+table[summary]
+```
+
+#### Set14
+
+All the elements of **Set13** identified as complex table by marker usage 
+(see Notes for details about detection through marker).
+
+#### Set15
+
+All the elements of **Set13** identified neither as complex table,
+nor as data table, nor as presentation table by marker usage (see Notes for details about detection through marker).
+
+-------------------
+
+#### Set16
+
+For HTML4 page (a non-HTML5 page: HTML4, XHTML1, ...),
+all `table` elements without a `summary` attribute.
+
+```jquery-css
+table:not([summary])
+```
+
+#### Set17
+
+All the elements of **Set16** identified as complex table by marker usage 
+(see Notes for details about detection through marker).
+
+#### Set18
+
+All the elements of **Set16** identified neither as complex table,
+nor as data table, nor as presentation table by marker usage (see Notes for details about detection through marker).
+
 
 ### Process
 
-#### Test1
+#### Tests
 
-For each occurence of **Set1**, test the presence of a `<caption>` child tag.
+##### Tests 1
 
-For each element returning false in **Test1**, raise a MessageA.
+If **Set2** is not empty, for each occurence of **Set1** raise a MessageA.
 
-#### Test1
+##### Tests 2
 
-For each occurence of **Set2**, test the presence of a `<caption>` child tag.
+If **Set3** is not empty, for each occurence of **Set3** raise a MessageB.
 
-For each occurence of false-result of **Test2**, raise a MessageB
+##### Tests 3
 
-For each occurence of true-result of **Test2**, raise a MessageC
+If **Set5** is not empty, for each occurence of **Set5** raise a MessageC.
 
-###### MessageA : Caption Missing on complex tables
+##### Tests 4
 
--   code : CaptionMissingOnComplexTable
--   status: Failed
--   parameter : Snippet
--   present in source : yes
+If **Set6** is not empty, for each occurence of **Set6** raise a MessageD.
 
-###### MessageB : Check the table without caption child is not a complex table
+##### Tests 5
 
--   code : CheckTableWithoutCaptionChildElementIsNotComplex
--   status: Pre-Qualified
--   parameter : Snippet
--   present in source : yes
+If **Set8** is not empty, for each occurence of **Set1** raise a MessageA.
 
-###### MessageC : Check the table with a caption child is a complex table
+##### Tests 6
 
--   code : CheckTableWithCaptionChildElementIsComplex
--   status: Pre-Qualified
--   parameter : Snippet
--   present in source : yes
+If **Set9** is not empty, for each occurence of **Set9** raise a MessageE.
+
+##### Tests 7
+
+If **Set11** is not empty, for each occurence of **Set11** raise a MessageF.
+
+##### Tests 8
+
+If **Set12** is not empty, for each occurence of **Set12** raise a MessageG.
+
+##### Tests 9
+
+If **Set14** is not empty, for each occurence of **Set14** raise a MessageA.
+
+##### Tests 10
+
+If **Set15** is not empty, for each occurence of **Set15** raise a MessageH.
+
+##### Tests 11
+
+If **Set17** is not empty, for each occurence of **Set17** raise a MessageI.
+
+##### Tests 12
+
+If **Set18** is not empty, for each occurence of **Set18** raise a MessageJ.
+
+-----------------------
+
+#### Messages
+
+##### MessageA: 
+
+- status: Passed
+- parameter: Snippet
+- present in source: yes
+
+##### MessageB: Check element, with `role=table` and `aria-describedby` attributes, is a complex table
+
+- code: CheckTableRoleWithAriaDescribedbyIsComplex
+- status: Pre-Qualified
+- parameter: `aria-describedby` attribute and snippet
+- present in source: yes
+
+##### MessageC: `aria-describedby` attribute is missing on complex table (element with `role=table`)
+
+- code: AriaDescribedbyMissingOnComplexTableRole
+- status: Failed
+- parameter: Snippet
+- present in source: yes
+
+##### MessageD: Check element, with `role=table`  attribute and without `aria-describedby` attribute, is not a complex table
+
+- code: CheckTableRoleWithoutAriaDescribedbyIsNotComplex
+- status: Pre-Qualified
+- parameter: Snippet
+- present in source: yes
+
+##### MessageE:  Check table with a `<caption>` child is a complex table
+
+- code: CheckTableWithCaptionChildElementIsComplex
+- status: Pre-Qualified
+- parameter: Snippet
+- present in source: yes
+
+##### MessageF: `<caption>` child is missing on complex tables
+- code: CaptionMissingOnComplexTable
+- status: Failed
+- parameter: Snippet
+- present in source: yes
+
+##### MessageG: Check table without `<caption>` child is not a complex table
+- code: CheckTableWithoutCaptionChildElementIsNotComplex
+- status: Pre-Qualified
+- parameter: Snippet
+- present in source: yes
+
+##### MessageH: Check table with a `summary` attribute is a complex table
+
+- code: CheckTableWithSummaryIsComplex
+- status: Pre-Qualified
+- parameter: `summary` attribute and snippet
+- present in source: yes
+
+##### MessageI: `summary` attribute is missing on complex tables
+
+- code: SummaryMissingOnComplexTable
+- status: Failed
+- parameter: Snippet
+- present in source: yes
+
+##### MessageJ: Check table without `summary` attribute is not a complex table
+
+- code: CheckTableWithoutSummaryIsNotComplex
+- status: Pre-Qualified
+- parameter: Snippet
+- present in source: yes
+
+----------------------
 
 ### Analysis
 
 #### Not Applicable
 
-The page has no `<table>` tag (**Set1** and **Set2** are empty)
+**Set1**, **Set4**, **Set7**, **Set10**, **Set13** and **Set16** are empty
+
+- If the markers are not used: the page has no array (`<table>` tag or element with `role=table` attribute).
+- If markers are used: the page has no array (a `<table>` tag or an element with the `role=table` attribute)
+  identified as a complex array.
+  
+(see Notes for details about detection through marker)
 
 #### Failed
 
-At least one complex table has no `<caption>` child tag (**Test1** returns false for at least one element)
+Requires the use of the "complex table" marker. (see Notes for details about detection through marker)
+
+If one of the following conditions is met:
+
+- At least one complex table (element with `role=table` attribute) has no `aria-describedby` attribute.
+- For a HTML5 page, at least one complex `<table>` has no `<caption>` child tag.
+- For a non-HTML5 page (HTML4, XHTML1, ...), at least one complex `<table>` has no `summary` attribute.
+
+**Set5**, **Set11** or **Set17** are not empty.
 
 #### Passed
 
-All the tables of the page are identified as complex tables and they all have a `<caption>` child tag (**Test1** returns true and **Set2** is empty)
+Requires the use of the "complex table" marker. (see Notes for details about detection through marker)
+
+All of the following conditions are required:
+
+- All tables of the page are identified as complex tables
+- All element with `role=table` attribute have `aria-describedby` attribute.
+- For a HTML5 page, all `<table>` have `<caption>` child tag.
+- For a non-HTML5 page (HTML4, XHTML1, ...), all `<table>` have `summary` attribute.
+
+Which means (all of the following conditions are necessary):
+
+- **Set2**, **Set8** or **Set14** are not empty.
+- **Set5**, **Set11** and **Set17** are empty.
+- **Set3**, **Set6**, **Set9**, **Set12**, **Set15**  and **Set18** are empty.
 
 #### Pre-qualified:
 
 In all other cases
 
+--------------------
 
+## Notes
+
+### non-HTML5 page (HTML4, XHTML1, ...)
+
+For non-HTML5 page (HTML4, XHTML1, ...), 
+we only take into account the `summary` attribute.
+
+### Markers 
+
+- **Complex table** markers are set through the **COMPLEX_TABLE_MARKER** parameter.
+- **Presentation table** markers are set through the **DATA_TABLE_MARKER** parameter.
+- **Presentation table** markers are set through the **PRESENTATION_TABLE_MARKER** parameter.
+
+The value(s) passed as marker(s) will be checked against the following attributes:
+
+- `class`
+- `id`
+- `role`
 
 ## Files
 
