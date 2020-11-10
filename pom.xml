@@ -170,11 +170,7 @@
         <system>gitlab-ci</system>
         <url>https://gitlab.com/asqatasun/Asqatasun/-/pipelines</url>
     </ciManagement>
-    <prerequisites>         <!--    Maven 3.1 is required to use the following plugin:   -->
-        <maven>3.1</maven>  <!--    ............  org.owasp:dependency-check-maven       -->
-    </prerequisites>        <!--    The following command line indicates
-                                    the minimum version of Maven for maven plugins
-                                    ............  mvn versions:display-plugin-updates     -->
+
     <modules>
         <module>engine</module>
         <module>testing-tools</module>
@@ -587,6 +583,27 @@
                     <headerHtmlFile>${project.basedir}/testing-tools/resources/html_template/header.html</headerHtmlFile>
                     <footerHtmlFile>${project.basedir}/testing-tools/resources/html_template/footer.html</footerHtmlFile>
                 </configuration>
+            </plugin>
+            <!-- Define minimal version of Maven to use -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.6</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
