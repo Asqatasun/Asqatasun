@@ -15,7 +15,7 @@ The following documentation is only for people who want to **compile** Asqatasun
 
 - git
 - JDK-8 is required
-- maven `3.1` (at least) is required
+- maven `3.6` (at least) is required
 - [Docker](https://docs.docker.com/engine/install/) `19.03.0` (at least) is required
 - [Docker-Compose](https://docs.docker.com/compose/install/) `1.27.0` (at least) is required
 
