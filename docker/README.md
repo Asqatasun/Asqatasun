@@ -1,21 +1,29 @@
 # Use Asqatasun with Docker
 
-work in progress
+## Launch Asqatasun with Docker
 
-## Build and launch Asqatasun 
+Consult our [dedicated repository to use Asqatasun with Docker](https://gitlab.com/asqatasun/asqatasun-docker) :
+
+- [Using Docker - Asqatasun 5.x](https://gitlab.com/asqatasun/asqatasun-docker/-/tree/main/5.x/)
+- [Using Docker - Asqatasun 4.x](https://gitlab.com/asqatasun/asqatasun-docker/-/tree/main/4.x/)
+
+## Build Asqatasun and launch it with Docker
+
+The following documentation is only for people who want to **compile** Asqatasun from source code and run it with Docker.
 
 ### Prerequisites
 
-* git
-* JDK-8 is required
-* maven `3.1` (at least) is required
-* Docker `19.03.0` (at least) is required
-* Docker-Compose `1.27.0` (at least) is required
+- git
+- JDK-8 is required
+- maven `3.6` (at least) is required
+- [Docker](https://docs.docker.com/engine/install/) `19.03.0` (at least) is required
+- [Docker-Compose](https://docs.docker.com/compose/install/) `1.27.0` (at least) is required
 
-Do have a look at:
+### All `Docker-Compose` files avalaible
 
-* https://docs.docker.com/compose/install/#uninstallation
-* https://docs.docker.com/compose/install/#install-compose-on-linux-systems
+- [Asqatasun **API**](api_SNAPSHOT-local)
+- [Asqatasun **Webapp**](webapp_SNAPSHOT-local)
+- [Asqatasun **API** + **Webapp**](all_SNAPSHOT-local)
 
 ### Ports, URL and credentials (user/password)
 
@@ -25,7 +33,12 @@ Do have a look at:
 | API      | 8986 | `http://localhost:8986`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
 | Webapp   | 8982 | `http://localhost:8982`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
 
-Tip: if you copy `.env.dist` file to `.env` file, you can change port numbers, IP adresses and database credentials.
+Tip:
+if you copy `.env.dist` file to `.env` file,
+you can change port numbers, IP adresses and database credentials.
+
+
+
 
 ### Launch Asqatasun webapp
 
@@ -44,23 +57,23 @@ cd Asqatasun
 docker/build_and_run-with-docker.sh  \
      --log-build                     \
      -s ${PWD}                       \
-     -d docker/app_SNAPSHOT-local 
+     -d docker/webapp_SNAPSHOT-local 
 
 # Option 2: build Asqatasun without running tests (faster)
 docker/build_and_run-with-docker.sh  \
      --skip-build-test               \
      -s ${PWD}                       \
-     -d docker/app_SNAPSHOT-local 
+     -d docker/webapp_SNAPSHOT-local 
 
 # Build docker image + launch Asqatasun and database
 ####################################################
 
 # Option 1: build docker image + launch Asqatasun and database (uses same database, if it already exists)
-cd docker/app_SNAPSHOT-local
+cd docker/webapp_SNAPSHOT-local
 docker-compose up --build
 
 # Option 2: build docker image + launch Asqatasun and a new database
-cd docker/app_SNAPSHOT-local
+cd docker/webapp_SNAPSHOT-local
 docker-compose rm -fsv
 docker-compose up --build
 ```
@@ -88,17 +101,17 @@ cd Asqatasun
 docker/build_and_run-with-docker.sh  \
      --skip-build-test               \
      -s ${PWD}                       \
-     -d docker/global_SNAPSHOT-local
+     -d docker/all_SNAPSHOT-local
 
 # Build docker image + launch Asqatasun (webapp + API) and database
 ###################################################################
 
 # Option 1: build docker image + launch Asqatasun (webapp + API) and database (uses same database, if it already exists)
-cd docker/global_SNAPSHOT-local
+cd docker/all_SNAPSHOT-local
 docker-compose up --build
 
 # Option 2: build docker image + launch Asqatasun (webapp + API) and a new database
-cd docker/global_SNAPSHOT-local
+cd docker/all_SNAPSHOT-local
 docker-compose rm -fsv
 docker-compose up --build
 ```
@@ -130,55 +143,3 @@ curl -X POST \
                            \"tags\": [    \"tag_1\"  ]                        \
          }"
 ```
-
-
-## Archive
-
-### Asqatasun 4.1.0
-- no docker image for this version of Asqatasun
-- you can use Vagrant instead to run Asqatasun 4.1.0 on your computer
-
-see: https://gitlab.com/asqatasun/asqatasun-vagrant/-/tree/master/Ubuntu-18.04/Asqatasun_v4.1.0
-
-```bash
-git clone https://gitlab.com/asqatasun/asqatasun-vagrant.git
-cd asqatasun-vagrant
-vagrant up
-vagrant ssh
-    sudo -i  # Inside the box
-    cd /vagrant
-    ./asqatasun.sh
-```
-
-
-### Asqatasun 4.0.3
-see: https://gitlab.com/asqatasun/Asqatasun/-/tree/v4.0.3/docker
-
-```markdown
-## Single container
-- This is a fat container, that is absolutly not compliant to [Docker best-practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
-- Don't use it for production as all data are wiped out at reboot / rebuild
-- BUT for quick testing, that does the job :)
-
-Create a container from [Docker Hub](https://hub.docker.com/r/asqatasun/asqatasun/)
-
-##  Multiple containers
-
-Work in progress
-
-## Builds Asqatasun and runs a new Docker container
-
-- builds Asqatasun from sources with maven,
-- builds a new Docker image
-- runs a container based the freshly built image
-
-###  Linux users
-
-git clone https://github.com/Asqatasun/Asqatasun
-cd  Asqatasun
-git checkout develop
-docker/build_and_run-with-docker.sh -l -s ${PWD} -d docker/SNAPSHOT-local
-
-In your browser, go to
-http://127.0.0.1:8085/asqatasun/
-````
