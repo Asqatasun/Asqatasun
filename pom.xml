@@ -431,7 +431,8 @@
                     </archive>
                 </configuration>
             </plugin>
-            <plugin><!-- used by maven-jar-plugin
+            <plugin>
+                <!-- used by maven-jar-plugin
                                  maven-war-plugin
 
                          https://www.mojohaus.org/build-helper-maven-plugin
@@ -455,7 +456,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin><!-- used by maven-jar-plugin
+            <plugin>
+                <!-- used by maven-jar-plugin
                                  maven-war-plugin
 
                          https://www.mojohaus.org/buildnumber-maven-plugin
@@ -477,8 +479,8 @@
                     </execution>
                 </executions>
             </plugin>
-
-    <!--    Generate standalone Javadocs
+            <!--
+               Generate standalone Javadocs
                https://maven.apache.org/plugins/maven-javadoc-plugin/
                https://maven.apache.org/plugins/maven-javadoc-plugin/usage.html
                https://maven.apache.org/plugins/maven-javadoc-plugin/javadoc-mojo.html
@@ -508,8 +510,8 @@
                     </bottom>
                 </configuration>
             </plugin>
-
-    <!--    OWASP Dependency-Check
+            <!--
+                OWASP Dependency-Check
                 https://www.owasp.org/index.php/OWASP_Dependency_Check
                 http://jeremylong.github.io/DependencyCheck/
                 http://jeremylong.github.io/DependencyCheck/dependency-check-maven/
@@ -532,8 +534,8 @@
                     </execution>
                 </executions>       -->
             </plugin>
-
-    <!--    Jacoco - Code coverage
+            <!--
+                Jacoco - Code coverage
                 http://www.jacoco.org/jacoco/
                 https://github.com/jacoco/jacoco/
                 report: target/site/jacoco
@@ -557,12 +559,11 @@
                     </execution>
                 </executions>
             </plugin>
-
-
-    <!--    Generate HTML files (README, CHANGELOG, ...)
-            in target/html/ directory  (used in tar.gz)
-               https://github.com/walokra/markdown-page-generator-plugin
-               https://github.com/sirthias/pegdown                         -->
+            <!--
+                Generate HTML files (README, CHANGELOG, ...)
+                in target/html/ directory  (used in tar.gz)
+                https://github.com/walokra/markdown-page-generator-plugin
+                https://github.com/sirthias/pegdown                         -->
             <plugin>
                 <groupId>com.ruleoftech</groupId>
                 <artifactId>markdown-page-generator-plugin</artifactId>
