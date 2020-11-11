@@ -1,17 +1,17 @@
 # RGAA 4.0 — Rule 5.1.1
 
-## Summary
+## Summary ====================================================================
 
 This tests consists in checking all "complex table" (`<table>` tags and elements with `role=table` attribute): 
 
-- All element with `role=table` attribute have `aria-describedby` attribute.
-- For a HTML5 page, all `<table>` have `<caption>` child tag.
-- For a non-HTML5 page (HTML4, XHTML1, ...), all `<table>` have `summary` attribute.
+- All element with `role=table` attribute having `aria-describedby` attribute.
+- For an HTML5 page, all `<table>` having `<caption>` child tag.
+- For a non-HTML5 page (HTML4, XHTML1, ...), all `<table>` having `summary` attribute.
 
-"Complex table" are characterized by HTML markers. (see Notes for details about detection through marker).
+"Complex table" may be characterized by HTML markers (see Notes for details about detection through markers).
 When tables cannot be characterized, the test is applied but the result is semi-decidable.
 
-## Business description
+## Business description =======================================================
 
 ### Criterion
 
@@ -30,7 +30,7 @@ When tables cannot be characterized, the test is applied but the result is semi-
 **A**
 
 
-## Technical description
+## Technical description ======================================================
 
 ### Scope
 
@@ -40,14 +40,15 @@ When tables cannot be characterized, the test is applied but the result is semi-
 
 **Decidable with marker**
 
-## Algorithm
+## Algorithm ==================================================================
 
-### Selection
+### Selection -----------------------------------------------------------------
 
 #### Set1
 
 All elements:
-- with `role="table"`  attribute
+
+- with `role="table"` attribute
 - with `aria-describedby` attribute
 
 ```jquery-css
@@ -170,57 +171,57 @@ All the elements of **Set16** identified neither as complex table,
 nor as data table, nor as presentation table by marker usage (see Notes for details about detection through marker).
 
 
-### Process
+### Process -------------------------------------------------------------------
 
 #### Tests
 
 ##### Tests 1
 
-If **Set2** is not empty, for each occurence of **Set1** raise a MessageA.
+If **Set2** is not empty, for each occurrence of **Set1** raise a MessageA.
 
 ##### Tests 2
 
-If **Set3** is not empty, for each occurence of **Set3** raise a MessageB.
+If **Set3** is not empty, for each occurrence of **Set3** raise a MessageB.
 
 ##### Tests 3
 
-If **Set5** is not empty, for each occurence of **Set5** raise a MessageC.
+If **Set5** is not empty, for each occurrence of **Set5** raise a MessageC.
 
 ##### Tests 4
 
-If **Set6** is not empty, for each occurence of **Set6** raise a MessageD.
+If **Set6** is not empty, for each occurrence of **Set6** raise a MessageD.
 
 ##### Tests 5
 
-If **Set8** is not empty, for each occurence of **Set1** raise a MessageA.
+If **Set8** is not empty, for each occurrence of **Set1** raise a MessageA.
 
 ##### Tests 6
 
-If **Set9** is not empty, for each occurence of **Set9** raise a MessageE.
+If **Set9** is not empty, for each occurrence of **Set9** raise a MessageE.
 
 ##### Tests 7
 
-If **Set11** is not empty, for each occurence of **Set11** raise a MessageF.
+If **Set11** is not empty, for each occurrence of **Set11** raise a MessageF.
 
 ##### Tests 8
 
-If **Set12** is not empty, for each occurence of **Set12** raise a MessageG.
+If **Set12** is not empty, for each occurrence of **Set12** raise a MessageG.
 
 ##### Tests 9
 
-If **Set14** is not empty, for each occurence of **Set14** raise a MessageA.
+If **Set14** is not empty, for each occurrence of **Set14** raise a MessageA.
 
 ##### Tests 10
 
-If **Set15** is not empty, for each occurence of **Set15** raise a MessageH.
+If **Set15** is not empty, for each occurrence of **Set15** raise a MessageH.
 
 ##### Tests 11
 
-If **Set17** is not empty, for each occurence of **Set17** raise a MessageI.
+If **Set17** is not empty, for each occurrence of **Set17** raise a MessageI.
 
 ##### Tests 12
 
-If **Set18** is not empty, for each occurence of **Set18** raise a MessageJ.
+If **Set18** is not empty, for each occurrence of **Set18** raise a MessageJ.
 
 -----------------------
 
@@ -246,21 +247,21 @@ If **Set18** is not empty, for each occurence of **Set18** raise a MessageJ.
 - parameter: Snippet
 - present in source: yes
 
-##### MessageD: Check element, with `role=table`  attribute and without `aria-describedby` attribute, is not a complex table
+##### MessageD: Check element, with `role=table` attribute and without `aria-describedby` attribute, is not a complex table
 
 - code: CheckTableRoleWithoutAriaDescribedbyIsNotComplex
 - status: Pre-Qualified
 - parameter: Snippet
 - present in source: yes
 
-##### MessageE:  Check table with a `<caption>` child is a complex table
+##### MessageE: Check table with a `<caption>` child is a complex table
 
 - code: CheckTableWithCaptionChildElementIsComplex
 - status: Pre-Qualified
 - parameter: Snippet
 - present in source: yes
 
-##### MessageF: `<caption>` child is missing on complex tables
+##### MessageF: `<caption>` child is missing on complex table
 - code: CaptionMissingOnComplexTable
 - status: Failed
 - parameter: Snippet
@@ -293,9 +294,8 @@ If **Set18** is not empty, for each occurence of **Set18** raise a MessageJ.
 - parameter: Snippet
 - present in source: yes
 
-----------------------
 
-### Analysis
+### Analysis ------------------------------------------------------------------
 
 #### Not Applicable
 
@@ -314,7 +314,7 @@ Requires the use of the "complex table" marker. (see Notes for details about det
 If one of the following conditions is met:
 
 - At least one complex table (element with `role=table` attribute) has no `aria-describedby` attribute.
-- For a HTML5 page, at least one complex `<table>` has no `<caption>` child tag.
+- For an HTML5 page, at least one complex `<table>` has no `<caption>` child tag.
 - For a non-HTML5 page (HTML4, XHTML1, ...), at least one complex `<table>` has no `summary` attribute.
 
 **Set5**, **Set11** or **Set17** are not empty.
@@ -326,9 +326,9 @@ Requires the use of the "complex table" marker. (see Notes for details about det
 All of the following conditions are required:
 
 - All tables of the page are identified as complex tables
-- All element with `role=table` attribute have `aria-describedby` attribute.
-- For a HTML5 page, all `<table>` have `<caption>` child tag.
-- For a non-HTML5 page (HTML4, XHTML1, ...), all `<table>` have `summary` attribute.
+- All element with `role=table` attribute have an `aria-describedby` attribute.
+- For an HTML5 page, all `<table>` have `<caption>` child tag.
+- For a non-HTML5 page (HTML4, XHTML1, ...), all `<table>` have a `summary` attribute.
 
 Which means (all of the following conditions are necessary):
 
@@ -340,9 +340,8 @@ Which means (all of the following conditions are necessary):
 
 In all other cases
 
---------------------
 
-## Notes
+## Notes ======================================================================
 
 ### non-HTML5 page (HTML4, XHTML1, ...)
 
@@ -351,9 +350,12 @@ we only take into account the `summary` attribute.
 
 ### Markers 
 
-- **Complex table** markers are set through the **COMPLEX_TABLE_MARKER** parameter.
-- **Presentation table** markers are set through the **DATA_TABLE_MARKER** parameter.
-- **Presentation table** markers are set through the **PRESENTATION_TABLE_MARKER** parameter.
+Web developer or content editor can explicitly define the nature of a table by adding a special value
+in an HTML attribute. This is what we call *markers*
+
+- **Complex table** markers can be set through the **COMPLEX_TABLE_MARKER** parameter.
+- **Data table** markers can be set through the **DATA_TABLE_MARKER** parameter.
+- **Presentation table** markers can be set through the **PRESENTATION_TABLE_MARKER** parameter.
 
 The value(s) passed as marker(s) will be checked against the following attributes:
 
