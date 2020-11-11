@@ -109,6 +109,7 @@ archive_artefact_manual:
   except:
     refs:
       - master
+      - tags
   when: manual
 
 release:
