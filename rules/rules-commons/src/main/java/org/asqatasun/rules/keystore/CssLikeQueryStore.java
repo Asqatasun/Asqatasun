@@ -108,8 +108,12 @@ public final class CssLikeQueryStore {
                     "canvas:not(a canvas):not(:matchesOwn(^\\s*$))";
  
     // Table theme css-like queries
-    public static final String TABLE_WITH_SUMMARY_CSS_LIKE_QUERY="table[summary]"; 
-    public static final String TABLE_WITH_CAPTION_CSS_LIKE_QUERY="table:has(caption)"; 
+    public static final String TABLE_ROLE_WITH_ARIA_DESCRIBEDBY_CSS_LIKE_QUERY="[role=table][aria-describedby]";
+    public static final String TABLE_ROLE_WITHOUT_ARIA_DESCRIBEDBY_CSS_LIKE_QUERY="[role=table]:not([aria-describedby])";
+    public static final String TABLE_WITH_SUMMARY_CSS_LIKE_QUERY="table[summary]";
+    public static final String TABLE_WITHOUT_SUMMARY_CSS_LIKE_QUERY="table:not([summary])";
+    public static final String TABLE_WITH_CAPTION_CSS_LIKE_QUERY="table:has(caption)";
+    public static final String TABLE_WITHOUT_CAPTION_CSS_LIKE_QUERY="table:not(:has(caption))";
     public static final String TABLE_WITH_TH_CSS_LIKE_QUERY="table:has(th)";
     public static final String TABLE_WITH_TH_OR_TD_CSS_LIKE_QUERY=
                     "table:has(th), table:has(td)";

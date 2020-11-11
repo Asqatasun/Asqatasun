@@ -220,6 +220,7 @@ public final class RemarkMessageStore {
     
     // table
     public static final String SUMMARY_MISSING_MSG = "SummaryMissing";
+    public static final String SUMMARY_MISSING_ON_COMPLEX_TABLE_MSG = "SummaryMissingOnComplexTable";
     public static final String CHECK_NATURE_OF_TABLE_WITH_EMPTY_SUMMARY_MSG =
             "CheckNatureOfTableWithEmptySummaryAttribute";
     public static final String CHECK_NATURE_OF_TABLE_WITH_NOT_EMPTY_SUMMARY_MSG =
@@ -230,14 +231,27 @@ public final class RemarkMessageStore {
             "CheckNatureOfTableWithoutSummaryAttribute";
     public static final String CAPTION_MISSING_MSG = "CaptionMissing";
     public static final String CAPTION_MISSING_ON_COMPLEX_TABLE_MSG = "CaptionMissingOnComplexTable";
-    public static final String CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG = 
+    public static final String ARIA_DESCRIBEDBY_MISSING_ON_COMPLEX_TABLE_ROLE_MSG =
+            "AriaDescribedbyMissingOnComplexTableRole";
+    public static final String CHECK_NATURE_OF_TABLE_WITHOUT_CAPTION_MSG =
             "CheckNatureOfTableWithoutCaptionChildElement";
     public static final String CHECK_TABLE_WITHOUT_CAPTION_IS_NOT_COMPLEX_MSG = 
             "CheckTableWithoutCaptionChildElementIsNotComplex";
+    public static final String CHECK_TABLE_WITHOUT_SUMMARY_IS_NOT_COMPLEX_MSG =
+        "CheckTableWithoutSummaryIsNotComplex";
+
+    public static final String CHECK_TABLE_ROLE_WITHOUT_ARIA_DESCRIBEDBY_IS_NOT_COMPLEX_MSG =
+            "CheckTableRoleWithoutAriaDescribedbyIsNotComplex";
     public static final String CHECK_NATURE_OF_TABLE_WITH_CAPTION_MSG = 
             "CheckNatureOfTableWithCaptionChildElement";
     public static final String CHECK_TABLE_WITH_CAPTION_IS_COMPLEX_MSG = 
             "CheckTableWithCaptionChildElementIsComplex";
+        public static final String CHECK_TABLE_WITH_SUMMARY_IS_COMPLEX_MSG =
+            "CheckTableWithSummaryIsComplex";
+
+    public static final String CHECK_TABLE_ROLE_WITH_ARIA_DESCRIBEDBY_IS_COMPLEX_MSG =
+            "CheckTableRoleWithAriaDescribedbyIsComplex";
+
     public static final String NOT_EMPTY_SUMMARY_MSG =
             "NotEmptySummaryForPresentationTable";
     public static final String NOT_PERTINENT_SUMMARY_MSG =

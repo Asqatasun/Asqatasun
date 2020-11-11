@@ -63,7 +63,7 @@ public class Rgaa40Rule090201 extends AbstractPageRuleMarkupImplementation {
     @Override
     protected void check(SSPHandler sspHandler, TestSolutionHandler testSolutionHandler) {
 
-        // Is it a HTML5 page?
+        // Is it an HTML5 page?
         ElementHandler<Element> elementHandler = new ElementHandlerImpl();
         DoctypeHtml5Checker doctypeHtml5Checker = new DoctypeHtml5Checker();
         doctypeHtml5Checker.check(sspHandler, elementHandler, testSolutionHandler);

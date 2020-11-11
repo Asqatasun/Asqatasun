@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.5.1.1 NMI 01</title>
+    <title>Rgaa 4.0 Test.5.1.1 Passed 04</title>
 </head>
-<body class="NMI">
+<body class="Passed">
 <div>
-    <h1>Rgaa 4.0 Test.5.1.1 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.5.1.1 Passed 04</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -16,23 +16,23 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <!-- table is not identified by any marker and it doesn't contain a caption child tag -->
-        <table>
+        <table id="id-complex-table" role="complex-table">
+            <caption>complex table caption</caption>
             <tbody>
-                <tr>
-                    <th>head</th>
-                    <td>data</td>
-                </tr>
+                <tr> 
+                    <th>head</th> 
+                    <td>data</td> 
+                </tr> 
             </tbody>
-        </table>
+        </table> 
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI:
+        Passed:
         - HTML5 page
-        - a table tag is not identified by any marker and it doesn't contain a caption child tag
+        - a complex table is identified by a marker (role attribute) and contains a caption child tag
     </div>
     <!-- END [test-explanation] -->
 </div>
