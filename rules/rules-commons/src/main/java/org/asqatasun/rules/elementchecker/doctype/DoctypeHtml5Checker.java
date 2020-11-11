@@ -57,10 +57,7 @@ public class DoctypeHtml5Checker extends ElementCheckerImpl {
      */
     public boolean isHtml5(SSPHandler sspHandler) {
         String doctype = sspHandler.getSSP().getDoctype();
-        if (StringUtils.isBlank(doctype) || isDoctypeValideHtml5(doctype)) {
-            return true;
-        }
-        return false;
+        return StringUtils.isBlank(doctype) || isDoctypeValideHtml5(doctype);
     }
 
 
