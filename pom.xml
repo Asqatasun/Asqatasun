@@ -31,7 +31,7 @@
     <!ELEMENT profiles (profile)*>
     <!ELEMENT profile (id|modules)*>
     <!ELEMENT id (#PCDATA)>
-    <!ELEMENT properties (commitUrlPrefix|project.build.sourceEncoding|project.reporting.outputEncoding|maven.compiler.encoding|maven.compiler.source|maven.compiler.target|asqatasunGroupId|asqatasunVersion|springGroupId|springVersion|springSecurityVersion|hibernateGroupId|hibernateVersion|httpcomponentsGroupId|jersey.version|mysql-connector-java.version|junitGroupId|junitVersion|maven-checkstyle-plugin.version|maven-clean-plugin.version|maven-compiler-plugin.version|maven-surefire-plugin.version|maven-project-info-reports-plugin.version|maven-javadoc-plugin.version|maven-jar-plugin.version|maven-jxr-plugin.version|maven-war-plugin.version|build-helper-maven-plugin.version|buildnumber-maven-plugin.version|dependency-check-maven.version|jacoco-maven-plugin.version|markdown-page-generator-plugin.version)*>
+    <!ELEMENT properties (commitUrlPrefix|project.build.sourceEncoding|project.reporting.outputEncoding|maven.compiler.encoding|maven.compiler.source|maven.compiler.target|asqatasunGroupId|springGroupId|springVersion|springSecurityVersion|hibernateGroupId|hibernateVersion|httpcomponentsGroupId|jersey.version|mysql-connector-java.version|junitGroupId|junitVersion|maven-checkstyle-plugin.version|maven-clean-plugin.version|maven-compiler-plugin.version|maven-surefire-plugin.version|maven-project-info-reports-plugin.version|maven-javadoc-plugin.version|maven-jar-plugin.version|maven-jxr-plugin.version|maven-war-plugin.version|build-helper-maven-plugin.version|buildnumber-maven-plugin.version|dependency-check-maven.version|jacoco-maven-plugin.version|markdown-page-generator-plugin.version)*>
     <!ELEMENT commitUrlPrefix (#PCDATA)>
     <!ELEMENT project.build.sourceEncoding (#PCDATA)>
     <!ELEMENT project.reporting.outputEncoding (#PCDATA)>
@@ -39,7 +39,6 @@
     <!ELEMENT maven.compiler.source (#PCDATA)>
     <!ELEMENT maven.compiler.target (#PCDATA)>
     <!ELEMENT asqatasunGroupId (#PCDATA)>
-    <!ELEMENT asqatasunVersion (#PCDATA)>
     <!ELEMENT springGroupId (#PCDATA)>
     <!ELEMENT springVersion (#PCDATA)>
     <!ELEMENT springSecurityVersion (#PCDATA)>
@@ -207,7 +206,6 @@
         <jackson-module-kotlin.version>2.10.3</jackson-module-kotlin.version>
 
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
-        <asqatasunVersion>5.0-SNAPSHOT</asqatasunVersion>
 
         <springGroupId>org.springframework</springGroupId>
         <springVersion>5.2.4.RELEASE</springVersion>
@@ -681,30 +679,30 @@
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-commons</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-accessiweb2.2</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <scope>runtime</scope>
             </dependency>
              <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-rgaa3.0</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <scope>runtime</scope>
             </dependency>
              <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-rgaa4.0</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-seo1.0</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <scope>runtime</scope>
             </dependency>
 
@@ -712,12 +710,12 @@
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-commons-entity</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-api</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>poi</groupId>
@@ -736,96 +734,96 @@
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-model</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-services</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-persistence</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-jms</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-commons-processing</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-contentloader</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-engine</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-resources</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-nomenclatureloader</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rule-implementation-loader</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-contentadapter</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-processor</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-consolidator</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-analyser</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-scenarioloader</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-logging</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- asqatasun testing-tools -->
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>asqatasun-rules-testing-tools</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${asqatasunGroupId}</groupId>
                 <artifactId>tgol-testing-tools</artifactId>
-                <version>${asqatasunVersion}</version>
+                <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
 
@@ -1359,5 +1357,13 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
