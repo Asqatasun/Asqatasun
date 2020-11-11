@@ -20,7 +20,7 @@
         <asqatasunGroupId>org.asqatasun</asqatasunGroupId>
         <springGroupId>org.springframework</springGroupId>
 
-        <asqatasun.version>5.0-SNAPSHOT</asqatasun.version>
+        <asqatasun.version>${project.version}</asqatasun.version>
         <selenium.version>4.0.0-alpha-5</selenium.version>
         <commonsValidator.version>1.6</commonsValidator.version>
         <commonsFileUpload.version>1.4</commonsFileUpload.version>

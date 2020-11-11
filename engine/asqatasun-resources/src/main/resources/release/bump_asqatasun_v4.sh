@@ -11,7 +11,7 @@ if [[ $? != 0 ]]; then
 fi
 
 usage() {
-    echo 'usage: ./bump_asqatasun.sh [OPTIONS]...'
+    echo 'usage: ./bump_asqatasun_v4.sh [OPTIONS]...'
     echo ''
     echo '  --from-version <arg>   MANDATORY: Version number to modify.'
     echo '  --to-version   <arg>   MANDATORY: New version number to apply.'

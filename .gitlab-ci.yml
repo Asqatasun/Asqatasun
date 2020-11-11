@@ -20,7 +20,7 @@ cache:
 prepare_env:
   stage: prepare
   script:
-    - export APP_VERSION=$(cat pom.xml |grep "<asqatasunVersion>" |sed 's/.*<asqatasunVersion>\(.*\)<\/asqatasunVersion>/\1/')
+    - export APP_VERSION=$(grep "^    <version>" pom.xml | sed 's/.*<version>\(.*\)<\/version>/\1/')
     - export WEBAPP_ARTIFACT_FILE="asqatasun-web-app-${APP_VERSION}.war"
     - export REST_SERVER_ARTIFACT_FILE="asqatasun-server-${APP_VERSION}.jar"
     - echo "APP_VERSION=${APP_VERSION}" | tee -a build.env

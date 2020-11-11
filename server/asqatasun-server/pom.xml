@@ -21,7 +21,7 @@
         <springGroupId>org.springframework</springGroupId>
 
         <jacksonModuleKotlin.version>2.10.3</jacksonModuleKotlin.version>
-        <asqatasun.version>5.0-SNAPSHOT</asqatasun.version>
+        <asqatasun.version>${project.version}</asqatasun.version>
         <mysqlConnector.version>8.0.21</mysqlConnector.version>
         <selenium.version>4.0.0-alpha-5</selenium.version>
         <swagger.version>2.9.2</swagger.version>
