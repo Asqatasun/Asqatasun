@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun-server</artifactId>
-    <version>5.0-SNAPSHOT</version>
+    <version>5.0.0-alpha.2</version>
     <packaging>jar</packaging>
     <name>asqatasun-server</name>
     <properties>

@@ -1,8 +1,10 @@
+===== Release 5.0.0-alpha.2 =====
+
 Commits    Contributors
 --------------------------
-  3385	Jérôme Kowalczyk
-   716	Matthieu FAURE
-   696	Fabrice Gangler
+  3524	Jérôme Kowalczyk
+   973	Fabrice Gangler
+   790	Matthieu FAURE
    137	Anthony Lingua
     52	neyo2010
     51	sofien-hamdi
@@ -24,7 +26,9 @@ Commits    Contributors
      3	aouchani
      2	Baptiste Le Bail
      2	Barogthor
+     2	Jona
      2	Nicola Spanti (RyDroid)
+     2	dependabot[bot]
      1	Ben Stewart
      1	Dougal Matthews
      1	Marc Laporte
@@ -34,7 +38,4 @@ Commits    Contributors
      1	halna
      1	mickaeldicurzio@gmail.com
      1	nisan
-
-
----- Release 4.1.1-SNAPSHOT ----------------------
 
