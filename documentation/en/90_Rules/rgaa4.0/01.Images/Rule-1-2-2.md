@@ -2,7 +2,8 @@
 
 ## Summary
 
-No-check rule
+This test consists in checking whether the textual alternative of each `<area>` of an image map is empty or whether aria 
+attributes are well-used to make them ignored by assistive technologies.
 
 ## Business description
 
@@ -33,7 +34,6 @@ No-check rule
 
 **A**
 
-
 ## Technical description
 
 ### Scope
@@ -42,25 +42,158 @@ No-check rule
 
 ### Decision level
 
-@@@TODO
-
+**Decidable with marker**
 
 ## Algorithm
 
 ### Selection
 
-None
+#### Set1
+
+All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute 
+of an `<img>` tag, not within a link, not identified as captcha (see Notes about captcha detection) and without legend with an empty 
+textual alternative.
+
+#### Set2
+
+All the elements of **Set1** identified as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set3
+
+All the elements of **Set1** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set4
+
+All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute 
+of an `<img>` tag, not within a link, not identified as captcha (see Notes about captcha detection) and without legend  
+with an aria mechanism to make them ignored by assistive technologies 
+
+#### Set5
+
+All the elements of **Set4** identified as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set6
+
+All the elements of **Set4** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set7
+
+All the `<area>` tags, defined within a `<map>` tag whose the `"id"` attribute corresponds to the `"usemap"` attribute 
+of an `<img>` tag, not within a link, not identified as captcha (see Notes about captcha detection) and without legend,  
+without any an aria mechanism to make them ignored by assistive technologies and with any attribute to set a textual alternative.
+ 
+#### Set8
+
+All the elements of **Set7** identified as decorative image by marker usage (see Notes for details about detection through marker)
+
+#### Set9
+
+All the elements of **Set7** identified neither as informative image, nor as decorative image by marker usage (see Notes for details about detection through marker)
 
 ### Process
 
-None
+##### Test1
+
+For each element of **Set3**, raise a MessageA.
+
+##### Test2
+
+For each element of **Set6**, raise a MessageB.
+
+##### Test3
+
+For each element of **Set8**, raise a MessageC.
+
+##### Test4
+
+For each element of **Set9**, raise a MessageD.  
+
+#### Messages
+
+##### MessageA
+
+-    code : **CheckNatureOfElementWithoutTextualAlternative** 
+-    status: Pre-Qualified
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute , `"href"` attribute 
+-    present in source : yes
+
+##### MessageB
+
+-    code : **CheckNatureOfElementHiddenWithAria** 
+-    status: Pre-Qualified
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute , `"href"` attribute 
+-    present in source : yes
+
+##### MessageC 
+
+-    code : **DecorativeElementWithNotEmptyTextualAlternative** 
+-    status: Failed
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute , `"href"` attribute 
+-    present in source : yes
+
+##### MessageD
+
+-    code : **CheckNatureOfElementWithTextualAlternative** 
+-    status: Pre-Qualified
+-    parameter : `"alt"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute , `"href"` attribute 
+-    present in source : yes
 
 ### Analysis
 
-#### Not Tested
+#### Not Applicable
 
-In all cases
+The page has no `<area>` tag of an image map (**Set1**, **Set4** and **Set7** are empty) or they are all marked as informative
 
+#### Passed 
+
+The page only contains area marked as decorative, with an empty textual alternative or with an aria mechanism to make 
+them ignored by assistive technologies :  (**Set2** or **Set5** are not empty AND **Set3**, **Set6**, **Set8**, **Set9** are empty)
+
+#### Failed
+
+At least one `<area>` tag of an image map identified as decorative, has a not empty textual alternative (**Set8** is not empty)
+
+#### Pre-qualified
+
+In all other cases
+
+## Notes
+
+### Textual alternative detection
+
+The textual alternative can be set by the presence of any the following elements : 
+
+* Text associated via the `aria-labelledby` WAI-ARIA attribute 
+* Presence of an `aria-label` WAI-ARIA attribute
+* Presence of an `alt` attribute
+
+That order has to be respected to compute the textual alternative.
+
+For instance, if an `aria-label` WAI-ARIA attribute and an `alt` attribute are both present, 
+the content of the `aria-label` WAI-ARIA attribute is considered as the textual alternative.
+
+### Markers 
+
+**Informative images** markers are set through the **INFORMATIVE_IMAGE_MARKER** parameter.
+
+**Decorative images** markers are set through the **DECORATIVE_IMAGE_MARKER** parameter.
+
+The value(s) passed as marker(s) will be checked against the following attributes:
+
+- `class`
+- `id`
+- `role`
+
+### Captcha detection
+
+An element is identified as a CAPTCHA when the "captcha" occurrence is found :
+
+- on one attribute of the element
+- or within the text of the element
+- or on one attribute of one parent of the element
+- or within the text of one parent of the element
+- or on one attribute of a sibling of the element
+- or within the text of a sibling of the element
 
 ## Files
 

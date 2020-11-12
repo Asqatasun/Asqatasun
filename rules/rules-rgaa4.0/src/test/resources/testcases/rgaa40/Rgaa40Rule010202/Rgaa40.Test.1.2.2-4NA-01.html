@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.1.2.2 NA 01</title>
+</head>
+<body class="NA">
+<div>
+    <h1>Rgaa 4.0 Test.1.2.2 NA 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#zone-non-cliquable">zone non cliquable</a> (balise <code>&lt;area&gt;</code> sans attribut <code>href</code>) <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-de-decoration">de décoration</a>, vérifie-t-elle une de ces conditions ?</p>
+            <ul>
+            <li>La balise <code>&lt;area&gt;</code> possède un attribut <code>alt</code> vide (<code>alt=""</code>) et est dépourvue de tout autre attribut permettant de fournir une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#alternative-textuelle-image">alternative textuelle</a>.</li>
+            <li>La balise <code>&lt;area&gt;</code> possède un attribut WAI-ARIA <code>aria-hidden="true"</code> ou <code>role="presentation"</code>.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <a href="mock-link.html">
+            <map id="mock-map1" name="mock-map1">
+                <area href="mock-area.html" alt="area within link"/>
+            </map>
+        </a>
+        <map id="mock-map3" name="mock-map3">
+            <area href="mock-area.html" alt="captcha"/>
+        </map>
+        <map id="mock-map4" name="mock-map4" class="informative-image">
+            <area href="mock-area.html" alt=""/>
+        </map>
+        <map id="mock-map2" name="mock-map2">
+            <area href="mock-area.html" alt="area within link"/>
+        </map>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NA.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

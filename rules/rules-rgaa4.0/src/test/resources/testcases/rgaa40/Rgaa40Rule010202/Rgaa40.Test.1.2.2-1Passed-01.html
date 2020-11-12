@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.1.2.2 Passed 01</title>
+</head>
+<body class="Passed">
+<div>
+    <h1>Rgaa 4.0 Test.1.2.2 Passed 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="testcase">
+        <!-- Code taken from https://developer.mozilla.org/fr/docs/Web/HTML/Element/area -->
+        <map name="infographic" class="decorative-image">
+            <area shape="rect" coords="184,6,253,27" href="https://mozilla.org" target="_blank" alt="" />
+            <area shape="circle" coords="130,136,60" href="https://developer.mozilla.org/" target="_blank" aria-hidden="true" alt="MDN" />
+            <area shape="poly" coords="130,6,253,96,223,106,130,39"
+                  href="https://developer.mozilla.org/docs/Web/Guide/Graphics" target="_blank" role="presentation" alt="Graphics" />
+            <area shape="poly" coords="253,96,207,241,189,217,223,103"
+                  href="https://developer.mozilla.org/docs/Web/HTML" target="_blank" aria-hidden="true" alt="" />
+            <area shape="poly" coords="207,241,54,241,72,217,189,217"
+                  href="https://developer.mozilla.org/docs/Web/JavaScript" target="_blank" role="presentation" aria-label="JavaScript"/>
+            <area shape="poly" coords="54,241,6,97,36,107,72,217"
+                  href="https://developer.mozilla.org/docs/Web/API" target="_blank" role="presentation" alt="Web APIs"/>
+            <area shape="poly" coords="6,97,130,6,130,39,36,107"
+                  href="https://developer.mozilla.org/docs/Web/CSS" target="_blank" aria-hidden="true" alt="CSS"/>
+        </map>
+        <img usemap="#infographic" src="https://interactive-examples.mdn.mozilla.net/media/examples/mdn-info.png" alt="MDN infographic" class="informative-image"/>
+
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#zone-non-cliquable">zone non cliquable</a> (balise <code>&lt;area&gt;</code> sans attribut <code>href</code>) <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-de-decoration">de décoration</a>, vérifie-t-elle une de ces conditions ?</p>
+            <ul>
+            <li>La balise <code>&lt;area&gt;</code> possède un attribut <code>alt</code> vide (<code>alt=""</code>) et est dépourvue de tout autre attribut permettant de fournir une <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#alternative-textuelle-image">alternative textuelle</a>.</li>
+            <li>La balise <code>&lt;area&gt;</code> possède un attribut WAI-ARIA <code>aria-hidden="true"</code> ou <code>role="presentation"</code>.</li>
+            </ul>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        Passed.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
