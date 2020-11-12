@@ -19,7 +19,11 @@
  */
 package org.asqatasun.rules.rgaa40;
 
-import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
+import static org.asqatasun.rules.keystore.AttributeStore.*;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.OBJECT_TYPE_IMG_WITHOUT_LEGEND_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.CssLikeQueryStore.OBJECT_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.EvidenceStore.COMPUTED_LINK_TITLE;
+import static org.asqatasun.rules.keystore.HtmlElementStore.TEXT_ELEMENT2;
 
 /**
  * Implementation of rule 1.2.3 (referential RGAA 4.0)
@@ -27,13 +31,21 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
  * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-2-3.md">rule 1.2.3 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-2-3">1.2.3 rule specification</a>
  */
-public class Rgaa40Rule010203 extends AbstractNotTestedRuleImplementation {
+public class Rgaa40Rule010203 extends AbstractDecorativeImageEmptyAlternativePageRuleImplementation {
 
     /**
      * Default constructor
      */
     public Rgaa40Rule010203() {
-        super();
+        super(
+            OBJECT_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY,
+            OBJECT_TYPE_IMG_WITHOUT_LEGEND_CSS_LIKE_QUERY,
+            TITLE_ATTR,
+            ARIA_LABEL_ATTR,
+            COMPUTED_LINK_TITLE,
+            TEXT_ELEMENT2,
+            DATA_ATTR
+        );
     }
 
 }
