@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.1.2.4 NA 01</title>
+</head>
+<body class="NA">
+<div>
+    <h1>Rgaa 4.0 Test.1.2.4 NA 01</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Chaque image vectorielle (balise <code>&lt;svg&gt;</code>) <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#image-de-decoration">de décoration</a>, sans <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#legende">légende</a>, vérifie-t-elle ces conditions ?</p>
+            <ul>
+            <li>La balise <code>&lt;svg&gt;</code> possède un attribut WAI-ARIA <code>aria-hidden="true"</code>.</li>
+            <li>La balise <code>&lt;svg&gt;</code> et ses enfants sont dépourvus d’<a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#alternative-textuelle-image">alternative textuelle</a>.</li>
+            <li>Les balises <code>&lt;title&gt;</code> et <code>&lt;desc&gt;</code> sont absentes ou vides.</li>
+            <li>La balise <code>&lt;svg&gt;</code> et ses enfants sont dépourvus d’attribut <code>title</code>.</li>
+            </ul>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <a href="mock-link.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 101" aria-hidden="true">
+                <circle cx="50" cy="50" r="40"/>
+            </svg>
+        </a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 102" aria-label="CAPTCHA meaning of the image">
+            <circle cx="50" cy="50" r="40"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 103" aria-hidden="true" class="informative-image">
+            <circle cx="50" cy="50" r="40"/>
+        </svg>
+        <figure>
+            <figcaption>Legend of image</figcaption>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 104" aria-hidden="true">
+                <circle cx="50" cy="50" r="40"/>
+            </svg>
+        </figure>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        NA.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>
