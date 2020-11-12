@@ -38,7 +38,7 @@
                         </svg>
                     </a>
                     <a  class="asqatasun-link-svg"
-                        href="https://doc.asqatasun.org/en/"
+                        href="https://doc.asqatasun.org/"
                         title="<fmt:message key="footer.link-doc"/>"
                         aria-label="<fmt:message key="footer.link-doc"/>">
                         <svg    class="icon_doc"
