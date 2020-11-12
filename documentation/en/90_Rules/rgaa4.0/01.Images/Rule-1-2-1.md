@@ -3,7 +3,7 @@
 ## Summary
 
 This test consists in checking whether the textual alternative of each decorative image is empty or whether aria 
-attributes are well-used to make them ignored by assistive technologies
+attributes are well-used to make them ignored by assistive technologies.
 
 ## Business description
 
@@ -50,10 +50,10 @@ attributes are well-used to make them ignored by assistive technologies
 
 #### Set1
 
-All the `<img>` tags not within a link and not identified as captcha (see Notes about captcha detection) with an empty 
-textual alternative and without aria mechanism to make them ignored by assistive technologies 
+All the `<img>` tags, not within a link, not identified as captcha (see Notes about captcha detection) and without legend with an empty 
+textual alternative
 
-css-selector : `img[alt~=^$]:not([usemap]):not(a img):not([title]):not([aria-label]):not([aria-labelledby]):not([aria-hidden=true]):not([role=presentation])`
+css-selector : `img[alt~=^$]:not([usemap]):not(a img):not([title]):not([aria-label]):not([aria-labelledby]):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img)`
 
 #### Set2
 
@@ -65,14 +65,10 @@ All the elements of **Set1** identified neither as informative image, nor as dec
 
 #### Set4
 
-All the `<img>` tags not within a link and not identified as captcha (see Notes about captcha detection) with a not empty 
-textual alternative and without aria mechanism to make them ignored by assistive technologies 
+All the `<img>` tags, not within a link, not identified as captcha (see Notes about captcha detection) and without legend  
+with an aria mechanism to make them ignored by assistive technologies 
 
-css-selector : 
-`img[title]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]), 
-img[aria-label]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]),
-img[aria-labelledby]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]),
-img[alt]:not([usemap]):not(a img):not([alt~=^\\s*$]):not([aria-hidden=true]):not([role=presentation])`
+css-selector : `img[role=presentation]:not([usemap]):not(a img):not(figure:has(figcaption) img),img[aria-hidden=true]:not([usemap]):not(a img):not(figure:has(figcaption) img)`
 
 #### Set5
 
@@ -84,10 +80,13 @@ All the elements of **Set4** identified neither as informative image, nor as dec
 
 #### Set7
 
-All the `<img>` tags not within a link and not identified as captcha (see Notes about captcha detection) with an
- aria mechanism to make them ignored by assistive technologies 
-
-css-selector : `img[role=presentation]:not([usemap]):not(a img), img[aria-hidden=true]:not([usemap]):not(a img)`
+All the `<img>` tags, not within a link, not identified as captcha (see Notes about captcha detection) and without legend,  
+without any an aria mechanism to make them ignored by assistive technologies and with any attribute to set a textual alternative.
+ 
+css-selector : `"img[title]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img),
+                 img[aria-label]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img),
+                 img[aria-labelledby]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img),
+                 img[alt]:not([usemap]):not(a img):not([alt~=^\\s*$]):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img)`
 
 #### Set8
 
@@ -103,15 +102,15 @@ All the elements of **Set7** identified neither as informative image, nor as dec
 
 ##### Test1
 
-For each element of **Set5**, raise a MessageA. 
+For each element of **Set3**, raise a MessageA.
 
 ##### Test2
 
-For each element of **Set3**, raise a MessageB.
+For each element of **Set6**, raise a MessageB.
 
 ##### Test3
 
-For each element of **Set6**, raise a MessageC.
+For each element of **Set8**, raise a MessageC.
 
 ##### Test4
 
@@ -119,30 +118,30 @@ For each element of **Set9**, raise a MessageD.
 
 #### Messages
 
-##### MessageA 
-
--    code : **DecorativeElementWithNotEmptyTextualAlternative** 
--    status: Failed
--    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
--    present in source : yes
-
-##### MessageB
+##### MessageA
 
 -    code : **CheckNatureOfElementWithoutTextualAlternative** 
 -    status: Pre-Qualified
 -    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
 -    present in source : yes
 
-##### MessageC
+##### MessageB
 
--    code : **CheckNatureOfElementWithTextualAlternative** 
+-    code : **CheckNatureOfElementHiddenWithAria** 
 -    status: Pre-Qualified
+-    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
+-    present in source : yes
+
+##### MessageC 
+
+-    code : **DecorativeElementWithNotEmptyTextualAlternative** 
+-    status: Failed
 -    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
 -    present in source : yes
 
 ##### MessageD
 
--    code : **CheckNatureOfElementHiddenWithAria** 
+-    code : **CheckNatureOfElementWithTextualAlternative** 
 -    status: Pre-Qualified
 -    parameter : `"alt"` attribute, `"title"` attribute, `"aria-label"` attribute, `"computed accessible name"`, `"role"` attribute, `"src"` attribute 
 -    present in source : yes
@@ -151,17 +150,16 @@ For each element of **Set9**, raise a MessageD.
 
 #### Not Applicable
 
-The page has no `<img>` tag (**Set1**, **Set4** and **Set7** are empty) or all the images are marked as informatives
+The page has no `<img>` tag (**Set1**, **Set4** and **Set7** are empty) or all the images are marked as informative
 
 #### Passed 
 
 The page only contains images marked as decorative, with an empty textual alternative or with an aria mechanism to make 
-them ignored by assistive technologies :  (**Set2** or **Set8** are not empty AND **Set3**, **Set5**, **Set6**, **Set9** are empty)
-
+them ignored by assistive technologies :  (**Set2** or **Set5** are not empty AND **Set3**, **Set6**, **Set8**, **Set9** are empty)
 
 #### Failed
 
-At least one `<img>` tag identified as decorative, has a not empty textual alternative (**Set5** is not empty)
+At least one `<img>` tag identified as decorative, has a not empty textual alternative (**Set8** is not empty)
 
 #### Pre-qualified
 
