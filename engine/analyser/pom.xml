@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>5.0.0-alpha.2</version>
+        <version>5-SNAPSHOT</version>
     </parent>
     <artifactId>asqatasun-analyser</artifactId>
     <name>analyser</name>
