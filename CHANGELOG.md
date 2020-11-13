@@ -9,14 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-WIP:
-
-* [#163 - Added version of RGAA 3.2017](https://github.com/Asqatasun/Asqatasun/issues/163)
+* Added version 4.0 of RGAA
+* Added Asqatasun API 1.0.0
 
 ### Changed
+
+* SpringBoot
+* Flyway
+
 ### Deprecated
 ### Removed
+
+- Disable site audit (crawler) [#488](https://gitlab.com/asqatasun/Asqatasun/-/issues/488) 
+
 ### Fixed
+
+- Allow IPv6 client  [#357](https://gitlab.com/asqatasun/Asqatasun/-/issues/357) 
+
+
 ### Security
 
 ## Asqatasun 4.1.0, 2020-04-03
