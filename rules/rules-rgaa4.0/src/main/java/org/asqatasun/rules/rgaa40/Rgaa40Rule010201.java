@@ -76,8 +76,7 @@ public class Rgaa40Rule010201 extends AbstractMarkerPageRuleImplementation {
      */
     private final ElementHandler<Element> imgWithNotEmptyAlternativeWithoutMarkerHandler = new ElementHandlerImpl();
 
-
-    String[] eeList = new String[]{ALT_ATTR, TITLE_ATTR, ARIA_LABEL_ATTR, COMPUTED_LINK_TITLE, ROLE_ATTR, SRC_ATTR};
+    private String[] eeList = new String[]{ALT_ATTR, TITLE_ATTR, ARIA_LABEL_ATTR, COMPUTED_LINK_TITLE, ROLE_ATTR, SRC_ATTR};
 
     /**
      * Default constructor

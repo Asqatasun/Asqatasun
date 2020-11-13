@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rgaa 4.0 Test.1.2.3 NMI 01</title>
+    <title>Rgaa 4.0 Test.1.2.3 NA 01</title>
 </head>
-<body class="NMI">
+<body class="NA">
 <div>
-    <h1>Rgaa 4.0 Test.1.2.3 NMI 01</h1>
+    <h1>Rgaa 4.0 Test.1.2.3 NA 01</h1>
 
     <!-- START [test-detail] -->
     <div class="test-detail" lang="fr">
@@ -21,25 +21,25 @@
 
     <!-- START [testcase] -->
     <div class="testcase">
-        <object type="image" data="dummy.png" aria-hidden="true"/>
+        <a href="https://example.org/"><object type="image" data="dummy.png" aria-hidden="true" class="decorative-image"/></a>
+
+        <object type="image" data="dummy.png" aria-hidden="true" aria-label="captcha" class="decorative-image"/>
+
+        <object type="image" data="dummy.png" aria-hidden="true" class="informative-image"/>
+
         <figure>
-            <object type="image" data="dummy.png" aria-hidden="true"/>
+            <figcaption>Legend of image</figcaption>
+            <object type="image" data="dummy.png" aria-hidden="true" class="decorative-image"/>
+            <object type="image" data="dummy.png" aria-label="" class="decorative-image"/>
+            <object type="image" data="dummy.png" aria-labelledby="" class="decorative-image"/>
+            <object type="image" data="dummy.png" aria-labelledby="" class="decorative-image">Any text</object>
         </figure>
-    </div>
-    <div class="testcase">
-        <object type="image" data="dummy.png" />
-        <object type="image" data="dummy.png" aria-hidden="true" aria-labelledby="" />
-        <object type="image" data="dummy.png" aria-hidden="true" aria-label="" />
-        <object type="image" data="dummy.png" aria-hidden="true" title="" />
-        <object type="image" data="dummy.png" aria-hidden="true" >
-            Textual alternative
-        </object>
     </div>
     <!-- END [testcase] -->
 
     <!-- START [test-explanation] -->
     <div class="test-explanation">
-        NMI.
+        NA.
     </div>
     <!-- END [test-explanation] -->
 </div>

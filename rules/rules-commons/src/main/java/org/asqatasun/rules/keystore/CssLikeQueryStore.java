@@ -32,14 +32,22 @@ public final class CssLikeQueryStore {
     public static final String BASIC_IMG_CSS_LIKE_QUERY="img:not([usemap]):not(a img), " +
         "[role=img]:not(a [role=img]):not(svg):not(area):not(canvas):not(input[type=image]):not(embed):not(object[type=image])";
     public static final String IMG_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
-        "img[alt~=^$]:not([usemap]):not(a img):not([title]):not([aria-label]):not([aria-labelledby]):not([aria-hidden=true]):not([role=presentation])";
+        "img[alt~=^$]:not([usemap])" +
+                    ":not(a img)" +
+                    ":not([title])" +
+                    ":not([aria-label])" +
+                    ":not([aria-labelledby])" +
+                    ":not([aria-hidden=true])" +
+                    ":not([role=presentation])" +
+                    ":not(figure:has(figcaption) img)";
     public static final String IMG_WITH_NOT_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
-        "img[title]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation])," +
-        "img[aria-label]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation])," +
-        "img[aria-labelledby]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation])," +
-        "img[alt]:not([usemap]):not(a img):not([alt~=^\\s*$]):not([aria-hidden=true]):not([role=presentation])";
+        "img[title]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img)," +
+        "img[aria-label]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img)," +
+        "img[aria-labelledby]:not([usemap]):not(a img):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img)," +
+        "img[alt]:not([usemap]):not(a img):not([alt~=^\\s*$]):not([aria-hidden=true]):not([role=presentation]):not(figure:has(figcaption) img)";
     public static final String IMG_ARIA_HIDDEN_CSS_LIKE_QUERY =
-        "img[role=presentation]:not([usemap]):not(a img), img[aria-hidden=true]:not([usemap]):not(a img)";
+        "img[role=presentation]:not([usemap]):not(a img):not(figure:has(figcaption) img), " +
+            "img[aria-hidden=true]:not([usemap]):not(a img):not(figure:has(figcaption) img)";
     public static final String IMG_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
                     "img[alt]:not(a img)"; 
     public static final String IMG_WITH_ALT_NOT_IN_LINK_WITHOUT_LONGDESC_CSS_LIKE_QUERY=
@@ -48,34 +56,53 @@ public final class CssLikeQueryStore {
     public static final String IMG_WITH_ISMAP_ATTR_CSS_LIKE_QUERY=
                     "img[ismap] , "
                     +"input[type=image][ismap]"; 
-    public static final String IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY=
-                    "img[alt]:not([longdesc])"; 
-    public static final String APPLET_WITH_ALT_CSS_LIKE_QUERY=
-                    "applet[alt]"; 
-    public static final String APPLET_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "applet[alt]:not(a applet)"; 
-    public static final String APPLET_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "applet:not(a applet)";
-    public static final String OBJECT_TYPE_IMG_CSS_LIKE_QUERY=
-                    "object[type^=image]"; 
-    public static final String OBJECT_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "object[type^=image]:not(a object)"; 
-    public static final String EMBED_TYPE_IMG_CSS_LIKE_QUERY=
-                    "embed[type^=image]"; 
-    public static final String EMBED_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "embed[type^=image]:not(a embed)"; 
-    public static final String AREA_WITH_ALT_CSS_LIKE_QUERY=
-                    "area[alt]"; 
-    public static final String AREA_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "area[alt]:not(a area)"; 
-    public static final String AREA_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "area:not(a area)"; 
-    public static final String AREA_WITH_ALT_WITHOUT_HREF_ATTR_CSS_LIKE_QUERY=
-                    "area[alt]:not([href])"; 
-    public static final String FORM_BUTTON_CSS_LIKE_QUERY="input[type=image]";
-    public static final String FORM_BUTTON_NOT_IN_LINK_CSS_LIKE_QUERY="input[type=image]:not(a input[type=image])";
-    public static final String FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY=
-                    "input[type=image][alt]";
+    public static final String IMG_WITH_ALT_WITHOUT_LONGDESC_CSS_LIKE_QUERY = "img[alt]:not([longdesc])";
+    public static final String APPLET_WITH_ALT_CSS_LIKE_QUERY = "applet[alt]";
+    public static final String APPLET_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY = "applet[alt]:not(a applet)";
+    public static final String APPLET_NOT_IN_LINK_CSS_LIKE_QUERY = "applet:not(a applet)";
+    public static final String OBJECT_TYPE_IMG_CSS_LIKE_QUERY = "object[type^=image]";
+    public static final String OBJECT_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY = "object[type^=image]:not(a object)";
+    public static final String OBJECT_TYPE_IMG_WITHOUT_LEGEND_CSS_LIKE_QUERY=
+                    "object[type^=image]:not(figure:has(figcaption) object)";
+    public static final String OBJECT_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
+        "object[type^=image][aria-hidden=true]" +
+            ":not(a object)" +
+            ":not([title])" +
+            ":not([aria-label])" +
+            ":not([aria-labelledby])" +
+            ":not(figure:has(figcaption) object)";
+    public static final String EMBED_TYPE_IMG_CSS_LIKE_QUERY = "embed[type^=image]";
+    public static final String EMBED_TYPE_IMG_WITHOUT_LEGEND_CSS_LIKE_QUERY =
+        "embed[type^=image]:not(figure:has(figcaption) embed)";
+    public static final String EMBED_TYPE_IMG_NOT_IN_LINK_CSS_LIKE_QUERY = "embed[type^=image]:not(a embed)";
+    public static final String EMBED_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
+        "embed[type^=image][aria-hidden=true]" +
+            ":not(a embed)" +
+            ":not([title])" +
+            ":not([aria-label])" +
+            ":not([aria-labelledby])" +
+            ":not(figure:has(figcaption) embed)";
+    public static final String CANVAS_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
+        "canvas[aria-hidden=true]" +
+            ":not(a canvas)" +
+            ":not([title])" +
+            ":not([aria-label])" +
+            ":not([aria-labelledby])" +
+            ":not(figure:has(figcaption) canvas)";
+    public static final String SVG_WITH_EMPTY_ALTERNATIVE_CSS_LIKE_QUERY =
+        "svg[aria-hidden=true]" +
+            ":not(a svg)" +
+            ":not([title])" +
+            ":not([aria-label])" +
+            ":not([aria-labelledby])" +
+            ":not(figure:has(figcaption) svg)";
+    public static final String AREA_WITH_ALT_CSS_LIKE_QUERY = "area[alt]";
+    public static final String AREA_WITH_ALT_NOT_IN_LINK_CSS_LIKE_QUERY = "area[alt]:not(a area)";
+    public static final String AREA_NOT_IN_LINK_CSS_LIKE_QUERY = "area:not(a area)";
+    public static final String AREA_WITH_ALT_WITHOUT_HREF_ATTR_CSS_LIKE_QUERY = "area[alt]:not([href])";
+    public static final String FORM_BUTTON_CSS_LIKE_QUERY = "input[type=image]";
+    public static final String FORM_BUTTON_NOT_IN_LINK_CSS_LIKE_QUERY = "input[type=image]:not(a input[type=image])";
+    public static final String FORM_BUTTON_WITH_ALT_CSS_LIKE_QUERY = "input[type=image][alt]";
     public static final String MAP_WITH_AREA_CHILD_AND_NAME_ATTR_CSS_LIKE_QUERY = 
                     "map:has(area)[name]:not([name~=^\\s*$])";
     public static final String NOT_EMPTY_ALT_ATTR_NOT_IN_LINK_CSS_LIKE_QUERY = 
@@ -88,12 +115,10 @@ public final class CssLikeQueryStore {
     public static final String ARIA_LABELLEDBY_CSS_LIKE_QUERY="[aria-labelledby]"; 
     
     //svg children
-    public static final String NOT_EMPTY_ARIA_TITLE_CSS_LIKE_QUERY = 
-            "title:not(:matchesOwn(^\\s*$))";
-    public static final String NOT_EMPTY_ARIA_DESC_CSS_LIKE_QUERY =
-            "desc:not(:matchesOwn(^\\s*$))";
-    public static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "svg:not(a svg)"; 
+    public static final String NOT_EMPTY_ARIA_TITLE_CSS_LIKE_QUERY = "title:not(:matchesOwn(^\\s*$))";
+    public static final String NOT_EMPTY_ARIA_DESC_CSS_LIKE_QUERY = "desc:not(:matchesOwn(^\\s*$))";
+    public static final String SVG_NOT_IN_LINK_CSS_LIKE_QUERY= "svg:not(a svg)";
+    public static final String SVG_WITHOUT_LEGEND_CSS_LIKE_QUERY= "svg:not(a svg):not(figure:has(figcaption) svg)";
     public static final String SVG_NOT_IN_LINK_WITH_DESC_CHILD_CSS_LIKE_QUERY=
                     "svg:not(a svg):has(desc:not(:matchesOwn(^\\s*$))"; 
     public static final String SVG_NOT_IN_LINK_WITH_ARIA_LABEL_CSS_LIKE_QUERY=
@@ -103,7 +128,9 @@ public final class CssLikeQueryStore {
     public static final String SVG_NOT_IN_LINK_WITH_ARIA_LABEL_AND_ROLE_IMG_CSS_LIKE_QUERY=
                     "svg[role=img][aria-label]:not([aria-label~=^\\s*$]:not(a svg)"; 
     public static final String CANVAS_NOT_IN_LINK_CSS_LIKE_QUERY=
-                    "canvas:not(a canvas)"; 
+                    "canvas:not(a canvas)";
+    public static final String CANVAS_WITHOUT_LEGEND_CSS_LIKE_QUERY=
+                    "canvas:not(figure:has(figcaption) canvas)";
     public static final String CANVAS_NOT_IN_LINK_WITH_NOT_EMPTY_CONTENT_CSS_LIKE_QUERY=
                     "canvas:not(a canvas):not(:matchesOwn(^\\s*$))";
  
