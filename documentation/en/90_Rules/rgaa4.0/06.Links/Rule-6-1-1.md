@@ -141,7 +141,7 @@ All the links that have children different from `<img>`, `<canvas>`, `<object>` 
 
 A link title is seen as not-pertinent in the following cases :
 
--   the link title is blacklisted (regarding the LinkTextBlacklist nomenclature)
+-   the link title is blacklisted (regarding the [LinkTextBlacklist nomenclature](https://doc.asqatasun.org/v5/en/business-rules/rgaa-v4/nomenclatures/linktextblacklist/))
 -   the link only contains not alphanumerics characters
 
 
