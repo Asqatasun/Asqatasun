@@ -1,6 +1,6 @@
 /*
  * Asqatasun - Automated webpage assessment
- * Copyright (C) 2008-2016  Asqatasun.org
+ * Copyright (C) 2008-2020  Asqatasun.org
  *
  * This file is part of Asqatasun.
  *
