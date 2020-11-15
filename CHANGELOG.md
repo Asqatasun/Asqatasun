@@ -9,15 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Added accessibility referential RGAAv4
+* Added accessibility referential **RGAA v4**
 * Added Asqatasun API 1.0.0
 
 ### Changed
 
-* Whole application is now based on SpringBoot
-* Database model is now managed by Flyway, useful for easier model upgrade
-* Docker images have their own dedicated repository https://gitlab.com/asqatasun/asqatasun-docker
-* Documentation website is being revamped https://doc.asqatasun.org/v5/en/
+* Whole application is now based on **SpringBoot**
+* Database model is now managed by **Flyway**, useful for easier model upgrade
+* Documentation website is being revamped: [https://doc.asqatasun.org/v5/en/](https://doc.asqatasun.org/v5/en/)
+* Docker images have their own dedicated repository: [https://gitlab.com/asqatasun/asqatasun-docker](https://gitlab.com/asqatasun/asqatasun-docker)
 
 ### Removed
 
@@ -28,8 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Allow IPv6 client  [#357](https://gitlab.com/asqatasun/Asqatasun/-/issues/357) 
 
-### Deprecated
-### Security
 
 ## Asqatasun 4.1.0, 2020-04-03
 
