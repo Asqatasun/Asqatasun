@@ -137,7 +137,7 @@
     <groupId>org.asqatasun</groupId>
     <artifactId>asqatasun</artifactId>
     <packaging>pom</packaging>
-    <version>5.0.0-rc.1</version>
+    <version>5-SNAPSHOT</version>
 
     <name>asqatasun</name>
     <url>https://asqatasun.org/</url>
