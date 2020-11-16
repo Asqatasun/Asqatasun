@@ -480,19 +480,19 @@
                 <configuration>
                     <tarLongFileMode>gnu</tarLongFileMode>
                     <descriptors>
-                        <descriptor>src/main/resources/descriptor.xml</descriptor>
+                        <descriptor>descriptor.xml</descriptor>
                     </descriptors>
                     <outputDirectory>target</outputDirectory>
-                    <finalName>asqatasun-${asqatasun.version}.i386</finalName>
+                    <finalName>asqatasun-${asqatasun.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
                     <execution>
                         <id>make-assembly</id> <!-- this is used for inheritance merges -->
                         <phase>package</phase> <!-- append to the packaging phase. -->
-<!--                        <goals>-->
-<!--                            <goal>assembly</goal> &lt;!&ndash; goals == mojos &ndash;&gt;-->
-<!--                        </goals>-->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
