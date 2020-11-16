@@ -2,7 +2,7 @@
     xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
-    <id>asqatasun_webapp</id>
+    <id>asqatasun</id>
     <formats>
         <format>tar.gz</format>
     </formats>
@@ -28,174 +28,24 @@
             <outputDirectory>/</outputDirectory>
         </fileSet>
 
-        <!-- Documentation: html FILES -->
-        <fileSet>
-            <directory>${basedir}/../../documentation/target/doc_html/</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-            <excludes>
-                <exclude>nbproject/**/*</exclude>
-                <exclude>SUMMARY.md</exclude>
-            </excludes>
-            <fileMode>644</fileMode>
-            <outputDirectory>/documentation</outputDirectory>
-        </fileSet>
-
-        <!-- SQL engine -->
-        <fileSet>
-            <directory>${basedir}/../../engine/asqatasun-resources/src/main/resources/sql</directory>
-            <includes>
-                <include>asqatasun-10-create-user-and-base.sql</include>
-                <include>asqatasun-20-create-tables.sql</include>
-                <include>asqatasun-30-insert.sql</include>
-            </includes>
-            <fileMode>664</fileMode>
-            <outputDirectory>/install/engine/sql</outputDirectory>
-        </fileSet>
-        <!-- SQL Rules resources -->
-        <fileSet>
-            <directory>${basedir}/../../rules/rules-resources/src/main/resources/sql</directory>
-            <includes>
-                <include>10-rules-resources-insert.sql</include>
-            </includes>
-            <fileMode>664</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <!-- SQL Rules AccessiWeb 2.2 -->
-        <fileSet>
-            <directory>${basedir}/../../rules/rules-accessiweb2.2/src/main/resources/sql</directory>
-            <includes>
-                <include>accessiweb2.2-insert.sql</include>
-            </includes>
-            <fileMode>664</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <!-- SQL Rules RGAA 3.0 -->
-        <fileSet>
-            <directory>${basedir}/../../rules/rules-rgaa3.0/src/main/resources/sql</directory>
-            <includes>
-                <include>rgaa3.0-insert.sql</include>
-            </includes>
-            <fileMode>664</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <!-- SQL Rules RGAA 4.0 -->
-        <fileSet>
-            <directory>${basedir}/../../rules/rules-rgaa4.0/src/main/resources/sql</directory>
-            <includes>
-                <include>rgaa4.0-insert.sql</include>
-            </includes>
-            <fileMode>664</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <!-- SQL Rules SEO 1.0 -->
-        <fileSet>
-            <directory>${basedir}/../../rules/rules-seo1.0/src/main/resources/sql</directory>
-            <includes>
-                <include>seo1.0-insert.sql</include>
-            </includes>
-            <fileMode>664</fileMode>
-            <outputDirectory>/install/rules/sql</outputDirectory>
-        </fileSet>
-        <!-- SQL web-app -->
-        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/sql</directory>
-            <includes>
-                <include>tgol-20-create-tables.sql</include>
-                <include>tgol-30-insert.sql</include>
-            </includes>
-            <fileMode>664</fileMode>
-            <outputDirectory>/install/web-app/sql</outputDirectory>
-        </fileSet>
-
-        <!-- Install files -->
-        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/installation</directory>
-            <includes>
-                <include>install.sh</include>
-                <include>install-SQL.sh</include>
-                <include>uninstall.sh</include>
-                <include>pre-requisites.sh</include>
-                <include>pre-requisites-ubuntu-1404.sh</include>
-                <include>pre-requisites-ubuntu-1804.sh</include>
-                <include>pre-requisites-SQL.sh</include>
-                <include>pre-requisites-SQL-ubuntu-1404.sh</include>
-                <include>pre-requisites-SQL-ubuntu-1804.sh</include>
-                <include>xvfb</include>
-                <include>xvfb@.service</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install</outputDirectory>
-        </fileSet>
-        <!-- Install web-app conf -->
-        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/conf</directory>
-            <includes>
-                <include>ESAPI.properties</include>
-                <include>asqatasun.conf</include>
-            </includes>
-            <fileMode>666</fileMode>
-            <outputDirectory>/install/web-app/conf</outputDirectory>
-        </fileSet>
-        <!-- Install sql utils -->
-        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/sql-management</directory>
-            <includes>
-                <include>PROCEDURE_ACT_list_running_acts.sql</include>
-                <include>PROCEDURE_AUDIT_last_audits.sql</include>
-                <include>PROCEDURE_AUDIT_delete_from_id.sql</include>
-                <include>PROCEDURE_CONTRACT_create.sql</include>
-                <include>tg-set-user-admin.sh</include>
-                <include>tg-create-user.sh</include>
-                <include>ASQA_audit_delete_from_id.sh</include>
-                <include>ASQA_contract_create_SEO.sh</include>
-                <include>ASQA_contract_create_A11Y_RGAA3.sh</include>
-                <include>ASQA_contract_create_A11Y_RGAA4.sh</include>
-                <include>ASQA_contract_create_A11Y_RGAA3_openbar.sh</include>
-                <include>ASQA_contract_create_A11Y_RGAA4_openbar.sh</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/web-app/sql-management</outputDirectory>
-        </fileSet>
-        <!-- Install utils -->
-        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/password-encoder</directory>
-            <includes>
-                <include>jacksum.jar</include>
-                <include>README.txt</include>
-                <include>passwd.sh</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/web-app/sql-management/Passwdmd5</outputDirectory>
-        </fileSet>
-        <!-- Install web-app utils -->
-        <fileSet>
-            <directory>${basedir}/../tgol-resources/src/main/resources/token-master-key-encryptor</directory>
-            <includes>
-                <include>**/*</include>
-            </includes>
-            <fileMode>755</fileMode>
-            <outputDirectory>/install/web-app/token-master-key-encryptor</outputDirectory>
-        </fileSet>
-        <!-- WEB APP .war -->
+        <!-- WEBAPP .war -->
         <fileSet>
             <directory>${basedir}/target</directory>
             <includes>
                 <include>*.war</include>
             </includes>
-            <fileMode>666</fileMode>
-            <outputDirectory>/install/web-app/</outputDirectory>
+            <fileMode>644</fileMode>
+            <outputDirectory>/webapp</outputDirectory>
         </fileSet>
 
-        <!-- Ansible -->
+        <!-- API rest .jar -->
         <fileSet>
-            <directory>${basedir}/../../ansible</directory>
+            <directory>${basedir}/../../server/asqatasun-server/target</directory>
             <includes>
-                <include>**/*</include>
+                <include>*.jar</include>
             </includes>
             <fileMode>644</fileMode>
-            <outputDirectory>/Ansible</outputDirectory>
+            <outputDirectory>/rest-api</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>
