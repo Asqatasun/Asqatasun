@@ -4,10 +4,10 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>asqatasun</artifactId>
-        <version>5-SNAPSHOT</version>
+        <version>5.0.0-rc.1</version>
     </parent>
     <artifactId>documentation</artifactId>
-    <version>5-SNAPSHOT</version>
+    <version>5.0.0-rc.1</version>
     <packaging>jar</packaging>
     <name>asqatasun-documentation</name>
 

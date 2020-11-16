@@ -1,10 +1,10 @@
-===== Release 5.0.0-alpha.2 =====
+===== Release 5.0.0-rc.1 =====
 
 Commits    Contributors
 --------------------------
-  3524	Jérôme Kowalczyk
-   973	Fabrice Gangler
-   790	Matthieu FAURE
+  3532	Jérôme Kowalczyk
+   984	Fabrice Gangler
+   799	Matthieu FAURE
    137	Anthony Lingua
     52	neyo2010
     51	sofien-hamdi

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>engine</artifactId>
-        <version>5-SNAPSHOT</version>
+        <version>5.0.0-rc.1</version>
     </parent>
     <artifactId>asqatasun-resources</artifactId>
     <name>asqatasun-resources</name>
