@@ -25,12 +25,14 @@ import java.util.Map;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.util.factory.DateFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
  * 
  * @author jkowalczyk
  */
+@Profile("!test")
 @Component("fileContentLoaderFactory")
 public class FileContentLoaderFactoryImpl implements ContentLoaderFactory {
 
