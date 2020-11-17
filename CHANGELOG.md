@@ -9,24 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Added accessibility referential **RGAA v4**
-* Added Asqatasun API 1.0.0
+- Added accessibility referential **RGAA v4**
+- Added REST **API** `v1.0.0` with Swagger playground
 
 ### Changed
 
-* Whole application is now based on **SpringBoot**
-* Database model is now managed by **Flyway**, useful for easier model upgrade
-* Documentation website is being revamped: [https://doc.asqatasun.org/v5/en/](https://doc.asqatasun.org/v5/en/)
-* Docker images have their own dedicated repository: [https://gitlab.com/asqatasun/asqatasun-docker](https://gitlab.com/asqatasun/asqatasun-docker)
+- Documentation website is being revamped: [https://doc.asqatasun.org/v5/en/](https://doc.asqatasun.org/v5/en/)
+- Docker images have their own dedicated repository: [https://gitlab.com/asqatasun/asqatasun-docker](https://gitlab.com/asqatasun/asqatasun-docker)
+- Audits are now performed using **Firefox 78** instead of Firefox 34
+- Scenario audits now use **Selenium IDE** instead of the deprecated Selenium Builder
+- Database model is now managed by **Flyway**, useful for easier model upgrade
+- Whole application is now based on **SpringBoot**
+  - Tomcat server is no longer needed
+  - a single java file (`.war`) contains all that is needed for webapp (except Firefox and database server)
+  - a single java file (`.jar`) contains all that is needed for REST server
 
 ### Removed
 
 - Disabled site audit (crawler) [#488](https://gitlab.com/asqatasun/Asqatasun/-/issues/488). 
   This will be re-implemented for v5.1.0 [#521](https://gitlab.com/asqatasun/Asqatasun/-/issues/521)
-  
+- Following pre-requisites are no longer necessary: `XVFB` and `Tomcat` server. 
+
 ### Fixed
 
 - Allow IPv6 client  [#357](https://gitlab.com/asqatasun/Asqatasun/-/issues/357) 
+
 
 
 ## Asqatasun 4.1.0, 2020-04-03
