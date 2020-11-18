@@ -25,6 +25,7 @@ import jp.vmi.selenium.selenese.Context
 import jp.vmi.selenium.selenese.Parser
 import jp.vmi.selenium.selenese.Runner
 import jp.vmi.selenium.selenese.TestProject
+import jp.vmi.selenium.selenese.command.Echo
 import jp.vmi.selenium.selenese.command.ICommand
 import jp.vmi.selenium.selenese.inject.AbstractDoCommandInterceptor
 import jp.vmi.selenium.selenese.inject.Binder
@@ -71,6 +72,7 @@ open class ScenarioLoaderImpl(private val webResource: WebResource,
     private val driver = remoteWebDriverFactory.createDriver(pageLoadDriverTimeout.toLong())
     private val result = ArrayList<Content>()
     private var pageRank = 1
+    private var auditStateIndex = 1
 
     override fun getResult(): MutableList<Content> = result
 
@@ -102,6 +104,11 @@ open class ScenarioLoaderImpl(private val webResource: WebResource,
     override fun invoke(invocation: MethodInvocation?, context: Context?, command: ICommand?, curArgs: Array<out String>?) =
         (invocation!!.proceed() as Result).also {
             waitPageFullyLoaded()
+            if (command is Echo && (command).arguments[0].equals("audit", true)) {
+                LOGGER.info("Fire new page ${driver.currentUrl} with echo command")
+                fireNewPage(driver.currentUrl+"#"+auditStateIndex, driver.pageSource, executeJsScripts(), driver.getScreenshotAs(OutputType.BYTES))
+                auditStateIndex++
+            }
             if (lastVisitedUrl != driver.currentUrl) {
                 LOGGER.info("Fire new page ${driver.currentUrl}, last visited Url is $lastVisitedUrl")
                     fireNewPage(driver.currentUrl, driver.pageSource, executeJsScripts(), driver.getScreenshotAs(OutputType.BYTES))
