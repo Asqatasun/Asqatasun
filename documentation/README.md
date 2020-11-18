@@ -1,4 +1,3 @@
 # Documentation
 
-- [English](en/) 
-- [Français](fr/) 
+- [English](en/)
