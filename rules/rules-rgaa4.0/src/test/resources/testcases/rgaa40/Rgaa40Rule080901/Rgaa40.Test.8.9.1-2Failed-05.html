@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rgaa 4.0 Test.8.9.1 Failed 05</title>
+</head>
+<body class="Failed">
+<div>
+    <h1>Rgaa 4.0 Test.8.9.1 Failed 05</h1>
+
+    <!-- START [test-detail] -->
+    <div class="test-detail" lang="fr">
+        <p>Dans chaque page web les balises (à l’exception de <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code> et
+            <code>&lt;table&gt;</code>) ne doivent pas être utilisées <a
+                href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#uniquement-a-des-fins-de-presentation">uniquement
+                à des fins de présentation</a>. Cette règle est-elle respectée ?</p>
+    </div>
+    <!-- END [test-detail] -->
+
+    <!-- START [testcase] -->
+    <div class="testcase">
+        <br><br>
+        some text
+        <br>      <br>
+        some text
+        <br>
+        <br>
+    </div>
+    <!-- END [testcase] -->
+
+    <!-- START [test-explanation] -->
+    <div class="test-explanation">
+        Failed:
+        The page contains multiple br tags followed immediately by another br tag.
+    </div>
+    <!-- END [test-explanation] -->
+</div>
+</body>
+</html>

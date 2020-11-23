@@ -19,6 +19,7 @@
  */
 package org.asqatasun.rules.rgaa40;
 
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.asqatasun.entity.audit.TestSolution;
 import org.asqatasun.processor.SSPHandler;
@@ -32,11 +33,14 @@ import org.asqatasun.rules.elementchecker.helper.RuleCheckHelper;
 import org.asqatasun.rules.elementselector.ElementSelector;
 import org.asqatasun.rules.elementselector.SimpleElementSelector;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
 
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_CSS_LIKE_QUERY;
 import static org.asqatasun.rules.keystore.CssLikeQueryStore.LINK_WITHOUT_TARGET_CSS_LIKE_QUERY;
+import static org.asqatasun.rules.keystore.HtmlElementStore.*;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.LINK_WITHOUT_TARGET_MSG;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_MSG;
+import static org.asqatasun.rules.keystore.RemarkMessageStore.CONSECUTIVE_TAGS_USED_FOR_LAYOUT_PURPOSE_MSG;
 import static org.asqatasun.rules.keystore.RemarkMessageStore.NO_PATTERN_DETECTED_MSG;
 
 /**
@@ -53,8 +57,8 @@ public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
     // Tags (p, li, ...) without content
     private ElementHandler<Element> tagWithoutContent = new ElementHandlerImpl();
 
-   // Total number of elements
-    private int totalNumberOfElements = 0;
+    // Consecutive <br> tags without text in between
+    private ElementHandler<Element> consecutiveBrElement = new ElementHandlerImpl();
 
     /**
      * Default constructor
@@ -76,7 +80,22 @@ public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
             new SimpleElementSelector(TAGS_WITHOUT_CONTENT_USED_FOR_LAYOUT_PURPOSE_CSS_LIKE_QUERY);
         tagWithoutContentSelector.selectElements(sspHandler, tagWithoutContent);
 
-        totalNumberOfElements = sspHandler.getTotalNumberOfElements();
+        // Selection of all consecutive <br> tags without text in between
+        ElementHandler<Element> brElementHandler = new ElementHandlerImpl();
+        ElementSelector brElementSelector = new SimpleElementSelector(BR_ELEMENT);
+        brElementSelector.selectElements(sspHandler, brElementHandler);
+        consecutiveBrElement.addAll(brElementHandler.get().stream()
+            .filter(e -> hasNextElementSiblingWithoutTextInBetween(e, BR_ELEMENT))
+            .collect(Collectors.toList()));
+    }
+
+    private static boolean hasNextElementSiblingWithoutTextInBetween(Element element, String nextElementSiblingName) {
+        Element nextElement = element.nextElementSibling();
+        Node nextTextNode = element.nextSibling();
+        String nextText = nextTextNode.toString().trim();
+        return nextElement != null
+            && nextElement.tagName().equals(nextElementSiblingName)
+            && nextText.isEmpty();
     }
 
     @Override
@@ -84,7 +103,7 @@ public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
         SSPHandler sspHandler,
         TestSolutionHandler testSolutionHandler) {
 
-        if (linkWithoutTarget.isEmpty() && tagWithoutContent.isEmpty()) {
+        if (linkWithoutTarget.isEmpty() && tagWithoutContent.isEmpty() && consecutiveBrElement.isEmpty()) {
             sspHandler.getProcessRemarkService().addProcessRemark(
                 TestSolution.NEED_MORE_INFO,
                 RuleCheckHelper.specifyMessageToRule(
@@ -112,11 +131,22 @@ public class Rgaa40Rule080901 extends AbstractPageRuleMarkupImplementation {
             sspHandler,
             tagWithoutContent,
             testSolutionHandler);
+
+        // Consecutive <br> tags without text in between
+        ElementChecker consecutiveBrElementChecker = new ElementPresenceChecker(
+            new ImmutablePair(TestSolution.FAILED, CONSECUTIVE_TAGS_USED_FOR_LAYOUT_PURPOSE_MSG),
+            new ImmutablePair(TestSolution.PASSED, ""));
+        consecutiveBrElementChecker.check(
+            sspHandler,
+            consecutiveBrElement,
+            testSolutionHandler);
     }
 
     @Override
     public int getSelectionSize() {
-        return totalNumberOfElements;
+        return this.tagWithoutContent.get().size()
+            + this.linkWithoutTarget.get().size()
+            + this.consecutiveBrElement.get().size();
     }
 
 }
