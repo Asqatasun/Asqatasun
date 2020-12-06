@@ -35,10 +35,7 @@ The following documentation is only for people who want to **compile** Asqatasun
 
 Tip:
 if you copy `.env.dist` file to `.env` file,
-you can change port numbers, IP adresses and database credentials.
-
-
-
+you can change **port** numbers, **IP** adresses and **database** credentials.
 
 ### Launch Asqatasun webapp
 
@@ -118,7 +115,7 @@ docker-compose up --build
 
 * In your browser:
   - Webapp: go to `http://127.0.0.1:8080/` 
-  - API documentation: go to `http://127.0.0.1:8081/` 
+  - API documentation: go to `http://127.0.0.1:8081/`    (**Swagger** playground)
 * Use this user and this password :
     * `admin@asqatasun.org`
     * `myAsqaPassword`
