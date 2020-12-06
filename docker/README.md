@@ -29,7 +29,7 @@ The following documentation is only for people who want to **compile** Asqatasun
 
 | Service  | Port | URL                                     | User                         | Password                        |
 |----------|------|-----------------------------------------|------------------------------|---------------------------------|
-| Database | 9924 | `jdbc:mysql://localhost:9924/asqatasun` | `asqatasunDatabaseUserLogin` | `asqatasunDatabaseUserP4ssword` |
+| Database | 3306 | `jdbc:mysql://localhost:3306/asqatasun` | `asqatasunDatabaseUserLogin` | `asqatasunDatabaseUserP4ssword` |
 | API      | 8081 | `http://localhost:8081`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
 | Webapp   | 8080 | `http://localhost:8080`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
 
