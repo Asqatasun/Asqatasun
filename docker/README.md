@@ -30,7 +30,7 @@ The following documentation is only for people who want to **compile** Asqatasun
 | Service  | Port | URL                                     | User                         | Password                        |
 |----------|------|-----------------------------------------|------------------------------|---------------------------------|
 | Database | 9924 | `jdbc:mysql://localhost:9924/asqatasun` | `asqatasunDatabaseUserLogin` | `asqatasunDatabaseUserP4ssword` |
-| API      | 8986 | `http://localhost:8986`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
+| API      | 8081 | `http://localhost:8081`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
 | Webapp   | 8080 | `http://localhost:8080`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
 
 Tip:
@@ -118,7 +118,7 @@ docker-compose up --build
 
 * In your browser:
   - Webapp: go to `http://127.0.0.1:8080/` 
-  - API documentation: go to `http://127.0.0.1:8986/` 
+  - API documentation: go to `http://127.0.0.1:8081/` 
 * Use this user and this password :
     * `admin@asqatasun.org`
     * `myAsqaPassword`
@@ -127,7 +127,7 @@ docker-compose up --build
 ```bash
 ASQA_USER="admin%40asqatasun.org" 
 ASQA_PASSWORD="myAsqaPassword"
-API_PREFIX_URL="http://${ASQA_USER}:${ASQA_PASSWORD}@localhost:8986"
+API_PREFIX_URL="http://${ASQA_USER}:${ASQA_PASSWORD}@localhost:8081"
 API_URL="${API_PREFIX_URL}/api/v1/audit/run"
 
 URL_TO_AUDIT=https://www.wikidata.org

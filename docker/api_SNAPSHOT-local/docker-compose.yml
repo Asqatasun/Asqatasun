@@ -19,9 +19,9 @@ services:
 
   # Asqatasun API
   ###############################################################################################################
-  # - port: 8986
-  # - URL:  http://localhost:8986     By default
-  #         http://<host_ip>:8986     By default
+  # - port: 8081
+  # - URL:  http://localhost:8081     By default
+  #         http://<host_ip>:8081     By default
   #         http://<host_ip>:<port>   If you use the .env configuration file
   ##############################################################################################################
   asqatasun-api_dev:
@@ -40,4 +40,4 @@ services:
       DB_PASSWORD: "${DB_PASSWORD:-asqatasunDatabaseUserP4ssword}"
       DB_DATABASE: "${DB_DATABASE:-asqatasun}"
     ports:
-      - "${API_HOST_IP:-0.0.0.0}:${API_HOST_PORT:-8986}:8080"
+      - "${API_HOST_IP:-0.0.0.0}:${API_HOST_PORT:-8081}:8080"
