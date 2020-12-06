@@ -31,7 +31,7 @@ The following documentation is only for people who want to **compile** Asqatasun
 |----------|------|-----------------------------------------|------------------------------|---------------------------------|
 | Database | 9924 | `jdbc:mysql://localhost:9924/asqatasun` | `asqatasunDatabaseUserLogin` | `asqatasunDatabaseUserP4ssword` |
 | API      | 8986 | `http://localhost:8986`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
-| Webapp   | 8982 | `http://localhost:8982`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
+| Webapp   | 8080 | `http://localhost:8080`                 | `admin@asqatasun.org`        | `myAsqaPassword`                |
 
 Tip:
 if you copy `.env.dist` file to `.env` file,
@@ -78,7 +78,7 @@ docker-compose rm -fsv
 docker-compose up --build
 ```
 
-* In your browser, go to `http://127.0.0.1:8982/` 
+* In your browser, go to `http://127.0.0.1:8080/` 
 * Use this user and this password :
     * `admin@asqatasun.org`
     * `myAsqaPassword`
@@ -117,7 +117,7 @@ docker-compose up --build
 ```
 
 * In your browser:
-  - Webapp: go to `http://127.0.0.1:8982/` 
+  - Webapp: go to `http://127.0.0.1:8080/` 
   - API documentation: go to `http://127.0.0.1:8986/` 
 * Use this user and this password :
     * `admin@asqatasun.org`

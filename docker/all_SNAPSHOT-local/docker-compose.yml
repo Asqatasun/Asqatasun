@@ -44,9 +44,9 @@ services:
 
   # Asqatasun webapp
   ###############################################################################################################
-  # - port: 8982
-  # - URL:  http://localhost:8982     By default
-  #         http://<host_ip>:8982     By default
+  # - port: 8080
+  # - URL:  http://localhost:8080     By default
+  #         http://<host_ip>:8080     By default
   #         http://<host_ip>:<port>   If you use the .env configuration file
   ##############################################################################################################
   asqatasun-webapp_dev:
@@ -65,4 +65,4 @@ services:
       DB_PASSWORD: "${DB_PASSWORD:-asqatasunDatabaseUserP4ssword}"
       DB_DATABASE: "${DB_DATABASE:-asqatasun}"
     ports:
-      - "${APP_HOST_IP:-0.0.0.0}:${APP_HOST_PORT:-8982}:8080"
+      - "${APP_HOST_IP:-0.0.0.0}:${APP_HOST_PORT:-8080}:8080"
