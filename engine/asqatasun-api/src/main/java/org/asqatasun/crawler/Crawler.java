@@ -21,9 +21,6 @@
  */
 package org.asqatasun.crawler;
 
-import java.util.Collection;
-import org.asqatasun.entity.service.audit.ContentDataService;
-import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.parameterization.Parametrable;
 
@@ -45,54 +42,4 @@ public interface Crawler extends Parametrable {
      */
     void run();
 
-    /**
-     *
-     * @param webResourceURL
-     */
-    void setSiteURL(String webResourceURL);
-
-    /**
-     *
-     * @param siteName
-     * @param webResourceURL
-     */
-    void setSiteURL(String siteName, Collection<String> webResourceURL);
-
-    /**
-     *
-     * @param pageURL
-     */
-    void setPageURL(String pageURL);
-
-
-    /**
-     *
-     * @param contentDataService
-     */
-    void setContentDataService(ContentDataService contentDataService);
-
-    /**
-     *
-     * @param webResourceDataService
-     */
-    void setWebResourceDataService(WebResourceDataService webResourceDataService);
-
-    /**
-     *
-     * @param outputDir
-     */
-    void setOutputDir(String outputDir);
-
-    /**
-     * 
-     * @param crawlConfigFilePath
-     */
-    void setCrawlConfigFilePath(String crawlConfigFilePath);
-    
-    /**
-     * 
-     * @param persistOnTheFly
-     */
-    void setPersistOnTheFly(boolean persistOnTheFly);
-    
 }

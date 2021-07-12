@@ -21,13 +21,8 @@
  */
 package org.asqatasun.service;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
-import org.asqatasun.crawler.CrawlerFactory;
 import org.asqatasun.entity.audit.Audit;
-import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.entity.service.audit.ContentDataService;
-import org.asqatasun.entity.service.subject.WebResourceDataService;
 import org.asqatasun.entity.subject.WebResource;
 
 /**
@@ -43,52 +38,5 @@ public interface CrawlerService {
      * @return the site crawled
      */
     WebResource crawlSite(Audit audit, String siteUrl);
-
-    /**
-     * @param audit  the current Audit
-     * @param pageUrl  the URL to crawl
-     * @return a page instance from the URL
-     */
-    WebResource crawlPage(Audit audit, String pageUrl);
-    
-    /**
-     * 
-     * @param audit  the current Audit
-     * @param siteUrl  the group of pages URL
-     * @param urlList  the list of URL to crawl
-     * @return a site instance with all the fetched resources
-     */
-    WebResource crawlGroupOfPages(Audit audit, String siteUrl, List<String> urlList);
-
-    /**
-     *
-     * @param crawlerFactory
-     */
-    void setCrawlerFactory(CrawlerFactory crawlerFactory);
-
-    /**
-     *
-     * @param contentDataService
-     */
-    void setContentDataService(ContentDataService contentDataService);
-
-    /**
-     *
-     * @param webResourceDataService
-     */
-    void setWebResourceDataService(WebResourceDataService webResourceDataService);
-
-    /**
-     *
-     * @param auditDataService
-     */
-    void setAuditDataService(AuditDataService auditDataService);
-
-    /**
-     *
-     * @return
-     *      the webResourceDataService instance
-     */
-    WebResourceDataService getWebResourceDataService();
 
 }
