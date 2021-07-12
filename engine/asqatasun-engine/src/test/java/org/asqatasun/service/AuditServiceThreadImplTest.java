@@ -98,6 +98,8 @@ public class AuditServiceThreadImplTest extends TestCase {
         AuditCommand mockAuditCommand = createMock(AuditCommand.class);
         mockAuditCommand.init();
         expectLastCall().once();
+        mockAuditCommand.crawl();
+        expectLastCall().once();
         mockAuditCommand.loadContent();
         expectLastCall().once();
         mockAuditCommand.adaptContent();

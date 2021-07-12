@@ -1,6 +1,6 @@
 /*
  *  Asqatasun - Automated webpage assessment
- *  Copyright (C) 2008-2020  Asqatasun.org
+ *  Copyright (C) 2008-2021  Asqatasun.org
  * 
  *  This file is part of Asqatasun.
  * 
@@ -21,12 +21,16 @@
  */
 package org.asqatasun.service.command;
 
+import org.asqatasun.entity.subject.*;
 import org.easymock.EasyMock;
 import org.asqatasun.entity.audit.AuditStatus;
-import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.service.CrawlerService;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Collections.EMPTY_LIST;
+import static org.easymock.EasyMock.expect;
 
 /**
  *
@@ -56,21 +60,70 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
     /**
      * Test of callCrawlerService method, of class PageAuditCommandImpl.
      */
-    public void testCallCrawlerService() {
+    public void testCrawl() {
         System.out.println("callCrawlerService");
 
+        Site site = new SiteImpl("https://test.org");
+        List<WebResource> pageList = new ArrayList<>();
+        pageList.add(new PageImpl("https://test.org/page1.html"));
+        pageList.add(new PageImpl("https://test.org/page2.html"));
+        pageList.add(new PageImpl("https://test.org/page3.html"));
+        pageList.add(new PageImpl("https://test.org/page4.html"));
         mockInitialisationCalls(false, AuditStatus.CRAWLING);
-        
+
+        expect(mockAudit.getStatus()).andReturn(AuditStatus.CRAWLING).once();
+        expect(mockAudit.getSubject()).andReturn(site).times(2);
+        expect(mockWebResourceDataService.getChildWebResourceCount(site)).andReturn(4L).times(1);
+
+        mockAudit.setStatus(AuditStatus.SCENARIO_LOADING);
+        EasyMock.expectLastCall().once();
+
         EasyMock.expect(mockCrawlerService.crawlSite(mockAudit, siteUrl)).
                 andReturn(EasyMock.createMock(WebResource.class))
                 .once();
+
+        EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+        EasyMock.expect(mockWebResourceDataService.getWebResourceFromItsParent(site, 0, 4)).andReturn(pageList).once();
         setReplayMode();
         
         SiteAuditCommandImpl siteAuditCommand = getInstance();
 
-        siteAuditCommand.callCrawlerService();
-        
+        siteAuditCommand.crawl();
+        System.out.println(siteAuditCommand.scenario);
         setVerifyMode();
+    }
+
+    /**
+     * Test of init method, of class CrawlAuditCommandImpl.
+     */
+    public void testInit() {
+        System.out.println("init");
+
+        mockInitialisationCalls(false, null);
+
+        mockAudit.setStatus(AuditStatus.CRAWLING);
+        EasyMock.expectLastCall().once();
+
+        EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
+
+        setReplayMode();
+
+        // init call is done when instantiated
+        getInstance();
+
+        setVerifyMode();
+    }
+
+    @Override
+    protected void setReplayModeOfLocalMocks() {
+        EasyMock.replay(mockCrawlerService);
+        EasyMock.replay(mockContentDataService);
+    }
+
+    @Override
+    protected void setVerifyModeOfLocalMocks() {
+        EasyMock.verify(mockCrawlerService);
+        EasyMock.verify(mockContentDataService);
     }
 
     /**
@@ -81,7 +134,8 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
          SiteAuditCommandImpl siteAuditCommand = new SiteAuditCommandImpl(
                 siteUrl, 
                 null,
-                Collections.EMPTY_LIST,
+                EMPTY_LIST,
+                mockCrawlerService,
                 mockAuditDataService);
 
         siteAuditCommand.setTestDataService(mockTestDataService);
@@ -96,7 +150,6 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
         siteAuditCommand.setConsolidatorService(mockConsolidatorService);
         siteAuditCommand.setAnalyserService(mockAnalyserService);
         siteAuditCommand.setAdaptationListener(mockAdaptationListener);
-        siteAuditCommand.setCrawlerService(mockCrawlerService);
         siteAuditCommand.setAdaptationTreatmentWindow(5);
         siteAuditCommand.setProcessingTreatmentWindow(5);
         siteAuditCommand.setConsolidationTreatmentWindow(5);
@@ -106,14 +159,5 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
 
         return siteAuditCommand;
     }
-    
-    @Override
-    protected void setReplayModeOfLocalMocks() {
-        EasyMock.replay(mockCrawlerService);
-    }
 
-    @Override
-    protected void setVerifyModeOfLocalMocks() {
-        EasyMock.verify(mockCrawlerService);
-    }
 }

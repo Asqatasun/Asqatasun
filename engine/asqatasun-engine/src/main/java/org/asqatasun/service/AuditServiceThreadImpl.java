@@ -90,6 +90,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
         //FIXME :Taoufiq
         try {
             init();
+            crawl();
             loadContent();
             adaptContent();
             process();
@@ -102,10 +103,10 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     }
 
     @Override
-    public void init() {
-        auditCommand.init();
+    public void init() {auditCommand.init();}
 
-    }
+    @Override
+    public void crawl() {auditCommand.crawl();}
 
     @Override
     public void loadContent() {
@@ -113,9 +114,7 @@ public class AuditServiceThreadImpl implements AuditServiceThread {
     }
 
     @Override
-    public void adaptContent() {
-        auditCommand.adaptContent();
-    }
+    public void adaptContent() {auditCommand.adaptContent();}
 
     @Override
     public void process() {

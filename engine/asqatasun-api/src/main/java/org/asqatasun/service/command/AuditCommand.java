@@ -45,6 +45,11 @@ public interface AuditCommand {
      * 
      */
     void init();
+
+    /**
+     *
+     */
+    void crawl();
     
     /**
      * 

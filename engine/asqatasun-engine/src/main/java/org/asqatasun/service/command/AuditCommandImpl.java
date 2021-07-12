@@ -31,6 +31,7 @@ import org.asqatasun.analyser.AnalyserService;
 import org.asqatasun.consolidator.ConsolidatorService;
 import org.asqatasun.contentadapter.AdaptationListener;
 import org.asqatasun.entity.audit.*;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.reference.Test;
 import org.asqatasun.entity.service.audit.*;
@@ -44,6 +45,8 @@ import org.asqatasun.service.*;
 import org.asqatasun.util.MD5Encoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.asqatasun.entity.contract.ScopeEnum.PAGE;
 
 /**
  *
@@ -65,144 +68,66 @@ public abstract class AuditCommandImpl implements AuditCommand {
     public static final int DEFAULT_PROCESSING_TREATMENT_WINDOW = 4;
     public static final int DEFAULT_ADAPTATION_TREATMENT_WINDOW = 4;
     public static final int DEFAULT_CONSOLIDATION_TREATMENT_WINDOW = 200;
-    
-    private int adaptationTreatmentWindow = DEFAULT_ADAPTATION_TREATMENT_WINDOW;
+
+    protected int adaptationTreatmentWindow = DEFAULT_ADAPTATION_TREATMENT_WINDOW;
     public void setAdaptationTreatmentWindow(int adaptationTreatmentWindow) {
         this.adaptationTreatmentWindow = adaptationTreatmentWindow;
     }
-
-    private int analyseTreatmentWindow = DEFAULT_ANALYSE_TREATMENT_WINDOW;
+    protected int analyseTreatmentWindow = DEFAULT_ANALYSE_TREATMENT_WINDOW;
     public void setAnalyseTreatmentWindow(int analyseTreatmentWindow) {
         this.analyseTreatmentWindow = analyseTreatmentWindow;
     }
-
-    private int consolidationTreatmentWindow = DEFAULT_CONSOLIDATION_TREATMENT_WINDOW;
+    protected int consolidationTreatmentWindow = DEFAULT_CONSOLIDATION_TREATMENT_WINDOW;
     public void setConsolidationTreatmentWindow(int consolidationTreatmentWindow) {
         this.consolidationTreatmentWindow = consolidationTreatmentWindow;
     }
-
-    private int processingTreatmentWindow = DEFAULT_PROCESSING_TREATMENT_WINDOW;
+    protected int processingTreatmentWindow = DEFAULT_PROCESSING_TREATMENT_WINDOW;
     public void setProcessingTreatmentWindow(int processingTreatmentWindow) {
         this.processingTreatmentWindow = processingTreatmentWindow;
     }
     
     private Audit audit;
     @Override
-    public Audit getAudit() {
-        return audit;
-    
-    }
+    public Audit getAudit() {return audit;}
     @Override
     public void setAudit(Audit audit) {
         this.audit = audit;
     }
     
     // The dataServices
-    
-    private AuditDataService auditDataService;
-    public AuditDataService getAuditDataService() {
-        return auditDataService;
-    }
-    public void setAuditDataService(AuditDataService auditDataService) {
-        this.auditDataService = auditDataService;
-    }
+    protected AuditDataService auditDataService;
+    public void setAuditDataService(AuditDataService auditDataService) {this.auditDataService = auditDataService;}
+    protected TestDataService testDataService;
+    public void setTestDataService(TestDataService testDataService) {this.testDataService = testDataService;}
+    protected ParameterDataService parameterDataService;
+    public void setParameterDataService(ParameterDataService parameterDataService) {this.parameterDataService = parameterDataService;}
+    protected WebResourceDataService webResourceDataService;
+    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {this.webResourceDataService = webResourceDataService;}
+    protected ContentDataService contentDataService;
+    public void setContentDataService(ContentDataService contentDataService) {this.contentDataService = contentDataService;}
+    protected ProcessResultDataService processResultDataService;
+    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {this.processResultDataService = processResultDataService;}
+    protected TagDataService tagDataService;
+    public void setTagDataService(TagDataService tagDataService) {this.tagDataService = tagDataService;}
+    protected PreProcessResultDataService preProcessResultDataService;
+    public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {this.preProcessResultDataService = preProcessResultDataService;}
 
-    private TestDataService testDataService;
-    public TestDataService getTestDataService() {
-        return testDataService;
-    }
-    public void setTestDataService(TestDataService testDataService) {
-        this.testDataService = testDataService;
-    }
-    
-    private ParameterDataService parameterDataService;
-    public ParameterDataService getParameterDataService() {
-        return parameterDataService;
-    }
-    public void setParameterDataService(ParameterDataService parameterDataService) {
-        this.parameterDataService = parameterDataService;
-    }
-    
-    private WebResourceDataService webResourceDataService;
-    public WebResourceDataService getWebResourceDataService() {
-        return webResourceDataService;
-    }
-    public void setWebResourceDataService(WebResourceDataService webResourceDataService) {
-        this.webResourceDataService = webResourceDataService;
-    }
-    
-    private ContentDataService contentDataService;
-    public ContentDataService getContentDataService() {
-        return contentDataService;
-    }
-    public void setContentDataService(ContentDataService contentDataService) {
-        this.contentDataService = contentDataService;
-    }
-    
-    private ProcessResultDataService processResultDataService;
-    public ProcessResultDataService getProcessResultDataService() {
-        return processResultDataService;
-    }
-    public void setProcessResultDataService(ProcessResultDataService processResultDataService) {
-        this.processResultDataService = processResultDataService;
-    }
-
-    private TagDataService tagDataService;
-    public void setTagDataService(TagDataService tagDataService) {
-        this.tagDataService = tagDataService;
-    }
-    
-    private PreProcessResultDataService preProcessResultDataService;
-    public PreProcessResultDataService getPreProcessResultDataService() {
-        return preProcessResultDataService;
-    }
-    public void setPreProcessResultDataService(PreProcessResultDataService preProcessResultDataService) {
-        this.preProcessResultDataService = preProcessResultDataService;
-    }
-    
     // The services
-    
-    private ContentAdapterService contentAdapterService;
-    public ContentAdapterService getContentAdapterService() {
-        return contentAdapterService;
-    }
-    public void setContentAdapterService(ContentAdapterService contentAdapterService) {
-        this.contentAdapterService = contentAdapterService;
-    }
-
-    private ProcessorService processorService;
-    public ProcessorService getProcessorService() {
-        return processorService;
-    }
-    public void setProcessorService(ProcessorService processorService) {
-        this.processorService = processorService;
-    }
-    
-    private ConsolidatorService consolidatorService;
-    public ConsolidatorService getConsolidatorService() {
-        return consolidatorService;
-    }
-    public void setConsolidatorService(ConsolidatorService consolidatorService) {
-        this.consolidatorService = consolidatorService;
-    }
-    
-    private AnalyserService analyserService;
-    public AnalyserService getAnalyserService() {
-        return analyserService;
-    }
-    public void setAnalyserService(AnalyserService analyserService) {
-        this.analyserService = analyserService;
-    }   
+    protected ScenarioLoaderService scenarioLoaderService;
+    public void setScenarioLoaderService(ScenarioLoaderService scenarioLoaderService) {this.scenarioLoaderService = scenarioLoaderService;}
+    protected ContentAdapterService contentAdapterService;
+    public void setContentAdapterService(ContentAdapterService contentAdapterService) {this.contentAdapterService = contentAdapterService;}
+    protected ProcessorService processorService;
+    public void setProcessorService(ProcessorService processorService) {this.processorService = processorService;}
+    protected ConsolidatorService consolidatorService;
+    public void setConsolidatorService(ConsolidatorService consolidatorService) {this.consolidatorService = consolidatorService;}
+    protected AnalyserService analyserService;
+    public void setAnalyserService(AnalyserService analyserService) {this.analyserService = analyserService;}
 
     // The listeners
-	private AdaptationListener adaptationListener;
-    public AdaptationListener getAdaptationListener() {
-        return adaptationListener;
-    }
-    public void setAdaptationListener(AdaptationListener adaptationListener) {
-        this.adaptationListener = adaptationListener;
-    }
-    
+    protected AdaptationListener adaptationListener;
+    public void setAdaptationListener(AdaptationListener adaptationListener) {this.adaptationListener = adaptationListener;}
+
     // the options
     private boolean cleanUpRelatedContent = true;
     public void setCleanUpRelatedContent(boolean cleanUpRelatedContent) {
@@ -215,19 +140,25 @@ public abstract class AuditCommandImpl implements AuditCommand {
     /**
      * The audit tags
      */
-    private List tagList;
+    private List<Tag> tagList;
+    protected String scenario;
+    protected String scenarioName;
+    protected ScopeEnum scope;
 
     /**
-     * @param paramSet 
+     * @param paramSet
+     * @param tagList
      * @param auditDataService
      */
     public AuditCommandImpl(
             Set<Parameter> paramSet,
             List<Tag> tagList,
-            AuditDataService auditDataService) {
+            AuditDataService auditDataService,
+            ScopeEnum scope) {
         this.paramSet = paramSet;
         this.tagList = tagList;
         this.auditDataService = auditDataService;
+        this.scope = scope;
         audit = auditDataService.create();
         setStatusToAudit(AuditStatus.PENDING);
     }
@@ -242,9 +173,39 @@ public abstract class AuditCommandImpl implements AuditCommand {
         }
         audit.setTestList(testDataService.getTestListFromParamSet(paramSet));
         audit.setParameterSet(paramSet);
-        setStatusToAudit(AuditStatus.INITIALISATION);
+        setStatusToAudit(AuditStatus.SCENARIO_LOADING);
     }
-    
+
+    @Override
+    public void crawl() {
+        // By default, do nothing
+    }
+
+    @Override
+    public void loadContent() {
+        LOGGER.info("Loading content for " + scenarioName);
+        if (!getAudit().getStatus().equals(AuditStatus.SCENARIO_LOADING) || scenario.isEmpty()) {
+            LOGGER.warn(
+                new StringBuilder("Audit Status is ")
+                    .append(getAudit().getStatus())
+                    .append(" while ")
+                    .append(AuditStatus.SCENARIO_LOADING)
+                    .append(" was required ").toString());
+            setStatusToAudit(AuditStatus.ERROR);
+            return;
+        }
+        // the returned content list is already persisted and associated with
+        // the current audit
+        if (audit.getSubject() != null) {
+            scenarioLoaderService.loadScenario(audit.getSubject(), scenario);
+        } else {
+            scenarioLoaderService.loadScenario(createWebResource(), scenario);
+        }
+        setStatusToAudit(AuditStatus.CONTENT_ADAPTING);
+
+        LOGGER.info(scenarioName +" has been loaded");
+    }
+
     @Override
     public void adaptContent() {
         audit = auditDataService.read(audit.getId());
@@ -788,9 +749,9 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @param url 
      */
     protected void createEmptyPageResource(String url) {
-        Page page = getWebResourceDataService().createPage(url);
+        Page page = webResourceDataService.createPage(url);
         getAudit().setSubject(page);
-        getWebResourceDataService().saveOrUpdate(page);
+        webResourceDataService.saveOrUpdate(page);
     }
     
     /**
@@ -798,9 +759,29 @@ public abstract class AuditCommandImpl implements AuditCommand {
      * @param url 
      */
     protected void createEmptySiteResource(String url) {
-        Site site = getWebResourceDataService().createSite(url);
+        Site site = webResourceDataService.createSite(url);
         getAudit().setSubject(site);
-        getWebResourceDataService().saveOrUpdate(site);
+        webResourceDataService.saveOrUpdate(site);
+    }
+
+    /**
+     * Create the main webResource attached to the audit and then
+     * passed to the scenario loader service
+     *
+     * @return
+     *      a Site instance
+     */
+    private WebResource createWebResource() {
+        WebResource webResource;
+        if (scope.equals(PAGE)) {
+            webResource = webResourceDataService.createPage(scenarioName);
+        } else {
+            webResource = webResourceDataService.createSite(scenarioName);
+        }
+        webResource.setAudit(getAudit());
+        webResourceDataService.saveOrUpdate(webResource);
+        getAudit().setSubject(webResource);
+        return webResource;
     }
 
 }

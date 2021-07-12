@@ -22,26 +22,44 @@
 
 package org.asqatasun.service.command;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.subject.WebResource;
+import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
+import org.asqatasun.service.CrawlerService;
+import org.asqatasun.util.FileNaming;
+import org.asqatasun.util.http.HttpRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.asqatasun.entity.contract.ScopeEnum.DOMAIN;
 
 /**
  *
  * @author jkowalczyk
  */
-public final class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
+public final class SiteAuditCommandImpl extends AuditCommandImpl {
 
      /**
      * Logger
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteAuditCommandImpl.class);
-    
+    /**
+     * The crawlerService instance
+     */
+    private final CrawlerService crawlerService;
+    private final String url;
+
     /**
      * 
      * @param siteUrl
@@ -49,23 +67,71 @@ public final class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
      * @param auditDataService 
      */
     public SiteAuditCommandImpl(
-            String siteUrl, 
+            String siteUrl,
             Set<Parameter> paramSet,
             List<Tag> tagList,
+            CrawlerService crawlerService,
             AuditDataService auditDataService) {
-        super(paramSet, tagList, auditDataService);
-        setUrl(siteUrl);
-    }
-    
-    @Override
-    public void callCrawlerService() {
-        LOGGER.info("Launching crawler for page " + getUrl());
-        getCrawlerService().crawlSite(getAudit(), getUrl());
+        super(paramSet, tagList, auditDataService, DOMAIN);
+        this.crawlerService = crawlerService;
+        this.url = siteUrl;
     }
 
     @Override
-    void createEmptyWebResource() {
-        createEmptySiteResource(getUrl());
+    public void init() {
+        if (HttpRequestHandler.getInstance().isUrlAccessible(url)) {
+            super.init();
+            setStatusToAudit(AuditStatus.CRAWLING);
+        } else {
+            super.init();
+            createEmptySiteResource(url);
+            setStatusToAudit(AuditStatus.ERROR);
+        }
     }
 
+    @Override
+    public void crawl() {
+        if (!getAudit().getStatus().equals(AuditStatus.CRAWLING)) {
+            LOGGER.warn(
+                "Audit status is " +
+                    getAudit().getStatus() +
+                    " while " +
+                    AuditStatus.CRAWLING +
+                    " was required.");
+            return;
+        }
+
+        crawlerService.crawlSite(getAudit(), url);
+
+        Long nbUrls = webResourceDataService.getChildWebResourceCount(getAudit().getSubject());
+        WebResource site = getAudit().getSubject();
+        if (nbUrls > 0) {
+            setStatusToAudit(AuditStatus.SCENARIO_LOADING);
+            prepareScenarioFromList(site, nbUrls.intValue());
+        } else {
+            LOGGER.warn("Audit has no content");
+            setStatusToAudit(AuditStatus.ERROR);
+        }
+
+    }
+
+    private void prepareScenarioFromList(WebResource site, int nbUrls) {
+        List<WebResource> urlList =
+            webResourceDataService.getWebResourceFromItsParent(site, 0, nbUrls);
+        List<URL> localUrlList = new ArrayList<>();
+        try {
+            for (WebResource url : urlList) {
+                localUrlList.add(new URL(FileNaming.addProtocolToUrl(url.getURL())));
+            }
+            try {
+                scenario = new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(url, localUrlList));
+            } catch (JsonProcessingException e) {
+                LoggerFactory.getLogger(this.getClass()).error("Could not parse scenario " + e.getMessage());
+            }
+            URL baseURL = new URL(FileNaming.addProtocolToUrl(url));
+            scenarioName = baseURL.getProtocol()+"://"+baseURL.getHost();
+        } catch (MalformedURLException e) {
+            LOGGER.warn("Malformed URL encountered : " + e.getMessage());
+        }
+    }
 }

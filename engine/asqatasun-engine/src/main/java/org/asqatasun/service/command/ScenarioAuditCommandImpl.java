@@ -29,11 +29,13 @@ import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
 
+import static org.asqatasun.entity.contract.ScopeEnum.SCENARIO;
+
 /**
  *
  * @author jkowalczyk
  */
-public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
+public class ScenarioAuditCommandImpl extends AuditCommandImpl {
 
     /**
      * 
@@ -48,10 +50,9 @@ public class ScenarioAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
             Set<Parameter> paramSet,
             List<Tag> tagList,
             AuditDataService auditDataService) {
-        super(paramSet, tagList, auditDataService);
-        setScenario(scenario);
-        setScenarioName(scenarioName);
-        setIsPage(false);
+        super(paramSet, tagList, auditDataService, SCENARIO);
+        this.scenario = scenario;
+        this.scenarioName = scenarioName;
     }
 
 }

@@ -38,6 +38,8 @@ import org.asqatasun.util.FileNaming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.asqatasun.entity.contract.ScopeEnum.FILE;
+
 /**
  *
  * @author jkowalczyk
@@ -55,10 +57,6 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
      * The contentLoaderService
      */
     private ContentLoaderService contentLoaderService;
-    public ContentLoaderService getContentLoaderService() {
-        return contentLoaderService;
-    }
-
     public void setContentLoaderService(ContentLoaderService contentLoaderService) {
         this.contentLoaderService = contentLoaderService;
     }
@@ -74,7 +72,7 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
             Set<Parameter> paramSet,
             List<Tag> tagList,
             AuditDataService auditDataService) {
-        super(paramSet, tagList, auditDataService);
+        super(paramSet, tagList, auditDataService, FILE);
         
         this.fileMap = fileMap;
     }
@@ -110,7 +108,7 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
 
             content.setAudit(getAudit());
             try {
-                getContentDataService().saveOrUpdate(content);
+                contentDataService.saveOrUpdate(content);
             } catch (PersistenceException pe) {
                 getAudit().setStatus(AuditStatus.ERROR);
                 break;
@@ -126,22 +124,21 @@ public class UploadAuditCommandImpl extends AuditCommandImpl {
     private void createWebResources() {
         WebResource webResource;
         if (fileMap.size() > 1) {
-            webResource = getWebResourceDataService().createSite(
+            webResource = webResourceDataService.createSite(
                     FileNaming.addProtocolToUrl(fileMap.keySet().iterator().next()));
-            getWebResourceDataService().saveOrUpdate(webResource);
+            webResourceDataService.saveOrUpdate(webResource);
             for (String pageUrl : fileMap.keySet()) {
-                Page page = getWebResourceDataService().createPage(pageUrl);
+                Page page = webResourceDataService.createPage(pageUrl);
                 ((Site) webResource).addChild(page);
-                getWebResourceDataService().saveOrUpdate(page);
+                webResourceDataService.saveOrUpdate(page);
             }
         } else {
-            webResource = getWebResourceDataService().
-                    createPage(fileMap.keySet().iterator().next());
+            webResource = webResourceDataService.createPage(fileMap.keySet().iterator().next());
         }
         // the webresource needs to be persisted a second time because of the
         // relation with the audit
         webResource.setAudit(getAudit());
-        getWebResourceDataService().saveOrUpdate(webResource);
+        webResourceDataService.saveOrUpdate(webResource);
         getAudit().setSubject(webResource);
     }
 

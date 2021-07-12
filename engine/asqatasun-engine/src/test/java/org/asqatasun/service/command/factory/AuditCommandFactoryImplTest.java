@@ -69,7 +69,7 @@ public class AuditCommandFactoryImplTest extends TestCase {
         EasyMock.replay(mockAuditDataService);
         EasyMock.replay(mockAudit);
 
-        auditCommandFactory = new AuditCommandFactoryImpl(mockAuditDataService, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        auditCommandFactory = new AuditCommandFactoryImpl(mockAuditDataService, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
     
     @Override
@@ -80,27 +80,8 @@ public class AuditCommandFactoryImplTest extends TestCase {
     /**
      * Test of create method, of class AuditCommandFactoryImpl.
      */
-    public void testCreate_3args_1() {
-        System.out.println("create PageAuditCommand with crawler");
-
-        auditCommandFactory.setAuditPageWithCrawler(true);
-        AuditCommand result = this.auditCommandFactory.create(
-            "",
-            Collections.EMPTY_SET,
-            Collections.EMPTY_LIST,
-            false);
-        
-        assertTrue(result instanceof PageAuditCrawlerCommandImpl);
-        EasyMock.verify(mockAuditDataService);
-        EasyMock.verify(mockAudit);
-    }
-    
-    /**
-     * Test of create method, of class AuditCommandFactoryImpl.
-     */
     public void testCreate_3args_1_2() {
         System.out.println("create PageAuditCommand without crawler");
-        auditCommandFactory.setAuditPageWithCrawler(false);
         AuditCommand result = this.auditCommandFactory.create(
             "",
             Collections.EMPTY_SET,
@@ -146,13 +127,11 @@ public class AuditCommandFactoryImplTest extends TestCase {
     public void testCreate_3args_3_1() {
         System.out.println("create GroupOfPagesAuditCommand with crawler");
 
-        auditCommandFactory.setAuditPageWithCrawler(true);
         AuditCommand result = this.auditCommandFactory.create(
             "",
             Collections.EMPTY_LIST,
             Collections.EMPTY_SET,
             Collections.EMPTY_LIST);
-        assertTrue(result instanceof GroupOfPagesCrawlerAuditCommandImpl);
         EasyMock.verify(mockAuditDataService);
         EasyMock.verify(mockAudit);
     }
@@ -163,7 +142,6 @@ public class AuditCommandFactoryImplTest extends TestCase {
     public void testCreate_3args_3_2() {
         System.out.println("create GroupOfPagesAuditCommand without crawler");
 
-        auditCommandFactory.setAuditPageWithCrawler(false);
         AuditCommand result = this.auditCommandFactory.create(
             "https://asqatasun.org",
             Arrays.asList("https://asqatasun.org"),

@@ -38,11 +38,13 @@ import org.asqatasun.util.FileNaming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.asqatasun.entity.contract.ScopeEnum.GROUPOFPAGES;
+
 /**
  *
  * @author jkowalczyk
  */
-public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
+public class GroupOfPagesAuditCommandImpl extends AuditCommandImpl {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupOfPagesAuditCommandImpl.class);
 
@@ -60,20 +62,19 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
                 List<Tag> tagList,
                 AuditDataService auditDataService) {
         
-        super(paramSet, tagList, auditDataService);
+        super(paramSet, tagList, auditDataService, GROUPOFPAGES);
         try {
             List<URL> localUrlList = new ArrayList<>();
             for (String url : pageUrlList) {
                 localUrlList.add(new URL(FileNaming.addProtocolToUrl(url)));
             }
             try {
-                setScenario(new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(siteUrl, localUrlList)));
+                scenario = new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(siteUrl, localUrlList));
             } catch (JsonProcessingException e) {
                 LoggerFactory.getLogger(this.getClass()).error("Could not parse scenario " + e.getMessage());
             }
             URL baseURL = new URL(FileNaming.addProtocolToUrl(siteUrl));
-            setScenarioName(baseURL.getProtocol()+"://"+baseURL.getHost());
-            setIsPage(false);
+            scenarioName = baseURL.getProtocol()+"://"+baseURL.getHost();
         } catch (MalformedURLException e) {
             LOGGER.warn("Malformed URL encountered : " + e.getMessage());
         }
