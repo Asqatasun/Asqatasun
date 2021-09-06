@@ -173,85 +173,80 @@
                     <c:set var="functKey">
                         ${funct.key}
                     </c:set>
-                    <c:if test="${functKey != 'DOMAIN'}"> <%-- /!\ website audit is disable /!\ --%>
-                        <span class="edit-contract-funct">
-                            <label id="${functKey}"
-                                   for="functionalityMap${functKey}1"
-                                   class="edit-contract-label">
-                                <fmt:message key="edit-contract.${functKey}"/>
-                            </label>
-                            <form:checkbox path="functionalityMap[${functKey}]"
-                                           cssErrorClass="error"
-                                           value="${funct.value}"/>
-                            <form:errors path="functionalityMap[${functKey}]"
-                                         cssClass="alert-message error" />
-                        </span>
-                    </c:if>
-
+                    <span class="edit-contract-funct">
+                        <label id="${functKey}"
+                               for="functionalityMap${functKey}1"
+                               class="edit-contract-label">
+                            <fmt:message key="edit-contract.${functKey}"/>
+                        </label>
+                        <form:checkbox path="functionalityMap[${functKey}]"
+                                       cssErrorClass="error"
+                                       value="${funct.value}"/>
+                        <form:errors path="functionalityMap[${functKey}]"
+                                     cssClass="alert-message error" />
+                    </span>
                 </c:forEach>
                 </div>
             </fieldset>
             <c:forEach var="entry" items="${optionsMap}">
-                <c:if test="${entry.key != 'crawl-options'}"> <%-- /!\ website audit is disable /!\ --%>
-                    <fieldset>
-                        <legend>
-                            <fmt:message key="${entry.key}"/>
-                        </legend>
-                        <c:if test="${entry.key == 'crawl-options'}">
-                            <div class="alert-message warning" >
-                                <p class="fieldset-info">
-                                    <fmt:message key="edit-contract.crawlOptionsInfo"/>
-                                </p>
-                            </div>
-                        </c:if>
-                        <c:forEach var="option" items="${entry.value}" >
-                            <c:set var="i18nKey"
-                                   scope="page"
-                                   value="${option.formField.i18nKey}"/>
-                            <c:set var="code"
-                                   scope="page"
-                                   value="${option.option.code}"/>
-                            <c:set var="contractOptionError">
-                                <form:errors path="optionMap[${code}]"/>
-                            </c:set>
-                            <c:choose>
-                                <c:when test="${not empty contractOptionError}">
-                                    <c:set var="contractOptionErrorClass" value="error"/>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:set var="contractOptionErrorClass" value=""/>
-                                </c:otherwise>
-                            </c:choose>
-                            <div class="clearfix ${contractOptionErrorClass}">
-                                <label id="set-up-${i18nKey}"
-                                       for="${i18nKey}">
-                                    <fmt:message key="${i18nKey}"/>
-                                </label>
-                                <div class="set-up-value input">
-                                    <form:input id="${i18nKey}"
-                                                path="optionMap[${code}]"
-                                                cssErrorClass="xlarge error"
-                                                cssClass="xlarge"/>
-                                    <form:errors path="optionMap[${code}]"
-                                                 cssClass="alert-message error" />
-                                    <br/>
-                                    <span class="help-block">
-                        <c:choose>
-                            <c:when test="${tg:instanceOf(option.formField, 'org.asqatasun.webapp.ui.form.NumericalFormField')}">
-                                <fmt:message key="${i18nKey}-rule">
-                                    <fmt:param>${option.formField.maxValue}</fmt:param>
-                                </fmt:message>
-                            </c:when>
-                            <c:otherwise>
-                                <fmt:message key="${i18nKey}-rule"/>
-                            </c:otherwise>
-                        </c:choose><!-- test="instanceof NumericalFormField"-->
-                        </span>
-                                </div>
-                            </div>
-                        </c:forEach>
-                    </fieldset>
+            <fieldset>
+                <legend>
+                    <fmt:message key="${entry.key}"/>
+                </legend>
+                <c:if test="${entry.key == 'crawl-options'}">
+                    <div class="alert-message warning" >
+                        <p class="fieldset-info">
+                            <fmt:message key="edit-contract.crawlOptionsInfo"/>
+                        </p>
+                    </div>
                 </c:if>
+                <c:forEach var="option" items="${entry.value}" >
+                    <c:set var="i18nKey"
+                           scope="page"
+                           value="${option.formField.i18nKey}"/>
+                    <c:set var="code"
+                           scope="page"
+                           value="${option.option.code}"/>
+                    <c:set var="contractOptionError">
+                        <form:errors path="optionMap[${code}]"/>
+                    </c:set>
+                    <c:choose>
+                        <c:when test="${not empty contractOptionError}">
+                            <c:set var="contractOptionErrorClass" value="error"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:set var="contractOptionErrorClass" value=""/>
+                        </c:otherwise>
+                    </c:choose>
+                    <div class="clearfix ${contractOptionErrorClass}">
+                        <label id="set-up-${i18nKey}"
+                               for="${i18nKey}">
+                            <fmt:message key="${i18nKey}"/>
+                        </label>
+                        <div class="set-up-value input">
+                            <form:input id="${i18nKey}"
+                                        path="optionMap[${code}]"
+                                        cssErrorClass="xlarge error"
+                                        cssClass="xlarge"/>
+                            <form:errors path="optionMap[${code}]"
+                                         cssClass="alert-message error" />
+                            <br/>
+                            <span class="help-block">
+                <c:choose>
+                    <c:when test="${tg:instanceOf(option.formField, 'org.asqatasun.webapp.ui.form.NumericalFormField')}">
+                        <fmt:message key="${i18nKey}-rule">
+                            <fmt:param>${option.formField.maxValue}</fmt:param>
+                        </fmt:message>
+                    </c:when>
+                    <c:otherwise>
+                        <fmt:message key="${i18nKey}-rule"/>
+                    </c:otherwise>
+                </c:choose><!-- test="instanceof NumericalFormField"-->
+                </span>
+                        </div>
+                    </div>
+                </c:forEach>
+            </fieldset>
             </c:forEach>
             <div id="edit-contract-form-submit" 
                  class="actions">
