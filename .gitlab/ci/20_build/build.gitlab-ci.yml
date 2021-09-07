@@ -1,0 +1,11 @@
+---
+build:
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS clean
+    - mvn $MAVEN_CLI_OPTS install  -Dmaven.test.skip=true
+  artifacts:
+    expire_in: 2 days
+    paths:
+      - ${WEBAPP_ARTIFACT_DIR}/${WEBAPP_ARTIFACT_FILE}
+      - ${REST_SERVER_ARTIFACT_DIR}/${REST_SERVER_ARTIFACT_FILE}

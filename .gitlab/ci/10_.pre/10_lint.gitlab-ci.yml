@@ -1,0 +1,153 @@
+---
+# ### LINTER ######################################################################################################
+# Hadolint        ---> DockerFile linter
+# Docker-Compose  ---> docker-compose.yml files linter
+# Dotenv          ---> .env files linter
+# Yamllint        ---> Yaml files linter
+# JsonLint        ---> JSON files linter
+# ShellCheck      ---> shell scripts linter
+# #################################################################################################################
+
+# ### DOCUMENTATION ###############################################################################################
+# markdownlint              ---> Markdown files linter
+# remark-validate-links     ---> check that Markdown links and images reference existing local files and headings.
+# remark-lint-no-dead-urls  ---> check that external URLs in Markdown files are alive.
+# #################################################################################################################
+
+# ##############################################################
+# markdownlint     https://github.com/DavidAnson/markdownlint
+#                  https://github.com/igorshubovych/markdownlint-cli
+#                  https://gitlab.com/06kellyjac/docker_markdownlint-cli
+# --> a CI job that will lint all markdown files
+# ##############################################################
+markdown_linter:
+  stage: .pre
+  # when: manual
+  needs: []
+  image:
+    name: registry.gitlab.com/06kellyjac/docker_markdownlint-cli:0.24.0-alpine
+    entrypoint:
+      - "/usr/bin/env"
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  before_script:
+    - markdownlint --version
+  script:
+    - markdownlint '**/*.md' --config .gitlab/config/markdownlint.yml -p .gitlab/config/markdownlintignore.txt
+    - markdownlint --version
+
+# ##############################################################
+# Hadolint     https://github.com/hadolint/hadolint
+#              https://hadolint.github.io/hadolint/
+#              https://hub.docker.com/r/hadolint/hadolint
+# --> a CI job that will lint all Dockerfile files
+# ##############################################################
+# DockerFile_linter:
+#    stage: .pre
+#    when: manual
+#    needs: []
+#    image: hadolint/hadolint:latest-alpine
+#    script:
+#        - find . -type f -name Dockerfile* | xargs -I % ls -l %
+#        - cat .gitlab/config/hadolint.yml
+#        - find . -type f -name Dockerfile* | xargs -I % hadolint --config .gitlab/config/hadolint.yml %
+# #############################################################################################
+# Rules currently not applied:  ---> see: .gitlab/config/hadolint.yml (@FIXME)
+#       DL3003 Use WORKDIR to switch to a directory
+#       DL3008 Instead of `apt-get install <package>` use `apt-get install <package>=<version>`
+#       DL3009 Delete the apt-get lists after installing something
+#       DL3025 Use arguments JSON notation for CMD and ENTRYPOINT arguments
+# #############################################################################################
+
+# ##############################################################
+# Docker-Compose config    https://docs.docker.com/compose/reference/config/
+# --> a CI job that will lint all docker-compose.yml files
+# ##############################################################
+# docker-compose.yml_linter:
+#    stage: .pre
+#    when: manual
+#    needs: []
+#    image: docker/compose:1.27.4
+#    script:
+#        - docker -v
+#        - docker-compose -v
+#        - find . -name docker-compose.yml | xargs -I % docker-compose -f % config
+
+
+# ##############################################################
+# Dotenv-Linter     https://dotenv-linter.github.io
+#                   https://github.com/dotenv-linter/dotenv-linter
+# --> a CI job that will lint all .env files (.env, .env.dist)
+# ##############################################################
+# dotenv_linter:
+#    stage: .pre
+#    when: manual
+#    needs: []
+#    image: alpine:latest
+#    script:
+#        - wget -q -O - https://raw.githubusercontent.com/dotenv-linter/dotenv-linter/master/install.sh | sh -s
+#        - bin/dotenv-linter --recursive --no-color --exclude src/
+#        - bin/dotenv-linter --recursive --no-color --skip QuoteCharacter UnorderedKey   src/
+
+# ##############################################################
+# Yamllint      https://yamllint.readthedocs.io
+#               https://github.com/adrienverge/yamllint
+#               https://github.com/sdesbure/docker_yamllint
+#               https://manpages.debian.org/buster/yamllint/yamllint.1.en.html
+# --> a CI job that will lint all YAML files (docker-compose.yml, .gitlab/ci/*.yml)
+# ##############################################################
+yaml_linter:
+  stage: .pre
+  # when: manual
+  needs: []
+  image: sdesbure/yamllint:latest
+  script:
+    - yamllint -c .gitlab/config/yamllint.yml .
+
+# ##############################################################
+# JsonLint      https://github.com/zaach/jsonlint
+#               https://github.com/PeterDaveHello/docker-jsonlint
+#               https://hub.docker.com/r/peterdavehello/jsonlint/
+# --> a CI job that will lint all JSON files
+# ##############################################################
+json_linter:
+  stage: .pre
+  # when: manual
+  needs: []
+  variables:
+    jsonlint_version: "1.6.3"
+  image: peterdavehello/jsonlint:$jsonlint_version
+  script:
+    # Ignore files from path "themes/learn"
+    # This command is tailored for "find" from Busybox (different from GNU find)
+    - find . -name '*.json' -type f -not -path "./themes/learn/*"
+    - find . -name '*.json' -type f -not -path "./themes/learn/*" | xargs -n 1 jsonlint -q
+
+# ##############################################################
+# Alternative: https://gitlab.com/pipeline-components/jsonlint
+# ##############################################################
+# json_linter:
+#    stage: .pre
+#    when: manual
+#    image: registry.gitlab.com/pipeline-components/jsonlint:latest
+#    script:
+#        - |
+#            find . -not -path './.git/*' -name '*.json' -type f -print0 |
+#            parallel --will-cite -k -0 -n1 jsonlint -q
+# ##############################################################
+
+
+# ##############################################################
+# ShellCheck     https://github.com/koalaman/shellcheck/wiki/GitLab-CI
+#                https://git-scm.com/docs/git-ls-files
+# --> a CI job that will lint all shell scripts (fail when no .sh files)
+# ##############################################################
+shellcheck_linter:
+  stage: .pre
+  # when: manual
+  needs: []
+  image: koalaman/shellcheck-alpine:latest
+  before_script:
+    - apk update
+    - apk add git
+  script:
+    - git ls-files --exclude='*.sh' --ignored --cached | xargs --no-run-if-empty shellcheck

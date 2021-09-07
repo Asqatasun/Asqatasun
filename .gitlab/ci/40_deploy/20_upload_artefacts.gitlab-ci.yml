@@ -1,0 +1,65 @@
+---
+upload_artefacts:
+  extends: .deploy_common
+  only:
+    refs:
+      - master
+      - tags
+
+upload_artefacts_manual:
+  extends: .deploy_common
+  except:
+    refs:
+      - master
+      - tags
+  when: manual
+  allow_failure: true
+
+# ------------------------------------------------------------------------------
+# Common to all deploy jobs
+.deploy_common:
+  image: debian:buster
+  stage: deploy
+  before_script:
+    ##
+    ## Install ssh-agent if not already installed, it is required by Docker.
+    ## (change apt-get to yum if you use an RPM-based image)
+    ##
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+
+    ##
+    ## Run ssh-agent (inside the build environment)
+    ##
+    - eval $(ssh-agent -s)
+
+    ##
+    ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    ## We're using tr to fix line endings which makes ed25519 keys work
+    ## without extra base64 encoding.
+    ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
+    ##
+    - echo "$ARCHIVE_ARTEFACT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+
+    ##
+    ## Create the SSH directory and give it the right permissions
+    ##
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+    ##
+    ## Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the
+    ## following two lines.
+    ##
+    - ssh-keyscan $ARCHIVE_ARTEFACT_DEPLOY_HOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+    ##
+    ## You can optionally disable host key checking. Be aware that by adding that
+    ## you are susceptible to man-in-the-middle attacks.
+    ## WARNING: Use this only with the Docker executor, if you use it with shell
+    ## you will overwrite your user's SSH config.
+    ##
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config'
+
+  script:
+    - ./ci/upload_build_artefacts.sh

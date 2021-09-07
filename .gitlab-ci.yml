@@ -1,11 +1,11 @@
 image: maven:3.6-openjdk-8
 
 stages:
-  - prepare
+  - .pre
   - build
   - test
-  - release
   - deploy
+  - .post
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
@@ -17,125 +17,16 @@ cache:
   paths:
     - .m2/repository/
 
-prepare_env:
-  stage: prepare
-  script:
-    - export APP_VERSION=$(grep "^    <version>" pom.xml | sed 's/.*<version>\(.*\)<\/version>/\1/')
-    - export WEBAPP_ARTIFACT_FILE="asqatasun-web-app-${APP_VERSION}.war"
-    - export REST_SERVER_ARTIFACT_FILE="asqatasun-server-${APP_VERSION}.jar"
-    - echo "APP_VERSION=${APP_VERSION}" | tee -a build.env
-    - echo "WEBAPP_ARTIFACT_FILE=${WEBAPP_ARTIFACT_FILE}" | tee -a build.env
-    - echo "REST_SERVER_ARTIFACT_FILE=${REST_SERVER_ARTIFACT_FILE}" | tee -a build.env
-    - echo "$CI_PROJECT_NAME version $APP_VERSION - build $CI_BUILD_ID"
-  artifacts:
-    reports:
-      dotenv: build.env
+include:
+  #  - local: /.gitlab/ci/10-.pre/10_lint.gitlab-ci.yml
+  - local: /.gitlab/ci/10_.pre/00_prepare.gitlab-ci.yml
+  - local: /.gitlab/ci/20_build/build.gitlab-ci.yml
+  - local: /.gitlab/ci/30_test/test.gitlab-ci.yml
+#  - local: /.gitlab/ci/40_deploy/10_release.gitlab-ci.yml
+  - local: /.gitlab/ci/40_deploy/20_upload_artefacts.gitlab-ci.yml
 
-build:
-  stage: build
-  dependencies:
-    - prepare_env
-  script:
-    - mvn $MAVEN_CLI_OPTS clean
-    - mvn $MAVEN_CLI_OPTS install  -Dmaven.test.skip=true
-  artifacts:
-    expire_in: 2 days
-    paths:
-      - ${WEBAPP_ARTIFACT_DIR}/${WEBAPP_ARTIFACT_FILE}
-      - ${REST_SERVER_ARTIFACT_DIR}/${REST_SERVER_ARTIFACT_FILE}
 
-test:
-  stage: test
-  script:
-    - mvn $MAVEN_CLI_OPTS clean
-    - mvn $MAVEN_CLI_OPTS test
-  only: [merge_requests]
 
-.archive_artefact_common:
-  image: debian:buster
-  stage: deploy
-  dependencies:
-    - prepare_env
-    - build
-  before_script:
-    ##
-    ## Install ssh-agent if not already installed, it is required by Docker.
-    ## (change apt-get to yum if you use an RPM-based image)
-    ##
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
 
-    ##
-    ## Run ssh-agent (inside the build environment)
-    ##
-    - eval $(ssh-agent -s)
 
-    ##
-    ## Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-    ## We're using tr to fix line endings which makes ed25519 keys work
-    ## without extra base64 encoding.
-    ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
-    ##
-    - echo "$ARCHIVE_ARTEFACT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
 
-    ##
-    ## Create the SSH directory and give it the right permissions
-    ##
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-
-    ##
-    ## Alternatively, use ssh-keyscan to scan the keys of your private server.
-    ## Replace example.com with your private server's domain name. Repeat that
-    ## command if you have more than one server to connect to.
-    ##
-    - ssh-keyscan $ARCHIVE_ARTEFACT_DEPLOY_HOST >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-
-    ## Packages install
-    - apt-get update -y && apt-get install rsync bzip2 -y
-
-  script:
-    - ./ci/archive_build_artefacts.sh
-
-archive_artefact:
-  extends: .archive_artefact_common
-  only:
-    refs:
-      - master
-      - tags
-
-archive_artefact_manual:
-  extends: .archive_artefact_common
-  except:
-    refs:
-      - master
-      - tags
-  when: manual
-
-release:
-  stage: release
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  rules:
-    - if: $CI_COMMIT_TAG   # Run this job when a tag is created manually
-  script:
-    - echo 'running release_job'
-  release:
-    name: 'Asqatasun $CI_COMMIT_TAG'
-    description: 'Asqatasun $CI_COMMIT_TAG description'
-    tag_name: '$CI_COMMIT_TAG'
-    ref: '$CI_COMMIT_TAG'
-
-.deploy-server-from-build: &tpl-deploy-server-from-build
-  stage: deploy
-  dependencies:
-    - prepare_env
-    - build
-  script:
-    - ./ci/deploy_to_server.sh
-
-deploy:dev:
-  <<: *tpl-deploy-server-from-build
-  variables:
-    HOST: $HOST_DEV
-  environment: dev
-  only: [master]
