@@ -219,6 +219,26 @@
                         </c:otherwise>
                     </c:choose>
                     <div class="clearfix ${contractOptionErrorClass}">
+                        <c:choose>
+                        <c:when test="${tg:instanceOf(option.formField, 'org.asqatasun.webapp.ui.form.CheckboxFormField')}">
+                        <div class="set-up-value input">
+                            <ul class="inputs-list">
+                        <c:forEach items="${option.formField.checkboxElementList}"
+                                   var="element"
+                                   varStatus="pResult">
+                                <li>
+                                    <label class="checkbox"
+                                           for="optionMap${code}${pResult.index + 1}">
+                                        <form:checkbox path="optionMap[${code}]"
+                                                       value="${element.value}"/>
+                                        <fmt:message key="${i18nKey}"/>
+                                    </label>
+                                </li>
+                        </c:forEach>
+                            </ul>
+                        </div>
+                        </c:when>
+                        <c:otherwise>
                         <label id="set-up-${i18nKey}"
                                for="${i18nKey}">
                             <fmt:message key="${i18nKey}"/>
@@ -244,6 +264,8 @@
                 </c:choose><!-- test="instanceof NumericalFormField"-->
                 </span>
                         </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </c:forEach>
             </fieldset>

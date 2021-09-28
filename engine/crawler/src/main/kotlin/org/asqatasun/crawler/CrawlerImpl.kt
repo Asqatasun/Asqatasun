@@ -55,6 +55,7 @@ class CrawlerImpl(private val audit: Audit,
         private const val MAX_DURATION_PARAM_KEY = "MAX_DURATION"
         private const val EXCLUSION_REGEX_PARAM_KEY = "EXCLUSION_REGEXP"
         private const val INCLUSION_REGEX_PARAM_KEY = "INCLUSION_REGEXP"
+        private const val ROBOTS_TXT_ACTIVATION = "ROBOTS_TXT_ACTIVATION"
         // Number of threads to use during crawling. Increasing this typically makes crawling faster. But crawling
         // speed depends on many other factors as well. You can experiment with this to figure out what number of
         // threads works best for you.
@@ -62,6 +63,7 @@ class CrawlerImpl(private val audit: Audit,
         // speed depends on many other factors as well. You can experiment with this to figure out what number of
         // threads works best for you.
         private const val NUMBER_OF_CRAWLERS = 4
+        private const val USER_AGENT = "asqatasun + asqatasun@asqatasun.org"
     }
 
     override fun getParameterSet(): MutableSet<Parameter> = audit.parameterSet as MutableSet<Parameter>
@@ -120,7 +122,7 @@ class CrawlerImpl(private val audit: Audit,
         // You can set the maximum number of pages to crawl. The default value is -1 for unlimited number of pages.
         config.maxPagesToFetch = Integer.valueOf(getParameterValue(MAX_DOCUMENTS_PARAM_KEY)) + 1
 
-        config.userAgentString = "asqatasun + asqatasun@asqatasun.org"
+        config.userAgentString = USER_AGENT
 
         // Should binary data should also be crawled? example: the contents of pdf, or the metadata of images etc
         config.isIncludeBinaryContentInCrawling = false
@@ -148,6 +150,11 @@ class CrawlerImpl(private val audit: Audit,
         // Instantiate the controller for this crawl.
         val pageFetcher = PageFetcher(config)
         val robotsTxtConfig = RobotstxtConfig()
+        robotsTxtConfig.userAgentName = USER_AGENT
+        if (!getParameterValue(ROBOTS_TXT_ACTIVATION)!!.toBoolean()) {
+            robotsTxtConfig.isEnabled = false
+            robotsTxtConfig.ignoreUADiscrimination = true
+        }
         val robotsTxtServer = RobotstxtServer(robotsTxtConfig, pageFetcher)
         val controller = CrawlController(config, pageFetcher, robotsTxtServer)
 

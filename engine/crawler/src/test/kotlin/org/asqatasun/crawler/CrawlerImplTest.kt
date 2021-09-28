@@ -38,7 +38,7 @@ class CrawlerImplTest {
 
     private val webResourceDataService: WebResourceDataService = Mockito.mock(WebResourceDataService::class.java)
     companion object {
-        private const val URL = "https://site.asqatasun.ovh/"
+        private const val URL = "https://site-robot.asqatasun.ovh/"
         private const val rootPageUrl = URL
         private const val depthOnePageUrl = URL + "page-1.html"
         private const val depthTwoPageUrl = URL + "page-2.html"
@@ -60,13 +60,18 @@ class CrawlerImplTest {
         crawlSite(2, listOf(rootPageUrl, depthOnePageUrl, depthTwoPageUrl), listOf(robotsAccessForbiddenPageUrl))
     }
 
-    private fun crawlSite(depth: Int, calledUrlList: List<String>, neverCalledUrlList: List<String>) {
+    @Test
+    fun crawlSiteDepth2AndNotRespectRobotsTxtDirectives() {
+        crawlSite(2, listOf(rootPageUrl, depthOnePageUrl, depthTwoPageUrl, robotsAccessForbiddenPageUrl), listOf(), false)
+    }
+
+    private fun crawlSite(depth: Int, calledUrlList: List<String>, neverCalledUrlList: List<String>, respectRobotsTxt: Boolean = true) {
         val site = SiteImpl()
         Mockito.`when`(webResourceDataService.createSite(URL)).thenReturn(site)
         Mockito.`when`(webResourceDataService.createPage(anyString())).thenReturn(PageImpl())
         Mockito.`when`(webResourceDataService.saveOrUpdate(site)).thenReturn(site)
         val audit = AuditImpl()
-        audit.parameterSet = setParameters(depth)
+        audit.parameterSet = setParameters(depth, respectRobotsTxt)
         val crawler = CrawlerImpl(audit, URL, webResourceDataService,
             "", "", "", "", emptyList())
         crawler.run()
@@ -78,7 +83,7 @@ class CrawlerImplTest {
         }
     }
 
-    private fun setParameters(depth: Int): Set<Parameter> {
+    private fun setParameters(depth: Int, respectRobotsTxt: Boolean): Set<Parameter> {
         val param1 = ParameterImpl()
         param1.value = "10"
         val paramElem1 = ParameterElementImpl()
@@ -104,7 +109,12 @@ class CrawlerImplTest {
         val paramElem5 = ParameterElementImpl()
         paramElem5.parameterElementCode = "MAX_DURATION"
         param5.parameterElement = paramElem5
-        return setOf(param1, param2, param3, param4, param5)
+        val param6 = ParameterImpl()
+        param6.value = respectRobotsTxt.toString()
+        val paramElem6 = ParameterElementImpl()
+        paramElem6.parameterElementCode = "ROBOTS_TXT_ACTIVATION"
+        param6.parameterElement = paramElem6
+        return setOf(param1, param2, param3, param4, param5, param6)
     }
 
 }

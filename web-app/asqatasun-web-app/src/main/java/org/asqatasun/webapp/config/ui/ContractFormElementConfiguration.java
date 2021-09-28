@@ -146,7 +146,8 @@ public class ContractFormElementConfiguration {
             depthOptionBuilder(),
             maxDurationOptionBuilder(),
             maxDocumentsOptionBuilder(),
-            exclusionRegexpOptionBuilder()
+            exclusionRegexpOptionBuilder(),
+            robotsTxtOptionBuilder()
         ));
         return map;
     }
@@ -309,6 +310,27 @@ public class ContractFormElementConfiguration {
             exclusionRegexpOptionFormFieldBuilder());
     }
     @Bean
+    public CheckboxElementBuilderImpl robotsTxtElementBuilder() {
+        CheckboxElementBuilderImpl builder = new CheckboxElementBuilderImpl();
+        builder.setEnabled(true);
+        builder.setValue("true");
+        return builder;
+    }
+    @Bean
+    public CheckboxFormFieldBuilderImpl robotsTxtOptionFormFieldBuilder() {
+        CheckboxFormFieldBuilderImpl builder = new CheckboxFormFieldBuilderImpl();
+        builder.setI18nKey("robots-txt");
+        builder.setErrorI18nKey("robots-txt-error");
+        builder.setCheckboxElementBuilderList(Collections.singletonList(robotsTxtElementBuilder()));
+        return builder;
+    }
+    @Bean
+    public ContractOptionFormFieldBuilder robotsTxtOptionBuilder() {
+        return buildContractOptionFormFieldBuilder(
+            "ROBOTS_TXT_ACTIVATION",
+            robotsTxtOptionFormFieldBuilder());
+    }
+    @Bean
     public List<FormFieldBuilder> contractManagementOptionFieldsBuilderList() {
         return Arrays.asList(
             displayContractOrderSelectFormFieldBuilder(),
@@ -337,7 +359,7 @@ public class ContractFormElementConfiguration {
         builder.setDefaultCode(defaultCode);
         return builder;
     }
-    public static CheckboxElementBuilderImpl buildCheckboxElementBuilder
+    public static org.asqatasun.webapp.ui.form.builder.CheckboxElementBuilderImpl buildCheckboxElementBuilder
         (String value, String i18nKey, String errorI18nKey, Boolean isEnabled, Boolean isSelected) {
         CheckboxElementBuilderImpl builder = new CheckboxElementBuilderImpl();
         builder.setValue(value);
