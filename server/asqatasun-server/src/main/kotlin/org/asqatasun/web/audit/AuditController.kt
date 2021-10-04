@@ -102,6 +102,7 @@ data class SiteAuditRequest(
     val maxDuration: Int = 3600,
     val exclusionRegexp: String = "",
     val inclusionRegexp: String = "",
+    val robotsTxtActivation: Boolean = true,
     val contractId: Long?,
     val tags: List<String>? = emptyList()
 )

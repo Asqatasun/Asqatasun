@@ -58,6 +58,7 @@ class AuditService(private val auditService: EngineAuditService,
         const val MAX_DURATION_PARAM_KEY = "MAX_DURATION"
         const val EXCLUSION_URL_LIST_PARAM_KEY = "EXCLUSION_REGEXP"
         const val INCLUSION_URL_LIST_PARAM_KEY = "INCLUSION_REGEXP"
+        const val ROBOTS_TXT_ACTIVATION_PARAM_KEY = "ROBOTS_TXT_ACTIVATION"
     }
 
     @PostConstruct
@@ -148,7 +149,8 @@ class AuditService(private val auditService: EngineAuditService,
                  p.parameterElement.parameterElementCode.equals(MAX_DURATION_PARAM_KEY) ||
                  p.parameterElement.parameterElementCode.equals(MAX_DOCUMENT_PARAM_KEY) ||
                  p.parameterElement.parameterElementCode.equals(INCLUSION_URL_LIST_PARAM_KEY) ||
-                 p.parameterElement.parameterElementCode.equals(EXCLUSION_URL_LIST_PARAM_KEY)
+                 p.parameterElement.parameterElementCode.equals(EXCLUSION_URL_LIST_PARAM_KEY) ||
+                 p.parameterElement.parameterElementCode.equals(ROBOTS_TXT_ACTIVATION_PARAM_KEY)
         }
         paramSet.add(parameterDataService.getParameter(
             parameterElementDataService.getParameterElement(DEPTH_PARAM_KEY), sar.depth.toString()))
@@ -160,6 +162,8 @@ class AuditService(private val auditService: EngineAuditService,
             parameterElementDataService.getParameterElement(INCLUSION_URL_LIST_PARAM_KEY), sar.inclusionRegexp))
         paramSet.add(parameterDataService.getParameter(
             parameterElementDataService.getParameterElement(EXCLUSION_URL_LIST_PARAM_KEY), sar.exclusionRegexp))
+        paramSet.add(parameterDataService.getParameter(
+            parameterElementDataService.getParameterElement(ROBOTS_TXT_ACTIVATION_PARAM_KEY), sar.robotsTxtActivation.toString()))
     }
 
     @Throws(IOException::class)

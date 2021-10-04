@@ -120,6 +120,12 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-scenarioloader</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-contentadapter</artifactId>
             <version>${asqatasun.version}</version>
             <scope>runtime</scope>
