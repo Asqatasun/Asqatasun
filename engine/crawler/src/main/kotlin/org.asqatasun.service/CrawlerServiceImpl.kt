@@ -77,6 +77,7 @@ class CrawlerServiceImpl(
         audit.subject = wr
         // the relation from webResource to audit is refresh, the audit has to be persisted first
         auditDataService.saveOrUpdate(audit)
+        audit.subject = webResourceDataService.saveOrUpdate(wr)
         return wr
     }
 

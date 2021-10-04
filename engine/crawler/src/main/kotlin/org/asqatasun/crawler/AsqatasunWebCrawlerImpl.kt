@@ -104,7 +104,7 @@ class AsqatasunWebCrawlerImpl(private val siteUrl: URL,
             logger.debug("\t{}: {}", header.name, header.value)
         }
         crawler.fireNewPage(url)
-        checkDurationLimit()
+        if (maxDuration != 0 && maxDuration != -1) checkDurationLimit()
     }
 
     override fun handleUrlBeforeProcess(curURL: WebURL): WebURL {

@@ -27,6 +27,7 @@ import edu.uci.ics.crawler4j.crawler.CrawlController.WebCrawlerFactory
 import edu.uci.ics.crawler4j.fetcher.PageFetcher
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtConfig
 import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer
+import org.apache.commons.lang3.RandomStringUtils
 import org.asqatasun.entity.audit.Audit
 import org.asqatasun.entity.parameterization.Parameter
 import org.asqatasun.entity.service.subject.WebResourceDataService
@@ -98,7 +99,7 @@ class CrawlerImpl(private val audit: Audit,
     }
 
     fun fireNewPage(pageUrl: String) {
-        LOGGER.info("fire New Page ${UriUtils.decode(pageUrl, "UTF-8")}")
+        LOGGER.info("fire New Page ${UriUtils.decode(pageUrl, "UTF-8")} " + mainWebResource.url)
         val pageWebResource = webResourceDataService.createPage(pageUrl)
         pageWebResource.parent = mainWebResource
         webResourceDataService.saveOrUpdate(pageWebResource)
@@ -110,7 +111,7 @@ class CrawlerImpl(private val audit: Audit,
 
         // Set the folder where intermediate crawl data is stored (e.g. list of urls that are extracted from previously
         // fetched pages and need to be crawled later).
-        config.crawlStorageFolder = "/tmp/asqatasun/"
+        config.crawlStorageFolder = "/tmp/asqatasun/"+ RandomStringUtils.randomAlphanumeric(6)+"/";
 
         // Be polite: Make sure that we don't send more than 1 request per second (1000 milliseconds between requests).
         // Otherwise it may overload the target servers.
