@@ -22,25 +22,20 @@
 
 package org.asqatasun.service.command;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.entity.subject.WebResource;
-import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
 import org.asqatasun.service.CrawlerService;
 import org.asqatasun.util.FileNaming;
 import org.asqatasun.util.http.HttpRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.Set;
 
 import static org.asqatasun.entity.contract.ScopeEnum.DOMAIN;
 
@@ -58,7 +53,6 @@ public final class SiteAuditCommandImpl extends AuditCommandImpl {
      * The crawlerService instance
      */
     private final CrawlerService crawlerService;
-    private final String url;
 
     /**
      * 
@@ -74,17 +68,22 @@ public final class SiteAuditCommandImpl extends AuditCommandImpl {
             AuditDataService auditDataService) {
         super(paramSet, tagList, auditDataService, DOMAIN);
         this.crawlerService = crawlerService;
-        this.url = siteUrl;
+        try {
+            URL baseURL = new URL(FileNaming.addProtocolToUrl(siteUrl));
+            this.targetUrl = baseURL.getProtocol()+"://"+baseURL.getHost();
+        } catch (MalformedURLException e) {
+            LOGGER.warn("Malformed URL encountered : " + e.getMessage());
+        }
     }
 
     @Override
     public void init() {
-        if (HttpRequestHandler.getInstance().isUrlAccessible(url)) {
+        if (HttpRequestHandler.getInstance().isUrlAccessible(this.targetUrl)) {
             super.init();
             setStatusToAudit(AuditStatus.CRAWLING);
         } else {
             super.init();
-            createEmptySiteResource(url);
+            createEmptySiteResource(this.targetUrl);
             setStatusToAudit(AuditStatus.ERROR);
         }
     }
@@ -101,13 +100,11 @@ public final class SiteAuditCommandImpl extends AuditCommandImpl {
             return;
         }
 
-        crawlerService.crawlSite(getAudit(), url);
-
+        crawlerService.crawlSite(getAudit(), this.targetUrl);
         Long nbUrls = webResourceDataService.getChildWebResourceCount(getAudit().getSubject());
-        WebResource site = getAudit().getSubject();
+
         if (nbUrls > 0) {
             setStatusToAudit(AuditStatus.SCENARIO_LOADING);
-            prepareScenarioFromList(site, nbUrls.intValue());
         } else {
             LOGGER.warn("Audit has no content");
             setStatusToAudit(AuditStatus.ERROR);
@@ -115,23 +112,4 @@ public final class SiteAuditCommandImpl extends AuditCommandImpl {
 
     }
 
-    private void prepareScenarioFromList(WebResource site, int nbUrls) {
-        List<WebResource> urlList =
-            webResourceDataService.getWebResourceFromItsParent(site, 0, nbUrls);
-        List<URL> localUrlList = new ArrayList<>();
-        try {
-            for (WebResource url : urlList) {
-                localUrlList.add(new URL(FileNaming.addProtocolToUrl(url.getURL())));
-            }
-            try {
-                scenario = new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(url, localUrlList));
-            } catch (JsonProcessingException e) {
-                LoggerFactory.getLogger(this.getClass()).error("Could not parse scenario " + e.getMessage());
-            }
-            URL baseURL = new URL(FileNaming.addProtocolToUrl(url));
-            scenarioName = baseURL.getProtocol()+"://"+baseURL.getHost();
-        } catch (MalformedURLException e) {
-            LOGGER.warn("Malformed URL encountered : " + e.getMessage());
-        }
-    }
 }

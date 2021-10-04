@@ -21,6 +21,7 @@
  */
 package org.asqatasun.service;
 
+import java.net.URL;
 import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.asqatasun.entity.audit.Content;
@@ -40,6 +41,22 @@ public interface ScenarioLoaderService {
      * @param scenarioFile
      * @return
      */
+    List<Content> loadScenario(WebResource webResource);
+
+    /**
+     *
+     * @param webResource
+     * @param scenarioFile
+     * @return
+     */
     List<Content> loadScenario(WebResource webResource, String scenarioFile);
+
+    /**
+     *
+     * @param webResource
+     * @param urlList
+     * @return
+     */
+    List<Content> loadScenario(WebResource webResource, List<URL> urlList, int startRank);
 
 }

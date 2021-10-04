@@ -90,7 +90,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         mockAudit.setSubject(mockPage);
         expectLastCall().once();
         
-        expect(mockScenarioLoaderService.loadScenario(mockPage, myScenario)).andReturn(null).once();
+        expect(mockScenarioLoaderService.loadScenario(mockPage)).andReturn(null).once();
         
         mockAudit.setStatus(AuditStatus.CONTENT_ADAPTING);
         expectLastCall().once();
@@ -103,8 +103,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         setReplayMode();
         
         AuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl(ScopeEnum.PAGE);
-        instance.scenarioName = myUrl;
-        instance.scenario = myScenario;
+        instance.targetUrl = myUrl;
         instance.init();
         instance.loadContent();
         
@@ -130,7 +129,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         mockAudit.setSubject(mockSite);
         expectLastCall().once();
         
-        expect(mockScenarioLoaderService.loadScenario(mockSite, myScenario)).andReturn(null).once();
+        expect(mockScenarioLoaderService.loadScenario(mockSite)).andReturn(null).once();
         
         mockAudit.setStatus(AuditStatus.CONTENT_ADAPTING);
         expectLastCall().once();
@@ -143,8 +142,7 @@ public class AbstractScenarioAuditCommandImplTest extends AuditCommandTestCase {
         setReplayMode();
         
         AuditCommandImpl instance = new TestAbstractScenarioAuditCommandImpl(ScopeEnum.GROUPOFFILES);
-        instance.scenarioName = myUrl;
-        instance.scenario = myScenario;
+        instance.targetUrl = myUrl;
         instance.init();
         instance.loadContent();
         

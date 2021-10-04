@@ -22,20 +22,15 @@
 
 package org.asqatasun.service.command;
 
-import java.util.List;
-import java.util.Set;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Tag;
-import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
 import org.asqatasun.util.FileNaming;
 import org.asqatasun.util.http.HttpRequestHandler;
-import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.Set;
 
 import static org.asqatasun.entity.contract.ScopeEnum.PAGE;
 
@@ -45,8 +40,6 @@ import static org.asqatasun.entity.contract.ScopeEnum.PAGE;
  */
 public class PageAuditCommandImpl extends AuditCommandImpl {
 
-    private final String pageUrl;
-    
     /**
      * 
      * @param pageUrl
@@ -59,22 +52,14 @@ public class PageAuditCommandImpl extends AuditCommandImpl {
             List<Tag> tagList,
             AuditDataService auditDataService) {
         super(paramSet, tagList, auditDataService, PAGE);
-        this.pageUrl = FileNaming.addProtocolToUrl(pageUrl);
+        this.targetUrl = FileNaming.addProtocolToUrl(pageUrl);
     }
 
     @Override
     public void init() {
-        if (HttpRequestHandler.getInstance().isUrlAccessible(pageUrl)) {
-            try {
-                scenario= new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(pageUrl));
-            } catch (JsonProcessingException e) {
-                LoggerFactory.getLogger(this.getClass()).error("Could not parse scenario " + e.getMessage());
-            }
-            scenarioName = pageUrl;
-            super.init();
-        } else {
-            super.init();
-            createEmptyPageResource(pageUrl);
+        super.init();
+        if (!HttpRequestHandler.getInstance().isUrlAccessible(targetUrl)) {
+            createEmptyPageResource(targetUrl);
             setStatusToAudit(AuditStatus.ERROR);
         }
     }

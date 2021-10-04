@@ -72,24 +72,22 @@ public class SiteAuditCommandImplTest extends AuditCommandTestCase {
         mockInitialisationCalls(false, AuditStatus.CRAWLING);
 
         expect(mockAudit.getStatus()).andReturn(AuditStatus.CRAWLING).once();
-        expect(mockAudit.getSubject()).andReturn(site).times(2);
+        expect(mockAudit.getSubject()).andReturn(site).once();
         expect(mockWebResourceDataService.getChildWebResourceCount(site)).andReturn(4L).times(1);
 
         mockAudit.setStatus(AuditStatus.SCENARIO_LOADING);
         EasyMock.expectLastCall().once();
 
-        EasyMock.expect(mockCrawlerService.crawlSite(mockAudit, siteUrl)).
+        EasyMock.expect(mockCrawlerService.crawlSite(mockAudit, "http://"+siteUrl)).
                 andReturn(EasyMock.createMock(WebResource.class))
                 .once();
 
         EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
-        EasyMock.expect(mockWebResourceDataService.getWebResourceFromItsParent(site, 0, 4)).andReturn(pageList).once();
         setReplayMode();
         
         SiteAuditCommandImpl siteAuditCommand = getInstance();
 
         siteAuditCommand.crawl();
-        System.out.println(siteAuditCommand.scenario);
         setVerifyMode();
     }
 

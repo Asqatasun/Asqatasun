@@ -56,13 +56,14 @@ import java.util.*
  */
 open class ScenarioLoaderImpl(private val webResource: WebResource,
                          private val scenario: String,
-                         private val remoteWebDriverFactory: RemoteWebDriverFactory,
+                         remoteWebDriverFactory: RemoteWebDriverFactory,
                          private val webResourceDataService: WebResourceDataService,
                          private val contentDataService: ContentDataService,
                          private val preProcessResultDataService: PreProcessResultDataService,
                          private val dateFactory: DateFactory,
                          private val jsScriptMap: Map<String, String>,
-                         private val pageLoadDriverTimeout: Int) : ScenarioLoader, AbstractDoCommandInterceptor() {
+                         private val pageLoadDriverTimeout: Int,
+                         startRank: Int) : ScenarioLoader, AbstractDoCommandInterceptor() {
 
     companion object {
         private val LOGGER = LoggerFactory.getLogger(ScenarioLoaderImpl::class.java)
@@ -71,7 +72,7 @@ open class ScenarioLoaderImpl(private val webResource: WebResource,
 
     private val driver = remoteWebDriverFactory.createDriver(pageLoadDriverTimeout.toLong())
     private val result = ArrayList<Content>()
-    private var pageRank = 1
+    private var pageRank = startRank
     private var auditStateIndex = 1
 
     override fun getResult(): MutableList<Content> = result
@@ -106,12 +107,17 @@ open class ScenarioLoaderImpl(private val webResource: WebResource,
             waitPageFullyLoaded()
             if (command is Echo && (command).arguments[0].equals("audit", true)) {
                 LOGGER.info("Fire new page ${driver.currentUrl} with echo command")
-                fireNewPage(driver.currentUrl+"#"+auditStateIndex, driver.pageSource, executeJsScripts(), driver.getScreenshotAs(OutputType.BYTES))
+                // we could get a screenshot here for further usage (display?) by using
+                // driver.getScreenshotAs(OutputType.BYTES) method
+                fireNewPage(driver.currentUrl+"#"+auditStateIndex, driver.pageSource, executeJsScripts())
                 auditStateIndex++
             }
             if (lastVisitedUrl != driver.currentUrl) {
                 LOGGER.info("Fire new page ${driver.currentUrl}, last visited Url is $lastVisitedUrl")
-                    fireNewPage(driver.currentUrl, driver.pageSource, executeJsScripts(), driver.getScreenshotAs(OutputType.BYTES))
+
+                // we could get a screenshot here for further usage (display?) by using
+                // driver.getScreenshotAs(OutputType.BYTES) method
+                fireNewPage(driver.currentUrl, driver.pageSource, executeJsScripts())
             }
             lastVisitedUrl = driver.currentUrl
         }
@@ -124,7 +130,7 @@ open class ScenarioLoaderImpl(private val webResource: WebResource,
      * @param scriptResult
      * @param snapshot
      */
-    private fun fireNewPage(url: String, source: String, scriptResult: Map<String, String>, snapshot: ByteArray) {
+    private fun fireNewPage(url: String, source: String, scriptResult: Map<String, String>) {
         LOGGER.debug("fire New SSP $url")
         if (source.isNullOrBlank()) {
             LOGGER.debug("Empty SSP $$url not saved")
@@ -168,7 +174,17 @@ open class ScenarioLoaderImpl(private val webResource: WebResource,
                 if (url != webResource.url) webResource.url = url
                 page = webResource
             }
-            is Site -> page = webResourceDataService.createPage(url).also { webResource.addChild(it) }
+            is Site ->
+                // if the webResource has already been created, in case of site audit using crawler, we fetch it from
+                // the db
+                page = (webResourceDataService.getByUrlAndParentWebResource(url, webResource))
+                    ?.let {
+                        it as Page
+                    }?: run {
+                        // if the webResource hasn't been created, we create it and associate it as a child of the
+                        // parent webResource
+                        webResourceDataService.createPage(url).also { (webResource as Site).addChild(it) }
+                    }
         }
 
         page!!.rank = pageRank

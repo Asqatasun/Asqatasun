@@ -28,6 +28,7 @@ import java.util.Set;
 import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.entity.subject.WebResource;
 
 import static org.asqatasun.entity.contract.ScopeEnum.SCENARIO;
 
@@ -36,6 +37,9 @@ import static org.asqatasun.entity.contract.ScopeEnum.SCENARIO;
  * @author jkowalczyk
  */
 public class ScenarioAuditCommandImpl extends AuditCommandImpl {
+
+    protected String scenario;
+    protected String scenarioName;
 
     /**
      * 
@@ -53,6 +57,12 @@ public class ScenarioAuditCommandImpl extends AuditCommandImpl {
         super(paramSet, tagList, auditDataService, SCENARIO);
         this.scenario = scenario;
         this.scenarioName = scenarioName;
+        this.targetUrl = scenarioName;
+    }
+
+    @Override
+    protected void callScenarioLoadService(WebResource webResource) {
+        scenarioLoaderService.loadScenario(webResource, scenario);
     }
 
 }

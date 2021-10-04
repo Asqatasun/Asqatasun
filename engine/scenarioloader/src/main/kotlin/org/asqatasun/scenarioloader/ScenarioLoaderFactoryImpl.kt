@@ -54,8 +54,8 @@ class ScenarioLoaderFactoryImpl(@Value("\${app.engine.loader.timeout:30}") priva
                   "doctypeExtractor" to IOUtils.toString(javaClass.getResourceAsStream(doctypeExtractor), "UTF-8"))
     }
 
-    override fun create(mainWebResource: WebResource, scenario: String) =
+    override fun create(mainWebResource: WebResource, scenario: String, startRank: Int) =
         ScenarioLoaderImpl(mainWebResource, scenario, remoteWebDriverFactory, webResourceDataService,
-            contentDataService, preProcessResultDataService, dateFactory, jsScriptMap, pageLoadDriverTimeout)
+            contentDataService, preProcessResultDataService, dateFactory, jsScriptMap, pageLoadDriverTimeout, startRank)
 
 }
