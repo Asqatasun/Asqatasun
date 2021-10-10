@@ -43,6 +43,7 @@ class CrawlerImplTest {
         private const val depthOnePageUrl = URL + "page-1.html"
         private const val depthTwoPageUrl = URL + "page-2.html"
         private const val robotsAccessForbiddenPageUrl = URL + "page-access-forbidden-for-robots.html"
+        private const val politenessDelay = 100
     }
 
     @Test
@@ -73,7 +74,7 @@ class CrawlerImplTest {
         val audit = AuditImpl()
         audit.parameterSet = setParameters(depth, respectRobotsTxt)
         val crawler = CrawlerImpl(audit, URL, webResourceDataService,
-            "", "", "", "", emptyList())
+            "", "", "", "", emptyList(), politenessDelay)
         crawler.run()
         calledUrlList.forEach {
             Mockito.verify(webResourceDataService, times(1)).createPage(it)

@@ -44,7 +44,8 @@ class CrawlerServiceImpl(
     @Value("\${app.engine.loader.proxy.port:}") private val proxyPort: String,
     @Value("\${app.engine.loader.proxy.user:}") private val proxyUser: String,
     @Value("\${app.engine.loader.proxy.password:}") private val proxyPassword: String,
-    @Value("\${app.engine.loader.proxy.exclusionUrl:}") private val proxyExclusionUrl: String) : CrawlerService {
+    @Value("\${app.engine.loader.proxy.exclusionUrl:}") private val proxyExclusionUrl: String,
+    @Value("\${app.engine.loader.politenessDelay:100}") private val politenessDelay: Int) : CrawlerService {
 
     companion object {
         private val LOGGER = LoggerFactory.getLogger(CrawlerServiceImpl::class.java)
@@ -59,8 +60,8 @@ class CrawlerServiceImpl(
      * @return returns the site after modification
      */
     override fun crawlSite(audit: Audit, siteUrl: String): WebResource {
-        val crawler = CrawlerImpl(audit, siteUrl, webResourceDataService,
-            proxyHost, proxyPort, proxyUser, proxyPassword, proxyExclusionUrl.trim().split(","))
+        val crawler = CrawlerImpl(audit, siteUrl, webResourceDataService, proxyHost, proxyPort, proxyUser, proxyPassword,
+             proxyExclusionUrl.trim().split(","), politenessDelay)
         return crawl(audit, crawler)
     }
 

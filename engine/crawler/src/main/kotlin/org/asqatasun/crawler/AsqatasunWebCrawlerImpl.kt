@@ -82,6 +82,7 @@ class AsqatasunWebCrawlerImpl(private val siteUrl: URL,
         logger.debug("Path: '{}'", path)
 
         // @TODO Deal with status code
+        // https://gitlab.com/asqatasun/Asqatasun/-/issues/579
 
         if(page.contentType == null
             || !page.contentType.contains("text/html")){

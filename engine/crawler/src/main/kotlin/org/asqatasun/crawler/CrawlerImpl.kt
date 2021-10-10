@@ -44,7 +44,8 @@ class CrawlerImpl(private val audit: Audit,
                   private val proxyPort: String?,
                   private val proxyUsername: String?,
                   private val proxyPassword: String?,
-                  private val proxyExclusionUrl: List<String>): Crawler {
+                  private val proxyExclusionUrl: List<String>,
+                  private val politenessDelay: Int): Crawler {
 
     private lateinit var mainWebResource: Site
     private var urlList: ArrayList<String> = ArrayList()
@@ -113,9 +114,10 @@ class CrawlerImpl(private val audit: Audit,
         // fetched pages and need to be crawled later).
         config.crawlStorageFolder = "/tmp/asqatasun/"+ RandomStringUtils.randomAlphanumeric(6)+"/";
 
-        // Be polite: Make sure that we don't send more than 1 request per second (1000 milliseconds between requests).
+        // Be polite: Make sure that we don't send more than 1 request per 100 milliseconds.
         // Otherwise it may overload the target servers.
-        config.politenessDelay = 100
+        // This parameter can be overridden using the spring property app.engine.loader.politenessDelay
+        config.politenessDelay = politenessDelay
 
         // You can set the maximum crawl depth here. The default value is -1 for unlimited depth.
         config.maxDepthOfCrawling = Integer.valueOf(getParameterValue(MAX_DEPTH_PARAM_KEY))

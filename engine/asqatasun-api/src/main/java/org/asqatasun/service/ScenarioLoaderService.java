@@ -38,7 +38,6 @@ public interface ScenarioLoaderService {
     /**
      *
      * @param webResource
-     * @param scenarioFile
      * @return
      */
     List<Content> loadScenario(WebResource webResource);
@@ -55,6 +54,7 @@ public interface ScenarioLoaderService {
      *
      * @param webResource
      * @param urlList
+     * @param startRank
      * @return
      */
     List<Content> loadScenario(WebResource webResource, List<URL> urlList, int startRank);
