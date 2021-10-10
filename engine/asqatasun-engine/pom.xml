@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
-            <artifactId>asqatasun-scenarioloader</artifactId>
+            <artifactId>asqatasun-api</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.module</groupId>

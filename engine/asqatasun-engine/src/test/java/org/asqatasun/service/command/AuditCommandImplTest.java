@@ -32,6 +32,7 @@ import org.asqatasun.contentadapter.AdaptationListener;
 import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Content;
 import org.asqatasun.entity.audit.SSP;
+import org.asqatasun.entity.contract.ScopeEnum;
 import org.asqatasun.entity.service.audit.AuditDataService;
 import org.asqatasun.entity.service.audit.ContentDataService;
 import org.asqatasun.entity.service.audit.ProcessResultDataService;
@@ -91,7 +92,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
         
-        AuditDataService result = instance.getAuditDataService();
+        AuditDataService result = instance.auditDataService;
         assertEquals(mockAuditDataService, result);
         
         setVerifyMode();
@@ -107,7 +108,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
         
-        TestDataService result = instance.getTestDataService();
+        TestDataService result = instance.testDataService;
         assertEquals(mockTestDataService, result);
         
         setVerifyMode();
@@ -123,7 +124,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        ParameterDataService result = instance.getParameterDataService();
+        ParameterDataService result = instance.parameterDataService;
         assertEquals(mockParameterDataService, result);
         
         setVerifyMode();
@@ -139,7 +140,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        WebResourceDataService result = instance.getWebResourceDataService();
+        WebResourceDataService result = instance.webResourceDataService;
         assertEquals(mockWebResourceDataService, result);
         
         setVerifyMode();
@@ -155,7 +156,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        ContentDataService result = instance.getContentDataService();
+        ContentDataService result = instance.contentDataService;
         assertEquals(mockContentDataService, result);
         
         setVerifyMode();
@@ -171,7 +172,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        ProcessResultDataService result = instance.getProcessResultDataService();
+        ProcessResultDataService result = instance.processResultDataService;
         assertEquals(mockProcessResultDataService, result);
         
         setVerifyMode();
@@ -187,7 +188,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        ContentAdapterService result = instance.getContentAdapterService();
+        ContentAdapterService result = instance.contentAdapterService;
         assertEquals(mockContentAdapterService, result);
         
         setVerifyMode();
@@ -203,7 +204,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        ProcessorService result = instance.getProcessorService();
+        ProcessorService result = instance.processorService;
         assertEquals(mockProcessorService, result);
         
         setVerifyMode();
@@ -219,7 +220,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        ConsolidatorService result = instance.getConsolidatorService();
+        ConsolidatorService result = instance.consolidatorService;
         assertEquals(mockConsolidatorService, result);
         
         setVerifyMode();
@@ -235,7 +236,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
 
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        AnalyserService result = instance.getAnalyserService();
+        AnalyserService result = instance.analyserService;
         assertEquals(mockAnalyserService, result);
         
         setVerifyMode();
@@ -251,7 +252,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         
         AuditCommandImpl instance = new TestAuditCommandImpl();
 
-        AdaptationListener result = instance.getAdaptationListener();
+        AdaptationListener result = instance.adaptationListener;
         assertEquals(mockAdaptationListener, result);
         
         setVerifyMode();
@@ -267,26 +268,26 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
 
         WebResource mockWr = createMock(WebResource.class);
         
-        expect(mockAudit.getId()).andReturn(Long.valueOf(1)).once();
-        expect(mockAuditDataService.read(Long.valueOf(1))).andReturn(mockAudit).once();
+        expect(mockAudit.getId()).andReturn(1L).once();
+        expect(mockAuditDataService.read(1L)).andReturn(mockAudit).once();
         expect(mockAudit.getStatus()).andReturn(AuditStatus.CONTENT_ADAPTING).once();
         expect(mockAudit.getSubject()).andReturn(mockWr).anyTimes();
         expect(mockWr.getURL()).andReturn("").anyTimes();
-        expect(mockWr.getId()).andReturn(Long.valueOf(1)).once();
+        expect(mockWr.getId()).andReturn(1L).once();
         
         expect(mockContentDataService.getNumberOfSSPFromWebResource(
                 mockWr, 
-                HttpStatus.SC_OK)).andReturn(Long.valueOf(49)).once();
+                HttpStatus.SC_OK)).andReturn(49L).once();
         
         expect(mockContentDataService.getSSPFromWebResource(
-                Long.valueOf(1), 
-                Long.valueOf(0), 
+            1L,
+            0L,
                 25,
                 true)).andReturn(new ArrayList<Content>()).once();
         
         expect(mockContentDataService.getSSPFromWebResource(
-                Long.valueOf(1), 
-                Long.valueOf(25), 
+            1L,
+            25L,
                 25,
                 true)).andReturn(new ArrayList<Content>()).once();
         
@@ -332,51 +333,6 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
         setVerifyMode();
     }
 
-    /**
-     * Test of process method, of class AuditCommandImpl.
-     */
-    public void testProcess() {
-        System.out.println("process");
-        AuditCommandImpl instance = null;
-//        instance.process();
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of consolidate method, of class AuditCommandImpl.
-     */
-    public void testConsolidate() {
-        System.out.println("consolidate");
-        AuditCommandImpl instance = null;
-//        instance.consolidate();
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of analyse method, of class AuditCommandImpl.
-     */
-    public void testAnalyse() {
-        System.out.println("analyse");
-        AuditCommandImpl instance = null;
-//        instance.analyse();
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setStatusToAudit method, of class AuditCommandImpl.
-     */
-    public void testSetStatusToAudit() {
-        System.out.println("setStatusToAudit");
-        AuditStatus auditStatus = null;
-        AuditCommandImpl instance = null;
-//        instance.setStatusToAudit(auditStatus);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
     @Override
     protected void setReplayModeOfLocalMocks() {
         
@@ -390,7 +346,7 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
     public class TestAuditCommandImpl extends AuditCommandImpl {
 
         public TestAuditCommandImpl() {
-            super(null, Collections.EMPTY_LIST, mockAuditDataService);
+            super(null, Collections.EMPTY_LIST, mockAuditDataService, ScopeEnum.PAGE);
             setTestDataService(mockTestDataService);
             setParameterDataService(mockParameterDataService);
             setWebResourceDataService(mockWebResourceDataService);
@@ -409,11 +365,6 @@ public class AuditCommandImplTest extends AuditCommandTestCase {
             setAnalyseTreatmentWindow(200);
             init();
         }
-
-//        @Override
-//        public void init() {
-//            throw new UnsupportedOperationException("Not supported yet.");
-//        }
 
         @Override
         public void loadContent() {

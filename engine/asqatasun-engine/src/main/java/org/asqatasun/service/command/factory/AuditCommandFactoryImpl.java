@@ -38,13 +38,10 @@ import org.asqatasun.service.*;
 import org.asqatasun.service.command.AuditCommand;
 import org.asqatasun.service.command.AuditCommandImpl;
 import org.asqatasun.service.command.GroupOfPagesAuditCommandImpl;
-import org.asqatasun.service.command.GroupOfPagesCrawlerAuditCommandImpl;
 import org.asqatasun.service.command.PageAuditCommandImpl;
-import org.asqatasun.service.command.PageAuditCrawlerCommandImpl;
 import org.asqatasun.service.command.ScenarioAuditCommandImpl;
 import org.asqatasun.service.command.SiteAuditCommandImpl;
 import org.asqatasun.service.command.UploadAuditCommandImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -67,6 +64,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         AnalyserService analyserService,
         ContentLoaderService contentLoaderService,
         ConsolidatorService consolidatorService,
+        CrawlerService crawlerService,
         ScenarioLoaderService scenarioLoaderService,
         ContentAdapterService contentAdapterService,
         ProcessorService processorService) {
@@ -82,6 +80,7 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
         this.analyserService = analyserService;
         this.contentLoaderService = contentLoaderService;
         this.consolidatorService = consolidatorService;
+        this.crawlerService = crawlerService;
         this.scenarioLoaderService = scenarioLoaderService;
         this.contentAdapterService = contentAdapterService;
         this.processorService = processorService;
@@ -97,42 +96,25 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
     private final PreProcessResultDataService preProcessResultDataService;
     private final ContentLoaderService contentLoaderService;
     private final ScenarioLoaderService scenarioLoaderService;
+    private final CrawlerService crawlerService;
     private final ContentAdapterService contentAdapterService;
     private final ProcessorService processorService;
     private final ConsolidatorService consolidatorService;
     private final AnalyserService analyserService;
     private final AdaptationListener adaptationListener;
 
-    private boolean auditPageWithCrawler = false;
-    public void setAuditPageWithCrawler(boolean auditPageWithCrawler) {
-        this.auditPageWithCrawler = auditPageWithCrawler;
-    }
-
     private boolean cleanUpRelatedContent = true;
-    public void setCleanUpRelatedContent(boolean cleanUpRelatedContent) {
-        this.cleanUpRelatedContent = cleanUpRelatedContent;
-    }
 
     public static final int ANALYSE_TREATMENT_WINDOW = 10;
     public static final int PROCESSING_TREATMENT_WINDOW = 4;
     public static final int ADAPTATION_TREATMENT_WINDOW = 4;
     public static final int CONSOLIDATION_TREATMENT_WINDOW = 200;
 
-    private int adaptationTreatmentWindow = ADAPTATION_TREATMENT_WINDOW;
-    private int analyseTreatmentWindow = ANALYSE_TREATMENT_WINDOW;
-    private int consolidationTreatmentWindow = CONSOLIDATION_TREATMENT_WINDOW;
-    private int processingTreatmentWindow = PROCESSING_TREATMENT_WINDOW;
-
     @Override
     public AuditCommand create(String url, Set<Parameter> paramSet, List<Tag> tagList, boolean isSite) {
         if (isSite) {
             SiteAuditCommandImpl auditCommand = 
-                    new SiteAuditCommandImpl(url, paramSet, tagList, auditDataService);
-            initCommandServices(auditCommand);
-            return auditCommand;
-        } else if (auditPageWithCrawler) {
-            PageAuditCrawlerCommandImpl auditCommand = 
-                    new PageAuditCrawlerCommandImpl(url, paramSet, tagList, auditDataService);
+                    new SiteAuditCommandImpl(url, paramSet, tagList, crawlerService, auditDataService);
             initCommandServices(auditCommand);
             return auditCommand;
         } else {
@@ -155,29 +137,16 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
 
     @Override
     public AuditCommand create(String siteUrl, List<String> pageUrlList, Set<Parameter> paramSet, List<Tag> tagList) {
-
-        if (auditPageWithCrawler) {
-            GroupOfPagesCrawlerAuditCommandImpl auditCommand = 
-                new GroupOfPagesCrawlerAuditCommandImpl(
-                            siteUrl,
-                            pageUrlList,
-                            paramSet,
-                            tagList,
-                            auditDataService);
-            initCommandServices(auditCommand);
-            return auditCommand;
-        } else {
-            GroupOfPagesAuditCommandImpl auditCommand = 
-                new GroupOfPagesAuditCommandImpl(
-                            siteUrl,
-                            pageUrlList,
-                            paramSet,
-                            tagList,
-                            auditDataService);
-            initCommandServices(auditCommand);
-            auditCommand.setScenarioLoaderService(scenarioLoaderService);
-            return auditCommand;
-        }
+        GroupOfPagesAuditCommandImpl auditCommand =
+            new GroupOfPagesAuditCommandImpl(
+                        siteUrl,
+                        pageUrlList,
+                        paramSet,
+                        tagList,
+                        auditDataService);
+        initCommandServices(auditCommand);
+        auditCommand.setScenarioLoaderService(scenarioLoaderService);
+        return auditCommand;
     }
 
     @Override
@@ -195,20 +164,22 @@ public class AuditCommandFactoryImpl implements AuditCommandFactory {
      */
     private void initCommandServices(AuditCommandImpl auditCommand) {
         auditCommand.setAdaptationListener(adaptationListener);
-        auditCommand.setAdaptationTreatmentWindow(adaptationTreatmentWindow);
-        auditCommand.setAnalyseTreatmentWindow(analyseTreatmentWindow);
+        auditCommand.setAdaptationTreatmentWindow(ADAPTATION_TREATMENT_WINDOW);
+        auditCommand.setAnalyseTreatmentWindow(ANALYSE_TREATMENT_WINDOW);
         auditCommand.setAnalyserService(analyserService);
         auditCommand.setCleanUpRelatedContent(cleanUpRelatedContent);
-        auditCommand.setConsolidationTreatmentWindow(consolidationTreatmentWindow);
+        auditCommand.setConsolidationTreatmentWindow(CONSOLIDATION_TREATMENT_WINDOW);
         auditCommand.setConsolidatorService(consolidatorService);
         auditCommand.setContentAdapterService(contentAdapterService);
+        auditCommand.setAuditDataService(auditDataService);
         auditCommand.setContentDataService(contentDataService);
         auditCommand.setParameterDataService(parameterDataService);
         auditCommand.setPreProcessResultDataService(preProcessResultDataService);
         auditCommand.setProcessResultDataService(processResultDataService);
         auditCommand.setTagDataService(tagDataService);
-        auditCommand.setProcessingTreatmentWindow(processingTreatmentWindow);
+        auditCommand.setProcessingTreatmentWindow(PROCESSING_TREATMENT_WINDOW);
         auditCommand.setProcessorService(processorService);
+        auditCommand.setScenarioLoaderService(scenarioLoaderService);
         auditCommand.setTestDataService(testDataService);
         auditCommand.setWebResourceDataService(webResourceDataService);
     }

@@ -22,26 +22,38 @@
 
 package org.asqatasun.service.command;
 
-import java.util.List;
-import java.util.Set;
-
+import org.asqatasun.entity.audit.AuditStatus;
 import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
+import org.asqatasun.service.CrawlerService;
+import org.asqatasun.util.FileNaming;
+import org.asqatasun.util.http.HttpRequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.Set;
+
+import static org.asqatasun.entity.contract.ScopeEnum.DOMAIN;
 
 /**
  *
  * @author jkowalczyk
  */
-public final class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
+public final class SiteAuditCommandImpl extends AuditCommandImpl {
 
      /**
      * Logger
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SiteAuditCommandImpl.class);
-    
+    /**
+     * The crawlerService instance
+     */
+    private final CrawlerService crawlerService;
+
     /**
      * 
      * @param siteUrl
@@ -49,23 +61,55 @@ public final class SiteAuditCommandImpl extends CrawlAuditCommandImpl {
      * @param auditDataService 
      */
     public SiteAuditCommandImpl(
-            String siteUrl, 
+            String siteUrl,
             Set<Parameter> paramSet,
             List<Tag> tagList,
+            CrawlerService crawlerService,
             AuditDataService auditDataService) {
-        super(paramSet, tagList, auditDataService);
-        setUrl(siteUrl);
-    }
-    
-    @Override
-    public void callCrawlerService() {
-        LOGGER.info("Launching crawler for page " + getUrl());
-        getCrawlerService().crawlSite(getAudit(), getUrl());
+        super(paramSet, tagList, auditDataService, DOMAIN);
+        this.crawlerService = crawlerService;
+        try {
+            URL baseURL = new URL(FileNaming.addProtocolToUrl(siteUrl));
+            this.targetUrl = baseURL.getProtocol()+"://"+baseURL.getHost();
+        } catch (MalformedURLException e) {
+            LOGGER.warn("Malformed URL encountered : " + e.getMessage());
+        }
     }
 
     @Override
-    void createEmptyWebResource() {
-        createEmptySiteResource(getUrl());
+    public void init() {
+        if (HttpRequestHandler.getInstance().isUrlAccessible(this.targetUrl)) {
+            super.init();
+            setStatusToAudit(AuditStatus.CRAWLING);
+        } else {
+            super.init();
+            createEmptySiteResource(this.targetUrl);
+            setStatusToAudit(AuditStatus.ERROR);
+        }
+    }
+
+    @Override
+    public void crawl() {
+        if (!getAudit().getStatus().equals(AuditStatus.CRAWLING)) {
+            LOGGER.warn(
+                "Audit status is " +
+                    getAudit().getStatus() +
+                    " while " +
+                    AuditStatus.CRAWLING +
+                    " was required.");
+            return;
+        }
+
+        crawlerService.crawlSite(getAudit(), this.targetUrl);
+        Long nbUrls = webResourceDataService.getChildWebResourceCount(getAudit().getSubject());
+
+        if (nbUrls > 0) {
+            setStatusToAudit(AuditStatus.SCENARIO_LOADING);
+        } else {
+            LOGGER.warn("Audit has no content");
+            setStatusToAudit(AuditStatus.ERROR);
+        }
+
     }
 
 }

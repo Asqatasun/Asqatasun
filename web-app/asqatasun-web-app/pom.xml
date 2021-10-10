@@ -53,6 +53,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
         </dependency>
         <!-- need to override selenium to avoid latest by spring boot-->
         <!-- webdriver api -->
@@ -191,6 +192,12 @@
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>
             <artifactId>asqatasun-logging</artifactId>
+            <version>${asqatasun.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${asqatasunGroupId}</groupId>
+            <artifactId>asqatasun-crawler</artifactId>
             <version>${asqatasun.version}</version>
             <scope>runtime</scope>
         </dependency>

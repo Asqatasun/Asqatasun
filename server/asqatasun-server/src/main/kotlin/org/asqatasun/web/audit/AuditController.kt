@@ -1,6 +1,6 @@
 /*
  *  Asqatasun - Automated webpage assessment
- *  Copyright (C) 2008-2020  Asqatasun.org
+ *  Copyright (C) 2008-2021  Asqatasun.org
  *
  *  This file is part of Asqatasun.
  *
@@ -76,18 +76,36 @@ class AuditController(private val auditDataService: AuditDataService,
         }!!
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = ["/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(value = ["/page/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun auditPage(@RequestBody auditRequest: PageAuditRequest, request: HttpServletRequest)
         = auditService.runPageAudit(auditRequest, request.remoteAddr)
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = ["/site/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
+    fun auditSite(@RequestBody auditRequest: SiteAuditRequest, request: HttpServletRequest)
+        = auditService.runSiteAudit(auditRequest, request.remoteAddr)
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = ["/runS"], consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(value = ["/scenario/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     @Throws(IOException::class)
     fun auditScenario(@RequestBody auditRequest: ScenarioAuditRequest, request: HttpServletRequest)
         = auditService.runScenarioAudit(auditRequest, request.remoteAddr)
 
 }
+
+data class SiteAuditRequest(
+    val url: String,
+    val referential: Referential,
+    val level: Level,
+    val depth: Int = 10,
+    val maxPages: Int = 1000,
+    val maxDuration: Int = 3600,
+    val exclusionRegexp: String = "",
+    val inclusionRegexp: String = "",
+    val robotsTxtActivation: Boolean = true,
+    val contractId: Long?,
+    val tags: List<String>? = emptyList()
+)
 
 data class PageAuditRequest(
     val urls: List<String>,

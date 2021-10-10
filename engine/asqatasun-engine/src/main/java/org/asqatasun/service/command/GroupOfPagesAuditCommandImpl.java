@@ -28,23 +28,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.asqatasun.entity.audit.Tag;
 import org.asqatasun.entity.parameterization.Parameter;
 import org.asqatasun.entity.service.audit.AuditDataService;
-import org.asqatasun.scenarioloader.model.SeleniumIdeScenarioBuilder;
+import org.asqatasun.entity.subject.WebResource;
 import org.asqatasun.util.FileNaming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.asqatasun.entity.contract.ScopeEnum.GROUPOFPAGES;
 
 /**
  *
  * @author jkowalczyk
  */
-public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandImpl {
+public class GroupOfPagesAuditCommandImpl extends AuditCommandImpl {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupOfPagesAuditCommandImpl.class);
+    List<URL> urlList = new ArrayList<>();
 
     /**
      * 
@@ -60,23 +61,21 @@ public class GroupOfPagesAuditCommandImpl extends AbstractScenarioAuditCommandIm
                 List<Tag> tagList,
                 AuditDataService auditDataService) {
         
-        super(paramSet, tagList, auditDataService);
+        super(paramSet, tagList, auditDataService, GROUPOFPAGES);
         try {
-            List<URL> localUrlList = new ArrayList<>();
             for (String url : pageUrlList) {
-                localUrlList.add(new URL(FileNaming.addProtocolToUrl(url)));
-            }
-            try {
-                setScenario(new ObjectMapper().writeValueAsString(new SeleniumIdeScenarioBuilder().build(siteUrl, localUrlList)));
-            } catch (JsonProcessingException e) {
-                LoggerFactory.getLogger(this.getClass()).error("Could not parse scenario " + e.getMessage());
+                urlList.add(new URL(FileNaming.addProtocolToUrl(url)));
             }
             URL baseURL = new URL(FileNaming.addProtocolToUrl(siteUrl));
-            setScenarioName(baseURL.getProtocol()+"://"+baseURL.getHost());
-            setIsPage(false);
+            this.targetUrl = baseURL.getProtocol()+"://"+baseURL.getHost();
         } catch (MalformedURLException e) {
             LOGGER.warn("Malformed URL encountered : " + e.getMessage());
         }
     }
-    
+
+    @Override
+    protected void callScenarioLoadService(WebResource webResource) {
+        scenarioLoaderService.loadScenario(webResource, urlList, 1);
+    }
+
 }

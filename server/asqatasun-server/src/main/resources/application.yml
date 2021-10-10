@@ -1,7 +1,7 @@
 jdbc:
-  url: "jdbc:mysql://localhost:3307/asqatasun"
-  user: "root"
-  password: "bou"
+  url: "jdbc:mysql://localhost:3306/asqatasun"
+  user: "asqatasunDatabaseUserLogin"
+  password: "asqatasunDatabaseUserP4ssword"
 
 jpa:
   showSql: false

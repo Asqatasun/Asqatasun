@@ -36,8 +36,6 @@ public interface ScenarioLoaderFactory {
      * @return 
      *      an instance of ContentLoader
      */
-    ScenarioLoader create(
-            WebResource mainWebResource, 
-            String scenarioFile);
+    ScenarioLoader create(WebResource mainWebResource, String scenarioFile, int startRank);
 
 }

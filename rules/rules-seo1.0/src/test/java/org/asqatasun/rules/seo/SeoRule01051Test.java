@@ -47,11 +47,6 @@ public class SeoRule01051Test extends SeoRuleImplementationTestCase {
         Page page = getWebResourceFactory().createPage("http://site-robot.asqatasun.ovh");
         site.addChild(page);
         
-        site = getWebResourceFactory().createSite("http://site.asqatasun.ovh");
-        getWebResourceMap().put("Seo.Test.1.5.1-2Failed-01", site);
-        page = getWebResourceFactory().createPage("http://site.asqatasun.ovh");
-        site.addChild(page);
-        
         site = getWebResourceFactory().createSite("http://site-sitemap.asqatasun.ovh");
         getWebResourceMap().put("Seo.Test.1.5.1-2Failed-02", site);
         page = getWebResourceFactory().createPage("http://site-sitemap.asqatasun.ovh");
@@ -61,7 +56,6 @@ public class SeoRule01051Test extends SeoRuleImplementationTestCase {
     @Override
     protected void setProcess() {
         process("Seo.Test.1.5.1-1Passed-01");
-        process("Seo.Test.1.5.1-2Failed-01");
         process("Seo.Test.1.5.1-2Failed-02");
     }
 
@@ -71,9 +65,6 @@ public class SeoRule01051Test extends SeoRuleImplementationTestCase {
                 consolidate("Seo.Test.1.5.1-1Passed-01");
         assertEquals(TestSolution.PASSED, processResult.getValue());
 
-        processResult = consolidate("Seo.Test.1.5.1-2Failed-01");
-        assertEquals(TestSolution.FAILED, processResult.getValue());
-        
         processResult = consolidate("Seo.Test.1.5.1-2Failed-02");
         assertEquals(TestSolution.FAILED, processResult.getValue());
     }

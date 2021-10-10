@@ -219,6 +219,29 @@ public class AuditFormElementConfiguration {
         return auditSetUpFormFieldBuilder;
     }
     @Bean
+    public CheckboxElementBuilderImpl robotsTxtBuilder() {
+        CheckboxElementBuilderImpl builder = new CheckboxElementBuilderImpl();
+        builder.setEnabled(true);
+        builder.setValue("true");
+        return builder;
+    }
+    @Bean
+    public CheckboxFormFieldBuilderImpl robotsTxtFormFieldBuilder() {
+        CheckboxFormFieldBuilderImpl builder = new CheckboxFormFieldBuilderImpl();
+        builder.setI18nKey("robots-txt");
+        builder.setErrorI18nKey("robots-txt-error");
+        builder.setCheckboxElementBuilderList(Arrays.asList(robotsTxtBuilder()));
+        return builder;
+    }
+    @Bean
+    public AuditSetUpFormFieldBuilder robotsTxtParamBuilder() {
+        AuditSetUpFormFieldBuilder auditSetUpFormFieldBuilder =
+            new AuditSetUpFormFieldBuilder(parameterElementDataService);
+        auditSetUpFormFieldBuilder.setFormFieldBuilder(robotsTxtFormFieldBuilder());
+        auditSetUpFormFieldBuilder.setParameterCode("ROBOTS_TXT_ACTIVATION");
+        return auditSetUpFormFieldBuilder;
+    }
+    @Bean
     public NumericalFormFieldBuilderImpl screenWidthFormFieldBuilder() {
         return ContractFormElementConfiguration.buildNumericalFormFieldBuilder(
             "2048", "1", "screen-width", "screen-width-error");
@@ -287,7 +310,8 @@ public class AuditFormElementConfiguration {
                 put("crawl-options", Arrays.asList(
                     inclusionRegexpParamBuilder(),
                     exclusionRegexpParamBuilder(),
-                    considerCookiesParamBuilder()));
+                    considerCookiesParamBuilder(),
+                    robotsTxtParamBuilder()));
                 put("marker-parameters", Arrays.asList(
                     dataTableParamBuilder(),
                     presentationTableParamBuilder(),

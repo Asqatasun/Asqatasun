@@ -220,6 +220,7 @@
         <mysql-connector-java.version>5.1.48</mysql-connector-java.version>
         <junitGroupId>junit</junitGroupId>
         <junitVersion>4.13</junitVersion>
+        <junitJupiterVersion>5.5.2</junitJupiterVersion>
         <commonsValidatorVersion>1.6</commonsValidatorVersion>
 
         <!-- Plugin Versions -->
@@ -313,6 +314,11 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -839,6 +845,18 @@
                 <groupId>${junitGroupId}</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junitVersion}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junitJupiterVersion}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junitJupiterVersion}</version>
                 <scope>test</scope>
             </dependency>
 

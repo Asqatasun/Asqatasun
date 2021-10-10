@@ -106,7 +106,7 @@ public abstract class AuditCommandTestCase extends TestCase{
         mockAudit.setParameterSet(null);
         EasyMock.expectLastCall().once();
 
-        mockAudit.setStatus(AuditStatus.INITIALISATION);
+        mockAudit.setStatus(AuditStatus.SCENARIO_LOADING);
         EasyMock.expectLastCall().once();
         EasyMock.expect(mockAuditDataService.saveOrUpdate(mockAudit)).andReturn(mockAudit).once();
         

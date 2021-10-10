@@ -31,11 +31,11 @@ import org.asqatasun.entity.service.contract.ActDataService
 import org.asqatasun.entity.service.contract.ContractDataService
 import org.asqatasun.entity.service.contract.ScopeDataService
 import org.asqatasun.entity.service.parameterization.ParameterDataService
+import org.asqatasun.entity.service.parameterization.ParameterElementDataService
 import org.asqatasun.service.AuditServiceListener
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.io.IOException
-import java.net.URL
 import java.time.Instant
 import java.util.*
 import javax.annotation.PostConstruct
@@ -47,9 +47,19 @@ class AuditService(private val auditService: EngineAuditService,
                    private val actDataService: ActDataService,
                    private val scopeDataService: ScopeDataService,
                    private val parameterDataService: ParameterDataService,
+                   private val parameterElementDataService: ParameterElementDataService,
                    private val tagDataService: TagDataService) {
 
     private val scopeMap: MutableMap<ScopeEnum, Scope> = EnumMap(ScopeEnum::class.java)
+
+    companion object {
+        const val DEPTH_PARAM_KEY = "DEPTH"
+        const val MAX_DOCUMENT_PARAM_KEY = "MAX_DOCUMENTS"
+        const val MAX_DURATION_PARAM_KEY = "MAX_DURATION"
+        const val EXCLUSION_URL_LIST_PARAM_KEY = "EXCLUSION_REGEXP"
+        const val INCLUSION_URL_LIST_PARAM_KEY = "INCLUSION_REGEXP"
+        const val ROBOTS_TXT_ACTIVATION_PARAM_KEY = "ROBOTS_TXT_ACTIVATION"
+    }
 
     @PostConstruct
     private fun initializeScopeMap() {
@@ -86,12 +96,25 @@ class AuditService(private val auditService: EngineAuditService,
     fun runScenarioAudit(sar: ScenarioAuditRequest, ipAddress: String): Long {
         val contract = getContract(sar.contractId)
 
-        return auditService.auditScenario(sar.name,
-                                          readFile(sar.scenario),
-                                          initialiseParamSet(sar.referential.code, sar.level.code),
-                                          tagDataService.getTagListFromValues(sar.tags)).let {
+        return auditService.auditScenario(
+            sar.name,
+            readFile(sar.scenario),
+            initialiseParamSet(sar.referential.code, sar.level.code),
+            tagDataService.getTagListFromValues(sar.tags)).let {
             getAuditId(it, ipAddress, SCENARIO, contract)
-        }
+            }
+    }
+
+    fun runSiteAudit(sar: SiteAuditRequest, ipAddress: String): Long {
+        val contract = getContract(sar.contractId)
+        val paramSet = initialiseParamSet(sar.referential.code, sar.level.code).toMutableSet()
+        initSiteAuditParamSet(sar, paramSet)
+        return auditService.auditSite(
+            sar.url,
+            paramSet,
+            tagDataService.getTagListFromValues(sar.tags)).let {
+                getAuditId(it, ipAddress, SCENARIO, contract)
+            }
     }
 
     private fun getAuditId(audit: Audit, ipAddress: String, scope: ScopeEnum, contract: Contract?): Long {
@@ -119,6 +142,29 @@ class AuditService(private val auditService: EngineAuditService,
 
     private fun initialiseParamSet(referentialCode: String, levelCode: String) =
         parameterDataService.getParameterSetFromAuditLevel(referentialCode, levelCode)
+
+    private fun initSiteAuditParamSet(sar: SiteAuditRequest, paramSet: MutableSet<Parameter>) {
+        paramSet.removeIf {
+            p -> p.parameterElement.parameterElementCode.equals(DEPTH_PARAM_KEY) ||
+                 p.parameterElement.parameterElementCode.equals(MAX_DURATION_PARAM_KEY) ||
+                 p.parameterElement.parameterElementCode.equals(MAX_DOCUMENT_PARAM_KEY) ||
+                 p.parameterElement.parameterElementCode.equals(INCLUSION_URL_LIST_PARAM_KEY) ||
+                 p.parameterElement.parameterElementCode.equals(EXCLUSION_URL_LIST_PARAM_KEY) ||
+                 p.parameterElement.parameterElementCode.equals(ROBOTS_TXT_ACTIVATION_PARAM_KEY)
+        }
+        paramSet.add(parameterDataService.getParameter(
+            parameterElementDataService.getParameterElement(DEPTH_PARAM_KEY), sar.depth.toString()))
+        paramSet.add(parameterDataService.getParameter(
+            parameterElementDataService.getParameterElement(MAX_DURATION_PARAM_KEY), sar.maxDuration.toString()))
+        paramSet.add(parameterDataService.getParameter(
+            parameterElementDataService.getParameterElement(MAX_DOCUMENT_PARAM_KEY), sar.maxPages.toString()))
+        paramSet.add(parameterDataService.getParameter(
+            parameterElementDataService.getParameterElement(INCLUSION_URL_LIST_PARAM_KEY), sar.inclusionRegexp))
+        paramSet.add(parameterDataService.getParameter(
+            parameterElementDataService.getParameterElement(EXCLUSION_URL_LIST_PARAM_KEY), sar.exclusionRegexp))
+        paramSet.add(parameterDataService.getParameter(
+            parameterElementDataService.getParameterElement(ROBOTS_TXT_ACTIVATION_PARAM_KEY), sar.robotsTxtActivation.toString()))
+    }
 
     @Throws(IOException::class)
     // #57 issue quick fix.......
