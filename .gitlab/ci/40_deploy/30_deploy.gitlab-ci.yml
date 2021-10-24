@@ -1,0 +1,8 @@
+---
+deploy:dev:
+  stage: deploy
+  only: [master]
+  variables:
+    HOST: $HOST_DEV
+  script:
+    - ./ci/deploy_to_server.sh

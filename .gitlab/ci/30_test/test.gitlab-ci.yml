@@ -1,0 +1,6 @@
+---
+test:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS clean
+    - mvn $MAVEN_CLI_OPTS test

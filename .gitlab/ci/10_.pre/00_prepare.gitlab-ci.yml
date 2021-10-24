@@ -1,0 +1,14 @@
+---
+prepare_env:
+  stage: .pre
+  script:
+    - export APP_VERSION=$(grep "^    <version>" pom.xml | sed 's/.*<version>\(.*\)<\/version>/\1/')
+    - export WEBAPP_ARTIFACT_FILE="asqatasun-web-app-${APP_VERSION}.war"
+    - export REST_SERVER_ARTIFACT_FILE="asqatasun-server-${APP_VERSION}.jar"
+    - echo "APP_VERSION=${APP_VERSION}" | tee -a build.env
+    - echo "WEBAPP_ARTIFACT_FILE=${WEBAPP_ARTIFACT_FILE}" | tee -a build.env
+    - echo "REST_SERVER_ARTIFACT_FILE=${REST_SERVER_ARTIFACT_FILE}" | tee -a build.env
+    - echo "$CI_PROJECT_NAME version $APP_VERSION - build $CI_BUILD_ID"
+  artifacts:
+    reports:
+      dotenv: build.env
