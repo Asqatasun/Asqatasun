@@ -1,13 +1,17 @@
 ---
 upload_artefacts:
   extends: .deploy_common
+  # Run this job: only for master && without tag
   only:
     refs:
       - master
+  except:
+    refs:
       - tags
 
 upload_artefacts_manual:
   extends: .deploy_common
+  # We allow manual deploy when NOT on master or a tag
   except:
     refs:
       - master
@@ -38,7 +42,7 @@ upload_artefacts_manual:
     ## without extra base64 encoding.
     ## https://gitlab.com/gitlab-examples/ssh-private-key/issues/1#note_48526556
     ##
-    - echo "$ARCHIVE_ARTEFACT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - echo "$ARTEFACT_SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
 
     ##
     ## Create the SSH directory and give it the right permissions
@@ -50,7 +54,7 @@ upload_artefacts_manual:
     ## Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the
     ## following two lines.
     ##
-    - ssh-keyscan $ARCHIVE_ARTEFACT_DEPLOY_HOST >> ~/.ssh/known_hosts
+    - echo "$ARTEFACT_SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
     ##
