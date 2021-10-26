@@ -20,6 +20,7 @@ cache:
 include:
   #  - local: /.gitlab/ci/10-.pre/10_lint.gitlab-ci.yml
   - local: /.gitlab/ci/10_.pre/00_prepare.gitlab-ci.yml
+  - local: /.gitlab/ci/10_.pre/lint_mvn.gitlab-ci.yml
   - local: /.gitlab/ci/20_build/build.gitlab-ci.yml
   - local: /.gitlab/ci/30_test/test.gitlab-ci.yml
 #  - local: /.gitlab/ci/40_deploy/10_release.gitlab-ci.yml

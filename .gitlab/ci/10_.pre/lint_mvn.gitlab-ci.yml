@@ -1,0 +1,5 @@
+---
+lint_mvn:
+  stage: .pre
+  script:
+    - mvn $MAVEN_CLI_OPTS validate
