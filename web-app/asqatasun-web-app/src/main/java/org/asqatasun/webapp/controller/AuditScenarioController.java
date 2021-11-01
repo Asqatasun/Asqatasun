@@ -156,7 +156,7 @@ public class AuditScenarioController extends AbstractAuditSetUpController {
                         strb.append(TgolKeyStore.JSON_EXTENSION);
                         response.setHeader(TgolKeyStore.CONTENT_DISPOSITION,strb.toString()); 
                         response.flushBuffer();
-                        break;
+                        return;
                     }
                 }
                 throw new ForbiddenPageException(getCurrentUser());
