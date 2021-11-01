@@ -25,7 +25,7 @@
 <c:if test="${adminActive == 'true'}">
     <c:set var="adminActive" scope="page" value=""/>
 </c:if>
-<div class="topbar">
+<header class="topbar">
     <div class="fill">
         <div class="container">
             <c:choose>
@@ -90,4 +90,4 @@
             </ul><!--class="nav secondary-nav"-->
         </div><!-- class="container" -->
     </div><!-- class="fill" -->
-</div><!-- class="topbar" -->
+</header><!-- class="topbar" -->

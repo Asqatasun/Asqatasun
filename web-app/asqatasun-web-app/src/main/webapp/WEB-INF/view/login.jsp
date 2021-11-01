@@ -51,7 +51,7 @@
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-login">
-        <div class="topbar">
+        <header class="topbar">
             <div class="fill">
                 <div class="container">
                     <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt="Asqatasun"/>
@@ -62,7 +62,7 @@
                     </ul>
                 </div> <!-- class="container"-->
             </div> <!-- class="fill"-->
-        </div> <!-- class="topbar"-->
+        </header> <!-- class="topbar"-->
         <div class="container">
             <div class="row">
                 <div class="span16">

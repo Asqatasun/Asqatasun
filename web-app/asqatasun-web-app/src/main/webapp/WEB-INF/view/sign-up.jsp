@@ -22,7 +22,7 @@
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-sign-up">
-        <div class="topbar">
+        <header class="topbar">
             <div class="fill">
                 <div class="container">
                     <a href="<c:url value="/login.html"/>" title="<fmt:message key="sign-up.backToLogin"/>">
@@ -35,7 +35,7 @@
                     </ul>
                 </div> <!-- class="container"-->
             </div> <!-- class="fill"-->
-        </div> <!-- class="topbar"-->
+        </header> <!-- class="topbar"-->
         <div class="container">
             <div class="row">
                 <div class="span16">
