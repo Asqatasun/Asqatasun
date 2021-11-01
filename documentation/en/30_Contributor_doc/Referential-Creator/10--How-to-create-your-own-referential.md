@@ -7,9 +7,6 @@ Build asqatasun (it may take a while !!)
 ```sh
 cd Asqatasun/
 
-# before first build
-mvn install:install-file -DgroupId=com.saucelabs -DartifactId=sebuilder-interpreter -Dversion=1.0.2 -Dpackaging=jar -Dfile=engine/asqatasun-resources/src/main/resources/lib/sebuilder-interpreter-1.0.2.jar
-
 # build
 mvn clean install
 ```
