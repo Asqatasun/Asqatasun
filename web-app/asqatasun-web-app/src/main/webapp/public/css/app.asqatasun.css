@@ -480,7 +480,9 @@ footer a {
 #footer-down {
     margin-top: 17px;
 }
-
+    #footer-copyright {
+        margin-top: 2em;
+    }
     #footer-asqatasun-link {
         margin-top: 1em;
     }

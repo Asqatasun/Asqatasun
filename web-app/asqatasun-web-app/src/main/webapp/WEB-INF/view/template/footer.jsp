@@ -11,10 +11,11 @@
                 - 
                 <fmt:message key="footer.availableUnder"/> 
                 <a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU AGPL v3</a>
-                <br><br>
-                &copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" />
-                - <a href="https://asqatasun.org/">Asqatasun.org</a>
 
+                <div id="footer-copyright">
+                    &copy; 2009-<fmt:formatDate value="${now}" pattern="yyyy" />
+                    - <a href="https://asqatasun.org/">Asqatasun.org</a>
+                </div>
 
                 <div id="footer-asqatasun-link">
                     <a class="asqatasun-link-svg"
@@ -28,7 +29,7 @@
                         </svg>
                     </a>
                     <a class="asqatasun-link-svg"
-                       href="http://forum.asqatasun.org/"
+                       href="https://forum.asqatasun.org/"
                        title="<fmt:message key="footer.link-forum"/>"
                        aria-label="<fmt:message key="footer.link-forum"/>">
                         <svg    class="icon_forum"
