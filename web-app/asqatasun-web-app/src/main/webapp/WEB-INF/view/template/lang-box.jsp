@@ -62,7 +62,7 @@
         <c:set var="enUrl" scope="request" value="?lang=en"/>
     </c:otherwise>
 </c:choose>
-<div id="lang-switcher">
+<nav id="lang-switcher">
     <a href="${deUrl}" title="Umsteigen auf Deutsch" lang="de">
         <abbr title="Deutsch">DE</abbr>
     </a>
@@ -75,4 +75,4 @@
     <a href="${esUrl}" title="Cambaiar a español" lang="es">
         <abbr title="Español">ES</abbr>
     </a>
-</div>
+</nav>
