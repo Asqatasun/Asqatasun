@@ -1,5 +1,6 @@
 jdbc:
   url: "jdbc:mysql://localhost:3306/asqatasun"
+  url_query_options: "?useSSL=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8"
   user: "asqatasunDatabaseUserLogin"
   password: "asqatasunDatabaseUserP4ssword"
 
