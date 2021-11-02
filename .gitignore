@@ -46,9 +46,10 @@ nbactions.xml
 ##### DevOps
 
 # Dockers binaries
-docker/**/asqatasun-*gz
-docker/**/asqatasun-*.war
-docker/**/asqatasun-*.jar
+docker/**/*.tar.bz2
+docker/**/*.tar.gz
+docker/**/*.war
+docker/**/*.jar
 
 # Docker-Compose env files
 docker/**/.env

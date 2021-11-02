@@ -23,7 +23,9 @@ EXPOSE ${WWWPORT}
 
 # Build variables
 ARG FIREFOX_URL="${FIREFOX_URL_PREFIX}${FIREFOX_VERSION}/linux-x86_64/en-US/firefox-${FIREFOX_VERSION}.tar.bz2"
+ARG FIREFOX_FILE="firefox-${FIREFOX_VERSION}.tar.bz2"
 ARG GECKODRIVER_URL="${GECKODRIVER_URL_PREFIX}${GECKODRIVER_VERSION}/geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz"
+ARG GECKODRIVER_FILE="geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz"
 ARG WAR_FILE="asqatasun-web-app-${ASQA_RELEASE}.war"
 
 ################################################################################################################
@@ -38,12 +40,15 @@ RUN apt-get update                    && \
                     curl
 
 # Asqatasun prerequisites
+ADD shared_download/ /opt
 RUN cd /opt                                                     && \
     echo ${FIREFOX_URL}                                         && \
-    wget ${FIREFOX_URL}                                         && \
-    wget ${GECKODRIVER_URL}                                     && \
-    tar xvf "firefox-${FIREFOX_VERSION}.tar.bz2"                && \
-    tar xvf "geckodriver-${GECKODRIVER_VERSION}-linux64.tar.gz"
+    echo ${GECKODRIVER_URL}                                     && \
+    ls | grep "${FIREFOX_FILE}"     || wget ${FIREFOX_URL}      && \
+    ls | grep "${GECKODRIVER_FILE}" || wget ${GECKODRIVER_URL}  && \
+    tar xf "${FIREFOX_FILE}"                                    && \
+    tar xf "${GECKODRIVER_FILE}"                                && \
+    rm -v "${FIREFOX_FILE}" && rm -v "${GECKODRIVER_FILE}"
 
 # Add a new Linux user
 RUN adduser asqatasun
