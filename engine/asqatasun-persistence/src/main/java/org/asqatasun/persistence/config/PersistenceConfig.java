@@ -48,13 +48,14 @@ import java.beans.PropertyVetoException;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class PersistenceConfig extends PersistenceCommonConfig{
 
-    private static final String URL_ENCODING_OPTION_SUFFIX = "?useSSL=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8";
-    @Value("${jdbc.user:asqatasun}")
+    @Value("${jdbc.user:asqatasunDatabaseUserLogin}")
     private String username;
-    @Value("${jdbc.password:asqatasun}")
+    @Value("${jdbc.password:asqatasunDatabaseUserP4ssword}")
     private String password;
     @Value("${jdbc.url:jdbc:mysql://localhost:3306/asqatasun}")
     private String url;
+    @Value("${jdbc.url_query_options:?useSSL=false&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8}")
+    private String url_query_options;
     @Value("${app.engine.persistence.useComboPool:false}")
     private Boolean useComboPool;
     @Value("#{'${app.engine.persistence.packagesToScan:org.asqatasun.entity}'.split(',')}")
@@ -62,7 +63,7 @@ public class PersistenceConfig extends PersistenceCommonConfig{
 
     @PostConstruct
     private void init() {
-        if (StringUtils.contains(url,MYSQL_KEY)) url = url+URL_ENCODING_OPTION_SUFFIX;
+        if (StringUtils.contains(url,MYSQL_KEY)) url = url+url_query_options;
     }
 
     @Bean(name = "dataSource")
