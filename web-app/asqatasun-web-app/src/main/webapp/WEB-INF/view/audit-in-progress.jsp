@@ -35,7 +35,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-audit-in-progress">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="${i18nPrefix}.h1"/>
             </c:set>
@@ -97,7 +97,7 @@
                     <a title="Flickr: Galerie de blumpy" href="http://www.flickr.com/photos/blumpy/">blumpy</a>
                 </div><!-- class="span4 offset9" -->
             </div><!-- class="row" -->
-        </div><!-- class="container"-->
+        </main><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

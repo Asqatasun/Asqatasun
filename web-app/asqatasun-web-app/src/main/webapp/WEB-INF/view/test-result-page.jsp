@@ -55,7 +55,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-test-result-page">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="testResultPage.h1">
                     <fmt:param>
@@ -135,7 +135,7 @@
                     </a>
                 </div>
             </div><!-- class="row"-->
-        </div><!-- id="container"-->
+        </main><!-- id="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${displayExternalImgJsUrl}"></script>

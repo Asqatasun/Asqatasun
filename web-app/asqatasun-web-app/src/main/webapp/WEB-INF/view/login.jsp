@@ -63,7 +63,7 @@
                 </div> <!-- class="container"-->
             </div> <!-- class="fill"-->
         </header> <!-- class="topbar"-->
-        <div class="container">
+        <main class="container">
             <div class="row">
                 <div class="span16">
                     <h1>
@@ -86,7 +86,7 @@
                     <%@include file="template/login-form.jsp" %>
                 </div><!-- class="span8 offset4" -->
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

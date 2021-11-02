@@ -27,7 +27,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-site-set-up">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="auditSetUpSite.h1"/>
             </c:set>
@@ -73,7 +73,7 @@
                     </c:otherwise>
                 </c:choose>
             </div><!-- class="row" -->
-        </div><!-- class="container"-->
+        </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     <script type="text/javascript" src="${jqueryUrl}"></script>
     <script type="text/javascript" src="${auditSetUpDetailsJsUrl}"></script>

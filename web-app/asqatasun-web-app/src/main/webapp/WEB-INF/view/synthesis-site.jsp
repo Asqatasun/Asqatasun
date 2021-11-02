@@ -61,7 +61,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-synthesis-site">
     <%@include file="template/header-utils.jsp" %>
-    <div class="container">
+    <main class="container">
         <c:set var="pageName" scope="page">
             <fmt:message key="synthesisSite.h1">
                 <fmt:param>
@@ -373,7 +373,7 @@
                 <!-- class="row"-->
             </c:otherwise>
         </c:choose>
-    </div><!-- class="container"-->
+    </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     <script type="text/javascript" src="${jqueryUrl}"></script>
     <script type="text/javascript" src="${auditParametersDetailsJsUrl}"></script>

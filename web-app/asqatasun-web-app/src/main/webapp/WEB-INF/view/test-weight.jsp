@@ -24,7 +24,7 @@
     <body id="tgm-account-settings">
         <c:set var="accountSettingsActive" value="true" scope="page"/>
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="test-weight.h1">
                     <fmt:param>
@@ -167,7 +167,7 @@
                     </form:form> 
                 </div>
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

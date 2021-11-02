@@ -23,7 +23,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-loading-error no-bg-container">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container no-bg-container">
+        <main class="container no-bg-container">
             <div class="row">
                 <div class="span16">
                     <div class="alert-message block-message">
@@ -60,7 +60,7 @@
                     <a title="Flickr: Galerie de ABC Archives" href="http://www.flickr.com/photos/abcarchives/">ABC Archives</a>
                 </div><!-- class="span4 offset9" -->
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
        <%@include file="template/footer.jsp" %>
     </body>
 </html>

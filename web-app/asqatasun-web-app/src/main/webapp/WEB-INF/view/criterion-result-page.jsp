@@ -58,7 +58,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-criterion-result-page">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="criterionResultPage.h1">
                     <fmt:param>
@@ -104,7 +104,7 @@
             <c:set var="counterByThemeMap" scope="request" value="${statistics.counterByThemeMap}"/>
             <c:set var="addShowHide" scope="request" value="true"/>
             <c:import url="template/detailed-result.jsp" />
-        </div><!-- id="container"-->
+        </main><!-- id="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${testDetailsJsUrl}"></script>

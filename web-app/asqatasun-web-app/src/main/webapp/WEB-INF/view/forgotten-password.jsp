@@ -36,7 +36,7 @@
                 </div> <!-- class="container"-->
             </div> <!-- class="fill"-->
         </header> <!-- class="topbar"-->
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="forgotten-password.h1"/>
             </c:set>
@@ -69,7 +69,7 @@
                     </div><!-- id="forgotten-password-form" -->
                 </div><!-- class="span10 offset3" -->
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

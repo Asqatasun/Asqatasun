@@ -37,7 +37,7 @@
     <body id="tgm-delete-audits">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <c:choose>
                     <c:when test="${userNameToDelete != null}">
@@ -106,7 +106,7 @@
                     <a title="Flickr: Galerie de Patrick van IJzendoorn" href="http://www.flickr.com/photos/sleepishly/">Jessica Diamond</a>
                 </div><!-- class="span4 offset9" -->
             </div><!-- class="row" -->
-        </div><!-- class="container"-->                    
+        </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     </body>
 </html>

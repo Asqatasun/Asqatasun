@@ -16,7 +16,7 @@
     <body id="tgm-home">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="edit-contract.h1">
                     <fmt:param>${contractName}</fmt:param>
@@ -46,7 +46,7 @@
                 </c:set>
                 <%@include file="template/add-edit-contract.jsp" %>
             </div><!-- class="row"-->
-        </div><!-- class="container"-->                    
+        </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     </body>
 </html>

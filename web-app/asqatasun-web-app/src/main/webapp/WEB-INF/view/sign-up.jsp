@@ -36,7 +36,7 @@
                 </div> <!-- class="container"-->
             </div> <!-- class="fill"-->
         </header> <!-- class="topbar"-->
-        <div class="container">
+        <main class="container">
             <div class="row">
                 <div class="span16">
                     <h1><spring:message code="sign-up.h1"/></h1>
@@ -49,7 +49,7 @@
                 </c:set>
                 <%@include file="template/add-user-form.jsp" %>
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

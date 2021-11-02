@@ -66,7 +66,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-page-list-${param.status}">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:if test="${auditNumber == 'true'}">
                 <c:set var="forTheAuditExtension" scope="page" value="forTheAudit."/>
             </c:if>
@@ -294,7 +294,7 @@
                     </display:table>
                 </div><!-- class="span16"-->
             </div><!-- class="row"-->
-        </div><!-- class="container"-->
+        </main><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <c:choose>

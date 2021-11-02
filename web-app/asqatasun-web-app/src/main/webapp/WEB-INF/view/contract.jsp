@@ -74,7 +74,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-project">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page" value="${detailedContractInfo.label}"/>
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
@@ -317,7 +317,7 @@
                     </div><!-- class="span15 offset1" -->
                 </div><!-- class="row" -->
             </c:if>
-        </div><!-- class="container"-->
+        </main><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>
