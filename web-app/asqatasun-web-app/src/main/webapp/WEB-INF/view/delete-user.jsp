@@ -30,7 +30,7 @@
     <body id="tgm-delete-users">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="delete-user.h1">
                     <fmt:param>
@@ -73,7 +73,7 @@
                     <a title="Flickr: Galerie de Patrick van IJzendoorn" href="http://www.flickr.com/photos/sleepishly/">Jessica Diamond</a>
                 </div><!-- class="span4 offset9" -->
             </div><!-- class="row" -->
-        </div><!-- class="container"-->                    
+        </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     </body>
 </html>

@@ -48,7 +48,7 @@
     <body id="tgm-contracts-mngt">
     <c:set var="adminActive" value="true"/>
     <%@include file="template/header-utils.jsp" %>
-    <div class="container">
+    <main class="container">
         <c:set var="pageName" scope="page">
             <fmt:message key="manage-contracts.h1">
                 <fmt:param>${userName}</fmt:param>
@@ -186,7 +186,7 @@
                 </c:otherwise>
             </c:choose>
         </div>
-    </div><!-- class="container"-->
+    </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     <script type="text/javascript" src="${jqueryUrl}"></script>
     <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>

@@ -57,7 +57,7 @@
     <body id="tgm-admin">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="admin.h1"/>
             </c:set>    
@@ -228,7 +228,7 @@
                 </c:otherwise>
             </c:choose>
             </div>
-        </div><!-- class="container"-->                    
+        </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${jqueryTableSorterUrl}"></script>

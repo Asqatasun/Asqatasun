@@ -14,7 +14,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-max-file-size-error">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container no-bg-container">
+        <main class="container no-bg-container">
             <div class="row">
                 <div class="span16">
                     <div class="alert-message block-message">
@@ -28,7 +28,7 @@
                     </div><!-- class="alert-message block-message"-->
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
-        </div><!-- class="meta-border" -->
+        </main><!-- class="container" -->
        <%@include file="template/footer.jsp" %>
     </body>
 </html>

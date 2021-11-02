@@ -41,7 +41,7 @@
     <body id="tgm-add-contract">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <ul class="breadcrumb">
                 <li><a href="<c:url value="/home.html"/>"><fmt:message key="home.h1"/></a> <span class="divider"></span></li>
                 <li><a href="<c:url value="/admin.html"/>"><fmt:message key="admin.h1"/></a> <span class="divider"></span></li>
@@ -68,7 +68,7 @@
                 </c:set>
                 <%@include file="template/add-edit-contract.jsp" %>
             </div><!-- class="row"-->
-        </div><!-- class="container"-->                    
+        </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     </body>
 </html>

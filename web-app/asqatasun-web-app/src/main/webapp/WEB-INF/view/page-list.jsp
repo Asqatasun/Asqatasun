@@ -46,7 +46,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-page-list">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="pageList.h1"/>
             </c:set>
@@ -135,7 +135,7 @@
                     </table>
                 </div><!-- id="span16 tg-table-container"-->
             </div><!-- id="row"-->
-        </div><!-- class="container"-->
+        </main><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <!--[if lte IE 8]>

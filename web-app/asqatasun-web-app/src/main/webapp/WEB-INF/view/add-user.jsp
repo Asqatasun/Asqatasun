@@ -18,7 +18,7 @@
     <body id="tgm-add-user">
         <c:set var="adminActive" value="true"/>
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="add-user.h1"/>
             </c:set>
@@ -41,7 +41,7 @@
                 </c:set>
                 <%@include file="template/add-user-form.jsp" %>
             </div>
-        </div><!-- class="container"-->                    
+        </main><!-- class="container"-->
     <%@include file="template/footer.jsp" %>
     </body>
 </html>

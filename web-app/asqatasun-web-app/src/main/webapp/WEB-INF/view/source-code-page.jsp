@@ -30,7 +30,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-source-code">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <c:set var="pageName" scope="page">
                 <fmt:message key="sourceCode.h1">
                     <fmt:param>${statistics.url}</fmt:param>
@@ -54,7 +54,7 @@
                     <c:import url="template/source-code.jsp" />
                 </div><!-- class=span16"-->
             </div><!-- class="row"-->
-        </div><!-- class="container"-->
+        </main><!-- class="container"-->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <script type="text/javascript" src="${highlightSelectedLineJsUrl}"></script>

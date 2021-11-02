@@ -51,7 +51,7 @@
     </c:set>
     <%@include file="template/head.jsp" %>
     <body id="tgm-login">
-        <div class="topbar">
+        <header class="topbar">
             <div class="fill">
                 <div class="container">
                     <img id="login-topbar-logo" class="brand" src="${tgLogoUrl}" alt="Asqatasun"/>
@@ -62,8 +62,8 @@
                     </ul>
                 </div> <!-- class="container"-->
             </div> <!-- class="fill"-->
-        </div> <!-- class="topbar"-->
-        <div class="container">
+        </header> <!-- class="topbar"-->
+        <main class="container">
             <div class="row">
                 <div class="span16">
                     <h1>
@@ -86,7 +86,7 @@
                     <%@include file="template/login-form.jsp" %>
                 </div><!-- class="span8 offset4" -->
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

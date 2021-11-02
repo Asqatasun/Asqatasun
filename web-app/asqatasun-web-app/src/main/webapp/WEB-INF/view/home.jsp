@@ -66,7 +66,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-home">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <div class="row">
                 <div class="span16">
                     <h1><fmt:message key="home.h1"/></h1>
@@ -274,7 +274,7 @@
                     </security:authorize>
                 </div><!-- class="span16" -->
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
         <script type="text/javascript" src="${jqueryUrl}"></script>
         <c:if test="${configProperties['displayGradeAsResult'] == 'false'}">

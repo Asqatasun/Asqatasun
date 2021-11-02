@@ -28,7 +28,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-oups">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container no-bg-container">
+        <main class="container no-bg-container">
             <div class="row">
                 <div class="span16">
                     <div class="alert-message block-message">
@@ -92,7 +92,7 @@
             </div><!-- class="row" -->
             </c:otherwise>
         </c:choose>
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>

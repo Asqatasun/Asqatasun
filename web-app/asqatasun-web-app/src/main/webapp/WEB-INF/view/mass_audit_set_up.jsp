@@ -22,7 +22,7 @@
     <%@include file="template/head.jsp" %>
     <body id="tgm-home">
         <%@include file="template/header-utils.jsp" %>
-        <div class="container">
+        <main class="container">
             <div class="row">
                 <div class="span16">
                     <h1><fmt:message key="mass-audit-set-up.h1"/></h1>
@@ -132,7 +132,7 @@
                     </form:form>
                 </div><!-- class="span14 offset1" -->
             </div><!-- class="row" -->
-        </div><!-- class="container" -->
+        </main><!-- class="container" -->
         <%@include file="template/footer.jsp" %>
     </body>
 </html>
