@@ -39,6 +39,8 @@ you can change **port** numbers, **IP** adresses and **database** credentials.
 
 ### Launch Asqatasun webapp
 
+> Warning - The following documentation is outdated and needs to be updated.
+
 - Build Asqatasun
 - Build docker images
 - Launch Asqatasun webapp
@@ -82,6 +84,8 @@ docker-compose up --build
     
     
 ### Launch Asqatasun webapp + API
+
+> Warning - The following documentation is outdated and needs to be updated.
 
 - Build Asqatasun
 - Build docker images
