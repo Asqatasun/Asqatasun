@@ -176,7 +176,6 @@
         <module>rules</module>
         <module>web-app</module>
         <module>server</module>
-        <module>documentation</module>
     </modules>
     <profiles>
         <profile>
