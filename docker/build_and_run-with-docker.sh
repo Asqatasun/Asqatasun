@@ -250,7 +250,7 @@ function do_build() {
         # clean and build $BUILD_ONLY_DIR directory, webapp and api server
         build "${SOURCE_DIR}/${BUILD_ONLY_DIR}"
         build "${SOURCE_DIR}/${WEBAPP_DIR}"
-        bbuild "${SOURCE_DIR}/${API_SERVER_DIR}"
+        build "${SOURCE_DIR}/${API_SERVER_DIR}"
     elif ${BUILD_ONLY_WEBAPP} ; then
         # clean and build only webapp
         build "${SOURCE_DIR}/${WEBAPP_DIR}"
