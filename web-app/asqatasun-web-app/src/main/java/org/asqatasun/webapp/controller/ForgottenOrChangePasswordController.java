@@ -23,7 +23,6 @@ package org.asqatasun.webapp.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.MessageFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -42,6 +41,7 @@ import org.asqatasun.webapp.validator.ForgottenPasswordFormValidator;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,7 +59,9 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class ForgottenOrChangePasswordController extends AbstractController {
 
-    private static final String CHANGE_PASSWORD_URL = "/change-password.html";
+    private static final String USER_ACCOUNT_TO_REPLACE =  "#userAccount";
+    private static final String CHANGE_PASSWORD_URL_TO_REPLACE =  "#changePasswordUrl";
+    private static final String CHANGE_PASSWORD_URL = "change-password.html";
     @Value("${app.webapp.ui.config.forgottenPassword.excludeUserList}")
     private List<String> forbiddenUserList;
     @Value("${app.webapp.ui.config.webAppUrl}")
@@ -69,7 +71,10 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     private final EmailSender emailSender;
     private final LocaleResolver localeResolver;
     private final SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer;
+    private final ReloadableResourceBundleMessageSource messageSource;
     private final TokenManager tokenManager;
+
+
 
     @Autowired
     public ForgottenOrChangePasswordController(
@@ -77,6 +82,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         ForgottenPasswordFormValidator forgottenPasswordFormValidator,
         EmailSender emailSender, LocaleResolver localeResolver,
         SecondaryLevelMenuDisplayer secondaryLevelMenuDisplayer,
+        ReloadableResourceBundleMessageSource messageSource,
         TokenManager tokenManager) {
         super();
         this.changePasswordFormValidator = changePasswordFormValidator;
@@ -84,6 +90,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         this.emailSender = emailSender;
         this.localeResolver = localeResolver;
         this.secondaryLevelMenuDisplayer = secondaryLevelMenuDisplayer;
+        this.messageSource = messageSource;
         this.tokenManager = tokenManager;
     }
 
@@ -395,18 +402,18 @@ public class ForgottenOrChangePasswordController extends AbstractController {
         String emailFrom = resourceBundle.getString(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_FROM_KEY);
         Set<String> emailToSet = new HashSet();
         emailToSet.add(user.getEmail1());
-        String emailSubject = resourceBundle.getString(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_SUBJECT_KEY);
-        String emailContentPattern = resourceBundle.getString(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_CONTENT_KEY);
-        String emailContent = MessageFormat.format(emailContentPattern,
-                user.getEmail1(),
-                computeReturnedUrl(user));
+        String emailSubject = messageSource.getMessage(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_SUBJECT_KEY, null, locale);
+        String emailContent = messageSource.getMessage(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_CONTENT_KEY, null, locale).
+            replaceAll(USER_ACCOUNT_TO_REPLACE, user.getEmail1()).
+            replaceAll(CHANGE_PASSWORD_URL_TO_REPLACE, computeReturnedUrl(user));
         emailSender.sendEmail(
-                emailFrom, 
-                emailToSet, 
-                Collections.<String>emptySet(), 
-                StringUtils.EMPTY, 
-                emailSubject, 
-                emailContent);
+            emailFrom,
+            emailToSet,
+            Collections.<String>emptySet(),
+            StringUtils.EMPTY,
+            emailSubject,
+            emailContent
+        );
     }
 
     /**
