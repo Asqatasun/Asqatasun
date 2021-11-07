@@ -4,14 +4,31 @@ LABEL org.label-schema.schema-version = "1.0.0-rc.1"   \
           # ----> documentation  http://label-schema.org/
 ################################################################################################################
 
+# System prerequisites
+RUN apt-get update                    && \
+    apt-get -y --no-install-recommends   \
+            install openjdk-8-jre        \
+                    libgtk-3-0           \
+                    libdbus-glib-1-2     \
+                    wget                 \
+                    curl
+
+################################################################################################################
+
 # Environment variables
 ENV    WWWPORT="8080"                               \
+       WEBAPP_URL="http://localhost:8080/"          \
        DB_PORT="3306"                               \
        DB_HOST="asqatasun-db_dev"                   \
        DB_DRIVER="mysql"                            \
        DB_DATABASE="asqatasun"                      \
        DB_USER="asqatasunDatabaseUserLogin"         \
        DB_PASSWORD="asqatasunDatabaseUserP4ssword"  \
+       SMTP_FROM=""                                 \
+       SMTP_HOST="localhost"                        \
+       SMTP_PORT="-1"                               \
+       SMTP_USER=""                                 \
+       SMTP_PASSWORD=""                             \
        ASQA_RELEASE="5-SNAPSHOT"                    \
        LOG_DIR="/var/log/asqatasun/"                \
        FIREFOX_VERSION="78.2.0esr"                  \
@@ -30,15 +47,6 @@ ARG WAR_FILE="asqatasun-web-app-${ASQA_RELEASE}.war"
 
 ################################################################################################################
 
-# System prerequisites
-RUN apt-get update                    && \
-    apt-get -y --no-install-recommends   \
-            install openjdk-8-jre        \
-                    libgtk-3-0           \
-                    libdbus-glib-1-2     \
-                    wget                 \
-                    curl
-
 # Asqatasun prerequisites
 ADD shared_download/ /opt
 RUN cd /opt                                                     && \
@@ -48,7 +56,9 @@ RUN cd /opt                                                     && \
     ls | grep "${GECKODRIVER_FILE}" || wget ${GECKODRIVER_URL}  && \
     tar xf "${FIREFOX_FILE}"                                    && \
     tar xf "${GECKODRIVER_FILE}"                                && \
-    rm -v "${FIREFOX_FILE}" && rm -v "${GECKODRIVER_FILE}"
+    rm -v "${FIREFOX_FILE}" && rm -v "${GECKODRIVER_FILE}"      && \
+    mkdir -v "/etc/asqatasun"                                   && \
+    mv -v "ESAPI.properties" "/etc/asqatasun"
 
 # Add a new Linux user
 RUN adduser asqatasun
@@ -77,10 +87,17 @@ HEALTHCHECK --timeout=3s    \
 ################################################################################################################
 CMD echo "WEBAPP ---> [DB_USER=${DB_USER}][DB_PASSWORD=${DB_PASSWORD}] <-------"                   && \
     echo "WEBAPP ---> [DB_URL=jdbc:${DB_DRIVER}://${DB_HOST}:${DB_PORT}/${DB_DATABASE}] <-------"  && \
+    echo "WEBAPP ---> [URL=${WEBAPP_URL}] <-------"  && \
     /usr/bin/java                                                            \
     -Dwebdriver.firefox.bin=/opt/firefox/firefox                             \
     -Dwebdriver.gecko.driver=/opt/geckodriver                                \
     -Dapp.logging.path="${LOG_DIR}"                                          \
+    -Dapp.emailSender.smtp.from="${SMTP_FROM}"                               \
+    -Dapp.emailSender.smtp.host="${SMTP_HOST}"                               \
+    -Dapp.emailSender.smtp.port="${SMTP_PORT}"                               \
+    -Dapp.emailSender.smtp.user="${SMTP_USER}"                               \
+    -Dapp.emailSender.smtp.password="${SMTP_PASSWORD}"                       \
+    -Dapp.webapp.ui.config.webAppUrl="${WEBAPP_URL}"                         \
     -Djdbc.url="jdbc:${DB_DRIVER}://${DB_HOST}:${DB_PORT}/${DB_DATABASE}"    \
     -Djdbc.user="${DB_USER}"                                                 \
     -Djdbc.password="${DB_PASSWORD}"                                         \
