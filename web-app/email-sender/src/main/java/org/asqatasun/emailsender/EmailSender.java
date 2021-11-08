@@ -46,12 +46,14 @@ public class EmailSender {
     private static final String CONTENT_TYPE_KEY = "Content-Type";
     private static final String FULL_CHARSET_KEY = "text/html; charset=UTF-8";
     private static final String CHARSET_KEY = "UTF-8";
-    @Value("${app.emailSender.smtp.host:localhost}")
-    private String smtpHost;
-    @Value("${app.emailSender.smtp.user:}")
-    private String userName;
     @Value("${app.emailSender.smtp.from:}")
     private String from;
+    @Value("${app.emailSender.smtp.host:localhost}")
+    private String smtpHost;
+    @Value("${app.emailSender.smtp.port:-1}")
+    private int smtpPort;
+    @Value("${app.emailSender.smtp.user:}")
+    private String userName;
     @Value("${app.emailSender.smtp.password:}")
     private String password;
 
@@ -78,7 +80,10 @@ public class EmailSender {
         props.put("mail.smtp.host", smtpHost);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        
+        if (smtpPort != -1) {
+            props.put("mail.smtp.port", smtpPort);
+        }
+
         // create some properties and get the default Session
         Session session = Session.getInstance(props);
         session.setDebug(debug);

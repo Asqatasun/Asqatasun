@@ -1,5 +1,22 @@
 version: "3.8"
 services:
+  # Mail catcher: email testing tool for developers
+  ###############################################################################################################
+  # MAILHOG  https://github.com/mailhog/MailHog
+  #          https://hub.docker.com/r/mailhog/mailhog
+  #
+  # - SMTP port: 1025
+  # - HTTP port: 8025
+  # - HTTP URL:  http://localhost:8025     By default
+  #              http://<host_ip>:8025     By default
+  #              http://<host_ip>:<port>   If you use the .env configuration file
+  ###############################################################################################################
+  asqatasun-mailhog:
+    image: "mailhog/mailhog"
+    ports:
+      - "${MAILHOG_SMTP_IP:-127.0.0.1}:${MAILHOG_SMTP_PORT:-1025}:1025"
+      - "${MAILHOG_HTTP_IP:-0.0.0.0}:${MAILHOG_HTTP_PORT:-8025}:8025"
+
   # Asqatasun database
   ###############################################################################################################
   # - port: 3306
@@ -28,14 +45,21 @@ services:
     build: .
     links:
       - asqatasun-db_dev
+      - asqatasun-mailhog
     depends_on:
       - asqatasun-db_dev
     environment:
-      DB_DRIVER:   "${DB_DRIVER:-mysql}"
-      DB_PORT:     "${DB_PORT:-3306}"
-      DB_HOST:     "${DB_HOST:-asqatasun-db_dev}"
-      DB_USER:     "${DB_USER:-asqatasunDatabaseUserLogin}"
-      DB_PASSWORD: "${DB_PASSWORD:-asqatasunDatabaseUserP4ssword}"
-      DB_DATABASE: "${DB_DATABASE:-asqatasun}"
+      WEBAPP_URL:    "${WEBAPP_URL:-http://localhost:8080/}"
+      DB_DRIVER:     "${DB_DRIVER:-mysql}"
+      DB_PORT:       "${DB_PORT:-3306}"
+      DB_HOST:       "${DB_HOST:-asqatasun-db_dev}"
+      DB_USER:       "${DB_USER:-asqatasunDatabaseUserLogin}"
+      DB_PASSWORD:   "${DB_PASSWORD:-asqatasunDatabaseUserP4ssword}"
+      DB_DATABASE:   "${DB_DATABASE:-asqatasun}"
+      SMTP_FROM:     "${SMTP_FROM:-from-asqatsun@example.com}"
+      SMTP_HOST:     "${SMTP_HOST:-asqatasun-mailhog}"
+      SMTP_PORT:     "${SMTP_PORT:-1025}"
+      SMTP_USER:     "${SMTP_USER:-}"
+      SMTP_PASSWORD: "${SMTP_PASSWORD:-}"
     ports:
       - "${APP_HOST_IP:-0.0.0.0}:${APP_HOST_PORT:-8080}:8080"
