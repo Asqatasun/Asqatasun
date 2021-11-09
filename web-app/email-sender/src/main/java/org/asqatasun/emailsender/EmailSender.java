@@ -46,16 +46,27 @@ public class EmailSender {
     private static final String CONTENT_TYPE_KEY = "Content-Type";
     private static final String FULL_CHARSET_KEY = "text/html; charset=UTF-8";
     private static final String CHARSET_KEY = "UTF-8";
+    private String smtpProtocol;
+
+    @Value("${app.emailSender.smtp.debug:false}")
+    private Boolean debug;
     @Value("${app.emailSender.smtp.from:}")
     private String from;
     @Value("${app.emailSender.smtp.host:localhost}")
     private String smtpHost;
     @Value("${app.emailSender.smtp.port:-1}")
     private int smtpPort;
+    @Value("${app.emailSender.smtp.ssl.enable:false}")
+    private Boolean secureProtocolEnable; // If true then "startTtlsEnable" property is not taken into account
+    @Value("${app.emailSender.smtp.ssl.protocols:TLSv1.2}")
+    private String secureProtocols;
+    @Value("${app.emailSender.smtp.starttls.enable:false}")
+    private Boolean startTtlsEnable;
     @Value("${app.emailSender.smtp.user:}")
     private String userName;
     @Value("${app.emailSender.smtp.password:}")
     private String password;
+
 
     /**
      *
@@ -73,22 +84,43 @@ public class EmailSender {
             String replyTo,
             String emailSubject, 
             String emailContent) {
-        boolean debug = false;
 
-        // Set the host smtp address
+        // Set SMTP properties (host, port, ...)
         Properties props = new Properties();
-        props.put("mail.smtp.host", smtpHost);
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+        if (secureProtocolEnable) {
+            smtpProtocol = "smtps";
+            props.put("mail." + smtpProtocol + ".ssl.protocols", secureProtocols);
+        }
+        else if (startTtlsEnable) {
+            smtpProtocol = "smtp";
+            props.put("mail." + smtpProtocol + ".starttls.enable", "true");
+            props.put("mail." + smtpProtocol + ".socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail." + smtpProtocol + ".socketFactory.fallback", "true");
+            props.put("mail." + smtpProtocol + ".ssl.protocols", secureProtocols);
+            if (smtpPort != -1) {
+                props.put("mail." + smtpProtocol + ".socketFactory.port", smtpPort);
+            }
+        }
+        else {
+            smtpProtocol = "smtp";
+            props.put("mail." + smtpProtocol + ".starttls.enable", "false");
+        }
+        props.put("mail." + smtpProtocol + ".host", smtpHost);
+        props.put("mail." + smtpProtocol + ".auth", "true");
         if (smtpPort != -1) {
-            props.put("mail.smtp.port", smtpPort);
+            props.put("mail." + smtpProtocol + ".port", smtpPort);
+        }
+
+        // Log SMTP configuration
+        if(debug) {
+            LOGGER.info("SMTP configuration: "+ props.toString());
         }
 
         // create some properties and get the default Session
         Session session = Session.getInstance(props);
         session.setDebug(debug);
         try {
-            Transport t = session.getTransport("smtp");
+            Transport t = session.getTransport(smtpProtocol);
             t.connect(smtpHost, userName, password);
 
             // create a message

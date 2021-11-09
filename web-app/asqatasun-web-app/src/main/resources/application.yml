@@ -33,11 +33,17 @@ app:
   version: "@project.version@"
   emailSender:
     smtp:
+      debug: false
       from: ""
       host: "localhost"
       port: -1
       user: ""
       password: ""
+      starttls:
+        enable: false
+      ssl:
+        enable: false        # If true then "starttls.enable" property is not taken into account
+        protocols: "TLSv1.2" # a whitespace separated list of protocols acceptable
   engine:
     persistence:
       packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"
