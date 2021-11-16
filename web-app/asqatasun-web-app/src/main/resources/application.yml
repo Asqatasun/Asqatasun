@@ -43,6 +43,7 @@ app:
       packagesToScan: "org.asqatasun.entity,org.asqatasun.webapp.entity"
       useComboPool: true
     loader:
+      politenessDelay: 100
       proxy:
         port:
         host:
