@@ -62,6 +62,8 @@ public class ForgottenOrChangePasswordController extends AbstractController {
     private static final String USER_ACCOUNT_TO_REPLACE =  "#userAccount";
     private static final String CHANGE_PASSWORD_URL_TO_REPLACE =  "#changePasswordUrl";
     private static final String CHANGE_PASSWORD_URL = "change-password.html";
+    @Value("${app.emailSender.smtp.from}")
+    private String appEmailFrom;
     @Value("${app.webapp.ui.config.forgottenPassword.excludeUserList}")
     private List<String> forbiddenUserList;
     @Value("${app.webapp.ui.config.webAppUrl}")
@@ -398,8 +400,6 @@ public class ForgottenOrChangePasswordController extends AbstractController {
      * @param user
      */
     private void sendResetEmail(User user, Locale locale) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle(TgolKeyStore.FORGOTTEN_PASSWD_BUNDLE_NAME, locale);
-        String emailFrom = resourceBundle.getString(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_FROM_KEY);
         Set<String> emailToSet = new HashSet();
         emailToSet.add(user.getEmail1());
         String emailSubject = messageSource.getMessage(TgolKeyStore.FORGOTTEN_PASSWD_EMAIL_SUBJECT_KEY, null, locale);
@@ -407,7 +407,7 @@ public class ForgottenOrChangePasswordController extends AbstractController {
             replaceAll(USER_ACCOUNT_TO_REPLACE, user.getEmail1()).
             replaceAll(CHANGE_PASSWORD_URL_TO_REPLACE, computeReturnedUrl(user));
         emailSender.sendEmail(
-            emailFrom,
+            appEmailFrom,
             emailToSet,
             Collections.<String>emptySet(),
             StringUtils.EMPTY,
