@@ -337,7 +337,6 @@ public final class TgolKeyStore {
     public static final String ATTACHMENT="attachment; filename=";
     
     /* forgotten password email creator keys */
-    public static final String FORGOTTEN_PASSWD_EMAIL_FROM_KEY = "forgotten-password.emailFrom";
     public static final String FORGOTTEN_PASSWD_EMAIL_SUBJECT_KEY = "forgotten-password.emailSubject";
     public static final String FORGOTTEN_PASSWD_EMAIL_CONTENT_KEY = "forgotten-password.emailContent";
     public static final String FORGOTTEN_PASSWD_BUNDLE_NAME = "i18n/forgotten-password-page-I18N";

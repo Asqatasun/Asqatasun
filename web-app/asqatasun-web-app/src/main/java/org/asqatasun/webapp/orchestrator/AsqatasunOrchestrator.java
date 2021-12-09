@@ -57,7 +57,6 @@ import org.springframework.stereotype.Service;
 public class AsqatasunOrchestrator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AsqatasunOrchestrator.class);
-    private static final String RECIPIENT_KEY =  "recipient";
     private static final String SUCCESS_SUBJECT_KEY =  "success-subject";
     private static final String ERROR_SUBJECT_KEY =  "error-subject";
     private static final String KRASH_SUBJECT_KEY =  "krash-subject";
@@ -78,6 +77,8 @@ public class AsqatasunOrchestrator {
     private static final String PAGE_RESULT_URL_SUFFIX = "home/contract/audit-result.html?audit=";
     private static final String CONTRACT_URL_SUFFIX = "home/contract.html?cr=";
 
+    @Value("${app.emailSender.smtp.from}")
+    private String appEmailFrom;
     @Value("${app.webapp.ui.config.webAppUrl}")
     private String webappUrl;
     @Value("${app.webapp.ui.config.orchestrator.ayncDelay}")
@@ -281,14 +282,12 @@ public class AsqatasunOrchestrator {
                 + "exlusion list");
             return;
         }
-        String emailFrom = messageSource.getMessage(RECIPIENT_KEY, null, locale);
-
         Set<String> emailToSet = new HashSet<>();
         emailToSet.add(emailTo);
         if (act.getStatus().equals(ActStatus.COMPLETED)) {
-            sendSuccessfulMessageOnActTerminated(act, locale, emailFrom, emailToSet, getProjectNameFromAct(act));
+            sendSuccessfulMessageOnActTerminated(act, locale, appEmailFrom, emailToSet, getProjectNameFromAct(act));
         } else if (act.getStatus().equals(ActStatus.ERROR)) {
-            sendFailureMessageOnActTerminated(act, locale, emailFrom, emailToSet, getProjectNameFromAct(act));
+            sendFailureMessageOnActTerminated(act, locale, appEmailFrom, emailToSet, getProjectNameFromAct(act));
         }
     }
 
@@ -299,7 +298,6 @@ public class AsqatasunOrchestrator {
      */
     private void sendKrashAuditEmail(Act act, Locale locale, Exception exception) {
 
-        String emailFrom = messageSource.getMessage(RECIPIENT_KEY, null, locale);
         String projectName = getProjectNameFromAct(act);
         String host = getLocalhostname();
 
@@ -320,7 +318,7 @@ public class AsqatasunOrchestrator {
                 msgContent = StringUtils.replace(msgContent, AUDIT_URL_TO_REPLACE, act.getAudit().getSubject().getURL());
             }
             LOGGER.info("krash email sent to " + krashReportMailList + " on audit n° " + act.getAudit().getId());
-            sendEmail(emailFrom, emailToSet, msgSubject, msgContent);
+            sendEmail(appEmailFrom, emailToSet, msgSubject, msgContent);
         }
 
         String emailTo = act.getContract().getUser().getEmail1();
@@ -341,7 +339,7 @@ public class AsqatasunOrchestrator {
         msgContent = StringUtils.replace(msgContent, PROJECT_URL_TO_REPLACE, buildContractUrl(act.getContract()));
 
         LOGGER.info("krash email sent to [" + emailTo + "]" + " on audit n° " + act.getAudit().getId());
-        sendEmail(emailFrom, emailToSet, msgSubject, msgContent);
+        sendEmail(appEmailFrom, emailToSet, msgSubject, msgContent);
     }
 
     /**

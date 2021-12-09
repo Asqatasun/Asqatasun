@@ -34,7 +34,7 @@ app:
   emailSender:
     smtp:
       debug: false
-      from: ""
+      from: "asqatasun@example.com"
       host: "localhost"
       port: -1
       user: ""
