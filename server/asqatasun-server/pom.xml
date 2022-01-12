@@ -70,7 +70,11 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.8</version>
+        </dependency>
         <!-- asqatasun dependencies-->
         <dependency>
             <groupId>${asqatasunGroupId}</groupId>

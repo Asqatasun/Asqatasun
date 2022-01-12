@@ -22,22 +22,37 @@
 
 package org.asqatasun.web.audit
 
+import org.apache.commons.csv.CSVFormat
+import org.apache.commons.csv.CSVPrinter
+import org.apache.commons.csv.QuoteMode
+import org.apache.commons.io.output.ByteArrayOutputStream
+import org.asqatasun.entity.audit.DefiniteResult
+import org.asqatasun.entity.audit.TestSolution
 import org.asqatasun.entity.service.audit.AuditDataService
 import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataService
 import org.asqatasun.model.*
+import org.springframework.core.io.InputStreamResource
+import org.springframework.core.io.Resource
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.io.ByteArrayInputStream
 import java.io.IOException
+import java.io.PrintWriter
+import java.lang.StringBuilder
 import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("api/v1/audit")
-class AuditController(private val auditDataService: AuditDataService,
-                      private val webResourceStatisticsDataService: WebResourceStatisticsDataService,
-                      private val auditService: AuditService) {
+class AuditController(
+    private val auditDataService: AuditDataService,
+    private val webResourceStatisticsDataService: WebResourceStatisticsDataService,
+    private val auditService: AuditService
+) {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
@@ -46,17 +61,19 @@ class AuditController(private val auditDataService: AuditDataService,
             audit.toAuditDto(
                 audit.subject.toWebResourceDto(webResourceStatisticsDataService),
                 audit.tagList.map { tag -> tag.value },
-                audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value)
+                audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value
+            )
         }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     fun get(@PathVariable id: Long) =
-        Optional.ofNullable(auditDataService.read(id)).map {audit ->
+        Optional.ofNullable(auditDataService.read(id)).map { audit ->
             audit.toAuditDto(
                 audit.subject.toWebResourceDto(webResourceStatisticsDataService),
                 audit.tagList.map { tag -> tag.value },
-                audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value)
+                audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value
+            )
         }.orElseThrow {
             ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
         }!!
@@ -65,11 +82,12 @@ class AuditController(private val auditDataService: AuditDataService,
     @GetMapping("/tags/{tags}")
     fun getByTags(@PathVariable tags: List<String>) =
         Optional.ofNullable(auditDataService.findAllByTags(tags)).map {
-            it.map {audit ->
+            it.map { audit ->
                 audit.toAuditDto(
                     audit.subject.toWebResourceDto(webResourceStatisticsDataService),
                     audit.tagList.map { tag -> tag.value },
-                    audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value)
+                    audit.parameterSet.filter { parameter -> parameter.parameterElement.parameterElementCode == "LEVEL" }[0].value
+                )
             }
         }.orElseThrow {
             ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
@@ -77,19 +95,81 @@ class AuditController(private val auditDataService: AuditDataService,
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/page/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun auditPage(@RequestBody auditRequest: PageAuditRequest, request: HttpServletRequest)
-        = auditService.runPageAudit(auditRequest, request.remoteAddr)
+    fun auditPage(@RequestBody auditRequest: PageAuditRequest, request: HttpServletRequest) =
+        auditService.runPageAudit(auditRequest, request.remoteAddr)
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/site/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun auditSite(@RequestBody auditRequest: SiteAuditRequest, request: HttpServletRequest)
-        = auditService.runSiteAudit(auditRequest, request.remoteAddr)
+    fun auditSite(@RequestBody auditRequest: SiteAuditRequest, request: HttpServletRequest) =
+        auditService.runSiteAudit(auditRequest, request.remoteAddr)
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/scenario/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     @Throws(IOException::class)
-    fun auditScenario(@RequestBody auditRequest: ScenarioAuditRequest, request: HttpServletRequest)
-        = auditService.runScenarioAudit(auditRequest, request.remoteAddr)
+    fun auditScenario(@RequestBody auditRequest: ScenarioAuditRequest, request: HttpServletRequest) =
+        auditService.runScenarioAudit(auditRequest, request.remoteAddr)
+
+    @GetMapping(value = ["/{id}/tests"], produces = ["text/csv"])
+    fun exportCSV(@PathVariable id: Long): ResponseEntity<Resource> {
+
+        val csvBody = ArrayList<List<String>>()
+        var csvHeader = arrayOf("\"Theme\"","\"Criteria\"", "\"Test\"")
+
+        Optional.ofNullable(auditDataService.read(id)).map { audit ->
+            csvHeader = csvHeader.plus('"'+audit.subject.url+'"')
+            audit.netResultList
+                .sortedBy { result ->
+                    result.test.rank
+                }
+                .forEach { result ->
+                    val descriptor = result.test.label.split('.')
+                    csvBody.add(
+                        listOf(
+                            descriptor[0],
+                            descriptor[1],
+                            descriptor[2],
+                            testSolutionToCsvResult(result.value as TestSolution)
+                        )
+                    )
+                }
+
+        }.orElseThrow {
+            ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
+        }!!
+
+        val byteArrayOutputStream =
+            ByteArrayOutputStream()
+                .use { out ->
+                    // defining the CSV printer
+                    CSVPrinter(
+                        PrintWriter(out),
+                        // withHeader is optional
+                        CSVFormat.DEFAULT.withHeader(*csvHeader).withQuote(null)
+                    ).use { csvPrinter ->
+                            // populating the CSV content
+                            csvBody.forEach { record ->
+                                csvPrinter.printRecord(record)
+                            }
+
+                            // writing the underlying stream
+                            csvPrinter.flush()
+
+                            ByteArrayInputStream(out.toByteArray())
+                        }
+                }
+
+        val fileInputStream = InputStreamResource(byteArrayOutputStream)
+        // setting HTTP headers
+        val headers = HttpHeaders()
+        // defining the custom Content-Type
+        headers.set(HttpHeaders.CONTENT_TYPE, "text/csv")
+
+        return ResponseEntity(
+            fileInputStream,
+            headers,
+            HttpStatus.OK
+        )
+    }
 
 }
 
@@ -123,3 +203,15 @@ data class ScenarioAuditRequest(
     val contractId: Long?,
     val tags: List<String>? = emptyList()
 )
+
+fun testSolutionToCsvResult(testSolution: TestSolution) =
+    when (testSolution) {
+        TestSolution.FAILED -> "nc"
+        TestSolution.PASSED -> "c"
+        TestSolution.NEED_MORE_INFO -> "pq"
+        TestSolution.NOT_APPLICABLE -> "na"
+        TestSolution.DETECTED -> "pq"
+        TestSolution.NOT_TESTED -> "nt"
+        TestSolution.SUSPECTED_FAILED -> "pq"
+        TestSolution.SUSPECTED_PASSED -> "pq"
+    }
