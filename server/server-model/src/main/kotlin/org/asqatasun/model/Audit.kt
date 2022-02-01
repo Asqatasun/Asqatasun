@@ -35,6 +35,13 @@ data class AuditDto(
     val referentialLevel: String
 )
 
-fun Audit.toAuditDto(webResource: WebResourceDto, tags: List<String>, rawParameterValue: String)
-    = AuditDto(id, webResource, status, dateOfCreation, tags, Referential.fromCode(rawParameterValue.split(';')[0])!!, rawParameterValue.split(';')[1])
+fun Audit.toAuditDto(webResource: WebResourceDto, tags: List<String>, rawParameterValue: String) = AuditDto(
+    id,
+    webResource,
+    status,
+    dateOfCreation,
+    tags,
+    Referential.fromCode(rawParameterValue.split(';')[0])!!,
+    rawParameterValue.split(';')[1]
+)
 
