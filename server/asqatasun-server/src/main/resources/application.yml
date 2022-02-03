@@ -59,3 +59,11 @@ app:
         host:
       selenium:
         headless: false
+
+# OpenAPI / Swagger
+springdoc:
+  packages-to-scan: org.asqatasun.web
+  swagger-ui:
+    # Sort: "method" or "alpha"
+    operationsSorter: method
+

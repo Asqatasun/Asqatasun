@@ -21,15 +21,22 @@
  */
 package org.asqatasun.model
 
+import io.swagger.v3.oas.annotations.media.Schema
 import org.asqatasun.entity.audit.Audit
 import org.asqatasun.entity.audit.AuditStatus
 import java.util.*
 
+@Schema(description = "Audit DTO (Data Transfert Object.")
 data class AuditDto(
     val id: Long,
     val subject: WebResourceDto,
     val status: AuditStatus,
     val date: Date,
+    @field:Schema(
+        description = "Tag(s) associated to the audit",
+        example = "monthly_audit_on_localgovs, localgovs_France, 2022-01-01",
+        type = "List<String>",
+    )
     val tags: List<String>,
     val referential: Referential,
     val referentialLevel: String

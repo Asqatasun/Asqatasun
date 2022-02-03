@@ -22,15 +22,21 @@
 
 package org.asqatasun.web.audit
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.info.Contact
+import io.swagger.v3.oas.annotations.info.Info
+import io.swagger.v3.oas.annotations.info.License
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVPrinter
-import org.apache.commons.csv.QuoteMode
 import org.apache.commons.io.output.ByteArrayOutputStream
-import org.asqatasun.entity.audit.DefiniteResult
 import org.asqatasun.entity.audit.TestSolution
 import org.asqatasun.entity.service.audit.AuditDataService
 import org.asqatasun.entity.service.statistics.WebResourceStatisticsDataService
-import org.asqatasun.model.*
+import org.asqatasun.model.Level
+import org.asqatasun.model.Referential
+import org.asqatasun.model.toAuditDto
+import org.asqatasun.model.toWebResourceDto
 import org.springframework.core.io.InputStreamResource
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpHeaders
@@ -42,9 +48,22 @@ import org.springframework.web.server.ResponseStatusException
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.PrintWriter
-import java.lang.StringBuilder
 import java.util.*
 import javax.servlet.http.HttpServletRequest
+
+@OpenAPIDefinition(
+    info = Info(
+        title = "Asqatasun API",
+        version = "0.5.0",
+        description = "Manage web-accessibility audits with Asqatasun API",
+        license = License(name = "aGPL", url = "https://gitlab.com/asqatasun/Asqatasun/-/blob/master/LICENSE"),
+        contact = Contact(
+            url = "https://forum.asqatasun.org/",
+            name = "Asqatasun team",
+            email = "asqatasun@asqatasun.org"
+        )
+    )
+)
 
 @RestController
 @RequestMapping("api/v1/audit")
@@ -65,6 +84,7 @@ class AuditController(
             )
         }
 
+    @Operation(summary = "Get an audit by its id")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     fun get(@PathVariable id: Long) =
@@ -113,10 +133,10 @@ class AuditController(
     fun exportCSV(@PathVariable id: Long): ResponseEntity<Resource> {
 
         val csvBody = ArrayList<List<String>>()
-        var csvHeader = arrayOf("\"Theme\"","\"Criteria\"", "\"Test\"")
+        var csvHeader = arrayOf("\"Theme\"", "\"Criteria\"", "\"Test\"")
 
         Optional.ofNullable(auditDataService.read(id)).map { audit ->
-            csvHeader = csvHeader.plus('"'+audit.subject.url+'"')
+            csvHeader = csvHeader.plus('"' + audit.subject.url + '"')
             audit.netResultList
                 .sortedBy { result ->
                     result.test.rank
@@ -146,16 +166,16 @@ class AuditController(
                         // withHeader is optional
                         CSVFormat.DEFAULT.withHeader(*csvHeader).withQuote(null)
                     ).use { csvPrinter ->
-                            // populating the CSV content
-                            csvBody.forEach { record ->
-                                csvPrinter.printRecord(record)
-                            }
-
-                            // writing the underlying stream
-                            csvPrinter.flush()
-
-                            ByteArrayInputStream(out.toByteArray())
+                        // populating the CSV content
+                        csvBody.forEach { record ->
+                            csvPrinter.printRecord(record)
                         }
+
+                        // writing the underlying stream
+                        csvPrinter.flush()
+
+                        ByteArrayInputStream(out.toByteArray())
+                    }
                 }
 
         val fileInputStream = InputStreamResource(byteArrayOutputStream)
