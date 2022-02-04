@@ -26,8 +26,6 @@
         <commonsFileUpload.version>1.4</commonsFileUpload.version>
         <jhighlight.version>1.0.3</jhighlight.version>
         <itextpdf.version>5.5.13</itextpdf.version>
-        <mysqlConnector.version>8.0.21</mysqlConnector.version>
-
         <yuicompressor-maven-plugin.version>1.5.1</yuicompressor-maven-plugin.version>
 
     </properties>
@@ -338,8 +336,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysqlConnector.version}</version>
-<!--            <scope>runtime</scope>-->
+            <version>8.0.25</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tika</groupId>
