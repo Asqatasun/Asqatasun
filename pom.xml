@@ -218,7 +218,7 @@
         <jersey.version>2.13</jersey.version>
         <mysql-connector-java.version>5.1.48</mysql-connector-java.version>
         <junitGroupId>junit</junitGroupId>
-        <junitVersion>4.13</junitVersion>
+        <junitVersion>4.13.1</junitVersion>
         <junitJupiterVersion>5.5.2</junitJupiterVersion>
         <commonsValidatorVersion>1.6</commonsValidatorVersion>
 
