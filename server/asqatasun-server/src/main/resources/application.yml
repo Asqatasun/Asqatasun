@@ -64,6 +64,7 @@ app:
 springdoc:
   packages-to-scan: org.asqatasun.web
   swagger-ui:
-    # Sort: "method" or "alpha"
-    operationsSorter: method
+    # Sort by: "method" (post, get, delete...) or "alpha" (alphabetic order)
+    operationsSorter: alpha
+    tagsSorter: alpha
 

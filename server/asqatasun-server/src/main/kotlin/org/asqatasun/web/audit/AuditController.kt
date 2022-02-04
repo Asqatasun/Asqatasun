@@ -27,6 +27,7 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVPrinter
 import org.apache.commons.io.output.ByteArrayOutputStream
@@ -73,6 +74,8 @@ class AuditController(
     private val auditService: AuditService
 ) {
 
+    @Tag(name = "Audit", description = "Audit of any kind (page, site, scenario, file)")
+    @Operation(summary = "Get all audits")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     fun getAll() = auditDataService.findAll()
@@ -84,6 +87,7 @@ class AuditController(
             )
         }
 
+    @Tag(name = "Audit", description = "Audit of any kind (page, site, scenario, file)")
     @Operation(summary = "Get an audit by its id")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
@@ -98,6 +102,8 @@ class AuditController(
             ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
         }!!
 
+    @Tag(name = "Audit", description = "Audit of any kind (page, site, scenario, file)")
+    @Operation(summary = "Get all audits tagged with the specified tag(s)", description = "Several tags may be specified, separated by a comma")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tags/{tags}")
     fun getByTags(@PathVariable tags: List<String>) =
@@ -113,22 +119,30 @@ class AuditController(
             ResponseStatusException(HttpStatus.NOT_FOUND, "Audit Not Found")
         }!!
 
+    @Tag(name = "Audit > Page", description = "Audit on a single page")
+    @Operation(summary = "Run a page audit, according to the specified parameters")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/page/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun auditPage(@RequestBody auditRequest: PageAuditRequest, request: HttpServletRequest) =
         auditService.runPageAudit(auditRequest, request.remoteAddr)
 
+    @Tag(name = "Audit > Site", description = "Audit on an entire website")
+    @Operation(summary = "Run an audit on a whole website, according to the specified parameters")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/site/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun auditSite(@RequestBody auditRequest: SiteAuditRequest, request: HttpServletRequest) =
         auditService.runSiteAudit(auditRequest, request.remoteAddr)
 
+    @Tag(name = "Audit > Scenario", description = "Audit on a set of webpages with eventual actions")
+    @Operation(summary = "Run a scenario audit, according to the specified parameters")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/scenario/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     @Throws(IOException::class)
     fun auditScenario(@RequestBody auditRequest: ScenarioAuditRequest, request: HttpServletRequest) =
         auditService.runScenarioAudit(auditRequest, request.remoteAddr)
 
+    @Tag(name = "Audit > Page", description = "Audit on a single page")
+    @Operation(summary = "List test results of the specified audit, organized by themes and criteria")
     @GetMapping(value = ["/{id}/tests"], produces = ["text/csv"])
     fun exportCSV(@PathVariable id: Long): ResponseEntity<Resource> {
 
