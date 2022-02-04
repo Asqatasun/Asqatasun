@@ -67,7 +67,7 @@ import javax.servlet.http.HttpServletRequest
 )
 
 @RestController
-@RequestMapping("api/v1/audit")
+@RequestMapping("api/v0/audit")
 class AuditController(
     private val auditDataService: AuditDataService,
     private val webResourceStatisticsDataService: WebResourceStatisticsDataService,
