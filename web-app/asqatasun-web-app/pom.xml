@@ -239,6 +239,7 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
+
         <!-- displaytag dependencies -->
         <dependency>
             <groupId>displaytag</groupId>
@@ -267,6 +268,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- hibernate dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -282,6 +284,7 @@
             <artifactId>hibernate-ehcache</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <!-- jasper et dynamicJasper dependencies -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
@@ -349,6 +352,7 @@
             <version>1.5.2</version>
             <scope>runtime</scope>
         </dependency>
+
         <!-- highlighter dependency -->
         <dependency>
             <groupId>org.codelibs</groupId>
@@ -414,6 +418,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- URL rewrite filter
              http://tuckey.org/urlrewrite/
              https://github.com/paultuckey/urlrewritefilter  -->
