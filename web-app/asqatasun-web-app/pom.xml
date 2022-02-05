@@ -26,8 +26,6 @@
         <commonsFileUpload.version>1.4</commonsFileUpload.version>
         <jhighlight.version>1.0.3</jhighlight.version>
         <itextpdf.version>5.5.13</itextpdf.version>
-        <mysqlConnector.version>8.0.21</mysqlConnector.version>
-
         <yuicompressor-maven-plugin.version>1.5.1</yuicompressor-maven-plugin.version>
 
     </properties>
@@ -241,6 +239,7 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
+
         <!-- displaytag dependencies -->
         <dependency>
             <groupId>displaytag</groupId>
@@ -269,6 +268,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- hibernate dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -284,6 +284,7 @@
             <artifactId>hibernate-ehcache</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <!-- jasper et dynamicJasper dependencies -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
@@ -338,13 +339,12 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysqlConnector.version}</version>
-<!--            <scope>runtime</scope>-->
+            <version>8.0.25</version>
         </dependency>
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
-            <version>1.23</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.htmlcompressor</groupId>
@@ -352,6 +352,7 @@
             <version>1.5.2</version>
             <scope>runtime</scope>
         </dependency>
+
         <!-- highlighter dependency -->
         <dependency>
             <groupId>org.codelibs</groupId>
@@ -417,6 +418,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <!-- URL rewrite filter
              http://tuckey.org/urlrewrite/
              https://github.com/paultuckey/urlrewritefilter  -->
