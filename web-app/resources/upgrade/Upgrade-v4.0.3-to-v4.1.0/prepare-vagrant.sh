@@ -28,4 +28,4 @@ for i in \
 done
 
 # WAR file
-rsync ../../../../../../../web-app/asqatasun-web-app/target/asqatasun-web-app-5.0-SNAPSHOT.war .
+rsync ../../../../../../../web-app/asqatasun-web-app/target/asqatasun-web-app-5-SNAPSHOT.war .
