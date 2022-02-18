@@ -2,4 +2,4 @@
 lint_mvn:
   stage: .pre
   script:
-    - mvn $MAVEN_CLI_OPTS validate
+    - ./mvnw $MAVEN_CLI_OPTS validate
