@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.asqatasun</groupId>
         <artifactId>rules</artifactId>
-        <version>5.0-SNAPSHOT</version>
+        <version>5-SNAPSHOT</version>
     </parent>
     <groupId>org.asqatasun</groupId>
     <artifactId>referential-creator</artifactId>
@@ -12,7 +12,7 @@
 
     <name>referential-creator</name>
     <url>http://maven.apache.org</url>
-    <!-- Here is what you need to set-uo before launching generation-->
+    <!-- Here is what you need to set-up before launching generation-->
     <properties>
         <generator.referentialName>Referential Name 1.0</generator.referentialName>
         <generator.referential>ReferentialName1.0</generator.referential>
@@ -27,7 +27,7 @@
             <plugin>
                 <groupId>org.asqatasun</groupId>
                 <artifactId>referential-creator-maven-plugin</artifactId>
-                <version>5.0-SNAPSHOT</version>
+                <version>5-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <id>generate</id>
