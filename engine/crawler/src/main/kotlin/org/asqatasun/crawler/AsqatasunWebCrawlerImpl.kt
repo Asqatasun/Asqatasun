@@ -55,7 +55,7 @@ class AsqatasunWebCrawlerImpl(private val siteUrl: URL,
         if (!super.shouldVisit(referringPage, url)) {
             return false
         }
-        val href = url.url.toLowerCase()
+        val href = url.url.lowercase(Locale.getDefault())
 
         if (BLACKLIST.matcher(href).matches()) return false
         // Ignore the url if it has an extension that matches our defined set of image extensions.
