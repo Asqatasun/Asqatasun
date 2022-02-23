@@ -62,11 +62,13 @@ data class ResultStat(
 fun WebResource.toWebResourceDto(wrDataService: WebResourceStatisticsDataService): WebResourceDto {
     val stats = wrDataService.getWebResourceStatisticsByWebResource(this)
     return if (this is Site)
-        WebResourceDto(id, GROUP_OF_PAGE, url, componentList.size, stats?.let{computeGrade(stats.rawMark)},
-            stats?.rawMark, stats?.toResultStats(), componentList.map{ it.toWebResourceDto(wrDataService) })
+        WebResourceDto(id, GROUP_OF_PAGE, url, componentList.size, stats?.let { computeGrade(stats.rawMark) },
+            stats?.rawMark, stats?.toResultStats(), componentList.map { it.toWebResourceDto(wrDataService) })
     else
-        WebResourceDto(id, PAGE, url, 1, stats?.let{computeGrade(stats.rawMark)}, stats?.rawMark,
-            stats?.toResultStats())
+        WebResourceDto(
+            id, PAGE, url, 1, stats?.let { computeGrade(stats.rawMark) }, stats?.rawMark,
+            stats?.toResultStats()
+        )
 }
 
 fun WebResourceStatistics.toResultStats() = listOf(
@@ -74,12 +76,13 @@ fun WebResourceStatistics.toResultStats() = listOf(
     ResultStat(TestSolution.FAILED, nbOfFailed),
     ResultStat(TestSolution.NEED_MORE_INFO, nbOfNmi),
     ResultStat(TestSolution.NOT_APPLICABLE, nbOfNa),
-    ResultStat(TestSolution.NOT_TESTED, nbOfNotTested))
+    ResultStat(TestSolution.NOT_TESTED, nbOfNotTested)
+)
 
 fun computeGrade(mark: Float) =
-     when {
+    when {
         mark == 100f -> GradeResult.A
-        mark > 90f ->  GradeResult.B
+        mark > 90f -> GradeResult.B
         mark > 85f -> GradeResult.C
         mark > 75f -> GradeResult.D
         mark > 60f -> GradeResult.E

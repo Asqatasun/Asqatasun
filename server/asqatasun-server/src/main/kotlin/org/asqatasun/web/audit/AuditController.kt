@@ -103,7 +103,10 @@ class AuditController(
         }!!
 
     @Tag(name = "Audit", description = "Audit of any kind (page, site, scenario, file)")
-    @Operation(summary = "Get all audits tagged with the specified tag(s)", description = "Several tags may be specified, separated by a comma")
+    @Operation(
+        summary = "Get all audits tagged with the specified tag(s)",
+        description = "Several tags may be specified, separated by a comma"
+    )
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tags/{tags}")
     fun getByTags(@PathVariable tags: List<String>) =

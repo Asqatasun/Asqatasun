@@ -22,24 +22,23 @@
 package org.asqatasun.entity.audit;
 
 /**
- * 
  * @author jkowalczyk
  */
 public enum AuditStatus {
 
-	ANALYSIS, 
-        COMPLETED,
-        CONSOLIDATION,
-        CONTENT_ADAPTING,
-        CONTENT_LOADING,
-        CRAWLING,
-        SCENARIO_LOADING,
-        ERROR,
-        INITIALISATION,
-        PENDING,
-        PROCESSING,
-	    MANUAL_INITIALIZING,
-	    MANUAL_ANALYSE_IN_PROGRESS,
-	    MANUAL_COMPLETED;
+    ANALYSIS,
+    COMPLETED,
+    CONSOLIDATION,
+    CONTENT_ADAPTING,
+    CONTENT_LOADING,
+    CRAWLING,
+    SCENARIO_LOADING,
+    ERROR,
+    INITIALISATION,
+    PENDING,
+    PROCESSING,
+    MANUAL_INITIALIZING,
+    MANUAL_ANALYSE_IN_PROGRESS,
+    MANUAL_COMPLETED
 
 }
