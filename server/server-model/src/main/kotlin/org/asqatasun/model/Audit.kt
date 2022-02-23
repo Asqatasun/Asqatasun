@@ -26,10 +26,19 @@ import org.asqatasun.entity.audit.Audit
 import org.asqatasun.entity.audit.AuditStatus
 import java.util.*
 
-@Schema(description = "Audit DTO (Data Transfert Object.")
+@Schema(
+    title = "Audit",
+    description = "The audit with its characteristics"
+)
 data class AuditDto(
+    @field:Schema(
+        description = "Unique id of the audit",
+        example = "42",
+    )
     val id: Long,
+    // WebResource already documented in Subject.kt
     val subject: WebResourceDto,
+    // AuditStatus already described in engine/asqatasun-api/src/main/java/org/asqatasun/entity/audit/AuditStatus.java
     val status: AuditStatus,
     val date: Date,
     @field:Schema(
@@ -38,7 +47,13 @@ data class AuditDto(
         type = "List<String>",
     )
     val tags: List<String>,
+    // Referential already documented in Reference.kt
     val referential: Referential,
+    @field:Schema(
+        description = "Referential level",
+        example = "AA",
+        type = "String",
+    )
     val referentialLevel: String
 )
 

@@ -27,6 +27,7 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.info.Contact
 import io.swagger.v3.oas.annotations.info.Info
 import io.swagger.v3.oas.annotations.info.License
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVPrinter
@@ -104,8 +105,8 @@ class AuditController(
 
     @Tag(name = "Audit", description = "Audit of any kind (page, site, scenario, file)")
     @Operation(
-        summary = "Get all audits tagged with the specified tag(s)",
-        description = "Several tags may be specified, separated by a comma"
+        summary = "Get audits by tag(s)",
+        description = "Get all audits tagged with the specified tag(s). Several tags may be specified, separated by a comma"
     )
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/tags/{tags}")
@@ -137,7 +138,14 @@ class AuditController(
         auditService.runSiteAudit(auditRequest, request.remoteAddr)
 
     @Tag(name = "Audit > Scenario", description = "Audit on a set of webpages with eventual actions")
-    @Operation(summary = "Run a scenario audit, according to the specified parameters")
+    @Operation(
+        summary = "Loads a scenario, and runs the audit against it",
+        description = """
+The scenario is loaded, and forgotten once run. It is not stored in database.
+This means if you want to run a scenario twice, you need to send it again as a parameter. 
+The scenario needs to be escaped with a tool such as <https://jsonformatter.org/json-escape>
+        """
+    )
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = ["/scenario/run"], consumes = [MediaType.APPLICATION_JSON_VALUE])
     @Throws(IOException::class)
@@ -210,6 +218,9 @@ class AuditController(
 
 }
 
+@Schema(
+    title = "Site Audit Request",
+)
 data class SiteAuditRequest(
     val url: String,
     val referential: Referential,
@@ -224,19 +235,52 @@ data class SiteAuditRequest(
     val tags: List<String>? = emptyList()
 )
 
+@Schema(
+    title = "Page Audit Request",
+)
 data class PageAuditRequest(
     val urls: List<String>,
+    // Referential already documented in Reference.kt
     val referential: Referential,
+    // Level already documented in Reference.kt
     val level: Level,
     val contractId: Long?,
     val tags: List<String>? = emptyList()
 )
 
+@Schema(
+    title = "Scenario Audit Request",
+    description = """
+A scenario is a set of pages (and actions) to be audited.
+See <https://doc.asqatasun.org/v5/en/User/Kinds-of-audit/Scenario-audit/>
+    """
+)
 data class ScenarioAuditRequest(
+    @field:Schema(
+        description = "Name of the scenario",
+        example = "Browsing Wikipedia",
+        type = "String",
+    )
     var name: String,
+    @field:Schema(
+        description = """
+Content of the scenario, in JSON format.
+Caution: if the API call is itself in JSON, this field MUST be JSON-escaped.
+A tool like <https://jsonformatter.org/json-escape> may be useful.
+        """,
+        example = "{\\n  \\\"id\\\": \\\"39429fc5-89ab-4270-bb0f-640c5c9390b3\\\",\\n  \\\"version\\\": \\\"2.0\\\",\\n  \\\"name\\\": \\\"Wikipedia homepage\\\",\\n  \\\"url\\\": \\\"https://en.wikipedia.org\\\",\\n  \\\"tests\\\": [{\\n    \\\"id\\\": \\\"9d3869a0-60ac-4a1b-bd3f-0f0f65f302d4\\\",\\n    \\\"name\\\": \\\"Open homepage\\\",\\n    \\\"commands\\\": [{\\n      \\\"id\\\": \\\"48d5b89b-1421-416e-a029-bb1c208221ef\\\",\\n      \\\"comment\\\": \\\"\\\",\\n      \\\"command\\\": \\\"open\\\",\\n      \\\"target\\\": \\\"/wiki/Main_Page\\\",\\n      \\\"targets\\\": [],\\n      \\\"value\\\": \\\"\\\"\\n    }]\\n  }],\\n  \\\"suites\\\": [{\\n    \\\"id\\\": \\\"34095dff-101a-4db9-a045-bbfe6a7c9c44\\\",\\n    \\\"name\\\": \\\"Wikipedia English\\\",\\n    \\\"persistSession\\\": false,\\n    \\\"parallel\\\": false,\\n    \\\"timeout\\\": 300,\\n    \\\"tests\\\": [\\\"9d3869a0-60ac-4a1b-bd3f-0f0f65f302d4\\\"]\\n  }],\\n  \\\"urls\\\": [\\\"https://en.wikipedia.org/\\\"],\\n  \\\"plugins\\\": []\\n}",
+        type = "String",
+    )
     var scenario: String,
+    // Referential already documented in Reference.kt
     var referential: Referential,
+    // Level already documented in Reference.kt
     var level: Level,
+    @field:Schema(
+        description = "Id of the contract (project) holding the scenario",
+        example = "1",
+        type = "Long",
+    )
     val contractId: Long?,
     val tags: List<String>? = emptyList()
 )
