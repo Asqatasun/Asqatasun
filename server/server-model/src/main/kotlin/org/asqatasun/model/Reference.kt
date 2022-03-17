@@ -21,6 +21,12 @@
  */
 package org.asqatasun.model
 
+import io.swagger.v3.oas.annotations.media.Schema
+
+@Schema(
+    description = "Referential against which the audit is ran.",
+    example = "RGAA_4_0",
+)
 enum class Referential(val code: String) {
     RGAA_4_0("Rgaa40"),
     RGAA_3_0("Rgaa30"),
@@ -33,6 +39,10 @@ enum class Referential(val code: String) {
     }
 }
 
+@Schema(
+    description = "Referential level",
+    example = "AA",
+)
 enum class Level(val code: String) {
     AAA("Or"),
     AA("Ar"),

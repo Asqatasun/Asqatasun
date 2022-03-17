@@ -22,24 +22,29 @@
 package org.asqatasun.entity.audit;
 
 /**
- * 
  * @author jkowalczyk
  */
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(
+    description = "The status of an audit. Please note an audit can have only one status.",
+    example = "COMPLETED"
+)
+
 public enum AuditStatus {
-
-	ANALYSIS, 
-        COMPLETED,
-        CONSOLIDATION,
-        CONTENT_ADAPTING,
-        CONTENT_LOADING,
-        CRAWLING,
-        SCENARIO_LOADING,
-        ERROR,
-        INITIALISATION,
-        PENDING,
-        PROCESSING,
-	    MANUAL_INITIALIZING,
-	    MANUAL_ANALYSE_IN_PROGRESS,
-	    MANUAL_COMPLETED;
-
+    ANALYSIS,
+    COMPLETED,
+    CONSOLIDATION,
+    CONTENT_ADAPTING,
+    CONTENT_LOADING,
+    CRAWLING,
+    SCENARIO_LOADING,
+    ERROR,
+    INITIALISATION,
+    PENDING,
+    PROCESSING,
+    MANUAL_INITIALIZING,
+    MANUAL_ANALYSE_IN_PROGRESS,
+    MANUAL_COMPLETED
 }

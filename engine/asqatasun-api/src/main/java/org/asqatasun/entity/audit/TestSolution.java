@@ -22,18 +22,22 @@
 package org.asqatasun.entity.audit;
 
 /**
- * 
  * @author jkowalczyk
  */
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(
+    description = "The result of a test.",
+    example = "FAILED"
+)
 public enum TestSolution {
-
-	FAILED,
-	SUSPECTED_FAILED,
-	NEED_MORE_INFO,
-	NOT_APPLICABLE,
-	SUSPECTED_PASSED,
-        NOT_TESTED,
-        DETECTED,
-	PASSED;
-
+    FAILED,
+    SUSPECTED_FAILED,
+    NEED_MORE_INFO,
+    NOT_APPLICABLE,
+    SUSPECTED_PASSED,
+    NOT_TESTED,
+    DETECTED,
+    PASSED;
 }
