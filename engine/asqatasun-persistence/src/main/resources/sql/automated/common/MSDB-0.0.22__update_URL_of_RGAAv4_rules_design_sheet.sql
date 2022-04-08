@@ -1,0 +1,16 @@
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, 'rule-', 'Rule-') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, 'business-rules', 'Business-rules') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, 'rgaa-v4', 'RGAA-v4') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '01.images', '01.Images') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '02.frames', '02.Frames') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '03.colours', '03.Colours') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '04.multimedia', '04.Multimedia') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '05.tables', '05.Tables') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '06.links', '06.Links') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '07.scripts', '07.Scripts') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '08.mandatory_elements', '08.Mandatory_elements') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '09.structure_of_information', '09.Structure_of_information') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '10.presentation_of_information', '10.Presentation_of_information') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '11.forms', '11.Forms') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '12.navigation', '12.Navigation') WHERE Rule_Archive_Name = 'rgaa40';
+UPDATE TEST SET Rule_Design_Url = REPLACE(Rule_Design_Url, '13.consultation', '13.Consultation') WHERE Rule_Archive_Name = 'rgaa40';
