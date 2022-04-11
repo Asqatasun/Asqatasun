@@ -26,7 +26,7 @@ import org.asqatasun.rules.textbuilder.AccessibleNameElementBuilder;
 /**
  * Implementation of rule 6.1.4 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/06.Links/Rule-6-1-4.md">rule 6.1.4 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/06.Links/Rule-6-1-4/">rule 6.1.4 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-6-1-4">6.1.4 rule specification</a>
  */
 public class Rgaa40Rule060104 extends AbstractLinkRuleRgaav4Implementation {

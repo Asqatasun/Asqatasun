@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.rgaa4.media.AbstractNoTimeBasedMediaDete
 /**
  * Implementation of rule 4.8.2 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/04.Multimedia/Rule-4-8-2.md">rule 4.8.2 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/04.Multimedia/Rule-4-8-2/">rule 4.8.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-4-8-2">4.8.2 rule specification</a>
  */
 public class Rgaa40Rule040802 extends AbstractNoTimeBasedMediaDetectionRuleImplementation {

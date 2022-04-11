@@ -41,7 +41,7 @@ import org.asqatasun.service.ProcessRemarkService;
 /**
  * Implementation of rule 9.1.2 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/09.Structure_of_information/Rule-9-1-2.md">rule 9.1.2 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/09.Structure_of_information/Rule-9-1-2/">rule 9.1.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-9-1-2">9.1.2 rule specification</a>
  */
 public class Rgaa40Rule090102 extends AbstractPageRuleWithSelectorAndCheckerImplementation {

@@ -25,7 +25,7 @@ import org.asqatasun.rules.elementchecker.contrast.ContrastChecker;
 /**
  * Implementation of rule 3.2.4 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/03.Colours/Rule-3-2-4.md">rule 3.2.4 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/03.Colours/Rule-3-2-4/">rule 3.2.4 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-3-2-4">3.2.4 rule specification</a>
  */
 public class Rgaa40Rule030204 extends AbstractPageRuleWithCheckerImplementation {
