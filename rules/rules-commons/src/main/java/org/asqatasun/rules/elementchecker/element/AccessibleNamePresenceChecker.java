@@ -60,8 +60,8 @@ public class AccessibleNamePresenceChecker extends ElementCheckerImpl {
     /**
      * Constructor.
      *
-     * @param detectedSolutionPair
-     * @param notDetectedSolutionPair
+     * @param detectedSolutionPair Represents the result when the checker responds true (this element we're looking for is found)
+     * @param notDetectedSolutionPair Represents the result when the checker responds false (this element we're looking for is not found)
      * @param eeAttributeNameList
      */
     public AccessibleNamePresenceChecker(
