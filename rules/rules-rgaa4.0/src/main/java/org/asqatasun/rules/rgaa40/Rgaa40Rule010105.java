@@ -51,11 +51,13 @@ public class Rgaa40Rule010105 extends AbstractMarkerPageRuleImplementation {
                 INFORMATIVE_IMAGE_MARKER,
                 // the decorative images are not part of the scope
                 DECORATIVE_IMAGE_MARKER,
+                // This first element checker is applied on images marked as INFORMATIVE_IMAGE_MARKER
                 new AccessibleNamePresenceChecker(
                     new ImmutablePair<>(PASSED, null),
-                    new ImmutablePair<>(FAILED, ALT_MISSING_MSG),
-                    INFORMATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE,
+                    new ImmutablePair<>(FAILED, ALT_MISSING_MSG),   // second case of FAILED
+                    INFORMATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE,     // first case of FAILED
                     new String[]{ROLE_ATTR, ARIA_LABEL_ATTR, COMPUTED_LINK_TITLE}),
+                // This second element checker is applied on images marked NEITHER as INFORMATIVE_IMAGE_MARKER NOR as DECORATIVE_IMAGE_MARKER
                 new AccessibleNamePresenceChecker(
                     new ImmutablePair<>(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG),
                     new ImmutablePair<>(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_WITHOUT_TEXTUAL_ALTERNATIVE_MSG),
