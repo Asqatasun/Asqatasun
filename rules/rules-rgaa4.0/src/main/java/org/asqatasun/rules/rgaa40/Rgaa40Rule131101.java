@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of rule 13.11.1 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/13.Consultation/Rule-13-11-1.md">rule 13.11.1 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/13.Consultation/Rule-13-11-1/">rule 13.11.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-13-11-1">13.11.1 rule specification</a>
  */
 public class Rgaa40Rule131101 extends AbstractNotTestedRuleImplementation {

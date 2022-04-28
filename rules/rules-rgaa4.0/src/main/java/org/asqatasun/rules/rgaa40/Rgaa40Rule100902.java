@@ -29,7 +29,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_EL
 /**
  * Implementation of rule 10.9.2 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/10.Presentation_of_information/Rule-10-9-2.md">rule 10.9.2 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/10.Presentation_of_information/Rule-10-9-2/">rule 10.9.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-10-9-2">10.9.2 rule specification</a>
  */
 public class Rgaa40Rule100902 extends AbstractDetectionPageRuleImplementation {

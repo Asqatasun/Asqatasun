@@ -28,7 +28,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.MANUAL_CHECK_ON_EL
 /**
  * Implementation of rule 11.12.2 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/11.Forms/Rule-11-12-2.md">rule 11.12.2 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/11.Forms/Rule-11-12-2/">rule 11.12.2 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-11-12-2">11.12.2 rule specification</a>
  */
 public class Rgaa40Rule111202 extends AbstractDetectionPageRuleImplementation {

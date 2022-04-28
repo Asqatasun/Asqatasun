@@ -24,7 +24,7 @@ import org.asqatasun.ruleimplementation.AbstractNotTestedRuleImplementation;
 /**
  * Implementation of rule 5.4.1 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/05.Tables/Rule-5-4-1.md">rule 5.4.1 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/05.Tables/Rule-5-4-1/">rule 5.4.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-5-4-1">5.4.1 rule specification</a>
  */
 public class Rgaa40Rule050401 extends AbstractNotTestedRuleImplementation {

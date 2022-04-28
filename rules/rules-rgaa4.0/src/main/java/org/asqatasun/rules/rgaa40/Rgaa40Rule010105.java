@@ -37,7 +37,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.*;
 /**
  * Implementation of rule 1.1.5 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-1-5.md">rule 1.1.5 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/01.Images/Rule-1-1-5/">rule 1.1.5 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-1-5">1.1.5 rule specification</a>
  */
 public class Rgaa40Rule010105 extends AbstractMarkerPageRuleImplementation {
@@ -51,11 +51,13 @@ public class Rgaa40Rule010105 extends AbstractMarkerPageRuleImplementation {
                 INFORMATIVE_IMAGE_MARKER,
                 // the decorative images are not part of the scope
                 DECORATIVE_IMAGE_MARKER,
+                // This first element checker is applied on images marked as INFORMATIVE_IMAGE_MARKER
                 new AccessibleNamePresenceChecker(
                     new ImmutablePair<>(PASSED, null),
-                    new ImmutablePair<>(FAILED, ALT_MISSING_MSG),
-                    INFORMATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE,
+                    new ImmutablePair<>(FAILED, ALT_MISSING_MSG),   // second case of FAILED
+                    INFORMATIVE_SVG_WITHOUT_ROLE_IMG_ATTRIBUTE,     // first case of FAILED
                     new String[]{ROLE_ATTR, ARIA_LABEL_ATTR, COMPUTED_LINK_TITLE}),
+                // This second element checker is applied on images marked NEITHER as INFORMATIVE_IMAGE_MARKER NOR as DECORATIVE_IMAGE_MARKER
                 new AccessibleNamePresenceChecker(
                     new ImmutablePair<>(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_WITH_TEXTUAL_ALTERNATIVE_MSG),
                     new ImmutablePair<>(NEED_MORE_INFO, CHECK_NATURE_OF_IMAGE_WITHOUT_TEXTUAL_ALTERNATIVE_MSG),

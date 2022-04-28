@@ -35,7 +35,7 @@ import static org.asqatasun.rules.keystore.RemarkMessageStore.CHECK_CAPTCHA_ALTE
 /**
  * Implementation of rule 1.4.3 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/01.Images/Rule-1-4-3.md">rule 1.4.3 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/01.Images/Rule-1-4-3/">rule 1.4.3 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-1-4-3">1.4.3 rule specification</a>
  */
 public class Rgaa40Rule010403 extends AbstractDetectionPageRuleImplementation {

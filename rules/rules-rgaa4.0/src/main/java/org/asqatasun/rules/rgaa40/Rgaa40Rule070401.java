@@ -31,7 +31,7 @@ import org.asqatasun.rules.elementchecker.helper.RuleCheckHelper;
 /**
  * Implementation of rule 7.4.1 (referential RGAA 4.0)
  *
- * For more details about implementation, refer to <a href="https://gitlab.com/asqatasun/Asqatasun/-/blob/master/documentation/en/90_Rules/rgaa4.0/07.Scripts/Rule-7-4-1.md">rule 7.4.1 design page</a>.
+ * For more details about implementation, refer to <a href="https://doc.asqatasun.org/v5/en/Business-rules/RGAA-v4/07.Scripts/Rule-7-4-1/">rule 7.4.1 design page</a>.
  * @see <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/criteres/#test-7-4-1">7.4.1 rule specification</a>
  */
 public class Rgaa40Rule070401 extends AbstractDetectionPageRuleImplementation {
