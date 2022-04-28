@@ -94,9 +94,9 @@ public class AccessibleNamePresenceChecker extends ElementCheckerImpl {
     }
 
     /**
-     * Most of the logical of the 1.1 criterion is handled by this method.
-     * The multiple if are a deliberate choice to fit the the definition of how an accessible name is defined in the
-     * glossary of the rgaa4 referential.
+     * Most of the logic of the 1.1 criterion is handled by this method.
+     * The multiple "if"s are a deliberate choice to fit the definition of how an accessible name is defined in the
+     * glossary of the RGAAv4 referential.
      * (cf https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode/glossaire/#alternative-textuelle-image)
      *
      * @param sspHandler
