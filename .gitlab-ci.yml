@@ -26,4 +26,8 @@ include:
 - local: "/.gitlab/ci/20_build/build.gitlab-ci.yml"
 - local: "/.gitlab/ci/30_test/test.gitlab-ci.yml"
 - local: "/.gitlab/ci/40_deploy/20_upload_artefacts.gitlab-ci.yml"
+- template: Security/SAST.gitlab-ci.yml
 - template: Security/Dependency-Scanning.gitlab-ci.yml
+
+sast:
+  stage: test
