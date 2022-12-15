@@ -5,29 +5,34 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+
 image: maven:3.6-openjdk-8
+
 stages:
-- ".pre"
-- build
-- test
-- deploy
-- ".post"
+  - ".pre"
+  - build
+  - test
+  - deploy
+  - ".post"
+
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   WEBAPP_ARTIFACT_DIR: web-app/asqatasun-web-app/target
   REST_SERVER_ARTIFACT_DIR: server/asqatasun-server/target
+
 cache:
   paths:
-  - ".m2/repository/"
+    - ".m2/repository/"
+
 include:
-- local: "/.gitlab/ci/10_.pre/00_prepare.gitlab-ci.yml"
-- local: "/.gitlab/ci/10_.pre/lint_mvn.gitlab-ci.yml"
-- local: "/.gitlab/ci/20_build/build.gitlab-ci.yml"
-- local: "/.gitlab/ci/30_test/test.gitlab-ci.yml"
-- local: "/.gitlab/ci/40_deploy/20_upload_artefacts.gitlab-ci.yml"
-- template: Security/SAST.gitlab-ci.yml
-- template: Security/Dependency-Scanning.gitlab-ci.yml
+  - local: "/.gitlab/ci/10_.pre/00_prepare.gitlab-ci.yml"
+  - local: "/.gitlab/ci/10_.pre/lint_mvn.gitlab-ci.yml"
+  - local: "/.gitlab/ci/20_build/build.gitlab-ci.yml"
+  - local: "/.gitlab/ci/30_test/test.gitlab-ci.yml"
+  - local: "/.gitlab/ci/40_deploy/20_upload_artefacts.gitlab-ci.yml"
+  - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
 
 sast:
   stage: test

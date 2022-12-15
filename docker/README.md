@@ -19,7 +19,7 @@ The following documentation is only for people who want to **compile** Asqatasun
 - [Docker](https://docs.docker.com/engine/install/) `19.03.0` (at least) is required
 - [Docker-Compose](https://docs.docker.com/compose/install/) `1.27.0` (at least) is required
 
-### All `Docker-Compose` files avalaible
+### All `Docker-Compose` files available
 
 - [Asqatasun **API**](api_SNAPSHOT-local)
 - [Asqatasun **Webapp**](webapp_SNAPSHOT-local)
