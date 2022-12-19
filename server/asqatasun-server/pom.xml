@@ -22,7 +22,7 @@
 
         <jacksonModuleKotlin.version>2.10.3</jacksonModuleKotlin.version>
         <asqatasun.version>${project.version}</asqatasun.version>
-        <mysqlConnector.version>8.0.21</mysqlConnector.version>
+        <mysqlConnector.version>8.0.28</mysqlConnector.version>
         <selenium.version>4.0.0-alpha-5</selenium.version>
     </properties>
     <dependencies>
