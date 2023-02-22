@@ -23,7 +23,7 @@
         <asqatasun.version>${project.version}</asqatasun.version>
         <selenium.version>4.0.0</selenium.version>
         <commonsValidator.version>1.7</commonsValidator.version>
-        <commonsFileUpload.version>1.4</commonsFileUpload.version>
+        <commonsFileUpload.version>1.5</commonsFileUpload.version>
         <jhighlight.version>1.0.3</jhighlight.version>
         <itextpdf.version>5.5.13</itextpdf.version>
         <yuicompressor-maven-plugin.version>1.5.1</yuicompressor-maven-plugin.version>
